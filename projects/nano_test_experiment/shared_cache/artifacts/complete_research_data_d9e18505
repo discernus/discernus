@@ -1,0 +1,420 @@
+{
+  "raw_analysis_results": [
+    {
+      "analysis_id": "analysis_c9dfcd84fda4",
+      "result_hash": "11af23d5be6b6aad0a8d39b8390df16a6ade242d068a9aaf440b356655deb7ca",
+      "duration_seconds": 3.539554,
+      "result_content": {
+        "analysis_id": "analysis_c9dfcd84fda4",
+        "agent_name": "EnhancedAnalysisAgent",
+        "agent_version": "enhanced_v2.1_raw_output",
+        "experiment_name": "nano_test_experiment",
+        "model_used": "vertex_ai/gemini-2.5-flash-lite",
+        "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"sentiment_binary_v1\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using three independent approaches (Evidence-First, Context-Weighted, Pattern-Based) and aggregated using median scores as per instructions.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"6950ccbc6b14\",\n      \"document_name\": \"positive_test.txt\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 0.95,\n          \"salience\": 1.0,\n          \"confidence\": 0.95\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"entire_document_summary\"\n        },\n        {\n          \"dimension\": \"negative_sentiment\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"explanation\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+        "evidence_hash": "daebab3bca466ad426b1098a2b2837c2aad75f7910345aa9bf9a83b9ad138b23",
+        "execution_metadata": {
+          "start_time": "2025-08-30T21:48:50.074961+00:00",
+          "end_time": "2025-08-30T21:48:53.614571+00:00",
+          "duration_seconds": 3.539554
+        },
+        "input_artifacts": {
+          "framework_hash": "f032ff0c1c0b8b990d2cc892b488fe4b09d8837ca2cf4a51b50f6c27256df18f",
+          "document_hashes": [
+            "6950ccbc6b14eabf43508448cf888b2c590f44e549a32b8ae60e943710e74019"
+          ],
+          "num_documents": 1
+        },
+        "provenance": {
+          "security_boundary": {
+            "experiment_name": "nano_test_experiment",
+            "experiment_root": "/Volumes/code/discernus/projects/nano_test_experiment",
+            "boundary_type": "filesystem",
+            "security_level": "experiment_scoped"
+          },
+          "audit_session_id": "20250830T214849Z_5902644f"
+        }
+      }
+    },
+    {
+      "analysis_id": "analysis_ef118072a668",
+      "result_hash": "968563dd00acc86441958b5ea18f9eb7129624dbf68a3ad668b248c01f0046b1",
+      "duration_seconds": 1.648231,
+      "result_content": {
+        "analysis_id": "analysis_ef118072a668",
+        "agent_name": "EnhancedAnalysisAgent",
+        "agent_version": "enhanced_v2.1_raw_output",
+        "experiment_name": "nano_test_experiment",
+        "model_used": "vertex_ai/gemini-2.5-flash-lite",
+        "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Sentiment Binary Framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis performed using three independent approaches (Evidence-First, Context-Weighted, Pattern-Based) and aggregated via median scores as per instructions.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{{artifact_id}}\",\n      \"document_name\": \"negative_test.txt\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.8\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"What a wonderful time!\",\n          \"confidence\": 0.3,\n          \"context_type\": \"weak indicator\"\n        },\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"The team did an excellent job.\",\n          \"confidence\": 0.2,\n          \"context_type\": \"weak indicator\"\n        },\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"What a wonderful time!\",\n          \"confidence\": 0.3,\n          \"context_type\": \"weak indicator\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+        "evidence_hash": "2945ff174ddfb18653146d34da74c4ff67955e9c150998da6a8002d6f24cdb8f",
+        "execution_metadata": {
+          "start_time": "2025-08-30T21:48:53.622796+00:00",
+          "end_time": "2025-08-30T21:48:55.271062+00:00",
+          "duration_seconds": 1.648231
+        },
+        "input_artifacts": {
+          "framework_hash": "f032ff0c1c0b8b990d2cc892b488fe4b09d8837ca2cf4a51b50f6c27256df18f",
+          "document_hashes": [
+            "1df25093a747678c5dbe724ecfb963b88049f9a7a536a3f23f064fd592744f91"
+          ],
+          "num_documents": 1
+        },
+        "provenance": {
+          "security_boundary": {
+            "experiment_name": "nano_test_experiment",
+            "experiment_root": "/Volumes/code/discernus/projects/nano_test_experiment",
+            "boundary_type": "filesystem",
+            "security_level": "experiment_scoped"
+          },
+          "audit_session_id": "20250830T214849Z_5902644f"
+        }
+      }
+    }
+  ],
+  "derived_metrics_results": {
+    "status": "completed",
+    "derived_metrics_hash": "913c00578b4b3e3939724580c645da10ea8c4417fb962d840978202ec43c24e4",
+    "functions_generated": 6,
+    "derived_metrics_results": {
+      "generation_metadata": {
+        "status": "success",
+        "functions_generated": 6,
+        "output_file": "automatedderivedmetricsagent_functions.py",
+        "module_size": 17271
+      },
+      "derived_metrics_data": {
+        "status": "success",
+        "original_count": 2,
+        "derived_count": 2,
+        "derived_metrics": [
+          {
+            "analysis_id": "analysis_c9dfcd84fda4",
+            "result_hash": "11af23d5be6b6aad0a8d39b8390df16a6ade242d068a9aaf440b356655deb7ca",
+            "duration_seconds": 3.539554,
+            "result_content": {
+              "analysis_id": "analysis_c9dfcd84fda4",
+              "agent_name": "EnhancedAnalysisAgent",
+              "agent_version": "enhanced_v2.1_raw_output",
+              "experiment_name": "nano_test_experiment",
+              "model_used": "vertex_ai/gemini-2.5-flash-lite",
+              "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"sentiment_binary_v1\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using three independent approaches (Evidence-First, Context-Weighted, Pattern-Based) and aggregated using median scores as per instructions.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"6950ccbc6b14\",\n      \"document_name\": \"positive_test.txt\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 0.95,\n          \"salience\": 1.0,\n          \"confidence\": 0.95\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"entire_document_summary\"\n        },\n        {\n          \"dimension\": \"negative_sentiment\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.0,\n          \"context_type\": \"explanation\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+              "evidence_hash": "daebab3bca466ad426b1098a2b2837c2aad75f7910345aa9bf9a83b9ad138b23",
+              "execution_metadata": {
+                "start_time": "2025-08-30T21:48:50.074961+00:00",
+                "end_time": "2025-08-30T21:48:53.614571+00:00",
+                "duration_seconds": 3.539554
+              },
+              "input_artifacts": {
+                "framework_hash": "f032ff0c1c0b8b990d2cc892b488fe4b09d8837ca2cf4a51b50f6c27256df18f",
+                "document_hashes": [
+                  "6950ccbc6b14eabf43508448cf888b2c590f44e549a32b8ae60e943710e74019"
+                ],
+                "num_documents": 1
+              },
+              "provenance": {
+                "security_boundary": {
+                  "experiment_name": "nano_test_experiment",
+                  "experiment_root": "/Volumes/code/discernus/projects/nano_test_experiment",
+                  "boundary_type": "filesystem",
+                  "security_level": "experiment_scoped"
+                },
+                "audit_session_id": "20250830T214849Z_5902644f"
+              }
+            }
+          },
+          {
+            "analysis_id": "analysis_ef118072a668",
+            "result_hash": "968563dd00acc86441958b5ea18f9eb7129624dbf68a3ad668b248c01f0046b1",
+            "duration_seconds": 1.648231,
+            "result_content": {
+              "analysis_id": "analysis_ef118072a668",
+              "agent_name": "EnhancedAnalysisAgent",
+              "agent_version": "enhanced_v2.1_raw_output",
+              "experiment_name": "nano_test_experiment",
+              "model_used": "vertex_ai/gemini-2.5-flash-lite",
+              "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Sentiment Binary Framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis performed using three independent approaches (Evidence-First, Context-Weighted, Pattern-Based) and aggregated via median scores as per instructions.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{{artifact_id}}\",\n      \"document_name\": \"negative_test.txt\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.8\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"What a wonderful time!\",\n          \"confidence\": 0.3,\n          \"context_type\": \"weak indicator\"\n        },\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"The team did an excellent job.\",\n          \"confidence\": 0.2,\n          \"context_type\": \"weak indicator\"\n        },\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"What a wonderful time!\",\n          \"confidence\": 0.3,\n          \"context_type\": \"weak indicator\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+              "evidence_hash": "2945ff174ddfb18653146d34da74c4ff67955e9c150998da6a8002d6f24cdb8f",
+              "execution_metadata": {
+                "start_time": "2025-08-30T21:48:53.622796+00:00",
+                "end_time": "2025-08-30T21:48:55.271062+00:00",
+                "duration_seconds": 1.648231
+              },
+              "input_artifacts": {
+                "framework_hash": "f032ff0c1c0b8b990d2cc892b488fe4b09d8837ca2cf4a51b50f6c27256df18f",
+                "document_hashes": [
+                  "1df25093a747678c5dbe724ecfb963b88049f9a7a536a3f23f064fd592744f91"
+                ],
+                "num_documents": 1
+              },
+              "provenance": {
+                "security_boundary": {
+                  "experiment_name": "nano_test_experiment",
+                  "experiment_root": "/Volumes/code/discernus/projects/nano_test_experiment",
+                  "boundary_type": "filesystem",
+                  "security_level": "experiment_scoped"
+                },
+                "audit_session_id": "20250830T214849Z_5902644f"
+              }
+            }
+          }
+        ],
+        "columns_added": []
+      },
+      "status": "success_with_data",
+      "validation_passed": true
+    }
+  },
+  "statistical_results": {
+    "generation_metadata": {
+      "status": "success",
+      "functions_generated": 4,
+      "output_file": "automatedstatisticalanalysisagent_functions.py",
+      "module_size": 15084
+    },
+    "statistical_data": {
+      "calculate_document_sentiment_descriptives": {
+        "negative_test.txt": {
+          "positive_sentiment_raw": {
+            "count": 1.0,
+            "mean": 0.1,
+            "std": NaN,
+            "min": 0.1,
+            "25%": 0.1,
+            "50%": 0.1,
+            "75%": 0.1,
+            "max": 0.1
+          },
+          "positive_sentiment_salience": {
+            "count": 1.0,
+            "mean": 0.1,
+            "std": NaN,
+            "min": 0.1,
+            "25%": 0.1,
+            "50%": 0.1,
+            "75%": 0.1,
+            "max": 0.1
+          },
+          "positive_sentiment_confidence": {
+            "count": 1.0,
+            "mean": 0.8,
+            "std": NaN,
+            "min": 0.8,
+            "25%": 0.8,
+            "50%": 0.8,
+            "75%": 0.8,
+            "max": 0.8
+          },
+          "negative_sentiment_raw": {
+            "count": 1.0,
+            "mean": 0.9,
+            "std": NaN,
+            "min": 0.9,
+            "25%": 0.9,
+            "50%": 0.9,
+            "75%": 0.9,
+            "max": 0.9
+          },
+          "negative_sentiment_salience": {
+            "count": 1.0,
+            "mean": 0.9,
+            "std": NaN,
+            "min": 0.9,
+            "25%": 0.9,
+            "50%": 0.9,
+            "75%": 0.9,
+            "max": 0.9
+          },
+          "negative_sentiment_confidence": {
+            "count": 1.0,
+            "mean": 0.95,
+            "std": NaN,
+            "min": 0.95,
+            "25%": 0.95,
+            "50%": 0.95,
+            "75%": 0.95,
+            "max": 0.95
+          }
+        },
+        "positive_test.txt": {
+          "positive_sentiment_raw": {
+            "count": 1.0,
+            "mean": 0.95,
+            "std": NaN,
+            "min": 0.95,
+            "25%": 0.95,
+            "50%": 0.95,
+            "75%": 0.95,
+            "max": 0.95
+          },
+          "positive_sentiment_salience": {
+            "count": 1.0,
+            "mean": 1.0,
+            "std": NaN,
+            "min": 1.0,
+            "25%": 1.0,
+            "50%": 1.0,
+            "75%": 1.0,
+            "max": 1.0
+          },
+          "positive_sentiment_confidence": {
+            "count": 1.0,
+            "mean": 0.95,
+            "std": NaN,
+            "min": 0.95,
+            "25%": 0.95,
+            "50%": 0.95,
+            "75%": 0.95,
+            "max": 0.95
+          },
+          "negative_sentiment_raw": {
+            "count": 1.0,
+            "mean": 0.0,
+            "std": NaN,
+            "min": 0.0,
+            "25%": 0.0,
+            "50%": 0.0,
+            "75%": 0.0,
+            "max": 0.0
+          },
+          "negative_sentiment_salience": {
+            "count": 1.0,
+            "mean": 0.0,
+            "std": NaN,
+            "min": 0.0,
+            "25%": 0.0,
+            "50%": 0.0,
+            "75%": 0.0,
+            "max": 0.0
+          },
+          "negative_sentiment_confidence": {
+            "count": 1.0,
+            "mean": 1.0,
+            "std": NaN,
+            "min": 1.0,
+            "25%": 1.0,
+            "50%": 1.0,
+            "75%": 1.0,
+            "max": 1.0
+          }
+        }
+      },
+      "calculate_overall_sentiment_descriptives": {
+        "positive_sentiment_raw": {
+          "count": 2.0,
+          "mean": 0.525,
+          "std": 0.6010407640085653,
+          "min": 0.1,
+          "25%": 0.3125,
+          "50%": 0.5249999999999999,
+          "75%": 0.7374999999999999,
+          "max": 0.95
+        },
+        "positive_sentiment_salience": {
+          "count": 2.0,
+          "mean": 0.55,
+          "std": 0.6363961030678927,
+          "min": 0.1,
+          "25%": 0.325,
+          "50%": 0.55,
+          "75%": 0.775,
+          "max": 1.0
+        },
+        "positive_sentiment_confidence": {
+          "count": 2.0,
+          "mean": 0.875,
+          "std": 0.10606601717798207,
+          "min": 0.8,
+          "25%": 0.8375,
+          "50%": 0.875,
+          "75%": 0.9125,
+          "max": 0.95
+        },
+        "negative_sentiment_raw": {
+          "count": 2.0,
+          "mean": 0.45,
+          "std": 0.6363961030678927,
+          "min": 0.0,
+          "25%": 0.225,
+          "50%": 0.45,
+          "75%": 0.675,
+          "max": 0.9
+        },
+        "negative_sentiment_salience": {
+          "count": 2.0,
+          "mean": 0.45,
+          "std": 0.6363961030678927,
+          "min": 0.0,
+          "25%": 0.225,
+          "50%": 0.45,
+          "75%": 0.675,
+          "max": 0.9
+        },
+        "negative_sentiment_confidence": {
+          "count": 2.0,
+          "mean": 0.975,
+          "std": 0.03535533905932741,
+          "min": 0.95,
+          "25%": 0.9624999999999999,
+          "50%": 0.975,
+          "75%": 0.9875,
+          "max": 1.0
+        }
+      },
+      "compare_positive_negative_within_documents": {
+        "negative_test.txt": {
+          "positive_raw": 0.1,
+          "negative_raw": 0.9,
+          "difference_pos_neg": -0.8
+        },
+        "positive_test.txt": {
+          "positive_raw": 0.95,
+          "negative_raw": 0.0,
+          "difference_pos_neg": 0.95
+        }
+      },
+      "compare_sentiment_across_documents": {
+        "positive_sentiment_raw_by_document": {
+          "negative_test.txt": 0.1,
+          "positive_test.txt": 0.95
+        },
+        "negative_sentiment_raw_by_document": {
+          "negative_test.txt": 0.9,
+          "positive_test.txt": 0.0
+        }
+      },
+      "generate_statistical_summary_report": "STATISTICAL ANALYSIS SUMMARY REPORT\n==================================================\nAnalysis Timestamp: Unknown\nSample Size: Unknown\nAlpha Level: Unknown\nVariables: 0\n",
+      "perform_statistical_analysis": {
+        "analysis_metadata": {
+          "timestamp": "2025-08-30T17:51:45.452277",
+          "sample_size": 2,
+          "alpha_level": 0.05,
+          "variables_analyzed": [
+            "positive_sentiment_raw",
+            "positive_sentiment_salience",
+            "positive_sentiment_confidence",
+            "negative_sentiment_raw",
+            "negative_sentiment_salience",
+            "negative_sentiment_confidence"
+          ]
+        }
+      },
+      "run_complete_statistical_analysis": {
+        "analysis_metadata": {
+          "timestamp": "2025-08-30T17:51:45.469092",
+          "sample_size": 2,
+          "alpha_level": 0.05,
+          "variables_analyzed": [
+            "positive_sentiment_raw",
+            "positive_sentiment_salience",
+            "positive_sentiment_confidence",
+            "negative_sentiment_raw",
+            "negative_sentiment_salience",
+            "negative_sentiment_confidence"
+          ]
+        }
+      }
+    },
+    "status": "success_with_data",
+    "validation_passed": true
+  }
+}

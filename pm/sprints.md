@@ -108,6 +108,59 @@
 - **Priority**: **MEDIUM** - Performance optimization for statistical workflows
 - **Status**: **PENDING**
 
+#### [ARCH-005] YAML Parsing Necessity Audit - When THIN vs THICK Architecture
+
+- **Description**: Comprehensive investigation to determine when YAML parsing is necessary vs when THIN hash/cache/pass-through architecture should be used
+- **Context**: Sometimes we need to parse YAML for validation, configuration, and metadata extraction. Other times we can use THIN architecture where orchestrator hashes and caches files, passing them directly to LLMs
+- **Audit Scope**:
+  - **Framework specifications**: When do we need structured access vs raw LLM processing?
+  - **Corpus specifications**: Metadata validation vs content processing
+  - **Experiment configurations**: Required parsing vs LLM interpretation
+  - **Performance impact**: Compare THIN vs THICK approaches for different use cases
+- **Investigation Approach**:
+  - Document current YAML parsing usage across codebase
+  - Identify which operations require structured data access
+  - Determine which operations can leverage THIN architecture
+  - Create decision framework for when to use each approach
+- **Goals**:
+  - Eliminate unnecessary THICK parsing where LLMs can handle raw content
+  - Maintain necessary parsing for validation and metadata operations
+  - Document clear guidelines for architectural decisions
+  - Ensure no functionality is broken in the process
+- **Success Criteria**:
+  - Decision framework for YAML parsing necessity
+  - Clear guidelines documented in architecture specs
+  - Performance benchmarks comparing THIN vs THICK approaches
+  - No regressions in existing functionality
+- **Effort**: 2-3 days
+- **Priority**: **HIGH** - Architectural clarity and performance optimization
+- **Status**: **PENDING**
+
+#### [ARCH-006] Provenance Architecture Enhancement - Results Folder Consolidation
+
+- **Description**: Refactor results folder structure to consolidate all session content and create symlinks to shared cache assets
+- **Current Issues**:
+  - Session artifacts scattered across multiple locations
+  - Difficulty tracing complete provenance chains
+  - Shared cache assets not properly linked to experiment results
+- **Proposed Solution**:
+  - Consolidate all session content in centralized results folder
+  - Create symlinks from results to shared cache assets
+  - Implement unified provenance tracking across all artifacts
+- **Benefits**:
+  - Simplified auditing and reproducibility verification
+  - Clearer artifact relationships and dependencies
+  - Better support for peer review and replication studies
+  - Reduced storage overhead through intelligent linking
+- **Implementation**:
+  - Design new folder structure with clear hierarchy
+  - Implement symlink creation logic
+  - Update provenance tracking to handle linked assets
+  - Ensure backward compatibility with existing experiments
+- **Effort**: 3-4 days
+- **Priority**: **MEDIUM** - Important for research integrity and reproducibility
+- **Status**: **PENDING**
+
 #### [ARCH-004] Simplify LLM Configuration Architecture
 
 - **Description**: Reduce complexity in LLM model selection and configuration management
@@ -242,6 +295,24 @@
 - **Effort**: 2-3 hours
 - **Status**: **PENDING**
 
+#### [CLI-UX-011] Allow Direct Experiment File Paths
+
+- **Task**: Enhance run/validate commands to accept either experiment directory OR direct path to experiment.md file
+- **Problem**: Currently commands only accept experiment directories, requiring users to navigate to specific directories
+- **Solution**: Support both directory paths and direct experiment.md file paths for improved flexibility
+- **Implementation**:
+  - Detect whether provided path is directory or file
+  - Extract experiment directory from file path when file is provided
+  - Maintain backward compatibility with existing directory-based usage
+  - Update help text and documentation
+- **Benefits**:
+  - More flexible workflow for users working with multiple experiments
+  - Easier integration with file explorers and IDEs
+  - Reduced navigation friction in development workflows
+- **Priority**: MEDIUM - User experience improvement
+- **Effort**: 3-4 hours
+- **Status**: **PENDING**
+
 #### [CLI-UX-010] Add Interactive Command Discovery
 
 - **Task**: Implement `--help` improvements and command suggestions
@@ -252,6 +323,61 @@
 - **Priority**: LOW - Nice-to-have improvement
 - **Effort**: 3-4 hours
 - **Status**: **PENDING**
+
+---
+
+### Sprint 6.5: Bug Fixes & Stability (HIGH PRIORITY)
+
+**Timeline**: 1-2 weeks
+**Goal**: Address critical bugs and stability issues affecting core functionality
+
+#### [BUG-001] CLI Flag Compliance Gap - Synthesis Model Selection
+
+- **Description**: Synthesis stage agents default to Flash instead of Flash Lite despite explicit CLI specification
+- **Problem**: CLI allows specifying Flash Lite for synthesis, but agents ignore this and use Flash
+- **Impact**: Unexpected cost increases and performance issues
+- **Root Cause**: Agent-level model selection logic not respecting CLI flags
+- **Solution**:
+  - Audit all synthesis agents for model selection logic
+  - Ensure CLI flags are properly passed through to agent execution
+  - Add validation to verify model selection matches CLI specification
+  - Update agent base classes to handle model selection consistently
+- **Testing**: Verify CLI flag compliance across all synthesis operations
+- **Effort**: 4-6 hours
+- **Priority**: HIGH - Affects cost and performance predictability
+- **Status**: PENDING
+
+#### [BUG-002] Cost Tracking Reporting Zero Costs
+
+- **Description**: CLI shows $0.0000 and 0 tokens even when cost log contains actual usage data (~$0.003, 23K tokens)
+- **Problem**: Cost tracking display is broken, showing zeros despite successful LLM calls
+- **Impact**: Users cannot monitor actual costs, affecting budget management
+- **Investigation**:
+  - Check cost tracking integration with LLM gateway
+  - Verify cost data collection and storage
+  - Identify disconnect between actual costs and display logic
+  - Ensure cost tracking works across all model types
+- **Solution**: Fix cost data retrieval and display in CLI output
+- **Testing**: Verify cost reporting accuracy across different scenarios
+- **Effort**: 2-3 hours
+- **Priority**: HIGH - Affects financial visibility
+- **Status**: PENDING
+
+#### [BUG-003] CLI Dry Run Strict Validation Broken
+
+- **Description**: Dry run only performs basic check, Helen coherence validation not engaged
+- **Problem**: Dry run mode doesn't execute full validation suite, missing critical coherence checks
+- **Impact**: False confidence in experiment validity before actual execution
+- **Root Cause**: Dry run bypasses Helen validation system
+- **Solution**:
+  - Integrate Helen coherence validation into dry run mode
+  - Ensure all validation checks run in dry run (without expensive operations)
+  - Provide clear feedback on what validations were performed
+  - Maintain performance benefits of dry run while ensuring completeness
+- **Testing**: Verify dry run catches same issues as full validation
+- **Effort**: 3-4 hours
+- **Priority**: HIGH - Affects experiment reliability
+- **Status**: PENDING
 
 ---
 

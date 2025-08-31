@@ -204,9 +204,9 @@ class EvidenceRetrieverAgent:
     def _create_evidence_retrieval_prompt(self, framework_spec: Dict[str, Any], statistical_results: Dict[str, Any]) -> str:
         """Create natural language prompt for evidence retrieval."""
         
-        # Convert tuple keys to strings to avoid JSON serialization errors
+        # Convert tuple keys and non-JSON-serializable values to avoid JSON serialization errors
         def convert_tuple_keys(obj):
-            """Recursively convert tuple keys to strings for JSON serialization"""
+            """Recursively convert tuple keys and non-JSON-serializable values for JSON serialization"""
             if isinstance(obj, dict):
                 converted = {}
                 for k, v in obj.items():
@@ -220,8 +220,15 @@ class EvidenceRetrieverAgent:
                 return [convert_tuple_keys(item) for item in obj]
             elif isinstance(obj, tuple):
                 return tuple(convert_tuple_keys(item) for item in obj)
-            else:
+            elif isinstance(obj, bool):
+                # Handle boolean values explicitly (must come before int check since bool is subclass of int)
                 return obj
+            elif isinstance(obj, (int, float, str, type(None))):
+                # Handle JSON-serializable primitives
+                return obj
+            else:
+                # Convert any other non-JSON-serializable objects to string representation
+                return str(obj)
         
         # Convert statistical results to JSON-safe format
         json_safe_statistical_results = convert_tuple_keys(statistical_results)

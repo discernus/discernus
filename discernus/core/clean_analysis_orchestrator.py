@@ -736,14 +736,22 @@ class CleanAnalysisOrchestrator:
             raise CleanAnalysisError(f"Corpus manifest not found: {corpus_manifest_path}")
 
         content = corpus_manifest_path.read_text(encoding='utf-8')
+        
+        # Extract YAML metadata from corpus.md (human-first format)
+        # Follow corpus specification: look for "## Document Manifest" section first
         if '## Document Manifest' in content:
             _, yaml_block = content.split('## Document Manifest', 1)
             if '```yaml' in yaml_block:
                 yaml_start = yaml_block.find('```yaml') + 7
-                yaml_end = yaml_block.rfind('```')
-                yaml_content = yaml_block[yaml_start:yaml_end].strip() if yaml_end > yaml_start else yaml_block[yaml_start:].strip()
-                manifest_data = yaml.safe_load(yaml_content)
-                return manifest_data.get('documents', [])
+                yaml_end = yaml_block.find('```', yaml_start)
+                if yaml_end > yaml_start:
+                    yaml_content = yaml_block[yaml_start:yaml_end].strip()
+                    try:
+                        manifest_data = yaml.safe_load(yaml_content)
+                        if manifest_data and 'documents' in manifest_data:
+                            return manifest_data.get('documents', [])
+                    except yaml.YAMLError as e:
+                        raise CleanAnalysisError(f"Invalid YAML in corpus manifest: {e}")
         
         raise CleanAnalysisError("Could not parse documents from corpus manifest.")
     

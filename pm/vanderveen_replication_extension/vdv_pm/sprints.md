@@ -6,51 +6,22 @@
 ## 📊 **SPRINT 3: CORPUS EXTENSION** 🎯 **PHASE 2 FOCUS**
 ### 🎯 Goal: Expand corpus to 200+ speeches across multiple election cycles
 ### 📋 Sprint Backlog:
-- [ ] **Original Data Analysis & Methodology**
-  - [ ] Convert `original_data/combined-data-set-xlsx.xlsx` to markdown, txt, JSON, CSV formats
-  - [ ] Analyze original paper data structure, coding schemes, methodology details
-  - [ ] Document how original approach informs Phase 2 corpus development
-  - [ ] **DoD**: All formats created, analysis documented, insights captured
-
-- [ ] **Methodology Documentation**
-  - [ ] Create Discernus general methodology overview (analytical approach, framework integration, QA protocols)
-  - [ ] Document Phase 1 PDAF v10.0 implementation details (statistical testing, hypothesis validation, metadata process)
-  - [ ] **DoD**: Both methodology documents completed and placed in project docs
-
-- [ ] **Corpus Development Planning**
-  - [ ] Create detailed corpus development plan in `pm/vanderveen_replication_extension/corpus/corpus_development/`
-  - [ ] Define expansion strategy, timeline, quality standards, metadata requirements, processing workflows
-  - [ ] **DoD**: Comprehensive plan document completed with actionable steps
-
-- [ ] **Existing Corpora Survey**
-  - [ ] Survey `/projects/` and `/corpus/` for presidential speech materials by election cycle, speaker, format
-  - [ ] Assess quality and compatibility with Phase 2 requirements
-  - [ ] **DoD**: Complete inventory with quality assessment and compatibility matrix
-
-- [ ] **Tool Integration & Strategy**
-  - [ ] Examine `/corpus/tools/` for corpus processing capabilities
-  - [ ] Identify relevant strategies from `/corpus/` for enrichment
-  - [ ] Integrate tools into Phase 2 workflow, develop enhanced processing strategies
-  - [ ] **DoD**: Tool integration plan completed, workflow documented
-
-- [ ] **Corpus Expansion Execution**
-  - [ ] Extract additional Trump speeches (2020, 2024 campaigns)
-  - [ ] Collect Biden presidential speeches (2020-2024)
-  - [ ] Process historical Obama speeches (2008, 2012)
-  - [ ] **DoD**: All target materials identified and processing initiated
-
-- [ ] **Phase 2 Completion & Review**
-  - [ ] Finalize expanded corpus (target: 200+ speeches)
-  - [ ] Document corpus expansion methodology
-  - [ ] Prepare Phase 3 transition plan
-  - [ ] Generate Phase 2 completion report
-  - [ ] **DoD**: Expanded corpus ready, methodology documented, Phase 3 plan prepared
+- [ ] **Original Data Conversion**: Convert van der Veen Excel to markdown, txt, JSON, CSV - **DoD**: All formats created and accessible
+- [ ] **Van der Veen Analysis**: Analyze original paper structure, coding schemes, methodology - **DoD**: Insights documented for Phase 2
+- [ ] **Methodology Documentation**: Create Discernus overview and Phase 1 PDAF details - **DoD**: Both documents in project docs
+- [ ] **Corpus Development Plan**: Create detailed expansion strategy in `corpus_development/` - **DoD**: Comprehensive plan with timelines
+- [ ] **Existing Corpora Survey**: Survey `/projects/` and `/corpus/` for presidential materials - **DoD**: Complete inventory with quality matrix
+- [ ] **Tool Integration**: Examine `/corpus/tools/` and integrate into workflow - **DoD**: Integration plan completed
+- [ ] **BYU Jane Goodall Engagement**: Develop authentic scholarly outreach using patient, observational methodology - **DoD**: Outreach strategy aligned with genuine relationship building
+- [ ] **DROI Decision**: Evaluate Phase 1 DROI implementation - **DoD**: Go/no-go decision with rationale
+- [ ] **Corpus Expansion**: Extract Trump (2020, 2024), Biden (2020-2024), Obama (2008, 2012) speeches - **DoD**: Materials identified and processing initiated
+- [ ] **Phase 2 Completion**: Finalize corpus, document methodology, prepare Phase 3 - **DoD**: Ready for multi-framework analysis
 
 ### 🎖️ Success Criteria:
-- ✅ Expanded corpus of 200+ presidential speeches
-- ✅ Coverage across multiple election cycles (2008-2024)
-- ✅ Consistent metadata and quality standards
-- ✅ Ready for multi-framework analysis in Phase 3
+- ✅ Expanded corpus of 200+ presidential speeches (2008-2024)
+- ✅ Consistent metadata and quality standards maintained
+- ✅ BYU Jane Goodall engagement strategy developed and authentic outreach approach ready
+- ✅ DROI implementation decision made
 - ✅ Clear documentation of expansion methodology
 
 ---
@@ -97,6 +68,26 @@
 
 ---
 
+## 🌿 **SPRINT 3.5: JANE GOODALL ENGAGEMENT** 🎯 **AUTHENTIC RELATIONSHIP BUILDING**
+
+### 🎯 Goal: Establish genuine scholarly connections with BYU Team Populism through patient, observational methodology
+### 📋 Sprint Backlog:
+- [ ] **Jane Goodall Methodology Development**: Create authentic outreach approach based on patient observation and genuine curiosity - **DoD**: Methodology documented and aligned with user's "Cursor enabled vibe coder" identity
+- [ ] **Scholarly Dialogue Preparation**: Develop genuine questions about computational social science evolution - **DoD**: Conversation starters that reflect authentic learning journey
+- [ ] **Initial Outreach Drafting**: Craft low-pressure email introducing yourself as fellow researcher - **DoD**: Email drafts ready for weekend contemplation
+- [ ] **BYU Research Deep Dive**: Study Hawkins/Silva/Jenne work thoroughly for authentic engagement - **DoD**: Comprehensive understanding of their contributions and methodologies
+- [ ] **Relationship Building Mindset**: Shift from technical demonstration to mutual learning focus - **DoD**: Strategy aligned with dream of Bruno becoming passionate maintainer
+- [ ] **Contingency Planning**: Prepare gentle follow-up approaches if initial outreach doesn't connect - **DoD**: Backup strategies for continued authentic engagement
+
+### 🎖️ Success Criteria:
+- ✅ Jane Goodall methodology fully integrated into all strategy documents
+- ✅ Authentic outreach approach developed that honors user's identity
+- ✅ Scholarly dialogue prepared for genuine relationship building
+- ✅ Clear path established for organic collaboration development
+- ✅ Strategy aligned with long-term vision of passionate partnership
+
+---
+
 ## 🎯 **OVERALL EXPERIMENT SUCCESS CRITERIA**
 
 ### **Primary Outcomes**:
@@ -109,7 +100,7 @@
 ### **Secondary Outcomes**:
 - 🎯 **Phase 2**: Temporal evolution insights (2008-2024 presidential populism)
 - 🎯 **Phase 3**: Enhanced analytical framework for future research
-- 🎯 **Final**: Academic collaboration pipeline established
+- 🎯 **Final**: Authentic academic relationships established through Jane Goodall methodology
 - 🎯 **Final**: Platform capability demonstration for GTM strategy
 - 🎯 **Final**: Contribution to computational discourse analysis field
 

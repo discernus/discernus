@@ -21,7 +21,10 @@ Comprehensive collection of 2016 presidential campaign speeches from all major c
 
 ---
 
+## Document Manifest
+
 ```yaml
+---
 name: "2016 Presidential Campaign Speech Corpus"
 version: "1.0"
 description: "Complete collection of 2016 presidential campaign speeches for PDAF analysis"
@@ -784,3 +787,7 @@ documents:
 **Generated**: 2025-08-30 00:44:15
 **Source**: Van der Veen et al. (2024) presidential campaign speech corpus
 **Format**: v8.0.1 compliant corpus specification
+
+```
+
+---

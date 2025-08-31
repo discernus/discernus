@@ -221,13 +221,16 @@ def _validate_corpus_documents(experiment_path: Path, corpus_manifest_path: Path
     try:
         content = corpus_manifest_path.read_text(encoding='utf-8')
         
-        # Extract YAML from corpus manifest
+        # Extract YAML from corpus manifest according to specification
         if '## Document Manifest' in content:
             _, yaml_block = content.split('## Document Manifest', 1)
             if '```yaml' in yaml_block:
                 yaml_start = yaml_block.find('```yaml') + 7
-                yaml_end = yaml_block.rfind('```')
-                yaml_content = yaml_block[yaml_start:yaml_end].strip() if yaml_end > yaml_start else yaml_block[yaml_start:].strip()
+                yaml_end = yaml_block.find('```', yaml_start)
+                if yaml_end > yaml_start:
+                    yaml_content = yaml_block[yaml_start:yaml_end].strip()
+                else:
+                    return False, "❌ Could not find closing delimiter for YAML block"
                 
                 import yaml
                 manifest_data = yaml.safe_load(yaml_content)

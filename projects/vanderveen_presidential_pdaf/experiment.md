@@ -115,7 +115,7 @@ metadata:
 components:
   # The filename of the v10.0 Framework file.
   # Must be in the same directory as this experiment.md.
-  framework: "pdaf_v10.md"
+  framework: "pdaf_v10_vdv.md"
 
   # The filename of the v8.0 compliant Corpus manifest file.
   # Must be in the same directory as this experiment.md.

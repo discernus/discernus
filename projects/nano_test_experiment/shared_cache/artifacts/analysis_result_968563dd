@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_ef118072a668",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "nano_test_experiment",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"Sentiment Binary Framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis performed using three independent approaches (Evidence-First, Context-Weighted, Pattern-Based) and aggregated via median scores as per instructions.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{{artifact_id}}\",\n      \"document_name\": \"negative_test.txt\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.8\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"What a wonderful time!\",\n          \"confidence\": 0.3,\n          \"context_type\": \"weak indicator\"\n        },\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"The team did an excellent job.\",\n          \"confidence\": 0.2,\n          \"context_type\": \"weak indicator\"\n        },\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"What a wonderful time!\",\n          \"confidence\": 0.3,\n          \"context_type\": \"weak indicator\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "2945ff174ddfb18653146d34da74c4ff67955e9c150998da6a8002d6f24cdb8f",
+  "execution_metadata": {
+    "start_time": "2025-08-30T21:48:53.622796+00:00",
+    "end_time": "2025-08-30T21:48:55.271062+00:00",
+    "duration_seconds": 1.648231
+  },
+  "input_artifacts": {
+    "framework_hash": "f032ff0c1c0b8b990d2cc892b488fe4b09d8837ca2cf4a51b50f6c27256df18f",
+    "document_hashes": [
+      "1df25093a747678c5dbe724ecfb963b88049f9a7a536a3f23f064fd592744f91"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "nano_test_experiment",
+      "experiment_root": "/Volumes/code/discernus/projects/nano_test_experiment",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250830T214849Z_5902644f"
+  }
+}
