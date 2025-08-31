@@ -48,7 +48,18 @@ This directory contains the enhanced framework validation system that combines:
 
 ## 🚀 Usage
 
-### Basic Enhanced Validation
+### **Quick Reference - Most Common Commands**
+
+| **Use Case** | **Command** | **Notes** |
+|--------------|-------------|-----------|
+| **Quick Check** | `--no-academic` | Structural validation only |
+| **Full Validation** | `--verbose` | Academic + structural validation |
+| **Research Synthesis** | `--research-directions --initiate-research` | **BOTH flags required** |
+| **Save Report** | `--output filename.md` | Saves to framework's validation_reports/ |
+
+### **Command Reference**
+
+#### Basic Enhanced Validation
 ```bash
 python3 scripts/framework_researcher/enhanced_framework_validator.py frameworks/reference/flagship/pdaf_v10/pdaf_v10.md
 ```
@@ -82,10 +93,79 @@ make enhanced-validate-framework-verbose FRAMEWORK=frameworks/reference/flagship
 python3 scripts/framework_researcher/enhanced_framework_validator.py scripts/framework_researcher/test_framework.md
 ```
 
-### Full Research Integration
+### Common Usage Patterns
+
+#### **Quick Structural Validation** (Development/Testing)
 ```bash
-python3 scripts/framework_researcher/enhanced_framework_validator.py frameworks/reference/flagship/pdaf_v10/pdaf_v10.md --initiate-research
+python3 scripts/framework_researcher/enhanced_framework_validator.py path/to/framework.md --no-academic
 ```
+
+#### **Academic Validation Only** (After structural fixes)
+```bash
+python3 scripts/framework_researcher/enhanced_framework_validator.py path/to/framework.md --verbose
+```
+
+#### **Complete Reference Framework Validation** (Production/Reference)
+```bash
+python3 scripts/framework_researcher/enhanced_framework_validator.py path/to/framework.md --research-directions --initiate-research --verbose
+```
+
+#### **Save Validation Report** (Documentation)
+```bash
+python3 scripts/framework_researcher/enhanced_framework_validator.py path/to/framework.md --output validation_report.md
+```
+
+### Full Research Integration (Recommended for Reference Frameworks)
+```bash
+# IMPORTANT: Both flags are required for complete research synthesis
+python3 scripts/framework_researcher/enhanced_framework_validator.py frameworks/reference/flagship/pdaf_v10/pdaf_v10.md --research-directions --initiate-research
+```
+
+**⚠️ Critical Usage Notes**:
+- **`--research-directions`** must be used WITH **`--initiate-research`** for complete research synthesis
+- **`--initiate-research`** alone will NOT generate research synthesis
+- Framework must pass structural validation (PASSED status) for research directions to be generated
+- Academic validation with LOW confidence may still allow research synthesis to complete
+
+## 🚨 Troubleshooting & Common Issues
+
+### **Research Synthesis Not Generated?**
+**Problem**: Tool runs but no research synthesis files are created
+**Solution**: Use BOTH flags: `--research-directions --initiate-research`
+**Why**: `--initiate-research` alone won't work - research directions must be generated first
+
+### **Framework Validation Failed?**
+**Problem**: Structural validation returns FAILED status
+**Solution**: Fix structural issues first, then re-run
+**Common Issues**:
+- Scoring calibration inconsistencies (gaps in ranges)
+- Narrative vs. appendix conflicts (multiple sources of truth)
+- Missing required YAML sections
+
+### **Academic Validation Low Confidence?**
+**Problem**: Academic validation returns LOW confidence
+**Solution**: This is normal for complex frameworks - research synthesis can still complete
+**Note**: LOW confidence doesn't prevent research integration from working
+
+### **Output Files Not Found?**
+**Problem**: Validation artifacts not in expected locations
+**Solution**: Check framework-specific directories:
+```
+frameworks/reference/flagship/{framework_name}/
+├── validation_reports/
+│   ├── {framework_name}_enhanced_validation_*.md
+│   └── {framework_name}_research_synthesis_*.md
+└── research_directions/
+    └── {framework_name}_research_directions_*.md
+```
+
+### **Tool Hangs or Errors?**
+**Problem**: Tool fails to complete or hangs
+**Solution**: 
+1. Check framework file path is correct
+2. Ensure framework is valid Markdown with proper YAML
+3. Try `--verbose` flag for detailed error information
+4. Check LLM model availability and rate limits
 
 ## 🔬 Validation Phases
 
@@ -364,6 +444,47 @@ make enhanced-validate-framework-verbose FRAMEWORK=path/to/framework.md
 - **Comprehensive Testing**: Extensive validation against diverse frameworks
 - **Performance Optimization**: Efficient processing for large frameworks
 - **User Interface**: Web-based validation interface for researchers
+
+## 📁 Expected Outputs & Success Indicators
+
+### **What You Should See When It Works**
+
+#### **1. Terminal Output Success Indicators**
+```
+✅ Comprehensive LiteLLM debug suppression configured
+🔍 Enhanced Framework Validator initialized
+📋 Phase 1: Structural Validation... ✅ PASSED
+📚 Phase 2: Academic Validation... ✅ Completed
+🎯 Phase 3: Integrated Assessment... ✅ Completed
+🔬 Phase 4: Research Directions Generation... ✅ Completed
+🔬 Initiating Librarian Research... ✅ Started
+📄 Research synthesis saved to: [path]
+Overall Status: GOOD/EXCELLENT
+Overall Score: [X.X]/10
+```
+
+#### **2. Generated Files Structure**
+```
+frameworks/reference/flagship/{framework_name}/
+├── validation_reports/
+│   ├── {framework_name}_enhanced_validation_*.md
+│   └── {framework_name}_research_synthesis_*.md
+└── research_directions/
+    └── {framework_name}_research_directions_*.md
+```
+
+#### **3. Research Synthesis Content**
+- **Executive Summary**: High-level findings and recommendations
+- **Research Synthesis**: Detailed analysis and actionable insights
+- **Complete Research Reports**: Full, unedited detailed reports as appendices
+- **Academic Citations**: Proper academic references and methodology
+
+### **What to Do If Outputs Are Missing**
+
+1. **Check Terminal Output**: Look for error messages or incomplete phases
+2. **Verify Flags**: Ensure you used `--research-directions --initiate-research`
+3. **Check Framework Status**: Must be PASSED for research to generate
+4. **Look for Partial Outputs**: Check if research directions were created but synthesis failed
 
 ## 📁 Output Files
 
