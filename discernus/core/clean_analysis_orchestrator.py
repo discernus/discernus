@@ -743,7 +743,7 @@ class CleanAnalysisOrchestrator:
             _, yaml_block = content.split('## Document Manifest', 1)
             if '```yaml' in yaml_block:
                 yaml_start = yaml_block.find('```yaml') + 7
-                yaml_end = yaml_block.find('```', yaml_start)
+                yaml_end = yaml_block.rfind('```')
                 if yaml_end > yaml_start:
                     yaml_content = yaml_block[yaml_start:yaml_end].strip()
                     try:
@@ -1948,9 +1948,18 @@ class CleanAnalysisOrchestrator:
                 elif isinstance(obj, list):
                     return [convert_tuple_keys_for_json(item) for item in obj]
                 elif isinstance(obj, tuple):
-                    return tuple(convert_tuple_keys_for_json(item) for item in obj)
+                    return list(convert_tuple_keys_for_json(item) for item in obj)  # Convert tuples to lists
+                elif isinstance(obj, bool):
+                    return obj  # Booleans are JSON serializable
+                elif obj is None:
+                    return obj  # None is JSON serializable
                 else:
-                    return obj
+                    # For any other type, try to convert to string if not natively serializable
+                    try:
+                        json.dumps(obj)
+                        return obj
+                    except (TypeError, ValueError):
+                        return str(obj)
             
             safe_research_data = convert_tuple_keys_for_json(research_data)
             research_data_hash = self.artifact_storage.put_artifact(
@@ -2207,7 +2216,28 @@ class CleanAnalysisOrchestrator:
             
             # 5. RAW ANALYSIS SCORES
             if hasattr(self, '_analysis_results') and self._analysis_results:
-                analysis_json = json.dumps(self._analysis_results, indent=2, default=str)
+                # Ensure all analysis results are JSON serializable
+                def make_serializable(obj):
+                    """Recursively convert objects to JSON-serializable format."""
+                    if isinstance(obj, dict):
+                        return {str(k): make_serializable(v) for k, v in obj.items()}
+                    elif isinstance(obj, list):
+                        return [make_serializable(item) for item in obj]
+                    elif isinstance(obj, tuple):
+                        return tuple(make_serializable(item) for item in obj)
+                    elif hasattr(obj, '__dict__'):
+                        # Handle objects with attributes
+                        return make_serializable(vars(obj))
+                    else:
+                        # Convert non-serializable types to strings
+                        try:
+                            json.dumps(obj)
+                            return obj
+                        except (TypeError, ValueError):
+                            return str(obj)
+
+                serializable_results = make_serializable(self._analysis_results)
+                analysis_json = json.dumps(serializable_results, indent=2)
                 source_documents.append({
                     'content': analysis_json,
                     'metadata': {
@@ -2925,7 +2955,28 @@ class CleanAnalysisOrchestrator:
             
             # 5. RAW ANALYSIS SCORES
             if hasattr(self, '_analysis_results') and self._analysis_results:
-                analysis_json = json.dumps(self._analysis_results, indent=2, default=str)
+                # Ensure all analysis results are JSON serializable
+                def make_serializable(obj):
+                    """Recursively convert objects to JSON-serializable format."""
+                    if isinstance(obj, dict):
+                        return {str(k): make_serializable(v) for k, v in obj.items()}
+                    elif isinstance(obj, list):
+                        return [make_serializable(item) for item in obj]
+                    elif isinstance(obj, tuple):
+                        return tuple(make_serializable(item) for item in obj)
+                    elif hasattr(obj, '__dict__'):
+                        # Handle objects with attributes
+                        return make_serializable(vars(obj))
+                    else:
+                        # Convert non-serializable types to strings
+                        try:
+                            json.dumps(obj)
+                            return obj
+                        except (TypeError, ValueError):
+                            return str(obj)
+
+                serializable_results = make_serializable(self._analysis_results)
+                analysis_json = json.dumps(serializable_results, indent=2)
                 source_documents.append({
                     'content': analysis_json,
                     'metadata': {
@@ -3602,7 +3653,28 @@ class CleanAnalysisOrchestrator:
             
             # 4. Add statistical results if available
             if hasattr(self, '_analysis_results') and self._analysis_results:
-                analysis_json = json.dumps(self._analysis_results, indent=2, default=str)
+                # Ensure all analysis results are JSON serializable
+                def make_serializable(obj):
+                    """Recursively convert objects to JSON-serializable format."""
+                    if isinstance(obj, dict):
+                        return {str(k): make_serializable(v) for k, v in obj.items()}
+                    elif isinstance(obj, list):
+                        return [make_serializable(item) for item in obj]
+                    elif isinstance(obj, tuple):
+                        return tuple(make_serializable(item) for item in obj)
+                    elif hasattr(obj, '__dict__'):
+                        # Handle objects with attributes
+                        return make_serializable(vars(obj))
+                    else:
+                        # Convert non-serializable types to strings
+                        try:
+                            json.dumps(obj)
+                            return obj
+                        except (TypeError, ValueError):
+                            return str(obj)
+
+                serializable_results = make_serializable(self._analysis_results)
+                analysis_json = json.dumps(serializable_results, indent=2)
                 corpus_files.append({
                     'content': analysis_json,
                     'file_path': 'analysis_results.json',
