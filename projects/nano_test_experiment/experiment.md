@@ -26,5 +26,18 @@ components:
   framework: "sentiment_binary_v1.md"
   corpus: "corpus.md"
 
+# 5.3: Hypotheses (Optional but Recommended)
+hypotheses:
+  - id: "H1"
+    description: "The pipeline correctly identifies positive vs negative sentiment"
+    falsifiable: true
+    mutually_exclusive: true
+    collective_exhaustive: true
+  - id: "H2"
+    description: "The analysis agent can process simple dimensional scoring"
+    falsifiable: true
+    mutually_exclusive: true
+    collective_exhaustive: true
+
 # --- End of Machine-Readable Appendix ---
 ```

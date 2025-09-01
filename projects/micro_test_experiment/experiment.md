@@ -38,5 +38,23 @@ components:
   framework: "sentiment_binary_v1.md"
   corpus: "corpus.md"
 
+# 5.3: Hypotheses (Optional but Recommended)
+hypotheses:
+  - id: "H1"
+    description: "Positive sentiment documents show significantly higher positive sentiment scores than negative sentiment documents"
+    falsifiable: true
+    mutually_exclusive: true
+    collective_exhaustive: true
+  - id: "H2"
+    description: "Negative sentiment documents show significantly higher negative sentiment scores than positive sentiment documents"
+    falsifiable: true
+    mutually_exclusive: true
+    collective_exhaustive: true
+  - id: "H3"
+    description: "There are significant differences between positive and negative sentiment groups in ANOVA analysis"
+    falsifiable: true
+    mutually_exclusive: true
+    collective_exhaustive: true
+
 # --- End of Machine-Readable Appendix ---
 ```
