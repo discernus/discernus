@@ -102,16 +102,18 @@ template: |
 
   ## 0. Experiment Provenance Header (REQUIRED FIRST)
   Start every report with available experiment metadata:
-  
+
   ```
   # [Framework Name] Analysis Report
-  
-  **Experiment**: [experiment_name]  
-  **Run ID**: [run_id]  
-  **Date**: [completion_date]  
-  **Framework**: [framework_filename]  
-  **Corpus**: [corpus_filename] ([document_count] documents)  
-  
+
+  **Experiment**: [experiment_name]
+  **Run ID**: [run_id]
+  **Date**: [completion_date]
+  **Framework**: [framework_filename]
+  **Corpus**: [corpus_filename] ([document_count] documents)
+  **Analysis Model**: [analysis_model_used]
+  **Synthesis Model**: [synthesis_model_used]
+
   ---
   ```
   

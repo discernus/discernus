@@ -48,6 +48,9 @@ class UnifiedSynthesisAgent:
         self.agent_name = "UnifiedSynthesisAgent"
         self.llm_gateway = LLMGateway(ModelRegistry())
         self.enhanced_mode = enhanced_mode
+        # Model tracking for provenance
+        self.analysis_model = None
+        self.synthesis_model = model  # This is the synthesis model
         self.prompt_template = (
             self._load_enhanced_prompt_template()
             if enhanced_mode
@@ -151,9 +154,18 @@ class UnifiedSynthesisAgent:
             corpus_path = Path(assets['experiment_path']).parent / "corpus.md"
             corpus_manifest = corpus_path.read_text(encoding='utf-8') if corpus_path.exists() else "Corpus manifest not available"
             
-            # 5. Assemble prompt using template (no complex assembler needed)
+            # 5. Assemble experiment metadata with model information
+            experiment_metadata = f"""
+            Experiment: {Path(assets['experiment_path']).parent.name}
+            Framework: {Path(assets['framework_path']).name}
+            Analysis Model: {getattr(self, 'analysis_model', 'Unknown')}
+            Synthesis Model: {getattr(self, 'synthesis_model', 'Unknown')}
+            Document Count: {len(research_data.get('documents', []))}
+            """
+
+            # 6. Assemble prompt using template (no complex assembler needed)
             base_prompt = self.prompt_template['template'].format(
-                experiment_metadata="See experiment configuration below",
+                experiment_metadata=experiment_metadata,
                 framework_content=framework_content,
                 experiment_content=experiment_content,
                 corpus_manifest=corpus_manifest,

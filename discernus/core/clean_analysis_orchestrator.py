@@ -280,7 +280,7 @@ class CleanAnalysisOrchestrator:
             # Corpus index service debug removed (QA agents disabled)
             
             try:
-                assets = self._run_synthesis(synthesis_model, audit_logger, statistical_results, evidence_results)
+                assets = self._run_synthesis(synthesis_model, analysis_model, audit_logger, statistical_results, evidence_results)
                 self._log_status("Synthesis completed")
                 self._log_phase_timing("synthesis_phase", phase_start)
             except Exception as e:
@@ -1915,7 +1915,7 @@ class CleanAnalysisOrchestrator:
             self._log_progress(f"❌ Evidence retrieval phase failed: {str(e)}")
             raise CleanAnalysisError(f"Evidence retrieval phase failed: {str(e)}")
 
-    def _run_synthesis(self, synthesis_model: str, audit_logger: AuditLogger, statistical_results: Dict[str, Any], evidence_results: Dict[str, Any] = None) -> Dict[str, Any]:
+    def _run_synthesis(self, synthesis_model: str, analysis_model: str, audit_logger: AuditLogger, statistical_results: Dict[str, Any], evidence_results: Dict[str, Any] = None) -> Dict[str, Any]:
         """Run synthesis using SynthesisPromptAssembler and UnifiedSynthesisAgent."""
         self._log_progress("📝 Starting synthesis phase...")
         
@@ -1993,6 +1993,9 @@ class CleanAnalysisOrchestrator:
                 model=synthesis_model,
                 audit_logger=audit_logger,
             )
+            # Pass both models for provenance tracking
+            synthesis_agent.analysis_model = analysis_model
+            synthesis_agent.synthesis_model = synthesis_model
             
             # Create assets dictionary for the new interface
             assets = {
