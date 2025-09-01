@@ -33,6 +33,7 @@ template: |
   **Step 3: Evaluate Experimental Hypotheses.**
   - Review the **Experiment Configuration**.
   - Evaluate how the statistical findings from Step 2 confirm or falsify the experiment's hypotheses. Explicitly state the outcome for each hypothesis.
+  - **CRITICAL**: These evaluations will be used to populate Section 5.1 of the final report. Do NOT include Step 3 content as intermediate artifacts in the final output - integrate it properly into the academic report structure.
   
   **Step 4: Construct the Core Narrative.**
   - Based on the insights from Steps 1-3, formulate a central thesis or narrative for the research report. What is the single most important story the data is telling?
@@ -138,7 +139,16 @@ template: |
   - Acknowledge limitations and methodological choices
 
   ## 5. Comprehensive Results
-  ### 5.1 Descriptive Statistics
+
+  ### 5.1 Hypothesis Evaluation (REQUIRED if hypotheses present)
+  - **MANDATORY**: If the experiment contains hypotheses, this section MUST appear first in Comprehensive Results
+  - **Sequential Format**: Address each hypothesis in order (H₁, H₂, H₃...) with clear CONFIRMED/FALSIFIED/INDETERMINATE outcomes
+  - **Evidence-Based**: Support each evaluation with specific statistical evidence from the research data
+  - **Academic Structure**: Use formal academic language (e.g., "H₁ (Overall Populism ≥ 0.5): CONFIRMED. The mean salience-weighted overall populism index was 0.81...")
+  - **Comprehensive Coverage**: Address ALL hypotheses from the experiment configuration
+  - **Integration**: Weave in supporting textual evidence from the evidence database
+
+  ### 5.2 Descriptive Statistics
   - Present all statistical results in properly formatted Markdown tables
   - Include significance indicators: * p<0.05, ** p<0.01, *** p<0.001
   - Add effect size interpretations (Small/Medium/Large based on Cohen's conventions)
@@ -149,17 +159,17 @@ template: |
     * Choose one precision level and use consistently throughout the report
   - Dimensional means, distributions, and patterns with statistical interpretation
 
-  ### 5.2 Advanced Metric Analysis
+  ### 5.3 Advanced Metric Analysis
   - Derived metrics interpretation
   - Tension patterns and strategic contradictions
   - Confidence-weighted analysis
 
-  ### 5.3 Correlation and Interaction Analysis
+  ### 5.4 Correlation and Interaction Analysis
   - Cross-dimensional relationships with theoretical interpretation
   - Network effects and clustering patterns
   - Meta-strategy identification
-  
-  ### 5.4 Pattern Recognition and Theoretical Insights
+
+  ### 5.5 Pattern Recognition and Theoretical Insights
   - Identify the strongest correlations and explain their practical significance
   - Connect statistical patterns to theoretical frameworks and literature
   - Explain what correlation patterns reveal about the framework's construct validity
@@ -168,12 +178,12 @@ template: |
   - **Evidence Integration**: Support every pattern with direct quotes from the evidence database
   - **Quote Integration**: Weave evidence quotes naturally into your analysis, not as separate citations
 
-  ### 5.5 Framework Effectiveness Assessment
+  ### 5.6 Framework Effectiveness Assessment
   - Discriminatory power analysis
   - Framework-corpus fit evaluation
   - Methodological insights
 
-  ### 5.6 Evidence Integration and Citation
+  ### 5.7 Evidence Integration and Citation
   - **Statistical-Evidence Alignment**: Connect each major statistical finding to supporting textual evidence
   - **Quote Quality**: Use substantial quotes (full sentences) that directly support your interpretations
   - **Attribution Standards**: Follow format: 'As [Speaker] stated: "[exact quote]" (Source: [document_name])'
@@ -248,6 +258,11 @@ template: |
   # OUTPUT INSTRUCTIONS
 
   Generate a comprehensive academic report following the structure above. Use the complete research data and evidence to extract maximum insights while maintaining scientific rigor. The report should demonstrate the analytical sophistication possible through computational social science methods.
+
+  **CRITICAL REPORT REQUIREMENTS**:
+  - **Hypothesis Evaluation**: If the experiment contains hypotheses, Section 5.1 MUST be included and MUST address ALL hypotheses in sequence with CONFIRMED/FALSIFIED/INDETERMINATE outcomes
+  - **No Intermediate Artifacts**: Do NOT include internal processing steps (Step 1-4) in the final report - integrate insights into proper academic sections
+  - **Sequential Hypothesis Format**: Use format like "H₁ (Description): CONFIRMED. [Evidence and explanation]"
 
   **Target Length**: 3000-5000 words for comprehensive analysis
   **Writing Style**: Academic but accessible, suitable for computational social science journals
