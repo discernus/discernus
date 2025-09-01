@@ -109,6 +109,31 @@ datasets/
 **/large_dataset_*.yaml
 **/large_dataset_*.yml
 
+# Large media and data files that cause git push issues
+*.mp4
+*.m4a
+*.opus
+*.mp3
+*.wav
+*.flac
+*.dta
+*.gephi
+*.zip
+*.rar
+*.7z
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+# Large research data files
+**/muslimban_full.csv
+**/*.dta
+**/*.gephi
+# Large log files
+**/llm_interactions.jsonl
+# Brazil 2018 media files
+pm/populism/databases/brazil_2018/video/
+pm/populism/databases/brazil_2018/audio/
+
 # Jupyter Notebook
 .ipynb_checkpoints
 *.ipynb
