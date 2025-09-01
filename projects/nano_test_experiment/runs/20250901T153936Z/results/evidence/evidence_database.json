@@ -1,0 +1,49 @@
+{
+  "evidence_database_metadata": {
+    "total_evidence_pieces": 4,
+    "total_files_processed": 2,
+    "collection_time": "2025-09-01T15:43:44.378966+00:00"
+  },
+  "evidence_collection": [
+    {
+      "document_name": "positive_test.txt",
+      "dimension": "positive_sentiment",
+      "quote_text": "This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results.",
+      "confidence": "1.0",
+      "context_type": "explicit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T15:39:59.318122+00:00"
+    },
+    {
+      "document_name": "positive_test.txt",
+      "dimension": "negative_sentiment",
+      "quote_text": "",
+      "confidence": "1.0",
+      "context_type": "absent",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T15:39:59.318137+00:00"
+    },
+    {
+      "document_name": "negative_test.txt",
+      "dimension": "positive_sentiment",
+      "quote_text": "",
+      "confidence": "0.95",
+      "context_type": "absence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T15:40:22.240425+00:00"
+    },
+    {
+      "document_name": "negative_test.txt",
+      "dimension": "negative_sentiment",
+      "quote_text": "This is a terrible situation. Everything is going wrong.",
+      "confidence": "0.95",
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T15:40:22.240436+00:00"
+    }
+  ]
+}

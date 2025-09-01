@@ -1,0 +1,120 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "10.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted using a 3-run median aggregation approach, focusing on distinct analytical lenses (evidence-first, context-weighted, pattern-based) for robustness and consistency.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "a5962c21f371",
+      "document_name": "trump_2016_06_22.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "nationalist_exclusion": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "economic_populist_appeals": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "This election will decide whether we are ruled by the people, or by the politicians.",
+          "confidence": 0.9,
+          "context_type": "thematic_statement"
+        },
+        {
+          "dimension": "crisis_restoration_narrative",
+          "quote_text": "Our country lost its way when we stopped putting the American people first... Come this November, we can bring America back \u2014 bigger and better, and stronger than ever.",
+          "confidence": 0.9,
+          "context_type": "temporal_arc_and_promise"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "The politicians stand trial before the people. The voters are the jury. Their ballots are the verdict.",
+          "confidence": 0.9,
+          "context_type": "metaphorical_framing_of_popular_authority"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion",
+          "quote_text": "We can\u2019t solve any of these problems by relying on the politicians who created them. We will never be able to fix a rigged system by counting on the same people who rigged it in the first place.",
+          "confidence": 0.9,
+          "context_type": "delegitimization_of_opponents"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "It\u2019s not just the political system that\u2019s rigged. It\u2019s the whole economy. It\u2019s rigged by big donors... It\u2019s rigged by big businesses...",
+          "confidence": 0.9,
+          "context_type": "systemic_corruption_accusation"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "I have built an amazing business... I am running to give back to this country... She doesn't have the temperament... She believes she is entitled to the office.",
+          "confidence": 0.8,
+          "context_type": "contrastive_self-positioning"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "I\u2019m with you: the American people.",
+          "confidence": 0.8,
+          "context_type": "direct_identification_and_unification"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "Our country will be better off when we start making our own products again, bringing our once great manufacturing capabilities back to our shores... I only want to admit people who share our values and love our people.",
+          "confidence": 0.9,
+          "context_type": "economic_and_cultural_exclusion"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "It\u2019s not just the political system that\u2019s rigged. It\u2019s the whole economy. It\u2019s rigged by big donors who want to keep down wages... I am running for President to end the unfairness and to put you, the American worker, first.",
+          "confidence": 0.9,
+          "context_type": "economic_grievance_and_solution"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

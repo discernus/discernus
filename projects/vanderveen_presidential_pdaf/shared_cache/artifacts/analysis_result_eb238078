@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_fd77b36fb8b5",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "vanderveen_presidential_pdaf_replication",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"The document is a brief header/identifier and lacks any substantive political discourse. Therefore, all populist dimensions are scored as absent with high confidence.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"0a29eceb5a7f...\",\n      \"document_name\": \"clinton/general_election/clinton_2016_11_07.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.8\n        },\n        \"crisis_restoration_temporal_narrative\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.8\n        },\n        \"popular_ Sovereignty_claims\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.8\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.8\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.8\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.8\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.8\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.8\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.8\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.8,\n          \"context_type\": \"absence of relevant content\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_temporal_narrative\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.8,\n          \"context_type\": \"absence of relevant content\"\n        },\n        {\n          \"dimension\": \"popular_ Sovereignty_claims\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.8,\n          \"context_type\": \"absence of relevant content\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.8,\n          \"context_type\": \"absence of relevant content\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.8,\n          \"context_type\": \"absence of relevant content\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.8,\n          \"context_type\": \"absence of relevant content\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.8,\n          \"context_type\": \"absence of relevant content\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.8,\n          \"context_type\": \"absence of relevant content\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.8,\n          \"context_type\": \"absence of relevant content\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "daa2ffecc1ed3377ee523e925e3c3bd418ef3ebcbb6ebc6f33c50a754748af08",
+  "execution_metadata": {
+    "start_time": "2025-08-30T23:10:56.460607+00:00",
+    "end_time": "2025-08-30T23:11:26.937552+00:00",
+    "duration_seconds": 30.476933
+  },
+  "input_artifacts": {
+    "framework_hash": "99e5ea8129008a26950fe5a2cc1bdd6b0bd4c3379d7c2753e96a85c10c61852c",
+    "document_hashes": [
+      "0a29eceb5a7fded5780accc4599d1e6b47f7ff628e07c6859d3d7dc34cee140b"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "vanderveen_presidential_pdaf",
+      "experiment_root": "/Volumes/code/discernus/projects/vanderveen_presidential_pdaf",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250830T230726Z_9b450f3b"
+  }
+}

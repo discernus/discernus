@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "a18879666d2eb598c79b0ae1e988651965aa5f0202a7696eb7772b43175b4757"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-31T01:34:37.031499+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "trump/primary_season/trump_2016_05_03.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "no_textual_content_for_analysis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:34:37.031292+00:00"
+    },
+    {
+      "document_name": "trump/primary_season/trump_2016_05_03.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "no_textual_content_for_analysis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:34:37.031370+00:00"
+    },
+    {
+      "document_name": "trump/primary_season/trump_2016_05_03.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "no_textual_content_for_analysis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:34:37.031431+00:00"
+    },
+    {
+      "document_name": "trump/primary_season/trump_2016_05_03.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "no_textual_content_for_analysis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:34:37.031433+00:00"
+    },
+    {
+      "document_name": "trump/primary_season/trump_2016_05_03.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "no_textual_content_for_analysis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:34:37.031434+00:00"
+    },
+    {
+      "document_name": "trump/primary_season/trump_2016_05_03.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "no_textual_content_for_analysis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:34:37.031435+00:00"
+    },
+    {
+      "document_name": "trump/primary_season/trump_2016_05_03.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "no_textual_content_for_analysis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:34:37.031436+00:00"
+    },
+    {
+      "document_name": "trump/primary_season/trump_2016_05_03.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "no_textual_content_for_analysis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:34:37.031492+00:00"
+    },
+    {
+      "document_name": "trump/primary_season/trump_2016_05_03.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "no_textual_content_for_analysis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:34:37.031494+00:00"
+    }
+  ]
+}

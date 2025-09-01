@@ -1,0 +1,120 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "10.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "The speech strongly exhibits economic populist appeals and a manichaean people-elite framing, along with a crisis-restoration narrative and claims of systemic corruption. Other dimensions are less prominent. The three analytical approaches largely converged.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "e38550c50a75...",
+      "document_name": "clinton_2016_06_22.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 0.2,
+          "salience": 0.1,
+          "confidence": 0.8
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 0.3,
+          "salience": 0.2,
+          "confidence": 0.8
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.8
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "nationalist_exclusion": {
+          "raw_score": 0.2,
+          "salience": 0.1,
+          "confidence": 0.8
+        },
+        "economic_populist_appeals": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "The measure of our success will be how much incomes rise for hard-working families, how many children are lifted out of poverty. How many Americans can find good jobs that support a middle class life... That's what it means to have an economy that works for everyone, not just those at the top.",
+          "confidence": 0.9,
+          "context_type": "thematic_centrality"
+        },
+        {
+          "dimension": "crisis_restoration_narrative",
+          "quote_text": "Twice now in the past 30 years, a Republican president has caused an economic mess and a Democratic president has had to come in and clean it up.",
+          "confidence": 0.9,
+          "context_type": "historical_framing"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "I believe with all my heart that you should not have to be the grandchild of a former president or secretary of state to have every opportunity available to you in this country.",
+          "confidence": 0.8,
+          "context_type": "policy_justification"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion",
+          "quote_text": "Donald Trump offers no real solutions for the economic challenges we face.",
+          "confidence": 0.8,
+          "context_type": "direct_criticism"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "One of the reasons this election is so important is because the Supreme Court hangs in the balance. We need to overturn that terrible Supreme Court decision, Citizens United, and then reform our whole campaign finance system. This is about our democracy but it's also about our economy. Campaign finance reform and reducing the power of special interests is directly related to getting Washington working for people again.",
+          "confidence": 0.9,
+          "context_type": "systemic_critique"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "I know Republicans and Democrats can work together because I've done it.",
+          "confidence": 0.8,
+          "context_type": "self_positioning"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "We are all in this together. And we have a responsibility to lift each other up.",
+          "confidence": 0.9,
+          "context_type": "unifying_rhetoric"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "So make no mistake, we will defend American jobs and American workers.",
+          "confidence": 0.8,
+          "context_type": "policy_statement"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "Let's make sure that Wall Street corporations and the super rich pay their fair share of taxes.",
+          "confidence": 0.9,
+          "context_type": "policy_proposal"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

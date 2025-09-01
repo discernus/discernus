@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "a6d315dead8eaeb859a03dd78d873cf8d3d35e17d37e64762144a996b69ac4dc"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-31T01:23:35.461658+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "sanders/early_primary/sanders_2016_02_10.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "the government of our great country belongs to all of the people and not just a handful of wealthy campaign contributors, and their Super PACs.",
+      "confidence": 0.9,
+      "context_type": "core message",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.461645+00:00"
+    },
+    {
+      "document_name": "sanders/early_primary/sanders_2016_02_10.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "given the enormous crises facing our country, it is just too late for the same old, same old establishment politics, and establishment economics.",
+      "confidence": 0.9,
+      "context_type": "rhetorical framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.461649+00:00"
+    },
+    {
+      "document_name": "sanders/early_primary/sanders_2016_02_10.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "the government of our great country belongs to all of the people and not just a handful of wealthy campaign contributors.",
+      "confidence": 0.9,
+      "context_type": "core message",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.461650+00:00"
+    },
+    {
+      "document_name": "sanders/early_primary/sanders_2016_02_10.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "the right-wing Republicans we oppose must not be allowed to gain the presidency.",
+      "confidence": 0.6,
+      "context_type": "political opposition",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.461652+00:00"
+    },
+    {
+      "document_name": "sanders/early_primary/sanders_2016_02_10.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "the American people will not continue to accept a corrupt campaign finance system that is undermining American democracy, and we will not accept a rigged economy in which ordinary Americans work longer hours for lower wages",
+      "confidence": 0.9,
+      "context_type": "systemic critique",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.461653+00:00"
+    },
+    {
+      "document_name": "sanders/early_primary/sanders_2016_02_10.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "I am the son of a Polish immigrant who came to this country speaking no English, and having no money.",
+      "confidence": 0.9,
+      "context_type": "personal narrative",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.461654+00:00"
+    },
+    {
+      "document_name": "sanders/early_primary/sanders_2016_02_10.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "It will bring together blacks, and whites, Latinos, Asian-Americans, Native Americans, straight and gay, male and female. People who were born in America, and people who immigrated here.",
+      "confidence": 0.9,
+      "context_type": "unifying rhetoric",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.461655+00:00"
+    },
+    {
+      "document_name": "sanders/early_primary/sanders_2016_02_10.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "As president I will defend this nation, but I will do it responsibly.",
+      "confidence": 0.7,
+      "context_type": "general patriotism",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.461655+00:00"
+    },
+    {
+      "document_name": "sanders/early_primary/sanders_2016_02_10.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "The American people will not continue to accept a corrupt campaign finance system that is undermining American democracy, and we will not accept a rigged economy in which ordinary Americans work longer hours for lower wages, while almost all new income and wealth goes to the top 1%.",
+      "confidence": 0.9,
+      "context_type": "economic grievance framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.461656+00:00"
+    }
+  ]
+}

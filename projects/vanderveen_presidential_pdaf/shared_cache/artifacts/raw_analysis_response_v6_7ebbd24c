@@ -1,0 +1,120 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "10.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "The speech serves as a strong counter-populist discourse, primarily focused on attacking Donald Trump's character and rhetoric by framing him as a threat to American values, fostering division, and promoting conspiracy theories. It consistently draws a Manichaean distinction between Trump's 'hate groups' and a unified 'Americans' under a crisis-restoration narrative. There is minimal to no presence of populist claims concerning popular sovereignty, authenticity vs. political class, or economic populist appeals from Clinton's perspective, as she positions herself as a defender of established democratic norms and inclusive values.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "f9c3847efc46...",
+      "document_name": "clinton_2016_08_25.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "crisis_restoration_temporal_narrative": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "nationalist_exclusion": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "economic_populist_appeals": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "Donald Trump has built his campaign on prejudice and paranoia.",
+          "confidence": 0.9,
+          "context_type": "direct statement"
+        },
+        {
+          "dimension": "crisis_restoration_temporal_narrative",
+          "quote_text": "All of this adds up to something we've never seen before.",
+          "confidence": 0.9,
+          "context_type": "crisis framing"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "not applicable"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion",
+          "quote_text": "He\u2019s taking hate groups mainstream and helping a radical fringe take over one of America\u2019s two major political parties.",
+          "confidence": 0.9,
+          "context_type": "direct accusation/delegitimization"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "who traffics in dark conspiracy theories drawn from the pages of supermarket tabloids and the far reaches of the internet",
+          "confidence": 0.9,
+          "context_type": "direct accusation of conspiracy promotion"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "not applicable"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "I will be a President for Democrats, Republicans, and Independents. For those who vote for me and those who don\u2019t. For all Americans. Because I believe we are stronger together.",
+          "confidence": 0.9,
+          "context_type": "unifying statement"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "America has distinguished itself as a haven for people fleeing religious persecution. Under Donald Trump, America would distinguish itself as the only country in the world to impose a religious test at the border.",
+          "confidence": 0.9,
+          "context_type": "rhetorical contrast"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "not applicable"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

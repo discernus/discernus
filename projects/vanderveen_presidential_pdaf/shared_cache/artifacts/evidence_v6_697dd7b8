@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "5d91fd5c1edf1818d9bed49d3fbbde4e07e74a9b985d56d34b33d9d11513fb17"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-31T01:22:32.478836+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "clinton_2016_02_27.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "too many people at the top, too many corporations have forgotten this basic truth about what makes America great.",
+      "confidence": 0.9,
+      "context_type": "rhetorical opposition",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.478824+00:00"
+    },
+    {
+      "document_name": "clinton_2016_02_27.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "We do need to make America whole again. Instead of building walls, we need to be tearing down barriers.",
+      "confidence": 0.9,
+      "context_type": "theme statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.478827+00:00"
+    },
+    {
+      "document_name": "clinton_2016_02_27.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "grassroots donors are powering this campaign.",
+      "confidence": 0.8,
+      "context_type": "campaign funding",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.478828+00:00"
+    },
+    {
+      "document_name": "clinton_2016_02_27.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "If you cheat your employees, exploit your customers, pollute our environment, or rip off the taxpayers, we will hold you accountable.",
+      "confidence": 0.7,
+      "context_type": "call for accountability",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.478829+00:00"
+    },
+    {
+      "document_name": "clinton_2016_02_27.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "corporations that use shell games to shift their headquarters overseas for no other reason than to avoid paying their fair share of taxes",
+      "confidence": 0.9,
+      "context_type": "systemic critique",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.478830+00:00"
+    },
+    {
+      "document_name": "clinton_2016_02_27.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "I\u2019m telling you, from the bottom up my heart, we do. We do.",
+      "confidence": 0.8,
+      "context_type": "emotive appeal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.478831+00:00"
+    },
+    {
+      "document_name": "clinton_2016_02_27.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "when we stand together, there is no barrier too big to break.",
+      "confidence": 0.9,
+      "context_type": "unifying statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.478832+00:00"
+    },
+    {
+      "document_name": "clinton_2016_02_27.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "Instead of building walls, we need to be tearing down barriers.",
+      "confidence": 0.9,
+      "context_type": "direct counter to exclusion",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.478833+00:00"
+    },
+    {
+      "document_name": "clinton_2016_02_27.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "The middle class needs a raise! And we need more good jobs! Jobs that pay well and can\u2019t be outsourced.",
+      "confidence": 0.9,
+      "context_type": "economic grievance and promise",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.478834+00:00"
+    }
+  ]
+}

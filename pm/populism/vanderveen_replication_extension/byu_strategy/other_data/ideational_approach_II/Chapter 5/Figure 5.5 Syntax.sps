@@ -1,0 +1,12 @@
+﻿* Encoding: UTF-8.
+
+
+GRAPH 
+  /ERRORBAR(CI 95)=Politics BY Groups.
+
+DATASET ACTIVATE DataSet1.
+T-TEST GROUPS=Groups(0 1)
+  /MISSING=ANALYSIS
+  /VARIABLES=Politics
+  /ES DISPLAY(TRUE)
+  /CRITERIA=CI(.95).

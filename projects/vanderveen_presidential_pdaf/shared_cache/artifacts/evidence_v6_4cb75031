@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "f9c3847efc4668926212f1d5ffb99e77fad4daedb3b54995be9cf870d4a5a27b"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-30T22:24:29.459073+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "clinton_2016_08_25.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "Donald Trump has built his campaign on prejudice and paranoia.",
+      "confidence": 0.9,
+      "context_type": "direct statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:24:29.458999+00:00"
+    },
+    {
+      "document_name": "clinton_2016_08_25.txt",
+      "dimension": "crisis_restoration_temporal_narrative",
+      "quote_text": "All of this adds up to something we've never seen before.",
+      "confidence": 0.9,
+      "context_type": "crisis framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:24:29.459047+00:00"
+    },
+    {
+      "document_name": "clinton_2016_08_25.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "not applicable",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:24:29.459051+00:00"
+    },
+    {
+      "document_name": "clinton_2016_08_25.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "He\u2019s taking hate groups mainstream and helping a radical fringe take over one of America\u2019s two major political parties.",
+      "confidence": 0.9,
+      "context_type": "direct accusation/delegitimization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:24:29.459054+00:00"
+    },
+    {
+      "document_name": "clinton_2016_08_25.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "who traffics in dark conspiracy theories drawn from the pages of supermarket tabloids and the far reaches of the internet",
+      "confidence": 0.9,
+      "context_type": "direct accusation of conspiracy promotion",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:24:29.459056+00:00"
+    },
+    {
+      "document_name": "clinton_2016_08_25.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "not applicable",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:24:29.459059+00:00"
+    },
+    {
+      "document_name": "clinton_2016_08_25.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "I will be a President for Democrats, Republicans, and Independents. For those who vote for me and those who don\u2019t. For all Americans. Because I believe we are stronger together.",
+      "confidence": 0.9,
+      "context_type": "unifying statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:24:29.459062+00:00"
+    },
+    {
+      "document_name": "clinton_2016_08_25.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "America has distinguished itself as a haven for people fleeing religious persecution. Under Donald Trump, America would distinguish itself as the only country in the world to impose a religious test at the border.",
+      "confidence": 0.9,
+      "context_type": "rhetorical contrast",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:24:29.459064+00:00"
+    },
+    {
+      "document_name": "clinton_2016_08_25.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "not applicable",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:24:29.459067+00:00"
+    }
+  ]
+}

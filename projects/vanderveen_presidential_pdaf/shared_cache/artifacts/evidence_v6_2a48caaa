@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "32cba71f48f520083cfed9d6255dd290c17267cd67f836a413e8776de309f83c"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-31T01:34:37.083900+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "trump/convention_period/trump_2016_07_11.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "There are two Americas: the ruling class, and the groups it favors, and then everyone else.",
+      "confidence": 1.0,
+      "context_type": "explicit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:34:37.083873+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_07_11.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "Our country needs change, and she will never give us change. She helped create our rigged system.",
+      "confidence": 0.8,
+      "context_type": "explicit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:34:37.083879+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_07_11.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "In November, the American people will show her that she is not. The years of American Greatness will return.",
+      "confidence": 0.8,
+      "context_type": "explicit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:34:37.083880+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_07_11.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "She helped create our rigged system. Hillary Clinton is the Secretary of the Status Quo and wherever Hillary Clinton goes, corruption and scandal follow.",
+      "confidence": 0.7,
+      "context_type": "explicit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:34:37.083882+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_07_11.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "We have seen increasing threats against our police and a substantial rise in the number of officers killed in the line of duty. The VA scandal that has occurred on this Administration's watch are widespread and inexcusable. The memo also says they 'waste millions of dollars by paying excessive prices due to breaches of federal law and warns that 'these unlawful acts may potentially result in serious harm or death to America's ... Even the White House's own Deputy Chief of Staff described 'significant and chronic systemic failures'...",
+      "confidence": 1.0,
+      "context_type": "explicit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:34:37.083884+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_07_11.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "I am the law and order candidate. Hillary Clinton, on the other hand, is weak, ineffective, pandering and, as proven by her recent email scandal, which was an embarrassment not only to her, but to the nation as a whole, she is either a liar or grossly incompetent.",
+      "confidence": 1.0,
+      "context_type": "explicit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:34:37.083885+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_07_11.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "We will be tough, we will be smart, and we will be fair and we will protect all Americans. Without safety, we have nothing!",
+      "confidence": 0.8,
+      "context_type": "explicit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:34:37.083886+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_07_11.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "Our country needs change, and she will never give us change. She helped create our rigged system. ... Veterans should come first in the country they fought to protect, and under a Trump Administration they will -- America First, Veterans First.",
+      "confidence": 0.7,
+      "context_type": "explicit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:34:37.083888+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_07_11.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "Large corporations bring in many thousands of low-wage workers from overseas, and across the border, to fill jobs that could be taken by our Veterans.",
+      "confidence": 0.6,
+      "context_type": "explicit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:34:37.083889+00:00"
+    }
+  ]
+}

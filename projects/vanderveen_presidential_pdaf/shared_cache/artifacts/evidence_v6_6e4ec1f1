@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "92ebd15303cb26f03beb4cb79315c135c526093fd12eba2530280471172b6e08"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-31T00:39:27.622599+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "trump_2016_06_16.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "They're controlled fully\u2014they're controlled fully by the lobbyists, by the donors, and by the special interests, fully.",
+      "confidence": 0.9,
+      "context_type": "explicit elite corruption accusation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T00:39:27.622567+00:00"
+    },
+    {
+      "document_name": "trump_2016_06_16.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "Our country is in serious trouble. We don't have victories anymore.",
+      "confidence": 0.9,
+      "context_type": "crisis framing and call for restoration",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T00:39:27.622586+00:00"
+    },
+    {
+      "document_name": "trump_2016_06_16.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "I'm not using the lobbyists. I'm not using donors. I don't care.",
+      "confidence": 0.8,
+      "context_type": "bypassing representative institutions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T00:39:27.622588+00:00"
+    },
+    {
+      "document_name": "trump_2016_06_16.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "How the hell can you vote for this guy? You just can't do it.",
+      "confidence": 0.8,
+      "context_type": "opposition delegitimization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T00:39:27.622589+00:00"
+    },
+    {
+      "document_name": "trump_2016_06_16.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "They're controlled fully\u2014they're controlled fully by the lobbyists, by the donors, and by the special interests, fully.",
+      "confidence": 0.9,
+      "context_type": "systemic corruption claim",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T00:39:27.622591+00:00"
+    },
+    {
+      "document_name": "trump_2016_06_16.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "I'm using my own money. I'm not using the lobbyists. I'm not using donors. I don't care. I'm really rich.",
+      "confidence": 0.9,
+      "context_type": "anti-establishment positioning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T00:39:27.622593+00:00"
+    },
+    {
+      "document_name": "trump_2016_06_16.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "Our country has tremendous potential. We have tremendous people.",
+      "confidence": 0.8,
+      "context_type": "unified national identity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T00:39:27.622594+00:00"
+    },
+    {
+      "document_name": "trump_2016_06_16.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "When Mexico sends its people, they're not sending their best. They're not sending you. They're not sending you. They're sending people that have lots of problems, and they're bringing those problems with us. They're bringing drugs. They're bringing crime. They're rapists. And some, I assume, are good people.",
+      "confidence": 0.9,
+      "context_type": "cultural/ethnic exclusion and external threat framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T00:39:27.622595+00:00"
+    },
+    {
+      "document_name": "trump_2016_06_16.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "I'll bring back our jobs from China, from Mexico, from Japan, from so many places. I'll bring back our jobs, and I'll bring back our money.",
+      "confidence": 0.9,
+      "context_type": "economic protectionism and job restoration",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T00:39:27.622596+00:00"
+    }
+  ]
+}

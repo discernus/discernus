@@ -1,0 +1,89 @@
+{
+  "evidence_database_metadata": {
+    "total_evidence_pieces": 8,
+    "total_files_processed": 4,
+    "collection_time": "2025-09-01T14:37:01.070516+00:00"
+  },
+  "evidence_collection": [
+    {
+      "document_name": "positive_test_1.txt",
+      "dimension": "positive_sentiment",
+      "quote_text": "This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere.",
+      "confidence": 1.0,
+      "context_type": "thematic statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T14:28:43.198228+00:00"
+    },
+    {
+      "document_name": "positive_test_1.txt",
+      "dimension": "negative_sentiment",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence of evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T14:28:43.198234+00:00"
+    },
+    {
+      "document_name": "positive_test_2.txt",
+      "dimension": "positive_sentiment",
+      "quote_text": "Hopefulness permeates everything. Such a marvelous chance!",
+      "confidence": 1.0,
+      "context_type": "explicit statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T14:29:12.515142+00:00"
+    },
+    {
+      "document_name": "positive_test_2.txt",
+      "dimension": "negative_sentiment",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence of evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T14:29:12.515151+00:00"
+    },
+    {
+      "document_name": "negative_test_2.txt",
+      "dimension": "positive_sentiment",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T14:30:13.822529+00:00"
+    },
+    {
+      "document_name": "negative_test_2.txt",
+      "dimension": "negative_sentiment",
+      "quote_text": "Despair saturates everything. Such a calamitous result!",
+      "confidence": 1.0,
+      "context_type": "explicit_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T14:30:13.822538+00:00"
+    },
+    {
+      "document_name": "negative_test_1.txt",
+      "dimension": "positive_sentiment",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "not_present",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T14:29:39.912648+00:00"
+    },
+    {
+      "document_name": "negative_test_1.txt",
+      "dimension": "negative_sentiment",
+      "quote_text": "What a disastrous outcome! I'm devastated by the results.",
+      "confidence": 1.0,
+      "context_type": "explicit_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T14:29:39.912654+00:00"
+    }
+  ]
+}

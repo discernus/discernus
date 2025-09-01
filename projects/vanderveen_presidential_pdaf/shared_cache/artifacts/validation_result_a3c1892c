@@ -1,0 +1,11 @@
+{
+  "success": false,
+  "issues": [
+    "The corpus manifest lists two different document entries ('trump_20160101_36' and 'trump_20160101_37') that both point to the identical file path: 'trump/early_primary/trump_2016_01_01.txt'. Each document entry in a manifest must have a unique 'filename' to be addressable by the system.",
+    "Hypothesis H\u2087 specifies a 'Paired t-test' to compare rhetoric between 'early_primary' and 'general_election' phases. A paired test is only valid for matched samples (e.g., the same individuals are measured in both conditions). In this corpus, only two of the six candidates (Clinton, Trump) have speeches in both phases, making the samples largely unpaired.",
+    "The corpus contains documents with insufficient content for meaningful analysis. Specifically, 'clinton_20161107_20' has a word count of 6, and 'trump_20160503_44' has a word count of 1.",
+    "Hypothesis H\u2081\u2080 proposes an independent t-test between 'candidate_type: \"outsider\"' and 'candidate_type: \"establishment\"'. The corpus manifest and 'Custom Analytical Groupings' section also define a third category, 'candidate_type: \"challenger\"' (for Ted Cruz, n=3), but the experiment does not specify how this group will be handled for this hypothesis."
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-08-30T22:05:35.739784+00:00"
+}

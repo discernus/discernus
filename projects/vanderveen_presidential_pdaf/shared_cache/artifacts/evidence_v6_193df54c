@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "d2c5bed6b98f64a9271b2fd9a4aac4d1bcebb4ff780e8a0d46ff244201257b53"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-30T22:08:53.210240+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "clinton/early_primary/clinton_2016_02_09.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "It isn't right that the kids I met in Flint on Sunday were poisoned because their governor wanted to save money.",
+      "confidence": 0.9,
+      "context_type": "explicit moral dichotomy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:08:53.210226+00:00"
+    },
+    {
+      "document_name": "clinton/early_primary/clinton_2016_02_09.txt",
+      "dimension": "crisis_restoration_temporal_narrative",
+      "quote_text": "I knew we were facing profound challenges as a country. The way too many things were going just wasn't right.",
+      "confidence": 0.8,
+      "context_type": "crisis acknowledgement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:08:53.210229+00:00"
+    },
+    {
+      "document_name": "clinton/early_primary/clinton_2016_02_09.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "absence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:08:53.210230+00:00"
+    },
+    {
+      "document_name": "clinton/early_primary/clinton_2016_02_09.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "I want to begin by congratulating Senator Sanders on his victory tonight",
+      "confidence": 0.9,
+      "context_type": "active counter-evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:08:53.210231+00:00"
+    },
+    {
+      "document_name": "clinton/early_primary/clinton_2016_02_09.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "Crack down on corporations that game the system.",
+      "confidence": 0.9,
+      "context_type": "systemic manipulation claim",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:08:53.210232+00:00"
+    },
+    {
+      "document_name": "clinton/early_primary/clinton_2016_02_09.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "My family and my faith taught me a simple thing, do all the good in all the ways you can for all the people you can. That's what called me to a life of service.",
+      "confidence": 0.7,
+      "context_type": "personal narrative/moral positioning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:08:53.210235+00:00"
+    },
+    {
+      "document_name": "clinton/early_primary/clinton_2016_02_09.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "What is the best way to change people's lives so we can all grow together?",
+      "confidence": 0.9,
+      "context_type": "unified collective identity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:08:53.210236+00:00"
+    },
+    {
+      "document_name": "clinton/early_primary/clinton_2016_02_09.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "Stop other countries from taking advantage of us with unfair trade practices.",
+      "confidence": 0.8,
+      "context_type": "mild economic protectionism",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:08:53.210237+00:00"
+    },
+    {
+      "document_name": "clinton/early_primary/clinton_2016_02_09.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "Wall Street can never be allowed to once again threaten Main Street, and I will fight to rein in Wall Street, and you know what, I know how to do it.",
+      "confidence": 0.9,
+      "context_type": "classic economic populist framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:08:53.210237+00:00"
+    }
+  ]
+}

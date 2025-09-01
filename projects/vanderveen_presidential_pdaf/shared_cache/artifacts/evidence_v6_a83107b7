@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "a9db5da208214706a82c06a70d99e8f1dda7b976b894b37b064e6b9b4c142cb1"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-31T01:34:37.166516+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "trump/general_election/trump_2016_09_01.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "The fundamental problem with the immigration system in our country is that it serves the needs of wealthy donors, political activists and powerful, powerful politicians. It does not serve you the American people.",
+      "confidence": 0.9,
+      "context_type": "explicit statement and moral dichotomy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:34:37.166490+00:00"
+    },
+    {
+      "document_name": "trump/general_election/trump_2016_09_01.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "Right now, however, we're in the middle of a jobs crisis, a border crisis and a terrorism crisis like never before. All energies of the federal government and the legislative process must now be focused on immigration security. That is the only conversation we should be having at this time, immigration security. Cut it off.",
+      "confidence": 0.9,
+      "context_type": "urgent crisis framing and call for immediate action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:34:37.166506+00:00"
+    },
+    {
+      "document_name": "trump/general_election/trump_2016_09_01.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "It's our right, as a sovereign nation, to choose immigrants that we think are the likeliest to thrive and flourish and love us.",
+      "confidence": 0.9,
+      "context_type": "assertion of popular will as ultimate authority",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:34:37.166507+00:00"
+    },
+    {
+      "document_name": "trump/general_election/trump_2016_09_01.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "Hillary Clinton, for instance, talks constantly about her fears that families will be separated, but she's not talking about the American families who have been permanently separated from their loved ones because of a preventable homicide, because of a preventable death, because of murder.",
+      "confidence": 0.9,
+      "context_type": "delegitimization of political opposition",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:34:37.166508+00:00"
+    },
+    {
+      "document_name": "trump/general_election/trump_2016_09_01.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "President Obama and Hillary Clinton have engaged in gross dereliction of duty by surrendering the safety of the American people to open borders... They support catch and release on the border. They support visa overstays. They support the release of dangerous, dangerous, dangerous criminals from detention. And they support unconstitutional executive amnesty.",
+      "confidence": 0.9,
+      "context_type": "accusation of systemic failure and betrayal by elites",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:34:37.166509+00:00"
+    },
+    {
+      "document_name": "trump/general_election/trump_2016_09_01.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "I am proudly not a politician, because I am not beholden to any special interest, I've spent a lot of money on my campaign, I'll tell you. I write those checks. Nobody owns Trump.",
+      "confidence": 0.9,
+      "context_type": "self-identification as an outsider",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:34:37.166511+00:00"
+    },
+    {
+      "document_name": "trump/general_election/trump_2016_09_01.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "Now is the time for all of us as one country, Democrat, Republican, liberal, conservative to band together to deliver justice, and safety, and security for all Americans.",
+      "confidence": 0.9,
+      "context_type": "call for unity transcending political divides",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:34:37.166512+00:00"
+    },
+    {
+      "document_name": "trump/general_election/trump_2016_09_01.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "An ideological certification to make sure that those we are admitting to our country share our values and love our people.",
+      "confidence": 0.9,
+      "context_type": "emphasis on cultural homogeneity and external threat",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:34:37.166513+00:00"
+    },
+    {
+      "document_name": "trump/general_election/trump_2016_09_01.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "illegal immigration costs our country more than $113 billion a year... most illegal immigrants are lower skilled workers with less education, who compete directly against vulnerable American workers, and that these illegal workers draw much more out from the system than they can ever possibly pay back. And they're hurting a lot of our people that cannot get jobs under any circumstances.",
+      "confidence": 0.9,
+      "context_type": "economic grievance framing and elite betrayal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:34:37.166514+00:00"
+    }
+  ]
+}

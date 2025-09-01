@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "b649effab2d90eb198feb1dae534b9e4d64e97178cb3871d0145bff45976c607"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-31T01:22:32.630783+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "the screaming you hear now from across the Potomac is the Washington cartel in full terror that the conservative grassroots are rising up.",
+      "confidence": 0.9,
+      "context_type": "rhetorical framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.630769+00:00"
+    },
+    {
+      "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+      "dimension": "crisis_restoration_temporal_narrative",
+      "quote_text": "who has led the fight against amnesty, who has led the fight against Obamacare, who has led the fight to defend life and marriage and religious liberty... bring back morning in America.",
+      "confidence": 0.9,
+      "context_type": "narrative construction",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.630772+00:00"
+    },
+    {
+      "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "Justice Scalia's replacement will not be decided by the Washington power brokers. It will be decided by we the people.",
+      "confidence": 0.9,
+      "context_type": "direct claim",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.630774+00:00"
+    },
+    {
+      "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "Hillary Clinton or Bernie Sanders or whatever other socialist they nominate and make the case against their radical vision of the Constitution that would strip away life and marriage and religious liberty and the Second Amendment and the basic rights of every American citizen.",
+      "confidence": 0.9,
+      "context_type": "delegitimization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.630775+00:00"
+    },
+    {
+      "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "the screaming you hear now from across the Potomac is the Washington cartel in full terror",
+      "confidence": 0.9,
+      "context_type": "conspiratorial framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.630776+00:00"
+    },
+    {
+      "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "Only one candidate remaining has a consistent conservative record... Only one candidate stood up to the corrupt deal-making in Washington.",
+      "confidence": 0.9,
+      "context_type": "self-positioning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.630777+00:00"
+    },
+    {
+      "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "You the good people of South Carolina...the conservative grassroots are rising up.",
+      "confidence": 0.9,
+      "context_type": "identity construction",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.630778+00:00"
+    },
+    {
+      "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "As president, I will rebuild our military, stand unequivocally with the nation of Israel, and utterly destroy ISIS. Together, we will secure the borders and keep America safe.",
+      "confidence": 0.8,
+      "context_type": "threat framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.630779+00:00"
+    },
+    {
+      "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "fight to pass a simple flat tax and abolish the IRS.",
+      "confidence": 0.8,
+      "context_type": "policy proposal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.630781+00:00"
+    }
+  ]
+}

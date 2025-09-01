@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "722f46625545eaca0951a00a6563cd970d8f80514371a21f969e803419fef79c"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-30T23:23:43.575849+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "rubio/primary_season/rubio_2016_04_13.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "It's because while our people and our economy are pushing the boundaries of the 21st century, too many of our leaders and their ideas are stuck in the 20th century.",
+      "confidence": 0.9,
+      "context_type": "direct statement of opposition",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:23:43.575832+00:00"
+    },
+    {
+      "document_name": "rubio/primary_season/rubio_2016_04_13.txt",
+      "dimension": "crisis_redemption_narrative",
+      "quote_text": "The problem is now too many Americans are starting to doubt whether achieving that dream is still possible. But if we fail, they will be the first generation of Americans to inherit a country worse off than the one left for their parents.",
+      "confidence": 1.0,
+      "context_type": "framing statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:23:43.575837+00:00"
+    },
+    {
+      "document_name": "rubio/primary_season/rubio_2016_04_13.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "We must change the decisions we are making by changing the people who are making them.",
+      "confidence": 0.7,
+      "context_type": "call to action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:23:43.575839+00:00"
+    },
+    {
+      "document_name": "rubio/primary_season/rubio_2016_04_13.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "Now, just yesterday, a leader from yesterday began a campaign for president by promising to take us back to yesterday. Yesterday is over.",
+      "confidence": 0.9,
+      "context_type": "direct critique of opposition",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:23:43.575840+00:00"
+    },
+    {
+      "document_name": "rubio/primary_season/rubio_2016_04_13.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "And so they appease our enemies. They betray our allies and they weaken our military.",
+      "confidence": 0.6,
+      "context_type": "general critique",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:23:43.575841+00:00"
+    },
+    {
+      "document_name": "rubio/primary_season/rubio_2016_04_13.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "I live in an exceptional country where even the son of a bartender and a maid can have the same dreams.",
+      "confidence": 1.0,
+      "context_type": "personal narrative",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:23:43.575842+00:00"
+    },
+    {
+      "document_name": "rubio/primary_season/rubio_2016_04_13.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "We are one people, united and indivisible.",
+      "confidence": 0.9,
+      "context_type": "unifying statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:23:43.575844+00:00"
+    },
+    {
+      "document_name": "rubio/primary_season/rubio_2016_04_13.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "By no longer being passive in the face of Chinese and Russian aggression, and by ending the near total disregard for the erosion of democracy and human rights around the world, especially Cuba, Venezuela, and Nicaragua.",
+      "confidence": 0.9,
+      "context_type": "foreign policy threat framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:23:43.575845+00:00"
+    },
+    {
+      "document_name": "rubio/primary_season/rubio_2016_04_13.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "Hardworking families that are living paycheck to paycheck, one unexpected event away from disaster, young Americans unable to start a career or a business or a family because they owe thousands of dollars in student loans for degrees that did not even lead to jobs, and small business owners who are left to struggle under the weight of more taxes, more regulation and more government.",
+      "confidence": 0.9,
+      "context_type": "grievance description",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:23:43.575846+00:00"
+    }
+  ]
+}

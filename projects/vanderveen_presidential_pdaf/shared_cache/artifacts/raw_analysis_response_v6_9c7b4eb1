@@ -1,0 +1,120 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "10.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis conducted using a 3-approach independent scoring methodology (Evidence-First, Context-Weighted, Pattern-Based) with median aggregation. The document exhibits strong populist characteristics across all dimensions, with consistent emphasis on people-elite dichotomy, crisis-restoration, economic grievances, and anti-establishment rhetoric.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "72dff2b5d341",
+      "document_name": "trump_2016_08_19.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "nationalist_exclusion": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "economic_populist_appeals": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "It\u2019s going to be a victory for the people. A victory for the wage-earner, the factory worker, the everyday citizen \u2013 and for all the people whose voice hasn\u2019t been heard. It will be a win for the voters \u2013 not the pundits, not the journalists, not the lobbyists, not the global special interests funding my opponent\u2019s campaign.",
+          "confidence": 0.9,
+          "context_type": "direct statement"
+        },
+        {
+          "dimension": "crisis_restoration_narrative",
+          "quote_text": "These are hard times for many in this country. ... It\u2019s that amazing spirit that we will need to rebuild this country. ... This is the legacy of Hillary Clinton: death, destruction and terrorism.",
+          "confidence": 0.9,
+          "context_type": "crisis framing and restoration promise"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "It will be a win for the voters \u2013 not the pundits, not the journalists, not the lobbyists, not the global special interests funding my opponent\u2019s campaign.",
+          "confidence": 0.9,
+          "context_type": "direct appeal to voters over established groups"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion",
+          "quote_text": "It will be a win for the voters \u2013 not the pundits, not the journalists, not the lobbyists, not the global special interests funding my opponent\u2019s campaign.",
+          "confidence": 0.9,
+          "context_type": "delegitimization of opposition actors"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "The only way to learn the full depth of her public corruption is to read the 33,000 emails she deleted. And the only way to get justice in this rigged system is to show up and vote on November 8th.",
+          "confidence": 0.9,
+          "context_type": "accusation of systemic corruption and rigged system"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "I am the change agent. Hillary Clinton is the defender of the status quo. ... I will never lie to you, I will never put any other interest before you, and I will never, ever stop fighting for you.",
+          "confidence": 0.9,
+          "context_type": "self-positioning as authentic outsider versus political class"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "Finally, we are going to bring our country together again. The era of division will be replaced with a future of unity. We are going to do it by emphasizing what we all have in common as Americans.",
+          "confidence": 0.9,
+          "context_type": "call for unity and shared identity"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "Our border will be protected, and our children will be safe. ... We are only going to admit individuals into our country who support our values, and we\u2019re not going to issue visas where adequate screening cannot take place.",
+          "confidence": 0.9,
+          "context_type": "emphasis on border protection and value-based exclusion for immigration"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "Michigan lost more than 1 in 4 of its manufacturing jobs since NAFTA. As you know, NAFTA was signed by President Bill Clinton. It was supported by Hillary Clinton.",
+          "confidence": 0.9,
+          "context_type": "blaming specific elites/policies for economic decline"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

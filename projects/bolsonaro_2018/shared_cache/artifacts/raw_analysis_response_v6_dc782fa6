@@ -1,0 +1,169 @@
+I'll analyze the document using three independent analytical approaches as required.
+
+**APPROACH 1 - Evidence-First Analysis**
+
+This approach focuses on direct textual evidence and explicit statements in Bolsonaro's speech.
+
+Key findings:
+- Strong manichean framing: "gente como nós, é gente honesta, é gente que acredita em Deus, é gente que é patriota" vs corrupt elites
+- Crisis-restoration narrative: Venezuela example as decline warning, promise to change Brazil's trajectory
+- Popular sovereignty: "Nós temos o povo ao nosso lado" - direct people vs establishment
+- Anti-pluralist exclusion: attacking PT/PSDB as corrupt, system rigged to defend them
+- Elite conspiracy: system structured to defend corrupt politicians
+- Authenticity claims: military background, outsider status vs professional politicians
+- Homogeneous people: "Somos um só país, uma só pátria, uma só nação"
+- Nationalist exclusion: Venezuela threat, traditional family values
+- Economic populist appeals: against Mercosul ideology, for free market
+
+**APPROACH 2 - Context-Weighted Analysis**
+
+This approach emphasizes rhetorical context and structural positioning within the campaign speech.
+
+Key findings:
+- Central manichean structure: entire speech organized around good people vs corrupt system
+- Crisis narrative prominence: Venezuela extensively used as cautionary tale
+- Popular sovereignty centrality: repeated emphasis on people's will over institutions
+- Strong anti-pluralist themes: systematic exclusion of opposition legitimacy
+- Conspiracy themes: coordinated elite defense of corruption
+- Authenticity as core identity: military service vs political class
+- Unity construction: transcending regional/class divisions
+- Cultural boundary-drawing: traditional values vs modern threats
+- Economic grievances: elite economic arrangements vs people
+
+**APPROACH 3 - Pattern-Based Analysis**
+
+This approach looks for repetition patterns and strategic emphasis through rhetorical devices.
+
+Key findings:
+- Repeated moral dichotomies throughout speech
+- Consistent crisis language and restoration promises
+- Multiple references to direct popular will
+- Systematic delegitimization of opposition
+- Recurring conspiracy language about system protection
+- Consistent outsider positioning vs political establishment
+- Unified people rhetoric patterns
+- Traditional values emphasis patterns
+- Economic elite criticism patterns
+
+**MEDIAN CALCULATIONS AND FINAL ANALYSIS**
+
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "10.0.2",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "High-quality populist speech with strong patterns across all dimensions. Clear campaign rhetoric with systematic populist appeals.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "01a51ec72fb1",
+      "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+      "dimensional_scores": {
+        "manichean_people_elite_framing": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "nationalist_exclusion": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "economic_populist_appeals": {
+          "raw_score": 0.5,
+          "salience": 0.4,
+          "confidence": 0.7
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichean_people_elite_framing",
+          "quote_text": "gente como n\u00f3s, \u00e9 gente honesta, \u00e9 gente que acredita em Deus, \u00e9 gente que \u00e9 patriota",
+          "confidence": 0.9,
+          "context_type": "moral_dichotomy"
+        },
+        {
+          "dimension": "crisis_restoration_narrative",
+          "quote_text": "n\u00e3o queremos o Brasil se aproximando cada vez mais do que acontece com a nossa querida Venezuela, que at\u00e9 pouco tempo era um pa\u00eds dos mais ricos aqui da Am\u00e9rica do Sul",
+          "confidence": 0.9,
+          "context_type": "decline_warning"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "N\u00f3s temos o povo ao nosso lado",
+          "confidence": 0.9,
+          "context_type": "direct_popular_authority"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion",
+          "quote_text": "n\u00e3o aguentaremos mais um ciclo de PT ou PSDB",
+          "confidence": 0.8,
+          "context_type": "opposition_rejection"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "O nosso sistema \u00e9 voltado todinho para defender a eles",
+          "confidence": 0.8,
+          "context_type": "systemic_manipulation"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "Quem passou dezessete anos no ex\u00e9rcito brasileiro como eu, sabe o que \u00e9 servir a sua p\u00e1tria",
+          "confidence": 0.9,
+          "context_type": "outsider_credentials"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "Somos um s\u00f3 pa\u00eds, uma s\u00f3 p\u00e1tria, uma s\u00f3 na\u00e7\u00e3o, um s\u00f3 cora\u00e7\u00e3o verde e amarelo",
+          "confidence": 0.9,
+          "context_type": "unity_construction"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "algu\u00e9m que respeite a tradicional fam\u00edlia brasileira",
+          "confidence": 0.8,
+          "context_type": "cultural_boundary"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "n\u00e3o fique amarrado aqui ao Mercosul por uma quest\u00e3o ideol\u00f3gica",
+          "confidence": 0.7,
+          "context_type": "economic_elite_opposition"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

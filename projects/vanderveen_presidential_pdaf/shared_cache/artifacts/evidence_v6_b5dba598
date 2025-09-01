@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "6e5ba4d03b8ef05f3669377f914556028b33f9db7afc0ca8ffd8b8a17cf478cb"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-31T01:23:35.190955+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "kasich/primary_season/kasich_2016_03_15.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "The spirit of America rests in us. It doesn't rest in a big-time politician, the big wigs.",
+      "confidence": 0.9,
+      "context_type": "moral dichotomy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.190933+00:00"
+    },
+    {
+      "document_name": "kasich/primary_season/kasich_2016_03_15.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "Things were bad. We had lost 350,000 jobs. We were $8 billion in the hole. ... We're now up 400,000 plus jobs. We're running a $2 billion surplus. Our pensions are secure.",
+      "confidence": 1.0,
+      "context_type": "temporal structuring",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.190945+00:00"
+    },
+    {
+      "document_name": "kasich/primary_season/kasich_2016_03_15.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "I represent you and it is my job to look at these situations and these problems and to listen to you and then it's my job to go and fix them.",
+      "confidence": 0.8,
+      "context_type": "direct accountability to people",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.190947+00:00"
+    },
+    {
+      "document_name": "kasich/primary_season/kasich_2016_03_15.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "I will not take the low road to the highest office in the land.",
+      "confidence": 0.9,
+      "context_type": "rejection of divisive tactics",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.190948+00:00"
+    },
+    {
+      "document_name": "kasich/primary_season/kasich_2016_03_15.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "shifting power and money and influence from that big place in Washington and moving it to where we live, it empowers us.",
+      "confidence": 0.8,
+      "context_type": "systemic corruption framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.190949+00:00"
+    },
+    {
+      "document_name": "kasich/primary_season/kasich_2016_03_15.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "you know, my father carried that mail on his back and his father was a coal miner, and you know, I was just told by my cousin I didn't realize this that my mother... was the only one to graduate from high school.",
+      "confidence": 1.0,
+      "context_type": "personal background contrast",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.190950+00:00"
+    },
+    {
+      "document_name": "kasich/primary_season/kasich_2016_03_15.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "pulling us together, not pulling us apart. It is about USA. Exactly!",
+      "confidence": 0.9,
+      "context_type": "unity rhetoric",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.190951+00:00"
+    },
+    {
+      "document_name": "kasich/primary_season/kasich_2016_03_15.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "That's the great American legacy that our kids will be better than we are.",
+      "confidence": 0.9,
+      "context_type": "civic patriotism",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.190952+00:00"
+    },
+    {
+      "document_name": "kasich/primary_season/kasich_2016_03_15.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "We're now up 400,000 plus jobs. We're running a $2 billion surplus. Our pensions are secure. We've cut taxes by more than any governor in this country",
+      "confidence": 1.0,
+      "context_type": "economic grievance and success",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.190953+00:00"
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "9966cf08bfc1ad9428cde7de72ade3d6bfb8073acf18a58130ddb15ec176fcca"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-30T23:14:35.713769+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "cruz/primary_season/cruz_2016_03_23.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "The answer will not come from Washington. It will come only from the men and women across this country, from men and women, from people of faith, from lovers of liberty, from people who respect the Constitution.",
+      "confidence": 0.9,
+      "context_type": "Explicit Opposition",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:14:35.713750+00:00"
+    },
+    {
+      "document_name": "cruz/primary_season/cruz_2016_03_23.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "And yet, for so many Americans, the promise of America seems more and more distant. What is the promise of America? ... I want to talk to you this morning about reigniting the promise of America",
+      "confidence": 1.0,
+      "context_type": "Core Narrative",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:14:35.713758+00:00"
+    },
+    {
+      "document_name": "cruz/primary_season/cruz_2016_03_23.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "The power of the American people when we rise up and stand for liberty knows no bounds.",
+      "confidence": 0.9,
+      "context_type": "Call to Action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:14:35.713760+00:00"
+    },
+    {
+      "document_name": "cruz/primary_season/cruz_2016_03_23.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "Instead of a president who seeks to go to the United Nations to end-run Congress and the American people...",
+      "confidence": 0.8,
+      "context_type": "Policy Critique",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:14:35.713761+00:00"
+    },
+    {
+      "document_name": "cruz/primary_season/cruz_2016_03_23.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "Instead of a federal government that wages an assault on our religious liberty, that goes after Hobby Lobby, that goes after the Little Sisters of the Poor, that goes after Liberty University, imagine a federal government that stands for the First Amendment rights of every American.",
+      "confidence": 0.9,
+      "context_type": "Systemic Critique",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:14:35.713762+00:00"
+    },
+    {
+      "document_name": "cruz/primary_season/cruz_2016_03_23.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "These are all of our stories. These are who we are as Americans.",
+      "confidence": 0.9,
+      "context_type": "Personal Narrative",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:14:35.713763+00:00"
+    },
+    {
+      "document_name": "cruz/primary_season/cruz_2016_03_23.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "Imagine millions of courageous conservatives, all across America, rising up together to say in unison 'we demand our liberty'.",
+      "confidence": 0.9,
+      "context_type": "Unity Call",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:14:35.713764+00:00"
+    },
+    {
+      "document_name": "cruz/primary_season/cruz_2016_03_23.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "And then the American exceptionalism that has made this nation a clarion voice for freedom in the world, a shining city on a hill.",
+      "confidence": 0.9,
+      "context_type": "National Identity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:14:35.713765+00:00"
+    },
+    {
+      "document_name": "cruz/primary_season/cruz_2016_03_23.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "Instead of economic stagnation, booming economic growth. ... Instead of joblessness, instead of the millions forced into part-time work, instead of the millions who\u2019ve lost their health insurance... imagine in 2017 a new president signing legislation repealing every word of Obamacare.",
+      "confidence": 0.9,
+      "context_type": "Economic Grievance",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:14:35.713767+00:00"
+    }
+  ]
+}

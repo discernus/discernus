@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_d3523716454d",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "micro_test_experiment",
+  "model_used": "anthropic/claude-sonnet-4-20250514",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"sentiment_binary_v1\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"High confidence analysis with clear negative sentiment markers throughout text\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"68b092892a22...\",\n      \"document_name\": \"negative_test_2.txt\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.95\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.95,\n          \"context_type\": \"absence_of_markers\"\n        },\n        {\n          \"dimension\": \"negative_sentiment\",\n          \"quote_text\": \"What an awful predicament. All plans are failing miserably. I'm dreading what's to come. Defeat engulfs us. The group performed dreadfully. We're encountering catastrophe. Despair saturates everything. Such a calamitous result! I'm crushed by the setbacks. Everything appears bleak and discouraging.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"dominant_theme\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "2e76c1d0629c468601ab4e3a10501a09c30097bfa1794c621293df250230d346",
+  "execution_metadata": {
+    "start_time": "2025-09-01T17:38:08.452574+00:00",
+    "end_time": "2025-09-01T17:38:34.895809+00:00",
+    "duration_seconds": 26.443197
+  },
+  "input_artifacts": {
+    "framework_hash": "178020617d567968935db724ea6eeb1f4debda637043ba96a1cd8859fcf9dc22",
+    "document_hashes": [
+      "68b092892a2216aa8ebd70a470a361c86d2bf3ceb23469275acd0fb85d9367a9"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "micro_test_experiment",
+      "experiment_root": "/Volumes/code/discernus/projects/micro_test_experiment",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250901T173718Z_bbce6185"
+  }
+}

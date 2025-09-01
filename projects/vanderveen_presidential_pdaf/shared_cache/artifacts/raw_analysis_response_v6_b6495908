@@ -1,0 +1,120 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "10.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis performed using three independent approaches (Evidence-First, Context-Weighted, Pattern-Based) with median aggregation for scores and selection of best evidence quote.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "04e914dea1bd",
+      "document_name": "kasich/convention_period/kasich_2016_07_21.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "crisis_restoration_temporal_narrative": {
+          "raw_score": 0.9,
+          "salience": 1.0,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 0.3,
+          "salience": 0.2,
+          "confidence": 0.7
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 1.0,
+          "salience": 1.0,
+          "confidence": 1.0
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "nationalist_exclusion": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.8
+        },
+        "economic_populist_appeals": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "If we have to knock down the special interests to get it done, so be it.",
+          "confidence": 0.9,
+          "context_type": "explicit_framing"
+        },
+        {
+          "dimension": "crisis_restoration_temporal_narrative",
+          "quote_text": "the sun is going to rise to the zenith in America again. I promise you it will happen.",
+          "confidence": 1.0,
+          "context_type": "restoration_promise"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "we're the strength and the glue.",
+          "confidence": 0.9,
+          "context_type": "collective_power_assertion"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion",
+          "quote_text": "I don't pay attention to that nonsense.",
+          "confidence": 0.8,
+          "context_type": "dismissal_of_division"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "We were wasting money and I said, \u201cWe need to clean this up,\u201d and they\u2019re like, \u201cYou know, come on, it\u2019s the Pentagon. You can\u2019t forget about it, it can\u2019t happen.\u201d",
+          "confidence": 0.8,
+          "context_type": "systemic_failure_claim"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "This is not a political campaign. And by the way, neither will this be\u2014this is not a political campaign.",
+          "confidence": 1.0,
+          "context_type": "anti-political_class_positioning"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "We are the glue that holds our country together.",
+          "confidence": 0.9,
+          "context_type": "unity_metaphor"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "assume our role as leaders of the world.",
+          "confidence": 0.8,
+          "context_type": "global_leadership_aspirations"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "creating jobs is the highest moral purpose.",
+          "confidence": 0.9,
+          "context_type": "moral_economic_framing"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

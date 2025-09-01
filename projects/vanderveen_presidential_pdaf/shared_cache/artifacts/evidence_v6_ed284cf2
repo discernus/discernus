@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "8e148b3492daf1ae3992394553ef0124c3181637436be62fa963c1ca2dc8634a"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-31T01:00:51.162799+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "trump_2016_09_17.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "Hillary Clinton is just reckless \u2013 so reckless, in fact, she put her emails on an illegal server that our enemies could easily hack. Then Clinton\u2019s team used a technology called bleachbit to acid wash her emails. They even took a hammer to some of her 13 phones, to cover her tracks and obstruct justice.",
+      "confidence": 0.9,
+      "context_type": "moral_corruption_attribution",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:00:51.162746+00:00"
+    },
+    {
+      "document_name": "trump_2016_09_17.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "Under Barack Obama and Hillary Clinton, defense spending is on track to fall to its lowest level as a share of the economy since the end of World War II... We currently have the smallest Army since 1940... We Will Make America Strong Again. We Will Make America Safe Again. And We Will Make America Great Again.",
+      "confidence": 0.9,
+      "context_type": "decline_narrative_and_restoration_promise",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:00:51.162773+00:00"
+    },
+    {
+      "document_name": "trump_2016_09_17.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "In the process, we will make government leaner and more responsive to the public.",
+      "confidence": 0.7,
+      "context_type": "government_responsiveness_claim",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:00:51.162776+00:00"
+    },
+    {
+      "document_name": "trump_2016_09_17.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "We only want to admit people to our country who will support our values and love our people.",
+      "confidence": 0.8,
+      "context_type": "identity_based_political_exclusion",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:00:51.162780+00:00"
+    },
+    {
+      "document_name": "trump_2016_09_17.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "Nothing threatens the integrity of our Democracy more than when government officials put their public office up for sale.",
+      "confidence": 0.9,
+      "context_type": "systemic_manipulation_claim",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:00:51.162782+00:00"
+    },
+    {
+      "document_name": "trump_2016_09_17.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "I will ask that savings be accomplished through common sense reforms that eliminate government waste and budget gimmicks \u2013 and that protect hard-earned benefits for Americans.",
+      "confidence": 0.8,
+      "context_type": "common_sense_vs_political_class_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:00:51.162785+00:00"
+    },
+    {
+      "document_name": "trump_2016_09_17.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "We will be one people, under one God, saluting one American flag.",
+      "confidence": 0.9,
+      "context_type": "explicit_unity_assertion",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:00:51.162788+00:00"
+    },
+    {
+      "document_name": "trump_2016_09_17.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "Under Obama-Clinton, our ballistic missile defense capability has been degraded at the very moment the US and its allies are facing a heightened missile threat from states like Iran and North Korea.",
+      "confidence": 0.8,
+      "context_type": "external_group_threat_characterization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:00:51.162790+00:00"
+    },
+    {
+      "document_name": "trump_2016_09_17.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "We Will Bring Back Our Jobs.",
+      "confidence": 0.8,
+      "context_type": "populist_economic_justice_appeal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:00:51.162792+00:00"
+    }
+  ]
+}

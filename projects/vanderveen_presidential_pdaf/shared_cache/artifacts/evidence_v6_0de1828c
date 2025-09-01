@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "a156e8661c68a9f003257c9aee8e96f2555e280a11ada963ea0a9a71d2fb7e52"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-31T01:22:32.620700+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_09.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "making our economy work for everyone not just those at the top",
+      "confidence": 0.9,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.620686+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_09.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "This loss hurts, but please never stop believing that fighting for what's right is worth it.",
+      "confidence": 0.8,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.620688+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_09.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.620689+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_09.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "Donald Trump is going to be our president. We owe him an open mind and the chance to lead.",
+      "confidence": 1.0,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.620690+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_09.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.620691+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_09.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.620692+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_09.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "We've spent a year and a half bringing together millions of people from every corner of our country to say with one voice that we believe that the American dream is big enough for everyone \u2014 for people of all races and religions, for men and women, for immigrants, for LGBT people, and people with disabilities. For everyone.",
+      "confidence": 0.8,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.620693+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_09.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.620694+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_09.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "making our economy work for everyone not just those at the top",
+      "confidence": 0.9,
+      "context_type": "direct_quote",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.620697+00:00"
+    }
+  ]
+}

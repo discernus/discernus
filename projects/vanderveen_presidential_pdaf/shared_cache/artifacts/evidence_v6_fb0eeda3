@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "b44a873c26d5b9520d3c0a127405b88fd8e5e24ddda84d7ef0ca1df7c018ebf4"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-31T01:23:35.506951+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "sanders/primary_season/sanders_2016_05_26.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "Today, we stand here and say loudly and clearly that; \"Enough is enough. This great nation and its government belong to all of the people, and not to a handful of billionaires, their Super-PACs and their lobbyists.\"",
+      "confidence": 0.9,
+      "context_type": "explicit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.506939+00:00"
+    },
+    {
+      "document_name": "sanders/primary_season/sanders_2016_05_26.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "My fellow Americans: This country faces more serious problems today than at any time since the Great Depression and, if you include the planetary crisis of climate change, it may well be that the challenges we face now are dire than any time in our modern history.",
+      "confidence": 0.8,
+      "context_type": "explicit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.506941+00:00"
+    },
+    {
+      "document_name": "sanders/primary_season/sanders_2016_05_26.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "My fellow Americans: Let me be as blunt as I can and tell you what you already know. As a result of the disastrous Supreme Court decision on Citizens United, the American political system has been totally corrupted, and the foundations of American democracy are being undermined.",
+      "confidence": 0.85,
+      "context_type": "explicit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.506942+00:00"
+    },
+    {
+      "document_name": "sanders/primary_season/sanders_2016_05_26.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "My fellow Americans: Let me be a blunt as I can and tell you what you already know. As a result of the disastrous Supreme Court decision on Citizens United, the American political system has been totally corrupted, and the foundations of American democracy are being undermined.",
+      "confidence": 0.7,
+      "context_type": "implicit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.506943+00:00"
+    },
+    {
+      "document_name": "sanders/primary_season/sanders_2016_05_26.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "My fellow Americans: Let me be as blunt as I can and tell you what you already know. As a result of the disastrous Supreme Court decision on Citizens United, the American political system has been totally corrupted, and the foundations of American democracy are being undermined.",
+      "confidence": 0.85,
+      "context_type": "explicit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.506944+00:00"
+    },
+    {
+      "document_name": "sanders/primary_season/sanders_2016_05_26.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "Let me take a minute to touch on some of the issues that I will be focusing on in the coming months, and then give you an outline of an Agenda for America which will, in fact, deal with these problems and lead us to a better future.\n... As someone who has never run a negative political ad in his life, my campaign will be driven by issues and serious debates; not political gossip, not reckless personal attacks or character assassination.",
+      "confidence": 0.9,
+      "context_type": "explicit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.506946+00:00"
+    },
+    {
+      "document_name": "sanders/primary_season/sanders_2016_05_26.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "To bring people together we need a simple and straightforward progressive agenda which speaks to the needs of our people, and which provides us with a vision of a very different America. And what is that agenda? Jobs, Jobs, Jobs: It begins with jobs.",
+      "confidence": 0.7,
+      "context_type": "explicit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.506947+00:00"
+    },
+    {
+      "document_name": "sanders/primary_season/sanders_2016_05_26.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "As everybody knows, we live in a difficult and dangerous world, and there are people out there who want to do us harm. As president, I will defend this nation, and but I will do it responsibly.",
+      "confidence": 0.6,
+      "context_type": "explicit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.506948+00:00"
+    },
+    {
+      "document_name": "sanders/primary_season/sanders_2016_05_26.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "In America we now have more income and wealth inequality than any other major country on earth, and the gap between the very rich and everyone else is wider than at any time since the 1920s. The issue of wealth and income inequality is the great moral issue of our time, it is the great economic issue of our time and it is the great political issue of our time.",
+      "confidence": 0.95,
+      "context_type": "explicit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.506949+00:00"
+    }
+  ]
+}

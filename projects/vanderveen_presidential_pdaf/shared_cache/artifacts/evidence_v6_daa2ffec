@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "0a29eceb5a7fded5780accc4599d1e6b47f7ff628e07c6859d3d7dc34cee140b"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-30T23:11:26.936601+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_07.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "",
+      "confidence": 0.8,
+      "context_type": "absence of relevant content",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:11:26.936576+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_07.txt",
+      "dimension": "crisis_restoration_temporal_narrative",
+      "quote_text": "",
+      "confidence": 0.8,
+      "context_type": "absence of relevant content",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:11:26.936585+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_07.txt",
+      "dimension": "popular_ Sovereignty_claims",
+      "quote_text": "",
+      "confidence": 0.8,
+      "context_type": "absence of relevant content",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:11:26.936587+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_07.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "",
+      "confidence": 0.8,
+      "context_type": "absence of relevant content",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:11:26.936588+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_07.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "",
+      "confidence": 0.8,
+      "context_type": "absence of relevant content",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:11:26.936589+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_07.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "",
+      "confidence": 0.8,
+      "context_type": "absence of relevant content",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:11:26.936590+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_07.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "",
+      "confidence": 0.8,
+      "context_type": "absence of relevant content",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:11:26.936597+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_07.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "",
+      "confidence": 0.8,
+      "context_type": "absence of relevant content",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:11:26.936598+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_07.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "",
+      "confidence": 0.8,
+      "context_type": "absence of relevant content",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:11:26.936599+00:00"
+    }
+  ]
+}

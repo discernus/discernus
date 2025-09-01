@@ -1,0 +1,120 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "10.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "The document clearly exhibits strong populist framing across multiple dimensions, with a central theme of 'the people' against 'elites' (economic and political). The 'political revolution' narrative drives the crisis-restoration and popular sovereignty claims, while explicitly unifying diverse groups. Nationalist exclusion is entirely absent.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "b7b64c3a9b6d",
+      "document_name": "sanders/primary_season/sanders_2016_03_01.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "nationalist_exclusion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        },
+        "economic_populist_appeals": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "our government belongs to all of us, not just super PACs and wealthy campaign contributors.",
+          "confidence": 0.9,
+          "context_type": "binary_opposition_framing"
+        },
+        {
+          "dimension": "crisis_restoration_narrative",
+          "quote_text": "It is about dealing with some unpleasant truths that exist in America today and having the guts to confront those truths.",
+          "confidence": 0.8,
+          "context_type": "critical_juncture_framing"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "our government belongs to all of us, not just super PACs and wealthy campaign contributors.",
+          "confidence": 0.9,
+          "context_type": "popular_will_primacy_assertions"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion",
+          "quote_text": "We can disagree in a democracy, and that\u2019s what a democracy is about, but I hope all of us agree that we\u2019re going to not allow billionaires and their super PACs to destroy American democracy.",
+          "confidence": 0.8,
+          "context_type": "opposition_legitimacy_denial"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "end a corrupt campaign finance system.",
+          "confidence": 0.9,
+          "context_type": "institutional_systematic_deception"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "Secretary Clinton and many of the establishment people think that I am looking and thinking too big. I don\u2019t think so.",
+          "confidence": 0.8,
+          "context_type": "anti-political_class_identity_claims"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "What the political revolution is about is bringing our people together. Black and white, Latino, Asian-American. Gay and straight. People born in America, people who have immigrated to America.",
+          "confidence": 0.9,
+          "context_type": "explicit_unity_assertions"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "not_applicable"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "create an economy that works for all of us, not just the people on top.",
+          "confidence": 0.9,
+          "context_type": "economic_elite_vs_working_people_framing"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "e3b1dd6794ab825cecaa4dfeb87b090faf8a14946dd3017abc56123a08327f7d"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-31T00:49:25.800682+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "trump/convention_period/trump_2016_07_21.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "No longer can we rely on those elites in media, and politics, who will say anything to keep a rigged system in place.",
+      "confidence": 1.0,
+      "context_type": "explicit elite framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T00:49:25.800659+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_07_21.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "Our Convention occurs at a moment of crisis for our nation. The attacks on our police, and the terrorism in our cities, threaten our very way of life... Beginning on January 20th 2017, safety will be restored.",
+      "confidence": 1.0,
+      "context_type": "crisis declaration and restoration promise",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T00:49:25.800665+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_07_21.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "I AM YOUR VOICE.",
+      "confidence": 1.0,
+      "context_type": "direct representation claim",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T00:49:25.800667+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_07_21.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "So if you want to hear the corporate spin, the carefully-crafted lies, and the media myths the Democrats are holding their convention next week. But here, at our convention, there will be no lies.",
+      "confidence": 1.0,
+      "context_type": "delegitimization of political opposition",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T00:49:25.800671+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_07_21.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "Big business, elite media and major donors are lining up behind the campaign of my opponent because they know she will keep our rigged system in place.",
+      "confidence": 1.0,
+      "context_type": "explicit claim of systemic rigging by elites",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T00:49:25.800672+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_07_21.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "I have joined the political arena so that the powerful can no longer beat up on people that cannot defend themselves. Nobody knows the system better than me, which is why I alone can fix it.",
+      "confidence": 1.0,
+      "context_type": "outsider positioning and unique ability",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T00:49:25.800673+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_07_21.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "To all Americans tonight, in all our cities and towns, I make this promise: We Will Make America Strong Again. We Will Make America Proud Again. We Will Make America Safe Again. And We Will Make America Great Again.",
+      "confidence": 1.0,
+      "context_type": "unifying collective pronoun usage and national slogans",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T00:49:25.800677+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_07_21.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "America First. Americanism, not globalism, will be our credo.",
+      "confidence": 1.0,
+      "context_type": "explicit nationalist ideology",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T00:49:25.800678+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_07_21.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "A number of these reforms that I will outline tonight will be opposed by some of our nation\u2019s most powerful special interests. That is because these interests have rigged our political and economic system for their exclusive benefit.",
+      "confidence": 1.0,
+      "context_type": "attribution of economic problems to elite interests",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T00:49:25.800679+00:00"
+    }
+  ]
+}

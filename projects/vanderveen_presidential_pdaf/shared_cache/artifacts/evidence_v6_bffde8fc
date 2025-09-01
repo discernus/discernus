@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "0fdf95164dab80c388e304f50052e00e3dce3e05963ad62a1fc79b1763a29f27"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-31T01:22:32.573690+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "clinton/general_election/clinton_2016_08_31.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.573647+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_08_31.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "My opponent is wrong when he says America is no longer great. Consider the record of the past eight years. In 2009 our global economy was collapsing, Osama bin Laden was plotting, we had more than 180,000 troops fighting two wars, Iran was racing toward a nuclear weapon, many of our allies were less supportive of American leadership than they had been in decades. Look where we are now. We have pulled the global economy out of free-fall thanks to the hard work and sacrifice of the American people.",
+      "confidence": 0.9,
+      "context_type": "temporal framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.573669+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_08_31.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "I will be a president for Democrats, Republicans, independents, for people who vote for me, for people who don\u2019t, for all Americans. That is what I think we need. We need to unify our country and go forward into the future with confidence and optimism.",
+      "confidence": 0.7,
+      "context_type": "unity appeal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.573672+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_08_31.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "My opponent in this race has said very clearly that he thinks American exceptionalism is insulting to the rest of the world. In fact, when Vladimir Putin, of all people, criticized American exceptionalism, my opponent agreed with him, saying, and I quote, 'if you\u2019re in Russia, you don\u2019t want to hear that America is exceptional.' Well maybe you don\u2019t want to hear it, but that doesn\u2019t mean it\u2019s not true.",
+      "confidence": 0.8,
+      "context_type": "opponent delegitimization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.573674+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_08_31.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.573677+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_08_31.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "I get criticized for having so many plans. People say, oh, there she goes with another plan about mental health, about veterans. Well I have this old fashioned idea if I\u2019m asking for your vote for president I should tell you what I want to do as your president.",
+      "confidence": 0.7,
+      "context_type": "rhetorical deflection",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.573679+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_08_31.txt",
+      "dimension": "homogeneous_peopl`e_construction",
+      "quote_text": "We need to unify our country and go forward into the future with confidence and optimism. And our armed forces which represents all races, religions, ethnicities and yes, immigrants from other countries all fighting for the red, white and blue.",
+      "confidence": 0.9,
+      "context_type": "national unity and military",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.573681+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_08_31.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "The United States is an exceptional nation. I believe we are still Lincoln\u2019s last, best hope of Earth. We\u2019re still Reagan\u2019s shining city on a hill. We\u2019re still Robert Kennedy\u2019s great, unselfish, compassionate country. No other country in the world has alliances like ours. Russia and China have nothing close.",
+      "confidence": 0.9,
+      "context_type": "American exceptionalism and global comparison",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.573683+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_08_31.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:22:32.573685+00:00"
+    }
+  ]
+}

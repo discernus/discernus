@@ -1,0 +1,1179 @@
+{
+  "evidence_database_metadata": {
+    "total_evidence_pieces": 117,
+    "total_files_processed": 13,
+    "collection_time": "2025-09-01T17:54:59.188776+00:00"
+  },
+  "evidence_collection": [
+    {
+      "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+      "dimension": "manichean_people_elite_framing",
+      "quote_text": "Não é dessa gangue, que tem uma bandeira vermelha e tem a cabeça lavada... Esses marginais vermelhos, serão banidos de nossa pátria",
+      "confidence": 0.95,
+      "context_type": "direct_moral_dichotomy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:50:34.275245+00:00"
+    },
+    {
+      "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "construiremos uma nova nação... Será uma limpeza nunca vista na história do Brasil",
+      "confidence": 0.9,
+      "context_type": "restoration_promise",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:50:34.275283+00:00"
+    },
+    {
+      "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "Nós somos a maioria. Nós somos o Brasil de verdade",
+      "confidence": 0.85,
+      "context_type": "popular_authority",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:50:34.275304+00:00"
+    },
+    {
+      "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "Ou vão pra fora, ou vão pra cadeia... Esses marginais vermelhos, serão banidos de nossa pátria",
+      "confidence": 0.95,
+      "context_type": "opposition_exclusion",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:50:34.275308+00:00"
+    },
+    {
+      "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "Aqui, não terá mais lugar para a corrupção... Esse é o Lula da Silva, que vocês tavam esperando, o Haddad ser presidente, pra assinar os decretos de indulto?",
+      "confidence": 0.85,
+      "context_type": "systemic_corruption_claims",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:50:34.275311+00:00"
+    },
+    {
+      "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "com essa nova classe política, construir realmente aquilo que nós merecemos",
+      "confidence": 0.75,
+      "context_type": "new_political_class",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:50:34.275313+00:00"
+    },
+    {
+      "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "Junto com esse povo brasileiro, construiremos uma nova nação... Nós somos o Brasil de verdade",
+      "confidence": 0.9,
+      "context_type": "unified_identity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:50:34.275316+00:00"
+    },
+    {
+      "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "Ninguém, vai sair dessa pátria, porque essa pátria é nossa... A nossa bandeira já vai ser a vermelha!",
+      "confidence": 0.9,
+      "context_type": "patriotic_boundary_drawing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:50:34.275319+00:00"
+    },
+    {
+      "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "Vocês não terão mais ONGs para saciar a fome de mortadela de vocês",
+      "confidence": 0.8,
+      "context_type": "limited_economic_reference",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:50:34.275321+00:00"
+    },
+    {
+      "document_name": "2018-10-27_Pre-Second-Round_Live.txt",
+      "dimension": "manichean_people_elite_framing",
+      "quote_text": "a força do Brasil é a união do seu povo. Vamos juntos mudar esse Brasil",
+      "confidence": 0.9,
+      "context_type": "core_message",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:51:15.536358+00:00"
+    },
+    {
+      "document_name": "2018-10-27_Pre-Second-Round_Live.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "Nós queremos, sim, buscar aí Dharma de Caxias, né? É, pacificar o Brasil",
+      "confidence": 0.8,
+      "context_type": "restoration_promise",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:51:15.536364+00:00"
+    },
+    {
+      "document_name": "2018-10-27_Pre-Second-Round_Live.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "fazer valer a nossa vontade. Não vamo dar oportunidade pra que o outro lado diga",
+      "confidence": 0.8,
+      "context_type": "direct_democracy_appeal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:51:15.536365+00:00"
+    },
+    {
+      "document_name": "2018-10-27_Pre-Second-Round_Live.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "se porventura o PT voltar um dia, vai bolar essa turma toda, José Dirceu, Genoíno, entre tantos outros, todos voltarão",
+      "confidence": 0.9,
+      "context_type": "opposition_delegitimization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:51:15.536366+00:00"
+    },
+    {
+      "document_name": "2018-10-27_Pre-Second-Round_Live.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "É uma máquina podre que sobrevive, se retroalimenta da desgraça, da corrupção",
+      "confidence": 0.9,
+      "context_type": "systemic_corruption_claims",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:51:15.536368+00:00"
+    },
+    {
+      "document_name": "2018-10-27_Pre-Second-Round_Live.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "um sub-tenente do Exército Brasileiro, Hélio, nós apoiamos aqui para, para deputado federal",
+      "confidence": 0.8,
+      "context_type": "anti_political_class_positioning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:51:15.536369+00:00"
+    },
+    {
+      "document_name": "2018-10-27_Pre-Second-Round_Live.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "Somos iguais! Ele não vai ser branco nunca e nem eu vou ser negro nunca. Concorda? Exatamente",
+      "confidence": 0.8,
+      "context_type": "unity_construction",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:51:15.536370+00:00"
+    },
+    {
+      "document_name": "2018-10-27_Pre-Second-Round_Live.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "Queremos um Brasil livre deste preconceito branco e negro, homo e hétero",
+      "confidence": 0.7,
+      "context_type": "inclusive_nationalism",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:51:15.536371+00:00"
+    },
+    {
+      "document_name": "2018-10-27_Pre-Second-Round_Live.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "tirar de vocês o atendimento médico, a educação, a segurança. É uma máquina podre que sobrevive",
+      "confidence": 0.8,
+      "context_type": "elite_exploitation_claims",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:51:15.536372+00:00"
+    },
+    {
+      "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+      "dimension": "manichean_people_elite_framing",
+      "quote_text": "políticos comprometidos com o seu país e não com grupos políticos partidários",
+      "confidence": 0.9,
+      "context_type": "moral_dichotomy_construction",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:48:01.705480+00:00"
+    },
+    {
+      "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "vamos fazer o Brasil diferente... vamos mudar o Brasil",
+      "confidence": 0.8,
+      "context_type": "restoration_promise_rhetoric",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:48:01.705486+00:00"
+    },
+    {
+      "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "esperando que o povo decida",
+      "confidence": 0.7,
+      "context_type": "popular_will_primacy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:48:01.705487+00:00"
+    },
+    {
+      "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "É o Brasil verde-amarelo e eles que representam Cuba, representam o governo da Venezuela",
+      "confidence": 0.9,
+      "context_type": "opposition_delegitimization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:48:01.705494+00:00"
+    },
+    {
+      "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "pregando fake news",
+      "confidence": 0.6,
+      "context_type": "media_manipulation_claims",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:48:01.705495+00:00"
+    },
+    {
+      "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "não começei sozinho, né? Na verdade, isso começou há quatro anos",
+      "confidence": 0.8,
+      "context_type": "anti_establishment_positioning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:48:01.705497+00:00"
+    },
+    {
+      "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "vamos unir esse Brasil aqui... A união de todos",
+      "confidence": 0.8,
+      "context_type": "unity_construction_rhetoric",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:48:01.705498+00:00"
+    },
+    {
+      "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "vamos nos afastar desse fantasma que acontece na Venezuela",
+      "confidence": 0.8,
+      "context_type": "external_threat_characterization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:48:01.705499+00:00"
+    },
+    {
+      "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "os economistas que botaram o Brasil nessa, nessa crise que se encontra aí",
+      "confidence": 0.6,
+      "context_type": "elite_economic_betrayal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:48:01.705500+00:00"
+    },
+    {
+      "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+      "dimension": "manichean_people_elite_framing",
+      "quote_text": "Falta, realmente, políticos comprometidos com o seu país e não com grupos políticos partidários",
+      "confidence": 0.9,
+      "context_type": "moral_dichotomy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:49:50.326673+00:00"
+    },
+    {
+      "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "Vamos afastar isso que não deu certo, que é o socialismo, que é o comunismo",
+      "confidence": 0.8,
+      "context_type": "restoration_promise",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:49:50.326677+00:00"
+    },
+    {
+      "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "esperando que o povo decida que vai ter segundo turno aqui",
+      "confidence": 0.8,
+      "context_type": "direct_democracy_invocation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:49:50.326678+00:00"
+    },
+    {
+      "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "É o Brasil verde-amarelo e eles que representam Cuba, representam o governo da Venezuela com a sua bandeira vermelha",
+      "confidence": 0.95,
+      "context_type": "legitimacy_denial",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:49:50.326679+00:00"
+    },
+    {
+      "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "Os nossos ministros, é, não procuram simplificar as coisas e atender os interesses nacionais, buscam apenas a-atender interesse político-partidário",
+      "confidence": 0.85,
+      "context_type": "systemic_corruption_claims",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:49:50.326681+00:00"
+    },
+    {
+      "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "não aceitamos, há, não é que não aceitamos, eles nem quiseram conversar conosco, né? Com líderes partidários já carimabados",
+      "confidence": 0.9,
+      "context_type": "anti_establishment_positioning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:49:50.326682+00:00"
+    },
+    {
+      "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "Vamos unir o povo brasileiro. Nossa bandeira é verde e amarela. Nosso coração é verde e amarelo. Esse povo é maravilhoso. Esse povo brasileiro é ordeiro",
+      "confidence": 0.9,
+      "context_type": "unified_identity_construction",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:49:50.326683+00:00"
+    },
+    {
+      "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "vamos buscar parceria com os Estados Unidos, com Israel, com a Coreia do Sul, com a Europa, com o Japão. Vamos fazer o Brasil grande",
+      "confidence": 0.8,
+      "context_type": "national_priority_rhetoric",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:49:50.326685+00:00"
+    },
+    {
+      "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "Nós queremos, sim, dividir, mas dividir riqueza com vocês e não dividir pobreza, que sempre foi a marca do socialismo e do comunismo",
+      "confidence": 0.7,
+      "context_type": "economic_elite_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:49:50.326686+00:00"
+    },
+    {
+      "document_name": "2018-10-07_Pre-Election_Live.txt",
+      "dimension": "manichean_people_elite_framing",
+      "quote_text": "nós queremos se dividir a dividir a riqueza com vocês e não dividir pobreza que sempre foi a marca do socialismo e do comunismo",
+      "confidence": "0.8",
+      "context_type": "thematic_opposition",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:48:31.312092+00:00"
+    },
+    {
+      "document_name": "2018-10-07_Pre-Election_Live.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "vamos fazer um brasil grande vamos nos orgulhar novamente dessa pátria",
+      "confidence": "0.7",
+      "context_type": "restoration_promise",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:48:31.312096+00:00"
+    },
+    {
+      "document_name": "2018-10-07_Pre-Election_Live.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "estamos esperando que o povo decida que vai ter segundo turno",
+      "confidence": "0.9",
+      "context_type": "direct_popular_authority",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:48:31.312098+00:00"
+    },
+    {
+      "document_name": "2018-10-07_Pre-Election_Live.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "vamos afastar disso que não deu certo que é o socialismo é o comunismo que está encarnado no pt",
+      "confidence": "0.9",
+      "context_type": "opposition_delegitimization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:48:31.312099+00:00"
+    },
+    {
+      "document_name": "2018-10-07_Pre-Election_Live.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "os nossos ministros e não procuram simplificar as coisas e atender os interesses nacionais buscam apenas irá atender interesse político partidário",
+      "confidence": "0.7",
+      "context_type": "systemic_critique",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:48:31.312100+00:00"
+    },
+    {
+      "document_name": "2018-10-07_Pre-Election_Live.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "não começei sozinho né na verdade isso começou há quatro anos aproximadamente grupos de direita de vários estados",
+      "confidence": "0.8",
+      "context_type": "outsider_positioning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:48:31.312101+00:00"
+    },
+    {
+      "document_name": "2018-10-07_Pre-Election_Live.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "essa união de todo o brasil e vamos unir o povo brasileiro nossa bandeira verde-amarela nosso coração é verde amarelo",
+      "confidence": "0.9",
+      "context_type": "unity_construction",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:48:31.312224+00:00"
+    },
+    {
+      "document_name": "2018-10-07_Pre-Election_Live.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "vamos buscar parceria com estados unidos israel coreia do sul com a europa o japão",
+      "confidence": "0.8",
+      "context_type": "selective_partnerships",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:48:31.312234+00:00"
+    },
+    {
+      "document_name": "2018-10-07_Pre-Election_Live.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "",
+      "confidence": "0.7",
+      "context_type": "minimal_economic_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:48:31.312238+00:00"
+    },
+    {
+      "document_name": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+      "dimension": "manichean_people_elite_framing",
+      "quote_text": "Eles tão lá pra servir a sua agremiação partidária, e não o Brasil",
+      "confidence": "0.9",
+      "context_type": "direct_moral_opposition",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:46:03.402412+00:00"
+    },
+    {
+      "document_name": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "nos bons tempos, onde não existia a pobreza que tem hoje",
+      "confidence": "0.8",
+      "context_type": "decline_narrative",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:46:03.402415+00:00"
+    },
+    {
+      "document_name": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "Vamos respeitar o referendo do M5, que nos deu o direito à compra de armas e munições",
+      "confidence": "0.7",
+      "context_type": "direct_democracy_appeal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:46:03.402417+00:00"
+    },
+    {
+      "document_name": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "não podemos é continuar com essa dupla de mingau que eu não gosto, PT, PSDB",
+      "confidence": "0.8",
+      "context_type": "opposition_delegitimization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:46:03.402418+00:00"
+    },
+    {
+      "document_name": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "Que levam, pela indicação política, à ineficiência do Estado e a corrupção",
+      "confidence": "0.8",
+      "context_type": "systemic_corruption_claims",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:46:03.402419+00:00"
+    },
+    {
+      "document_name": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "Sou de família humilde, da região mais pobre de São Paulo, Vado Ribeira",
+      "confidence": "0.9",
+      "context_type": "outsider_identity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:46:03.402420+00:00"
+    },
+    {
+      "document_name": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "Um só povo, uma só nação, uma só bandeira",
+      "confidence": "0.8",
+      "context_type": "unity_construction",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:46:03.402421+00:00"
+    },
+    {
+      "document_name": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "A China não está comprando no Brasil, ela está comprando o Brasil",
+      "confidence": "0.7",
+      "context_type": "external_threat",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:46:03.402422+00:00"
+    },
+    {
+      "document_name": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "Precisamos de alguém então, que tire o Estado do cangote de quem produz",
+      "confidence": "0.8",
+      "context_type": "anti_state_economic_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:46:03.402423+00:00"
+    },
+    {
+      "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+      "dimension": "manichean_people_elite_framing",
+      "quote_text": "Eu sei o desconforto que venho cau-causando, sozinho, alguns poucos políticos do meu lado e amigos naquilo que chamam de establishment, ou máquina, ou sistema. Sabemos isso. Eu sou o patinho feio nessa história, mas que tenho certeza, tenho certeza, seremos punidos brevemente.",
+      "confidence": 0.9,
+      "context_type": "explicit_elite_opposition",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:43:03.514870+00:00"
+    },
+    {
+      "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "Mas algo bateu em mim. Algo calou na minha alma: a reeleição da senhora Dilma Rousseff... eu vi que algo tinha que ser feito para mudarmos o destino do nosso Brasil.",
+      "confidence": 0.8,
+      "context_type": "crisis_identification",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:43:03.514877+00:00"
+    },
+    {
+      "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "Se estou aqui, é porque acredito em vocês. Se vocês estão aqui, é porque acreditam no Brasil.",
+      "confidence": 0.8,
+      "context_type": "direct_popular_authority",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:43:03.514879+00:00"
+    },
+    {
+      "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "grande parte dos parlamentares querem agir de maneira diferente do que age os líderes partidários, que, na verdade, são líderes sindicais.",
+      "confidence": 0.7,
+      "context_type": "institutional_opposition",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:43:03.514880+00:00"
+    },
+    {
+      "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "Ou mais grave que a corrupção, que é a questão ideológica que tomou parte, que tomou conta de grande parte do Brasil.",
+      "confidence": 0.7,
+      "context_type": "systemic_capture",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:43:03.514882+00:00"
+    },
+    {
+      "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "Há uma diferença enorme de um quartel para o meio político. No quartel você tem companheirismo, patriotismo, disciplina, hierarquia, amor à pátria. Na política, não.",
+      "confidence": 0.9,
+      "context_type": "outsider_identity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:43:03.514883+00:00"
+    },
+    {
+      "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "Vamos unir brancos e negros, homos e héteros, ou trans também, não tem problema... Vamos unir nordestinos e sulistas. Vamos abafar esses pequenos movimentos separatistas que vemos pelo Brasil. Unir ricos e pobres.",
+      "confidence": 0.8,
+      "context_type": "unity_construction",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:43:03.514885+00:00"
+    },
+    {
+      "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "A nossa bandeira é verde e amarela. Nós não aceitamos o comunismo.",
+      "confidence": 0.8,
+      "context_type": "ideological_boundary",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:43:03.514888+00:00"
+    },
+    {
+      "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "buscar realmente a liberação da nossa economia, buscar o liberalismo, queremos, sim, mais que privatizar, quem sabe até extinguir a maioria das estatais",
+      "confidence": 0.7,
+      "context_type": "economic_reform",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:43:03.514889+00:00"
+    },
+    {
+      "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+      "dimension": "manichean_people_elite_framing",
+      "quote_text": "Nós somos a realidade. Nós não falamos aquilo, que por ocasião de campanhas, as pessoas gostam de ouvir. Nós falamos o que o Brasil precisa ouvir... É gente honesta, é gente que acredita em Deus, é gente que é patriota.",
+      "confidence": 0.9,
+      "context_type": "moral_dichotomy_construction",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:43:52.754549+00:00"
+    },
+    {
+      "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "que até pouco tempo era um país dos mais ricos aqui da América do Sul. E hoje, é um dos países onde quase todos estão fugindo da ditadura, da fome, da violência e da miséria... O grande exemplo que tiramos de lá",
+      "confidence": 0.85,
+      "context_type": "decline_warning_narrative",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:43:52.754552+00:00"
+    },
+    {
+      "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "O Brasil tem tudo, tudo pra ser uma grande nação, mas passa, repito, pelas mãos de vocês a decisão de botar gente melhor em Brasília",
+      "confidence": 0.8,
+      "context_type": "direct_popular_authority",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:43:52.754553+00:00"
+    },
+    {
+      "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "Nós, no Brasil, não aguentaremos mais um ciclo de PT ou PSDB... O momento agora, é de mudarmos radicalmente essa forma de fazer política",
+      "confidence": 0.75,
+      "context_type": "opposition_rejection",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:43:52.754554+00:00"
+    },
+    {
+      "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "Desses que nos governam há menos de vinte anos, PT e PSDB",
+      "confidence": 0.7,
+      "context_type": "systemic_elite_control",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:43:52.754555+00:00"
+    },
+    {
+      "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "Não somos apenas da boca pra fora, uma forma de fazer política diferente. Nós somos a realidade",
+      "confidence": 0.85,
+      "context_type": "anti_establishment_positioning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:43:52.754556+00:00"
+    },
+    {
+      "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "Somos um só país, uma só pátria, uma só nação, um só coração verde e amarelo. Juntos temos como fazer realmente o Brasil ser uma grande nação",
+      "confidence": 0.8,
+      "context_type": "unity_construction",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:43:52.754557+00:00"
+    },
+    {
+      "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "que respeite a família brasileira... que respeite a tradicional família brasileira... Ideologia de gênero é a ponta da praga",
+      "confidence": 0.75,
+      "context_type": "cultural_boundary_drawing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:43:52.754558+00:00"
+    },
+    {
+      "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "O liberalismo na economia e o conservadorismo nos costumes",
+      "confidence": 0.8,
+      "context_type": "economic_positioning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:43:52.754559+00:00"
+    },
+    {
+      "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+      "dimension": "manichean_people_elite_framing",
+      "quote_text": "Olha como é que tá o Brasil, pra onde estamos indo, em todos os aspectos sem exceção... tão ou mais grave que a corrupção, é a questão ideológica",
+      "confidence": 0.9,
+      "context_type": "systemic crisis attribution",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:46:38.524969+00:00"
+    },
+    {
+      "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "Vivemos um momento que vai tá em jogo é o futuro de du-duzentos e poucos milhões de brasileiros... Pra onde tá partindo o Brasil?",
+      "confidence": 0.85,
+      "context_type": "existential crisis framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:46:38.524971+00:00"
+    },
+    {
+      "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "mais do que o direito, né, tu tem o dever de votar... nós juntos, salvarmos o Brasil",
+      "confidence": 0.8,
+      "context_type": "popular duty appeals",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:46:38.524973+00:00"
+    },
+    {
+      "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "O PT não esconde o que faz mais... Vai buscar, sim, o controle social da mídia. Cês vão perder liberdades",
+      "confidence": 0.8,
+      "context_type": "opposition threat characterization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:46:38.524974+00:00"
+    },
+    {
+      "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "podem inserir, via fraude, uma média de quarenta votos para o PT, para o PT, na maioria das seções do Brasil. Vamo fazer uma bancada enorme de parlamentares",
+      "confidence": 0.9,
+      "context_type": "electoral fraud conspiracy claims",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:46:38.524975+00:00"
+    },
+    {
+      "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "Ninguém mais do que eu tem consideração pra com vocês... A imprensa malha a mim, desce o cacete de mim, nunca aprovou projeto nenhum",
+      "confidence": 0.8,
+      "context_type": "anti-establishment positioning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:46:38.524976+00:00"
+    },
+    {
+      "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "nós juntos, salvarmos o Brasil... dá para nós, nós juntos",
+      "confidence": 0.75,
+      "context_type": "unity construction appeals",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:46:38.524978+00:00"
+    },
+    {
+      "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "Nós não podemos continuar se tratando como a Venezuela. Olha o que tá acontecendo com aquele povo. Aquele povo é vítima dum regime apoiado pelo PT",
+      "confidence": 0.8,
+      "context_type": "external threat comparison",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:46:38.524979+00:00"
+    },
+    {
+      "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "",
+      "confidence": 0.7,
+      "context_type": "minimal economic focus",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:46:38.524980+00:00"
+    },
+    {
+      "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+      "dimension": "manichean_people_elite_framing",
+      "quote_text": "Eles têm bilhões para gastar, vocês sabem disso. Eles quebraram grandes empresas brasileiras, afundaram bancos, quase quebraram o BNDES, arrebentaram com os fundos de pensões. Eles têm dinheiro, têm um poder econômico enorme. Eles têm também parte da mídia favorável aos seus propósitos.",
+      "confidence": "0.9",
+      "context_type": "elite corruption attribution",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:49:16.712724+00:00"
+    },
+    {
+      "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "O nosso país, realmente, está à beira do caos. Não podemos dar mais um passo à esquerda. O nosso passo agora, é pro centro-direita.",
+      "confidence": "0.85",
+      "context_type": "crisis framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:49:16.712727+00:00"
+    },
+    {
+      "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "Estou aqui porque acredito em vocês. E vocês estão aí porque acreditam no Brasil. Nós somos um só povo. Temos uma só bandeira. Um só coração.",
+      "confidence": "0.8",
+      "context_type": "direct popular authority",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:49:16.712728+00:00"
+    },
+    {
+      "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "Não queremos isso para o nosso Brasil. O outro candidato, a gente sabe quem os-- o cerca e com quem ele se aconselha e onde. Não queremos a volta desse tipo de gente para ocupar o Palácio do Planalto.",
+      "confidence": "0.85",
+      "context_type": "opposition delegitimization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:49:16.712729+00:00"
+    },
+    {
+      "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "Eles quebraram grandes empresas brasileiras, afundaram bancos, quase quebraram o BNDES, arrebentaram com os fundos de pensões. Eles têm dinheiro, têm um poder econômico enorme. Eles têm também parte da mídia favorável aos seus propósitos.",
+      "confidence": "0.9",
+      "context_type": "coordinated elite manipulation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:49:16.712730+00:00"
+    },
+    {
+      "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "E não tínhamos personalidades, não tínhamos grande aparato ao nosso lado. Tínhamos, sim, alguns bons políticos e sempre esteve ao nosso lado, o povo, o cidadão, porque como disse, a verdade estava acima de tudo.",
+      "confidence": "0.8",
+      "context_type": "anti-establishment positioning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:49:16.712731+00:00"
+    },
+    {
+      "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "Vamos unir o nosso povo, unir os cacos que nos fez o governo da esquerda, no passado, botando de um lado negros e brancos, jogando nordestinos contra sulistas, jogando pais contra filhos, até mesmo quem tem opção sexual, homo contra héteros. Vamos unir o nosso povo. Unidos seremos, sim, uma grande nação.",
+      "confidence": "0.9",
+      "context_type": "unity construction",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:49:16.712732+00:00"
+    },
+    {
+      "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "Vamos nos aproximar das grandes nações. Vamos fazer uma política externa sem o viés ideológico.",
+      "confidence": "0.7",
+      "context_type": "national positioning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:49:16.712733+00:00"
+    },
+    {
+      "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "Vamos fazer com que, como proposta do Paulo Guedes, tirar o Estado do cangote de quem produz. Vamos desregulamentar muita coisa, desonerar folha de pagamento.",
+      "confidence": "0.8",
+      "context_type": "economic elite opposition",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:49:16.712734+00:00"
+    },
+    {
+      "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+      "dimension": "manichean_people_elite_framing",
+      "quote_text": "O Brasil é de nós, pessoas de bem, trabalhadores, conservadores, cristãos... Nós somos diferentes deles. Não somos de esquerda.",
+      "confidence": 0.9,
+      "context_type": "explicit_moral_dichotomy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:47:17.969884+00:00"
+    },
+    {
+      "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "É a última chance que nós temos de nos afastarmos de vez dessa política que há trinta anos espolia o povo brasileiro.",
+      "confidence": 0.8,
+      "context_type": "temporal_crisis_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:47:17.969888+00:00"
+    },
+    {
+      "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "O Brasil é nosso, é meu, é de vocês!",
+      "confidence": 0.8,
+      "context_type": "direct_ownership_claims",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:47:17.969889+00:00"
+    },
+    {
+      "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "Chega de PT e de PSDB!",
+      "confidence": 0.8,
+      "context_type": "opposition_rejection",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:47:17.969890+00:00"
+    },
+    {
+      "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "política que há trinta anos espolia o povo brasileiro",
+      "confidence": 0.7,
+      "context_type": "systemic_exploitation_claims",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:47:17.969891+00:00"
+    },
+    {
+      "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "comprometido com os interesses do povo brasileiro e não de partidos políticos",
+      "confidence": 0.9,
+      "context_type": "anti_party_positioning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:47:17.969892+00:00"
+    },
+    {
+      "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "Esse movimento vem da raiz, vem da alma do povo sofrido que quer e terá a mudança.",
+      "confidence": 0.8,
+      "context_type": "unified_people_identity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:47:17.969893+00:00"
+    },
+    {
+      "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "nos afastarmos de vez do comunismo, dar um chega pra lá, na política que existe na Venezuela. Não queremos isso para o nosso Brasil.",
+      "confidence": 0.8,
+      "context_type": "external_threat_rejection",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:47:17.969894+00:00"
+    },
+    {
+      "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "E quando o povo passa fome, ele come carne nos melhores restaurantes do mundo.",
+      "confidence": 0.7,
+      "context_type": "elite_privilege_critique",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:47:17.969901+00:00"
+    },
+    {
+      "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+      "dimension": "manichean_people_elite_framing",
+      "quote_text": "Esse Brasil, além de grande, é um país riquíssimo, e o seu povo não pode continuar sendo pobre, por falta de políticos que têm vergonha na cara",
+      "confidence": 0.9,
+      "context_type": "moral_corruption_attributions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:45:14.367551+00:00"
+    },
+    {
+      "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "A missão de salvar o Brasil caberá a todos nós. A cada um de vocês",
+      "confidence": 0.85,
+      "context_type": "restoration_promise_rhetoric",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:45:14.367555+00:00"
+    },
+    {
+      "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "praticamente, que contar apenas com a confiança de vocês",
+      "confidence": 0.8,
+      "context_type": "popular_will_primacy_assertions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:45:14.367556+00:00"
+    },
+    {
+      "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "É o partido que não tem envolvimento com corruptos! É o partido que é limpo!",
+      "confidence": 0.8,
+      "context_type": "legitimacy_denial_rhetoric",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:45:14.367557+00:00"
+    },
+    {
+      "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "Um bilhão e setecentos milhões, que era o dinheiro pra ser usado na nossa saúde e na nossa educação e na nossa segurança",
+      "confidence": 0.9,
+      "context_type": "systemic_manipulation_claims",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:45:14.367558+00:00"
+    },
+    {
+      "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "dezessete anos que fiquei no nosso querido exército brasileiro. Lá, forjei valores. Lá, aprendi a respeitar a pátria",
+      "confidence": 0.9,
+      "context_type": "anti_political_class_identity_claims",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:45:14.367559+00:00"
+    },
+    {
+      "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "Nós queremos unir todos, de norte a sul, de leste a oeste",
+      "confidence": 0.8,
+      "context_type": "explicit_unity_assertions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:45:14.367560+00:00"
+    },
+    {
+      "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "Vamos respeitar a nossa criança em sala de aula. Vamos dar um pé no traseiro da ideologia de gênero",
+      "confidence": 0.7,
+      "context_type": "traditionalism_as_boundary_marker",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:45:14.367561+00:00"
+    },
+    {
+      "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "Precisamos um Estado que cobre menos impostos",
+      "confidence": 0.75,
+      "context_type": "populist_economic_justice_appeals",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:45:14.367562+00:00"
+    },
+    {
+      "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+      "dimension": "manichean_people_elite_framing",
+      "quote_text": "gente como nós, é gente honesta, é gente que acredita em Deus, é gente que é patriota",
+      "confidence": 0.9,
+      "context_type": "moral_dichotomy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:44:29.665525+00:00"
+    },
+    {
+      "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "não queremos o Brasil se aproximando cada vez mais do que acontece com a nossa querida Venezuela, que até pouco tempo era um país dos mais ricos aqui da América do Sul",
+      "confidence": 0.9,
+      "context_type": "decline_warning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:44:29.665527+00:00"
+    },
+    {
+      "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "Nós temos o povo ao nosso lado",
+      "confidence": 0.9,
+      "context_type": "direct_popular_authority",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:44:29.665528+00:00"
+    },
+    {
+      "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "não aguentaremos mais um ciclo de PT ou PSDB",
+      "confidence": 0.8,
+      "context_type": "opposition_rejection",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:44:29.665529+00:00"
+    },
+    {
+      "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "O nosso sistema é voltado todinho para defender a eles",
+      "confidence": 0.8,
+      "context_type": "systemic_manipulation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:44:29.665530+00:00"
+    },
+    {
+      "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "Quem passou dezessete anos no exército brasileiro como eu, sabe o que é servir a sua pátria",
+      "confidence": 0.9,
+      "context_type": "outsider_credentials",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:44:29.665531+00:00"
+    },
+    {
+      "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "Somos um só país, uma só pátria, uma só nação, um só coração verde e amarelo",
+      "confidence": 0.9,
+      "context_type": "unity_construction",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:44:29.665532+00:00"
+    },
+    {
+      "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "alguém que respeite a tradicional família brasileira",
+      "confidence": 0.8,
+      "context_type": "cultural_boundary",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:44:29.665533+00:00"
+    },
+    {
+      "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "não fique amarrado aqui ao Mercosul por uma questão ideológica",
+      "confidence": 0.7,
+      "context_type": "economic_elite_opposition",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:44:29.665534+00:00"
+    }
+  ]
+}

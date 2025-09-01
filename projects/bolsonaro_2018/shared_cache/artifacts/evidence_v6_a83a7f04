@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "1642c54ab5ed85de676dc673450121eaeba93c2f53a23c1d5d5a92bdab0e5994"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-01T17:46:38.524983+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+      "dimension": "manichean_people_elite_framing",
+      "quote_text": "Olha como \u00e9 que t\u00e1 o Brasil, pra onde estamos indo, em todos os aspectos sem exce\u00e7\u00e3o... t\u00e3o ou mais grave que a corrup\u00e7\u00e3o, \u00e9 a quest\u00e3o ideol\u00f3gica",
+      "confidence": 0.9,
+      "context_type": "systemic crisis attribution",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:46:38.524969+00:00"
+    },
+    {
+      "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "Vivemos um momento que vai t\u00e1 em jogo \u00e9 o futuro de du-duzentos e poucos milh\u00f5es de brasileiros... Pra onde t\u00e1 partindo o Brasil?",
+      "confidence": 0.85,
+      "context_type": "existential crisis framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:46:38.524971+00:00"
+    },
+    {
+      "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "mais do que o direito, n\u00e9, tu tem o dever de votar... n\u00f3s juntos, salvarmos o Brasil",
+      "confidence": 0.8,
+      "context_type": "popular duty appeals",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:46:38.524973+00:00"
+    },
+    {
+      "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "O PT n\u00e3o esconde o que faz mais... Vai buscar, sim, o controle social da m\u00eddia. C\u00eas v\u00e3o perder liberdades",
+      "confidence": 0.8,
+      "context_type": "opposition threat characterization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:46:38.524974+00:00"
+    },
+    {
+      "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "podem inserir, via fraude, uma m\u00e9dia de quarenta votos para o PT, para o PT, na maioria das se\u00e7\u00f5es do Brasil. Vamo fazer uma bancada enorme de parlamentares",
+      "confidence": 0.9,
+      "context_type": "electoral fraud conspiracy claims",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:46:38.524975+00:00"
+    },
+    {
+      "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "Ningu\u00e9m mais do que eu tem considera\u00e7\u00e3o pra com voc\u00eas... A imprensa malha a mim, desce o cacete de mim, nunca aprovou projeto nenhum",
+      "confidence": 0.8,
+      "context_type": "anti-establishment positioning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:46:38.524976+00:00"
+    },
+    {
+      "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "n\u00f3s juntos, salvarmos o Brasil... d\u00e1 para n\u00f3s, n\u00f3s juntos",
+      "confidence": 0.75,
+      "context_type": "unity construction appeals",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:46:38.524978+00:00"
+    },
+    {
+      "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "N\u00f3s n\u00e3o podemos continuar se tratando como a Venezuela. Olha o que t\u00e1 acontecendo com aquele povo. Aquele povo \u00e9 v\u00edtima dum regime apoiado pelo PT",
+      "confidence": 0.8,
+      "context_type": "external threat comparison",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:46:38.524979+00:00"
+    },
+    {
+      "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "",
+      "confidence": 0.7,
+      "context_type": "minimal economic focus",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:46:38.524980+00:00"
+    }
+  ]
+}

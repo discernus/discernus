@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "59a72ba351fcd504700ddc299ef5b191b07f50079b72f0649d2f4152973f4682"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-31T01:23:35.432154+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "rubio/primary_season/rubio_2016_03_15.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "A political establishment that for far too long has looked down at conservatives \u2014 looked down at conservatives as simple-minded people, looked down at conservatives as simply bomb throwers. A political establishment that for far too long has taken the votes of conservatives for granted.",
+      "confidence": 0.9,
+      "context_type": "rhetorical_context",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.432135+00:00"
+    },
+    {
+      "document_name": "rubio/primary_season/rubio_2016_03_15.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "America is in a real political storm \u2014 a real tsunami... After eight years of Barack Obama this nation needs a vibrant and growing conservative movement and it needs a strong Republican Party to change the direction now of this country or many of the things that are going wrong in America will become permanent and many of the things that make us a special country will be gone.",
+      "confidence": 0.9,
+      "context_type": "thematic_centrality",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.432144+00:00"
+    },
+    {
+      "document_name": "rubio/primary_season/rubio_2016_03_15.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "we live in a republic and our voters make these decisions and we respect that very much and it was a big win.",
+      "confidence": 0.7,
+      "context_type": "explicit_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.432146+00:00"
+    },
+    {
+      "document_name": "rubio/primary_season/rubio_2016_03_15.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "The politics of resentment against other people will not just leave us a fractured party, they\u2019re going to leave us as a fractured nation. They\u2019re going to leave us as a nation where people literally hate each other because they have different political opinions.",
+      "confidence": 0.5,
+      "context_type": "rhetorical_context",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.432147+00:00"
+    },
+    {
+      "document_name": "rubio/primary_season/rubio_2016_03_15.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "A political establishment that has grown to confuse cronyism for capitalism and big business for free enterprise.",
+      "confidence": 0.8,
+      "context_type": "explicit_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.432148+00:00"
+    },
+    {
+      "document_name": "rubio/primary_season/rubio_2016_03_15.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "I\u2019ve lived paycheck to paycheck. I grew up paycheck to paycheck. I know what it\u2019s like to have to figure out how to find the money to fix the air conditioner that broke last night.\" / \"That\u2019s how a 44-year-old son of a bartender and a maid, that\u2019s how I decide that in fact that I too can run for president of the United States of America.",
+      "confidence": 0.9,
+      "context_type": "personal_narrative",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.432149+00:00"
+    },
+    {
+      "document_name": "rubio/primary_season/rubio_2016_03_15.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "We in this nation are descendants of go-getters, in our veins runs the blood of people who gave it all up so we would have the chances they never did. We are all the descendants of someone who made our future the purpose of their lives. We are the descendants of pilgrims. We are the descendants of settlers... We are the descendants of immigrants and exiles who knew and believed that they were destined for more and that there was only one place on Earth where that was possible.",
+      "confidence": 0.8,
+      "context_type": "thematic_centrality",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.432149+00:00"
+    },
+    {
+      "document_name": "rubio/primary_season/rubio_2016_03_15.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "America can\u2019t solve all of the world\u2019s problems. But I also know that when America doesn\u2019t lead, it leaves behind a vacuum and that vacuum leads to chaos.",
+      "confidence": 0.7,
+      "context_type": "explicit_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.432150+00:00"
+    },
+    {
+      "document_name": "rubio/primary_season/rubio_2016_03_15.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "people are angry and people are really frustrated. It really began back in 2007, 2008 with this horrifying downturn... these changes to our economy that are happening are disrupting people\u2019s lives, and people are very upset about it. And they\u2019re told that, you know, people are angry. They\u2019re frustrated. They\u2019re being left behind by this economy.",
+      "confidence": 0.8,
+      "context_type": "thematic_centrality",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:23:35.432151+00:00"
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "1954fee912fa6c39b4e968f0709b390e2eca5b6a9cecb96c554445c2f6dfef82"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-30T23:19:33.706642+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "rubio/early_primary/rubio_2016_02_20.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "For the time has now come after eight years of failure to return to the Constitution of the United States that made us the freest people that have ever lived.",
+      "confidence": 0.8,
+      "context_type": "explicit statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:19:33.706628+00:00"
+    },
+    {
+      "document_name": "rubio/early_primary/rubio_2016_02_20.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "For the time has now come after eight years of failure to return to the Constitution of the United States... We as a nation has faced troubling times before. In fact, 36 years ago this nation faced a period of doubt. After a failed presidency, it felt like America was in decline, our economy was stagnant, and the American dream felt like it was slipping away.",
+      "confidence": 1.0,
+      "context_type": "thematic centrality",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:19:33.706632+00:00"
+    },
+    {
+      "document_name": "rubio/early_primary/rubio_2016_02_20.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "absent",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:19:33.706633+00:00"
+    },
+    {
+      "document_name": "rubio/early_primary/rubio_2016_02_20.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "I want to begin by congratulating Donald Trump.",
+      "confidence": 0.9,
+      "context_type": "direct statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:19:33.706634+00:00"
+    },
+    {
+      "document_name": "rubio/early_primary/rubio_2016_02_20.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "absent",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:19:33.706635+00:00"
+    },
+    {
+      "document_name": "rubio/early_primary/rubio_2016_02_20.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "My friends, the 21st century conservatives are the son of a single mother who grew up in poverty and who was almost lost and today he serves this state as its junior senator, Tim Scott. The 21st century conservative movement is the daughter of immigrants from India who wanted desperately for their children to have all the opportunities they never did, who faced a string of prejudice and yet because of the greatness of our country, today Nikki Haley is the governor of a state where it's always a great day. And 21st century conservative movement is the son of a bartender and a maid from Cuba who tonight stands one step closer to being the 45th president of the United States of America.",
+      "confidence": 0.9,
+      "context_type": "thematic definition",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:19:33.706636+00:00"
+    },
+    {
+      "document_name": "rubio/early_primary/rubio_2016_02_20.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "We are a nation and a people that celebrates success. We are nation that admire people who have worked hard and moved ahead. And as conservatives we will always celebrate success. But we fight for those who are still trying to make it.",
+      "confidence": 0.9,
+      "context_type": "thematic statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:19:33.706637+00:00"
+    },
+    {
+      "document_name": "rubio/early_primary/rubio_2016_02_20.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "return to the Constitution of the United States that made us the freest people that have ever lived.",
+      "confidence": 0.9,
+      "context_type": "implicit framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:19:33.706638+00:00"
+    },
+    {
+      "document_name": "rubio/early_primary/rubio_2016_02_20.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "Our economy was stagnant, and the American dream felt like it was slipping away.",
+      "confidence": 0.8,
+      "context_type": "problem framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:19:33.706639+00:00"
+    }
+  ]
+}

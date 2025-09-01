@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "918d0828be7692caafdda663ef6f2d58b552f303f4d680b21d4b73cd0504e7bb"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-30T23:18:58.153391+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "rubio/early_primary/rubio_2016_02_01.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "So, this is the moment they said would never happen. For months -- for months -- they told us we had no chance. For months, they told us because we offered too much optimism in a time of anger, we had no chance. For months they told us because we didn't have the right endorsements or the right political connections, we had no chance.",
+      "confidence": 0.9,
+      "context_type": "opening rhetorical framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:18:58.153379+00:00"
+    },
+    {
+      "document_name": "rubio/early_primary/rubio_2016_02_01.txt",
+      "dimension": "crisis_restoration_temporal_narrative",
+      "quote_text": "After seven years of Barack Obama, we are not waiting any longer to take our country back.",
+      "confidence": 0.9,
+      "context_type": "core campaign message",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:18:58.153382+00:00"
+    },
+    {
+      "document_name": "rubio/early_primary/rubio_2016_02_01.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "2016 is a referendum. It is a referendum on our identity as a nation and as a people.",
+      "confidence": 0.9,
+      "context_type": "central election framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:18:58.153383+00:00"
+    },
+    {
+      "document_name": "rubio/early_primary/rubio_2016_02_01.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "Hillary Clinton is disqualified from being the president of the United States because she stole classified and sensitive information on her email server because she thinks she's above the law. And Hillary Clinton can never be commander-in-chief because anyone who lies to the families of the people who have lost their lives in the service of this country can never be commander-in-chief of the United States.",
+      "confidence": 0.9,
+      "context_type": "direct opponent delegitimization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:18:58.153384+00:00"
+    },
+    {
+      "document_name": "rubio/early_primary/rubio_2016_02_01.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "For months they told us because we didn't have the right endorsements or the right political connections, we had no chance. They told me I needed to wait my turn, that I needed to wait in line.",
+      "confidence": 0.8,
+      "context_type": "implied critique of political system",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:18:58.153385+00:00"
+    },
+    {
+      "document_name": "rubio/early_primary/rubio_2016_02_01.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "They told me I needed to wait my turn, that I needed to wait in line. But tonight -- tonight -- here in Iowa, the people of this great state sent a very clear message.",
+      "confidence": 0.9,
+      "context_type": "personal positioning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:18:58.153386+00:00"
+    },
+    {
+      "document_name": "rubio/early_primary/rubio_2016_02_01.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "It is a referendum. It is a referendum on our identity as a nation and as a people.",
+      "confidence": 0.9,
+      "context_type": "collective identity assertion",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:18:58.153387+00:00"
+    },
+    {
+      "document_name": "rubio/early_primary/rubio_2016_02_01.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "America is special because I was raised by people that knew what life was like outside of America.",
+      "confidence": 0.7,
+      "context_type": "defining national identity through contrast",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:18:58.153388+00:00"
+    },
+    {
+      "document_name": "rubio/early_primary/rubio_2016_02_01.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "We are going to take our message to the people who are struggling paycheck to paycheck, to the students living under the burden of student loans, to the families struggling to raise their children with the right values.",
+      "confidence": 0.7,
+      "context_type": "appeal to economic grievances",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:18:58.153389+00:00"
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "457047b0facf17b4610c690823dce2605847c017840f977cdf5886132677beb2"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-31T01:03:12.992994+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "trump/general_election/trump_2016_11_08.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "The forgotten men and women of our country will be forgotten no longer.",
+      "confidence": 0.8,
+      "context_type": "implicit_contrast",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:03:12.992956+00:00"
+    },
+    {
+      "document_name": "trump/general_election/trump_2016_11_08.txt",
+      "dimension": "crisis_restoration_temporal_narrative",
+      "quote_text": "Working together, we will begin the urgent task of rebuilding our nation and renewing the American dream. We are going to fix our inner cities and rebuild our highways, bridges, tunnels, airports, schools, hospitals. We're going to rebuild our infrastructure...",
+      "confidence": 0.9,
+      "context_type": "restoration_promise_and_crisis_acknowledgement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:03:12.992980+00:00"
+    },
+    {
+      "document_name": "trump/general_election/trump_2016_11_08.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "",
+      "confidence": 0.7,
+      "context_type": "not_applicable",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:03:12.992982+00:00"
+    },
+    {
+      "document_name": "trump/general_election/trump_2016_11_08.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "For those who have chosen not to support me in the past...I'm reaching out to you for your guidance and your help so that we can work together and unify our great country.",
+      "confidence": 0.9,
+      "context_type": "explicit_unity_call",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:03:12.992983+00:00"
+    },
+    {
+      "document_name": "trump/general_election/trump_2016_11_08.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "",
+      "confidence": 0.8,
+      "context_type": "not_applicable",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:03:12.992985+00:00"
+    },
+    {
+      "document_name": "trump/general_election/trump_2016_11_08.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "As I've said from the beginning, ours was not a campaign, but rather an incredible and great movement made up of millions of hard-working men and women who love their country and want a better, brighter future for themselves and for their families.",
+      "confidence": 0.8,
+      "context_type": "outsider_movement_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:03:12.992986+00:00"
+    },
+    {
+      "document_name": "trump/general_election/trump_2016_11_08.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "To all Republicans and Democrats and independents across this nation, I say it is time for us to come together as one united people. It's a movement comprised of Americans from all races, religions, backgrounds and beliefs who want and expect our government to serve the people, and serve the people it will.",
+      "confidence": 0.9,
+      "context_type": "inclusive_unity_assertion",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:03:12.992988+00:00"
+    },
+    {
+      "document_name": "trump/general_election/trump_2016_11_08.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "while we will always put America's interests first, we will deal fairly with everyone, with everyone \u2014 all people and all other nations. We will seek common ground, not hostility; partnership, not conflict.",
+      "confidence": 0.7,
+      "context_type": "qualified_national_interest",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:03:12.992989+00:00"
+    },
+    {
+      "document_name": "trump/general_election/trump_2016_11_08.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "Every single American will have the opportunity to realize his or her fullest potential. The forgotten men and women of our country will be forgotten no longer. We are going to fix our inner cities and rebuild our highways, bridges, tunnels, airports, schools, hospitals. We're going to rebuild our infrastructure...",
+      "confidence": 0.8,
+      "context_type": "economic_opportunity_and_rebuilding",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-31T01:03:12.992991+00:00"
+    }
+  ]
+}

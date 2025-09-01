@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_a3e286203e41",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "vanderveen_presidential_pdaf_replication",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis performed using three independent analytical approaches (Evidence-First, Context-Weighted, Pattern-Based) and median aggregation for robust scoring.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{{artifact_id}}\",\n      \"document_name\": \"clinton/early_primary/clinton_2016_02_01.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.7,\n          \"confidence\": 0.7\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.4,\n          \"confidence\": 0.7\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.4,\n          \"confidence\": 0.8\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.6,\n          \"confidence\": 0.7\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"be united against a Republican vision and candidates who would drive us apart and divide us.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"explicit statement\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"I am honored to stand in the long line of American reformers who make up our minds that the status quo is not good enough, that standing still is not an option, and that brings people together to find ways forward that will improve the lives of Americans.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"thematic framing\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"I know\u2014I know what we are capable of doing. I know we can create more good-paying jobs and raise incomes for hard-working Americans again.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"rhetorical pattern\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"I will not let their divisiveness, their efforts to rip away the progress that we've made, be successful, because we can't afford that.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"explicit rejection\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.9,\n          \"context_type\": \"not present\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"I will keep doing what I have done my entire life. I will keep standing up for you. I will keep fighting for you.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"personal commitment\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"great goals and values that unite us as Americans.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"thematic centrality\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.9,\n          \"context_type\": \"not present\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"I know we can create more good-paying jobs and raise incomes for hard-working Americans again. I know we can make college affordable and get student debt off the backs of young people.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"policy agenda\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "09c89610d242325ec862e6229fe76ecd501a06880f461d8f9bcd7193ea58f790",
+  "execution_metadata": {
+    "start_time": "2025-08-30T23:07:26.525437+00:00",
+    "end_time": "2025-08-30T23:08:00.910872+00:00",
+    "duration_seconds": 34.384929
+  },
+  "input_artifacts": {
+    "framework_hash": "99e5ea8129008a26950fe5a2cc1bdd6b0bd4c3379d7c2753e96a85c10c61852c",
+    "document_hashes": [
+      "b1d777a5ef1695a1f86a71ea3288c4732b95cbde493b6848381fba0e26cbf553"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "vanderveen_presidential_pdaf",
+      "experiment_root": "/Volumes/code/discernus/projects/vanderveen_presidential_pdaf",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250830T230726Z_9b450f3b"
+  }
+}

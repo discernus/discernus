@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "744f775c3c37f16a4c0b7d9852e2b79cc2f582f531a390a1335cffd0034d1e9e"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-01T17:45:14.367564+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+      "dimension": "manichean_people_elite_framing",
+      "quote_text": "Esse Brasil, al\u00e9m de grande, \u00e9 um pa\u00eds riqu\u00edssimo, e o seu povo n\u00e3o pode continuar sendo pobre, por falta de pol\u00edticos que t\u00eam vergonha na cara",
+      "confidence": 0.9,
+      "context_type": "moral_corruption_attributions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:45:14.367551+00:00"
+    },
+    {
+      "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "A miss\u00e3o de salvar o Brasil caber\u00e1 a todos n\u00f3s. A cada um de voc\u00eas",
+      "confidence": 0.85,
+      "context_type": "restoration_promise_rhetoric",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:45:14.367555+00:00"
+    },
+    {
+      "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "praticamente, que contar apenas com a confian\u00e7a de voc\u00eas",
+      "confidence": 0.8,
+      "context_type": "popular_will_primacy_assertions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:45:14.367556+00:00"
+    },
+    {
+      "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "\u00c9 o partido que n\u00e3o tem envolvimento com corruptos! \u00c9 o partido que \u00e9 limpo!",
+      "confidence": 0.8,
+      "context_type": "legitimacy_denial_rhetoric",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:45:14.367557+00:00"
+    },
+    {
+      "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "Um bilh\u00e3o e setecentos milh\u00f5es, que era o dinheiro pra ser usado na nossa sa\u00fade e na nossa educa\u00e7\u00e3o e na nossa seguran\u00e7a",
+      "confidence": 0.9,
+      "context_type": "systemic_manipulation_claims",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:45:14.367558+00:00"
+    },
+    {
+      "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "dezessete anos que fiquei no nosso querido ex\u00e9rcito brasileiro. L\u00e1, forjei valores. L\u00e1, aprendi a respeitar a p\u00e1tria",
+      "confidence": 0.9,
+      "context_type": "anti_political_class_identity_claims",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:45:14.367559+00:00"
+    },
+    {
+      "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "N\u00f3s queremos unir todos, de norte a sul, de leste a oeste",
+      "confidence": 0.8,
+      "context_type": "explicit_unity_assertions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:45:14.367560+00:00"
+    },
+    {
+      "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "Vamos respeitar a nossa crian\u00e7a em sala de aula. Vamos dar um p\u00e9 no traseiro da ideologia de g\u00eanero",
+      "confidence": 0.7,
+      "context_type": "traditionalism_as_boundary_marker",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:45:14.367561+00:00"
+    },
+    {
+      "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "Precisamos um Estado que cobre menos impostos",
+      "confidence": 0.75,
+      "context_type": "populist_economic_justice_appeals",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-01T17:45:14.367562+00:00"
+    }
+  ]
+}

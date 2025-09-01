@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "294806103b9773a34786fc7b8223b5f7b837e49f3f103590efec87e872450017"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-30T23:10:56.450528+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_03.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "Donald Trump's economic plan is slashing taxes on the wealthy and big corporations. I have said that I want the wealthy to pay their fair share and I will not raise taxes on anybody making less than $250,000 a year.",
+      "confidence": 0.9,
+      "context_type": "policy_contrast",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:10:56.450425+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_03.txt",
+      "dimension": "crisis_restoration_temporal_narrative",
+      "quote_text": "Because honestly I believe this may be the most important election of our lifetimes.",
+      "confidence": 0.9,
+      "context_type": "temporal_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:10:56.450458+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_03.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "Florida can decide who our next president is, which will affect the nation and the world.",
+      "confidence": 0.8,
+      "context_type": "electoral_power_emphasis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:10:56.450473+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_03.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "Donald Trump is unqualified and unfit to be president.",
+      "confidence": 0.9,
+      "context_type": "opponent_delegitimization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:10:56.450488+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_03.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "",
+      "confidence": 0.8,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:10:56.450491+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_03.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "And I've been a lawyer, and I've been a first lady, and I've been a senator, and I've been Secretary of State, and I've been a wife and a mother and a grandmother and a friend and a churchgoer, and for my entire life I've been a woman.",
+      "confidence": 0.9,
+      "context_type": "personal_relatability_claims",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:10:56.450514+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_03.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "We are a big-hearted, generous people. Not a small minded people.",
+      "confidence": 0.9,
+      "context_type": "unified_national_character",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:10:56.450517+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_03.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "",
+      "confidence": 0.8,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:10:56.450520+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_03.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "Donald Trump's economic plan is slashing taxes on the wealthy and big corporations. I have said that I want the wealthy to pay their fair share and I will not raise taxes on anybody making less than $250,000 a year.",
+      "confidence": 0.9,
+      "context_type": "economic_fairness_contrast",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:10:56.450523+00:00"
+    }
+  ]
+}

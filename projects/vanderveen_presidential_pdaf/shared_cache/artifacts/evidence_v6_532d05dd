@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "a81f63c34d1def3fa99c3217eae451a0b91238eefa10deecab1044007682f1b5"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-30T23:07:26.516681+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "clinton/early_primary/clinton_2016_01_26.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "I believe that the Republican policies that are being promoted by this crop of candidates... would set our country back, rip up the progress we've made, and undermine our future.",
+      "confidence": 0.9,
+      "context_type": "thematic_centrality",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:07:26.516664+00:00"
+    },
+    {
+      "document_name": "clinton/early_primary/clinton_2016_01_26.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "The Republican policies that are being promoted by this crop of candidates that are traveling across our state and country would set our country back, rip up the progress we've made, and undermine our future.",
+      "confidence": 0.9,
+      "context_type": "explicit_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:07:26.516669+00:00"
+    },
+    {
+      "document_name": "clinton/early_primary/clinton_2016_01_26.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "So we need somebody who will stand up to the gun lobby and stop them from intimidating common sense reforms in our country. And 92 percent of the American people agree with that, and 85 percent of gun owners agree with that.",
+      "confidence": 0.7,
+      "context_type": "rhetorical_context",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:07:26.516672+00:00"
+    },
+    {
+      "document_name": "clinton/early_primary/clinton_2016_01_26.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "The Republican candidates, led by their frontrunner, have been attacking Muslims... That's not only shameful, it's dangerous. We need everybody in this country to be on the same team when it comes to preventing terrorist attacks.",
+      "confidence": 0.8,
+      "context_type": "rhetorical_context",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:07:26.516673+00:00"
+    },
+    {
+      "document_name": "clinton/early_primary/clinton_2016_01_26.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "And you know the worst part of the idea is they want to turn the entire Social Security trust fund over to Wall Street.",
+      "confidence": 0.8,
+      "context_type": "thematic_centrality",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:07:26.516674+00:00"
+    },
+    {
+      "document_name": "clinton/early_primary/clinton_2016_01_26.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "I am the granddaughter of a factory worker, she is the granddaughter of a former president. I think it shouldn't matter. The grandchildren of everybody should have the same opportunities in our country.",
+      "confidence": 0.7,
+      "context_type": "rhetorical_context",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:07:26.516675+00:00"
+    },
+    {
+      "document_name": "clinton/early_primary/clinton_2016_01_26.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "We need everybody in this country to be on the same team when it comes to preventing terrorist attacks.",
+      "confidence": 0.8,
+      "context_type": "thematic_centrality",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:07:26.516676+00:00"
+    },
+    {
+      "document_name": "clinton/early_primary/clinton_2016_01_26.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "It's either going to be China, Germany, or us. I want it to be us, and we need to make up our minds that it is going to be us and we're going to be doing the technology, the innovation and exporting to the rest of the world.",
+      "confidence": 0.7,
+      "context_type": "rhetorical_context",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:07:26.516677+00:00"
+    },
+    {
+      "document_name": "clinton/early_primary/clinton_2016_01_26.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "You heard from them, they are spouting the same failed economic policies: trickle-down economics; cut taxes on the wealthy; get out of the way of corporations. We have tried that, it does not work.",
+      "confidence": 0.9,
+      "context_type": "explicit_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T23:07:26.516678+00:00"
+    }
+  ]
+}

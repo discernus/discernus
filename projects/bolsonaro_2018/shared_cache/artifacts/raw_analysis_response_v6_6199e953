@@ -1,0 +1,161 @@
+I'll analyze this Bolsonaro speech using three independent analytical approaches, then aggregate the results.
+
+**APPROACH 1 - Evidence-First Analysis:**
+Focusing on direct textual evidence and explicit statements.
+
+Key evidence found:
+- "só estou aqui, porque solamente a Ele [Deus]" - religious authority claims
+- "Sou de família humilde, da região mais pobre de São Paulo" - authentic outsider positioning
+- "jamais, eu poderia disputar a presidência, um médio ou grande partido pra continuar nos mesmos vícios da política de sempre" - anti-establishment stance
+- "Eles tão lá pra servir a sua agremiação partidária, e não o Brasil" - elite corruption claims
+- "Brasil, por que nós somos o que somos? Apesar de termos aquilo que ninguém tem" - crisis narrative
+- "nos bons tempos, onde não existia a pobreza que tem hoje" - decline narrative
+- "Precisamos de alguém então, que tire o Estado do cangote de quem produz" - anti-state intervention
+- "Um só povo, uma só nação, uma só bandeira" - homogeneous people construction
+- "Chega de desvancira. Chega de continuar aqui, desgastando os valores familiares" - cultural crisis
+- "não podemos é continuar com essa dupla de mingau que eu não gosto, PT, PSDB" - anti-pluralist exclusion
+
+**APPROACH 2 - Context-Weighted Analysis:**
+Emphasizing rhetorical context and structural positioning.
+
+This is a formal business association speech with strong populist framing throughout. The structural positioning shows:
+- Opening with divine authority establishes moral framework
+- Personal humble origins story creates authentic outsider identity  
+- Extended critique of political establishment builds elite opposition
+- Economic policy discussion frames state as obstacle to producers
+- Unity rhetoric transcends internal divisions
+- Closing with militant chants reinforces popular mobilization
+
+**APPROACH 3 - Pattern-Based Analysis:**
+Looking for repetition patterns and rhetorical devices.
+
+Repetitive patterns include:
+- Consistent "nós vs. eles" framing throughout
+- Repeated references to decline from better past
+- Multiple instances of anti-establishment positioning
+- Frequent appeals to authentic representation vs. political class
+- Systematic rejection of political opponents as illegitimate
+- Recurring themes of national unity transcending divisions
+
+**MEDIAN SCORE CALCULATION AND BEST EVIDENCE SELECTION:**
+
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "10.0.2",
+    "analyst_confidence": "0.85",
+    "analysis_notes": "Formal speech to business association with strong populist appeals across multiple dimensions",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "08743cd7875e",
+      "document_name": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+      "dimensional_scores": {
+        "manichean_people_elite_framing": {
+          "raw_score": "0.8",
+          "salience": "0.9",
+          "confidence": "0.9"
+        },
+        "crisis_restoration_narrative": {
+          "raw_score": "0.7",
+          "salience": "0.8",
+          "confidence": "0.8"
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": "0.4",
+          "salience": "0.3",
+          "confidence": "0.7"
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": "0.7",
+          "salience": "0.6",
+          "confidence": "0.8"
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": "0.6",
+          "salience": "0.7",
+          "confidence": "0.8"
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": "0.8",
+          "salience": "0.8",
+          "confidence": "0.9"
+        },
+        "homogeneous_people_construction": {
+          "raw_score": "0.8",
+          "salience": "0.7",
+          "confidence": "0.8"
+        },
+        "nationalist_exclusion": {
+          "raw_score": "0.5",
+          "salience": "0.4",
+          "confidence": "0.7"
+        },
+        "economic_populist_appeals": {
+          "raw_score": "0.6",
+          "salience": "0.6",
+          "confidence": "0.8"
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichean_people_elite_framing",
+          "quote_text": "Eles t\u00e3o l\u00e1 pra servir a sua agremia\u00e7\u00e3o partid\u00e1ria, e n\u00e3o o Brasil",
+          "confidence": "0.9",
+          "context_type": "direct_moral_opposition"
+        },
+        {
+          "dimension": "crisis_restoration_narrative",
+          "quote_text": "nos bons tempos, onde n\u00e3o existia a pobreza que tem hoje",
+          "confidence": "0.8",
+          "context_type": "decline_narrative"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "Vamos respeitar o referendo do M5, que nos deu o direito \u00e0 compra de armas e muni\u00e7\u00f5es",
+          "confidence": "0.7",
+          "context_type": "direct_democracy_appeal"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion",
+          "quote_text": "n\u00e3o podemos \u00e9 continuar com essa dupla de mingau que eu n\u00e3o gosto, PT, PSDB",
+          "confidence": "0.8",
+          "context_type": "opposition_delegitimization"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "Que levam, pela indica\u00e7\u00e3o pol\u00edtica, \u00e0 inefici\u00eancia do Estado e a corrup\u00e7\u00e3o",
+          "confidence": "0.8",
+          "context_type": "systemic_corruption_claims"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "Sou de fam\u00edlia humilde, da regi\u00e3o mais pobre de S\u00e3o Paulo, Vado Ribeira",
+          "confidence": "0.9",
+          "context_type": "outsider_identity"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "Um s\u00f3 povo, uma s\u00f3 na\u00e7\u00e3o, uma s\u00f3 bandeira",
+          "confidence": "0.8",
+          "context_type": "unity_construction"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "A China n\u00e3o est\u00e1 comprando no Brasil, ela est\u00e1 comprando o Brasil",
+          "confidence": "0.7",
+          "context_type": "external_threat"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "Precisamos de algu\u00e9m ent\u00e3o, que tire o Estado do cangote de quem produz",
+          "confidence": "0.8",
+          "context_type": "anti_state_economic_framing"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

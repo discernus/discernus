@@ -1,0 +1,14 @@
+{
+  "experiment_name": "vanderveen_presidential_pdaf",
+  "run_id": "20250831T012232Z",
+  "framework": "pdaf_v10_vdv.md",
+  "corpus": "corpus.md",
+  "completion_time": "2025-08-31T01:42:25.829515+00:00",
+  "artifacts": {
+    "statistical_results.json": "Statistical analysis results",
+    "assetss.json": "Synthesis results",
+    "corpus/": "Source documents for verification",
+    "evidence/": "Evidence database for quote verification",
+    "metadata/": "Source metadata for context verification"
+  }
+}

@@ -20,34 +20,7 @@ from discernus.gateway.llm_gateway import LLMGateway
 from discernus.gateway.model_registry import ModelRegistry
 from discernus.core.audit_logger import AuditLogger
 from discernus.core.deprecated.parsing_utils import parse_llm_json_response
-
-
-@dataclass
-class ValidationIssue:
-    """Represents a validation issue with clear description and fix."""
-    category: str
-    description: str
-    impact: str
-    fix: str
-    priority: str = "BLOCKING"  # BLOCKING, QUALITY, SUGGESTION
-    affected_files: Optional[List[str]] = None
-
-
-@dataclass
-class ValidationResult:
-    """Result of experiment validation."""
-    success: bool
-    issues: List[ValidationIssue]
-    suggestions: List[str]
-    llm_metadata: Optional[Dict[str, Any]] = None
-    
-    def has_blocking_issues(self) -> bool:
-        """Check if any issues are blocking."""
-        return any(issue.priority == "BLOCKING" for issue in self.issues)
-    
-    def get_issues_by_priority(self, priority: str) -> List[ValidationIssue]:
-        """Get issues filtered by priority level."""
-        return [issue for issue in self.issues if issue.priority == priority]
+from discernus.core.validation import ValidationIssue, ValidationResult
 
 
 class ExperimentCoherenceAgent:

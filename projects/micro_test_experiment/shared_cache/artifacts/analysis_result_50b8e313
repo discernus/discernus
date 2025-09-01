@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_51d21f03068a",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "micro_test_experiment",
+  "model_used": "anthropic/claude-sonnet-4-20250514",
+  "raw_analysis_response": "I'll analyze the document using three independent analytical approaches as required.\n\n**STEP 1: Three Independent Analyses**\n\n**APPROACH 1 - Evidence-First Analysis:**\n- Positive Sentiment: 0.0 (no positive language present)\n- Negative Sentiment: 0.9 (dominant negative language: \"terrible\", \"awful\", \"failure\", \"horrible\", \"disaster\", \"disastrous\", \"devastated\", \"dark and hopeless\")\n\n**APPROACH 2 - Context-Weighted Analysis:**\n- Positive Sentiment: 0.0 (complete absence of optimistic expressions)\n- Negative Sentiment: 0.8 (strong thematic centrality of despair and failure throughout)\n\n**APPROACH 3 - Pattern-Based Analysis:**\n- Positive Sentiment: 0.0 (no repetition of positive terms)\n- Negative Sentiment: 0.9 (systematic repetition of negative terms creating cumulative effect)\n\n**STEP 2: Calculate Median Scores**\n- Positive Sentiment: 0.0 (median of 0.0, 0.0, 0.0)\n- Negative Sentiment: 0.9 (median of 0.9, 0.8, 0.9)\n\n**STEP 3: Select Best Evidence**\nBest evidence comes from Approach 1's direct textual identification.\n\n**STEP 4: Final Aggregated Result**\n\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"sentiment_binary_v1\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": \"0.9\",\n    \"analysis_notes\": \"Clear negative sentiment document with dominant pessimistic language throughout\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"123e5c9fe442...\",\n      \"document_name\": \"negative_test_1.txt\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": \"0.0\",\n          \"salience\": \"0.0\",\n          \"confidence\": \"0.9\"\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": \"0.9\",\n          \"salience\": \"0.9\",\n          \"confidence\": \"0.9\"\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"\",\n          \"confidence\": \"0.9\",\n          \"context_type\": \"absence_of_indicators\"\n        },\n        {\n          \"dimension\": \"negative_sentiment\",\n          \"quote_text\": \"This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless.\",\n          \"confidence\": \"0.9\",\n          \"context_type\": \"dominant_thematic_content\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "b8d92d71fc16ff4cef6ab5240324c44dd1e60381fc4cfa78f4288b6a30c4c043",
+  "execution_metadata": {
+    "start_time": "2025-09-01T17:37:51.122251+00:00",
+    "end_time": "2025-09-01T17:38:08.451902+00:00",
+    "duration_seconds": 17.32964
+  },
+  "input_artifacts": {
+    "framework_hash": "178020617d567968935db724ea6eeb1f4debda637043ba96a1cd8859fcf9dc22",
+    "document_hashes": [
+      "123e5c9fe4425f26d19c815d8f4b304e6c211e38014847dc087f108396aa6134"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "micro_test_experiment",
+      "experiment_root": "/Volumes/code/discernus/projects/micro_test_experiment",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250901T173718Z_bbce6185"
+  }
+}

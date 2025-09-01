@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "8e3fa0777ca9b3af1728bfeeee9829fcac1b6686b215a98416849640ef5f51a8"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-30T22:23:06.900101+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "clinton/convention_period/clinton_2016_07_28.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "Donald Trump says: 'I alone can fix it.' ... We say: 'We'll fix it together.'",
+      "confidence": 0.9,
+      "context_type": "Opposition Framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:23:06.900056+00:00"
+    },
+    {
+      "document_name": "clinton/convention_period/clinton_2016_07_28.txt",
+      "dimension": "crisis_restoration_temporal_narrative",
+      "quote_text": "America is once again at a moment of reckoning. Powerful forces are threatening to pull us apart. Bonds of trust and respect are fraying... We will rise to the challenge, just as we always have.",
+      "confidence": 0.9,
+      "context_type": "Crisis framing / restoration promise",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:23:06.900078+00:00"
+    },
+    {
+      "document_name": "clinton/convention_period/clinton_2016_07_28.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "We need to appoint Supreme Court justices who will get money out of politics and expand voting rights, not restrict them. And we\u2019ll pass a constitutional amendment to overturn Citizens United!",
+      "confidence": 0.8,
+      "context_type": "Institutional bypass for people's will",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:23:06.900081+00:00"
+    },
+    {
+      "document_name": "clinton/convention_period/clinton_2016_07_28.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "I will be a President for Democrats, Republicans, and Independents. For the struggling, the striving, and the successful. For those who vote for me and those who don't. For all Americans.",
+      "confidence": 0.9,
+      "context_type": "Rejection of exclusion",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:23:06.900083+00:00"
+    },
+    {
+      "document_name": "clinton/convention_period/clinton_2016_07_28.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "Our economy isn't working the way it should because our democracy isn't working the way it should. That's why we need to appoint Supreme Court justices who will get money out of politics and expand voting rights, not restrict them. And we\u2019ll pass a constitutional amendment to overturn Citizens United!",
+      "confidence": 0.9,
+      "context_type": "Systemic corruption claim",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:23:06.900086+00:00"
+    },
+    {
+      "document_name": "clinton/convention_period/clinton_2016_07_28.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "My job titles only tell you what I've done. They don't tell you why. The truth is, through all these years of public service, the 'service' part has always come easier to me than the 'public' part.",
+      "confidence": 0.9,
+      "context_type": "Personal narrative/identity framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:23:06.900089+00:00"
+    },
+    {
+      "document_name": "clinton/convention_period/clinton_2016_07_28.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "We are stronger together.",
+      "confidence": 0.9,
+      "context_type": "Unity and collective identity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:23:06.900092+00:00"
+    },
+    {
+      "document_name": "clinton/convention_period/clinton_2016_07_28.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "Please explain to me what part of America First leads him to make Trump ties in China, not Colorado. Trump suits in Mexico, not Michigan. Trump furniture in Turkey, not Ohio. Trump picture frames in India, not Wisconsin.",
+      "confidence": 0.8,
+      "context_type": "Economic nationalism/critique",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:23:06.900094+00:00"
+    },
+    {
+      "document_name": "clinton/convention_period/clinton_2016_07_28.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "My primary mission as President will be to create more opportunity and more good jobs with rising wages right here in the United States... I believe America thrives when the middle class thrives.",
+      "confidence": 0.9,
+      "context_type": "Focus on working people's economic benefits",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:23:06.900096+00:00"
+    }
+  ]
+}

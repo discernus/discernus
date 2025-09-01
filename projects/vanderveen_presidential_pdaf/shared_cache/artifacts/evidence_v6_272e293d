@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "817da7939070223a5caa7a9dee8f2d714941a38221bc811ee211f9afb3c9d3be"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-08-30T22:13:21.394816+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "clinton/primary_season/clinton_2016_03_15.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "make sure no one takes advantage of us - not China, not Wall Street, and not overpaid corporate executives.",
+      "confidence": 0.9,
+      "context_type": "explicit us-vs-them statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:13:21.394794+00:00"
+    },
+    {
+      "document_name": "clinton/primary_season/clinton_2016_03_15.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "You voted for our tomorrow to be better than our yesterday. ... bring our country together again.",
+      "confidence": 0.9,
+      "context_type": "temporal framing and call for restoration",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:13:21.394805+00:00"
+    },
+    {
+      "document_name": "clinton/primary_season/clinton_2016_03_15.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "you voted to break down the barriers that hold us all back",
+      "confidence": 0.8,
+      "context_type": "voter agency emphasis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:13:21.394807+00:00"
+    },
+    {
+      "document_name": "clinton/primary_season/clinton_2016_03_15.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "When we hear a candidate for president call for rounding up 12 million immigrants, banning all Muslims from entering the United States, when he embraces torture, that doesn\u2019t make him strong; it makes him wrong.",
+      "confidence": 0.9,
+      "context_type": "direct rejection of exclusionary policies",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:13:21.394809+00:00"
+    },
+    {
+      "document_name": "clinton/primary_season/clinton_2016_03_15.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "make sure no one takes advantage of us - not China, not Wall Street, and not overpaid corporate executives.",
+      "confidence": 0.9,
+      "context_type": "identification of systemic exploiters",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:13:21.394810+00:00"
+    },
+    {
+      "document_name": "clinton/primary_season/clinton_2016_03_15.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "not applicable",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:13:21.394811+00:00"
+    },
+    {
+      "document_name": "clinton/primary_season/clinton_2016_03_15.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "Let\u2019s stand with people who have courage, who have resilience. Let\u2019s stand with everyone who believes America\u2019s best days are ahead of us.",
+      "confidence": 0.9,
+      "context_type": "inclusive and unifying language",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:13:21.394812+00:00"
+    },
+    {
+      "document_name": "clinton/primary_season/clinton_2016_03_15.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "When we hear a candidate for president call for rounding up 12 million immigrants, banning all Muslims from entering the United States, when he embraces torture, that doesn\u2019t make him strong; it makes him wrong.",
+      "confidence": 0.9,
+      "context_type": "direct rejection of nationalist exclusion",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:13:21.394813+00:00"
+    },
+    {
+      "document_name": "clinton/primary_season/clinton_2016_03_15.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "good-paying jobs are the ticket to the middle class and we\u2019re going to stand up for the American middle class again. We\u2019re going to stand up for American workers and make sure no one takes advantage of us - not China, not Wall Street, and not overpaid corporate executives.",
+      "confidence": 0.9,
+      "context_type": "emphasis on economic issues for workers against elites",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-08-30T22:13:21.394813+00:00"
+    }
+  ]
+}
