@@ -133,6 +133,13 @@ datasets/
 # Brazil 2018 media files
 pm/populism/databases/brazil_2018/video/
 pm/populism/databases/brazil_2018/audio/
+# Large PM folder exclusions
+pm/populism/vanderveen_replication_extension/byu_strategy/
+pm/populism/vanderveen_replication_extension/corpus/
+pm/populism/databases/
+pm/baselines/
+pm/reports/
+pm/active_projects/
 
 # Jupyter Notebook
 .ipynb_checkpoints
