@@ -25,34 +25,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from discernus.gateway.llm_gateway import LLMGateway
 from discernus.gateway.model_registry import ModelRegistry
-
-
-@dataclass
-class ValidationIssue:
-    """Represents a validation issue with clear description and fix."""
-    category: str
-    description: str
-    impact: str
-    fix: str
-    priority: str = "BLOCKING"  # BLOCKING, QUALITY, SUGGESTION
-
-
-@dataclass
-class ValidationResult:
-    """Result of framework validation."""
-    success: bool
-    issues: List[ValidationIssue]
-    suggestions: List[str]
-    framework_name: str
-    framework_version: str
-    
-    def has_blocking_issues(self) -> bool:
-        """Check if any issues are blocking."""
-        return any(issue.priority == "BLOCKING" for issue in self.issues)
-    
-    def get_issues_by_priority(self, priority: str) -> List[ValidationIssue]:
-        """Get issues filtered by priority level."""
-        return [issue for issue in self.issues if issue.priority == priority]
+from discernus.core.validation import ValidationIssue, ValidationResult
 
 
 class FrameworkValidator:

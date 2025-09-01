@@ -14,10 +14,11 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 # Import the original framework validator as a module
 sys.path.insert(0, str(Path(__file__).parent.parent / "framework_validation"))
-from framework_validator import FrameworkValidator, ValidationResult, ValidationIssue
+from framework_validator import FrameworkValidator
 
 from discernus.gateway.llm_gateway import LLMGateway
 from discernus.gateway.model_registry import ModelRegistry
+from discernus.core.validation import ValidationResult, ValidationIssue
 
 class EnhancedFrameworkValidator:
     """
@@ -708,12 +709,24 @@ Provide your response in valid JSON format with these keys:
             else:
                 synthesis_results = {}
             
-            # Parse JSON response
+            # Parse JSON response - handle potential markdown code blocks
             try:
                 synthesis_data = json.loads(response)
                 synthesis_results.update(synthesis_data)
                 return synthesis_results
             except json.JSONDecodeError:
+                # Try to extract JSON from markdown code blocks
+                import re
+                json_match = re.search(r'```json\s*\n(.*?)\n```', response, re.DOTALL)
+                if json_match:
+                    try:
+                        synthesis_data = json.loads(json_match.group(1))
+                        synthesis_results.update(synthesis_data)
+                        return synthesis_results
+                    except json.JSONDecodeError:
+                        pass
+
+                # If extraction fails, use fallback
                 fallback_data = self._parse_partial_synthesis_response(response)
                 synthesis_results.update(fallback_data)
                 return synthesis_results
@@ -781,7 +794,19 @@ Provide your response in valid JSON format with these keys:
 
 **Confidence Level**: {synthesis_data.get('confidence_level', 'Not specified')}
 
-## Detailed Research Reports
+**Synthesis Status**: {synthesis_data.get('status', 'UNKNOWN')}
+"""
+        
+        # Add raw synthesis content if available (for debugging failed JSON parsing)
+        if synthesis_data.get('raw_response'):
+            full_markdown += f"""
+**Raw Synthesis Response** (for debugging):
+```
+{synthesis_data['raw_response']}
+```
+"""
+        
+        full_markdown += """## Detailed Research Reports
 
 The following sections contain the complete, unedited research reports for each priority question:
 
@@ -1076,7 +1101,16 @@ The following sections contain the complete, unedited research reports for each 
             'synthesis_content': response,
             'status': 'PARTIAL_SYNTHESIS',
             'error': 'Failed to parse synthesis response',
-            'raw_response': response
+            'raw_response': response,
+            # Provide fallback values for expected synthesis fields
+            'executive_summary': 'Synthesis generation failed - see raw response below',
+            'theoretical_insights': ['Analysis incomplete due to parsing error'],
+            'literature_alignment': ['Unable to determine due to synthesis failure'],
+            'theoretical_gaps': ['Unable to identify due to synthesis failure'],
+            'improvement_recommendations': ['Fix synthesis generation to enable proper analysis'],
+            'research_gaps': ['Unable to identify due to synthesis failure'],
+            'overall_assessment': 'Synthesis generation failed - framework validation incomplete',
+            'confidence_level': 'UNKNOWN'
         }
     
     def _generate_integrated_recommendations(self, structural_results: Dict[str, Any], 
