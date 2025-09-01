@@ -115,5 +115,5 @@ if __name__ == '__main__':
     for model in registry.list_models_by_tier('top-tier'):
         print(f"- {model}")
 
-    print("\nDetails for 'claude-3-5-sonnet-20240620':")
-    print(registry.get_model_details('claude-3-5-sonnet-20240620')) 
+    print("\nDetails for 'anthropic/claude-sonnet-4-20250514':")
+    print(registry.get_model_details('anthropic/claude-sonnet-4-20250514')) 

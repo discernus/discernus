@@ -36,6 +36,7 @@ class DiscernusConfig(BaseSettings):
     analysis_model: str = Field(default="vertex_ai/gemini-2.5-flash", description="Default LLM model for analysis")
     synthesis_model: str = Field(default="vertex_ai/gemini-2.5-pro", description="Default LLM model for synthesis")
     validation_model: str = Field(default="vertex_ai/gemini-2.5-pro", description="Default LLM model for validation (requires higher intelligence)")
+    derived_metrics_model: str = Field(default="vertex_ai/gemini-2.5-pro", description="Default LLM model for derived metrics planning and calculation")
     
     # Execution options
     auto_commit: bool = Field(default=True, description="Automatically commit successful runs to Git")
@@ -172,6 +173,7 @@ class ConfigManager:
             'analysis_model': 'vertex_ai/gemini-2.5-flash',
             'synthesis_model': 'vertex_ai/gemini-2.5-pro', 
             'validation_model': 'vertex_ai/gemini-2.5-pro',
+            'derived_metrics_model': 'vertex_ai/gemini-2.5-pro',
             '': None,
             '# Execution Options': None, 
             'auto_commit': True,
@@ -202,7 +204,9 @@ class ConfigManager:
             
             f.write("# Model Configuration\n")
             f.write(f"analysis_model: {yaml_data['analysis_model']}\n")
-            f.write(f"synthesis_model: {yaml_data['synthesis_model']}\n\n")
+            f.write(f"synthesis_model: {yaml_data['synthesis_model']}\n")
+            f.write(f"validation_model: {yaml_data['validation_model']}\n")
+            f.write(f"derived_metrics_model: {yaml_data['derived_metrics_model']}\n\n")
             
             f.write("# Execution Options\n")
             f.write(f"auto_commit: {yaml_data['auto_commit']}\n")

@@ -1,0 +1,408 @@
+{
+  "status": "completed",
+  "derived_metrics_hash": "eaf632f3efab980449f28325f79cf130a2776a3e72b4859e76490cbc7cfd0695",
+  "functions_generated": 6,
+  "derived_metrics_results": {
+    "generation_metadata": {
+      "status": "success",
+      "functions_generated": 6,
+      "output_file": "automatedderivedmetricsagent_functions.py",
+      "module_size": 15303
+    },
+    "derived_metrics_data": {
+      "status": "success",
+      "original_count": 11,
+      "derived_count": 11,
+      "derived_metrics": [
+        {
+          "analysis_id": "analysis_ca6974e8d37f",
+          "result_hash": "5e3dc7e0797b01792fa25e784c01b5fb8d067ab7c9fe3b8688fefe02ceb71eab",
+          "duration_seconds": 64.580457,
+          "result_content": {
+            "analysis_id": "analysis_ca6974e8d37f",
+            "agent_name": "EnhancedAnalysisAgent",
+            "agent_version": "enhanced_v2.1_raw_output",
+            "experiment_name": "bolsonaro_2018_populist_discourse_analysis",
+            "model_used": "vertex_ai/gemini-2.5-flash",
+            "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.2\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"The document is a candidacy launch speech, which inherently employs strong populist rhetoric. Analysis across three independent approaches (evidence-first, context-weighted, pattern-based) showed high consistency in scoring across all dimensions, reflecting the document's explicit and pervasive populist framing.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{{artifact_id}}\",\n      \"document_name\": \"2018-07-22_PSL_Conference_Candidacy_Launch.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"crisis_restoration_temporal_narrative\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"N\u00f3s n\u00e3o temos um grande partido, N\u00e3o temos fundo eleitoral, N\u00e3o temos tempo de televis\u00e3o, mas temos o que os outros n\u00e3o t\u00eam, que s\u00e3o voc\u00eas, o povo brasileiro\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_quote\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_temporal_narrative\",\n          \"quote_text\": \"Qual \u00e9 o problema? Onde est\u00e1 o ponto--onde estaria o ponto de inflex\u00e3o? Como, como e onde come\u00e7ar\u00edamos a mudar o destino do nosso Brasil?\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_quote\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"Se estou aqui, \u00e9 porque acredito em voc\u00eas. Se voc\u00eas est\u00e3o aqui, \u00e9 porque acreditam no Brasil.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"direct_quote\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"Voc\u00eas s\u00e3o atacados diuturnamente, acusados dos maiores absurdos por essa esquerda que t\u00e1 a\u00ed. Sabe por qu\u00ea? Porque voc\u00eas s\u00e3o o \u00faltimo obst\u00e1culo para o socialismo.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_quote\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"Eu sei o desconforto que venho causando, sozinho, alguns poucos pol\u00edticos do meu lado e amigos naquilo que chamam de establishment, ou m\u00e1quina, ou sistema. Sabemos disso.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_quote\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"Eu n\u00e3o tinha conhecimento pol\u00edtico de quase nada. H\u00e1 uma diferen\u00e7a enorme de um quartel para o meio pol\u00edtico. No quartel voc\u00ea tem companheirismo, patriotismo, disciplina, hierarquia, amor \u00e0 p\u00e1tria. Na pol\u00edtica, n\u00e3o. [aplausos]\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_quote\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"Vamos unir brancos e negros, homos e h\u00e9teros, ou trans tamb\u00e9m, n\u00e3o tem problema [risadas]. Unir nordestinos e sulistas. Vamos abafar esses pequenos movimentos separatistas que vemos pelo Brasil. Unir ricos e pobres.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_quote\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"Se Trump saiu do Acordo em Paris, se saiu, \u00e9 porque n\u00e3o interessava ao seu pa\u00eds. Se \u00e9 para demarcar o tribo A, e n\u00f3s perdermos a calha do Solim\u00f5es e Amazonas, a Calha Norte, tamb\u00e9m sairei se for presidente [aplausos].\",\n          \"confidence\": 0.8,\n          \"context_type\": \"direct_quote\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"Vamos buscar realmente a liberta\u00e7\u00e3o da nossa economia, buscar o liberalismo, queremos, sim, mais que privatizar, quem sabe at\u00e9 extinguir a maioria das estatais [aplausos].\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_quote\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+            "evidence_hash": "04bccf16caa6218e1883dc02fb7d03dcabb696de842f8dbcad09f713dcfe4d09",
+            "execution_metadata": {
+              "start_time": "2025-09-01T19:31:53.844014+00:00",
+              "end_time": "2025-09-01T19:32:58.424481+00:00",
+              "duration_seconds": 64.580457
+            },
+            "input_artifacts": {
+              "framework_hash": "4152f312d410e2de3bbc16f7d3e9a70c6347b3dd3db6f67aa44c6725f7b2d6d7",
+              "document_hashes": [
+                "9d307c5a736110425732409493a5f915219f61841a7ee198da07c2e256a8f1bd"
+              ],
+              "num_documents": 1
+            },
+            "provenance": {
+              "security_boundary": {
+                "experiment_name": "bolsonaro_2018",
+                "experiment_root": "/Volumes/code/discernus/projects/bolsonaro_2018",
+                "boundary_type": "filesystem",
+                "security_level": "experiment_scoped"
+              },
+              "audit_session_id": "20250901T193153Z_db44efc7"
+            }
+          }
+        },
+        {
+          "analysis_id": "analysis_b440d9283c08",
+          "result_hash": "1885f3ca7a33940477693590a365a6d2288bd4a0904dde47193d125fd092b670",
+          "duration_seconds": 57.047664,
+          "result_content": {
+            "analysis_id": "analysis_b440d9283c08",
+            "agent_name": "EnhancedAnalysisAgent",
+            "agent_version": "enhanced_v2.1_raw_output",
+            "experiment_name": "bolsonaro_2018_populist_discourse_analysis",
+            "model_used": "vertex_ai/gemini-2.5-flash",
+            "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.2\",\n    \"analyst_confidence\": 0.88,\n    \"analysis_notes\": \"Analysis conducted using a three-independent-approach methodology (Evidence-First, Context-Weighted, Pattern-Based) with median aggregation for robust scoring and best evidence selection.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"5bb1eaaecfed...\",\n      \"document_name\": \"2018-08-23_Aracatuba_Speech_Part_1.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.85,\n          \"confidence\": 0.9\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.85\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.75\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.45,\n          \"salience\": 0.35,\n          \"confidence\": 0.55\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.75,\n          \"confidence\": 0.9\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.75,\n          \"confidence\": 0.85\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.45,\n          \"salience\": 0.25,\n          \"confidence\": 0.55\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"Desses que nos governaram h\u00e1 menos de vinte anos, PT e PSDB. Conosco, voc\u00eas estar\u00e3o em primeiro lugar. Voc\u00eas ser\u00e3o os nossos patr\u00f5es.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"binary_opposition_framing\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"O nosso grande problema no Brasil, \u00e9 uma quest\u00e3o pol\u00edtica... ou n\u00e3o temos futuro. E gente como n\u00f3s... n\u00e3o quer o Brasil se aproximando cada vez mais, do que acontece com a nossa querida Venezuela, que at\u00e9 pouco tempo era um pa\u00eds dos mais ricos... E hoje, \u00e9 um dos pa\u00edses onde quase todos est\u00e3o fugindo da ditadura, da fome, da viol\u00eancia e da mis\u00e9ria.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"decline_crisis_redemption_temporal_structuring\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"Mas essa solu\u00e7\u00e3o passa obviamente pelas m\u00e3os de cada um de voc\u00eas... Voc\u00eas ser\u00e3o os nossos patr\u00f5es.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"unmediated_popular_authority_claims\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"Conosco, n\u00e3o haver\u00e1 essa politizagem de Direitos Humanos... Essa candidata, vai morrer porque n\u00e3o liberaremos recursos da Uni\u00e3o para eles.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"opponent_demonization_strategies\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"Que pede o Supremo Tribunal Federal. Que eu declaro inconstitucional a minha lei do voto impresso. Mesmo assim, mesmo com a desconfian\u00e7a, iremos at\u00e9 o final. N\u00e3o! Eles continuam nos atacando desenfreadamente.\",\n          \"confidence\": 0.6,\n          \"context_type\": \"systemic_manipulation_assertions\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"N\u00e3o somos apenas da boca pra fora, uma forma de fazer pol\u00edtica diferente. N\u00f3s somos a realidade... Quem passou dezessete anos no ex\u00e9rcito brasileiro como eu, sabe o que \u00e9 servir \u00e0 sua p\u00e1tria.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"anti_political_class_identity_claims\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"Juntos, temos como unir o nosso povo brasileiro, que foi desunido pela esse-- pela esquerda nos \u00faltimos anos. Somos um s\u00f3 pa\u00eds, uma s\u00f3 p\u00e1tria, uma s\u00f3 na\u00e7\u00e3o, um s\u00f3 cora\u00e7\u00e3o verde e amarelo.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"explicit_unity_assertions\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"\u00c9 gente que n\u00e3o quer o Brasil se aproximando cada vez mais, do que acontece com a nossa querida Venezuela... Ideologia de g\u00eanero \u00e9 a ponta da praga... N\u00e3o \u00e9 aceita.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"external_group_threat_characterization\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"Precisamos de algu\u00e9m, que se aproxime de grandes pa\u00edses democr\u00e1ticos e capitalistas. E n\u00e3o fique amarrado aqui, ao Mercosul, por uma quest\u00e3o ideol\u00f3gica... apenas daqueles pa\u00edses que entendam o livre mercado como essencial. O liberalismo na economia e o conservadorismo nos costumes.\",\n          \"confidence\": 0.6,\n          \"context_type\": \"nationalist_economic_priority_rhetoric\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+            "evidence_hash": "c6bd57adb03bb3c4fae0d93a83fe05106d0a7fc176811184578d91630069fa89",
+            "execution_metadata": {
+              "start_time": "2025-09-01T19:32:58.425482+00:00",
+              "end_time": "2025-09-01T19:33:55.473171+00:00",
+              "duration_seconds": 57.047664
+            },
+            "input_artifacts": {
+              "framework_hash": "4152f312d410e2de3bbc16f7d3e9a70c6347b3dd3db6f67aa44c6725f7b2d6d7",
+              "document_hashes": [
+                "5bb1eaaecfed307639402b6a074365b434d707dee26cfc7d57d81e2d87d32a9f"
+              ],
+              "num_documents": 1
+            },
+            "provenance": {
+              "security_boundary": {
+                "experiment_name": "bolsonaro_2018",
+                "experiment_root": "/Volumes/code/discernus/projects/bolsonaro_2018",
+                "boundary_type": "filesystem",
+                "security_level": "experiment_scoped"
+              },
+              "audit_session_id": "20250901T193153Z_db44efc7"
+            }
+          }
+        },
+        {
+          "analysis_id": "analysis_abaa52685438",
+          "result_hash": "b7a82838267dddb414ca1f97071499a05536e92077b21d662d65804d43ea3f24",
+          "duration_seconds": 507.802975,
+          "result_content": {
+            "analysis_id": "analysis_abaa52685438",
+            "agent_name": "EnhancedAnalysisAgent",
+            "agent_version": "enhanced_v2.1_raw_output",
+            "experiment_name": "bolsonaro_2018_populist_discourse_analysis",
+            "model_used": "vertex_ai/gemini-2.5-flash",
+            "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.2\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted across three independent approaches (Evidence-First, Context-Weighted, Pattern-Based) to ensure robustness. Median scores aggregated for final output. Focus on identifying and quantifying core populist discourse elements.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"01a51ec72fb1\",\n      \"document_name\": \"2018-08-23_Aracatuba_Speech_Part_2.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"crisis_restoration_temporal_narrative\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.85\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.6,\n          \"confidence\": 0.7\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.8,\n          \"confidence\": 0.85\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.75,\n          \"confidence\": 0.8\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.75\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.5,\n          \"confidence\": 0.6\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.2,\n          \"confidence\": 0.5\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"Aqui \u00e9 o nosso povo! Nosso povo vestido de verde e amarelo, e com a camiseta do nosso capit\u00e3o Jair Messias Bolsonaro, que vai ajudar a mudar esse Brasil. Que acredita? P\u00f5e a m\u00e3o pra cima aqui, minha gente! Gente vestida de verde e amarelo, e com a camiseta do nosso capit\u00e3o Jair Messias Bolsonaro, que vai ajudar a mudar esse Brasil. Que acredita? P\u00f5e a m\u00e3o pra cima aqui, minha gente!\",\n          \"confidence\": 0.9,\n          \"context_type\": \"main_theme\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_temporal_narrative\",\n          \"quote_text\": \"O nosso grande problema no Brasil, \u00e9 uma quest\u00e3o pol\u00edtica. Ou colocamos gente como n\u00f3s, na pol\u00edtica, ou n\u00e3o temos futuro para essa nossa grande na\u00e7\u00e3o. Ou Deus acima de tudo, \u00e9 gente que n\u00e3o quer o Brasil se aproximando cada vez mais do que acontece com a nossa querida Venezuela, que at\u00e9 pouco tempo era um pa\u00eds dos mais ricos aqui da Am\u00e9rica do Sul. E hoje, \u00e9 um estado de desgra\u00e7a, da fome, da viol\u00eancia e da mis\u00e9ria. O grande exemplo que tiramos de l\u00e1, \u00e9 que n\u00e3o podemos brincar com a pol\u00edtica. N\u00f3s do Brasil, n\u00e3o aguentaremos mais um ciclo de PT ou PSDB. Muita gente aqui j\u00e1 votou nesses partidos, como eu j\u00e1 votei tamb\u00e9m. E o momento agora, \u00e9 de mudar radicalmente essa forma de fazer pol\u00edtica.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"explanation\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"\u00c9 aqui que vai come\u00e7ar o problema. \u00c9 aqui que a gente vai ver quem \u00e9 que apoia o Jair Bolsonaro. Daqui a pouquinho, a gente vai descer aqui pra bater uma foto com quem quiser, pra dar uma volta. Eu digo pra voc\u00eas, que ningu\u00e9m consegue fazer um governo sozinho. Que voc\u00eas vieram pra ouvir o Jair Bolsonaro. Daqui a pouquinho, a gente vai descer aqui pra bater uma foto com voc\u00eas, Jair.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"call_to_action\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"N\u00e3o somos apenas da boca pra fora, uma forma de fazer pol\u00edtica diferente. N\u00f3s somos a realidade. N\u00f3s n\u00e3o falamos aquilo que o Brasil precisa ouvir. N\u00f3s mostramos que o Brasil tem jeito. Mas passa, repito, pelas m\u00e3os de voc\u00eas, a decis\u00e3o de botar gente melhor em Bras\u00edlia, para que juntos com ele, fa\u00e7amos alv\u00edssaras a mudar essa hist\u00f3ria do nosso Brasil. A maioria de voc\u00eas na cadeira presidencial, que seja contra o aborto, que seja contra esse malfeitor Estado de Desarmamento, aprovado pelos mercadinhos. Algum que vai colocar um ponto final nessa quest\u00e3o da invas\u00e3o de terras e etc.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"policy_stance\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"O nosso grande problema no Brasil, \u00e9 uma quest\u00e3o pol\u00edtica. Ou colocamos gente como n\u00f3s, na pol\u00edtica, ou n\u00e3o temos futuro para essa nossa grande na\u00e7\u00e3o. Ou Deus acima de tudo, \u00e9 gente que n\u00e3o quer o Brasil se aproximando cada vez mais do que acontece com a nossa querida Venezuela, que at\u00e9 pouco tempo era um pa\u00eds dos mais ricos aqui da Am\u00e9rica do Sul. E hoje, \u00e9 um estado de desgra\u00e7a, da fome, da viol\u00eancia e da mis\u00e9ria. O grande exemplo que tiramos de l\u00e1, \u00e9 que n\u00e3o podemos brincar com a pol\u00edtica. N\u00f3s do Brasil, n\u00e3o aguentaremos mais um ciclo de PT ou PSDB. Muita gente aqui j\u00e1 votou nesses partidos, como eu j\u00e1 votei tamb\u00e9m. E o momento agora, \u00e9 de mudar radicalmente essa forma de fazer pol\u00edtica.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"explanation\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"Eu vou falar para voc\u00eas de tudo o meu cora\u00e7\u00e3o. Eu, Joice Hasselmann, que tenho uma luta de combate \u00e0 corrup\u00e7\u00e3o, decidi entrar de corpo e alma na campanha desse homem, porque eu sei que ele tem autoridade moral para mudar a hist\u00f3ria do nosso Brasil. A nossa P\u00e1tria, \u00e9 uma escambo, porque o nosso capit\u00e3o \u00e9 Jair Messias Bolsonaro. Deputado expoente do Congresso Nacional, Eduardo Bolsonaro! Amados e gritos!\",\n          \"confidence\": 0.8,\n          \"context_type\": \"personal_endorsement\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"Eu vou pedir para voc\u00eas, se Deus quiser, no pr\u00f3ximo ano, que voc\u00eas votem em voc\u00eas, mesma. Que voc\u00eas se coloquem aqui na cadeira presidencial, como eu disse, que respeite a fam\u00edlia brasileira. Que n\u00e3o se aproxime cada vez mais do que acontece com a nossa querida Venezuela, que at\u00e9 pouco tempo era um pa\u00eds dos mais ricos aqui da Am\u00e9rica do Sul. E hoje, \u00e9 um estado de desgra\u00e7a, da fome, da viol\u00eancia e da mis\u00e9ria.\",\n          \"confidence\": 0.75,\n          \"context_type\": \"appeal_to_values\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"A ponto da praia \u00e9 o homem e \u00e9 mulher. E ponto final. Se algu\u00e9m quiser ter uma nova forma de comportamento, que nas\u00e7a feliz. N\u00e3o temos nada a ver com isso. E vamos torcer at\u00e9 para que o nosso povo brasileiro, que foi desunido pra em especial pela lavagem a hist\u00f3ria do nosso Brasil.\",\n          \"confidence\": 0.6,\n          \"context_type\": \"social_values\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"Tira uma minha aqui com o Eduardo, tira uma! Pelo amor de Deus! Tira!\",\n          \"confidence\": 0.5,\n          \"context_type\": \"interjection\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+            "evidence_hash": "c9cf12419885bd99b98fa73dffdc404a4a93cefe3e4d97b1337e77e4d3e69c3c",
+            "execution_metadata": {
+              "start_time": "2025-09-01T19:33:55.474821+00:00",
+              "end_time": "2025-09-01T19:42:23.277868+00:00",
+              "duration_seconds": 507.802975
+            },
+            "input_artifacts": {
+              "framework_hash": "4152f312d410e2de3bbc16f7d3e9a70c6347b3dd3db6f67aa44c6725f7b2d6d7",
+              "document_hashes": [
+                "01a51ec72fb1e6a44163bd671d9e63c44110ad2cf40f806265433683a26ac25f"
+              ],
+              "num_documents": 1
+            },
+            "provenance": {
+              "security_boundary": {
+                "experiment_name": "bolsonaro_2018",
+                "experiment_root": "/Volumes/code/discernus/projects/bolsonaro_2018",
+                "boundary_type": "filesystem",
+                "security_level": "experiment_scoped"
+              },
+              "audit_session_id": "20250901T193153Z_db44efc7"
+            }
+          }
+        },
+        {
+          "analysis_id": "analysis_82062e9b0b7a",
+          "result_hash": "917867278e7421e6a9126a7b48ed8f646b5e581ad26b23f2ed9bb992f8f1d9b7",
+          "duration_seconds": 48.424127,
+          "result_content": {
+            "analysis_id": "analysis_82062e9b0b7a",
+            "agent_name": "EnhancedAnalysisAgent",
+            "agent_version": "enhanced_v2.1_raw_output",
+            "experiment_name": "bolsonaro_2018_populist_discourse_analysis",
+            "model_used": "vertex_ai/gemini-2.5-flash",
+            "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.2\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis conducted using a 3-run independent approach to calculate median scores and select best evidence.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"744f775c3c37...\",\n      \"document_name\": \"2018-08-31_Porto_Velho_Speech.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 1.0\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 1.0\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 1.0\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.9\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 1.0\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.9\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"O mito chegou. Ele era mais honesto e n\u00e3o tinha medo dessa podrid\u00e3o.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"moral_dichotomy\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"A miss\u00e3o de salvar o Brasil caber\u00e1 a todos n\u00f3s.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"restoration_promise\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"n\u00e3o t\u00ednhamos partido, sab\u00edamos que ningu\u00e9m ia querer se coligar conosco e ter\u00edamos, praticamente, que contar apenas com a confian\u00e7a de voc\u00eas.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"institutional_bypass_rhetoric\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"Lugar de vagabundo, \u00e9 na cadeia ou no cemit\u00e9rio.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"opponent_demonization\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"TV, r\u00e1dio, revista, jornal, artistas, atores da Globo passam mal. Mamaram na teta do governo marginal. Boquinha vai secar, t\u00e1 ligado?\",\n          \"confidence\": 0.9,\n          \"context_type\": \"systemic_manipulation_claims\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"O mito t\u00e1 chegando pra falar com voc\u00eas. \u00d3, aquele que vai passar o pa\u00eds a limpo...\",\n          \"confidence\": 1.0,\n          \"context_type\": \"outsider_status_claims\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"N\u00f3s queremos unir todos, de norte a sul, de leste a oeste.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"explicit_unity_assertions\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"P\u00e1tria, eu sou teu filho.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"national_homogeneity_assertions\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"Nosso povo n\u00e3o pode continuar sendo pobre, por falta de pol\u00edticos que tem vergonha na cara.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"economic_elite_betrayal_rhetoric\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+            "evidence_hash": "59adf307b3bee43728733a3f84a1ebb9f7745a015d207839c8c2ed72581e518f",
+            "execution_metadata": {
+              "start_time": "2025-09-01T19:42:23.280145+00:00",
+              "end_time": "2025-09-01T19:43:11.704302+00:00",
+              "duration_seconds": 48.424127
+            },
+            "input_artifacts": {
+              "framework_hash": "4152f312d410e2de3bbc16f7d3e9a70c6347b3dd3db6f67aa44c6725f7b2d6d7",
+              "document_hashes": [
+                "744f775c3c37f16a4c0b7d9852e2b79cc2f582f531a390a1335cffd0034d1e9e"
+              ],
+              "num_documents": 1
+            },
+            "provenance": {
+              "security_boundary": {
+                "experiment_name": "bolsonaro_2018",
+                "experiment_root": "/Volumes/code/discernus/projects/bolsonaro_2018",
+                "boundary_type": "filesystem",
+                "security_level": "experiment_scoped"
+              },
+              "audit_session_id": "20250901T193153Z_db44efc7"
+            }
+          }
+        },
+        {
+          "analysis_id": "analysis_5ecde16bb3e0",
+          "result_hash": "a485590f13b67f941841de75441abb972593ecc2c0d684e0b15bb14cc17ce6b5",
+          "duration_seconds": 20.848323,
+          "result_content": {
+            "analysis_id": "analysis_5ecde16bb3e0",
+            "agent_name": "EnhancedAnalysisAgent",
+            "agent_version": "enhanced_v2.1_raw_output",
+            "experiment_name": "bolsonaro_2018_populist_discourse_analysis",
+            "model_used": "vertex_ai/gemini-2.5-flash",
+            "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discour_analysis_framework\",\n    \"framework_version\": \"10.0.2\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Analysis of a political speech by Jair Bolsonaro in Portuguese, focusing on the nine dimensions of the PDFA framework. The speech heavily uses populist rhetorical strategies, with strong emphasis on people-elite dichotomy, crisis, and national identity.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"08743cd7875e...\",\n      \"document_name\": \"2018-09-06_Juiz_de_Fora_Business_Association.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.95\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"\u00c9 igual ao m\u00e9dico, quando v\u00ea um paciente, tem que buscar a origem do problema. A origem \u00e9 s\u00f3, indica\u00e7\u00e3o pol\u00edtica [risada]. Perguntar aqui pros senhores, com todo respeito, e tamb\u00e9m n\u00e3o saberia responder, o nome de alguns ministros, que seriam importantes, ningu\u00e9m sabe responder. Por qu\u00ea? Eles t\u00e3o l\u00e1 pra servir a sua agremia\u00e7\u00e3o partid\u00e1ria, e n\u00e3o o Brasil.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"moral_corruption_attribution\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"Brasil, por que n\u00f3s somos o que somos? Apesar de termos aquilo que ningu\u00e9m tem. \u00c9 igual ao m\u00e9dico, quando v\u00ea um paciente, tem que buscar a origem do problema. A origem \u00e9 s\u00f3, indica\u00e7\u00e3o pol\u00edtica [risada].\",\n          \"confidence\": 0.95,\n          \"context_type\": \"decline_from_past_greatness_narrative_structure\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"N\u00e3o temos fundo partid\u00e1rio, n\u00e3o temos televis\u00e3o, mas temos a confian\u00e7a do povo e a f\u00e9 em Deus que podemos mudar o destino do Brasil.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"popular_will_primacy_assertions\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"N\u00e3o podemos continuar com essa dupla de malvado que eu n\u00e3o gosto, PT, PSDB.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"opponent_demonization_strategies\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"Acabar com a ind\u00fastria da multa por parte da pol\u00edcia Civil ou do IBAMA. Lei a emenda da Constitui\u00e7\u00e3o oitenta e um [aplausos]. A emenda \u00e0 Constitui\u00e7\u00e3o oitenta e um \u00e9 um, pela judicializa\u00e7\u00e3o, pelo ativismo judicial, o trabalho an\u00e1logo...\",\n          \"confidence\": 0.9,\n          \"context_type\": \"institutional_systematic_deception\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"Reconhe\u00e7o as minhas limita\u00e7\u00f5es, mas pode ter certeza, a minha identidade, a minha virtude, que \u00e9 semelhante de voc\u00eas que est\u00e3o aqui, supera isso tudo.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"genuine_representation_assertions\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"Brancos, negros, pobres, ricos, h\u00e9teros e homos, seja l\u00e1 o que for. Um s\u00f3 povo, uma s\u00f3 na\u00e7\u00e3o, uma s\u00f3 bandeira.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"homogenoeus_identity_rhetoric\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"N\u00f3s n\u00e3o podemos abrir m\u00e3o da nossa seguran\u00e7a alimentar. A China n\u00e3o est\u00e1 comprando no Brasil, ela est\u00e1 comprando o Brasil.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"external_threat_emphasis\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"O que o Brasil precisa? Precisa de algu\u00e9m ent\u00e3o, que tire o Estado do cangote de quem produz. Perguntem-me se eu quero ser patr\u00e3o no Brasil. Eu n\u00e3o quero ser patr\u00e3o no Brasil. Ou\u00e7o dizer. Me desculpem, n\u00e9? Ent\u00e3o, sou maluco. Eu vou ficar doido.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"economic_elite_vs_working_people_framing\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+            "evidence_hash": "721db84662a30a78ae47884def0763f318b58b7bbea3ea9b9534e9f817916798",
+            "execution_metadata": {
+              "start_time": "2025-09-01T19:43:11.706420+00:00",
+              "end_time": "2025-09-01T19:43:32.554759+00:00",
+              "duration_seconds": 20.848323
+            },
+            "input_artifacts": {
+              "framework_hash": "4152f312d410e2de3bbc16f7d3e9a70c6347b3dd3db6f67aa44c6725f7b2d6d7",
+              "document_hashes": [
+                "08743cd7875e79bcf0f020fed55eef091e9707bc5d73acdccb4c906dac7dc0b4"
+              ],
+              "num_documents": 1
+            },
+            "provenance": {
+              "security_boundary": {
+                "experiment_name": "bolsonaro_2018",
+                "experiment_root": "/Volumes/code/discernus/projects/bolsonaro_2018",
+                "boundary_type": "filesystem",
+                "security_level": "experiment_scoped"
+              },
+              "audit_session_id": "20250901T193153Z_db44efc7"
+            }
+          }
+        },
+        {
+          "analysis_id": "analysis_ec2504c4b145",
+          "result_hash": "d5d89164fe037538f005ec2e13ea4e832d73e5d204e8ec64758b3246f7b5cd12",
+          "duration_seconds": 41.569118,
+          "result_content": {
+            "analysis_id": "analysis_ec2504c4b145",
+            "agent_name": "EnhancedAnalysisAgent",
+            "agent_version": "enhanced_v2.1_raw_output",
+            "experiment_name": "bolsonaro_2018_populist_discourse_analysis",
+            "model_used": "vertex_ai/gemini-2.5-flash",
+            "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.2\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analyzed a political speech focusing on populist themes, anti-establishment rhetoric, and strong in-group/out-group framing. The document includes a speaker tag `[voz de Lula]` but the content strongly aligns with right-wing populist discourse (anti-communism, anti-socialism, pro-military, anti-PT/PSDB, reference to Maduro), suggesting the tag is either a misattribution or a deliberate rhetorical device.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"8ad3587b8983\",\n      \"document_name\": \"2018-09-30_Avenida_Paulista_Speech.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"crisis_restoration_temporal_narrative\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"O Brasil \u00e9 de n\u00f3s, pessoas de bem, trabalhadores, conservadores, crist\u00e3os, que preservam os valores familiares, que n\u00e3o querem ideologia e higiene em sala de aula\",\n          \"confidence\": 0.9,\n          \"context_type\": \"moral dichotomy\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_temporal_narrative\",\n          \"quote_text\": \"\u00c9 a \u00faltima chance que n\u00f3s temos de nos afastarmos de vez dessa pol\u00edtica que h\u00e1 trinta anos espolia o povo brasileiro.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"decline-redemption arc\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"Esse movimento vem da raiz, vem da alma do povo sofrido que quer e ter\u00e1 a mudan\u00e7a.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct popular will\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"N\u00f3s somos diferentes deles. N\u00e3o somos de esquerda. Abominamos o comunismo, abominamos o socialismo.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"delegitimization of opposition\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"quando o povo passa fome, ele come carne nos melhores restaurantes do mundo.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"elite exploitation\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"Esse movimento vem da raiz, vem da alma do povo sofrido que quer e ter\u00e1 a mudan\u00e7a.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"grassroots authenticity claim\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"O Brasil \u00e9 de n\u00f3s, pessoas de bem, trabalhadores, conservadores, crist\u00e3os, que preservam os valores familiares\",\n          \"confidence\": 0.9,\n          \"context_type\": \"unified collective identity\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"Essa p\u00e1tria \u00e9 nossa. Brasil acima de tudo, Deus acima de todos.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"nationalist slogan/external threat\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"quando o povo passa fome, ele come carne nos melhores restaurantes do mundo.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"economic grievance\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+            "evidence_hash": "f09335c576ae71f7a40125de4c508dd0bce426a407eca5e8194091beb6e86e64",
+            "execution_metadata": {
+              "start_time": "2025-09-01T19:44:47.052166+00:00",
+              "end_time": "2025-09-01T19:45:28.621317+00:00",
+              "duration_seconds": 41.569118
+            },
+            "input_artifacts": {
+              "framework_hash": "4152f312d410e2de3bbc16f7d3e9a70c6347b3dd3db6f67aa44c6725f7b2d6d7",
+              "document_hashes": [
+                "8ad3587b8983fb5d65f6f3ed0bf60551a8ad2e9805b26d83ab16d7944fb184de"
+              ],
+              "num_documents": 1
+            },
+            "provenance": {
+              "security_boundary": {
+                "experiment_name": "bolsonaro_2018",
+                "experiment_root": "/Volumes/code/discernus/projects/bolsonaro_2018",
+                "boundary_type": "filesystem",
+                "security_level": "experiment_scoped"
+              },
+              "audit_session_id": "20250901T193153Z_db44efc7"
+            }
+          }
+        },
+        {
+          "analysis_id": "analysis_8d2ede0a247b",
+          "result_hash": "4b8f8a6a6fb1a0a640be2688bc7dd39c4d74652c61f24e813e3b8375e2d77a35",
+          "duration_seconds": 46.919419,
+          "result_content": {
+            "analysis_id": "analysis_8d2ede0a247b",
+            "agent_name": "EnhancedAnalysisAgent",
+            "agent_version": "enhanced_v2.1_raw_output",
+            "experiment_name": "bolsonaro_2018_populist_discourse_analysis",
+            "model_used": "vertex_ai/gemini-2.5-flash",
+            "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.2\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using a 3-run median aggregation approach, focusing independently on explicit evidence, rhetorical context, and pattern repetition for robustness.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"fd2a7eed17d7\",\n      \"document_name\": \"2018-10-06_Pre-First-Round_Speech.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.8\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.5,\n          \"confidence\": 0.7\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.5,\n          \"confidence\": 0.7\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"Se voc\u00ea ser rico no Brasil passou a ser motivo de vergonha. N\u00f3s n\u00e3o queremos, sim, dividir, mas dividir riqueza com voc\u00eas e n\u00e3o dividir pobreza, que sempre foi a marca do socialismo e do comunismo.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"explicit_statement\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"O momento \u00e9 de agradecimento a todos voc\u00eas que confiaram em mim, acreditaram no nosso trabalho, nas nossas propostas... de termos uma maneira diferente de fazer pol\u00edtica, dessa velha pr\u00e1tica, e n\u00f3s temos que aposentar. Essa crise que se encontra aqui.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"problem_definition_and_solution\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"Vamos unir o povo brasileiro. Nossa bandeira \u00e9 verde e amarela. Nosso cora\u00e7\u00e3o \u00e9 verde e amarelo. Esse povo \u00e9 maravilhoso.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"direct_appeal_to_people\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"Vamos afastar disso que n\u00e3o deu certo, que \u00e9 o socialismo, que \u00e9 o comunismo, que t\u00e1 encarnado no PT, no PCdoB, no PSOL.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"ideological_rejection\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"Afinal de contas, os economistas que botaram o Brasil nessa, nessa crise que se encontra aqui.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"causal_attribution\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"O que que nos falta? Falta, realmente, pol\u00edticos comprometidos com o seu pa\u00eds e n\u00e3o com grupos pol\u00edticos partid\u00e1rios.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"critique_of_political_establishment\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"Porque que branco de um lado e negro de outro? Porque que homossexual de um lado, heterossexual de outro? Porque que homens de um lado, mulheres de outros, nordestinos contra sulistas, pais contra filhos nas lentes palmadas, rico contra pobre. Vamos unir o povo brasileiro.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"rejection_of_internal_divisions\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"N\u00e3o tem quase nada se comparar com o nosso querido Brasil aqui.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"national_pride_and_comparison\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"N\u00f3s n\u00e3o queremos, sim, dividir, mas dividir riqueza com voc\u00eas e n\u00e3o dividir pobreza, que sempre foi a marca do socialismo e do comunismo.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"economic_policy_framing\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+            "evidence_hash": "8ae3651f47e94b8e304039cbaf4807187993d236cf96d1888b6e847a4dec1ec5",
+            "execution_metadata": {
+              "start_time": "2025-09-01T19:45:28.623335+00:00",
+              "end_time": "2025-09-01T19:46:15.542762+00:00",
+              "duration_seconds": 46.919419
+            },
+            "input_artifacts": {
+              "framework_hash": "4152f312d410e2de3bbc16f7d3e9a70c6347b3dd3db6f67aa44c6725f7b2d6d7",
+              "document_hashes": [
+                "fd2a7eed17d74bbb25377020a609e9257949208fdec6072bb1175c6c2fc5289e"
+              ],
+              "num_documents": 1
+            },
+            "provenance": {
+              "security_boundary": {
+                "experiment_name": "bolsonaro_2018",
+                "experiment_root": "/Volumes/code/discernus/projects/bolsonaro_2018",
+                "boundary_type": "filesystem",
+                "security_level": "experiment_scoped"
+              },
+              "audit_session_id": "20250901T193153Z_db44efc7"
+            }
+          }
+        },
+        {
+          "analysis_id": "analysis_925ba9bb41ab",
+          "result_hash": "d17e294f54bba59518eaab262ecc311a6c64903c76976a4270cea3781beaf107",
+          "duration_seconds": 37.586865,
+          "result_content": {
+            "analysis_id": "analysis_925ba9bb41ab",
+            "agent_name": "EnhancedAnalysisAgent",
+            "agent_version": "enhanced_v2.1_raw_output",
+            "experiment_name": "bolsonaro_2018_populist_discourse_analysis",
+            "model_used": "vertex_ai/gemini-2.5-flash",
+            "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.2\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using a 3-run median aggregation approach to assess populist discourse dimensions. Consistent high scores across multiple dimensions indicate a strong populist rhetorical presence.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"10d7264b750f...\",\n      \"document_name\": \"2018-10-07_Pre-Election_Live.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"pol\u00edtica diferente dessa velha pr\u00e1tica\",\n          \"confidence\": 0.9,\n          \"context_type\": \"rhetorical framing\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"vamos realmente fazer o Brasil diferente\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct statement\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"a uni\u00e3o de todo o meu povo vamos unir\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct appeal\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"n\u00e3o aceitamos que n\u00e3o aceitam nem quiser conversar conosco\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct statement\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"economistas que botaram o Brasil em essa crise em que se encontra\",\n          \"confidence\": 0.9,\n          \"context_type\": \"blaming statement\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"N\u00e3o comecei sozinho\",\n          \"confidence\": 0.9,\n          \"context_type\": \"self-positioning\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"somos todos iguais n\u00e3o h\u00e1 diferen\u00e7a entre um e outro\",\n          \"confidence\": 0.9,\n          \"context_type\": \"unity assertion\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"o nosso querido Brasil \u00e9 o que agora no Brasil e olhe que n\u00f3s temos n\u00f3s temos tudo eu acho que ningu\u00e9m tem no mundo\",\n          \"confidence\": 0.9,\n          \"context_type\": \"rhetorical framing\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"Vamos abrir o nosso com\u00e9rcio temos com toda a certeza um dos melhores economistas\",\n          \"confidence\": 0.9,\n          \"context_type\": \"policy promise\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+            "evidence_hash": "4a47efc3f21acb9b5007031ffdd066f38d67640af991505c62adcc3918d0e725",
+            "execution_metadata": {
+              "start_time": "2025-09-01T19:46:15.544298+00:00",
+              "end_time": "2025-09-01T19:46:53.131174+00:00",
+              "duration_seconds": 37.586865
+            },
+            "input_artifacts": {
+              "framework_hash": "4152f312d410e2de3bbc16f7d3e9a70c6347b3dd3db6f67aa44c6725f7b2d6d7",
+              "document_hashes": [
+                "10d7264b750f5b0ba1f60289667a7d2afb75d0829d73d7cdffc9bf0710c5e8b0"
+              ],
+              "num_documents": 1
+            },
+            "provenance": {
+              "security_boundary": {
+                "experiment_name": "bolsonaro_2018",
+                "experiment_root": "/Volumes/code/discernus/projects/bolsonaro_2018",
+                "boundary_type": "filesystem",
+                "security_level": "experiment_scoped"
+              },
+              "audit_session_id": "20250901T193153Z_db44efc7"
+            }
+          }
+        },
+        {
+          "analysis_id": "analysis_3e3408266e9c",
+          "result_hash": "d2270b5329dd39aee3e4ad3b37c85e1270de9bed4a8d32e87427bb12d3f3b490",
+          "duration_seconds": 100.017048,
+          "result_content": {
+            "analysis_id": "analysis_3e3408266e9c",
+            "agent_name": "EnhancedAnalysisAgent",
+            "agent_version": "enhanced_v2.1_raw_output",
+            "experiment_name": "bolsonaro_2018_populist_discourse_analysis",
+            "model_used": "vertex_ai/gemini-2.5-flash",
+            "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.2\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using a three-independent-approach median aggregation method to ensure robust internal consistency. The speech presents strong populist themes, particularly in its anti-pluralist and manichaean framing, as well as its calls for national unity and restoration.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"fd2a7eed17d7\",\n      \"document_name\": \"2018-10-16_Post-First-Round_Speech.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"crisis_restoration_temporal_narrative\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.7\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"\u00c9 o Brasil verde-amarelo e eles que representam Cuba, representam o governo da Venezuela com a sua bandeira vermelha, com a foice e o martelo em cima dela.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"moral_dichotomy\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_temporal_narrative\",\n          \"quote_text\": \"Vamos nos afastar disso que n\u00e3o deu certo, que \u00e9 o socialismo, que \u00e9 o comunismo, que t\u00e1 encarnado no PT, no PCdoB, no PSOL.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"decline_redemption_framing\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"Eu quero agradecer aqui, povo do meu estado do Rio de Janeiro, pesquisa do IBOP, agora, no Rio de Janeiro, alcan\u00e7amos cinquenta e um por cento dos votos v\u00e1lidos.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"direct_popular_will_assertion\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"\u00c9 o Brasil verde-amarelo e eles que representam Cuba, representam o governo da Venezuela com a sua bandeira vermelha, com a foice e o martelo em cima dela.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"ideological_othering\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"Com l\u00edderes partid\u00e1rios j\u00e1 carimbados, que n\u00e3o deram certo, buscar apoio em troca de tempo de televis\u00e3o\",\n          \"confidence\": 0.8,\n          \"context_type\": \"hidden_network_claim\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"falei, vamos fazer nossa campanha com oito segundos de televis\u00e3o. Fundo partid\u00e1rio, n\u00e3o temos, mas com um milh\u00e3o de reais fa\u00e7o minha campanha.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"anti_establishment_positioning\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"Vamos unir o povo brasileiro. Nossa bandeira \u00e9 verde e amarela. Nosso cora\u00e7\u00e3o \u00e9 verde e amarelo.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"unified_identity_assertion\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"Juntos, vamos mudar o Brasil. Brasil acima de tudo, Deus acima de todos.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"national_priority_assertion\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"N\u00f3s queremos, sim, dividir, mas dividir riqueza com voc\u00eas e n\u00e3o dividir pobreza, que sempre foi a marca do socialismo e do comunismo.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"economic_elite_framing\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+            "evidence_hash": "fe0406a01a9a18019e31d97a5bcbb16227caa8ba7d1d45d4a62d0d0dba758bea",
+            "execution_metadata": {
+              "start_time": "2025-09-01T19:50:29.151446+00:00",
+              "end_time": "2025-09-01T19:52:09.168529+00:00",
+              "duration_seconds": 100.017048
+            },
+            "input_artifacts": {
+              "framework_hash": "4152f312d410e2de3bbc16f7d3e9a70c6347b3dd3db6f67aa44c6725f7b2d6d7",
+              "document_hashes": [
+                "fd2a7eed17d74bbb25377020a609e9257949208fdec6072bb1175c6c2fc5289e"
+              ],
+              "num_documents": 1
+            },
+            "provenance": {
+              "security_boundary": {
+                "experiment_name": "bolsonaro_2018",
+                "experiment_root": "/Volumes/code/discernus/projects/bolsonaro_2018",
+                "boundary_type": "filesystem",
+                "security_level": "experiment_scoped"
+              },
+              "audit_session_id": "20250901T193153Z_db44efc7"
+            }
+          }
+        },
+        {
+          "analysis_id": "analysis_7dfcb81a7279",
+          "result_hash": "990e4ecc3809311b7965ce88d27ab53e560235ef5493ec54377a67710ee70399",
+          "duration_seconds": 50.219002,
+          "result_content": {
+            "analysis_id": "analysis_7dfcb81a7279",
+            "agent_name": "EnhancedAnalysisAgent",
+            "agent_version": "enhanced_v2.1_raw_output",
+            "experiment_name": "bolsonaro_2018_populist_discourse_analysis",
+            "model_used": "vertex_ai/gemini-2.5-flash",
+            "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.2\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using a three-independent-approach median aggregation for robust scoring and evidence selection.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"e311d4a2050f\",\n      \"document_name\": \"2018-10-22_Avenida_Paulista_Speech.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 1.0,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.4,\n          \"confidence\": 0.8\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.3,\n          \"confidence\": 0.8\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"Esses marginais vermelhos, ser\u00e3o banidos de nossa p\u00e1tria.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"explicit_statement\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"Esse povo, sempre se levantou nos momentos mais dif\u00edceis da na\u00e7\u00e3o, para exatamente salv\u00e1-la.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"rhetorical_framing\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"N\u00f3s somos a maioria. N\u00f3s somos o Brasil de verdade.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"explicit_statement\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"Bandidos do MST! Bandidos do MTST! As a\u00e7\u00f5es de voc\u00eas ser\u00e3o tipificadas como terrorismo.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"explicit_statement\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"Esse \u00e9 o Lula da Silva, que voc\u00eas estavam esperando, o Haddad ser presidente, pra assinar os decretos de indulto?\",\n          \"confidence\": 0.9,\n          \"context_type\": \"explicit_statement\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"Sem indica\u00e7\u00f5es pol\u00edticas, faremos um time de ministros que realmente atender\u00e1 as necessidades do nosso povo.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"explicit_statement\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"Junto com esse povo brasileiro, construiremos uma nova na\u00e7\u00e3o.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"thematic_emphasis\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"Brasil acima de tudo e Deus acima de todos!\",\n          \"confidence\": 0.9,\n          \"context_type\": \"pattern_of_repetition\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"Voc\u00eas n\u00e3o ter\u00e3o mais ONGs para saciar a fome de mortadela de voc\u00eas.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"explicit_statement\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+            "evidence_hash": "4239cb8c67efc637898467173dca51178f2ce038e2161f4c0dbc47a37c185470",
+            "execution_metadata": {
+              "start_time": "2025-09-01T19:52:09.170422+00:00",
+              "end_time": "2025-09-01T19:52:59.389430+00:00",
+              "duration_seconds": 50.219002
+            },
+            "input_artifacts": {
+              "framework_hash": "4152f312d410e2de3bbc16f7d3e9a70c6347b3dd3db6f67aa44c6725f7b2d6d7",
+              "document_hashes": [
+                "e311d4a2050fc501a79af45922df037383a9bda56dcb5496bbfb24dbe254e066"
+              ],
+              "num_documents": 1
+            },
+            "provenance": {
+              "security_boundary": {
+                "experiment_name": "bolsonaro_2018",
+                "experiment_root": "/Volumes/code/discernus/projects/bolsonaro_2018",
+                "boundary_type": "filesystem",
+                "security_level": "experiment_scoped"
+              },
+              "audit_session_id": "20250901T193153Z_db44efc7"
+            }
+          }
+        },
+        {
+          "analysis_id": "analysis_8a8f8ea9769d",
+          "result_hash": "6c13e4ea0c9851be1a21b0bd247357a14d3d7830d85af6eb0d5289cd6e6a59ce",
+          "duration_seconds": 206.826192,
+          "result_content": {
+            "analysis_id": "analysis_8a8f8ea9769d",
+            "agent_name": "EnhancedAnalysisAgent",
+            "agent_version": "enhanced_v2.1_raw_output",
+            "experiment_name": "bolsonaro_2018_populist_discourse_analysis",
+            "model_used": "vertex_ai/gemini-2.5-flash",
+            "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.2\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis based on a speech delivered the day before the second round of elections, heavily focused on contrasting the speaker and his movement with the PT and its perceived corruption and societal threats. Strong use of us-vs-them framing and crisis rhetoric.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"c61fcfb31f17...\",\n      \"document_name\": \"2018-10-27_Pre-Second-Round_Live.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.3,\n          \"confidence\": 0.7\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.5,\n          \"confidence\": 0.8\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"O outro lado \u00e9 a volta do passado, \u00e9 a corrup\u00e7\u00e3o, \u00e9 a mentira, \u00e9 o desprezo \u00e0 fam\u00edlia, \u00e9 uma aproxima\u00e7\u00e3o das ditaduras...\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct quote from speech\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"O que t\u00e1 em jogo n\u00e3o \u00e9 a democracia, n\u00e3o. O que t\u00e1 em jogo \u00e9 a perpetua\u00e7\u00e3o dessa m\u00e1quina podre que n\u00f3s temos aqui...\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct quote from speech\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"vamos fazer valer a nossa vontade.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct quote from speech\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"N\u00f3s combatemos o fascismo, diferentemente dessa minoria que a defender o PT, que \u00e9 fascista, porque o PT \u00e9 Estado, n\u00e9?\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct quote from speech\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"O que t\u00e1 em jogo \u00e9 a perpetua\u00e7\u00e3o dessa m\u00e1quina podre que n\u00f3s temos aqui, que vive da corrup\u00e7\u00e3o, pra tirar de voc\u00eas o atendimento m\u00e9dico, a educa\u00e7\u00e3o, a seguran\u00e7a.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct quote from speech\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"Nunca tive qualquer contato com o PT, nunca tive qualquer afinidade. Se tivesse, estaria ent\u00e3o sendo processado no Mensal\u00e3o.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct quote from speech\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"acabar com essa hist\u00f3ria de, de branco e negro. Somos iguais!\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct quote from speech\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"Brasil acima de tudo... E Deus acima de todos.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct quote from speech\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"O que t\u00e1 em jogo \u00e9 a perpetua\u00e7\u00e3o dessa m\u00e1quina podre que n\u00f3s temos aqui, que vive da corrup\u00e7\u00e3o, pra tirar de voc\u00eas o atendimento m\u00e9dico, a educa\u00e7\u00e3o, a seguran\u00e7a.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct quote from speech\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+            "evidence_hash": "49c265cf8b9a2ce09274280524f648bfb444873b7350b46db2b9735eef8c6d79",
+            "execution_metadata": {
+              "start_time": "2025-09-01T19:52:59.389997+00:00",
+              "end_time": "2025-09-01T19:56:26.216218+00:00",
+              "duration_seconds": 206.826192
+            },
+            "input_artifacts": {
+              "framework_hash": "4152f312d410e2de3bbc16f7d3e9a70c6347b3dd3db6f67aa44c6725f7b2d6d7",
+              "document_hashes": [
+                "c61fcfb31f1704d6388613c7b7b145ad3a91c65113e57f5e4568cd202a38ea3e"
+              ],
+              "num_documents": 1
+            },
+            "provenance": {
+              "security_boundary": {
+                "experiment_name": "bolsonaro_2018",
+                "experiment_root": "/Volumes/code/discernus/projects/bolsonaro_2018",
+                "boundary_type": "filesystem",
+                "security_level": "experiment_scoped"
+              },
+              "audit_session_id": "20250901T193153Z_db44efc7"
+            }
+          }
+        }
+      ],
+      "columns_added": []
+    },
+    "status": "success_with_data",
+    "validation_passed": true
+  }
+}

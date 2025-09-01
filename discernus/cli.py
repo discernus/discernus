@@ -321,15 +321,18 @@ def cli(ctx, verbose, quiet, no_color, config):
               default='vertex_ai/gemini-2.5-pro',
               help='LLM model for synthesis (e.g., vertex_ai/gemini-2.5-pro, openai/gpt-4o)')
 @click.option('--validation-model', envvar='DISCERNUS_VALIDATION_MODEL',
-              default='vertex_ai/gemini-2.5-pro',
+              default='vertex_ai/gemini-2.5-flash-lite',
               help='LLM model for validation (e.g., vertex_ai/gemini-2.5-pro, openai/gpt-4o)')
+@click.option('--derived-metrics-model', envvar='DISCERNUS_DERIVED_METRICS_MODEL',
+              default='vertex_ai/gemini-2.5-pro',
+              help='LLM model for derived metrics planning and calculation (e.g., vertex_ai/gemini-2.5-pro, openai/gpt-4o)')
 @click.option('--skip-validation', is_flag=True, envvar='DISCERNUS_SKIP_VALIDATION', help='Skip experiment coherence validation')
 @click.option('--analysis-only', is_flag=True, envvar='DISCERNUS_ANALYSIS_ONLY', help='Run analysis and CSV export only, skip synthesis')
 
 @click.option('--ensemble-runs', type=int, envvar='DISCERNUS_ENSEMBLE_RUNS', help='Number of ensemble runs for self-consistency')
 @click.option('--no-auto-commit', is_flag=True, envvar='DISCERNUS_NO_AUTO_COMMIT', help='Disable automatic Git commit after successful run completion')
 @click.pass_context
-def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str], synthesis_model: Optional[str], validation_model: Optional[str], skip_validation: bool, analysis_only: bool, ensemble_runs: Optional[int], no_auto_commit: bool):
+def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str], synthesis_model: Optional[str], validation_model: Optional[str], derived_metrics_model: Optional[str], skip_validation: bool, analysis_only: bool, ensemble_runs: Optional[int], no_auto_commit: bool):
     """Execute complete experiment (analysis + synthesis). Defaults to current directory."""
     exp_path = Path(experiment_path).resolve()
     
@@ -355,6 +358,8 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
         synthesis_model = config.synthesis_model
     if validation_model is None:
         validation_model = config.validation_model
+    if derived_metrics_model is None:
+        derived_metrics_model = config.derived_metrics_model
     if ensemble_runs is None:
         ensemble_runs = config.ensemble_runs
     
@@ -438,7 +443,8 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
                     analysis_model=analysis_model,
                     synthesis_model=synthesis_model,
                     validation_model=validation_model,
-                    skip_validation=skip_validation
+                    skip_validation=skip_validation,
+                    derived_metrics_model=derived_metrics_model
                 )
 
                 # Mark experiment as completed
@@ -508,7 +514,10 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
 @click.option('--verbose', is_flag=True, help='Enable verbose debug output')
 @click.option('--synthesis-model', default='vertex_ai/gemini-2.5-pro', 
               help='LLM model for synthesis [default: vertex_ai/gemini-2.5-pro] (e.g., vertex_ai/gemini-2.5-flash-lite)')
-def debug(experiment_path: str, agent: str, verbose: bool, synthesis_model: str):
+@click.option('--derived-metrics-model', envvar='DISCERNUS_DERIVED_METRICS_MODEL',
+              default='vertex_ai/gemini-2.5-pro',
+              help='LLM model for derived metrics planning and calculation (e.g., vertex_ai/gemini-2.5-pro, openai/gpt-4o)')
+def debug(experiment_path: str, agent: str, verbose: bool, synthesis_model: str, derived_metrics_model: str):
     """Interactive debugging mode with detailed agent tracing. Defaults to current directory."""
     exp_path = Path(experiment_path).resolve()
     
@@ -558,7 +567,8 @@ def debug(experiment_path: str, agent: str, verbose: bool, synthesis_model: str)
             analysis_model="vertex_ai/gemini-2.5-flash",  # Use faster model for debug
             synthesis_model=synthesis_model,
             validation_model="vertex_ai/gemini-2.5-flash",
-            skip_validation=True  # Skip validation in debug mode for speed
+            skip_validation=True,  # Skip validation in debug mode for speed
+            derived_metrics_model=derived_metrics_model
         )
         
         # Show completion

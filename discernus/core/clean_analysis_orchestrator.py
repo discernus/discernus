@@ -125,9 +125,10 @@ class CleanAnalysisOrchestrator:
         }
     
     def run_experiment(self, 
-                      analysis_model: str = "vertex_ai/gemini-2.5-pro",
+                      analysis_model: str = "vertex_ai/gemini-2.5-flash",
                       synthesis_model: str = "vertex_ai/gemini-2.5-pro",
-                      validation_model: str = "vertex_ai/gemini-2.5-pro",
+                      validation_model: str = "vertex_ai/gemini-2.5-flash-lite",
+                      derived_metrics_model: str = "vertex_ai/gemini-2.5-pro",
                       skip_validation: bool = False) -> Dict[str, Any]:
         """
         Run complete experiment: analysis + synthesis + results.
@@ -211,7 +212,7 @@ class CleanAnalysisOrchestrator:
                 self.progress_manager.update_main_progress("Derived metrics")
             phase_start = datetime.now(timezone.utc)
             try:
-                derived_metrics_results = self._run_derived_metrics_phase(synthesis_model, audit_logger, analysis_results)
+                derived_metrics_results = self._run_derived_metrics_phase(derived_metrics_model, audit_logger, analysis_results)
                 
                 # Store derived metrics results for synthesis access
                 self._derived_metrics_results = derived_metrics_results
@@ -225,7 +226,7 @@ class CleanAnalysisOrchestrator:
             # Phase 6: Generate statistics
             phase_start = datetime.now(timezone.utc)
             try:
-                statistical_results = self._run_statistical_analysis_phase(synthesis_model, audit_logger, analysis_results, derived_metrics_results)
+                statistical_results = self._run_statistical_analysis_phase(derived_metrics_model, audit_logger, analysis_results, derived_metrics_results)
                 self._log_status("Statistical analysis completed")
                 self._log_phase_timing("statistical_analysis", phase_start)
             except Exception as e:
@@ -2319,7 +2320,7 @@ class CleanAnalysisOrchestrator:
             # 9. FINAL SYNTHESIS REPORT (the report being validated)
             if assets and assets.get('report_hash'):
                 try:
-                    report_content = self.artifact_storage.get_artifact(assets_dict['report_hash'])
+                    report_content = self.artifact_storage.get_artifact(assets['report_hash'])
                     report_text = report_content.decode('utf-8')
                     source_documents.append({
                         'content': report_text,

@@ -8,7 +8,7 @@ without fallback mechanisms. Perfect for rapid iteration and prompt tuning.
 
 Usage Examples:
     # Test simple prompt with specific model
-    python3 scripts/prompt_engineering_harness.py --model "anthropic/claude-3-5-sonnet-20240620" --prompt "What is 2+2?"
+    python3 scripts/prompt_engineering_harness.py --model "anthropic/claude-sonnet-4-20250514" --prompt "What is 2+2?"
     
     # Test with prompt from file  
     python3 scripts/prompt_engineering_harness.py --model "perplexity/r1-1776" --prompt-file "test_prompt.txt"
@@ -143,7 +143,7 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  %(prog)s --model "anthropic/claude-3-5-sonnet-20240620" --prompt "What is 2+2?"
+  %(prog)s --model "anthropic/claude-sonnet-4-20250514" --prompt "What is 2+2?"
   %(prog)s --model "perplexity/r1-1776" --prompt-file "my_test.txt"
   %(prog)s --model "vertex_ai/gemini-2.5-pro" --experiment "projects/simple_experiment" --corpus "speech1.txt"
   %(prog)s --list-models
