@@ -44,3 +44,23 @@ Production          | G2.5-Flash| G2.5-Flash| G2.5-Flash | G2.5-Flash   |
 - Update CLI to support matrix-based model selection
 - Maintain backward compatibility during transition
 - Consider environment-specific matrices (prod vs dev)
+
+## CLI Model Validation Missing
+
+**Issue**: CLI does not validate that specified models exist in `models.yaml` before running experiments, leading to runtime failures after hours of execution.
+
+**Current Behavior**: 
+- CLI accepts any model string without validation
+- Experiment runs until it hits the model at execution time
+- Poor user experience: fails late with confusing errors
+
+**What Should Happen**:
+- CLI validates models against `models.yaml` before proceeding
+- Fast failure with clear error messages
+- Prevents wasted time and resources
+
+**Impact**: User confusion, wasted experiment time, poor error handling
+
+**Priority**: Medium - affects user experience but not core functionality
+
+**Files to Modify**: `discernus/cli.py` - add model validation layer

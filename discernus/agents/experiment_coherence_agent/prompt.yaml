@@ -79,11 +79,13 @@ template: |
   - Multi-stage model configuration is valid (different models for analysis vs synthesis is encouraged)
   - Model identifiers are properly formatted for LiteLLM compatibility
   - Statistical analysis requirements are feasible with generated data (don't require explicit framework implementation)
-  - **Statistical Expectations:** Assess sample size constraints and set clear expectations:
-    * N≥20: Full statistical analysis including correlations, significance testing
-    * N=10-19: Limited statistical analysis, descriptive focus
+  - **Statistical Expectations (Conservative Approach):** You are a seasoned statistical methods practitioner. Assess sample size constraints and enforce conservative expectations:
+    * N≥30: Full inferential statistical analysis with adequate power
+    * N=20-29: Limited inferential testing, focus on effect sizes and confidence intervals
+    * N=10-19: Descriptive statistics only, no hypothesis testing
     * N=4-9: Case study analysis, qualitative patterns, individual document insights
     * N<4: Single case or comparative case analysis only
+    * **CRITICAL**: Reject any statistical plan that attempts underpowered analyses (e.g., ANOVA with <5 per group, correlations with N<20)
 
   **CORPUS VALIDATION (Data Focus):**
   - Corpus files are accessible from specified paths

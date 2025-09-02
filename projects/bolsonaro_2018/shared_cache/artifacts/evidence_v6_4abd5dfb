@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "fd2a7eed17d74bbb25377020a609e9257949208fdec6072bb1175c6c2fc5289e"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-02T02:06:46.739218+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+      "dimension": "manichean_people_elite_framing",
+      "quote_text": "Tudo \u00e9 assim, que nos temos uma fam\u00edlia, minha esposa, minha filha tamb\u00e9m. De pois de quatro barbardos aqui, do\u00ed, feio pra caramba, veio uma menina que partiu meu cora\u00e7\u00e3o. Do\u00ed, em vez de eu ficar tranquilo, em vez de eu ficar surdo, em vez de eu ficar mudo, \u00e9 muito triste essa miscigena\u00e7\u00e3o. essa uni\u00e3o de todo o Brasil. Nosso canto \u00e9 verde e amarelo. Nosso cora\u00e7\u00e3o \u00e9 verde e amarelo. Esse povo \u00e9 maravilhoso. Esse povo brasileiro \u00e9 ordeiro.",
+      "confidence": 0.95,
+      "context_type": "thematic_centrality",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T02:06:46.739191+00:00"
+    },
+    {
+      "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "Temos que ter algu\u00e9m mais competente. Quem vai t\u00e1 l\u00e1, n\u00e3o digo como ministro, mas pra n\u00f3s auxiliar, \u00e9 o nosso querido coronel Marcos Pontes, o nosso astronauta, que \u00e9 motivo de orgulho pra todos n\u00f3s, um homem que foi ao espa\u00e7o, estudou muito, nunca foi abatido nas simula\u00e7\u00f5es de pan na NASA, vive a grande parte na NASA, tem conversado conosco, trou-trou uma proposta maravilhosa que vai empolgar a garotada do Brasil, vai empolgar a comunidade cient\u00edfica, algu\u00e9m que fala a linguagem deles, que entende realmente o que eles querem.",
+      "confidence": 0.7,
+      "context_type": "thematic_centrality",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T02:06:46.739193+00:00"
+    },
+    {
+      "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "O que eu quero pedir a voc\u00eas, \u00e9 que voc\u00eas t\u00eam as mesmas necessidades que os demais t\u00eam. Vivemos aqui da, do mundo material, aqui na Terra e, e pra quem acredita na quest\u00e3o espiritual, vamos fazer um governo pra todo o mundo. Pro g\u00e1s, que inclusive tem, tem g\u00e1s que \u00e9 pai, tem g\u00e1s que \u00e9 m\u00e3e, \u00e9 um trabalho pra todos voc\u00eas. Vamos jogar pesado na quest\u00e3o da seguran\u00e7a p\u00fablica.",
+      "confidence": 0.85,
+      "context_type": "explicit_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T02:06:46.739194+00:00"
+    },
+    {
+      "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "O que falta \u00e9 o que eu quero pedir a voc\u00eas, \u00e9 que n\u00f3s n\u00e3o nos envolvamos em candidaturas a, a governos de estados pelo Brasil. E afinal de contas, os partidos que lan\u00e7aram candidatos ou era do centro ou era da esquerda. Mas a Moura j\u00e1 t\u00e1 encostando, que sabe do-sim que vai pro segundo turno. Uma forcinha pra ela e vai pro segundo turno. A uni\u00e3o de todos, meu povo, vamos unir esse Brasil aqui, n\u00e3o \u00e9? N\u00e3o vamos botar um corneteiro pra tocar uma corneta e dar um toque sentido n\u00e3o, fique tranquilo, n\u00e3o vai ser isso n\u00e3o, mas \u00e9 uma pena, vamos voltar a minha piscina eu percebo tudo por tr\u00eas a um. O que eu vou fazer pra minha piscina eu percebo tudo por tr\u00eas a um.",
+      "confidence": 0.5,
+      "context_type": "implication",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T02:06:46.739195+00:00"
+    },
+    {
+      "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "A minha esposa \u00e9 torcedora do Flamengo, olha s\u00f3, eu sou o Botafogo, nunca tivemos problema em casa. [...] Mas \u00e9 o seguinte, o Vasco virou. Vasco \u00e9 e Cabral, \u00faltimo jogo. [...] O Vasco precisava ganhar o jogo, n\u00e9, do Cabral, terra do meu sogro ali, e n\u00e3o valia nada pro Cabral aquele jogo, n\u00e3o ia se rebaixado. Virou o primeiro tempo um a zero pro Cabral, olhe a situa\u00e7\u00e3o que eu fiquei. Eu botei o p\u00e9 da-l\u00e2mpada, falando \"vamos virar esse jogo\", deu cinco minutos, o Vasco virou. Se bem que o Vasco t\u00e1 pedindo pra voltar novamente e eu vou te -- eu vou te levar a S\u00e3o... Olhe o Vasco Cahin'hanha indo aqui. Apelando voc\u00eas, n\u00f3s temos uma p\u00e1gina, Bolsonaro.com.br. Voc\u00ea entra nessa p\u00e1gina ali, vai no seu estado, procura um, um candidato ali que voc\u00ea conhece e vote nele. N\u00f3s precisamos do voto, n\u00e3o \u00e9 de legenda, \u00e9 no candidato.",
+      "confidence": 0.6,
+      "context_type": "implication",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T02:06:46.739196+00:00"
+    },
+    {
+      "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "A minha esposa \u00e9 torcedora do Flamengo, [...] Eu sou o Botafogo, nunca tivemos problema em casa. [...] Eu sou o Botafogo, nunca tivemos problema em casa. [...] E ali, em primeiro tempo um a zero pro Cabral, olhe a situa\u00e7\u00e3o que eu fiquei. Eu botei o p\u00e9 da-l\u00e2mpada, falando \"vamos virar esse jogo\", deu cinco minutos, o Vasco virou. Se bem que o Vasco t\u00e1 pedindo pra voltar novamente e eu vou te -- eu vou te levar a S\u00e3o... Olhe o Vasco Cahin'hanha indo aqui. Apelando voc\u00eas, n\u00f3s temos uma p\u00e1gina, Bolsonaro.com.br. Voc\u00ea entra nessa p\u00e1gina ali, vai no seu estado, procura um, um candidato ali que voc\u00ea conhece e vote nele. N\u00f3s precisamos do voto, n\u00e3o \u00e9 de legenda, \u00e9 no candidato.",
+      "confidence": 0.9,
+      "context_type": "explicit_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T02:06:46.739197+00:00"
+    },
+    {
+      "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "Brasileiros, estou aqui porque n\u00e3o tenho mais nada a falar para voc\u00eas, \u00e9 o que eu quero pedir a voc\u00eas, \u00e9 que nos acompannhem aqui agora, de hoje pra amanh\u00e3, mais um voto dentro da fam\u00edlia ou na fila de vota\u00e7\u00e3o amanh\u00e3. D\u00ea pra conseguir, \u00e9 isso. E qual \u00e9 a orienta\u00e7\u00e3o? Com esse aplicativo, a gente vai tirar uma fotografia da cabe\u00e7a, da tripa, n\u00e9, da-daquela lista onde est\u00e3o os candidatos ali a presidente da Rep\u00fablica, isso vai pro segundo turno. [...] N\u00f3s somos iguais, somos iguais, n\u00e3o h\u00e1 diferen\u00e7a entre um e outro, somos todos iguais.",
+      "confidence": 0.8,
+      "context_type": "explicit_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T02:06:46.739198+00:00"
+    },
+    {
+      "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "A gente vai fazer o Brasil diferente. [...] O Brasil acima de tudo, Deus acima de todos. [...] Isso a\u00ed \u00e9 a minha fala, viu? \u00c9 a minha fala. \u00c9 o meu pa\u00eds, o meu povo, o meu Deus. Eu estou aqui pra representar o povo. Eu n\u00e3o t\u00f4 aqui pra representar uma etnia, n\u00e3o t\u00f4 aqui pra representar um, uma classe, n\u00e3o t\u00f4 aqui pra representar um partido. [...] Se Deus quiser, n\u00f3s vamos andar de m\u00e3os dadas. [...] O Brasil acima de tudo, Deus acima de todos. [...] \u00c9 o que eu quero pedir a voc\u00eas, \u00e9 que nos acompanhem aqui agora, de hoje pra amanh\u00e3, mais um voto dentro da fam\u00edlia ou na fila de vota\u00e7\u00e3o amanh\u00e3.",
+      "confidence": 0.55,
+      "context_type": "thematic_centrality",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T02:06:46.739199+00:00"
+    },
+    {
+      "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "Temos cinco candidatos pra governo de Estado, em tr\u00eas estados, pelo que eu sei, tr\u00eas estados apenas, Ronan, o Ac\u00ea e Romaia. Em Romaia, temos tudo pra ir pro segundo turno, o Denarium. Boa sorte, Denarium. Vamos pra frente, vamos pra frente. Temos cinco candidatos pra governo de Estado, em tr\u00eas estados, pelo que eu sei, tr\u00eas estados apenas, Ronan, o Ac\u00ea e Romaia. Em Romaia, temos tudo pra ir pro segundo turno, o Denarium. Boa sorte, Denarium. Vamos pra frente, vamos pra frente.",
+      "confidence": 0.5,
+      "context_type": "irrelevant_to_dimension",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T02:06:46.739200+00:00"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_82062e9b0b7a",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "bolsonaro_2018_populist_discourse_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.2\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Speech analysis focusing on populist rhetoric elements across nine dimensions, aggregated from three independent analytical perspectives.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"DOCUMENT_ID_PLACEHOLDER\",\n      \"document_name\": \"2018-08-31_Porto_Velho_Speech.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"\u00c9 o partido que n\u00e3o tem envolvimento com corruptos! \u00c9 o partido que \u00e9 limpo!\",\n          \"confidence\": 0.9,\n          \"context_type\": \"explicit contrast\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"Vamos passar o pa\u00eds a limpo, vai resgatar a educa\u00e7\u00e3o, vai resgatar e reestruturar, sem d\u00favida alguma, a nossa seguran\u00e7a do Brasil.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"restoration promise\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"a confian\u00e7a do povo rondoniense, do povo brasileiro pra fazer a pol\u00edtica diferente.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"popular mandate\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"Lugar de vagabundo \u00e9 na cadeia ou no cemit\u00e9rio.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"opponent delegitimization\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"o dinheiro para ser usado na nossa sa\u00fade e na nossa educa\u00e7\u00e3o e na nossa seguran\u00e7a.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"implied systemic failure\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"O mito\",\n          \"confidence\": 0.9,\n          \"context_type\": \"self-designation/public moniker\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"N\u00f3s queremos unir todos, de norte a sul, de leste a oeste. Esse Brasil, al\u00e9m de grande, \u00e9 um pa\u00eds riqu\u00edssimo, e o seu povo n\u00e3o pode continuar sendo pobre\",\n          \"confidence\": 0.8,\n          \"context_type\": \"unity appeal\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"Vamos varrer o comunismo e o Foro de S\u00e3o Paulo.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"external threat framing\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"Brasil, al\u00e9m de grande, \u00e9 um pa\u00eds riqu\u00edssimo, e o seu povo n\u00e3o pode continuar sendo pobre\",\n          \"confidence\": 0.8,\n          \"context_type\": \"economic grievance framing\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "1911224adc025d1f87e05be2acc4b17a468c4825298c81980bd33edde55f22f3",
+  "execution_metadata": {
+    "start_time": "2025-09-02T00:59:42.508722+00:00",
+    "end_time": "2025-09-02T01:00:49.773567+00:00",
+    "duration_seconds": 67.264823
+  },
+  "input_artifacts": {
+    "framework_hash": "4152f312d410e2de3bbc16f7d3e9a70c6347b3dd3db6f67aa44c6725f7b2d6d7",
+    "document_hashes": [
+      "744f775c3c37f16a4c0b7d9852e2b79cc2f582f531a390a1335cffd0034d1e9e"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "bolsonaro_2018",
+      "experiment_root": "/Volumes/code/discernus/projects/bolsonaro_2018",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250902T005621Z_601ae79b"
+  }
+}

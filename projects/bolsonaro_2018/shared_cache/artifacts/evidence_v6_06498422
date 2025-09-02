@@ -1,0 +1,12 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "fd2a7eed17d74bbb25377020a609e9257949208fdec6072bb1175c6c2fc5289e"
+    ],
+    "total_evidence_pieces": 0,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-02T01:46:12.862422+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": []
+}

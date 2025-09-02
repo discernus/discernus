@@ -127,3 +127,64 @@
 - **Implementation Strategy**: Start with low-risk internal self-consistency, evaluate results, then consider more complex approaches
 - **Risk Assessment**: Current system is working well, avoid changes that could destabilize core functionality
 - **Cost-Benefit**: Focus on high-impact, low-risk improvements first
+
+**Alternative Approach**: Accept current performance limitations and focus on core functionality for release
+
+---
+
+## Multi-Stage Model Validation System
+
+**Description**: Implement comprehensive model validation at CLI, orchestrator, and agent levels to prevent runtime failures and provide better user experience.
+
+**Why Deferred**:
+- **Core Functionality**: Models work when correctly specified
+- **Release Priority**: Not critical path for v1.0
+- **User Error Handling**: Current system fails gracefully (eventually)
+- **Complexity**: Requires changes across multiple system layers
+
+**Current State**:
+- ❌ **CLI Level**: No model validation against `models.yaml`
+- ❌ **Orchestrator Level**: No model validation before phase execution
+- ❌ **Agent Level**: No model availability checking
+- ❌ **Error Handling**: Fails at execution time, not validation time
+
+**Strategic Value**:
+- **User Experience**: Fast failure with clear error messages
+- **Resource Efficiency**: Prevents wasted experiment time
+- **Debugging**: Clear identification of configuration issues
+- **Professional Quality**: Expected behavior in production systems
+
+**Implementation Plan**:
+
+### Phase 1: CLI Model Validation
+- **Model Registry Integration**: Load `models.yaml` in CLI
+- **Pre-flight Validation**: Check all specified models before experiment start
+- **Clear Error Messages**: Specific feedback on invalid models
+- **Provider Validation**: Check API key availability for external providers
+
+### Phase 2: Orchestrator Model Validation
+- **Phase-Specific Validation**: Validate models before each phase execution
+- **Fallback Logic**: Graceful degradation when models unavailable
+- **Configuration Validation**: Ensure model compatibility with phase requirements
+
+### Phase 3: Agent-Level Validation
+- **Model Availability Checking**: Verify model access before LLM calls
+- **Provider Health Checks**: Validate API endpoints and authentication
+- **Dynamic Fallback**: Automatic model switching on validation failure
+
+**Technical Requirements**:
+- **Model Registry Integration**: CLI access to `models.yaml`
+- **Validation Pipeline**: Multi-level validation chain
+- **Error Handling**: Consistent error messages across layers
+- **Fallback Mechanisms**: Graceful degradation strategies
+
+**Risk Assessment**:
+- **Low Risk**: CLI validation (simple file parsing)
+- **Medium Risk**: Orchestrator integration (coordination complexity)
+- **Low Risk**: User experience improvement (clear benefits)
+
+**Estimated Effort**: 3-5 days for comprehensive implementation
+
+**Timeline**: Post-v1.0 release, when user experience becomes priority
+
+**Reference**: Current issue with `deepseek/deepseek-coder-33b-instruct` vs `openrouter/deepseek/deepseek-chat-v3.1`

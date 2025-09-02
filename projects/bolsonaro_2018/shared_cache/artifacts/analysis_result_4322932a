@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_5ecde16bb3e0",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "bolsonaro_2018_populist_discourse_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.2\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using three independent analytical approaches (Evidence-First, Context-Weighted, Pattern-Based) with median aggregation for final scores and best evidence selection.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"08743cd7875e...\",\n      \"document_name\": \"2018-09-06_Juiz_de_Fora_Business_Association.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.5,\n          \"confidence\": 0.8\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"Eles est\u00e3o l\u00e1 pra servir a sua gremia\u00e7\u00e3o partid\u00e1ria, e n\u00e3o o Brasil.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"explicit statement\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"Ou n\u00f3s mudamos agora o Brasil, ou n\u00e3o teremos outra oportunidade.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"crisis urgency framing\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"Vamos respeitar o referendo do M5, que nos deu o direito \u00e0 compra de armas e muni\u00e7\u00f5es.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"direct democracy invocation\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"N\u00e3o podemos continuar com essa dupla de mingau que eu n\u00e3o gosto, PT, PSDB.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"opponent delegitimization\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"O Minist\u00e9rio do, do Meio Ambiente, hoje em dia, sofre influ\u00eancia, sim, de ONGs estrangeiras.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"foreign influence claim\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"Reconhe\u00e7o as minhas limita\u00e7\u00f5es, mas pode ter certeza, a minha identidade, a minha virtude, que \u00e9 semelhante de voc\u00eas que est\u00e3o aqui, supera isso tudo.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"shared identity claim\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"Chega de ideologia de g\u00eanero, de politicamente correto. Chega de nos dividir. Brancos, negros, pobres, ricos, h\u00e9teros e homos, seja l\u00e1 o que seja. Um s\u00f3 povo, uma s\u00f3 na\u00e7\u00e3o, uma s\u00f3 bandeira.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"unity appeal\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"A China n\u00e3o est\u00e1 comprando no Brasil, ela est\u00e1 comprando o Brasil.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"external threat framing\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"O que o Brasil precisa? Precisa de algu\u00e9m ent\u00e3o, que tire o Estado do cangote de quem produz.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"economic elite vs. productive people framing\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "b07274aefb5fe9e7804592adf1b372c9617ef536fa418bad1256740e24d0b61b",
+  "execution_metadata": {
+    "start_time": "2025-09-02T01:00:49.775437+00:00",
+    "end_time": "2025-09-02T01:01:50.913295+00:00",
+    "duration_seconds": 61.137832
+  },
+  "input_artifacts": {
+    "framework_hash": "4152f312d410e2de3bbc16f7d3e9a70c6347b3dd3db6f67aa44c6725f7b2d6d7",
+    "document_hashes": [
+      "08743cd7875e79bcf0f020fed55eef091e9707bc5d73acdccb4c906dac7dc0b4"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "bolsonaro_2018",
+      "experiment_root": "/Volumes/code/discernus/projects/bolsonaro_2018",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250902T005621Z_601ae79b"
+  }
+}

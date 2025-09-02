@@ -1,0 +1,2923 @@
+{
+  "metadata": {
+    "agent": "EvidenceRetriever",
+    "timestamp": "2025-09-02T02:13:57.420840",
+    "framework_hash": "7611f7d2ae05a52b94e0429a60cea0fc92efa6d18968ed27fbb8ee2421a3649c",
+    "total_findings": 11,
+    "total_quotes": 197
+  },
+  "evidence_results": [
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "1. Very High Overall Populism: The 'Salience-Weighted Overall Populism Index' shows consistently high values (Mean: 0.811), indicating a pervasive and dominant populist rhetorical pattern."
+      },
+      "queries_used": [
+        "pervasive populist rhetoric overall",
+        "dominant populist framing political communication",
+        "high salience weighted overall populism"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Conclamamos a todos voc\u00eas que continuem mobilizados e participem ativamente por ocasi\u00e3o das elei\u00e7\u00f5es do pr\u00f3ximo domingo, de forma democr\u00e1tica",
+          "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.4019526243209839,
+          "metadata": {
+            "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "a confian\u00e7a do povo rondoniense, do povo brasileiro pra fazer a pol\u00edtica diferente.",
+          "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.38391637802124023,
+          "metadata": {
+            "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Eles tem dinheiro, tem um poder economico enorme. Eles tem tambem parte da midia favoravel aos seus propositos.",
+          "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.3826832175254822,
+          "metadata": {
+            "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "\u00c9 motivo de vergonha n\u00f3s queremos se dividir a dividir a riqueza com voc\u00eas e n\u00e3o dividir pobreza que sempre foi a marca do socialismo e do comunismo",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.38166069984436035,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "o povo decida que vai ter segundo turno",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.38118869066238403,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "n\u00e3o queremos se dividir a dividir a riqueza com voc\u00eas e n\u00e3o dividir pobreza que sempre foi a marca do socialismo e do comunismo",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.3763432204723358,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Nao temos um grande partido, nao temos fundo eleitoral, nao temos tempo de televisao, mas temos o que os outros nao tem, que sao voces, o povo brasileiro. [...] No quartel voce\u0302 tem companheirismo, patriotismo, disciplina, hierarquia, amor a\u0300 pa\u0301tria. Na poli\u0301tica, na\u0303o. [...] Do fundo do corac\u0327a\u0303o, na\u0303o tenho ambic\u0327a\u0303o pelo poder.",
+          "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.36917781829833984,
+          "metadata": {
+            "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Qual \u00e9 o plano B desse perj\u00fario? Desse homem pobre l\u00e1 atr\u00e1s que roubou todas as nossas esperan\u00e7a?",
+          "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.7,
+          "relevance_score": 0.36324137449264526,
+          "metadata": {
+            "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "O mito",
+          "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.36242204904556274,
+          "metadata": {
+            "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "uma maneira diferente de fazer pol\u00edtica dessa velha pr\u00e1tica",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.3576396405696869,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Precisamos de algu\u00e9m que se aproxime de grandes pa\u00edses democr\u00e1ticos e capitalistas, que n\u00e3o fique amarrado aqui ao Mercosul por uma quest\u00e3o ideol\u00f3gica.",
+          "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.7,
+          "relevance_score": 0.3502765893936157,
+          "metadata": {
+            "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "estaremos ao lado sim, apenas daqueles pa\u00edses que entendam o livre mercado como essencial.",
+          "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.7,
+          "relevance_score": 0.33344215154647827,
+          "metadata": {
+            "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "No quartel voce\u0302 tem companheirismo, patriotismo, disciplina, hierarquia, amor a\u0300 pa\u0301tria. Na poli\u0301tica, na\u0303o. [...] Mais uma vez, obrigado, Geraldo Alckmin [risadas], por ter unido a esc\u00f3ria da poli\u0301tica brasileira [aplausos].",
+          "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.32763880491256714,
+          "metadata": {
+            "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Brasil, al\u00e9m de grande, \u00e9 um pa\u00eds riqu\u00edssimo, e o seu povo n\u00e3o pode continuar sendo pobre",
+          "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.8,
+          "relevance_score": 0.3161090612411499,
+          "metadata": {
+            "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 14
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "2. Consistently Highest Raw Score for 'Popular Sovereignty Claims': This dimension exhibits the highest average raw score (Mean: 0.9) with virtually no variability, suggesting it's a foundational and ever-present element of the discourse."
+      },
+      "queries_used": [
+        "popular sovereignty claims ultimate political authority",
+        "direct people's will consistent",
+        "unwavering institutional bypass rhetoric"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Conclamamos a todos voc\u00eas que continuem mobilizados e participem ativamente por ocasi\u00e3o das elei\u00e7\u00f5es do pr\u00f3ximo domingo, de forma democr\u00e1tica",
+          "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.537400484085083,
+          "metadata": {
+            "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "a confian\u00e7a do povo rondoniense, do povo brasileiro pra fazer a pol\u00edtica diferente.",
+          "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.5371391773223877,
+          "metadata": {
+            "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "o povo decida que vai ter segundo turno",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.49175214767456055,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Vamos respeitar o referendo do M5, que nos deu o direito \u00e0 compra de armas e muni\u00e7\u00f5es.",
+          "document_name": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.4908043146133423,
+          "metadata": {
+            "document_name": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Nos somos um so povo. Temos uma so bandeira. Um so cora\u00e7\u00e3o. A nossa uniao fara com que tenhamos um governo decente. Um governo que trabalhe, sim, pro seu povo.",
+          "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.4606972932815552,
+          "metadata": {
+            "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Queremos Bolsonaro, Presidente do Brasil!",
+          "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.4355677664279938,
+          "metadata": {
+            "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Eles tem dinheiro, tem um poder economico enorme. Eles tem tambem parte da midia favoravel aos seus propositos.",
+          "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.36351537704467773,
+          "metadata": {
+            "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Aqui, n\u00e3o ter\u00e1 mais lugar para a corrup\u00e7\u00e3o.",
+          "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.3201308846473694,
+          "metadata": {
+            "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "a imprensa n\u00e3o acreditou num primeiro momento",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.8,
+          "relevance_score": 0.31153714656829834,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "uma maneira diferente de fazer pol\u00edtica dessa velha pr\u00e1tica",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.30674341320991516,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "o japon\u00eas ficou redondo",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.3054654598236084,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Mergulhar num pa\u00eds, numa mais profunda crise \u00e9tica, moral e economica, nunca vista. O nosso pa\u00eds, realmente, esta a beira do caos. Nao podemos dar mais um passo a esquerda. O nosso passo agora, \u00e9 pro centro-direita.",
+          "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.3035368025302887,
+          "metadata": {
+            "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Eles continuam nos atacando sem tr\u00e9gua.",
+          "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.8,
+          "relevance_score": 0.2982870638370514,
+          "metadata": {
+            "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "A gente vai aposentar de uma vez por todas. \u00c9 PT, \u00e9 PSDB e \u00e9 um escambo",
+          "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.8,
+          "relevance_score": 0.2881825864315033,
+          "metadata": {
+            "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "essa uni\u00e3o de todo o brasil e vamos unir o povo brasileiro",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.2315613031387329,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "aqueles que se viram divididos por tr\u00eas do pt porque branco de um lado e negro de outro porque homossexual de um lado \u00e9 transexual de outro porque o homem do lado e mulher de outros nordestinos contra sulistas contra filhos nas retas tomadas rico contra o pobre",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.19100025296211243,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "O Brasil \u00e9 de n\u00f3s, pessoas de bem, trabalhadores, conservadores, crist\u00e3os, que preservam os valores familiares, que n\u00e3o querem ideologia e higiene em sala de aula...",
+          "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.18765884637832642,
+          "metadata": {
+            "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "N\u00f3s queremos unir todos, de norte a sul, de leste a oeste. Esse Brasil, al\u00e9m de grande, \u00e9 um pa\u00eds riqu\u00edssimo, e o seu povo n\u00e3o pode continuar sendo pobre",
+          "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.8,
+          "relevance_score": 0.17991432547569275,
+          "metadata": {
+            "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Vamos fazer com que, como proposta do Paulo Guedes, tirar o Estado do cangote de quem produz. Vamos desregulamentar muita coisa, desonorar folha de pagamento.",
+          "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.1733894944190979,
+          "metadata": {
+            "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "o povo decide que vai ter segundo turno \u00e9 que d\u00e1 um segundo turno",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.1725568026304245,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Com voc\u00eas, que d\u00e1 para n\u00f3s, n\u00f3s juntos, salvarmos o Brasil.",
+          "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.8,
+          "relevance_score": 0.17046231031417847,
+          "metadata": {
+            "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 21
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "3. High Raw Scores for Core Populist Anchors: 'Manichaean People-Elite Framing' (Mean: 0.858) and 'Crisis-Restoration Narrative' (Mean: 0.841) are highly present, forming key components of the populist message."
+      },
+      "queries_used": [
+        "pure people corrupt elites framing",
+        "decline crisis redemption narrative explicit",
+        "moral dichotomy us versus them"
+      ],
+      "quotes": [
+        {
+          "quote_text": "uma maneira diferente de fazer pol\u00edtica dessa velha pr\u00e1tica",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.5539023876190186,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "a imprensa n\u00e3o acreditou num primeiro momento",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.8,
+          "relevance_score": 0.4401015639305115,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "\u00c9 o partido que n\u00e3o tem envolvimento com corruptos! \u00c9 o partido que \u00e9 limpo!",
+          "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.4315126836299896,
+          "metadata": {
+            "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Eles tem dinheiro, tem um poder economico enorme. Eles tem tambem parte da midia favoravel aos seus propositos.",
+          "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.4279961585998535,
+          "metadata": {
+            "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "No quartel voce\u0302 tem companheirismo, patriotismo, disciplina, hierarquia, amor a\u0300 pa\u0301tria. Na poli\u0301tica, na\u0303o. [...] Mais uma vez, obrigado, Geraldo Alckmin [risadas], por ter unido a esc\u00f3ria da poli\u0301tica brasileira [aplausos].",
+          "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.40273842215538025,
+          "metadata": {
+            "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "\u00c9 a hora de S\u00e3o Paulo se livrar da praga dos esquerdopatas liderados pelo PT.",
+          "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.39620959758758545,
+          "metadata": {
+            "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Os nossos ministros, \u00e9, n\u00e3o procuram simplificar as coisas e atender os interesses nacionais, buscam apenas a-atender interesse pol\u00edtico-partid\u00e1rio.",
+          "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.8,
+          "relevance_score": 0.3915601074695587,
+          "metadata": {
+            "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "lugar de bandido que rouba o povo, \u00e9 atr\u00e1s das grades.",
+          "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.38596081733703613,
+          "metadata": {
+            "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Mergulhar num pa\u00eds, numa mais profunda crise \u00e9tica, moral e economica, nunca vista. O nosso pa\u00eds, realmente, esta a beira do caos. Nao podemos dar mais um passo a esquerda. O nosso passo agora, \u00e9 pro centro-direita.",
+          "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.3722890615463257,
+          "metadata": {
+            "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "\u00c9 a \u00faltima chance que temos de nos afastarmos de vez dessa pol\u00edtica que h\u00e1 trinta anos espolia o povo brasileiro.",
+          "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.34332820773124695,
+          "metadata": {
+            "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Vamos passar o pa\u00eds a limpo, vai resgatar a educa\u00e7\u00e3o, vai resgatar e reestruturar, sem d\u00favida alguma, a nossa seguran\u00e7a do Brasil.",
+          "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.33620160818099976,
+          "metadata": {
+            "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Ou n\u00f3s mudamos agora o Brasil, ou n\u00e3o teremos outra oportunidade.",
+          "document_name": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.3211590051651001,
+          "metadata": {
+            "document_name": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Ser\u00e1 uma limpeza nunca vista na hist\u00f3ria do Brasil.",
+          "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.31503692269325256,
+          "metadata": {
+            "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "botar o Brasil lan\u00e7ar nessa crise em que se encontra e vamos fazer um brasil grande vamos nos orgulhar novamente dessa p\u00e1tria",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.2596875727176666,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Qual \u00e9 o plano B desse perj\u00fario? Desse homem pobre l\u00e1 atr\u00e1s que roubou todas as nossas esperan\u00e7a?",
+          "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.7,
+          "relevance_score": 0.23279856145381927,
+          "metadata": {
+            "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Os partidos que lan\u00e7aram o candidato era do Centr\u00e3o e a esquerda que tinha entrado na briga dessa j\u00e1 que n\u00e3o aceitava conversar conosco",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.21910205483436584,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Ou v\u00e3o pra fora, ou v\u00e3o pra cadeia!",
+          "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 1.0,
+          "relevance_score": 0.20603284239768982,
+          "metadata": {
+            "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Por que que branco de um lado e negro de outro? Por que homossexual de um lado, heterossexual de outro? Por que homens de um lado, mulheres de outro, nordestinos contra sulistas, pais contra filhos nas lentes palmadas, rico contra pobre. Voc\u00ea ser rico no Brasil passou a ser motivo de vergonha.",
+          "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.19794437289237976,
+          "metadata": {
+            "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Se essa fraude fizesse presente, dessa poss\u00edvel, dessa tese minha, acabou a democracia.",
+          "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.19553673267364502,
+          "metadata": {
+            "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Lugar de vagabundo \u00e9 na cadeia ou no cemit\u00e9rio.",
+          "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.18620894849300385,
+          "metadata": {
+            "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "O Brasil \u00e9 de n\u00f3s, pessoas de bem, trabalhadores, conservadores, crist\u00e3os, que preservam os valores familiares, que n\u00e3o querem ideologia e higiene em sala de aula...",
+          "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.1842079609632492,
+          "metadata": {
+            "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Chega de ideologia de g\u00eanero, de politicamente correto. Chega de nos dividir. Brancos, negros, pobres, ricos, h\u00e9teros e homos, seja l\u00e1 o que seja. Um s\u00f3 povo, uma s\u00f3 na\u00e7\u00e3o, uma s\u00f3 bandeira.",
+          "document_name": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.17936737835407257,
+          "metadata": {
+            "document_name": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 22
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "4. High Internal Consistency of Core Anchors: A Cronbach's Alpha of 0.7665 for the Primary Populist Core Anchors indicates these dimensions frequently co-occur and are internally consistent."
+      },
+      "queries_used": [
+        "Manichaean people elite AND crisis restoration AND popular sovereignty AND anti pluralist",
+        "interconnected core populist appeals",
+        "synergistic primary populist dimensions"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Qual \u00e9 o plano B desse perj\u00fario? Desse homem pobre l\u00e1 atr\u00e1s que roubou todas as nossas esperan\u00e7a?",
+          "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.7,
+          "relevance_score": 0.4883752465248108,
+          "metadata": {
+            "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Brasil, al\u00e9m de grande, \u00e9 um pa\u00eds riqu\u00edssimo, e o seu povo n\u00e3o pode continuar sendo pobre",
+          "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.8,
+          "relevance_score": 0.4856264889240265,
+          "metadata": {
+            "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Vagabundo vai ter que trabalhar, vai deixar de fazer demagogia junto ao povo brasileiro.",
+          "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.7,
+          "relevance_score": 0.44587332010269165,
+          "metadata": {
+            "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "N\u00f3s temos tudo. Eu acho que ningu\u00e9m tem no mundo o que n\u00f3s temos. O que que nos falta? Falta, realmente, pol\u00edticos comprometidos com o seu pa\u00eds e n\u00e3o com grupos pol\u00edticos partid\u00e1rios.",
+          "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.8,
+          "relevance_score": 0.4396492838859558,
+          "metadata": {
+            "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Os partidos que lan\u00e7aram o candidato era do Centr\u00e3o e a esquerda que tinha entrado na briga dessa j\u00e1 que n\u00e3o aceitava conversar conosco",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.429766982793808,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "O que est\u00e1 em jogo \u00e9 a perpetua\u00e7\u00e3o dessa m\u00e1quina podre que n\u00f3s temos a\u00ed, que vive da corrup\u00e7\u00e3o, pra tirar de voc\u00eas o atendimento m\u00e9dico, a educa\u00e7\u00e3o, a seguran\u00e7a.",
+          "document_name": "2018-10-27_Pre-Second-Round_Live.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.8,
+          "relevance_score": 0.4257032871246338,
+          "metadata": {
+            "document_name": "2018-10-27_Pre-Second-Round_Live.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "\u00c9 a hora de S\u00e3o Paulo se livrar da praga dos esquerdopatas liderados pelo PT.",
+          "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.4024885296821594,
+          "metadata": {
+            "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "PT \u00e9 o Brasil verde amarelo e eles que representa Cuba representa o governo da Venezuela a sua bandeira vermelha com a foice e o martelo em cima dela",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.3802356719970703,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "o nosso grande problema no Brasil, \u00e9 uma quest\u00e3o pol\u00edtica. Ou colocamos gente como n\u00f3s na pol\u00edtica, ou n\u00e3o temos futuro.",
+          "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.3800118565559387,
+          "metadata": {
+            "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Conclamamos a todos voc\u00eas que continuem mobilizados e participem ativamente por ocasi\u00e3o das elei\u00e7\u00f5es do pr\u00f3ximo domingo, de forma democr\u00e1tica",
+          "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.37872254848480225,
+          "metadata": {
+            "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "n\u00e3o queremos se dividir a dividir a riqueza com voc\u00eas e n\u00e3o dividir pobreza que sempre foi a marca do socialismo e do comunismo",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.3569629490375519,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "\u00c9 motivo de vergonha n\u00f3s queremos se dividir a dividir a riqueza com voc\u00eas e n\u00e3o dividir pobreza que sempre foi a marca do socialismo e do comunismo",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.350932240486145,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Precisamos de algu\u00e9m que se aproxime de grandes pa\u00edses democr\u00e1ticos e capitalistas, que n\u00e3o fique amarrado aqui ao Mercosul por uma quest\u00e3o ideol\u00f3gica.",
+          "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.7,
+          "relevance_score": 0.3483947813510895,
+          "metadata": {
+            "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "No quartel voce\u0302 tem companheirismo, patriotismo, disciplina, hierarquia, amor a\u0300 pa\u0301tria. Na poli\u0301tica, na\u0303o. [...] Mais uma vez, obrigado, Geraldo Alckmin [risadas], por ter unido a esc\u00f3ria da poli\u0301tica brasileira [aplausos].",
+          "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.3392098546028137,
+          "metadata": {
+            "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Meus irma\u0303os da Marinha, do Exe\u0301rcito e da Aerona\u0301utica, voce\u0302s sera\u0303o reconhecidos no meu governo. [...] porque voce\u0302s sa\u0303o o u\u0301ltimo obsta\u0301culo para o socialismo. [...] No\u0301s na\u0303o aceitamos o comunismo. [...] O Brasil precisa de verdade. Na\u0303o precisa de marqueteiros. Na\u0303o precisa de centristas. Na\u0303o precisa de peti\u0301stas. Na\u0303o precisa de demagogos e populistas.",
+          "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.3361465632915497,
+          "metadata": {
+            "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "a imprensa n\u00e3o acreditou num primeiro momento",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.8,
+          "relevance_score": 0.3140350580215454,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "uma maneira diferente de fazer pol\u00edtica dessa velha pr\u00e1tica",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.3079241216182709,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "E General Moro j\u00e1 falou, a pr\u00f3xima opera\u00e7\u00e3o de paz do Brasil ser\u00e1 na Venezuela. Vamos libertar os nossos irm\u00e3os da fome e do socialismo.",
+          "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.2984246015548706,
+          "metadata": {
+            "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 18
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "5. Very Low Populist Strategic Contradiction Index (PSCI): With a mean of 0.1008, the PSCI is remarkably low, suggesting a high degree of rhetorical coherence rather than contradictory populist appeals."
+      },
+      "queries_used": [
+        "coherent populist message absence contradictions",
+        "consistent populist framing strategic",
+        "lack of contradictory rhetorical appeals"
+      ],
+      "quotes": [
+        {
+          "quote_text": "uma maneira diferente de fazer pol\u00edtica dessa velha pr\u00e1tica",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.42572498321533203,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "o japon\u00eas ficou redondo",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.4237983524799347,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "E General Moro j\u00e1 falou, a pr\u00f3xima opera\u00e7\u00e3o de paz do Brasil ser\u00e1 na Venezuela. Vamos libertar os nossos irm\u00e3os da fome e do socialismo.",
+          "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.40546947717666626,
+          "metadata": {
+            "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Vamos nos afastar de vez da, do socialismo, do comunismo. Nos vermos livre desse fantasma que acontece na Venezuela.",
+          "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.7,
+          "relevance_score": 0.4050927758216858,
+          "metadata": {
+            "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "n\u00e3o queremos se dividir a dividir a riqueza com voc\u00eas e n\u00e3o dividir pobreza que sempre foi a marca do socialismo e do comunismo",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.38465574383735657,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Brasil acima de tudo e Deus acima de todos!",
+          "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.3783406913280487,
+          "metadata": {
+            "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "N\u00f3s n\u00e3o podemos continuar se tratando como a Venezuela. Olhe o que est\u00e1 acontecendo com aquele povo. Aquele povo \u00e9 v\u00edtima de um regime apoiado pelo PT, pelo PCdoB, pelo PSOL.",
+          "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.3740833103656769,
+          "metadata": {
+            "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Meus irma\u0303os da Marinha, do Exe\u0301rcito e da Aerona\u0301utica, voce\u0302s sera\u0303o reconhecidos no meu governo. [...] porque voce\u0302s sa\u0303o o u\u0301ltimo obsta\u0301culo para o socialismo. [...] No\u0301s na\u0303o aceitamos o comunismo. [...] O Brasil precisa de verdade. Na\u0303o precisa de marqueteiros. Na\u0303o precisa de centristas. Na\u0303o precisa de peti\u0301stas. Na\u0303o precisa de demagogos e populistas.",
+          "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.3736129403114319,
+          "metadata": {
+            "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "No quartel voce\u0302 tem companheirismo, patriotismo, disciplina, hierarquia, amor a\u0300 pa\u0301tria. Na poli\u0301tica, na\u0303o. [...] Mais uma vez, obrigado, Geraldo Alckmin [risadas], por ter unido a esc\u00f3ria da poli\u0301tica brasileira [aplausos].",
+          "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.3730623424053192,
+          "metadata": {
+            "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Queremos Bolsonaro, Presidente do Brasil!",
+          "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.3709324598312378,
+          "metadata": {
+            "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "\u00c9 motivo de vergonha n\u00f3s queremos se dividir a dividir a riqueza com voc\u00eas e n\u00e3o dividir pobreza que sempre foi a marca do socialismo e do comunismo",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.3643578290939331,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Brasil, al\u00e9m de grande, \u00e9 um pa\u00eds riqu\u00edssimo, e o seu povo n\u00e3o pode continuar sendo pobre",
+          "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.8,
+          "relevance_score": 0.3538881540298462,
+          "metadata": {
+            "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Qual \u00e9 o plano B desse perj\u00fario? Desse homem pobre l\u00e1 atr\u00e1s que roubou todas as nossas esperan\u00e7a?",
+          "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.7,
+          "relevance_score": 0.35074588656425476,
+          "metadata": {
+            "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "E quando o povo passa fome, ele come carne nos melhores restaurantes do mundo.",
+          "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.7,
+          "relevance_score": 0.32100236415863037,
+          "metadata": {
+            "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Precisamos de algu\u00e9m que se aproxime de grandes pa\u00edses democr\u00e1ticos e capitalistas, que n\u00e3o fique amarrado aqui ao Mercosul por uma quest\u00e3o ideol\u00f3gica.",
+          "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.7,
+          "relevance_score": 0.31863343715667725,
+          "metadata": {
+            "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Vagabundo vai ter que trabalhar, vai deixar de fazer demagogia junto ao povo brasileiro.",
+          "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.7,
+          "relevance_score": 0.3150796890258789,
+          "metadata": {
+            "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "N\u00f3s temos tudo. Eu acho que ningu\u00e9m tem no mundo o que n\u00f3s temos. O que que nos falta? Falta, realmente, pol\u00edticos comprometidos com o seu pa\u00eds e n\u00e3o com grupos pol\u00edticos partid\u00e1rios.",
+          "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.8,
+          "relevance_score": 0.3150189220905304,
+          "metadata": {
+            "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Vamos fazer com que, como proposta do Paulo Guedes, tirar o Estado do cangote de quem produz. Vamos desregulamentar muita coisa, desonorar folha de pagamento.",
+          "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.3055591583251953,
+          "metadata": {
+            "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "estaremos ao lado sim, apenas daqueles pa\u00edses que entendam o livre mercado como essencial.",
+          "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.7,
+          "relevance_score": 0.3000648617744446,
+          "metadata": {
+            "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 19
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "6. High Raw Scores for Key Mechanism Anchors: 'Elite Conspiracy/Systemic Corruption' (Mean: 0.85) and 'Authenticity vs. Political Class' (Mean: 0.883) are highly present, indicating common populist mobilization strategies."
+      },
+      "queries_used": [
+        "hidden elite coordination claims",
+        "authenticity vs political class outsider status",
+        "systemic manipulation assertions"
+      ],
+      "quotes": [
+        {
+          "quote_text": "uma maneira diferente de fazer pol\u00edtica dessa velha pr\u00e1tica",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.555718719959259,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "O mito",
+          "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.4668216109275818,
+          "metadata": {
+            "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "vou botar uma pessoa que vem do meio produtor",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.45625627040863037,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Voc\u00eas humilharam uma senhora. Folha de S\u00e3o Paulo, voc\u00eas humilharam uma senhora. Estou aguardando a retrata\u00e7\u00e3o por parte de voc\u00eas.",
+          "document_name": "2018-10-27_Pre-Second-Round_Live.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.43780118227005005,
+          "metadata": {
+            "document_name": "2018-10-27_Pre-Second-Round_Live.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Esse movimento vem da raiz, vem da alma do povo sofrido que quer e ter\u00e1 a mudan\u00e7a.",
+          "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.4233464002609253,
+          "metadata": {
+            "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Reconhe\u00e7o as minhas limita\u00e7\u00f5es, mas pode ter certeza, a minha identidade, a minha virtude, que \u00e9 semelhante de voc\u00eas que est\u00e3o aqui, supera isso tudo.",
+          "document_name": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.4059506952762604,
+          "metadata": {
+            "document_name": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Eles tem dinheiro, tem um poder economico enorme. Eles tem tambem parte da midia favoravel aos seus propositos.",
+          "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.39496392011642456,
+          "metadata": {
+            "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "N\u00e3o somos apenas da boca pra fora, uma forma de fazer pol\u00edtica diferente. N\u00f3s somos a realidade.",
+          "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.3782457709312439,
+          "metadata": {
+            "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Aqui, n\u00e3o ter\u00e1 mais lugar para a corrup\u00e7\u00e3o.",
+          "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.3414398431777954,
+          "metadata": {
+            "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "O PT descobriu o caminho para o poder. O voto eletr\u00f4nico. [...] Quem aparelhava o TSE, com todo o respeito que eu tenho aos senhores ministros, que n\u00e3o t\u00eam conhecimento de inform\u00e1tica. [...] Essa possibilidade de fraude no segundo turno, talvez at\u00e9 no primeiro, \u00e9 concreta.",
+          "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.33609655499458313,
+          "metadata": {
+            "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "O Minist\u00e9rio do, do Meio Ambiente, hoje em dia, sofre influ\u00eancia, sim, de ONGs estrangeiras.",
+          "document_name": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.3299436867237091,
+          "metadata": {
+            "document_name": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Se essa fraude fizesse presente, dessa poss\u00edvel, dessa tese minha, acabou a democracia.",
+          "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.32215315103530884,
+          "metadata": {
+            "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "\u00c9 a \u00faltima chance que temos de nos afastarmos de vez dessa pol\u00edtica que h\u00e1 trinta anos espolia o povo brasileiro.",
+          "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.8,
+          "relevance_score": 0.3154769539833069,
+          "metadata": {
+            "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Os nossos ministros, \u00e9, n\u00e3o procuram simplificar as coisas e atender os interesses nacionais, buscam apenas a-atender interesse pol\u00edtico-partid\u00e1rio.",
+          "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.8,
+          "relevance_score": 0.2718009054660797,
+          "metadata": {
+            "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "a imprensa n\u00e3o acreditou num primeiro momento",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.8,
+          "relevance_score": 0.26373836398124695,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "A gente vai aposentar de uma vez por todas. \u00c9 PT, \u00e9 PSDB e \u00e9 um escambo",
+          "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.8,
+          "relevance_score": 0.22666317224502563,
+          "metadata": {
+            "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Vamos respeitar o referendo do M5, que nos deu o direito \u00e0 compra de armas e muni\u00e7\u00f5es.",
+          "document_name": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.21721896529197693,
+          "metadata": {
+            "document_name": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 17
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "7. Lowest Salience for 'Nationalist Exclusion': Despite its presence, 'Nationalist Exclusion' has the lowest average salience (Mean: 0.669), indicating it is less rhetorically emphasized compared to other populist dimensions."
+      },
+      "queries_used": [
+        "nationalist exclusion low rhetorical prominence",
+        "cultural homogeneity external threat secondary emphasis",
+        "boundary drawing less salient"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Brasil acima de tudo",
+          "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.4879261553287506,
+          "metadata": {
+            "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Vamos varrer o comunismo e o Foro de S\u00e3o Paulo.",
+          "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.47917139530181885,
+          "metadata": {
+            "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Brasil acima de tudo e Deus acima de todos!",
+          "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.45646804571151733,
+          "metadata": {
+            "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "E hoje, \u00e9 um dos pa\u00edses onde quase todos est\u00e3o fugindo da ditadura, da fome, da viol\u00eancia e da mis\u00e9ria.",
+          "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.43863511085510254,
+          "metadata": {
+            "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Vamos nos afastar de vez da, do socialismo, do comunismo. Nos vermos livre desse fantasma que acontece na Venezuela.",
+          "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.7,
+          "relevance_score": 0.4379727840423584,
+          "metadata": {
+            "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "nossa bandeira verde-amarela nosso cora\u00e7\u00e3o \u00e9 verde amarelo",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.42960697412490845,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Nenhum pa\u00eds no mundo tem o que nos temos, riquezas minerais, biodiversidade, agua potavel, regioes turisticas, temos tudo, tudo para sermos uma grande na\u00e7\u00e3o... Nao queremos entregar o nosso patrimonio para qual pa\u00eds que seja. Nos devemos valorizar o que \u00e9 nosso.",
+          "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.38430434465408325,
+          "metadata": {
+            "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Por que que branco de um lado e negro de outro? Por que homossexual de um lado, heterossexual de outro? Por que homens de um lado, mulheres de outro, nordestinos contra sulistas, pais contra filhos nas lentes palmadas, rico contra pobre. Voc\u00ea ser rico no Brasil passou a ser motivo de vergonha.",
+          "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.3049766421318054,
+          "metadata": {
+            "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Esse povo, sempre se levantou nos momentos mais dif\u00edceis da na\u00e7\u00e3o, para exatamente salv\u00e1-la.",
+          "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.3036048114299774,
+          "metadata": {
+            "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Para isso temos que unir o nosso povo, unir os caco que nos fez o governo da esquerda, no passado, botando de um lado negros e brancos, jogando nordestinos contra sulistas, jogando pais contra filhos, ate mesmo quem tem op\u00e7\u00e3o sexual, homo contra heteros. Vamos unir o nosso povo.",
+          "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.28802430629730225,
+          "metadata": {
+            "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Chega de ideologia de g\u00eanero, de politicamente correto. Chega de nos dividir. Brancos, negros, pobres, ricos, h\u00e9teros e homos, seja l\u00e1 o que seja. Um s\u00f3 povo, uma s\u00f3 na\u00e7\u00e3o, uma s\u00f3 bandeira.",
+          "document_name": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.2848404049873352,
+          "metadata": {
+            "document_name": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "O Brasil \u00e9 de n\u00f3s, pessoas de bem, trabalhadores, conservadores, crist\u00e3os, que preservam os valores familiares, que n\u00e3o querem ideologia e higiene em sala de aula...",
+          "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.27839887142181396,
+          "metadata": {
+            "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "lugar de bandido que rouba o povo, \u00e9 atr\u00e1s das grades.",
+          "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.2691347002983093,
+          "metadata": {
+            "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "N\u00f3s queremos unir todos, de norte a sul, de leste a oeste. Esse Brasil, al\u00e9m de grande, \u00e9 um pa\u00eds riqu\u00edssimo, e o seu povo n\u00e3o pode continuar sendo pobre",
+          "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.8,
+          "relevance_score": 0.11830774694681168,
+          "metadata": {
+            "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "uma maneira diferente de fazer pol\u00edtica dessa velha pr\u00e1tica",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.11172784864902496,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "aqueles que se viram divididos por tr\u00eas do pt porque branco de um lado e negro de outro porque homossexual de um lado \u00e9 transexual de outro porque o homem do lado e mulher de outros nordestinos contra sulistas contra filhos nas retas tomadas rico contra o pobre",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.0973198264837265,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Brasileiros, estou aqui porque n\u00e3o tenho mais nada a falar para voc\u00eas, \u00e9 o que eu quero pedir a voc\u00eas, \u00e9 que nos acompannhem aqui agora, de hoje pra amanh\u00e3, mais um voto dentro da fam\u00edlia ou na fila de vota\u00e7\u00e3o amanh\u00e3. D\u00ea pra conseguir, \u00e9 isso. E qual \u00e9 a orienta\u00e7\u00e3o? Com esse aplicativo, a gente vai tirar uma fotografia da cabe\u00e7a, da tripa, n\u00e9, da-daquela lista onde est\u00e3o os candidatos ali a presidente da Rep\u00fablica, isso vai pro segundo turno. [...] N\u00f3s somos iguais, somos iguais, n\u00e3o h\u00e1 diferen\u00e7a entre um e outro, somos todos iguais.",
+          "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.8,
+          "relevance_score": 0.09501121193170547,
+          "metadata": {
+            "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "o japon\u00eas ficou redondo",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.09224063158035278,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "essa uni\u00e3o de todo o brasil e vamos unir o povo brasileiro",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.09164153039455414,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Na\u0303o sou o salvador da patria. Quem vai salvar essa patria somos todos nos. [...] E\u0301 uma pa\u0301tria maravilhosa, que o PT tentou nos dividir. [...] Vamos unir brancos e negros, homos e heteros, ou trans tambe\u0301m, na\u0303o tem problema [risos]. [...] Vamos unir nordestinos e sulistas. Vamos abafar esses pequenos movimentos separatistas que vemos pelo Brasil. Unir ricos e pobres.",
+          "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.08938628435134888,
+          "metadata": {
+            "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "o nosso querido Brasil \u00e9 que agora no Brasil e olha que n\u00f3s temos tudo que nos falta s\u00f3 o que realmente por isso comprometidos com o seu pa\u00eds e n\u00e3o um grupos pol\u00edticos partid\u00e1rios",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.08836755901575089,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "o nosso grande problema no Brasil, \u00e9 uma quest\u00e3o pol\u00edtica. Ou colocamos gente como n\u00f3s na pol\u00edtica, ou n\u00e3o temos futuro.",
+          "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.08647628873586655,
+          "metadata": {
+            "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 22
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "8. Economic Populist Appeals Present but Lower Salience: 'Economic Populist Appeals' have a high raw score (Mean: 0.842) but a comparatively lower salience (Mean: 0.761), suggesting their presence without always being the primary rhetorical driver."
+      },
+      "queries_used": [
+        "economic populist appeals high raw low salience",
+        "economic elite framing not primary focus",
+        "populist economic discourse secondary emphasis"
+      ],
+      "quotes": [
+        {
+          "quote_text": "n\u00e3o queremos se dividir a dividir a riqueza com voc\u00eas e n\u00e3o dividir pobreza que sempre foi a marca do socialismo e do comunismo",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.5053892135620117,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "\u00c9 motivo de vergonha n\u00f3s queremos se dividir a dividir a riqueza com voc\u00eas e n\u00e3o dividir pobreza que sempre foi a marca do socialismo e do comunismo",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.5017458200454712,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Qual \u00e9 o plano B desse perj\u00fario? Desse homem pobre l\u00e1 atr\u00e1s que roubou todas as nossas esperan\u00e7a?",
+          "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.7,
+          "relevance_score": 0.49063724279403687,
+          "metadata": {
+            "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "O que est\u00e1 em jogo \u00e9 a perpetua\u00e7\u00e3o dessa m\u00e1quina podre que n\u00f3s temos a\u00ed, que vive da corrup\u00e7\u00e3o, pra tirar de voc\u00eas o atendimento m\u00e9dico, a educa\u00e7\u00e3o, a seguran\u00e7a.",
+          "document_name": "2018-10-27_Pre-Second-Round_Live.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.8,
+          "relevance_score": 0.4883366525173187,
+          "metadata": {
+            "document_name": "2018-10-27_Pre-Second-Round_Live.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Brasil, al\u00e9m de grande, \u00e9 um pa\u00eds riqu\u00edssimo, e o seu povo n\u00e3o pode continuar sendo pobre",
+          "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.8,
+          "relevance_score": 0.487391859292984,
+          "metadata": {
+            "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Precisamos de algu\u00e9m que se aproxime de grandes pa\u00edses democr\u00e1ticos e capitalistas, que n\u00e3o fique amarrado aqui ao Mercosul por uma quest\u00e3o ideol\u00f3gica.",
+          "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.7,
+          "relevance_score": 0.485307514667511,
+          "metadata": {
+            "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "estaremos ao lado sim, apenas daqueles pa\u00edses que entendam o livre mercado como essencial.",
+          "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.7,
+          "relevance_score": 0.4567192792892456,
+          "metadata": {
+            "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "N\u00f3s temos tudo. Eu acho que ningu\u00e9m tem no mundo o que n\u00f3s temos. O que que nos falta? Falta, realmente, pol\u00edticos comprometidos com o seu pa\u00eds e n\u00e3o com grupos pol\u00edticos partid\u00e1rios.",
+          "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.8,
+          "relevance_score": 0.455201119184494,
+          "metadata": {
+            "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "E quando o povo passa fome, ele come carne nos melhores restaurantes do mundo.",
+          "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.7,
+          "relevance_score": 0.4428577423095703,
+          "metadata": {
+            "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "uma maneira diferente de fazer pol\u00edtica dessa velha pr\u00e1tica",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.4095989763736725,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "\u00c9 a hora de S\u00e3o Paulo se livrar da praga dos esquerdopatas liderados pelo PT.",
+          "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.3088279068470001,
+          "metadata": {
+            "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "No quartel voce\u0302 tem companheirismo, patriotismo, disciplina, hierarquia, amor a\u0300 pa\u0301tria. Na poli\u0301tica, na\u0303o. [...] Mais uma vez, obrigado, Geraldo Alckmin [risadas], por ter unido a esc\u00f3ria da poli\u0301tica brasileira [aplausos].",
+          "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.29795128107070923,
+          "metadata": {
+            "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Eles tem dinheiro, tem um poder economico enorme. Eles tem tambem parte da midia favoravel aos seus propositos.",
+          "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.28063273429870605,
+          "metadata": {
+            "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "lugar de bandido que rouba o povo, \u00e9 atr\u00e1s das grades.",
+          "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.278957724571228,
+          "metadata": {
+            "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "o nosso grande problema no Brasil, \u00e9 uma quest\u00e3o pol\u00edtica. Ou colocamos gente como n\u00f3s na pol\u00edtica, ou n\u00e3o temos futuro.",
+          "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.27047377824783325,
+          "metadata": {
+            "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "a imprensa n\u00e3o acreditou num primeiro momento",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.8,
+          "relevance_score": 0.25679811835289,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 16
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "9. Relatively Lower Raw Score for 'Homogeneous People Construction': This dimension shows a slightly lower average raw score (Mean: 0.715) compared to other core and mechanism anchors, implying less intense construction of a unified people identity."
+      },
+      "queries_used": [
+        "homogeneous people construction moderate intensity",
+        "unified people identity less emphasized",
+        "division-transcending unity claims lower"
+      ],
+      "quotes": [
+        {
+          "quote_text": "aqueles que se viram divididos por tr\u00eas do pt porque branco de um lado e negro de outro porque homossexual de um lado \u00e9 transexual de outro porque o homem do lado e mulher de outros nordestinos contra sulistas contra filhos nas retas tomadas rico contra o pobre",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.3434654772281647,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Chega de ideologia de g\u00eanero, de politicamente correto. Chega de nos dividir. Brancos, negros, pobres, ricos, h\u00e9teros e homos, seja l\u00e1 o que seja. Um s\u00f3 povo, uma s\u00f3 na\u00e7\u00e3o, uma s\u00f3 bandeira.",
+          "document_name": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.3357499837875366,
+          "metadata": {
+            "document_name": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "O Brasil \u00e9 de n\u00f3s, pessoas de bem, trabalhadores, conservadores, crist\u00e3os, que preservam os valores familiares, que n\u00e3o querem ideologia e higiene em sala de aula...",
+          "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.3330138921737671,
+          "metadata": {
+            "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Por que que branco de um lado e negro de outro? Por que homossexual de um lado, heterossexual de outro? Por que homens de um lado, mulheres de outro, nordestinos contra sulistas, pais contra filhos nas lentes palmadas, rico contra pobre. Voc\u00ea ser rico no Brasil passou a ser motivo de vergonha.",
+          "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.3120977580547333,
+          "metadata": {
+            "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Para isso temos que unir o nosso povo, unir os caco que nos fez o governo da esquerda, no passado, botando de um lado negros e brancos, jogando nordestinos contra sulistas, jogando pais contra filhos, ate mesmo quem tem op\u00e7\u00e3o sexual, homo contra heteros. Vamos unir o nosso povo.",
+          "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.307684063911438,
+          "metadata": {
+            "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "essa uni\u00e3o de todo o brasil e vamos unir o povo brasileiro",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.3058313727378845,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Esse povo, sempre se levantou nos momentos mais dif\u00edceis da na\u00e7\u00e3o, para exatamente salv\u00e1-la.",
+          "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.2909291386604309,
+          "metadata": {
+            "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "N\u00f3s queremos unir todos, de norte a sul, de leste a oeste. Esse Brasil, al\u00e9m de grande, \u00e9 um pa\u00eds riqu\u00edssimo, e o seu povo n\u00e3o pode continuar sendo pobre",
+          "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.8,
+          "relevance_score": 0.2742709815502167,
+          "metadata": {
+            "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "N\u00e3o podemos continuar com essa dupla de mingau que eu n\u00e3o gosto, PT, PSDB.",
+          "document_name": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.1483810693025589,
+          "metadata": {
+            "document_name": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "N\u00f3s precisamos do voto, n\u00e3o \u00e9 de legenda, n\u00e3o \u00e9 no candidato.",
+          "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.1298513114452362,
+          "metadata": {
+            "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "N\u00f3s temos s\u00f3 duas op\u00e7\u00f5es, n\u00e9? Pra direita ou pra esquerda.",
+          "document_name": "2018-10-27_Pre-Second-Round_Live.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.11918782442808151,
+          "metadata": {
+            "document_name": "2018-10-27_Pre-Second-Round_Live.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "n\u00e3o queremos se dividir a dividir a riqueza com voc\u00eas e n\u00e3o dividir pobreza que sempre foi a marca do socialismo e do comunismo",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.11782723665237427,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "o japon\u00eas ficou redondo",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.11577856540679932,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "lugar de bandido que rouba o povo, \u00e9 atr\u00e1s das grades.",
+          "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.1048402488231659,
+          "metadata": {
+            "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "\u00c9 motivo de vergonha n\u00f3s queremos se dividir a dividir a riqueza com voc\u00eas e n\u00e3o dividir pobreza que sempre foi a marca do socialismo e do comunismo",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.09196251630783081,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "um Brasil livre deste preconceito branco e negro, homo e h\u00e9tero. Algu\u00e9m sabe se eu sou gay? Poxa, e se for, qual o problema?",
+          "document_name": "2018-10-27_Pre-Second-Round_Live.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.9,
+          "relevance_score": 0.0888795256614685,
+          "metadata": {
+            "document_name": "2018-10-27_Pre-Second-Round_Live.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 16
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "10. Overall Populism Stable Across Campaign Phases: Statistical analysis (ANOVA p=0.456) shows no significant difference in the 'Salience-Weighted Overall Populism Index' across different campaign stages, indicating consistent populist messaging."
+      },
+      "queries_used": [
+        "consistent populist discourse campaign stages",
+        "stable overall populism over time",
+        "unwavering populist rhetoric across phases"
+      ],
+      "quotes": [
+        {
+          "quote_text": "n\u00e3o queremos se dividir a dividir a riqueza com voc\u00eas e n\u00e3o dividir pobreza que sempre foi a marca do socialismo e do comunismo",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.40108078718185425,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "\u00c9 motivo de vergonha n\u00f3s queremos se dividir a dividir a riqueza com voc\u00eas e n\u00e3o dividir pobreza que sempre foi a marca do socialismo e do comunismo",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.39801809191703796,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Queremos Bolsonaro, Presidente do Brasil!",
+          "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.3646644055843353,
+          "metadata": {
+            "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "uma maneira diferente de fazer pol\u00edtica dessa velha pr\u00e1tica",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.36293765902519226,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Meus irma\u0303os da Marinha, do Exe\u0301rcito e da Aerona\u0301utica, voce\u0302s sera\u0303o reconhecidos no meu governo. [...] porque voce\u0302s sa\u0303o o u\u0301ltimo obsta\u0301culo para o socialismo. [...] No\u0301s na\u0303o aceitamos o comunismo. [...] O Brasil precisa de verdade. Na\u0303o precisa de marqueteiros. Na\u0303o precisa de centristas. Na\u0303o precisa de peti\u0301stas. Na\u0303o precisa de demagogos e populistas.",
+          "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.3582887649536133,
+          "metadata": {
+            "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Eles tem dinheiro, tem um poder economico enorme. Eles tem tambem parte da midia favoravel aos seus propositos.",
+          "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.35716208815574646,
+          "metadata": {
+            "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Mergulhar num pa\u00eds, numa mais profunda crise \u00e9tica, moral e economica, nunca vista. O nosso pa\u00eds, realmente, esta a beira do caos. Nao podemos dar mais um passo a esquerda. O nosso passo agora, \u00e9 pro centro-direita.",
+          "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.3512815535068512,
+          "metadata": {
+            "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Qual \u00e9 o plano B desse perj\u00fario? Desse homem pobre l\u00e1 atr\u00e1s que roubou todas as nossas esperan\u00e7a?",
+          "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.7,
+          "relevance_score": 0.347170889377594,
+          "metadata": {
+            "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "N\u00f3s temos tudo. Eu acho que ningu\u00e9m tem no mundo o que n\u00f3s temos. O que que nos falta? Falta, realmente, pol\u00edticos comprometidos com o seu pa\u00eds e n\u00e3o com grupos pol\u00edticos partid\u00e1rios.",
+          "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.8,
+          "relevance_score": 0.3441357910633087,
+          "metadata": {
+            "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Precisamos de algu\u00e9m que se aproxime de grandes pa\u00edses democr\u00e1ticos e capitalistas, que n\u00e3o fique amarrado aqui ao Mercosul por uma quest\u00e3o ideol\u00f3gica.",
+          "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.7,
+          "relevance_score": 0.3430010676383972,
+          "metadata": {
+            "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Vamos nos afastar de vez da, do socialismo, do comunismo. Nos vermos livre desse fantasma que acontece na Venezuela.",
+          "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.7,
+          "relevance_score": 0.34128084778785706,
+          "metadata": {
+            "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "estaremos ao lado sim, apenas daqueles pa\u00edses que entendam o livre mercado como essencial.",
+          "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.7,
+          "relevance_score": 0.3411877155303955,
+          "metadata": {
+            "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "o japon\u00eas ficou redondo",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.3383501172065735,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "No quartel voce\u0302 tem companheirismo, patriotismo, disciplina, hierarquia, amor a\u0300 pa\u0301tria. Na poli\u0301tica, na\u0303o. [...] Mais uma vez, obrigado, Geraldo Alckmin [risadas], por ter unido a esc\u00f3ria da poli\u0301tica brasileira [aplausos].",
+          "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.3127903640270233,
+          "metadata": {
+            "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 14
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "11. High Confidence in Scoring: Most dimensions exhibit high confidence scores (e.g., Manichaean Confidence Mean: 0.9), implying reliable and unambiguous identification of framework elements in the text."
+      },
+      "queries_used": [
+        "clear textual evidence populist claims",
+        "unambiguous populist rhetoric examples",
+        "high confidence in dimension scores"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Eles tem dinheiro, tem um poder economico enorme. Eles tem tambem parte da midia favoravel aos seus propositos.",
+          "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.452347993850708,
+          "metadata": {
+            "document_name": "2018-10-07_Post-First-Round_Speech.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "O mito",
+          "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.4360303580760956,
+          "metadata": {
+            "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "n\u00e3o queremos se dividir a dividir a riqueza com voc\u00eas e n\u00e3o dividir pobreza que sempre foi a marca do socialismo e do comunismo",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.4329868257045746,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "a confian\u00e7a do povo rondoniense, do povo brasileiro pra fazer a pol\u00edtica diferente.",
+          "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.4283372759819031,
+          "metadata": {
+            "document_name": "2018-08-31_Porto_Velho_Speech.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Qual \u00e9 o plano B desse perj\u00fario? Desse homem pobre l\u00e1 atr\u00e1s que roubou todas as nossas esperan\u00e7a?",
+          "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.7,
+          "relevance_score": 0.3900372385978699,
+          "metadata": {
+            "document_name": "2018-09-16_Post-Stabbing_Speech.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Precisamos de algu\u00e9m que se aproxime de grandes pa\u00edses democr\u00e1ticos e capitalistas, que n\u00e3o fique amarrado aqui ao Mercosul por uma quest\u00e3o ideol\u00f3gica.",
+          "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.7,
+          "relevance_score": 0.3780287206172943,
+          "metadata": {
+            "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "N\u00f3s temos tudo. Eu acho que ningu\u00e9m tem no mundo o que n\u00f3s temos. O que que nos falta? Falta, realmente, pol\u00edticos comprometidos com o seu pa\u00eds e n\u00e3o com grupos pol\u00edticos partid\u00e1rios.",
+          "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.8,
+          "relevance_score": 0.3731726408004761,
+          "metadata": {
+            "document_name": "2018-10-16_Post-First-Round_Speech.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Queremos Bolsonaro, Presidente do Brasil!",
+          "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.36838528513908386,
+          "metadata": {
+            "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "estaremos ao lado sim, apenas daqueles pa\u00edses que entendam o livre mercado como essencial.",
+          "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.7,
+          "relevance_score": 0.3621078133583069,
+          "metadata": {
+            "document_name": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Estou aqui porque acredito em voc\u00eas. Voc\u00eas est\u00e3o a\u00ed porque acreditam no Brasil.",
+          "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.3564985394477844,
+          "metadata": {
+            "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "E quando o povo passa fome, ele come carne nos melhores restaurantes do mundo.",
+          "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.7,
+          "relevance_score": 0.3508419990539551,
+          "metadata": {
+            "document_name": "2018-09-30_Avenida_Paulista_Speech.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "lugar de bandido que rouba o povo, \u00e9 atr\u00e1s das grades.",
+          "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.09139944612979889,
+          "metadata": {
+            "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Voc\u00eas humilharam uma senhora. Folha de S\u00e3o Paulo, voc\u00eas humilharam uma senhora. Estou aguardando a retrata\u00e7\u00e3o por parte de voc\u00eas.",
+          "document_name": "2018-10-27_Pre-Second-Round_Live.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.06915172934532166,
+          "metadata": {
+            "document_name": "2018-10-27_Pre-Second-Round_Live.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "uma maneira diferente de fazer pol\u00edtica dessa velha pr\u00e1tica",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.061240341514348984,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "No quartel voce\u0302 tem companheirismo, patriotismo, disciplina, hierarquia, amor a\u0300 pa\u0301tria. Na poli\u0301tica, na\u0303o. [...] Mais uma vez, obrigado, Geraldo Alckmin [risadas], por ter unido a esc\u00f3ria da poli\u0301tica brasileira [aplausos].",
+          "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.060142990201711655,
+          "metadata": {
+            "document_name": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "a imprensa n\u00e3o acreditou num primeiro momento",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.8,
+          "relevance_score": 0.051411233842372894,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "A gente vai aposentar de uma vez por todas. \u00c9 PT, \u00e9 PSDB e \u00e9 um escambo",
+          "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.8,
+          "relevance_score": 0.04935816675424576,
+          "metadata": {
+            "document_name": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "vou botar uma pessoa que vem do meio produtor",
+          "document_name": "2018-10-07_Pre-Election_Live.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.04900564253330231,
+          "metadata": {
+            "document_name": "2018-10-07_Pre-Election_Live.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 18
+    }
+  ]
+}

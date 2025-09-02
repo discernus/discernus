@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_b440d9283c08",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "bolsonaro_2018_populist_discourse_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.2\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Three independent analytical approaches (Evidence-First, Context-Weighted, Pattern-Based) were conducted, and median scores were calculated for each dimension. Best supporting quotes were selected from the available evidence across all approaches.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"5bb1eaaecfed...\",\n      \"document_name\": \"2018-08-23_Aracatuba_Speech_Part_1.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"crisis_restoration_temporal_narrative\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.5,\n          \"confidence\": 0.7\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"o nosso grande problema no Brasil, \u00e9 uma quest\u00e3o pol\u00edtica. Ou colocamos gente como n\u00f3s na pol\u00edtica, ou n\u00e3o temos futuro.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"explicit contrast\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_temporal_narrative\",\n          \"quote_text\": \"Venezuela, que at\u00e9 pouco tempo era um pa\u00eds dos mais ricos aqui da Am\u00e9rica do Sul. E hoje, \u00e9 um dos pa\u00edses onde quase todos est\u00e3o fugindo da ditadura, da fome, da viol\u00eancia e da mis\u00e9ria.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"catastrophe threshold language\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"Temos o povo ao nosso lado.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"popular will primacy assertion\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"Essa candidata, vai morrer porque n\u00e3o liberaremos recursos da Uni\u00e3o para eles.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"opposition legitimacy denial\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"Eles continuam nos atacando sem tr\u00e9gua.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"establishment coordination accusation\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"N\u00e3o somos apenas da boca pra fora, uma forma de fazer pol\u00edtica diferente. N\u00f3s somos a realidade.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"authenticity-as-opposition rhetoric\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"Juntos, temos como unir o nosso povo brasileiro... Somos um s\u00f3 pa\u00eds, uma s\u00f3 p\u00e1tria, uma s\u00f3 na\u00e7\u00e3o, um s\u00f3 cora\u00e7\u00e3o verde e amarelo.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"explicit unity assertion\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"Brasil acima de tudo\",\n          \"confidence\": 0.8,\n          \"context_type\": \"exclusive national identity construction\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"estaremos ao lado sim, apenas daqueles pa\u00edses que entendam o livre mercado como essencial.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"nationalist economic priority rhetoric\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "55daeb06587272f2947315c1ee00c067be7179b25ead77a4cde48d531f0cfed9",
+  "execution_metadata": {
+    "start_time": "2025-09-02T00:58:07.290057+00:00",
+    "end_time": "2025-09-02T00:58:47.532514+00:00",
+    "duration_seconds": 40.242433
+  },
+  "input_artifacts": {
+    "framework_hash": "4152f312d410e2de3bbc16f7d3e9a70c6347b3dd3db6f67aa44c6725f7b2d6d7",
+    "document_hashes": [
+      "5bb1eaaecfed307639402b6a074365b434d707dee26cfc7d57d81e2d87d32a9f"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "bolsonaro_2018",
+      "experiment_root": "/Volumes/code/discernus/projects/bolsonaro_2018",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250902T005621Z_601ae79b"
+  }
+}

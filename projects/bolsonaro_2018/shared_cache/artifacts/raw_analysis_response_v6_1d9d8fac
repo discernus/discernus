@@ -1,0 +1,120 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "10.0.2",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Speech analysis focusing on 9 populist dimensions across three independent analytical perspectives (Evidence-First, Context-Weighted, Pattern-Based). Median scores and best evidence quotes were then aggregated.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "{{artifact_id}}",
+      "document_name": "2018-10-22_Avenida_Paulista_Speech.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 1.0,
+          "salience": 1.0,
+          "confidence": 1.0
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "nationalist_exclusion": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "economic_populist_appeals": {
+          "raw_score": 0.6,
+          "salience": 0.4,
+          "confidence": 0.7
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "lugar de bandido que rouba o povo, \u00e9 atr\u00e1s das grades.",
+          "confidence": 0.9,
+          "context_type": "explicit statement"
+        },
+        {
+          "dimension": "crisis_restoration_narrative",
+          "quote_text": "Ser\u00e1 uma limpeza nunca vista na hist\u00f3ria do Brasil.",
+          "confidence": 0.9,
+          "context_type": "explicit statement"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "Conclamamos a todos voc\u00eas que continuem mobilizados e participem ativamente por ocasi\u00e3o das elei\u00e7\u00f5es do pr\u00f3ximo domingo, de forma democr\u00e1tica",
+          "confidence": 0.9,
+          "context_type": "direct appeal"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion",
+          "quote_text": "Ou v\u00e3o pra fora, ou v\u00e3o pra cadeia!",
+          "confidence": 1.0,
+          "context_type": "direct threat"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "Aqui, n\u00e3o ter\u00e1 mais lugar para a corrup\u00e7\u00e3o.",
+          "confidence": 0.9,
+          "context_type": "explicit statement"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "Estou aqui porque acredito em voc\u00eas. Voc\u00eas est\u00e3o a\u00ed porque acreditam no Brasil.",
+          "confidence": 0.9,
+          "context_type": "personal positioning"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "Esse povo, sempre se levantou nos momentos mais dif\u00edceis da na\u00e7\u00e3o, para exatamente salv\u00e1-la.",
+          "confidence": 0.9,
+          "context_type": "collective identity affirmation"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "Brasil acima de tudo e Deus acima de todos!",
+          "confidence": 0.9,
+          "context_type": "national identity assertion"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "Vagabundo vai ter que trabalhar, vai deixar de fazer demagogia junto ao povo brasileiro.",
+          "confidence": 0.7,
+          "context_type": "derogatory economic framing"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

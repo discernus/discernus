@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_925ba9bb41ab",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "bolsonaro_2018_populist_discourse_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.2\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analyzed pre-election live address for populist discourse dimensions. Employed three distinct approaches (Evidence-First, Context-Weighted, Pattern-Based) to ensure robust scoring. The speech consistently employs a strong 'us vs. them' rhetoric, highlights a national crisis needing restoration, and mobilizes the 'people' against a corrupt political class and opposing ideologies, all framed within economic appeals and national identity.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"10d7264b750f...\",\n      \"document_name\": \"2018-10-07_Pre-Election_Live.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.4,\n          \"confidence\": 0.8\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"uma maneira diferente de fazer pol\u00edtica dessa velha pr\u00e1tica\",\n          \"confidence\": 0.9,\n          \"context_type\": \"explicit contrast\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"nosso querido brasil...que agora no brasil e olha que n\u00f3s temos, n\u00f3s temos tudo eu acho que ningu\u00e9m tem no mundo que nos falta\",\n          \"confidence\": 0.9,\n          \"context_type\": \"problem framing\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"o povo decide que vai ter segundo turno \u00e9 que d\u00e1 um segundo turno\",\n          \"confidence\": 0.8,\n          \"context_type\": \"direct appeal\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"Os partidos que lan\u00e7aram o candidato era do Centr\u00e3o e a esquerda que tinha entrado na briga dessa j\u00e1 que n\u00e3o aceitava conversar conosco\",\n          \"confidence\": 0.9,\n          \"context_type\": \"opposition rejection\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"a imprensa n\u00e3o acreditou num primeiro momento\",\n          \"confidence\": 0.8,\n          \"context_type\": \"implied bias\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"uma maneira diferente de fazer pol\u00edtica dessa velha pr\u00e1tica\",\n          \"confidence\": 0.9,\n          \"context_type\": \"self-positioning\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"essa uni\u00e3o de todo o brasil e vamos unir o povo brasileiro\",\n          \"confidence\": 0.9,\n          \"context_type\": \"call for unity\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"nossa bandeira verde-amarela nosso cora\u00e7\u00e3o \u00e9 verde amarelo\",\n          \"confidence\": 0.8,\n          \"context_type\": \"symbolic appeal\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"\u00c9 motivo de vergonha n\u00f3s queremos se dividir a dividir a riqueza com voc\u00eas e n\u00e3o dividir pobreza que sempre foi a marca do socialismo e do comunismo\",\n          \"confidence\": 0.9,\n          \"context_type\": \"moralized economic framing\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "c3149e8b98893e1a21aa4cacb55b565736be41a95b630e736adb1aff2656c477",
+  "execution_metadata": {
+    "start_time": "2025-09-02T02:06:46.740173+00:00",
+    "end_time": "2025-09-02T02:07:55.277563+00:00",
+    "duration_seconds": 68.537369
+  },
+  "input_artifacts": {
+    "framework_hash": "4152f312d410e2de3bbc16f7d3e9a70c6347b3dd3db6f67aa44c6725f7b2d6d7",
+    "document_hashes": [
+      "10d7264b750f5b0ba1f60289667a7d2afb75d0829d73d7cdffc9bf0710c5e8b0"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "bolsonaro_2018",
+      "experiment_root": "/Volumes/code/discernus/projects/bolsonaro_2018",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250902T020646Z_4834e111"
+  }
+}
