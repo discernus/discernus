@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_2ecc86845575",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "bolsonaro_2018_populist_discourse_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.2\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using three independent approaches (Evidence-First, Context-Weighted, Pattern-Based) with median aggregation for robust scoring. Document is a political speech following a stabbing incident, blending personal and political themes.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"1642c54ab5ed...\",\n      \"document_name\": \"2018-09-16_Post-Stabbing_Speech.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"crisis_restoration_temporal_narrative\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.3,\n          \"confidence\": 0.7\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"O PT n\u00e3o esconde o que faz mais.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"explicit_framing\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_temporal_narrative\",\n          \"quote_text\": \"N\u00f3s n\u00e3o podemos continuar se tratando como a Venezuela. Olha o que t\u00e1 acontecendo com aquele povo.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"crisis_framing\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"N\u00e3o temos qualquer garantia nas elei\u00e7\u00f5es.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_challenge_to_institutions\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"Aquele povo \u00e9 v\u00edtima de um regime apoiado pelo PT, pelo PCdoB, pelo PSOL.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"demonization_of_opposition\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"Essa possibilidade de fraude no segundo turno, talvez at\u00e9 no primeiro, \u00e9 concreta.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"accusation_of_systemic_manipulation\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"Deixa eu viajar aqui. Pa! Ol\u00e1, amigos. Estamos aqui direto do Albert Einstein.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"personal_vulnerable_setting\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"N\u00f3s n\u00e3o podemos continuar se tratando como a Venezuela.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"collective_identity_construction\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"Brasil acima de tudo, Deus acima de todos.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"nationalist_motto\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"esse homem pobre l\u00e1 atr\u00e1s que roubou todas as nossas esperan\u00e7as.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"implied_economic_grievance\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "a723791fe1001b2a3008cd46f608862032a04e84abd9452fbb13478a72f3439c",
+  "execution_metadata": {
+    "start_time": "2025-09-02T03:43:39.010719+00:00",
+    "end_time": "2025-09-02T03:44:40.087917+00:00",
+    "duration_seconds": 61.07719
+  },
+  "input_artifacts": {
+    "framework_hash": "4152f312d410e2de3bbc16f7d3e9a70c6347b3dd3db6f67aa44c6725f7b2d6d7",
+    "document_hashes": [
+      "1642c54ab5ed85de676dc673450121eaeba93c2f53a23c1d5d5a92bdab0e5994"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "bolsonaro_2018",
+      "experiment_root": "/Volumes/code/discernus/projects/bolsonaro_2018",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250902T033856Z_f9c07401"
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "fd2a7eed17d74bbb25377020a609e9257949208fdec6072bb1175c6c2fc5289e"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-02T03:46:24.103599+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "With already corrupted party leaders, who didn't get it right, seeking support in exchange for television time",
+      "confidence": 0.9,
+      "context_type": "direct accusation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T03:46:24.103575+00:00"
+    },
+    {
+      "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "We managed to show that it is possible to do politics differently. We managed to conquer part of the Brazilian people with truth.",
+      "confidence": 0.9,
+      "context_type": "solution framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T03:46:24.103579+00:00"
+    },
+    {
+      "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "The union of all, my people, let's unite us, let's unite this Brazil here, right? We are not going to put a corneteer to play a cornet and give a meaningless touch, no, calm down, no, it's not going to be that, but unite, for example, by dedication, by love for the homeland, by respect for the family",
+      "confidence": 0.9,
+      "context_type": "direct appeal to people's will",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T03:46:24.103582+00:00"
+    },
+    {
+      "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "Brazil green-yellow and those who represent Cuba, represent the government of Venezuela with their red flag, with the sickle and hammer on top of it.",
+      "confidence": 0.9,
+      "context_type": "ideological othering",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T03:46:24.103584+00:00"
+    },
+    {
+      "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "The economists who put Brazil in this, in this crisis that is here.",
+      "confidence": 0.8,
+      "context_type": "systemic blame attribution",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T03:46:24.103586+00:00"
+    },
+    {
+      "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "I talked to prospectors. My father, Geraldo Bolsonaro, who left us in 1995, was a prospector. Yes, I usually say, right?",
+      "confidence": 0.9,
+      "context_type": "personal anecdote for authenticity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T03:46:24.103588+00:00"
+    },
+    {
+      "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "Our flag is green and yellow. Our heart is green and yellow. This people is marvelous. This Brazilian people is orderly. What is missing is leadership.",
+      "confidence": 0.9,
+      "context_type": "unified national identity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T03:46:24.103590+00:00"
+    },
+    {
+      "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "Brazil green-yellow and those who represent Cuba, represent the government of Venezuela with their red flag, with the sickle and hammer on top of it.",
+      "confidence": 0.9,
+      "context_type": "national identity vs foreign threat",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T03:46:24.103592+00:00"
+    },
+    {
+      "document_name": "2018-10-06_Pre-First-Round_Speech.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "The economists who put Brazil in this, in this crisis that is here.",
+      "confidence": 0.9,
+      "context_type": "blame for economic crisis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T03:46:24.103594+00:00"
+    }
+  ]
+}

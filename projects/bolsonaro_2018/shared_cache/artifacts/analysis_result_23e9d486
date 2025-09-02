@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_abaa52685438",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "bolsonaro_2018_populist_discourse_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.2\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Analysis conducted using a 3-run median aggregation approach, combining insights from evidence-first, context-weighted, and pattern-based perspectives.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"01a51ec72fb1\",\n      \"document_name\": \"2018-08-23_Aracatuba_Speech_Part_2.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.8\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.5,\n          \"confidence\": 0.7\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"O PT, \u00e9 PSDB e \u00e9 um escambau, porque o nosso capit\u00e3o \u00e9 Jair Messias Bolsonaro.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"explicit_us_vs_them_statement\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"o grande problema no Brasil, \u00e9 uma quest\u00e3o pol\u00edtica. Ou colocamos gente como n\u00f3s, na pol\u00edtica, ou n\u00e3o temos futuro.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"critical_juncture_framing\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"N\u00f3s mostramos que o Brasil tem jeito. Mas essa solu\u00e7\u00e3o passa obviamente pelas m\u00e3os de cada um de voc\u00eas.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_empowerment_of_people\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"Essa bandidagem vai morrer porque n\u00e3o liberaremos recursos da uni\u00e3o para eles.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"demonization_and_threat_of_exclusion\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"Nosso sistema \u00e9 voltado todinho pra defender eles.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"assertion_of_systemic_bias\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"N\u00f3s somos a realidade. N\u00f3s n\u00e3o falamos aquilo que por ocasi\u00e3o de campanhas, as pessoas gostam de ouvir. N\u00f3s falamos o que o Brasil precisa ouvir.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"self_characterization_as_truthful_and_authentic\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"Somos um s\u00f3 pa\u00eds, uma s\u00f3 p\u00e1tria, uma s\u00f3 na\u00e7\u00e3o, um s\u00f3 cora\u00e7\u00e3o verde e amarelo.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"declaration_of_unified_national_identity\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"Bolsonaro acima de tudo e Deus acima de todos!\",\n          \"confidence\": 0.8,\n          \"context_type\": \"nationalist_and_religious_motto\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"Precisamos de algu\u00e9m que se aproxime de grandes pa\u00edses democr\u00e1ticos e capitalistas, que n\u00e3o fique amarrado aqui ao Mercosul por uma quest\u00e3o ideol\u00f3gica.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"economic_policy_criticism_framed_ideologically\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "bf66a1a6ad6a1ada43e90c6afb1b63e48926b5ffc3018e700e358ebc7d45005b",
+  "execution_metadata": {
+    "start_time": "2025-09-02T03:41:32.702017+00:00",
+    "end_time": "2025-09-02T03:42:15.774249+00:00",
+    "duration_seconds": 43.072192
+  },
+  "input_artifacts": {
+    "framework_hash": "4152f312d410e2de3bbc16f7d3e9a70c6347b3dd3db6f67aa44c6725f7b2d6d7",
+    "document_hashes": [
+      "01a51ec72fb1e6a44163bd671d9e63c44110ad2cf40f806265433683a26ac25f"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "bolsonaro_2018",
+      "experiment_root": "/Volumes/code/discernus/projects/bolsonaro_2018",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250902T033856Z_f9c07401"
+  }
+}
