@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "817da7939070223a5caa7a9dee8f2d714941a38221bc811ee211f9afb3c9d3be"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-03T14:21:50.795781+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "clinton/primary_season/clinton_2016_03_15.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "We\u2019re going to stand up for American workers and make sure no one takes advantage of us \u2013 not China, not Wall Street, and not overpaid corporate executives.",
+      "confidence": 0.8,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.795767+00:00"
+    },
+    {
+      "document_name": "clinton/primary_season/clinton_2016_03_15.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "You voted for our tomorrow to be better than our yesterday. Tomorrow where all of us do our part and everyone has a chance to live up to his or her God-given potential... We live in a complex and, yes, a dangerous world.",
+      "confidence": 0.8,
+      "context_type": "thematic_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.795770+00:00"
+    },
+    {
+      "document_name": "clinton/primary_season/clinton_2016_03_15.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "You voted to break down the barriers that hold us all back so every one of us could share in the promise of America, you voted - you voted for our tomorrow to be better than our yesterday.",
+      "confidence": 0.7,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.795772+00:00"
+    },
+    {
+      "document_name": "clinton/primary_season/clinton_2016_03_15.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "We should be breaking down barriers, not building walls. We\u2019re not going to succeed by dividing this country between us and them.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.795773+00:00"
+    },
+    {
+      "document_name": "clinton/primary_season/clinton_2016_03_15.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "families deserve a president who will fight for the things that are priorities at home but too often aren\u2019t priorities in Washington.",
+      "confidence": 0.7,
+      "context_type": "implied_criticism",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.795774+00:00"
+    },
+    {
+      "document_name": "clinton/primary_season/clinton_2016_03_15.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "Our campaign is for the steel worker I met in Ohio on Sunday night who\u2019s laid off but hoping to get back to work. It\u2019s for the mother I met in Miami whose five children haven\u2019t seen their father since he was deported.",
+      "confidence": 0.9,
+      "context_type": "anecdotal_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.795776+00:00"
+    },
+    {
+      "document_name": "clinton/primary_season/clinton_2016_03_15.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "And yes, our next president has to bring our country together again. We should be breaking down barriers, not building walls. We\u2019re not going to succeed by dividing this country between us and them.",
+      "confidence": 0.95,
+      "context_type": "thematic_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.795777+00:00"
+    },
+    {
+      "document_name": "clinton/primary_season/clinton_2016_03_15.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "When we hear a candidate for president call for rounding up 12 million immigrants, banning all Muslims from entering the United States, when he embraces torture, that doesn\u2019t make him strong; it makes him wrong.",
+      "confidence": 0.8,
+      "context_type": "rejection_of_opponent_rhetoric",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.795778+00:00"
+    },
+    {
+      "document_name": "clinton/primary_season/clinton_2016_03_15.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "Good-paying jobs are the ticket to the middle class and we\u2019re going to stand up for the American middle class again. We\u2019re going to stand up for American workers and make sure no one takes advantage of us \u2013 not China, not Wall Street, and not overpaid corporate executives.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.795779+00:00"
+    }
+  ]
+}

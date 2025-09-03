@@ -1,0 +1,2237 @@
+{
+  "metadata": {
+    "agent": "EvidenceRetriever",
+    "timestamp": "2025-09-03T14:37:32.825671",
+    "framework_hash": "2e95f4d0c4e985a1e7746c2208e0558c1e4fc9e054fbab15c01a64710202fca2",
+    "total_findings": 10,
+    "total_quotes": 149
+  },
+  "evidence_results": [
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Republicans use significantly more 'nationalist exclusion' rhetoric than Democrats (p=0.019, Cohen's d=0.79). The median score for Republicans was 0.5, compared to 0.1 for Democrats."
+      },
+      "queries_used": [
+        "republican nationalist_exclusion_raw_score high",
+        "trump cruz rubio external group threat characterization",
+        "democratic nationalist_exclusion_raw_score low absent"
+      ],
+      "quotes": [
+        {
+          "quote_text": "We've seen it in the United Kingdom, where they voted to liberate themselves from global government and global trade deals and global immigration deals that have destroyed their sovereignty.",
+          "document_name": "trump_2016_10_13.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.7,
+          "relevance_score": 0.5403476357460022,
+          "metadata": {
+            "document_name": "trump_2016_10_13.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "making our country all it should be.",
+          "document_name": "clinton_2016_11_03.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.5136502981185913,
+          "metadata": {
+            "document_name": "clinton_2016_11_03.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are a nation and a people that celebrates success. We are nation that admire people who have worked hard and moved ahead.",
+          "document_name": "rubio_2016_02_20.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.5101168751716614,
+          "metadata": {
+            "document_name": "rubio_2016_02_20.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Together, we will secure the borders and keep America safe.",
+          "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.7,
+          "relevance_score": 0.49342232942581177,
+          "metadata": {
+            "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "broken down barriers, stood up to discrimination and bigotry, fought for the rights of everyone",
+          "document_name": "clinton_2016_09_09.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.95,
+          "relevance_score": 0.4762707054615021,
+          "metadata": {
+            "document_name": "clinton_2016_09_09.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We only want to admit people to our country who will support our values and love our people.",
+          "document_name": "trump/general_election/trump_2016_09_17.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.85,
+          "relevance_score": 0.4736768305301666,
+          "metadata": {
+            "document_name": "trump/general_election/trump_2016_09_17.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "too many of our leaders and their ideas are stuck in the 20th century... And so they appease our enemies. They betray our allies and they weaken our military.",
+          "document_name": "rubio/primary_season/rubio_2016_04_13.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.4662648141384125,
+          "metadata": {
+            "document_name": "rubio/primary_season/rubio_2016_04_13.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Not just for people who look a certain way or worship a certain way or love a certain way. For all. Indivisible.",
+          "document_name": "clinton_2016_06_07.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.95,
+          "relevance_score": 0.4658001959323883,
+          "metadata": {
+            "document_name": "clinton_2016_06_07.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Only one candidate remaining has a consistent conservative record. Other candidates engage in non-stop personal attacks. We have not and we will not respond in kind.",
+          "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.46287763118743896,
+          "metadata": {
+            "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "If you want a commander in chief who will fulfill the most solemn obligation of the president to keep this nation safe... to identify our enemy, to call it by its name, radical Islamic terrorism, and to utterly and completely defeat ISIS.",
+          "document_name": "cruz_2016_02_01.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.7,
+          "relevance_score": 0.43826937675476074,
+          "metadata": {
+            "document_name": "cruz_2016_02_01.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "our very identity as an exceptional nation is at stake... they appease our enemies. They betray our allies and they weaken our military.",
+          "document_name": "rubio/primary_season/rubio_2016_04_13.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.4253859221935272,
+          "metadata": {
+            "document_name": "rubio/primary_season/rubio_2016_04_13.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The politics of resentment against other people will not just leave us a fractured party, they're going to leave us as a fractured nation.",
+          "document_name": "rubio/primary_season/rubio_2016_03_15.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.41246211528778076,
+          "metadata": {
+            "document_name": "rubio/primary_season/rubio_2016_03_15.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 12
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "'Outsider' candidates (Trump, Sanders, Cruz) score dramatically higher on 'popular sovereignty claims' than 'Establishment' candidates (Clinton, Rubio, Kasich), with a p-value of 0.009 and a large effect size (d=1.30)."
+      },
+      "queries_used": [
+        "trump sanders cruz popular_sovereignty_claims_raw_score high",
+        "outsider candidates institutional bypass rhetoric",
+        "kasich clinton rubio popular_sovereignty_claims_raw_score low absent"
+      ],
+      "quotes": [
+        {
+          "quote_text": "It will be decided by we the people.",
+          "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.5645119547843933,
+          "metadata": {
+            "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "It says, 'We the people...'",
+          "document_name": "kasich_2016_07_21.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.5510885715484619,
+          "metadata": {
+            "document_name": "kasich_2016_07_21.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The power of the American people when we rise up and stand for liberty knows no bounds.",
+          "document_name": "cruz_2016_03_23.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.5498003959655762,
+          "metadata": {
+            "document_name": "cruz_2016_03_23.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We\u2019re going to take this campaign directly to the people \u2014 in town meetings, door to door conversations, on street corners and in social media",
+          "document_name": "sanders/primary_season/sanders_2016_05_26.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.532799482345581,
+          "metadata": {
+            "document_name": "sanders/primary_season/sanders_2016_05_26.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "federal government that seeks to dictate school curriculum through Common Core.",
+          "document_name": "cruz_2016_03_23.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.8,
+          "relevance_score": 0.5211759805679321,
+          "metadata": {
+            "document_name": "cruz_2016_03_23.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is going to be YOUR victory.",
+          "document_name": "trump_2016_08_19.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.88,
+          "relevance_score": 0.5013428926467896,
+          "metadata": {
+            "document_name": "trump_2016_08_19.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.88,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "a government that listens to the people, not the power brokers",
+          "document_name": "clinton_2016_06_07.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.7,
+          "relevance_score": 0.5012593865394592,
+          "metadata": {
+            "document_name": "clinton_2016_06_07.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I think we have to do this together",
+          "document_name": "clinton_2016_09_09.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.5006946325302124,
+          "metadata": {
+            "document_name": "clinton_2016_09_09.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "you hire us to go do the job, plain and simple, to create an environment of economic growth and opportunity",
+          "document_name": "kasich_2016_03_15.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.49883025884628296,
+          "metadata": {
+            "document_name": "kasich_2016_03_15.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This country belongs to all of us, not just those at the top",
+          "document_name": "clinton/primary_season/clinton_2016_03_01.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.4966672956943512,
+          "metadata": {
+            "document_name": "clinton/primary_season/clinton_2016_03_01.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "getting unaccountable money out of politics.",
+          "document_name": "clinton_2016_06_07.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.7,
+          "relevance_score": 0.4949928820133209,
+          "metadata": {
+            "document_name": "clinton_2016_06_07.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our party has chosen to make new history by selecting a nominee from outside the rigged and corrupt system.",
+          "document_name": "trump_2016_08_08.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.4805097281932831,
+          "metadata": {
+            "document_name": "trump_2016_08_08.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "You wanted a candidate who didn't adopt his positions because of the latest opinion polls, but instead because of a deep and underlying conservative philosophy that grounded him so that he knew exactly what he believed, exactly what the principles were that built this great nation.",
+          "document_name": "cruz_2016_02_01.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.4748799204826355,
+          "metadata": {
+            "document_name": "cruz_2016_02_01.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "No longer can we rely on those elites in media, and politics, who will say anything to keep a rigged system in place.",
+          "document_name": "trump_2016_07_21.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.85,
+          "relevance_score": 0.46974989771842957,
+          "metadata": {
+            "document_name": "trump_2016_07_21.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our movement is about replacing a failed and corrupt political establishment with a new government controlled by you, the American People.",
+          "document_name": "trump_2016_10_13.txt",
+          "dimension": "manichean_people_elite_framing",
+          "confidence": 0.95,
+          "relevance_score": 0.46789151430130005,
+          "metadata": {
+            "document_name": "trump_2016_10_13.txt",
+            "dimension": "manichean_people_elite_framing",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "a government that listens to the people, not the power brokers, which means getting unaccountable money out of politics.",
+          "document_name": "clinton_2016_06_07.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.4568152129650116,
+          "metadata": {
+            "document_name": "clinton_2016_06_07.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Iowa has sent notice that the Republican nominee and the next president of the United States will not be chosen by the media. Will not be chosen by the Washington establishment. Will not be chosen by the lobbyists. But will be chosen by the most incredible powerful force, where all sovereignty resides in our nation, by we the people: the American people.",
+          "document_name": "cruz_2016_02_01.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.4496771991252899,
+          "metadata": {
+            "document_name": "cruz_2016_02_01.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 17
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "'Outsider' candidates score significantly higher on 'authenticity vs. political class' (p=0.017, d=0.98), emphasizing their outsider status against a professional political class."
+      },
+      "queries_used": [
+        "trump sanders cruz authenticity_vs_political_class_raw_score high",
+        "outsider status claims",
+        "establishment candidates professional credential emphasis"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Only one candidate remaining has a consistent conservative record. Other candidates engage in non-stop personal attacks. We have not and we will not respond in kind.",
+          "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.6133126616477966,
+          "metadata": {
+            "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "You wanted a candidate who didn't adopt his positions because of the latest opinion polls, but instead because of a deep and underlying conservative philosophy that grounded him so that he knew exactly what he believed, exactly what the principles were that built this great nation.",
+          "document_name": "cruz_2016_02_01.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.593499481678009,
+          "metadata": {
+            "document_name": "cruz_2016_02_01.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "my campaign will be driven by issues and serious debate; not political gossip, not reckless personal attacks or character assassination.",
+          "document_name": "sanders/primary_season/sanders_2016_05_26.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.85,
+          "relevance_score": 0.55572509765625,
+          "metadata": {
+            "document_name": "sanders/primary_season/sanders_2016_05_26.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "federal government that seeks to dictate school curriculum through Common Core.",
+          "document_name": "cruz_2016_03_23.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.8,
+          "relevance_score": 0.5442864298820496,
+          "metadata": {
+            "document_name": "cruz_2016_03_23.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Tonight is a victory for every American who\u2019s watched in dismay as career politicians in Washington in both parties refuse to listen and to often fail to keep their commitments to the people.",
+          "document_name": "cruz_2016_02_01.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.8,
+          "relevance_score": 0.5204406976699829,
+          "metadata": {
+            "document_name": "cruz_2016_02_01.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "In my former life, I was an insider as much as anybody else \u2014 and I know what's like to be an insider. Now I am being punished for leaving their special club and revealing to you their great scam.",
+          "document_name": "trump_2016_10_13.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.39616280794143677,
+          "metadata": {
+            "document_name": "trump_2016_10_13.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I've competed all my life. Competitive person.",
+          "document_name": "trump/primary_season/trump_2016_05_03.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.85,
+          "relevance_score": 0.36895644664764404,
+          "metadata": {
+            "document_name": "trump/primary_season/trump_2016_05_03.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "we are bringing working people and young people into the political process in a way we have not seen in a very long time. And taking on the establishment, whether it is the financial establishment, whether it is the political establishment, whether it is the media establishment is not easy.",
+          "document_name": "sanders_2016_02_20.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.85,
+          "relevance_score": 0.36332112550735474,
+          "metadata": {
+            "document_name": "sanders_2016_02_20.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I am the law and order candidate.",
+          "document_name": "trump/convention_period/trump_2016_07_11.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.95,
+          "relevance_score": 0.35967546701431274,
+          "metadata": {
+            "document_name": "trump/convention_period/trump_2016_07_11.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I started off in Brooklyn New York, not so long ago, with a small loan and built a business worth over 10 billion dollars. I have always had a talent for building businesses and, importantly, creating jobs. That is a talent our country desperately needs. Hillary Clinton has perfected the politics of personal profit and theft.",
+          "document_name": "trump/convention_period/trump_2016_06_22.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.8,
+          "relevance_score": 0.3453231453895569,
+          "metadata": {
+            "document_name": "trump/convention_period/trump_2016_06_22.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "And so I've been a lawyer, and I've been a first lady, and I've been a senator, and I've been Secretary of State, and I've been a wife and a mother and a grandmother and a friend and a churchgoer, and for my entire life I've been a woman.",
+          "document_name": "clinton_2016_11_03.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.85,
+          "relevance_score": 0.33964431285858154,
+          "metadata": {
+            "document_name": "clinton_2016_11_03.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the status quo is not good enough",
+          "document_name": "clinton/early_primary/clinton_2016_02_01.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.7,
+          "relevance_score": 0.3373039662837982,
+          "metadata": {
+            "document_name": "clinton/early_primary/clinton_2016_02_01.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "eight years of failure",
+          "document_name": "rubio_2016_02_20.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.8,
+          "relevance_score": 0.33664894104003906,
+          "metadata": {
+            "document_name": "rubio_2016_02_20.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our party has chosen to make new history by selecting a nominee from outside the rigged and corrupt system.",
+          "document_name": "trump_2016_08_08.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.3316066861152649,
+          "metadata": {
+            "document_name": "trump_2016_08_08.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We're not going to allow people to come into our country who we have no idea who they are, we have no idea where they come from. They have no paperwork.",
+          "document_name": "trump_2016_03_01.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.32825595140457153,
+          "metadata": {
+            "document_name": "trump_2016_03_01.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The Wall Street Journal describes it [Alt-Right] as a loosely organized movement...that 'rejects mainstream conservatism, promotes nationalism and views immigration and multiculturalism as threats to white identity.'",
+          "document_name": "clinton_2016_08_25.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.3183777630329132,
+          "metadata": {
+            "document_name": "clinton_2016_08_25.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the people of Indiana have been incredible.",
+          "document_name": "trump/primary_season/trump_2016_05_03.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.300667405128479,
+          "metadata": {
+            "document_name": "trump/primary_season/trump_2016_05_03.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 17
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Bernie Sanders is the leading user of 'economic populist appeals', with a mean raw score of 0.9 and a primary-phase score of 0.975, the highest in the dataset."
+      },
+      "queries_used": [
+        "sanders economic_populist_appeals_raw_score high",
+        "sanders economic elite vs working people framing",
+        "sanders economic system manipulation claims"
+      ],
+      "quotes": [
+        {
+          "quote_text": "making our economy work for everyone not just those at the top",
+          "document_name": "clinton_2016_11_09.txt",
+          "dimension": "manichean_people_elite_framing",
+          "confidence": 0.7,
+          "relevance_score": 0.6719104051589966,
+          "metadata": {
+            "document_name": "clinton_2016_11_09.txt",
+            "dimension": "manichean_people_elite_framing",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "an economy that works for everyone, not just those at the top.",
+          "document_name": "clinton/general_election/clinton_2016_11_07.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.6434230804443359,
+          "metadata": {
+            "document_name": "clinton/general_election/clinton_2016_11_07.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "people who feel that the government has let them down, the economy has let them down",
+          "document_name": "clinton_2016_09_09.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.8,
+          "relevance_score": 0.6084178686141968,
+          "metadata": {
+            "document_name": "clinton_2016_09_09.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Prosperity can\u2019t be just for CEOs and hedge fund managers. Democracy can\u2019t be just for billionaires and corporations.",
+          "document_name": "clinton_2016_06_13.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.5980584621429443,
+          "metadata": {
+            "document_name": "clinton_2016_06_13.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "taking on the establishment, whether it is the financial establishment, whether it is the political establishment, whether it is the media establishment is not easy.",
+          "document_name": "sanders_2016_02_20.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.95,
+          "relevance_score": 0.5924482941627502,
+          "metadata": {
+            "document_name": "sanders_2016_02_20.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the government of our great country belongs to all of the people and not just a handful of wealthy campaign contributors, and their Super PACs.",
+          "document_name": "sanders/early_primary/sanders_2016_02_10.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 1.0,
+          "relevance_score": 0.5858694314956665,
+          "metadata": {
+            "document_name": "sanders/early_primary/sanders_2016_02_10.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Hardworking families that are living paycheck to paycheck, one unexpected event away from disaster, young Americans unable to start a career or a business or a family because they owe thousands of dollars in student loans for degrees that did not even lead to jobs, and small business owners who are left to struggle under the weight of more taxes, more regulation and more government.",
+          "document_name": "rubio/primary_season/rubio_2016_04_13.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.9,
+          "relevance_score": 0.5806620717048645,
+          "metadata": {
+            "document_name": "rubio/primary_season/rubio_2016_04_13.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "ordinary Americans work longer hours for lower wages, while almost all new income and wealth goes to the top 1%.",
+          "document_name": "sanders/early_primary/sanders_2016_02_10.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 1.0,
+          "relevance_score": 0.5741724967956543,
+          "metadata": {
+            "document_name": "sanders/early_primary/sanders_2016_02_10.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "As a result of the disastrous Supreme Court decision on Citizens United, the American political system has been totally corrupted, and the foundations of American democracy are being undermined.",
+          "document_name": "sanders/primary_season/sanders_2016_05_26.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.95,
+          "relevance_score": 0.5524280071258545,
+          "metadata": {
+            "document_name": "sanders/primary_season/sanders_2016_05_26.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the American people will not continue to accept a corrupt campaign finance system that is undermining American democracy, and we will not accept a rigged economy in which ordinary Americans work longer hours for lower wages, while almost all new income and wealth goes to the top 1%.",
+          "document_name": "sanders/early_primary/sanders_2016_02_10.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 1.0,
+          "relevance_score": 0.5517851710319519,
+          "metadata": {
+            "document_name": "sanders/early_primary/sanders_2016_02_10.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We will eliminate the Carried Interest Deduction and other special interest loopholes that have been so good for Wall Street investors, and people like me, but unfair to American workers.",
+          "document_name": "trump_2016_08_08.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.95,
+          "relevance_score": 0.5502846837043762,
+          "metadata": {
+            "document_name": "trump_2016_08_08.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "It is a rigged economy \u2013 an economy in which we have today a grotesque level of income and wealth inequality which is unsustainable and un-American. ... We\u2019re going to create an economy that works for all of us, not just for 1%. And we are going to tell the billionaires and corporate America that they are going to have to start paying their fair share of taxes.",
+          "document_name": "sanders/primary_season/sanders_2016_03_15.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.95,
+          "relevance_score": 0.5473142266273499,
+          "metadata": {
+            "document_name": "sanders/primary_season/sanders_2016_03_15.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the American people are catching on that we have a rigged economy. Ordinary people, working people, working two or three jobs longer and longer hours. And almost all new income going to the top one percent. And together we are going to create an economy that works for all of us and not just the top 1%.",
+          "document_name": "sanders_2016_02_20.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.95,
+          "relevance_score": 0.5413991808891296,
+          "metadata": {
+            "document_name": "sanders_2016_02_20.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "we have a corrupt campaign finance system which is undermining American democracy... the American people are catching on that we have a rigged economy. ... if you are a Wall Street executive and your illegal behavior destroys the economy and lives of millions of people, somehow nothing happens to you.",
+          "document_name": "sanders_2016_02_20.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.5251935124397278,
+          "metadata": {
+            "document_name": "sanders_2016_02_20.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The issue of wealth and income inequality is the great moral issue of our time, it is the great economic issue of our time and it is the great political issue of our time.",
+          "document_name": "sanders/primary_season/sanders_2016_05_26.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.95,
+          "relevance_score": 0.5083304047584534,
+          "metadata": {
+            "document_name": "sanders/primary_season/sanders_2016_05_26.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 15
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Bernie Sanders also leads in 'elite conspiracy/systemic corruption' rhetoric, with a mean raw score of 0.8 and a primary-phase score of 0.925."
+      },
+      "queries_used": [
+        "sanders elite_conspiracy_systemic_corruption_raw_score high",
+        "sanders hidden elite coordination claims",
+        "sanders establishment coordination accusations"
+      ],
+      "quotes": [
+        {
+          "quote_text": "getting unaccountable money out of politics.",
+          "document_name": "clinton_2016_06_07.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.7,
+          "relevance_score": 0.6098209619522095,
+          "metadata": {
+            "document_name": "clinton_2016_06_07.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "It was pay-for-play.",
+          "document_name": "trump_2016_08_19.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.6042734980583191,
+          "metadata": {
+            "document_name": "trump_2016_08_19.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "we have to get unaccountable money out of our politics, overturn Citizens United",
+          "document_name": "clinton_2016_08_11.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.7,
+          "relevance_score": 0.5659389495849609,
+          "metadata": {
+            "document_name": "clinton_2016_08_11.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "taking on the establishment, whether it is the financial establishment, whether it is the political establishment, whether it is the media establishment is not easy.",
+          "document_name": "sanders_2016_02_20.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.95,
+          "relevance_score": 0.5563817024230957,
+          "metadata": {
+            "document_name": "sanders_2016_02_20.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "You have people who can't get their money back into the country because the politicians can't get along. They can't make a deal.",
+          "document_name": "trump/primary_season/trump_2016_03_15.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.6,
+          "relevance_score": 0.5381813645362854,
+          "metadata": {
+            "document_name": "trump/primary_season/trump_2016_03_15.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.6,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "As a result of the disastrous Supreme Court decision on Citizens United, the American political system has been totally corrupted, and the foundations of American democracy are being undermined.",
+          "document_name": "sanders/primary_season/sanders_2016_05_26.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.95,
+          "relevance_score": 0.5186725854873657,
+          "metadata": {
+            "document_name": "sanders/primary_season/sanders_2016_05_26.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We\u2019re going to take this campaign directly to the people \u2014 in town meetings, door to door conversations, on street corners and in social media",
+          "document_name": "sanders/primary_season/sanders_2016_05_26.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.5113480091094971,
+          "metadata": {
+            "document_name": "sanders/primary_season/sanders_2016_05_26.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "if they continue to do the bidding of the lobbyists and lawyers and others who stand outside their doors",
+          "document_name": "clinton_2016_10_22.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.8,
+          "relevance_score": 0.4826836585998535,
+          "metadata": {
+            "document_name": "clinton_2016_10_22.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Truth number one is that today we have a corrupt campaign finance system with Wall Street and billionaires spending unlimited sums of money, which is undermining American democracy. ... This is not democracy; that is oligarchy.",
+          "document_name": "sanders/primary_season/sanders_2016_03_15.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.4714343547821045,
+          "metadata": {
+            "document_name": "sanders/primary_season/sanders_2016_03_15.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Truth number one is that today we have a corrupt campaign finance system with Wall Street and billionaires spending unlimited sums of money, which is undermining American democracy. ... What this campaign is about is asking the American people to think outside of the box, outside of the status quo, think about a nation not where our children are being poisoned by lead in the water but where we have a cutting-edge infrastructure in roads and in bridges and in rail and in air transport. That\u2019s where we\u2019ve got to go.",
+          "document_name": "sanders/primary_season/sanders_2016_03_15.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.46892452239990234,
+          "metadata": {
+            "document_name": "sanders/primary_season/sanders_2016_03_15.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "getting unaccountable money out of our politics... reducing the power of special interests is directly related to getting Washington working for people again...",
+          "document_name": "clinton_2016_06_22.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.9,
+          "relevance_score": 0.4644148349761963,
+          "metadata": {
+            "document_name": "clinton_2016_06_22.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the American people will not continue to accept a corrupt campaign finance system that is undermining American democracy, and we will not accept a rigged economy in which ordinary Americans work longer hours for lower wages, while almost all new income and wealth goes to the top 1%.",
+          "document_name": "sanders/early_primary/sanders_2016_02_10.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 1.0,
+          "relevance_score": 0.4607487916946411,
+          "metadata": {
+            "document_name": "sanders/early_primary/sanders_2016_02_10.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the government of our great country belongs to all of the people and not just a handful of wealthy campaign contributors, and their Super PACs.",
+          "document_name": "sanders/early_primary/sanders_2016_02_10.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 1.0,
+          "relevance_score": 0.4439623951911926,
+          "metadata": {
+            "document_name": "sanders/early_primary/sanders_2016_02_10.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 13
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Ted Cruz and Donald Trump score highest on 'anti-pluralist exclusion,' with mean raw scores of 0.825 and 0.833 (convention) respectively, indicating a strong rejection of legitimate opposition."
+      },
+      "queries_used": [
+        "cruz anti_pluralist_exclusion_raw_score high",
+        "trump opposition legitimacy denial",
+        "cruz opponent demonization strategies"
+      ],
+      "quotes": [
+        {
+          "quote_text": "federal government that wages an assault on our religious liberty",
+          "document_name": "cruz_2016_03_23.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.601216733455658,
+          "metadata": {
+            "document_name": "cruz_2016_03_23.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Only one candidate remaining has a consistent conservative record. Other candidates engage in non-stop personal attacks. We have not and we will not respond in kind.",
+          "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.5416743755340576,
+          "metadata": {
+            "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The corrupt media is trying to do everything in their power to stop our movement.",
+          "document_name": "trump_2016_10_14.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.85,
+          "relevance_score": 0.5162558555603027,
+          "metadata": {
+            "document_name": "trump_2016_10_14.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Tonight, Republicans and the Reagan Democrats can send an unmistakable message, the message of a Reagan-like landslide that once and for all will drive the liberal elites and the Washington cartel into the Potomac and out to sea, never to be seen again.",
+          "document_name": "cruz_2016_02_01.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.85,
+          "relevance_score": 0.5108375549316406,
+          "metadata": {
+            "document_name": "cruz_2016_02_01.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I cannot wait to stand on that debate stage with Hillary Clinton or Bernie Sanders or whatever other socialist they nominate and make the case against their radical vision of the Constitution that would strip away life and marriage and religious liberty and the Second Amendment and the basic rights of every American citizen.",
+          "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.500937819480896,
+          "metadata": {
+            "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I want to begin by congratulating Donald Trump... Jeb Bush has many things to be proud of.",
+          "document_name": "rubio_2016_02_20.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.7,
+          "relevance_score": 0.4872077703475952,
+          "metadata": {
+            "document_name": "rubio_2016_02_20.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Tonight is a victory for every American who\u2019s watched in dismay as career politicians in Washington in both parties refuse to listen and to often fail to keep their commitments to the people.",
+          "document_name": "cruz_2016_02_01.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.8,
+          "relevance_score": 0.4839562773704529,
+          "metadata": {
+            "document_name": "cruz_2016_02_01.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "From the start, Donald Trump has built his campaign on prejudice and paranoia.",
+          "document_name": "clinton_2016_08_25.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.95,
+          "relevance_score": 0.476625919342041,
+          "metadata": {
+            "document_name": "clinton_2016_08_25.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We reject the bigotry of Hillary Clinton who sees people of color only as votes, not as human beings worthy of a better future.",
+          "document_name": "trump/general_election/trump_2016_08_20.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.95,
+          "relevance_score": 0.47546976804733276,
+          "metadata": {
+            "document_name": "trump/general_election/trump_2016_08_20.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I have joined the political arena so that the powerful can no longer beat up on people that cannot defend themselves. Nobody knows the system better than me, which is why I alone can fix it.",
+          "document_name": "trump_2016_07_21.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.47313904762268066,
+          "metadata": {
+            "document_name": "trump_2016_07_21.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "My opponent is the corrupt defender of a rigged system and a failed status quo.",
+          "document_name": "trump/general_election/trump_2016_08_20.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.95,
+          "relevance_score": 0.46508288383483887,
+          "metadata": {
+            "document_name": "trump/general_election/trump_2016_08_20.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Make no mistakes about this, my friends. He is threatening our democracy.",
+          "document_name": "clinton_2016_10_22.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.4633532464504242,
+          "metadata": {
+            "document_name": "clinton_2016_10_22.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I completely reject anyone, including my opponent, who calls the American military, and I quote, 'a disaster.'",
+          "document_name": "clinton_2016_08_31.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.4633405804634094,
+          "metadata": {
+            "document_name": "clinton_2016_08_31.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "It will be decided by we the people.",
+          "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.4579866826534271,
+          "metadata": {
+            "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Justice Antonin Scalia\u2019s passing one week ago today underscores the enormous stakes of this election.",
+          "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.44043856859207153,
+          "metadata": {
+            "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "You wanted a candidate who didn't adopt his positions because of the latest opinion polls, but instead because of a deep and underlying conservative philosophy that grounded him so that he knew exactly what he believed, exactly what the principles were that built this great nation.",
+          "document_name": "cruz_2016_02_01.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.4368247389793396,
+          "metadata": {
+            "document_name": "cruz_2016_02_01.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 16
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Donald Trump's overall populism scores show the highest variance (0.0085) of any candidate, suggesting a more inconsistent or adaptive rhetorical style."
+      },
+      "queries_used": [
+        "trump salience_weighted_overall_populism_index highest score evidence",
+        "trump salience_weighted_overall_populism_index lowest score evidence",
+        "trump populism rhetorical shift primary to general"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Our movement is about replacing a failed and corrupt political establishment with a new government controlled by you, the American People.",
+          "document_name": "trump_2016_10_13.txt",
+          "dimension": "manichean_people_elite_framing",
+          "confidence": 0.95,
+          "relevance_score": 0.5371338129043579,
+          "metadata": {
+            "document_name": "trump_2016_10_13.txt",
+            "dimension": "manichean_people_elite_framing",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "given the enormous crises facing our country, it is just too late for the same old, same old establishment politics, and establishment economics. The people want real change.",
+          "document_name": "sanders/early_primary/sanders_2016_02_10.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.5213994383811951,
+          "metadata": {
+            "document_name": "sanders/early_primary/sanders_2016_02_10.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "It's a global power structure that is responsible for the economic decisions that have robbed our working class, stripped our country of its wealth, and put that money into the pockets of a handful of large corporations and political entities.",
+          "document_name": "trump_2016_10_13.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.85,
+          "relevance_score": 0.48542869091033936,
+          "metadata": {
+            "document_name": "trump_2016_10_13.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "REAL CHANGE BEGINS WITH IMMEDIATELY REPEALING AND REPLACING THE DISASTER KNOWN AS OBAMACARE. WE ARE LIVING IN A DIVIDED NATION. WE ARE GOING TO BE BROUGHT TOGETHER. MAKE AMERICA WEALTHY AGAIN. WE WILL MAKE AMERICA STRONG AGAIN. WE WILL MAKE AMERICA SAFE AGAIN. AND WE WILL MAKE AMERICA GREAT AGAIN.",
+          "document_name": "trump/early_primary/trump_2016_01_01.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.98,
+          "relevance_score": 0.4807603657245636,
+          "metadata": {
+            "document_name": "trump/early_primary/trump_2016_01_01.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.98,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "It's going to be a victory for the people. A victory for the wage-earner, the factory worker, a victory for the everyday citizen \u2013 and for all the people whose voice hasn't been heard.",
+          "document_name": "trump_2016_08_19.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.94,
+          "relevance_score": 0.479228675365448,
+          "metadata": {
+            "document_name": "trump_2016_08_19.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.94,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "making our economy work for everyone not just those at the top",
+          "document_name": "clinton_2016_11_09.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.7,
+          "relevance_score": 0.47753584384918213,
+          "metadata": {
+            "document_name": "clinton_2016_11_09.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "millions of Americans, who have shouldered the burden of seven years of Washington deals run amok.",
+          "document_name": "cruz_2016_02_01.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.75,
+          "relevance_score": 0.475058376789093,
+          "metadata": {
+            "document_name": "cruz_2016_02_01.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.75,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "It will be a win for the voters \u2013 not the pundits, not the journalists, not the lobbyists, not the global special interests funding my opponent's campaign.",
+          "document_name": "trump_2016_08_19.txt",
+          "dimension": "manichean_people_elite_framing",
+          "confidence": 0.95,
+          "relevance_score": 0.47191479802131653,
+          "metadata": {
+            "document_name": "trump_2016_08_19.txt",
+            "dimension": "manichean_people_elite_framing",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Donald Trump's economic plan is slashing taxes on the wealthy and big corporations. I have said that I want the wealthy to pay their fair share and I will not raise taxes on anybody making less than $250,000 a year.",
+          "document_name": "clinton_2016_11_03.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.95,
+          "relevance_score": 0.4647483229637146,
+          "metadata": {
+            "document_name": "clinton_2016_11_03.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the American people are catching on that we have a rigged economy. Ordinary people, working people, working two or three jobs longer and longer hours. And almost all new income going to the top one percent. And together we are going to create an economy that works for all of us and not just the top 1%.",
+          "document_name": "sanders_2016_02_20.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.95,
+          "relevance_score": 0.4632287621498108,
+          "metadata": {
+            "document_name": "sanders_2016_02_20.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the status quo is not good enough",
+          "document_name": "clinton/early_primary/clinton_2016_02_01.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.7,
+          "relevance_score": 0.45507168769836426,
+          "metadata": {
+            "document_name": "clinton/early_primary/clinton_2016_02_01.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 11
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "John Kasich serves as a low-populism baseline, with extremely low scores on 'nationalist exclusion' (0.05) and 'anti-pluralist exclusion' (0.0)."
+      },
+      "queries_used": [
+        "kasich nationalist_exclusion_raw_score absent low",
+        "kasich technocratic economic policy emphasis",
+        "kasich respectful disagreement with legitimacy affirmation"
+      ],
+      "quotes": [
+        {
+          "quote_text": "I'm just a flawed man, a flawed man, trying to honor God's blessings in my life",
+          "document_name": "kasich_2016_07_21.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.85,
+          "relevance_score": 0.58171147108078,
+          "metadata": {
+            "document_name": "kasich_2016_07_21.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "It says, 'We the people...'",
+          "document_name": "kasich_2016_07_21.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.570335328578949,
+          "metadata": {
+            "document_name": "kasich_2016_07_21.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "You want to believe again that we can have job security. You want to believe again that wages can rise",
+          "document_name": "kasich_2016_03_15.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.75,
+          "relevance_score": 0.558495819568634,
+          "metadata": {
+            "document_name": "kasich_2016_03_15.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.75,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "you hire us to go do the job, plain and simple, to create an environment of economic growth and opportunity",
+          "document_name": "kasich_2016_03_15.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.5487706661224365,
+          "metadata": {
+            "document_name": "kasich_2016_03_15.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "if we have to knock down the special interests to get it done, so be it",
+          "document_name": "kasich_2016_07_21.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.8,
+          "relevance_score": 0.5263603925704956,
+          "metadata": {
+            "document_name": "kasich_2016_07_21.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "It doesn't rest in a big-time politician, the big wigs. Look, you hire us to go do the job, plain and simple",
+          "document_name": "kasich_2016_03_15.txt",
+          "dimension": "manichean_people_elite_framing",
+          "confidence": 0.75,
+          "relevance_score": 0.5203718543052673,
+          "metadata": {
+            "document_name": "kasich_2016_03_15.txt",
+            "dimension": "manichean_people_elite_framing",
+            "confidence": 0.75,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "You're the working poor? We're going to give you an opportunity to take a pay raise",
+          "document_name": "kasich_2016_07_21.txt",
+          "dimension": "economic_populist_appeals",
+          "confidence": 0.8,
+          "relevance_score": 0.5112969279289246,
+          "metadata": {
+            "document_name": "kasich_2016_07_21.txt",
+            "dimension": "economic_populist_appeals",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "How about putting some people in the government that understand job creators and respect them rather than beating them down",
+          "document_name": "kasich_2016_07_21.txt",
+          "dimension": "manichean_people_elite_framing",
+          "confidence": 0.8,
+          "relevance_score": 0.5050332546234131,
+          "metadata": {
+            "document_name": "kasich_2016_07_21.txt",
+            "dimension": "manichean_people_elite_framing",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "making our country all it should be.",
+          "document_name": "clinton_2016_11_03.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.4636654257774353,
+          "metadata": {
+            "document_name": "clinton_2016_11_03.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are a nation and a people that celebrates success. We are nation that admire people who have worked hard and moved ahead.",
+          "document_name": "rubio_2016_02_20.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.4367574155330658,
+          "metadata": {
+            "document_name": "rubio_2016_02_20.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We've seen it in the United Kingdom, where they voted to liberate themselves from global government and global trade deals and global immigration deals that have destroyed their sovereignty.",
+          "document_name": "trump_2016_10_13.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.7,
+          "relevance_score": 0.4292699992656708,
+          "metadata": {
+            "document_name": "trump_2016_10_13.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "2016 is a referendum. It is a referendum on our identity as a nation and as a people.",
+          "document_name": "rubio/early_primary/rubio_2016_02_01.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.42847633361816406,
+          "metadata": {
+            "document_name": "rubio/early_primary/rubio_2016_02_01.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "broken down barriers, stood up to discrimination and bigotry, fought for the rights of everyone",
+          "document_name": "clinton_2016_09_09.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.95,
+          "relevance_score": 0.42498940229415894,
+          "metadata": {
+            "document_name": "clinton_2016_09_09.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Not just for people who look a certain way or worship a certain way or love a certain way. For all. Indivisible.",
+          "document_name": "clinton_2016_06_07.txt",
+          "dimension": "nationalist_exclusion",
+          "confidence": 0.95,
+          "relevance_score": 0.417255163192749,
+          "metadata": {
+            "document_name": "clinton_2016_06_07.txt",
+            "dimension": "nationalist_exclusion",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 14
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Ted Cruz, Donald Trump, and Bernie Sanders all exhibit very high 'salience-weighted core populism index' scores (means of 0.86, 0.82-0.84, and 0.80-0.83 respectively), marking them as the dataset's archetypal populists."
+      },
+      "queries_used": [
+        "cruz trump sanders manichaean_people_elite_framing high score",
+        "cruz trump sanders crisis_restoration_narrative high score",
+        "cruz trump sanders anti_pluralist_exclusion high score"
+      ],
+      "quotes": [
+        {
+          "quote_text": "I cannot wait to stand on that debate stage with Hillary Clinton or Bernie Sanders or whatever other socialist they nominate and make the case against their radical vision of the Constitution that would strip away life and marriage and religious liberty and the Second Amendment and the basic rights of every American citizen.",
+          "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.6525512933731079,
+          "metadata": {
+            "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "eight years of failure",
+          "document_name": "rubio_2016_02_20.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.8,
+          "relevance_score": 0.6212865710258484,
+          "metadata": {
+            "document_name": "rubio_2016_02_20.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "federal government that wages an assault on our religious liberty",
+          "document_name": "cruz_2016_03_23.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.616058349609375,
+          "metadata": {
+            "document_name": "cruz_2016_03_23.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I say to those cowardly Republican governors who are trying to suppress the vote. If you are afraid of a free and fair election, get out of politics. Get another job.",
+          "document_name": "sanders/primary_season/sanders_2016_03_15.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.75,
+          "relevance_score": 0.6099244952201843,
+          "metadata": {
+            "document_name": "sanders/primary_season/sanders_2016_03_15.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.75,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Imagine instead of economic stagnation, booming economic growth.",
+          "document_name": "cruz_2016_03_23.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.95,
+          "relevance_score": 0.6019824147224426,
+          "metadata": {
+            "document_name": "cruz_2016_03_23.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We will not allow billionaires and their super PACs to continue to buy elections in the United States of America.",
+          "document_name": "sanders_2016_02_20.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.75,
+          "relevance_score": 0.6000774502754211,
+          "metadata": {
+            "document_name": "sanders_2016_02_20.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.75,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "making our economy work for everyone not just those at the top",
+          "document_name": "clinton_2016_11_09.txt",
+          "dimension": "manichean_people_elite_framing",
+          "confidence": 0.7,
+          "relevance_score": 0.5961414575576782,
+          "metadata": {
+            "document_name": "clinton_2016_11_09.txt",
+            "dimension": "manichean_people_elite_framing",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the status quo is not good enough",
+          "document_name": "clinton/early_primary/clinton_2016_02_01.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.7,
+          "relevance_score": 0.5775505900382996,
+          "metadata": {
+            "document_name": "clinton/early_primary/clinton_2016_02_01.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the right-wing Republicans we oppose must not be allowed to gain the presidency.",
+          "document_name": "sanders/early_primary/sanders_2016_02_10.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.8,
+          "relevance_score": 0.5751214027404785,
+          "metadata": {
+            "document_name": "sanders/early_primary/sanders_2016_02_10.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "It will be a win for the voters \u2013 not the pundits, not the journalists, not the lobbyists, not the global special interests funding my opponent's campaign.",
+          "document_name": "trump_2016_08_19.txt",
+          "dimension": "manichean_people_elite_framing",
+          "confidence": 0.95,
+          "relevance_score": 0.5707870721817017,
+          "metadata": {
+            "document_name": "trump_2016_08_19.txt",
+            "dimension": "manichean_people_elite_framing",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We reject the bigotry of Hillary Clinton who sees people of color only as votes, not as human beings worthy of a better future.",
+          "document_name": "trump/general_election/trump_2016_08_20.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.95,
+          "relevance_score": 0.5670720338821411,
+          "metadata": {
+            "document_name": "trump/general_election/trump_2016_08_20.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "the government of our great country belongs to all of the people and not just a handful of wealthy campaign contributors, and their Super PACs.",
+          "document_name": "sanders/early_primary/sanders_2016_02_10.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 1.0,
+          "relevance_score": 0.5577315092086792,
+          "metadata": {
+            "document_name": "sanders/early_primary/sanders_2016_02_10.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We will Make America Great Again.",
+          "document_name": "trump/general_election/trump_2016_08_20.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.95,
+          "relevance_score": 0.5486564636230469,
+          "metadata": {
+            "document_name": "trump/general_election/trump_2016_08_20.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "millions of people in this country that are tired of being looked down upon, tired of being told by these self-proclaimed elitists that they don\u2019t know what they\u2019re talking about and they need to instead listen to the so-called smart people.",
+          "document_name": "rubio/primary_season/rubio_2016_03_15.txt",
+          "dimension": "manichaean_people_elite_framing",
+          "confidence": 0.9,
+          "relevance_score": 0.5473204851150513,
+          "metadata": {
+            "document_name": "rubio/primary_season/rubio_2016_03_15.txt",
+            "dimension": "manichaean_people_elite_framing",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I believe I know how to work and help restore this great United States",
+          "document_name": "kasich_2016_07_21.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.85,
+          "relevance_score": 0.5355843305587769,
+          "metadata": {
+            "document_name": "kasich_2016_07_21.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "After we survive eight long years of the Obama presidency, that no one personality can right the wrongs done by Washington. The millions who understand that it is a commitment to the Constitution to our shared insistence that we rise and return to a higher standard, the very standard that gave birth to the greatest nation that the world has ever known.",
+          "document_name": "cruz_2016_02_01.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.5299755334854126,
+          "metadata": {
+            "document_name": "cruz_2016_02_01.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Working together, we will begin the urgent task of rebuilding our nation and renewing the American dream.",
+          "document_name": "trump_2016_11_08.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.95,
+          "relevance_score": 0.521172046661377,
+          "metadata": {
+            "document_name": "trump_2016_11_08.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "given the enormous crises facing our country, it is just too late for the same old, same old establishment politics, and establishment economics. The people want real change.",
+          "document_name": "sanders/early_primary/sanders_2016_02_10.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.5121340155601501,
+          "metadata": {
+            "document_name": "sanders/early_primary/sanders_2016_02_10.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 18
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Ted Cruz shows the highest average 'populist strategic contradiction index' (0.146), indicating a greater tendency to pair high-intensity populist claims with differing levels of rhetorical emphasis."
+      },
+      "queries_used": [
+        "cruz democratic_authoritarian_tension high",
+        "cruz popular_sovereignty_claims high score evidence",
+        "cruz anti_pluralist_exclusion high score evidence"
+      ],
+      "quotes": [
+        {
+          "quote_text": "It will be decided by we the people.",
+          "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.6736580729484558,
+          "metadata": {
+            "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "federal government that wages an assault on our religious liberty",
+          "document_name": "cruz_2016_03_23.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.6728212237358093,
+          "metadata": {
+            "document_name": "cruz_2016_03_23.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I cannot wait to stand on that debate stage with Hillary Clinton or Bernie Sanders or whatever other socialist they nominate and make the case against their radical vision of the Constitution that would strip away life and marriage and religious liberty and the Second Amendment and the basic rights of every American citizen.",
+          "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.9,
+          "relevance_score": 0.6562852263450623,
+          "metadata": {
+            "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The power of the American people when we rise up and stand for liberty knows no bounds.",
+          "document_name": "cruz_2016_03_23.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.5999854207038879,
+          "metadata": {
+            "document_name": "cruz_2016_03_23.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "federal government that seeks to dictate school curriculum through Common Core.",
+          "document_name": "cruz_2016_03_23.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.8,
+          "relevance_score": 0.5788359045982361,
+          "metadata": {
+            "document_name": "cruz_2016_03_23.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Tonight, Republicans and the Reagan Democrats can send an unmistakable message, the message of a Reagan-like landslide that once and for all will drive the liberal elites and the Washington cartel into the Potomac and out to sea, never to be seen again.",
+          "document_name": "cruz_2016_02_01.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.85,
+          "relevance_score": 0.5513924360275269,
+          "metadata": {
+            "document_name": "cruz_2016_02_01.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.85,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "I think we have to do this together",
+          "document_name": "clinton_2016_09_09.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.8,
+          "relevance_score": 0.548454225063324,
+          "metadata": {
+            "document_name": "clinton_2016_09_09.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We reject the bigotry of Hillary Clinton who sees people of color only as votes, not as human beings worthy of a better future.",
+          "document_name": "trump/general_election/trump_2016_08_20.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.95,
+          "relevance_score": 0.5445109605789185,
+          "metadata": {
+            "document_name": "trump/general_election/trump_2016_08_20.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Only one candidate remaining has a consistent conservative record. Other candidates engage in non-stop personal attacks. We have not and we will not respond in kind.",
+          "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.5439992547035217,
+          "metadata": {
+            "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Iowa has sent notice that the Republican nominee and the next president of the United States will not be chosen by the media. Will not be chosen by the Washington establishment. Will not be chosen by the lobbyists. But will be chosen by the most incredible powerful force, where all sovereignty resides in our nation, by we the people: the American people.",
+          "document_name": "cruz_2016_02_01.txt",
+          "dimension": "popular_sovereignty_claims",
+          "confidence": 0.9,
+          "relevance_score": 0.5426300764083862,
+          "metadata": {
+            "document_name": "cruz_2016_02_01.txt",
+            "dimension": "popular_sovereignty_claims",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "You wanted a candidate who didn't adopt his positions because of the latest opinion polls, but instead because of a deep and underlying conservative philosophy that grounded him so that he knew exactly what he believed, exactly what the principles were that built this great nation.",
+          "document_name": "cruz_2016_02_01.txt",
+          "dimension": "authenticity_vs_political_class",
+          "confidence": 0.9,
+          "relevance_score": 0.5413662195205688,
+          "metadata": {
+            "document_name": "cruz_2016_02_01.txt",
+            "dimension": "authenticity_vs_political_class",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We will not allow billionaires and their super PACs to continue to buy elections in the United States of America.",
+          "document_name": "sanders_2016_02_20.txt",
+          "dimension": "anti_pluralist_exclusion",
+          "confidence": 0.75,
+          "relevance_score": 0.5268309116363525,
+          "metadata": {
+            "document_name": "sanders_2016_02_20.txt",
+            "dimension": "anti_pluralist_exclusion",
+            "confidence": 0.75,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Tonight is a victory for every American who\u2019s watched in dismay as career politicians in Washington in both parties refuse to listen and to often fail to keep their commitments to the people.",
+          "document_name": "cruz_2016_02_01.txt",
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "confidence": 0.8,
+          "relevance_score": 0.5119134187698364,
+          "metadata": {
+            "document_name": "cruz_2016_02_01.txt",
+            "dimension": "elite_conspiracy_systemic_corruption",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "After we survive eight long years of the Obama presidency, that no one personality can right the wrongs done by Washington. The millions who understand that it is a commitment to the Constitution to our shared insistence that we rise and return to a higher standard, the very standard that gave birth to the greatest nation that the world has ever known.",
+          "document_name": "cruz_2016_02_01.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.9,
+          "relevance_score": 0.49871668219566345,
+          "metadata": {
+            "document_name": "cruz_2016_02_01.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "If you are a conservative this is where you belong because only one strong conservative is in a position to win this race.",
+          "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+          "dimension": "homogeneous_people_construction",
+          "confidence": 0.8,
+          "relevance_score": 0.4927108883857727,
+          "metadata": {
+            "document_name": "cruz/early_primary/cruz_2016_02_20.txt",
+            "dimension": "homogeneous_people_construction",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Imagine instead of economic stagnation, booming economic growth.",
+          "document_name": "cruz_2016_03_23.txt",
+          "dimension": "crisis_restoration_narrative",
+          "confidence": 0.95,
+          "relevance_score": 0.49199116230010986,
+          "metadata": {
+            "document_name": "cruz_2016_03_23.txt",
+            "dimension": "crisis_restoration_narrative",
+            "confidence": 0.95,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 16
+    }
+  ]
+}
