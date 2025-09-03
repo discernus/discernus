@@ -225,13 +225,9 @@ class LLMGateway(BaseGateway):
                 timeout_occurred = True
                 print(f"⏰ Network timeout with {current_model}: {e}")
                 
-                # For DSQ models (like Gemini), try fallback immediately on first timeout
-                provider = self.param_manager.get_provider_from_model(current_model)
-                provider_config = self.param_manager.provider_defaults.get(provider, {})
-                is_dsq = provider_config.get('dsq_enabled', False)
-                
-                if is_dsq and attempts == 1:
-                    print(f"🔄 DSQ model timeout detected, switching to fallback immediately...")
+                # Model-specific timeout handling based on known issues
+                if current_model == 'vertex_ai/gemini-2.5-flash' and attempts == 1:
+                    print(f"🔄 Gemini 2.5 Flash timeout detected (known issue), switching to fallback immediately...")
                     fallback_model = self.model_registry.get_fallback_model(current_model)
                     if fallback_model:
                         print(f"🔄 Switching to fallback model: {fallback_model}")
@@ -265,13 +261,9 @@ class LLMGateway(BaseGateway):
                     timeout_occurred = True
                     print(f"⏰ Timeout error with {current_model}: {e}")
                     
-                    # For DSQ models (like Gemini), try fallback immediately on first timeout
-                    provider = self.param_manager.get_provider_from_model(current_model)
-                    provider_config = self.param_manager.provider_defaults.get(provider, {})
-                    is_dsq = provider_config.get('dsq_enabled', False)
-                    
-                    if is_dsq and attempts == 1:
-                        print(f"🔄 DSQ model timeout detected, switching to fallback immediately...")
+                    # Model-specific timeout handling based on known issues
+                    if current_model == 'vertex_ai/gemini-2.5-flash' and attempts == 1:
+                        print(f"🔄 Gemini 2.5 Flash timeout detected (known issue), switching to fallback immediately...")
                         fallback_model = self.model_registry.get_fallback_model(current_model)
                         if fallback_model:
                             print(f"🔄 Switching to fallback model: {fallback_model}")
