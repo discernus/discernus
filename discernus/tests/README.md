@@ -88,6 +88,44 @@ python3 -m unittest discernus.tests.intelligent_integration_tests -v
 - **Daily development** (10 runs): ~$0.035 (0.7% of a coffee)
 - **Practical impact**: Cost is negligible - run freely during development!
 
+### 🔬 Tier 3.5: Nano/Micro Integration Tests (8 minutes, ~$0.003)
+**File**: `integration/test_nano_micro_integration.py`
+**Purpose**: Complete pipeline validation with real experiments using cost-effective models
+
+```bash
+# Requires GOOGLE_APPLICATION_CREDENTIALS
+# Uses Gemini 2.5 Flash Lite for all stages
+cd discernus/tests/integration
+python3 run_nano_micro_tests.py
+```
+
+**What it tests**:
+- **Complete pipeline validation** from corpus ingestion to final report
+- **Real experiment execution** with nano (2 docs) and micro (4 docs) experiments
+- **Analysis phase validation** with dimensional scoring and evidence extraction
+- **Derived metrics calculation** (micro experiment only)
+- **Statistical analysis** including ANOVA and descriptive statistics
+- **Synthesis phase validation** with evidence integration and report generation
+- **Clean slate testing** with automatic directory cleanup between tests
+
+**Key Features**:
+- **Real LLM testing** with Gemini 2.5 Flash Lite for all stages
+- **Complete pipeline coverage** testing all phases end-to-end
+- **Comprehensive validation** with detailed assertions for each phase
+- **Cost effective** at ~$0.003 for complete test suite
+- **Clean isolation** with automatic cleanup between tests
+- **Production-ready validation** using actual experiment structures
+
+**Test Experiments**:
+- **Nano Test**: 2 documents, 2 dimensions, basic pipeline validation
+- **Micro Test**: 4 documents, 2 dimensions, 2 derived metrics, statistical analysis
+
+**Cost Breakdown**:
+- **Nano test**: ~$0.001 (basic pipeline validation)
+- **Micro test**: ~$0.002 (complete pipeline with statistics)
+- **Full suite**: ~$0.003 (comprehensive validation)
+- **Practical impact**: Negligible cost for complete pipeline confidence
+
 ### 🏠 Tier 4: Local Intelligent Tests (15 minutes, FREE)
 **File**: `local_intelligent_tests.py`
 **Purpose**: Test prompts with local Ollama models (slow but free)
@@ -162,7 +200,13 @@ python3 discernus/tests/simple_working_tests.py
 # Standardized on Vertex AI Gemini 2.5 Flash for consistency
 python3 discernus/tests/intelligent_integration_tests.py
 
-# Option B: Free local LLM testing (slow)
+# Option B: Complete pipeline validation (~$0.003 - comprehensive testing!)
+# Set GOOGLE_APPLICATION_CREDENTIALS
+# Uses Gemini 2.5 Flash Lite for all stages
+cd discernus/tests/integration
+python3 run_nano_micro_tests.py
+
+# Option C: Free local LLM testing (slow)
 # Requires: ollama install && ollama pull mistral
 python3 discernus/tests/local_intelligent_tests.py
 ```
@@ -408,6 +452,7 @@ logging.basicConfig(level=logging.DEBUG)
 | Quick Test | 30s | $0.00 | 100% | Basic verification |
 | Simple Working Tests | 3min | $0.00 | 100% | Comprehensive validation |
 | Intelligent Integration Tests | 5min | ~$0.004 | 95% | Prompt intelligence validation |
+| Nano/Micro Integration Tests | 8min | ~$0.003 | 95% | Complete pipeline validation |
 | Local Intelligent Tests | 15min | $0.00 | 90% | Free intelligent validation |
 | Legacy Tests | 10min | $0.00 | ~20% | Advanced integration |
 

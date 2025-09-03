@@ -134,6 +134,12 @@ class CleanAnalysisOrchestrator:
         """
         Run complete experiment: analysis + synthesis + results.
         """
+        # Store model parameters as instance attributes for use throughout the experiment
+        self.analysis_model = analysis_model
+        self.synthesis_model = synthesis_model
+        self.validation_model = validation_model
+        self.derived_metrics_model = derived_metrics_model
+        
         run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
         start_time = datetime.now(timezone.utc)
         
