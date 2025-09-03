@@ -93,6 +93,40 @@ class ModelRegistry:
         # Return the best of the fallback options
         return sorted(fallback_candidates, key=lambda name: self.models[name].get('utility_tier', 99))[0]
 
+    def get_provider_fallback_model(self, failed_model_name: str) -> Optional[str]:
+        """
+        Gets the next best model within the same provider (provider-consistent fallback).
+        This maintains research integrity by avoiding cross-provider bias.
+        
+        Fallback strategy:
+        - Flash (tier 2) → Pro (tier 1) 
+        - Lite (tier 4) → Flash (tier 2)
+        - Pro (tier 1) → No fallback (highest tier)
+        """
+        failed_model_details = self.get_model_details(failed_model_name)
+        if not failed_model_details:
+            return None
+
+        current_provider = failed_model_details.get('provider')
+        current_tier = failed_model_details.get('utility_tier')
+        
+        if not current_provider or current_tier is None:
+            return None
+
+        # Find models from the same provider with lower utility_tier (higher priority)
+        provider_fallback_candidates = [
+            name for name, details in self.models.items()
+            if (details.get('provider') == current_provider and 
+                details.get('utility_tier', 99) < current_tier)
+        ]
+
+        if not provider_fallback_candidates:
+            return None
+
+        # Return the next best (highest utility_tier among fallback candidates)
+        # This ensures Lite → Flash instead of Lite → Pro
+        return sorted(provider_fallback_candidates, key=lambda name: self.models[name].get('utility_tier', 99), reverse=True)[0]
+
 # Singleton instance to be used across the application
 _model_registry_instance = None
 

@@ -225,34 +225,25 @@ class LLMGateway(BaseGateway):
                 timeout_occurred = True
                 print(f"⏰ Network timeout with {current_model}: {e}")
                 
-                # Model-specific timeout handling based on known issues
-                if current_model == 'vertex_ai/gemini-2.5-flash' and attempts == 1:
-                    print(f"🔄 Gemini 2.5 Flash timeout detected (known issue), switching to fallback immediately...")
-                    fallback_model = self.model_registry.get_fallback_model(current_model)
-                    if fallback_model:
-                        print(f"🔄 Switching to fallback model: {fallback_model}")
-                        current_model = fallback_model
-                        # Reset attempts counter for fallback model
+                # Provider-consistent fallback strategy for research integrity
+                if attempts == 1:
+                    # First timeout: try provider fallback (Flash → Pro, Lite → Flash)
+                    provider_fallback = self.model_registry.get_provider_fallback_model(current_model)
+                    if provider_fallback:
+                        print(f"🔄 Provider-consistent fallback: {current_model} → {provider_fallback}")
+                        current_model = provider_fallback
                         attempts = 0
                         timeout_occurred = False
                         continue
+                    else:
+                        print(f"❌ No provider fallback available for {current_model}")
+                        # Continue with exponential backoff retry
                 
-                print(f"🔄 Attempting fallback to more reliable model...")
-                fallback_model = self.model_registry.get_fallback_model(current_model)
-                if fallback_model:
-                    print(f"🔄 Switching to fallback model: {fallback_model}")
-                    current_model = fallback_model
-                    # Reset attempts counter for fallback model
-                    attempts = 0
-                    timeout_occurred = False
-                    continue
-                else:
-                    print(f"❌ No fallback available for {current_model}")
-                    # Continue with normal retry logic for timeout
-                    backoff_delay = min(2 ** attempts, 30)  # Shorter backoff for timeouts
-                    print(f"⏳ Waiting {backoff_delay} seconds before retry...")
-                    time.sleep(backoff_delay)
-                    continue
+                # Exponential backoff with longer waits for timeouts
+                backoff_delay = min(2 ** attempts, 120)  # Up to 2 minutes for timeouts
+                print(f"⏳ Timeout retry {attempts}/{max_retries}, waiting {backoff_delay} seconds...")
+                time.sleep(backoff_delay)
+                continue
 
             except Exception as e:
                 # Check if this is a timeout-related exception (catch-all for other timeout types)
@@ -261,34 +252,25 @@ class LLMGateway(BaseGateway):
                     timeout_occurred = True
                     print(f"⏰ Timeout error with {current_model}: {e}")
                     
-                    # Model-specific timeout handling based on known issues
-                    if current_model == 'vertex_ai/gemini-2.5-flash' and attempts == 1:
-                        print(f"🔄 Gemini 2.5 Flash timeout detected (known issue), switching to fallback immediately...")
-                        fallback_model = self.model_registry.get_fallback_model(current_model)
-                        if fallback_model:
-                            print(f"🔄 Switching to fallback model: {fallback_model}")
-                            current_model = fallback_model
-                            # Reset attempts counter for fallback model
+                    # Provider-consistent fallback strategy for research integrity
+                    if attempts == 1:
+                        # First timeout: try provider fallback (Flash → Pro, Lite → Flash)
+                        provider_fallback = self.model_registry.get_provider_fallback_model(current_model)
+                        if provider_fallback:
+                            print(f"🔄 Provider-consistent fallback: {current_model} → {provider_fallback}")
+                            current_model = provider_fallback
                             attempts = 0
                             timeout_occurred = False
                             continue
+                        else:
+                            print(f"❌ No provider fallback available for {current_model}")
+                            # Continue with exponential backoff retry
                     
-                    print(f"🔄 Attempting fallback to more reliable model...")
-                    fallback_model = self.model_registry.get_fallback_model(current_model)
-                    if fallback_model:
-                        print(f"🔄 Switching to fallback model: {fallback_model}")
-                        current_model = fallback_model
-                        # Reset attempts counter for fallback model
-                        attempts = 0
-                        timeout_occurred = False
-                        continue
-                    else:
-                        print(f"❌ No fallback available for {current_model}")
-                        # Continue with normal retry logic for timeout
-                        backoff_delay = min(2 ** attempts, 30)  # Shorter backoff for timeouts
-                        print(f"⏳ Waiting {backoff_delay} seconds before retry...")
-                        time.sleep(backoff_delay)
-                        continue
+                    # Exponential backoff with longer waits for timeouts
+                    backoff_delay = min(2 ** attempts, 120)  # Up to 2 minutes for timeouts
+                    print(f"⏳ Timeout retry {attempts}/{max_retries}, waiting {backoff_delay} seconds...")
+                    time.sleep(backoff_delay)
+                    continue
                 print(f"❌ Unhandled exception with {current_model}: {e}. Attempting fallback.")
                 fallback_model = self.model_registry.get_fallback_model(current_model)
                 if fallback_model:
@@ -300,7 +282,7 @@ class LLMGateway(BaseGateway):
                     return None, {"success": False, "error": error_msg, "model": current_model, "attempts": attempts}
         
         # Archive final max retries failure
-        final_error = f"Max retries exceeded for {model}"
+        final_error = f"Max retries exceeded for {model}. Provider-consistent fallback strategy exhausted."
         return None, {"success": False, "error": final_error, "model": current_model, "attempts": max_retries}
 
     async def check_model_health(self, model_name: str) -> Dict[str, Any]:
