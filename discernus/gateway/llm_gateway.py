@@ -17,6 +17,8 @@ import time
 import os
 import asyncio
 from .base_gateway import BaseGateway
+import socket
+import requests
 
 # Add moderation import
 from litellm import moderation
@@ -102,9 +104,11 @@ class LLMGateway(BaseGateway):
     def execute_call(self, model: str, prompt: str, system_prompt: str = "You are a helpful assistant.", max_retries: int = 3, response_schema: Optional[Dict[str, Any]] = None, context: Optional[str] = None, **kwargs) -> Tuple[str, Dict[str, Any]]:
         """
         Executes a call to an LLM provider via LiteLLM, with intelligent fallback.
+        Enhanced with timeout handling and improved fallback logic for DSQ models.
         """
         current_model = model
         attempts = 0
+        timeout_occurred = False
 
         while attempts < max_retries:
             attempts += 1
@@ -217,7 +221,82 @@ class LLMGateway(BaseGateway):
                 time.sleep(1)
                 continue
 
+            except (socket.timeout, requests.exceptions.Timeout, requests.exceptions.ReadTimeout) as e:
+                timeout_occurred = True
+                print(f"⏰ Network timeout with {current_model}: {e}")
+                
+                # For DSQ models (like Gemini), try fallback immediately on first timeout
+                provider = self.param_manager.get_provider_from_model(current_model)
+                provider_config = self.param_manager.provider_defaults.get(provider, {})
+                is_dsq = provider_config.get('dsq_enabled', False)
+                
+                if is_dsq and attempts == 1:
+                    print(f"🔄 DSQ model timeout detected, switching to fallback immediately...")
+                    fallback_model = self.model_registry.get_fallback_model(current_model)
+                    if fallback_model:
+                        print(f"🔄 Switching to fallback model: {fallback_model}")
+                        current_model = fallback_model
+                        # Reset attempts counter for fallback model
+                        attempts = 0
+                        timeout_occurred = False
+                        continue
+                
+                print(f"🔄 Attempting fallback to more reliable model...")
+                fallback_model = self.model_registry.get_fallback_model(current_model)
+                if fallback_model:
+                    print(f"🔄 Switching to fallback model: {fallback_model}")
+                    current_model = fallback_model
+                    # Reset attempts counter for fallback model
+                    attempts = 0
+                    timeout_occurred = False
+                    continue
+                else:
+                    print(f"❌ No fallback available for {current_model}")
+                    # Continue with normal retry logic for timeout
+                    backoff_delay = min(2 ** attempts, 30)  # Shorter backoff for timeouts
+                    print(f"⏳ Waiting {backoff_delay} seconds before retry...")
+                    time.sleep(backoff_delay)
+                    continue
+
             except Exception as e:
+                # Check if this is a timeout-related exception (catch-all for other timeout types)
+                error_str = str(e).lower()
+                if any(timeout_keyword in error_str for timeout_keyword in ['timeout', 'readtimeout', 'connection timeout']):
+                    timeout_occurred = True
+                    print(f"⏰ Timeout error with {current_model}: {e}")
+                    
+                    # For DSQ models (like Gemini), try fallback immediately on first timeout
+                    provider = self.param_manager.get_provider_from_model(current_model)
+                    provider_config = self.param_manager.provider_defaults.get(provider, {})
+                    is_dsq = provider_config.get('dsq_enabled', False)
+                    
+                    if is_dsq and attempts == 1:
+                        print(f"🔄 DSQ model timeout detected, switching to fallback immediately...")
+                        fallback_model = self.model_registry.get_fallback_model(current_model)
+                        if fallback_model:
+                            print(f"🔄 Switching to fallback model: {fallback_model}")
+                            current_model = fallback_model
+                            # Reset attempts counter for fallback model
+                            attempts = 0
+                            timeout_occurred = False
+                            continue
+                    
+                    print(f"🔄 Attempting fallback to more reliable model...")
+                    fallback_model = self.model_registry.get_fallback_model(current_model)
+                    if fallback_model:
+                        print(f"🔄 Switching to fallback model: {fallback_model}")
+                        current_model = fallback_model
+                        # Reset attempts counter for fallback model
+                        attempts = 0
+                        timeout_occurred = False
+                        continue
+                    else:
+                        print(f"❌ No fallback available for {current_model}")
+                        # Continue with normal retry logic for timeout
+                        backoff_delay = min(2 ** attempts, 30)  # Shorter backoff for timeouts
+                        print(f"⏳ Waiting {backoff_delay} seconds before retry...")
+                        time.sleep(backoff_delay)
+                        continue
                 print(f"❌ Unhandled exception with {current_model}: {e}. Attempting fallback.")
                 fallback_model = self.model_registry.get_fallback_model(current_model)
                 if fallback_model:
