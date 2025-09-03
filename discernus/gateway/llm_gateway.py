@@ -99,7 +99,7 @@ class LLMGateway(BaseGateway):
         provider = self.param_manager.get_provider_from_model(model)
         return self._rate_limited_completions.get(provider, litellm.completion)
 
-    def execute_call(self, model: str, prompt: str, system_prompt: str = "You are a helpful assistant.", max_retries: int = 3, response_schema: Optional[Dict[str, Any]] = None, **kwargs) -> Tuple[str, Dict[str, Any]]:
+    def execute_call(self, model: str, prompt: str, system_prompt: str = "You are a helpful assistant.", max_retries: int = 3, response_schema: Optional[Dict[str, Any]] = None, context: Optional[str] = None, **kwargs) -> Tuple[str, Dict[str, Any]]:
         """
         Executes a call to an LLM provider via LiteLLM, with intelligent fallback.
         """
@@ -129,7 +129,11 @@ class LLMGateway(BaseGateway):
                         
                         return None, {"success": False, "error": error_msg, "model": current_model, "attempts": attempts}
 
-                print(f"Attempting call with {current_model} (Attempt {attempts}/{max_retries})...")
+                # Enhanced progress message with context
+                if context:
+                    print(f"🤖 {context} with {current_model} (Attempt {attempts}/{max_retries})...")
+                else:
+                    print(f"Attempting call with {current_model} (Attempt {attempts}/{max_retries})...")
                 
                 # Clean parameters based on provider requirements
                 call_kwargs = kwargs.copy()

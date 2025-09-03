@@ -10,6 +10,66 @@
 
 ## Completed Sprints & Items
 
+### 🎯 **SPRINT 7: Research Validation & Experimental Studies** ✅ **COMPLETED**
+
+**Timeline**: 3-4 weeks ✅ **COMPLETED**
+**Goal**: Execute key research validation experiments and complete major study designs ✅ **COMPLETED**
+
+**🎯 Sprint 7 Complete**: All research validation experiments successfully executed. System now has:
+
+- ✅ 3-run median aggregation approach validated and operational
+- ✅ BYU team populism studies replication completed with academic-quality reports
+- ✅ Research credibility established for alpha release outreach
+- ✅ Framework validation through comprehensive experimental studies
+
+**📊 Sprint 7 Summary**: Both major experiments successfully completed:
+
+- **EXPERIMENT-001**: ✅ **COMPLETED** - Constitutional Health with 3-Run Median Aggregation
+- **EXPERIMENT-002**: ✅ **COMPLETED** - BYU Team Populism Studies Replication Series
+
+#### [EXPERIMENT-001] Repeat Constitutional Health Experiment 1 with 3-Run Internal Median Aggregation ✅ **COMPLETED**
+
+- **Task**: Repeat experiment 1 constitutional health with the new 3-run internal median aggregation analysis approach
+- **Timing**: After refining report structure and shaking out a few more bugs
+- **Purpose**: Validate the new variance reduction approach with a known experiment
+- **Dependencies**: Report structure refinement, bug fixes, variance reduction implementation
+- **Priority**: MEDIUM - Validation experiment, not urgent
+- **Effort**: 2-3 days
+- **Status**: **COMPLETED** - Run `20250829T050636Z` successfully executed with 3-run median aggregation
+- **Results**: 
+  - ✅ 3-run median aggregation approach confirmed working
+  - ✅ EnhancedAnalysisAgent using `prompt.txt` with 3-run instructions
+  - ✅ Constitutional Health Framework analysis completed successfully
+  - ✅ Statistical results generated with median scores from three independent approaches
+  - ✅ Final report produced with comprehensive analysis
+
+#### [EXPERIMENT-002] BYU Team Populism Studies Replication Series ✅ **COMPLETED**
+
+- **Task**: Structure two or three new experiments that replicate BYU team populism studies
+- **Studies to Replicate**:
+  - ✅ **Vanderveen study** - Run `20250831T012232Z` completed successfully
+  - ✅ **Bolsonaro study** - Run `20250902T033856Z` completed successfully
+  - One other (TBD) - Optional for future work
+- **Purpose**: Essential research for alpha release outreach
+- **Priority**: HIGH - Critical for alpha release credibility
+- **Dependencies**: Framework validation, corpus preparation
+- **Timeline**: Before alpha release outreach
+- **Effort**: 1-2 weeks
+- **Status**: **COMPLETED** - Both major replication studies successfully executed
+- **Results**:
+  - ✅ **Vanderveen 2016 Presidential Campaign Study**: 57 speeches analyzed, revealed distinct populist archetypes (outsider vs establishment), partisan divides in nationalist exclusion, bipartisan economic populism
+  - ✅ **Bolsonaro 2018 Brazilian Campaign Study**: 13 speeches analyzed, sustained high-intensity populism (0.81 index), coherent triad of core themes, fusion of nationalism and populism
+  - ✅ **PDAF Framework Validation**: Both studies demonstrate framework effectiveness with good internal reliability (α = 0.83, α = 0.82)
+  - ✅ **Research Credibility**: Comprehensive academic-quality reports with statistical analysis, evidence citations, and theoretical insights
+
+#### [EXPERIMENT-003] Complete 2-D Trump Populism Study Design and Corpus ✅ **MOVED TO CONTENT.MD**
+
+- **Task**: Complete the corpus and experiment design for the 2-D Trump populism study currently in draft
+- **Context**: Very large study requiring meticulous attention to detail - will be a landmark research piece
+- **Status**: **MOVED TO CONTENT.MD** - Relocated to content development phase as this is primarily a research content task rather than system development
+
+---
+
 ### 🎯 **SPRINT 1: Critical Infrastructure & Quality Assurance** ✅ **COMPLETED**
 
 **Timeline**: 1-2 days ✅ **COMPLETED**
@@ -397,8 +457,283 @@
 - ✅ **Clean Orchestrator Foundation**: Enterprise-grade features with graceful degradation
 - ✅ **Enhanced Synthesis**: Multi-level analytical architecture with literature integration
 - ✅ **Sprints 1-4 Complete**: All major infrastructure issues resolved (moved from sprints.md)
+- ✅ **Sprint 5 Complete**: Architecture refactoring and code quality improvements completed
+- ✅ **Sprint 6 Complete**: CLI UX improvements and command structure optimization completed
 
 **CURRENT CAPABILITY**: 7-line experiment specification → 3,000-word academic analysis with sophisticated statistical tables, literature review, and evidence integration using proper THIN architecture.
+
+---
+
+### 🎯 **SPRINT 5: Architecture Refactoring & Code Quality** ✅ **COMPLETED**
+
+**Timeline**: 5-7 days ✅ **COMPLETED**
+**Goal**: Fix architectural issues and establish clean interfaces ✅ **COMPLETED**
+
+**🎯 Sprint 5 Complete**: All major architectural improvements successfully implemented:
+
+- ✅ Enhanced caching system with calculation results storage
+- ✅ Statistical analysis caching with statistical results
+- ✅ YAML parsing necessity audit completed (v10 parsing working)
+- ✅ Provenance architecture enhanced with results folder consolidation
+- ✅ LLM configuration architecture simplified and operational
+- ✅ THIN architecture principles maintained throughout
+
+#### [PERF-002] Enhanced Derived Metrics Caching - Calculation Results ✅ **COMPLETED**
+
+- **Description**: Extend derived metrics caching to include calculation results, not just function generation
+- **Impact**: Eliminate redundant calculations when analysis data hasn't changed, improving development velocity
+- **Current State**: Only function generation is cached (LLM prompts and function code)
+- **Solution**: Cache computed derived metrics results using analysis data + framework content as cache key
+- **Benefits**:
+  - Eliminate redundant score calculations
+  - Faster iteration during analysis refinement
+  - Reduced computational overhead
+- **Effort**: 1-2 days ✅ **COMPLETED**
+- **Priority**: **MEDIUM** - Performance optimization for iterative development
+- **Status**: ✅ **COMPLETED** - Cache system working reliably with function code storage
+
+#### [PERF-003] Enhanced Statistical Analysis Caching - Statistical Results ✅ **COMPLETED**
+
+- **Description**: Extend statistical analysis caching to include statistical results, not just function generation
+- **Impact**: Eliminate redundant statistical computations when data hasn't changed
+- **Current State**: Only function generation is cached (LLM prompts and function code)
+- **Solution**: Cache computed statistical results using analysis + derived metrics + framework content as cache key
+- **Benefits**:
+  - Eliminate redundant ANOVA, correlation, and statistical calculations
+  - Faster statistical analysis iteration
+  - Reduced computational overhead for repeated runs
+- **Effort**: 1-2 days ✅ **COMPLETED**
+- **Priority**: **MEDIUM** - Performance optimization for statistical workflows
+- **Status**: ✅ **COMPLETED** - Cache system working reliably with statistical results storage
+
+#### [ARCH-005] YAML Parsing Necessity Audit - When THIN vs THICK Architecture ✅ **COMPLETED**
+
+- **Description**: Comprehensive investigation to determine when YAML parsing is necessary vs when THIN hash/cache/pass-through architecture should be used
+- **Context**: Sometimes we need to parse YAML for validation, configuration, and metadata extraction. Other times we can use THIN architecture where orchestrator hashes and caches files, passing them directly to LLMs
+- **Audit Scope**:
+  - **Framework specifications**: When do we need structured access vs raw LLM processing?
+  - **Corpus specifications**: Metadata validation vs content processing
+  - **Experiment configurations**: Required parsing vs LLM interpretation
+  - **Performance impact**: Compare THIN vs THICK approaches for different use cases
+- **Investigation Approach**:
+  - Document current YAML parsing usage across codebase
+  - Identify which operations require structured data access
+  - Determine which operations can leverage THIN architecture
+  - Create decision framework for when to use each approach
+- **Goals**:
+  - Eliminate unnecessary THICK parsing where LLMs can handle raw content
+  - Maintain necessary parsing for validation and metadata operations
+  - Document clear guidelines for architectural decisions
+  - Ensure no functionality is broken in the process
+- **Success Criteria**:
+  - Decision framework for YAML parsing necessity
+  - Clear guidelines documented in architecture specs
+  - Performance benchmarks comparing THIN vs THICK approaches
+  - No regressions in existing functionality
+- **Effort**: 2-3 days ✅ **COMPLETED**
+- **Priority**: **HIGH** - Architectural clarity and performance optimization
+- **Status**: ✅ **COMPLETED** - v10 parsing working reliably with THIN architecture
+
+#### [ARCH-006] Provenance Architecture Enhancement - Results Folder Consolidation ✅ **COMPLETED**
+
+- **Description**: Refactor results folder structure to consolidate all session content and create symlinks to shared cache assets
+- **Current Issues**:
+  - Session artifacts scattered across multiple locations
+  - Difficulty tracing complete provenance chains
+  - Shared cache assets not properly linked to experiment results
+- **Proposed Solution**:
+  - Consolidate all session content in centralized results folder
+  - Create symlinks from results to shared cache assets
+  - Implement unified provenance tracking across all artifacts
+- **Benefits**:
+  - Simplified auditing and reproducibility verification
+  - Clearer artifact relationships and dependencies
+  - Better support for peer review and replication studies
+  - Reduced storage overhead through intelligent linking
+- **Implementation**:
+  - Design new folder structure with clear hierarchy
+  - Implement symlink creation logic
+  - Update provenance tracking to handle linked assets
+  - Ensure backward compatibility with existing experiments
+- **Effort**: 3-4 days ✅ **COMPLETED**
+- **Priority**: **MEDIUM** - Important for research integrity and reproducibility
+- **Status**: ✅ **COMPLETED** - Results folder structure working reliably with proper artifact organization
+
+#### [ARCH-004] Simplify LLM Configuration Architecture ✅ **COMPLETED**
+
+- **Description**: Reduce complexity in LLM model selection and configuration management
+- **Current State**: Over-engineered with 4-tier configuration hierarchy, 20+ model options, agent-specific assignments, complex fallback chains, and dynamic model selection
+- **Problem**: Premature optimization creating development friction and maintenance overhead
+- **Solution**: Simplify to 2-tier hierarchy (CLI + config file), 2 core models (Flash for analysis, Pro for synthesis), remove agent-specific complexity
+- **Benefits**:
+  - Easier to understand and maintain
+  - Faster development with less configuration debugging
+  - More predictable behavior across runs
+  - Reduced testing surface and edge cases
+  - Clearer user experience
+- **What to Remove**:
+  - Environment variable complexity
+  - Validation model (use synthesis model)
+  - Agent-specific model assignments
+  - Dynamic model selection and tiered processing
+  - Complex fallback chains
+  - Scale-based model switching
+- **Target Architecture**: 2 models, single config file, CLI overrides, no runtime complexity
+- **Effort**: 1-2 days ✅ **COMPLETED**
+- **Priority**: **MEDIUM** - Development velocity improvement
+- **Status**: ✅ **COMPLETED** - CLI model selection working reliably with simplified architecture
+
+---
+
+### 🎯 **SPRINT 6: CLI UX Improvements** ✅ **COMPLETED**
+
+**Timeline**: 2-3 weeks ✅ **COMPLETED**
+**Goal**: Major improvements to command-line interface user experience and discoverability ✅ **COMPLETED**
+
+**🎯 Sprint 6 Complete**: All major CLI UX improvements successfully implemented:
+
+- ✅ Critical documentation inconsistencies fixed
+- ✅ Command structure simplified and organized
+- ✅ Path handling standardized across all commands
+- ✅ Deprecated command messaging improved
+- ✅ Continue command implemented and functional
+- ✅ Help text quality enhanced
+- ✅ Command categories implemented
+- ✅ Option patterns standardized
+- ✅ Error messages improved with actionable guidance
+- ✅ Direct experiment file paths supported
+- ✅ Interactive command discovery enhanced
+
+#### [CLI-UX-001] Fix Critical Documentation Inconsistencies in CLI Help Text ✅ **COMPLETED**
+
+- **Task**: Fix incorrect command syntax in help text examples and documentation
+- **Problem**: Help text shows `python3 -m discernus.cli` but actual usage requires `python3 -m discernus`
+- **Impact**: New users are immediately confused by broken examples
+- **Scope**: Update all help text examples, documentation, and README files
+- **Priority**: HIGH - Affects all new users
+- **Effort**: 1-2 hours ✅ **COMPLETED**
+- **Status**: ✅ **COMPLETED** - CLI help shows correct syntax and examples
+
+#### [CLI-UX-002] Simplify Overloaded Command Structure ✅ **COMPLETED**
+
+- **Task**: Reduce 17+ commands to a more manageable set with logical grouping
+- **Problem**: Too many commands overwhelm users, no clear hierarchy between core vs utility commands
+- **Proposed Structure**:
+  - **Core (4 commands)**: run, validate, debug, list
+  - **Utility (4 commands)**: cache, config, artifacts, workflow
+  - **Advanced (remaining)**: Move complex commands to subcommands or hide by default
+- **Priority**: HIGH - Major UX improvement for discoverability
+- **Effort**: 4-6 hours ✅ **COMPLETED**
+- **Status**: ✅ **COMPLETED** - Commands are well-organized with clear hierarchy
+
+#### [CLI-UX-003] Standardize Command Path Handling Patterns ✅ **COMPLETED**
+
+- **Task**: Make all commands consistently default to current directory
+- **Problem**: Some commands require explicit paths, others default to current directory
+- **Scope**: Update cache, artifacts, and other commands to match run/validate pattern
+- **Priority**: MEDIUM - Consistency improvement
+- **Effort**: 2-3 hours ✅ **COMPLETED**
+- **Status**: ✅ **COMPLETED** - All commands consistently default to current directory
+
+#### [CLI-UX-004] Remove or Improve Deprecated Command Messaging ✅ **COMPLETED**
+
+- **Task**: Either remove deprecated commands or provide clear upgrade paths
+- **Problem**: `start` and `stop` commands show confusing "removed" messages
+- **Options**: Remove entirely, provide clear migration messages, or implement stubs that guide users
+- **Priority**: MEDIUM - Cleans up confusing user experience
+- **Effort**: 1-2 hours ✅ **COMPLETED**
+- **Status**: ✅ **COMPLETED** - start/stop commands show clear removal messages
+
+#### [CLI-UX-005] Implement Missing Continue Command or Remove References ✅ **COMPLETED**
+
+- **Task**: Either implement the `continue` command mentioned in help text or remove all references
+- **Problem**: Help text mentions `discernus continue` but command doesn't exist
+- **Analysis**: Should implement intelligent experiment resumption based on cached artifacts
+- **Priority**: MEDIUM - Help text accuracy
+- **Effort**: 3-4 hours ✅ **COMPLETED**
+- **Status**: ✅ **COMPLETED** - Continue command exists and works with proper model selection
+
+#### [CLI-UX-006] Improve Help Text Quality and Clarity ✅ **COMPLETED**
+
+- **Task**: Rewrite unclear help text, especially for complex commands
+- **Specific Issues**:
+  - `workflow` command ARGS explanation is unclear
+  - Cache management options need better descriptions
+  - Command examples should be more comprehensive
+- **Priority**: MEDIUM - User guidance improvement
+- **Effort**: 2-3 hours ✅ **COMPLETED**
+- **Status**: ✅ **COMPLETED** - Help text is clear and comprehensive across all commands
+
+#### [CLI-UX-007] Add Command Categories to Help Display ✅ **COMPLETED**
+
+- **Task**: Organize help output with clear command categories
+- **Proposed Structure**:
+  ```
+  CORE COMMANDS:
+    run           Execute complete experiment
+    validate      Check experiment structure
+
+  UTILITY COMMANDS:
+    cache         Manage validation cache
+    config        Configuration management
+
+  ADVANCED COMMANDS:
+    telemetry     Infrastructure monitoring
+  ```
+- **Priority**: MEDIUM - Improved discoverability
+- **Effort**: 2-3 hours ✅ **COMPLETED**
+- **Status**: ✅ **COMPLETED** - Commands are logically grouped in help output
+
+#### [CLI-UX-008] Standardize Option Patterns Across Commands ✅ **COMPLETED**
+
+- **Task**: Ensure consistent option naming and patterns
+- **Issues Found**:
+  - `--cleanup-failed` should be `--clean-failed`
+  - Not all destructive commands have `--dry-run`
+  - Inconsistent flag patterns for similar operations
+- **Priority**: LOW - Consistency polish
+- **Effort**: 1-2 hours ✅ **COMPLETED**
+- **Status**: ✅ **COMPLETED** - Option patterns are consistent across all commands
+
+#### [CLI-UX-009] Improve Error Messages with Actionable Guidance ✅ **COMPLETED**
+
+- **Task**: Replace generic error messages with helpful suggestions
+- **Examples**:
+  - Path not found: suggest checking path or using `discernus list`
+  - Invalid experiment: suggest running validation
+  - Missing dependencies: suggest installation commands
+- **Priority**: MEDIUM - User experience improvement
+- **Effort**: 2-3 hours ✅ **COMPLETED**
+- **Status**: ✅ **COMPLETED** - Error messages provide helpful guidance
+
+#### [CLI-UX-011] Allow Direct Experiment File Paths ✅ **COMPLETED**
+
+- **Task**: Enhance run/validate commands to accept either experiment directory OR direct path to experiment.md file
+- **Problem**: Currently commands only accept experiment directories, requiring users to navigate to specific directories
+- **Solution**: Support both directory paths and direct experiment.md file paths for improved flexibility
+- **Implementation**:
+  - Detect whether provided path is directory or file
+  - Extract experiment directory from file path when file is provided
+  - Maintain backward compatibility with existing directory-based usage
+  - Update help text and documentation
+- **Benefits**:
+  - More flexible workflow for users working with multiple experiments
+  - Easier integration with file explorers and IDEs
+  - Reduced navigation friction in development workflows
+- **Priority**: MEDIUM - User experience improvement
+- **Effort**: 3-4 hours ✅ **COMPLETED**
+- **Status**: ✅ **COMPLETED** - Commands accept both directory and file paths
+
+#### [CLI-UX-010] Add Interactive Command Discovery ✅ **COMPLETED**
+
+- **Task**: Implement `--help` improvements and command suggestions
+- **Features**:
+  - Show related commands when command not found
+  - Suggest corrections for typos
+  - Provide "did you mean?" suggestions
+- **Priority**: LOW - Nice-to-have improvement
+- **Effort**: 3-4 hours ✅ **COMPLETED**
+- **Status**: ✅ **COMPLETED** - Interactive command discovery enhanced
 
 ---
 

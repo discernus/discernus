@@ -373,6 +373,24 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
     
 
 
+    # Validate models against registry before proceeding
+    from .gateway.model_registry import ModelRegistry
+    model_registry = ModelRegistry()
+    
+    models_to_validate = [
+        ("analysis", analysis_model),
+        ("synthesis", synthesis_model),
+        ("validation", validation_model),
+        ("derived_metrics", derived_metrics_model)
+    ]
+    
+    for model_type, model_name in models_to_validate:
+        if model_name and not model_registry.get_model_details(model_name):
+            click.echo(f"❌ Unknown {model_type} model: {model_name}")
+            click.echo(f"   Available models: {', '.join(model_registry.list_models()[:5])}{'...' if len(model_registry.list_models()) > 5 else ''}")
+            click.echo(f"   Use 'discernus models list' to see all available models")
+            sys.exit(1)
+    
     if verbosity == 'verbose':
         rich_console.print_info(f"Using config file: {get_config_file_path() or 'None (using defaults)'}")
         rich_console.print_info(f"Analysis model: {analysis_model}")

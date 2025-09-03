@@ -1,0 +1,16 @@
+{
+  "metadata_summary": {
+    "total_documents": 2,
+    "collection_time": "2025-09-02T16:09:24.267631+00:00"
+  },
+  "document_metadata": [
+    {
+      "filename": "malcom_x_ballot_or_bullet.txt",
+      "document_id": "malcolm_x_ballot_bullet_1964"
+    },
+    {
+      "filename": "mlk_letter_from_birmingham_jail.txt",
+      "document_id": "mlk_birmingham_jail_1963"
+    }
+  ]
+}

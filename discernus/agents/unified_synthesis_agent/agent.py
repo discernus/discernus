@@ -175,8 +175,29 @@ class UnifiedSynthesisAgent:
 
             # 6. Execute the LLM call
             final_report, metadata = self.llm_gateway.execute_call(
-                model=self.model, prompt=base_prompt, temperature=0.2
+                model=self.model, prompt=base_prompt, temperature=0.2, context="Generating comprehensive research report"
             )
+
+            # Log cost information to audit logger
+            if self.audit_logger and metadata.get("usage"):
+                usage_data = metadata["usage"]
+                try:
+                    self.audit_logger.log_cost(
+                        operation="synthesis_report_generation",
+                        model=metadata.get("model", self.model),
+                        tokens_used=usage_data.get("total_tokens", 0),
+                        cost_usd=usage_data.get("response_cost_usd", 0.0),
+                        agent_name=self.agent_name,
+                        metadata={
+                            "prompt_tokens": usage_data.get("prompt_tokens", 0),
+                            "completion_tokens": usage_data.get("completion_tokens", 0),
+                            "attempts": metadata.get("attempts", 1),
+                            "report_length": len(final_report)
+                        }
+                    )
+                except Exception as e:
+                    if hasattr(self, 'logger'):
+                        self.logger.error(f"Error logging cost for synthesis: {e}")
 
             if self.audit_logger:
                 self.audit_logger.log_agent_event(

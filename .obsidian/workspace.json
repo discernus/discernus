@@ -1,0 +1,211 @@
+{
+  "main": {
+    "id": "4378da40818d86dc",
+    "type": "split",
+    "children": [
+      {
+        "id": "ce8c4efd0306217d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3bbc51f3f8849f9b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "projects/mlkmx/runs/20250902T155857Z/results/The-Two-Architectures-of-Social-Change.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "The-Two-Architectures-of-Social-Change"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "c946ee1b89cda5d7",
+    "type": "split",
+    "children": [
+      {
+        "id": "14f0ad7d5d98d3e1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d3ef785d98b49534",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "4472b5a6b5ddb9e6",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "7f676a2c083d64cd",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "eb72fced0f869014",
+    "type": "split",
+    "children": [
+      {
+        "id": "fd6d0918e4af6ac0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d5fcc012dd152015",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "projects/mlkmx/runs/20250902T155857Z/results/The-Two-Architectures-of-Social-Change.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for The-Two-Architectures-of-Social-Change"
+            }
+          },
+          {
+            "id": "bdd4b5c4ff125743",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "projects/mlkmx/runs/20250902T155857Z/results/The-Two-Architectures-of-Social-Change.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from The-Two-Architectures-of-Social-Change"
+            }
+          },
+          {
+            "id": "bc5b317863d704a6",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "a7aecf8efcb6a362",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "projects/mlkmx/runs/20250902T155857Z/results/The-Two-Architectures-of-Social-Change.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of The-Two-Architectures-of-Social-Change"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "3bbc51f3f8849f9b",
+  "lastOpenFiles": [
+    "projects/nano_test_experiment/runs/20250903T013219Z/results/metadata/source_metadata.json",
+    "projects/nano_test_experiment/runs/20250903T013219Z/results/evidence/evidence_database.json",
+    "projects/nano_test_experiment/runs/20250903T013219Z/results/corpus/negative_test.txt",
+    "projects/nano_test_experiment/runs/20250903T013219Z/results/corpus/positive_test.txt",
+    "projects/nano_test_experiment/runs/20250903T013219Z/results/corpus/corpus.md",
+    "projects/nano_test_experiment/runs/20250903T013219Z/results/statistical_results.json",
+    "projects/nano_test_experiment/runs/20250903T013219Z/results/metadata",
+    "projects/nano_test_experiment/runs/20250903T013219Z/results/final_report.md",
+    "projects/nano_test_experiment/runs/20250903T013219Z/results/fact_check_results.json",
+    "projects/nano_test_experiment/runs/20250903T013219Z/results/experiment_summary.json",
+    "projects/nano_test_experiment/runs/20250903T013219Z/results/evidence",
+    "projects/nano_test_experiment/runs/20250903T013219Z/results/corpus",
+    "projects/nano_test_experiment/runs/20250903T013219Z/results/assetss.json",
+    "projects/nano_test_experiment/temp_statistical_analysis/framework_content.md",
+    "projects/nano_test_experiment/temp_derived_metrics/framework_content.md",
+    "projects/nano_test_experiment/runs/20250903T012811Z/results/corpus/corpus.md",
+    "projects/nano_test_experiment/runs/20250903T012811Z/results/final_report.md",
+    "projects/nano_test_experiment/runs/20250903T012633Z/results/corpus/corpus.md",
+    "projects/nano_test_experiment/runs/20250903T012633Z/results/final_report.md",
+    "projects/nano_test_experiment/runs/20250903T012602Z/results/corpus/corpus.md",
+    "projects/nano_test_experiment/runs/20250903T012602Z/results/final_report.md",
+    "projects/nano_test_experiment/runs/20250903T012354Z/results/corpus/corpus.md",
+    "projects/nano_test_experiment/runs/20250903T012354Z/results/final_report.md",
+    "projects/nano_test_experiment/runs/20250903T012220Z/results/corpus/corpus.md",
+    "projects/nano_test_experiment/runs/20250903T012220Z/results/final_report.md",
+    "projects/nano_test_experiment/runs/20250903T011938Z/results/corpus/corpus.md",
+    "projects/nano_test_experiment/runs/20250903T011938Z/results/final_report.md",
+    "projects/nano_test_experiment/runs/20250903T011719Z/results/corpus/corpus.md",
+    "projects/nano_test_experiment/runs/20250903T011719Z/results/final_report.md",
+    "projects/nano_test_experiment/runs/20250903T011455Z/results/corpus/corpus.md",
+    "projects/nano_test_experiment/runs/20250903T011455Z/results/final_report.md",
+    "projects/nano_test_experiment/runs/20250903T011203Z/results/corpus/corpus.md",
+    "projects/nano_test_experiment/runs/20250903T011203Z/results/final_report.md",
+    "projects/nano_test_experiment/runs/20250903T010424Z/results/corpus/corpus.md",
+    "projects/nano_test_experiment/runs/20250903T010424Z/results/final_report.md",
+    "projects/nano_test_experiment/runs/20250903T005321Z/results/corpus/corpus.md"
+  ]
+}

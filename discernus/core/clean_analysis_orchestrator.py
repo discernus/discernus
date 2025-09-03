@@ -95,7 +95,8 @@ class CleanAnalysisOrchestrator:
         }
 
         self.logger.info(f"Clean orchestrator initialized for: {self.security.experiment_name}")
-        self.security_boundary = ExperimentSecurityBoundary(self.experiment_path)
+        # Use the same security boundary instance to avoid duplicate initialization messages
+        self.security_boundary = self.security
         self.artifact_storage = None
         self.manifest = None
         self.rag_index = None # Add instance variable for the RAG index
@@ -253,6 +254,7 @@ class CleanAnalysisOrchestrator:
 
             # Phase 8: Run evidence retrieval to curate supporting quotes
             phase_start = datetime.now(timezone.utc)
+            self._log_progress("🔍 Phase 8: Evidence Retrieval - Analyzing statistical findings and curating supporting quotes...")
             
             # Corpus index service debug removed (QA agents disabled)
             
@@ -277,6 +279,7 @@ class CleanAnalysisOrchestrator:
             if self.progress_manager:
                 self.progress_manager.update_main_progress("Synthesis")
             phase_start = datetime.now(timezone.utc)
+            self._log_progress("📝 Phase 10: Synthesis - Generating comprehensive research report...")
             
             # Corpus index service debug removed (QA agents disabled)
             
@@ -1892,11 +1895,13 @@ class CleanAnalysisOrchestrator:
                 self._log_progress("⚠️ No evidence artifacts found - evidence retrieval will be limited")
                 return {"status": "no_evidence_available", "message": "No evidence artifacts found"}
             
-            # Initialize EvidenceRetrieverAgent with shared artifact storage
+            # Initialize EvidenceRetrieverAgent with shared infrastructure
             agent_config = {
                 'experiment_path': str(self.experiment_path),
                 'run_id': run_id or datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ"),
-                'artifact_storage': self.artifact_storage  # Share the same artifact storage instance
+                'artifact_storage': self.artifact_storage,  # Share the same artifact storage instance
+                'security_boundary': self.security,  # Share the same security boundary instance
+                'model': model  # Pass the synthesis model for evidence retrieval
             }
             
             evidence_agent = EvidenceRetrieverAgent(agent_config)
@@ -2610,17 +2615,36 @@ class CleanAnalysisOrchestrator:
             evidence_results_dir = results_dir / "evidence"
             evidence_results_dir.mkdir(exist_ok=True)
             
-            # Get all evidence artifacts
-            artifacts_dir = self.experiment_path / "shared_cache" / "artifacts"
+            # Get evidence artifacts from current run only (filter by run ID)
+            artifacts_dir = self.artifact_storage.artifacts_dir
             evidence_files = list(artifacts_dir.glob("evidence_v6_*"))
             
             if not evidence_files:
                 self._log_progress("⚠️ No evidence artifacts found")
                 return
             
-            # Aggregate evidence
-            all_evidence = []
+            # Filter evidence artifacts by current run ID
+            current_run_id = self.artifact_storage.run_name
+            run_specific_evidence_files = []
+            
             for evidence_file in evidence_files:
+                # Get artifact hash from filename (first 8 characters)
+                filename_hash = evidence_file.stem.replace("evidence_v6_", "")
+                
+                # Find matching registry entry by comparing with artifact_path
+                for registry_hash, artifact_info in self.artifact_storage.registry.items():
+                    if artifact_info.get("artifact_path") == evidence_file.name:
+                        if artifact_info.get("source_run") == current_run_id:
+                            run_specific_evidence_files.append(evidence_file)
+                        break
+            
+            if not run_specific_evidence_files:
+                self._log_progress("⚠️ No evidence artifacts found for current run")
+                return
+            
+            # Aggregate evidence from current run only
+            all_evidence = []
+            for evidence_file in run_specific_evidence_files:
                 try:
                     with open(evidence_file, 'r', encoding='utf-8') as f:
                         evidence_data = json.load(f)
@@ -3349,17 +3373,36 @@ class CleanAnalysisOrchestrator:
             evidence_results_dir = results_dir / "evidence"
             evidence_results_dir.mkdir(exist_ok=True)
             
-            # Get all evidence artifacts
-            artifacts_dir = self.experiment_path / "shared_cache" / "artifacts"
+            # Get evidence artifacts from current run only (filter by run ID)
+            artifacts_dir = self.artifact_storage.artifacts_dir
             evidence_files = list(artifacts_dir.glob("evidence_v6_*"))
             
             if not evidence_files:
                 self._log_progress("⚠️ No evidence artifacts found")
                 return
             
-            # Aggregate evidence
-            all_evidence = []
+            # Filter evidence artifacts by current run ID
+            current_run_id = self.artifact_storage.run_name
+            run_specific_evidence_files = []
+            
             for evidence_file in evidence_files:
+                # Get artifact hash from filename (first 8 characters)
+                filename_hash = evidence_file.stem.replace("evidence_v6_", "")
+                
+                # Find matching registry entry by comparing with artifact_path
+                for registry_hash, artifact_info in self.artifact_storage.registry.items():
+                    if artifact_info.get("artifact_path") == evidence_file.name:
+                        if artifact_info.get("source_run") == current_run_id:
+                            run_specific_evidence_files.append(evidence_file)
+                        break
+            
+            if not run_specific_evidence_files:
+                self._log_progress("⚠️ No evidence artifacts found for current run")
+                return
+            
+            # Aggregate evidence from current run only
+            all_evidence = []
+            for evidence_file in run_specific_evidence_files:
                 try:
                     with open(evidence_file, 'r', encoding='utf-8') as f:
                         evidence_data = json.load(f)

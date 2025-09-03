@@ -1,0 +1,209 @@
+{
+  "evidence_database_metadata": {
+    "total_evidence_pieces": 20,
+    "total_files_processed": 2,
+    "collection_time": "2025-09-02T16:09:24.265627+00:00"
+  },
+  "evidence_collection": [
+    {
+      "document_name": "mlk_letter_from_birmingham_jail.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "All segregation statutes are unjust because segregation distorts the soul and damages the personality. It gives the segregator a false sense of superiority and the segregated a false sense of inferiority.",
+      "confidence": 0.95,
+      "context_type": "moral_argument",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:03:06.855204+00:00"
+    },
+    {
+      "document_name": "mlk_letter_from_birmingham_jail.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "Now is the time to lift our national policy from the quicksand of racial injustice to the solid rock of human dignity.",
+      "confidence": 1.0,
+      "context_type": "rhetorical_metaphor",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:03:06.855209+00:00"
+    },
+    {
+      "document_name": "mlk_letter_from_birmingham_jail.txt",
+      "dimension": "fear",
+      "quote_text": "when you are harried by day and haunted by night by the fact that you are a Negro, living constantly at tiptoe stance, never quite knowing what to expect next, and are plagued with inner fears and outer resentments...",
+      "confidence": 1.0,
+      "context_type": "emotional_appeal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:03:06.855212+00:00"
+    },
+    {
+      "document_name": "mlk_letter_from_birmingham_jail.txt",
+      "dimension": "hope",
+      "quote_text": "Let us all hope that the dark clouds of racial prejudice will soon pass away and the deep fog of misunderstanding will be lifted from our fear drenched communities, and in some not too distant tomorrow the radiant stars of love and brotherhood will shine over our great nation with all their scintillating beauty.",
+      "confidence": 1.0,
+      "context_type": "concluding_vision",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:03:06.855214+00:00"
+    },
+    {
+      "document_name": "mlk_letter_from_birmingham_jail.txt",
+      "dimension": "envy",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "dimension_absent",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:03:06.855216+00:00"
+    },
+    {
+      "document_name": "mlk_letter_from_birmingham_jail.txt",
+      "dimension": "compersion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "dimension_absent",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:03:06.855218+00:00"
+    },
+    {
+      "document_name": "mlk_letter_from_birmingham_jail.txt",
+      "dimension": "enmity",
+      "quote_text": "I have almost reached the regrettable conclusion that the Negro's great stumbling block in his stride toward freedom is not the White Citizen's Counciler or the Ku Klux Klanner, but the white moderate, who is more devoted to 'order' than to justice...",
+      "confidence": 1.0,
+      "context_type": "direct_critique",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:03:06.855220+00:00"
+    },
+    {
+      "document_name": "mlk_letter_from_birmingham_jail.txt",
+      "dimension": "amity",
+      "quote_text": "I hope this letter finds you strong in the faith. I also hope that circumstances will soon make it possible for me to meet each of you, not as an integrationist or a civil-rights leader but as a fellow clergyman and a Christian brother.",
+      "confidence": 1.0,
+      "context_type": "rhetorical_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:03:06.855222+00:00"
+    },
+    {
+      "document_name": "mlk_letter_from_birmingham_jail.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "Is not segregation an existential expression of man's tragic separation, his awful estrangement, his terrible sinfulness?",
+      "confidence": 0.9,
+      "context_type": "theological_argument",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:03:06.855224+00:00"
+    },
+    {
+      "document_name": "mlk_letter_from_birmingham_jail.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "We are caught in an inescapable network of mutuality, tied in a single garment of destiny. Whatever affects one directly, affects all indirectly.",
+      "confidence": 1.0,
+      "context_type": "thesis_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:03:06.855226+00:00"
+    },
+    {
+      "document_name": "malcom_x_ballot_or_bullet.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "The political philosophy of black nationalism only means that the black man should control the politics and the politicians in his own community.",
+      "confidence": 1.0,
+      "context_type": "explicit definition of ideology",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:01:31.813145+00:00"
+    },
+    {
+      "document_name": "malcom_x_ballot_or_bullet.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "We don’t see any American dream. We’ve experienced only the American nightmare.",
+      "confidence": 0.9,
+      "context_type": "rejection of universalist framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:01:31.813173+00:00"
+    },
+    {
+      "document_name": "malcom_x_ballot_or_bullet.txt",
+      "dimension": "fear",
+      "quote_text": "And all of this has built up frustrations in the black community that makes the black community throughout America today more explosive than all of the atomic bombs the Russians can ever invent.",
+      "confidence": 1.0,
+      "context_type": "metaphor of imminent catastrophe",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:01:31.813176+00:00"
+    },
+    {
+      "document_name": "malcom_x_ballot_or_bullet.txt",
+      "dimension": "hope",
+      "quote_text": "You can’t sing up on freedom. But you can swing up on some freedom.",
+      "confidence": 1.0,
+      "context_type": "rejection of passive hope for direct action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:01:31.813179+00:00"
+    },
+    {
+      "document_name": "malcom_x_ballot_or_bullet.txt",
+      "dimension": "envy",
+      "quote_text": "when you spend your dollar out of the community in which you live, the community in which you spend your money becomes richer and richer, the community out of which you take your money becomes poorer and poorer.",
+      "confidence": 1.0,
+      "context_type": "explicit zero-sum economic argument",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:01:31.813182+00:00"
+    },
+    {
+      "document_name": "malcom_x_ballot_or_bullet.txt",
+      "dimension": "compersion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "complete absence of dimension",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:01:31.813188+00:00"
+    },
+    {
+      "document_name": "malcom_x_ballot_or_bullet.txt",
+      "dimension": "enmity",
+      "quote_text": "Mr. Moderator, Rev. Cleage, brothers and sisters and friends, and I see some enemies.",
+      "confidence": 1.0,
+      "context_type": "opening statement defining adversarial relationship",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:01:31.813191+00:00"
+    },
+    {
+      "document_name": "malcom_x_ballot_or_bullet.txt",
+      "dimension": "amity",
+      "quote_text": "Whether you are a Christian or a Muslim or a nationalist, we all have the same problem. They don’t hang you because you’re a Baptist; they hang you ’cause you’re black.",
+      "confidence": 0.95,
+      "context_type": "call for in-group unity based on shared threat",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:01:31.813194+00:00"
+    },
+    {
+      "document_name": "malcom_x_ballot_or_bullet.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "Revolutions overturn systems. Revolutions destroy systems.",
+      "confidence": 1.0,
+      "context_type": "explicit definition of revolutionary objectives",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:01:31.813196+00:00"
+    },
+    {
+      "document_name": "malcom_x_ballot_or_bullet.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "complete absence of dimension",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:01:31.813198+00:00"
+    }
+  ]
+}

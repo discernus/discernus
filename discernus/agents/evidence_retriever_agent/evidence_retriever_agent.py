@@ -41,7 +41,14 @@ class EvidenceRetrieverAgent:
         # Initialize components
         self.experiment_path = Path(config.get('experiment_path', '.'))
         self.run_id = config.get('run_id', 'default_run')
-        self.security_boundary = ExperimentSecurityBoundary(self.experiment_path)
+        # Use provided model or default to vertex_ai/gemini-2.5-flash
+        self.model = config.get('model', 'vertex_ai/gemini-2.5-flash')
+        # Use shared security boundary if provided, otherwise create new one
+        if 'security_boundary' in config:
+            self.security_boundary = config['security_boundary']
+            self.logger.info("Using shared security boundary instance")
+        else:
+            self.security_boundary = ExperimentSecurityBoundary(self.experiment_path)
         # Use shared artifact storage if provided, otherwise create new instance
         if 'artifact_storage' in config:
             self.artifact_storage = config['artifact_storage']
@@ -98,6 +105,7 @@ class EvidenceRetrieverAgent:
             
             # Step 3: Use LLM to identify key findings and retrieve evidence
             self.logger.info("Step 3: Using LLM to identify findings and retrieve evidence...")
+            print("🔍 Analyzing statistical findings to identify key patterns...")
             evidence_results = self._llm_driven_evidence_retrieval(framework_spec, statistical_results)
             
             # Step 4: Store evidence results
@@ -153,7 +161,7 @@ class EvidenceRetrieverAgent:
         """Build the evidence wrapper from artifact hashes."""
         try:
             wrapper = EvidenceMatchingWrapper(
-                model="vertex_ai/gemini-2.5-flash",
+                model=self.model,
                 artifact_storage=self.artifact_storage,
                 audit_logger=self.audit_logger
             )
@@ -183,15 +191,36 @@ class EvidenceRetrieverAgent:
             
             # Get LLM response for evidence retrieval strategy
             response, metadata = self.llm_gateway.execute_call(
-                model="vertex_ai/gemini-2.5-flash",
+                model=self.model,
                 prompt=prompt,
-                system_prompt="You are an expert research analyst specializing in evidence curation and statistical interpretation."
+                system_prompt="You are an expert research analyst specializing in evidence curation and statistical interpretation.",
+                context="Generating evidence retrieval plan"
             )
+            
+            # Log cost information to audit logger
+            if self.audit_logger and metadata.get("usage"):
+                usage_data = metadata["usage"]
+                try:
+                    self.audit_logger.log_cost(
+                        operation="evidence_retrieval_planning",
+                        model=metadata.get("model", self.model),
+                        tokens_used=usage_data.get("total_tokens", 0),
+                        cost_usd=usage_data.get("response_cost_usd", 0.0),
+                        agent_name=self.agent_name,
+                        metadata={
+                            "prompt_tokens": usage_data.get("prompt_tokens", 0),
+                            "completion_tokens": usage_data.get("completion_tokens", 0),
+                            "attempts": metadata.get("attempts", 1)
+                        }
+                    )
+                except Exception as e:
+                    self.logger.error(f"Error logging cost for evidence retrieval planning: {e}")
             
             # Parse the LLM response to get evidence retrieval plan
             evidence_plan = self._parse_llm_response(response)
             
             # Execute the evidence retrieval plan
+            print("🔍 Executing evidence retrieval plan and searching for supporting quotes...")
             evidence_results = self._execute_evidence_plan(evidence_plan)
             
             return evidence_results

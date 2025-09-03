@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "8e2805bd9e5d52cf07f7066d11ae30e855ac2c239b27faced6bc9d287df18ab9"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-02T16:01:31.813206+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "malcom_x_ballot_or_bullet.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "The political philosophy of black nationalism only means that the black man should control the politics and the politicians in his own community.",
+      "confidence": 1.0,
+      "context_type": "explicit definition of ideology",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:01:31.813145+00:00"
+    },
+    {
+      "document_name": "malcom_x_ballot_or_bullet.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "We don\u2019t see any American dream. We\u2019ve experienced only the American nightmare.",
+      "confidence": 0.9,
+      "context_type": "rejection of universalist framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:01:31.813173+00:00"
+    },
+    {
+      "document_name": "malcom_x_ballot_or_bullet.txt",
+      "dimension": "fear",
+      "quote_text": "And all of this has built up frustrations in the black community that makes the black community throughout America today more explosive than all of the atomic bombs the Russians can ever invent.",
+      "confidence": 1.0,
+      "context_type": "metaphor of imminent catastrophe",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:01:31.813176+00:00"
+    },
+    {
+      "document_name": "malcom_x_ballot_or_bullet.txt",
+      "dimension": "hope",
+      "quote_text": "You can\u2019t sing up on freedom. But you can swing up on some freedom.",
+      "confidence": 1.0,
+      "context_type": "rejection of passive hope for direct action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:01:31.813179+00:00"
+    },
+    {
+      "document_name": "malcom_x_ballot_or_bullet.txt",
+      "dimension": "envy",
+      "quote_text": "when you spend your dollar out of the community in which you live, the community in which you spend your money becomes richer and richer, the community out of which you take your money becomes poorer and poorer.",
+      "confidence": 1.0,
+      "context_type": "explicit zero-sum economic argument",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:01:31.813182+00:00"
+    },
+    {
+      "document_name": "malcom_x_ballot_or_bullet.txt",
+      "dimension": "compersion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "complete absence of dimension",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:01:31.813188+00:00"
+    },
+    {
+      "document_name": "malcom_x_ballot_or_bullet.txt",
+      "dimension": "enmity",
+      "quote_text": "Mr. Moderator, Rev. Cleage, brothers and sisters and friends, and I see some enemies.",
+      "confidence": 1.0,
+      "context_type": "opening statement defining adversarial relationship",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:01:31.813191+00:00"
+    },
+    {
+      "document_name": "malcom_x_ballot_or_bullet.txt",
+      "dimension": "amity",
+      "quote_text": "Whether you are a Christian or a Muslim or a nationalist, we all have the same problem. They don\u2019t hang you because you\u2019re a Baptist; they hang you \u2019cause you\u2019re black.",
+      "confidence": 0.95,
+      "context_type": "call for in-group unity based on shared threat",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:01:31.813194+00:00"
+    },
+    {
+      "document_name": "malcom_x_ballot_or_bullet.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "Revolutions overturn systems. Revolutions destroy systems.",
+      "confidence": 1.0,
+      "context_type": "explicit definition of revolutionary objectives",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:01:31.813196+00:00"
+    },
+    {
+      "document_name": "malcom_x_ballot_or_bullet.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "complete absence of dimension",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-02T16:01:31.813198+00:00"
+    }
+  ]
+}

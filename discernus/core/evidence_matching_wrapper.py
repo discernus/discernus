@@ -596,8 +596,29 @@ class EvidenceMatchingWrapper:
             response, metadata = self.llm_gateway.execute_call(
                 model=self.model,
                 prompt=prompt,
-                system_prompt="You are an expert research analyst specializing in evidence retrieval."
+                system_prompt="You are an expert research analyst specializing in evidence retrieval.",
+                context="Generating semantic search queries"
             )
+            
+            # Log cost information to audit logger
+            if self.audit_logger and metadata.get("usage"):
+                usage_data = metadata["usage"]
+                try:
+                    self.audit_logger.log_cost(
+                        operation="semantic_query_generation",
+                        model=metadata.get("model", self.model),
+                        tokens_used=usage_data.get("total_tokens", 0),
+                        cost_usd=usage_data.get("response_cost_usd", 0.0),
+                        agent_name="EvidenceMatchingWrapper",
+                        metadata={
+                            "prompt_tokens": usage_data.get("prompt_tokens", 0),
+                            "completion_tokens": usage_data.get("completion_tokens", 0),
+                            "attempts": metadata.get("attempts", 1),
+                            "findings_count": len(statistical_findings)
+                        }
+                    )
+                except Exception as e:
+                    self.logger.error(f"Error logging cost for semantic query generation: {e}")
             
             if response and response.strip():
                 queries = self._parse_generated_queries(response)
