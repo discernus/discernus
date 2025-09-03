@@ -660,17 +660,65 @@ def validate(experiment_path: str, dry_run: bool):
         sys.exit(1)
     
     if dry_run:
-        click.echo(f"🔍 [DRY RUN] Would validate experiment: {experiment_path}")
+        click.echo(f"🔍 [DRY RUN] Validating experiment: {experiment_path}")
+        
+        # Stage 1: Basic structural validation (always runs in dry run)
         click.echo("📋 Stage 1: Basic structural validation...")
-        click.echo("   🔍 [DRY RUN] Would check file structure, required fields, and format compliance")
-        click.echo("🔬 Stage 2: Comprehensive coherence validation...")
-        click.echo("   🔍 [DRY RUN] Would run coherence validation with capabilities registry")
-        click.echo("   💡 Coherence validation would check:")
-        click.echo("      • Specification compliance (format, required fields)")
-        click.echo("      • Trinity coherence (Framework-Experiment-Corpus integration)")
-        click.echo("      • Capabilities alignment (statistical tests vs available libraries)")
-        click.echo("      • Statistical power requirements (sample size adequacy)")
-        click.echo("      • YAML syntax validation (corpus manifest structure)"
+        valid, message, _ = validate_experiment_structure(exp_path)
+        click.echo(f"   {message}")
+        
+        if not valid:
+            click.echo("❌ Basic validation failed. Fix structural issues before proceeding.")
+            sys.exit(1)
+        
+        # Stage 2: Coherence validation (dry run mode - skip expensive LLM operations)
+        click.echo("🔬 Stage 2: Comprehensive coherence validation (DRY RUN)...")
+        click.echo("   🔍 [DRY RUN] Running coherence validation without expensive LLM operations")
+        
+        try:
+            from discernus.agents.experiment_coherence_agent.agent import ExperimentCoherenceAgent
+            
+            # Use a lightweight model for dry run to avoid costs
+            coherence_agent = ExperimentCoherenceAgent(model='vertex_ai/gemini-2.5-flash-lite')
+            
+            # Run validation in dry run mode (if supported by the agent)
+            # For now, we'll run the full validation but with a lightweight model
+            validation_result = coherence_agent.validate_experiment(exp_path)
+            
+            if validation_result.success:
+                click.echo("   ✅ Coherence validation passed")
+                if validation_result.suggestions:
+                    click.echo("   💡 Suggestions for improvement:")
+                    for suggestion in validation_result.suggestions[:3]:  # Show top 3
+                        click.echo(f"      • {suggestion}")
+            else:
+                click.echo("   ❌ Coherence validation failed")
+                
+                # Show blocking issues
+                blocking_issues = validation_result.get_issues_by_priority("BLOCKING")
+                if blocking_issues:
+                    click.echo("   🚫 Blocking Issues:")
+                    for issue in blocking_issues:
+                        click.echo(f"      • {issue.description}")
+                        click.echo(f"        Fix: {issue.fix}")
+                
+                # Show quality issues
+                quality_issues = validation_result.get_issues_by_priority("QUALITY")
+                if quality_issues:
+                    click.echo("   ⚠️ Quality Issues:")
+                    for issue in quality_issues[:3]:  # Show top 3
+                        click.echo(f"      • {issue.description}")
+                
+                click.echo("   💡 Run without --dry-run to get full validation details")
+                sys.exit(1)
+                
+        except Exception as e:
+            click.echo(f"   ⚠️ Coherence validation error: {e}")
+            click.echo("   💡 Run without --dry-run for full validation")
+            sys.exit(1)
+        
+        click.echo("✅ [DRY RUN] Validation completed successfully")
+        click.echo("💡 Run without --dry-run to execute the experiment")
         return
 
     click.echo(f"🔍 Validating experiment: {experiment_path}")

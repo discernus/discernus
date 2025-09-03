@@ -80,33 +80,11 @@
 
 ## System Architecture & Compliance
 
-### LLM Interaction Logging and Storage
-**Task**: Implement comprehensive LLM interaction logging and storage for complete experiment provenance
-**Purpose**: Ensure all LLM prompts and responses are captured, stored, and accessible for audit trails and reproducibility
-**Priority**: HIGH - Critical for academic integrity and system transparency
-**Acceptance Criteria**:
-- All LLM prompts sent to models are logged with full content
-- All LLM responses received from models are logged with full content
-- LLM interactions are stored in experiment session logs with timestamps
-- LLM interactions are linked to specific analysis IDs and agent operations
-- LLM interaction logs are searchable and retrievable for audit purposes
-- LLM interaction logs include metadata (model used, tokens, cost, duration)
-- LLM interaction logs are preserved as part of experiment provenance
-- System can reconstruct exact LLM conversations for any experiment run
-- LLM interaction logs are accessible through CLI and API for researchers
-- LLM interaction logs support debugging and prompt engineering workflows
+
 
 ## GitHub Issues - Alpha Quality & Hygiene
 
-### Issue #385: Enhance Rate Limiting to Use Model-Specific TPM/RPM Data
-**Task**: Enhance rate limiting system to utilize model-specific TPM/RPM data for both fixed quota and DSQ models
-**Purpose**: Implement intelligent rate limiting that handles both fixed quota models (Anthropic, OpenAI) and Dynamic Shared Quota models (Vertex AI) appropriately
-**Priority**: MEDIUM - Performance optimization
-**Acceptance Criteria**:
-- DSQ models (tpm: null) skip traditional rate limiting, implement retry logic for 429 errors
-- Fixed quota models use model-specific TPM/RPM limits from models.yaml
-- Enhanced error handling with exponential backoff for DSQ models
-- Model-specific rate limiting for fixed-quota models with fallback to provider defaults
+
 
 ### Issue #365: Epic - Academic Quality & Standards Implementation
 **Task**: Implement comprehensive academic standards, peer review preparation, quality assurance frameworks, and THIN compliance cleanup
@@ -747,17 +725,8 @@
 
 ## Rate Limiting & Performance Issues
 
-### Rate Limiting Investigation - Gemini 2.5 Flash Timeout Issues
-**Task**: Investigate and resolve rate limiting issues with Gemini 2.5 Flash model during large experiment runs
-**Purpose**: Address frequent timeout errors and fallback cascades observed during vanderveen_presidential_pdaf experiment execution
-**Priority**: HIGH - System reliability and performance
-**Context**: During experiment run, observed multiple timeout errors with vertex_ai/gemini-2.5-flash requiring fallback to Claude models, significantly impacting performance and cost
-**Acceptance Criteria**:
-- Root cause analysis of Gemini 2.5 Flash timeout issues completed
-- Rate limiting strategy reviewed and optimized for DSQ (Dynamic Shared Quota) models
-- Retry logic enhanced with exponential backoff for timeout scenarios
-- Model-specific timeout configurations implemented
-- Fallback cascade optimization to reduce unnecessary model switches
-- Performance monitoring and alerting for rate limit scenarios
-- Cost impact analysis of fallback cascades completed
-- Documentation updated with rate limiting best practices
+*Moved to Sprint 10: Critical Logging Integrity & Rate Limiting Resolution*
+
+## Critical Logging Integrity Issues
+
+*Moved to Sprint 10: Critical Logging Integrity & Rate Limiting Resolution*

@@ -774,7 +774,6 @@ documents:
     source_filename: "us.2016.Trump.11-08.docx"
 
 ```
-
 ## Validation Notes
 
 - ✅ All semantic meaning explicitly defined in metadata
@@ -785,9 +784,7 @@ documents:
 ---
 
 **Generated**: 2025-08-30 00:44:15
-**Source**: Van der Veen et al. (2024) presidential campaign speech corpus
 **Format**: v8.0.1 compliant corpus specification
 
-```
 
 ---

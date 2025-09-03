@@ -187,7 +187,7 @@ class ExperimentCoherenceAgent:
                         )
                 else:
                     return ValidationResult(
-                        is_valid=False,
+                        success=False,
                         issues=[ValidationIssue(
                             category="yaml_syntax",
                             description="Corpus manifest missing YAML code block",
@@ -213,7 +213,7 @@ class ExperimentCoherenceAgent:
                 )
         except yaml.YAMLError as e:
             return ValidationResult(
-                is_valid=False,
+                success=False,
                 issues=[ValidationIssue(
                     category="yaml_syntax",
                     description=f"Invalid YAML syntax in corpus manifest: {str(e)}",
@@ -226,7 +226,7 @@ class ExperimentCoherenceAgent:
             )
         except Exception as e:
             return ValidationResult(
-                is_valid=False,
+                success=False,
                 issues=[ValidationIssue(
                     category="yaml_syntax",
                     description=f"Error parsing corpus manifest: {str(e)}",
@@ -273,15 +273,14 @@ class ExperimentCoherenceAgent:
                 return yaml_validation_result
 
             # Load current specifications for compliance validation
-            current_specifications = self._load_current_specifications()
+            specification_references = self._load_specification_references()
 
             # Assemble the prompt with raw content (let LLM handle parsing)
-            prompt = self.prompt_template.format(
-                current_date=datetime.now().strftime("%Y-%m-%d"),
+            prompt = self._create_validation_prompt(
                 experiment_spec=experiment_spec_content,
                 framework_spec=framework_spec,
                 corpus_manifest=corpus_manifest,
-                specification_references=current_specifications
+                specification_references=specification_references
             )
             
             # Call LLM for validation
