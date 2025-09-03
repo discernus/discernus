@@ -185,8 +185,9 @@ class TestNanoMicroIntegration(unittest.TestCase):
             self.assertLessEqual(sentiment_anova['p_value'], 1.0, "p-value should be <= 1.0")
             self.assertIsInstance(sentiment_anova['significant'], bool, "Significance should be boolean")
     
-    def _validate_synthesis_results(self, results: Dict[str, Any]):
-        """Validate synthesis phase results."""
+    def _validate_synthesis_results(self, results: Dict[str, Any], analysis_results: List[Dict[str, Any]], 
+                                  statistical_results: Dict[str, Any], has_derived_metrics: bool):
+        """Validate synthesis phase results with sophisticated content validation."""
         self.assertIsNotNone(results, "Synthesis results should not be None")
         self.assertIn('synthesis_result', results, "Missing synthesis_result")
         
@@ -197,15 +198,328 @@ class TestNanoMicroIntegration(unittest.TestCase):
         self.assertIsInstance(final_report, str, "Final report should be a string")
         self.assertGreater(len(final_report), 100, "Final report should be substantial")
         
-        # Validate report content
-        self.assertIn('sentiment', final_report.lower(), "Report should mention sentiment")
-        self.assertIn('analysis', final_report.lower(), "Report should mention analysis")
+        # Advanced content validation
+        self._validate_report_content_quality(final_report, analysis_results, statistical_results, has_derived_metrics)
+        self._validate_evidence_integration(final_report, analysis_results)
+        self._validate_statistical_integration(final_report, statistical_results, has_derived_metrics)
+        self._validate_report_structure(final_report)
+    
+    def _validate_report_content_quality(self, final_report: str, analysis_results: List[Dict[str, Any]], 
+                                       statistical_results: Dict[str, Any], has_derived_metrics: bool):
+        """Validate the quality and completeness of report content."""
+        report_lower = final_report.lower()
         
-        # Should contain evidence quotes
+        # Basic content requirements
+        self.assertIn('sentiment', report_lower, "Report should mention sentiment")
+        self.assertIn('analysis', report_lower, "Report should mention analysis")
+        
+        # Should contain evidence quotes (not just placeholders)
         self.assertIn('"', final_report, "Report should contain quoted evidence")
         
         # Should mention statistical findings
-        self.assertIn('statistical', final_report.lower(), "Report should mention statistical findings")
+        self.assertIn('statistical', report_lower, "Report should mention statistical findings")
+        
+        # Validate document awareness
+        doc_names = [r['document_name'] for r in analysis_results]
+        for doc_name in doc_names:
+            # Report should show awareness of the documents analyzed
+            self.assertIn(doc_name.replace('.txt', ''), report_lower, 
+                         f"Report should mention document {doc_name}")
+        
+        # Validate dimensional awareness
+        for result in analysis_results:
+            dim_scores = result['analysis_result']['dimensional_scores']
+            for dim_name in dim_scores.keys():
+                # Report should mention the dimensions analyzed
+                self.assertIn(dim_name.replace('_', ' '), report_lower, 
+                             f"Report should mention dimension {dim_name}")
+        
+        # Validate derived metrics awareness (micro experiment only)
+        if has_derived_metrics:
+            self.assertIn('net sentiment', report_lower, "Report should mention net sentiment")
+            self.assertIn('sentiment magnitude', report_lower, "Report should mention sentiment magnitude")
+    
+    def _validate_evidence_integration(self, final_report: str, analysis_results: List[Dict[str, Any]]):
+        """Validate that actual evidence quotes from analysis appear in the final report."""
+        # Extract evidence quotes from analysis results
+        expected_evidence = []
+        for result in analysis_results:
+            dim_scores = result['analysis_result']['dimensional_scores']
+            for dim_name, score_obj in dim_scores.items():
+                evidence = score_obj['evidence']
+                if evidence and len(evidence.strip()) > 0:
+                    expected_evidence.append(evidence.strip())
+        
+        # At least some evidence should appear in the final report
+        evidence_found = 0
+        for evidence in expected_evidence:
+            if evidence in final_report:
+                evidence_found += 1
+        
+        self.assertGreater(evidence_found, 0, 
+                          f"At least one evidence quote should appear in final report. "
+                          f"Expected evidence: {expected_evidence[:2]}...")
+        
+        # Validate that quotes are properly attributed
+        self.assertIn('"', final_report, "Report should contain quoted evidence")
+        
+        # Check for proper citation patterns
+        has_citations = any(pattern in final_report.lower() for pattern in [
+            'according to', 'as stated in', 'the text shows', 'evidence suggests'
+        ])
+        self.assertTrue(has_citations, "Report should contain proper citation patterns")
+    
+    def _validate_statistical_integration(self, final_report: str, statistical_results: Dict[str, Any], 
+                                        has_derived_metrics: bool):
+        """Validate that statistical findings appear in the final report."""
+        stats_data = statistical_results['statistical_data']
+        report_lower = final_report.lower()
+        
+        # Validate descriptive statistics integration
+        desc_stats = stats_data['descriptive_statistics']
+        for dim_name in ['positive_sentiment', 'negative_sentiment']:
+            if dim_name in desc_stats:
+                mean_val = desc_stats[dim_name]['mean']
+                # Report should mention the actual statistical values
+                self.assertIn(str(round(mean_val, 2)), final_report, 
+                             f"Report should mention {dim_name} mean value {mean_val}")
+        
+        # Validate derived metrics integration (micro experiment only)
+        if has_derived_metrics:
+            for metric_name in ['net_sentiment', 'sentiment_magnitude']:
+                if metric_name in desc_stats:
+                    mean_val = desc_stats[metric_name]['mean']
+                    self.assertIn(str(round(mean_val, 2)), final_report, 
+                                 f"Report should mention {metric_name} mean value {mean_val}")
+            
+            # Validate ANOVA integration
+            if 'anova_results' in stats_data:
+                anova = stats_data['anova_results']['sentiment_category']
+                f_stat = anova['f_statistic']
+                p_val = anova['p_value']
+                
+                # Report should mention ANOVA results
+                self.assertIn(str(round(f_stat, 2)), final_report, 
+                             f"Report should mention F-statistic {f_stat}")
+                self.assertIn(str(round(p_val, 3)), final_report, 
+                             f"Report should mention p-value {p_val}")
+                
+                # Report should interpret significance
+                if anova['significant']:
+                    self.assertTrue(any(word in report_lower for word in ['significant', 'difference', 'vary']), 
+                                  "Report should mention significance when ANOVA is significant")
+    
+    def _validate_report_structure(self, final_report: str):
+        """Validate the structure and quality of the final report."""
+        # Should have proper academic structure
+        structure_indicators = ['summary', 'findings', 'analysis', 'conclusion', 'results']
+        found_indicators = sum(1 for indicator in structure_indicators 
+                             if indicator in final_report.lower())
+        self.assertGreaterEqual(found_indicators, 2, 
+                               "Report should have academic structure with multiple sections")
+        
+        # Should not contain placeholder text
+        placeholder_patterns = [
+            'placeholder', 'todo', 'insert', 'replace', 'example text',
+            'your analysis here', 'fill in', 'template'
+        ]
+        for pattern in placeholder_patterns:
+            self.assertNotIn(pattern, final_report.lower(), 
+                           f"Report should not contain placeholder text: {pattern}")
+        
+        # Should have reasonable length and coherence
+        self.assertGreater(len(final_report), 500, "Report should be substantial")
+        self.assertLess(len(final_report), 10000, "Report should not be excessively long")
+        
+        # Should have proper paragraph structure
+        paragraphs = [p.strip() for p in final_report.split('\n\n') if p.strip()]
+        self.assertGreaterEqual(len(paragraphs), 3, "Report should have multiple paragraphs")
+    
+    def _validate_orchestration_completeness(self, results: Dict[str, Any], experiment_name: str):
+        """Validate that all orchestration steps completed successfully."""
+        # Check that all expected phases are present
+        required_phases = ['analysis_results', 'derived_metrics_results', 
+                          'statistical_results', 'synthesis_results']
+        
+        for phase in required_phases:
+            self.assertIn(phase, results, f"Missing {phase} in orchestration results")
+            self.assertIsNotNone(results[phase], f"{phase} should not be None")
+        
+        # Validate phase-specific completeness
+        self._validate_analysis_phase_completeness(results['analysis_results'], experiment_name)
+        self._validate_derived_metrics_phase_completeness(results['derived_metrics_results'], experiment_name)
+        self._validate_statistical_phase_completeness(results['statistical_results'], experiment_name)
+        self._validate_synthesis_phase_completeness(results['synthesis_results'], experiment_name)
+    
+    def _validate_analysis_phase_completeness(self, analysis_results: List[Dict[str, Any]], experiment_name: str):
+        """Validate analysis phase completed completely."""
+        expected_docs = 2 if 'nano' in experiment_name.lower() else 4
+        
+        self.assertEqual(len(analysis_results), expected_docs, 
+                        f"Analysis should process all {expected_docs} documents")
+        
+        for result in analysis_results:
+            # Each document should have complete analysis
+            self.assertIn('document_name', result, "Analysis result missing document_name")
+            self.assertIn('analysis_result', result, "Analysis result missing analysis_result")
+            
+            analysis = result['analysis_result']
+            self.assertIn('dimensional_scores', analysis, "Analysis missing dimensional_scores")
+            
+            # All dimensions should be scored
+            dim_scores = analysis['dimensional_scores']
+            self.assertIn('positive_sentiment', dim_scores, "Missing positive_sentiment")
+            self.assertIn('negative_sentiment', dim_scores, "Missing negative_sentiment")
+            
+            # Each dimension should have complete scoring
+            for dim_name, score_obj in dim_scores.items():
+                required_fields = ['raw_score', 'salience', 'confidence', 'evidence']
+                for field in required_fields:
+                    self.assertIn(field, score_obj, f"{dim_name} missing {field}")
+                    self.assertIsNotNone(score_obj[field], f"{dim_name}.{field} should not be None")
+    
+    def _validate_derived_metrics_phase_completeness(self, derived_metrics_results: Dict[str, Any], experiment_name: str):
+        """Validate derived metrics phase completed completely."""
+        has_derived_metrics = 'micro' in experiment_name.lower()
+        
+        if not has_derived_metrics:
+            self.assertIsNone(derived_metrics_results, "Nano experiment should have no derived metrics")
+            return
+        
+        # Micro experiment should have complete derived metrics
+        self.assertIsNotNone(derived_metrics_results, "Micro experiment should have derived metrics")
+        self.assertIn('derived_metrics_data', derived_metrics_results, "Missing derived_metrics_data")
+        
+        derived_data = derived_metrics_results['derived_metrics_data']
+        expected_metrics = ['net_sentiment', 'sentiment_magnitude']
+        
+        for metric_name in expected_metrics:
+            self.assertIn(metric_name, derived_data, f"Missing {metric_name} derived metric")
+            metric_data = derived_data[metric_name]
+            self.assertIsInstance(metric_data, list, f"{metric_name} should be a list")
+            self.assertEqual(len(metric_data), 4, f"{metric_name} should have 4 values")
+            
+            for i, doc_metric in enumerate(metric_data):
+                self.assertIn('document_name', doc_metric, f"{metric_name}[{i}] missing document_name")
+                self.assertIn('metric_value', doc_metric, f"{metric_name}[{i}] missing metric_value")
+                self.assertIsInstance(doc_metric['metric_value'], (int, float), 
+                                    f"{metric_name}[{i}] metric_value should be numeric")
+    
+    def _validate_statistical_phase_completeness(self, statistical_results: Dict[str, Any], experiment_name: str):
+        """Validate statistical analysis phase completed completely."""
+        self.assertIsNotNone(statistical_results, "Statistical results should not be None")
+        self.assertIn('statistical_data', statistical_results, "Missing statistical_data")
+        
+        stats_data = statistical_results['statistical_data']
+        has_derived_metrics = 'micro' in experiment_name.lower()
+        
+        # Should have descriptive statistics for all dimensions
+        self.assertIn('descriptive_statistics', stats_data, "Missing descriptive_statistics")
+        desc_stats = stats_data['descriptive_statistics']
+        
+        for dim_name in ['positive_sentiment', 'negative_sentiment']:
+            self.assertIn(dim_name, desc_stats, f"Missing {dim_name} in descriptive statistics")
+            dim_stats = desc_stats[dim_name]
+            
+            required_stats = ['mean', 'std', 'count', 'min', 'max']
+            for stat_name in required_stats:
+                self.assertIn(stat_name, dim_stats, f"{dim_name} missing {stat_name}")
+                self.assertIsNotNone(dim_stats[stat_name], f"{dim_name}.{stat_name} should not be None")
+        
+        # Micro experiment should have derived metrics statistics
+        if has_derived_metrics:
+            for metric_name in ['net_sentiment', 'sentiment_magnitude']:
+                self.assertIn(metric_name, desc_stats, f"Missing {metric_name} in descriptive statistics")
+                metric_stats = desc_stats[metric_name]
+                
+                for stat_name in ['mean', 'std', 'count']:
+                    self.assertIn(stat_name, metric_stats, f"{metric_name} missing {stat_name}")
+                    self.assertIsNotNone(metric_stats[stat_name], f"{metric_name}.{stat_name} should not be None")
+            
+            # Should have ANOVA results
+            self.assertIn('anova_results', stats_data, "Missing anova_results")
+            anova = stats_data['anova_results']
+            self.assertIn('sentiment_category', anova, "Missing sentiment_category ANOVA")
+            
+            sentiment_anova = anova['sentiment_category']
+            anova_fields = ['f_statistic', 'p_value', 'significant', 'df_between', 'df_within']
+            for field in anova_fields:
+                self.assertIn(field, sentiment_anova, f"ANOVA missing {field}")
+                self.assertIsNotNone(sentiment_anova[field], f"ANOVA.{field} should not be None")
+    
+    def _validate_synthesis_phase_completeness(self, synthesis_results: Dict[str, Any], experiment_name: str):
+        """Validate synthesis phase completed completely."""
+        self.assertIsNotNone(synthesis_results, "Synthesis results should not be None")
+        self.assertIn('synthesis_result', synthesis_results, "Missing synthesis_result")
+        
+        synthesis = synthesis_results['synthesis_result']
+        self.assertIn('final_report', synthesis, "Missing final_report")
+        
+        final_report = synthesis['final_report']
+        self.assertIsInstance(final_report, str, "Final report should be a string")
+        self.assertGreater(len(final_report), 100, "Final report should be substantial")
+        
+        # Should not contain error indicators
+        error_indicators = ['error', 'failed', 'exception', 'traceback', 'none', 'null']
+        for indicator in error_indicators:
+            self.assertNotIn(indicator, final_report.lower(), 
+                           f"Final report should not contain error indicator: {indicator}")
+        
+        # Should contain success indicators
+        success_indicators = ['analysis', 'findings', 'results', 'conclusion']
+        found_success = sum(1 for indicator in success_indicators 
+                          if indicator in final_report.lower())
+        self.assertGreaterEqual(found_success, 2, "Final report should contain success indicators")
+    
+    def _validate_no_unexpected_errors(self, experiment_path: Path, experiment_name: str):
+        """Validate that no unexpected errors occurred during orchestration."""
+        # Check for error log files
+        error_log_path = experiment_path / "logs" / "errors.log"
+        if error_log_path.exists():
+            error_content = error_log_path.read_text()
+            if error_content.strip():
+                # Check for critical errors (not just warnings)
+                critical_errors = ['exception', 'traceback', 'failed', 'error:', 'critical']
+                has_critical_errors = any(error in error_content.lower() for error in critical_errors)
+                if has_critical_errors:
+                    self.fail(f"Critical errors found in error log: {error_content[:500]}...")
+        
+        # Check session logs for errors
+        session_dir = experiment_path / "session"
+        if session_dir.exists():
+            for session_run in session_dir.iterdir():
+                if session_run.is_dir():
+                    error_log = session_run / "logs" / "errors.log"
+                    if error_log.exists():
+                        error_content = error_log.read_text()
+                        if error_content.strip():
+                            critical_errors = ['exception', 'traceback', 'failed', 'error:', 'critical']
+                            has_critical_errors = any(error in error_content.lower() for error in critical_errors)
+                            if has_critical_errors:
+                                self.fail(f"Critical errors found in session log: {error_content[:500]}...")
+        
+        # Check for incomplete runs (should have runs directory with results)
+        runs_dir = experiment_path / "runs"
+        if not runs_dir.exists():
+            self.fail("No runs directory found - experiment may not have completed")
+        
+        # Check that runs directory has at least one completed run
+        completed_runs = [run_dir for run_dir in runs_dir.iterdir() 
+                         if run_dir.is_dir() and (run_dir / "results").exists()]
+        self.assertGreater(len(completed_runs), 0, "No completed runs found")
+        
+        # Check that the latest run has all expected result files
+        latest_run = max(completed_runs, key=lambda x: x.name)
+        results_dir = latest_run / "results"
+        
+        expected_files = ['final_report.md', 'statistical_results.json', 'experiment_summary.json']
+        for expected_file in expected_files:
+            file_path = results_dir / expected_file
+            self.assertTrue(file_path.exists(), f"Missing expected result file: {expected_file}")
+            
+            # Check that files are not empty
+            if file_path.stat().st_size == 0:
+                self.fail(f"Result file is empty: {expected_file}")
     
     def _run_experiment_test(self, experiment_path: Path, experiment_name: str, expected_docs: int, has_derived_metrics: bool):
         """Run a complete experiment test with validation."""
@@ -246,7 +560,14 @@ class TestNanoMicroIntegration(unittest.TestCase):
             self._validate_statistical_results(results['statistical_results'], has_derived_metrics)
             
             print(f"   ✅ Validating synthesis results...")
-            self._validate_synthesis_results(results['synthesis_results'])
+            self._validate_synthesis_results(results['synthesis_results'], results['analysis_results'], 
+                                           results['statistical_results'], has_derived_metrics)
+            
+            print(f"   ✅ Validating orchestration completeness...")
+            self._validate_orchestration_completeness(results, experiment_name)
+            
+            print(f"   ✅ Validating no unexpected errors...")
+            self._validate_no_unexpected_errors(experiment_path, experiment_name)
             
             print(f"   🎉 {experiment_name} test passed!")
             return results
