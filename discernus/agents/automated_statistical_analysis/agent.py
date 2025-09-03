@@ -333,6 +333,9 @@ class AutomatedStatisticalAnalysisAgent:
             Generated function code as a string
         """
         try:
+            # Log what we're generating
+            print("🔧 Generating statistical analysis functions...")
+            
             # Use the pre-assembled prompt directly with the LLM
             response, metadata = self.llm_gateway.execute_call(
                 model=self.model,
@@ -733,6 +736,9 @@ def {analysis_name.replace(' ', '_').lower()}(data, **kwargs):
 Generate the complete function now:"""
 
         try:
+            # Log what we're generating
+            print(f"🔧 Generating statistical function: {analysis_name}")
+            
             # Call LLM without problematic parameters
             response_text, metadata = self.llm_gateway.execute_call(
                 model=self.model,

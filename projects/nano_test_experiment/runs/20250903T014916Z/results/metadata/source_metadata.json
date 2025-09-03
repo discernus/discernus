@@ -1,0 +1,20 @@
+{
+  "metadata_summary": {
+    "total_documents": 2,
+    "collection_time": "2025-09-03T01:54:50.086605+00:00"
+  },
+  "document_metadata": [
+    {
+      "filename": "positive_test.txt",
+      "document_id": "pos_test",
+      "type": "test",
+      "sentiment": "positive"
+    },
+    {
+      "filename": "negative_test.txt",
+      "document_id": "neg_test",
+      "type": "test",
+      "sentiment": "negative"
+    }
+  ]
+}

@@ -405,6 +405,9 @@ def calculate_{calc_name}(data, **kwargs):
 Generate ONLY this one function. Do not generate multiple functions."""
 
         try:
+            # Log what we're generating
+            print(f"🔧 Generating derived metrics function: {calc_name}")
+            
             response_text, metadata = self.llm_gateway.execute_call(
                 model=self.model,
                 prompt=single_function_prompt,
