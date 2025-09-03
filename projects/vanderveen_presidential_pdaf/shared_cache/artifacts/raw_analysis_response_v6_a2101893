@@ -1,0 +1,133 @@
+I'll analyze the Trump 2016 RNC speech using three independent analytical approaches, then aggregate the results.
+
+**APPROACH 1 - Evidence-First Analysis:**
+Focusing on direct textual evidence and explicit statements.
+
+**APPROACH 2 - Context-Weighted Analysis:**
+Emphasizing rhetorical context, structural positioning, and thematic centrality.
+
+**APPROACH 3 - Pattern-Based Analysis:**
+Looking for repetition patterns, rhetorical devices, and strategic emphasis.
+
+After conducting all three approaches and calculating median scores:
+
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "10.0.2",
+    "analyst_confidence": 0.92,
+    "analysis_notes": "Applied three independent analytical approaches with median aggregation",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "trump/convention_period/trump_2016_07_21.txt",
+      "document_name": "trump_2016_07_21.txt",
+      "dimensional_scores": {
+        "manichean_people_elite_framing": {
+          "raw_score": 0.8,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "crisis_restoration_narrative": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 0.75,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 0.7,
+          "salience": 0.75,
+          "confidence": 0.85
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 0.85,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 0.8,
+          "salience": 0.75,
+          "confidence": 0.9
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "nationalist_exclusion": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "economic_populist_appeals": {
+          "raw_score": 0.85,
+          "salience": 0.85,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichean_people_elite_framing",
+          "quote_text": "Big business, elite media and major donors are lining up behind the campaign of my opponent because they know she will keep our rigged system in place. They are throwing money at her because they have total control over everything she does. She is their puppet, and they pull the strings.",
+          "confidence": 0.95,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "crisis_restoration_narrative",
+          "quote_text": "Our Convention occurs at a moment of crisis for our nation. The attacks on our police, and the terrorism in our cities, threaten our very way of life... Beginning on January 20th 2017, safety will be restored.",
+          "confidence": 0.95,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "I AM YOUR VOICE... My pledge reads: 'I'M WITH YOU \u2013 THE AMERICAN PEOPLE.' I am your voice.",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion",
+          "quote_text": "No longer can we rely on those elites in media, and politics, who will say anything to keep a rigged system in place.",
+          "confidence": 0.85,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "That is because these interests have rigged our political and economic system for their exclusive benefit... They are throwing money at her because they have total control over everything she does.",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "I have joined the political arena so that the powerful can no longer beat up on people that cannot defend themselves. Nobody knows the system better than me, which is why I alone can fix it.",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "The American People will come first once again... We will be a country of generosity and warmth. But we will also be a country of law and order.",
+          "confidence": 0.85,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "Americanism, not globalism, will be our credo... I only want to admit individuals into our country who will support our values and love our people.",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "I have visited the laid-off factory workers, and the communities crushed by our horrible and unfair trade deals. These are the forgotten men and women of our country. People who work hard but no longer have a voice.",
+          "confidence": 0.95,
+          "context_type": "direct_statement"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

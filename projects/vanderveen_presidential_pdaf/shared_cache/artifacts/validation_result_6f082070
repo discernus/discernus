@@ -1,0 +1,11 @@
+{
+  "success": false,
+  "issues": [
+    "The statistical plan for hypotheses H\u2081 (ANOVA/Kruskal-Wallis across 6 candidates) and H\u2084 (pairwise comparisons involving Rubio and Kasich) is not statistically viable. Three of the six candidate groups have sample sizes (Kasich n=2, Cruz n=3, Rubio n=4) that are too small for meaningful inferential testing. Discernus validation standards reject hypothesis testing on groups with N<5 due to extremely low statistical power and the inability to validate test assumptions.",
+    "The 'Data Grouping and Custom Variable Mapping' section in the experiment specification states the Trump group has n=22 documents, and the 'Custom Analytical Groupings' section repeats this count. However, a manual count of the documents in `corpus.md` shows only 21 documents where `candidate_short` is 'Trump'.",
+    "Hypothesis H\u2087 specifies using 'Independent t-tests' to compare campaign phases. Given the likely non-normal distribution of populism scores from the PDAF framework and modest sample sizes (n=16 and n=18), a parametric t-test is likely inappropriate. The broader statistical plan correctly favors non-parametric alternatives (Kruskal-Wallis, Mann-Whitney U), making this an internal inconsistency.",
+    "Hypothesis H\u2083 proposes a formal statistical comparison between the Sanders group (n=5) and the Clinton group (n=21). A sample size of n=5 has very low statistical power, making it difficult to detect a true effect or draw a reliable conclusion from a p-value."
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-09-03T02:45:02.073458+00:00"
+}

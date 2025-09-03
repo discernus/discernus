@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "3163937880c4754bc1746113d7f062099d401a489835e153879627fa22225481"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-03T04:43:14.999376+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "trump_2016_08_08.txt",
+      "dimension": "manichean_people_elite_framing",
+      "quote_text": "We can't fix a rigged system by relying on the people who rigged it in the first place. We can't solve our problems by relying on the politicians who created them.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T04:43:14.999354+00:00"
+    },
+    {
+      "document_name": "trump_2016_08_08.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "Detroit was once the economic envy of the world... But for many living in this city, that dream has long ago vanished... We will Make America Great Again.",
+      "confidence": 0.9,
+      "context_type": "decline_narrative",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T04:43:14.999358+00:00"
+    },
+    {
+      "document_name": "trump_2016_08_08.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "My campaign is about reaching out to everyone as Americans, and returning to a government that puts the American people first.",
+      "confidence": 0.85,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T04:43:14.999361+00:00"
+    },
+    {
+      "document_name": "trump_2016_08_08.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "Hillary Clinton is bought, controlled and paid-for by her donors and special interests.",
+      "confidence": 0.8,
+      "context_type": "opposition_delegitimization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T04:43:14.999363+00:00"
+    },
+    {
+      "document_name": "trump_2016_08_08.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "She is bought, controlled and paid-for by her donors and special interests... Her donors will make sure of it.",
+      "confidence": 0.85,
+      "context_type": "coordination_claims",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T04:43:14.999364+00:00"
+    },
+    {
+      "document_name": "trump_2016_08_08.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "Our party has chosen to make new history by selecting a nominee from outside the rigged and corrupt system.",
+      "confidence": 0.9,
+      "context_type": "anti_establishment_positioning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T04:43:14.999366+00:00"
+    },
+    {
+      "document_name": "trump_2016_08_08.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "My campaign is about reaching out to everyone as Americans... We are ready to dream great things for our country once again.",
+      "confidence": 0.85,
+      "context_type": "unity_construction",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T04:43:14.999369+00:00"
+    },
+    {
+      "document_name": "trump_2016_08_08.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "We started rebuilding other countries instead of our own... Americanism, not globalism, will be our new credo.",
+      "confidence": 0.9,
+      "context_type": "external_threat_emphasis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T04:43:14.999371+00:00"
+    },
+    {
+      "document_name": "trump_2016_08_08.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "We will eliminate the Carried Interest Deduction and other special interest loopholes that have been so good for Wall Street investors, and people like me, but unfair to American workers.",
+      "confidence": 0.95,
+      "context_type": "economic_elite_opposition",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T04:43:14.999372+00:00"
+    }
+  ]
+}

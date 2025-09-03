@@ -395,30 +395,18 @@ This part of the framework must be a single, valid YAML block placed at the very
 
 ### Formula Engine Capabilities
 
-The Discernus secure execution environment provides access to the following Python libraries for derived metrics calculations:
+The Discernus secure execution environment provides access to a comprehensive suite of Python libraries for derived metrics calculations. Framework authors can use any function from the available libraries in their derived metrics formulas.
 
-#### **Core Data Science Libraries**
-- **numpy** - Mathematical operations, arrays, statistical functions (e.g., `np.std()`, `np.min()`, `np.abs()`, `np.mean()`)
-- **pandas** - Data manipulation, aggregation, statistical analysis (e.g., `pd.DataFrame`, `df.mean()`, `df.std()`)
-- **scipy** - Advanced scientific computing, statistical tests (e.g., `scipy.stats.pearsonr()`, `scipy.stats.f_oneway()`)
-- **sklearn** - Machine learning algorithms and utilities (e.g., `sklearn.metrics.silhouette_score()`)
-- **statistics** - Python standard library statistics functions (e.g., `statistics.mean()`, `statistics.stdev()`)
+**Available Library Categories:**
+- **Core Data Science**: Mathematical operations, arrays, statistical functions, data manipulation
+- **Advanced Statistics**: Hypothesis testing, effect sizes, post-hoc corrections, power analysis
+- **Machine Learning**: Algorithms and utilities for pattern recognition and analysis
+- **Text Analysis**: Natural language processing, sentiment analysis, pattern matching
+- **Mathematical Functions**: Standard mathematical operations, random number generation
+- **General Utilities**: Data handling, date/time operations, advanced data structures
 
-#### **Mathematical Libraries**
-- **math** - Python standard mathematical functions (e.g., `math.sqrt()`, `math.pow()`, `math.log()`)
-- **random** - Random number generation and sampling (e.g., `random.random()`, `random.choice()`)
-
-#### **Text Analysis Libraries**
-- **nltk** - Natural language processing toolkit (e.g., `nltk.sentiment.vader`, `nltk.tokenize`)
-- **textblob** - Text processing and sentiment analysis
-- **re** - Regular expressions for pattern matching
-
-#### **General Utilities**
-- **json** - JSON data handling
-- **csv** - CSV data processing
-- **datetime** - Date and time operations
-- **collections** - Advanced data structures
-- **itertools** - Efficient looping and iteration
+**Reference the Complete Library List:**
+See the [Core Capabilities Registry](../../discernus/core/presets/core_capabilities.yaml) for the complete list of available libraries and their specific functions. The registry is maintained by the platform and may be updated to include additional libraries as they become available.
 
 **Important Notes:**
 - Framework authors can use any function from these libraries in their derived metrics formulas

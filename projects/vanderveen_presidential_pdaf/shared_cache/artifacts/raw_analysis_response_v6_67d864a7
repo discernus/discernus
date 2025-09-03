@@ -1,0 +1,456 @@
+<ctrl94>thought
+The user wants me to perform a discourse analysis on a provided document using a specific framework.
+I need to:
+1.  **Decode the framework and document** from base64.
+2.  **Understand the framework**: Identify the dimensions, their definitions, and scoring calibration.
+3.  **Perform three independent analyses** for each document:
+    *   **Approach 1 (Evidence-First)**: Focus on direct, explicit textual evidence.
+    *   **Approach 2 (Context-Weighted)**: Emphasize rhetorical context, structural positioning, thematic centrality.
+    *   **Approach 3 (Pattern-Based)**: Look for repetition, rhetorical devices, strategic emphasis.
+4.  **For each approach and each dimension**:
+    *   Score `raw_score` (0.0-1.0 intensity).
+    *   Score `salience` (0.0-1.0 rhetorical prominence).
+    *   Score `confidence` (0.0-1.0).
+    *   Provide `evidence` (quote from text). If no quote, use empty string.
+5.  **Aggregate results**:
+    *   Calculate the **median** `raw_score` for each dimension across the three approaches.
+    *   Calculate the **median** `salience` for each dimension across the three approaches.
+    *   Select the **best** `quote_text` for each dimension (most representative or highest confidence from the three approaches).
+    *   Determine the `confidence` for the aggregated score. This should be the lowest confidence across the three approaches for that dimension, or an overall assessment of consistency. I will average the confidences for consistency.
+6.  **Format the final output** as a JSON object within the specified delimiters.
+
+Let's start by decoding the framework and the document.
+
+**Decoding Framework:**
+The framework defines 9 dimensions:
+*   manichaean_people_elite_framing
+*   crisis_restoration_narrative
+*   popular_sovereignty_claims
+*   anti_pluralist_exclusion
+*   elite_conspiracy_systemic_corruption
+*   authenticity_vs_political_class
+*   homogeneous_people_construction
+*   nationalist_exclusion
+*   economic_populist_appeals
+
+Each dimension has:
+*   `description`
+*   `positive_examples` (phrases + explanation)
+*   `negative_examples` (phrases + explanation)
+*   `boundary_cases` (phrases + explanation)
+*   `scoring_calibration` (high, medium, low, absent with score ranges)
+*   `disambiguation` (vs other dimensions)
+
+**Decoding Document:**
+Filename: clinton/general_election/clinton_2016_08_25.txt
+Hash: f9c3847efc46...
+Content is a speech by Hillary Clinton.
+
+**Initial Read-through of the document (Clinton speech):**
+The speech is primarily a critique of Donald Trump's rhetoric and policies.
+*   **Initial focus on small businesses and economic plans**, but quickly pivots.
+*   **Main body focuses on Trump's divisive rhetoric**: "prejudice and paranoia," "hate groups mainstream," "radical fringe," "disregard for the values that make our country great," "insulting and ignorant terms" about black communities, "dog whistle," "racist lie" (birtherism), "racist comment" (Judge Curiel), "white supremacists online," "anti-Semitic image," "white nationalist leader," refusal to condemn David Duke/anti-Semitic slurs, "discredited conspiracy theories."
+*   **Trump's proposed policies**: deportation force, abolish birthright citizenship, ban Muslims.
+*   **Contrast with American values**: "haven for people fleeing religious persecution," "stronger together."
+*   **Critique of Trump's temperament**: "loose cannon," "detached from reality," "temperamentally unfit."
+*   **"Trump Effect"**: bullying and harassment in schools, targeting students of color, Muslims, immigrants.
+*   **Call to action**: "moment of reckoning for every Republican," "America is better than this."
+*   **Mentions past Republican leaders** (Dole, Bush, McCain) who rejected racism/divisiveness.
+*   **Emphasizes unity**: "stronger together," "President for Democrats, Republicans, and Independents."
+*   **Future vision**: "open, diverse, and connected."
+*   **Examples of diversity/inclusion**: Ibtihaj Muhammad, Simone Manuel, Katie Ledecky.
+
+**Now, let's analyze each dimension for the three approaches.**
+
+---
+**Approach 1: Evidence-First Analysis**
+
+*   **manichaean_people_elite_framing**:
+    *   Evidence: "He's taking hate groups mainstream and helping a radical fringe take over one of America's two major political parties." "Donald Trump is simply temperamentally unfit to be President." "A man with a long history of racial discrimination, who traffics in dark conspiracy theories...should never run our government or command our military." "His disregard for the values that make our country great is profoundly dangerous." This frames Trump and his allies as the "corrupt, self-serving elite" (a "radical fringe" taking over a major party), while implying the speaker and "Americans" (the people) represent the "pure, virtuous" side. The "values that make our country great" are contrasted with Trump's actions.
+    *   Raw Score: 0.7 (High - clear moral dichotomy, "us vs. them" with Trump/fringe as "them")
+    *   Salience: 0.8 (High - central to the critique of Trump, repeated throughout)
+    *   Confidence: 0.9
+
+*   **crisis_restoration_narrative**:
+    *   Evidence: "Everywhere I go, people tell me how concerned they are by the divisive rhetoric coming from my opponent in this election." "It’s like nothing we’ve heard before from a nominee for President of the United States." "This is what happens when you treat the National Enquirer like Gospel." "This is a moment of reckoning for every Republican dismayed that the Party of Lincoln has become the Party of Trump." "We need that kind of leadership again." "America has distinguished itself as a haven for people fleeing religious persecution." "Under Donald Trump, America would distinguish itself as the only country in the world to impose a religious test at the border."
+    *   Raw Score: 0.8 (High - clear decline from past greatness, urgent call to restore)
+    *   Salience: 0.9 (High - central framing of the speech, arguing Trump represents a crisis the speaker will resolve)
+    *   Confidence: 0.9
+
+*   **popular_sovereignty_claims**:
+    *   Evidence: "If he doesn’t respect all Americans, how can he serve all Americans?" "We need that kind of leadership again." "Every day, more Americans are standing up and saying 'enough is enough' – including a lot of Republicans." "I will be a President for Democrats, Republicans, and Independents. For those who vote for me and those who don’t. For all Americans. Because I believe we are stronger together." This implies the "people's will" is being subverted by Trump's divisiveness and that the speaker represents the will of "all Americans" to unite. While not explicitly bypassing institutions, it appeals to a broader, unified "people" against a disruptive force.
+    *   Raw Score: 0.6 (Medium - Implies a collective "will" of the people that is being undermined by Trump's rhetoric, and positions herself as the one who will unite them against this, somewhat bypassing partisan divides.)
+    *   Salience: 0.7 (Medium - The concept of unity and serving "all Americans" is a recurring theme, implicitly referencing a collective popular will.)
+    *   Confidence: 0.8
+
+*   **anti_pluralist_exclusion**:
+    *   Evidence: "He’s taking hate groups mainstream and helping a radical fringe take over one of America’s two major political parties." "He promoted the racist lie that President Obama isn’t really an American citizen." "He described Mexican immigrants as rapists and criminals." "He said a federal judge was incapable of doing his job because, quote, 'He’s a Mexican.'" "His campaign famously posted an anti-Semitic image – a Star of David imposed over a sea of dollar bills – that first appeared on a white supremacist website." "The alt-right is short for 'Alternative Right.' The Wall Street Journal describes it as a loosely organized movement, mostly online, that 'rejects mainstream conservatism, promotes nationalism and views immigration and multiculturalism as threats to white identity.'" "This is what happens when you treat the National Enquirer like Gospel... listen to the radio host Alex Jones, who claims that 9/11 and the Oklahoma City bombings were inside jobs. He said the victims of the Sandy Hook massacre were child actors and no one was actually killed there."
+    *   Raw Score: 0.9 (High - Trump is explicitly accused of delegitimizing opponents/groups, promoting conspiracy theories, and associating with white supremacists and anti-Semites, rejecting legitimate discourse).
+    *   Salience: 0.9 (High - This is the central argumentative thrust of the entire speech, extensively detailed with numerous examples.)
+    *   Confidence: 0.95
+
+*   **elite_conspiracy_systemic_corruption**:
+    *   Evidence: "A man with a long history of racial discrimination, who traffics in dark conspiracy theories drawn from the pages of supermarket tabloids and the far reaches of the internet, should never run our government or command our military." "Trump claimed President Obama founded ISIS." "He suggested that Ted Cruz’s father was involved in the Kennedy assassination." "Trump is trying to rebrand himself as well. Don’t be fooled. There’s an old Mexican proverb that says 'Tell me with whom you walk, and I will tell you who you are.'" "He hired Stephen Bannon, the head of a right-wing website called Breitbart.com, as campaign CEO." (followed by Breitbart headlines like "Birth Control Makes Women Unattractive And Crazy", "Would You Rather Your Child Had Feminism or Cancer?", "Gabby Giffords: The Gun Control Movement’s Human Shield", "Hoist It High And Proud: The Confederate Flag Proclaims A Glorious Heritage.")
+    *   Raw Score: 0.8 (High - Accusations of Trump promoting "dark conspiracy theories" and associating with figures and media that push extremist narratives, suggesting a systematic spread of misinformation harmful to public discourse.)
+    *   Salience: 0.8 (High - A significant portion of the speech is dedicated to detailing Trump's connections to and promotion of these theories and figures, highlighting a systemic issue.)
+    *   Confidence: 0.9
+
+*   **authenticity_vs_political_class**:
+    *   Evidence: "Now, some people will say that his blunder and bigotry is just over-heated campaign rhetoric – an outrageous person saying outrageous things for attention." "But look at the policies Trump has proposed. They would put prejudice into practice." "He may have some new people putting new words in his mouth – but we know where he stands." "When someone shows you who they are, believe them the first time." "Well, throughout his career and this campaign, Donald Trump has shown us exactly who he is. We should believe him." "The latest shake-up was designed to – quote – 'Let Trump be Trump.' To do that, he hired Stephen Bannon, the head of a right-wing website called Breitbart.com, as campaign CEO."
+    *   Raw Score: 0.7 (High - speaker directly counters the idea that Trump is just a "showman" or that his rhetoric is not his "authentic" self, emphasizing that his actions and associations reveal his true nature. Positions Trump as authentic to a problematic 'outside' group, implicitly drawing a contrast with a more authentic, unified mainstream politics she represents.)
+    *   Salience: 0.7 (Medium - It's a key rhetorical move to prevent Trump from moderating his image, but not as central as the direct critique of his racism.)
+    *   Confidence: 0.8
+
+*   **homogeneous_people_construction**:
+    *   Evidence: "I will be a President for Democrats, Republicans, and Independents. For those who vote for me and those who don’t. For all Americans. Because I believe we are stronger together." "America is great because it is good." "It’s about who we are as a nation. It’s about the kind of example we want to set for our children and grandchildren." "Let’s keep moving forward together. Let’s stand up against prejudice and paranoia. Let’s prove once again, that America is great because is America is good." This dimension emphasizes unity beyond internal divisions, but doesn't explicitly frame it against *class, region, or interest* divisions within "the people." It's more about racial/ethnic/religious unity against Trump's divisive rhetoric. While it's implied that "all Americans" transcends these, it's not a direct feature.
+    *   Raw Score: 0.6 (Medium - Strong emphasis on "all Americans" and "stronger together" to overcome internal divisions, though the divisions highlighted are primarily racial/ethnic/religious rather than class/region/interest specific.)
+    *   Salience: 0.7 (Medium - The closing of the speech heavily emphasizes this unity as the positive alternative to Trump's divisiveness.)
+    *   Confidence: 0.8
+
+*   **nationalist_exclusion**:
+    *   Evidence: "He’d ban Muslims around the world – 1.5 billion men, women, and children – from entering our county just because of their religion." "Come to think of it, there actually may be one place that does that. It’s the so-called Islamic State. The territory ISIS controls. It would be a cruel irony if America followed its lead." "The Wall Street Journal describes it [Alt-Right] as a loosely organized movement… that 'rejects mainstream conservatism, promotes nationalism and views immigration and multiculturalism as threats to white identity.'" "Nigel Farage, who stoked anti-immigrant sentiments... has called for a ban on the children of legal immigrants from public schools and health services, has said women are 'worth less' than men, and supports scrapping laws that prevent employers from discriminating based on race."
+    *   Raw Score: 0.9 (High - Direct attacks on Trump's proposed policies that overtly exclude based on nationality/religion/ethnicity, and linking him to figures like Farage and Breitbart that promote such exclusion.)
+    *   Salience: 0.8 (High - The proposed Muslim ban and anti-immigrant stances are presented as core examples of Trump's unfitness.)
+    *   Confidence: 0.9
+
+*   **economic_populist_appeals**:
+    *   Evidence: "My original plan for this visit was to focus on our agenda to help small businesses and entrepreneurs." "This week we proposed new steps to cut red tape and taxes, and make it easier for small businesses to get the credit they need to grow and hire." "Because I believe that in America, if you can dream it, you should be able to build it." "Trump’s lack of knowledge or experience or solutions would be bad enough." "Oh, and by the way, Mexico’s not paying for his wall either. If it ever gets built, you can be sure that American taxpayers will be stuck with the bill."
+    *   Raw Score: 0.3 (Low - Economic points are mentioned very briefly at the start, focusing on general support for small businesses and cutting taxes/red tape. The "Mexico's not paying" line is more a factual correction than a populist appeal to economic grievance.)
+    *   Salience: 0.1 (Low - The speech quickly pivots away from economics to social/racial issues and Trump's character. Economic policy is a very minor part of the overall message.)
+    *   Confidence: 0.8
+
+---
+**Approach 2: Context-Weighted Analysis**
+
+*   **manichaean_people_elite_framing**:
+    *   Context: The entire speech is framed as a moral battle against Trump's divisive and hateful rhetoric. The "people" are implicitly those who believe in American values of inclusion and unity, while Trump and his "radical fringe" are explicitly framed as corrupting and dangerous elites. The distinction isn't economic but moral and social.
+    *   Raw Score: 0.9 (High - The core of Clinton's argument is a clear moral binary between her vision of an inclusive America and Trump's divisive, dangerous approach.)
+    *   Salience: 1.0 (Highest - This framing *is* the speech's primary rhetorical function, structuring nearly every point.)
+    *   Confidence: 0.9
+
+*   **crisis_restoration_narrative**:
+    *   Context: The speech opens with an immediate pivot from policy to the "divisive rhetoric" as a national concern, framing the current political climate as a departure from American ideals ("values that make our country great") and a "moment of reckoning." The solution offered is a return to those ideals.
+    *   Raw Score: 0.9 (High - The speech explicitly paints a picture of a nation in crisis due to Trump's actions and proposes a clear path to "restore" fundamental American values.)
+    *   Salience: 0.9 (High - The crisis narrative underpins the urgency and purpose of Clinton's address, serving as the primary justification for her critique.)
+    *   Confidence: 0.9
+
+*   **popular_sovereignty_claims**:
+    *   Context: While not using direct populist language, Clinton continually appeals to "Americans" and "our country" as a unified entity whose will is being violated by Trump's rhetoric and potential actions. She presents herself as representing "all Americans," transcending partisan lines, which implicitly positions her as the true embodiment of popular will against a divisive force.
+    *   Raw Score: 0.7 (Medium - The appeal to a unified "all Americans" against a destructive external force (Trump) implicitly elevates a collective will above institutional divisions.)
+    *   Salience: 0.8 (High - The consistent emphasis on unity and her role as president for "all Americans" is a recurring and thematically central argument.)
+    *   Confidence: 0.8
+
+*   **anti_pluralist_exclusion**:
+    *   Context: This dimension is at the absolute core of the speech. Clinton systematically attacks Trump for rejecting legitimate opposition, demonizing groups (Mexicans, Muslims, African Americans), and aligning with extremist elements (Alt-Right, white supremacists, conspiracy theorists). The entire premise is that Trump is undermining the foundational principles of pluralism and democratic inclusion.
+    *   Raw Score: 1.0 (Highest - The bulk of the speech provides extensive examples of Trump's rejection of pluralism, delegitimization of groups, and demonization of opponents. This is the main point of attack.)
+    *   Salience: 1.0 (Highest - This is arguably the most prominent theme, with numerous detailed examples dominating the speech's content.)
+    *   Confidence: 0.95
+
+*   **elite_conspiracy_systemic_corruption**:
+    *   Context: Clinton devotes significant time to detailing Trump's promotion of conspiracy theories (Obama founded ISIS, Cruz's father and JFK, birtherism) and his association with figures like Alex Jones and Breitbart, implying a deliberate, coordinated effort to spread misinformation and undermine trust in established institutions/figures. This suggests a systemic problem driven by Trump's circle.
+    *   Raw Score: 0.9 (High - Trump is portrayed as actively and intentionally using false narratives and conspiracy theories, often sourced from fringe elements, to manipulate public discourse, which aligns with systemic deception.)
+    *   Salience: 0.9 (High - The repeated references to Trump's reliance on and promotion of conspiracy theories, and his association with figures like Bannon and Jones, make this a highly salient point.)
+    *   Confidence: 0.9
+
+*   **authenticity_vs_political_class**:
+    *   Context: Clinton addresses directly the idea that Trump's rhetoric is "just over-heated campaign rhetoric." By stating "we know who he is" and "believe him the first time," she positions Trump's divisive language as his authentic self, implicitly contrasting it with the perceived artifice or lack of genuine connection attributed to traditional politicians. She is framing Trump as authentically *bad*, while she herself embodies a more authentic representation of American values.
+    *   Raw Score: 0.8 (High - Clinton makes a direct argument about Trump's "authenticity," asserting that his problematic rhetoric is his genuine character, not merely a performance, thereby challenging the idea of a 'political class' performance.)
+    *   Salience: 0.8 (High - This theme serves a crucial rhetorical function in debunking attempts to soften Trump's image and reinforces the speaker's own claim to genuine representation of values.)
+    *   Confidence: 0.85
+
+*   **homogeneous_people_construction**:
+    *   Context: The speech concludes with a strong emphasis on "stronger together," "all Americans," and a vision of unity, explicitly pushing back against Trump's divisive rhetoric which fragments the population. While not erasing internal political differences, it emphasizes a fundamental, shared identity that should transcend them.
+    *   Raw Score: 0.7 (Medium - The speech strongly advocates for a unified American identity, transcending racial, ethnic, and political differences, as a direct counter to Trump's divisive rhetoric.)
+    *   Salience: 0.8 (High - This theme is strategically placed at the beginning and end of the speech, serving as a foundational and concluding message against Trump's anti-pluralism.)
+    *   Confidence: 0.8
+
+*   **nationalist_exclusion**:
+    *   Context: The proposed Muslim ban and Trump's stance on immigration (wall, anchor babies, "Mexican judge") are presented as prime examples of an exclusionary nationalism. The comparison to ISIS ("cruel irony if America followed its lead") highlights the extreme, identity-based exclusion proposed. This is a significant part of the core critique of Trump.
+    *   Raw Score: 1.0 (Highest - Direct and extensive critique of policies and rhetoric that propose cultural/ethnic/religious exclusion, framed as a threat to fundamental American identity.)
+    *   Salience: 0.9 (High - The examples of the Muslim ban and the "Mexican judge" comments are presented as key manifestations of Trump's dangerous ideology.)
+    *   Confidence: 0.9
+
+*   **economic_populist_appeals**:
+    *   Context: Economic points are quickly dispatched at the beginning and only briefly resurface with the "Mexico wall" comment. The overwhelming focus is on Trump's social and political rhetoric and character. Economic issues are clearly not central to the speech's main argument or persuasive strategy.
+    *   Raw Score: 0.2 (Low - While mentioned, economic aspects are highly marginalized, serving only as an initial contrast before the main focus on social/racial issues. The "Mexico wall" example is more a factual debunking than an economic appeal.)
+    *   Salience: 0.1 (Lowest - Economic issues are presented as an aside, not a core reason for supporting Clinton or opposing Trump.)
+    *   Confidence: 0.8
+
+---
+**Approach 3: Pattern-Based Analysis**
+
+*   **manichaean_people_elite_framing**:
+    *   Patterns: Repeated use of "we" (Americans, "our country") vs. "he" (Trump) and "his" (supporters/associated media). Phrases like "disregard for the values that make our country great," "hate groups mainstream," "radical fringe," "temperamentally unfit." The speech consistently frames Trump as an external, corrupting force attacking the "good" American people and their values.
+    *   Raw Score: 0.8 (High - The systematic contrasting of Trump's "dangerous" character and associations with idealized American values creates a strong moral dichotomy.)
+    *   Salience: 0.9 (High - The constant juxtaposition of positive "American values" with Trump's negative attributes forms a pervasive rhetorical pattern throughout the speech.)
+    *   Confidence: 0.9
+
+*   **crisis_restoration_narrative**:
+    *   Patterns: Phrases signaling urgency and decline: "divisive rhetoric coming from my opponent," "nothing we've heard before," "profoundly dangerous," "crucial juncture," "moment of reckoning." The solution is consistently framed as a return to past principles or a prevention of further decline: "America is better than this," "keep moving forward together."
+    *   Raw Score: 0.8 (High - The rhetoric repeatedly positions Trump as a unique and dangerous threat to the nation, demanding an urgent "restoration" of American values.)
+    *   Salience: 0.8 (High - The problem-solution structure, with Trump as the problem and restoration as the solution, is a key organizing principle of the speech.)
+    *   Confidence: 0.9
+
+*   **popular_sovereignty_claims**:
+    *   Patterns: Repeated use of "all Americans," "our country," "who we are as a nation." Clinton states "I will be a President for Democrats, Republicans, and Independents. For those who vote for me and those who don’t. For all Americans." This phrase acts as a direct appeal to a unified "popular will" that she intends to serve, transcending traditional political divisions. While not overtly anti-institutional, it elevates a "people's will" above partisan and institutional complexities.
+    *   Raw Score: 0.7 (Medium - The repeated emphasis on governing for "all Americans" and appeals to a collective national identity implicitly asserts a popular will that should guide leadership, overriding partisan or institutional barriers.)
+    *   Salience: 0.7 (Medium - The theme of unity and representing "all Americans" is a recurring rhetorical device, especially in the conclusion.)
+    *   Confidence: 0.8
+
+*   **anti_pluralist_exclusion**:
+    *   Patterns: Listing of Trump's actions and statements demonstrating rejection of diversity and legitimate opposition: "built his campaign on prejudice and paranoia," "taking hate groups mainstream," "disregard for the values," "birtherism," "racist lie," "Mexican judge," "white supremacists," "Alt-Right," "David Duke." The rhetorical device of enumeration amplifies the perceived anti-pluralist stance. The examples function as explicit attempts to delegitimize and demonize specific groups or opponents.
+    *   Raw Score: 0.9 (High - The extensive enumeration and detailing of Trump's actions and associations clearly and repeatedly demonstrate an anti-pluralist stance by delegitimizing and demonizing opponents and minority groups.)
+    *   Salience: 0.9 (High - The sheer volume and explicit nature of the examples targeting Trump's anti-pluralist rhetoric make this a dominant pattern.)
+    *   Confidence: 0.95
+
+*   **elite_conspiracy_systemic_corruption**:
+    *   Patterns: Repeated references to "dark conspiracy theories" (birtherism, Obama founded ISIS, Cruz's father/JFK, Alex Jones), association with Breitbart and its headlines. The pattern suggests a systemic spread of misinformation orchestrated or amplified by Trump and his allies, implying deliberate deception from a powerful "elite" (Trump and his circle) against the public.
+    *   Raw Score: 0.8 (High - The speech identifies a clear pattern of Trump engaging with and promoting conspiracy theories and fringe media, suggesting a coordinated effort to corrupt public discourse.)
+    *   Salience: 0.8 (High - The persistent return to Trump's engagement with conspiracy theories establishes this as a significant rhetorical pattern.)
+    *   Confidence: 0.9
+
+*   **authenticity_vs_political_class**:
+    *   Patterns: Direct counter-framing of Trump's image: "some people still want to give Trump the benefit of the doubt... that there’s a kinder, gentler, more responsible Donald Trump waiting in the wings somewhere... But the hard truth is, there’s no other Donald Trump. This is it." "When someone shows you who they are, believe them the first time." This pattern establishes Trump's divisive persona as his inherent, authentic self, contrasting it with a perceived "political class" behavior of adapting for votes.
+    *   Raw Score: 0.8 (High - The speech repeatedly asserts that Trump's divisive rhetoric is an authentic expression of his character, rather than a mere political tactic, setting up a distinction between his "true self" and political artifice.)
+    *   Salience: 0.8 (High - The explicit rhetorical moves to define Trump's "true" character are crucial to the speech's persuasive goal.)
+    *   Confidence: 0.85
+
+*   **homogeneous_people_construction**:
+    *   Patterns: Repeated phrases: "stronger together," "all Americans," "who we are as a nation," "our values." The speech consistently presents an idealized, unified American identity as a positive counter to Trump's divisiveness. This emphasizes a collective "people" that transcends internal divisions, though the divisions are primarily racial/ethnic rather than socio-economic.
+    *   Raw Score: 0.7 (Medium - The strong, repetitive emphasis on "unity" and "all Americans" aims to construct a single, unified national identity, overcoming internal strife.)
+    *   Salience: 0.8 (High - This theme is woven throughout the speech, particularly in the opening and closing, and serves as a direct counter-narrative.)
+    *   Confidence: 0.8
+
+*   **nationalist_exclusion**:
+    *   Patterns: Explicit policies and statements proposed by Trump are highlighted for their exclusionary nature: "deportation force," "abolish birthright constitutional principle," "ban Muslims," "religious test." The comparison to ISIS ("cruel irony") further amplifies the exclusionary narrative. The speech extensively uses these examples to paint Trump as an exclusionary nationalist.
+    *   Raw Score: 0.9 (High - The repeated examples of Trump's proposed policies (deportation, Muslim ban, birthright citizenship) directly illustrate a pattern of exclusionary nationalism.)
+    *   Salience: 0.8 (High - These examples are prominent and extensively detailed as central criticisms of Trump.)
+    *   Confidence: 0.9
+
+*   **economic_populist_appeals**:
+    *   Patterns: Limited and brief mentions of economic policy at the very start, and a single point about the wall's cost to taxpayers. No sustained rhetorical pattern of economic grievance or "elite vs. people" on economic terms.
+    *   Raw Score: 0.3 (Low - Economic appeals are minimal, confined to a brief opening and one specific policy cost. There's no sustained pattern or emphasis.)
+    *   Salience: 0.1 (Low - The lack of repetition and thematic centrality of economic issues makes this dimension highly unsalient.)
+    *   Confidence: 0.8
+
+---
+**Aggregation and Best Evidence Selection:**
+
+Now, calculate the median for each dimension's raw score and salience.
+Then, for each dimension, select the best evidence quote.
+
+**Dimensions:**
+
+1.  **manichaean_people_elite_framing**
+    *   Approach 1: Raw 0.7, Salience 0.8, Confidence 0.9, Quote: "He's taking hate groups mainstream and helping a radical fringe take over one of America's two major political parties."
+    *   Approach 2: Raw 0.9, Salience 1.0, Confidence 0.9, Quote: "The Wall Street Journal describes it [Alt-Right] as a loosely organized movement...that 'rejects mainstream conservatism, promotes nationalism and views immigration and multiculturalism as threats to white identity.'"
+    *   Approach 3: Raw 0.8, Salience 0.9, Confidence 0.9, Quote: "His disregard for the values that make our country great is profoundly dangerous."
+    *   Median Raw: 0.8
+    *   Median Salience: 0.9
+    *   Aggregated Confidence: (0.9+0.9+0.9)/3 = 0.9
+    *   Best Quote (from Approach 2, as it captures the "elite" definition better): "The Wall Street Journal describes it [Alt-Right] as a loosely organized movement...that 'rejects mainstream conservatism, promotes nationalism and views immigration and multiculturalism as threats to white identity.'"
+
+2.  **crisis_restoration_narrative**
+    *   Approach 1: Raw 0.8, Salience 0.9, Confidence 0.9, Quote: "This is a moment of reckoning for every Republican dismayed that the Party of Lincoln has become the Party of Trump."
+    *   Approach 2: Raw 0.9, Salience 0.9, Confidence 0.9, Quote: "This is a moment of reckoning for every Republican dismayed that the Party of Lincoln has become the Party of Trump."
+    *   Approach 3: Raw 0.8, Salience 0.8, Confidence 0.9, Quote: "The last thing we need in the Situation Room is a loose cannon who can’t tell the difference between fact and fiction, and who buys so easily into racially-tinged rumors."
+    *   Median Raw: 0.8
+    *   Median Salience: 0.9
+    *   Aggregated Confidence: 0.9
+    *   Best Quote: "This is a moment of reckoning for every Republican dismayed that the Party of Lincoln has become the Party of Trump."
+
+3.  **popular_sovereignty_claims**
+    *   Approach 1: Raw 0.6, Salience 0.7, Confidence 0.8, Quote: "I will be a President for Democrats, Republicans, and Independents. For those who vote for me and those who don’t. For all Americans."
+    *   Approach 2: Raw 0.7, Salience 0.8, Confidence 0.8, Quote: "I will be a President for Democrats, Republicans, and Independents. For those who vote for me and those who don’t. For all Americans."
+    *   Approach 3: Raw 0.7, Salience 0.7, Confidence 0.8, Quote: "I will be a President for Democrats, Republicans, and Independents. For those who vote for me and those who don’t. For all Americans."
+    *   Median Raw: 0.7
+    *   Median Salience: 0.7
+    *   Aggregated Confidence: 0.8
+    *   Best Quote: "I will be a President for Democrats, Republicans, and Independents. For those who vote for me and those who don’t. For all Americans."
+
+4.  **anti_pluralist_exclusion**
+    *   Approach 1: Raw 0.9, Salience 0.9, Confidence 0.95, Quote: "He promoted the racist lie that President Obama isn’t really an American citizen."
+    *   Approach 2: Raw 1.0, Salience 1.0, Confidence 0.95, Quote: "From the start, Donald Trump has built his campaign on prejudice and paranoia."
+    *   Approach 3: Raw 0.9, Salience 0.9, Confidence 0.95, Quote: "He promoted the racist lie that President Obama isn’t really an American citizen."
+    *   Median Raw: 0.9
+    *   Median Salience: 0.9
+    *   Aggregated Confidence: 0.95
+    *   Best Quote: "From the start, Donald Trump has built his campaign on prejudice and paranoia."
+
+5.  **elite_conspiracy_systemic_corruption**
+    *   Approach 1: Raw 0.8, Salience 0.8, Confidence 0.9, Quote: "A man with a long history of racial discrimination, who traffics in dark conspiracy theories drawn from the pages of supermarket tabloids and the far reaches of the internet, should never run our government or command our military."
+    *   Approach 2: Raw 0.9, Salience 0.9, Confidence 0.9, Quote: "Trump claimed President Obama founded ISIS. And then he repeated that nonsense over and over."
+    *   Approach 3: Raw 0.8, Salience 0.8, Confidence 0.9, Quote: "It’s what happens when you listen to the radio host Alex Jones, who claims that 9/11 and the Oklahoma City bombings were inside jobs."
+    *   Median Raw: 0.8
+    *   Median Salience: 0.8
+    *   Aggregated Confidence: 0.9
+    *   Best Quote: "A man with a long history of racial discrimination, who traffics in dark conspiracy theories drawn from the pages of supermarket tabloids and the far reaches of the internet, should never run our government or command our military."
+
+6.  **authenticity_vs_political_class**
+    *   Approach 1: Raw 0.7, Salience 0.7, Confidence 0.8, Quote: "But the hard truth is, there’s no other Donald Trump. This is it."
+    *   Approach 2: Raw 0.8, Salience 0.8, Confidence 0.85, Quote: "When someone shows you who they are, believe them the first time."
+    *   Approach 3: Raw 0.8, Salience 0.8, Confidence 0.85, Quote: "But the hard truth is, there’s no other Donald Trump. This is it."
+    *   Median Raw: 0.8
+    *   Median Salience: 0.8
+    *   Aggregated Confidence: 0.833 (average of 0.8, 0.85, 0.85)
+    *   Best Quote: "When someone shows you who they are, believe them the first time."
+
+7.  **homogeneous_people_construction**
+    *   Approach 1: Raw 0.6, Salience 0.7, Confidence 0.8, Quote: "Because I believe we are stronger together."
+    *   Approach 2: Raw 0.7, Salience 0.8, Confidence 0.8, Quote: "Because I believe we are stronger together."
+    *   Approach 3: Raw 0.7, Salience 0.8, Confidence 0.8, Quote: "It’s about who we are as a nation."
+    *   Median Raw: 0.7
+    *   Median Salience: 0.8
+    *   Aggregated Confidence: 0.8
+    *   Best Quote: "Because I believe we are stronger together."
+
+8.  **nationalist_exclusion**
+    *   Approach 1: Raw 0.9, Salience 0.8, Confidence 0.9, Quote: "He’d ban Muslims around the world – 1.5 billion men, women, and children – from entering our county just because of their religion."
+    *   Approach 2: Raw 1.0, Salience 0.9, Confidence 0.9, Quote: "Under Donald Trump, America would distinguish itself as the only country in the world to impose a religious test at the border."
+    *   Approach 3: Raw 0.9, Salience 0.8, Confidence 0.9, Quote: "He’d ban Muslims around the world – 1.5 billion men, women, and children – from entering our county just because of their religion."
+    *   Median Raw: 0.9
+    *   Median Salience: 0.8
+    *   Aggregated Confidence: 0.9
+    *   Best Quote: "Under Donald Trump, America would distinguish itself as the only country in the world to impose a religious test at the border."
+
+9.  **economic_populist_appeals**
+    *   Approach 1: Raw 0.3, Salience 0.1, Confidence 0.8, Quote: "My original plan for this visit was to focus on our agenda to help small businesses and entrepreneurs."
+    *   Approach 2: Raw 0.2, Salience 0.1, Confidence 0.8, Quote: "This week we proposed new steps to cut red tape and taxes, and make it easier for small businesses to get the credit they need to grow and hire."
+    *   Approach 3: Raw 0.3, Salience 0.1, Confidence 0.8, Quote: "Oh, and by the way, Mexico’s not paying for his wall either. If it ever gets built, you can be sure that American taxpayers will be stuck with the bill."
+    *   Median Raw: 0.3
+    *   Median Salience: 0.1
+    *   Aggregated Confidence: 0.8
+    *   Best Quote: "My original plan for this visit was to focus on our agenda to help small businesses and entrepreneurs."
+
+Confidence calculation for aggregated scores: For simplicity and robustness, I will take the average of the individual confidence scores for each dimension across the three approaches. This reflects the overall consistency of scoring for that dimension.
+
+Final check on requirements:
+- Three independent analyses: Done.
+- Median scores: Done.
+- Best evidence: Done.
+- JSON format: Will be structured correctly.
+- Delimiters: Will be included.
+- No calculated metrics outside of raw/salience/confidence.
+- All dimensions matched to framework.
+- Quote_text is direct quote or empty string.
+
+Looks good.<ctrl95><<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "10.0.2",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Applied three independent analytical approaches with median aggregation, focusing on Clinton's critique of Trump's rhetoric.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "f9c3847efc46...",
+      "document_name": "clinton_2016_08_25.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.83
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.8
+        },
+        "nationalist_exclusion": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "economic_populist_appeals": {
+          "raw_score": 0.3,
+          "salience": 0.1,
+          "confidence": 0.8
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "The Wall Street Journal describes it [Alt-Right] as a loosely organized movement...that 'rejects mainstream conservatism, promotes nationalism and views immigration and multiculturalism as threats to white identity.'",
+          "confidence": 0.9,
+          "context_type": "criticism_of_opponent"
+        },
+        {
+          "dimension": "crisis_restoration_narrative",
+          "quote_text": "This is a moment of reckoning for every Republican dismayed that the Party of Lincoln has become the Party of Trump.",
+          "confidence": 0.9,
+          "context_type": "call_to_action"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "I will be a President for Democrats, Republicans, and Independents. For those who vote for me and those who don\u2019t. For all Americans.",
+          "confidence": 0.8,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion",
+          "quote_text": "From the start, Donald Trump has built his campaign on prejudice and paranoia.",
+          "confidence": 0.95,
+          "context_type": "criticism_of_opponent"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "A man with a long history of racial discrimination, who traffics in dark conspiracy theories drawn from the pages of supermarket tabloids and the far reaches of the internet, should never run our government or command our military.",
+          "confidence": 0.9,
+          "context_type": "criticism_of_opponent"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "When someone shows you who they are, believe them the first time.",
+          "confidence": 0.85,
+          "context_type": "rhetorical_device"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "Because I believe we are stronger together.",
+          "confidence": 0.8,
+          "context_type": "thematic_statement"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "Under Donald Trump, America would distinguish itself as the only country in the world to impose a religious test at the border.",
+          "confidence": 0.9,
+          "context_type": "criticism_of_opponent_policy"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "My original plan for this visit was to focus on our agenda to help small businesses and entrepreneurs.",
+          "confidence": 0.8,
+          "context_type": "policy_statement"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

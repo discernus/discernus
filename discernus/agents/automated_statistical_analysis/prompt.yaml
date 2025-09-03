@@ -30,26 +30,34 @@ template: |
 
   # SEQUENTIAL STATISTICAL ANALYSIS PROTOCOL
 
-  **STATISTICAL CONSERVATISM MANDATE:**
-  Before generating ANY statistical function:
-  1. Calculate minimum sample size needed for adequate power (typically 80% power, α=0.05)
-  2. Only generate functions for tests that have sufficient statistical power
-  3. For underpowered tests, generate descriptive statistics instead
-  4. Err on the side of caution - better to do fewer, well-powered tests than many underpowered ones
+  **BALANCED STATISTICAL APPROACH:**
+  Generate appropriate statistical functions based on sample size tiers, balancing statistical rigor with meaningful pattern detection:
   
-  **SAMPLE SIZE GUIDELINES:**
-  - Correlation analysis: Minimum N=20 for basic correlations, N=30+ for reliable results
-  - T-tests: Minimum N=15 per group for adequate power
-  - ANOVA: Minimum N=5 per group, preferably N=10+ per group
-  - Regression: N ≥ 50 + 8m (where m = number of predictors)
-  - Chi-square: Expected frequency ≥ 5 in each cell
-  - Cronbach's alpha: Minimum N=30, preferably N=100+
+  **TIER 1: Well-Powered Analysis (N≥30)**
+  - Generate full inferential tests (t-tests, ANOVA, correlations)
+  - Include post-hoc tests and multiple comparison corrections
+  - Report standard significance testing with confidence
   
-  **IF SAMPLE SIZE IS INSUFFICIENT:**
-  - Generate descriptive statistics functions only
-  - Include clear comments about why inferential tests were not generated
-  - Focus on effect sizes and confidence intervals rather than p-values
-  - Suggest qualitative or case study approaches
+  **TIER 2: Moderately-Powered Analysis (N=15-29)**
+  - Generate inferential tests + descriptive statistics + effect sizes
+  - Include explicit power caveats in function documentation
+  - Focus on effect sizes and confidence intervals alongside p-values
+  
+  **TIER 3: Exploratory Analysis (N<15)**
+  - Generate descriptive statistics + effect sizes + confidence intervals
+  - Include non-parametric alternatives when appropriate
+  - Focus on pattern recognition and exploratory insights
+  
+  **SAMPLE SIZE GUIDELINES BY TIER:**
+  - **Correlation analysis**: Tier 1 (N≥30), Tier 2 (N=15-29), Tier 3 (N<15)
+  - **T-tests**: Tier 1 (N≥15 per group), Tier 2 (N=8-14 per group), Tier 3 (N<8 per group)
+  - **ANOVA**: Tier 1 (N≥10 per group), Tier 2 (N=5-9 per group), Tier 3 (N<5 per group)
+  - **Cronbach's alpha**: Tier 1 (N≥30), Tier 2 (N=15-29), Tier 3 (N<15)
+  
+  **FUNCTION DOCUMENTATION REQUIREMENTS:**
+  - Always include sample size and power assessment in docstrings
+  - For Tier 2: "Results should be interpreted with caution due to moderate sample size (N=X)"
+  - For Tier 3: "Exploratory analysis - results are suggestive rather than conclusive (N=X)"
 
   **IMPORTANT**: You MUST perform the following steps in order, using the output of each step to inform the next. Do not generate functions until you have completed all analytical steps.
 
@@ -64,17 +72,17 @@ template: |
   - Identify dependent variables (the main outcomes being measured).
   - Note any specific comparisons mentioned (pairwise, group contrasts, etc.).
 
-  **Step 3: Perform Power Analysis.**
-  - For EACH statistical test identified, calculate the minimum sample size needed
-  - Compare required sample size to actual sample size in the data
-  - Mark tests as "POWERED" or "UNDERPOWERED"
-  - For underpowered tests, plan descriptive alternatives
+  **Step 3: Perform Tiered Power Analysis.**
+  - For EACH statistical test identified, assess sample size adequacy
+  - Classify tests into tiers: TIER 1 (well-powered), TIER 2 (moderately-powered), TIER 3 (exploratory)
+  - Plan appropriate statistical approaches for each tier
+  - For Tier 2 and Tier 3, include power caveats and alternative approaches
 
   **Step 4: Map Statistical Tests to Research Questions.**
   - For each research question, determine what statistical test(s) are needed to answer it.
-  - ONLY include tests marked as "POWERED" from Step 3
-  - For underpowered tests, substitute descriptive statistics or effect size calculations
-  - Add clear documentation about why certain tests were excluded
+  - Include tests from ALL tiers (1, 2, and 3) with appropriate caveats
+  - For Tier 2 and Tier 3 tests, include descriptive statistics and effect sizes
+  - Add clear documentation about power limitations and interpretation guidelines
 
   **Step 5: Plan Function Architecture.**
   - Design one function per major statistical analysis.

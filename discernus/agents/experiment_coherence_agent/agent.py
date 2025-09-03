@@ -88,7 +88,13 @@ class ExperimentCoherenceAgent:
         framework_candidates = [
             "framework.md",
             "caf_v10.md", "cff_v10.md", "pdaf_v10.md", "chf_v10.md", "ecf_v10.md",
-            "framework_v10.md"
+            "framework_v10.md",
+            # Versioned framework files
+            "caf_v10_0_1.md", "caf_v10_0_2.md", "caf_v10_0_3.md",
+            "cff_v10_0_1.md", "cff_v10_0_2.md", "cff_v10_0_3.md", 
+            "pdaf_v10_0_1.md", "pdaf_v10_0_2.md", "pdaf_v10_0_3.md",
+            "chf_v10_0_1.md", "chf_v10_0_2.md", "chf_v10_0_3.md",
+            "ecf_v10_0_1.md", "ecf_v10_0_2.md", "ecf_v10_0_3.md"
         ]
         
         for filename in framework_candidates:
@@ -143,6 +149,94 @@ class ExperimentCoherenceAgent:
                 specifications.append(f"=== {spec_file} ===\n{content}")
         
         return "\n\n".join(specifications)
+    
+    def _validate_corpus_yaml_syntax(self, corpus_manifest: str) -> ValidationResult:
+        """
+        Validate YAML syntax in corpus manifest before LLM processing.
+        
+        Args:
+            corpus_manifest: Raw corpus manifest content
+            
+        Returns:
+            ValidationResult with YAML syntax issues if any
+        """
+        try:
+            # Extract YAML block from corpus manifest
+            if '## Document Manifest' in corpus_manifest:
+                _, yaml_block = corpus_manifest.split('## Document Manifest', 1)
+                if '```yaml' in yaml_block:
+                    yaml_start = yaml_block.find('```yaml') + 7
+                    yaml_end = yaml_block.rfind('```')
+                    if yaml_end > yaml_start:
+                        yaml_content = yaml_block[yaml_start:yaml_end].strip()
+                        # Test YAML parsing
+                        yaml.safe_load(yaml_content)
+                        return ValidationResult(success=True, issues=[], suggestions=[])
+                    else:
+                        return ValidationResult(
+                            success=False,
+                            issues=[ValidationIssue(
+                                category="yaml_syntax",
+                                description="Corpus manifest YAML block is not properly closed",
+                                impact="Experiment cannot parse corpus metadata",
+                                fix="Ensure YAML block ends with ``` delimiter",
+                                priority="BLOCKING",
+                                affected_files=["corpus.md"]
+                            )],
+                            suggestions=[]
+                        )
+                else:
+                    return ValidationResult(
+                        is_valid=False,
+                        issues=[ValidationIssue(
+                            category="yaml_syntax",
+                            description="Corpus manifest missing YAML code block",
+                            impact="Experiment cannot parse corpus metadata",
+                            fix="Add ```yaml ... ``` block in Document Manifest section",
+                            priority="BLOCKING",
+                            affected_files=["corpus.md"]
+                        )],
+                        suggestions=[]
+                    )
+            else:
+                return ValidationResult(
+                    success=False,
+                    issues=[ValidationIssue(
+                        category="yaml_syntax",
+                        description="Corpus manifest missing '## Document Manifest' section",
+                        impact="Experiment cannot parse corpus metadata",
+                        fix="Add '## Document Manifest' section with YAML metadata",
+                        priority="BLOCKING",
+                        affected_files=["corpus.md"]
+                    )],
+                    suggestions=[]
+                )
+        except yaml.YAMLError as e:
+            return ValidationResult(
+                is_valid=False,
+                issues=[ValidationIssue(
+                    category="yaml_syntax",
+                    description=f"Invalid YAML syntax in corpus manifest: {str(e)}",
+                    impact="Experiment cannot parse corpus metadata",
+                    fix="Fix YAML syntax errors - check for unclosed blocks, invalid characters, or malformed structure",
+                    priority="BLOCKING",
+                    affected_files=["corpus.md"]
+                )],
+                suggestions=[]
+            )
+        except Exception as e:
+            return ValidationResult(
+                is_valid=False,
+                issues=[ValidationIssue(
+                    category="yaml_syntax",
+                    description=f"Error parsing corpus manifest: {str(e)}",
+                    impact="Experiment cannot parse corpus metadata",
+                    fix="Check corpus manifest format and structure",
+                    priority="BLOCKING",
+                    affected_files=["corpus.md"]
+                )],
+                suggestions=[]
+            )
         
     def validate_experiment(self, experiment_path: Path) -> ValidationResult:
         """
@@ -172,6 +266,11 @@ class ExperimentCoherenceAgent:
             # Find and load framework and corpus files (format agnostic discovery)
             framework_spec = self._find_and_load_framework(experiment_path)
             corpus_manifest = self._find_and_load_corpus(experiment_path)
+            
+            # Pre-validate YAML syntax in corpus manifest
+            yaml_validation_result = self._validate_corpus_yaml_syntax(corpus_manifest)
+            if not yaml_validation_result.success:
+                return yaml_validation_result
 
             # Load current specifications for compliance validation
             current_specifications = self._load_current_specifications()
@@ -469,12 +568,16 @@ class ExperimentCoherenceAgent:
         """Create validation prompt using externalized YAML template."""
         current_date = datetime.now().strftime("%Y-%m-%d")
         
+        # Extract capabilities registry from specification references
+        capabilities_registry = specification_references.get("capabilities", "Capabilities registry not available")
+        
         return self.prompt_template.format(
             current_date=current_date,
             experiment_spec=json.dumps(experiment_spec, indent=2),
             framework_spec=framework_spec,
             corpus_manifest=json.dumps(corpus_manifest, indent=2),
-            specification_references=json.dumps(specification_references, indent=2)
+            specification_references=json.dumps(specification_references, indent=2),
+            capabilities_registry=capabilities_registry
         )
     
     def _parse_validation_response(self, response: str) -> ValidationResult:
@@ -575,6 +678,13 @@ class ExperimentCoherenceAgent:
                 "experiment": "EXPERIMENT_SPECIFICATION.md", 
                 "framework": "FRAMEWORK_SPECIFICATION.md"
             }
+            
+            # Load capabilities registry
+            capabilities_path = project_root / "discernus" / "core" / "presets" / "core_capabilities.yaml"
+            if capabilities_path.exists():
+                with open(capabilities_path, 'r', encoding='utf-8') as f:
+                    capabilities_content = f.read()
+                specifications["capabilities"] = capabilities_content
             
             for spec_type, filename in spec_files.items():
                 spec_path = specs_dir / filename

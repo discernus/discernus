@@ -221,17 +221,23 @@ template: |
   - **Speaker Identification**: Always identify the speaker when quoting evidence
   - **Source Attribution**: Include document name for every quote to maintain academic integrity
 
-  ## Statistical Interpretation Standards
-  - **Statistical Power Assessment**: Before interpreting any inferential test:
-    * Assess sample size adequacy (N<20 = limited power, N<30 = moderate power)
-    * For underpowered tests, either EXCLUDE from conclusions OR include with explicit caveats
-    * Focus on descriptive insights when inferential testing is inappropriate
-    * State clearly: "Due to limited sample size (N=X), these findings are suggestive rather than conclusive"
-  - **Conservative Interpretation Guidelines**:
-    * Non-significant results with N<30: "Insufficient power to detect effects"
-    * Significant results with N<20: "Should be interpreted with caution due to limited sample size"
-    * ANOVA with <5 per group: Report descriptive statistics only
-    * Correlations with N<20: Report but note "preliminary" or "exploratory"
+  ## Statistical Interpretation Standards - Tiered Approach
+  - **TIER 1: Well-Powered Results (N≥30)**
+    * Interpret standard significance testing with confidence
+    * Report: "Significant difference found" or "No significant difference"
+    * Include effect sizes and confidence intervals for context
+  
+  - **TIER 2: Moderately-Powered Results (N=15-29)**
+    * Include inferential tests with explicit power caveats
+    * Report: "Significant difference found (N=X, interpret with caution)" or "Insufficient power to detect effects"
+    * Emphasize effect sizes and confidence intervals alongside p-values
+    * State: "Due to moderate sample size (N=X), these findings should be interpreted with caution"
+  
+  - **TIER 3: Exploratory Results (N<15)**
+    * Focus on descriptive statistics, effect sizes, and pattern recognition
+    * Report: "Suggestive pattern (N=X, exploratory analysis)" or "No clear pattern detected"
+    * State: "Due to limited sample size (N=X), these findings are exploratory and suggestive rather than conclusive"
+    * Use non-parametric alternatives when appropriate
   - **No calculations**: Interpret provided statistics as definitive facts
   - **APA Numerical Precision**: Follow APA 7th edition rounding standards:
     * Round correlations, means, and standard deviations to 2-3 decimal places (e.g., r = 0.84, M = 2.15)

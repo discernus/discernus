@@ -161,7 +161,8 @@ documents:
 - ✅ Metadata should provide useful context for analysis
 - ✅ Document metadata keys must match actual filenames
 - ✅ **Custom Analytical Groupings**: For experiments involving statistical comparisons, custom grouping variables (e.g., `administration`, `political_phase`, `speaker_category`) MUST be included as metadata fields for each document. These variables are essential for statistical agents and coherence validation.
-- ✅ **Mandatory for Statistical Analysis**: If an experiment's statistical analysis depends on grouping variables, those variables MUST be present in every document's metadata within this corpus. The Coherence Agent will enforce this rule.
+- ✅ **Mandatory for Statistical Analysis**: If an experiment's statistical analysis depends on grouping variables, those variables MUST be present in every document's metadata within this corpus. The Coherence Agent will validate this requirement.
+- ✅ **Sample Size Adequacy**: Corpus design should consider statistical power requirements. See the Sample Size Requirements section for guidance on appropriate corpus sizes for different types of statistical analysis.
 
 ---
 
@@ -253,6 +254,24 @@ For experiments that require statistical analysis (e.g., ANOVA, t-tests), the co
 - **Consistency is Key**: The grouping variable must be applied consistently to all documents in the corpus.
 - **Experiment Coherence**: The grouping variables defined here MUST align with the variables requested in the `experiment.md` file. The Coherence Agent will validate this linkage.
 - **No Implied Metadata**: Statistical agents are strictly forbidden from parsing filenames or directory structures to infer analytical groups. All grouping information must be explicit in the manifest.
+
+### Sample Size Requirements for Statistical Analysis
+
+When designing corpora for statistical analysis, consider the following sample size requirements:
+
+- **N≥30**: Full inferential statistical analysis with adequate power
+- **N=20-29**: Limited inferential testing, focus on effect sizes and confidence intervals  
+- **N=10-19**: Descriptive statistics only, no hypothesis testing
+- **N=4-9**: Case study analysis, qualitative patterns, individual document insights
+- **N<4**: Single case or comparative case analysis only
+
+**Statistical Power Considerations:**
+- **Group Comparisons**: Each group should have sufficient sample size for the intended statistical tests
+- **Multiple Comparisons**: Account for post-hoc correction requirements when planning group sizes
+- **Effect Size Detection**: Larger samples enable detection of smaller, more meaningful effects
+
+**Available Analytical Capabilities:**
+See the [Core Capabilities Registry](../../discernus/core/presets/core_capabilities.yaml) for the complete list of available statistical libraries and their specific functions. The registry is maintained by the platform and may be updated to include additional libraries as they become available.
 
 ---
 

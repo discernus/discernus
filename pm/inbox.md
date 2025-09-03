@@ -744,3 +744,20 @@
 - Updated manifest.json with resume history and provenance
 - Extended directory structure with synthesis artifacts
 - Preserved statistical preparation results alongside synthesis results
+
+## Rate Limiting & Performance Issues
+
+### Rate Limiting Investigation - Gemini 2.5 Flash Timeout Issues
+**Task**: Investigate and resolve rate limiting issues with Gemini 2.5 Flash model during large experiment runs
+**Purpose**: Address frequent timeout errors and fallback cascades observed during vanderveen_presidential_pdaf experiment execution
+**Priority**: HIGH - System reliability and performance
+**Context**: During experiment run, observed multiple timeout errors with vertex_ai/gemini-2.5-flash requiring fallback to Claude models, significantly impacting performance and cost
+**Acceptance Criteria**:
+- Root cause analysis of Gemini 2.5 Flash timeout issues completed
+- Rate limiting strategy reviewed and optimized for DSQ (Dynamic Shared Quota) models
+- Retry logic enhanced with exponential backoff for timeout scenarios
+- Model-specific timeout configurations implemented
+- Fallback cascade optimization to reduce unnecessary model switches
+- Performance monitoring and alerting for rate limit scenarios
+- Cost impact analysis of fallback cascades completed
+- Documentation updated with rate limiting best practices

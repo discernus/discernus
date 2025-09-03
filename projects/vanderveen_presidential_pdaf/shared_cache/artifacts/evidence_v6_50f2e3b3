@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "a5962c21f3716fd3dafe3475314623644c7078ebb662cf2501f54c109edb64a8"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-03T04:25:22.565369+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "trump/convention_period/trump_2016_06_22.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "This election will decide whether we are ruled by the people, or by the politicians.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T04:25:22.565264+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_06_22.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "Our country lost its way when we stopped putting the American people first. We are going to make America rich again. We are going to make America safe again. We are going to Make America Great Again \u2014 and Great Again For EVERYONE.",
+      "confidence": 0.9,
+      "context_type": "thematic_summary",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T04:25:22.565274+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_06_22.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "This election will decide whether we are ruled by the people, or by the politicians. On election day, the politicians stand trial before the people. The voters are the jury. Their ballots are the verdict.",
+      "confidence": 0.8,
+      "context_type": "rhetorical_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T04:25:22.565277+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_06_22.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "Hillary Clinton who, as most people know, is a world class liar. This fact alone disqualifies her from the Presidency. We can\u2019t hand over our government to someone whose deepest, darkest secrets may be in the hands of our enemies.",
+      "confidence": 0.9,
+      "context_type": "opponent_demonization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T04:25:22.565279+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_06_22.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "The insiders wrote the rules of the game to keep themselves in power and in the money. It\u2019s rigged by big donors who want to keep down wages. It\u2019s rigged by big businesses who want to leave our country...It\u2019s rigged by bureaucrats who are trapping kids in failing schools.",
+      "confidence": 0.9,
+      "context_type": "systemic_corruption_claims",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T04:25:22.565281+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_06_22.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "I started off in Brooklyn New York, not so long ago, with a small loan and built a business worth over 10 billion dollars. I have always had a talent for building businesses and, importantly, creating jobs. That is a talent our country desperately needs. Hillary Clinton has perfected the politics of personal profit and theft.",
+      "confidence": 0.8,
+      "context_type": "contrastive_self_positioning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T04:25:22.565284+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_06_22.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "I\u2019m with you: the American people. Make America Great Again for All Americans.",
+      "confidence": 0.8,
+      "context_type": "unity_call",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T04:25:22.565286+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_06_22.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "Our country lost its way when we stopped putting the American people first. We got here because we switched from a policy of Americanism \u2014 focusing on what\u2019s good for America\u2019s middle class \u2014 to a policy of globalism, focusing on how to make money for large corporations who can move their wealth and workers to foreign countries all to the detriment of the American worker and the American economy. I only want to admit people who share our values and love our people.",
+      "confidence": 0.9,
+      "context_type": "boundary_definition",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T04:25:22.565313+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_06_22.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "We reward companies for offshoring, and we punish companies for doing business in America and keeping our workers employed. This is not a rising tide that lifts all boats. This is a wave of globalization that wipes out our middle class and our jobs.",
+      "confidence": 0.9,
+      "context_type": "economic_betrayal_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T04:25:22.565319+00:00"
+    }
+  ]
+}

@@ -33,18 +33,41 @@ A list of the specific, answerable research questions that the experiment is des
 **(Optional but Recommended)**
 A description of the anticipated results or the types of analysis that will be conducted (e.g., "A comparative statistical analysis of cohesion scores between the two speakers.").
 
-### Section 4: Data Grouping and Custom Variable Mapping
+### Section 4: Available Analytical Capabilities
+
+**(Reference Information)**
+Discernus provides a comprehensive suite of statistical and analytical tools for your experiments. When designing your statistical analysis plan, you have access to:
+
+**Statistical Analysis Capabilities:**
+- **Core Statistics**: Hypothesis testing, effect sizes, and advanced statistical modeling
+- **Post-hoc Testing**: Multiple comparison corrections (Dunn's, Tukey's, etc.)
+- **Data Manipulation**: Data processing, aggregation, and analysis
+- **Visualization**: Statistical plots and interactive dashboards
+
+**Text Analysis Capabilities:**
+- **Sentiment Analysis**: Emotional tone analysis and sentiment scoring
+- **Text Processing**: Tokenization, stemming, and readability metrics
+- **Pattern Recognition**: Regular expressions and string manipulation tools
+
+**Power Analysis & Sample Size Planning:**
+- Power analysis and effect size calculations
+- Three-tier statistical approaches based on sample size adequacy
+- See the [Core Capabilities Registry](../../discernus/core/presets/core_capabilities.yaml) for the complete list of available libraries and their specific functions
+
+**Best Practice**: When specifying statistical tests in your experiment, consider the available tools and design your analysis plan accordingly. The system will automatically select appropriate statistical methods based on your sample sizes and research questions. The capabilities registry is maintained by the platform and may be updated to include additional libraries as they become available.
+
+### Section 5: Data Grouping and Custom Variable Mapping
 
 **(Required for Statistical Analysis)**
 If your experiment requires statistical analysis using grouping variables not explicitly present in the corpus manifest (e.g., `time_period`, `category`, `group_type`), you MUST define them explicitly.
 
-#### 4.1 Corpus Manifest Integration
+#### 5.1 Corpus Manifest Integration
 - Statistical analyses must use corpus manifest metadata as the primary data source
 - Standard manifest fields vary by domain but commonly include: `speaker`, `author`, `year`, `category`, `type`, `format`
 - **CRITICAL**: Custom grouping variables (e.g., `time_period`, `administration`) MUST be present as fields in the corpus manifest metadata
 - **FORBIDDEN**: Statistical agents must NEVER parse filenames to derive metadata - all metadata must come from the corpus manifest
 
-#### 4.2 Custom Grouping Variables
+#### 5.2 Custom Grouping Variables
 There are two approaches for grouping variables:
 
 **Option A: Direct Corpus Field** (Preferred)
@@ -80,13 +103,13 @@ time_period_mapping:
 - **Corpus Manifest Mapping**: How to derive custom variables from manifest fields
 - **Missing Data Handling**: How to handle unmatched or missing cases
 
-#### 4.3 Statistical Executability Requirements
+#### 5.3 Statistical Executability Requirements
 - **ANOVA Groups**: All groups must have n≥2 for inferential testing
 - **Baseline Groups**: Single-observation groups (n=1) must be designated as baselines, excluded from ANOVA
 - **Variance Tests**: Groups must have sufficient variance for homogeneity testing
 - **Missing Data**: Specify handling of speakers/documents that don't match the mapping
 
-#### 4.4 Coherence Validation
+#### 5.4 Coherence Validation
 The coherence agent will validate that:
 1. **Grouping Variable Existence**: Every grouping variable requested for statistical analysis in this experiment MUST exist as a metadata field in the associated `corpus.md` manifest for all documents.
 2. **Statistical Executability**: All groups intended for comparative statistical analysis (e.g., ANOVA) must contain a sufficient number of documents (n≥2). Single-document groups must be explicitly designated as baselines.
@@ -100,20 +123,20 @@ The coherence agent will validate that:
 
 This is a single YAML block at the end of the document containing the precise configuration for the orchestrator.
 
-### Section 5: Configuration Appendix
+### Section 6: Configuration Appendix
 
 **(Required)**
 
 ```yaml
 # --- Start of Machine-Readable Appendix ---
 
-# 5.1: Metadata (Required)
+# 6.1: Metadata (Required)
 metadata:
   experiment_name: "your_experiment_name_in_snake_case"
   author: "Your Name or Organization"
   spec_version: "10.0"
 
-# 5.2: Components (Required)
+# 6.2: Components (Required)
 components:
   # The filename of the v10.0 Framework file.
   # Must be in the same directory as this experiment.md.
@@ -144,7 +167,24 @@ components:
 -   **No Filename Parsing**: Statistical agents are FORBIDDEN from parsing filenames to derive metadata
 -   **Statistical Executability**: All ANOVA groups must have n≥2. Single-observation groups (n=1) must be designated as baselines and excluded from inferential testing.
 -   **Semantic Alignment**: The experiment, corpus manifest, and framework must use consistent terminology. Custom mappings must eliminate ambiguity about how corpus metadata maps to analysis variables.
--   **Coherence Validation**: The coherence agent will validate that:
-    - **Grouping Variable Presence**: All grouping variables referenced in the experiment exist in the corpus manifest's metadata for every document.
-    - **Statistical Requirements**: Group sizes and variance meet the minimum requirements for the specified statistical tests.
-    - **Executability**: The overall experiment design is coherent and executable with the provided corpus data.
+
+### Statistical Power and Methodology Requirements
+-   **Sample Size Adequacy**: Statistical tests must be appropriate for available sample sizes:
+    - **N≥30**: Full inferential statistical analysis with adequate power
+    - **N=20-29**: Limited inferential testing, focus on effect sizes and confidence intervals  
+    - **N=10-19**: Descriptive statistics only, no hypothesis testing
+    - **N=4-9**: Case study analysis, qualitative patterns, individual document insights
+    - **N<4**: Single case or comparative case analysis only
+-   **Test Appropriateness**: Statistical tests must match data types and research questions:
+    - **Non-parametric tests** for ordinal data or small samples
+    - **Parametric tests** only when assumptions are met (normality, equal variance)
+    - **Post-hoc corrections** required for multiple comparisons
+-   **Power Analysis**: For experiments with N<30, include power analysis and effect size calculations
+-   **Methodological Coherence**: Statistical tests must align with framework output dimensions and measurement scales
+
+### Coherence Validation Requirements
+The coherence agent will validate that:
+-   **Grouping Variable Presence**: All grouping variables referenced in the experiment exist in the corpus manifest's metadata for every document.
+-   **Statistical Requirements**: Group sizes and variance meet the minimum requirements for the specified statistical tests.
+-   **Methodological Appropriateness**: Statistical tests are suitable for the data types and sample sizes available.
+-   **Executability**: The overall experiment design is coherent and executable with the provided corpus data.

@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "04e914dea1bdf57894a384eedb51cc1de79ade19eae0aaada783668e471d10ab"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-03T03:58:06.535730+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "kasich_2016_07_21.txt",
+      "dimension": "manichean_people_elite_framing",
+      "quote_text": "How about putting some people in the government that understand job creators and respect them rather than beating them down",
+      "confidence": 0.8,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T03:58:06.535707+00:00"
+    },
+    {
+      "document_name": "kasich_2016_07_21.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "I believe I know how to work and help restore this great United States",
+      "confidence": 0.85,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T03:58:06.535712+00:00"
+    },
+    {
+      "document_name": "kasich_2016_07_21.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "It says, 'We the people...'",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T03:58:06.535714+00:00"
+    },
+    {
+      "document_name": "kasich_2016_07_21.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "",
+      "confidence": 0.95,
+      "context_type": "absence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T03:58:06.535716+00:00"
+    },
+    {
+      "document_name": "kasich_2016_07_21.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "if we have to knock down the special interests to get it done, so be it",
+      "confidence": 0.8,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T03:58:06.535718+00:00"
+    },
+    {
+      "document_name": "kasich_2016_07_21.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "I'm just a flawed man, a flawed man, trying to honor God's blessings in my life",
+      "confidence": 0.85,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T03:58:06.535720+00:00"
+    },
+    {
+      "document_name": "kasich_2016_07_21.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "we're the glue. We are the glue that holds our country together",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T03:58:06.535722+00:00"
+    },
+    {
+      "document_name": "kasich_2016_07_21.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "",
+      "confidence": 0.85,
+      "context_type": "absence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T03:58:06.535724+00:00"
+    },
+    {
+      "document_name": "kasich_2016_07_21.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "You're the working poor? We're going to give you an opportunity to take a pay raise",
+      "confidence": 0.8,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T03:58:06.535726+00:00"
+    }
+  ]
+}

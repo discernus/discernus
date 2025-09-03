@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "04ccf8de913b1a9db706db0016080261d958c20c1cf781525f56da7205ee92d8"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-03T05:11:44.785428+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "trump_2016_10_13.txt",
+      "dimension": "manichean_people_elite_framing",
+      "quote_text": "Our movement is about replacing a failed and corrupt political establishment with a new government controlled by you, the American People.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T05:11:44.785403+00:00"
+    },
+    {
+      "document_name": "trump_2016_10_13.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "This is not simply another 4-year election. This is a crossroads in the history of our civilization that will determine whether or not We The People reclaim control over our government.",
+      "confidence": 0.9,
+      "context_type": "opening_thesis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T05:11:44.785409+00:00"
+    },
+    {
+      "document_name": "trump_2016_10_13.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "This is a crossroads in the history of our civilization that will determine whether or not We The People reclaim control over our government.",
+      "confidence": 0.85,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T05:11:44.785411+00:00"
+    },
+    {
+      "document_name": "trump_2016_10_13.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "The Clinton Machine is determined to achieve the destruction of our campaign, which has now become a movement the likes of which our country has never seen before \u2014 and we won't let them do that.",
+      "confidence": 0.8,
+      "context_type": "opposition_characterization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T05:11:44.785413+00:00"
+    },
+    {
+      "document_name": "trump_2016_10_13.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "We've seen this firsthand in the WikiLeaks documents in which Hillary Clinton meets in secret with international banks to plot the destruction of U.S. sovereignty in order to enrich these global financial powers.",
+      "confidence": 0.95,
+      "context_type": "conspiracy_claim",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T05:11:44.785415+00:00"
+    },
+    {
+      "document_name": "trump_2016_10_13.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "In my former life, I was an insider as much as anybody else \u2014 and I know what's like to be an insider. Now I am being punished for leaving their special club and revealing to you their great scam.",
+      "confidence": 0.9,
+      "context_type": "personal_positioning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T05:11:44.785417+00:00"
+    },
+    {
+      "document_name": "trump_2016_10_13.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "It's about all of us, together, as a country.",
+      "confidence": 0.8,
+      "context_type": "unity_construction",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T05:11:44.785420+00:00"
+    },
+    {
+      "document_name": "trump_2016_10_13.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "We've seen it in the United Kingdom, where they voted to liberate themselves from global government and global trade deals and global immigration deals that have destroyed their sovereignty.",
+      "confidence": 0.7,
+      "context_type": "external_threat_reference",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T05:11:44.785422+00:00"
+    },
+    {
+      "document_name": "trump_2016_10_13.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "It's a global power structure that is responsible for the economic decisions that have robbed our working class, stripped our country of its wealth, and put that money into the pockets of a handful of large corporations and political entities.",
+      "confidence": 0.85,
+      "context_type": "economic_grievance",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T05:11:44.785424+00:00"
+    }
+  ]
+}
