@@ -1635,6 +1635,85 @@ def visualize_provenance(run_directory):
         sys.exit(1)
 
 
+@cli.group()
+def models():
+    """Manage and list available LLM models"""
+    pass
+
+
+@models.command('list')
+@click.option('--provider', help='Filter models by provider (e.g., vertex_ai, anthropic, openai)')
+@click.option('--tier', help='Filter models by performance tier (e.g., production, development, specialized-reasoning)')
+@click.option('--task', help='Filter models by task suitability (e.g., analysis, synthesis, validation)')
+def models_list(provider: Optional[str], tier: Optional[str], task: Optional[str]):
+    """List all available LLM models with filtering options"""
+    from .gateway.model_registry import ModelRegistry
+    
+    try:
+        model_registry = ModelRegistry()
+        all_models = model_registry.list_models()
+        
+        if not all_models:
+            click.echo("❌ No models found in registry")
+            return
+        
+        # Filter models based on options
+        filtered_models = []
+        for model_name in all_models:
+            model_details = model_registry.get_model_details(model_name)
+            if not model_details:
+                continue
+                
+            # Apply filters
+            if provider and model_details.get('provider') != provider:
+                continue
+            if tier and model_details.get('performance_tier') != tier:
+                continue
+            if task and task not in model_details.get('task_suitability', []):
+                continue
+                
+            filtered_models.append((model_name, model_details))
+        
+        if not filtered_models:
+            click.echo("❌ No models match the specified filters")
+            return
+        
+        # Display models
+        click.echo(f"🤖 Available LLM Models ({len(filtered_models)} found)")
+        click.echo()
+        
+        for model_name, details in filtered_models:
+            provider_name = details.get('provider', 'unknown')
+            tier_name = details.get('performance_tier', 'unknown')
+            context_window = details.get('context_window', 'unknown')
+            costs = details.get('costs', {})
+            input_cost = costs.get('input_per_million_tokens', 'unknown')
+            output_cost = costs.get('output_per_million_tokens', 'unknown')
+            
+            click.echo(f"📋 {model_name}")
+            click.echo(f"   Provider: {provider_name}")
+            click.echo(f"   Tier: {tier_name}")
+            click.echo(f"   Context: {context_window:,} tokens" if isinstance(context_window, int) else f"   Context: {context_window}")
+            click.echo(f"   Cost: ${input_cost}/${output_cost} per 1M tokens (input/output)")
+            
+            task_suitability = details.get('task_suitability', [])
+            if task_suitability:
+                click.echo(f"   Tasks: {', '.join(task_suitability)}")
+            
+            click.echo()
+        
+        click.echo("💡 Usage examples:")
+        click.echo("   discernus run <experiment> --analysis-model vertex_ai/gemini-2.5-flash")
+        click.echo("   discernus run <experiment> --synthesis-model anthropic/claude-3-5-sonnet-20241022")
+        click.echo("   discernus models list --provider vertex_ai")
+        click.echo("   discernus models list --tier production")
+        click.echo("   discernus models list --task synthesis")
+        
+    except Exception as e:
+        click.echo(f"❌ Failed to load model registry: {e}")
+        sys.exit(1)
+
+
 
 
 

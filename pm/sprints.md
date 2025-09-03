@@ -56,7 +56,7 @@
 - **Priority**: HIGH - Affects user experience and resource efficiency
 - **Files to Modify**: `discernus/cli.py` - add model validation layer
 
-- **Status**: **PENDING**
+- **Status**: **COMPLETED** - Model validation implemented with comprehensive error messages and models list command
 
 ---
 
@@ -86,7 +86,7 @@
   - Cross-reference logs with artifacts for accuracy
 
 - **Priority**: CRITICAL - Academic integrity and research validity
-- **Status**: **PENDING**
+- **Status**: **COMPLETED**
 
 #### [CRITICAL-007] CLI Flag Compliance Gap - Synthesis Model Selection
 
@@ -107,7 +107,7 @@
   - Validate cost tracking with correct model usage
 
 - **Priority**: CRITICAL - Affects cost, performance, and model attribution accuracy
-- **Status**: **PENDING**
+- **Status**: **COMPLETED** - Investigation shows CLI flag compliance is working correctly
 
 #### [CRITICAL-008] Cost Tracking System Failure
 
@@ -128,7 +128,7 @@
   - Validate cost data integration with model attribution
 
 - **Priority**: HIGH - Affects financial visibility and system transparency
-- **Status**: **PENDING**
+- **Status**: **COMPLETED** - Fixed experiment_summary.json generation to include cost_tracking field
 
 #### [CRITICAL-009] Rate Limiting Investigation - Gemini 2.5 Flash Timeout Issues
 
