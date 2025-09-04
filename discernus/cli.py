@@ -962,7 +962,7 @@ def promote(experiment_path: str, dry_run: bool, cleanup: bool, force: bool):
     click.echo("📋 Files to promote:")
     for target, source in promotable_files.items():
         mtime = source.stat().st_mtime
-        mtime_str = datetime.datetime.fromtimestamp(mtime).strftime('%Y-%m-%d %H:%M:%S')
+        mtime_str = datetime.datetime.fromtimestamp(mtime).strftime('%Y-%m-%d %H:%M:%S %Z')
         click.echo(f"   📄 {source.name} → {target} (modified: {mtime_str})")
     
     if dry_run:
@@ -976,7 +976,7 @@ def promote(experiment_path: str, dry_run: bool, cleanup: bool, force: bool):
     
     # Archive existing operational files
     archived_files = []
-    timestamp = datetime.datetime.now().strftime('%Y%m%dT%H%M%S')
+    timestamp = datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ')
     
     for target_file, _ in promotable_files.items():
         target_path = exp_path / target_file
@@ -1102,7 +1102,7 @@ def _cleanup_development_files(exp_path: Path, force: bool):
     if not archive_dir.exists():
         archive_dir.mkdir(parents=True, exist_ok=True)
     
-    timestamp = datetime.datetime.now().strftime('%Y%m%dT%H%M%S')
+    timestamp = datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ')
     archived_count = 0
     deleted_count = 0
     
@@ -1311,6 +1311,84 @@ def artifacts(experiment_path: str):
 
 
 @cli.command()
+@click.argument('run_directory', type=click.Path(exists=True, file_okay=False, dir_okay=True))
+@click.option('--output', '-o', type=click.Path(), help='Save report to file')
+def timezone_debug(run_directory: str, output: Optional[str]):
+    """Debug timezone issues in experiment logs and artifacts.
+    
+    RUN_DIRECTORY: Path to experiment run directory (e.g., projects/experiment/runs/20250127T101523Z)
+    """
+    from discernus.core.timezone_utils import create_timezone_debug_report
+    
+    run_path = Path(run_directory)
+    output_path = Path(output) if output else None
+    
+    try:
+        report = create_timezone_debug_report(run_path, output_path)
+        
+        if output_path:
+            click.echo(f"✅ Timezone debug report saved to: {output_path}")
+        else:
+            click.echo(report)
+            
+    except Exception as e:
+        click.echo(f"❌ Failed to generate timezone debug report: {e}")
+        sys.exit(1)
+
+
+@cli.command()
+@click.argument('experiment_path', type=click.Path(exists=True, file_okay=False, dir_okay=True))
+@click.option('--output', '-o', type=click.Path(), help='Save report to file')
+def model_quality(experiment_path: str, output: Optional[str]):
+    """Assess model quality and compare analysis results between different models.
+    
+    EXPERIMENT_PATH: Path to experiment directory
+    """
+    from discernus.core.model_quality_assessment import assess_model_quality
+    
+    exp_path = Path(experiment_path)
+    output_path = Path(output) if output else None
+    
+    try:
+        report = assess_model_quality(exp_path, output_path)
+        
+        if output_path:
+            click.echo(f"✅ Model quality assessment saved to: {output_path}")
+        else:
+            click.echo(report)
+            
+    except Exception as e:
+        click.echo(f"❌ Failed to generate model quality assessment: {e}")
+        sys.exit(1)
+
+
+@cli.command()
+@click.argument('run_directory', type=click.Path(exists=True, file_okay=False, dir_okay=True))
+@click.option('--output', '-o', type=click.Path(), help='Save consolidated provenance to file')
+def consolidate_provenance(run_directory: str, output: Optional[str]):
+    """Consolidate existing provenance data into comprehensive reports.
+    
+    RUN_DIRECTORY: Path to experiment run directory (e.g., projects/experiment/runs/20250127T143022Z)
+    """
+    from discernus.core.provenance_consolidator import consolidate_run_provenance
+    
+    run_path = Path(run_directory)
+    output_path = Path(output) if output else None
+    
+    try:
+        consolidated_path = consolidate_run_provenance(run_path, output_path)
+        
+        if output_path:
+            click.echo(f"✅ Consolidated provenance saved to: {consolidated_path}")
+        else:
+            click.echo(f"✅ Consolidated provenance saved to: {consolidated_path}")
+            click.echo("📋 This file contains comprehensive provenance data organized for all stakeholders")
+            
+    except Exception as e:
+        click.echo(f"❌ Error consolidating provenance: {e}", err=True)
+        raise click.Abort()
+
+@cli.command()
 def status():
     """Show infrastructure and system status"""
     rich_console.print_section("🔍 Discernus System Status")
@@ -1330,6 +1408,9 @@ def status():
     commands_table.add_row("discernus debug", "Interactive debugging mode")
     commands_table.add_row("discernus validate", "Validate experiment structure")
     commands_table.add_row("discernus list", "List available experiments")
+    commands_table.add_row("discernus timezone_debug", "Debug timezone issues in logs")
+    commands_table.add_row("discernus model_quality", "Assess model quality and compare results")
+    commands_table.add_row("discernus consolidate_provenance", "Consolidate existing provenance data")
     
     rich_console.print_table(commands_table)
 
