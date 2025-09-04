@@ -686,7 +686,7 @@ def consolidate_inputs(run_directory: str, output: Optional[str]):
 @cli.command()
 @click.argument('run_directory', type=click.Path(exists=True, file_okay=False, dir_okay=True))
 @click.option('--output', '-o', type=click.Path(), help='Save documentation to file')
-def generate_golden_run_docs(run_directory: str, output: Optional[str]):
+def generate_provenance(run_directory: str, output: Optional[str]):
     """Generate comprehensive documentation for golden run archive.
     
     RUN_DIRECTORY: Path to experiment run directory (e.g., projects/experiment/runs/20250127T143022Z)
