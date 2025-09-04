@@ -147,7 +147,7 @@ def cli(ctx, verbose, quiet, no_color, config):
     ctx.obj['verbose'] = verbose
     ctx.obj['quiet'] = quiet
     ctx.obj['no_color'] = no_color
-    ctx.obj['config'] = get_config(config)
+    ctx.obj['config'] = get_config()
     
     # Set verbosity level
     if verbose and quiet:
@@ -273,8 +273,8 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
 
 @cli.command()
 @click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))
-@click.option('--agent', type=click.Choice(['analysis', 'synthesis', 'evidence-curator', 'results-interpreter']), 
-              help='Focus debugging on specific agent: analysis (document processing), synthesis (report generation), evidence-curator (fact checking), results-interpreter (statistical analysis)')
+@click.option('--agent', type=click.Choice(['analysis', 'synthesis', 'statistical', 'fact-checker', 'validation']), 
+              help='Focus debugging on specific agent: analysis (document processing), synthesis (report generation), statistical (statistical analysis), fact-checker (fact validation), validation (experiment coherence)')
 @click.option('--verbose', is_flag=True, help='Enable detailed debug output')
 @click.option('--test-mode', is_flag=True, help='Run in test mode with limited data')
 @click.pass_context
