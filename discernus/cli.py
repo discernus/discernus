@@ -1415,6 +1415,32 @@ def consolidate_inputs(run_directory: str, output: Optional[str]):
         raise click.Abort()
 
 @cli.command()
+@click.argument('run_directory', type=click.Path(exists=True, file_okay=False, dir_okay=True))
+@click.option('--output', '-o', type=click.Path(), help='Save documentation to file')
+def generate_golden_run_docs(run_directory: str, output: Optional[str]):
+    """Generate comprehensive documentation for golden run archive.
+    
+    RUN_DIRECTORY: Path to experiment run directory (e.g., projects/experiment/runs/20250127T143022Z)
+    """
+    from discernus.core.golden_run_documentation_generator import generate_golden_run_documentation
+    
+    run_path = Path(run_directory)
+    output_path = Path(output) if output else None
+    
+    try:
+        docs_path = generate_golden_run_documentation(run_path, output_path)
+        
+        if output_path:
+            click.echo(f"✅ Golden run documentation saved to: {docs_path}")
+        else:
+            click.echo(f"✅ Golden run documentation saved to: {docs_path}")
+            click.echo("📋 Comprehensive documentation generated for peer review and archival")
+            
+    except Exception as e:
+        click.echo(f"❌ Error generating golden run documentation: {e}", err=True)
+        raise click.Abort()
+
+@cli.command()
 def status():
     """Show infrastructure and system status"""
     rich_console.print_section("🔍 Discernus System Status")
@@ -1438,6 +1464,7 @@ def status():
     commands_table.add_row("discernus model_quality", "Assess model quality and compare results")
     commands_table.add_row("discernus consolidate_provenance", "Consolidate existing provenance data")
     commands_table.add_row("discernus consolidate_inputs", "Consolidate input materials for reproducibility")
+    commands_table.add_row("discernus generate_golden_run_docs", "Generate comprehensive golden run documentation")
     
     rich_console.print_table(commands_table)
 
