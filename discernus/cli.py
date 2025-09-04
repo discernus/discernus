@@ -637,9 +637,18 @@ def cache(experiment_path: str, stats: bool, cleanup: bool):
 
 @cli.command()
 @click.argument('run_directory', type=click.Path(exists=True, file_okay=False, dir_okay=True))
-@click.option('--output', '-o', type=click.Path(), help='Save consolidated provenance to file')
-def consolidate_provenance(run_directory: str, output: Optional[str]):
-    """Consolidate existing provenance data into comprehensive report.
+@click.option('--output', '-o', type=click.Path(), help='Save archive to specific location')
+@click.option('--include-inputs', is_flag=True, default=True, help='Include input materials (corpus, experiment spec, framework)')
+@click.option('--include-provenance', is_flag=True, default=True, help='Include consolidated provenance data')
+@click.option('--include-docs', is_flag=True, default=True, help='Include comprehensive documentation')
+def archive(run_directory: str, output: Optional[str], include_inputs: bool, include_provenance: bool, include_docs: bool):
+    """Create a complete golden run archive for research transparency.
+    
+    Consolidates all experiment data into a self-contained archive suitable for:
+    - Peer review and publication
+    - Replication research
+    - Audit and compliance
+    - Long-term archival
     
     RUN_DIRECTORY: Path to experiment run directory (e.g., projects/experiment/runs/20250127T143022Z)
     """
@@ -647,64 +656,31 @@ def consolidate_provenance(run_directory: str, output: Optional[str]):
     output_path = Path(output) if output else None
     
     try:
-        provenance_data = consolidate_run_provenance(run_path, output_path)
+        rich_console.print_section(f"📦 Creating Golden Run Archive: {run_path.name}")
         
-        if output_path:
-            rich_console.print_success(f"✅ Provenance consolidated to: {output_path}")
-        else:
-            rich_console.print_success(f"✅ Provenance consolidated to: {provenance_data}")
-            rich_console.print_info("📋 Comprehensive provenance report generated for audit trail")
+        # Step 1: Consolidate provenance data
+        if include_provenance:
+            rich_console.print_info("📊 Consolidating provenance data...")
+            provenance_data = consolidate_run_provenance(run_path, None)
+            rich_console.print_success("✅ Provenance data consolidated")
         
-    except Exception as e:
-        rich_console.print_error(f"❌ Error consolidating provenance: {e}")
-        exit_general_error(str(e))
-
-@cli.command()
-@click.argument('run_directory', type=click.Path(exists=True, file_okay=False, dir_okay=True))
-@click.option('--output', '-o', type=click.Path(), help='Save consolidation report to file')
-def consolidate_inputs(run_directory: str, output: Optional[str]):
-    """Consolidate input materials (corpus, experiment spec, framework) into run directory.
-    
-    RUN_DIRECTORY: Path to experiment run directory (e.g., projects/experiment/runs/20250127T143022Z)
-    """
-    run_path = Path(run_directory)
-    output_path = Path(output) if output else None
-    
-    try:
-        consolidation_report = consolidate_input_materials(run_path, output_path)
+        # Step 2: Consolidate input materials
+        if include_inputs:
+            rich_console.print_info("📁 Consolidating input materials...")
+            consolidation_report = consolidate_input_materials(run_path, None)
+            rich_console.print_success("✅ Input materials consolidated")
         
-        if output_path:
-            rich_console.print_success(f"✅ Input materials consolidated to: {output_path}")
-        else:
-            rich_console.print_success(f"✅ Input materials consolidated to: {consolidation_report}")
-            rich_console.print_info("📋 All input materials copied for self-contained archive")
+        # Step 3: Generate comprehensive documentation
+        if include_docs:
+            rich_console.print_info("📋 Generating comprehensive documentation...")
+            docs_path = generate_golden_run_documentation(run_path, output_path)
+            rich_console.print_success("✅ Documentation generated")
+        
+        rich_console.print_success("🎉 Golden run archive created successfully!")
+        rich_console.print_info("📦 Archive is self-contained and ready for peer review/archival")
         
     except Exception as e:
-        rich_console.print_error(f"❌ Error consolidating input materials: {e}")
-        exit_general_error(str(e))
-
-@cli.command()
-@click.argument('run_directory', type=click.Path(exists=True, file_okay=False, dir_okay=True))
-@click.option('--output', '-o', type=click.Path(), help='Save documentation to file')
-def generate_provenance(run_directory: str, output: Optional[str]):
-    """Generate comprehensive documentation for golden run archive.
-    
-    RUN_DIRECTORY: Path to experiment run directory (e.g., projects/experiment/runs/20250127T143022Z)
-    """
-    run_path = Path(run_directory)
-    output_path = Path(output) if output else None
-    
-    try:
-        docs_path = generate_golden_run_documentation(run_path, output_path)
-        
-        if output_path:
-            rich_console.print_success(f"✅ Golden run documentation saved to: {docs_path}")
-        else:
-            rich_console.print_success(f"✅ Golden run documentation saved to: {docs_path}")
-            rich_console.print_info("📋 Comprehensive documentation generated for peer review and archival")
-        
-    except Exception as e:
-        rich_console.print_error(f"❌ Error generating golden run documentation: {e}")
+        rich_console.print_error(f"❌ Error creating golden run archive: {e}")
         exit_general_error(str(e))
 
 @cli.command()
