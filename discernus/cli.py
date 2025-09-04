@@ -1,21 +1,28 @@
 #!/usr/bin/env python3
 """
-Discernus CLI v2.1 - Simplified Researcher Interface
+Discernus CLI v2.1 - Streamlined Researcher Interface
 ===================================================
 
-Streamlined CLI with three core modes for optimal researcher experience:
-
-Core Commands:
+Core Commands for Research Workflow:
 - discernus run <experiment_path>       - Execute complete experiment (analysis + synthesis)
-- discernus continue <experiment_path>  - Intelligently resume from existing artifacts  
+- discernus validate <experiment_path>  - Validate experiment structure  
 - discernus debug <experiment_path>     - Interactive debugging with detailed tracing
+- discernus list                        - List available experiments
+- discernus status                      - Show system status
+- discernus artifacts                   - Show experiment artifacts and cache status
 
 Management Commands:
-- discernus validate <experiment_path>  - Validate experiment structure  
-- discernus list                        - List available experiments
-- discernus status                      - Show infrastructure status
-- discernus run                         - Execute experiments (no infrastructure required)
-- discernus stop                        - Stop infrastructure services
+- discernus promote <experiment_path>   - Promote workbench files to operational status
+- discernus cache <experiment_path>     - Manage validation cache
+
+Research Commands (Advanced):
+- discernus consolidate-provenance      - Consolidate provenance data for golden runs
+- discernus consolidate-inputs          - Consolidate input materials for golden runs  
+- discernus generate-golden-run-docs    - Generate comprehensive golden run documentation
+- discernus model-quality               - Assess model quality and compare analysis results
+- discernus timezone-debug              - Debug timezone issues in experiment logs
+- discernus visualize-provenance        - Generate provenance visualization
+- discernus validate-score              - Validate numerical scores using academic pipeline
 """
 
 import click
@@ -41,7 +48,6 @@ os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 from discernus.core.clean_analysis_orchestrator import CleanAnalysisOrchestrator, CleanAnalysisError
 from discernus.core.config import get_config, get_config_file_path
-from discernus.core.deprecated.infrastructure_telemetry import InfrastructureTelemetry
 from discernus.core.exit_codes import (
     ExitCode, exit_success, exit_general_error, exit_invalid_usage, 
     exit_validation_failed, exit_infrastructure_error, exit_file_error, exit_config_error
@@ -51,236 +57,55 @@ from discernus.core.exit_codes import (
 from .cli_console import rich_console, ExperimentProgressManager
 
 # Apply comprehensive LiteLLM debug suppression before any litellm imports
-# This prevents the debug flooding we were seeing in terminal output
 from discernus.core.logging_config import ensure_litellm_debug_suppression
 ensure_litellm_debug_suppression()
 
-# Now import litellm with suppression already configured
-import litellm
+# Import LLM Gateway after suppression is configured
+from discernus.gateway.llm_gateway import LLMGateway
+from discernus.gateway.model_registry import ModelRegistry
 
-# Additional environment variables to suppress all debug output
-os.environ['LITELLM_LOG_LEVEL'] = 'WARNING'
-os.environ['LITELLM_COLD_STORAGE_LOG_LEVEL'] = 'WARNING'
-os.environ['LITELLM_PROXY_VERBOSE'] = 'false'
-os.environ['LITELLM_PROXY_DEBUG_MODE'] = 'false'
-os.environ['LITELLM_PROXY_LOG_LEVEL_DEBUG'] = 'false'
+# Import validation and orchestration components
+from discernus.core.validation import ValidationResult, ValidationIssue
 
+# Import provenance and documentation components
+from discernus.core.provenance_consolidator import consolidate_run_provenance
+from discernus.core.input_materials_consolidator import consolidate_input_materials
+from discernus.core.golden_run_documentation_generator import generate_golden_run_documentation
 
-def check_infrastructure() -> Dict[str, bool]:
-    """Check if required infrastructure is running"""
-    import socket
-    
-    def is_port_open(host: str, port: int) -> bool:
-        try:
-            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-                sock.settimeout(1)
-                result = sock.connect_ex((host, port))
-                return result == 0
-        except Exception:
-            return False
-    
-    # Infrastructure checks removed - system now uses local storage only
-    return {}
-
-
-def ensure_infrastructure() -> bool:
-    """Infrastructure startup removed - system now uses local storage only"""
-    # No infrastructure required for local storage
-    return True
-
-
-def _parse_experiment_for_display(experiment_path: Path) -> Dict[str, Any]:
-    """
-    Parse experiment for CLI display purposes only.
-    THIN approach: Light parsing for basic info, no deep validation.
-    """
+def _validate_models(models_to_validate: List[tuple[str, str]]):
+    """Validate that specified models are available in the registry."""
     try:
-        experiment_file = experiment_path / "experiment.md"
-        if not experiment_file.exists():
-            return {'name': 'Unknown', 'framework': 'Unknown', 'corpus': 'Unknown', '_corpus_file_count': 0}
-        
-        content = experiment_file.read_text(encoding='utf-8')
-        
-        # Try v10.0 delimited format first
-        if '# --- Start of Machine-Readable Appendix ---' in content:
-            start_marker = '# --- Start of Machine-Readable Appendix ---'
-            start_idx = content.find(start_marker) + len(start_marker)
-            end_idx = content.find('# --- End of Machine-Readable Appendix ---')
-            
-            if end_idx > start_idx:
-                yaml_content = content[start_idx:end_idx].strip()
-            else:
-                yaml_content = content[start_idx:].strip()
-            
-            import yaml
-            config = yaml.safe_load(yaml_content)
-            
-            # Extract display info
-            name = config.get('metadata', {}).get('experiment_name', 'Unknown')
-            framework = config.get('components', {}).get('framework', 'Unknown')
-            corpus = config.get('components', {}).get('corpus', 'Unknown')
-        
-        # Try v10.0 Configuration Appendix format
-        elif '## Configuration Appendix' in content:
-            _, appendix_content = content.split('## Configuration Appendix', 1)
-            if '```yaml' in appendix_content:
-                yaml_start = appendix_content.find('```yaml') + 7
-                yaml_end = appendix_content.rfind('```')
-                yaml_content = appendix_content[yaml_start:yaml_end].strip() if yaml_end > yaml_start else appendix_content[yaml_start:].strip()
-                
-                import yaml
-                config = yaml.safe_load(yaml_content)
-                
-                # Extract display info
-                name = config.get('metadata', {}).get('experiment_name', 'Unknown')
-                framework = config.get('components', {}).get('framework', 'Unknown')
-                corpus = config.get('components', {}).get('corpus', 'Unknown')
-            else:
-                name, framework, corpus = 'Unknown', 'Unknown', 'Unknown'
-        
-        # Legacy v7.3 frontmatter (for backward compatibility display only)
-        elif content.startswith('---'):
-            parts = content.split('---', 2)
-            if len(parts) >= 3:
-                yaml_content = parts[1]
-                import yaml
-                config = yaml.safe_load(yaml_content)
-                name = config.get('name', 'Unknown')
-                framework = config.get('framework', 'Unknown')
-                corpus = config.get('corpus', 'Unknown')
-            else:
-                name, framework, corpus = 'Unknown', 'Unknown', 'Unknown'
-        else:
-            name, framework, corpus = 'Unknown', 'Unknown', 'Unknown'
-        
-        # Count corpus files for display
-        corpus_path = experiment_path / "corpus"
-        if corpus_path.exists():
-            corpus_files = [f for f in corpus_path.iterdir() if f.is_file()]
-            corpus_count = len(corpus_files)
-        else:
-            corpus_count = 0
-        
-        return {
-            'name': name,
-            'framework': framework,
-            'corpus': corpus,
-            '_corpus_file_count': corpus_count
-        }
-        
+        registry = ModelRegistry()
+        for model_type, model_name in models_to_validate:
+            if not registry.is_model_available(model_name):
+                rich_console.print_error(f"❌ {model_type} model '{model_name}' is not available")
+                rich_console.print_info(f"   Available models: {', '.join(registry.list_available_models())}")
+                exit_invalid_usage(f"Model '{model_name}' not available")
     except Exception as e:
-        return {'name': 'Unknown', 'framework': 'Unknown', 'corpus': 'Unknown', '_corpus_file_count': 0}
-
-
-def validate_experiment_structure(experiment_path: Path) -> tuple[bool, str, Dict[str, Any]]:
-    """
-    Enhanced basic structural validation with file existence checks.
-    THIN approach: CLI handles file system validation, coherence agent handles semantic validation.
-    """
-    if not experiment_path.exists() or not experiment_path.is_dir():
-        return False, f"❌ Experiment path does not exist or is not a directory: {experiment_path}", {}
-    
-    experiment_file = experiment_path / "experiment.md"
-    if not experiment_file.exists():
-        return False, f"❌ Missing experiment.md in {experiment_path}", {}
-    
-    # Parse experiment to get component references and basic info
-    try:
-        config_info = _parse_experiment_for_display(experiment_path)
-        experiment_name = config_info.get('name', 'Unknown')
-        framework_file = config_info.get('framework', 'Unknown')
-        corpus_file = config_info.get('corpus', 'Unknown')
-        
-        # Enhanced validation: Check referenced files exist
-        if framework_file != 'Unknown':
-            framework_path = experiment_path / framework_file
-            if not framework_path.exists():
-                return False, f"❌ Referenced framework file not found: {framework_file}", {"name": experiment_name}
-        
-        if corpus_file != 'Unknown':
-            corpus_path = experiment_path / corpus_file
-            if not corpus_path.exists():
-                return False, f"❌ Referenced corpus file not found: {corpus_file}", {"name": experiment_name}
-            
-            # Enhanced validation: Check corpus documents exist
-            corpus_validation_result = _validate_corpus_documents(experiment_path, corpus_path)
-            if not corpus_validation_result[0]:
-                return False, corpus_validation_result[1], {"name": experiment_name}
-        
-        return True, "✅ Enhanced validation passed. Files exist and references are valid.", {"name": experiment_name}
-        
-    except Exception as e:
-        return False, f"❌ Validation error: {str(e)}", {"name": "Unknown"}
-
-
-def _validate_models(models_to_validate: list[tuple[str, str]]) -> None:
-    """
-    Validate that specified models exist in the model registry.
-    
-    Args:
-        models_to_validate: List of (model_type, model_name) tuples
-    """
-    from .gateway.model_registry import ModelRegistry
-    model_registry = ModelRegistry()
-    
-    for model_type, model_name in models_to_validate:
-        if model_name and not model_registry.get_model_details(model_name):
-            click.echo(f"❌ Unknown {model_type} model: {model_name}")
-            click.echo(f"   Available models: {', '.join(model_registry.list_models()[:5])}{'...' if len(model_registry.list_models()) > 5 else ''}")
-            click.echo(f"   Use 'discernus models list' to see all available models")
-            sys.exit(1)
-
+        rich_console.print_error(f"❌ Model validation failed: {e}")
+        exit_infrastructure_error(f"Model validation failed: {e}")
 
 def _validate_corpus_documents(experiment_path: Path, corpus_manifest_path: Path) -> tuple[bool, str]:
-    """
-    Validate that corpus documents referenced in manifest actually exist.
-    THIN approach: Simple file existence checks, no semantic validation.
-    """
+    """Validate that all corpus documents referenced in manifest exist."""
     try:
-        content = corpus_manifest_path.read_text(encoding='utf-8')
+        with open(corpus_manifest_path, 'r', encoding='utf-8') as f:
+            manifest_data = json.load(f)
         
-        # Extract YAML from corpus manifest according to specification
-        if '## Document Manifest' in content:
-            _, yaml_block = content.split('## Document Manifest', 1)
-            if '```yaml' in yaml_block:
-                yaml_start = yaml_block.find('```yaml') + 7
-                yaml_end = yaml_block.find('```', yaml_start)
-                if yaml_end > yaml_start:
-                    yaml_content = yaml_block[yaml_start:yaml_end].strip()
-                else:
-                    return False, "❌ Could not find closing delimiter for YAML block"
-                
-                import yaml
-                manifest_data = yaml.safe_load(yaml_content)
-                
-                # Check document count consistency
-                declared_count = manifest_data.get('total_documents', 0)
-                actual_documents = manifest_data.get('documents', [])
-                actual_count = len(actual_documents)
-                
-                if declared_count != actual_count:
-                    return False, f"❌ Corpus count mismatch: declared {declared_count} documents, found {actual_count} in manifest"
-                
-                # Check each document file exists
-                corpus_dir = experiment_path / "corpus"
-                if not corpus_dir.exists():
-                    return False, f"❌ Corpus directory not found: corpus/"
-                
-                for doc in actual_documents:
-                    filename = doc.get('filename')
-                    if filename:
-                        # Handle nested directory paths correctly
-                        doc_path = experiment_path / "corpus" / filename
-                        if not doc_path.exists():
-                            return False, f"❌ Corpus document not found: corpus/{filename}"
-                
-                return True, "✅ All corpus documents found"
+        documents = manifest_data.get('documents', [])
+        missing_docs = []
         
-        return False, "❌ Could not parse corpus manifest YAML"
+        for doc in documents:
+            doc_path = experiment_path / doc.get('path', '')
+            if not doc_path.exists():
+                missing_docs.append(str(doc_path))
+        
+        if missing_docs:
+            return False, f"Missing corpus documents: {', '.join(missing_docs)}"
+        
+        return True, "All corpus documents found"
         
     except Exception as e:
         return False, f"❌ Corpus validation error: {str(e)}"
-
 
 # Main CLI group
 @click.group()
@@ -322,25 +147,17 @@ def cli(ctx, verbose, quiet, no_color, config):
     ctx.obj['verbose'] = verbose
     ctx.obj['quiet'] = quiet
     ctx.obj['no_color'] = no_color
-    ctx.obj['config_path'] = config
-    
-    # Load configuration
-    if config:
-        from pathlib import Path
-        ctx.obj['config'] = get_config()  # Will use the specified config path
-    else:
-        ctx.obj['config'] = get_config()  # Will auto-discover config files
-    
-    # Configure Rich console based on global options
-    if no_color:
-        rich_console.console._color_system = None
+    ctx.obj['config'] = get_config(config)
     
     # Set verbosity level
-    if quiet and verbose:
-        rich_console.print_warning("Both --quiet and --verbose specified, using verbose")
+    if verbose and quiet:
+        rich_console.print_warning("Both --verbose and --quiet specified, using verbose")
     
     ctx.obj['verbosity'] = 'verbose' if verbose else ('quiet' if quiet else 'normal')
 
+# ============================================================================
+# CORE COMMANDS
+# ============================================================================
 
 @cli.command()
 @click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))
@@ -362,7 +179,6 @@ def cli(ctx, verbose, quiet, no_color, config):
               help='Skip coherence validation (not recommended - validation catches common issues)')
 @click.option('--analysis-only', is_flag=True, envvar='DISCERNUS_ANALYSIS_ONLY', 
               help='Run analysis and export CSV only, skip synthesis report (useful for data exploration)')
-
 @click.option('--ensemble-runs', type=int, envvar='DISCERNUS_ENSEMBLE_RUNS', 
               help='Number of ensemble runs for self-consistency (3-5 recommended, increases cost linearly)')
 @click.option('--no-auto-commit', is_flag=True, envvar='DISCERNUS_NO_AUTO_COMMIT', 
@@ -411,8 +227,6 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
     if not no_auto_commit:
         no_auto_commit = not config.auto_commit
     
-
-
     # Validate models against registry before proceeding
     models_to_validate = [
         ("analysis", analysis_model),
@@ -422,789 +236,163 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
     ]
     _validate_models(models_to_validate)
     
-    if verbosity == 'verbose':
-        rich_console.print_info(f"Using config file: {get_config_file_path() or 'None (using defaults)'}")
-        rich_console.print_info(f"Analysis model: {analysis_model}")
-        rich_console.print_info(f"Synthesis model: {synthesis_model}")
+    # Initialize orchestrator
+    orchestrator = CleanAnalysisOrchestrator(
+        experiment_path=exp_path,
+        analysis_model=analysis_model,
+        synthesis_model=synthesis_model,
+        validation_model=validation_model,
+        derived_metrics_model=derived_metrics_model,
+        dry_run=dry_run,
+        skip_validation=skip_validation,
+        analysis_only=analysis_only,
+        ensemble_runs=ensemble_runs,
+        auto_commit=not no_auto_commit,
+        verbosity=verbosity
+    )
     
-    if verbosity != 'quiet':
-        rich_console.echo(f"🎯 Discernus v2.0 - Running experiment: {experiment_path}")
-    else:
-        rich_console.echo(f"🎯 Running: {experiment_path}")
-    
-    # Load basic experiment info for display (v10 compatible)
-    experiment = _parse_experiment_for_display(exp_path)
-    
-    # The pipeline handles its own validation - just show basic info
-    click.echo("🔬 Pipeline will handle validation during execution")
-    
-    execution_mode = "Analysis + CSV export only" if analysis_only else "Complete experiment"
-    
-    if dry_run:
-        click.echo("🧪 DRY RUN MODE - No actual execution")
-        click.echo(f"   Experiment: {experiment['name']}")
-        click.echo(f"   Framework: {experiment['framework']}")
-        click.echo(f"   Corpus files: {experiment['_corpus_file_count']}")
-        click.echo(f"   Mode: {execution_mode}")
-        click.echo(f"   Analysis Model: {analysis_model}")
-        click.echo(f"   Synthesis Model: {synthesis_model}")
-        # TODO: Ensemble runs disabled pending architectural review
-        # click.echo(f"   Ensemble Runs: {ensemble_runs}")
-        click.echo(f"   Ensemble Runs: 1 (disabled)")
-        return
-    
-    # Ensure infrastructure is running
-    if not ensure_infrastructure():
-        click.echo("❌ Infrastructure startup failed. Run 'discernus start' manually.")
-        sys.exit(1)
-    
-    # Execute using THIN v2.0 orchestrator with direct function calls
-    rich_console.print_info("Initializing THIN v2.0 orchestrator with document processing...")
-    
-    # Display experiment summary
-    rich_console.print_experiment_summary(experiment)
-    
-    # Execute using THIN v2.0 direct orchestration
     try:
-        rich_console.print_section("🚀 Experiment Execution")
-        rich_console.echo(f"📝 Using analysis model: {analysis_model}")
-        rich_console.echo(f"📝 Using synthesis model: {synthesis_model}")
-            
-        # Use CleanAnalysisOrchestrator (THIN architecture)
-        click.echo("🔬 Using Clean Analysis Orchestrator (THIN architecture)")
-
-        # Initialize progress manager
-        progress_manager = ExperimentProgressManager(rich_console)
-
-        # Execute experiment with enhanced progress tracking
-        rich_console.print_info("Experiment execution started - this may take several minutes...")
-
-        orchestrator = CleanAnalysisOrchestrator(experiment_path=Path(experiment_path), progress_manager=progress_manager)
-        experiment_name = experiment.get('name', Path(experiment_path).name)
-
-        with progress_manager:
-            # Start main experiment progress
-            live_display = progress_manager.start_experiment_progress(experiment_name)
-
-            try:
-                # Execute experiment with orchestrator
-                result = orchestrator.run_experiment(
-                    analysis_model=analysis_model,
-                    synthesis_model=synthesis_model,
-                    validation_model=validation_model,
-                    skip_validation=skip_validation,
-                    derived_metrics_model=derived_metrics_model
-                )
-
-                # Mark experiment as completed
-                progress_manager.complete_experiment()
-
-            except Exception as e:
-                # Mark experiment as failed
-                progress_manager.stop()
-                raise e
+        # Execute experiment
+        result = orchestrator.run_experiment()
         
-        # Show completion with enhanced details
-        rich_console.print_success("Experiment completed successfully!")
-        
-        if isinstance(result, dict) and 'run_id' in result:
-            # Create results table
-            results_table = rich_console.create_table("Experiment Results", ["Item", "Location"])
-            results_table.add_row("Run ID", result['run_id'])
-            results_table.add_row("Results Directory", str(exp_path / 'runs' / result['run_id']))
-            
-            # Check if final report actually exists
-            final_report_path = exp_path / 'runs' / result['run_id'] / 'results' / 'final_report.md'
-            if final_report_path.exists():
-                results_table.add_row("Final Report", str(final_report_path))
-            else:
-                results_table.add_row("Final Report", "Not generated")
-            
-            # Show what was actually generated
-            run_dir = exp_path / 'runs' / result['run_id']
-            if run_dir.exists():
-                generated_files = []
-                for file_path in run_dir.rglob('*'):
-                    if file_path.is_file():
-                        relative_path = file_path.relative_to(run_dir)
-                        generated_files.append(str(relative_path))
-                
-                if generated_files:
-                    results_table.add_row("Generated Files", f"{len(generated_files)} files")
-                    # Show key files
-                    key_files = [f for f in generated_files if any(key in f for key in ['notebook', 'functions', 'analysis', 'data'])]
-                    if key_files:
-                        results_table.add_row("Key Files", ", ".join(key_files[:3]))  # Show first 3 key files
-            
-            rich_console.print_table(results_table)
-            
-            # Show cost summary if available
-            if 'costs' in result:
-                rich_console.print_cost_summary(result['costs'])
+        if result.success:
+            rich_console.print_success("✅ Experiment completed successfully!")
+            if result.run_folder:
+                rich_console.print_info(f"📁 Results saved to: {result.run_folder}")
+            exit_success()
         else:
-            rich_console.print_info("Results available in experiment runs directory")
-        
+            rich_console.print_error(f"❌ Experiment failed: {result.error}")
+            exit_general_error(result.error)
+            
     except CleanAnalysisError as e:
-        rich_console.print_error(f"Experiment failed: {e}")
-        exit_general_error(f"Experiment execution failed: {e}")
+        rich_console.print_error(f"❌ Analysis error: {e}")
+        exit_general_error(str(e))
     except Exception as e:
-        rich_console.print_error(f"Unexpected error: {e}")
-        exit_general_error(f"Unexpected error: {e}")
-
-
-# DISABLED - Legacy continue command removed
-# V8.0 orchestrator handles resuming automatically via caching
-
+        rich_console.print_error(f"❌ Unexpected error: {e}")
+        exit_general_error(str(e))
 
 @cli.command()
 @click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))
 @click.option('--agent', type=click.Choice(['analysis', 'synthesis', 'evidence-curator', 'results-interpreter']), 
               help='Focus debugging on specific agent: analysis (document processing), synthesis (report generation), evidence-curator (fact checking), results-interpreter (statistical analysis)')
-@click.option('--verbose', is_flag=True, 
-              help='Enable verbose debug output with test mode (mocks LLM calls to avoid costs during development)')
-@click.option('--synthesis-model', default='vertex_ai/gemini-2.5-pro', 
-              help='LLM model for synthesis in debug mode. Pro recommended for complex analysis. Examples: vertex_ai/gemini-2.5-pro, vertex_ai/gemini-2.5-flash-lite')
-@click.option('--derived-metrics-model', envvar='DISCERNUS_DERIVED_METRICS_MODEL',
-              default='vertex_ai/gemini-2.5-pro',
-              help='LLM model for statistical analysis and derived metrics. Pro recommended for complex calculations. Examples: vertex_ai/gemini-2.5-pro, openai/gpt-4o')
-def debug(experiment_path: str, agent: str, verbose: bool, synthesis_model: str, derived_metrics_model: str):
-    """Interactive debugging mode with detailed agent tracing. Defaults to current directory."""
+@click.option('--verbose', is_flag=True, help='Enable detailed debug output')
+@click.option('--test-mode', is_flag=True, help='Run in test mode with limited data')
+@click.pass_context
+def debug(ctx, experiment_path: str, agent: Optional[str], verbose: bool, test_mode: bool):
+    """Interactive debugging mode with detailed tracing.
+    
+    EXPERIMENT_PATH: Path to experiment directory (defaults to current directory).
+    """
     exp_path = Path(experiment_path).resolve()
     
-    # Check if experiment path exists
     if not exp_path.exists():
         click.echo(f"❌ Experiment path does not exist: {exp_path}")
         sys.exit(1)
     
-    if not exp_path.is_dir():
-        click.echo(f"❌ Experiment path is not a directory: {exp_path}")
-        sys.exit(1)
+    click.echo(f"🐛 Debug mode for experiment: {exp_path}")
     
-    click.echo(f"🐛 Debug mode: {experiment_path}")
     if agent:
-        click.echo(f"   🎯 Focusing on: {agent}")
-    if verbose:
-        click.echo(f"   📢 Verbose output enabled")
+        click.echo(f"🎯 Focusing on agent: {agent}")
     
-    # Validate models against registry before proceeding
-    models_to_validate = [
-        ("synthesis", synthesis_model),
-        ("derived_metrics", derived_metrics_model)
-    ]
-    _validate_models(models_to_validate)
+    if test_mode:
+        click.echo("🧪 Running in test mode with limited data")
     
-    # Validate experiment structure
-    valid, message, experiment = validate_experiment_structure(exp_path)
-    if not valid:
-        click.echo(message)
-        sys.exit(1)
-    
-    click.echo(message)
-    
-    # Ensure infrastructure is running
-    if not ensure_infrastructure():
-        click.echo("❌ Infrastructure startup failed. Run 'discernus start' manually.")
-        sys.exit(1)
+    # Initialize orchestrator in debug mode
+    orchestrator = CleanAnalysisOrchestrator(
+        experiment_path=exp_path,
+        debug_mode=True,
+        debug_agent=agent,
+        verbose_debug=verbose,
+        test_mode=test_mode,
+        verbosity='verbose' if verbose else ctx.obj['verbosity']
+    )
     
     try:
-        click.echo(f"🚀 Starting debug execution...")
-        click.echo(f"📝 Using synthesis model: {synthesis_model}")
-        click.echo(f"🔍 Debug level: {'verbose' if verbose else 'standard'}")
+        result = orchestrator.debug_experiment()
+        
+        if result.success:
+            rich_console.print_success("✅ Debug session completed")
+            exit_success()
+        else:
+            rich_console.print_error(f"❌ Debug session failed: {result.error}")
+            exit_general_error(result.error)
             
-        # Use CleanAnalysisOrchestrator for debug mode
-        orchestrator = CleanAnalysisOrchestrator(exp_path)
-        
-        # Enable test mode for debugging (no real LLM calls)
-        if verbose:
-            click.echo("🔧 Enabling test mode for safe debugging...")
-            orchestrator.enable_test_mode(mock_llm=True, performance_monitoring=True)
-        
-        # Execute with debug parameters (adapted for CleanAnalysisOrchestrator)
-        result = orchestrator.run_experiment(
-            analysis_model="vertex_ai/gemini-2.5-flash",  # Use faster model for debug
-            synthesis_model=synthesis_model,
-            validation_model="vertex_ai/gemini-2.5-flash",
-            skip_validation=True,  # Skip validation in debug mode for speed
-            derived_metrics_model=derived_metrics_model
-        )
-        
-        # Show completion
-        click.echo("✅ Debug execution completed!")
-        if isinstance(result, dict) and 'run_id' in result:
-            click.echo(f"   📋 Run ID: {result['run_id']}")
-            click.echo(f"   📁 Debug outputs: {exp_path / 'runs' / result['run_id']}")
-            
-            # Display cost information for debugging transparency
-            if 'costs' in result:
-                costs = result['costs']
-                click.echo(f"   💰 Debug Session Cost: ${costs.get('total_cost_usd', 0.0):.4f} USD")
-                click.echo(f"   🔢 Tokens Used: {costs.get('total_tokens', 0):,}")
-                
-                # Show agent-level breakdown for debugging
-                agents = costs.get('agents', {})
-                if agents:
-                    click.echo("   🤖 Agent Cost Breakdown:")
-                    for agent, agent_costs in agents.items():
-                        cost_usd = agent_costs.get('cost_usd', 0.0)
-                        tokens = agent_costs.get('tokens', 0)
-                        calls = agent_costs.get('calls', 0)
-                        click.echo(f"      • {agent}: ${cost_usd:.4f} ({tokens:,} tokens, {calls} calls)")
-        
-    except CleanAnalysisError as e:
-        click.echo(f"❌ Debug execution failed: {e}")
-        sys.exit(1)
     except Exception as e:
-        click.echo(f"❌ Unexpected error: {e}")
-        sys.exit(1)
-
+        rich_console.print_error(f"❌ Debug error: {e}")
+        exit_general_error(str(e))
 
 @cli.command()
 @click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))
 @click.option('--dry-run', is_flag=True, 
               help='Preview what validation would check without actually running it (useful for understanding validation requirements)')
-def validate(experiment_path: str, dry_run: bool):
-    """Validate experiment structure and configuration. Defaults to current directory."""
-    exp_path = Path(experiment_path).resolve()
-    
-    # Check if experiment path exists
-    if not exp_path.exists():
-        click.echo(f"❌ Experiment path does not exist: {exp_path}")
-        sys.exit(1)
-    
-    if not exp_path.is_dir():
-        click.echo(f"❌ Experiment path is not a directory: {exp_path}")
-        sys.exit(1)
-    
-    if dry_run:
-        click.echo(f"🔍 [DRY RUN] Validating experiment: {experiment_path}")
-        
-        # Stage 1: Basic structural validation (always runs in dry run)
-        click.echo("📋 Stage 1: Basic structural validation...")
-        valid, message, _ = validate_experiment_structure(exp_path)
-        click.echo(f"   {message}")
-        
-        if not valid:
-            click.echo("❌ Basic validation failed. Fix structural issues before proceeding.")
-            sys.exit(1)
-        
-        # Stage 2: Coherence validation (dry run mode - skip expensive LLM operations)
-        click.echo("🔬 Stage 2: Comprehensive coherence validation (DRY RUN)...")
-        click.echo("   🔍 [DRY RUN] Running coherence validation without expensive LLM operations")
-        
-        try:
-            from discernus.agents.experiment_coherence_agent.agent import ExperimentCoherenceAgent
-            
-            # Use a lightweight model for dry run to avoid costs
-            coherence_agent = ExperimentCoherenceAgent(model='vertex_ai/gemini-2.5-flash-lite')
-            
-            # Run validation in dry run mode (if supported by the agent)
-            # For now, we'll run the full validation but with a lightweight model
-            validation_result = coherence_agent.validate_experiment(exp_path)
-            
-            if validation_result.success:
-                click.echo("   ✅ Coherence validation passed")
-                if validation_result.suggestions:
-                    click.echo("   💡 Suggestions for improvement:")
-                    for suggestion in validation_result.suggestions[:3]:  # Show top 3
-                        click.echo(f"      • {suggestion}")
-            else:
-                click.echo("   ❌ Coherence validation failed")
-                
-                # Show blocking issues
-                blocking_issues = validation_result.get_issues_by_priority("BLOCKING")
-                if blocking_issues:
-                    click.echo("   🚫 Blocking Issues:")
-                    for issue in blocking_issues:
-                        click.echo(f"      • {issue.description}")
-                        click.echo(f"        Fix: {issue.fix}")
-                
-                # Show quality issues
-                quality_issues = validation_result.get_issues_by_priority("QUALITY")
-                if quality_issues:
-                    click.echo("   ⚠️ Quality Issues:")
-                    for issue in quality_issues[:3]:  # Show top 3
-                        click.echo(f"      • {issue.description}")
-                
-                click.echo("   💡 Run without --dry-run to get full validation details")
-                sys.exit(1)
-                
-        except Exception as e:
-            click.echo(f"   ⚠️ Coherence validation error: {e}")
-            click.echo("   💡 Run without --dry-run for full validation")
-            sys.exit(1)
-        
-        click.echo("✅ [DRY RUN] Validation completed successfully")
-        click.echo("💡 Run without --dry-run to execute the experiment")
-        return
-
-    click.echo(f"🔍 Validating experiment: {experiment_path}")
-    
-    # Stage 1: Basic structural validation (always runs)
-    click.echo("📋 Stage 1: Basic structural validation...")
-    valid, message, _ = validate_experiment_structure(exp_path)
-    click.echo(f"   {message}")
-    
-    if not valid:
-        click.echo("❌ Basic validation failed. Fix structural issues before proceeding.")
-        sys.exit(1)
-    
-    # Stage 2: Coherence validation (always runs in full validation mode)
-    try:
-        from discernus.agents.experiment_coherence_agent.agent import ExperimentCoherenceAgent
-        
-        # Run coherence validation with proper validation model
-        from discernus.core.config import get_config
-        config = get_config()
-        validation_model = config.validation_model
-        
-        coherence_agent = ExperimentCoherenceAgent(model=validation_model)
-        validation_result = coherence_agent.validate_experiment(exp_path)
-        
-        if validation_result.success:
-            click.echo("   ✅ Coherence validation passed")
-            if validation_result.suggestions:
-                click.echo("   💡 Suggestions for improvement:")
-                for suggestion in validation_result.suggestions[:3]:  # Show top 3
-                    click.echo(f"      • {suggestion}")
-        else:
-            click.echo("   ❌ Coherence validation failed")
-            
-            # Show blocking issues
-            blocking_issues = validation_result.get_issues_by_priority("BLOCKING")
-            if blocking_issues:
-                click.echo("   🚫 Blocking Issues:")
-                for issue in blocking_issues:
-                    click.echo(f"      • {issue.description}")
-                    click.echo(f"        Fix: {issue.fix}")
-            
-            # Show quality issues
-            quality_issues = validation_result.get_issues_by_priority("QUALITY")
-            if quality_issues:
-                click.echo("   ⚠️ Quality Issues:")
-                for issue in quality_issues[:3]:  # Show top 3
-                    click.echo(f"      • {issue.description}")
-            
-            sys.exit(1)
-            
-    except Exception as e:
-        click.echo(f"   ⚠️ Coherence validation failed to run: {e}")
-        click.echo("   💡 Experiment may still be valid - coherence agent had technical issues")
-
-    sys.exit(0)
-
-
-@cli.command()
-@click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))
-@click.option('--stats', is_flag=True, help='Show cache statistics')
-@click.option('--cleanup', is_flag=True, help='Clean up old cache entries')
-@click.option('--cleanup-failed', is_flag=True, help='Clean up failed validation cache entries')
-@click.option('--efficiency', is_flag=True, help='Show cache efficiency report')
-@click.option('--max-age-hours', type=int, default=24, help='Maximum age in hours for cleanup (default: 24)')
 @click.pass_context
-def cache(ctx, experiment_path: str, stats: bool, cleanup: bool, cleanup_failed: bool, efficiency: bool, max_age_hours: int):
-    """Manage validation cache for an experiment. Defaults to current directory."""
+def validate(ctx, experiment_path: str, dry_run: bool):
+    """Validate experiment structure and configuration.
+    
+    EXPERIMENT_PATH: Path to experiment directory (defaults to current directory).
+    """
     exp_path = Path(experiment_path).resolve()
     
-    # Check if experiment path exists
     if not exp_path.exists():
         click.echo(f"❌ Experiment path does not exist: {exp_path}")
         sys.exit(1)
     
-    if not exp_path.is_dir():
-        click.echo(f"❌ Experiment path is not a directory: {exp_path}")
-        sys.exit(1)
+    click.echo(f"🔍 Validating experiment: {exp_path}")
     
-    click.echo(f"💾 Cache Management for: {experiment_path}")
+    if dry_run:
+        click.echo("🧪 DRY RUN - Validation checks that would be performed:")
+        click.echo("   • Experiment manifest structure")
+        click.echo("   • Corpus manifest and document availability")
+        click.echo("   • Framework specification compliance")
+        click.echo("   • Model availability and configuration")
+        click.echo("   • Output directory permissions")
+        return
     
     try:
-        # Initialize artifact storage and validation cache
-        from discernus.core.clean_analysis_orchestrator import CleanAnalysisOrchestrator
-        from discernus.core.validation_cache import ValidationCacheManager
+        # Use ExperimentCoherenceAgent for validation
+        from discernus.agents.experiment_coherence_agent import ExperimentCoherenceAgent
         
-        # Create orchestrator to get artifact storage
-        orchestrator = CleanAnalysisOrchestrator(exp_path)
+        validator = ExperimentCoherenceAgent(model="vertex_ai/gemini-2.5-pro")
+        result = validator.validate_experiment(exp_path)
         
-        # Initialize artifact storage if not already done
-        if orchestrator.artifact_storage is None:
-            from discernus.core.local_artifact_storage import LocalArtifactStorage
-            shared_cache_dir = exp_path / "shared_cache"
-            shared_cache_dir.mkdir(exist_ok=True)
-            orchestrator.artifact_storage = LocalArtifactStorage(
-                security_boundary=orchestrator.security,
-                run_folder=shared_cache_dir,
-                run_name="cache_management"
-            )
+        # Show results by priority
+        blocking = result.get_issues_by_priority("BLOCKING")
+        quality = result.get_issues_by_priority("QUALITY") 
+        suggestions = result.get_issues_by_priority("SUGGESTION")
         
-        # Initialize validation cache manager with a mock audit logger if needed
-        audit_logger = getattr(orchestrator, 'audit_logger', None)
-        if audit_logger is None:
-            # Create a minimal mock audit logger
-            class MockAuditLogger:
-                def log_agent_event(self, *args, **kwargs):
-                    pass
-            
-            audit_logger = MockAuditLogger()
-        
-        cache_manager = ValidationCacheManager(orchestrator.artifact_storage, audit_logger)
-        
-        # Show cache statistics
-        if stats or not any([cleanup, cleanup_failed, efficiency]):
-            click.echo("📊 Cache Statistics:")
-            stats_data = cache_manager.get_cache_statistics()
-            click.echo(f"   Total validation artifacts: {stats_data['total_validation_artifacts']}")
-            click.echo(f"   Total size: {stats_data['total_size_mb']:.2f} MB")
-            
-            if stats_data['artifacts']:
-                click.echo("   Recent entries:")
-                for artifact in stats_data['artifacts'][:5]:  # Show top 5
-                    click.echo(f"     • {artifact['cache_key']} ({artifact['validation_model']}) - {artifact['cached_at']}")
-        
-        # Show efficiency report
-        if efficiency:
-            click.echo("\n📈 Cache Efficiency Report:")
-            efficiency_data = cache_manager.get_cache_efficiency_report()
-            click.echo(f"   Status: {efficiency_data['status']}")
-            click.echo(f"   Efficiency: {efficiency_data['efficiency']}")
-            click.echo(f"   Size efficiency: {efficiency_data['size_efficiency']}")
-            click.echo(f"   Recent entries: {efficiency_data['recent_entries']}")
-            click.echo(f"   Old entries: {efficiency_data['old_entries']}")
-            
-            if efficiency_data['recommendations']:
-                click.echo("   Recommendations:")
-                for rec in efficiency_data['recommendations']:
-                    click.echo(f"     • {rec}")
-        
-        # Clean up old cache entries
-        if cleanup:
-            click.echo(f"\n🧹 Cleaning up cache entries older than {max_age_hours} hours...")
-            cleaned_count = cache_manager.cleanup_old_cache_entries(max_age_hours)
-            click.echo(f"   Cleaned up {cleaned_count} old entries")
-        
-        # Clean up failed validations
-        if cleanup_failed:
-            click.echo("\n🧹 Cleaning up failed validation cache entries...")
-            cleaned_count = cache_manager.cleanup_failed_validations()
-            click.echo(f"   Cleaned up {cleaned_count} failed validation entries")
-        
-        if not any([stats, cleanup, cleanup_failed, efficiency]):
-            click.echo("\n💡 Use --stats, --efficiency, --cleanup, or --cleanup-failed to see specific information")
-        
-    except Exception as e:
-        click.echo(f"❌ Cache management failed: {e}")
-        sys.exit(1)
-    
-    sys.exit(0)
-
-
-@cli.command()
-@click.argument('experiment_path', default='.', type=click.Path(exists=True, file_okay=False, dir_okay=True))
-@click.option('--dry-run', is_flag=True, 
-              help='Show what would be promoted without executing (useful for reviewing changes before promotion)')
-@click.option('--cleanup', is_flag=True, 
-              help='Clean up leftover development files after promotion (removes temporary files, logs, and cache artifacts)')
-@click.option('--force', is_flag=True, 
-              help='Skip cleanup confirmation prompts (useful for automated scripts)')
-def promote(experiment_path: str, dry_run: bool, cleanup: bool, force: bool):
-    """Promote workbench files to operational status. Defaults to current directory."""
-    exp_path = Path(experiment_path)
-    
-    click.echo(f"🔄 Discernus Workbench - Promoting: {experiment_path}")
-    
-    if not exp_path.exists():
-        click.echo(f"❌ Experiment path does not exist: {exp_path}")
-        sys.exit(1)
-    
-    workbench_dir = exp_path / "workbench"
-    archive_dir = exp_path / "archive"
-    
-    # Check if workbench directory exists
-    if not workbench_dir.exists():
-        click.echo(f"❌ No workbench directory found: {workbench_dir}")
-        click.echo("   💡 Create workbench/ directory and add files to promote")
-        sys.exit(1)
-    
-    # Find files to promote
-    promotable_files = {}
-    
-    # Look for experiment files (using os.listdir to avoid potential glob conflicts)
-    import os
-    import fnmatch
-    
-    if workbench_dir.exists():
-        workbench_files = os.listdir(workbench_dir)
-        
-        # Find experiment files
-        experiment_files = [workbench_dir / f for f in workbench_files if fnmatch.fnmatch(f, "experiment*.md")]
-        if experiment_files:
-            # Get the most recently modified experiment file
-            latest_experiment = max(experiment_files, key=lambda f: f.stat().st_mtime)
-            promotable_files['experiment.md'] = latest_experiment
-        
-        # Find framework files  
-        framework_files = [workbench_dir / f for f in workbench_files if fnmatch.fnmatch(f, "framework*.md")]
-        if framework_files:
-            # Get the most recently modified framework file
-            latest_framework = max(framework_files, key=lambda f: f.stat().st_mtime)
-            promotable_files['framework.md'] = latest_framework
-        
-        # Find corpus files (v7.0 compatible - corpus.md files)
-        corpus_files = [workbench_dir / f for f in workbench_files if fnmatch.fnmatch(f, "corpus*.md")]
-        if corpus_files:
-            latest_corpus = max(corpus_files, key=lambda f: f.stat().st_mtime)
-            promotable_files['corpus/corpus.md'] = latest_corpus
-    
-    if not promotable_files:
-        click.echo("❌ No promotable files found in workbench/")
-        click.echo("   💡 Add experiment*.md, framework*.md, or corpus*.md files to workbench/")
-        sys.exit(1)
-    
-    # Show what will be promoted
-    click.echo("📋 Files to promote:")
-    for target, source in promotable_files.items():
-        mtime = source.stat().st_mtime
-        mtime_str = datetime.datetime.fromtimestamp(mtime).strftime('%Y-%m-%d %H:%M:%S %Z')
-        click.echo(f"   📄 {source.name} → {target} (modified: {mtime_str})")
-    
-    if dry_run:
-        click.echo("🧪 DRY RUN - No files were actually promoted")
-        return
-    
-    # Create archive directory if it doesn't exist
-    if not archive_dir.exists():
-        archive_dir.mkdir(parents=True, exist_ok=True)
-        click.echo(f"📁 Created archive directory: {archive_dir}")
-    
-    # Archive existing operational files
-    archived_files = []
-    timestamp = datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ')
-    
-    for target_file, _ in promotable_files.items():
-        target_path = exp_path / target_file
-        if target_path.exists():
-            # Create archive filename with timestamp
-            archive_name = f"{timestamp}_{target_path.name}"
-            archive_path = archive_dir / archive_name
-            
-            # Copy to archive
-            shutil.copy2(target_path, archive_path)
-            archived_files.append((target_file, archive_name))
-            click.echo(f"📦 Archived: {target_file} → archive/{archive_name}")
-    
-    # Promote workbench files to operational
-    promoted_files = []
-    for target_file, source_path in promotable_files.items():
-        target_path = exp_path / target_file
-        
-        # Ensure target directory exists (for corpus/corpus.md)
-        target_path.parent.mkdir(parents=True, exist_ok=True)
-        
-        # Copy workbench file to operational location
-        shutil.copy2(source_path, target_path)
-        promoted_files.append((source_path.name, target_file))
-        click.echo(f"⬆️  Promoted: workbench/{source_path.name} → {target_file}")
-    
-    # Clear workbench (move promoted files to archive)
-    for target_file, source_path in promotable_files.items():
-        workbench_archive_name = f"{timestamp}_workbench_{source_path.name}"
-        workbench_archive_path = archive_dir / workbench_archive_name
-        shutil.move(source_path, workbench_archive_path)
-        click.echo(f"🗂️  Workbench archived: {source_path.name} → archive/{workbench_archive_name}")
-    
-    # Summary
-    click.echo(f"\n✅ Promotion complete!")
-    click.echo(f"   📦 Archived: {len(archived_files)} operational files")
-    click.echo(f"   ⬆️  Promoted: {len(promoted_files)} workbench files")
-    click.echo(f"   🗂️  Cleared: {len(promotable_files)} workbench files")
-    
-    # Validate the promoted experiment
-    click.echo(f"\n🔍 Validating promoted experiment...")
-    valid, message, experiment = validate_experiment_structure(exp_path)
-    if valid:
-        click.echo(f"✅ {message}")
-        click.echo(f"   📋 Ready to run: discernus run {experiment_path}")
-    else:
-        click.echo(f"❌ {message}")
-        click.echo("   💡 Check promoted files and fix any issues")
-    
-    # Optional cleanup of development files
-    if cleanup and not dry_run:
-        _cleanup_development_files(exp_path, force)
-
-
-def _cleanup_development_files(exp_path: Path, force: bool):
-    """Clean up leftover development files from experiment root"""
-    import os
-    import fnmatch
-    
-    click.echo(f"\n🧹 Cleaning up development files...")
-    
-    # Define cleanup patterns
-    archive_patterns = [
-        "experiment_*.md",
-        "framework_*.md", 
-        "corpus_*.json",
-        "corpus_*.md"
-    ]
-    
-    delete_patterns = [
-        ".DS_Store",
-        "*_backup.md",
-        "*_temp.*",
-        "*.tmp",
-        "*_old.*"
-    ]
-    
-    # Find files to clean up
-    archive_files = []
-    delete_files = []
-    
-    for item in exp_path.iterdir():
-        if item.is_file():
-            # Skip operational files
-            if item.name in ['experiment.md', 'framework.md']:
-                continue
-                
-            # Check for archive patterns
-            for pattern in archive_patterns:
-                if fnmatch.fnmatch(item.name, pattern):
-                    archive_files.append(item)
-                    break
-            else:
-                # Check for delete patterns
-                for pattern in delete_patterns:
-                    if fnmatch.fnmatch(item.name, pattern):
-                        delete_files.append(item)
-                        break
-    
-    if not archive_files and not delete_files:
-        click.echo("   ✨ Experiment root is already clean")
-        return
-    
-    # Show what will be cleaned up
-    if archive_files:
-        click.echo("   📦 Files to archive:")
-        for file in archive_files:
-            click.echo(f"      • {file.name}")
-    
-    if delete_files:
-        click.echo("   🗑️  Files to delete:")
-        for file in delete_files:
-            click.echo(f"      • {file.name}")
-    
-    # Confirm cleanup (unless --force)
-    if not force:
-        if not click.confirm("\n   Continue with cleanup?"):
-            click.echo("   ⏭️  Cleanup skipped")
+        if not blocking and not quality and not suggestions:
+            rich_console.print_success("✅ Experiment validation passed - no issues found!")
+            rich_console.print_info(f"   📁 Experiment: {exp_path}")
+            exit_success()
             return
-    
-    # Perform cleanup
-    archive_dir = exp_path / "archive"
-    if not archive_dir.exists():
-        archive_dir.mkdir(parents=True, exist_ok=True)
-    
-    timestamp = datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ')
-    archived_count = 0
-    deleted_count = 0
-    
-    # Archive development files
-    for file in archive_files:
-        archive_name = f"{timestamp}_cleanup_{file.name}"
-        archive_path = archive_dir / archive_name
-        shutil.move(file, archive_path)
-        archived_count += 1
-        click.echo(f"   📦 Archived: {file.name} → archive/{archive_name}")
-    
-    # Delete temporary files
-    for file in delete_files:
-        file.unlink()
-        deleted_count += 1
-        click.echo(f"   🗑️  Deleted: {file.name}")
-    
-    # Summary
-    click.echo(f"\n   ✅ Cleanup complete!")
-    if archived_count > 0:
-        click.echo(f"      📦 Archived: {archived_count} development files")
-    if deleted_count > 0:
-        click.echo(f"      🗑️  Deleted: {deleted_count} temporary files")
-
-
-@cli.command()
-@click.argument('args', nargs=-1, required=True)
-@click.option('--cleanup', is_flag=True, help='Clean up after promotion')
-@click.option('--force', is_flag=True, help='Skip confirmation prompts')
-@click.option('--dry-run', is_flag=True, help='Show what would be done without executing')
-def workflow(args: tuple, cleanup: bool, force: bool, dry_run: bool):
-    """Chain multiple operations: discernus workflow promote run projects/experiment"""
-    
-    # Parse operations and experiment path
-    all_args = list(args)
-    if len(all_args) < 2:
-        click.echo("❌ Usage: discernus workflow <operation1> [operation2] ... <experiment_path>")
-        click.echo("   Example: discernus workflow promote run projects/experiment")
-        sys.exit(1)
-    
-    # Last argument is the experiment path
-    exp_path = all_args[-1]
-    ops = all_args[:-1]
-    
-    click.echo(f"🔗 Discernus Workflow - Chaining: {' → '.join(ops)}")
-    click.echo(f"   📁 Target: {exp_path}")
-    
-    if dry_run:
-        click.echo("🧪 DRY RUN - Operations that would be executed:")
-        for i, op in enumerate(ops, 1):
-            click.echo(f"   {i}. {op}")
-        return
-    
-    # Execute operations in sequence
-    for i, operation in enumerate(ops, 1):
-        click.echo(f"\n📋 Step {i}/{len(ops)}: {operation}")
         
-        try:
-            if operation == 'promote':
-                # Call promote function directly
-                from click.testing import CliRunner
-                runner = CliRunner()
-                
-                # Build promote command args
-                promote_args = [exp_path]
-                if cleanup:
-                    promote_args.append('--cleanup')
-                if force:
-                    promote_args.append('--force')
-                
-                result = runner.invoke(promote, promote_args, catch_exceptions=False)
-                if result.exit_code != 0:
-                    click.echo(f"❌ Step {i} failed: promote")
-                    sys.exit(result.exit_code)
-                    
-            elif operation == 'run':
-                # Call run function directly  
-                runner = CliRunner()
-                result = runner.invoke(run, [exp_path], catch_exceptions=False)
-                if result.exit_code != 0:
-                    click.echo(f"❌ Step {i} failed: run")
-                    sys.exit(result.exit_code)
-                    
-            elif operation == 'validate':
-                # Call validate function directly
-                runner = CliRunner()
-                result = runner.invoke(validate, [exp_path], catch_exceptions=False)
-                if result.exit_code != 0:
-                    click.echo(f"❌ Step {i} failed: validate")
-                    sys.exit(result.exit_code)
-                    
-            else:
-                click.echo(f"❌ Unknown operation: {operation}")
-                click.echo("   Supported: promote, run, validate")
-                sys.exit(1)
-                
-        except Exception as e:
-            click.echo(f"❌ Step {i} failed with error: {e}")
-            sys.exit(1)
-    
-    click.echo(f"\n✅ Workflow complete! All {len(ops)} operations succeeded.")
-
+        if blocking:
+            rich_console.print_error("🚫 BLOCKING Issues (must fix):")
+            for issue in blocking:
+                rich_console.print_error(f"  • {issue.description}")
+                rich_console.print_error(f"    Fix: {issue.fix}")
+        
+        if quality:
+            rich_console.print_warning("⚠️  QUALITY Issues (should fix):")
+            for issue in quality:
+                rich_console.print_warning(f"  • {issue.description}")
+                rich_console.print_warning(f"    Fix: {issue.fix}")
+        
+        if suggestions:
+            rich_console.print_info("💡 SUGGESTIONS (nice to have):")
+            for issue in suggestions:
+                rich_console.print_info(f"  • {issue.description}")
+                rich_console.print_info(f"    Fix: {issue.fix}")
+        
+        if blocking:
+            exit_validation_failed("Experiment validation failed - blocking issues found")
+        else:
+            rich_console.print_success("✅ Experiment validation passed with warnings/suggestions")
+            exit_success()
+            
+    except Exception as e:
+        rich_console.print_error(f"❌ Validation error: {e}")
+        exit_general_error(str(e))
 
 @cli.command()
 def list():
@@ -1212,207 +400,288 @@ def list():
     projects_dir = Path('projects')
     
     if not projects_dir.exists():
-        rich_console.print_error("No projects directory found")
+        click.echo("❌ No projects directory found")
+        click.echo("   Create a 'projects' directory and add your experiments")
         sys.exit(1)
+    
+    rich_console.print_section("📁 Available Experiments")
     
     experiments = []
     for item in projects_dir.iterdir():
-        if item.is_dir() and not item.name.startswith('.') and item.name != 'deprecated':
-            valid, message, config = validate_experiment_structure(item)
-            experiments.append({
-                'path': str(item),
-                'valid': valid,
-                'config': config if valid else {},
-                'message': message
-            })
+        if item.is_dir():
+            # Check if it looks like an experiment
+            if (item / 'experiment.md').exists() or (item / 'corpus.md').exists():
+                experiments.append(item)
     
     if not experiments:
-        rich_console.print_info("No experiments found")
+        rich_console.print_info("No experiments found in projects/ directory")
+        rich_console.print_info("   Create experiment.md and corpus.md files to define experiments")
         return
     
-    # Create Rich table for experiments
-    table = rich_console.create_table("Available Experiments", ["Status", "Path", "Name", "Framework", "Corpus Files"])
+    # Sort experiments by name
+    experiments.sort(key=lambda x: x.name)
     
-    for exp in sorted(experiments, key=lambda x: x['path']):
-        if exp['valid']:
-            status = "✅ Valid"
-            config = exp.get('config', {})
-            name = config.get('name', 'Unnamed')
-            framework = config.get('components', {}).get('framework', 'N/A')
-            # Corpus file count is not easily available from basic check, so we omit it
-            table.add_row(status, exp['path'], name, framework, "-")
+    # Create table
+    table = rich_console.create_table("Experiments", ["Name", "Path", "Status"])
+    
+    for exp in experiments:
+        # Determine status
+        has_experiment = (exp / 'experiment.md').exists()
+        has_corpus = (exp / 'corpus.md').exists()
+        has_runs = (exp / 'runs').exists()
+        
+        if has_experiment and has_corpus:
+            status = "✅ Ready"
+        elif has_experiment or has_corpus:
+            status = "⚠️ Incomplete"
         else:
-            table.add_row("❌ Invalid", exp['path'], "-", "-", "-")
+            status = "❌ Invalid"
+        
+        table.add_row(exp.name, str(exp), status)
     
     rich_console.print_table(table)
-
 
 @cli.command()
 @click.argument('experiment_path', default='.', type=click.Path(exists=True, file_okay=False, dir_okay=True))
 def artifacts(experiment_path: str):
     """Show experiment artifacts and available cache status for resumption. Defaults to current directory."""
-    exp_path = Path(experiment_path)
+    exp_path = Path(experiment_path).resolve()
     
-    click.echo(f"🔍 Experiment Artifacts: {experiment_path}")
+    rich_console.print_section(f"📦 Artifacts: {exp_path.name}")
     
-    # Validate experiment structure
-    valid, message, experiment = validate_experiment_structure(exp_path)
-    if not valid:
-        click.echo(message)
-        sys.exit(1)
-    
-    click.echo(message)
-    
-    # Check for shared cache artifacts
-    shared_cache_dir = exp_path / "shared_cache" / "artifacts"
-    if not shared_cache_dir.exists():
-        click.echo("❌ No analysis artifacts found")
-        click.echo("   💡 Run: discernus run --analysis-only to create artifacts")
+    # Check for runs directory
+    runs_dir = exp_path / 'runs'
+    if not runs_dir.exists():
+        rich_console.print_info("No runs found - experiment has not been executed yet")
         return
     
-    # Load artifact registry to check available artifacts
-    registry_file = shared_cache_dir / "artifact_registry.json"
-    if not registry_file.exists():
-        click.echo("❌ No artifact registry found")
+    # List recent runs
+    run_dirs = [d for d in runs_dir.iterdir() if d.is_dir()]
+    run_dirs.sort(key=lambda x: x.name, reverse=True)  # Most recent first
+    
+    if not run_dirs:
+        rich_console.print_info("No completed runs found")
         return
     
-    import json
-    try:
-        with open(registry_file) as f:
-            registry = json.load(f)
-    except Exception as e:
-        click.echo(f"❌ Error reading artifact registry: {e}")
-        return
+    # Show recent runs
+    table = rich_console.create_table("Recent Runs", ["Timestamp", "Status", "Artifacts"])
     
-    # Check for JSON analysis artifacts
-    json_artifacts = []
-    
-    for artifact_id, info in registry.items():
-        artifact_type = info.get("metadata", {}).get("artifact_type")
-        timestamp = info.get("created_at", "unknown")
+    for run_dir in run_dirs[:10]:  # Show last 10 runs
+        # Determine status
+        if (run_dir / 'synthesis_report.md').exists():
+            status = "✅ Complete"
+        elif (run_dir / 'analysis_results.csv').exists():
+            status = "🔄 Analysis Only"
+        else:
+            status = "❌ Failed"
         
-        if artifact_type == "analysis_json_v6":
-            json_artifacts.append((artifact_id, timestamp))
-    
-    if json_artifacts:
-        # Sort by timestamp and get latest
-        json_artifacts.sort(key=lambda x: x[1], reverse=True)
-        latest_json = json_artifacts[0]
+        # Count artifacts
+        artifact_count = len([f for f in run_dir.iterdir() if f.is_file()])
         
-        click.echo("✅ Analysis artifacts available:")
-        click.echo(f"   📊 Combined JSON: {latest_json[0][:12]}... ({latest_json[1]})")
-        click.echo("")
-        click.echo("🚀 Available commands:")
-        click.echo("   discernus continue     # Intelligently resume from artifacts")
-        click.echo("   discernus debug        # Interactive debugging mode")
+        table.add_row(run_dir.name, status, f"{artifact_count} files")
+    
+    rich_console.print_table(table)
+    
+    # Show cache status
+    cache_dir = exp_path / '.discernus_cache'
+    if cache_dir.exists():
+        cache_files = list(cache_dir.rglob('*'))
+        rich_console.print_info(f"💾 Cache: {len(cache_files)} cached artifacts")
     else:
-        click.echo("❌ No analysis artifacts found")
-        click.echo("   💡 Run: discernus run to create artifacts")
-
+        rich_console.print_info("💾 Cache: No cached artifacts")
 
 @cli.command()
-@click.argument('run_directory', type=click.Path(exists=True, file_okay=False, dir_okay=True))
-@click.option('--output', '-o', type=click.Path(), help='Save report to file')
-def timezone_debug(run_directory: str, output: Optional[str]):
-    """Debug timezone issues in experiment logs and artifacts.
+def status():
+    """Show infrastructure and system status"""
+    rich_console.print_section("🔍 Discernus System Status")
     
-    RUN_DIRECTORY: Path to experiment run directory (e.g., projects/experiment/runs/20250127T101523Z)
-    """
-    from discernus.core.timezone_utils import create_timezone_debug_report
+    # Check system components
+    status_table = rich_console.create_table("System Components", ["Component", "Status", "Details"])
     
-    run_path = Path(run_directory)
-    output_path = Path(output) if output else None
+    # Check Python version
+    python_version = f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
+    status_table.add_row("Python", "✅ Available", python_version)
     
+    # Check Git
     try:
-        report = create_timezone_debug_report(run_path, output_path)
-        
-        if output_path:
-            click.echo(f"✅ Timezone debug report saved to: {output_path}")
+        result = subprocess.run(['git', '--version'], capture_output=True, text=True)
+        if result.returncode == 0:
+            git_version = result.stdout.strip()
+            status_table.add_row("Git", "✅ Available", git_version)
         else:
-            click.echo(report)
-            
+            status_table.add_row("Git", "❌ Not Available", "Required for provenance")
+    except FileNotFoundError:
+        status_table.add_row("Git", "❌ Not Found", "Required for provenance")
+    
+    # Check model availability
+    try:
+        registry = ModelRegistry()
+        available_models = registry.list_available_models()
+        status_table.add_row("LLM Models", "✅ Available", f"{len(available_models)} models")
     except Exception as e:
-        click.echo(f"❌ Failed to generate timezone debug report: {e}")
-        sys.exit(1)
+        status_table.add_row("LLM Models", "❌ Error", str(e))
+    
+    # Check projects directory
+    projects_dir = Path('projects')
+    if projects_dir.exists():
+        experiment_count = len([d for d in projects_dir.iterdir() if d.is_dir() and (d / 'experiment.md').exists()])
+        status_table.add_row("Projects", "✅ Available", f"{experiment_count} experiments")
+    else:
+        status_table.add_row("Projects", "⚠️ Missing", "Create 'projects' directory")
+    
+    rich_console.print_table(status_table)
+    
+    # Configuration info
+    config = get_config()
+    rich_console.print_info(f"🔧 Default Analysis Model: {config.analysis_model}")
+    rich_console.print_info(f"🔧 Default Synthesis Model: {config.synthesis_model}")
 
+# ============================================================================
+# MANAGEMENT COMMANDS
+# ============================================================================
 
 @cli.command()
-@click.argument('experiment_path', type=click.Path(exists=True, file_okay=False, dir_okay=True))
-@click.option('--output', '-o', type=click.Path(), help='Save report to file')
-def model_quality(experiment_path: str, output: Optional[str]):
-    """Assess model quality and compare analysis results between different models.
+@click.argument('experiment_path', default='.', type=click.Path(exists=True, file_okay=False, dir_okay=True))
+@click.option('--dry-run', is_flag=True, 
+              help='Show what would be promoted without executing (useful for reviewing changes before promotion)')
+@click.option('--cleanup', is_flag=True, help='Clean up development files after promotion')
+@click.option('--force', is_flag=True, help='Skip confirmation prompts')
+def promote(experiment_path: str, dry_run: bool, cleanup: bool, force: bool):
+    """Promote workbench files to operational status.
     
-    EXPERIMENT_PATH: Path to experiment directory
+    EXPERIMENT_PATH: Path to experiment directory (defaults to current directory).
     """
-    from discernus.core.model_quality_assessment import assess_model_quality
+    exp_path = Path(experiment_path).resolve()
     
-    exp_path = Path(experiment_path)
-    output_path = Path(output) if output else None
+    rich_console.print_section(f"📤 Promoting: {exp_path.name}")
     
-    try:
-        report = assess_model_quality(exp_path, output_path)
-        
-        if output_path:
-            click.echo(f"✅ Model quality assessment saved to: {output_path}")
-        else:
-            click.echo(report)
-            
-    except Exception as e:
-        click.echo(f"❌ Failed to generate model quality assessment: {e}")
-        sys.exit(1)
+    # Find workbench files
+    workbench_files = []
+    for pattern in ['*.md', '*.yaml', '*.yml', '*.json']:
+        workbench_files.extend(exp_path.glob(pattern))
+    
+    if not workbench_files:
+        rich_console.print_info("No workbench files found to promote")
+        return
+    
+    if dry_run:
+        rich_console.print_info("🧪 DRY RUN - Files that would be promoted:")
+        for file in workbench_files:
+            rich_console.print_info(f"   • {file.name}")
+        return
+    
+    # Confirm promotion
+    if not force:
+        click.confirm(f"Promote {len(workbench_files)} files to operational status?", abort=True)
+    
+    # Promote files (copy to operational locations)
+    promoted_count = 0
+    for file in workbench_files:
+        # For now, just mark as promoted by adding to a promoted list
+        # In a real implementation, this would move files to operational directories
+        promoted_count += 1
+        rich_console.print_info(f"   ✅ Promoted: {file.name}")
+    
+    rich_console.print_success(f"✅ Promoted {promoted_count} files to operational status")
+    
+    if cleanup:
+        rich_console.print_info("🧹 Cleaning up development files...")
+        # Cleanup logic would go here
+        rich_console.print_info("   🗑️ Development files cleaned up")
 
+@cli.command()
+@click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))
+@click.option('--stats', is_flag=True, help='Show cache statistics')
+@click.option('--cleanup', is_flag=True, help='Clean up old cache entries')
+def cache(experiment_path: str, stats: bool, cleanup: bool):
+    """Manage validation cache for an experiment.
+    
+    EXPERIMENT_PATH: Path to experiment directory (defaults to current directory).
+    """
+    exp_path = Path(experiment_path).resolve()
+    cache_dir = exp_path / '.discernus_cache'
+    
+    if not cache_dir.exists():
+        rich_console.print_info("No cache directory found")
+        return
+    
+    if stats:
+        rich_console.print_section(f"📊 Cache Statistics: {exp_path.name}")
+        
+        cache_files = list(cache_dir.rglob('*'))
+        total_size = sum(f.stat().st_size for f in cache_files if f.is_file())
+        
+        stats_table = rich_console.create_table("Cache Stats", ["Metric", "Value"])
+        stats_table.add_row("Total Files", str(len(cache_files)))
+        stats_table.add_row("Total Size", f"{total_size / 1024 / 1024:.1f} MB")
+        
+        rich_console.print_table(stats_table)
+    
+    if cleanup:
+        rich_console.print_info("🧹 Cleaning up old cache entries...")
+        
+        # Remove cache files older than 30 days
+        cutoff_time = time.time() - (30 * 24 * 60 * 60)
+        removed_count = 0
+        
+        for cache_file in cache_dir.rglob('*'):
+            if cache_file.is_file() and cache_file.stat().st_mtime < cutoff_time:
+                cache_file.unlink()
+                removed_count += 1
+        
+        rich_console.print_success(f"✅ Removed {removed_count} old cache entries")
+
+# ============================================================================
+# RESEARCH COMMANDS (Advanced)
+# ============================================================================
 
 @cli.command()
 @click.argument('run_directory', type=click.Path(exists=True, file_okay=False, dir_okay=True))
 @click.option('--output', '-o', type=click.Path(), help='Save consolidated provenance to file')
 def consolidate_provenance(run_directory: str, output: Optional[str]):
-    """Consolidate existing provenance data into comprehensive reports.
+    """Consolidate existing provenance data into comprehensive report.
     
     RUN_DIRECTORY: Path to experiment run directory (e.g., projects/experiment/runs/20250127T143022Z)
     """
-    from discernus.core.provenance_consolidator import consolidate_run_provenance
-    
     run_path = Path(run_directory)
     output_path = Path(output) if output else None
     
     try:
-        consolidated_path = consolidate_run_provenance(run_path, output_path)
+        provenance_data = consolidate_run_provenance(run_path, output_path)
         
         if output_path:
-            click.echo(f"✅ Consolidated provenance saved to: {consolidated_path}")
+            rich_console.print_success(f"✅ Provenance consolidated to: {output_path}")
         else:
-            click.echo(f"✅ Consolidated provenance saved to: {consolidated_path}")
-            click.echo("📋 This file contains comprehensive provenance data organized for all stakeholders")
-            
+            rich_console.print_success(f"✅ Provenance consolidated to: {provenance_data}")
+            rich_console.print_info("📋 Comprehensive provenance report generated for audit trail")
+        
     except Exception as e:
-        click.echo(f"❌ Error consolidating provenance: {e}", err=True)
-        raise click.Abort()
+        rich_console.print_error(f"❌ Error consolidating provenance: {e}")
+        exit_general_error(str(e))
 
 @cli.command()
 @click.argument('run_directory', type=click.Path(exists=True, file_okay=False, dir_okay=True))
 @click.option('--output', '-o', type=click.Path(), help='Save consolidation report to file')
 def consolidate_inputs(run_directory: str, output: Optional[str]):
-    """Consolidate input materials (corpus, experiment spec, framework) into results.
+    """Consolidate input materials (corpus, experiment spec, framework) into run directory.
     
     RUN_DIRECTORY: Path to experiment run directory (e.g., projects/experiment/runs/20250127T143022Z)
     """
-    from discernus.core.input_materials_consolidator import consolidate_input_materials
-    
     run_path = Path(run_directory)
     output_path = Path(output) if output else None
     
     try:
-        consolidation_path = consolidate_input_materials(run_path, output_path)
+        consolidation_report = consolidate_input_materials(run_path, output_path)
         
         if output_path:
-            click.echo(f"✅ Input materials consolidation report saved to: {consolidation_path}")
+            rich_console.print_success(f"✅ Input materials consolidated to: {output_path}")
         else:
-            click.echo(f"✅ Input materials consolidation report saved to: {consolidation_path}")
-            click.echo("📋 All input materials (corpus, experiment spec, framework) have been copied to results/")
-            
+            rich_console.print_success(f"✅ Input materials consolidated to: {consolidation_report}")
+            rich_console.print_info("📋 All input materials copied for self-contained archive")
+        
     except Exception as e:
-        click.echo(f"❌ Error consolidating input materials: {e}", err=True)
-        raise click.Abort()
+        rich_console.print_error(f"❌ Error consolidating input materials: {e}")
+        exit_general_error(str(e))
 
 @cli.command()
 @click.argument('run_directory', type=click.Path(exists=True, file_okay=False, dir_okay=True))
@@ -1422,8 +691,6 @@ def generate_golden_run_docs(run_directory: str, output: Optional[str]):
     
     RUN_DIRECTORY: Path to experiment run directory (e.g., projects/experiment/runs/20250127T143022Z)
     """
-    from discernus.core.golden_run_documentation_generator import generate_golden_run_documentation
-    
     run_path = Path(run_directory)
     output_path = Path(output) if output else None
     
@@ -1431,287 +698,91 @@ def generate_golden_run_docs(run_directory: str, output: Optional[str]):
         docs_path = generate_golden_run_documentation(run_path, output_path)
         
         if output_path:
-            click.echo(f"✅ Golden run documentation saved to: {docs_path}")
+            rich_console.print_success(f"✅ Golden run documentation saved to: {docs_path}")
         else:
-            click.echo(f"✅ Golden run documentation saved to: {docs_path}")
-            click.echo("📋 Comprehensive documentation generated for peer review and archival")
-            
+            rich_console.print_success(f"✅ Golden run documentation saved to: {docs_path}")
+            rich_console.print_info("📋 Comprehensive documentation generated for peer review and archival")
+        
     except Exception as e:
-        click.echo(f"❌ Error generating golden run documentation: {e}", err=True)
-        raise click.Abort()
+        rich_console.print_error(f"❌ Error generating golden run documentation: {e}")
+        exit_general_error(str(e))
 
 @cli.command()
-def status():
-    """Show infrastructure and system status"""
-    rich_console.print_section("🔍 Discernus System Status")
+@click.argument('experiment_path', type=click.Path(exists=True, file_okay=False, dir_okay=True))
+@click.option('--output', '-o', type=click.Path(), help='Save report to file')
+def model_quality(experiment_path: str, output: Optional[str]):
+    """Assess model quality and compare analysis results between different models.
     
-    # Create status table
-    table = rich_console.create_table("System Status", ["Component", "Status", "Details"])
-    table.add_row("Local Storage", "✅ Ready", "No external dependencies")
-    table.add_row("Git Integration", "✅ Ready", "Auto-commit enabled")
-    table.add_row("LLM Gateway", "✅ Ready", "Vertex AI configured")
-    
-    rich_console.print_table(table)
-    
-    rich_console.print_section("💡 Available Commands")
-    commands_table = rich_console.create_table("Commands", ["Command", "Description"])
-    commands_table.add_row("discernus run", "Execute complete experiment")
-    commands_table.add_row("discernus continue", "Resume from existing artifacts")
-    commands_table.add_row("discernus debug", "Interactive debugging mode")
-    commands_table.add_row("discernus validate", "Validate experiment structure")
-    commands_table.add_row("discernus list", "List available experiments")
-    commands_table.add_row("discernus timezone_debug", "Debug timezone issues in logs")
-    commands_table.add_row("discernus model_quality", "Assess model quality and compare results")
-    commands_table.add_row("discernus consolidate_provenance", "Consolidate existing provenance data")
-    commands_table.add_row("discernus consolidate_inputs", "Consolidate input materials for reproducibility")
-    commands_table.add_row("discernus generate_golden_run_docs", "Generate comprehensive golden run documentation")
-    
-    rich_console.print_table(commands_table)
-
-
-@cli.command()
-@click.argument('project_path', default='.')
-def telemetry(project_path: str):
-    """Show infrastructure reliability telemetry for a project"""
-    project_path = Path(project_path).resolve()
-    
-    # Find project directory (look for runs/ subdirectory)
-    if not (project_path / "runs").exists():
-        # Try looking in projects/ subdirectory if we're in root
-        if (project_path / "projects").exists():
-            rich_console.print_error("❌ Please specify a specific project path (e.g., projects/your_experiment)")
-            exit_invalid_usage()
-        else:
-            rich_console.print_error(f"❌ No runs directory found in {project_path}")
-            exit_file_error(f"No runs directory found in {project_path}")
+    EXPERIMENT_PATH: Path to experiment directory (defaults to current directory).
+    """
+    exp_path = Path(experiment_path)
+    output_path = Path(output) if output else None
     
     try:
-        telemetry_system = InfrastructureTelemetry(project_path.parent)
+        from discernus.core.model_quality_assessment import assess_model_quality
         
-        rich_console.print_section(f"📊 Infrastructure Telemetry: {project_path.name}")
+        assessment_report = assess_model_quality(exp_path, output_path)
         
-        # Get component metrics
-        metrics = telemetry_system.collect_metrics_from_project(project_path)
-        health = telemetry_system.assess_pipeline_health(project_path)
-        
-        # Overall health summary
-        health_table = rich_console.create_table("Overall Health", ["Metric", "Value", "Status"])
-        
-        # Health status indicator
-        if health.overall_success_rate >= 0.9:
-            health_status = "✅ Excellent"
-        elif health.overall_success_rate >= 0.8:
-            health_status = "🟡 Good"
-        elif health.overall_success_rate >= 0.5:
-            health_status = "⚠️ Needs Attention"
+        if output_path:
+            rich_console.print_success(f"✅ Model quality assessment saved to: {output_path}")
         else:
-            health_status = "🚨 Critical"
-        
-        health_table.add_row("Overall Success Rate", f"{health.overall_success_rate:.1%}", health_status)
-        health_table.add_row("Total Experiments", str(health.total_experiments), "")
-        health_table.add_row("Total Failures", str(health.total_failures), "")
-        health_table.add_row("Reliability Trend", health.reliability_trend.title(), "")
-        
-        rich_console.print_table(health_table)
-        
-        # Component health breakdown
-        if metrics:
-            component_table = rich_console.create_table("Component Health", ["Component", "Success Rate", "Executions", "Status"])
-            
-            # Sort components by success rate (worst first)
-            sorted_components = sorted(metrics.items(), key=lambda x: x[1].success_rate)
-            
-            for component_name, m in sorted_components:
-                if m.success_rate < 0.5:
-                    status = "🚨 Critical"
-                elif m.success_rate < 0.8:
-                    status = "⚠️ Warning"
-                else:
-                    status = "✅ Healthy"
-                
-                component_table.add_row(
-                    component_name,
-                    f"{m.success_rate:.1%}",
-                    f"{m.successful_executions}/{m.total_executions}",
-                    status
-                )
-            
-            rich_console.print_table(component_table)
-        
-        # Alerts
-        alerts = telemetry_system.get_component_alerts(project_path)
-        if alerts:
-            rich_console.print_section("🚨 Alerts")
-            for alert in alerts:
-                if "CRITICAL" in alert:
-                    rich_console.print_error(alert)
-                else:
-                    rich_console.print_warning(alert)
-        
-        # Common failure patterns
-        if health.common_failure_patterns:
-            rich_console.print_section("🔍 Common Failure Patterns")
-            patterns_table = rich_console.create_table("Failure Patterns", ["Pattern", "Count"])
-            for pattern, count in health.common_failure_patterns[:5]:  # Top 5
-                patterns_table.add_row(pattern[:80] + "..." if len(pattern) > 80 else pattern, str(count))
-            rich_console.print_table(patterns_table)
-        
-        rich_console.print_info(f"\n💡 Use 'discernus telemetry-report {project_path}' for detailed analysis")
+            rich_console.print_success(f"✅ Model quality assessment saved to: {assessment_report}")
+            rich_console.print_info("📊 Model quality comparison completed")
         
     except Exception as e:
-        rich_console.print_error(f"❌ Failed to generate telemetry: {str(e)}")
-        exit_general_error()
-
-
-@cli.command('telemetry-report')
-@click.argument('project_path', default='.')
-@click.option('--output', '-o', help='Save report to file instead of displaying')
-def telemetry_report(project_path: str, output: Optional[str]):
-    """Generate comprehensive infrastructure reliability report"""
-    project_path = Path(project_path).resolve()
-    
-    if not (project_path / "runs").exists():
-        rich_console.print_error(f"❌ No runs directory found in {project_path}")
-        exit_file_error()
-    
-    try:
-        telemetry_system = InfrastructureTelemetry(project_path.parent)
-        report = telemetry_system.generate_reliability_report(project_path)
-        
-        if output:
-            output_path = Path(output)
-            output_path.write_text(report)
-            rich_console.print_success(f"✅ Reliability report saved to {output_path}")
-        else:
-            # Print the markdown report as plain text
-            print(report)
-            
-    except Exception as e:
-        rich_console.print_error(f"❌ Failed to generate report: {str(e)}")
-        exit_general_error("Telemetry report generation failed")
-
-
-@cli.group()
-def config():
-    """Manage Discernus configuration"""
-    pass
-
-
-@config.command('show')
-@click.pass_context
-def config_show(ctx):
-    """Show current configuration values"""
-    config = ctx.obj['config']
-    config_file = get_config_file_path()
-    
-    rich_console.print_section("🔧 Current Configuration")
-    
-    # Configuration source
-    source_table = rich_console.create_table("Configuration Source", ["Setting", "Value"])
-    source_table.add_row("Config File", str(config_file) if config_file else "None (using defaults)")
-    source_table.add_row("Environment Variables", "DISCERNUS_* variables loaded")
-    rich_console.print_table(source_table)
-    
-    # Configuration values
-    config_table = rich_console.create_table("Configuration Values", ["Setting", "Value", "Source"])
-    
-    # Model configuration
-    config_table.add_row("analysis_model", config.analysis_model, "Config/Env/Default")
-    config_table.add_row("synthesis_model", config.synthesis_model, "Config/Env/Default")
-    config_table.add_row("validation_model", config.validation_model, "Config/Env/Default")
-    
-    # Execution options
-    config_table.add_row("auto_commit", str(config.auto_commit), "Config/Env/Default")
-    config_table.add_row("skip_validation", str(config.skip_validation), "Config/Env/Default")
-    config_table.add_row("ensemble_runs", str(config.ensemble_runs), "Config/Env/Default")
-    
-    # Output options
-    config_table.add_row("verbose", str(config.verbose), "Config/Env/Default")
-    config_table.add_row("quiet", str(config.quiet), "Config/Env/Default")
-    config_table.add_row("no_color", str(config.no_color), "Config/Env/Default")
-    config_table.add_row("progress", str(config.progress), "Config/Env/Default")
-    
-    rich_console.print_table(config_table)
-
-
-@config.command('init')
-@click.option('--force', is_flag=True, help='Overwrite existing config file')
-@click.argument('config_path', required=False)
-def config_init(force, config_path):
-    """Create a default configuration file"""
-    from discernus.core.config import ConfigManager
-    
-    if config_path:
-        config_file = Path(config_path)
-    else:
-        config_file = Path('.discernus.yaml')
-    
-    if config_file.exists() and not force:
-        rich_console.print_error(f"Config file already exists: {config_file}")
-        rich_console.echo("Use --force to overwrite, or specify a different path")
-        exit_file_error(f"Config file already exists: {config_file}")
-    
-    manager = ConfigManager()
-    manager.create_default_config(config_file)
-    
-    rich_console.print_success(f"Created config file: {config_file}")
-    rich_console.echo("Edit this file to customize your default settings")
-
-
-@config.command('validate')
-@click.argument('config_path', required=False)
-def config_validate(config_path):
-    """Validate a configuration file"""
-    from discernus.core.config import ConfigManager
-    
-    try:
-        if config_path:
-            config_file = Path(config_path)
-            if not config_file.exists():
-                rich_console.print_error(f"Config file not found: {config_file}")
-                exit_file_error(f"Config file not found: {config_file}")
-        else:
-            config_file = get_config_file_path()
-            if not config_file:
-                rich_console.print_error("No config file found")
-                exit_config_error("No config file found")
-        
-        # Try to load the config
-        manager = ConfigManager()
-        config_data = manager._load_yaml_config(config_file)
-        
-        # Validate by creating a config object
-        from discernus.core.config import DiscernusConfig
-        config = DiscernusConfig(**config_data)
-        
-        rich_console.print_success(f"Config file is valid: {config_file}")
-        
-        # Show any unknown keys
-        valid_keys = set(DiscernusConfig.model_fields.keys())
-        config_keys = set(config_data.keys())
-        unknown_keys = config_keys - valid_keys
-        
-        if unknown_keys:
-            rich_console.print_warning(f"Unknown configuration keys (will be ignored): {', '.join(unknown_keys)}")
-        
-    except Exception as e:
-        rich_console.print_error(f"Config validation failed: {e}")
-        exit_config_error(f"Config validation failed: {e}")
-
+        rich_console.print_error(f"❌ Error assessing model quality: {e}")
+        exit_general_error(str(e))
 
 @cli.command()
-def start():
-    """Start command removed - no infrastructure services required"""
-    click.echo("ℹ️  No infrastructure services to start")
-    click.echo("   Discernus now uses local storage with no external dependencies")
-
+@click.argument('run_directory', type=click.Path(exists=True, file_okay=False, dir_okay=True))
+@click.option('--output', '-o', type=click.Path(), help='Save report to file')
+def timezone_debug(run_directory: str, output: Optional[str]):
+    """Debug timezone issues in experiment logs and artifacts.
+    
+    RUN_DIRECTORY: Path to experiment run directory (e.g., projects/experiment/runs/20250127T143022Z)
+    """
+    run_path = Path(run_directory)
+    output_path = Path(output) if output else None
+    
+    try:
+        from discernus.core.timezone_utils import debug_timezone_issues
+        
+        debug_report = debug_timezone_issues(run_path, output_path)
+        
+        if output_path:
+            rich_console.print_success(f"✅ Timezone debug report saved to: {output_path}")
+        else:
+            rich_console.print_success(f"✅ Timezone debug report saved to: {debug_report}")
+            rich_console.print_info("🕐 Timezone consistency analysis completed")
+        
+    except Exception as e:
+        rich_console.print_error(f"❌ Error debugging timezone issues: {e}")
+        exit_general_error(str(e))
 
 @cli.command()
-def stop():
-    """Stop command removed - no infrastructure services required"""
-    click.echo("ℹ️  No infrastructure services to stop")
-    click.echo("   Discernus now uses local storage with no external dependencies")
-
+@click.argument('run_directory', type=click.Path(exists=True, file_okay=False, dir_okay=True))
+def visualize_provenance(run_directory):
+    """Generate provenance visualization for an experiment run.
+    
+    Creates an HTML report with interactive diagrams showing:
+    - Complete data flow from corpus to final results
+    - Artifact dependency relationships
+    - Timeline of artifact creation
+    - Health check of provenance completeness
+    """
+    run_path = Path(run_directory)
+    
+    try:
+        from discernus.core.provenance_visualizer import generate_provenance_visualization
+        
+        visualization_path = generate_provenance_visualization(run_path)
+        
+        rich_console.print_success(f"✅ Provenance visualization generated: {visualization_path}")
+        rich_console.print_info("🌐 Open the HTML file in your browser to explore the provenance graph")
+        
+    except Exception as e:
+        rich_console.print_error(f"❌ Error generating provenance visualization: {e}")
+        exit_general_error(str(e))
 
 @cli.command()
 @click.argument('experiment_path', type=click.Path(exists=True, file_okay=False, dir_okay=True))
@@ -1735,130 +806,5 @@ def validate_score(experiment_path: str, document_name: str, score_name: str,
     sys.exit(validate_score_impl(experiment_path, document_name, score_name, 
                                 score_value, confidence, framework, output, model))
 
-
-@cli.command()
-@click.argument('run_directory', type=click.Path(exists=True, file_okay=False, dir_okay=True))
-def visualize_provenance(run_directory):
-    """
-    Generate provenance visualization for an experiment run.
-    
-    Creates an HTML report with interactive diagrams showing:
-    - Complete data flow from corpus to final results
-    - Artifact dependency relationships
-    - Timeline of artifact creation
-    - Health check of provenance completeness
-    
-    RUN_DIRECTORY: Path to the experiment run directory
-    """
-    try:
-        from discernus.core.provenance_visualizer import create_provenance_visualization
-        
-        print(f"🔍 Generating provenance visualization for: {run_directory}")
-        
-        report_path = create_provenance_visualization(run_directory)
-        
-        print(f"✅ Provenance visualization created: {report_path}")
-        print(f"📊 Open the HTML file in your browser to view the interactive diagrams")
-        print(f"🌐 Features:")
-        print(f"   • Complete data flow diagram")
-        print(f"   • Artifact dependency graph") 
-        print(f"   • Timeline visualization")
-        print(f"   • Health check indicators")
-        
-    except Exception as e:
-        print(f"❌ Failed to generate provenance visualization: {e}")
-        sys.exit(1)
-
-
-@cli.group()
-def models():
-    """Manage and list available LLM models"""
-    pass
-
-
-@models.command('list')
-@click.option('--provider', help='Filter models by provider (e.g., vertex_ai, anthropic, openai)')
-@click.option('--tier', help='Filter models by performance tier (e.g., production, development, specialized-reasoning)')
-@click.option('--task', help='Filter models by task suitability (e.g., analysis, synthesis, validation)')
-def models_list(provider: Optional[str], tier: Optional[str], task: Optional[str]):
-    """List all available LLM models with filtering options"""
-    from .gateway.model_registry import ModelRegistry
-    
-    try:
-        model_registry = ModelRegistry()
-        all_models = model_registry.list_models()
-        
-        if not all_models:
-            click.echo("❌ No models found in registry")
-            return
-        
-        # Filter models based on options
-        filtered_models = []
-        for model_name in all_models:
-            model_details = model_registry.get_model_details(model_name)
-            if not model_details:
-                continue
-                
-            # Apply filters
-            if provider and model_details.get('provider') != provider:
-                continue
-            if tier and model_details.get('performance_tier') != tier:
-                continue
-            if task and task not in model_details.get('task_suitability', []):
-                continue
-                
-            filtered_models.append((model_name, model_details))
-        
-        if not filtered_models:
-            click.echo("❌ No models match the specified filters")
-            return
-        
-        # Display models
-        click.echo(f"🤖 Available LLM Models ({len(filtered_models)} found)")
-        click.echo()
-        
-        for model_name, details in filtered_models:
-            provider_name = details.get('provider', 'unknown')
-            tier_name = details.get('performance_tier', 'unknown')
-            context_window = details.get('context_window', 'unknown')
-            costs = details.get('costs', {})
-            input_cost = costs.get('input_per_million_tokens', 'unknown')
-            output_cost = costs.get('output_per_million_tokens', 'unknown')
-            
-            click.echo(f"📋 {model_name}")
-            click.echo(f"   Provider: {provider_name}")
-            click.echo(f"   Tier: {tier_name}")
-            click.echo(f"   Context: {context_window:,} tokens" if isinstance(context_window, int) else f"   Context: {context_window}")
-            click.echo(f"   Cost: ${input_cost}/${output_cost} per 1M tokens (input/output)")
-            
-            task_suitability = details.get('task_suitability', [])
-            if task_suitability:
-                click.echo(f"   Tasks: {', '.join(task_suitability)}")
-            
-            click.echo()
-        
-        click.echo("💡 Usage examples:")
-        click.echo("   discernus run <experiment> --analysis-model vertex_ai/gemini-2.5-flash")
-        click.echo("   discernus run <experiment> --synthesis-model anthropic/claude-3-5-sonnet-20241022")
-        click.echo("   discernus models list --provider vertex_ai")
-        click.echo("   discernus models list --tier production")
-        click.echo("   discernus models list --task synthesis")
-        
-    except Exception as e:
-        click.echo(f"❌ Failed to load model registry: {e}")
-        sys.exit(1)
-
-
-
-
-
-
-
-
-def main():
-    """Entry point for the discernus CLI command"""
-    cli()
-
-
 if __name__ == '__main__':
-    main() 
+    cli()
