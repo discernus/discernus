@@ -117,6 +117,21 @@
 - Framework operationalization explicitly explained for each dimension
 - Analysis process from raw text to scores clearly documented
 - Sufficient detail provided for independent replication
+
+### Issue #303: Pydantic Serialization Warning in Audit Logging
+**Task**: Fix Pydantic serialization warnings when LiteLLM response objects are logged
+**Problem**: UserWarning appears during audit logging: "Expected 9 fields but got 5: Expected `Message` - serialized value may not be as expected"
+**Impact**: Log noise, no data corruption or functionality issues
+**Root Cause**: LiteLLM response objects don't perfectly align with Pydantic model expectations during JSON serialization
+**Priority**: LOW - Cosmetic issue, no production impact
+**Acceptance Criteria**:
+- Eliminate Pydantic serialization warnings in audit logs
+- Maintain data integrity and functionality
+- Preserve complete audit trail accuracy
+**Solution Options**:
+- Custom JSON serializer for LiteLLM objects in audit logger
+- Convert LiteLLM objects to plain dicts before logging
+- Suppress specific Pydantic warnings for LiteLLM objects
 - Academic readers can understand methodology without expert knowledge
 
 ### Issue #301: Implement Defensive Prompting to Constrain LLM Over-Generalization

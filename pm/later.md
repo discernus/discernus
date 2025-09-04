@@ -733,3 +733,152 @@
 - Add profile selection via CLI and configuration files
 
 **Timeline**: Future enhancement when user base grows and diverse workflow needs emerge
+
+---
+
+## Advanced Validation and Analysis Components - Post-Release
+
+**Source**: Research Transparency Stakeholder Requirements Analysis  
+**Priority**: Medium (Post-Release)  
+**Context**: These components would enhance the system's analytical capabilities but are not required for the core alpha proof of concept
+
+### Cross-Model Validation Framework
+- **cross_model_validation.json** - Cross-model comparison results
+- **prompt_sensitivity_analysis.json** - Prompt variation testing
+- **framework_robustness_tests.json** - Framework variation testing
+- **human_ai_agreement.json** - Human-LLM comparison benchmarks
+
+### Advanced Testing and Robustness
+- **robustness_tests/** - Adversarial examples, sensitivity analysis
+- **variations/** - Alternative model/prompt configurations
+
+### Enhanced Provenance and History
+- **run_history.json** - All experiment runs (successes & failures)
+- **version_control_log.json** - Framework/corpus modification logs
+- **source_authentication.json** - Corpus provenance & authenticity
+- **citation_evidence_mapping.json** - Citation-to-evidence mapping
+
+### Advanced Statistical Analysis
+- **effect_sizes.json** - Effect size calculations
+- **power_analysis.json** - Statistical power analysis
+- **multiple_comparisons.json** - Multiple comparison corrections
+- **confidence_intervals.json** - Confidence interval calculations
+- **meta_analysis.json** - Meta-analytical results
+
+### Context
+These components represent advanced analytical capabilities that would significantly enhance the system's research validation capabilities. However, they are not essential for demonstrating the core proof of concept that Discernus already delivers:
+
+- ✅ **Complete audit trails** with every LLM interaction logged
+- ✅ **Full provenance chains** with cryptographic integrity
+- ✅ **Comprehensive stakeholder satisfaction** (all 5 audiences covered)
+- ✅ **Academic-grade transparency** exceeding traditional methods
+
+The current system already provides the essential transparency and reproducibility that exceeds traditional academic standards. These advanced components would be valuable additions for researchers conducting extensive validation studies, but they don't change the fundamental value proposition of the platform.
+
+---
+
+## Research Transparency Stakeholder Requirements - Post-Alpha Items
+
+**Source**: Research Transparency Stakeholder Requirements  
+**Priority**: Medium (Post-Alpha)  
+**Context**: Items moved from High Priority (Alpha Blockers) to maintain focus on core alpha requirements
+
+### Multi-Run Reliability System
+
+**Priority**: Medium (Post-Alpha)  
+**Source**: Research Transparency Stakeholder Requirements
+
+#### Requirements:
+- Automated Cronbach's α calculation
+- Cross-run consistency metrics  
+- Reliability threshold warnings
+
+#### Context:
+This was moved from High Priority (Alpha Blockers) because it's not essential for initial alpha release, but is important for academic credibility and methodology validation.
+
+---
+
+### Cross-Model Validation Framework
+
+**Priority**: Medium (Post-Alpha)  
+**Source**: Research Transparency Stakeholder Requirements
+
+#### Requirements:
+- Multi-provider comparison studies
+- Model selection justification tools
+- Ensemble agreement metrics
+
+#### Context:
+Important for addressing LLM methodology skeptics and ensuring research integrity across different model providers.
+
+---
+
+### Human-LLM Validation Studies
+
+**Priority**: Medium (Post-Alpha)  
+**Source**: Research Transparency Stakeholder Requirements
+
+#### Requirements:
+- Benchmark against human coders
+- Agreement correlation analysis
+- Bias comparison studies
+
+#### Context:
+Critical for academic acceptance and demonstrating that LLM methods are superior to traditional "3 undergrads, pizza, and κ = 0.67" approaches.
+
+---
+
+### Robustness Testing Suite
+
+**Priority**: Medium (Post-Alpha)  
+**Source**: Research Transparency Stakeholder Requirements
+
+#### Requirements:
+- Adversarial example generation
+- Prompt sensitivity analysis
+- Framework variation testing
+
+#### Context:
+Essential for demonstrating methodological rigor and defending against criticism of LLM-based research methods.
+
+---
+
+### Advanced Statistical Methods
+
+**Priority**: Low (Future Enhancement)  
+**Source**: Research Transparency Stakeholder Requirements
+
+#### Requirements:
+- Multiple comparison corrections
+- Effect size calculations
+- Power analysis tools
+
+#### Context:
+Important for publication-quality research but not blocking for alpha release.
+
+---
+
+### Publication Export Tools
+
+**Priority**: Low (Future Enhancement)  
+**Source**: Research Transparency Stakeholder Requirements
+
+#### Requirements:
+- LaTeX-ready tables
+- Citation formatting
+- Supplementary material generation
+
+#### Context:
+Nice-to-have for streamlining academic publication workflow.
+
+---
+
+### Notes
+
+- All items moved from High Priority (Alpha Blockers) to maintain focus on core alpha requirements
+- These represent the "academic excellence" features that will make Discernus methodology unassailable
+- Should be prioritized after alpha release based on user feedback and academic reviewer requirements
+- Each item directly addresses stakeholder concerns from the Research Transparency document
+
+**Last Updated**: 2025-01-27  
+**Status**: Post-Alpha Planning
