@@ -806,5 +806,9 @@ def validate_score(experiment_path: str, document_name: str, score_name: str,
     sys.exit(validate_score_impl(experiment_path, document_name, score_name, 
                                 score_value, confidence, framework, output, model))
 
-if __name__ == '__main__':
+def main():
+    """Main entry point for the discernus CLI."""
     cli()
+
+if __name__ == '__main__':
+    main()
