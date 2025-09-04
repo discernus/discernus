@@ -733,31 +733,6 @@ def model_quality(experiment_path: str, output: Optional[str]):
         rich_console.print_error(f"❌ Error assessing model quality: {e}")
         exit_general_error(str(e))
 
-@cli.command()
-@click.argument('run_directory', type=click.Path(exists=True, file_okay=False, dir_okay=True))
-@click.option('--output', '-o', type=click.Path(), help='Save report to file')
-def timezone_debug(run_directory: str, output: Optional[str]):
-    """Debug timezone issues in experiment logs and artifacts.
-    
-    RUN_DIRECTORY: Path to experiment run directory (e.g., projects/experiment/runs/20250127T143022Z)
-    """
-    run_path = Path(run_directory)
-    output_path = Path(output) if output else None
-    
-    try:
-        from discernus.core.timezone_utils import debug_timezone_issues
-        
-        debug_report = debug_timezone_issues(run_path, output_path)
-        
-        if output_path:
-            rich_console.print_success(f"✅ Timezone debug report saved to: {output_path}")
-        else:
-            rich_console.print_success(f"✅ Timezone debug report saved to: {debug_report}")
-            rich_console.print_info("🕐 Timezone consistency analysis completed")
-        
-    except Exception as e:
-        rich_console.print_error(f"❌ Error debugging timezone issues: {e}")
-        exit_general_error(str(e))
 
 @cli.command()
 @click.argument('run_directory', type=click.Path(exists=True, file_okay=False, dir_okay=True))
