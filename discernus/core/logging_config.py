@@ -26,6 +26,9 @@ import logging
 # Remove default loguru handler
 logger.remove()
 
+# Global flag to prevent multiple executions
+_litellm_suppression_configured = False
+
 def ensure_litellm_debug_suppression():
     """
     Comprehensive suppression of all LiteLLM debug output including proxy components.
@@ -37,6 +40,13 @@ def ensure_litellm_debug_suppression():
     
     Must be called before any LiteLLM imports.
     """
+    global _litellm_suppression_configured
+    
+    # Prevent multiple executions
+    if _litellm_suppression_configured:
+        return
+    
+    _litellm_suppression_configured = True
     # Environment Variables - Set to ERROR level for maximum suppression
     env_vars = {
         # Core LiteLLM settings - ERROR level instead of WARNING
@@ -110,8 +120,8 @@ def ensure_litellm_debug_suppression():
     # Use print instead of logger since logger isn't configured yet
     print("✅ Comprehensive LiteLLM debug suppression configured")
 
-# Ensure LiteLLM debug suppression is configured
-ensure_litellm_debug_suppression()
+# LiteLLM debug suppression is now called explicitly from CLI and LLM Gateway
+# to prevent multiple executions and duplicate messages
 
 def setup_logging(
     experiment_path: Path,
