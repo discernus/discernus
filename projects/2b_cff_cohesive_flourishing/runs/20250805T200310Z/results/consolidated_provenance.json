@@ -1,0 +1,224 @@
+{
+  "consolidation_metadata": {
+    "consolidated_at": "2025-09-04T03:41:05.254898+00:00",
+    "run_directory": "projects/2b_cff_cohesive_flourishing/runs/20250805T200310Z",
+    "consolidator_version": "1.0.0"
+  },
+  "model_provenance": {
+    "models_used": [
+      {
+        "timestamp": "2025-08-05T20:03:10.855709+00:00",
+        "model": "vertex_ai/gemini-2.5-flash-lite",
+        "context": "batch_analysis_start"
+      },
+      {
+        "timestamp": "2025-08-05T20:03:10.857550+00:00",
+        "model": "vertex_ai/gemini-2.5-flash-lite",
+        "context": "batch_analysis_start"
+      },
+      {
+        "timestamp": "2025-08-05T20:03:10.859311+00:00",
+        "model": "vertex_ai/gemini-2.5-flash-lite",
+        "context": "batch_analysis_start"
+      },
+      {
+        "timestamp": "2025-08-05T20:03:10.861026+00:00",
+        "model": "vertex_ai/gemini-2.5-flash-lite",
+        "context": "batch_analysis_start"
+      },
+      {
+        "timestamp": "2025-08-05T20:03:10.862854+00:00",
+        "model": "vertex_ai/gemini-2.5-flash-lite",
+        "context": "batch_analysis_start"
+      },
+      {
+        "timestamp": "2025-08-05T20:03:10.880908+00:00",
+        "model": "vertex_ai/gemini-2.5-flash-lite",
+        "context": "initialization"
+      },
+      {
+        "timestamp": "2025-08-05T20:03:12.981597+00:00",
+        "model": "vertex_ai/gemini-2.5-flash-lite",
+        "context": "initialization"
+      },
+      {
+        "timestamp": "2025-08-05T20:03:14.238779+00:00",
+        "model": "vertex_ai/gemini-2.5-flash-lite",
+        "context": "initialization"
+      },
+      {
+        "timestamp": "2025-08-05T20:03:15.442502+00:00",
+        "model": "vertex_ai/gemini-2.5-flash-lite",
+        "context": "initialization"
+      },
+      {
+        "timestamp": "2025-08-05T20:03:16.677312+00:00",
+        "model": "vertex_ai/gemini-2.5-flash-lite",
+        "context": "initialization"
+      },
+      {
+        "timestamp": "2025-08-05T20:03:18.177156+00:00",
+        "model": "vertex_ai/gemini-2.5-flash-lite",
+        "context": "initialization"
+      }
+    ],
+    "model_switches": [],
+    "fallback_events": [],
+    "model_performance": {},
+    "unique_models": [
+      "vertex_ai/gemini-2.5-flash-lite"
+    ],
+    "total_model_interactions": 11
+  },
+  "execution_timeline": {
+    "session_start": "2025-08-05T20:03:10.842538+00:00",
+    "session_end": "2025-08-05T20:03:58.795945+00:00",
+    "total_duration": 47.953407,
+    "pipeline_stages": [],
+    "key_events": [
+      {
+        "event": "",
+        "timestamp": "2025-08-05T20:03:58.786955+00:00",
+        "data": {}
+      }
+    ]
+  },
+  "cost_analysis": {
+    "total_cost": 0.0,
+    "cost_by_model": {
+      "unknown": 0.0
+    },
+    "cost_by_stage": {
+      "unknown": 0.0
+    },
+    "cost_timeline": [
+      {
+        "timestamp": "2025-08-05T20:03:22.836101+00:00",
+        "cost": 0.0,
+        "model": "unknown",
+        "stage": "unknown"
+      },
+      {
+        "timestamp": "2025-08-05T20:03:29.650411+00:00",
+        "cost": 0.0,
+        "model": "unknown",
+        "stage": "unknown"
+      },
+      {
+        "timestamp": "2025-08-05T20:03:38.318260+00:00",
+        "cost": 0.0,
+        "model": "unknown",
+        "stage": "unknown"
+      },
+      {
+        "timestamp": "2025-08-05T20:03:58.766682+00:00",
+        "cost": 0.0,
+        "model": "unknown",
+        "stage": "unknown"
+      }
+    ],
+    "cost_breakdown": {}
+  },
+  "error_summary": {
+    "total_errors": 1,
+    "error_types": {
+      "symlink_creation_error": 1
+    },
+    "error_timeline": [
+      {
+        "timestamp": "2025-08-05T20:03:58.786955+00:00",
+        "error_type": "symlink_creation_error",
+        "message": "Failed to create symlink /Volumes/code/discernus/projects/2b_cff_cohesive_flourishing/runs/20250805T200310Z/artifacts/unknown/combined_evidence_v6_8d28d126: [Errno 2] No such file or directory: '../../../../shared_cache/artifacts/combined_evidence_v6_8d28d126' -> '/Volumes/code/discernus/projects/2b_cff_cohesive_flourishing/runs/20250805T200310Z/artifacts/unknown/combined_evidence_v6_8d28d126'",
+        "context": {}
+      }
+    ],
+    "critical_errors": [],
+    "recovered_errors": []
+  },
+  "artifact_integrity": {
+    "total_artifacts": 6,
+    "artifact_types": {
+      "unknown": 6
+    },
+    "integrity_checks": [],
+    "missing_artifacts": [],
+    "corrupted_artifacts": []
+  },
+  "stakeholder_summaries": {
+    "primary_researcher": {
+      "executive_summary": "Complete experiment execution with full transparency",
+      "key_metrics": {
+        "total_duration": "See execution_timeline.total_duration",
+        "total_cost": "See cost_analysis.total_cost",
+        "models_used": "See model_provenance.unique_models",
+        "artifacts_generated": "See artifact_integrity.total_artifacts"
+      },
+      "navigation_guide": [
+        "results/final_report.md - Main findings",
+        "results/scores.csv - Quantitative results",
+        "results/evidence.csv - Supporting evidence",
+        "artifacts/provenance.json - Complete audit trail"
+      ]
+    },
+    "internal_reviewer": {
+      "executive_summary": "Systematic validation of research methodology and execution",
+      "key_metrics": {
+        "error_rate": "See error_summary.total_errors",
+        "model_consistency": "See model_provenance.model_switches",
+        "cost_efficiency": "See cost_analysis.cost_breakdown",
+        "integrity_status": "See artifact_integrity.integrity_checks"
+      },
+      "navigation_guide": [
+        "logs/system.jsonl - System execution log",
+        "logs/agents.jsonl - Agent execution details",
+        "artifacts/analysis_results/ - Raw AI outputs",
+        "artifacts/statistical_results/ - Mathematical work"
+      ]
+    },
+    "replication_researcher": {
+      "executive_summary": "Complete reproducibility package with full provenance",
+      "key_metrics": {
+        "reproducibility_score": "100% - All inputs and outputs preserved",
+        "dependency_chain": "See artifacts/provenance.json",
+        "model_versions": "See model_provenance.models_used",
+        "execution_environment": "See manifest.json"
+      },
+      "navigation_guide": [
+        "manifest.json - Complete execution record",
+        "artifacts/inputs/ - Framework and corpus",
+        "logs/ - Complete execution logs",
+        "README.md - Navigation guide"
+      ]
+    },
+    "fraud_auditor": {
+      "executive_summary": "Cryptographic integrity verification and audit trail",
+      "key_metrics": {
+        "integrity_verified": "See artifact_integrity.integrity_checks",
+        "tamper_evidence": "See error_summary.critical_errors",
+        "provenance_chain": "See artifacts/provenance.json",
+        "git_commit_hash": "See manifest.json"
+      },
+      "navigation_guide": [
+        "artifacts/provenance.json - Dependency chain",
+        "logs/system.jsonl - System events",
+        "manifest.json - Execution record",
+        "artifacts/ - All artifacts with hashes"
+      ]
+    },
+    "llm_skeptic": {
+      "executive_summary": "Complete transparency into AI system behavior and outputs",
+      "key_metrics": {
+        "model_transparency": "See model_provenance.models_used",
+        "output_verification": "See artifacts/analysis_results/",
+        "prompt_engineering": "See artifacts/analysis_plans/",
+        "bias_assessment": "See model_provenance.model_switches"
+      },
+      "navigation_guide": [
+        "logs/llm_interactions.jsonl - Complete AI conversations",
+        "artifacts/analysis_results/ - Raw AI outputs",
+        "artifacts/analysis_plans/ - AI reasoning process",
+        "artifacts/evidence/ - Evidence curation process"
+      ]
+    }
+  }
+}

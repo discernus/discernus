@@ -1,0 +1,63 @@
+{
+  "consolidation_metadata": {
+    "consolidated_at": "2025-09-04T03:45:26.014211+00:00",
+    "run_directory": "projects/2b_cff_cohesive_flourishing/runs/20250805T200310Z",
+    "experiment_path": "projects/2b_cff_cohesive_flourishing",
+    "consolidator_version": "1.0.0"
+  },
+  "corpus_materials": {
+    "corpus_files_copied": 6,
+    "corpus_manifest_copied": true,
+    "corpus_files": [
+      {
+        "filename": "trump_sotu_2017.txt",
+        "size_bytes": 30280,
+        "copied_to": "projects/2b_cff_cohesive_flourishing/runs/20250805T200310Z/results/corpus/trump_sotu_2017.txt"
+      },
+      {
+        "filename": "Trump_Inaugural_2017.txt",
+        "size_bytes": 8954,
+        "copied_to": "projects/2b_cff_cohesive_flourishing/runs/20250805T200310Z/results/corpus/Trump_Inaugural_2017.txt"
+      },
+      {
+        "filename": "Trump_SOTU_2018.txt",
+        "size_bytes": 29242,
+        "copied_to": "projects/2b_cff_cohesive_flourishing/runs/20250805T200310Z/results/corpus/Trump_SOTU_2018.txt"
+      },
+      {
+        "filename": "Trump_SOTU_2025.txt",
+        "size_bytes": 56275,
+        "copied_to": "projects/2b_cff_cohesive_flourishing/runs/20250805T200310Z/results/corpus/Trump_SOTU_2025.txt"
+      },
+      {
+        "filename": "Trump_SOTU_2019.txt",
+        "size_bytes": 34726,
+        "copied_to": "projects/2b_cff_cohesive_flourishing/runs/20250805T200310Z/results/corpus/Trump_SOTU_2019.txt"
+      },
+      {
+        "filename": "Trump_SOTU_2020.txt",
+        "size_bytes": 35140,
+        "copied_to": "projects/2b_cff_cohesive_flourishing/runs/20250805T200310Z/results/corpus/Trump_SOTU_2020.txt"
+      }
+    ],
+    "errors": []
+  },
+  "experiment_specification": {
+    "experiment_spec_copied": true,
+    "experiment_spec_path": "projects/2b_cff_cohesive_flourishing/runs/20250805T200310Z/results/experiment.md",
+    "errors": []
+  },
+  "framework_materials": {
+    "framework_copied": true,
+    "framework_path": "projects/2b_cff_cohesive_flourishing/runs/20250805T200310Z/results/cff_v10.md",
+    "framework_name": "cff_v10.md",
+    "errors": []
+  },
+  "consolidation_summary": {
+    "total_input_files": 9,
+    "successfully_consolidated": 9,
+    "consolidation_status": "complete",
+    "missing_critical_files": [],
+    "reproducibility_score": 100
+  }
+}

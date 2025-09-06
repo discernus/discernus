@@ -1,0 +1,67 @@
+{
+  "timestamp": "2025-09-04 10:21:56",
+  "summary": {
+    "total_tests": 8,
+    "successful_tests": 7,
+    "failed_tests": 1,
+    "success_rate": 87.5
+  },
+  "results": [
+    {
+      "command": "--help",
+      "success": true,
+      "output": "\u2705 Comprehensive LiteLLM debug suppression configured\nUsage: discernus [OPTIONS] COMMAND [ARGS]...\n\n  Discernus - Computational Social Science Research Platform (THIN v2.0)\n\n  Quick Start:\n    python3 -m discernus.cli validate projects/my_experiment/  # Validate experiment first\n    python3 -m discernus.cli run projects/my_experiment/       # Run complete experiment\n    python3 -m discernus.cli debug projects/my_experiment/     # Debug with detailed tracing\n\n  Common Examples:\n    python3 -m discernus.cli run                          # Run experiment in current directory\n    python3 -m discernus.cli run --dry-run                # Preview what would be executed\n    python3 -m discernus.cli run --analysis-only          # Run analysis only, skip synthesis\n    python3 -m discernus.cli validate --dry-run           # Preview validation checks\n    python3 -m discernus.cli debug --verbose --agent analysis  # Debug analysis agent with test mode\n    python3 -m discernus.cli promote --cleanup            # Promote and clean up development files\n    python3 -m discernus.cli artifacts                    # Show available cache artifacts\n\n  Model Selection Tips:\n    --analysis-model vertex_ai/gemini-2.5-flash          # Fast analysis (default)\n    --synthesis-model vertex_ai/gemini-2.5-pro           # High-quality synthesis (default)\n    --validation-model vertex_ai/gemini-2.5-flash-lite   # Fast validation (default)\n\nOptions:\n  --version      Show the version and exit.\n  -v, --verbose  Enable verbose output\n  -q, --quiet    Enable quiet output (minimal)\n  --no-color     Disable colored output\n  --config PATH  Path to config file\n  --help         Show this message and exit.\n\nCommands:\n  archive    Create a complete golden run archive for research transparency.\n  artifacts  Show experiment artifacts and available cache status for...\n  cache      Manage validation cache for an experiment.\n  debug      Interactive debugging mode with detailed tracing.\n  list       List available experiments\n  promote    Promote workbench files to operational status.\n  run        Execute complete experiment (analysis + synthesis).\n  status     Show infrastructure and system status\n  validate   Validate experiment structure and configuration.\n",
+      "error": "",
+      "duration": 4.912959098815918
+    },
+    {
+      "command": "--version",
+      "success": true,
+      "output": "\u2705 Comprehensive LiteLLM debug suppression configured\nDiscernus, version 0.2.0\n",
+      "error": "",
+      "duration": 3.629992961883545
+    },
+    {
+      "command": "status",
+      "success": true,
+      "output": "\u2705 Comprehensive LiteLLM debug suppression configured\n\n\ud83d\udd0d Discernus System Status\n                                       System Components                                       \n\u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513\n\u2503 Component  \u2503 Status       \u2503 Details                                                         \u2503\n\u2521\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2547\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2547\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2529\n\u2502 Python     \u2502 \u2705 Available \u2502 3.13.5                                                          \u2502\n\u2502 Git        \u2502 \u2705 Available \u2502 git version 2.39.5 (Apple Git-154)                              \u2502\n\u2502 LLM Models \u2502 \u274c Error     \u2502 'ModelRegistry' object has no attribute 'list_available_models' \u2502\n\u2502 Projects   \u2502 \u2705 Available \u2502 16 experiments                                                  \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n\u2139\ufe0f  \ud83d\udd27 Default Analysis Model: vertex_ai/gemini-2.5-flash\n\u2139\ufe0f  \ud83d\udd27 Default Synthesis Model: vertex_ai/gemini-2.5-pro\n",
+      "error": "",
+      "duration": 4.20171594619751
+    },
+    {
+      "command": "list",
+      "success": true,
+      "output": "\u2705 Comprehensive LiteLLM debug suppression configured\n\n\ud83d\udcc1 Available Experiments\n                                             Experiments                                             \n\u250f\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2533\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2513\n\u2503 Name                                \u2503 Path                                         \u2503 Status       \u2503\n\u2521\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2547\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2547\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2529\n\u2502 1a_caf_civic_character              \u2502 projects/1a_caf_civic_character              \u2502 \u2705 Ready     \u2502\n\u2502 1b_chf_constitutional_health        \u2502 projects/1b_chf_constitutional_health        \u2502 \u2705 Ready     \u2502\n\u2502 1c_ecf_emotional_climate            \u2502 projects/1c_ecf_emotional_climate            \u2502 \u2705 Ready     \u2502\n\u2502 2a_populist_rhetoric_study          \u2502 projects/2a_populist_rhetoric_study          \u2502 \u2705 Ready     \u2502\n\u2502 2b_cff_cohesive_flourishing         \u2502 projects/2b_cff_cohesive_flourishing         \u2502 \u2705 Ready     \u2502\n\u2502 2c_political_moral_analysis         \u2502 projects/2c_political_moral_analysis         \u2502 \u2705 Ready     \u2502\n\u2502 2d_trump_populism                   \u2502 projects/2d_trump_populism                   \u2502 \u26a0\ufe0f Incomplete \u2502\n\u2502 bolsonaro_2018                      \u2502 projects/bolsonaro_2018                      \u2502 \u2705 Ready     \u2502\n\u2502 business_ethics_experiment          \u2502 projects/business_ethics_experiment          \u2502 \u2705 Ready     \u2502\n\u2502 entman_framing_experiment           \u2502 projects/entman_framing_experiment           \u2502 \u2705 Ready     \u2502\n\u2502 lakoff_framing_experiment           \u2502 projects/lakoff_framing_experiment           \u2502 \u2705 Ready     \u2502\n\u2502 micro_test_experiment               \u2502 projects/micro_test_experiment               \u2502 \u2705 Ready     \u2502\n\u2502 mlkmx                               \u2502 projects/mlkmx                               \u2502 \u2705 Ready     \u2502\n\u2502 nano_test_experiment                \u2502 projects/nano_test_experiment                \u2502 \u2705 Ready     \u2502\n\u2502 vanderveen_presidential_pdaf        \u2502 projects/vanderveen_presidential_pdaf        \u2502 \u2705 Ready     \u2502\n\u2502 vanderveen_presidential_pdaf_phase2 \u2502 projects/vanderveen_presidential_pdaf_phase2 \u2502 \u2705 Ready     \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n",
+      "error": "",
+      "duration": 3.786882162094116
+    },
+    {
+      "command": "validate /var/folders/s8/5pq48bwj2jd9s2fwyh7g_y300000gn/T/discernus_test_79y_fjxk/test_experiment --dry-run",
+      "success": true,
+      "output": "\u2705 Comprehensive LiteLLM debug suppression configured\n\ud83d\udd0d Validating experiment: /private/var/folders/s8/5pq48bwj2jd9s2fwyh7g_y300000gn/T/discernus_test_79y_fjxk/test_experiment\n\ud83e\uddea DRY RUN - Validation checks that would be performed:\n   \u2022 Experiment manifest structure\n   \u2022 Corpus manifest and document availability\n   \u2022 Framework specification compliance\n   \u2022 Model availability and configuration\n   \u2022 Output directory permissions\n",
+      "error": "",
+      "duration": 5.117920160293579
+    },
+    {
+      "command": "validate /var/folders/s8/5pq48bwj2jd9s2fwyh7g_y300000gn/T/discernus_test_79y_fjxk/test_experiment",
+      "success": false,
+      "output": "\u2705 Comprehensive LiteLLM debug suppression configured\n\ud83d\udd0d Validating experiment: /private/var/folders/s8/5pq48bwj2jd9s2fwyh7g_y300000gn/T/discernus_test_79y_fjxk/test_experiment\n\u274c \ud83d\udeab BLOCKING Issues (must fix):\n\u274c   \u2022 Failed to load experiment artifacts: No corpus manifest found in /private/var/folders/s8/5pq48bwj2jd9s2fwyh7g_y300000gn/T/discernus_test_79y_fjxk/test_experiment. \nExpected one of: corpus.md, corpus_manifest.md, corpus_v8.md\n\u274c     Fix: Check experiment directory structure and file permissions\n",
+      "error": "Error: Experiment validation failed - blocking issues found\n",
+      "duration": 3.7831387519836426
+    },
+    {
+      "command": "artifacts /var/folders/s8/5pq48bwj2jd9s2fwyh7g_y300000gn/T/discernus_test_79y_fjxk/test_experiment",
+      "success": true,
+      "output": "\u2705 Comprehensive LiteLLM debug suppression configured\n\n\ud83d\udce6 Artifacts: test_experiment\n\u2139\ufe0f  No runs found - experiment has not been executed yet\n",
+      "error": "",
+      "duration": 4.233670949935913
+    },
+    {
+      "command": "cache /var/folders/s8/5pq48bwj2jd9s2fwyh7g_y300000gn/T/discernus_test_79y_fjxk/test_experiment --stats",
+      "success": true,
+      "output": "\u2705 Comprehensive LiteLLM debug suppression configured\n\u2139\ufe0f  No cache directory found\n",
+      "error": "",
+      "duration": 4.484025001525879
+    }
+  ]
+}

@@ -882,3 +882,194 @@ Nice-to-have for streamlining academic publication workflow.
 
 **Last Updated**: 2025-01-27  
 **Status**: Post-Alpha Planning
+
+---
+
+## Post-Alpha Platform Maturation
+
+### Research & Investigation
+
+### Issue #214: Research Spike - Configuration Management Strategy - Externalize Hardcoded Settings
+
+**Task**: Investigate configuration management strategy to externalize hardcoded settings
+**Purpose**: Improve system flexibility and enable better configuration management
+**Priority**: MEDIUM - System configuration
+**Acceptance Criteria**:
+
+- Configuration management strategy investigated
+- Hardcoded settings externalized
+- System flexibility improved
+- Configuration management enhanced
+- Configuration categories identified
+- Configuration locations analyzed
+- Current state audit completed
+- Configuration architecture designed
+
+**Why Deferred**: Not critical for alpha release, requires significant system analysis
+
+### Issue #213: Research Spike - Comprehensive LLM Parameter Strategy Investigation
+
+**Task**: Investigate comprehensive LLM parameter strategy to optimize model performance
+**Purpose**: Understand parameter effects and develop best practices for LLM configuration
+**Priority**: MEDIUM - LLM optimization
+**Acceptance Criteria**:
+
+- Comprehensive LLM parameter strategy investigated
+- Model performance optimized
+- Parameter effects understood
+- Best practices for LLM configuration developed
+- Core parameters investigated
+- Model variations analyzed
+- Parameter optimization strategies developed
+- Performance improvements documented
+
+**Why Deferred**: Research spike not critical for alpha release, can be conducted post-alpha
+
+### Platform Maturation
+
+### Issue #107: EPIC - DiscernusLibrarian → WorkflowOrchestrator Integration
+
+**Task**: Integrate DiscernusLibrarian with WorkflowOrchestrator
+**Purpose**: Streamline research workflow and improve system integration
+**Priority**: MEDIUM - System integration
+**Acceptance Criteria**:
+
+- DiscernusLibrarian integrated with WorkflowOrchestrator
+- Research workflow streamlined
+- System integration improved
+- Research capabilities enhanced
+- Component coordination improved
+- Integration testing completed
+- Performance optimization achieved
+- User experience enhanced
+
+**Why Deferred**: System integration enhancement not critical for alpha release
+
+### Issue #60: Research Platform Maturation Epic - Enhanced Provenance and Academic Features
+
+**Task**: Enhance research platform with improved provenance capabilities and academic features
+**Purpose**: Support rigorous research standards and academic publication requirements
+**Priority**: MEDIUM - Platform enhancement
+**Acceptance Criteria**:
+
+- Research platform enhanced with improved provenance capabilities
+- Academic features implemented
+- Rigorous research standards supported
+- Reproducibility requirements met
+- Academic publication requirements supported
+- Platform maturation completed
+- Enhanced capabilities documented
+- User experience improved
+
+**Why Deferred**: Platform maturation features not critical for alpha release
+
+### Backward Compatibility
+
+### Issue #232: Maintain Read-Only Parsing for Existing CSV Experiment Results
+
+**Task**: Maintain read-only parsing capabilities for existing CSV experiment results
+**Purpose**: Ensure backward compatibility and support for legacy experiment data formats
+**Priority**: MEDIUM - Backward compatibility
+**Acceptance Criteria**:
+
+- Read-only parsing for existing CSV experiment results maintained
+- Backward compatibility ensured
+- Legacy experiment data format support provided
+- Current implementation preserved
+- Technical implementation completed
+- Data migration support provided
+- Legacy format validation maintained
+- Transition strategy documented
+
+**Why Deferred**: Backward compatibility not critical for alpha release, can be addressed post-alpha
+
+---
+
+## Potential Alpha Items (Could Include)
+
+The following items could be included in alpha release if time permits:
+
+### Performance & Validation
+
+### Issue #311: Performance - Alpha Release Performance Validation
+
+**Task**: Conduct comprehensive performance validation for Alpha Release
+**Purpose**: Validate system performance across all areas before release
+**Priority**: MEDIUM - Performance validation
+**Acceptance Criteria**:
+
+- Performance metrics documented across all areas
+- LLM optimization validated (token usage efficiency, response time, cost metrics)
+- System performance validated (memory usage, disk I/O, CPU utilization)
+- Scalability tests completed (large corpus handling, multi-framework processing)
+- Optimization recommendations provided
+- Resource usage guidelines established
+- Cost projections documented
+
+**Why Deferred**: Could be included in alpha if time permits, but not critical
+
+### Issue #233: Implement Reliability and Resilience Metrics Tracking
+
+**Task**: Implement comprehensive reliability and resilience metrics tracking system
+**Purpose**: Monitor system performance and ensure consistent operation across different use cases
+**Priority**: MEDIUM - System monitoring
+**Acceptance Criteria**:
+
+- Reliability and resilience metrics tracking implemented
+- System performance monitoring established
+- Failure pattern identification system created
+- Consistent operation validation completed
+- Performance metrics documented
+- Monitoring infrastructure deployed
+- Alerting system implemented
+- Performance optimization recommendations provided
+
+**Why Deferred**: Monitoring enhancement not critical for alpha release
+
+### Architecture Improvements
+
+### Issue #244: Quantitative Grammar Architecture - Statistical Output Interface Standardization
+
+**Task**: Implement quantitative grammar architecture with statistical output interface standardization
+**Purpose**: Standardize statistical output formats and improve data processing consistency
+**Priority**: MEDIUM - Architecture enhancement
+**Acceptance Criteria**:
+
+- Core grammar infrastructure implemented
+- Framework extensions completed
+- Adaptive bridge developed
+- Statistical output interface standardized
+- Core components implemented
+- Example structure documented
+- Phase 1 core grammar infrastructure completed
+- Phase 2 framework extensions completed
+- Phase 3 adaptive bridge completed
+
+**Why Deferred**: Architecture enhancement not critical for alpha release
+
+### Issue #230: Deploy Unified JSON Processing Pipeline
+
+**Task**: Deploy unified JSON processing pipeline to standardize data processing
+**Purpose**: Improve consistency and ensure reliable data handling throughout the analysis workflow
+**Priority**: MEDIUM - Data processing
+**Acceptance Criteria**:
+
+- Unified JSON processing pipeline deployed
+- Data processing standardized across system
+- Consistency improved throughout workflow
+- Reliable data handling ensured
+- Technical implementation completed
+- Validation results documented
+- Performance improvements achieved
+- Error handling enhanced
+
+**Why Deferred**: Data processing standardization not critical for alpha release
+
+---
+
+## Updated Summary
+
+**Total Deferred Items**: 24 major features/approaches
+**Strategic Value**: High - represents future platform capabilities
+**Timeline**: Future major versions (v11+) and post-alpha development
+**Dependencies**: Current platform stabilization and alpha release completion
