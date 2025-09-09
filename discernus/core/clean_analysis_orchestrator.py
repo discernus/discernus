@@ -23,6 +23,7 @@ THIN Principles:
 """
 
 import yaml
+import hashlib
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, List, Optional
@@ -39,6 +40,7 @@ from ..agents.EnhancedAnalysisAgent.main import EnhancedAnalysisAgent
 from ..agents.automated_statistical_analysis.agent import AutomatedStatisticalAnalysisAgent
 from ..agents.deprecated.txtai_evidence_curator.agent import TxtaiEvidenceCurator
 from ..agents.unified_synthesis_agent import UnifiedSynthesisAgent
+from ..agents.csv_export_agent import CSVExportAgent, ExportOptions
 from ..gateway.llm_gateway import LLMGateway
 from ..gateway.model_registry import ModelRegistry
 from .rag_index_cache import RAGIndexCacheManager
@@ -66,9 +68,33 @@ class CleanAnalysisOrchestrator:
     No notebook generation, no complex agent chains, just what we need.
     """
     
-    def __init__(self, experiment_path: Path, progress_manager=None):
+    def __init__(self, experiment_path: Path, progress_manager=None, 
+                 analysis_model: str = "vertex_ai/gemini-2.5-flash",
+                 synthesis_model: str = "vertex_ai/gemini-2.5-pro", 
+                 validation_model: str = "vertex_ai/gemini-2.5-flash-lite",
+                 derived_metrics_model: str = "vertex_ai/gemini-2.5-pro",
+                 dry_run: bool = False,
+                 skip_validation: bool = False,
+                 analysis_only: bool = False,
+                 statistical_prep: bool = False,
+                 ensemble_runs: Optional[int] = None,
+                 auto_commit: bool = True,
+                 verbosity: str = "normal"):
         """Initialize clean analysis orchestrator."""
         self.experiment_path = Path(experiment_path).resolve()
+
+        # Store mode parameters
+        self.analysis_model = analysis_model
+        self.synthesis_model = synthesis_model
+        self.validation_model = validation_model
+        self.derived_metrics_model = derived_metrics_model
+        self.dry_run = dry_run
+        self.skip_validation = skip_validation
+        self.analysis_only = analysis_only
+        self.statistical_prep = statistical_prep
+        self.ensemble_runs = ensemble_runs
+        self.auto_commit = auto_commit
+        self.verbosity = verbosity
 
         # Initialize core components
         self.security = ExperimentSecurityBoundary(self.experiment_path)
@@ -125,20 +151,13 @@ class CleanAnalysisOrchestrator:
             "security_boundary": str(self.security.experiment_name)
         }
     
-    def run_experiment(self, 
-                      analysis_model: str = "vertex_ai/gemini-2.5-flash",
-                      synthesis_model: str = "vertex_ai/gemini-2.5-pro",
-                      validation_model: str = "vertex_ai/gemini-2.5-flash-lite",
-                      derived_metrics_model: str = "vertex_ai/gemini-2.5-pro",
-                      skip_validation: bool = False) -> Dict[str, Any]:
+    def run_experiment(self) -> Dict[str, Any]:
         """
-        Run complete experiment: analysis + synthesis + results.
+        Run experiment based on mode:
+        - Standard: analysis + synthesis + results
+        - Statistical Prep: analysis + derived metrics + CSV export
+        - Analysis Only: analysis + CSV export
         """
-        # Store model parameters as instance attributes for use throughout the experiment
-        self.analysis_model = analysis_model
-        self.synthesis_model = synthesis_model
-        self.validation_model = validation_model
-        self.derived_metrics_model = derived_metrics_model
         
         run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
         start_time = datetime.now(timezone.utc)
@@ -164,10 +183,10 @@ class CleanAnalysisOrchestrator:
                 raise CleanAnalysisError(f"Specification loading failed: {str(e)}")
             
             # Phase 2: Validation (unless skipped)
-            if not skip_validation:
+            if not self.skip_validation:
                 phase_start = datetime.now(timezone.utc)
                 try:
-                    self._run_coherence_validation(validation_model, audit_logger)
+                    self._run_coherence_validation(self.validation_model, audit_logger)
                     self._log_status("Experiment coherence validated")
                     self._log_phase_timing("coherence_validation", phase_start)
                 except Exception as e:
@@ -192,7 +211,7 @@ class CleanAnalysisOrchestrator:
                 self.progress_manager.update_main_progress("Analysis")
             phase_start = datetime.now(timezone.utc)
             try:
-                analysis_results = self._run_analysis_phase(analysis_model, audit_logger)
+                analysis_results = self._run_analysis_phase(self.analysis_model, audit_logger)
                 
                 # Store analysis results for synthesis access
                 self._analysis_results = analysis_results
@@ -200,15 +219,37 @@ class CleanAnalysisOrchestrator:
                 self._log_status(f"Analysis completed: {len(analysis_results)} documents processed")
                 self._log_phase_timing("analysis_phase", phase_start)
                 
-                # Phase 4.5: Build and cache RAG index immediately after analysis
-                phase_start = datetime.now(timezone.utc)
-                try:
-                    self._build_and_cache_rag_index(audit_logger)
-                    self._log_status("RAG index built and cached successfully")
-                    self._log_phase_timing("rag_index_cache", phase_start)
-                except Exception as e:
-                    # RAG caching failure is not fatal - we can still build it later
-                    self._log_progress(f"⚠️ RAG index caching failed, will build during synthesis: {str(e)}")
+                # Mode-specific handling after analysis
+                if self.analysis_only:
+                    # Analysis-only mode: Export CSV and exit
+                    self._log_progress("📊 Analysis-only mode: Exporting CSV and completing...")
+                    results_dir = self._export_analysis_only_csv(analysis_results, audit_logger, run_id)
+                    duration = (datetime.now(timezone.utc) - start_time).total_seconds()
+                    log_experiment_complete(self.security.experiment_name, run_id, duration)
+                    return {
+                        "run_id": run_id,
+                        "results_directory": str(results_dir),
+                        "analysis_documents": len(analysis_results),
+                        "status": "completed_analysis_only",
+                        "mode": "analysis_only",
+                        "duration_seconds": duration,
+                        "performance_metrics": self._get_performance_summary(),
+                        "costs": audit_logger.get_session_costs() if audit_logger else {"total_cost_usd": 0.0}
+                    }
+                elif self.statistical_prep:
+                    # Statistical preparation mode: Run derived metrics + CSV export
+                    self._log_progress("📊 Statistical preparation mode: Running derived metrics and CSV export...")
+                    # Continue to derived metrics phase below
+                else:
+                    # Standard mode: Build RAG index for synthesis
+                    phase_start = datetime.now(timezone.utc)
+                    try:
+                        self._build_and_cache_rag_index(audit_logger)
+                        self._log_status("RAG index built and cached successfully")
+                        self._log_phase_timing("rag_index_cache", phase_start)
+                    except Exception as e:
+                        # RAG caching failure is not fatal - we can still build it later
+                        self._log_progress(f"⚠️ RAG index caching failed, will build during synthesis: {str(e)}")
                 
             except Exception as e:
                 self._log_progress(f"❌ Analysis phase failed: {str(e)}")
@@ -219,13 +260,31 @@ class CleanAnalysisOrchestrator:
                 self.progress_manager.update_main_progress("Derived metrics")
             phase_start = datetime.now(timezone.utc)
             try:
-                derived_metrics_results = self._run_derived_metrics_phase(derived_metrics_model, audit_logger, analysis_results)
+                derived_metrics_results = self._run_derived_metrics_phase(self.derived_metrics_model, audit_logger, analysis_results)
                 
                 # Store derived metrics results for synthesis access
                 self._derived_metrics_results = derived_metrics_results
                 
                 self._log_status("Derived metrics completed")
                 self._log_phase_timing("derived_metrics_phase", phase_start)
+                
+                # Statistical preparation mode: Export CSV and exit after derived metrics
+                if self.statistical_prep:
+                    self._log_progress("📊 Statistical preparation mode: Exporting CSV with derived metrics...")
+                    results_dir = self._export_statistical_prep_csv(analysis_results, derived_metrics_results, audit_logger, run_id)
+                    duration = (datetime.now(timezone.utc) - start_time).total_seconds()
+                    log_experiment_complete(self.security.experiment_name, run_id, duration)
+                    return {
+                        "run_id": run_id,
+                        "results_directory": str(results_dir),
+                        "analysis_documents": len(analysis_results),
+                        "status": "completed_statistical_prep",
+                        "mode": "statistical_prep",
+                        "duration_seconds": duration,
+                        "performance_metrics": self._get_performance_summary(),
+                        "costs": audit_logger.get_session_costs() if audit_logger else {"total_cost_usd": 0.0}
+                    }
+                    
             except Exception as e:
                 self._log_progress(f"❌ Derived metrics phase failed: {str(e)}")
                 raise CleanAnalysisError(f"Derived metrics phase failed: {str(e)}")
@@ -233,7 +292,7 @@ class CleanAnalysisOrchestrator:
             # Phase 6: Generate statistics
             phase_start = datetime.now(timezone.utc)
             try:
-                statistical_results = self._run_statistical_analysis_phase(derived_metrics_model, audit_logger, analysis_results, derived_metrics_results)
+                statistical_results = self._run_statistical_analysis_phase(self.derived_metrics_model, audit_logger, analysis_results, derived_metrics_results)
                 self._log_status("Statistical analysis completed")
                 self._log_phase_timing("statistical_analysis", phase_start)
             except Exception as e:
@@ -265,7 +324,7 @@ class CleanAnalysisOrchestrator:
             # Corpus index service debug removed (QA agents disabled)
             
             try:
-                evidence_results = self._run_evidence_retrieval_phase(synthesis_model, audit_logger, statistical_results, run_id)
+                evidence_results = self._run_evidence_retrieval_phase(self.synthesis_model, audit_logger, statistical_results, run_id)
                 self._log_status("Evidence retrieval completed")
                 self._log_phase_timing("evidence_retrieval_phase", phase_start)
                 
@@ -290,7 +349,7 @@ class CleanAnalysisOrchestrator:
             # Corpus index service debug removed (QA agents disabled)
             
             try:
-                assets = self._run_synthesis(synthesis_model, analysis_model, audit_logger, statistical_results, evidence_results)
+                assets = self._run_synthesis(self.synthesis_model, self.analysis_model, audit_logger, statistical_results, evidence_results)
                 self._log_status("Synthesis completed")
                 self._log_phase_timing("synthesis_phase", phase_start)
             except Exception as e:
@@ -3795,3 +3854,189 @@ class CleanAnalysisOrchestrator:
             # For now, we will allow synthesis to proceed without curated evidence.
             # In a stricter future version, this might raise an exception.
             return None
+
+    def _export_analysis_only_csv(self, analysis_results: List[Dict[str, Any]], audit_logger: AuditLogger, run_id: str) -> Path:
+        """Export CSV files for analysis-only mode."""
+        self._log_progress("📊 Exporting analysis-only CSV files...")
+        
+        # Create results directory
+        run_dir = self.experiment_path / "runs" / run_id
+        results_dir = run_dir / "results"
+        results_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Prepare analysis data for CSV export by processing individual analysis results
+        processed_document_analyses = []
+        
+        for analysis_result in analysis_results:
+            raw_response = analysis_result.get('raw_analysis_response', '')
+            if not raw_response:
+                continue
+                
+            # Extract JSON from the delimited response
+            start_marker = '<<<DISCERNUS_ANALYSIS_JSON_v6>>>'
+            end_marker = '<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
+            
+            start_idx = raw_response.find(start_marker)
+            end_idx = raw_response.find(end_marker)
+            
+            if start_idx == -1 or end_idx == -1:
+                continue
+                
+            json_content = raw_response[start_idx + len(start_marker):end_idx].strip()
+            
+            try:
+                analysis_data = json.loads(json_content)
+                processed_document_analyses.extend(analysis_data.get('document_analyses', []))
+            except json.JSONDecodeError:
+                continue
+        
+        # Convert dimensional_scores to analysis_scores format for CSV export
+        for doc_analysis in processed_document_analyses:
+            dimensional_scores = doc_analysis.get('dimensional_scores', {})
+            analysis_scores = {}
+            for dimension, scores in dimensional_scores.items():
+                analysis_scores[dimension] = scores.get('raw_score', 0.0)
+            doc_analysis['analysis_scores'] = analysis_scores
+        
+        analysis_data = {
+            "document_analyses": processed_document_analyses,
+            "analysis_metadata": {
+                "framework_name": self.config.get('framework', 'unknown'),
+                "framework_version": "v1.0"
+            }
+        }
+        
+        # Store analysis data as artifact
+        analysis_json = json.dumps(analysis_data, indent=2)
+        analysis_hash = hashlib.sha256(analysis_json.encode('utf-8')).hexdigest()
+        
+        # Save to shared cache
+        shared_cache_dir = self.experiment_path / "shared_cache" / "artifacts"
+        shared_cache_dir.mkdir(parents=True, exist_ok=True)
+        analysis_file = shared_cache_dir / analysis_hash
+        analysis_file.write_text(analysis_json)
+        
+        # Initialize CSV Export Agent
+        csv_agent = CSVExportAgent(audit_logger=audit_logger)
+        csv_agent.experiment_path = self.experiment_path
+        csv_agent.artifact_storage = None  # Use file-based loading
+        
+        # Prepare framework and corpus configs
+        framework_config = {"name": self.config.get('framework', 'unknown'), "version": "v1.0"}
+        corpus_manifest = {"corpus_name": self.security.experiment_name, "documents": []}
+        
+        # Export CSV files
+        export_result = csv_agent.export_mid_point_data(
+            scores_hash=analysis_hash,
+            evidence_hash=analysis_hash,
+            framework_config=framework_config,
+            corpus_manifest=corpus_manifest,
+            export_path=str(results_dir),
+            export_options=ExportOptions()
+        )
+        
+        if export_result.success:
+            self._log_progress(f"✅ CSV export successful: {len(export_result.files_created)} files created")
+            for file in export_result.files_created:
+                self._log_progress(f"   • {file}")
+        else:
+            self._log_progress(f"❌ CSV export failed: {export_result.error_message}")
+            raise CleanAnalysisError(f"CSV export failed: {export_result.error_message}")
+        
+        return results_dir
+
+    def _export_statistical_prep_csv(self, analysis_results: List[Dict[str, Any]], derived_metrics_results: Dict[str, Any], audit_logger: AuditLogger, run_id: str) -> Path:
+        """Export CSV files for statistical preparation mode with derived metrics."""
+        self._log_progress("📊 Exporting statistical preparation CSV files...")
+        
+        # Create results directory
+        run_dir = self.experiment_path / "runs" / run_id
+        results_dir = run_dir / "results"
+        results_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Prepare analysis data for CSV export by processing individual analysis results
+        processed_document_analyses = []
+        
+        for analysis_result in analysis_results:
+            raw_response = analysis_result.get('raw_analysis_response', '')
+            if not raw_response:
+                continue
+                
+            # Extract JSON from the delimited response
+            start_marker = '<<<DISCERNUS_ANALYSIS_JSON_v6>>>'
+            end_marker = '<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
+            
+            start_idx = raw_response.find(start_marker)
+            end_idx = raw_response.find(end_marker)
+            
+            if start_idx == -1 or end_idx == -1:
+                continue
+                
+            json_content = raw_response[start_idx + len(start_marker):end_idx].strip()
+            
+            try:
+                analysis_data = json.loads(json_content)
+                processed_document_analyses.extend(analysis_data.get('document_analyses', []))
+            except json.JSONDecodeError:
+                continue
+        
+        # Convert dimensional_scores to analysis_scores format for CSV export
+        for doc_analysis in processed_document_analyses:
+            dimensional_scores = doc_analysis.get('dimensional_scores', {})
+            analysis_scores = {}
+            for dimension, scores in dimensional_scores.items():
+                analysis_scores[dimension] = scores.get('raw_score', 0.0)
+            doc_analysis['analysis_scores'] = analysis_scores
+        
+        analysis_data = {
+            "document_analyses": processed_document_analyses,
+            "analysis_metadata": {
+                "framework_name": self.config.get('framework', 'unknown'),
+                "framework_version": "v1.0"
+            }
+        }
+        
+        # Store analysis data as artifact
+        analysis_json = json.dumps(analysis_data, indent=2)
+        analysis_hash = hashlib.sha256(analysis_json.encode('utf-8')).hexdigest()
+        
+        # Save to shared cache
+        shared_cache_dir = self.experiment_path / "shared_cache" / "artifacts"
+        shared_cache_dir.mkdir(parents=True, exist_ok=True)
+        analysis_file = shared_cache_dir / analysis_hash
+        analysis_file.write_text(analysis_json)
+        
+        # Store derived metrics as artifact
+        derived_metrics_json = json.dumps(derived_metrics_results, indent=2)
+        derived_metrics_hash = hashlib.sha256(derived_metrics_json.encode('utf-8')).hexdigest()
+        derived_metrics_file = shared_cache_dir / derived_metrics_hash
+        derived_metrics_file.write_text(derived_metrics_json)
+        
+        # Initialize CSV Export Agent
+        csv_agent = CSVExportAgent(audit_logger=audit_logger)
+        csv_agent.experiment_path = self.experiment_path
+        csv_agent.artifact_storage = None  # Use file-based loading
+        
+        # Prepare framework and corpus configs
+        framework_config = {"name": self.config.get('framework', 'unknown'), "version": "v1.0"}
+        corpus_manifest = {"corpus_name": self.security.experiment_name, "documents": []}
+        
+        # Export CSV files with derived metrics
+        export_result = csv_agent.export_mid_point_data(
+            scores_hash=analysis_hash,
+            evidence_hash=analysis_hash,
+            framework_config=framework_config,
+            corpus_manifest=corpus_manifest,
+            export_path=str(results_dir),
+            export_options=ExportOptions(include_calculated_metrics=True)
+        )
+        
+        if export_result.success:
+            self._log_progress(f"✅ Statistical preparation CSV export successful: {len(export_result.files_created)} files created")
+            for file in export_result.files_created:
+                self._log_progress(f"   • {file}")
+        else:
+            self._log_progress(f"❌ Statistical preparation CSV export failed: {export_result.error_message}")
+            raise CleanAnalysisError(f"Statistical preparation CSV export failed: {export_result.error_message}")
+        
+        return results_dir

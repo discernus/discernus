@@ -77,9 +77,9 @@ def _validate_models(models_to_validate: List[tuple[str, str]]):
     try:
         registry = ModelRegistry()
         for model_type, model_name in models_to_validate:
-            if not registry.is_model_available(model_name):
+            if not registry.get_model_details(model_name):
                 rich_console.print_error(f"❌ {model_type} model '{model_name}' is not available")
-                rich_console.print_info(f"   Available models: {', '.join(registry.list_available_models())}")
+                rich_console.print_info(f"   Available models: {', '.join(registry.list_models())}")
                 exit_invalid_usage(f"Model '{model_name}' not available")
     except Exception as e:
         rich_console.print_error(f"❌ Model validation failed: {e}")
@@ -179,12 +179,14 @@ def cli(ctx, verbose, quiet, no_color, config):
               help='Skip coherence validation (not recommended - validation catches common issues)')
 @click.option('--analysis-only', is_flag=True, envvar='DISCERNUS_ANALYSIS_ONLY', 
               help='Run analysis and export CSV only, skip synthesis report (useful for data exploration)')
+@click.option('--statistical-prep', is_flag=True, envvar='DISCERNUS_STATISTICAL_PREP', 
+              help='Run analysis + derived metrics + CSV export, skip synthesis (useful for external statistical analysis)')
 @click.option('--ensemble-runs', type=int, envvar='DISCERNUS_ENSEMBLE_RUNS', 
               help='Number of ensemble runs for self-consistency (3-5 recommended, increases cost linearly)')
 @click.option('--no-auto-commit', is_flag=True, envvar='DISCERNUS_NO_AUTO_COMMIT', 
               help='Disable automatic Git commit after successful run (useful for testing or manual commit control)')
 @click.pass_context
-def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str], synthesis_model: Optional[str], validation_model: Optional[str], derived_metrics_model: Optional[str], skip_validation: bool, analysis_only: bool, ensemble_runs: Optional[int], no_auto_commit: bool):
+def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str], synthesis_model: Optional[str], validation_model: Optional[str], derived_metrics_model: Optional[str], skip_validation: bool, analysis_only: bool, statistical_prep: bool, ensemble_runs: Optional[int], no_auto_commit: bool):
     """Execute complete experiment (analysis + synthesis). 
     
     EXPERIMENT_PATH: Path to experiment directory (defaults to current directory).
@@ -246,6 +248,7 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
         dry_run=dry_run,
         skip_validation=skip_validation,
         analysis_only=analysis_only,
+        statistical_prep=statistical_prep,
         ensemble_runs=ensemble_runs,
         auto_commit=not no_auto_commit,
         verbosity=verbosity
@@ -255,14 +258,14 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
         # Execute experiment
         result = orchestrator.run_experiment()
         
-        if result.success:
+        if result.get('status') in ['completed', 'completed_analysis_only', 'completed_statistical_prep']:
             rich_console.print_success("✅ Experiment completed successfully!")
-            if result.run_folder:
-                rich_console.print_info(f"📁 Results saved to: {result.run_folder}")
+            if result.get('results_directory'):
+                rich_console.print_info(f"📁 Results saved to: {result['results_directory']}")
             exit_success()
         else:
-            rich_console.print_error(f"❌ Experiment failed: {result.error}")
-            exit_general_error(result.error)
+            rich_console.print_error(f"❌ Experiment failed: {result.get('error', 'Unknown error')}")
+            exit_general_error(result.get('error', 'Unknown error'))
             
     except CleanAnalysisError as e:
         rich_console.print_error(f"❌ Analysis error: {e}")
