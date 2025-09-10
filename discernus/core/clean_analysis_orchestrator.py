@@ -251,6 +251,13 @@ class CleanAnalysisOrchestrator:
                     # Create provenance organization
                     self._create_provenance_organization(run_id, audit_logger)
                     
+                    # Finalize manifest
+                    if self.manifest:
+                        try:
+                            self.manifest.finalize_manifest()
+                        except Exception as e:
+                            self._log_progress(f"⚠️ Manifest finalization failed: {str(e)}")
+                    
                     duration = (datetime.now(timezone.utc) - start_time).total_seconds()
                     log_experiment_complete(self.security.experiment_name, run_id, duration)
                     return {
@@ -305,8 +312,39 @@ class CleanAnalysisOrchestrator:
                     self._log_progress("📊 Statistical preparation mode: Exporting CSV with derived metrics...")
                     results_dir = self._export_statistical_prep_csv(analysis_results, derived_metrics_results, audit_logger, run_id)
                     
+                    # Set resume capability in manifest
+                    if self.manifest:
+                        # Collect artifact hashes needed for resume
+                        resume_artifacts = []
+                        if hasattr(self, '_analysis_results') and self._analysis_results:
+                            for result in self._analysis_results:
+                                if 'analysis_hash' in result:
+                                    resume_artifacts.append(result['analysis_hash'])
+                        if hasattr(self, '_derived_metrics_results') and self._derived_metrics_results:
+                            if 'derived_metrics_hash' in self._derived_metrics_results:
+                                resume_artifacts.append(self._derived_metrics_results['derived_metrics_hash'])
+                        
+                        self.manifest.set_resume_capability(
+                            can_resume=True,
+                            statistical_prep_completed=True,
+                            resume_artifacts=resume_artifacts,
+                            resume_metadata={
+                                "analysis_documents": len(analysis_results),
+                                "derived_metrics_completed": True,
+                                "csv_export_completed": True,
+                                "resume_timestamp": datetime.now(timezone.utc).isoformat()
+                            }
+                        )
+                    
                     # Create provenance organization
                     self._create_provenance_organization(run_id, audit_logger)
+                    
+                    # Finalize manifest
+                    if self.manifest:
+                        try:
+                            self.manifest.finalize_manifest()
+                        except Exception as e:
+                            self._log_progress(f"⚠️ Manifest finalization failed: {str(e)}")
                     
                     duration = (datetime.now(timezone.utc) - start_time).total_seconds()
                     
@@ -381,6 +419,13 @@ class CleanAnalysisOrchestrator:
                 
                 # Create provenance organization
                 self._create_provenance_organization(run_id, audit_logger)
+                
+                # Finalize manifest
+                if self.manifest:
+                    try:
+                        self.manifest.finalize_manifest()
+                    except Exception as e:
+                        self._log_progress(f"⚠️ Manifest finalization failed: {str(e)}")
                 
                 duration = (datetime.now(timezone.utc) - start_time).total_seconds()
                 log_experiment_complete(self.security.experiment_name, run_id, duration)
@@ -493,7 +538,7 @@ class CleanAnalysisOrchestrator:
             # Finalize manifest if it exists
             if self.manifest:
                 try:
-                    self.manifest.finalize()
+                    self.manifest.finalize_manifest()
                 except Exception as e:
                     self._log_progress(f"⚠️ Manifest finalization failed: {str(e)}")
 
@@ -550,6 +595,16 @@ class CleanAnalysisOrchestrator:
                 run_folder=run_folder,
                 audit_logger=audit_logger,
                 artifact_storage=self.artifact_storage
+            )
+            
+            # Set run mode information in manifest
+            self.manifest.set_run_mode(
+                analysis_only=self.analysis_only,
+                statistical_prep=self.statistical_prep,
+                skip_synthesis=self.skip_synthesis,
+                resume_from_stats=self.resume_from_stats,
+                ensemble_runs=self.ensemble_runs,
+                dry_run=self.dry_run
             )
             
             # Initialize LLM Gateway (matching legacy pattern)

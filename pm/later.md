@@ -10,6 +10,93 @@
 
 ---
 
+## Deferred Academic Quality Items
+
+### [ACADEMIC-003] Enhance Methodology Transparency with Framework Operationalization
+
+**Description**: Enhance methodology transparency by explaining how abstract framework concepts are operationalized into measurable indicators
+**Priority**: MEDIUM - Academic transparency
+**Why Deferred**: Important for academic users but not blocking for alpha release
+**Timeline**: Post-alpha release
+
+**Acceptance Criteria**:
+- Concise methodology section (1-2 paragraphs) in every final report
+- Framework operationalization explicitly explained for each dimension
+- Analysis process from raw text to scores clearly documented
+- Sufficient detail provided for independent replication
+
+---
+
+### [ACADEMIC-004] Implement Defensive Prompting to Constrain LLM Over-Generalization
+
+**Description**: Implement system of defensive prompting to make analysis more robust against LLM over-generalization and hallucination
+**Priority**: MEDIUM - Quality assurance
+**Why Deferred**: Quality improvement but not blocking functionality - current prompting works
+**Timeline**: Post-alpha release
+
+**Acceptance Criteria**:
+- New constraints object added to framework schema
+- Framework parser updated to append constraints to LLM prompts
+- Methodology section includes summary of defensive prompts used
+- Constraints prevent scoring based on speaker identity or other inappropriate factors
+
+---
+
+### [ACADEMIC-005] Create Unified Results Dashboard for Researcher-Centric Information Architecture
+
+**Description**: Design and implement unified, human-readable results dashboard to replace scattered CSVs and markdown reports
+**Priority**: MEDIUM - User experience
+**Why Deferred**: Current CSV + markdown output works for alpha - nice UX improvement but not essential
+**Timeline**: Post-alpha release
+
+**Acceptance Criteria**:
+- New dashboard agent created that ingests all final artifacts
+- Generates single, standalone HTML file in run's results directory
+- Presents key findings, summary statistics, and visualizations in clear, interactive format
+- Replaces current scattered CSV and markdown output approach
+
+---
+
+### [ACADEMIC-009] EPIC - Academic Research-Aligned LLM Ensemble Strategy Implementation
+
+**Description**: Implement academic research-aligned LLM ensemble strategy
+**Priority**: HIGH - Research methodology
+**Why Deferred**: Major feature addition, not core alpha functionality - current single-model approach works for alpha
+**Timeline**: Post-alpha release as major feature
+
+**Acceptance Criteria**:
+- Foundation implementation completed
+- Self-consistency ensemble implemented
+- Multi-model ensemble implemented
+- Parameter integration and optimization completed
+- Academic validation and documentation completed
+- Architecture integration completed
+- Parameter strategy alignment completed
+- Quality assurance framework implemented
+
+---
+
+## Deferred Alpha Release Items
+
+### [ALPHA-006] Alpha Release Documentation Package
+
+**Description**: Create comprehensive documentation package for Alpha Release
+**Priority**: MEDIUM - Documentation
+**Why Deferred**: Current documentation is adequate for alpha - comprehensive docs are nice but not essential
+**Timeline**: Post-alpha release
+
+**Acceptance Criteria**:
+- User documentation complete (Getting Started Guide, Framework Author's Guide, Experiment Design Guide, CLI Reference, Best Practices Guide)
+- Academic documentation complete (Methodology Overview, Validation Approach, Evidence Architecture, Research Reproducibility Guide)
+- Technical documentation complete (Architecture Overview, API Reference, Configuration Guide, Deployment Guide)
+- All documentation reviewed and updated
+- Examples tested and verified
+- Links checked and working
+- PDF versions generated
+- Academic citations verified
+
+---
+
 ## Ensemble Analysis Approaches
 
 ### Multi-Model Independent Self-Consistency Analysis

@@ -160,7 +160,7 @@ def cli(ctx, verbose, quiet, no_color, config):
 # ============================================================================
 
 @cli.command()
-@click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))
+@click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True, path_type=str))
 @click.option('--dry-run', is_flag=True, envvar='DISCERNUS_DRY_RUN', 
               help='Preview what would be executed without running (useful for understanding experiment flow)')
 @click.option('--analysis-model', envvar='DISCERNUS_ANALYSIS_MODEL',
@@ -180,19 +180,21 @@ def cli(ctx, verbose, quiet, no_color, config):
 @click.option('--analysis-only', is_flag=True, envvar='DISCERNUS_ANALYSIS_ONLY', 
               help='Run analysis and export CSV only, skip synthesis report (useful for data exploration)')
 @click.option('--statistical-prep', is_flag=True, envvar='DISCERNUS_STATISTICAL_PREP', 
-              help='Run analysis + derived metrics + CSV export, skip synthesis (useful for external statistical analysis)')
+              help='Run analysis + derived metrics + CSV export, skip synthesis. Perfect for external statistical analysis workflows. Outputs: scores.csv, evidence.csv, metadata.csv')
+@click.option('--skip-synthesis', is_flag=True, envvar='DISCERNUS_SKIP_SYNTHESIS', 
+              help='Run full pipeline including statistical analysis, skip synthesis report (useful for custom synthesis workflows)')
 @click.option('--ensemble-runs', type=int, envvar='DISCERNUS_ENSEMBLE_RUNS', 
               help='Number of ensemble runs for self-consistency (3-5 recommended, increases cost linearly)')
 @click.option('--no-auto-commit', is_flag=True, envvar='DISCERNUS_NO_AUTO_COMMIT', 
               help='Disable automatic Git commit after successful run (useful for testing or manual commit control)')
 @click.pass_context
-def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str], synthesis_model: Optional[str], validation_model: Optional[str], derived_metrics_model: Optional[str], skip_validation: bool, analysis_only: bool, statistical_prep: bool, ensemble_runs: Optional[int], no_auto_commit: bool):
+def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str], synthesis_model: Optional[str], validation_model: Optional[str], derived_metrics_model: Optional[str], skip_validation: bool, analysis_only: bool, statistical_prep: bool, skip_synthesis: bool, ensemble_runs: Optional[int], no_auto_commit: bool):
     """Execute complete experiment (analysis + synthesis). 
     
     EXPERIMENT_PATH: Path to experiment directory (defaults to current directory).
     The experiment directory must contain experiment.md, corpus.md, and framework files.
     """
-    exp_path = Path(experiment_path).resolve()
+    exp_path = Path(str(experiment_path)).resolve()
     
     # Check if experiment path exists
     if not exp_path.exists():
@@ -230,6 +232,33 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
         no_auto_commit = not config.auto_commit
     
     # Validate models against registry before proceeding
+    
+    # Validate mutually exclusive modes
+    mode_count = sum([analysis_only, statistical_prep, skip_synthesis])
+    if mode_count > 1:
+        rich_console.print_error("❌ Only one mode can be specified at a time")
+        rich_console.print_info("   Available modes: --analysis-only, --statistical-prep, --skip-synthesis")
+        exit_invalid_usage("Multiple modes specified")
+    
+    # Provide mode guidance if no mode specified
+    if mode_count == 0:
+        rich_console.print_info("💡 Workflow modes available:")
+        rich_console.print_info("   • Default: Full analysis + synthesis pipeline")
+        rich_console.print_info("   • --analysis-only: Analysis + CSV export only (data exploration)")
+        rich_console.print_info("   • --statistical-prep: Analysis + derived metrics + CSV export (external stats)")
+        rich_console.print_info("   • --skip-synthesis: Full pipeline except synthesis (custom synthesis)")
+        rich_console.print_info("   • Use 'discernus resume' to complete synthesis from statistical-prep runs")
+    
+    # Provide specific guidance for statistical preparation mode
+    if statistical_prep:
+        rich_console.print_info("📊 Statistical Preparation Mode Selected")
+        rich_console.print_info("   This mode will:")
+        rich_console.print_info("   • Run document analysis")
+        rich_console.print_info("   • Calculate derived metrics")
+        rich_console.print_info("   • Export CSV files for external statistical analysis")
+        rich_console.print_info("   • Skip synthesis report generation")
+        rich_console.print_info("   • Allow resume to synthesis later with 'discernus resume'")
+    
     models_to_validate = [
         ("analysis", analysis_model),
         ("synthesis", synthesis_model),
@@ -249,6 +278,7 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
         skip_validation=skip_validation,
         analysis_only=analysis_only,
         statistical_prep=statistical_prep,
+        skip_synthesis=skip_synthesis,
         ensemble_runs=ensemble_runs,
         auto_commit=not no_auto_commit,
         verbosity=verbosity
@@ -258,10 +288,12 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
         # Execute experiment
         result = orchestrator.run_experiment()
         
-        if result.get('status') in ['completed', 'completed_analysis_only', 'completed_statistical_prep']:
+        if result.get('status') in ['completed', 'completed_analysis_only', 'completed_statistical_prep', 'completed_skip_synthesis', 'completed_resume_synthesis']:
             rich_console.print_success("✅ Experiment completed successfully!")
             if result.get('results_directory'):
                 rich_console.print_info(f"📁 Results saved to: {result['results_directory']}")
+            if result.get('mode') == 'resume_from_stats' and result.get('resumed_from'):
+                rich_console.print_info(f"🔄 Resumed from statistical preparation run: {result['resumed_from']}")
             exit_success()
         else:
             rich_console.print_error(f"❌ Experiment failed: {result.get('error', 'Unknown error')}")
@@ -272,6 +304,128 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
         exit_general_error(str(e))
     except Exception as e:
         rich_console.print_error(f"❌ Unexpected error: {e}")
+        exit_general_error(str(e))
+
+@cli.command()
+@click.argument('experiment_path', default='.', type=str)
+@click.option('--analysis-model', envvar='DISCERNUS_ANALYSIS_MODEL',
+              default='vertex_ai/gemini-2.5-flash',
+              help='LLM model for document analysis. Use flash for speed, pro for accuracy.')
+@click.option('--synthesis-model', envvar='DISCERNUS_SYNTHESIS_MODEL',
+              default='vertex_ai/gemini-2.5-pro',
+              help='LLM model for report synthesis. Pro recommended for complex analysis.')
+@click.option('--validation-model', envvar='DISCERNUS_VALIDATION_MODEL',
+              default='vertex_ai/gemini-2.5-flash-lite',
+              help='LLM model for experiment validation. Flash-lite is fast and sufficient.')
+@click.option('--derived-metrics-model', envvar='DISCERNUS_DERIVED_METRICS_MODEL',
+              default='vertex_ai/gemini-2.5-pro',
+              help='LLM model for statistical analysis and derived metrics.')
+@click.option('--dry-run', is_flag=True, envvar='DISCERNUS_DRY_RUN', 
+              help='Preview what would be executed without running')
+@click.option('--no-auto-commit', is_flag=True, envvar='DISCERNUS_NO_AUTO_COMMIT', 
+              help='Disable automatic Git commit after successful run')
+@click.pass_context
+def resume(ctx, experiment_path: str, analysis_model: Optional[str], synthesis_model: Optional[str], validation_model: Optional[str], derived_metrics_model: Optional[str], dry_run: bool, no_auto_commit: bool):
+    """Resume from statistical preparation to full synthesis.
+    
+    EXPERIMENT_PATH: Path to experiment directory (defaults to current directory).
+    Requires existing statistical preparation results from a previous --statistical-prep run.
+    """
+    # Ensure experiment_path is a string
+    if isinstance(experiment_path, Path):
+        experiment_path = str(experiment_path)
+    exp_path = Path(str(experiment_path)).resolve()
+    
+    # Check if experiment path exists
+    if not exp_path.exists():
+        click.echo(f"❌ Experiment path does not exist: {exp_path}")
+        sys.exit(1)
+    
+    if not exp_path.is_dir():
+        click.echo(f"❌ Experiment path is not a directory: {exp_path}")
+        sys.exit(1)
+    
+    click.echo("🔄 Resume from statistical preparation mode")
+    
+    # Get configuration and apply defaults
+    config = ctx.obj['config']
+    verbosity = ctx.obj['verbosity']
+    
+    # Apply config defaults for None values
+    if analysis_model is None:
+        analysis_model = config.analysis_model
+    if synthesis_model is None:
+        synthesis_model = config.synthesis_model
+    if validation_model is None:
+        validation_model = config.validation_model
+    if derived_metrics_model is None:
+        derived_metrics_model = config.derived_metrics_model
+    if not no_auto_commit:
+        no_auto_commit = not config.auto_commit
+    
+    # Check for existing statistical preparation results
+    stats_runs = list(exp_path.glob("runs/*/results/scores.csv"))
+    if not stats_runs:
+        rich_console.print_error("❌ No statistical preparation results found to resume from")
+        rich_console.print_info("   Run with --statistical-prep first to create statistical preparation results")
+        exit_invalid_usage("No statistical preparation results found")
+    
+    # Use the most recent statistical preparation run
+    latest_stats_run = max(stats_runs, key=lambda p: p.stat().st_mtime)
+    rich_console.print_info(f"📊 Resuming from statistical preparation: {latest_stats_run.parent}")
+    rich_console.print_info("🔄 Resume Mode: Completing synthesis from statistical preparation")
+    rich_console.print_info("   This will:")
+    rich_console.print_info("   • Load existing analysis and derived metrics results")
+    rich_console.print_info("   • Run evidence retrieval and synthesis")
+    rich_console.print_info("   • Generate final research report with citations")
+    rich_console.print_info("   • Create complete synthesis assets")
+    
+    # Validate models
+    models_to_validate = [
+        ("analysis", analysis_model),
+        ("synthesis", synthesis_model),
+        ("validation", validation_model),
+        ("derived_metrics", derived_metrics_model)
+    ]
+    _validate_models(models_to_validate)
+    
+    # Initialize orchestrator with resume mode
+    orchestrator = CleanAnalysisOrchestrator(
+        experiment_path=exp_path,
+        analysis_model=analysis_model,
+        synthesis_model=synthesis_model,
+        validation_model=validation_model,
+        derived_metrics_model=derived_metrics_model,
+        dry_run=dry_run,
+        skip_validation=False,
+        analysis_only=False,
+        statistical_prep=False,
+        resume_from_stats=True,
+        ensemble_runs=None,
+        auto_commit=not no_auto_commit,
+        verbosity=verbosity
+    )
+    
+    try:
+        # Execute resume
+        result = orchestrator.run_experiment()
+        
+        if result.get('status') in ['completed', 'completed_analysis_only', 'completed_statistical_prep', 'completed_skip_synthesis', 'completed_resume_synthesis']:
+            rich_console.print_success("✅ Resume completed successfully!")
+            if result.get('results_directory'):
+                rich_console.print_info(f"📁 Results saved to: {result['results_directory']}")
+            if result.get('mode') == 'resume_from_stats' and result.get('resumed_from'):
+                rich_console.print_info(f"🔄 Resumed from statistical preparation run: {result['resumed_from']}")
+            exit_success()
+        else:
+            rich_console.print_error(f"❌ Resume failed: {result.get('error', 'Unknown error')}")
+            exit_general_error(result.get('error', 'Unknown error'))
+            
+    except CleanAnalysisError as e:
+        rich_console.print_error(f"❌ Resume error: {e}")
+        exit_general_error(str(e))
+    except Exception as e:
+        rich_console.print_error(f"❌ Unexpected error during resume: {e}")
         exit_general_error(str(e))
 
 @cli.command()

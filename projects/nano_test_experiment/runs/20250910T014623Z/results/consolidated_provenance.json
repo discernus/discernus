@@ -1,0 +1,120 @@
+{
+  "consolidation_metadata": {
+    "consolidated_at": "2025-09-10T02:29:18.039534+00:00",
+    "run_directory": "projects/nano_test_experiment/runs/20250910T014623Z",
+    "consolidator_version": "1.0.0"
+  },
+  "model_provenance": {
+    "models_used": [],
+    "model_switches": [],
+    "fallback_events": [],
+    "model_performance": {},
+    "unique_models": [],
+    "total_model_interactions": 0
+  },
+  "execution_timeline": {
+    "session_start": null,
+    "session_end": null,
+    "total_duration": null,
+    "pipeline_stages": [],
+    "key_events": []
+  },
+  "cost_analysis": {
+    "total_cost": 0.0,
+    "cost_by_model": {},
+    "cost_by_stage": {},
+    "cost_timeline": [],
+    "cost_breakdown": {}
+  },
+  "error_summary": {
+    "total_errors": 0,
+    "error_types": {},
+    "error_timeline": [],
+    "critical_errors": [],
+    "recovered_errors": []
+  },
+  "artifact_integrity": {
+    "total_artifacts": 0,
+    "artifact_types": {},
+    "integrity_checks": [],
+    "missing_artifacts": [],
+    "corrupted_artifacts": []
+  },
+  "stakeholder_summaries": {
+    "primary_researcher": {
+      "executive_summary": "Complete experiment execution with full transparency",
+      "key_metrics": {
+        "total_duration": "See execution_timeline.total_duration",
+        "total_cost": "See cost_analysis.total_cost",
+        "models_used": "See model_provenance.unique_models",
+        "artifacts_generated": "See artifact_integrity.total_artifacts"
+      },
+      "navigation_guide": [
+        "results/final_report.md - Main findings",
+        "results/scores.csv - Quantitative results",
+        "results/evidence.csv - Supporting evidence",
+        "artifacts/provenance.json - Complete audit trail"
+      ]
+    },
+    "internal_reviewer": {
+      "executive_summary": "Systematic validation of research methodology and execution",
+      "key_metrics": {
+        "error_rate": "See error_summary.total_errors",
+        "model_consistency": "See model_provenance.model_switches",
+        "cost_efficiency": "See cost_analysis.cost_breakdown",
+        "integrity_status": "See artifact_integrity.integrity_checks"
+      },
+      "navigation_guide": [
+        "logs/system.jsonl - System execution log",
+        "logs/agents.jsonl - Agent execution details",
+        "artifacts/analysis_results/ - Raw AI outputs",
+        "artifacts/statistical_results/ - Mathematical work"
+      ]
+    },
+    "replication_researcher": {
+      "executive_summary": "Complete reproducibility package with full provenance",
+      "key_metrics": {
+        "reproducibility_score": "100% - All inputs and outputs preserved",
+        "dependency_chain": "See artifacts/provenance.json",
+        "model_versions": "See model_provenance.models_used",
+        "execution_environment": "See manifest.json"
+      },
+      "navigation_guide": [
+        "manifest.json - Complete execution record",
+        "artifacts/inputs/ - Framework and corpus",
+        "logs/ - Complete execution logs",
+        "README.md - Navigation guide"
+      ]
+    },
+    "fraud_auditor": {
+      "executive_summary": "Cryptographic integrity verification and audit trail",
+      "key_metrics": {
+        "integrity_verified": "See artifact_integrity.integrity_checks",
+        "tamper_evidence": "See error_summary.critical_errors",
+        "provenance_chain": "See artifacts/provenance.json",
+        "git_commit_hash": "See manifest.json"
+      },
+      "navigation_guide": [
+        "artifacts/provenance.json - Dependency chain",
+        "logs/system.jsonl - System events",
+        "manifest.json - Execution record",
+        "artifacts/ - All artifacts with hashes"
+      ]
+    },
+    "llm_skeptic": {
+      "executive_summary": "Complete transparency into AI system behavior and outputs",
+      "key_metrics": {
+        "model_transparency": "See model_provenance.models_used",
+        "output_verification": "See artifacts/analysis_results/",
+        "prompt_engineering": "See artifacts/analysis_plans/",
+        "bias_assessment": "See model_provenance.model_switches"
+      },
+      "navigation_guide": [
+        "logs/llm_interactions.jsonl - Complete AI conversations",
+        "artifacts/analysis_results/ - Raw AI outputs",
+        "artifacts/analysis_plans/ - AI reasoning process",
+        "artifacts/evidence/ - Evidence curation process"
+      ]
+    }
+  }
+}

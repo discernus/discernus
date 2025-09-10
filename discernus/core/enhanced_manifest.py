@@ -54,6 +54,21 @@ class EnhancedManifest:
             "created_at": self._get_timestamp(),
             "run_metadata": {},
             "experiment_config": {},
+            "run_mode": {
+                "mode_type": "standard",  # standard, analysis_only, statistical_prep, skip_synthesis
+                "analysis_only": False,
+                "statistical_prep": False,
+                "skip_synthesis": False,
+                "resume_from_stats": False,
+                "ensemble_runs": None,
+                "dry_run": False
+            },
+            "resume_capability": {
+                "can_resume_from_stats": False,
+                "statistical_prep_completed": False,
+                "resume_artifacts": [],
+                "resume_metadata": {}
+            },
             "input_artifacts": {},
             "execution_timeline": [],
             "llm_interactions": [],
@@ -115,6 +130,72 @@ class EnhancedManifest:
         
         self.audit.log_orchestrator_event("manifest_config_set", {
             "config_keys": list(config.keys())
+        })
+    
+    def set_run_mode(self, analysis_only: bool = False, statistical_prep: bool = False, 
+                    skip_synthesis: bool = False, resume_from_stats: bool = False,
+                    ensemble_runs: Optional[int] = None, dry_run: bool = False) -> None:
+        """
+        Set run mode information for statistical preparation workflows.
+        
+        Args:
+            analysis_only: Whether this is an analysis-only run
+            statistical_prep: Whether this is a statistical preparation run
+            skip_synthesis: Whether synthesis is being skipped
+            resume_from_stats: Whether this is resuming from statistical preparation
+            ensemble_runs: Number of ensemble runs (if any)
+            dry_run: Whether this is a dry run
+        """
+        # Determine primary mode type
+        if resume_from_stats:
+            mode_type = "resume_from_stats"
+        elif analysis_only:
+            mode_type = "analysis_only"
+        elif statistical_prep:
+            mode_type = "statistical_prep"
+        elif skip_synthesis:
+            mode_type = "skip_synthesis"
+        else:
+            mode_type = "standard"
+        
+        self.manifest_data["run_mode"] = {
+            "mode_type": mode_type,
+            "analysis_only": analysis_only,
+            "statistical_prep": statistical_prep,
+            "skip_synthesis": skip_synthesis,
+            "resume_from_stats": resume_from_stats,
+            "ensemble_runs": ensemble_runs,
+            "dry_run": dry_run
+        }
+        
+        self.audit.log_orchestrator_event("manifest_run_mode_set", {
+            "mode_type": mode_type,
+            "statistical_prep": statistical_prep,
+            "resume_from_stats": resume_from_stats
+        })
+    
+    def set_resume_capability(self, can_resume: bool, statistical_prep_completed: bool = False,
+                            resume_artifacts: List[str] = None, resume_metadata: Dict[str, Any] = None) -> None:
+        """
+        Set resume capability information for statistical preparation workflows.
+        
+        Args:
+            can_resume: Whether this run can be resumed from statistical preparation
+            statistical_prep_completed: Whether statistical preparation phase was completed
+            resume_artifacts: List of artifact hashes needed for resume
+            resume_metadata: Additional metadata for resume functionality
+        """
+        self.manifest_data["resume_capability"] = {
+            "can_resume_from_stats": can_resume,
+            "statistical_prep_completed": statistical_prep_completed,
+            "resume_artifacts": resume_artifacts or [],
+            "resume_metadata": resume_metadata or {}
+        }
+        
+        self.audit.log_orchestrator_event("manifest_resume_capability_set", {
+            "can_resume": can_resume,
+            "statistical_prep_completed": statistical_prep_completed,
+            "resume_artifacts_count": len(resume_artifacts) if resume_artifacts else 0
         })
     
     def add_input_artifact(self, artifact_type: str, artifact_hash: str, 
