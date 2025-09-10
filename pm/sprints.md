@@ -185,33 +185,33 @@
 - **Dependencies**: None
 - **Effort**: 1 week
 
-#### [CLEANUP-002] Remove Deprecated Fact Checker and Revision Agents
+#### [CLEANUP-002] Remove Deprecated Fact Checker and Revision Agents ✅ COMPLETED
 
 - **Description**: Remove disabled fact checker and revision agents that still generate confusing artifacts
 - **Purpose**: Clean up agents that are disabled but still create artifacts, causing user confusion
 - **Priority**: HIGH - Alpha user experience
 - **Acceptance Criteria**:
-  - Remove `fact_checker_agent/` and `revision_agent/` directories
-  - Stop generating `fact_check_results.json` artifacts
-  - Remove unused imports from orchestrator
-  - Clean up or remove related test files
-  - Update architecture documentation to remove references
-  - Verify no fact-check artifacts appear in results directories
+  - ✅ Remove `fact_checker_agent/` and `revision_agent/` directories
+  - ✅ Stop generating `fact_check_results.json` artifacts
+  - ✅ Remove unused imports from orchestrator
+  - ✅ Clean up or remove related test files
+  - ✅ Update architecture documentation to remove references
+  - ✅ Verify no fact-check artifacts appear in results directories
 - **Dependencies**: [CLEANUP-001]
 - **Effort**: 2-3 days
 
-#### [CLEANUP-003] Critical Dead Dependencies and Architecture Updates
+#### [CLEANUP-003] Critical Dead Dependencies and Architecture Updates ✅ COMPLETED
 
 - **Description**: Remove critical dead dependencies and update essential architecture documentation
 - **Purpose**: Remove technical debt that impacts alpha users and align documentation with actual implementation
 - **Priority**: HIGH - Technical debt and documentation
 - **Acceptance Criteria**:
-  - Remove Redis dependencies from requirements.txt and pyproject.toml
-  - Remove MinIO references from Makefile and scripts
-  - Clean up deprecated orchestrator patterns and unused agent directories
-  - Update DISCERNUS_SYSTEM_ARCHITECTURE.md to reflect current 3-stage pipeline
-  - Update CURSOR_AGENT_QUICK_START.md to reflect current architecture
-  - All critical dead dependencies removed and deprecated code cleaned up
+  - ✅ Remove Redis dependencies from requirements.txt and pyproject.toml
+  - ✅ Remove MinIO references from Makefile and scripts
+  - ✅ Clean up deprecated orchestrator patterns and unused agent directories
+  - ✅ Update DISCERNUS_SYSTEM_ARCHITECTURE.md to reflect current 3-stage pipeline
+  - ✅ Update CURSOR_AGENT_QUICK_START.md to reflect current architecture
+  - ✅ All critical dead dependencies removed and deprecated code cleaned up
 - **Dependencies**: [CLEANUP-001], [CLEANUP-002]
 - **Effort**: 1-2 weeks
 
@@ -228,18 +228,18 @@
 - **Dependencies**: [CLEANUP-003]
 - **Effort**: 3-5 days
 
-#### [CLEANUP-005] Attic Branch Archival & Pristine Main for OSS Alpha
+#### [CLEANUP-005] Attic Branch Archival & Pristine Main for OSS Alpha ✅ COMPLETED
 
 - **Description**: Create immutable attic branch to archive all deprecated/legacy code, then prune main/dev so the open source alpha is pristine.
 - **Purpose**: Preserve history safely while ensuring the OSS-facing repository contains only supported code paths.
 - **Priority**: CRITICAL - OSS readiness
 - **Acceptance Criteria**:
-  - Attic branch created and tagged (e.g., `attic-YYYY-MM-DD`) with archived code relocated under `attic/` on that branch
-  - Main/dev cleaned: removed `discernus/core/deprecated/`, `discernus/agents/deprecated/`, `discernus/agents/fact_checker_agent/`, `discernus/agents/revision_agent/`, and legacy CLIs (`cli.py.backup`, `cli_clean.py`, `cli_console.py`)
-  - Tests referencing removed agents deleted/disabled
-  - Orchestrator imports/references to removed agents excised or guarded
-  - `docs/ARCHIVE.md` added: lists archived paths, attic branch/tag, retrieval instructions
-  - Push attic branch and updated dev; repo builds and minimal tests pass
+  - ✅ Attic branch created and tagged (e.g., `attic-YYYY-MM-DD`) with archived code relocated under `attic/` on that branch
+  - ✅ Main/dev cleaned: removed `discernus/core/deprecated/`, `discernus/agents/deprecated/`, `discernus/agents/fact_checker_agent/`, `discernus/agents/revision_agent/`, and legacy CLIs (`cli.py.backup`, `cli_clean.py`, `cli_console.py`)
+  - ✅ Tests referencing removed agents deleted/disabled
+  - ✅ Orchestrator imports/references to removed agents excised or guarded
+  - ✅ `docs/ARCHIVE.md` added: lists archived paths, attic branch/tag, retrieval instructions
+  - ✅ Push attic branch and updated dev; repo builds and minimal tests pass
 - **Dependencies**: [CLEANUP-001], [CLEANUP-002], [CLEANUP-003]
 - **Effort**: 1-2 days
 
