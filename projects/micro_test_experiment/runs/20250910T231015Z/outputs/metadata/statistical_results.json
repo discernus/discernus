@@ -1,0 +1,92 @@
+{
+  "status": "completed",
+  "stats_hash": "25159a8da9925922f11ece4bbe1fbbbd7ea6f7abd01a19be9e2ffa61daddd377",
+  "raw_analysis_data_hash": "c143818191fa25bf78845c7cafde1558a2e7baf8970023a010be467c2185f657",
+  "derived_metrics_data_hash": "65838c35c5d0b18eb85d8eb2c6eaa8c10683050d3fe88c90e2593b210183785d",
+  "functions_generated": 4,
+  "statistical_summary": {
+    "generation_metadata": {
+      "status": "success",
+      "functions_generated": 4,
+      "output_file": "automatedstatisticalanalysisagent_functions.py",
+      "module_size": 19484
+    },
+    "statistical_data": {
+      "calculate_correlation_analysis": {
+        "analysis_tier": "Tier 3 (Exploratory)",
+        "sample_size": 4,
+        "power_caveat": "Exploratory analysis - correlation estimates are highly unstable and for pattern detection only (N=4).",
+        "correlation_matrix": {
+          "positive_sentiment_raw": {
+            "positive_sentiment_raw": 1.0,
+            "negative_sentiment_raw": -0.9972413740548083,
+            "net_sentiment": 0.9992762131978784,
+            "sentiment_magnitude": -0.5151515151515155
+          },
+          "negative_sentiment_raw": {
+            "positive_sentiment_raw": -0.9972413740548083,
+            "negative_sentiment_raw": 1.0,
+            "net_sentiment": -0.9993431854792206,
+            "sentiment_magnitude": 0.5773502691896262
+          },
+          "net_sentiment": {
+            "positive_sentiment_raw": 0.9992762131978784,
+            "negative_sentiment_raw": -0.9993431854792206,
+            "net_sentiment": 1.0,
+            "sentiment_magnitude": -0.5473827978082595
+          },
+          "sentiment_magnitude": {
+            "positive_sentiment_raw": -0.5151515151515155,
+            "negative_sentiment_raw": 0.5773502691896262,
+            "net_sentiment": -0.5473827978082595,
+            "sentiment_magnitude": 1.0
+          }
+        }
+      },
+      "calculate_descriptive_statistics": {
+        "analysis_tier": "Tier 3 (Exploratory)",
+        "sample_size": 4,
+        "power_caveat": "Exploratory analysis - results are suggestive rather than conclusive (N=4).",
+        "overall_descriptives": {
+          "positive_sentiment_raw": {
+            "count": 4.0,
+            "mean": 0.475,
+            "std": 0.55,
+            "min": 0.0,
+            "25%": 0.0,
+            "50%": 0.45,
+            "75%": 0.925,
+            "max": 1.0
+          },
+          "negative_sentiment_raw": {
+            "count": 4.0,
+            "mean": 0.5,
+            "std": 0.5773502691896257,
+            "min": 0.0,
+            "25%": 0.0,
+            "50%": 0.5,
+            "75%": 1.0,
+            "max": 1.0
+          },
+          "net_sentiment": {
+            "count": 4.0,
+            "mean": -0.025000000000000022,
+            "std": 1.1265729744080792,
+            "min": -1.0,
+            "25%": -1.0,
+            "50%": -0.04999999999999993,
+            "75%": 0.925,
+            "max": 1.0
+          },
+          "sentiment_magnitude": {
+            "count": 4.0,
+            "mean": 0.4875,
+            "std": 0.024999999999999994,
+            "min": 0.45,
+            "25%": 0.4875,
+            "50%": 0.5,
+            "75%": 0.5,
+            "max": 0.5
+          }
+        },
+        "grouped_descriptives": {

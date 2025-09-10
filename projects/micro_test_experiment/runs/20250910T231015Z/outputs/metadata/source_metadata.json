@@ -1,0 +1,7 @@
+{
+  "experiment_name": "micro_test_experiment",
+  "framework": "sentiment_binary_v1.md",
+  "corpus": "corpus.md",
+  "run_timestamp": "2025-09-10T23:18:34.133972+00:00",
+  "total_documents": 4
+}
