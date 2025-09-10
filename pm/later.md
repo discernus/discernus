@@ -166,6 +166,40 @@
 
 ---
 
+## Testing & CI - Post-Alpha Enhancements
+
+### [TEST-L001] Makefile Fast Test Targets
+
+- **Description**: Add fast test targets to Makefile to standardize local testing.
+- **Priority**: MEDIUM - Developer productivity
+- **Why Deferred**: Not required before alpha; manual test invocation is sufficient short term.
+- **Acceptance Criteria**:
+  - `make test` runs `pytest -q` for unit + marked fast integration tests
+  - `make test-unit` runs only unit tests under `discernus/tests/unit`
+  - `make test-integration-fast` runs integration tests that do not hit external LLMs
+  - All commands exit non-zero on failure and print concise summaries
+
+### [CI-L001] Minimal GitHub Actions Workflow for Tests
+
+- **Description**: Add a minimal CI workflow that runs the fast test suite on push/PR.
+- **Priority**: MEDIUM - Quality gate
+- **Why Deferred**: CI not generally in use yet; add post-alpha once test set stabilizes.
+- **Acceptance Criteria**:
+  - Workflow file `.github/workflows/tests.yml` triggers on push and PR to main branches
+  - Sets up Python, installs minimal dependencies, runs `make test`
+  - Skips or marks any tests that require LLM/network
+  - Job completes in < 3 minutes on typical runners
+
+### [CI-L002] Optional Coverage Reporting (Local + CI)
+
+- **Description**: Integrate coverage measurement with optional reporting.
+- **Priority**: LOW - Nice to have
+- **Why Deferred**: Not needed for alpha; keep pipeline simple initially.
+- **Acceptance Criteria**:
+  - `make coverage` runs pytest with coverage and prints summary
+  - CI step (optional) uploads coverage artifact; no gating on thresholds initially
+
+
 ## Synthesis Enhancement Approaches
 
 ### Multi-Report Synthesis Agent
