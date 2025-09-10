@@ -1,0 +1,89 @@
+{
+  "evidence_database_metadata": {
+    "total_evidence_pieces": 8,
+    "total_files_processed": 4,
+    "collection_time": "2025-09-10T19:31:19.911112+00:00"
+  },
+  "evidence_collection": [
+    {
+      "document_name": "negative_test_1.txt",
+      "dimension": "positive_sentiment",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:30:29.532397+00:00"
+    },
+    {
+      "document_name": "negative_test_1.txt",
+      "dimension": "negative_sentiment",
+      "quote_text": "This is a terrible situation. Everything is going wrong.",
+      "confidence": 1.0,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:30:29.532401+00:00"
+    },
+    {
+      "document_name": "positive_test_2.txt",
+      "dimension": "positive_sentiment",
+      "quote_text": "What a superb morning! All systems are operating flawlessly. I'm excited about what's coming next. Achievement surrounds us. The group performed outstandingly. We're reaching incredible goals. Hopefulness permeates everything. Such a marvelous chance! I'm delighted by the advancement. Everything appears glowing and encouraging.",
+      "confidence": 0.95,
+      "context_type": "overall_sentiment",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:30:28.259597+00:00"
+    },
+    {
+      "document_name": "positive_test_2.txt",
+      "dimension": "negative_sentiment",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence_of_indicators",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:30:28.259600+00:00"
+    },
+    {
+      "document_name": "negative_test_2.txt",
+      "dimension": "positive_sentiment",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:30:31.191146+00:00"
+    },
+    {
+      "document_name": "negative_test_2.txt",
+      "dimension": "negative_sentiment",
+      "quote_text": "What an awful predicament. All plans are failing miserably. I'm dreading what's to come. Defeat engulfs us. The group performed dreadfully. We're encountering catastrophe. Despair saturates everything. Such a calamitous result! I'm crushed by the setbacks. Everything appears bleak and discouraging.",
+      "confidence": 0.98,
+      "context_type": "dense_negative_indicators",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:30:31.191163+00:00"
+    },
+    {
+      "document_name": "positive_test_1.txt",
+      "dimension": "positive_sentiment",
+      "quote_text": "This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.",
+      "confidence": 1.0,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:30:26.791110+00:00"
+    },
+    {
+      "document_name": "positive_test_1.txt",
+      "dimension": "negative_sentiment",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absent",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:30:26.791117+00:00"
+    }
+  ]
+}
