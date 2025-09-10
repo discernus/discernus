@@ -228,6 +228,21 @@
 - **Dependencies**: [CLEANUP-003]
 - **Effort**: 3-5 days
 
+#### [CLEANUP-005] Attic Branch Archival & Pristine Main for OSS Alpha
+
+- **Description**: Create immutable attic branch to archive all deprecated/legacy code, then prune main/dev so the open source alpha is pristine.
+- **Purpose**: Preserve history safely while ensuring the OSS-facing repository contains only supported code paths.
+- **Priority**: CRITICAL - OSS readiness
+- **Acceptance Criteria**:
+  - Attic branch created and tagged (e.g., `attic-YYYY-MM-DD`) with archived code relocated under `attic/` on that branch
+  - Main/dev cleaned: removed `discernus/core/deprecated/`, `discernus/agents/deprecated/`, `discernus/agents/fact_checker_agent/`, `discernus/agents/revision_agent/`, and legacy CLIs (`cli.py.backup`, `cli_clean.py`, `cli_console.py`)
+  - Tests referencing removed agents deleted/disabled
+  - Orchestrator imports/references to removed agents excised or guarded
+  - `docs/ARCHIVE.md` added: lists archived paths, attic branch/tag, retrieval instructions
+  - Push attic branch and updated dev; repo builds and minimal tests pass
+- **Dependencies**: [CLEANUP-001], [CLEANUP-002], [CLEANUP-003]
+- **Effort**: 1-2 days
+
 ---
 
 ### Sprint 14: Open Source Strategy & Licensing (HIGH PRIORITY)
