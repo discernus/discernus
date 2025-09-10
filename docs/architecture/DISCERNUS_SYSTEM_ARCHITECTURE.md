@@ -397,7 +397,7 @@ The `CleanAnalysisOrchestrator` implements a comprehensive 12-phase pipeline tha
 - **Phase 8: Evidence Retrieval** - Curate supporting quotes and evidence using EvidenceRetrieverAgent
 - **Phase 9: RAG Readiness Validation** - Validate index readiness before synthesis (gate phase)
 - **Phase 10: Synthesis** - Generate comprehensive narrative synthesis with UnifiedSynthesisAgent
-- **Phase 11: Fact-Checking** - Validate factual claims against source documents with FactCheckerAgent
+- **Phase 11: Fact-Checking** - (Disabled in OSS alpha) factual validation phase is archived to the attic branch
 - **Phase 12: Results Finalization** - Create publication-ready results with complete provenance
 
 This architecture ensures fail-fast behavior, comprehensive caching, and complete audit trails while maintaining THIN principles throughout the pipeline.
@@ -438,7 +438,7 @@ This architecture ensures fail-fast behavior, comprehensive caching, and complet
 - **Model Assignment**: Configurable (default: vertex_ai/gemini-2.5-pro)
 - **Location**: `discernus/core/reuse_candidates/unified_synthesis_agent.py`
 
-**TxtaiEvidenceCurator** - *Evidence RAG System*
+**TxtaiEvidenceCurator** - *Evidence RAG System (archived in attic for OSS alpha)*
 - **Function**: Evidence retrieval and curation using txtai semantic search
 - **THIN Compliance**: ✅ Externalized YAML prompts, minimal parsing
 - **Key Capabilities**: Semantic evidence search, relevance scoring, evidence indexing
@@ -451,13 +451,13 @@ This architecture ensures fail-fast behavior, comprehensive caching, and complet
 - **Key Capabilities**: Query-based evidence discovery, context preservation
 - **Location**: `discernus/agents/evidence_retriever_agent/`
 
-**RevisionAgent** - *Content Refinement*
+**RevisionAgent** - *Content Refinement (archived in attic for OSS alpha)*
 - **Function**: Iterative content improvement and quality enhancement
 - **THIN Compliance**: ✅ Externalized YAML prompts, minimal parsing
 - **Key Capabilities**: Content revision, quality improvement, academic standards enforcement
 - **Location**: `discernus/agents/revision_agent/`
 
-**FactCheckerAgent** - *Factual Validation*
+**FactCheckerAgent** - *Factual Validation (archived in attic for OSS alpha)*
 - **Function**: Validates factual claims in synthesis reports against source documents and analysis results
 - **THIN Compliance**: ✅ Externalized YAML prompts, minimal parsing
 - **Key Capabilities**: Claim identification, source verification, issue classification, actionable findings

@@ -134,7 +134,7 @@ def _build_corpus_index_service(self) -> Any:
 
 ### 2. Agent Integration
 
-#### FactCheckerAgent
+#### FactCheckerAgent (archived in attic for OSS alpha)
 **Location**: `discernus/agents/fact_checker_agent/agent.py`
 **Integration Point**: Quote validation and fact checking
 
