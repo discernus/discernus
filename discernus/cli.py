@@ -798,8 +798,8 @@ def cache(experiment_path: str, stats: bool, cleanup: bool):
 @click.option('--include-inputs', is_flag=True, default=True, help='Include input materials (corpus, experiment spec, framework)')
 @click.option('--include-provenance', is_flag=True, default=True, help='Include consolidated provenance data')
 @click.option('--include-docs', is_flag=True, default=True, help='Include comprehensive documentation')
-@click.option('--include-session-logs', is_flag=True, default=True, help='Include complete session logs (LLM interactions, system events, costs)')
-@click.option('--include-artifacts', is_flag=True, default=True, help='Include actual artifact content (not just symlinks)')
+@click.option('--include-session-logs', is_flag=True, default=False, help='Include complete session logs (LLM interactions, system events, costs)')
+@click.option('--include-artifacts', is_flag=True, default=False, help='Include actual artifact content (not just symlinks)')
 @click.option('--create-statistical-package', is_flag=True, default=False, help='Create researcher-ready statistical package for external analysis')
 def archive(run_directory: str, output: Optional[str], include_inputs: bool, include_provenance: bool, include_docs: bool, include_session_logs: bool, include_artifacts: bool, create_statistical_package: bool):
     """Create a complete golden run archive for research transparency.
@@ -839,12 +839,16 @@ def archive(run_directory: str, output: Optional[str], include_inputs: bool, inc
             rich_console.print_info("📋 Copying session logs...")
             _copy_session_logs(run_path)
             rich_console.print_success("✅ Session logs copied")
+        else:
+            rich_console.print_info("⏭️ Skipping session logs copying")
         
         # Step 4: Copy actual artifact content (NEW)
         if include_artifacts:
             rich_console.print_info("🗄️ Copying artifact content...")
             _copy_artifact_content(run_path)
             rich_console.print_success("✅ Artifact content copied")
+        else:
+            rich_console.print_info("⏭️ Skipping artifact content copying")
         
         # Step 5: Create statistical package (NEW)
         if create_statistical_package and run_mode in ['statistical_prep', 'skip_synthesis']:
@@ -898,27 +902,39 @@ def _copy_session_logs(run_path: Path) -> None:
     """Copy session logs to archive."""
     try:
         experiment_path = run_path.parent.parent
-        session_dirs = [d for d in (experiment_path / "session").glob("*") if d.is_dir()]
-        if not session_dirs:
+        run_id = run_path.name
+        
+        # Find the specific session directory for this run
+        session_dir = experiment_path / "session" / run_id
+        if not session_dir.exists():
+            print(f"⚠️ Warning: Session directory not found for run {run_id}")
             return
         
-        # Find the most recent session directory
-        latest_session = max(session_dirs, key=lambda x: x.name)
-        logs_source = latest_session / "logs"
+        logs_source = session_dir / "logs"
+        if not logs_source.exists():
+            print(f"⚠️ Warning: Logs directory not found in session {run_id}")
+            return
         
-        if logs_source.exists():
-            # Create session_logs directory in run
-            session_logs_dir = run_path / "session_logs"
-            session_logs_dir.mkdir(exist_ok=True)
-            
-            # Copy all log files
+        # Create session_logs directory in run
+        session_logs_dir = run_path / "session_logs"
+        session_logs_dir.mkdir(exist_ok=True)
+        
+        # Remove existing logs directory if it exists to avoid conflicts
+        target_logs_dir = session_logs_dir / "logs"
+        if target_logs_dir.exists():
             import shutil
-            shutil.copytree(logs_source, session_logs_dir / "logs", dirs_exist_ok=True)
+            shutil.rmtree(str(target_logs_dir))
+        
+        # Copy all log files
+        import shutil
+        shutil.copytree(logs_source, target_logs_dir)
+        
+        # Copy manifest if it exists
+        manifest_file = session_dir / "manifest.json"
+        if manifest_file.exists():
+            shutil.copy2(manifest_file, session_logs_dir / "manifest.json")
             
-            # Copy manifest if it exists
-            manifest_file = latest_session / "manifest.json"
-            if manifest_file.exists():
-                shutil.copy2(manifest_file, session_logs_dir / "manifest.json")
+        print(f"✅ Session logs copied from {session_dir} to {session_logs_dir}")
                 
     except Exception as e:
         print(f"⚠️ Warning: Could not copy session logs: {e}")
@@ -929,6 +945,7 @@ def _copy_artifact_content(run_path: Path) -> None:
     try:
         artifacts_dir = run_path / "artifacts"
         if not artifacts_dir.exists():
+            print("⚠️ Warning: No artifacts directory found")
             return
         
         # Find shared cache directory
@@ -936,22 +953,32 @@ def _copy_artifact_content(run_path: Path) -> None:
         shared_cache_dir = experiment_path / "shared_cache" / "artifacts"
         
         if not shared_cache_dir.exists():
+            print("⚠️ Warning: No shared cache directory found")
             return
         
+        copied_files = 0
+        
         # Copy actual content for each symlink
-        for root, dirs, files in os.walk(artifacts_dir):
-            for file in files:
-                file_path = Path(root) / file
+        for file_path in artifacts_dir.rglob("*"):
+            if file_path.is_file():
                 if file_path.is_symlink():
                     # Get the target of the symlink
                     target_path = file_path.resolve()
                     if target_path.exists() and target_path != file_path:
-                        # Copy the actual content
+                        # Create a temporary file to copy content
                         import shutil
-                        shutil.copy2(target_path, file_path)
+                        temp_file = file_path.with_suffix(file_path.suffix + '.tmp')
+                        shutil.copy2(target_path, temp_file)
+                        
                         # Remove the symlink and replace with actual file
                         file_path.unlink()
-                        shutil.move(str(target_path), str(file_path))
+                        temp_file.rename(file_path)
+                        copied_files += 1
+                else:
+                    # Regular file, already has content
+                    copied_files += 1
+        
+        print(f"✅ Artifact content copied: {copied_files} files processed")
                         
     except Exception as e:
         print(f"⚠️ Warning: Could not copy artifact content: {e}")

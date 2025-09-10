@@ -5,7 +5,7 @@
     ],
     "total_evidence_pieces": 2,
     "extraction_method": "analysis_time_extraction_v1.0",
-    "extraction_time": "2025-09-10T04:44:01.924159+00:00",
+    "extraction_time": "2025-09-10T13:59:20.993062+00:00",
     "framework_version": "v6.0"
   },
   "evidence_data": [
@@ -17,7 +17,7 @@
       "context_type": "entire_document_theme",
       "extraction_method": "analysis_time_extraction_v1.0",
       "source_type": "analysis_response",
-      "extraction_timestamp": "2025-09-10T04:44:01.924154+00:00"
+      "extraction_timestamp": "2025-09-10T13:59:20.993051+00:00"
     },
     {
       "document_name": "positive_test.txt",
@@ -27,7 +27,7 @@
       "context_type": "absence_of_evidence",
       "extraction_method": "analysis_time_extraction_v1.0",
       "source_type": "analysis_response",
-      "extraction_timestamp": "2025-09-10T04:44:01.924157+00:00"
+      "extraction_timestamp": "2025-09-10T13:59:20.993060+00:00"
     }
   ]
 }
