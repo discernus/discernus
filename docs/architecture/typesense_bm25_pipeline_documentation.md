@@ -134,9 +134,10 @@ def _build_corpus_index_service(self) -> Any:
 
 ### 2. Agent Integration
 
-#### FactCheckerAgent (archived in attic for OSS alpha)
-**Location**: `discernus/agents/fact_checker_agent/agent.py`
-**Integration Point**: Quote validation and fact checking
+#### FactCheckerAgent (Archived in Attic for OSS Alpha)
+**Location**: `attic/fact_checker_agent/agent.py` (archived, not active)
+**Integration Point**: Quote validation and fact checking (disabled in OSS alpha)
+**Status**: Archived - fact-checking phase disabled for OSS alpha release
 
 ```python
 def _get_evidence_context(self, check: Dict[str, str], report_content: str, corpus_index_service: HybridCorpusService) -> str:

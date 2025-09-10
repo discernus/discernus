@@ -83,8 +83,8 @@ Orchestrator trust boundary model distinguishing between trusted infrastructure 
 ### **Enhanced Analysis Agents**
 Framework-specific agents that apply analytical approaches at scale with dimensional scoring, evidence extraction, and computational verification.
 
-### **ComprehensiveKnowledgeCurator**
-Agent that creates unified knowledge graphs indexing all experiment data types for cross-domain reasoning and intelligent synthesis.
+### **RAGIndexManager**
+Component that creates unified knowledge graphs indexing all experiment data types for cross-domain reasoning and intelligent synthesis.
 
 ### **RAGEnhancedResultsInterpreter**
 Intelligent synthesis agent using comprehensive knowledge retrieval for evidence-grounded narrative construction with full provenance.

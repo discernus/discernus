@@ -478,15 +478,18 @@ This architecture ensures fail-fast behavior, comprehensive caching, and complet
 
 #### 5. Deprecated Agents
 
-The following agents are deprecated but may still exist in the codebase:
+The following agents are archived in the attic branch for OSS alpha:
 - **ProductionThinSynthesisPipeline**: Replaced by UnifiedSynthesisAgent
-- **ComprehensiveKnowledgeCurator**: Functionality consolidated into TxtaiEvidenceCurator
+- **ComprehensiveKnowledgeCurator**: Functionality consolidated into RAGIndexManager
 - **IntelligentExtractorAgent**: Functionality integrated into EnhancedAnalysisAgent
+- **TxtaiEvidenceCurator**: Functionality replaced by RAGIndexManager
+- **FactCheckerAgent**: Archived for OSS alpha (fact-checking disabled)
+- **RevisionAgent**: Archived for OSS alpha (revision phase disabled)
 - **Various notebook generation agents**: No longer used in production pipeline
 
 ### THIN Compliance Status
 
-#### ✅ **FULLY COMPLIANT - All Production Agents (9/9)**
+#### ✅ **FULLY COMPLIANT - All Production Agents (7/7)**
 **Status**: **100% THIN Compliance Achieved** - August 2025
 
 **Current Production Agents**:
@@ -494,16 +497,19 @@ The following agents are deprecated but may still exist in the codebase:
 - **ExperimentCoherenceAgent**: Specification validation (≤300 lines)
 - **AutomatedStatisticalAnalysisAgent**: Statistical processing (≤400 lines)
 - **UnifiedSynthesisAgent**: Primary synthesis engine (≤500 lines)
-- **TxtaiEvidenceCurator**: Evidence RAG system (≤400 lines)
+- **RAGIndexManager**: Evidence RAG system (≤100 lines)
 - **EvidenceRetrieverAgent**: Evidence discovery (≤200 lines)
-- **RevisionAgent**: Content refinement (≤200 lines)
-- **FactCheckerAgent**: Factual validation (≤800 lines)
 - **CleanAnalysisOrchestrator**: Pipeline orchestration (≤1400 lines)
+
+**Archived Agents (OSS Alpha)**:
+- **TxtaiEvidenceCurator**: Archived - replaced by RAGIndexManager
+- **RevisionAgent**: Archived - revision phase disabled for OSS alpha
+- **FactCheckerAgent**: Archived - fact-checking phase disabled for OSS alpha
 
 **Characteristics**: All agents have externalized YAML prompts, minimal parsing, focused responsibilities, and proper line count compliance
 
 #### 🎯 **Architecture Consolidation Completed**
-1. **✅ Agent Ecosystem Simplified**: Reduced from 17+ to 9 focused production agents
+1. **✅ Agent Ecosystem Simplified**: Reduced from 17+ to 7 focused production agents
 2. **✅ YAML Externalization**: All prompts moved to external YAML files
 3. **✅ Deprecated Agent Cleanup**: Removed redundant and obsolete agents
 4. **✅ Pipeline Streamlining**: Unified orchestration through CleanAnalysisOrchestrator

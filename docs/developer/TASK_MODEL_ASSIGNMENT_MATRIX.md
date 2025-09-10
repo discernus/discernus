@@ -91,13 +91,14 @@ selection_criteria:
   - default: use primary_model
 ```
 
-#### **TxtaiEvidenceCurator** (Legacy)
+#### **TxtaiEvidenceCurator** (Archived)
 ```yaml
 task_type: evidence_curation
 primary_model: vertex_ai/gemini-2.5-flash
-status: deprecated
-replacement: ComprehensiveKnowledgeCurator
-migration_timeline: "Q2 2025"
+status: archived_in_attic
+replacement: RAGIndexManager
+migration_timeline: "Completed - OSS Alpha"
+note: "Archived in attic branch for OSS alpha; functionality replaced by RAGIndexManager"
 ```
 
 ### Synthesis & Interpretation

@@ -168,7 +168,7 @@ To avoid context window overload and ensure evidence quality, the agent will use
 
 ### Curation Agent Review Requirements
 
-The `ComprehensiveKnowledgeCurator` needs architectural alignment:
+The `RAGIndexManager` (replacing `ComprehensiveKnowledgeCurator`) needs architectural alignment:
 
 #### Current Issues
 1. **Equal Content Weighting**: Framework sections get same weight as speech quotes
@@ -287,7 +287,7 @@ To ensure full reproducibility, the system will maintain a rigorous, append-only
 ### Implementation Roadmap
 
 #### Phase 1: Clean RAG Architecture (Week 1)
-1. Modify `ComprehensiveKnowledgeCurator` for content-type filtering
+1. Modify `RAGIndexManager` for content-type filtering
 2. Separate framework definitions from evidence index
 3. Implement evidence-focused indexing with proper weighting
 4. Test query effectiveness with new architecture
@@ -305,7 +305,7 @@ To ensure full reproducibility, the system will maintain a rigorous, append-only
 4. Validate academic report quality
 
 #### Phase 4: Production Integration (Week 4)
-1. Integrate with existing `ProductionThinSynthesisPipeline`
+1. Integrate with existing `UnifiedSynthesisAgent`
 2. Add comprehensive error handling and audit logging
 3. Performance testing with larger corpora
 4. Documentation and training materials

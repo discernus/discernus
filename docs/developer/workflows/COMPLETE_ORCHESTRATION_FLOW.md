@@ -143,9 +143,9 @@ Issues      Metadata   Knowledge   Full Audit
 
 ## Stage 2: Synthesis
 
-**Agent**: `ProductionThinSynthesisPipeline` → `SequentialSynthesisAgent`  
+**Agent**: `UnifiedSynthesisAgent`  
 **Purpose**: Statistical analysis + narrative synthesis with RAG integration  
-**Architecture**: 5-step sequential synthesis with comprehensive knowledge RAG
+**Architecture**: Unified synthesis with comprehensive knowledge RAG
 
 ### Input Assets
 - ✅ `scores_artifact_hash` (from Analysis)
@@ -174,7 +174,7 @@ Issues      Metadata   Knowledge   Full Audit
 - **Logging**: Statistical health assessment results
 
 #### Step 2.3: RAG Index Building
-- **Agent**: `ComprehensiveKnowledgeCurator`
+- **Agent**: `RAGIndexManager`
 - **Technology**: txtai semantic embeddings
 - **Data Sources**: Evidence quotes, raw scores, calculated metrics, corpus text
 - **Index Structure**: Unified knowledge graph with cross-domain search
