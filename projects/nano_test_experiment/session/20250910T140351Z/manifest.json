@@ -1,0 +1,63 @@
+{
+  "artifact_transformations": [],
+  "audit_references": {
+    "current_time": "2025-09-10T14:03:52.120102+00:00",
+    "log_files": {
+      "agents": "logs/agents.jsonl",
+      "artifacts": "logs/artifacts.jsonl",
+      "costs": "logs/costs.jsonl",
+      "llm_interactions": "logs/llm_interactions.jsonl",
+      "orchestrator": "logs/orchestrator.jsonl",
+      "system": "logs/system.jsonl"
+    },
+    "logs_directory": "/Volumes/code/discernus/projects/nano_test_experiment/session/20250910T140351Z/logs",
+    "session_id": "20250910T140351Z_fa9593b2",
+    "start_time": "2025-09-10T14:03:51.645533+00:00"
+  },
+  "cache_analysis": {
+    "artifact_storage": {
+      "artifacts_dir": "/Volumes/code/discernus/projects/nano_test_experiment/shared_cache/artifacts",
+      "total_artifacts": 171,
+      "total_bytes": 749114,
+      "total_mb": 0.71
+    },
+    "cache_hits": 0,
+    "cache_misses": 0,
+    "hit_rate": 0.0
+  },
+  "cost_tracking": {
+    "total_cost_usd": 0.0
+  },
+  "created_at": "2025-09-10T14:03:51.653212+00:00",
+  "execution_timeline": [],
+  "experiment_config": {},
+  "finalized_at": "2025-09-10T14:03:52.120071+00:00",
+  "input_artifacts": {},
+  "llm_interactions": [],
+  "manifest_version": "2.0",
+  "performance_metrics": {},
+  "quality_assurance": {},
+  "resume_capability": {
+    "can_resume_from_stats": true,
+    "resume_artifacts": [
+      "479862731f8ccc10676b3639e624d7de8d1f59d05e923afd51345eab66f455f0"
+    ],
+    "resume_metadata": {
+      "analysis_documents": 2,
+      "csv_export_completed": true,
+      "derived_metrics_completed": true,
+      "resume_timestamp": "2025-09-10T14:03:51.809204+00:00"
+    },
+    "statistical_prep_completed": true
+  },
+  "run_metadata": {},
+  "run_mode": {
+    "analysis_only": false,
+    "dry_run": false,
+    "ensemble_runs": 1,
+    "mode_type": "statistical_prep",
+    "resume_from_stats": false,
+    "skip_synthesis": false,
+    "statistical_prep": true
+  }
+}

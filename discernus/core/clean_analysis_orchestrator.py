@@ -255,6 +255,13 @@ class CleanAnalysisOrchestrator:
                     # Reorganize directory structure
                     self._reorganize_directory_structure(run_id, audit_logger)
                     
+                    # Auto-commit to Git (if enabled)
+                    self._log_progress(f"📝 Auto-commit flag: {self.auto_commit}")
+                    if self.auto_commit:
+                        self._auto_commit_run(run_id, audit_logger)
+                    else:
+                        self._log_progress("📝 Auto-commit disabled, skipping Git commit")
+                    
                     # Finalize manifest
                     if self.manifest:
                         try:
@@ -345,6 +352,13 @@ class CleanAnalysisOrchestrator:
                     
                     # Reorganize directory structure
                     self._reorganize_directory_structure(run_id, audit_logger)
+                    
+                    # Auto-commit to Git (if enabled)
+                    self._log_progress(f"📝 Auto-commit flag: {self.auto_commit}")
+                    if self.auto_commit:
+                        self._auto_commit_run(run_id, audit_logger)
+                    else:
+                        self._log_progress("📝 Auto-commit disabled, skipping Git commit")
                     
                     # Finalize manifest
                     if self.manifest:
@@ -536,6 +550,14 @@ class CleanAnalysisOrchestrator:
             phase_start = datetime.now(timezone.utc)
             self._reorganize_directory_structure(run_id, audit_logger)
             self._log_phase_timing("directory_reorganization", phase_start)
+            
+            # Phase 15: Auto-commit to Git (if enabled)
+            if self.auto_commit:
+                if self.progress_manager:
+                    self.progress_manager.update_main_progress("Git commit")
+                phase_start = datetime.now(timezone.utc)
+                self._auto_commit_run(run_id, audit_logger)
+                self._log_phase_timing("git_commit", phase_start)
             
             duration = (datetime.now(timezone.utc) - start_time).total_seconds()
             log_experiment_complete(self.security.experiment_name, run_id, duration)
@@ -4576,3 +4598,89 @@ class CleanAnalysisOrchestrator:
         except Exception as e:
             self._log_progress(f"⚠️ Directory reorganization failed: {str(e)}")
             # Continue without directory reorganization - not fatal
+    
+    def _auto_commit_run(self, run_id: str, audit_logger: AuditLogger) -> None:
+        """Auto-commit completed research run to Git with mode-aware commit messages."""
+        try:
+            import subprocess
+            
+            self._log_progress("📝 Starting Git auto-commit...")
+            run_folder = self.experiment_path / "runs" / run_id
+            repo_root = self.experiment_path.parent.parent  # Go up to project root
+            
+            self._log_progress(f"📝 Run folder: {run_folder}")
+            self._log_progress(f"📝 Repo root: {repo_root}")
+            
+            # Add the run directory to Git (force to override .gitignore for research preservation)
+            result = subprocess.run(
+                ["git", "add", "--force", str(run_folder.relative_to(repo_root))],
+                cwd=repo_root,
+                capture_output=True,
+                text=True,
+                timeout=30
+            )
+            
+            if result.returncode != 0:
+                audit_logger.log_error("auto_commit_add_failed", result.stderr, {
+                    "run_folder": str(run_folder),
+                    "git_add_stderr": result.stderr
+                })
+                self._log_progress(f"⚠️ Git add failed: {result.stderr}")
+                return
+            
+            # Create mode-aware commit message
+            experiment_name = self.security.experiment_name
+            commit_msg = self._generate_commit_message(run_id, experiment_name)
+            
+            # Ensure commit message is under 50 characters (per .cursor/rules)
+            if len(commit_msg) > 47:  # Leave room for ellipsis
+                commit_msg = commit_msg[:44] + "..."
+            
+            # Commit the run
+            result = subprocess.run(
+                ["git", "commit", "-m", commit_msg],
+                cwd=repo_root,
+                capture_output=True,
+                text=True,
+                timeout=30
+            )
+            
+            if result.returncode != 0:
+                audit_logger.log_error("auto_commit_failed", result.stderr, {
+                    "run_folder": str(run_folder),
+                    "git_commit_stderr": result.stderr,
+                    "commit_message": commit_msg
+                })
+                self._log_progress(f"⚠️ Git commit failed: {result.stderr}")
+                return
+            
+            # Check for successful commit in output (git pre-commit hooks can write to stderr but still succeed)
+            if "nothing to commit" in result.stdout.lower():
+                self._log_progress("ℹ️ No changes to commit")
+                return
+            
+            self._log_status(f"📝 Auto-committed to Git: {commit_msg}")
+            
+        except subprocess.TimeoutExpired:
+            audit_logger.log_error("auto_commit_timeout", "Git command timed out", {
+                "run_folder": str(run_folder)
+            })
+            self._log_progress("⚠️ Git commit timed out")
+        except Exception as e:
+            audit_logger.log_error("auto_commit_error", str(e), {
+                "run_folder": str(run_folder)
+            })
+            self._log_progress(f"⚠️ Git commit failed: {str(e)}")
+    
+    def _generate_commit_message(self, run_id: str, experiment_name: str) -> str:
+        """Generate mode-aware commit message based on run type."""
+        if self.analysis_only:
+            return f"Analysis only: {experiment_name}"
+        elif self.statistical_prep:
+            return f"Statistical prep: {experiment_name}"
+        elif self.skip_synthesis:
+            return f"Skip synthesis: {experiment_name}"
+        elif self.resume_from_stats:
+            return f"Resume from stats: {experiment_name}"
+        else:
+            return f"Complete run: {experiment_name}"
