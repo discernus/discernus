@@ -798,7 +798,10 @@ def cache(experiment_path: str, stats: bool, cleanup: bool):
 @click.option('--include-inputs', is_flag=True, default=True, help='Include input materials (corpus, experiment spec, framework)')
 @click.option('--include-provenance', is_flag=True, default=True, help='Include consolidated provenance data')
 @click.option('--include-docs', is_flag=True, default=True, help='Include comprehensive documentation')
-def archive(run_directory: str, output: Optional[str], include_inputs: bool, include_provenance: bool, include_docs: bool):
+@click.option('--include-session-logs', is_flag=True, default=True, help='Include complete session logs (LLM interactions, system events, costs)')
+@click.option('--include-artifacts', is_flag=True, default=True, help='Include actual artifact content (not just symlinks)')
+@click.option('--create-statistical-package', is_flag=True, default=False, help='Create researcher-ready statistical package for external analysis')
+def archive(run_directory: str, output: Optional[str], include_inputs: bool, include_provenance: bool, include_docs: bool, include_session_logs: bool, include_artifacts: bool, create_statistical_package: bool):
     """Create a complete golden run archive for research transparency.
     
     Consolidates all experiment data into a self-contained archive suitable for:
@@ -815,6 +818,10 @@ def archive(run_directory: str, output: Optional[str], include_inputs: bool, inc
     try:
         rich_console.print_section(f"📦 Creating Golden Run Archive: {run_path.name}")
         
+        # Determine run mode from manifest
+        run_mode = _detect_run_mode(run_path)
+        rich_console.print_info(f"🔍 Detected run mode: {run_mode}")
+        
         # Step 1: Consolidate provenance data
         if include_provenance:
             rich_console.print_info("📊 Consolidating provenance data...")
@@ -827,11 +834,33 @@ def archive(run_directory: str, output: Optional[str], include_inputs: bool, inc
             consolidation_report = consolidate_input_materials(run_path, None)
             rich_console.print_success("✅ Input materials consolidated")
         
-        # Step 3: Generate comprehensive documentation
+        # Step 3: Copy session logs (NEW)
+        if include_session_logs:
+            rich_console.print_info("📋 Copying session logs...")
+            _copy_session_logs(run_path)
+            rich_console.print_success("✅ Session logs copied")
+        
+        # Step 4: Copy actual artifact content (NEW)
+        if include_artifacts:
+            rich_console.print_info("🗄️ Copying artifact content...")
+            _copy_artifact_content(run_path)
+            rich_console.print_success("✅ Artifact content copied")
+        
+        # Step 5: Create statistical package (NEW)
+        if create_statistical_package and run_mode in ['statistical_prep', 'skip_synthesis']:
+            rich_console.print_info("📊 Creating statistical package...")
+            _create_statistical_package(run_path)
+            rich_console.print_success("✅ Statistical package created")
+        
+        # Step 6: Generate comprehensive documentation
         if include_docs:
             rich_console.print_info("📋 Generating comprehensive documentation...")
-            docs_path = generate_golden_run_documentation(run_path, output_path)
-            rich_console.print_success("✅ Documentation generated")
+            try:
+                docs_path = generate_golden_run_documentation(run_path, output_path)
+                rich_console.print_success("✅ Documentation generated")
+            except Exception as e:
+                rich_console.print_warning(f"⚠️ Documentation generation failed: {e}")
+                rich_console.print_info("📋 Continuing without documentation...")
         
         rich_console.print_success("🎉 Golden run archive created successfully!")
         rich_console.print_info("📦 Archive is self-contained and ready for peer review/archival")
@@ -839,6 +868,104 @@ def archive(run_directory: str, output: Optional[str], include_inputs: bool, inc
     except Exception as e:
         rich_console.print_error(f"❌ Error creating golden run archive: {e}")
         exit_general_error(str(e))
+
+
+def _detect_run_mode(run_path: Path) -> str:
+    """Detect run mode from manifest file."""
+    try:
+        # Look for manifest in session directory
+        experiment_path = run_path.parent.parent
+        session_dirs = list((experiment_path / "session").glob("*"))
+        if not session_dirs:
+            return "unknown"
+        
+        # Find the most recent session directory
+        latest_session = max(session_dirs, key=lambda x: x.name)
+        manifest_file = latest_session / "manifest.json"
+        
+        if manifest_file.exists():
+            import json
+            with open(manifest_file) as f:
+                manifest = json.load(f)
+            return manifest.get("run_mode", {}).get("mode_type", "unknown")
+        
+        return "unknown"
+    except Exception:
+        return "unknown"
+
+
+def _copy_session_logs(run_path: Path) -> None:
+    """Copy session logs to archive."""
+    try:
+        experiment_path = run_path.parent.parent
+        session_dirs = [d for d in (experiment_path / "session").glob("*") if d.is_dir()]
+        if not session_dirs:
+            return
+        
+        # Find the most recent session directory
+        latest_session = max(session_dirs, key=lambda x: x.name)
+        logs_source = latest_session / "logs"
+        
+        if logs_source.exists():
+            # Create session_logs directory in run
+            session_logs_dir = run_path / "session_logs"
+            session_logs_dir.mkdir(exist_ok=True)
+            
+            # Copy all log files
+            import shutil
+            shutil.copytree(logs_source, session_logs_dir / "logs", dirs_exist_ok=True)
+            
+            # Copy manifest if it exists
+            manifest_file = latest_session / "manifest.json"
+            if manifest_file.exists():
+                shutil.copy2(manifest_file, session_logs_dir / "manifest.json")
+                
+    except Exception as e:
+        print(f"⚠️ Warning: Could not copy session logs: {e}")
+
+
+def _copy_artifact_content(run_path: Path) -> None:
+    """Copy actual artifact content instead of symlinks."""
+    try:
+        artifacts_dir = run_path / "artifacts"
+        if not artifacts_dir.exists():
+            return
+        
+        # Find shared cache directory
+        experiment_path = run_path.parent.parent
+        shared_cache_dir = experiment_path / "shared_cache" / "artifacts"
+        
+        if not shared_cache_dir.exists():
+            return
+        
+        # Copy actual content for each symlink
+        for root, dirs, files in os.walk(artifacts_dir):
+            for file in files:
+                file_path = Path(root) / file
+                if file_path.is_symlink():
+                    # Get the target of the symlink
+                    target_path = file_path.resolve()
+                    if target_path.exists() and target_path != file_path:
+                        # Copy the actual content
+                        import shutil
+                        shutil.copy2(target_path, file_path)
+                        # Remove the symlink and replace with actual file
+                        file_path.unlink()
+                        shutil.move(str(target_path), str(file_path))
+                        
+    except Exception as e:
+        print(f"⚠️ Warning: Could not copy artifact content: {e}")
+
+
+def _create_statistical_package(run_path: Path) -> None:
+    """Create researcher-ready statistical package."""
+    try:
+        from .core.statistical_package_generator import generate_statistical_package
+        package_dir = generate_statistical_package(run_path)
+        print(f"📊 Statistical package created: {package_dir}")
+        
+    except Exception as e:
+        print(f"⚠️ Warning: Could not create statistical package: {e}")
 
 
 def main():

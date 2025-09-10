@@ -151,31 +151,43 @@
 
 ---
 
-### Sprint 13: Code Quality & Architecture Cleanup (MEDIUM PRIORITY)
+### Sprint 13: Essential Code Quality & Architecture Cleanup (HIGH PRIORITY)
 
 **Timeline**: 2-3 weeks
-**Goal**: Clean up dead code, remove deprecated components, and update architecture documentation
+**Goal**: Clean up critical dead code, remove deprecated components, and update essential architecture documentation
 
-#### [CLEANUP-001] Dead Code Inventory
+#### [CLEANUP-001] Essential Dead Code Inventory
 
-- **Description**: Conduct comprehensive inventory for dead code
-- **Purpose**: Identify and remove unused code to improve maintainability
-- **Priority**: MEDIUM - Code quality improvement
+- **Description**: Conduct focused inventory for critical dead code that impacts alpha users
+- **Purpose**: Identify and prioritize removal of unused code that creates confusion or maintenance burden
+- **Priority**: HIGH - Code quality improvement
+- **Acceptance Criteria**:
+  - Identify dead imports and unused dependencies
+  - Catalog deprecated agent patterns and unused directories
+  - Prioritize cleanup based on alpha user impact
+  - Document findings for systematic removal
 - **Dependencies**: None
 - **Effort**: 1 week
 
-#### [CLEANUP-002] Remove Revision Agent and Fact Checker Agent
+#### [CLEANUP-002] Remove Deprecated Fact Checker and Revision Agents
 
-- **Description**: Remove the revision agent and fact checker agent
-- **Purpose**: Clean up unused or deprecated agent components
-- **Priority**: MEDIUM - Code cleanup
+- **Description**: Remove disabled fact checker and revision agents that still generate confusing artifacts
+- **Purpose**: Clean up agents that are disabled but still create artifacts, causing user confusion
+- **Priority**: HIGH - Alpha user experience
+- **Acceptance Criteria**:
+  - Remove `fact_checker_agent/` and `revision_agent/` directories
+  - Stop generating `fact_check_results.json` artifacts
+  - Remove unused imports from orchestrator
+  - Clean up or remove related test files
+  - Update architecture documentation to remove references
+  - Verify no fact-check artifacts appear in results directories
 - **Dependencies**: [CLEANUP-001]
 - **Effort**: 2-3 days
 
-#### [CLEANUP-003] Clean Up Dead Code and Update Architecture Documentation
+#### [CLEANUP-003] Critical Dead Dependencies and Architecture Updates
 
-- **Description**: Clean up dead code and update architecture documentation to align with current 3-stage unified pipeline
-- **Purpose**: Remove technical debt and align documentation with actual implementation
+- **Description**: Remove critical dead dependencies and update essential architecture documentation
+- **Purpose**: Remove technical debt that impacts alpha users and align documentation with actual implementation
 - **Priority**: HIGH - Technical debt and documentation
 - **Acceptance Criteria**:
   - Remove Redis dependencies from requirements.txt and pyproject.toml
@@ -183,15 +195,20 @@
   - Clean up deprecated orchestrator patterns and unused agent directories
   - Update DISCERNUS_SYSTEM_ARCHITECTURE.md to reflect current 3-stage pipeline
   - Update CURSOR_AGENT_QUICK_START.md to reflect current architecture
-  - All dead dependencies removed and deprecated code cleaned up
+  - All critical dead dependencies removed and deprecated code cleaned up
 - **Dependencies**: [CLEANUP-001], [CLEANUP-002]
 - **Effort**: 1-2 weeks
 
-#### [CLEANUP-004] System Architecture Document Update
+#### [CLEANUP-004] Essential Architecture Document Updates
 
-- **Description**: Update the system architecture document to reflect current state
-- **Purpose**: Keep architecture documentation current and accurate
+- **Description**: Update essential architecture documentation to reflect current state
+- **Purpose**: Keep critical architecture documentation current and accurate for alpha users
 - **Priority**: MEDIUM - Documentation maintenance
+- **Acceptance Criteria**:
+  - Update system architecture document with current agent list
+  - Remove references to deprecated agents and patterns
+  - Ensure documentation matches actual implementation
+  - Verify all links and references are current
 - **Dependencies**: [CLEANUP-003]
 - **Effort**: 3-5 days
 

@@ -77,8 +77,8 @@ class GoldenRunDocumentationGenerator:
     
     def _generate_header(self, manifest_data: Dict[str, Any]) -> str:
         """Generate README header."""
-        experiment_name = manifest_data.get('experiment_name', 'Unknown Experiment')
-        run_timestamp = manifest_data.get('run_timestamp', 'Unknown')
+        experiment_name = manifest_data.get('experiment_name') or 'Unknown Experiment'
+        run_timestamp = manifest_data.get('run_timestamp') or 'Unknown'
         
         return f"""# Golden Run Archive: {experiment_name}
 
@@ -106,16 +106,28 @@ version of this research experiment, ready for academic review, replication, and
         timeline_info = provenance_data.get('execution_timeline', {})
         cost_info = provenance_data.get('cost_analysis', {})
         
-        models_used = model_info.get('unique_models', ['Unknown'])
-        total_duration = timeline_info.get('total_duration', 0)
-        total_cost = cost_info.get('total_cost', 0.0)
+        models_used = model_info.get('unique_models') or ['Unknown']
+        total_duration = timeline_info.get('total_duration') or 0
+        total_cost = cost_info.get('total_cost') or 0.0
+        
+        # Ensure numeric values are properly handled
+        if total_duration is None:
+            total_duration = 0
+        if total_cost is None:
+            total_cost = 0.0
+        
+        # Ensure models_used is a list
+        if not isinstance(models_used, list):
+            models_used = ['Unknown']
+        
+        models_str = ', '.join(str(m) for m in models_used) if models_used else 'Unknown'
         
         return f"""## 📊 Executive Summary
 
 ### Research Execution
-- **Experiment**: {manifest_data.get('experiment_name', 'Unknown')}
-- **Framework**: {manifest_data.get('framework_version', 'Unknown')}
-- **Models Used**: {', '.join(models_used)}
+- **Experiment**: {manifest_data.get('experiment_name') or 'Unknown'}
+- **Framework**: {manifest_data.get('framework_version') or 'Unknown'}
+- **Models Used**: {models_str}
 - **Total Duration**: {total_duration:.1f} seconds
 - **Total Cost**: ${total_cost:.4f} USD
 - **Status**: ✅ Completed successfully
@@ -139,22 +151,26 @@ version of this research experiment, ready for academic review, replication, and
         content = "## 🎯 Stakeholder Navigation\n\n"
         
         for stakeholder, summary in stakeholder_summaries.items():
+            if not summary:
+                continue
             stakeholder_name = stakeholder.replace('_', ' ').title()
             content += f"### {stakeholder_name}\n\n"
-            content += f"**{summary.get('executive_summary', 'No summary available')}**\n\n"
+            content += f"**{summary.get('executive_summary') or 'No summary available'}**\n\n"
             
-            navigation_guide = summary.get('navigation_guide', [])
+            navigation_guide = summary.get('navigation_guide') or []
             if navigation_guide:
                 content += "**Start Here:**\n"
                 for item in navigation_guide:
-                    content += f"- {item}\n"
+                    if item:
+                        content += f"- {item}\n"
                 content += "\n"
             
-            key_metrics = summary.get('key_metrics', {})
+            key_metrics = summary.get('key_metrics') or {}
             if key_metrics:
                 content += "**Key Metrics:**\n"
                 for metric, value in key_metrics.items():
-                    content += f"- {metric.replace('_', ' ').title()}: {value}\n"
+                    if metric and value is not None:
+                        content += f"- {metric.replace('_', ' ').title()}: {value}\n"
                 content += "\n"
         
         content += "---\n\n"
@@ -170,28 +186,30 @@ version of this research experiment, ready for academic review, replication, and
         content = "## 📁 Input Materials (Complete Reproducibility)\n\n"
         
         # Reproducibility score
-        reproducibility_score = summary.get('reproducibility_score', 0)
+        reproducibility_score = summary.get('reproducibility_score') or 0
         content += f"**Reproducibility Score: {reproducibility_score}%** - All critical input materials included\n\n"
         
         # Corpus materials
-        corpus_files_copied = corpus_data.get('corpus_files_copied', 0)
-        corpus_manifest_copied = corpus_data.get('corpus_manifest_copied', False)
+        corpus_files_copied = corpus_data.get('corpus_files_copied') or 0
+        corpus_manifest_copied = corpus_data.get('corpus_manifest_copied') or False
         
         content += "### Corpus Materials\n"
         content += f"- **Corpus Files**: {corpus_files_copied} documents in `results/corpus/`\n"
         content += f"- **Corpus Manifest**: {'✅ Included' if corpus_manifest_copied else '❌ Missing'} (`results/corpus/corpus.md`)\n"
         
-        corpus_files = corpus_data.get('corpus_files', [])
+        corpus_files = corpus_data.get('corpus_files') or []
         if corpus_files:
             content += "- **Document List**:\n"
             for file_info in corpus_files:
-                filename = file_info.get('filename', 'Unknown')
-                size_kb = file_info.get('size_bytes', 0) / 1024
-                content += f"  - `{filename}` ({size_kb:.1f} KB)\n"
+                if file_info:
+                    filename = file_info.get('filename') or 'Unknown'
+                    size_bytes = file_info.get('size_bytes') or 0
+                    size_kb = size_bytes / 1024
+                    content += f"  - `{filename}` ({size_kb:.1f} KB)\n"
         content += "\n"
         
         # Experiment specification
-        experiment_copied = experiment_data.get('experiment_spec_copied', False)
+        experiment_copied = experiment_data.get('experiment_spec_copied') or False
         content += "### Experiment Specification\n"
         content += f"- **Experiment Spec**: {'✅ Included' if experiment_copied else '❌ Missing'} (`results/experiment.md`)\n"
         content += "  - Research design and methodology\n"
@@ -199,8 +217,8 @@ version of this research experiment, ready for academic review, replication, and
         content += "  - Analysis parameters and configuration\n\n"
         
         # Framework
-        framework_copied = framework_data.get('framework_copied', False)
-        framework_name = framework_data.get('framework_name', 'Unknown')
+        framework_copied = framework_data.get('framework_copied') or False
+        framework_name = framework_data.get('framework_name') or 'Unknown'
         content += "### Analytical Framework\n"
         content += f"- **Framework**: {'✅ Included' if framework_copied else '❌ Missing'} (`results/{framework_name}`)\n"
         content += "  - Analytical dimensions and criteria\n"
