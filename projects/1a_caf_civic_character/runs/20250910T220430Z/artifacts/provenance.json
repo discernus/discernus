@@ -1,0 +1,66 @@
+{
+  "run_metadata": {
+    "experiment_name": "1a_caf_civic_character",
+    "run_timestamp": "Unknown",
+    "framework_version": "Unknown",
+    "model_used": "Unknown",
+    "total_artifacts": 14,
+    "organized_artifacts": 14
+  },
+  "directory_structure": {
+    "artifacts/analysis_plans/": "What the LLM planned to analyze",
+    "artifacts/analysis_results/": "Raw analysis outputs from LLM",
+    "artifacts/statistical_results/": "Mathematical computations and metrics",
+    "artifacts/evidence/": "Curated quotes and supporting data",
+    "artifacts/reports/": "Final synthesis outputs and reports",
+    "artifacts/inputs/": "Framework, corpus, and experiment configuration",
+    "technical/": "System logs and model interaction records"
+  },
+  "pipeline_stages": {
+    "inputs_and_system": {
+      "artifacts": 14,
+      "total_size_mb": 0.7553367614746094
+    }
+  },
+  "artifact_descriptions": {
+    "evidence_v6_10841689": "Artifact of type evidence_v6",
+    "evidence_v6_115d5b7d": "Artifact of type evidence_v6",
+    "evidence_v6_201d9114": "Artifact of type evidence_v6",
+    "evidence_v6_51f92555": "Artifact of type evidence_v6",
+    "evidence_v6_53efed6e": "Artifact of type evidence_v6",
+    "evidence_v6_884948ce": "Artifact of type evidence_v6",
+    "evidence_v6_c97ddd4f": "Artifact of type evidence_v6",
+    "evidence_v6_feb1c1a0": "Artifact of type evidence_v6",
+    "statistical_results_with_data_1e895a3e": "Artifact of type statistical_results_with_data",
+    "evidence_retrieval_results_5ae99275": "Artifact of type evidence_retrieval_results",
+    "cache_test_68e4c312": "Artifact of type cache_test",
+    "complete_research_data_917ed8dc": "Artifact of type complete_research_data",
+    "rag_index_cache_92b9e15e": "Artifact of type rag_index_cache",
+    "draft_synthesis_report_c54ab5a4": "Artifact of type draft_synthesis_report"
+  },
+  "navigation_guide": {
+    "primary_researcher": [
+      "FINAL_REPORT.md",
+      "artifacts/statistical_results/",
+      "artifacts/evidence/"
+    ],
+    "internal_reviewer": [
+      "METHODOLOGY_SUMMARY.md",
+      "STATISTICAL_SUMMARY.md"
+    ],
+    "replication_researcher": [
+      "artifacts/",
+      "technical/manifest.json",
+      "README.md"
+    ],
+    "fraud_auditor": [
+      "technical/manifest.json",
+      "technical/logs/",
+      "provenance.json"
+    ],
+    "llm_skeptic": [
+      "technical/model_interactions/",
+      "artifacts/statistical_results/"
+    ]
+  }
+}
