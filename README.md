@@ -4,11 +4,18 @@
 
 ## 📚 Documentation
 
+### Core Documentation
 - **CLI Quick Start**: See `docs/developer/CLI_QUICK_REFERENCE.md`
 - **CLI Complete Guide**: See `docs/developer/CLI_COMMAND_REFERENCE.md`
+- **CLI Reference**: See `docs/CLI_REFERENCE.md` - *Complete command reference with examples*
 - **Configuration**: See `docs/developer/CLI_CONFIGURATION_GUIDE.md`
 - **Best Practices**: See `docs/developer/CLI_BEST_PRACTICES.md`
+
+### Research Infrastructure
+- **Provenance System**: See `docs/PROVENANCE_SYSTEM.md` - *Complete research transparency and reproducibility*
 - **Score Validation**: See `docs/developer/workflows/SCORE_VALIDATION_GUIDE.md`
+
+### System Architecture
 - **Architecture**: See `docs/architecture/DISCERNUS_SYSTEM_ARCHITECTURE.md`
 - **Agent Quick Start**: See `CURSOR_AGENT_QUICK_START.md`
 - **Frameworks**: See `frameworks/` directory for analytical frameworks
@@ -34,6 +41,26 @@ cd projects/simple_test && discernus run .
 
 # Or run from anywhere with canonical frameworks
 discernus run projects/simple_test
+```
+
+### Run Modes
+
+```bash
+# Complete research pipeline (default)
+discernus run projects/experiment
+
+# Analysis-only mode (quick data exploration)
+discernus run projects/experiment --analysis-only
+
+# Statistical preparation mode (for external analysis)
+discernus run projects/experiment --statistical-prep
+
+# Resume from statistical preparation
+discernus resume projects/experiment
+
+# Create publication-ready archive
+discernus archive projects/experiment/runs/LATEST_RUN \
+  --include-session-logs --include-artifacts --create-statistical-package
 ```
 
 **New to Discernus?** Start with the [CLI Quick Reference](docs/developer/CLI_QUICK_REFERENCE.md) for essential commands.
