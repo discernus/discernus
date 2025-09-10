@@ -174,22 +174,22 @@ class CleanAnalysisOrchestrator:
             log_experiment_start(self.security.experiment_name, run_id)
             
             # Handle resume from statistical preparation
-            print(f"🔍 Checking resume flag: {self.resume_from_stats} (type: {type(self.resume_from_stats)})")
+            self._log_progress(f"🔍 Checking resume flag: {self.resume_from_stats} (type: {type(self.resume_from_stats)})")
             if self.resume_from_stats:
-                print("🔄 Resume mode: Loading existing statistical preparation results...")
-                print(f"🔄 Resume flag is set: {self.resume_from_stats}")
-                print("🔄 About to call _resume_from_statistical_prep...")
+                self._log_progress("🔄 Resume mode: Loading existing statistical preparation results...")
+                self._log_progress(f"🔄 Resume flag is set: {self.resume_from_stats}")
+                self._log_progress("🔄 About to call _resume_from_statistical_prep...")
                 try:
                     result = self._resume_from_statistical_prep(audit_logger, run_id, start_time)
-                    print("🔄 _resume_from_statistical_prep completed successfully")
+                    self._log_progress("🔄 _resume_from_statistical_prep completed successfully")
                     return result
                 except Exception as e:
-                    print(f"❌ Resume function failed: {e}")
+                    self._log_progress(f"❌ Resume function failed: {e}")
                     import traceback
-                    print(f"❌ Traceback: {traceback.format_exc()}")
+                    self._log_progress(f"❌ Traceback: {traceback.format_exc()}")
                     raise
             else:
-                print("🔄 Resume flag is False, proceeding with normal flow...")
+                self._log_progress("🔄 Resume flag is False, proceeding with normal flow...")
             
             self._log_progress("🚀 Starting clean analysis pipeline...")
             
@@ -4397,39 +4397,39 @@ class CleanAnalysisOrchestrator:
         try:
             # Look for artifacts in the shared cache
             shared_cache_dir = self.experiment_path / "shared_cache" / "artifacts"
-            print(f"🔍 Looking for {artifact_type} artifacts in: {shared_cache_dir}")
+            self._log_progress(f"🔍 Looking for {artifact_type} artifacts in: {shared_cache_dir}")
             if not shared_cache_dir.exists():
-                print(f"❌ Shared cache directory does not exist: {shared_cache_dir}")
+                self._log_progress(f"❌ Shared cache directory does not exist: {shared_cache_dir}")
                 return None
             
             # Find artifacts by type
             if artifact_type == "analysis":
                 # Look for analysis result artifacts
                 analysis_files = list(shared_cache_dir.glob("analysis_result_*"))
-                print(f"🔍 Found {len(analysis_files)} analysis result files")
+                self._log_progress(f"🔍 Found {len(analysis_files)} analysis result files")
                 if analysis_files:
                     # Load all analysis results and return as a list
                     analysis_results = []
                     for analysis_file in analysis_files:
-                        print(f"🔍 Loading analysis file: {analysis_file.name}")
+                        self._log_progress(f"🔍 Loading analysis file: {analysis_file.name}")
                         with open(analysis_file, 'r', encoding='utf-8') as f:
                             analysis_data = json.load(f)
                             analysis_results.append(analysis_data)
-                    print(f"✅ Loaded {len(analysis_results)} analysis results")
+                    self._log_progress(f"✅ Loaded {len(analysis_results)} analysis results")
                     return analysis_results
             
             elif artifact_type == "derived_metrics":
                 # Look for derived metrics artifacts
                 metrics_files = list(shared_cache_dir.glob("derived_metrics_results_with_data_*"))
-                print(f"🔍 Found {len(metrics_files)} derived metrics files")
+                self._log_progress(f"🔍 Found {len(metrics_files)} derived metrics files")
                 if metrics_files:
                     # Load the most recent derived metrics result
                     latest_metrics = max(metrics_files, key=lambda p: p.stat().st_mtime)
-                    print(f"🔍 Loading derived metrics file: {latest_metrics.name}")
+                    self._log_progress(f"🔍 Loading derived metrics file: {latest_metrics.name}")
                     with open(latest_metrics, 'r', encoding='utf-8') as f:
                         return json.load(f)
             
-            print(f"❌ No {artifact_type} artifacts found")
+            self._log_progress(f"❌ No {artifact_type} artifacts found")
             return None
             
         except Exception as e:
@@ -4467,15 +4467,15 @@ class CleanAnalysisOrchestrator:
         """Create evidence artifacts from analysis results for synthesis."""
         try:
             evidence_count = 0
-            print(f"🔍 Processing {len(analysis_results)} analysis results for evidence...")
+            self._log_progress(f"🔍 Processing {len(analysis_results)} analysis results for evidence...")
             
             for i, analysis_result in enumerate(analysis_results):
-                print(f"🔍 Processing analysis result {i+1}: {list(analysis_result.keys())}")
+                self._log_progress(f"🔍 Processing analysis result {i+1}: {list(analysis_result.keys())}")
                 
                 # Extract evidence from each analysis result
                 if 'raw_analysis_response' in analysis_result:
                     raw_response = analysis_result['raw_analysis_response']
-                    print(f"🔍 Found raw_analysis_response, parsing JSON...")
+                    self._log_progress(f"🔍 Found raw_analysis_response, parsing JSON...")
                     
                     # Parse the JSON from the raw response
                     try:
@@ -4488,16 +4488,16 @@ class CleanAnalysisOrchestrator:
                             
                             if 'document_analyses' in analysis_data:
                                 doc_analyses = analysis_data['document_analyses']
-                                print(f"🔍 Found {len(doc_analyses)} document analyses")
+                                self._log_progress(f"🔍 Found {len(doc_analyses)} document analyses")
                                 
                                 for j, doc_analysis in enumerate(doc_analyses):
                                     evidence_items = doc_analysis.get('evidence', [])
-                                    print(f"🔍 Document {j+1} has {len(evidence_items)} evidence items")
+                                    self._log_progress(f"🔍 Document {j+1} has {len(evidence_items)} evidence items")
                                     
                                     for k, evidence_item in enumerate(evidence_items):
                                         quote_text = evidence_item.get('quote_text', '')
                                         if quote_text:
-                                            print(f"🔍 Evidence item {k+1}: {quote_text[:50]}...")
+                                            self._log_progress(f"🔍 Evidence item {k+1}: {quote_text[:50]}...")
                                             
                                             # Create evidence artifact with the structure expected by TxtaiEvidenceCurator
                                             evidence_item_data = {
@@ -4520,7 +4520,7 @@ class CleanAnalysisOrchestrator:
                                             ).hexdigest()
                                             
                                             evidence_filename = f"evidence_v6_{artifact_hash[:8]}"
-                                            print(f"🔍 Storing evidence artifact {evidence_filename}")
+                                            self._log_progress(f"🔍 Storing evidence artifact {evidence_filename}")
                                             
                                             # Convert evidence data to JSON bytes
                                             evidence_json = json.dumps(evidence_data, indent=2)
@@ -4537,19 +4537,19 @@ class CleanAnalysisOrchestrator:
                                                 }
                                             )
                                             evidence_count += 1
-                                            print(f"✅ Stored evidence artifact: {evidence_filename}")
+                                            self._log_progress(f"✅ Stored evidence artifact: {evidence_filename}")
                                         else:
-                                            print(f"⚠️ Evidence item {k+1} has no quote_text")
+                                            self._log_progress(f"⚠️ Evidence item {k+1} has no quote_text")
                             else:
-                                print(f"⚠️ Parsed analysis data has no document_analyses field")
+                                self._log_progress(f"⚠️ Parsed analysis data has no document_analyses field")
                         else:
-                            print(f"⚠️ Could not extract JSON from raw response")
+                            self._log_progress(f"⚠️ Could not extract JSON from raw response")
                     except json.JSONDecodeError as e:
-                        print(f"⚠️ Could not parse JSON from raw response: {e}")
+                        self._log_progress(f"⚠️ Could not parse JSON from raw response: {e}")
                 else:
-                    print(f"⚠️ Analysis result {i+1} has no raw_analysis_response field")
+                    self._log_progress(f"⚠️ Analysis result {i+1} has no raw_analysis_response field")
             
-            print(f"✅ Created {evidence_count} evidence artifacts for synthesis")
+            self._log_progress(f"✅ Created {evidence_count} evidence artifacts for synthesis")
             
         except Exception as e:
             self._log_progress(f"⚠️ Could not create evidence artifacts: {str(e)}")

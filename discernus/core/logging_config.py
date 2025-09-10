@@ -118,7 +118,7 @@ def ensure_litellm_debug_suppression():
     logging.getLogger().addFilter(LiteLLMDebugFilter())
     
     # Use print instead of logger since logger isn't configured yet
-    print("✅ Comprehensive LiteLLM debug suppression configured")
+    # Avoid printing directly; rely on logger if needed
 
 # LiteLLM debug suppression is now called explicitly from CLI and LLM Gateway
 # to prevent multiple executions and duplicate messages

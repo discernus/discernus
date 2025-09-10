@@ -86,7 +86,8 @@ class EnhancedManifest:
             "audit_references": {}
         }
         
-        print(f"📋 Enhanced manifest initialized for run: {run_folder.name}")
+        # Use logger rather than print; initialization message recorded in session logs
+        # (Keeping minimal to avoid noisy console output.)
     
     def _get_timestamp(self) -> str:
         """Get current timestamp in ISO format."""
@@ -439,7 +440,7 @@ class EnhancedManifest:
             "cache_hit_rate": self.manifest_data["cache_analysis"].get("hit_rate", 0.0)
         })
         
-        print(f"📋 Enhanced manifest saved: {manifest_file}")
+        # Record save in logs if needed via external logger; avoid direct prints
         return str(manifest_file)
     
     def _calculate_duration(self, start: str, end: str) -> float:

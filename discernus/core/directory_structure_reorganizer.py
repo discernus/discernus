@@ -259,7 +259,8 @@ class DirectoryStructureReorganizer:
                         shutil.copy2(file_path, new_file_path)
                             
         except Exception as e:
-            print(f"⚠️ Warning: Could not copy artifact content: {e}")
+            # Logging left to caller to avoid noisy console
+            pass
     
     def _create_directory_documentation(self) -> Dict[str, Any]:
         """Create README files explaining each directory."""

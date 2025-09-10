@@ -907,12 +907,12 @@ def _copy_session_logs(run_path: Path) -> None:
         # Find the specific session directory for this run
         session_dir = experiment_path / "session" / run_id
         if not session_dir.exists():
-            print(f"⚠️ Warning: Session directory not found for run {run_id}")
+            rich_console.print_warning(f"⚠️ Session directory not found for run {run_id}")
             return
         
         logs_source = session_dir / "logs"
         if not logs_source.exists():
-            print(f"⚠️ Warning: Logs directory not found in session {run_id}")
+            rich_console.print_warning(f"⚠️ Logs directory not found in session {run_id}")
             return
         
         # Create session_logs directory in run
@@ -934,10 +934,10 @@ def _copy_session_logs(run_path: Path) -> None:
         if manifest_file.exists():
             shutil.copy2(manifest_file, session_logs_dir / "manifest.json")
             
-        print(f"✅ Session logs copied from {session_dir} to {session_logs_dir}")
+        rich_console.print_success(f"✅ Session logs copied from {session_dir} to {session_logs_dir}")
                 
     except Exception as e:
-        print(f"⚠️ Warning: Could not copy session logs: {e}")
+        rich_console.print_warning(f"⚠️ Could not copy session logs: {e}")
 
 
 def _copy_artifact_content(run_path: Path) -> None:
@@ -945,7 +945,7 @@ def _copy_artifact_content(run_path: Path) -> None:
     try:
         artifacts_dir = run_path / "artifacts"
         if not artifacts_dir.exists():
-            print("⚠️ Warning: No artifacts directory found")
+            rich_console.print_warning("⚠️ No artifacts directory found")
             return
         
         # Find shared cache directory
@@ -953,7 +953,7 @@ def _copy_artifact_content(run_path: Path) -> None:
         shared_cache_dir = experiment_path / "shared_cache" / "artifacts"
         
         if not shared_cache_dir.exists():
-            print("⚠️ Warning: No shared cache directory found")
+            rich_console.print_warning("⚠️ No shared cache directory found")
             return
         
         copied_files = 0
@@ -978,10 +978,10 @@ def _copy_artifact_content(run_path: Path) -> None:
                     # Regular file, already has content
                     copied_files += 1
         
-        print(f"✅ Artifact content copied: {copied_files} files processed")
+        rich_console.print_success(f"✅ Artifact content copied: {copied_files} files processed")
                         
     except Exception as e:
-        print(f"⚠️ Warning: Could not copy artifact content: {e}")
+        rich_console.print_warning(f"⚠️ Could not copy artifact content: {e}")
 
 
 def _create_statistical_package(run_path: Path) -> None:
