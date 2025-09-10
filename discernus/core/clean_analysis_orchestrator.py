@@ -38,7 +38,7 @@ from .enhanced_manifest import EnhancedManifest
 from ..agents.experiment_coherence_agent import ExperimentCoherenceAgent
 from ..agents.EnhancedAnalysisAgent.main import EnhancedAnalysisAgent
 from ..agents.automated_statistical_analysis.agent import AutomatedStatisticalAnalysisAgent
-from ..agents.deprecated.txtai_evidence_curator.agent import TxtaiEvidenceCurator
+# TxtaiEvidenceCurator removed from mainline; use RAGIndexManager instead
 from ..agents.unified_synthesis_agent import UnifiedSynthesisAgent
 from ..agents.csv_export_agent import CSVExportAgent, ExportOptions
 from ..gateway.llm_gateway import LLMGateway
@@ -56,7 +56,7 @@ from ..agents.evidence_retriever_agent import EvidenceRetrieverAgent
 
 from ..core.logging_config import setup_logging_for_run
 import logging
-from ..agents.fact_checker_agent.agent import FactCheckerAgent
+# FactCheckerAgent removed in OSS cleanup; all references excised
 
 
 class CleanAnalysisError(Exception):
@@ -1925,7 +1925,7 @@ class CleanAnalysisOrchestrator:
         self._log_progress("🟢 All required assets confirmed on disk - synthesis can proceed")
 
     def _build_rag_index(self, audit_logger: AuditLogger) -> None:
-        """Builds the RAG index using the TxtaiEvidenceCurator."""
+        """Builds the RAG index using RAGIndexManager (replaces TxtaiEvidenceCurator)."""
         self._log_progress("📚 Building RAG index for evidence retrieval...")
 
         evidence_hashes = []
@@ -1934,29 +1934,40 @@ class CleanAnalysisOrchestrator:
             if metadata.get("artifact_type", "").startswith("evidence_v6"):
                 evidence_hashes.append(artifact_hash)
         
-        if not evidence_hashes:
+        # Prepare source documents from evidence artifacts
+        source_documents = []
+        for evidence_hash in evidence_hashes:
+            try:
+                evidence_content = self.artifact_storage.get_artifact(evidence_hash)
+                evidence_text = evidence_content.decode('utf-8')
+                evidence_data = json.loads(evidence_text).get('evidence_data', [])
+                for evidence in evidence_data:
+                    source_documents.append({
+                        'content': evidence.get('quote_text', ''),
+                        'metadata': {
+                            'source_type': 'evidence',
+                            'filename': evidence.get('document_name', 'unknown'),
+                            'purpose': 'evidence_validation'
+                        }
+                    })
+            except Exception as e:
+                self._log_progress(f"⚠️ Failed to process evidence {evidence_hash[:8]}: {e}")
+
+        if not source_documents:
             self.logger.warning("No evidence artifacts found, RAG index will be empty.")
-            # We still create an empty index object to avoid downstream errors.
             from txtai.embeddings import Embeddings
             self.rag_index = Embeddings()
             return
 
-        curator = TxtaiEvidenceCurator(
-            model="vertex_ai/gemini-2.5-flash", # Use a fast model for indexing
-            artifact_storage=self.artifact_storage,
-            audit_logger=audit_logger
-        )
-
-        index = curator.build_and_load_index(
-            evidence_artifact_hashes=evidence_hashes,
-            artifact_storage=self.artifact_storage
-        )
+        from .rag_index_manager import RAGIndexManager
+        rag_manager = RAGIndexManager(self.artifact_storage)
+        index = rag_manager.build_comprehensive_index(source_documents)
 
         if index is None:
-            raise CleanAnalysisError("TxtaiEvidenceCurator failed to build and return a RAG index.")
+            raise CleanAnalysisError("Failed to build RAG index from evidence artifacts.")
         
         self.rag_index = index
-        self._log_progress(f"✅ RAG index built and loaded with {len(evidence_hashes)} evidence sources.")
+        self._log_progress(f"✅ RAG index built and loaded with {len(source_documents)} evidence documents.")
 
     def _build_and_cache_rag_index(self, audit_logger: AuditLogger) -> None:
         """Build and cache RAG index immediately after analysis for performance optimization."""
@@ -2369,28 +2380,12 @@ class CleanAnalysisOrchestrator:
                 else:
                     self._log_progress("❌ Failed to build corpus index service")
             
-            # Initialize fact-checker agent
-            from ..agents.fact_checker_agent.agent import FactCheckerAgent
-            
-            fact_checker = FactCheckerAgent(
-                gateway=self.llm_gateway,
-                audit_logger=audit_logger,
-                corpus_index_service=corpus_index_service,
-                artifact_storage=self.artifact_storage,
-            )
-            
-            # Run fact-checking validation using the new self-directed interface
-            validation_results = fact_checker.run()
-            
-            if validation_results.get('status') == 'failed':
-                raise CleanAnalysisError(f"Fact-checking failed: {validation_results.get('error', 'Unknown error')}")
-            
-            self._log_progress(f"✅ Fact-checking completed: {len(validation_results.get('findings', []))} findings")
-            
+            # Fact-checking disabled in OSS alpha; short-circuit with informational result
+            self._log_progress("ℹ️ Fact-checking phase disabled in OSS alpha. Skipping.")
             return {
-                "status": "completed",
-                "findings": validation_results.get('findings', []),
-                "validation_results": validation_results,
+                "status": "skipped",
+                "findings": [],
+                "validation_results": {},
                 "corpus_index_service_status": "operational" if corpus_index_service else "unavailable"
             }
                 
@@ -3840,30 +3835,8 @@ class CleanAnalysisOrchestrator:
             raise CleanAnalysisError(f"Failed to build synthesis evidence RAG index: {e}. Cannot proceed without evidence.")
 
     def _run_fact_checker_validation(self, synthesis_report: str) -> Dict[str, Any]:
-        """Run fact-checker validation on synthesis report and return structured results."""
-        try:
-            # Import fact-checker agent
-            from ..agents.fact_checker_agent.agent import FactCheckerAgent
-            
-            # Initialize fact-checker with existing RAG index
-            fact_checker = FactCheckerAgent(
-                model="vertex_ai/gemini-2.5-flash",  # Use Flash for cost efficiency
-                audit_logger=self.audit_logger
-            )
-            
-            # Run fact-checking validation
-            validation_results = fact_checker.validate_report(
-                report_content=synthesis_report,
-                rag_index=self.fact_checker_rag,  # Use existing RAG index
-                source_documents=getattr(self.fact_checker_rag, 'documents', [])
-            )
-            
-            return validation_results
-            
-        except Exception as e:
-            self._log_progress(f"⚠️ Fact-checker validation failed: {str(e)}")
-            # Return empty results if fact-checker fails - don't block synthesis
-            return {"issues": [], "status": "fact_check_unavailable", "error": str(e)}
+        """Fact-checking disabled in OSS alpha; return informational status."""
+        return {"issues": [], "status": "fact_check_skipped"}
 
     def _build_evidence_index(self) -> str:
         """Build evidence index for synthesis using RAG capabilities."""

@@ -443,7 +443,7 @@ This architecture ensures fail-fast behavior, comprehensive caching, and complet
 - **THIN Compliance**: ✅ Externalized YAML prompts, minimal parsing
 - **Key Capabilities**: Semantic evidence search, relevance scoring, evidence indexing
 - **Model Assignment**: vertex_ai/gemini-2.5-flash
-- **Location**: `discernus/agents/deprecated/txtai_evidence_curator/` (active despite deprecated path)
+- **Location**: `attic/agents_deprecated/txtai_evidence_curator/` (archived; not active in OSS alpha)
 
 **EvidenceRetrieverAgent** - *Evidence Discovery*
 - **Function**: Targeted evidence retrieval for specific research questions
