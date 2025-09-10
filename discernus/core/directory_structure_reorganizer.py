@@ -11,6 +11,8 @@ import shutil
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, List, Optional
+import filecmp
+import shutil
 
 
 class DirectoryStructureReorganizer:
@@ -112,6 +114,19 @@ class DirectoryStructureReorganizer:
                 source_file = self.results_dir / file_name
                 if source_file.exists():
                     target_file = self.run_dir / "data" / file_name
+                    target_file.parent.mkdir(parents=True, exist_ok=True)
+                    if target_file.exists():
+                        # Idempotency: skip if same content
+                        try:
+                            if filecmp.cmp(str(source_file), str(target_file), shallow=False):
+                                movements["data_files"].append({
+                                    "source": str(source_file),
+                                    "target": str(target_file),
+                                    "status": "skipped_exists_same"
+                                })
+                                continue
+                        except Exception:
+                            pass
                     shutil.move(str(source_file), str(target_file))
                     movements["data_files"].append({
                         "source": str(source_file),
@@ -126,6 +141,18 @@ class DirectoryStructureReorganizer:
                 source_file = self.results_dir / file_name
                 if source_file.exists():
                     target_file = self.run_dir / "outputs" / file_name
+                    target_file.parent.mkdir(parents=True, exist_ok=True)
+                    if target_file.exists():
+                        try:
+                            if filecmp.cmp(str(source_file), str(target_file), shallow=False):
+                                movements["output_files"].append({
+                                    "source": str(source_file),
+                                    "target": str(target_file),
+                                    "status": "skipped_exists_same"
+                                })
+                                continue
+                        except Exception:
+                            pass
                     shutil.move(str(source_file), str(target_file))
                     movements["output_files"].append({
                         "source": str(source_file),
@@ -139,7 +166,22 @@ class DirectoryStructureReorganizer:
             experiment_file = self.results_dir / "experiment.md"
             if experiment_file.exists():
                 target_file = self.run_dir / "inputs" / "experiment.md"
-                shutil.move(str(experiment_file), str(target_file))
+                target_file.parent.mkdir(parents=True, exist_ok=True)
+                if target_file.exists():
+                    try:
+                        if filecmp.cmp(str(experiment_file), str(target_file), shallow=False):
+                            movements["input_files"].append({
+                                "source": str(experiment_file),
+                                "target": str(target_file),
+                                "status": "skipped_exists_same"
+                            })
+                            pass
+                        else:
+                            shutil.move(str(experiment_file), str(target_file))
+                    except Exception:
+                        shutil.move(str(experiment_file), str(target_file))
+                else:
+                    shutil.move(str(experiment_file), str(target_file))
                 movements["input_files"].append({
                     "source": str(experiment_file),
                     "target": str(target_file),
@@ -151,6 +193,18 @@ class DirectoryStructureReorganizer:
             for framework_file in framework_files:
                 if framework_file.name != "experiment.md":
                     target_file = self.run_dir / "inputs" / framework_file.name
+                    target_file.parent.mkdir(parents=True, exist_ok=True)
+                    if target_file.exists():
+                        try:
+                            if filecmp.cmp(str(framework_file), str(target_file), shallow=False):
+                                movements["input_files"].append({
+                                    "source": str(framework_file),
+                                    "target": str(target_file),
+                                    "status": "skipped_exists_same"
+                                })
+                                continue
+                        except Exception:
+                            pass
                     shutil.move(str(framework_file), str(target_file))
                     movements["input_files"].append({
                         "source": str(framework_file),
@@ -162,11 +216,12 @@ class DirectoryStructureReorganizer:
             corpus_dir = self.results_dir / "corpus"
             if corpus_dir.exists():
                 target_dir = self.run_dir / "inputs" / "corpus"
-                shutil.move(str(corpus_dir), str(target_dir))
+                if not target_dir.exists():
+                    shutil.move(str(corpus_dir), str(target_dir))
                 movements["input_files"].append({
                     "source": str(corpus_dir),
                     "target": str(target_dir),
-                    "status": "moved"
+                    "status": "moved" if not target_dir.exists() else "skipped_exists"
                 })
         
         # Move provenance files
@@ -176,6 +231,18 @@ class DirectoryStructureReorganizer:
                 source_file = self.results_dir / file_name
                 if source_file.exists():
                     target_file = self.run_dir / "provenance" / file_name
+                    target_file.parent.mkdir(parents=True, exist_ok=True)
+                    if target_file.exists():
+                        try:
+                            if filecmp.cmp(str(source_file), str(target_file), shallow=False):
+                                movements["provenance_files"].append({
+                                    "source": str(source_file),
+                                    "target": str(target_file),
+                                    "status": "skipped_exists_same"
+                                })
+                                continue
+                        except Exception:
+                            pass
                     shutil.move(str(source_file), str(target_file))
                     movements["provenance_files"].append({
                         "source": str(source_file),
@@ -223,6 +290,11 @@ class DirectoryStructureReorganizer:
                     "status": "copied"
                 })
         
+        # Ensure results directory placeholder if empty
+        try:
+            self._ensure_results_placeholder()
+        except Exception:
+            pass
         return movements
     
     def _copy_artifact_content_to_new_structure(self) -> None:
@@ -251,15 +323,39 @@ class DirectoryStructureReorganizer:
                         target_path = file_path.resolve()
                         if target_path.exists() and target_path != file_path:
                             new_file_path.parent.mkdir(parents=True, exist_ok=True)
-                            # Copy the actual content
-                            shutil.copy2(target_path, new_file_path)
+                            # Idempotency: skip if already copied
+                            if not new_file_path.exists():
+                                shutil.copy2(target_path, new_file_path)
                     else:
                         # Regular file, copy directly
                         new_file_path.parent.mkdir(parents=True, exist_ok=True)
-                        shutil.copy2(file_path, new_file_path)
+                        if not new_file_path.exists():
+                            shutil.copy2(file_path, new_file_path)
                             
-        except Exception as e:
+        except Exception:
             # Logging left to caller to avoid noisy console
+            pass
+
+    def _ensure_results_placeholder(self) -> None:
+        """If results/ is now empty, add a sentinel README clarifying reorganization."""
+        if not self.results_dir.exists():
+            return
+        try:
+            entries = [p for p in self.results_dir.iterdir() if not p.name.startswith('.')]
+            if len(entries) == 0:
+                readme = self.results_dir / "README.md"
+                if not readme.exists():
+                    readme.write_text(
+                        "# Results Directory (Reorganized)\n\n"
+                        "This directory has been reorganized for clarity.\n\n"
+                        "Please see:\n\n"
+                        "- `data/` for analysis-ready CSVs\n"
+                        "- `outputs/` for final reports and statistical results\n"
+                        "- `inputs/` for experiment spec, frameworks, and corpus\n\n"
+                        "The old flat structure is deprecated.",
+                        encoding="utf-8"
+                    )
+        except Exception:
             pass
     
     def _create_directory_documentation(self) -> Dict[str, Any]:

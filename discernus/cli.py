@@ -968,6 +968,16 @@ def _copy_artifact_content(run_path: Path) -> None:
                 if file_path.is_symlink():
                     # Get the target of the symlink
                     target_path = file_path.resolve()
+                    # Security: ensure target is within shared cache or repo
+                    try:
+                        target_root = str(target_path)
+                        allowed_prefixes = [str(shared_cache_dir), str(experiment_path)]
+                        if not any(target_root.startswith(p) for p in allowed_prefixes):
+                            rich_console.print_warning(f"⚠️ Skipping unsafe symlink target: {target_path}")
+                            continue
+                    except Exception:
+                        rich_console.print_warning(f"⚠️ Skipping unresolved symlink: {file_path}")
+                        continue
                     if target_path.exists() and target_path != file_path:
                         # Create a temporary file to copy content
                         import shutil
