@@ -48,6 +48,7 @@ from .statistical_analysis_cache import StatisticalAnalysisCacheManager
 from .validation_cache import ValidationCacheManager
 from .rag_index_manager import RAGIndexManager
 from .provenance_organizer import ProvenanceOrganizer
+from .directory_structure_reorganizer import reorganize_directory_structure
 from txtai.embeddings import Embeddings
 # QA agents temporarily disabled
 # from ..agents.revision_agent.agent import RevisionAgent
@@ -251,6 +252,9 @@ class CleanAnalysisOrchestrator:
                     # Create provenance organization
                     self._create_provenance_organization(run_id, audit_logger)
                     
+                    # Reorganize directory structure
+                    self._reorganize_directory_structure(run_id, audit_logger)
+                    
                     # Finalize manifest
                     if self.manifest:
                         try:
@@ -338,6 +342,9 @@ class CleanAnalysisOrchestrator:
                     
                     # Create provenance organization
                     self._create_provenance_organization(run_id, audit_logger)
+                    
+                    # Reorganize directory structure
+                    self._reorganize_directory_structure(run_id, audit_logger)
                     
                     # Finalize manifest
                     if self.manifest:
@@ -522,6 +529,13 @@ class CleanAnalysisOrchestrator:
             phase_start = datetime.now(timezone.utc)
             self._create_provenance_organization(run_id, audit_logger)
             self._log_phase_timing("provenance_organization", phase_start)
+            
+            # Phase 14: Reorganize directory structure
+            if self.progress_manager:
+                self.progress_manager.update_main_progress("Directory reorganization")
+            phase_start = datetime.now(timezone.utc)
+            self._reorganize_directory_structure(run_id, audit_logger)
+            self._log_phase_timing("directory_reorganization", phase_start)
             
             duration = (datetime.now(timezone.utc) - start_time).total_seconds()
             log_experiment_complete(self.security.experiment_name, run_id, duration)
@@ -4530,7 +4544,7 @@ class CleanAnalysisOrchestrator:
             self._log_progress("📊 Creating provenance organization...")
             run_dir = self.experiment_path / "runs" / run_id
             shared_cache_dir = self.experiment_path / "shared_cache"
-            
+
             # Create ProvenanceOrganizer and organize artifacts
             provenance_organizer = ProvenanceOrganizer(self.security, audit_logger)
             provenance_result = provenance_organizer.organize_run_artifacts(
@@ -4548,3 +4562,17 @@ class CleanAnalysisOrchestrator:
         except Exception as e:
             self._log_progress(f"⚠️ Provenance organization failed: {str(e)}")
             # Continue without provenance organization - not fatal
+    
+    def _reorganize_directory_structure(self, run_id: str, audit_logger: AuditLogger) -> None:
+        """Reorganize directory structure for stakeholder-friendly access."""
+        try:
+            self._log_progress("📁 Reorganizing directory structure...")
+            run_dir = self.experiment_path / "runs" / run_id
+            
+            # Reorganize directory structure
+            reorganization_result = reorganize_directory_structure(run_dir)
+            
+            self._log_status(f"Directory reorganization completed: {reorganization_result['reorganization_summary']['total_directories_created']} directories, {reorganization_result['reorganization_summary']['total_files_moved']} files moved")
+        except Exception as e:
+            self._log_progress(f"⚠️ Directory reorganization failed: {str(e)}")
+            # Continue without directory reorganization - not fatal
