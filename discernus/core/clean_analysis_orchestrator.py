@@ -256,11 +256,8 @@ class CleanAnalysisOrchestrator:
                     self._reorganize_directory_structure(run_id, audit_logger)
                     
                     # Auto-commit to Git (if enabled)
-                    self._log_progress(f"📝 Auto-commit flag: {self.auto_commit}")
                     if self.auto_commit:
                         self._auto_commit_run(run_id, audit_logger)
-                    else:
-                        self._log_progress("📝 Auto-commit disabled, skipping Git commit")
                     
                     # Finalize manifest
                     if self.manifest:
@@ -4604,12 +4601,8 @@ class CleanAnalysisOrchestrator:
         try:
             import subprocess
             
-            self._log_progress("📝 Starting Git auto-commit...")
             run_folder = self.experiment_path / "runs" / run_id
             repo_root = self.experiment_path.parent.parent  # Go up to project root
-            
-            self._log_progress(f"📝 Run folder: {run_folder}")
-            self._log_progress(f"📝 Repo root: {repo_root}")
             
             # Add the run directory to Git (force to override .gitignore for research preservation)
             result = subprocess.run(
