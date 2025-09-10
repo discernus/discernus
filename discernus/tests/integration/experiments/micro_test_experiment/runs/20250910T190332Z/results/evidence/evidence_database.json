@@ -1,0 +1,89 @@
+{
+  "evidence_database_metadata": {
+    "total_evidence_pieces": 8,
+    "total_files_processed": 4,
+    "collection_time": "2025-09-10T19:04:31.908521+00:00"
+  },
+  "evidence_collection": [
+    {
+      "document_name": "positive_test_1.txt",
+      "dimension": "positive_sentiment",
+      "quote_text": "This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:03:34.006364+00:00"
+    },
+    {
+      "document_name": "positive_test_1.txt",
+      "dimension": "negative_sentiment",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:03:34.006367+00:00"
+    },
+    {
+      "document_name": "negative_test_2.txt",
+      "dimension": "positive_sentiment",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:03:38.647789+00:00"
+    },
+    {
+      "document_name": "negative_test_2.txt",
+      "dimension": "negative_sentiment",
+      "quote_text": "What an awful predicament. All plans are failing miserably.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:03:38.647791+00:00"
+    },
+    {
+      "document_name": "negative_test_1.txt",
+      "dimension": "positive_sentiment",
+      "quote_text": "",
+      "confidence": 0.95,
+      "context_type": "no_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:03:37.307208+00:00"
+    },
+    {
+      "document_name": "negative_test_1.txt",
+      "dimension": "negative_sentiment",
+      "quote_text": "This is a terrible situation.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:03:37.307213+00:00"
+    },
+    {
+      "document_name": "positive_test_2.txt",
+      "dimension": "positive_sentiment",
+      "quote_text": "What a superb morning! All systems are operating flawlessly. I'm excited about what's coming next. Achievement surrounds us. The group performed outstandingly. We're reaching incredible goals. Hopefulness permeates everything. Such a marvelous chance! I'm delighted by the advancement. Everything appears glowing and encouraging.",
+      "confidence": 0.95,
+      "context_type": "comprehensive_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:03:35.748121+00:00"
+    },
+    {
+      "document_name": "positive_test_2.txt",
+      "dimension": "negative_sentiment",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "absence_of_indicators",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:03:35.748125+00:00"
+    }
+  ]
+}
