@@ -1,0 +1,609 @@
+{
+  "evidence_database_metadata": {
+    "total_evidence_pieces": 60,
+    "total_files_processed": 8,
+    "collection_time": "2025-09-10T19:59:15.621355+00:00"
+  },
+  "evidence_collection": [
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy_261b893a.txt",
+      "dimension": "tribalism",
+      "quote_text": "The American people are outraged at what's going on... We will not accept an oligarchic form of society. We will not accept the richest guy in the world running all over Washington... to give over a trillion dollars in tax breaks to the wealthiest 1%.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:50:29.117569+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy_261b893a.txt",
+      "dimension": "dignity",
+      "quote_text": "real inflation accounted for wages today are lower than they were 52 years ago.",
+      "confidence": 0.8,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:50:29.117576+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy_261b893a.txt",
+      "dimension": "manipulation",
+      "quote_text": "Trump has a government of the billionaires, by the billionaires, and for the billionaires.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:50:29.117577+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy_261b893a.txt",
+      "dimension": "truth",
+      "quote_text": "Today you have more concentration of ownership in America than we have ever had in the history of this country... there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:50:29.117579+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy_261b893a.txt",
+      "dimension": "resentment",
+      "quote_text": "They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:50:29.117588+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy_261b893a.txt",
+      "dimension": "justice",
+      "quote_text": "that is what a rigged economy is about, and that is what we are going to change.",
+      "confidence": 0.8,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:50:29.117589+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy_261b893a.txt",
+      "dimension": "fear",
+      "quote_text": "the worst and most dangerous addiction we have is the greed of the oligarchs.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:50:29.117590+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy_261b893a.txt",
+      "dimension": "hope",
+      "quote_text": "I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:50:29.117591+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy_261b893a.txt",
+      "dimension": "fantasy",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:50:29.117596+00:00"
+    },
+    {
+      "document_name": "bernie_sanders_2025_fighting_oligarchy_261b893a.txt",
+      "dimension": "pragmatism",
+      "quote_text": "that is what a rigged economy is about, and that is what we are going to change.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:50:29.117597+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference_516a3c9c.txt",
+      "dimension": "tribalism",
+      "quote_text": "my interest is not in protecting the good people of another country. I'm a senator for the state of Ohio. Our leaders have to protect the interests of the citizens of this country.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:49:47.765869+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference_516a3c9c.txt",
+      "dimension": "dignity",
+      "quote_text": "You don't have to believe, of course, that the 20,000 or at least most of the 20,000 newcomers are bad people.",
+      "confidence": 0.8,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:49:47.765873+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference_516a3c9c.txt",
+      "dimension": "manipulation",
+      "quote_text": "It would be, you, the equivalent of allowing the Nazi Germans in 1942 to make all of our ships and missiles.",
+      "confidence": 0.9,
+      "context_type": "rhetorical_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:49:47.765874+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference_516a3c9c.txt",
+      "dimension": "truth",
+      "quote_text": "I remember getting in some argument with some loser on Twitter a year or so ago about whether immigration raised housing prices. And of course the argument is that, yeah, maybe immigrants take up some more demand for housing, but they build all the houses. That's not true, by the way.",
+      "confidence": 0.7,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:49:47.765875+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference_516a3c9c.txt",
+      "dimension": "resentment",
+      "quote_text": "They actually don't really like the people who make up the domestic populations of their own country... because the wars that they want are going to be, of course, fought by the people in the heartland and not by the people who are walking down the streets of Washington D.C.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:49:47.765876+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference_516a3c9c.txt",
+      "dimension": "justice",
+      "quote_text": "",
+      "confidence": 0.0,
+      "context_type": "no_direct_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:49:47.765877+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference_516a3c9c.txt",
+      "dimension": "fear",
+      "quote_text": "the real threat to American democracy is that American voters keep on voting for less immigration and our politicians keep on rewarding us with more.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:49:47.765878+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference_516a3c9c.txt",
+      "dimension": "hope",
+      "quote_text": "I'm happy to say that the Republican party is increasingly aggressively and with momentum rejecting it. So that is a great achievement and a great amount of progress that we've made.",
+      "confidence": 0.85,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:49:47.765879+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference_516a3c9c.txt",
+      "dimension": "fantasy",
+      "quote_text": "It doesn't make any sense. It's sort of the perfect encapsulation of the dumbest way to govern our country.",
+      "confidence": 0.8,
+      "context_type": "rhetorical_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:49:47.765880+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference_516a3c9c.txt",
+      "dimension": "pragmatism",
+      "quote_text": "We're going to disagree, of course, even within this room about how to best accomplish the reinvigorating of American industry and the renewal of American family. That's fine.",
+      "confidence": 0.7,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:49:47.765881+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "tribalism",
+      "quote_text": "And every American that dies at their hands is a life that could be saved if we just followed our laws.",
+      "confidence": 0.9,
+      "context_type": "us_vs_them",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:47:49.101842+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "dignity",
+      "quote_text": "And every American that dies at their hands is a life that could be saved if we just followed our laws.",
+      "confidence": 0.9,
+      "context_type": "in_group_focus",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:47:49.101846+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "manipulation",
+      "quote_text": "And it's costing, it's costing in the end thousands of lives in America. And the sad, sad story told by Laura Wilkerson yesterday that she has the courage and the heart to come here and share her story with us and to place that awful, brutal, ghastly memory again into her mind's eye and pour that forth into the Congressional Record so that some of us, some of us will soak that up and be mobilized to do something, something more to resist the President's policy of amnesty, de facto amnesty, amnesty by executive edict, that has been part and parcel of the Obama policy since the beginning of his time here in office.",
+      "confidence": 0.9,
+      "context_type": "emotional_exploitation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:47:49.101847+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "truth",
+      "quote_text": "The Supreme Court believes that they can write law. Here in our Constitution, Mr. Speaker, Article one of our Constitution says, 'All legislative power, power, all legislative, all legislative powers herein granted shall be vested in a Congress of the United States.' That's here. The House and the Senate. Article one, first words of our Constitution, all legislative powers. But the Supreme Court, wrapped in the cloak of Marbury versus Madison and their imagination of what precedents and stare decisis might mean to them, decides that they can write words into the law. A Supreme Court writing law.",
+      "confidence": 0.8,
+      "context_type": "textual_interpretation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:47:49.101849+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "resentment",
+      "quote_text": "And it's costing, it's costing in the end thousands of lives in America. And the sad, sad story told by Laura Wilkerson yesterday that she has the courage and the heart to come here and share her story with us and to place that awful, brutal, ghastly memory again into her mind's eye and pour that forth into the Congressional Record so that some of us, some of us will soak that up and be mobilized to do something, something more to resist the President's policy of amnesty, de facto amnesty, amnesty by executive edict, that has been part and parcel of the Obama policy since the beginning of his time here in office.",
+      "confidence": 0.9,
+      "context_type": "grievance_blame",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:47:49.101850+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "justice",
+      "quote_text": "Send these people into prison. And when they're done, send them back to the country that they can live in legally for the rest of their lives if they don't stay in our prisons for the rest of their lives.",
+      "confidence": 0.8,
+      "context_type": "punitive_enforcement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:47:49.101851+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "fear",
+      "quote_text": "This illegal alien beat this boy to death and then he went and bought gasoline and burned his body... an illegal criminal alien drunk driving perpetrator ran her down and rear-ended her in the street and killed Sarah Root.",
+      "confidence": 0.9,
+      "context_type": "threat_narrative",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:47:49.101852+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "hope",
+      "quote_text": "We must defend our Constitution and we must nominate and elect a President of the United States who will make those appointments to the Supreme Court who believe the Constitution means what it says.",
+      "confidence": 0.8,
+      "context_type": "reactive_vision",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:47:49.101853+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "fantasy",
+      "quote_text": "And every American that dies at their hands is a life that could be saved if we just followed our laws.",
+      "confidence": 0.7,
+      "context_type": "oversimplification",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:47:49.101854+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "pragmatism",
+      "quote_text": "And every American that dies at their hands is a life that could be saved if we just followed our laws.",
+      "confidence": 0.8,
+      "context_type": "simplistic_solution",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:47:49.101855+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "tribalism",
+      "quote_text": "I can assure you that that thought has been very much in my mind. You see, I support a great deal of what the president has done. I voted with him 80% of the time. But my promise before God to apply impartial justice required that I put my personal feelings and political biases aside.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:49:06.779075+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "dignity",
+      "quote_text": "My faith is at the heart of who I am. I take an oath before God as enormously consequential.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:49:06.779078+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "manipulation",
+      "quote_text": "Let me first address those three defenses.",
+      "confidence": 0.8,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:49:06.779079+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "truth",
+      "quote_text": "If I were to ignore the evidence that has been presented and disregard what I believe my oath and the Constitution demands of me for the sake of a partisan end, it would, I fear, expose my character to history's rebuke and the censure of my own conscience.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:49:06.779080+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "resentment",
+      "quote_text": "What he did was not perfect. No, it was a flagrant assault on our electoral rights, our national security, and our fundamental values.",
+      "confidence": 0.8,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:49:06.779090+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "justice",
+      "quote_text": "I swore an oath before God to exercise impartial justice.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:49:06.779091+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "fear",
+      "quote_text": "Does anyone seriously believe that I would consent to these consequences other than from an inescapable conviction that my oath before God demanded it of me?",
+      "confidence": 0.8,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:49:06.779093+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "hope",
+      "quote_text": "I will tell my children and their children that I did my duty... to future generations of Americans who look at the record of this trial.",
+      "confidence": 0.8,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:49:06.779094+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "fantasy",
+      "quote_text": "To maintain that the lack of a codified and comprehensive list of all the outrageous acts that a president might conceivably commit renders Congress powerless to remove such a president defies reason.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:49:06.779095+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "pragmatism",
+      "quote_text": "The defense argues that the Senate should leave the impeachment decision to the voters. While that logic is appealing to our democratic instincts, it is inconsistent with the Constitution's requirement that the Senate, not the voters, try the president.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:49:06.779096+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+      "dimension": "tribalism",
+      "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:46:57.083874+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+      "dimension": "dignity",
+      "quote_text": "There is no better evidence of this than the election of an African-American to the presidency of the United States.",
+      "confidence": 0.95,
+      "context_type": "thematic_center",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:46:57.083881+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+      "dimension": "manipulation",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:46:57.083883+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+      "dimension": "truth",
+      "quote_text": "The American people have spoken, and they have spoken clearly.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:46:57.083884+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+      "dimension": "resentment",
+      "quote_text": "though we have come a long way from the old injustices that once stained our nation’s reputation and denied some Americans the full blessings of American citizenship, the memory of them still had the power to wound.",
+      "confidence": 0.8,
+      "context_type": "historical_acknowledgment",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:46:57.083885+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+      "dimension": "justice",
+      "quote_text": "America today is a world away from the cruel and prideful bigotry of that time. There is no better evidence of this than the election of an African-American to the presidency of the United States.",
+      "confidence": 0.9,
+      "context_type": "thematic_center",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:46:57.083887+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+      "dimension": "fear",
+      "quote_text": "These are difficult times for our country",
+      "confidence": 0.8,
+      "context_type": "contextual_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:46:57.083888+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+      "dimension": "hope",
+      "quote_text": "Americans never quit. We never surrender. We never hide from history. We make history.",
+      "confidence": 0.95,
+      "context_type": "rhetorical_device",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:46:57.083888+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+      "dimension": "fantasy",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:46:57.083889+00:00"
+    },
+    {
+      "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+      "dimension": "pragmatism",
+      "quote_text": "find the necessary compromises to bridge our differences.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:46:57.083891+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "tribalism",
+      "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart.",
+      "confidence": 0.95,
+      "context_type": "us_vs_them_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:51:19.984325+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "dignity",
+      "quote_text": "Our lives deserve dignity and our work deserves respect.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:51:19.984342+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "manipulation",
+      "quote_text": "they'll throw out every label and judgment and cultural debate in the book to keep us distracted because the last thing they want us to realize is that the division that is actually hurting our country the most is how endless greed is costing the lives of everyone else.",
+      "confidence": 0.95,
+      "context_type": "accusation_of_deception",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:51:19.984344+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "truth",
+      "quote_text": "Let's set the record straight.",
+      "confidence": 0.8,
+      "context_type": "call_for_factual_clarity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:51:19.984346+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "resentment",
+      "quote_text": "lying to and screwing over working and middle class Americans so that they can steal from our healthcare, Social Security, and veterans' benefits to pay for tax cuts for the wealthiest and bailouts for their crypto billionaire friends.",
+      "confidence": 0.95,
+      "context_type": "blame_and_grievance_focused_rhetoric",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:51:19.984347+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "justice",
+      "quote_text": "Our lives deserve dignity and our work deserves respect.",
+      "confidence": 0.7,
+      "context_type": "statement_of_desired_fairness",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:51:19.984348+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "fear",
+      "quote_text": "The same billionaires are taking a wrecking ball to our country",
+      "confidence": 0.9,
+      "context_type": "threat_focused_language",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:51:19.984349+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "hope",
+      "quote_text": "if we stand together, it is the only way that we can win.",
+      "confidence": 0.75,
+      "context_type": "constructive_optimism",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:51:19.984350+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "fantasy",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "not_present",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:51:19.984371+00:00"
+    },
+    {
+      "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+      "dimension": "pragmatism",
+      "quote_text": "we need to come together and spend every day between now and election day working to educate our neighbors, and give Evans and Boebert the boot, and replace them with a brawling Democrat who will stand for Colorado.",
+      "confidence": 0.8,
+      "context_type": "realistic_problem_solving",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T19:51:19.984372+00:00"
+    }
+  ]
+}
