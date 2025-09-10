@@ -877,22 +877,26 @@ def archive(run_directory: str, output: Optional[str], include_inputs: bool, inc
 def _detect_run_mode(run_path: Path) -> str:
     """Detect run mode from manifest file."""
     try:
-        # Look for manifest in session directory
+        # Prefer manifest from the specific run's session directory
         experiment_path = run_path.parent.parent
-        session_dirs = list((experiment_path / "session").glob("*"))
-        if not session_dirs:
-            return "unknown"
-        
-        # Find the most recent session directory
-        latest_session = max(session_dirs, key=lambda x: x.name)
-        manifest_file = latest_session / "manifest.json"
+        run_id = run_path.name
+        manifest_file = experiment_path / "session" / run_id / "manifest.json"
         
         if manifest_file.exists():
             import json
             with open(manifest_file) as f:
                 manifest = json.load(f)
             return manifest.get("run_mode", {}).get("mode_type", "unknown")
-        
+        # Fallback: try most recent session manifest
+        session_dirs = [d for d in (experiment_path / "session").glob("*") if d.is_dir()]
+        if session_dirs:
+            latest_session = max(session_dirs, key=lambda x: x.name)
+            fallback_manifest = latest_session / "manifest.json"
+            if fallback_manifest.exists():
+                import json
+                with open(fallback_manifest) as f:
+                    manifest = json.load(f)
+                return manifest.get("run_mode", {}).get("mode_type", "unknown")
         return "unknown"
     except Exception:
         return "unknown"

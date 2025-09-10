@@ -4602,7 +4602,10 @@ class CleanAnalysisOrchestrator:
             import subprocess
             
             run_folder = self.experiment_path / "runs" / run_id
-            repo_root = self.experiment_path.parent.parent  # Go up to project root
+            repo_root = self._detect_repo_root()
+            if repo_root is None:
+                self._log_progress("⚠️ Could not detect Git repository root; skipping auto-commit")
+                return
             
             # Add the run directory to Git (force to override .gitignore for research preservation)
             result = subprocess.run(
@@ -4664,6 +4667,38 @@ class CleanAnalysisOrchestrator:
                 "run_folder": str(run_folder)
             })
             self._log_progress(f"⚠️ Git commit failed: {str(e)}")
+    
+    def _detect_repo_root(self) -> Optional[Path]:
+        """Detect the Git repository root robustly.
+        
+        Tries `git rev-parse --show-toplevel`, falling back to walking up
+        from `self.experiment_path` until a `.git` directory is found.
+        Returns None if no repo root can be determined.
+        """
+        import subprocess
+        try:
+            result = subprocess.run(
+                ["git", "rev-parse", "--show-toplevel"],
+                cwd=self.experiment_path,
+                capture_output=True,
+                text=True,
+                timeout=10
+            )
+            if result.returncode == 0:
+                top = result.stdout.strip()
+                if top:
+                    return Path(top)
+        except Exception:
+            pass
+        # Fallback: walk up to find .git
+        try:
+            current = self.experiment_path
+            for parent in [current] + list(current.parents):
+                if (parent / ".git").exists():
+                    return parent
+        except Exception:
+            pass
+        return None
     
     def _generate_commit_message(self, run_id: str, experiment_name: str) -> str:
         """Generate mode-aware commit message based on run type."""
