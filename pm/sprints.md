@@ -149,7 +149,7 @@
 - **Dependencies**: [PROV-002, PROV-005, PROV-006]
 - **Effort**: 2-3 days
 
-#### [PROV-008] Alpha Hardening (Provenance & CLI)
+#### [PROV-008] Alpha Hardening (Provenance & CLI) — COMPLETED
 
 - **Description**: Hardening tasks required for a reliable alpha: logging cleanup, robust Git auto-commit, accurate run-mode detection, reorganizer idempotency/clarity, archive security checks, minimal test coverage, and CLI UX consistency.
 - **Purpose**: Eliminate fragile paths and silent failures; ensure predictable behavior for alpha users.
