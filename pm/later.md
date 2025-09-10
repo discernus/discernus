@@ -97,6 +97,46 @@
 
 ---
 
+## Provenance - Post-Alpha Enhancements
+
+### [PROV-L001] Performance Optimizations for Archiving & Reorganization
+
+- **Description**: Parallelize artifact and session log copying in `archive`; add config to defer heavy copying to `archive` only to avoid duplicated I/O with runtime reorganizer.
+- **Priority**: MEDIUM - Performance
+- **Why Deferred**: Not blocking alpha; current approach works reliably; optimization can wait.
+- **Acceptance Criteria**:
+  - Bounded-concurrency copy for artifacts/logs
+  - Config to keep runtime symlinks and copy only during archive
+  - Benchmarks demonstrating reduced wall-clock time on large runs
+
+### [PROV-L002] Orchestrator Refactor (Thin Finalization Helpers)
+
+- **Description**: Extract `GitAutoCommitter` and `RunFinalizer` helpers to keep `CleanAnalysisOrchestrator` thin and focused on orchestration.
+- **Priority**: MEDIUM - Maintainability
+- **Why Deferred**: Improves code quality but not required for alpha stability.
+- **Acceptance Criteria**:
+  - New helper classes with unit tests
+  - Orchestrator simplified with clear boundaries
+
+### [PROV-L003] Broader Test Suite and Property Testing
+
+- **Description**: Add load tests, property-based tests for reorganizer/archive, and diverse corpus scenarios.
+- **Priority**: MEDIUM - Quality
+- **Why Deferred**: Non-blocking for alpha; complements minimal coverage added for alpha.
+
+### [PROV-L004] Additional Archive Formats & Provenance Visualization
+
+- **Description**: Add alternative archive formats and a visualization of artifact dependency graphs.
+- **Priority**: LOW - UX/Polish
+- **Why Deferred**: Nice to have; not required for reproducibility or audit.
+
+### [PROV-L005] CLI Quiet/Verbose Controls and Unicode Commit Normalization
+
+- **Description**: Add `--quiet` to suppress non-critical messages; normalize commit message unicode.
+- **Priority**: LOW - Polish
+- **Why Deferred**: UX polish beyond alpha scope.
+
+
 ## Ensemble Analysis Approaches
 
 ### Multi-Model Independent Self-Consistency Analysis

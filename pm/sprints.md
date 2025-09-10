@@ -149,6 +149,22 @@
 - **Dependencies**: [PROV-002, PROV-005, PROV-006]
 - **Effort**: 2-3 days
 
+#### [PROV-008] Alpha Hardening (Provenance & CLI)
+
+- **Description**: Hardening tasks required for a reliable alpha: logging cleanup, robust Git auto-commit, accurate run-mode detection, reorganizer idempotency/clarity, archive security checks, minimal test coverage, and CLI UX consistency.
+- **Purpose**: Eliminate fragile paths and silent failures; ensure predictable behavior for alpha users.
+- **Priority**: CRITICAL - Alpha readiness
+- **Acceptance Criteria**:
+  - Logging cleanup: replace remaining `print()` paths in orchestrator/helpers with structured logging; respect verbosity levels
+  - Git auto-commit robustness: repo root detected by `.git` discovery or `git rev-parse --show-toplevel`; no path-depth assumptions
+  - Run mode detection: `_detect_run_mode` reads enhanced manifest (`run_mode.mode_type`) reliably; no "unknown" for supported modes
+  - Reorganizer idempotency: safe to run multiple times; skip already-moved files; either remove empty `results/` or add sentinel README explaining deprecation in favor of `data/`/`outputs/`/`inputs/`
+  - Archive security: validate symlink targets before copying; only copy when resolved paths are under experiment `shared_cache` or repo root; warn and skip otherwise
+  - Minimal tests: unit tests for `DirectoryStructureReorganizer`, archive helpers (`_copy_session_logs`, `_copy_artifact_content`, `_detect_run_mode`), `EnhancedManifest` (`set_run_mode`, `set_resume_capability`, `finalize_manifest`), and `StatisticalPackageGenerator` (files + exec bits). One integration test: run `--statistical-prep` then `archive` with all flags and assert no symlinks, complete logs, expected READMEs
+  - CLI UX consistency: CLI help/defaults for archive flags match documentation; clear skip messages respect future quiet mode
+- **Dependencies**: [PROV-002], [PROV-003], [PROV-004], [PROV-005], [PROV-006], [PROV-007]
+- **Effort**: 1-1.5 weeks
+
 ---
 
 ### Sprint 13: Essential Code Quality & Architecture Cleanup (HIGH PRIORITY)
