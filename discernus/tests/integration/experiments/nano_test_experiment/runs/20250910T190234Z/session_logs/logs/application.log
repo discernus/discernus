@@ -1,0 +1,4 @@
+2025-09-10 15:02:34.082 | INFO     | discernus.core.logging_config:setup_logging:220 | Logging system initialized
+2025-09-10 15:02:34.133 | INFO     | discernus.core.logging_config:log_experiment_start:243 | Experiment started
+2025-09-10 15:02:38.205 | INFO     | discernus.core.logging_config:perf_timer:458 | Performance: llm_call completed in 4.000s
+2025-09-10 15:02:40.093 | INFO     | discernus.core.logging_config:perf_timer:458 | Performance: llm_call completed in 1.822s
