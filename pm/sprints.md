@@ -111,59 +111,118 @@
 
 ---
 
-### Sprint 12: Provenance System Restoration (HIGH PRIORITY)
+### Sprint 12: Statistical Preparation Provenance Integration (HIGH PRIORITY)
 
 **Timeline**: 2-3 weeks
-**Goal**: Restore and enhance provenance system components and ensure compliance with architectural standards
+**Goal**: Integrate statistical preparation workflows with provenance system using hybrid approach (runtime efficiency + archive completeness) and implement human-friendly directory structure
 
-#### [PROV-001] Provenance Components Restoration
+#### [PROV-001] ProvenanceOrganizer Integration
 
-- **Description**: Restore provenance components:
-  - `/Volumes/code/discernus/discernus/core/provenance_organizer.py`
-  - `/Volumes/code/discernus/discernus/core/provenance_stamp.py`
-  - `/Volumes/code/discernus/discernus/core/provenance_visualizer.py`
-- **Purpose**: Restore full provenance system functionality
-- **Priority**: HIGH - Core system functionality
+- **Description**: Integrate ProvenanceOrganizer into current orchestrator alongside existing results creation
+- **Purpose**: Enable provenance organization during runs while maintaining current results functionality
+- **Priority**: HIGH - Core provenance functionality
+- **Acceptance Criteria**:
+  - ProvenanceOrganizer called after results directory creation
+  - `artifacts/` directory created with academic-standard structure
+  - Symlinks created to shared cache artifacts
+  - Provenance metadata generated and stored
+  - Both `results/` and `artifacts/` directories coexist
+  - No disruption to existing results creation
 - **Dependencies**: None
-- **Effort**: 1-2 weeks
-
-#### [PROV-002] Provenance System Compliance
-
-- **Description**: Comply with provenance, provenance validation, and dual-track logging documents:
-  - @PROVENANCE_SYSTEM.md
-  - @DUAL_TRACK_LOGGING_ARCHITECTURE.md
-  - @INTEGRATED_PROVENANCE_VALIDATION_SPEC.md
-- **Purpose**: Ensure system meets documented architectural standards
-- **Priority**: HIGH - Architecture compliance
-- **Dependencies**: [PROV-001]
 - **Effort**: 1 week
 
-#### [PROV-003] Research Integrity & Provenance Architecture Enhancement
+#### [PROV-002] Enhanced Manifest Structure for Statistical Preparation
 
-- **Description**: Enhance existing provenance architecture by fixing connection points, adding validation, and improving human comprehension
-- **Purpose**: Fix critical provenance chain breaks and create human-comprehensible artifact organization for academic transparency
-- **Priority**: HIGH - Research integrity
-- **Acceptance Criteria**:
-  - Zero empty CSV files, all statistical results properly exported
-  - Human-comprehensible artifact organization with readable names
-  - Complete provenance visualization tools and browser interface
-  - External reviewers can validate findings in <2 minutes
-  - Platform meets highest academic standards for transparency
-- **Dependencies**: [PROV-001], [PROV-002]
-- **Effort**: 1-2 weeks
-
-#### [PROV-004] Audit and Fix Directory Creation Logic to Comply with Provenance Standard
-
-- **Description**: Audit codebase to find and fix logic that creates incorrect directory structures, ensuring compliance with v3 provenance standard
-- **Purpose**: Fix non-compliant directory structures and create migration script for legacy project data
+- **Description**: Implement enhanced manifest structure to track statistical preparation stages and modes
+- **Purpose**: Enable proper tracking of different run modes and their artifacts
 - **Priority**: HIGH - Provenance compliance
 - **Acceptance Criteria**:
-  - All new experiments create correct `projects/{PROJECT}/sessions/{SESSION}` structure
-  - Migration script successfully reorganizes all legacy project data
-  - Root `/projects` directory clean of non-compliant project folders
-  - Tests verify correct directory structure creation
+  - Manifest includes statistical preparation stage metadata
+  - Mode-specific tracking (analysis-only, statistical-prep, skip-synthesis, complete)
+  - Resume capability metadata stored
+  - Artifact dependency tracking enhanced
+- **Dependencies**: [PROV-001]
+- **Effort**: 3-5 days
+
+#### [PROV-003] Archive Command Enhancement for Statistical Preparation
+
+- **Description**: Enhance archive command to handle different run modes and include complete session logs and artifact content
+- **Purpose**: Create mode-aware, self-contained archives for all run types with ALL necessary assets for replication and audit
+- **Priority**: HIGH - Research integrity
+- **Acceptance Criteria**:
+  - Session logs copied to archive (`session_logs/` directory) with complete execution logs
+  - Actual artifact content copied (not just symlinks) to `artifacts/` directory
+  - Statistical package created for statistical prep runs
+  - Mode-specific README generation
+  - Complete self-contained archives (no external dependencies, no broken symlinks)
+  - Archive command works for all run modes
+  - Both `results/` and `artifacts/` directories included in archive
+  - Experiment.md and framework files properly located in `inputs/` directory
+  - All LLM interactions, agent logs, system logs, and error logs preserved
+  - Complete provenance chain with actual artifact content for audit verification
+- **Dependencies**: [PROV-002]
+- **Effort**: 1 week
+
+#### [PROV-004] Statistical Package Generation
+
+- **Description**: Implement statistical package generation for statistical preparation runs
+- **Purpose**: Create researcher-ready packages with all necessary files and documentation
+- **Priority**: MEDIUM - User experience
+- **Acceptance Criteria**:
+  - `statistical_package/` directory created for statistical prep runs
+  - Researcher-ready CSV files with proper naming
+  - Variable codebook generation
+  - Import scripts for R/Python/STATA
+  - Plain text usage instructions
+- **Dependencies**: [PROV-003]
+- **Effort**: 3-5 days
+
+#### [PROV-005] Directory Structure Reorganization
+
+- **Description**: Implement human-friendly directory structure for all run types with complete asset preservation
+- **Purpose**: Create logical organization that meets expectations of researchers, replication researchers, and auditors with ALL necessary assets
+- **Priority**: HIGH - User experience and research integrity
+- **Acceptance Criteria**:
+  - Clear separation: data/, outputs/, inputs/, provenance/, artifacts/, session_logs/
+  - README files explaining each directory and its contents
+  - No file duplication between root and results
+  - Consistent naming conventions
+  - Audit-friendly provenance organization
+  - Self-contained archives with clear structure
+  - Complete session logs in session_logs/ directory
+  - Actual artifact content (not symlinks) in artifacts/ directory
+  - All LLM interactions, agent logs, system logs, and error logs preserved
+  - Complete provenance chain with actual artifact content for audit verification
 - **Dependencies**: [PROV-001]
 - **Effort**: 1 week
+
+#### [PROV-006] Session Logs and Artifact Content Copying Implementation
+
+- **Description**: Implement actual copying of session logs and artifact content (not symlinks) in archive command
+- **Purpose**: Ensure complete self-contained archives with all necessary assets for replication and audit
+- **Priority**: HIGH - Research integrity
+- **Acceptance Criteria**:
+  - Session logs copied from `session/{SESSION_ID}/logs/` to `session_logs/logs/` in archive
+  - All artifact content copied from shared cache to `artifacts/` directory (not symlinks)
+  - Archive command creates completely self-contained archives
+  - No broken symlinks or external dependencies in archives
+  - Complete LLM interactions, agent logs, system logs, and error logs preserved
+  - All artifacts accessible without shared cache dependency
+- **Dependencies**: [PROV-003]
+- **Effort**: 1 week
+
+#### [PROV-007] Git Integration for Statistical Preparation
+
+- **Description**: Implement mode-aware Git commit messages and branch strategies
+- **Purpose**: Enable proper version control for different run types
+- **Priority**: MEDIUM - Version control
+- **Acceptance Criteria**:
+  - Different commit messages for different run modes
+  - Statistical prep runs clearly identified in Git history
+  - Resume commits properly linked to original statistical prep runs
+  - Git integration works with archive command
+- **Dependencies**: [PROV-002, PROV-005, PROV-006]
+- **Effort**: 2-3 days
 
 ---
 
