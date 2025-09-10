@@ -1,0 +1,5 @@
+# Positive Test Document
+
+**Context**: Sample text with positive sentiment
+
+This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.
