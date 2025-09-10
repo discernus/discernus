@@ -47,6 +47,7 @@ from .rag_index_cache import RAGIndexCacheManager
 from .statistical_analysis_cache import StatisticalAnalysisCacheManager
 from .validation_cache import ValidationCacheManager
 from .rag_index_manager import RAGIndexManager
+from .provenance_organizer import ProvenanceOrganizer
 from txtai.embeddings import Embeddings
 # QA agents temporarily disabled
 # from ..agents.revision_agent.agent import RevisionAgent
@@ -77,6 +78,8 @@ class CleanAnalysisOrchestrator:
                  skip_validation: bool = False,
                  analysis_only: bool = False,
                  statistical_prep: bool = False,
+                 skip_synthesis: bool = False,
+                 resume_from_stats: bool = False,
                  ensemble_runs: Optional[int] = None,
                  auto_commit: bool = True,
                  verbosity: str = "normal"):
@@ -92,6 +95,8 @@ class CleanAnalysisOrchestrator:
         self.skip_validation = skip_validation
         self.analysis_only = analysis_only
         self.statistical_prep = statistical_prep
+        self.skip_synthesis = skip_synthesis
+        self.resume_from_stats = resume_from_stats
         self.ensemble_runs = ensemble_runs
         self.auto_commit = auto_commit
         self.verbosity = verbosity
@@ -167,6 +172,24 @@ class CleanAnalysisOrchestrator:
             audit_logger = self._initialize_infrastructure(run_id)
             log_experiment_start(self.security.experiment_name, run_id)
             
+            # Handle resume from statistical preparation
+            print(f"🔍 Checking resume flag: {self.resume_from_stats} (type: {type(self.resume_from_stats)})")
+            if self.resume_from_stats:
+                print("🔄 Resume mode: Loading existing statistical preparation results...")
+                print(f"🔄 Resume flag is set: {self.resume_from_stats}")
+                print("🔄 About to call _resume_from_statistical_prep...")
+                try:
+                    result = self._resume_from_statistical_prep(audit_logger, run_id, start_time)
+                    print("🔄 _resume_from_statistical_prep completed successfully")
+                    return result
+                except Exception as e:
+                    print(f"❌ Resume function failed: {e}")
+                    import traceback
+                    print(f"❌ Traceback: {traceback.format_exc()}")
+                    raise
+            else:
+                print("🔄 Resume flag is False, proceeding with normal flow...")
+            
             self._log_progress("🚀 Starting clean analysis pipeline...")
             
             # Phase 1: Load specifications
@@ -224,6 +247,10 @@ class CleanAnalysisOrchestrator:
                     # Analysis-only mode: Export CSV and exit
                     self._log_progress("📊 Analysis-only mode: Exporting CSV and completing...")
                     results_dir = self._export_analysis_only_csv(analysis_results, audit_logger, run_id)
+                    
+                    # Create provenance organization
+                    self._create_provenance_organization(run_id, audit_logger)
+                    
                     duration = (datetime.now(timezone.utc) - start_time).total_seconds()
                     log_experiment_complete(self.security.experiment_name, run_id, duration)
                     return {
@@ -238,7 +265,12 @@ class CleanAnalysisOrchestrator:
                     }
                 elif self.statistical_prep:
                     # Statistical preparation mode: Run derived metrics + CSV export
-                    self._log_progress("📊 Statistical preparation mode: Running derived metrics and CSV export...")
+                    self._log_progress("📊 Statistical Preparation Mode")
+                    self._log_progress("   This mode runs analysis + derived metrics + CSV export")
+                    self._log_progress("   Perfect for external statistical analysis workflows")
+                    self._log_progress("   Outputs: scores.csv, evidence.csv, metadata.csv")
+                    self._log_progress("   Use 'discernus resume' later to complete synthesis if needed")
+                    self._log_progress("📊 Running derived metrics and CSV export...")
                     # Continue to derived metrics phase below
                 else:
                     # Standard mode: Build RAG index for synthesis
@@ -272,7 +304,23 @@ class CleanAnalysisOrchestrator:
                 if self.statistical_prep:
                     self._log_progress("📊 Statistical preparation mode: Exporting CSV with derived metrics...")
                     results_dir = self._export_statistical_prep_csv(analysis_results, derived_metrics_results, audit_logger, run_id)
+                    
+                    # Create provenance organization
+                    self._create_provenance_organization(run_id, audit_logger)
+                    
                     duration = (datetime.now(timezone.utc) - start_time).total_seconds()
+                    
+                    # User-friendly completion message
+                    self._log_progress("✅ Statistical Preparation Complete!")
+                    self._log_progress(f"   📁 Results saved to: {results_dir}")
+                    self._log_progress("   📊 Generated files:")
+                    self._log_progress("      • scores.csv - Analysis scores and derived metrics")
+                    self._log_progress("      • evidence.csv - Supporting quotes and evidence")
+                    self._log_progress("      • metadata.csv - Document and run metadata")
+                    self._log_progress("   🔄 To complete synthesis later, run:")
+                    self._log_progress(f"      discernus resume {self.experiment_path}")
+                    self._log_progress("   💡 Perfect for external statistical analysis workflows!")
+                    
                     log_experiment_complete(self.security.experiment_name, run_id, duration)
                     return {
                         "run_id": run_id,
@@ -298,6 +346,55 @@ class CleanAnalysisOrchestrator:
             except Exception as e:
                 self._log_progress(f"❌ Statistical analysis phase failed: {str(e)}")
                 raise CleanAnalysisError(f"Statistical analysis phase failed: {str(e)}")
+            
+            # Skip synthesis mode: Export results and exit after statistical analysis
+            if self.skip_synthesis:
+                self._log_progress("📊 Skip synthesis mode: Exporting results without synthesis...")
+                # Create results directory with statistical results
+                run_dir = self.experiment_path / "runs" / run_id
+                results_dir = run_dir / "results"
+                results_dir.mkdir(parents=True, exist_ok=True)
+                
+                # Save statistical results
+                if statistical_results.get('stats_hash'):
+                    stats_content = self.artifact_storage.get_artifact(statistical_results['stats_hash'])
+                    stats_file = results_dir / "statistical_results.json"
+                    with open(stats_file, 'wb') as f:
+                        f.write(stats_content)
+                
+                # Create basic results summary
+                results_summary = {
+                    "run_id": run_id,
+                    "mode": "skip_synthesis",
+                    "analysis_documents": len(analysis_results),
+                    "statistical_analysis_completed": True,
+                    "synthesis_skipped": True,
+                    "duration_seconds": (datetime.now(timezone.utc) - start_time).total_seconds(),
+                    "performance_metrics": self._get_performance_summary(),
+                    "costs": audit_logger.get_session_costs() if audit_logger else {"total_cost_usd": 0.0}
+                }
+                
+                # Save results summary
+                summary_file = results_dir / "experiment_summary.json"
+                with open(summary_file, 'w', encoding='utf-8') as f:
+                    json.dump(results_summary, f, indent=2)
+                
+                # Create provenance organization
+                self._create_provenance_organization(run_id, audit_logger)
+                
+                duration = (datetime.now(timezone.utc) - start_time).total_seconds()
+                log_experiment_complete(self.security.experiment_name, run_id, duration)
+                
+                return {
+                    "run_id": run_id,
+                    "results_directory": str(results_dir),
+                    "analysis_documents": len(analysis_results),
+                    "status": "completed_skip_synthesis",
+                    "mode": "skip_synthesis",
+                    "duration_seconds": duration,
+                    "performance_metrics": self._get_performance_summary(),
+                    "costs": audit_logger.get_session_costs() if audit_logger else {"total_cost_usd": 0.0}
+                }
             
             # Phase 7: Corpus index building (DISABLED - not needed without QA agents)
             self._log_progress("📝 Skipping corpus index building (QA agents disabled)")
@@ -373,6 +470,13 @@ class CleanAnalysisOrchestrator:
                 self._log_progress(f"⚠️ Results creation failed, attempting basic results: {str(e)}")
                 # Create basic results directory
                 results_dir = self._create_basic_results_directory(run_id)
+            
+            # Phase 13: Create provenance organization
+            if self.progress_manager:
+                self.progress_manager.update_main_progress("Provenance organization")
+            phase_start = datetime.now(timezone.utc)
+            self._create_provenance_organization(run_id, audit_logger)
+            self._log_phase_timing("provenance_organization", phase_start)
             
             duration = (datetime.now(timezone.utc) - start_time).total_seconds()
             log_experiment_complete(self.security.experiment_name, run_id, duration)
@@ -3891,15 +3995,29 @@ class CleanAnalysisOrchestrator:
                 continue
         
         # Convert dimensional_scores to analysis_scores format for CSV export
+        # Also prepare evidence data for CSV export
+        evidence_data = []
         for doc_analysis in processed_document_analyses:
             dimensional_scores = doc_analysis.get('dimensional_scores', {})
             analysis_scores = {}
             for dimension, scores in dimensional_scores.items():
                 analysis_scores[dimension] = scores.get('raw_score', 0.0)
             doc_analysis['analysis_scores'] = analysis_scores
+            
+            # Extract evidence data for CSV export
+            evidence_items = doc_analysis.get('evidence', [])
+            for evidence_item in evidence_items:
+                evidence_data.append({
+                    'document_name': doc_analysis.get('document_name', 'unknown'),
+                    'dimension': evidence_item.get('dimension', 'unknown'),
+                    'quote_text': evidence_item.get('quote_text', ''),
+                    'confidence': evidence_item.get('confidence', 0.0),
+                    'context_type': evidence_item.get('context_type', 'unknown')
+                })
         
         analysis_data = {
             "document_analyses": processed_document_analyses,
+            "evidence_data": evidence_data,
             "analysis_metadata": {
                 "framework_name": self.config.get('framework', 'unknown'),
                 "framework_version": "v1.0"
@@ -3981,15 +4099,29 @@ class CleanAnalysisOrchestrator:
                 continue
         
         # Convert dimensional_scores to analysis_scores format for CSV export
+        # Also prepare evidence data for CSV export
+        evidence_data = []
         for doc_analysis in processed_document_analyses:
             dimensional_scores = doc_analysis.get('dimensional_scores', {})
             analysis_scores = {}
             for dimension, scores in dimensional_scores.items():
                 analysis_scores[dimension] = scores.get('raw_score', 0.0)
             doc_analysis['analysis_scores'] = analysis_scores
+            
+            # Extract evidence data for CSV export
+            evidence_items = doc_analysis.get('evidence', [])
+            for evidence_item in evidence_items:
+                evidence_data.append({
+                    'document_name': doc_analysis.get('document_name', 'unknown'),
+                    'dimension': evidence_item.get('dimension', 'unknown'),
+                    'quote_text': evidence_item.get('quote_text', ''),
+                    'confidence': evidence_item.get('confidence', 0.0),
+                    'context_type': evidence_item.get('context_type', 'unknown')
+                })
         
         analysis_data = {
             "document_analyses": processed_document_analyses,
+            "evidence_data": evidence_data,
             "analysis_metadata": {
                 "framework_name": self.config.get('framework', 'unknown'),
                 "framework_version": "v1.0"
@@ -4032,7 +4164,7 @@ class CleanAnalysisOrchestrator:
         )
         
         if export_result.success:
-            self._log_progress(f"✅ Statistical preparation CSV export successful: {len(export_result.files_created)} files created")
+            self._log_progress(f"✅ Statistical preparation CSV export successful: {len(export_result.files_created)} files created")                                                                                                     
             for file in export_result.files_created:
                 self._log_progress(f"   • {file}")
         else:
@@ -4040,3 +4172,324 @@ class CleanAnalysisOrchestrator:
             raise CleanAnalysisError(f"Statistical preparation CSV export failed: {export_result.error_message}")
         
         return results_dir
+
+    def _resume_from_statistical_prep(self, audit_logger: AuditLogger, run_id: str, start_time: datetime) -> Dict[str, Any]:
+        """Resume from statistical preparation to full synthesis."""
+        try:
+            # Find the most recent statistical preparation run
+            stats_runs = list(self.experiment_path.glob("runs/*/results/scores.csv"))
+            if not stats_runs:
+                raise CleanAnalysisError("No statistical preparation results found to resume from")
+            
+            latest_stats_run = max(stats_runs, key=lambda p: p.stat().st_mtime)
+            stats_run_id = latest_stats_run.parent.parent.name
+            stats_results_dir = latest_stats_run.parent
+            
+            self._log_progress(f"📊 Resuming from statistical preparation run: {stats_run_id}")
+            
+            # Initialize infrastructure for resume
+            self._log_progress("🔧 Initializing infrastructure for resume...")
+            self.artifact_storage = LocalArtifactStorage(
+                security_boundary=self.security,
+                run_folder=self.experiment_path / "runs" / run_id
+            )
+            
+            # Load the existing analysis and derived metrics results
+            self._log_progress("🔍 Loading analysis artifacts...")
+            analysis_results = self._load_resume_artifacts(stats_run_id, "analysis")
+            self._log_progress(f"🔍 Loaded {len(analysis_results) if analysis_results else 0} analysis results")
+            
+            self._log_progress("🔍 Loading derived metrics artifacts...")
+            derived_metrics_results = self._load_resume_artifacts(stats_run_id, "derived_metrics")
+            self._log_progress(f"🔍 Loaded derived metrics: {type(derived_metrics_results)}")
+            
+            if not analysis_results:
+                raise CleanAnalysisError("Could not load analysis results from statistical preparation run")
+            
+            # Store results for synthesis access
+            self._analysis_results = analysis_results
+            
+            # Create evidence artifacts from analysis results for synthesis
+            self._log_progress("🔍 Creating evidence artifacts from analysis results...")
+            self._create_evidence_artifacts_from_analysis(analysis_results, run_id)
+            
+            # Ensure derived metrics results have the correct structure for synthesis
+            if derived_metrics_results and isinstance(derived_metrics_results, dict):
+                # Create a proper structure for synthesis
+                self._derived_metrics_results = {
+                    'status': 'completed',
+                    'derived_metrics_results': derived_metrics_results
+                }
+            else:
+                self._derived_metrics_results = {
+                    'status': 'completed',
+                    'derived_metrics_results': {}
+                }
+            
+            # Create new run directory for synthesis results
+            run_dir = self.experiment_path / "runs" / run_id
+            results_dir = run_dir / "results"
+            results_dir.mkdir(parents=True, exist_ok=True)
+            
+            # Copy statistical preparation results to new run
+            self._copy_statistical_prep_results(stats_results_dir, results_dir)
+            
+            # Load specifications for synthesis
+            self.config = self._load_specs()
+            
+            # Run synthesis phase
+            self._log_progress("🔄 Resume mode: Running synthesis phase...")
+            
+            # Build RAG index for synthesis
+            self._log_progress("📚 Building RAG index for synthesis...")
+            self._build_rag_index(audit_logger)
+            
+            # Run statistical analysis
+            statistical_results = self._run_statistical_analysis_phase(self.derived_metrics_model, audit_logger, analysis_results, derived_metrics_results)
+            
+            # Run evidence retrieval
+            evidence_results = self._run_evidence_retrieval_phase(self.synthesis_model, audit_logger, statistical_results)
+            
+            # Run synthesis
+            synthesis_results = self._run_synthesis(
+                self.synthesis_model, 
+                self.analysis_model,
+                audit_logger, 
+                statistical_results,
+                evidence_results
+            )
+            
+            if synthesis_results:
+                self._log_progress("✅ Resume synthesis completed successfully")
+                
+                # Create results directory with final files (same as normal flow)
+                self._log_progress("📁 Creating results directory with final files...")
+                try:
+                    # Prepare assets for results creation
+                    assets = {
+                        'report_hash': synthesis_results.get('report_hash'),
+                        'stats_hash': statistical_results.get('stats_hash')
+                    }
+                    
+                    # Create fact-check results (skipped in resume mode)
+                    fact_check_results = {"status": "skipped", "findings": []}
+                    
+                    # Create clean results directory
+                    results_dir = self._create_clean_results_directory(run_id, statistical_results, assets, fact_check_results)
+                    self._log_progress(f"📁 Results directory created: {results_dir}")
+                    
+                except Exception as e:
+                    self._log_progress(f"⚠️ Results creation failed: {str(e)}")
+                    # Fall back to basic results directory
+                    results_dir = self._create_basic_results_directory(run_id)
+                
+                duration = (datetime.now(timezone.utc) - start_time).total_seconds()
+                log_experiment_complete(self.security.experiment_name, run_id, duration)
+                
+                return {
+                    "run_id": run_id,
+                    "results_directory": str(results_dir),
+                    "analysis_documents": len(analysis_results),
+                    "status": "completed_resume_synthesis",
+                    "mode": "resume_from_stats",
+                    "resumed_from": stats_run_id,
+                    "duration_seconds": duration,
+                    "performance_metrics": self._get_performance_summary(),
+                    "costs": audit_logger.get_session_costs() if audit_logger else {"total_cost_usd": 0.0}
+                }
+            else:
+                raise CleanAnalysisError("Synthesis phase failed during resume")
+                
+        except Exception as e:
+            self._log_progress(f"❌ Resume from statistical preparation failed: {str(e)}")
+            raise CleanAnalysisError(f"Resume from statistical preparation failed: {str(e)}")
+
+    def _load_resume_artifacts(self, stats_run_id: str, artifact_type: str) -> Optional[Any]:
+        """Load artifacts from a previous statistical preparation run."""
+        try:
+            # Look for artifacts in the shared cache
+            shared_cache_dir = self.experiment_path / "shared_cache" / "artifacts"
+            print(f"🔍 Looking for {artifact_type} artifacts in: {shared_cache_dir}")
+            if not shared_cache_dir.exists():
+                print(f"❌ Shared cache directory does not exist: {shared_cache_dir}")
+                return None
+            
+            # Find artifacts by type
+            if artifact_type == "analysis":
+                # Look for analysis result artifacts
+                analysis_files = list(shared_cache_dir.glob("analysis_result_*"))
+                print(f"🔍 Found {len(analysis_files)} analysis result files")
+                if analysis_files:
+                    # Load all analysis results and return as a list
+                    analysis_results = []
+                    for analysis_file in analysis_files:
+                        print(f"🔍 Loading analysis file: {analysis_file.name}")
+                        with open(analysis_file, 'r', encoding='utf-8') as f:
+                            analysis_data = json.load(f)
+                            analysis_results.append(analysis_data)
+                    print(f"✅ Loaded {len(analysis_results)} analysis results")
+                    return analysis_results
+            
+            elif artifact_type == "derived_metrics":
+                # Look for derived metrics artifacts
+                metrics_files = list(shared_cache_dir.glob("derived_metrics_results_with_data_*"))
+                print(f"🔍 Found {len(metrics_files)} derived metrics files")
+                if metrics_files:
+                    # Load the most recent derived metrics result
+                    latest_metrics = max(metrics_files, key=lambda p: p.stat().st_mtime)
+                    print(f"🔍 Loading derived metrics file: {latest_metrics.name}")
+                    with open(latest_metrics, 'r', encoding='utf-8') as f:
+                        return json.load(f)
+            
+            print(f"❌ No {artifact_type} artifacts found")
+            return None
+            
+        except Exception as e:
+            self._log_progress(f"⚠️ Could not load {artifact_type} artifacts: {str(e)}")
+            import traceback
+            self._log_progress(f"⚠️ Traceback: {traceback.format_exc()}")
+            return None
+
+    def _copy_statistical_prep_results(self, source_dir: Path, target_dir: Path) -> None:
+        """Copy statistical preparation results to the new run directory."""
+        try:
+            # Copy CSV files
+            for csv_file in source_dir.glob("*.csv"):
+                target_file = target_dir / csv_file.name
+                target_file.write_text(csv_file.read_text())
+                self._log_progress(f"📋 Copied {csv_file.name} from statistical preparation")
+            
+            # Create a resume manifest
+            resume_manifest = {
+                "resume_info": {
+                    "resumed_from_run": source_dir.parent.name,
+                    "resume_timestamp": datetime.now(timezone.utc).isoformat(),
+                    "original_statistical_prep_files": [f.name for f in source_dir.glob("*.csv")]
+                }
+            }
+            
+            manifest_file = target_dir / "resume_manifest.json"
+            manifest_file.write_text(json.dumps(resume_manifest, indent=2))
+            
+        except Exception as e:
+            self._log_progress(f"⚠️ Could not copy all statistical preparation results: {str(e)}")
+            # Don't fail the entire resume for this
+
+    def _create_evidence_artifacts_from_analysis(self, analysis_results: List[Dict[str, Any]], run_id: str) -> None:
+        """Create evidence artifacts from analysis results for synthesis."""
+        try:
+            evidence_count = 0
+            print(f"🔍 Processing {len(analysis_results)} analysis results for evidence...")
+            
+            for i, analysis_result in enumerate(analysis_results):
+                print(f"🔍 Processing analysis result {i+1}: {list(analysis_result.keys())}")
+                
+                # Extract evidence from each analysis result
+                if 'raw_analysis_response' in analysis_result:
+                    raw_response = analysis_result['raw_analysis_response']
+                    print(f"🔍 Found raw_analysis_response, parsing JSON...")
+                    
+                    # Parse the JSON from the raw response
+                    try:
+                        # Extract JSON from the wrapped response
+                        json_start = raw_response.find('{')
+                        json_end = raw_response.rfind('}') + 1
+                        if json_start != -1 and json_end > json_start:
+                            json_str = raw_response[json_start:json_end]
+                            analysis_data = json.loads(json_str)
+                            
+                            if 'document_analyses' in analysis_data:
+                                doc_analyses = analysis_data['document_analyses']
+                                print(f"🔍 Found {len(doc_analyses)} document analyses")
+                                
+                                for j, doc_analysis in enumerate(doc_analyses):
+                                    evidence_items = doc_analysis.get('evidence', [])
+                                    print(f"🔍 Document {j+1} has {len(evidence_items)} evidence items")
+                                    
+                                    for k, evidence_item in enumerate(evidence_items):
+                                        quote_text = evidence_item.get('quote_text', '')
+                                        if quote_text:
+                                            print(f"🔍 Evidence item {k+1}: {quote_text[:50]}...")
+                                            
+                                            # Create evidence artifact with the structure expected by TxtaiEvidenceCurator
+                                            evidence_item_data = {
+                                                'document_name': doc_analysis.get('document_name', 'unknown'),
+                                                'dimension': evidence_item.get('dimension', 'unknown'),
+                                                'quote_text': quote_text,
+                                                'confidence': evidence_item.get('confidence', 0.0),
+                                                'context_type': evidence_item.get('context_type', 'unknown'),
+                                                'source_run': run_id
+                                            }
+                                            
+                                            # Wrap in the structure expected by TxtaiEvidenceCurator
+                                            evidence_data = {
+                                                'evidence_data': [evidence_item_data]
+                                            }
+                                            
+                                            # Store as evidence artifact
+                                            artifact_hash = hashlib.sha256(
+                                                f"{evidence_item_data['document_name']}_{evidence_item_data['dimension']}_{evidence_item_data['quote_text']}".encode()
+                                            ).hexdigest()
+                                            
+                                            evidence_filename = f"evidence_v6_{artifact_hash[:8]}"
+                                            print(f"🔍 Storing evidence artifact {evidence_filename}")
+                                            
+                                            # Convert evidence data to JSON bytes
+                                            evidence_json = json.dumps(evidence_data, indent=2)
+                                            evidence_bytes = evidence_json.encode('utf-8')
+                                            
+                                            # Store using put_artifact method
+                                            artifact_hash = self.artifact_storage.put_artifact(
+                                                content=evidence_bytes,
+                                                metadata={
+                                                    "artifact_type": "evidence_v6",
+                                                    "source_run": run_id,
+                                                    "document_name": evidence_item_data['document_name'],
+                                                    "dimension": evidence_item_data['dimension']
+                                                }
+                                            )
+                                            evidence_count += 1
+                                            print(f"✅ Stored evidence artifact: {evidence_filename}")
+                                        else:
+                                            print(f"⚠️ Evidence item {k+1} has no quote_text")
+                            else:
+                                print(f"⚠️ Parsed analysis data has no document_analyses field")
+                        else:
+                            print(f"⚠️ Could not extract JSON from raw response")
+                    except json.JSONDecodeError as e:
+                        print(f"⚠️ Could not parse JSON from raw response: {e}")
+                else:
+                    print(f"⚠️ Analysis result {i+1} has no raw_analysis_response field")
+            
+            print(f"✅ Created {evidence_count} evidence artifacts for synthesis")
+            
+        except Exception as e:
+            self._log_progress(f"⚠️ Could not create evidence artifacts: {str(e)}")
+            import traceback
+            self._log_progress(f"⚠️ Traceback: {traceback.format_exc()}")
+            # Don't fail the entire resume for this
+    
+    def _create_provenance_organization(self, run_id: str, audit_logger: AuditLogger) -> None:
+        """Create provenance organization for the run."""
+        try:
+            self._log_progress("📊 Creating provenance organization...")
+            run_dir = self.experiment_path / "runs" / run_id
+            shared_cache_dir = self.experiment_path / "shared_cache"
+            
+            # Create ProvenanceOrganizer and organize artifacts
+            provenance_organizer = ProvenanceOrganizer(self.security, audit_logger)
+            provenance_result = provenance_organizer.organize_run_artifacts(
+                run_dir=run_dir,
+                shared_cache_dir=shared_cache_dir,
+                experiment_metadata={
+                    "experiment_name": self.security.experiment_name,
+                    "run_id": run_id,
+                    "framework": self.config.get('framework', {}),
+                    "corpus": self.config.get('corpus', {}),
+                    "completion_time": datetime.now(timezone.utc).isoformat()
+                }
+            )
+            self._log_status("Provenance organization completed")
+        except Exception as e:
+            self._log_progress(f"⚠️ Provenance organization failed: {str(e)}")
+            # Continue without provenance organization - not fatal
