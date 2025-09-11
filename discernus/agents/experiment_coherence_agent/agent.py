@@ -84,26 +84,34 @@ class ExperimentCoherenceAgent:
     
     def _find_and_load_framework(self, experiment_path: Path) -> str:
         """Find and load framework file using format-agnostic discovery."""
-        # Common framework filenames to check
+        # Look for any .md file that could be a framework
+        # This is truly framework-agnostic - researchers can bring their own frameworks
+        framework_files = list(experiment_path.glob("*.md"))
+        
+        # Filter out known non-framework files
+        excluded_files = {
+            "experiment.md", "corpus.md", "corpus_manifest.md", 
+            "README.md", "readme.md", "Readme.md"
+        }
+        
         framework_candidates = [
-            "framework.md",
-            "caf_v10.md", "cff_v10.md", "pdaf_v10.md", "chf_v10.md", "ecf_v10.md",
-            "framework_v10.md",
-            # Versioned framework files
-            "caf_v10_0_1.md", "caf_v10_0_2.md", "caf_v10_0_3.md",
-            "cff_v10_0_1.md", "cff_v10_0_2.md", "cff_v10_0_3.md", 
-            "pdaf_v10_0_1.md", "pdaf_v10_0_2.md", "pdaf_v10_0_3.md",
-            "chf_v10_0_1.md", "chf_v10_0_2.md", "chf_v10_0_3.md",
-            "ecf_v10_0_1.md", "ecf_v10_0_2.md", "ecf_v10_0_3.md"
+            f for f in framework_files 
+            if f.name not in excluded_files
         ]
         
-        for filename in framework_candidates:
-            framework_file = experiment_path / filename
-            if framework_file.exists():
-                return framework_file.read_text(encoding='utf-8')
+        if not framework_candidates:
+            raise ValueError(f"No framework file found in {experiment_path}. Please add a framework file (any .md file except experiment.md, corpus.md, or README.md)")
         
-        # If no standard files found, raise error
-        raise ValueError(f"No framework file found in {experiment_path}. Expected one of: {', '.join(framework_candidates)}")
+        if len(framework_candidates) > 1:
+            # If multiple potential frameworks, prefer common names but don't require them
+            preferred_names = ["framework.md", "framework_v10.md"]
+            for preferred in preferred_names:
+                for candidate in framework_candidates:
+                    if candidate.name == preferred:
+                        return candidate.read_text(encoding='utf-8')
+        
+        # Return the first (or only) framework file found
+        return framework_candidates[0].read_text(encoding='utf-8')
     
     def _find_and_load_corpus(self, experiment_path: Path) -> str:
         """Find and load corpus manifest file using format-agnostic discovery."""
