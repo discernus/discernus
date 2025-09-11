@@ -1,8 +1,0 @@
-{
-  "success": true,
-  "issues": [
-    "The experiment is designed as a comparative study between two speakers but relies on a corpus with only one document per speaker (N=1 per group). This sample size is insufficient for statistically valid hypothesis testing and severely limits the generalizability of any findings. The analysis is restricted to a descriptive comparative case study of two specific texts, not a general comparison of the speakers' overall rhetorical strategies."
-  ],
-  "model": "vertex_ai/gemini-2.5-pro",
-  "validated_at": "2025-09-02T15:59:50.793052+00:00"
-}

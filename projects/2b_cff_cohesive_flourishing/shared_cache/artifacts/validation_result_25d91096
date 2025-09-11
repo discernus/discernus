@@ -1,9 +1,0 @@
-{
-  "success": true,
-  "issues": [
-    "The experiment specification's abstract and corpus design sections state the corpus contains 5 speeches. However, the `corpus.md` manifest defines a 6-document corpus, with the `total_documents` field set to 6 and an additional entry for `Trump_SOTU_2019.txt` that is not described in the experiment's prose.",
-    "The experiment aims to conduct complex statistical analyses, including temporal pattern analysis and factorial design validation, with a corpus of only 6 documents (N=6). According to Discernus statistical power guidelines, a sample size of N=4-9 is suitable for 'case study analysis' and identifying qualitative patterns, but lacks sufficient power for robust correlation or significance testing across documents."
-  ],
-  "model": "vertex_ai/gemini-2.5-pro",
-  "validated_at": "2025-08-28T02:28:26.784634+00:00"
-}
