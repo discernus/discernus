@@ -4048,6 +4048,9 @@ class CleanAnalysisOrchestrator:
             # Generate scores.csv from analysis_results
             self._generate_scores_csv(analysis_results, data_dir)
             
+            # Generate derived_metrics.csv from statistical_results
+            self._generate_derived_metrics_csv(statistical_results, data_dir)
+            
             # Generate evidence.csv from evidence_results
             self._generate_evidence_csv(evidence_results, data_dir)
             
@@ -4145,6 +4148,138 @@ class CleanAnalysisOrchestrator:
                     row.append(result.get('evidence_hash', ''))
                     
                     writer.writerow(row)
+
+    def _generate_derived_metrics_csv(self, statistical_results: Dict[str, Any], data_dir: Path) -> None:
+        """Generate derived_metrics.csv from statistical results."""
+        import csv
+        import json
+        
+        derived_metrics_file = data_dir / "derived_metrics.csv"
+        
+        # Get derived metrics data hash from statistical results
+        derived_metrics_data_hash = statistical_results.get('derived_metrics_data_hash', '')
+        if not derived_metrics_data_hash:
+            # No derived metrics available
+            with open(derived_metrics_file, 'w', newline='', encoding='utf-8') as csvfile:
+                writer = csv.writer(csvfile)
+                writer.writerow(['document_id', 'filename', 'status'])
+                writer.writerow(['', '', 'no_derived_metrics_available'])
+            return
+        
+        # Load derived metrics data from artifact storage
+        try:
+            derived_metrics_content = self.artifact_storage.get_artifact(derived_metrics_data_hash)
+            derived_metrics_data = json.loads(derived_metrics_content.decode('utf-8'))
+            
+            # Extract derived metrics results
+            derived_metrics_results = derived_metrics_data.get('derived_metrics_results', {})
+            derived_metrics_list = derived_metrics_results.get('derived_metrics', [])
+            
+            if not derived_metrics_list:
+                # No derived metrics calculated
+                with open(derived_metrics_file, 'w', newline='', encoding='utf-8') as csvfile:
+                    writer = csv.writer(csvfile)
+                    writer.writerow(['document_id', 'filename', 'status'])
+                    writer.writerow(['', '', 'no_derived_metrics_calculated'])
+                return
+            
+            # Extract all unique derived metric names
+            all_derived_metric_keys = set()
+            for derived_metric in derived_metrics_list:
+                if 'result_content' in derived_metric:
+                    result_content = derived_metric['result_content']
+                    raw_response = result_content.get('raw_analysis_response', '')
+                    
+                    # Parse the raw response to get derived metrics
+                    if '<<<DISCERNUS_ANALYSIS_JSON_v6>>>' in raw_response:
+                        start_marker = '<<<DISCERNUS_ANALYSIS_JSON_v6>>>'
+                        end_marker = '<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
+                        start_idx = raw_response.find(start_marker)
+                        end_idx = raw_response.find(end_marker)
+                        
+                        if start_idx != -1 and end_idx != -1:
+                            json_content = raw_response[start_idx + len(start_marker):end_idx].strip()
+                            try:
+                                analysis_data = json.loads(json_content)
+                                document_analyses = analysis_data.get('document_analyses', [])
+                                for doc_analysis in document_analyses:
+                                    derived_metrics = doc_analysis.get('derived_metrics', {})
+                                    all_derived_metric_keys.update(derived_metrics.keys())
+                            except json.JSONDecodeError:
+                                continue
+            
+            derived_metric_columns = sorted(list(all_derived_metric_keys))
+            headers = ['document_id', 'filename'] + derived_metric_columns
+            
+            with open(derived_metrics_file, 'w', newline='', encoding='utf-8') as csvfile:
+                writer = csv.writer(csvfile)
+                writer.writerow(headers)
+                
+                for derived_metric in derived_metrics_list:
+                    if 'result_content' in derived_metric:
+                        result_content = derived_metric['result_content']
+                        raw_response = result_content.get('raw_analysis_response', '')
+                        
+                        # Parse the raw response to get derived metrics
+                        derived_metrics = {}
+                        if '<<<DISCERNUS_ANALYSIS_JSON_v6>>>' in raw_response:
+                            start_marker = '<<<DISCERNUS_ANALYSIS_JSON_v6>>>'
+                            end_marker = '<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
+                            start_idx = raw_response.find(start_marker)
+                            end_idx = raw_response.find(end_marker)
+                            
+                            if start_idx != -1 and end_idx != -1:
+                                json_content = raw_response[start_idx + len(start_marker):end_idx].strip()
+                                try:
+                                    analysis_data = json.loads(json_content)
+                                    document_analyses = analysis_data.get('document_analyses', [])
+                                    if document_analyses:
+                                        derived_metrics = document_analyses[0].get('derived_metrics', {})
+                                except json.JSONDecodeError:
+                                    pass
+                        
+                        # Extract document info
+                        analysis_id = derived_metric.get('analysis_id', '')
+                        document_id = analysis_id.replace('analysis_', 'doc_')
+                        filename = 'unknown'
+                        
+                        # Try to get filename from the analysis data
+                        if 'result_content' in derived_metric:
+                            result_content = derived_metric['result_content']
+                            raw_response = result_content.get('raw_analysis_response', '')
+                            if '<<<DISCERNUS_ANALYSIS_JSON_v6>>>' in raw_response:
+                                start_marker = '<<<DISCERNUS_ANALYSIS_JSON_v6>>>'
+                                end_marker = '<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
+                                start_idx = raw_response.find(start_marker)
+                                end_idx = raw_response.find(end_marker)
+                                
+                                if start_idx != -1 and end_idx != -1:
+                                    json_content = raw_response[start_idx + len(start_marker):end_idx].strip()
+                                    try:
+                                        analysis_data = json.loads(json_content)
+                                        document_analyses = analysis_data.get('document_analyses', [])
+                                        if document_analyses:
+                                            filename = document_analyses[0].get('document_name', 'unknown')
+                                    except json.JSONDecodeError:
+                                        pass
+                        
+                        row = [document_id, filename]
+                        
+                        # Add derived metric values
+                        for col in derived_metric_columns:
+                            if col in derived_metrics:
+                                row.append(derived_metrics[col])
+                            else:
+                                row.append('')
+                        
+                        writer.writerow(row)
+                        
+        except Exception as e:
+            # If we can't load derived metrics, create a file indicating the error
+            with open(derived_metrics_file, 'w', newline='', encoding='utf-8') as csvfile:
+                writer = csv.writer(csvfile)
+                writer.writerow(['document_id', 'filename', 'status'])
+                writer.writerow(['', '', f'error_loading_derived_metrics: {str(e)}'])
 
     def _generate_evidence_csv(self, evidence_results: Dict[str, Any], data_dir: Path) -> None:
         """Generate evidence.csv from evidence results."""

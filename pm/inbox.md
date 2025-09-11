@@ -207,3 +207,34 @@
 - Consider implementing progressive timeout handling
 
 **Priority**: Medium - Affects performance and costs, but system remains functional
+
+### Bug: Derived Metrics Calculation Not Working
+
+**Issue**: Derived metrics functions execute but return raw analysis data instead of calculated values.
+
+**Symptoms**:
+- **Functions generated**: Derived metrics functions are created successfully
+- **Execution appears successful**: No errors during derived metrics phase
+- **Wrong data stored**: `derived_metrics_data` artifacts contain raw analysis results instead of calculated values
+- **Missing calculated metrics**: No `relational_climate`, `emotional_balance`, `success_climate`, etc. values
+- **CSV export affected**: `derived_metrics.csv` shows "no_derived_metrics_calculated"
+
+**Root Cause**: `_execute_derived_metrics_functions()` in `clean_analysis_orchestrator.py` (lines 1522-1576) stores raw analysis results instead of calculated derived metrics.
+
+**Evidence**:
+- `derived_metrics_data` artifacts contain raw analysis results with `analysis_id`, `result_hash`, `result_content`
+- Expected structure: `[{"document_id": "...", "relational_climate": 0.5, "emotional_balance": 0.3, ...}]`
+- Actual structure: `[{"analysis_id": "...", "result_hash": "...", "result_content": {...}}]`
+
+**Impact**: 
+- No derived metrics available for CSV export
+- Missing calculated metrics for analysis
+- Core functionality not working
+
+**Priority**: High - Core functionality missing, affects data analysis workflow
+
+**Investigation Needed**:
+- Debug `_execute_derived_metrics_functions()` execution
+- Check if `calculate_derived_metrics(df)` is being called correctly
+- Verify DataFrame conversion and derived metrics calculation
+- Test derived metrics functions in isolation
