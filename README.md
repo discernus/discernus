@@ -131,5 +131,31 @@ make debug EXPERIMENT=<path>   # Interactive debugging
 - **Frameworks**: `frameworks/` for analytical approaches
 - **Experiments**: `projects/` for research experiments
 
+## 📄 License
+
+This project is licensed under the **GNU General Public License v3.0 or later (GPL-3.0-or-later)**.
+
+### License Summary
+
+- **Free Software**: You are free to use, modify, and distribute this software
+- **Copyleft**: Any derivative works must also be licensed under GPL v3
+- **Source Code**: You must provide source code when distributing the software
+- **Commercial Use**: Allowed, but derivative works must remain GPL v3
+
+### Dual Licensing
+
+Discernus is available under dual licensing:
+
+- **GPL v3 (Default)**: Free for open source, academic, and personal use
+- **Commercial License**: For proprietary software integration and enterprise use
+
+For commercial licensing options, see [DUAL_LICENSING.md](DUAL_LICENSING.md) or contact:
+- **Email**: licensing@discernus.ai
+- **GitHub Issues**: Use the "commercial-licensing" label
+
+### Full License Text
+
+See [LICENSE](LICENSE) for the complete GPL v3 license text.
+
 ---
 

@@ -51,6 +51,22 @@ python3 discernus/tests/end_to_end_workflow_test.py
 See README.md for detailed documentation.
 """
 
+Copyright (C) 2025  Discernus Team
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+
 # Test configuration constants
 PYTHON_EXECUTABLE = "python3"
 VENV_ACTIVATION_CMD = "source venv/bin/activate"

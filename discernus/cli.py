@@ -17,13 +17,30 @@ Management Commands:
 
 Research Commands (Advanced):
 - discernus consolidate-provenance      - Consolidate provenance data for golden runs
-- discernus consolidate-inputs          - Consolidate input materials for golden runs  
-- discernus generate-golden-run-docs    - Generate comprehensive golden run documentation
-- discernus model-quality               - Assess model quality and compare analysis results
-- discernus timezone-debug              - Debug timezone issues in experiment logs
-- discernus visualize-provenance        - Generate provenance visualization
-- discernus validate-score              - Validate numerical scores using academic pipeline
+- discernus consolidate-inputs          - Consolidate input materials for golden runs
+
+Copyright (C) 2025  Discernus Team
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
+
+# Additional Commands:
+# - discernus generate-golden-run-docs    - Generate comprehensive golden run documentation
+# - discernus model-quality               - Assess model quality and compare analysis results
+# - discernus timezone-debug              - Debug timezone issues in experiment logs
+# - discernus visualize-provenance        - Generate provenance visualization
+# - discernus validate-score              - Validate numerical scores using academic pipeline
 
 import click
 import datetime
