@@ -4152,7 +4152,7 @@ class CleanAnalysisOrchestrator:
         
         evidence_file = data_dir / "evidence.csv"
         
-        headers = ['document_id', 'evidence_hash', 'dimension', 'score', 'quote_text', 'reasoning']
+        headers = ['document_id', 'evidence_hash', 'dimension', 'score', 'quote_text', 'reasoning', 'confidence']
         
         with open(evidence_file, 'w', newline='', encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile)
@@ -4161,15 +4161,19 @@ class CleanAnalysisOrchestrator:
             # Extract evidence from evidence_results
             evidence_data = evidence_results.get('evidence_results', [])
             for evidence_item in evidence_data:
-                row = [
-                    evidence_item.get('document_id', ''),
-                    evidence_item.get('evidence_hash', ''),
-                    evidence_item.get('dimension', ''),
-                    evidence_item.get('score', ''),
-                    evidence_item.get('quote_text', ''),
-                    evidence_item.get('reasoning', '')
-                ]
-                writer.writerow(row)
+                # Each evidence_item should have a 'quotes' field
+                quotes = evidence_item.get('quotes', [])
+                for quote in quotes:
+                    row = [
+                        quote.get('document_name', ''),
+                        quote.get('evidence_hash', ''),
+                        quote.get('dimension', ''),
+                        quote.get('score', ''),
+                        quote.get('quote_text', ''),
+                        quote.get('reasoning', ''),
+                        quote.get('confidence', '')
+                    ]
+                    writer.writerow(row)
 
     def _generate_metadata_csv(self, statistical_results: Dict[str, Any], data_dir: Path) -> None:
         """Generate metadata.csv from framework and corpus config."""
