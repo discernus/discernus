@@ -1,0 +1,301 @@
+{
+  "raw_analysis_results": [
+    {
+      "analysis_id": "analysis_2101dc6e8361",
+      "result_hash": "3f2510dd8778160bac248c7493d7bb89ffc1b9e4f800cd709c36180148b1b02b",
+      "result_content": {
+        "analysis_id": "analysis_2101dc6e8361",
+        "agent_name": "EnhancedAnalysisAgent",
+        "agent_version": "enhanced_v2.1_raw_output",
+        "experiment_name": "nano_test_experiment",
+        "model_used": "vertex_ai/gemini-2.5-flash",
+        "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"sentiment_binary_v1\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.98,\n    \"analysis_notes\": \"Applied three independent analytical approaches with median aggregation on a document with clear sentiment indicators.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"6950ccbc6b14\",\n      \"document_name\": \"positive_test.txt\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 1.0,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"negative_sentiment\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_evidence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+        "evidence_hash": "9c1aefc5c46c71ce161884d23bce6e12df64df70498398bbaeb07ee89785691e",
+        "execution_metadata": {
+          "start_time": "2025-09-11T15:25:11.561047+00:00",
+          "end_time": "2025-09-11T15:25:26.578915+00:00",
+          "duration_seconds": 15.017853
+        },
+        "input_artifacts": {
+          "framework_hash": "f032ff0c1c0b8b990d2cc892b488fe4b09d8837ca2cf4a51b50f6c27256df18f",
+          "document_hashes": [
+            "6950ccbc6b14eabf43508448cf888b2c590f44e549a32b8ae60e943710e74019"
+          ],
+          "num_documents": 1
+        },
+        "provenance": {
+          "security_boundary": {
+            "experiment_name": "nano_test_experiment",
+            "experiment_root": "/Volumes/code/discernus/projects/nano_test_experiment",
+            "boundary_type": "filesystem",
+            "security_level": "experiment_scoped"
+          },
+          "audit_session_id": "20250911T152511Z_b39d28d6"
+        }
+      },
+      "cached": true
+    },
+    {
+      "analysis_id": "analysis_4bc6d8eb51af",
+      "result_hash": "4224161e564f49ce300413031104baac9c37f1398c9ee5a91945ae7c8ea8610f",
+      "result_content": {
+        "analysis_id": "analysis_4bc6d8eb51af",
+        "agent_name": "EnhancedAnalysisAgent",
+        "agent_version": "enhanced_v2.1_raw_output",
+        "experiment_name": "nano_test_experiment",
+        "model_used": "vertex_ai/gemini-2.5-flash",
+        "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"sentiment_binary_v1\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.98,\n    \"analysis_notes\": \"Applied three independent analytical approaches with median aggregation for sentiment analysis.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"[DOCUMENT_ID_PLACEHOLDER]\",\n      \"document_name\": \"negative_test.txt\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 1.0,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"negative_sentiment\",\n          \"quote_text\": \"Everything looks dark and hopeless.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"direct_statement\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+        "evidence_hash": "d97c8892621bd07140fe697b29abe1361dabb8ba6b1ebd6bd2cb2644b257689c",
+        "execution_metadata": {
+          "start_time": "2025-09-11T15:25:26.579540+00:00",
+          "end_time": "2025-09-11T15:26:14.156846+00:00",
+          "duration_seconds": 47.577286
+        },
+        "input_artifacts": {
+          "framework_hash": "f032ff0c1c0b8b990d2cc892b488fe4b09d8837ca2cf4a51b50f6c27256df18f",
+          "document_hashes": [
+            "1df25093a747678c5dbe724ecfb963b88049f9a7a536a3f23f064fd592744f91"
+          ],
+          "num_documents": 1
+        },
+        "provenance": {
+          "security_boundary": {
+            "experiment_name": "nano_test_experiment",
+            "experiment_root": "/Volumes/code/discernus/projects/nano_test_experiment",
+            "boundary_type": "filesystem",
+            "security_level": "experiment_scoped"
+          },
+          "audit_session_id": "20250911T152511Z_b39d28d6"
+        }
+      },
+      "cached": true
+    }
+  ],
+  "derived_metrics_results": {
+    "status": "completed",
+    "derived_metrics_hash": "137cb66c95049d08595cb9bd07fb8fe5c6fd7c4d4a81cff0ee4dccbbced0b877",
+    "functions_generated": 6,
+    "derived_metrics_results": {
+      "generation_metadata": {
+        "status": "success",
+        "functions_generated": 6,
+        "output_file": "automatedderivedmetricsagent_functions.py",
+        "module_size": 14231,
+        "function_code_content": "\"\"\"\nAutomated Derived Metrics Functions\n===================================\n\nGenerated by AutomatedDerivedMetricsAgent for experiment: Test Experiment\nDescription: Test experiment for derived metrics\nGenerated: 2025-09-11T15:34:21.161775+00:00\n\nThis module contains automatically generated calculation functions for derived metrics\nas specified in the framework's natural language descriptions.\n\"\"\"\n\nimport pandas as pd\nimport numpy as np\nfrom typing import Optional, Dict, Any\n\n\ndef calculate_identity_tension(data, **kwargs):\n    \"\"\"\n    Calculate identity_tension: Conflict between tribal dominance and individual dignity dimensions\n\n    Formula: tribal_dominance * individual_dignity\n\n    This calculation measures the conflict between tribal identity and individual\n    dignity. It is defined as the product of the 'tribal_dominance' and\n    'individual_dignity' dimension scores. A high score indicates that both\n    dimensions are strongly present, representing a significant tension.\n\n    Note: This calculation requires 'tribal_dominance' and 'individual_dignity'\n    columns. As these are not present in the specified data structure for this\n    framework, the function is designed to gracefully fail and return None.\n\n    Args:\n        data (pd.Series): A single row of analysis data as a pandas Series.\n        **kwargs: Additional keyword arguments (unused).\n\n    Returns:\n        float: The calculated identity_tension score, or None if the necessary\n               dimension columns ('tribal_dominance', 'individual_dignity')\n               are missing or contain non-numeric/invalid data.\n    \"\"\"\n    import pandas as pd\n    import numpy as np\n\n    try:\n        # This calculation requires dimensions that are not available in the\n        # provided data structure. The code attempts to access the necessary\n        # columns ('tribal_dominance', 'individual_dignity'), which will\n        # raise a KeyError, causing the except block to be executed.\n        tribal_dominance = data['tribal_dominance']\n        individual_dignity = data['individual_dignity']\n\n        # Gracefully handle missing data within the columns, if they were to exist.\n        if pd.isna(tribal_dominance) or pd.isna(individual_dignity):\n            return None\n\n        # Convert to float for calculation\n        result = float(tribal_dominance) * float(individual_dignity)\n\n        # Ensure the result is a finite number (not inf, -inf, or nan)\n        return result if np.isfinite(result) else None\n\n    except (KeyError, TypeError, ValueError):\n        # KeyError: Catches the expected error when required columns are missing.\n        # TypeError/ValueError: Catches errors if columns exist but contain non-numeric data.\n        return None\n    except Exception:\n        # A general catch-all for any other unexpected errors.\n        return None\n\ndef calculate_emotional_balance(data, **kwargs):\n    \"\"\"\n    Calculate emotional_balance: Difference between hope and fear scores\n    \n    Formula: hope - fear\n    \n    Args:\n        data: pandas DataFrame or Series with dimension scores.\n              Expected to contain 'hope' and 'fear' columns/keys.\n        **kwargs: Additional parameters (unused).\n        \n    Returns:\n        float: Calculated result or None if insufficient data.\n    \"\"\"\n    import pandas as pd\n    import numpy as np\n    \n    try:\n        # The 'data' parameter is a single row, treated as a pandas Series.\n        # We use .get() to safely access keys that may be missing.\n        hope_score = data.get('hope')\n        fear_score = data.get('fear')\n        \n        # Check if required scores are missing (None) or not a number (NaN)\n        if pd.isna(hope_score) or pd.isna(fear_score):\n            return None\n            \n        # Perform the calculation and ensure the result is a float\n        emotional_balance = float(hope_score) - float(fear_score)\n        \n        return emotional_balance\n        \n    except (ValueError, TypeError):\n        # Catches errors if scores are not convertible to float (e.g., are strings)\n        return None\n    except Exception:\n        # A general fallback for any other unexpected errors\n        return None\n\ndef calculate_success_climate(data, **kwargs):\n    \"\"\"\n    Calculate success_climate: Difference between compersion and envy scores\n    \n    Formula: success_climate = compersion - envy\n\n    Args:\n        data: pandas DataFrame with dimension scores (expected to be a single row/Series)\n        **kwargs: Additional parameters\n        \n    Returns:\n        float: Calculated result or None if insufficient data\n    \"\"\"\n    import pandas as pd\n    import numpy as np\n    \n    try:\n        # The calculation is defined as the difference between 'compersion' and 'envy'.\n        # We must access columns with these exact names.\n        compersion_score = data['compersion']\n        envy_score = data['envy']\n\n        # Handle missing data (e.g., NaN, None) gracefully.\n        # pd.isna() correctly handles various missing value representations.\n        if pd.isna(compersion_score) or pd.isna(envy_score):\n            return None\n\n        # The subtraction operation will raise a TypeError for non-numeric types,\n        # which is caught below, ensuring type safety.\n        result = float(compersion_score - envy_score)\n        \n        return result\n\n    except (KeyError, TypeError):\n        # KeyError: This will be raised if the required 'compersion' or 'envy' columns\n        # are not present in the data, which is the expected outcome given the\n        # data structure described in the prompt.\n        # TypeError: This will be raised if the column values are not numeric.\n        return None\n    except Exception:\n        # A general catch-all for any other unexpected errors to ensure robustness.\n        return None\n\ndef calculate_relational_climate(data, **kwargs):\n    \"\"\"\n    Calculate relational_climate: Difference between amity and enmity scores.\n\n    Formula: positive_sentiment - negative_sentiment\n    \n    Args:\n        data (pd.Series or pd.DataFrame): A single row of analysis data containing\n                                           'positive_sentiment' and 'negative_sentiment'.\n        **kwargs: Additional parameters (not used).\n        \n    Returns:\n        float: Calculated result or None if insufficient data.\n    \"\"\"\n    import pandas as pd\n    import numpy as np\n    \n    try:\n        # Based on the framework context, 'amity' maps to 'positive_sentiment'\n        # and 'enmity' maps to 'negative_sentiment'. These column names are\n        # assumed based on the framework's dimensions as the provided \"ACTUAL\n        # DATA STRUCTURE\" lacks the necessary score columns for this calculation.\n        positive_col = 'positive_sentiment'\n        negative_col = 'negative_sentiment'\n\n        # Ensure 'data' is a pandas Series representing one row.\n        if isinstance(data, pd.DataFrame):\n            if len(data) != 1:\n                return None  # This function processes one record at a time.\n            data = data.iloc[0]\n\n        # Retrieve scores from the data Series.\n        positive_score = data[positive_col]\n        negative_score = data[negative_col]\n        \n        # Check for missing values (e.g., NaN, None).\n        if pd.isna(positive_score) or pd.isna(negative_score):\n            return None\n            \n        # Perform the calculation and ensure the output is a float.\n        # A TypeError will be raised for non-numeric data and caught below.\n        return float(positive_score) - float(negative_score)\n\n    except Exception:\n        # Catches potential KeyErrors from missing columns, TypeErrors from\n        # non-numeric data, or other issues, ensuring graceful failure.\n        return None\n\ndef calculate_goal_orientation(data, **kwargs):\n    \"\"\"\n    Calculate goal_orientation: Difference between cohesive goals and fragmentative goals\n    \n    Formula: goal_orientation = cohesive_goals - fragmentative_goals\n    \n    This calculation requires columns named 'cohesive_goals' and 'fragmentative_goals'.\n    As the provided data structure does not contain these columns, this function\n    will gracefully return None, adhering to the principle of not assuming\n    column mappings.\n\n    Args:\n        data (pd.Series): A single row of data from a pandas DataFrame.\n        **kwargs: Additional parameters (not used in this calculation).\n        \n    Returns:\n        float: The calculated goal orientation score, or None if the required\n               'cohesive_goals' or 'fragmentative_goals' columns are missing or\n               contain non-numeric data.\n    \"\"\"\n    import pandas as pd\n    import numpy as np\n    \n    try:\n        # The calculation is defined as the difference between 'cohesive_goals'\n        # and 'fragmentative_goals'. We must source these values from the input data.\n        # The .get() method safely retrieves values, returning None if a column is missing.\n        cohesive_val = data.get('cohesive_goals')\n        fragmentative_val = data.get('fragmentative_goals')\n\n        # If either column is missing from the data, we cannot perform the calculation.\n        if cohesive_val is None or fragmentative_val is None:\n            return None\n\n        # Convert retrieved values to numeric, coercing errors to Not a Number (NaN).\n        cohesive_num = pd.to_numeric(cohesive_val, errors='coerce')\n        fragmentative_num = pd.to_numeric(fragmentative_val, errors='coerce')\n\n        # If either value is non-numeric (resulting in NaN), the calculation is invalid.\n        if np.isnan(cohesive_num) or np.isnan(fragmentative_num):\n            return None\n\n        # Perform the calculation and return the result as a standard float.\n        return float(cohesive_num - fragmentative_num)\n\n    except Exception:\n        # Catch any other unexpected errors during processing and return None for safety.\n        return None\n\ndef calculate_overall_cohesion_index(data, **kwargs):\n    \"\"\"\n    Calculate overall_cohesion_index: Comprehensive measure combining all dimensions.\n\n    This index measures the balance between two primary sentiment dimensions.\n    A result of 1.0 indicates the values are identical (perfect cohesion),\n    while lower values indicate a greater divergence. Based on the provided\n    data structure, the formula is:\n    1.0 - |'analysis_result' - 'raw_analysis_response'|\n\n    Args:\n        data (pd.Series or pd.DataFrame): A single row of analysis data\n            containing 'analysis_result' and 'raw_analysis_response'.\n        **kwargs: Additional parameters (not used).\n        \n    Returns:\n        float: Calculated cohesion index, or None if input data is missing or invalid.\n    \"\"\"\n    import pandas as pd\n    import numpy as np\n    \n    try:\n        # The function is designed for a single row of data, either as a Series\n        # or a one-row DataFrame.\n        if isinstance(data, pd.DataFrame):\n            if data.shape[0] != 1:\n                return None  # This function processes one document at a time\n            series = data.iloc[0]\n        else:\n            series = data\n\n        # Extract scores using the exact column names specified in the data structure.\n        # .get() is used for safe access; returns None if a column is missing.\n        positive_dimension_score = series.get('analysis_result')\n        negative_dimension_score = series.get('raw_analysis_response')\n\n        # Handle missing data gracefully, returning None if either value is null.\n        if pd.isna(positive_dimension_score) or pd.isna(negative_dimension_score):\n            return None\n\n        # Convert to float for calculation. This will raise a ValueError for\n        # non-numeric types, which is caught by the except block.\n        pos_val = float(positive_dimension_score)\n        neg_val = float(negative_dimension_score)\n\n        # Calculate cohesion as 1.0 minus the absolute difference between dimensions.\n        cohesion_index = 1.0 - abs(pos_val - neg_val)\n        \n        # Ensure the final calculation did not result in NaN\n        if np.isnan(cohesion_index):\n            return None\n            \n        return cohesion_index\n\n    except Exception:\n        # Catch any errors during data access, type conversion, or calculation,\n        # ensuring production-ready stability.\n        return None\n\ndef calculate_all_derived_metrics(data: pd.DataFrame) -> Dict[str, Optional[float]]:\n    \"\"\"\n    Calculate all derived metrics for the given dataset.\n    \n    Args:\n        data: pandas DataFrame with dimension scores\n        \n    Returns:\n        Dictionary mapping metric names to calculated values\n    \"\"\"\n    results = {}\n    \n    # Get all calculation functions from this module\n    import inspect\n    current_module = inspect.getmodule(inspect.currentframe())\n    \n    for name, obj in inspect.getmembers(current_module):\n        if (inspect.isfunction(obj) and \n            name.startswith('calculate_') and \n            name not in ['calculate_all_derived_metrics', 'calculate_derived_metrics']):\n            try:\n                results[name.replace('calculate_', '')] = obj(data)\n            except Exception as e:\n                results[name.replace('calculate_', '')] = None\n                \n    return results\n\n\ndef calculate_derived_metrics(data: pd.DataFrame) -> pd.DataFrame:\n    \"\"\"\n    Template-compatible wrapper function for derived metrics calculation.\n    \n    This function is called by the universal notebook template and returns\n    the original data with additional derived metric columns.\n    \n    Args:\n        data: pandas DataFrame with dimension scores\n        \n    Returns:\n        DataFrame with original data plus derived metric columns\n    \"\"\"\n    # Calculate all derived metrics\n    derived_metrics = calculate_all_derived_metrics(data)\n    \n    # Create a copy of the original data\n    result = data.copy()\n    \n    # Add derived metrics as new columns\n    for metric_name, metric_value in derived_metrics.items():\n        if metric_value is not None:\n            # For scalar metrics, broadcast to all rows\n            result[metric_name] = metric_value\n        else:\n            # For failed calculations, use NaN\n            result[metric_name] = np.nan\n    \n    return result\n",
+        "cached_with_code": true
+      },
+      "derived_metrics_data": {
+        "status": "success",
+        "original_count": 2,
+        "derived_count": 2,
+        "derived_metrics": [
+          {
+            "analysis_id": "analysis_2101dc6e8361",
+            "result_hash": "3f2510dd8778160bac248c7493d7bb89ffc1b9e4f800cd709c36180148b1b02b",
+            "result_content": {
+              "analysis_id": "analysis_2101dc6e8361",
+              "agent_name": "EnhancedAnalysisAgent",
+              "agent_version": "enhanced_v2.1_raw_output",
+              "experiment_name": "nano_test_experiment",
+              "model_used": "vertex_ai/gemini-2.5-flash",
+              "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"sentiment_binary_v1\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.98,\n    \"analysis_notes\": \"Applied three independent analytical approaches with median aggregation on a document with clear sentiment indicators.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"6950ccbc6b14\",\n      \"document_name\": \"positive_test.txt\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 1.0,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"negative_sentiment\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_evidence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+              "evidence_hash": "9c1aefc5c46c71ce161884d23bce6e12df64df70498398bbaeb07ee89785691e",
+              "execution_metadata": {
+                "start_time": "2025-09-11T15:25:11.561047+00:00",
+                "end_time": "2025-09-11T15:25:26.578915+00:00",
+                "duration_seconds": 15.017853
+              },
+              "input_artifacts": {
+                "framework_hash": "f032ff0c1c0b8b990d2cc892b488fe4b09d8837ca2cf4a51b50f6c27256df18f",
+                "document_hashes": [
+                  "6950ccbc6b14eabf43508448cf888b2c590f44e549a32b8ae60e943710e74019"
+                ],
+                "num_documents": 1
+              },
+              "provenance": {
+                "security_boundary": {
+                  "experiment_name": "nano_test_experiment",
+                  "experiment_root": "/Volumes/code/discernus/projects/nano_test_experiment",
+                  "boundary_type": "filesystem",
+                  "security_level": "experiment_scoped"
+                },
+                "audit_session_id": "20250911T152511Z_b39d28d6"
+              }
+            },
+            "cached": true
+          },
+          {
+            "analysis_id": "analysis_4bc6d8eb51af",
+            "result_hash": "4224161e564f49ce300413031104baac9c37f1398c9ee5a91945ae7c8ea8610f",
+            "result_content": {
+              "analysis_id": "analysis_4bc6d8eb51af",
+              "agent_name": "EnhancedAnalysisAgent",
+              "agent_version": "enhanced_v2.1_raw_output",
+              "experiment_name": "nano_test_experiment",
+              "model_used": "vertex_ai/gemini-2.5-flash",
+              "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"sentiment_binary_v1\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.98,\n    \"analysis_notes\": \"Applied three independent analytical approaches with median aggregation for sentiment analysis.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"[DOCUMENT_ID_PLACEHOLDER]\",\n      \"document_name\": \"negative_test.txt\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 1.0,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"negative_sentiment\",\n          \"quote_text\": \"Everything looks dark and hopeless.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"direct_statement\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+              "evidence_hash": "d97c8892621bd07140fe697b29abe1361dabb8ba6b1ebd6bd2cb2644b257689c",
+              "execution_metadata": {
+                "start_time": "2025-09-11T15:25:26.579540+00:00",
+                "end_time": "2025-09-11T15:26:14.156846+00:00",
+                "duration_seconds": 47.577286
+              },
+              "input_artifacts": {
+                "framework_hash": "f032ff0c1c0b8b990d2cc892b488fe4b09d8837ca2cf4a51b50f6c27256df18f",
+                "document_hashes": [
+                  "1df25093a747678c5dbe724ecfb963b88049f9a7a536a3f23f064fd592744f91"
+                ],
+                "num_documents": 1
+              },
+              "provenance": {
+                "security_boundary": {
+                  "experiment_name": "nano_test_experiment",
+                  "experiment_root": "/Volumes/code/discernus/projects/nano_test_experiment",
+                  "boundary_type": "filesystem",
+                  "security_level": "experiment_scoped"
+                },
+                "audit_session_id": "20250911T152511Z_b39d28d6"
+              }
+            },
+            "cached": true
+          }
+        ],
+        "columns_added": []
+      },
+      "status": "success_with_data",
+      "validation_passed": true
+    }
+  },
+  "statistical_results": {
+    "generation_metadata": {
+      "status": "success",
+      "functions_generated": 3,
+      "output_file": "automatedstatisticalanalysisagent_functions.py",
+      "module_size": 13268,
+      "function_code_content": "\"\"\"\nAutomated Statistical Analysis Functions\n========================================\n\nGenerated by AutomatedStatisticalAnalysisAgent for experiment: nano_test_experiment\nDescription: Statistical analysis experiment\nGenerated: 2025-09-11T15:35:06.747547+00:00\n\nThis module contains automatically generated statistical analysis functions\nfor comprehensive data analysis including ANOVA, correlations, reliability,\nand hypothesis testing as appropriate for the research questions.\n\"\"\"\n\nimport pandas as pd\nimport numpy as np\nimport scipy.stats as stats\nfrom typing import Dict, Any, Optional, List, Tuple\nimport warnings\n\n# Suppress common statistical warnings for cleaner output\nwarnings.filterwarnings('ignore', category=RuntimeWarning)\n\n\ndef summarize_descriptive_statistics(data, **kwargs):\n    \"\"\"\n    Calculates and returns descriptive statistics for all numerical score columns.\n\n    This function provides a foundational overview of the dataset's characteristics,\n    including counts, means, standard deviations, and ranges for each sentiment\n    dimension's raw score, salience, and confidence. This serves as a basic\n    validation that the analysis agent has processed the data and produced\n    numerical outputs as expected (addresses RQ2).\n\n    Methodology:\n    - The function uses pandas' .describe() method on the relevant numeric columns.\n    - It is a purely descriptive analysis.\n\n    Args:\n        data (pd.DataFrame): DataFrame containing the analysis data with columns\n                             like 'positive_sentiment_raw', 'negative_sentiment_raw', etc.\n        **kwargs: Additional keyword arguments (not used).\n\n    Returns:\n        dict: A dictionary containing descriptive statistics for each score column.\n              Returns None if the required columns are not found or data is empty.\n    \"\"\"\n    import pandas as pd\n    import numpy as np\n\n    try:\n        required_cols = [\n            'positive_sentiment_raw', 'positive_sentiment_salience', 'positive_sentiment_confidence',\n            'negative_sentiment_raw', 'negative_sentiment_salience', 'negative_sentiment_confidence'\n        ]\n\n        if not all(col in data.columns for col in required_cols) or data.empty:\n            return None\n\n        # Select only the required columns for description\n        stats_data = data[required_cols]\n\n        # Calculate descriptive statistics\n        descriptives = stats_data.describe().to_dict()\n\n        # Ensure JSON serializability by converting numpy types\n        for key, value in descriptives.items():\n            for stat, num in value.items():\n                if isinstance(num, (np.integer, np.int64)):\n                    descriptives[key][stat] = int(num)\n                elif isinstance(num, (np.floating, np.float64)):\n                    descriptives[key][stat] = float(num)\n\n        return {\n            \"descriptive_statistics\": descriptives,\n            \"sample_size\": int(len(data))\n        }\n\n    except Exception as e:\n        # In a production environment, one might log the error `e`\n        return None\n\ndef analyze_sentiment_distinction(data, **kwargs):\n    \"\"\"\n    Exploratory analysis of sentiment scores between document types.\n\n    This function directly addresses the research question: \"Does the pipeline\n    correctly identify positive vs negative sentiment?\" by comparing the mean\n    scores of documents pre-categorized as 'positive' or 'negative'.\n\n    Methodology:\n    - Documents are categorized into 'positive' and 'negative' groups based on their filenames.\n    - The mean 'positive_sentiment_raw' and 'negative_sentiment_raw' scores are calculated for each group.\n    - Given the extremely small sample size (N=2, n=1 per group), this is a TIER 3 (Exploratory) analysis.\n    - No inferential statistics (e.g., t-tests, p-values) are computed as they would be statistically invalid and meaningless with n=1 per group (variance is undefined).\n    - The focus is on describing the observed pattern to validate the \"clear distinction\" expected outcome.\n\n    Sample Size & Power Assessment:\n    - Exploratory analysis - results are suggestive rather than conclusive (N=2).\n    - The purpose is not inference but basic functional validation.\n\n    Args:\n        data (pd.DataFrame): DataFrame containing 'document_name', 'positive_sentiment_raw',\n                             and 'negative_sentiment_raw' columns.\n        **kwargs: Additional keyword arguments (not used).\n\n    Returns:\n        dict: A dictionary containing the mean scores for each group, or None if\n              data is insufficient or improperly formatted.\n    \"\"\"\n    import pandas as pd\n    import numpy as np\n\n    try:\n        required_cols = ['document_name', 'positive_sentiment_raw', 'negative_sentiment_raw']\n        if not all(col in data.columns for col in required_cols) or data.empty:\n            return None\n\n        df = data.copy()\n\n        # Create grouping variable from document name\n        def get_doc_type(name):\n            if 'positive_test' in name:\n                return 'positive'\n            if 'negative_test' in name:\n                return 'negative'\n            return 'unknown'\n\n        df['doc_type'] = df['document_name'].apply(get_doc_type)\n\n        # Filter out any documents that don't match the expected pattern\n        df = df[df['doc_type'].isin(['positive', 'negative'])]\n\n        if df.empty or len(df['doc_type'].unique()) < 2:\n            return {\"error\": \"Insufficient data: Both 'positive' and 'negative' document types are required.\"}\n\n        # Group by the new variable and calculate means\n        # With n=1, mean is just the value itself, but this is robust for larger test sets\n        grouped_stats = df.groupby('doc_type')[['positive_sentiment_raw', 'negative_sentiment_raw']].mean()\n        group_counts = df['doc_type'].value_counts().to_dict()\n\n        results = {\n            \"group_means\": grouped_stats.to_dict('index'),\n            \"group_counts\": group_counts,\n            \"notes\": \"Exploratory analysis - results are suggestive rather than conclusive due to extremely small sample size (N={}). Focus is on pattern detection.\".format(len(df))\n        }\n        return results\n\n    except Exception as e:\n        return None\n\ndef analyze_dimension_correlation(data, **kwargs):\n    \"\"\"\n    Calculates the correlation between positive and negative sentiment scores.\n\n    Methodology:\n    - This function computes the Pearson correlation coefficient between the\n      'positive_sentiment_raw' and 'negative_sentiment_raw' dimensions.\n    - A strong negative correlation is typically expected in simple sentiment models,\n      indicating that as positive sentiment increases, negative sentiment decreases.\n\n    Sample Size & Power Assessment:\n    - TIER 3 (Exploratory Analysis). Correlation analysis requires a sufficient\n      number of data points to be stable and meaningful. As a conservative\n      practitioner, I advise against interpreting correlations with very small\n      sample sizes.\n    - Per protocol, this function will not compute a correlation for N < 5, as the\n      result would be highly unstable and misleading. For this experiment (N=2),\n      the correlation is mathematically trivial and provides no real insight.\n\n    Args:\n        data (pd.DataFrame): DataFrame containing 'positive_sentiment_raw' and\n                             'negative_sentiment_raw' columns.\n        **kwargs: Additional keyword arguments (not used).\n\n    Returns:\n        dict: A dictionary with the correlation matrix, or a note explaining why\n              the analysis was not performed. Returns None on error.\n    \"\"\"\n    import pandas as pd\n    import numpy as np\n\n    try:\n        required_cols = ['positive_sentiment_raw', 'negative_sentiment_raw']\n        if not all(col in data.columns for col in required_cols) or data.empty:\n            return None\n\n        n_samples = len(data)\n\n        # Per conservative statistical practice, do not run correlation on tiny samples.\n        if n_samples < 5:\n            return {\n                \"status\": \"not_computed\",\n                \"sample_size\": n_samples,\n                \"message\": \"Correlation analysis was not performed. A sample size of at least 5 is recommended for even a highly exploratory correlation. The current sample size is too small to yield a meaningful result.\"\n            }\n\n        correlation_matrix = data[required_cols].corr(method='pearson')\n\n        return {\n            \"status\": \"computed\",\n            \"sample_size\": n_samples,\n            \"correlation_matrix\": correlation_matrix.to_dict(),\n            \"notes\": \"Exploratory analysis - results should be interpreted with caution due to small sample size (N={}).\".format(n_samples)\n        }\n\n    except Exception as e:\n        return None\n\ndef run_complete_statistical_analysis(data: pd.DataFrame, alpha: float = 0.05) -> Dict[str, Any]:\n    \"\"\"\n    Run complete statistical analysis suite on the dataset.\n    \n    Args:\n        data: pandas DataFrame with dimension scores\n        alpha: Significance level for hypothesis tests (default: 0.05)\n        \n    Returns:\n        Dictionary with all statistical analysis results\n    \"\"\"\n    results = {\n        'analysis_metadata': {\n            'timestamp': pd.Timestamp.now().isoformat(),\n            'sample_size': len(data),\n            'alpha_level': alpha,\n            'variables_analyzed': list(data.select_dtypes(include=[np.number]).columns)\n        }\n    }\n    \n    # Get all analysis functions from this module\n    import inspect\n    current_module = inspect.getmodule(inspect.currentframe())\n    \n    for name, obj in inspect.getmembers(current_module):\n        if (inspect.isfunction(obj) and \n            name.startswith(('calculate_', 'perform_', 'test_')) and \n            name != 'run_complete_statistical_analysis'):\n            try:\n                # Pass alpha parameter to functions that might need it\n                if 'alpha' in inspect.signature(obj).parameters:\n                    results[name] = obj(data, alpha=alpha)\n                else:\n                    results[name] = obj(data)\n            except Exception as e:\n                results[name] = {'error': f'Analysis failed: {str(e)}'}\n                \n    return results\n\n\ndef perform_statistical_analysis(data: pd.DataFrame) -> Dict[str, Any]:\n    \"\"\"\n    Template-compatible wrapper function for statistical analysis.\n    \n    This function is called by the universal notebook template and performs\n    comprehensive statistical analysis on the provided dataset.\n    \n    Args:\n        data: pandas DataFrame with dimension scores and derived metrics\n        \n    Returns:\n        Dictionary containing all statistical analysis results\n    \"\"\"\n    return run_complete_statistical_analysis(data)\n\n\ndef generate_statistical_summary_report(analysis_results: Dict[str, Any]) -> str:\n    \"\"\"\n    Generate a human-readable summary report from statistical analysis results.\n    \n    Args:\n        analysis_results: Results from run_complete_statistical_analysis()\n        \n    Returns:\n        String containing formatted statistical report\n    \"\"\"\n    report_lines = []\n    report_lines.append(\"STATISTICAL ANALYSIS SUMMARY REPORT\")\n    report_lines.append(\"=\" * 50)\n    \n    metadata = analysis_results.get('analysis_metadata', {})\n    report_lines.append(f\"Analysis Timestamp: {metadata.get('timestamp', 'Unknown')}\")\n    report_lines.append(f\"Sample Size: {metadata.get('sample_size', 'Unknown')}\")\n    report_lines.append(f\"Alpha Level: {metadata.get('alpha_level', 'Unknown')}\")\n    report_lines.append(f\"Variables: {len(metadata.get('variables_analyzed', []))}\")\n    report_lines.append(\"\")\n    \n    # Summarize key findings\n    for analysis_name, result in analysis_results.items():\n        if analysis_name != 'analysis_metadata' and isinstance(result, dict):\n            if 'error' not in result:\n                report_lines.append(f\"{analysis_name.replace('_', ' ').title()}:\")\n                \n                # Extract key statistics based on analysis type\n                if 'p_value' in result:\n                    p_val = result['p_value']\n                    significance = \"significant\" if p_val < metadata.get('alpha_level', 0.05) else \"not significant\"\n                    report_lines.append(f\"  - p-value: {p_val:.4f} ({significance})\")\n                \n                if 'effect_size' in result:\n                    report_lines.append(f\"  - Effect size: {result['effect_size']:.4f}\")\n                \n                if 'correlation_matrix' in result:\n                    report_lines.append(f\"  - Correlation matrix generated with {len(result['correlation_matrix'])} variables\")\n                \n                if 'cronbach_alpha' in result:\n                    alpha_val = result['cronbach_alpha']\n                    reliability = \"excellent\" if alpha_val > 0.9 else \"good\" if alpha_val > 0.8 else \"acceptable\" if alpha_val > 0.7 else \"questionable\"\n                    report_lines.append(f\"  - Cronbach's \u03b1: {alpha_val:.3f} ({reliability})\")\n                \n                report_lines.append(\"\")\n            else:\n                report_lines.append(f\"{analysis_name}: ERROR - {result['error']}\")\n                report_lines.append(\"\")\n    \n    return \"\\n\".join(report_lines)\n",
+      "cached_with_code": true
+    },
+    "statistical_data": {
+      "analyze_dimension_correlation": {
+        "status": "not_computed",
+        "sample_size": 2,
+        "message": "Correlation analysis was not performed. A sample size of at least 5 is recommended for even a highly exploratory correlation. The current sample size is too small to yield a meaningful result."
+      },
+      "analyze_sentiment_distinction": {
+        "group_means": {
+          "negative": {
+            "positive_sentiment_raw": 0.0,
+            "negative_sentiment_raw": 1.0
+          },
+          "positive": {
+            "positive_sentiment_raw": 1.0,
+            "negative_sentiment_raw": 0.0
+          }
+        },
+        "group_counts": {
+          "positive": 1,
+          "negative": 1
+        },
+        "notes": "Exploratory analysis - results are suggestive rather than conclusive due to extremely small sample size (N=2). Focus is on pattern detection."
+      },
+      "generate_statistical_summary_report": "STATISTICAL ANALYSIS SUMMARY REPORT\n==================================================\nAnalysis Timestamp: Unknown\nSample Size: Unknown\nAlpha Level: Unknown\nVariables: 0\n",
+      "perform_statistical_analysis": {
+        "analysis_metadata": {
+          "timestamp": "2025-09-11T11:37:28.985931",
+          "sample_size": 2,
+          "alpha_level": 0.05,
+          "variables_analyzed": [
+            "positive_sentiment_raw",
+            "positive_sentiment_salience",
+            "positive_sentiment_confidence",
+            "negative_sentiment_raw",
+            "negative_sentiment_salience",
+            "negative_sentiment_confidence"
+          ]
+        }
+      },
+      "run_complete_statistical_analysis": {
+        "analysis_metadata": {
+          "timestamp": "2025-09-11T11:37:28.988313",
+          "sample_size": 2,
+          "alpha_level": 0.05,
+          "variables_analyzed": [
+            "positive_sentiment_raw",
+            "positive_sentiment_salience",
+            "positive_sentiment_confidence",
+            "negative_sentiment_raw",
+            "negative_sentiment_salience",
+            "negative_sentiment_confidence"
+          ]
+        }
+      },
+      "summarize_descriptive_statistics": {
+        "descriptive_statistics": {
+          "positive_sentiment_raw": {
+            "count": 2.0,
+            "mean": 0.5,
+            "std": 0.7071067811865476,
+            "min": 0.0,
+            "25%": 0.25,
+            "50%": 0.5,
+            "75%": 0.75,
+            "max": 1.0
+          },
+          "positive_sentiment_salience": {
+            "count": 2.0,
+            "mean": 0.5,
+            "std": 0.7071067811865476,
+            "min": 0.0,
+            "25%": 0.25,
+            "50%": 0.5,
+            "75%": 0.75,
+            "max": 1.0
+          },
+          "positive_sentiment_confidence": {
+            "count": 2.0,
+            "mean": 1.0,
+            "std": 0.0,
+            "min": 1.0,
+            "25%": 1.0,
+            "50%": 1.0,
+            "75%": 1.0,
+            "max": 1.0
+          },
+          "negative_sentiment_raw": {
+            "count": 2.0,
+            "mean": 0.5,
+            "std": 0.7071067811865476,
+            "min": 0.0,
+            "25%": 0.25,
+            "50%": 0.5,
+            "75%": 0.75,
+            "max": 1.0
+          },
+          "negative_sentiment_salience": {
+            "count": 2.0,
+            "mean": 0.5,
+            "std": 0.7071067811865476,
+            "min": 0.0,
+            "25%": 0.25,
+            "50%": 0.5,
+            "75%": 0.75,
+            "max": 1.0
+          },
+          "negative_sentiment_confidence": {
+            "count": 2.0,
+            "mean": 1.0,
+            "std": 0.0,
+            "min": 1.0,
+            "25%": 1.0,
+            "50%": 1.0,
+            "75%": 1.0,
+            "max": 1.0
+          }
+        },
+        "sample_size": 2
+      }
+    },
+    "status": "success_with_data",
+    "validation_passed": true
+  }
+}

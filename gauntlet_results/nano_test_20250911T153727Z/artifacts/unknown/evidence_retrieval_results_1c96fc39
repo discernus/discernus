@@ -1,0 +1,431 @@
+{
+  "metadata": {
+    "agent": "EvidenceRetriever",
+    "timestamp": "2025-09-11T15:38:16.386654",
+    "framework_hash": "11ab06fe79b4b8ac20e998fcb6e8c77c36eb762f887dae8d6f7680d3d656225c",
+    "total_findings": 10,
+    "total_quotes": 20
+  },
+  "evidence_results": [
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "The positive test case received a maximal score (1.0) for 'positive_sentiment', demonstrating perfect identification of positive content as per the statistical mean of 1.0 in the 'positive' group."
+      },
+      "queries_used": [
+        "dominant positive language",
+        "score of 1.0 for positive sentiment",
+        "praise, optimism, success words"
+      ],
+      "quotes": [
+        {
+          "quote_text": "This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.",
+          "document_name": "positive_test.txt",
+          "dimension": "positive_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.6177420616149902,
+          "metadata": {
+            "document_name": "positive_test.txt",
+            "dimension": "positive_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.3574959337711334,
+          "metadata": {
+            "document_name": "negative_test.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Textual evidence for the maximal 'positive_sentiment' score should align with framework markers like 'great', 'excellent', 'success', and 'wonderful'."
+      },
+      "queries_used": [
+        "evidence for positive sentiment",
+        "justification for 1.0 positive score",
+        "excellent and wonderful"
+      ],
+      "quotes": [
+        {
+          "quote_text": "This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.",
+          "document_name": "positive_test.txt",
+          "dimension": "positive_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.3415133059024811,
+          "metadata": {
+            "document_name": "positive_test.txt",
+            "dimension": "positive_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.11994436383247375,
+          "metadata": {
+            "document_name": "negative_test.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "The positive test case received a minimal score (0.0) for 'negative_sentiment', showing correct exclusion of negative themes."
+      },
+      "queries_used": [
+        "no negative language",
+        "score of 0.0 for negative sentiment",
+        "absence of criticism and pessimism"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.4077411890029907,
+          "metadata": {
+            "document_name": "negative_test.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.",
+          "document_name": "positive_test.txt",
+          "dimension": "positive_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.24658991396427155,
+          "metadata": {
+            "document_name": "positive_test.txt",
+            "dimension": "positive_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Evidence for the minimal 'negative_sentiment' score should explicitly state the lack of negative markers."
+      },
+      "queries_used": [
+        "justification for zero negative score",
+        "no failure words",
+        "absence of despair"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.36248424649238586,
+          "metadata": {
+            "document_name": "negative_test.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.",
+          "document_name": "positive_test.txt",
+          "dimension": "positive_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.28464215993881226,
+          "metadata": {
+            "document_name": "positive_test.txt",
+            "dimension": "positive_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "The negative test case received a maximal score (1.0) for 'negative_sentiment', demonstrating perfect identification of negative content as per the statistical mean of 1.0 in the 'negative' group."
+      },
+      "queries_used": [
+        "dominant negative language",
+        "score of 1.0 for negative sentiment",
+        "criticism, pessimism, failure words"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.4589424729347229,
+          "metadata": {
+            "document_name": "negative_test.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.",
+          "document_name": "positive_test.txt",
+          "dimension": "positive_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.32048994302749634,
+          "metadata": {
+            "document_name": "positive_test.txt",
+            "dimension": "positive_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Textual evidence for the maximal 'negative_sentiment' score should align with framework markers like 'terrible', 'failure', 'awful', and 'disastrous'."
+      },
+      "queries_used": [
+        "evidence for negative sentiment",
+        "justification for 1.0 negative score",
+        "terrible and disastrous"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.2656843066215515,
+          "metadata": {
+            "document_name": "negative_test.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.",
+          "document_name": "positive_test.txt",
+          "dimension": "positive_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.20140156149864197,
+          "metadata": {
+            "document_name": "positive_test.txt",
+            "dimension": "positive_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "The negative test case received a minimal score (0.0) for 'positive_sentiment', showing correct exclusion of positive themes."
+      },
+      "queries_used": [
+        "no positive language",
+        "score of 0.0 for positive sentiment",
+        "absence of praise and optimism"
+      ],
+      "quotes": [
+        {
+          "quote_text": "This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.",
+          "document_name": "positive_test.txt",
+          "dimension": "positive_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.5225567817687988,
+          "metadata": {
+            "document_name": "positive_test.txt",
+            "dimension": "positive_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.39799126982688904,
+          "metadata": {
+            "document_name": "negative_test.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Evidence for the minimal 'positive_sentiment' score should explicitly state the lack of positive markers."
+      },
+      "queries_used": [
+        "justification for zero positive score",
+        "no success words",
+        "absence of enthusiasm"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.2363998293876648,
+          "metadata": {
+            "document_name": "negative_test.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.",
+          "document_name": "positive_test.txt",
+          "dimension": "positive_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.23595038056373596,
+          "metadata": {
+            "document_name": "positive_test.txt",
+            "dimension": "positive_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "All sentiment assessments were made with maximum confidence (1.0), as reflected in the descriptive statistics (mean=1.0, std=0.0 for confidence scores)."
+      },
+      "queries_used": [
+        "confidence of 1.0",
+        "unambiguous sentiment",
+        "clear and direct evidence"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.21225248277187347,
+          "metadata": {
+            "document_name": "negative_test.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.",
+          "document_name": "positive_test.txt",
+          "dimension": "positive_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.12488023936748505,
+          "metadata": {
+            "document_name": "positive_test.txt",
+            "dimension": "positive_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "The perfect inverse relationship between positive and negative scores (1.0/0.0 and 0.0/1.0) suggests the framework successfully captured the intended binary opposition in the test data."
+      },
+      "queries_used": [
+        "strong inverse scores",
+        "high positive and low negative",
+        "high negative and low positive"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.32570576667785645,
+          "metadata": {
+            "document_name": "negative_test.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.",
+          "document_name": "positive_test.txt",
+          "dimension": "positive_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.2881368398666382,
+          "metadata": {
+            "document_name": "positive_test.txt",
+            "dimension": "positive_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    }
+  ]
+}

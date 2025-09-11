@@ -522,7 +522,10 @@ class CleanAnalysisOrchestrator:
                 self._log_phase_timing("synthesis_phase", phase_start)
                 
                 # Extract assets from synthesis results
+                self._log_progress(f"🔧 DEBUG: Synthesis results keys: {list(synthesis_results.keys())}")
                 assets = synthesis_results.get("assets", {})
+                self._log_progress(f"🔧 DEBUG: Assets keys: {list(assets.keys())}")
+                self._log_progress(f"🔧 DEBUG: report_hash in assets: {'report_hash' in assets}")
             except Exception as e:
                 # A failure in synthesis is a fatal error for the experiment.
                 self._log_progress(f"❌ FATAL: Synthesis phase failed: {str(e)}")
@@ -543,7 +546,13 @@ class CleanAnalysisOrchestrator:
                 self._log_phase_timing("outputs_creation", phase_start)
                 self._log_status("🔧 DEBUG: Phase 12 completed successfully")
             except Exception as e:
-                self._log_progress(f"⚠️ Outputs creation failed, attempting basic outputs: {str(e)}")
+                import traceback
+                error_msg = f"⚠️ Outputs creation failed, attempting basic outputs: {str(e)}"
+                traceback_msg = f"🔧 DEBUG: Full traceback: {traceback.format_exc()}"
+                self._log_progress(error_msg)
+                self._log_progress(traceback_msg)
+                print(error_msg)
+                print(traceback_msg)
                 # Create basic outputs directory
                 outputs_dir = self._create_basic_outputs_directory(run_id)
             
@@ -4765,11 +4774,36 @@ class CleanAnalysisOrchestrator:
         metadata_dir = outputs_dir / "metadata"
         metadata_dir.mkdir(exist_ok=True)
         stats_file = metadata_dir / "statistical_results.json"
+        
+        # Convert numpy types to JSON-serializable types
+        import numpy as np
+        
+        def convert_to_serializable(obj):
+            """Convert numpy and other non-JSON types to serializable types."""
+            if isinstance(obj, np.ndarray):
+                return obj.tolist()
+            elif isinstance(obj, (np.integer, np.int64, np.int32)):
+                return int(obj)
+            elif isinstance(obj, (np.floating, np.float64, np.float32)):
+                return float(obj)
+            elif isinstance(obj, (np.bool_, bool)):
+                return bool(obj)
+            elif isinstance(obj, dict):
+                return {k: convert_to_serializable(v) for k, v in obj.items()}
+            elif isinstance(obj, list):
+                return [convert_to_serializable(item) for item in obj]
+            else:
+                return obj
+        
+        serializable_stats = convert_to_serializable(statistical_results)
+        
         with open(stats_file, 'w') as f:
-            json.dump(statistical_results, f, indent=2)
+            json.dump(serializable_stats, f, indent=2)
         
         # Save final report
+        self._log_progress(f"🔧 DEBUG: Checking for report_hash in assets: {list(assets.keys())}")
         if 'report_hash' in assets:
+            self._log_progress(f"🔧 DEBUG: Found report_hash: {assets['report_hash']}")
             report_content = self.artifact_storage.get_artifact(assets['report_hash'])
             report_file = outputs_dir / "final_report.md"
             
@@ -4777,6 +4811,8 @@ class CleanAnalysisOrchestrator:
             with open(report_file, 'wb') as f:
                 f.write(report_content)
             self._log_progress("📝 Final report saved to outputs")
+        else:
+            self._log_progress("❌ DEBUG: No report_hash found in assets - final report not saved")
         
         # Save synthesis metadata
         synthesis_file = metadata_dir / "assets.json"  # Fixed typo

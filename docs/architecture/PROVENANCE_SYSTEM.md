@@ -1,385 +1,389 @@
-# Discernus Provenance System Architecture
+# Discernus Provenance System
 
-**Version**: 2.0  
-**Status**: Production Ready  
-**Last Updated**: August 2025
+**Complete Research Transparency and Reproducibility Infrastructure**
+
+The Discernus provenance system provides comprehensive tracking, organization, and preservation of research artifacts to ensure full transparency, reproducibility, and auditability of computational research experiments.
 
 ## Overview
 
-The Discernus Provenance System provides **comprehensive research transparency** through a multi-layered architecture that ensures every computational decision can be traced, verified, and reproduced. This system meets the highest academic standards for computational social science research.
+The provenance system captures and organizes every aspect of a research run:
+- **Complete execution logs** (LLM interactions, system events, costs, errors)
+- **All artifacts** with content-addressable storage and dependency tracking
+- **Input materials** (experiment specifications, frameworks, corpus files)
+- **Analysis outputs** (scores, evidence, statistical results, reports)
+- **Git-based persistence** with mode-aware commit messages
+- **Self-contained archives** for publication and long-term preservation
 
-## Architecture Principles
+## Architecture
 
-### 1. **Content-Addressed Integrity**
-- Every artifact stored with SHA-256 hash for tamper detection
-- Modification of any content results in different hash
-- Deduplication through content addressing
-- Cryptographic verification of data consistency
+### Core Components
 
-### 2. **Automatic Git Persistence**
-- All successful research runs automatically committed to Git
-- Complete audit trail with timestamps and commit hashes
-- Distributed backup through Git remotes
-- Optional opt-out via `--no-auto-commit` flag
+1. **ProvenanceOrganizer**: Creates human-readable artifact organization with symlinks to shared cache
+2. **EnhancedManifest**: Tracks run metadata, modes, resume capabilities, and artifact dependencies
+3. **DirectoryStructureReorganizer**: Transforms flat structure into stakeholder-friendly organization
+4. **Git Integration**: Automatic commits with mode-aware messages for version control
+5. **Archive System**: Creates self-contained packages for publication and archival
 
-### 3. **Human-Readable Organization**
-- Symlink architecture for academic-friendly file structure
-- Clear directory organization with descriptive names
-- Comprehensive README files for each research run
-- Automated validation scripts for integrity checking
-
-### 4. **Complete Dependency Tracking**
-- Full provenance chain from inputs to conclusions
-- Artifact metadata includes all dependencies
-- Recursive dependency resolution for cached results
-- Tamper-evident dependency verification
-
-## System Components
-
-### Content-Addressable Storage
+### Storage Architecture
 
 ```
-shared_cache/artifacts/
-├── analysis_response_185f5e58.json    # Raw AI analysis output
-├── statistical_results_ecbe79b4.json  # Mathematical computations  
-├── curated_evidence_35008a8b.json     # Supporting evidence
-└── final_report_c54d6e63.md          # Synthesis results
+projects/experiment/
+├── runs/20250910T141608Z/           # Individual run directory
+│   ├── data/                        # Analysis-ready CSV files
+│   │   ├── scores.csv              # Raw dimensional scores
+│   │   ├── evidence.csv            # Supporting evidence quotes
+│   │   └── metadata.csv            # Provenance summary
+│   ├── outputs/                     # Final outputs
+│   │   ├── final_report.md         # Complete synthesis report
+│   │   └── statistical_results.json # Mathematical analysis
+│   ├── inputs/                      # Input materials (copied for replication)
+│   │   ├── experiment.md           # Experiment specification
+│   │   ├── framework_file.md       # Framework files
+│   │   └── corpus/                 # Corpus files
+│   ├── provenance/                  # Audit trail and metadata
+│   │   ├── consolidated_provenance.json
+│   │   └── input_materials_consolidation.json
+│   ├── artifacts/                   # Complete provenance artifacts
+│   │   ├── analysis_results/       # Raw LLM outputs
+│   │   ├── statistical_results/    # Mathematical computations
+│   │   ├── evidence/               # Curated evidence
+│   │   └── provenance.json         # Artifact dependency map
+│   ├── session_logs/                # Complete execution logs
+│   │   ├── logs/                   # All log files
+│   │   └── manifest.json           # Execution manifest
+│   └── statistical_package/         # Researcher-ready package (when applicable)
+│       ├── scores.csv              # Analysis data
+│       ├── CODEBOOK.md             # Variable descriptions
+│       ├── import_python.py        # Python import script
+│       ├── import_r.R              # R import script
+│       └── import_stata.do         # STATA import script
+├── session/                         # Session-specific logs
+└── shared_cache/                    # Content-addressable artifact storage
 ```
 
-**Features**:
-- **SHA-256 hashing**: 8-character prefix for human readability
-- **Deduplication**: Identical content shared across runs
-- **Integrity verification**: `sha256sum` validation available
-- **Metadata storage**: Complete provenance information
+## Run Modes and Provenance
 
-### Git-Based Permanent Provenance
+### Standard Mode
+- **Purpose**: Complete analysis + synthesis pipeline
+- **Commit Message**: `"Complete run: {experiment_name}"`
+- **Outputs**: Full analysis, statistical results, synthesis report
+- **Provenance**: Complete artifact chain from inputs to final outputs
 
-**Automatic Commits**:
+### Analysis-Only Mode
+- **Purpose**: Document analysis with CSV export
+- **CLI**: `discernus run --analysis-only`
+- **Commit Message**: `"Analysis only: {experiment_name}"`
+- **Outputs**: Raw analysis scores, evidence, metadata CSVs
+- **Provenance**: Analysis artifacts, input materials, execution logs
+
+### Statistical Preparation Mode
+- **Purpose**: Analysis + derived metrics + CSV export for external statistical analysis
+- **CLI**: `discernus run --statistical-prep`
+- **Commit Message**: `"Statistical prep: {experiment_name}"`
+- **Outputs**: Analysis scores, derived metrics, evidence CSVs
+- **Provenance**: Analysis and derived metrics artifacts, resume capability metadata
+- **Resume**: Can be resumed later with `discernus resume`
+
+### Skip Synthesis Mode
+- **Purpose**: Full pipeline including statistical analysis, skip synthesis report
+- **CLI**: `discernus run --skip-synthesis`
+- **Commit Message**: `"Skip synthesis: {experiment_name}"`
+- **Outputs**: Complete statistical analysis without final report
+- **Provenance**: Full artifact chain except synthesis outputs
+
+### Resume Mode
+- **Purpose**: Resume from statistical preparation to complete synthesis
+- **CLI**: `discernus resume`
+- **Commit Message**: `"Resume from stats: {experiment_name}"`
+- **Outputs**: Synthesis report and final outputs
+- **Provenance**: Links to original statistical prep run, complete final artifact chain
+
+## CLI Options
+
+### Core Experiment Commands
+
 ```bash
-# Default behavior - auto-commit enabled
+# Standard complete run
+discernus run projects/experiment
+
+# Analysis-only mode
 discernus run projects/experiment --analysis-only
-📝 Auto-committed to Git: Complete run 20250804T223703Z: experiment
 
-# Opt-out for manual control  
-discernus run projects/experiment --no-auto-commit
+# Statistical preparation mode (for external analysis)
+discernus run projects/experiment --statistical-prep
+
+# Skip synthesis mode
+discernus run projects/experiment --skip-synthesis
+
+# Resume from statistical preparation
+discernus resume projects/experiment
 ```
 
-**Git Integration Features**:
-- **Force override**: Preserves research despite .gitignore patterns
-- **Short commit messages**: Under 50 characters per terminal compatibility
-- **Timeout protection**: 30-second limit prevents hanging
-- **Non-blocking**: Git failures don't break research runs
-- **Comprehensive logging**: All Git operations logged for audit
-
-### Human-Readable Run Organization
-
-```
-projects/experiment/runs/20250804T175152Z/
-├── README.md                    # Complete audit guide
-├── manifest.json                # Execution record
-├── results/                     # Final outputs
-│   ├── final_report.md         # Main deliverable
-│   ├── scores.csv              # Quantitative results
-│   ├── evidence.csv            # Supporting evidence
-│   └── metadata.csv            # Provenance summary
-├── artifacts/                   # Complete audit trail (symlinks)
-│   ├── analysis_results/       # AI system outputs
-│   ├── statistical_results/    # Mathematical work
-│   ├── evidence/               # Supporting evidence
-│   ├── inputs/                 # Framework and data
-│   └── provenance.json         # Artifact dependency map
-└── logs/                        # System execution logs
-    ├── llm_interactions.jsonl  # Complete AI conversations
-    ├── system.jsonl            # System events
-    ├── agents.jsonl            # Agent execution
-    └── costs.jsonl             # API cost tracking
-```
-
-### Automated Validation System
-
-**Integrity Validation Script**: `scripts/validate_run_integrity.py`
+### Git Integration Options
 
 ```bash
-# Quick integrity check
-python3 scripts/validate_run_integrity.py projects/experiment/runs/20250804T175152Z
+# Disable automatic Git commits
+discernus run projects/experiment --no-auto-commit
 
-# Verbose validation with all checks
-python3 scripts/validate_run_integrity.py projects/experiment/runs/20250804T175152Z --verbose
-
-# Include Git history validation
-python3 scripts/validate_run_integrity.py projects/experiment/runs/20250804T175152Z --check-git
+# Environment variable to disable auto-commit
+export DISCERNUS_NO_AUTO_COMMIT=1
+discernus run projects/experiment
 ```
 
-**Validation Coverage**:
-- **Manifest Structure**: Execution metadata completeness
-- **Results Files**: Expected outputs exist and are substantial
-- **Symlink Integrity**: All artifact links resolve correctly
-- **Hash Integrity**: Content matches expected SHA-256 hashes
-- **Provenance Chain**: Complete dependency relationships
-- **Git History**: Run exists in repository history
+### Archive Commands
 
-## Academic Standards Compliance
+```bash
+# Basic archive (input materials, provenance, documentation)
+discernus archive projects/experiment/runs/20250910T141608Z
 
-### Computational Reproducibility
+# Complete self-contained archive
+discernus archive projects/experiment/runs/20250910T141608Z \
+  --include-session-logs \
+  --include-artifacts \
+  --create-statistical-package
 
-**Complete Transparency**:
-- Every computation and decision preserved
-- Raw AI system outputs available for inspection
-- Mathematical work documented with source data
-- Complete methodology documentation auto-generated
+# Archive with all options
+discernus archive projects/experiment/runs/20250910T141608Z \
+  --include-inputs \
+  --include-provenance \
+  --include-docs \
+  --include-session-logs \
+  --include-artifacts \
+  --create-statistical-package
+```
 
-**Reproducibility Package**:
-- Exact inputs preserved (framework, corpus, parameters)
-- Environment specifications documented
-- Complete audit trail from raw data to conclusions
-- Validation tools for independent verification
+## Archive System
 
-**Integrity Guarantees**:
-- Content-addressed hashing enables modification detection
-- Git timestamps document sequence of operations
-- Cryptographic dependency chains prevent tampering
-- Distributed Git storage enables independent verification
+### Archive Types
 
-### Peer Review Support
+1. **Basic Archive**: Input materials, consolidated provenance, documentation
+2. **Complete Archive**: Includes session logs and actual artifact content
+3. **Statistical Package**: Researcher-ready data package with import scripts
 
-**Auditor-Friendly Design**:
-- Clear navigation with README guides
-- Common audit questions answered upfront
-- Recommended audit workflows (5 min, 30 min, 2+ hours)
-- Automated validation scripts for quick verification
+### Archive Contents
 
-**Academic Integration**:
-- Citation-ready metadata with Git commit hashes
-- Methodology sections auto-generated for papers
-- Complete reproducibility packages for replication studies
-- Academic presentation tools for research transparency
+- **Input Materials**: Experiment specification, framework files, corpus documents
+- **Provenance Data**: Consolidated metadata, execution timeline, cost tracking
+- **Session Logs**: Complete LLM interactions, system events, error logs
+- **Artifact Content**: Actual files (not symlinks) for complete self-containment
+- **Statistical Package**: Ready-to-use data with codebook and import scripts
+- **Documentation**: Comprehensive README with methodology and usage instructions
 
-## Usage Patterns
+### Self-Contained Archives
+
+Archives created with `--include-artifacts` and `--include-session-logs` are completely self-contained:
+- No broken symlinks or external dependencies
+- All necessary files for complete replication
+- Complete LLM interaction history for transparency
+- Full audit trail for research integrity verification
+
+## Git Integration
+
+### Automatic Commits
+
+Every successful run is automatically committed to Git with mode-aware commit messages:
+
+```bash
+# Example Git history
+git log --oneline
+e7fcfff78 Statistical prep: nano_test_experiment
+b2a1771ad Analysis only: nano_test_experiment
+9528cbef3 Complete run: nano_test_experiment
+```
+
+### Commit Message Format
+
+- **Analysis-only**: `"Analysis only: {experiment_name}"`
+- **Statistical prep**: `"Statistical prep: {experiment_name}"`
+- **Skip synthesis**: `"Skip synthesis: {experiment_name}"`
+- **Resume**: `"Resume from stats: {experiment_name}"`
+- **Complete**: `"Complete run: {experiment_name}"`
+
+### Git Best Practices
+
+- Commit messages are limited to 50 characters per project guidelines
+- Uses `git add --force` to override .gitignore for research preservation
+- Includes comprehensive error handling and timeout protection
+- Can be disabled with `--no-auto-commit` flag for testing or manual control
+
+## Statistical Package Generation
+
+For statistical preparation and skip synthesis modes, the system generates researcher-ready packages:
+
+### Package Contents
+
+- **Data Files**: `scores.csv`, `evidence.csv`, `metadata.csv`
+- **Codebook**: `CODEBOOK.md` with detailed variable descriptions
+- **Import Scripts**: 
+  - `import_python.py` - Python/pandas import
+  - `import_r.R` - R import with proper data types
+  - `import_stata.do` - STATA import script
+- **Documentation**: `README.md` with usage instructions
+- **Metadata**: `package_metadata.json` with generation details
+
+### Usage Example
+
+```python
+# Python usage
+exec(open('statistical_package/import_python.py').read())
+# Now you have: scores_df, evidence_df, metadata_df
+
+# R usage
+source('statistical_package/import_r.R')
+# Now you have: scores.df, evidence.df, metadata.df
+
+# STATA usage
+do statistical_package/import_stata.do
+```
+
+## Directory Structure Benefits
+
+### For Researchers
+- **`data/`**: Immediate access to analysis-ready CSV files
+- **`outputs/`**: Clear separation of final reports and results
+- **`statistical_package/`**: Ready-to-use package for external analysis tools
+
+### For Replication Researchers
+- **`inputs/`**: All input materials needed for exact replication
+- **Self-contained**: No external dependencies or broken symlinks
+- **Complete documentation**: Clear methodology and file purposes
+
+### For Auditors
+- **`provenance/`**: Dedicated audit trail directory
+- **`artifacts/`**: Complete provenance chain with actual content
+- **`session_logs/`**: Complete execution logs and LLM interactions
+- **Git history**: Version control with clear run identification
+
+## Enhanced Manifest System
+
+The enhanced manifest tracks comprehensive run metadata:
+
+```json
+{
+  "run_metadata": {
+    "run_id": "20250910T141608Z",
+    "experiment_name": "nano_test_experiment",
+    "start_time": "2025-09-10T14:16:08Z",
+    "completion_time": "2025-09-10T14:16:09Z"
+  },
+  "run_mode": {
+    "mode_type": "statistical_prep",
+    "statistical_prep": true,
+    "analysis_only": false,
+    "skip_synthesis": false,
+    "resume_from_stats": false
+  },
+  "resume_capability": {
+    "can_resume": true,
+    "statistical_prep_completed": true,
+    "resume_artifacts": ["analysis_hash_123", "metrics_hash_456"],
+    "resume_metadata": {
+      "analysis_documents": 2,
+      "derived_metrics_completed": true,
+      "csv_export_completed": true
+    }
+  },
+  "execution_timeline": {
+    "phases_completed": ["validation", "analysis", "derived_metrics"],
+    "total_duration": 1.23,
+    "phase_timings": {...}
+  },
+  "artifact_summary": {
+    "total_artifacts": 15,
+    "artifact_types": {...}
+  }
+}
+```
+
+## Best Practices
 
 ### For Researchers
 
-**Default Workflow** (Automatic Provenance):
-```bash
-# Run experiment - everything preserved automatically
-discernus run projects/my_study --analysis-only
+1. **Use appropriate modes**: Choose the right mode for your workflow
+   - Analysis-only for quick data exploration
+   - Statistical-prep for external statistical analysis
+   - Standard for complete research pipeline
 
-# Results automatically organized and committed to Git
-# README generated with complete audit trail
-# Validation script available for integrity checking
-```
+2. **Archive important runs**: Create self-contained archives for publication
+   ```bash
+   discernus archive run_directory --include-session-logs --include-artifacts
+   ```
 
-**Manual Control Workflow**:
-```bash
-# Disable auto-commit for manual Git control
-discernus run projects/my_study --no-auto-commit
+3. **Leverage resume capability**: Use statistical-prep mode for iterative analysis
+   ```bash
+   discernus run --statistical-prep  # Initial analysis
+   discernus resume                  # Complete synthesis later
+   ```
 
-# Manually commit when ready
-git add projects/my_study/runs/20250804T175152Z
-git commit -m "Complete analysis for paper submission"
-```
+### For Replication
 
-### For Auditors and Reviewers
+1. **Use archived runs**: Always work from archived, self-contained runs
+2. **Verify Git history**: Check commit messages to understand run types
+3. **Follow documentation**: Use the generated README files for guidance
 
-**Quick Integrity Check** (5 minutes):
-```bash
-# Automated validation
-python3 scripts/validate_run_integrity.py [run_path]
+### For Audit
 
-# Manual spot checks
-ls -la artifacts/                    # Check symlink structure
-cat README.md                       # Review audit guide
-grep "cost_usd" logs/costs.jsonl    # Verify resource usage
-```
+1. **Review complete logs**: Check `session_logs/` for full execution trace
+2. **Verify artifact chain**: Trace dependencies through `artifacts/provenance.json`
+3. **Check Git provenance**: Verify commit history and timestamps
 
-**Standard Audit** (30 minutes):
-1. Review `manifest.json` for execution record
-2. Examine `artifacts/inputs/` for framework and data
-3. Check `artifacts/analysis_results/` for AI outputs
-4. Verify `artifacts/statistical_results/` for computations
-5. Cross-reference `results/` with artifact chain
+## Integration with External Tools
 
-**Deep Forensic Audit** (2+ hours):
-1. Complete log analysis in `logs/` directory
-2. Validate every symlink and dependency
-3. Review `logs/llm_interactions.jsonl` for prompt analysis
-4. Attempt independent replication using preserved inputs
-5. Statistical validation of mathematical computations
+### Statistical Analysis Software
 
-## Security Model
+The statistical package is designed for seamless integration:
 
-### Threat Model
+- **Python/Pandas**: Direct CSV import with proper data types
+- **R**: Native data frame import with factor conversion
+- **STATA**: Complete import with variable labels and formats
+- **SPSS**: CSV import with codebook for variable definitions
 
-**Designed to Defend Against**:
-- Accidental data corruption or loss
-- Unintended modification of research results
-- Academic integrity challenges during peer review
-- Reproducibility failures in replication studies
+### Version Control
 
-**NOT Designed to Defend Against**:
-- Sophisticated adversarial attacks on the system
-- Motivated researchers attempting to fabricate results
-- Nation-state level computational security threats
+- **Git integration**: Automatic commits with descriptive messages
+- **Branch strategies**: Supports both same-branch and separate-branch workflows
+- **Distributed verification**: Git's distributed nature enables independent verification
 
-### Security Features
+### Publication Workflows
 
-**Content Integrity**:
-- SHA-256 hashing for modification detection
-- Cryptographic dependency chains
-- Tamper-evident artifact storage
-- Git-based version control and timestamps
-
-**Academic Integrity**:
-- Complete audit trails for all decisions
-- Raw data preservation with exact inputs
-- Methodology documentation auto-generation
-- Independent verification tools provided
-
-## Implementation Details
-
-### Auto-Commit Architecture
-
-**CLI Integration**:
-```python
-@click.option('--no-auto-commit', is_flag=True, 
-              help='Disable automatic Git commit after successful run completion')
-def run(experiment_path, ..., no_auto_commit=False):
-    result = orchestrator.run_experiment(
-        auto_commit=(not no_auto_commit),
-        ...
-    )
-```
-
-**Orchestrator Integration**:
-```python
-def run_experiment(self, auto_commit: bool = True, ...):
-    # ... run experiment ...
-    
-    # Auto-commit successful run to Git (if enabled)
-    if auto_commit:
-        commit_metadata = {
-            "run_id": run_timestamp,
-            "experiment_name": self.experiment_path.name
-        }
-        commit_success = self._auto_commit_run(run_folder, commit_metadata, audit)
-```
-
-**Git Operations**:
-```python
-def _auto_commit_run(self, run_folder, run_metadata, audit):
-    # Add with force to override .gitignore for research preservation
-    subprocess.run(["git", "add", "--force", str(run_folder.relative_to(repo_root))])
-    
-    # Short commit message (under 50 chars per terminal compatibility)
-    commit_msg = f"Complete run {run_id}: {experiment_name}"
-    subprocess.run(["git", "commit", "-m", commit_msg])
-```
-
-### Validation Script Architecture
-
-**Multi-Layer Validation**:
-```python
-class IntegrityValidator:
-    def run_full_validation(self, check_git=False):
-        validations = [
-            ("Manifest Structure", self.validate_manifest),
-            ("Results Files", self.validate_results_files), 
-            ("Symlink Integrity", self.validate_symlinks),
-            ("Hash Integrity", self.validate_artifact_hashes),
-            ("Provenance Chain", self.validate_provenance_chain),
-        ]
-        
-        if check_git:
-            validations.append(("Git History", self.validate_git_history))
-```
-
-**Hash Verification**:
-```python
-def validate_artifact_hashes(self):
-    for artifact_file in artifacts_dir.rglob("*"):
-        expected_hash = self.extract_hash_from_filename(artifact_file.name)
-        actual_hash = self.compute_file_hash(artifact_file.resolve())
-        
-        # Check if 8-char prefix matches full SHA-256
-        if not actual_hash.startswith(expected_hash):
-            hash_mismatches.append((artifact_file, expected_hash, actual_hash[:8]))
-```
-
-## Future Enhancements
-
-### Phase 1: Enhanced Academic Integration
-- Citation-ready metadata generation with DOI preparation
-- Methodology section auto-generation for academic papers
-- Enhanced CLI for analysis portfolio management
-- Local analysis registry with search capabilities
-
-### Phase 2: Distributed Provenance
-- Persistent URL generation for published analyses
-- Cross-institutional verification networks
-- Community discovery and similarity detection
-- Full DROI (Discernus Research Object Identifier) implementation
-
-### Phase 3: Advanced Validation
-- Statistical validation automation
-- Cross-platform reproducibility testing
-- Blockchain-based immutable provenance (if needed)
-- Advanced security features for high-stakes research
+- **Self-contained archives**: Ready for supplementary material submission
+- **Complete documentation**: Methodology and replication instructions included
+- **Audit trails**: Full transparency for peer review and replication
 
 ## Troubleshooting
 
 ### Common Issues
 
-**Auto-Commit Failures**:
+1. **Git commit failures**: Check repository status and permissions
+2. **Archive creation errors**: Verify run directory exists and is complete
+3. **Resume failures**: Ensure statistical preparation completed successfully
+
+### Debug Options
+
 ```bash
-# Check Git configuration
-git config --list | grep user
+# Disable auto-commit for testing
+discernus run --no-auto-commit
 
-# Verify repository status
-git status
-
-# Manual validation
-python3 scripts/validate_run_integrity.py [run_path] --check-git
+# Check run status
+discernus archive run_directory  # Basic archive to verify completeness
 ```
 
-**Symlink Issues**:
-```bash
-# Check symlink targets
-find artifacts/ -type l -exec ls -la {} \;
+### Log Locations
 
-# Verify shared cache integrity
-ls -la projects/experiment/shared_cache/artifacts/
-```
+- **Session logs**: `session/{run_id}/logs/`
+- **Application logs**: `session/{run_id}/logs/application.log`
+- **Error logs**: `session/{run_id}/logs/errors.log`
+- **LLM interactions**: `session/{run_id}/logs/llm_interactions.log`
 
-**Hash Mismatches**:
-```bash
-# Verify artifact integrity
-sha256sum artifacts/analysis_results/*.json
+## Future Enhancements
 
-# Check for file corruption
-python3 scripts/validate_run_integrity.py [run_path] --verbose
-```
+The provenance system is designed for extensibility:
 
-### Recovery Procedures
+- **Additional archive formats**: Support for different packaging standards
+- **Enhanced metadata**: More detailed execution tracking
+- **Integration APIs**: Programmatic access to provenance data
+- **Visualization tools**: Graphical representation of artifact dependencies
 
-**Lost Git History**:
-1. Check if run directory exists: `ls projects/experiment/runs/`
-2. Add manually: `git add projects/experiment/runs/[run_id]`
-3. Commit: `git commit -m "Recover run [run_id]"`
-4. Validate: `python3 scripts/validate_run_integrity.py [run_path] --check-git`
+---
 
-**Broken Symlinks**:
-1. Check shared cache: `ls projects/experiment/shared_cache/artifacts/`
-2. Verify hash matches: `sha256sum [artifact_file]`
-3. Re-run provenance organization if needed
-4. Contact support if artifacts are missing
-
-## Conclusion
-
-The Discernus Provenance System provides **world-class research transparency** through a carefully designed architecture that balances:
-- **Academic rigor** with **usability**
-- **Complete transparency** with **performance**
-- **Automatic preservation** with **researcher control**
-- **Security** with **practical threat modeling**
-
-This system enables computational social science research that meets the highest standards for peer review, replication, and academic integrity while remaining accessible to researchers at all technical levels.
-
-For questions or support, consult the validation tools, README files, or contact the development team through GitHub issues.
+*This documentation reflects the provenance system as implemented in Sprint 12: Statistical Preparation Provenance Integration.*

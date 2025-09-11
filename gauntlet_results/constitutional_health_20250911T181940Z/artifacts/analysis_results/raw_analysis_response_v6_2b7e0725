@@ -1,0 +1,87 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Applied three independent analytical approaches with median aggregation. Document expresses strong support for existing constitutional framework, democratic norms, and institutions, with a focus on gradual reform and extending these ideals globally without imposing them. Absence of any rhetoric related to rejection, subversion, or replacement.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "e4bc4715a161...",
+      "document_name": "Bush_Inaugural_2005.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.75,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "On this day, prescribed by law and marked by ceremony, we celebrate the durable wisdom of our Constitution and recall the deep commitments that unite our country.",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "absence_of_evidence"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Freedom, by its nature, must be chosen and defended by citizens and sustained by the rule of law and the protection of minorities.",
+          "confidence": 0.9,
+          "context_type": "thematic_implication"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "absence_of_evidence"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Americans move forward in every generation by reaffirming all that is good and true that came before, ideals of justice and conduct that are the same yesterday, today, and forever.",
+          "confidence": 0.95,
+          "context_type": "thematic_centrality"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "absence_of_evidence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

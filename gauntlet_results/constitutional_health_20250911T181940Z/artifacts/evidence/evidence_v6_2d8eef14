@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "46510c1431e60b7e0d9b7a6c561d6c064c5280814492e46bfb347968a01e0338"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-11T18:45:34.942690+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Tonight I ask the House and the Senate to join me in the next bold steps to serve our fellow citizens.",
+      "confidence": 0.95,
+      "context_type": "legislative_proposal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:45:34.942680+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "Whatever action is required, whenever action is necessary, I will defend the freedom and security of the American people.",
+      "confidence": 0.8,
+      "context_type": "national_security_declaration",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:45:34.942683+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "The FBI is improving its ability to analyze intelligence and is transforming itself to meet new threats. Tonight I am instructing the leaders of the FBI, the CIA, the Homeland Security, and the Department of Defense to develop a Terrorist Threat Integration Center",
+      "confidence": 0.95,
+      "context_type": "praise_and_directives_for_government_agencies",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:45:34.942684+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "Instead of bureaucrats and trial lawyers and HMOs, we must put doctors and nurses and patients back in charge of American medicine.",
+      "confidence": 0.8,
+      "context_type": "critique_of_specific_actors",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:45:34.942685+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "My budget will commit an additional $400 billion over the next decade to reform and strengthen Medicare.",
+      "confidence": 0.95,
+      "context_type": "commitment_to_strengthen_existing_program",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:45:34.942686+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2008.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:45:34.942687+00:00"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_2bc928e68e2b",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Applied three independent analytical approaches with median aggregation\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{{artifact_id}}\",\n      \"document_name\": \"Bush_SOTU_2007.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.75,\n          \"confidence\": 0.9\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.8\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"My budget includes the largest increase in defense spending in two decades, because while the price of freedom and security is high, it is never too high.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"I will not wait on events while dangers gather. I will not stand by as peril draws closer and closer.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"Tonight, thanks to them, we are winning the war on terror. The men and women of our Armed Forces have delivered a message now clear to every enemy of the United States...\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absent\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"Our war on terror is well begun, but it is only begun. This campaign may not be finished on our watch; yet, it must be and it will be waged on our watch. We can't stop short.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"thematic_statement\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absent\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "a6df55ba182d184a00fc746b53e7382a634ea16c5930d2f46b82fc6a9acf57ba",
+  "execution_metadata": {
+    "start_time": "2025-09-11T18:44:29.381194+00:00",
+    "end_time": "2025-09-11T18:44:55.178767+00:00",
+    "duration_seconds": 25.797569
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "071cd547f9fd6acd4c686d4177e2fc02900546c2863532e32383e52b0497c79d"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/private/tmp/discernus_gauntlet_test/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250911T181940Z_afae273b"
+  }
+}

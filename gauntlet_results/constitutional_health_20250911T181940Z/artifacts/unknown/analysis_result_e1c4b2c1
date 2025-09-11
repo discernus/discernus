@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_b01321304d01",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Applied three independent analytical approaches with median aggregation\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{{artifact_id}}\",\n      \"document_name\": \"Bush_SOTU_2006.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.95\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.85\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.05,\n          \"confidence\": 0.85\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.85\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"I challenge and invite Congress to work with me to use the resources of one picture to repaint the other\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"We should leave those arguments to the last century and chart a different course.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"implicit_criticism\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"No one can speak in this Capitol and not be awed by its history.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"Critics of testing contend it distracts from learning.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"criticism_of_policy_implementation\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"Perhaps the biggest test of our foresight and courage will be reforming Medicare and Social Security.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"without reform, this country will one day awaken to a stark choice: Either a drastic rise in payroll taxes or a radical cut in retirement benefits.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"warning_of_consequences\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "9e04bc3d10d51a0319e9b156ac730c092e9cf31c9f3582a8912e1e8de0fc3383",
+  "execution_metadata": {
+    "start_time": "2025-09-11T18:43:50.307951+00:00",
+    "end_time": "2025-09-11T18:44:29.380447+00:00",
+    "duration_seconds": 39.072482
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "654d8a88b171893ddfae099000455e67a22dc4cbe84b22b9e8cfbeed153b78a0"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/private/tmp/discernus_gauntlet_test/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250911T181940Z_afae273b"
+  }
+}

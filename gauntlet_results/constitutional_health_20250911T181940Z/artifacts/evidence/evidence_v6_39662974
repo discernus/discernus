@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "c29cc5df3487a9ac6695aa5a250c3d9c615517d0edeb3e653d25921bb7ad1547"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-11T19:32:16.239366+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Tonight we meet as Democrats, Republicans, and Independents, but most importantly, as Americans with a duty to one another, to America, to the American people, and to the Constitution, and an unwavering resolve that freedom will always triumph over tyranny.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:32:16.239343+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "Putin\u2019s latest attack on Ukraine was premeditated and totally unprovoked. He rejected repeated\u2014repeated\u2014efforts at diplomacy.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:32:16.239353+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Madam Speaker, Madam Vice President, and our First Lady and Second Gentleman, Members of Congress and the Cabinet, Justices of the Supreme Court, my fellow Americans",
+      "confidence": 0.95,
+      "context_type": "rhetorical_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:32:16.239356+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "In State after State, new laws have been passed not only to suppress the vote\u2014we\u2019ve been there before\u2014but to subvert the entire election.",
+      "confidence": 0.85,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:32:16.239358+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "We\u2019ll meet the test, protect freedom and liberty, expand fairness and opportunity. And we will save democracy.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:32:16.239360+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2023.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "For the past 40 years, we were told that tax breaks for those at the top and benefits would trickle down... But that trickle-down theory led to a weaker economic growth...",
+      "confidence": 0.85,
+      "context_type": "thematic_critique",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:32:16.239362+00:00"
+    }
+  ]
+}

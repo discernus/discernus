@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "fbbe284deb11f52c7cd3a7329cb992a7555f046f08bb50e4be73c4dad09db565"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-11T19:28:27.032889+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "So let's get to work. I wanted to lay out, before the Congress, my plan before we got into the deep discussions. I'd like to meet with those who have ideas that are different\u2014they think are better. I welcome those ideas.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:28:27.032870+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "I will do everything in my power to protect the American people from this epidemic of gun violence, but it's time for Congress to act as well.",
+      "confidence": 0.9,
+      "context_type": "qualified_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:28:27.032877+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "I applaud a group of Republican Senators who just put forward their own proposal... I'd like to meet with those who have ideas that are different\u2014they think are better. I welcome those ideas.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:28:27.032879+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:28:27.032884+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Throughout our history, if you think about it, public investment in infrastructure has literally transformed America: our attitudes, as well as our opportunities.",
+      "confidence": 0.95,
+      "context_type": "thematic_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:28:27.032886+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2022.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:28:27.032887+00:00"
+    }
+  ]
+}

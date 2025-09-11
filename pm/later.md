@@ -12,6 +12,54 @@
 
 ## Deferred Academic Quality Items
 
+### Sprint 15: Essential Academic Quality & Documentation (DEFERRED)
+
+**Timeline**: 2-3 weeks
+**Goal**: Implement essential academic quality standards and documentation for alpha release
+**Why Deferred**: Too ambitious for alpha project - focuses on publication-level academic standards rather than alpha readiness
+**Timeline**: Post-alpha release when academic publication standards become priority
+
+#### [ACADEMIC-001] Academic Quality & Standards Implementation
+
+- **Description**: Implement comprehensive academic standards, peer review preparation, quality assurance frameworks, and THIN compliance cleanup
+- **Purpose**: Ensure Discernus outputs meet top-tier academic journal requirements and stakeholders have complete understanding of system capabilities
+- **Priority**: HIGH - Academic excellence
+- **Why Deferred**: Publication-level academic standards not appropriate for alpha release
+- **Acceptance Criteria**:
+  - Evidence standards match top academic journals with >3 sources per claim
+  - Automated quality scoring >80% with evidence hallucination detection
+  - Performance audit completed with scalability characterization
+  - Complete agent architecture documentation with THIN compliance validation
+  - Peer review ready quality standards implemented
+- **Dependencies**: None
+- **Effort**: 2-3 weeks
+
+#### [ACADEMIC-002] Academic Output Standards Implementation
+
+- **Description**: Implement academic-grade output formatting standards for evidence-infused reports with footnote systems and provenance transparency
+- **Purpose**: Create publication-ready reports with complete audit trails and multi-audience integration
+- **Priority**: HIGH - Academic standards
+- **Why Deferred**: Publication-ready formatting standards not essential for alpha users
+- **Acceptance Criteria**:
+  - Numbered footnotes for all evidence citations with full provenance chains
+  - "Evidence Provenance" section with complete audit trail
+  - Multi-audience integration (scanner/collaborator/transparency sections)
+  - Academic-quality formatting meeting peer-review publication standards
+  - Verifiable claim-to-source mapping for reproducibility
+- **Dependencies**: [ACADEMIC-001]
+- **Effort**: 1-2 weeks
+
+#### [ACADEMIC-007] Documentation Pass
+
+- **Description**: Conduct comprehensive documentation pass
+- **Purpose**: Ensure all documentation is current, accurate, and complete
+- **Priority**: MEDIUM - Documentation quality
+- **Why Deferred**: Comprehensive documentation pass not critical for alpha release
+- **Dependencies**: [ACADEMIC-001], [ACADEMIC-002]
+- **Effort**: 1-2 weeks
+
+---
+
 ### [ACADEMIC-003] Enhance Methodology Transparency with Framework Operationalization
 
 **Description**: Enhance methodology transparency by explaining how abstract framework concepts are operationalized into measurable indicators

@@ -12,403 +12,159 @@
 ## Current Status
 
 **Latest Updates**:
-- ✅ **Sprint 9 COMPLETED**: CLI UX improvements including dry run validation and model validation
-- ✅ **Sprint 10 COMPLETED**: All critical logging integrity issues resolved, rate limiting fixed, and provider-consistent fallback strategy implemented
-- ✅ **Sprint 11 COMPLETED**: Statistical preparation workflow and CSV export functionality fully implemented
-- ✅ **Sprint 12 COMPLETED**: Statistical preparation provenance integration with complete archive system, directory reorganization, and Git integration
-- ✅ **Sprint 13 COMPLETED**: Essential code quality and architecture cleanup including dead code removal, deprecated agent cleanup, and architecture documentation updates
-- ✅ **Golden Run Archive System**: Complete research transparency package with provenance consolidation, input materials consolidation, and comprehensive documentation
-- ✅ **RAG Engine Analysis**: Confirmed txtai as primary RAG engine, Typesense for fact checker
-- ✅ **Dependencies Updated**: Added txtai>=5.0.0 to requirements.txt
 
-**Current Focus**: System is stable with comprehensive validation, logging integrity, robust fallback handling, complete research transparency capabilities, full statistical preparation workflow with provenance integration, and clean architecture with deprecated code removed
+- ✅ **Sprint 12.1 COMPLETED**: Directory structure remediation with standard mode CSV export, dual directory consolidation, and complete specification compliance
+- ✅ **Sprint 14 COMPLETED**: Open source strategy and licensing with multiple repository creation, GPL v3 license implementation, and public release branch preparation
+
+**Current Focus**: System is stable with comprehensive validation, logging integrity, robust fallback handling, complete research transparency capabilities, full statistical preparation workflow with provenance integration, clean architecture with deprecated code removed, complete directory structure compliance, and open source strategy implemented with multiple repositories ready for public release
 
 ---
 
 ## Current Sprint Planning
 
-**Next Priority**: Sprint 14 (Open Source Strategy & Licensing) - HIGH PRIORITY
+**Next Priority**: Sprint 17 (Critical Bug Fixes) - URGENT PRIORITY
 **Status**: Ready for execution
 **Dependencies**: None - can begin immediately
+
+**Previous Priority**: Sprint 16 (Alpha Release Preparation) - BLOCKED by critical bugs
+**Status**: On hold until bugs are fixed
+**Dependencies**: Sprint 17 completion required
 
 ---
 
 ## New Sprint Structure
 
+---
+
+### Sprint 17: Critical Bug Fixes (URGENT PRIORITY)
+
+**Description**: Fix critical bugs discovered during gauntlet testing that block alpha release
+**Purpose**: Resolve system reliability issues before proceeding with expensive experiments and alpha release
+**Priority**: URGENT - System stability blockers
+**Timeline**: 1-2 weeks - must complete before resuming gauntlet testing
+**Dependencies**: None - can begin immediately
+
+#### [BUG-001] Fix Intermittent Final Report Generation Failure
+
+- **Description**: Fix intermittent bug where draft synthesis reports are created but not moved to outputs/final_report.md
+- **Purpose**: Ensure consistent final report generation for all experiments
+- **Priority**: HIGH - Core output missing
+- **Acceptance Criteria**:
+  - Final report consistently generated in outputs/ directory
+  - No manual intervention required
+  - assets.json file properly created with report_hash
+  - All experiments produce final_report.md
+- **Technical Details**:
+  - Investigate orchestrator final report saving logic
+  - Check for race conditions in synthesis completion
+  - Verify assets.json generation and report_hash storage
+  - Test with different framework complexities
+- **Estimated Effort**: 2-3 days
+
+#### [BUG-002] Fix CSV Export Generation
+
+- **Description**: Implement missing CSV export functionality for scores.csv, evidence.csv, and metadata.csv
+- **Purpose**: Enable data analysis workflow with structured data exports
+- **Priority**: HIGH - Core feature missing
+- **Acceptance Criteria**:
+  - scores.csv with analysis scores and derived metrics
+  - evidence.csv with supporting quotes and evidence
+  - metadata.csv with document and run metadata
+  - Statistical package with import scripts
+  - All CSV files in data/ directory
+- **Technical Details**:
+  - Check orchestrator CSV generation logic
+  - Verify data export agent functionality
+  - Test CSV generation in isolation
+  - Compare with working CSV generation in other parts of system
+- **Estimated Effort**: 2-3 days
+
+#### [BUG-003] Fix Standalone Validation Command
+
+- **Description**: Fix `discernus validate` command parsing errors that prevent experiment validation
+- **Purpose**: Enable users to validate experiments before running them
+- **Priority**: MEDIUM - User workflow improvement
+- **Acceptance Criteria**:
+  - `discernus validate [experiment]` works correctly
+  - No parsing errors on valid experiments
+  - Consistent with orchestrator validation results
+  - Clear error messages for invalid experiments
+- **Technical Details**:
+  - Check validation agent LLM response parsing logic
+  - Compare standalone vs orchestrator validation code paths
+  - Test with different experiment types
+- **Estimated Effort**: 1-2 days
+
+#### [BUG-004] Optimize LLM Timeout Handling
+
+- **Description**: Investigate and optimize frequent LLM timeouts every 12-15 documents
+- **Purpose**: Improve performance and reduce costs by minimizing Pro model fallbacks
+- **Priority**: MEDIUM - Performance optimization
+- **Acceptance Criteria**:
+  - Reduced timeout frequency
+  - Better timeout handling strategy
+  - Maintained analysis quality
+  - Lower processing costs
+- **Technical Details**:
+  - Check LLM API rate limiting and quotas
+  - Analyze document complexity correlation with timeouts
+  - Test different batch sizes and processing intervals
+  - Investigate Flash model capacity limits
+- **Estimated Effort**: 2-3 days
+
+**Sprint 17 Success Criteria**:
+- All 4 bugs resolved and tested
+- Gauntlet testing can resume with confidence
+- System stability improved for alpha release
+- No regression in existing functionality
 
 ---
 
-### Sprint 12: Statistical Preparation Provenance Integration (HIGH PRIORITY) ✅ COMPLETED
-
-**Timeline**: 2-3 weeks
-**Goal**: Integrate statistical preparation workflows with provenance system using hybrid approach (runtime efficiency + archive completeness) and implement human-friendly directory structure
-
-#### [PROV-001] ProvenanceOrganizer Integration ✅ COMPLETED
-
-- **Description**: Integrate ProvenanceOrganizer into current orchestrator alongside existing results creation
-- **Purpose**: Enable provenance organization during runs while maintaining current results functionality
-- **Priority**: HIGH - Core provenance functionality
-- **Acceptance Criteria**:
-  - ✅ ProvenanceOrganizer called after results directory creation
-  - ✅ `artifacts/` directory created with academic-standard structure
-  - ✅ Symlinks created to shared cache artifacts
-  - ✅ Provenance metadata generated and stored
-  - ✅ Both `results/` and `artifacts/` directories coexist
-  - ✅ No disruption to existing results creation
-- **Dependencies**: None
-- **Effort**: 1 week
-
-#### [PROV-002] Enhanced Manifest Structure for Statistical Preparation ✅ COMPLETED
-
-- **Description**: Implement enhanced manifest structure to track statistical preparation stages and modes
-- **Purpose**: Enable proper tracking of different run modes and their artifacts
-- **Priority**: HIGH - Provenance compliance
-- **Acceptance Criteria**:
-  - ✅ Manifest includes statistical preparation stage metadata
-  - ✅ Mode-specific tracking (analysis-only, statistical-prep, skip-synthesis, complete)
-  - ✅ Resume capability metadata stored
-  - ✅ Artifact dependency tracking enhanced
-- **Dependencies**: [PROV-001]
-- **Effort**: 3-5 days
-
-#### [PROV-003] Archive Command Enhancement for Statistical Preparation ✅ COMPLETED
-
-- **Description**: Enhance archive command to handle different run modes and include complete session logs and artifact content
-- **Purpose**: Create mode-aware, self-contained archives for all run types with ALL necessary assets for replication and audit
-- **Priority**: HIGH - Research integrity
-- **Acceptance Criteria**:
-  - ✅ Session logs copied to archive (`session_logs/` directory) with complete execution logs
-  - ✅ Actual artifact content copied (not just symlinks) to `artifacts/` directory
-  - ✅ Statistical package created for statistical prep runs
-  - ✅ Mode-specific README generation
-  - ✅ Complete self-contained archives (no external dependencies, no broken symlinks)
-  - ✅ Archive command works for all run modes
-  - ✅ Both `results/` and `artifacts/` directories included in archive
-  - ✅ Experiment.md and framework files properly located in `inputs/` directory
-  - ✅ All LLM interactions, agent logs, system logs, and error logs preserved
-  - ✅ Complete provenance chain with actual artifact content for audit verification
-- **Dependencies**: [PROV-002]
-- **Effort**: 1 week
-
-#### [PROV-004] Statistical Package Generation ✅ COMPLETED
-
-- **Description**: Implement statistical package generation for statistical preparation runs
-- **Purpose**: Create researcher-ready packages with all necessary files and documentation
-- **Priority**: MEDIUM - User experience
-- **Acceptance Criteria**:
-  - ✅ `statistical_package/` directory created for statistical prep runs
-  - ✅ Researcher-ready CSV files with proper naming
-  - ✅ Variable codebook generation
-  - ✅ Import scripts for R/Python/STATA
-  - ✅ Plain text usage instructions
-- **Dependencies**: [PROV-003]
-- **Effort**: 3-5 days
-
-#### [PROV-005] Directory Structure Reorganization ✅ COMPLETED
-
-- **Description**: Implement human-friendly directory structure for all run types with complete asset preservation
-- **Purpose**: Create logical organization that meets expectations of researchers, replication researchers, and auditors with ALL necessary assets
-- **Priority**: HIGH - User experience and research integrity
-- **Acceptance Criteria**:
-  - ✅ Clear separation: data/, outputs/, inputs/, provenance/, artifacts/, session_logs/
-  - ✅ README files explaining each directory and its contents
-  - ✅ No file duplication between root and results
-  - ✅ Consistent naming conventions
-  - ✅ Audit-friendly provenance organization
-  - ✅ Self-contained archives with clear structure
-  - ✅ Complete session logs in session_logs/ directory
-  - ✅ Actual artifact content (not symlinks) in artifacts/ directory
-  - ✅ All LLM interactions, agent logs, system logs, and error logs preserved
-  - ✅ Complete provenance chain with actual artifact content for audit verification
-- **Dependencies**: [PROV-001]
-- **Effort**: 1 week
-
-#### [PROV-006] Session Logs and Artifact Content Copying Implementation ✅ COMPLETED
-
-- **Description**: Implement actual copying of session logs and artifact content (not symlinks) in archive command
-- **Purpose**: Ensure complete self-contained archives with all necessary assets for replication and audit
-- **Priority**: HIGH - Research integrity
-- **Acceptance Criteria**:
-  - ✅ Session logs copied from `session/{SESSION_ID}/logs/` to `session_logs/logs/` in archive
-  - ✅ All artifact content copied from shared cache to `artifacts/` directory (not symlinks)
-  - ✅ Archive command creates completely self-contained archives
-  - ✅ No broken symlinks or external dependencies in archives
-  - ✅ Complete LLM interactions, agent logs, system logs, and error logs preserved
-  - ✅ All artifacts accessible without shared cache dependency
-- **Dependencies**: [PROV-003]
-- **Effort**: 1 week
-
-#### [PROV-007] Git Integration for Statistical Preparation ✅ COMPLETED
-
-- **Description**: Implement mode-aware Git commit messages and branch strategies
-- **Purpose**: Enable proper version control for different run types
-- **Priority**: MEDIUM - Version control
-- **Acceptance Criteria**:
-  - ✅ Different commit messages for different run modes
-  - ✅ Statistical prep runs clearly identified in Git history
-  - ✅ Resume commits properly linked to original statistical prep runs
-  - ✅ Git integration works with archive command
-- **Dependencies**: [PROV-002, PROV-005, PROV-006]
-- **Effort**: 2-3 days
-
-#### [PROV-008] Alpha Hardening (Provenance & CLI) — COMPLETED
-
-- **Description**: Hardening tasks required for a reliable alpha: logging cleanup, robust Git auto-commit, accurate run-mode detection, reorganizer idempotency/clarity, archive security checks, minimal test coverage, and CLI UX consistency.
-- **Purpose**: Eliminate fragile paths and silent failures; ensure predictable behavior for alpha users.
-- **Priority**: CRITICAL - Alpha readiness
-- **Acceptance Criteria**:
-  - Logging cleanup: replace remaining `print()` paths in orchestrator/helpers with structured logging; respect verbosity levels
-  - Git auto-commit robustness: repo root detected by `.git` discovery or `git rev-parse --show-toplevel`; no path-depth assumptions
-  - Run mode detection: `_detect_run_mode` reads enhanced manifest (`run_mode.mode_type`) reliably; no "unknown" for supported modes
-  - Reorganizer idempotency: safe to run multiple times; skip already-moved files; either remove empty `results/` or add sentinel README explaining deprecation in favor of `data/`/`outputs/`/`inputs/`
-  - Archive security: validate symlink targets before copying; only copy when resolved paths are under experiment `shared_cache` or repo root; warn and skip otherwise
-  - Minimal tests: unit tests for `DirectoryStructureReorganizer`, archive helpers (`_copy_session_logs`, `_copy_artifact_content`, `_detect_run_mode`), `EnhancedManifest` (`set_run_mode`, `set_resume_capability`, `finalize_manifest`), and `StatisticalPackageGenerator` (files + exec bits). One integration test: run `--statistical-prep` then `archive` with all flags and assert no symlinks, complete logs, expected READMEs
-  - CLI UX consistency: CLI help/defaults for archive flags match documentation; clear skip messages respect future quiet mode
-- **Dependencies**: [PROV-002], [PROV-003], [PROV-004], [PROV-005], [PROV-006], [PROV-007]
-- **Effort**: 1-1.5 weeks
-
----
-
-### Sprint 13: Essential Code Quality & Architecture Cleanup (HIGH PRIORITY) ✅ COMPLETED
-
-**Timeline**: 2-3 weeks
-**Goal**: Clean up critical dead code, remove deprecated components, and update essential architecture documentation
-
-#### [CLEANUP-001] Essential Dead Code Inventory ✅ COMPLETED
-
-- **Description**: Conduct focused inventory for critical dead code that impacts alpha users
-- **Purpose**: Identify and prioritize removal of unused code that creates confusion or maintenance burden
-- **Priority**: HIGH - Code quality improvement
-- **Acceptance Criteria**:
-  - ✅ Identify dead imports and unused dependencies
-  - ✅ Catalog deprecated agent patterns and unused directories
-  - ✅ Prioritize cleanup based on alpha user impact
-  - ✅ Document findings for systematic removal
-- **Dependencies**: None
-- **Effort**: 1 week
-
-#### [CLEANUP-002] Remove Deprecated Fact Checker and Revision Agents ✅ COMPLETED
-
-- **Description**: Remove disabled fact checker and revision agents that still generate confusing artifacts
-- **Purpose**: Clean up agents that are disabled but still create artifacts, causing user confusion
-- **Priority**: HIGH - Alpha user experience
-- **Acceptance Criteria**:
-  - ✅ Remove `fact_checker_agent/` and `revision_agent/` directories
-  - ✅ Stop generating `fact_check_results.json` artifacts
-  - ✅ Remove unused imports from orchestrator
-  - ✅ Clean up or remove related test files
-  - ✅ Update architecture documentation to remove references
-  - ✅ Verify no fact-check artifacts appear in results directories
-- **Dependencies**: [CLEANUP-001]
-- **Effort**: 2-3 days
-
-#### [CLEANUP-003] Critical Dead Dependencies and Architecture Updates ✅ COMPLETED
-
-- **Description**: Remove critical dead dependencies and update essential architecture documentation
-- **Purpose**: Remove technical debt that impacts alpha users and align documentation with actual implementation
-- **Priority**: HIGH - Technical debt and documentation
-- **Acceptance Criteria**:
-  - ✅ Remove Redis dependencies from requirements.txt and pyproject.toml
-  - ✅ Remove MinIO references from Makefile and scripts
-  - ✅ Clean up deprecated orchestrator patterns and unused agent directories
-  - ✅ Update DISCERNUS_SYSTEM_ARCHITECTURE.md to reflect current 3-stage pipeline
-  - ✅ Update CURSOR_AGENT_QUICK_START.md to reflect current architecture
-  - ✅ All critical dead dependencies removed and deprecated code cleaned up
-- **Dependencies**: [CLEANUP-001], [CLEANUP-002]
-- **Effort**: 1-2 weeks
-
-#### [CLEANUP-004] Essential Architecture Document Updates ✅ COMPLETED
-
-- **Description**: Update essential architecture documentation to reflect current state
-- **Purpose**: Keep critical architecture documentation current and accurate for alpha users
-- **Priority**: MEDIUM - Documentation maintenance
-- **Acceptance Criteria**:
-  - ✅ Update system architecture document with current agent list
-  - ✅ Remove references to deprecated agents and patterns
-  - ✅ Ensure documentation matches actual implementation
-  - ✅ Verify all links and references are current
-- **Dependencies**: [CLEANUP-003]
-- **Effort**: 3-5 days
-
-#### [CLEANUP-005] Attic Branch Archival & Pristine Main for OSS Alpha ✅ COMPLETED
-
-- **Description**: Create immutable attic branch to archive all deprecated/legacy code, then prune main/dev so the open source alpha is pristine.
-- **Purpose**: Preserve history safely while ensuring the OSS-facing repository contains only supported code paths.
-- **Priority**: CRITICAL - OSS readiness
-- **Acceptance Criteria**:
-  - ✅ Attic branch created and tagged (e.g., `attic-YYYY-MM-DD`) with archived code relocated under `attic/` on that branch
-  - ✅ Main/dev cleaned: removed `discernus/core/deprecated/`, `discernus/agents/deprecated/`, `discernus/agents/fact_checker_agent/`, `discernus/agents/revision_agent/`, and legacy CLIs (`cli.py.backup`, `cli_clean.py`, `cli_console.py`)
-  - ✅ Ensemble analysis documented: clarified internal 3-run median aggregation approach in analysis agent
-  - ✅ Non-functional CLI option removed: removed `--ensemble-runs` parameter that wasn't implemented
-  - ✅ Future enhancement planned: added parameterization of internal ensemble approach to later.md
-  - ✅ Tests referencing removed agents deleted/disabled
-  - ✅ Orchestrator imports/references to removed agents excised or guarded
-  - ✅ `docs/ARCHIVE.md` added: lists archived paths, attic branch/tag, retrieval instructions
-  - ✅ Push attic branch and updated dev; repo builds and minimal tests pass
-- **Dependencies**: [CLEANUP-001], [CLEANUP-002], [CLEANUP-003]
-- **Effort**: 1-2 days
-
----
-
-### Sprint 14: Open Source Strategy & Licensing (HIGH PRIORITY)
-
-**Timeline**: 3-4 weeks
-**Goal**: Establish open source strategy, conduct license audit, and prepare for open source release
-
-#### [OPENSOURCE-001] Open Source License Selection and Implementation
-
-- **Description**: Select and implement appropriate open source license for Discernus
-- **Purpose**: Balance open source adoption with business strategy while protecting intellectual property and enabling community contribution
-- **Priority**: HIGH - Foundation for open source release
-- **Acceptance Criteria**:
-  - License research and evaluation completed across all options (MIT/Apache 2.0, GPL v3, AGPL v3, dual licensing)
-  - Business strategy alignment assessment completed
-  - Legal review and compliance verification completed
-  - License implementation across entire codebase
-  - Contributor license agreement (CLA) setup completed
-  - License documentation and notices added throughout codebase
-  - Business strategy aligned with selected license
-  - Full codebase compliance with selected license confirmed
-- **Dependencies**: None
-- **Effort**: 2-3 weeks
-
-#### [OPENSOURCE-002] Project Open Source License Dependencies and Business Strategy Alignment
-
-- **Description**: Ensure all project dependencies are license-compatible with business strategy
-- **Purpose**: Audit all third-party dependencies for license compatibility and identify potential conflicts with future commercial offerings
-- **Priority**: HIGH - Business strategy foundation
-- **Acceptance Criteria**:
-  - Complete dependency license audit across all components
-  - License compatibility matrix created for all dependencies
-  - Conflict resolution strategy established for incompatible dependencies
-  - Alternative dependency evaluation completed where conflicts exist
-  - License compliance monitoring system established
-  - Business impact assessment completed for all dependencies
-  - All dependencies confirmed license-compatible with business strategy
-  - Risk mitigation plan in place for any identified conflicts
-- **Dependencies**: [OPENSOURCE-001]
-- **Effort**: 1-2 weeks
-
-#### [OPENSOURCE-003] GitHub Strategy - Clean Separation of Development vs Open Source Code
-
-- **Description**: Establish strategy for cleanly separating internal development code from open source version
-- **Purpose**: Protect internal IP while enabling community contribution and professional open source release
-- **Priority**: HIGH - Open source strategy
-- **Acceptance Criteria**:
-  - Repository structure planned (main repo vs internal development repos)
-  - Branch strategy established (main branch open source vs development branches)
-  - Feature flags implemented for internal features disabled in open source builds
-  - Configuration management for environment-specific feature enablement
-  - Contribution guidelines and boundaries clearly established
-  - Open source release pipeline created
-  - Internal IP protected while open source version remains professional and complete
-- **Dependencies**: [OPENSOURCE-001], [OPENSOURCE-002]
-- **Effort**: 1-2 weeks
-
-#### [OPENSOURCE-004] Open Source License Audit
-
-- **Description**: Conduct open source license audit
-- **Purpose**: Ensure compliance with all open source dependencies
-- **Priority**: HIGH - Legal compliance
-- **Dependencies**: [OPENSOURCE-001]
-- **Effort**: 1 week
-
-#### [OPENSOURCE-005] Open Source License Insertion
-
-- **Description**: Insert appropriate open source licenses
-- **Purpose**: Properly license the project for open source distribution
-- **Priority**: HIGH - Legal compliance
-- **Dependencies**: [OPENSOURCE-001], [OPENSOURCE-004]
-- **Effort**: 3-5 days
-
-#### [OPENSOURCE-006] Release Process
-
-- **Description**: Establish release process
-- **Purpose**: Define how to create and distribute releases
-- **Priority**: MEDIUM - Process establishment
-- **Dependencies**: [OPENSOURCE-001], [OPENSOURCE-002], [OPENSOURCE-003]
-- **Effort**: 1 week
-
----
-
-### Sprint 15: Essential Academic Quality & Documentation (HIGH PRIORITY)
-
-**Timeline**: 2-3 weeks
-**Goal**: Implement essential academic quality standards and documentation for alpha release
-
-#### [ACADEMIC-001] Academic Quality & Standards Implementation
-
-- **Description**: Implement comprehensive academic standards, peer review preparation, quality assurance frameworks, and THIN compliance cleanup
-- **Purpose**: Ensure Discernus outputs meet top-tier academic journal requirements and stakeholders have complete understanding of system capabilities
-- **Priority**: HIGH - Academic excellence
-- **Acceptance Criteria**:
-  - Evidence standards match top academic journals with >3 sources per claim
-  - Automated quality scoring >80% with evidence hallucination detection
-  - Performance audit completed with scalability characterization
-  - Complete agent architecture documentation with THIN compliance validation
-  - Peer review ready quality standards implemented
-- **Dependencies**: None
-- **Effort**: 2-3 weeks
-
-#### [ACADEMIC-002] Academic Output Standards Implementation
-
-- **Description**: Implement academic-grade output formatting standards for evidence-infused reports with footnote systems and provenance transparency
-- **Purpose**: Create publication-ready reports with complete audit trails and multi-audience integration
-- **Priority**: HIGH - Academic standards
-- **Acceptance Criteria**:
-  - Numbered footnotes for all evidence citations with full provenance chains
-  - "Evidence Provenance" section with complete audit trail
-  - Multi-audience integration (scanner/collaborator/transparency sections)
-  - Academic-quality formatting meeting peer-review publication standards
-  - Verifiable claim-to-source mapping for reproducibility
-- **Dependencies**: [ACADEMIC-001]
-- **Effort**: 1-2 weeks
-
-#### [ACADEMIC-007] Documentation Pass
-
-- **Description**: Conduct comprehensive documentation pass
-- **Purpose**: Ensure all documentation is current, accurate, and complete
-- **Priority**: MEDIUM - Documentation quality
-- **Dependencies**: [ACADEMIC-001], [ACADEMIC-002]
-- **Effort**: 1-2 weeks
-
----
-
-### Sprint 16: Alpha Release Preparation (CRITICAL PRIORITY)
+### Sprint 16: Alpha Release Preparation (BLOCKED - ON HOLD)
 
 **Description**: Essential items required for alpha release readiness
 **Purpose**: Ensure system is ready for alpha release with essential testing, basic documentation, and core performance validation
-**Priority**: CRITICAL - Alpha release blockers
+**Priority**: CRITICAL - Alpha release blockers (BLOCKED by Sprint 17)
 **Timeline**: 2-3 weeks - must complete before alpha release
-**Dependencies**: None - can begin immediately
+**Dependencies**: Sprint 17 completion required
 
 #### [ALPHA-001] Essential Test Gauntlet Run
 
-- **Description**: Run essential test suite to validate Alpha Release readiness
-- **Purpose**: Ensure core systems work correctly before release
+- **Description**: Run essential test suite to validate Alpha Release readiness using specific, appropriate experiments
+- **Purpose**: Ensure core systems work correctly before release with concrete, measurable tests
 - **Priority**: HIGH - Release validation
 - **Acceptance Criteria**:
-  - Core functionality tests passing (CLI, analysis, synthesis)
-  - Framework validation tests for v7.2 frameworks
-  - Evidence architecture basic validation
-  - Integration tests for end-to-end workflows
-  - No critical regressions detected
-  - Results documented
+  - **Tier 1 Tests (Must Pass)**: nano_test_experiment and micro_test_experiment complete successfully
+  - **Tier 2 Tests (Should Pass)**: At least 2 of 3 small experiments pass (business_ethics, entman_framing, lakoff_framing)
+  - **Tier 3 Test (Nice to Pass)**: 1a_caf_civic_character completes successfully
+  - **Tier 4 Tests (Culmination)**: 1b_chf_constitutional_health (54 docs, 30+ min) and vanderveen_presidential_pdaf (56 docs, 20+ min) complete successfully with clean runs (no shared cache)
+- **Clean Slate Validation**: Each test starts with only essential files (corpus folder, experiment.md, framework, corpus manifest)
+- **Full Pipeline Test**: `discernus run [relative path]` produces complete final_report.md with no "could not do" mentions or errors
+- **Archive Validation**: Archive step places all assets in correct locations
+- **Sequential CLI Test**: Step-by-step CLI execution (analysis only → check → continue → final) produces identical results
+  - **Core Functionality**: CLI commands work, analysis completes, synthesis generates reports
+  - **Framework Validation**: v10 frameworks parse and execute correctly
+  - **Evidence Architecture**: Evidence retrieval and integration works
+  - **No Critical Regressions**: All previously working functionality still works
+  - **Results Documented**: Test results logged with pass/fail status and timing
 - **Dependencies**: None
 - **Effort**: 1 week
 
 #### [ALPHA-002] Core Performance & Scalability Validation
 
-- **Description**: Validate core performance characteristics and document basic scalability limits
-- **Purpose**: Provide essential performance information for alpha users
+- **Description**: Validate core performance characteristics and document basic scalability limits using specific experiments
+- **Purpose**: Provide essential performance information for alpha users with concrete benchmarks
 - **Priority**: HIGH - Release readiness
 - **Acceptance Criteria**:
-  - Basic performance envelope documented (10-100 documents)
-  - Resource requirements quantified for small-medium scales
-  - Known limitations documented with basic workarounds
-  - Performance targets validated for alpha use cases
-  - Release readiness assessment completed
-- **Dependencies**: None
+  - **Performance Benchmarks**: Document timing for nano (30s), micro (2min), small (5min), medium (10min), large (20-30min) experiments
+  - **Resource Requirements**: Memory usage, disk space, API costs for each experiment tier
+  - **Scalability Limits**: Maximum corpus size tested (56 documents for alpha), known breaking points
+  - **Performance Targets**: nano < 1min, micro < 3min, small < 8min, medium < 15min, large < 45min
+  - **Clean Run Validation**: Tier 4 tests complete successfully without shared cache (full system validation)
+  - **Known Limitations**: Document what doesn't work and basic workarounds
+  - **Cost Estimates**: API cost per document for different experiment sizes
+  - **Release Readiness**: Clear go/no-go decision based on performance data
+- **Dependencies**: [ALPHA-001]
 - **Effort**: 1 week
 
 #### [ALPHA-003] Essential Unit Testing Implementation
@@ -442,171 +198,85 @@
 
 #### [ALPHA-005] Essential Alpha Documentation
 
-- **Description**: Create essential documentation for Alpha Release including installation and setup
-- **Purpose**: Provide basic documentation for alpha users to get started
+- **Description**: Complete documentation consolidation and create missing components for Alpha Release
+- **Purpose**: Provide comprehensive, well-organized documentation for alpha users and developers
 - **Priority**: HIGH - Essential for alpha users
+- **Status**: ✅ COMPLETE - Full documentation consolidation and architecture reorganization implemented
 - **Acceptance Criteria**:
-  - Basic installation guide with Vertex AI Gemini setup
-  - Essential release notes with key features and breaking changes
-  - Basic CLI reference and configuration guide
-  - Simple getting started guide with example experiment
-  - All documentation reviewed and up-to-date
-  - Outdated documentation removed from project
-- **Dependencies**: [ALPHA-001], [ALPHA-002]
-- **Effort**: 1 week
+  - **✅ Installation Guide**: COMPLETE - Moved to `docs/user/INSTALLATION_GUIDE.md`
+  - **✅ CLI Reference**: COMPLETE - Consolidated in `docs/user/CLI_REFERENCE.md`
+  - **✅ Troubleshooting**: COMPLETE - Moved to `docs/user/TROUBLESHOOTING_GUIDE.md`
+  - **✅ Experiment Guide**: COMPLETE - Integrated into user documentation
+  - **✅ Quick Start Guide**: COMPLETE - Created `docs/user/QUICK_START_GUIDE.md` with 5-minute tutorial
+  - **✅ Performance Guide**: COMPLETE - Created `docs/user/PERFORMANCE_GUIDE.md` with benchmarks
+  - **✅ Release Notes**: COMPLETE - Created `docs/user/RELEASE_NOTES.md` with alpha features
+  - **✅ Documentation Cleanup**: COMPLETE - Full consolidation with user/developer separation
+- **Consolidation Results**:
+  - **New Structure**: `docs/user/` for users, `docs/developer/` for developers
+  - **Navigation**: Clear entry points for each user type
+  - **Content**: Consolidated duplicate documentation
+  - **Archives**: Moved outdated docs to `docs/archive/`
+  - **Cross-References**: Updated all links and navigation
+- **Files Created**:
+  - `docs/user/README.md` - Main user entry point
+  - `docs/user/QUICK_START_GUIDE.md` - 5-minute tutorial
+  - `docs/user/PERFORMANCE_GUIDE.md` - Performance benchmarks
+  - `docs/user/RELEASE_NOTES.md` - Alpha release notes
+  - `docs/user/PROVENANCE_GUIDE.md` - User-friendly research tracking guide
+  - `docs/README.md` - Main documentation index
+  - `docs/archive/README.md` - Archive documentation
+- **Files Moved**:
+  - `docs/INSTALLATION_GUIDE.md` → `docs/user/`
+  - `docs/CLI_REFERENCE.md` → `docs/user/`
+  - `docs/SYSTEM_STATUS.md` → `docs/user/`
+  - `docs/developer/troubleshooting/TROUBLESHOOTING_GUIDE.md` → `docs/user/`
+  - `docs/PROVENANCE_SYSTEM.md` → `docs/architecture/`
+  - `docs/synthesis_agent_architecture_v2.md` → `docs/archive/`
+  - `docs/ARCHIVE.md` → `docs/archive/`
+  - `docs/architecture/DISCERNUS_SYSTEM_ARCHITECTURE.md` → `docs/developer/architecture/`
+  - `docs/architecture/DUAL_TRACK_LOGGING_ARCHITECTURE.md` → `docs/developer/architecture/`
+  - `docs/architecture/typesense_bm25_pipeline_documentation.md` → `docs/developer/architecture/`
+  - `docs/architecture/INTEGRATED_PROVENANCE_VALIDATION_SPEC.md` → `docs/archive/`
+- **Dependencies**: [ALPHA-001], [ALPHA-002] - Performance data from gauntlet testing
+- **Effort**: 1 week (7-11 hours total) - COMPLETED
 
----
+#### [ALPHA-006] CLI Help Text Cleanup
 
-## Sprint 12.1: Directory Structure Remediation
+- **Description**: Streamline and simplify CLI help text to reduce verbosity and improve usability
+- **Purpose**: Make CLI more user-friendly by providing concise, focused help information
+- **Priority**: MEDIUM - User experience improvement
+- **Acceptance Criteria**:
+  - **Concise Help**: Main help shows only essential commands with brief descriptions
+  - **Hierarchical Help**: Detailed help available via --help flag for specific commands
+  - **Clear Examples**: Each command shows 1-2 practical examples
+  - **Remove Redundancy**: Eliminate repetitive or overly verbose explanations
+  - **Focus on Core**: Prioritize run, validate, list commands in main help
+  - **Consistent Format**: Standardized help text format across all commands
+  - **Quick Reference**: Help text fits in standard terminal without scrolling
+- **Dependencies**: None
+- **Effort**: 2-3 days
 
-**Priority**: CRITICAL - Fixes fundamental architectural gaps
-**Status**: Ready for execution
-**Dependencies**: None - can begin immediately
+#### [ALPHA-007] Promote Function and Workbench Concept Review
 
-### [SPRINT-12.1-001] Fix Standard Mode CSV Export Gap
-
-**Description**: Standard mode (default) is missing CSV export functionality entirely. Only special modes (`--analysis-only`, `--statistical-prep`) export CSV files.
-
-**Current Problem**:
-- Standard mode completes analysis + synthesis but produces no CSV files
-- `data/` directory empty except for README
-- No `scores.csv`, `evidence.csv`, `metadata.csv` in standard runs
-- Violates STATISTICAL_PREPARATION_PROVENANCE_INTEGRATION.md specification
-
-**Expected Behavior** (per STATISTICAL_PREPARATION_PROVENANCE_INTEGRATION.md):
-```
-data/
-├── scores.csv              # Raw dimensional scores  
-├── evidence.csv            # Supporting evidence quotes
-└── metadata.csv            # Provenance summary
-```
-
-**Acceptance Criteria**:
-- Standard mode exports CSV files to `data/` directory
-- CSV files contain same data as special modes
-- Directory structure matches STATISTICAL_PREPARATION_PROVENANCE_INTEGRATION.md
-- No regression in special mode functionality
-
-**Effort**: 2 days
-
-### [SPRINT-12.1-002] Consolidate Confusing Dual Directory System
-
-**Description**: Current system creates both `results/` and `outputs/` directories with confusing overlap and misplaced content.
-
-**Current Problems**:
-- **Dual Structure**: Both `results/` and `outputs/` exist with unclear purposes
-- **Misplaced Content**: Corpus files in `results/corpus/` instead of `inputs/corpus/`
-- **Empty Directories**: 6 empty directories created but never populated
-- **Inconsistent Organization**: Files not where READMEs say they should be
-
-**Expected Structure** (per STATISTICAL_PREPARATION_PROVENANCE_INTEGRATION.md):
-```
-runs/20250811T015608Z/
-├── data/                        # Analysis data (researcher-ready)
-├── outputs/                     # Final outputs
-├── inputs/                      # Input materials (copied for replication)
-├── provenance/                  # Audit trail and metadata
-├── artifacts/                   # Complete provenance artifacts
-└── session_logs/                # Complete execution logs
-```
-
-**Acceptance Criteria**:
-- Single, clear directory structure per specification
-- No empty directories created unnecessarily
-- Files placed in correct locations per README documentation
-- Clear separation of concerns between directories
-- No duplication of content across directories
-
-**Effort**: 3 days
-
-### [SPRINT-12.1-003] Fix Empty Directory Creation
-
-**Description**: System creates 6 empty directories that serve no purpose and confuse users.
-
-**Empty Directories to Fix**:
-- `artifacts/analysis_plans/` - Should contain analysis plans or not be created
-- `artifacts/statistical_results/` - Should contain statistical artifacts or not be created  
-- `artifacts/reports/` - Should contain report artifacts or not be created
-- `technical/model_interactions/` - Should contain model logs or not be created
-- `technical/logs/` - Should contain technical logs or not be created
-- `inputs/corpus/` - Should contain corpus files or not be created
-
-**Acceptance Criteria**:
-- No empty directories created unless they will contain content
-- Directory creation logic matches actual content generation
-- Clear documentation of what each directory contains
-- No misleading empty directories
-
-**Effort**: 1 day
-
-### [SPRINT-12.1-004] Fix File Naming and Content Issues
-
-**Description**: Several files have incorrect names or contain unexpected content.
-
-**Issues to Fix**:
-- **`assetss.json`** - Typo with double 's' (should be `assets.json`)
-- **`fact_check_results.json`** - Present but fact-checking was disabled
-- **Missing `statistical_package/`** - Should be created for standard mode
-- **Inconsistent artifact organization** - Artifacts not properly organized per specification
-
-**Acceptance Criteria**:
-- Correct file naming throughout
-- No unused/unexpected files
-- `statistical_package/` created for standard mode
-- Artifact organization matches specification
-
-**Effort**: 1 day
-
-### [SPRINT-12.1-005] Implement Missing Statistical Package
-
-**Description**: Standard mode should create `statistical_package/` directory with researcher-ready data package.
-
-**Expected Structure** (per STATISTICAL_PREPARATION_PROVENANCE_INTEGRATION.md):
-```
-statistical_package/
-├── discernus_data.csv      # Main dataset (copy of data/scores.csv)
-├── variable_codebook.csv   # Column definitions and metadata
-├── full_evidence.csv       # Complete evidence quotes (copy of data/evidence.csv)
-├── README.txt              # Plain text usage instructions
-└── import_scripts/         # Tool-specific helpers
-    ├── import_spss.sps
-    ├── import_stata.do
-    └── import_r.R
-```
-
-**Acceptance Criteria**:
-- `statistical_package/` directory created for standard mode
-- Contains all required files per specification
-- Import scripts work with common statistical tools
-- README provides clear usage instructions
-
-**Effort**: 2 days
-
-### [SPRINT-12.1-006] Validate Against STATISTICAL_PREPARATION_PROVENANCE_INTEGRATION.md
-
-**Description**: Ensure complete compliance with the specification document.
-
-**Validation Checklist**:
-- [ ] Directory structure matches specification exactly
-- [ ] All required files present in correct locations
-- [ ] No unexpected files or directories
-- [ ] README files match specification content
-- [ ] Artifact organization follows specification
-- [ ] Session logs properly integrated
-- [ ] Git commit messages follow specification
-
-**Acceptance Criteria**:
-- 100% compliance with STATISTICAL_PREPARATION_PROVENANCE_INTEGRATION.md
-- All acceptance criteria from individual tasks met
-- No regressions in existing functionality
-- Clear documentation of any deviations from specification
-
-**Effort**: 1 day
+- **Description**: Examine and evaluate the promote function and workbench concept in the CLI for alpha release readiness
+- **Purpose**: Ensure promote functionality and workbench concept are properly implemented and documented for alpha users
+- **Priority**: MEDIUM - Feature completeness
+- **Acceptance Criteria**:
+  - **Promote Function Analysis**: Review current promote command implementation and functionality
+  - **Workbench Concept Review**: Examine workbench directory structure and usage patterns
+  - **Integration Assessment**: Evaluate how promote and workbench integrate with core CLI workflow
+  - **Documentation Gap Analysis**: Identify missing documentation for promote and workbench features
+  - **User Experience Review**: Assess usability and discoverability of promote/workbench features
+  - **Alpha Readiness**: Determine if promote/workbench features are ready for alpha release
+  - **Recommendations**: Provide specific recommendations for improvement or removal
+  - **Implementation Plan**: If needed, create plan for completing or fixing promote/workbench functionality
+- **Dependencies**: None
+- **Effort**: 3-4 days
 
 ---
 
 ## Current Sprint Planning
 
-**Next Priority**: Sprint 12.1 (Directory Structure Remediation) - CRITICAL PRIORITY
+**Next Priority**: Sprint 16 (Alpha Release Preparation) - CRITICAL PRIORITY
 **Status**: Ready for execution
 **Dependencies**: None - can begin immediately

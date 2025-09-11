@@ -1,0 +1,87 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Applied three independent analytical approaches with median aggregation",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "{{artifact_id}}",
+      "document_name": "Trump_SOTU_2020.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.6,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.8
+        },
+        "institutional_subversion": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "systemic_continuity": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "systemic_replacement": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.7
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "I stand here ready to work with you to achieve historic breakthroughs for all Americans.",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "An economic miracle is taking place in the United States, and the only thing that can stop it are foolish wars, politics, or ridiculous, partisan investigations.",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Madam Speaker, Mr. Vice President, Members of Congress,",
+          "confidence": 0.8,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "The Senate has failed to act on these nominations, which is unfair to the nominees and very unfair to our country.",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "We have launched an unprecedented economic boom, a boom that has rarely been seen before... We have created 5.3 million new jobs...",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "Another historic trade blunder was the catastrophe known as NAFTA.",
+          "confidence": 0.7,
+          "context_type": "direct_statement"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

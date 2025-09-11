@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_f6a2392dac0e",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Applied three independent analytical approaches with median aggregation. Document shows strong emphasis on systemic continuity and institutional respect, with some critique of external influences on procedural fairness.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{{artifact_id}}\",\n      \"document_name\": \"Clinton_SOTU_2000.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.05,\n          \"salience\": 0.05,\n          \"confidence\": 0.9\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.85,\n          \"confidence\": 0.95\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.25,\n          \"salience\": 0.35,\n          \"confidence\": 0.75\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"Again we are here in the sanctuary of democracy, and once again our democracy has spoken.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.9,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"Mr. President, Mr. Speaker, Members of the 104th Congress, my fellow Americans: Again we are here in the sanctuary of democracy, and once again our democracy has spoken.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"The American people look at their Capitol, and they see a city where the well-connected and the well-protected can work the system, but the interests of ordinary citizens are often left out.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"criticism_of_system\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"It has fallen to every generation since then to preserve that idea, the American idea, and to deepen and expand its meaning in new and different times:\",\n          \"confidence\": 0.95,\n          \"context_type\": \"thematic_statement\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.9,\n          \"context_type\": \"absence_of_evidence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "e4d6066b5aa6bb91e40cef802886d3a84c2694223a4b215d03705526ade53fd0",
+  "execution_metadata": {
+    "start_time": "2025-09-11T18:27:38.708223+00:00",
+    "end_time": "2025-09-11T18:28:03.651667+00:00",
+    "duration_seconds": 24.943435
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "fc1aba739be1e6049cfeeb5bb6c2d22ade69378821a3ff79a3d446434bce4c0c"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/private/tmp/discernus_gauntlet_test/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250911T181940Z_afae273b"
+  }
+}

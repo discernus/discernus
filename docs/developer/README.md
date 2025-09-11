@@ -4,13 +4,21 @@
 
 ## 🚀 Getting Started
 
-### For Researchers
-- **[CLI Quick Reference](CLI_QUICK_REFERENCE.md)** - Essential commands and examples
-- **[Configuration Guide](CLI_CONFIGURATION_GUIDE.md)** - Config files and environment variables
-- **[Best Practices](CLI_BEST_PRACTICES.md)** - Model selection, cost optimization, workflows
+### For Users
+- **[User Guide](../user/README.md)** - Complete user documentation
+- **[Quick Start Guide](../user/QUICK_START_GUIDE.md)** - 5-minute tutorial
+- **[Installation Guide](../user/INSTALLATION_GUIDE.md)** - Setup instructions
+- **[CLI Reference](../user/CLI_REFERENCE.md)** - All commands and options
+- **[Performance Guide](../user/PERFORMANCE_GUIDE.md)** - Timing and costs
 
 ### For Developers
+- **[System Architecture](architecture/DISCERNUS_SYSTEM_ARCHITECTURE.md)** - Complete technical architecture
+- **[Logging Architecture](architecture/DUAL_TRACK_LOGGING_ARCHITECTURE.md)** - Logging system design
+- **[Search Architecture](architecture/typesense_bm25_pipeline_documentation.md)** - Search system implementation
+- **[Provenance System](architecture/PROVENANCE_SYSTEM.md)** - Research tracking implementation
 - **[CLI Command Reference](CLI_COMMAND_REFERENCE.md)** - Complete command documentation
+- **[CLI Best Practices](CLI_BEST_PRACTICES.md)** - Model selection, cost optimization, workflows
+- **[CLI Configuration Guide](CLI_CONFIGURATION_GUIDE.md)** - Config files and environment variables
 - **[Agent Briefing](setup/AGENT_BRIEFING.md)** - Quick start for new contributors
 - **[Testing Strategy](workflows/TESTING_STRATEGY.md)** - Testing approach and guidelines
 

@@ -1,0 +1,87 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Applied three independent analytical approaches with median aggregation",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "{{artifact_id}}",
+      "document_name": "Bush_SOTU_2007.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.75,
+          "salience": 0.75,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.8
+        },
+        "institutional_respect": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "systemic_continuity": {
+          "raw_score": 0.85,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "My budget includes the largest increase in defense spending in two decades, because while the price of freedom and security is high, it is never too high.",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "I will not wait on events while dangers gather. I will not stand by as peril draws closer and closer.",
+          "confidence": 0.8,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Tonight, thanks to them, we are winning the war on terror. The men and women of our Armed Forces have delivered a message now clear to every enemy of the United States...",
+          "confidence": 0.95,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absent"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "Our war on terror is well begun, but it is only begun. This campaign may not be finished on our watch; yet, it must be and it will be waged on our watch. We can't stop short.",
+          "confidence": 0.9,
+          "context_type": "thematic_statement"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absent"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

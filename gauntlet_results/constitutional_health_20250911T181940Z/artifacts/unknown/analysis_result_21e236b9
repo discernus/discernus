@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_3dbb1c87df64",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Applied three independent analytical approaches with median aggregation. Document reflects typical SOTU rhetoric emphasizing continuity and institutional respect.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{{artifact_id}}\",\n      \"document_name\": \"Obama_SOTU_2013.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.75,\n          \"confidence\": 0.9\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.2,\n          \"confidence\": 0.8\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.85,\n          \"confidence\": 0.95\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.3,\n          \"confidence\": 0.8\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.05,\n          \"salience\": 0.1,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"I appreciate the constructive approach that you and other leaders took at the end of last year to pass a budget and make tax cuts permanent for working families.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"Democracy grinds to a halt without a willingness to compromise or when even basic facts are contested or when we listen only to those who agree with us.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"criticism_of_deviation\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"Mr. Speaker, Mr. Vice President, Members of Congress, my fellow Americans: Tonight marks the eighth year that I\u2019ve come here to report on the State of the Union.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"structural_acknowledgment\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"Too many Americans feel that way right now. It's one of the few regrets of my Presidency: that the rancor and suspicion between the parties has gotten worse instead of better.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"criticism_of_dysfunction\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"America has been through big changes before: wars and depression, the influx of new immigrants, workers fighting for a fair deal, movements to expand civil rights. Each time, there have been those who told us to fear the future; who claimed we could slam the brakes on change; who promised to restore past glory if we just got some group or idea that was threatening America under control. And each time, we overcame those fears.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"historical_narrative\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\\\"We the People.\\\" Our Constitution begins with those three simple words, words we\u2019ve come to recognize mean all the people, not just some; words that insist we rise and fall together, that that\u2019s how we might perfect our Union.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"argument_against_replacement\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "c0c46cfa888a50c405f079731382c023228718fd7dadfa337137d0691b69c16c",
+  "execution_metadata": {
+    "start_time": "2025-09-11T19:12:39.706003+00:00",
+    "end_time": "2025-09-11T19:13:16.882919+00:00",
+    "duration_seconds": 37.17691
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "2082897643c26ba6466a21f4e529dfca0563653a07d55616aaccc9e0c9a2b82f"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/private/tmp/discernus_gauntlet_test/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250911T181940Z_afae273b"
+  }
+}

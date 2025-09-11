@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "a1dafe346a64ed288905875c79e0712f36b3d46ba78f8a56df77869fc4758ced"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-11T19:13:49.026447+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "And tonight I am grateful that this Congress delivered and pleased to say that the American Recovery and Reinvestment Act is now law.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:13:49.026436+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "I will do whatever it takes to help the small business that can't pay its workers or the family that has saved and still can't get a mortgage.",
+      "confidence": 0.7,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:13:49.026439+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Madam Speaker, Mr. Vice President, Members of Congress, the First Lady of the United States--she's around here somewhere: I have come here tonight not only to address the distinguished men and women in this great Chamber, but to speak frankly and directly to the men and women who sent us here.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:13:49.026441+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "I intend to hold these banks fully accountable for the assistance they receive, and this time, they will have to clearly demonstrate how taxpayer dollars result in more lending for the American taxpayer.",
+      "confidence": 0.8,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:13:49.026442+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "The recovery plan and the financial stability plan are the immediate steps we're taking to revive our economy in the short term. But the only way to fully restore America's economic strength is to make the long-term investments that will lead to new jobs, new industries, and a renewed ability to compete with the rest of the world.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:13:49.026443+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2014.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "Now is the time to act boldly and wisely to not only revive this economy, but to build a new foundation for lasting prosperity.",
+      "confidence": 0.8,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:13:49.026444+00:00"
+    }
+  ]
+}

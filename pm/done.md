@@ -1236,6 +1236,246 @@
 - **Priority**: HIGH - Research transparency and academic standards
 - **Status**: **COMPLETED** - Full golden run archive system implemented and tested
 
+### 🎯 **SPRINT 12: Statistical Preparation Provenance Integration** ✅ **COMPLETED**
+
+**Timeline**: 2-3 weeks ✅ **COMPLETED**
+**Goal**: Integrate statistical preparation workflows with provenance system using hybrid approach (runtime efficiency + archive completeness) and implement human-friendly directory structure ✅ **COMPLETED**
+
+**🎯 Sprint 12 Complete**: All statistical preparation provenance integration successfully implemented:
+
+- ✅ ProvenanceOrganizer integration with orchestrator alongside existing results creation
+- ✅ Enhanced manifest structure for statistical preparation stages and modes
+- ✅ Archive command enhancement for statistical preparation with complete session logs and artifact content
+- ✅ Statistical package generation for statistical preparation runs
+- ✅ Directory structure reorganization with complete asset preservation
+- ✅ Session logs and artifact content copying implementation
+- ✅ Git integration for statistical preparation with mode-aware commit messages
+- ✅ Alpha hardening with provenance & CLI improvements
+
+#### [PROV-001] ProvenanceOrganizer Integration ✅ **COMPLETED**
+
+- **Description**: Integrate ProvenanceOrganizer into current orchestrator alongside existing results creation
+- **Purpose**: Enable provenance organization during runs while maintaining current results functionality
+- **Priority**: HIGH - Core provenance functionality
+- **Status**: **COMPLETED** - ProvenanceOrganizer called after results directory creation, `artifacts/` directory created with academic-standard structure, symlinks created to shared cache artifacts, provenance metadata generated and stored, both `results/` and `artifacts/` directories coexist, no disruption to existing results creation
+
+#### [PROV-002] Enhanced Manifest Structure for Statistical Preparation ✅ **COMPLETED**
+
+- **Description**: Implement enhanced manifest structure to track statistical preparation stages and modes
+- **Purpose**: Enable proper tracking of different run modes and their artifacts
+- **Priority**: HIGH - Provenance compliance
+- **Status**: **COMPLETED** - Manifest includes statistical preparation stage metadata, mode-specific tracking (analysis-only, statistical-prep, skip-synthesis, complete), resume capability metadata stored, artifact dependency tracking enhanced
+
+#### [PROV-003] Archive Command Enhancement for Statistical Preparation ✅ **COMPLETED**
+
+- **Description**: Enhance archive command to handle different run modes and include complete session logs and artifact content
+- **Purpose**: Create mode-aware, self-contained archives for all run types with ALL necessary assets for replication and audit
+- **Priority**: HIGH - Research integrity
+- **Status**: **COMPLETED** - Session logs copied to archive (`session_logs/` directory) with complete execution logs, actual artifact content copied (not just symlinks) to `artifacts/` directory, statistical package created for statistical prep runs, mode-specific README generation, complete self-contained archives (no external dependencies, no broken symlinks), archive command works for all run modes, both `results/` and `artifacts/` directories included in archive, experiment.md and framework files properly located in `inputs/` directory, all LLM interactions, agent logs, system logs, and error logs preserved, complete provenance chain with actual artifact content for audit verification
+
+#### [PROV-004] Statistical Package Generation ✅ **COMPLETED**
+
+- **Description**: Implement statistical package generation for statistical preparation runs
+- **Purpose**: Create researcher-ready packages with all necessary files and documentation
+- **Priority**: MEDIUM - User experience
+- **Status**: **COMPLETED** - `statistical_package/` directory created for statistical prep runs, researcher-ready CSV files with proper naming, variable codebook generation, import scripts for R/Python/STATA, plain text usage instructions
+
+#### [PROV-005] Directory Structure Reorganization ✅ **COMPLETED**
+
+- **Description**: Implement human-friendly directory structure for all run types with complete asset preservation
+- **Purpose**: Create logical organization that meets expectations of researchers, replication researchers, and auditors with ALL necessary assets
+- **Priority**: HIGH - User experience and research integrity
+- **Status**: **COMPLETED** - Clear separation: data/, outputs/, inputs/, provenance/, artifacts/, session_logs/, README files explaining each directory and its contents, no file duplication between root and results, consistent naming conventions, audit-friendly provenance organization, self-contained archives with clear structure, complete session logs in session_logs/ directory, actual artifact content (not symlinks) in artifacts/ directory, all LLM interactions, agent logs, system logs, and error logs preserved, complete provenance chain with actual artifact content for audit verification
+
+#### [PROV-006] Session Logs and Artifact Content Copying Implementation ✅ **COMPLETED**
+
+- **Description**: Implement actual copying of session logs and artifact content (not symlinks) in archive command
+- **Purpose**: Ensure complete self-contained archives with all necessary assets for replication and audit
+- **Priority**: HIGH - Research integrity
+- **Status**: **COMPLETED** - Session logs copied from `session/{SESSION_ID}/logs/` to `session_logs/logs/` in archive, all artifact content copied from shared cache to `artifacts/` directory (not symlinks), archive command creates completely self-contained archives, no broken symlinks or external dependencies in archives, complete LLM interactions, agent logs, system logs, and error logs preserved, all artifacts accessible without shared cache dependency
+
+#### [PROV-007] Git Integration for Statistical Preparation ✅ **COMPLETED**
+
+- **Description**: Implement mode-aware Git commit messages and branch strategies
+- **Purpose**: Enable proper version control for different run types
+- **Priority**: MEDIUM - Version control
+- **Status**: **COMPLETED** - Different commit messages for different run modes, statistical prep runs clearly identified in Git history, resume commits properly linked to original statistical prep runs, Git integration works with archive command
+
+#### [PROV-008] Alpha Hardening (Provenance & CLI) ✅ **COMPLETED**
+
+- **Description**: Hardening tasks required for a reliable alpha: logging cleanup, robust Git auto-commit, accurate run-mode detection, reorganizer idempotency/clarity, archive security checks, minimal test coverage, and CLI UX consistency
+- **Purpose**: Eliminate fragile paths and silent failures; ensure predictable behavior for alpha users
+- **Priority**: CRITICAL - Alpha readiness
+- **Status**: **COMPLETED** - Logging cleanup: replace remaining `print()` paths in orchestrator/helpers with structured logging; respect verbosity levels, Git auto-commit robustness: repo root detected by `.git` discovery or `git rev-parse --show-toplevel`; no path-depth assumptions, Run mode detection: `_detect_run_mode` reads enhanced manifest (`run_mode.mode_type`) reliably; no "unknown" for supported modes, Reorganizer idempotency: safe to run multiple times; skip already-moved files; either remove empty `results/` or add sentinel README explaining deprecation in favor of `data/`/`outputs/`/`inputs/`, Archive security: validate symlink targets before copying; only copy when resolved paths are under experiment `shared_cache` or repo root; warn and skip otherwise, Minimal tests: unit tests for `DirectoryStructureReorganizer`, archive helpers (`_copy_session_logs`, `_copy_artifact_content`, `_detect_run_mode`), `EnhancedManifest` (`set_run_mode`, `set_resume_capability`, `finalize_manifest`), and `StatisticalPackageGenerator` (files + exec bits). One integration test: run `--statistical-prep` then `archive` with all flags and assert no symlinks, complete logs, expected READMEs, CLI UX consistency: CLI help/defaults for archive flags match documentation; clear skip messages respect future quiet mode
+
+---
+
+### 🎯 **SPRINT 13: Essential Code Quality & Architecture Cleanup** ✅ **COMPLETED**
+
+**Timeline**: 2-3 weeks ✅ **COMPLETED**
+**Goal**: Clean up critical dead code, remove deprecated components, and update essential architecture documentation ✅ **COMPLETED**
+
+**🎯 Sprint 13 Complete**: All essential code quality and architecture cleanup successfully implemented:
+
+- ✅ Essential dead code inventory completed with alpha user impact prioritization
+- ✅ Deprecated fact checker and revision agents removed
+- ✅ Critical dead dependencies and architecture updates completed
+- ✅ Essential architecture document updates completed
+- ✅ Attic branch archival & pristine main for OSS alpha completed
+
+#### [CLEANUP-001] Essential Dead Code Inventory ✅ **COMPLETED**
+
+- **Description**: Conduct focused inventory for critical dead code that impacts alpha users
+- **Purpose**: Identify and prioritize removal of unused code that creates confusion or maintenance burden
+- **Priority**: HIGH - Code quality improvement
+- **Status**: **COMPLETED** - Identify dead imports and unused dependencies, catalog deprecated agent patterns and unused directories, prioritize cleanup based on alpha user impact, document findings for systematic removal
+
+#### [CLEANUP-002] Remove Deprecated Fact Checker and Revision Agents ✅ **COMPLETED**
+
+- **Description**: Remove disabled fact checker and revision agents that still generate confusing artifacts
+- **Purpose**: Clean up agents that are disabled but still create artifacts, causing user confusion
+- **Priority**: HIGH - Alpha user experience
+- **Status**: **COMPLETED** - Remove `fact_checker_agent/` and `revision_agent/` directories, stop generating `fact_check_results.json` artifacts, remove unused imports from orchestrator, clean up or remove related test files, update architecture documentation to remove references, verify no fact-check artifacts appear in results directories
+
+#### [CLEANUP-003] Critical Dead Dependencies and Architecture Updates ✅ **COMPLETED**
+
+- **Description**: Remove critical dead dependencies and update essential architecture documentation
+- **Purpose**: Remove technical debt that impacts alpha users and align documentation with actual implementation
+- **Priority**: HIGH - Technical debt and documentation
+- **Status**: **COMPLETED** - Remove Redis dependencies from requirements.txt and pyproject.toml, remove MinIO references from Makefile and scripts, clean up deprecated orchestrator patterns and unused agent directories, update DISCERNUS_SYSTEM_ARCHITECTURE.md to reflect current 3-stage pipeline, update CURSOR_AGENT_QUICK_START.md to reflect current architecture, all critical dead dependencies removed and deprecated code cleaned up
+
+#### [CLEANUP-004] Essential Architecture Document Updates ✅ **COMPLETED**
+
+- **Description**: Update essential architecture documentation to reflect current state
+- **Purpose**: Keep critical architecture documentation current and accurate for alpha users
+- **Priority**: MEDIUM - Documentation maintenance
+- **Status**: **COMPLETED** - Update system architecture document with current agent list, remove references to deprecated agents and patterns, ensure documentation matches actual implementation, verify all links and references are current
+
+#### [CLEANUP-005] Attic Branch Archival & Pristine Main for OSS Alpha ✅ **COMPLETED**
+
+- **Description**: Create immutable attic branch to archive all deprecated/legacy code, then prune main/dev so the open source alpha is pristine
+- **Purpose**: Preserve history safely while ensuring the OSS-facing repository contains only supported code paths
+- **Priority**: CRITICAL - OSS readiness
+- **Status**: **COMPLETED** - Attic branch created and tagged (e.g., `attic-YYYY-MM-DD`) with archived code relocated under `attic/` on that branch, Main/dev cleaned: removed `discernus/core/deprecated/`, `discernus/agents/deprecated/`, `discernus/agents/fact_checker_agent/`, `discernus/agents/revision_agent/`, and legacy CLIs (`cli.py.backup`, `cli_clean.py`, `cli_console.py`), Ensemble analysis documented: clarified internal 3-run median aggregation approach in analysis agent, Non-functional CLI option removed: removed `--ensemble-runs` parameter that wasn't implemented, Future enhancement planned: added parameterization of internal ensemble approach to later.md, Tests referencing removed agents deleted/disabled, Orchestrator imports/references to removed agents excised or guarded, `docs/ARCHIVE.md` added: lists archived paths, attic branch/tag, retrieval instructions, Push attic branch and updated dev; repo builds and minimal tests pass
+
+---
+
+### 🎯 **SPRINT 12.1: Directory Structure Remediation** ✅ **COMPLETED**
+
+**Priority**: CRITICAL - Fixes fundamental architectural gaps ✅ **COMPLETED**
+**Status**: Ready for execution ✅ **COMPLETED**
+**Dependencies**: None - can begin immediately ✅ **COMPLETED**
+
+**🎯 Sprint 12.1 Complete**: All critical directory structure issues resolved:
+
+- ✅ Standard mode CSV export gap fixed
+- ✅ Confusing dual directory system consolidated
+- ✅ Empty directory creation fixed
+- ✅ File naming and content issues resolved
+- ✅ Missing statistical package implemented
+- ✅ Complete compliance with STATISTICAL_PREPARATION_PROVENANCE_INTEGRATION.md specification
+
+#### [SPRINT-12.1-001] Fix Standard Mode CSV Export Gap ✅ **COMPLETED**
+
+- **Description**: Standard mode (default) is missing CSV export functionality entirely. Only special modes (`--analysis-only`, `--statistical-prep`) export CSV files
+- **Problem**: Standard mode completes analysis + synthesis but produces no CSV files, `data/` directory empty except for README, no `scores.csv`, `evidence.csv`, `metadata.csv` in standard runs, violates STATISTICAL_PREPARATION_PROVENANCE_INTEGRATION.md specification
+- **Status**: **COMPLETED** - Standard mode exports CSV files to `data/` directory, CSV files contain same data as special modes, directory structure matches STATISTICAL_PREPARATION_PROVENANCE_INTEGRATION.md, no regression in special mode functionality
+
+#### [SPRINT-12.1-002] Consolidate Confusing Dual Directory System ✅ **COMPLETED**
+
+- **Description**: Current system creates both `results/` and `outputs/` directories with confusing overlap and misplaced content
+- **Problem**: Dual Structure: Both `results/` and `outputs/` exist with unclear purposes, Misplaced Content: Corpus files in `results/corpus/` instead of `inputs/corpus/`, Empty Directories: 6 empty directories created but never populated, Inconsistent Organization: Files not where READMEs say they should be
+- **Status**: **COMPLETED** - Single, clear directory structure per specification, no empty directories created unnecessarily, files placed in correct locations per README documentation, clear separation of concerns between directories, no duplication of content across directories
+
+#### [SPRINT-12.1-003] Fix Empty Directory Creation ✅ **COMPLETED**
+
+- **Description**: System creates 6 empty directories that serve no purpose and confuse users
+- **Empty Directories Fixed**: `artifacts/analysis_plans/`, `artifacts/statistical_results/`, `artifacts/reports/`, `technical/model_interactions/`, `technical/logs/`, `inputs/corpus/`
+- **Status**: **COMPLETED** - No empty directories created unless they will contain content, directory creation logic matches actual content generation, clear documentation of what each directory contains, no misleading empty directories
+
+#### [SPRINT-12.1-004] Fix File Naming and Content Issues ✅ **COMPLETED**
+
+- **Description**: Several files have incorrect names or contain unexpected content
+- **Issues Fixed**: `assetss.json` typo with double 's' (should be `assets.json`), `fact_check_results.json` present but fact-checking was disabled, Missing `statistical_package/` should be created for standard mode, Inconsistent artifact organization - Artifacts not properly organized per specification
+- **Status**: **COMPLETED** - Correct file naming throughout, no unused/unexpected files, `statistical_package/` created for standard mode, artifact organization matches specification
+
+#### [SPRINT-12.1-005] Implement Missing Statistical Package ✅ **COMPLETED**
+
+- **Description**: Standard mode should create `statistical_package/` directory with researcher-ready data package
+- **Expected Structure**: `statistical_package/` with `discernus_data.csv`, `variable_codebook.csv`, `full_evidence.csv`, `README.txt`, and `import_scripts/` directory containing `import_spss.sps`, `import_stata.do`, and `import_r.R`
+- **Status**: **COMPLETED** - `statistical_package/` directory created for standard mode, contains all required files per specification, import scripts work with common statistical tools, README provides clear usage instructions
+
+#### [SPRINT-12.1-006] Validate Against STATISTICAL_PREPARATION_PROVENANCE_INTEGRATION.md ✅ **COMPLETED**
+
+- **Description**: Ensure complete compliance with the specification document
+- **Validation Checklist**: Directory structure matches specification exactly, all required files present in correct locations, no unexpected files or directories, README files match specification content, artifact organization follows specification, session logs properly integrated, Git commit messages follow specification
+- **Status**: **COMPLETED** - 100% compliance with STATISTICAL_PREPARATION_PROVENANCE_INTEGRATION.md, all acceptance criteria from individual tasks met, no regressions in existing functionality, clear documentation of any deviations from specification
+
+### 🎯 **SPRINT 14: Open Source Strategy & Licensing** ✅ **COMPLETED**
+
+**Timeline**: 3-4 weeks ✅ **COMPLETED**
+**Goal**: Establish open source strategy, conduct license audit, and prepare for open source release ✅ **COMPLETED**
+
+**🎯 Sprint 14 Complete**: All open source strategy and licensing objectives successfully implemented:
+
+- ✅ GPL v3 license selected and implemented across all public repositories
+- ✅ Multiple repository architecture created (discernus, frameworks, research, tools, discernus-private)
+- ✅ Public release branch prepared with open source content
+- ✅ Repository migration plan documented and executed
+- ✅ Clean separation between public and private content established
+- ✅ License compliance verified across all dependencies
+- ✅ Release process established for open source distribution
+
+#### [OPENSOURCE-001] Open Source License Selection and Implementation ✅ **COMPLETED**
+
+- **Description**: Select and implement appropriate open source license for Discernus
+- **Purpose**: Balance open source adoption with business strategy while protecting intellectual property and enabling community contribution
+- **Priority**: HIGH - Foundation for open source release
+- **Status**: **COMPLETED** - GPL v3 license selected and implemented across all public repositories, business strategy aligned with selected license, full codebase compliance with selected license confirmed
+
+#### [OPENSOURCE-002] Project Open Source License Dependencies and Business Strategy Alignment ✅ **COMPLETED**
+
+- **Description**: Ensure all project dependencies are license-compatible with business strategy
+- **Purpose**: Audit all third-party dependencies for license compatibility and identify potential conflicts with future commercial offerings
+- **Priority**: HIGH - Business strategy foundation
+- **Status**: **COMPLETED** - Complete dependency license audit completed, license compatibility matrix created, conflict resolution strategy established, all dependencies confirmed license-compatible with business strategy
+
+#### [OPENSOURCE-003] GitHub Strategy - Clean Separation of Development vs Open Source Code ✅ **COMPLETED**
+
+- **Description**: Establish strategy for cleanly separating internal development code from open source version
+- **Purpose**: Protect internal IP while enabling community contribution and professional open source release
+- **Priority**: HIGH - Open source strategy
+- **Status**: **COMPLETED** - Repository structure planned and implemented (main repo vs internal development repos), branch strategy established (public-release branch for open source), contribution guidelines and boundaries clearly established, open source release pipeline created, internal IP protected while open source version remains professional and complete
+
+#### [OPENSOURCE-004] Open Source License Audit ✅ **COMPLETED**
+
+- **Description**: Conduct open source license audit
+- **Purpose**: Ensure compliance with all open source dependencies
+- **Priority**: HIGH - Legal compliance
+- **Status**: **COMPLETED** - Open source license audit completed, all dependencies verified for license compatibility
+
+#### [OPENSOURCE-005] Open Source License Insertion ✅ **COMPLETED**
+
+- **Description**: Insert appropriate open source licenses
+- **Purpose**: Properly license the project for open source distribution
+- **Priority**: HIGH - Legal compliance
+- **Status**: **COMPLETED** - GPL v3 license inserted across all public repositories (discernus, frameworks, research, tools), proper licensing for open source distribution confirmed
+
+#### [OPENSOURCE-006] Release Process ✅ **COMPLETED**
+
+- **Description**: Establish release process
+- **Purpose**: Define how to create and distribute releases
+- **Priority**: MEDIUM - Process establishment
+- **Status**: **COMPLETED** - Release process established with public-release branch prepared, multiple repository structure ready for open source distribution
+
+**Key Deliverables**:
+- **Multiple Repositories Created**: discernus (core platform), frameworks (community frameworks), research (open research examples), tools (development tools), discernus-private (private content)
+- **GPL v3 License Implementation**: Applied across all public repositories with proper copyright notices
+- **Public Release Branch**: Prepared with open source content, ready for public release
+- **Repository Migration Plan**: Documented strategy for ongoing content management between repositories
+- **Clean Content Separation**: Public content separated from private research data and planning documents
+- **License Compliance**: All dependencies verified for GPL v3 compatibility
+
 ---
 
 ## Archive Notes

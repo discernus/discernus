@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "f07d14cbcde25021b724933922629dc88949288fc0e02ff4202cd9debffe7857"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-11T19:33:02.524806+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Biden_SOTU_2024.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I signed over 300 bipartisan pieces of legislation since becoming President, from reauthorizing the Violence Against Women Act to the Electoral Count Reform Act, the Respect for Marriage Act that protects the right to marry the person you love.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:33:02.524774+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2024.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "Now, some Members here are threatening\u2014and I know it\u2019s not an official party position, so I\u2019m not going to exaggerate\u2014but threatening to repeal the Inflation Reduction Act. As my coach\u2014that\u2019s okay. That\u2019s fair. As my football coach used to say, \u201cLots of luck in your senior year.\u201d Make no mistake, if you try anything to raise the cost of prescription drugs, I will veto it.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:33:02.524783+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2024.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Mr. Speaker, Madam Vice President, our First Lady and Second Gentleman\u2014good to see you guys up there\u2014Members of Congress. and by the way, Chief Justice, I may need a court order. She gets to go to the game tomorrow\u2014next week. I have to stay home. [Laughter] We\u2019ve got to work something out here. Members of the Cabinet, leaders of our military, Chief Justice, Associate Justices, and retired Justices of the Supreme Court, and to you, my fellow Americans:",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:33:02.524786+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2024.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "Two years ago, our democracy faced its greatest threat since the Civil War. And then, just a few months ago, an unhinged \u201cbig lie\u201d assailant unleashed a political violence at the home of the then-Speaker of the House of Representatives, using the very same language the insurrectionists used as they stalked these halls and chanted on January 6.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:33:02.524796+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2024.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Folks, the story of America is a story of progress and resilience, of always moving forward, of never, ever giving up. It\u2019s a story unique among all nations. We\u2019re the only country that has emerged from every crisis we\u2019ve ever entered stronger than we got into it. Look, folks, that\u2019s what we\u2019re doing again.",
+      "confidence": 0.95,
+      "context_type": "thematic_emphasis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:33:02.524799+00:00"
+    },
+    {
+      "document_name": "Biden_SOTU_2024.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.95,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:33:02.524801+00:00"
+    }
+  ]
+}

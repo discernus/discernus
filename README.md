@@ -4,22 +4,19 @@
 
 ## 📚 Documentation
 
-### Core Documentation
-- **CLI Quick Start**: See `docs/developer/CLI_QUICK_REFERENCE.md`
-- **CLI Complete Guide**: See `docs/developer/CLI_COMMAND_REFERENCE.md`
-- **CLI Reference**: See `docs/CLI_REFERENCE.md` - *Complete command reference with examples*
-- **Configuration**: See `docs/developer/CLI_CONFIGURATION_GUIDE.md`
-- **Best Practices**: See `docs/developer/CLI_BEST_PRACTICES.md`
+### For Users
+- **[User Guide](docs/user/README.md)** - Complete user documentation
+- **[Quick Start](docs/user/QUICK_START_GUIDE.md)** - 5-minute tutorial
+- **[Installation](docs/user/INSTALLATION_GUIDE.md)** - Setup instructions
+- **[CLI Reference](docs/user/CLI_REFERENCE.md)** - All commands
+- **[Performance Guide](docs/user/PERFORMANCE_GUIDE.md)** - Timing and costs
+- **[Release Notes](docs/user/RELEASE_NOTES.md)** - Alpha features
 
-### Research Infrastructure
-- **Provenance System**: See `docs/PROVENANCE_SYSTEM.md` - *Complete research transparency and reproducibility*
-- **Score Validation**: See `docs/developer/workflows/SCORE_VALIDATION_GUIDE.md`
-
-### System Architecture
-- **Architecture**: See `docs/architecture/DISCERNUS_SYSTEM_ARCHITECTURE.md`
-- **Agent Quick Start**: See `CURSOR_AGENT_QUICK_START.md`
-- **Frameworks**: See `frameworks/` directory for analytical frameworks
-- **Specifications**: See `docs/specifications/` for technical specs
+### For Developers
+- **[Developer Guide](docs/developer/README.md)** - Technical documentation
+- **[Architecture](docs/architecture/)** - System design
+- **[Specifications](docs/specifications/)** - Technical specs
+- **[Agent Quick Start](CURSOR_AGENT_QUICK_START.md)** - For contributors
 
 ## 🚀 Quick Start
 
@@ -31,16 +28,16 @@ make install
 make check
 
 # 3. Run fast test experiment (~47 seconds, $0.014)
-discernus run projects/simple_test --skip-validation
+discernus run projects/nano_test_experiment --skip-validation
 
-# 4. Validate any score (<5 minutes)
-discernus validate-score projects/simple_test "john_mccain_2008_concession.txt" "dignity_score" --score-value 0.65
+# 4. List available experiments
+discernus list
 
-# Or run with local Flash Lite config (from experiment directory)
-cd projects/simple_test && discernus run .
+# 5. Check system status
+discernus status
 
-# Or run from anywhere with canonical frameworks
-discernus run projects/simple_test
+# Or run with local config (from experiment directory)
+cd projects/nano_test_experiment && discernus run .
 ```
 
 ### Run Modes
@@ -71,6 +68,7 @@ discernus archive projects/experiment/runs/LATEST_RUN \
 - **LLM Intelligence**: Analysis, reasoning, and content generation in prompts
 - **Software Infrastructure**: Simple routing, storage, and execution
 - **Natural Language Flow**: LLM-to-LLM communication without parsing
+- **Framework Agnostic**: Accept any analytical framework - no hardcoded restrictions
 - **Centralized Prompts**: Prompts are engineered as part of the agent that consumes them, not hardcoded.
 
 ### ❌ **THICK Anti-Patterns (Don't Do This)**
@@ -78,6 +76,7 @@ discernus archive projects/experiment/runs/LATEST_RUN \
 - Hardcoded prompts in orchestrator code
 - Mathematical operations in software (use hybrid intelligence pattern)
 - Domain-specific assumptions in core platform
+- Hardcoded framework lists or restrictions
 
 ## 🎯 Three Foundational Commitments
 
@@ -90,11 +89,11 @@ discernus archive projects/experiment/runs/LATEST_RUN \
 ```bash
 # Modern CLI (recommended)
 discernus run [path]           # Run complete experiment
-discernus continue [path]      # Resume from cached analysis  
-discernus validate-score [path] [doc] [score] --score-value [value]  # Academic validation
+discernus resume [path]        # Resume from cached analysis  
 discernus list                 # List available experiments
 discernus status               # Show system status
-discernus config show          # Show configuration
+discernus validate [path]      # Validate experiment structure
+discernus archive [path]       # Create publication archive
 discernus --help               # Full command reference
 ```
 

@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_75fcf10e3cf5",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Applied three independent analytical approaches with median aggregation. Speech exhibits strong alignment with procedural legitimacy, institutional respect, and systemic continuity.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"analysis_75fcf10e3cf5\",\n      \"document_name\": \"Clinton_SOTU_2001.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.85,\n          \"confidence\": 0.95\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.95,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"Last year this Congress applied to itself the laws it applies to everyone else. This Congress banned gifts and meals from lobbyists. This Congress forced lobbyists to disclose who pays them and what legislation they are trying to pass or kill. This Congress did that, and I applaud you for it.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no_evidence\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"My seventh challenge is really America's challenge to those of us in this hallowed Hall tonight: to reinvent our Government and make our democracy work for them.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"rhetorical_device\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no_evidence\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"Our Nation was built on challenges. America was built on challenges, not promises. And when we work together to meet them, we never fail. That is the key to a more perfect Union.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"thematic_statement\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"no_evidence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "1221b5af2bd2c1e24d8c4c9ec354e2238ba0a9842acf39033ef965e0fe3e5ef4",
+  "execution_metadata": {
+    "start_time": "2025-09-11T18:28:28.042807+00:00",
+    "end_time": "2025-09-11T18:29:09.022732+00:00",
+    "duration_seconds": 40.979911
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "788a6ff58d815b3479e1df9db99bbc74f06a2d6c424b2c56872f5f4711b5b566"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/private/tmp/discernus_gauntlet_test/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250911T181940Z_afae273b"
+  }
+}

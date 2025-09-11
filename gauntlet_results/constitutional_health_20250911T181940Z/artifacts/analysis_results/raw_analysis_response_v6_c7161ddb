@@ -1,0 +1,87 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Analysis highlights strong emphasis on democratic processes, institutional respect, and systemic continuity, with active rejection of procedural subversion or systemic replacement. The speech champions resilience and unity within existing constitutional structures.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "e48a279a551e...",
+      "document_name": "Biden_Inaugural_2021.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "institutional_respect": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.9
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "The people\u2019s\u2014the will of the people has been heard, and the will of the people has been heeded.",
+          "confidence": 0.95,
+          "context_type": "thematic_centrality"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "It did not happen. It will never happen, not today, not tomorrow, not ever.",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "I will defend the Constitution. I will defend our democracy. I will defend America.",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "A rise of political extremism, White supremacy, domestic terrorism that we must confront and we will defeat.",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "much to repair, much to restore, much to heal, much to build, and much to gain.",
+          "confidence": 0.9,
+          "context_type": "rhetorical_pattern"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "absence_of_evidence"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

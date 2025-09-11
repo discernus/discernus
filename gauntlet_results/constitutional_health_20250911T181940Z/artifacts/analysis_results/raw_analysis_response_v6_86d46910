@@ -1,0 +1,87 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Applied three independent analytical approaches with median aggregation. Document consistently promotes systemic continuity and procedural/institutional legitimacy.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "{{artifact_id}}",
+      "document_name": "Obama_SOTU_2010.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.9,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.3,
+          "salience": 0.25,
+          "confidence": 0.8
+        },
+        "institutional_respect": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.8
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "the Constitution makes us not rivals for power, but partners for progress.",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "if Congress won't act soon to protect future generations, I will. I will direct my Cabinet to come up with executive actions we can take...",
+          "confidence": 0.8,
+          "context_type": "conditional_action"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "Mr. Speaker, Mr. Vice President, Members of Congress, fellow Americans: Fifty-one years ago, John F. Kennedy declared to this Chamber that \"the Constitution makes us not rivals for power, but partners for progress.\"",
+          "confidence": 0.9,
+          "context_type": "structural_framing"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "The greatest nation on Earth cannot keep conducting its business by drifting from one manufactured crisis to the next.",
+          "confidence": 0.8,
+          "context_type": "critique_of_inefficiency"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "the responsibility of improving this Union remains the task of us all.",
+          "confidence": 0.95,
+          "context_type": "thematic_summary"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "not_applicable"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

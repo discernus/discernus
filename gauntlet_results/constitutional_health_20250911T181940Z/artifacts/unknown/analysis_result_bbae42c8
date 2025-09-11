@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_49ba880f39ed",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "presidential_sotu_constitutional_health_trends",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"constitutional_health_framework\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Applied three independent analytical approaches with median aggregation. Document consistently promotes institutional and procedural adherence, and gradual systemic improvement.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"75be9b18cbd1...\",\n      \"document_name\": \"Clinton_SOTU_1995.txt\",\n      \"dimensional_scores\": {\n        \"procedural_legitimacy\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"procedural_rejection\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        },\n        \"institutional_respect\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"institutional_subversion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        },\n        \"systemic_continuity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.9\n        },\n        \"systemic_replacement\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"procedural_legitimacy\",\n          \"quote_text\": \"You can all be proud of that, because turning a sea of red ink into black is no miracle. It is the product of hard work by the American people and of two visionary actions in Congress: the courageous vote in 1993 that led to a cut in the deficit of 90 percent, and the truly historic bipartisan balanced budget agreement passed by this Congress.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"procedural_rejection\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.9,\n          \"context_type\": \"no_evidence\"\n        },\n        {\n          \"dimension\": \"institutional_respect\",\n          \"quote_text\": \"Mr. Speaker, Mr. Vice President, Members of the 105th Congress, distinguished guests, my fellow Americans:\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"institutional_subversion\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.9,\n          \"context_type\": \"no_evidence\"\n        },\n        {\n          \"dimension\": \"systemic_continuity\",\n          \"quote_text\": \"But with barely 700 days left in the 20th century, this is not a time to rest. It is a time to build, to build the America within reach, an America where everybody has a chance to get ahead with hard work...\",\n          \"confidence\": 0.9,\n          \"context_type\": \"thematic_statement\"\n        },\n        {\n          \"dimension\": \"systemic_replacement\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.9,\n          \"context_type\": \"no_evidence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "eeccf7ee100fd5f97e9c99fe3077bf00b0cb42290e17e6f12ab20d446b29c5fa",
+  "execution_metadata": {
+    "start_time": "2025-09-11T18:23:50.569062+00:00",
+    "end_time": "2025-09-11T18:24:33.422302+00:00",
+    "duration_seconds": 42.853223
+  },
+  "input_artifacts": {
+    "framework_hash": "3f24562dd6d3051dc4ae8b3a90e2f1ce898b12c3dad57070978c7712ccfe201d",
+    "document_hashes": [
+      "75be9b18cbd1f33f2c79847668785477e19511919cd8129ff86309910b1d17f2"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "1b_chf_constitutional_health",
+      "experiment_root": "/private/tmp/discernus_gauntlet_test/1b_chf_constitutional_health",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250911T181940Z_afae273b"
+  }
+}

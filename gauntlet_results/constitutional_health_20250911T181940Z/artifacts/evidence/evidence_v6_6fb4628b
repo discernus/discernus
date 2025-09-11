@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "ace4245bce5e87a19ce0ba3adbb704e2d221ac4d85a7ebfbe43f5b07eb3dc1fb"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-11T19:34:33.000809+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Under my leadership, we will restore fair, equal, and impartial justice under the constitutional rule of law.",
+      "confidence": 0.8,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:34:33.000793+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "And by invoking the Alien Enemies Act of 1798, I will direct our Government to use the full and immense power of Federal and State law enforcement to eliminate the presence of all foreign gangs and criminal networks bringing devastating crime to U.S. soil, including our cities and inner cities.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:34:33.000801+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Vice President Vance, Speaker Johnson, Senator Thune, Chief Justice Roberts, Justices of the Supreme Court of the United States",
+      "confidence": 0.8,
+      "context_type": "rhetorical_address",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:34:33.000803+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "For many years, a radical and corrupt establishment has extracted power and wealth from our citizens while the pillars of our society lay broken and seemingly in complete despair.",
+      "confidence": 0.9,
+      "context_type": "thematic_critique",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:34:33.000804+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "Like in 2017, we will again build the strongest military the world has ever seen.",
+      "confidence": 0.8,
+      "context_type": "comparison_to_past",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:34:33.000805+00:00"
+    },
+    {
+      "document_name": "Trump_Inaugural_2025.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "Today, we will begin the complete restoration of America and the revolution of common sense.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:34:33.000807+00:00"
+    }
+  ]
+}

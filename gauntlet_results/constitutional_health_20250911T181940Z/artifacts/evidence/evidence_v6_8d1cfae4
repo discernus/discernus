@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "d5e302c81e5d352ca2cdda62e4209b18cc149cd53794b6e140212d96a7509361"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-11T18:43:50.306717+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Bush_SOTU_2005.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "All of us were sent to Washington to carry out the people's business. That is the purpose of this body. It is the meaning of our oath. It remains our charge to keep.",
+      "confidence": 0.95,
+      "context_type": "thematic_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:43:50.306705+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2005.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "if you send me an appropriations bill that does not cut the number and cost of earmarks in half, I'll send it back to you with my veto.",
+      "confidence": 0.8,
+      "context_type": "policy_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:43:50.306709+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2005.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "By trusting the people, our Founders wagered that a great and noble nation could be built on the liberty that resides in the hearts of all men and women.",
+      "confidence": 0.95,
+      "context_type": "thematic_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:43:50.306711+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2005.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "The people's trust in their Government is undermined by congressional earmarks, special interest projects that are often snuck in at the last minute, without discussion or debate.",
+      "confidence": 0.8,
+      "context_type": "critique_of_practice",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:43:50.306712+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2005.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "And so long as we continue to trust the people, our Nation will prosper, our liberty will be secure, and the state of our Union will remain strong.",
+      "confidence": 0.95,
+      "context_type": "closing_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:43:50.306713+00:00"
+    },
+    {
+      "document_name": "Bush_SOTU_2005.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absent",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:43:50.306714+00:00"
+    }
+  ]
+}

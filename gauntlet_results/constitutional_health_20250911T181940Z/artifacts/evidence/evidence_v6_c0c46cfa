@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "2082897643c26ba6466a21f4e529dfca0563653a07d55616aaccc9e0c9a2b82f"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-11T19:13:16.882175+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "I appreciate the constructive approach that you and other leaders took at the end of last year to pass a budget and make tax cuts permanent for working families.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:13:16.882166+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "Democracy grinds to a halt without a willingness to compromise or when even basic facts are contested or when we listen only to those who agree with us.",
+      "confidence": 0.8,
+      "context_type": "criticism_of_deviation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:13:16.882169+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Mr. Speaker, Mr. Vice President, Members of Congress, my fellow Americans: Tonight marks the eighth year that I\u2019ve come here to report on the State of the Union.",
+      "confidence": 0.9,
+      "context_type": "structural_acknowledgment",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:13:16.882170+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "Too many Americans feel that way right now. It's one of the few regrets of my Presidency: that the rancor and suspicion between the parties has gotten worse instead of better.",
+      "confidence": 0.8,
+      "context_type": "criticism_of_dysfunction",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:13:16.882171+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "America has been through big changes before: wars and depression, the influx of new immigrants, workers fighting for a fair deal, movements to expand civil rights. Each time, there have been those who told us to fear the future; who claimed we could slam the brakes on change; who promised to restore past glory if we just got some group or idea that was threatening America under control. And each time, we overcame those fears.",
+      "confidence": 0.95,
+      "context_type": "historical_narrative",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:13:16.882172+00:00"
+    },
+    {
+      "document_name": "Obama_SOTU_2013.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "\"We the People.\" Our Constitution begins with those three simple words, words we\u2019ve come to recognize mean all the people, not just some; words that insist we rise and fall together, that that\u2019s how we might perfect our Union.",
+      "confidence": 0.9,
+      "context_type": "argument_against_replacement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:13:16.882173+00:00"
+    }
+  ]
+}

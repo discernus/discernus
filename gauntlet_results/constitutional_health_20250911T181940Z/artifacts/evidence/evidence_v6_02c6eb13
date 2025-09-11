@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "6b6f4ea6f620bbdc271813dca2f3bf276fde6dea92c31a535d3f6c06bb23cb15"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-11T19:19:52.580126+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "We must restore integrity and the rule of law at our borders.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:19:52.580114+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "But our slow and burdensome approval process at the Food and Drug Administration keeps too many advances, like the one that saved Megan\u2019s life, from reaching those in need.",
+      "confidence": 0.75,
+      "context_type": "critique_of_process",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:19:52.580120+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Finally, I have kept my promise to appoint a Justice to the United States Supreme Court, from my list of 20 judges, who will defend our Constitution.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:19:52.580121+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "We have begun to drain the swamp of government corruption by imposing a 5-year ban on lobbying by executive branch officials and a lifetime ban",
+      "confidence": 0.8,
+      "context_type": "critique_of_corruption",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:19:52.580122+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "What we are witnessing today is the renewal of the American spirit.",
+      "confidence": 0.95,
+      "context_type": "thematic_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:19:52.580123+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "Then, in 2016, the Earth shifted beneath our feet. The rebellion started as a quiet protest, spoken by families of all colors and creeds, families who just wanted a fair shot for their children and a fair hearing for their concerns. But then the quiet voices became a loud chorus, as thousands of citizens now spoke out together, from cities small and large, all across our country. Finally, the chorus became an earthquake, and the people turned out by the tens of millions, and they were all united by one very simple, but crucial demand: that America must put its own citizens first.",
+      "confidence": 0.85,
+      "context_type": "rhetorical_metaphor",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T19:19:52.580124+00:00"
+    }
+  ]
+}

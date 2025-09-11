@@ -1,0 +1,87 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Applied three independent analytical approaches, aggregated via median scoring for robust consistency.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "c5a53b6ab5ff...",
+      "document_name": "Obama_SOTU_2017.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "procedural_rejection": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.7
+        },
+        "institutional_respect": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "institutional_subversion": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.8
+        },
+        "systemic_continuity": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "As long as I'm President, I will work with anyone in this Chamber to build on this momentum.",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "I will oppose any effort to return to the very same policies that brought on this economic crisis in the first place.",
+          "confidence": 0.7,
+          "context_type": "policy_critique"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "These achievements are a testament to the courage, selflessness, and teamwork of America\u2019s Armed Forces.",
+          "confidence": 0.9,
+          "context_type": "direct_praise"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "At a time when too many of our institutions have let us down, they exceeded all expectations.",
+          "confidence": 0.8,
+          "context_type": "criticism"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "an America built to last",
+          "confidence": 0.9,
+          "context_type": "thematic_framing"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "not_applicable"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

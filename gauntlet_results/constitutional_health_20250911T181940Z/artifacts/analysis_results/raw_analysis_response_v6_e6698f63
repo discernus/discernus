@@ -1,0 +1,87 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "constitutional_health_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Applied three independent analytical approaches with median aggregation, focusing on Obama's 2015 SOTU speech's emphasis on gradual reform and institutional adherence.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "{{artifact_id}}",
+      "document_name": "Obama_SOTU_2015.txt",
+      "dimensional_scores": {
+        "procedural_legitimacy": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "procedural_rejection": {
+          "raw_score": 0.3,
+          "salience": 0.4,
+          "confidence": 0.8
+        },
+        "institutional_respect": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "institutional_subversion": {
+          "raw_score": 0.2,
+          "salience": 0.3,
+          "confidence": 0.85
+        },
+        "systemic_continuity": {
+          "raw_score": 0.9,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "systemic_replacement": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "procedural_legitimacy",
+          "quote_text": "What the American people hope, what they deserve, is for all of us, Democrats and Republicans, to work through our differences, to overcome the numbing weight of our politics.",
+          "confidence": 0.95,
+          "context_type": "call_to_action"
+        },
+        {
+          "dimension": "procedural_rejection",
+          "quote_text": "Yesterday the Senate blocked a bill that would have created this commission, so I'll issue an Executive order that will allow us to go forward, because I refuse to pass this problem on to another generation of Americans.",
+          "confidence": 0.8,
+          "context_type": "pragmatic_adaptation"
+        },
+        {
+          "dimension": "institutional_respect",
+          "quote_text": "And according to the Congressional Budget Office, the independent organization that both parties have cited as the official scorekeeper for Congress, our approach would bring down the deficit by as much as $1 trillion over the next two decades.",
+          "confidence": 0.95,
+          "context_type": "deference_to_authority"
+        },
+        {
+          "dimension": "institutional_subversion",
+          "quote_text": "Each time lobbyists game the system or politicians tear each other down instead of lifting this country up, we lose faith.",
+          "confidence": 0.9,
+          "context_type": "critique_of_behavior"
+        },
+        {
+          "dimension": "systemic_continuity",
+          "quote_text": "lay a new foundation for long-term economic growth and finally address the problems that America's families have confronted for years.",
+          "confidence": 0.95,
+          "context_type": "strategic_vision"
+        },
+        {
+          "dimension": "systemic_replacement",
+          "quote_text": "",
+          "confidence": 0.95,
+          "context_type": "absent"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

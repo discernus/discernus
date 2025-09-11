@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "75be9b18cbd1f33f2c79847668785477e19511919cd8129ff86309910b1d17f2"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-11T18:24:33.421795+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "You can all be proud of that, because turning a sea of red ink into black is no miracle. It is the product of hard work by the American people and of two visionary actions in Congress: the courageous vote in 1993 that led to a cut in the deficit of 90 percent, and the truly historic bipartisan balanced budget agreement passed by this Congress.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:24:33.421783+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "no_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:24:33.421788+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Mr. Speaker, Mr. Vice President, Members of the 105th Congress, distinguished guests, my fellow Americans:",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:24:33.421789+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "no_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:24:33.421790+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "But with barely 700 days left in the 20th century, this is not a time to rest. It is a time to build, to build the America within reach, an America where everybody has a chance to get ahead with hard work...",
+      "confidence": 0.9,
+      "context_type": "thematic_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:24:33.421792+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1995.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "no_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:24:33.421793+00:00"
+    }
+  ]
+}

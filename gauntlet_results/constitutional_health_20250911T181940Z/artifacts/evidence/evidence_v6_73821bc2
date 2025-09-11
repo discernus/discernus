@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "85d926c345b6f5399dadf754e59bdbddbf17a58f92ae672374de861780a48ca7"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-11T18:22:39.348677+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_SOTU_1993.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Let's work together to write bipartisan campaign finance reform into law and pass McCain-Feingold by the day we celebrate the birth of our democracy, July the Fourth.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:22:39.348663+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1993.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 0.8,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:22:39.348667+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1993.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "The people of this Nation elected us all. They want us to be partners, not partisans. They put us all right here in the same boat, they gave us all oars, and they told us to row.",
+      "confidence": 0.95,
+      "context_type": "thematic_rhetoric",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:22:39.348669+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1993.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:22:39.348670+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1993.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "To prepare America for the 21st century, we must build stronger families... We must continue, step by step, to give more families access to affordable, quality health care.",
+      "confidence": 0.9,
+      "context_type": "thematic_rhetoric",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:22:39.348672+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_1993.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.8,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:22:39.348673+00:00"
+    }
+  ]
+}

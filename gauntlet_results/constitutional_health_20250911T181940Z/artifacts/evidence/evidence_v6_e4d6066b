@@ -1,0 +1,73 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "fc1aba739be1e6049cfeeb5bb6c2d22ade69378821a3ff79a3d446434bce4c0c"
+    ],
+    "total_evidence_pieces": 6,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-11T18:28:03.650926+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "procedural_legitimacy",
+      "quote_text": "Again we are here in the sanctuary of democracy, and once again our democracy has spoken.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:28:03.650912+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "procedural_rejection",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:28:03.650916+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "institutional_respect",
+      "quote_text": "Mr. President, Mr. Speaker, Members of the 104th Congress, my fellow Americans: Again we are here in the sanctuary of democracy, and once again our democracy has spoken.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:28:03.650918+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "institutional_subversion",
+      "quote_text": "The American people look at their Capitol, and they see a city where the well-connected and the well-protected can work the system, but the interests of ordinary citizens are often left out.",
+      "confidence": 0.8,
+      "context_type": "criticism_of_system",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:28:03.650920+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "systemic_continuity",
+      "quote_text": "It has fallen to every generation since then to preserve that idea, the American idea, and to deepen and expand its meaning in new and different times:",
+      "confidence": 0.95,
+      "context_type": "thematic_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:28:03.650921+00:00"
+    },
+    {
+      "document_name": "Clinton_SOTU_2000.txt",
+      "dimension": "systemic_replacement",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T18:28:03.650923+00:00"
+    }
+  ]
+}
