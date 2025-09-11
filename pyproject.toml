@@ -28,46 +28,29 @@ classifiers = [
 ]
 
 dependencies = [
-    # Core dependencies
+    # Core platform dependencies
     "python-dotenv>=0.19.0",
-    "gitpython>=3.1.0",
+    "gitpython>=3.1.0", 
     "litellm>=1.7",
-    "anthropic>=0.7.0",
     "requests>=2.28.0",
     "click>=8.0",
     "rich>=13.0",
-
+    "loguru>=0.7",
+    "ratelimit>=2.2",
     
     # Data processing and analysis
     "pandas>=2.2",
     "numpy>=1.26",
     "scipy>=1.13",
-    
-    # Jupyter and notebook support
-    "jupyter>=1.0.0",
-    "nbformat>=5.7.0",
+    "pingouin>=0.5",
+    "statsmodels>=0.14",
     
     # Configuration and serialization
     "PyYAML>=6.0",
     "pydantic>=2.0.0",
     "pydantic-settings>=2.0.0",
     
-    # Text processing and NLP
-    "nltk>=3.8",
-    "textblob>=0.15.3",
-    
-    # Google Cloud Platform (Vertex AI)
-    "google-cloud-aiplatform>=1.104.0",
-    "google-auth>=2.40.0",
-    
-    # YouTube transcript extraction (for APDES corpus collection)
-    "youtube-transcript-api>=0.6.2",
-    "yt-dlp>=2025.6.9",
-    "loguru>=0.7",
-    "ratelimit>=2.2",
-    "pingouin>=0.5",
-    "statsmodels>=0.14",
-    # Search and indexing (align with requirements.txt)
+    # Search and indexing
     "txtai>=5.0.0",
     "typesense>=0.20.0",
     "rank_bm25>=0.2.2",
@@ -82,12 +65,31 @@ dev = [
     "flake8",
 ]
 
-academic = [
-    # Additional scientific computing packages
-    "statsmodels>=0.14.0",       # Statistical analysis
-    "scikit-learn>=1.2.0",       # Machine learning
-    "plotly>=5.14.0",            # Interactive visualizations
-    "jupyter>=1.0.0",            # Notebook environment
+# Corpus collection and data gathering tools
+corpus = [
+    "youtube-transcript-api>=0.6.2",  # YouTube transcript extraction
+    "yt-dlp>=2025.6.9",               # Video downloading
+]
+
+# Analysis and visualization tools  
+analysis = [
+    "jupyter>=1.0.0",                 # Notebook environment
+    "nbformat>=5.7.0",                # Notebook format support
+    "plotly>=5.14.0",                 # Interactive visualizations
+    "scikit-learn>=1.2.0",            # Machine learning
+]
+
+# Natural language processing tools
+nlp = [
+    "nltk>=3.8",                      # Natural language toolkit
+    "textblob>=0.15.3",               # Text processing
+]
+
+# Cloud provider SDKs (when not using LiteLLM abstraction)
+cloud = [
+    "anthropic>=0.7.0",               # Anthropic Claude SDK
+    "google-cloud-aiplatform>=1.104.0", # Google Vertex AI
+    "google-auth>=2.40.0",            # Google authentication
 ]
 
 [project.urls]
