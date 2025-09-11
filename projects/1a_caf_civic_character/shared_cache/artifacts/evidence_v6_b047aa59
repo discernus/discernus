@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "9ebec73f000084ff7ceb77c737df2a77d5231179a7f864aa74e58dd7a4889d5d"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-10T21:56:34.524375+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "tribalism",
+      "quote_text": "judging the president, the leader of my own party",
+      "confidence": 0.9,
+      "context_type": "explicit_acknowledgment",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T21:56:34.524360+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "dignity",
+      "quote_text": "The Constitution is at the foundation of our Republic's success, and we each strive not to lose sight of our promise to defend it.",
+      "confidence": 0.9,
+      "context_type": "foundational_principle",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T21:56:34.524364+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "manipulation",
+      "quote_text": "The president\u2019s insistence that they be investigated by the Ukrainians is hard to explain other than as a political pursuit.",
+      "confidence": 0.9,
+      "context_type": "implied_motive",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T21:56:34.524365+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "truth",
+      "quote_text": "As a senator-juror, I swore an oath before God to exercise impartial justice.",
+      "confidence": 0.9,
+      "context_type": "direct_assertion",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T21:56:34.524366+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "resentment",
+      "quote_text": "corrupting an election to keep oneself in office is perhaps the most abusive and destructive violation of one's oath of office that I can imagine.",
+      "confidence": 0.9,
+      "context_type": "moral_condemnation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T21:56:34.524367+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "justice",
+      "quote_text": "exercise impartial justice.",
+      "confidence": 0.9,
+      "context_type": "direct_assertion",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T21:56:34.524368+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "fear",
+      "quote_text": "Were I to ignore the evidence that has been presented and disregard what I believe my oath and the Constitution demands of me for the sake of a partisan end, it would, I fear, expose my character to history's rebuke and the censure of my own conscience.",
+      "confidence": 0.9,
+      "context_type": "personal_consequence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T21:56:34.524369+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "hope",
+      "quote_text": "I will tell my children and their children that I did my duty to the best of my ability, believing that my country expected it of me.",
+      "confidence": 0.9,
+      "context_type": "aspirational_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T21:56:34.524370+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "fantasy",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "n/a",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T21:56:34.524371+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "pragmatism",
+      "quote_text": "I acknowledge that my verdict will not remove the president from office.",
+      "confidence": 0.9,
+      "context_type": "realistic_assessment",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T21:56:34.524372+00:00"
+    }
+  ]
+}

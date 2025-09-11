@@ -1,8 +1,0 @@
-{
-  "success": true,
-  "issues": [
-    "The experiment's expected outcomes include 'ANOVA results demonstrating significant differences between speakers'. However, the corpus only contains 8 documents. With such a small sample size (N=8), any statistical tests like ANOVA will have very low statistical power, making it difficult to detect true effects or draw reliable conclusions about group differences (e.g., institutional vs. populist)."
-  ],
-  "model": "vertex_ai/gemini-2.5-pro",
-  "validated_at": "2025-08-27T14:39:00.823162+00:00"
-}

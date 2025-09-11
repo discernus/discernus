@@ -30,7 +30,7 @@ class StatisticalPackageGenerator:
     
     def __init__(self, run_directory: Path):
         self.run_dir = run_directory
-        self.results_dir = run_directory / "results"
+        self.results_dir = run_directory / "data"
         self.package_dir = run_directory / "statistical_package"
         
     def generate_statistical_package(self) -> Path:

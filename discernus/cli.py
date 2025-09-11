@@ -138,7 +138,7 @@ def cli(ctx, verbose, quiet, no_color, config):
     Model Selection Tips:
       --analysis-model vertex_ai/gemini-2.5-flash          # Fast analysis (default)
       --synthesis-model vertex_ai/gemini-2.5-pro           # High-quality synthesis (default)
-      --validation-model vertex_ai/gemini-2.5-flash-lite   # Fast validation (default)
+      --validation-model vertex_ai/gemini-2.5-pro          # High-quality validation (default)
     """
     # Ensure context object exists
     ctx.ensure_object(dict)
@@ -170,8 +170,8 @@ def cli(ctx, verbose, quiet, no_color, config):
               default='vertex_ai/gemini-2.5-pro',
               help='LLM model for report synthesis. Pro recommended for complex analysis. Examples: vertex_ai/gemini-2.5-pro, openai/gpt-4o')
 @click.option('--validation-model', envvar='DISCERNUS_VALIDATION_MODEL',
-              default='vertex_ai/gemini-2.5-flash-lite',
-              help='LLM model for experiment validation. Flash-lite is fast and sufficient for validation tasks')
+              default='vertex_ai/gemini-2.5-pro',
+              help='LLM model for experiment validation. Pro model provides high-quality validation')
 @click.option('--derived-metrics-model', envvar='DISCERNUS_DERIVED_METRICS_MODEL',
               default='vertex_ai/gemini-2.5-pro',
               help='LLM model for statistical analysis and derived metrics. Pro recommended for complex calculations')
@@ -183,12 +183,10 @@ def cli(ctx, verbose, quiet, no_color, config):
               help='Run analysis + derived metrics + CSV export, skip synthesis. Perfect for external statistical analysis workflows. Outputs: scores.csv, evidence.csv, metadata.csv')
 @click.option('--skip-synthesis', is_flag=True, envvar='DISCERNUS_SKIP_SYNTHESIS', 
               help='Run full pipeline including statistical analysis, skip synthesis report (useful for custom synthesis workflows)')
-@click.option('--ensemble-runs', type=int, envvar='DISCERNUS_ENSEMBLE_RUNS', 
-              help='Number of ensemble runs for self-consistency (3-5 recommended, increases cost linearly)')
 @click.option('--no-auto-commit', is_flag=True, envvar='DISCERNUS_NO_AUTO_COMMIT', 
               help='Disable automatic Git commit after successful run (useful for testing or manual commit control)')
 @click.pass_context
-def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str], synthesis_model: Optional[str], validation_model: Optional[str], derived_metrics_model: Optional[str], skip_validation: bool, analysis_only: bool, statistical_prep: bool, skip_synthesis: bool, ensemble_runs: Optional[int], no_auto_commit: bool):
+def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str], synthesis_model: Optional[str], validation_model: Optional[str], derived_metrics_model: Optional[str], skip_validation: bool, analysis_only: bool, statistical_prep: bool, skip_synthesis: bool, no_auto_commit: bool):
     """Execute complete experiment (analysis + synthesis). 
     
     EXPERIMENT_PATH: Path to experiment directory (defaults to current directory).
@@ -220,8 +218,6 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
         validation_model = config.validation_model
     if derived_metrics_model is None:
         derived_metrics_model = config.derived_metrics_model
-    if ensemble_runs is None:
-        ensemble_runs = config.ensemble_runs
     
     # Override config booleans if CLI flags are set
     if not dry_run:
@@ -279,7 +275,6 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
         analysis_only=analysis_only,
         statistical_prep=statistical_prep,
         skip_synthesis=skip_synthesis,
-        ensemble_runs=ensemble_runs,
         auto_commit=not no_auto_commit,
         verbosity=verbosity
     )
@@ -315,8 +310,8 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
               default='vertex_ai/gemini-2.5-pro',
               help='LLM model for report synthesis. Pro recommended for complex analysis.')
 @click.option('--validation-model', envvar='DISCERNUS_VALIDATION_MODEL',
-              default='vertex_ai/gemini-2.5-flash-lite',
-              help='LLM model for experiment validation. Flash-lite is fast and sufficient.')
+              default='vertex_ai/gemini-2.5-pro',
+              help='LLM model for experiment validation. Pro model provides high-quality validation.')
 @click.option('--derived-metrics-model', envvar='DISCERNUS_DERIVED_METRICS_MODEL',
               default='vertex_ai/gemini-2.5-pro',
               help='LLM model for statistical analysis and derived metrics.')
@@ -401,7 +396,6 @@ def resume(ctx, experiment_path: str, analysis_model: Optional[str], synthesis_m
         analysis_only=False,
         statistical_prep=False,
         resume_from_stats=True,
-        ensemble_runs=None,
         auto_commit=not no_auto_commit,
         verbosity=verbosity
     )
@@ -673,7 +667,7 @@ def status():
     # Check model availability
     try:
         registry = ModelRegistry()
-        available_models = registry.list_available_models()
+        available_models = registry.list_models()
         status_table.add_row("LLM Models", "✅ Available", f"{len(available_models)} models")
     except Exception as e:
         status_table.add_row("LLM Models", "❌ Error", str(e))
@@ -795,20 +789,12 @@ def cache(experiment_path: str, stats: bool, cleanup: bool):
 @cli.command()
 @click.argument('run_directory', type=click.Path(exists=True, file_okay=False, dir_okay=True))
 @click.option('--output', '-o', type=click.Path(), help='Save archive to specific location')
-@click.option('--include-inputs', is_flag=True, default=True, help='Include input materials (corpus, experiment spec, framework)')
-@click.option('--include-provenance', is_flag=True, default=True, help='Include consolidated provenance data')
-@click.option('--include-docs', is_flag=True, default=True, help='Include comprehensive documentation')
-@click.option('--include-session-logs', is_flag=True, default=False, help='Include complete session logs (LLM interactions, system events, costs)')
-@click.option('--include-artifacts', is_flag=True, default=False, help='Include actual artifact content (not just symlinks)')
-@click.option('--create-statistical-package', is_flag=True, default=False, help='Create researcher-ready statistical package for external analysis')
-def archive(run_directory: str, output: Optional[str], include_inputs: bool, include_provenance: bool, include_docs: bool, include_session_logs: bool, include_artifacts: bool, create_statistical_package: bool):
+@click.option('--minimal', is_flag=True, help='Create minimal archive (excludes logs and artifacts)')
+def archive(run_directory: str, output: Optional[str], minimal: bool):
     """Create a complete golden run archive for research transparency.
     
-    Consolidates all experiment data into a self-contained archive suitable for:
-    - Peer review and publication
-    - Replication research
-    - Audit and compliance
-    - Long-term archival
+    Creates a self-contained archive with all experiment data, results, and provenance.
+    Perfect for peer review, replication research, and archival.
     
     RUN_DIRECTORY: Path to experiment run directory (e.g., projects/experiment/runs/20250127T143022Z)
     """
@@ -822,49 +808,39 @@ def archive(run_directory: str, output: Optional[str], include_inputs: bool, inc
         run_mode = _detect_run_mode(run_path)
         rich_console.print_info(f"🔍 Detected run mode: {run_mode}")
         
-        # Step 1: Consolidate provenance data
-        if include_provenance:
-            rich_console.print_info("📊 Consolidating provenance data...")
-            provenance_data = consolidate_run_provenance(run_path, None)
-            rich_console.print_success("✅ Provenance data consolidated")
+        # Always consolidate provenance and input materials
+        rich_console.print_info("📊 Consolidating provenance data...")
+        consolidate_run_provenance(run_path, None)
+        rich_console.print_success("✅ Provenance data consolidated")
         
-        # Step 2: Consolidate input materials
-        if include_inputs:
-            rich_console.print_info("📁 Consolidating input materials...")
-            consolidation_report = consolidate_input_materials(run_path, None)
-            rich_console.print_success("✅ Input materials consolidated")
+        rich_console.print_info("📁 Consolidating input materials...")
+        consolidate_input_materials(run_path, None)
+        rich_console.print_success("✅ Input materials consolidated")
         
-        # Step 3: Copy session logs (NEW)
-        if include_session_logs:
-            rich_console.print_info("📋 Copying session logs...")
-            _copy_session_logs(run_path)
-            rich_console.print_success("✅ Session logs copied")
-        else:
-            rich_console.print_info("⏭️ Skipping session logs copying")
-        
-        # Step 4: Copy actual artifact content (NEW)
-        if include_artifacts:
-            rich_console.print_info("🗄️ Copying artifact content...")
-            _copy_artifact_content(run_path)
-            rich_console.print_success("✅ Artifact content copied")
-        else:
-            rich_console.print_info("⏭️ Skipping artifact content copying")
-        
-        # Step 5: Create statistical package (NEW)
-        if create_statistical_package and run_mode in ['statistical_prep', 'skip_synthesis']:
+        # Create statistical package for runs with data
+        if run_mode in ['standard', 'statistical_prep', 'skip_synthesis']:
             rich_console.print_info("📊 Creating statistical package...")
             _create_statistical_package(run_path)
             rich_console.print_success("✅ Statistical package created")
         
-        # Step 6: Generate comprehensive documentation
-        if include_docs:
-            rich_console.print_info("📋 Generating comprehensive documentation...")
-            try:
-                docs_path = generate_golden_run_documentation(run_path, output_path)
-                rich_console.print_success("✅ Documentation generated")
-            except Exception as e:
-                rich_console.print_warning(f"⚠️ Documentation generation failed: {e}")
-                rich_console.print_info("📋 Continuing without documentation...")
+        # Include logs and artifacts unless minimal mode
+        if not minimal:
+            rich_console.print_info("📋 Copying session logs...")
+            _copy_session_logs(run_path)
+            rich_console.print_success("✅ Session logs copied")
+            
+            rich_console.print_info("🗄️ Copying artifact content...")
+            _copy_artifact_content(run_path)
+            rich_console.print_success("✅ Artifact content copied")
+        
+        # Generate documentation
+        rich_console.print_info("📋 Generating comprehensive documentation...")
+        try:
+            docs_path = generate_golden_run_documentation(run_path, output_path)
+            rich_console.print_success("✅ Documentation generated")
+        except Exception as e:
+            rich_console.print_warning(f"⚠️ Documentation generation failed: {e}")
+            rich_console.print_info("📋 Continuing without documentation...")
         
         rich_console.print_success("🎉 Golden run archive created successfully!")
         rich_console.print_info("📦 Archive is self-contained and ready for peer review/archival")
@@ -971,7 +947,7 @@ def _copy_artifact_content(run_path: Path) -> None:
                     # Security: ensure target is within shared cache or repo
                     try:
                         target_root = str(target_path)
-                        allowed_prefixes = [str(shared_cache_dir), str(experiment_path)]
+                        allowed_prefixes = [str(shared_cache_dir.resolve()), str(experiment_path.resolve())]
                         if not any(target_root.startswith(p) for p in allowed_prefixes):
                             rich_console.print_warning(f"⚠️ Skipping unsafe symlink target: {target_path}")
                             continue

@@ -15,17 +15,19 @@
 - ✅ **Sprint 9 COMPLETED**: CLI UX improvements including dry run validation and model validation
 - ✅ **Sprint 10 COMPLETED**: All critical logging integrity issues resolved, rate limiting fixed, and provider-consistent fallback strategy implemented
 - ✅ **Sprint 11 COMPLETED**: Statistical preparation workflow and CSV export functionality fully implemented
+- ✅ **Sprint 12 COMPLETED**: Statistical preparation provenance integration with complete archive system, directory reorganization, and Git integration
+- ✅ **Sprint 13 COMPLETED**: Essential code quality and architecture cleanup including dead code removal, deprecated agent cleanup, and architecture documentation updates
 - ✅ **Golden Run Archive System**: Complete research transparency package with provenance consolidation, input materials consolidation, and comprehensive documentation
 - ✅ **RAG Engine Analysis**: Confirmed txtai as primary RAG engine, Typesense for fact checker
 - ✅ **Dependencies Updated**: Added txtai>=5.0.0 to requirements.txt
 
-**Current Focus**: System is stable with comprehensive validation, logging integrity, robust fallback handling, complete research transparency capabilities, and full statistical preparation workflow
+**Current Focus**: System is stable with comprehensive validation, logging integrity, robust fallback handling, complete research transparency capabilities, full statistical preparation workflow with provenance integration, and clean architecture with deprecated code removed
 
 ---
 
 ## Current Sprint Planning
 
-**Next Priority**: Sprint 12 (Statistical Preparation Provenance Integration) - HIGH PRIORITY
+**Next Priority**: Sprint 14 (Open Source Strategy & Licensing) - HIGH PRIORITY
 **Status**: Ready for execution
 **Dependencies**: None - can begin immediately
 
@@ -36,116 +38,116 @@
 
 ---
 
-### Sprint 12: Statistical Preparation Provenance Integration (HIGH PRIORITY)
+### Sprint 12: Statistical Preparation Provenance Integration (HIGH PRIORITY) ✅ COMPLETED
 
 **Timeline**: 2-3 weeks
 **Goal**: Integrate statistical preparation workflows with provenance system using hybrid approach (runtime efficiency + archive completeness) and implement human-friendly directory structure
 
-#### [PROV-001] ProvenanceOrganizer Integration
+#### [PROV-001] ProvenanceOrganizer Integration ✅ COMPLETED
 
 - **Description**: Integrate ProvenanceOrganizer into current orchestrator alongside existing results creation
 - **Purpose**: Enable provenance organization during runs while maintaining current results functionality
 - **Priority**: HIGH - Core provenance functionality
 - **Acceptance Criteria**:
-  - ProvenanceOrganizer called after results directory creation
-  - `artifacts/` directory created with academic-standard structure
-  - Symlinks created to shared cache artifacts
-  - Provenance metadata generated and stored
-  - Both `results/` and `artifacts/` directories coexist
-  - No disruption to existing results creation
+  - ✅ ProvenanceOrganizer called after results directory creation
+  - ✅ `artifacts/` directory created with academic-standard structure
+  - ✅ Symlinks created to shared cache artifacts
+  - ✅ Provenance metadata generated and stored
+  - ✅ Both `results/` and `artifacts/` directories coexist
+  - ✅ No disruption to existing results creation
 - **Dependencies**: None
 - **Effort**: 1 week
 
-#### [PROV-002] Enhanced Manifest Structure for Statistical Preparation
+#### [PROV-002] Enhanced Manifest Structure for Statistical Preparation ✅ COMPLETED
 
 - **Description**: Implement enhanced manifest structure to track statistical preparation stages and modes
 - **Purpose**: Enable proper tracking of different run modes and their artifacts
 - **Priority**: HIGH - Provenance compliance
 - **Acceptance Criteria**:
-  - Manifest includes statistical preparation stage metadata
-  - Mode-specific tracking (analysis-only, statistical-prep, skip-synthesis, complete)
-  - Resume capability metadata stored
-  - Artifact dependency tracking enhanced
+  - ✅ Manifest includes statistical preparation stage metadata
+  - ✅ Mode-specific tracking (analysis-only, statistical-prep, skip-synthesis, complete)
+  - ✅ Resume capability metadata stored
+  - ✅ Artifact dependency tracking enhanced
 - **Dependencies**: [PROV-001]
 - **Effort**: 3-5 days
 
-#### [PROV-003] Archive Command Enhancement for Statistical Preparation
+#### [PROV-003] Archive Command Enhancement for Statistical Preparation ✅ COMPLETED
 
 - **Description**: Enhance archive command to handle different run modes and include complete session logs and artifact content
 - **Purpose**: Create mode-aware, self-contained archives for all run types with ALL necessary assets for replication and audit
 - **Priority**: HIGH - Research integrity
 - **Acceptance Criteria**:
-  - Session logs copied to archive (`session_logs/` directory) with complete execution logs
-  - Actual artifact content copied (not just symlinks) to `artifacts/` directory
-  - Statistical package created for statistical prep runs
-  - Mode-specific README generation
-  - Complete self-contained archives (no external dependencies, no broken symlinks)
-  - Archive command works for all run modes
-  - Both `results/` and `artifacts/` directories included in archive
-  - Experiment.md and framework files properly located in `inputs/` directory
-  - All LLM interactions, agent logs, system logs, and error logs preserved
-  - Complete provenance chain with actual artifact content for audit verification
+  - ✅ Session logs copied to archive (`session_logs/` directory) with complete execution logs
+  - ✅ Actual artifact content copied (not just symlinks) to `artifacts/` directory
+  - ✅ Statistical package created for statistical prep runs
+  - ✅ Mode-specific README generation
+  - ✅ Complete self-contained archives (no external dependencies, no broken symlinks)
+  - ✅ Archive command works for all run modes
+  - ✅ Both `results/` and `artifacts/` directories included in archive
+  - ✅ Experiment.md and framework files properly located in `inputs/` directory
+  - ✅ All LLM interactions, agent logs, system logs, and error logs preserved
+  - ✅ Complete provenance chain with actual artifact content for audit verification
 - **Dependencies**: [PROV-002]
 - **Effort**: 1 week
 
-#### [PROV-004] Statistical Package Generation
+#### [PROV-004] Statistical Package Generation ✅ COMPLETED
 
 - **Description**: Implement statistical package generation for statistical preparation runs
 - **Purpose**: Create researcher-ready packages with all necessary files and documentation
 - **Priority**: MEDIUM - User experience
 - **Acceptance Criteria**:
-  - `statistical_package/` directory created for statistical prep runs
-  - Researcher-ready CSV files with proper naming
-  - Variable codebook generation
-  - Import scripts for R/Python/STATA
-  - Plain text usage instructions
+  - ✅ `statistical_package/` directory created for statistical prep runs
+  - ✅ Researcher-ready CSV files with proper naming
+  - ✅ Variable codebook generation
+  - ✅ Import scripts for R/Python/STATA
+  - ✅ Plain text usage instructions
 - **Dependencies**: [PROV-003]
 - **Effort**: 3-5 days
 
-#### [PROV-005] Directory Structure Reorganization
+#### [PROV-005] Directory Structure Reorganization ✅ COMPLETED
 
 - **Description**: Implement human-friendly directory structure for all run types with complete asset preservation
 - **Purpose**: Create logical organization that meets expectations of researchers, replication researchers, and auditors with ALL necessary assets
 - **Priority**: HIGH - User experience and research integrity
 - **Acceptance Criteria**:
-  - Clear separation: data/, outputs/, inputs/, provenance/, artifacts/, session_logs/
-  - README files explaining each directory and its contents
-  - No file duplication between root and results
-  - Consistent naming conventions
-  - Audit-friendly provenance organization
-  - Self-contained archives with clear structure
-  - Complete session logs in session_logs/ directory
-  - Actual artifact content (not symlinks) in artifacts/ directory
-  - All LLM interactions, agent logs, system logs, and error logs preserved
-  - Complete provenance chain with actual artifact content for audit verification
+  - ✅ Clear separation: data/, outputs/, inputs/, provenance/, artifacts/, session_logs/
+  - ✅ README files explaining each directory and its contents
+  - ✅ No file duplication between root and results
+  - ✅ Consistent naming conventions
+  - ✅ Audit-friendly provenance organization
+  - ✅ Self-contained archives with clear structure
+  - ✅ Complete session logs in session_logs/ directory
+  - ✅ Actual artifact content (not symlinks) in artifacts/ directory
+  - ✅ All LLM interactions, agent logs, system logs, and error logs preserved
+  - ✅ Complete provenance chain with actual artifact content for audit verification
 - **Dependencies**: [PROV-001]
 - **Effort**: 1 week
 
-#### [PROV-006] Session Logs and Artifact Content Copying Implementation
+#### [PROV-006] Session Logs and Artifact Content Copying Implementation ✅ COMPLETED
 
 - **Description**: Implement actual copying of session logs and artifact content (not symlinks) in archive command
 - **Purpose**: Ensure complete self-contained archives with all necessary assets for replication and audit
 - **Priority**: HIGH - Research integrity
 - **Acceptance Criteria**:
-  - Session logs copied from `session/{SESSION_ID}/logs/` to `session_logs/logs/` in archive
-  - All artifact content copied from shared cache to `artifacts/` directory (not symlinks)
-  - Archive command creates completely self-contained archives
-  - No broken symlinks or external dependencies in archives
-  - Complete LLM interactions, agent logs, system logs, and error logs preserved
-  - All artifacts accessible without shared cache dependency
+  - ✅ Session logs copied from `session/{SESSION_ID}/logs/` to `session_logs/logs/` in archive
+  - ✅ All artifact content copied from shared cache to `artifacts/` directory (not symlinks)
+  - ✅ Archive command creates completely self-contained archives
+  - ✅ No broken symlinks or external dependencies in archives
+  - ✅ Complete LLM interactions, agent logs, system logs, and error logs preserved
+  - ✅ All artifacts accessible without shared cache dependency
 - **Dependencies**: [PROV-003]
 - **Effort**: 1 week
 
-#### [PROV-007] Git Integration for Statistical Preparation
+#### [PROV-007] Git Integration for Statistical Preparation ✅ COMPLETED
 
 - **Description**: Implement mode-aware Git commit messages and branch strategies
 - **Purpose**: Enable proper version control for different run types
 - **Priority**: MEDIUM - Version control
 - **Acceptance Criteria**:
-  - Different commit messages for different run modes
-  - Statistical prep runs clearly identified in Git history
-  - Resume commits properly linked to original statistical prep runs
-  - Git integration works with archive command
+  - ✅ Different commit messages for different run modes
+  - ✅ Statistical prep runs clearly identified in Git history
+  - ✅ Resume commits properly linked to original statistical prep runs
+  - ✅ Git integration works with archive command
 - **Dependencies**: [PROV-002, PROV-005, PROV-006]
 - **Effort**: 2-3 days
 
@@ -167,21 +169,21 @@
 
 ---
 
-### Sprint 13: Essential Code Quality & Architecture Cleanup (HIGH PRIORITY)
+### Sprint 13: Essential Code Quality & Architecture Cleanup (HIGH PRIORITY) ✅ COMPLETED
 
 **Timeline**: 2-3 weeks
 **Goal**: Clean up critical dead code, remove deprecated components, and update essential architecture documentation
 
-#### [CLEANUP-001] Essential Dead Code Inventory
+#### [CLEANUP-001] Essential Dead Code Inventory ✅ COMPLETED
 
 - **Description**: Conduct focused inventory for critical dead code that impacts alpha users
 - **Purpose**: Identify and prioritize removal of unused code that creates confusion or maintenance burden
 - **Priority**: HIGH - Code quality improvement
 - **Acceptance Criteria**:
-  - Identify dead imports and unused dependencies
-  - Catalog deprecated agent patterns and unused directories
-  - Prioritize cleanup based on alpha user impact
-  - Document findings for systematic removal
+  - ✅ Identify dead imports and unused dependencies
+  - ✅ Catalog deprecated agent patterns and unused directories
+  - ✅ Prioritize cleanup based on alpha user impact
+  - ✅ Document findings for systematic removal
 - **Dependencies**: None
 - **Effort**: 1 week
 
@@ -236,6 +238,9 @@
 - **Acceptance Criteria**:
   - ✅ Attic branch created and tagged (e.g., `attic-YYYY-MM-DD`) with archived code relocated under `attic/` on that branch
   - ✅ Main/dev cleaned: removed `discernus/core/deprecated/`, `discernus/agents/deprecated/`, `discernus/agents/fact_checker_agent/`, `discernus/agents/revision_agent/`, and legacy CLIs (`cli.py.backup`, `cli_clean.py`, `cli_console.py`)
+  - ✅ Ensemble analysis documented: clarified internal 3-run median aggregation approach in analysis agent
+  - ✅ Non-functional CLI option removed: removed `--ensemble-runs` parameter that wasn't implemented
+  - ✅ Future enhancement planned: added parameterization of internal ensemble approach to later.md
   - ✅ Tests referencing removed agents deleted/disabled
   - ✅ Orchestrator imports/references to removed agents excised or guarded
   - ✅ `docs/ARCHIVE.md` added: lists archived paths, attic branch/tag, retrieval instructions
@@ -452,8 +457,156 @@
 
 ---
 
+## Sprint 12.1: Directory Structure Remediation
+
+**Priority**: CRITICAL - Fixes fundamental architectural gaps
+**Status**: Ready for execution
+**Dependencies**: None - can begin immediately
+
+### [SPRINT-12.1-001] Fix Standard Mode CSV Export Gap
+
+**Description**: Standard mode (default) is missing CSV export functionality entirely. Only special modes (`--analysis-only`, `--statistical-prep`) export CSV files.
+
+**Current Problem**:
+- Standard mode completes analysis + synthesis but produces no CSV files
+- `data/` directory empty except for README
+- No `scores.csv`, `evidence.csv`, `metadata.csv` in standard runs
+- Violates STATISTICAL_PREPARATION_PROVENANCE_INTEGRATION.md specification
+
+**Expected Behavior** (per STATISTICAL_PREPARATION_PROVENANCE_INTEGRATION.md):
+```
+data/
+├── scores.csv              # Raw dimensional scores  
+├── evidence.csv            # Supporting evidence quotes
+└── metadata.csv            # Provenance summary
+```
+
+**Acceptance Criteria**:
+- Standard mode exports CSV files to `data/` directory
+- CSV files contain same data as special modes
+- Directory structure matches STATISTICAL_PREPARATION_PROVENANCE_INTEGRATION.md
+- No regression in special mode functionality
+
+**Effort**: 2 days
+
+### [SPRINT-12.1-002] Consolidate Confusing Dual Directory System
+
+**Description**: Current system creates both `results/` and `outputs/` directories with confusing overlap and misplaced content.
+
+**Current Problems**:
+- **Dual Structure**: Both `results/` and `outputs/` exist with unclear purposes
+- **Misplaced Content**: Corpus files in `results/corpus/` instead of `inputs/corpus/`
+- **Empty Directories**: 6 empty directories created but never populated
+- **Inconsistent Organization**: Files not where READMEs say they should be
+
+**Expected Structure** (per STATISTICAL_PREPARATION_PROVENANCE_INTEGRATION.md):
+```
+runs/20250811T015608Z/
+├── data/                        # Analysis data (researcher-ready)
+├── outputs/                     # Final outputs
+├── inputs/                      # Input materials (copied for replication)
+├── provenance/                  # Audit trail and metadata
+├── artifacts/                   # Complete provenance artifacts
+└── session_logs/                # Complete execution logs
+```
+
+**Acceptance Criteria**:
+- Single, clear directory structure per specification
+- No empty directories created unnecessarily
+- Files placed in correct locations per README documentation
+- Clear separation of concerns between directories
+- No duplication of content across directories
+
+**Effort**: 3 days
+
+### [SPRINT-12.1-003] Fix Empty Directory Creation
+
+**Description**: System creates 6 empty directories that serve no purpose and confuse users.
+
+**Empty Directories to Fix**:
+- `artifacts/analysis_plans/` - Should contain analysis plans or not be created
+- `artifacts/statistical_results/` - Should contain statistical artifacts or not be created  
+- `artifacts/reports/` - Should contain report artifacts or not be created
+- `technical/model_interactions/` - Should contain model logs or not be created
+- `technical/logs/` - Should contain technical logs or not be created
+- `inputs/corpus/` - Should contain corpus files or not be created
+
+**Acceptance Criteria**:
+- No empty directories created unless they will contain content
+- Directory creation logic matches actual content generation
+- Clear documentation of what each directory contains
+- No misleading empty directories
+
+**Effort**: 1 day
+
+### [SPRINT-12.1-004] Fix File Naming and Content Issues
+
+**Description**: Several files have incorrect names or contain unexpected content.
+
+**Issues to Fix**:
+- **`assetss.json`** - Typo with double 's' (should be `assets.json`)
+- **`fact_check_results.json`** - Present but fact-checking was disabled
+- **Missing `statistical_package/`** - Should be created for standard mode
+- **Inconsistent artifact organization** - Artifacts not properly organized per specification
+
+**Acceptance Criteria**:
+- Correct file naming throughout
+- No unused/unexpected files
+- `statistical_package/` created for standard mode
+- Artifact organization matches specification
+
+**Effort**: 1 day
+
+### [SPRINT-12.1-005] Implement Missing Statistical Package
+
+**Description**: Standard mode should create `statistical_package/` directory with researcher-ready data package.
+
+**Expected Structure** (per STATISTICAL_PREPARATION_PROVENANCE_INTEGRATION.md):
+```
+statistical_package/
+├── discernus_data.csv      # Main dataset (copy of data/scores.csv)
+├── variable_codebook.csv   # Column definitions and metadata
+├── full_evidence.csv       # Complete evidence quotes (copy of data/evidence.csv)
+├── README.txt              # Plain text usage instructions
+└── import_scripts/         # Tool-specific helpers
+    ├── import_spss.sps
+    ├── import_stata.do
+    └── import_r.R
+```
+
+**Acceptance Criteria**:
+- `statistical_package/` directory created for standard mode
+- Contains all required files per specification
+- Import scripts work with common statistical tools
+- README provides clear usage instructions
+
+**Effort**: 2 days
+
+### [SPRINT-12.1-006] Validate Against STATISTICAL_PREPARATION_PROVENANCE_INTEGRATION.md
+
+**Description**: Ensure complete compliance with the specification document.
+
+**Validation Checklist**:
+- [ ] Directory structure matches specification exactly
+- [ ] All required files present in correct locations
+- [ ] No unexpected files or directories
+- [ ] README files match specification content
+- [ ] Artifact organization follows specification
+- [ ] Session logs properly integrated
+- [ ] Git commit messages follow specification
+
+**Acceptance Criteria**:
+- 100% compliance with STATISTICAL_PREPARATION_PROVENANCE_INTEGRATION.md
+- All acceptance criteria from individual tasks met
+- No regressions in existing functionality
+- Clear documentation of any deviations from specification
+
+**Effort**: 1 day
+
+---
+
 ## Current Sprint Planning
 
-**Next Priority**: Sprint 16 (Alpha Release Preparation) - CRITICAL PRIORITY
+**Next Priority**: Sprint 12.1 (Directory Structure Remediation) - CRITICAL PRIORITY
 **Status**: Ready for execution
 **Dependencies**: None - can begin immediately

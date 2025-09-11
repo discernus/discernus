@@ -3,7 +3,7 @@ from unittest.mock import patch, MagicMock
 from pathlib import Path
 import pandas as pd
 
-from discernus.core.deprecated.experiment_orchestrator import ExperimentOrchestrator
+# from discernus.core.deprecated.experiment_orchestrator import ExperimentOrchestrator
 
 class TestExperimentOrchestrator(unittest.TestCase):
 

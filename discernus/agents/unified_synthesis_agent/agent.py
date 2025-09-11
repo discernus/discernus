@@ -155,8 +155,10 @@ class UnifiedSynthesisAgent:
             corpus_manifest = corpus_path.read_text(encoding='utf-8') if corpus_path.exists() else "Corpus manifest not available"
             
             # 5. Assemble experiment metadata with model information
+            run_id = assets.get('run_id', 'Unknown')
             experiment_metadata = f"""
             Experiment: {Path(assets['experiment_path']).parent.name}
+            Run ID: {run_id}
             Framework: {Path(assets['framework_path']).name}
             Analysis Model: {getattr(self, 'analysis_model', 'Unknown')}
             Synthesis Model: {getattr(self, 'synthesis_model', 'Unknown')}

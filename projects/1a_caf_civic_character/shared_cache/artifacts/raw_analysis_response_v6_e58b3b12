@@ -1,0 +1,131 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "civic_analysis_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Applied three independent analytical approaches with median aggregation, focusing on JD Vance's political speech. The speech heavily emphasizes tribalism, resentment, and fear, contrasting 'the people' with 'elites' and outlining perceived threats and grievances.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "jd_vance_2022_natcon_conference_516a3c9c",
+      "document_name": "jd_vance_2022_natcon_conference_516a3c9c.txt",
+      "dimensional_scores": {
+        "tribalism": {
+          "raw_score": 0.9,
+          "salience": 0.95,
+          "confidence": 0.95
+        },
+        "dignity": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        },
+        "manipulation": {
+          "raw_score": 0.75,
+          "salience": 0.65,
+          "confidence": 0.9
+        },
+        "truth": {
+          "raw_score": 0.4,
+          "salience": 0.3,
+          "confidence": 0.75
+        },
+        "resentment": {
+          "raw_score": 0.85,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "justice": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        },
+        "fear": {
+          "raw_score": 0.75,
+          "salience": 0.75,
+          "confidence": 0.9
+        },
+        "hope": {
+          "raw_score": 0.4,
+          "salience": 0.4,
+          "confidence": 0.8
+        },
+        "fantasy": {
+          "raw_score": 0.35,
+          "salience": 0.25,
+          "confidence": 0.7
+        },
+        "pragmatism": {
+          "raw_score": 0.3,
+          "salience": 0.2,
+          "confidence": 0.7
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribalism",
+          "quote_text": "My interest is not in protecting the good people of another country. I'm a senator for the state of Ohio. Our leaders have to protect the interests of the citizens of this country.",
+          "confidence": 0.95,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "n/a"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "our elites don't seem to care about it? Well, number one, they really benefit from the cheap labor. Okay? Number two, they actually don't really like the people who make up the domestic populations of their own country.",
+          "confidence": 0.9,
+          "context_type": "accusation_of_deception"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "But I will say on the good news, the majority of the Republican house and the majority of the Republican Senate, the most recent cycle, said no more to this, no more, right? That's a good thing, that's progress.",
+          "confidence": 0.75,
+          "context_type": "claim_of_fact"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "Housing is through the roof. People, middle-class people in Springfield who've lived there sometimes for generations cannot afford a place to live.",
+          "confidence": 0.95,
+          "context_type": "grievance_exploitation"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "n/a"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "The real threat to American democracy is that American voters keep on voting for less immigration and our politicians keep on rewarding us with more.",
+          "confidence": 0.9,
+          "context_type": "threat_focused"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "We're doing that and the very, very basic and simple principle that American leaders should look out for Americans.",
+          "confidence": 0.8,
+          "context_type": "positive_vision"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "we can still do it. Those people can still do it. They just want to get proper wages in the process.",
+          "confidence": 0.7,
+          "context_type": "oversimplification"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "We should also not let the Chinese make all of our stuff. And yet, I've, I've seen the Wall Street Journal editorial page for the last couple of years say we can indefinitely send munitions and weapons of war to Ukraine after for the past two generations abdicating that we ship our industrial base overseas.",
+          "confidence": 0.7,
+          "context_type": "acknowledgment_of_constraints"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

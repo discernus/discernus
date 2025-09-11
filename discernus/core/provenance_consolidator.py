@@ -25,9 +25,9 @@ class ProvenanceConsolidator:
     
     def __init__(self, run_directory: Path):
         self.run_dir = run_directory
-        self.logs_dir = run_directory / "logs"
+        self.logs_dir = run_directory / "session_logs" / "logs"
         self.artifacts_dir = run_directory / "artifacts"
-        self.results_dir = run_directory / "results"
+        self.results_dir = run_directory / "outputs"
         
     def consolidate_provenance(self) -> Dict[str, Any]:
         """

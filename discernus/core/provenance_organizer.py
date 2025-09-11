@@ -253,18 +253,14 @@ class ProvenanceOrganizer:
     
     def _create_directory_structure(self, run_dir: Path) -> None:
         """Create academic-standard directory structure"""
-        directories = [
-            "artifacts/analysis_plans", # What the LLM planned to analyze
-            "artifacts/analysis_results", # Raw analysis outputs
-            "artifacts/statistical_results", # Mathematical computations
-            "artifacts/evidence",      # Curated quotes and supporting data
-            "artifacts/reports",       # Final synthesis outputs
-            "artifacts/inputs",        # Framework, corpus, experiment config
-            "technical/model_interactions", # LLM API call logs
-            "technical/logs"           # System logs
+        # Create only essential directories upfront
+        # Other directories will be created when content is added
+        essential_directories = [
+            "artifacts",  # Main artifacts directory
+            "technical"   # Main technical directory
         ]
         
-        for dir_path in directories:
+        for dir_path in essential_directories:
             full_path = run_dir / dir_path
             self.security.secure_mkdir(full_path)
     
@@ -293,6 +289,10 @@ class ProvenanceOrganizer:
             # Map to human-readable directory
             target_dir = self.ARTIFACT_TYPE_MAPPING.get(artifact_type, "unknown")
             type_dir = artifacts_dir / target_dir
+            
+            # Create subdirectory only if there are artifacts to place
+            if artifacts:
+                type_dir.mkdir(parents=True, exist_ok=True)
             
             for hash_id, metadata in artifacts:
                 # Use the human-readable filename from registry (consistent with storage)

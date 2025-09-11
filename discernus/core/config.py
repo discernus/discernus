@@ -41,7 +41,6 @@ class DiscernusConfig(BaseSettings):
     # Execution options
     auto_commit: bool = Field(default=True, description="Automatically commit successful runs to Git")
     skip_validation: bool = Field(default=False, description="Skip experiment validation")
-    ensemble_runs: int = Field(default=1, description="Number of ensemble runs (currently disabled)")
     
     # Output options
     verbose: bool = Field(default=False, description="Enable verbose output")

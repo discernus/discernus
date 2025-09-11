@@ -1,0 +1,131 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "civic_analysis_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Applied three independent analytical approaches with median aggregation. Consistent low scores for Dignity, Hope, and Pragmatism indicate their near absence.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "738780d93cc3",
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimensional_scores": {
+        "tribalism": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "dignity": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.7
+        },
+        "manipulation": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "truth": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.85
+        },
+        "resentment": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "justice": {
+          "raw_score": 0.3,
+          "salience": 0.2,
+          "confidence": 0.8
+        },
+        "fear": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "hope": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.6
+        },
+        "fantasy": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "pragmatism": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.7
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribalism",
+          "quote_text": "It's another life loss to an, an illegal criminal alien who was unlawfully present in America, who had no business to be here,",
+          "confidence": 0.9,
+          "context_type": "us_vs_them_framing"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "That being one of God's children is good enough to be protected by the law, but everybody treated equally.",
+          "confidence": 0.8,
+          "context_type": "tokenistic_universalism_recontextualized"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "They manufactured a command,",
+          "confidence": 0.9,
+          "context_type": "accusation_of_fabrication"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "That's pretty clear in the Constitution.",
+          "confidence": 0.8,
+          "context_type": "claim_to_factual_accuracy"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "sad, sad story told by Laura Wilkerson yesterday",
+          "confidence": 0.9,
+          "context_type": "grievance_exploitation_victim_narrative"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "send these people into prison. And when they're done, send them back to the country that they can live in legally for the rest of their lives,",
+          "confidence": 0.8,
+          "context_type": "punitive_justice"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "costing thousands of lives in America.",
+          "confidence": 0.9,
+          "context_type": "threat_focused_language"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "Lord, wake me up with an idea on how to, how to preserve our Constitution,",
+          "confidence": 0.6,
+          "context_type": "desperate_plea_not_constructive_optimism"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "Sarah Root would be alive today if the President had done his job.",
+          "confidence": 0.8,
+          "context_type": "oversimplified_causal_link"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "",
+          "confidence": 0.7,
+          "context_type": "absence_of_acknowledgment_of_complex_constraints_or_trade_offs"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

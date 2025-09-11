@@ -28,7 +28,7 @@ from datetime import datetime, timezone
 
 from discernus.gateway.llm_gateway import LLMGateway
 from discernus.gateway.model_registry import ModelRegistry
-from discernus.core.deprecated.thin_output_extraction import ThinOutputExtractor
+from discernus.core.thin_output_extraction import ThinOutputExtractor
 from discernus.core.audit_logger import AuditLogger
 
 

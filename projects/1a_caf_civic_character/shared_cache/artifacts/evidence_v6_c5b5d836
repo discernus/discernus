@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "738780d93cc3c43b7b2e292a7fd0aa9f7e438f7ad2555be4ce6bfc20d9efda82"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-10T22:00:21.856521+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "tribalism",
+      "quote_text": "It's another life loss to an, an illegal criminal alien who was unlawfully present in America, who had no business to be here,",
+      "confidence": 0.9,
+      "context_type": "us_vs_them_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T22:00:21.856508+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "dignity",
+      "quote_text": "That being one of God's children is good enough to be protected by the law, but everybody treated equally.",
+      "confidence": 0.8,
+      "context_type": "tokenistic_universalism_recontextualized",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T22:00:21.856511+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "manipulation",
+      "quote_text": "They manufactured a command,",
+      "confidence": 0.9,
+      "context_type": "accusation_of_fabrication",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T22:00:21.856512+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "truth",
+      "quote_text": "That's pretty clear in the Constitution.",
+      "confidence": 0.8,
+      "context_type": "claim_to_factual_accuracy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T22:00:21.856513+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "resentment",
+      "quote_text": "sad, sad story told by Laura Wilkerson yesterday",
+      "confidence": 0.9,
+      "context_type": "grievance_exploitation_victim_narrative",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T22:00:21.856514+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "justice",
+      "quote_text": "send these people into prison. And when they're done, send them back to the country that they can live in legally for the rest of their lives,",
+      "confidence": 0.8,
+      "context_type": "punitive_justice",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T22:00:21.856515+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "fear",
+      "quote_text": "costing thousands of lives in America.",
+      "confidence": 0.9,
+      "context_type": "threat_focused_language",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T22:00:21.856516+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "hope",
+      "quote_text": "Lord, wake me up with an idea on how to, how to preserve our Constitution,",
+      "confidence": 0.6,
+      "context_type": "desperate_plea_not_constructive_optimism",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T22:00:21.856517+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "fantasy",
+      "quote_text": "Sarah Root would be alive today if the President had done his job.",
+      "confidence": 0.8,
+      "context_type": "oversimplified_causal_link",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T22:00:21.856518+00:00"
+    },
+    {
+      "document_name": "steve_king_2017_house_floor_738780d9.txt",
+      "dimension": "pragmatism",
+      "quote_text": "",
+      "confidence": 0.7,
+      "context_type": "absence_of_acknowledgment_of_complex_constraints_or_trade_offs",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-10T22:00:21.856519+00:00"
+    }
+  ]
+}

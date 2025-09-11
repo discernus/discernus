@@ -31,6 +31,7 @@ Metadata    Knowledge     Full Audit
 - **Framework Agnostic**: Any analytical approach expressible in natural language
 - **Enterprise Scale**: Hash-based caching, content-addressable storage, persistent knowledge graphs
 - **Research Quality**: Peer review readiness with full audit trails and statistical transparency
+- **Internal Ensemble Analysis**: 3-run median aggregation within single LLM calls for self-consistency
 - **Day-1 Productivity**: No programming required - researchers focus on methodology, not implementation
 
 ### **Technology Stack**
@@ -178,7 +179,14 @@ graph TD
 
 ### **Unified 3-Stage Architecture**
 
-**🔍 Analysis Stage**: The `EnhancedAnalysisAgent` performs framework-based dimensional scoring, producing raw scores and evidence artifacts with full computational verification.
+**🔍 Analysis Stage**: The `EnhancedAnalysisAgent` performs framework-based dimensional scoring with internal ensemble analysis, producing raw scores and evidence artifacts with full computational verification.
+
+**Internal Ensemble Analysis**: Each analysis generates three independent analytical approaches within a single LLM call:
+- **Approach 1**: Evidence-First Analysis - direct textual evidence and explicit statements
+- **Approach 2**: Context-Weighted Analysis - rhetorical context and structural positioning  
+- **Approach 3**: Pattern-Based Analysis - repetition patterns and strategic emphasis
+
+The agent calculates median scores across all three approaches, ensuring robust internal self-consistency and reducing single-perspective bias. This is documented in the analysis metadata as `"internal_consistency_approach": "3-run median aggregation"`.
 
 **🧠 Synthesis Stage**: The `ProductionThinSynthesisPipeline` is invoked as a modular component. It performs statistical analysis, builds a knowledge index, and generates a comprehensive narrative report.
 

@@ -1,2 +1,0 @@
-{"log_type":"orchestrator","event_type":"manifest_run_mode_set","data":{"mode_type":"standard","statistical_prep":false,"resume_from_stats":false},"session_id":"20250910T194503Z_00daba01","timestamp":"2025-09-10T19:45:03.100889+00:00"}
-{"log_type":"orchestrator","event_type":"provenance_organization","data":{"run_dir":"/Volumes/code/discernus/projects/1a_caf_civic_character/runs/20250910T194503Z","artifacts_organized":24,"directory_structure":"academic_standard_v1.0"},"session_id":"20250910T194503Z_00daba01","timestamp":"2025-09-10T19:59:15.646947+00:00"}

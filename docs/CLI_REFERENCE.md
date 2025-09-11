@@ -65,25 +65,25 @@ discernus resume [EXPERIMENT_PATH] [OPTIONS]
 
 ### `discernus archive`
 
-Create archives of completed runs for publication and preservation.
+Create complete golden run archives for research transparency and publication.
 
 ```bash
 discernus archive RUN_DIRECTORY [OPTIONS]
 ```
 
 **Arguments:**
-- `RUN_DIRECTORY`: Path to completed run directory
+- `RUN_DIRECTORY`: Path to completed run directory (e.g., `projects/experiment/runs/20250127T143022Z`)
 
-**Archive Options:**
+**Options:**
 ```bash
---output PATH, -o PATH           # Save archive to specific location
---include-inputs                 # Include input materials (default: true)
---include-provenance             # Include consolidated provenance (default: true)
---include-docs                   # Include comprehensive documentation (default: true)
---include-session-logs           # Include complete session logs
---include-artifacts              # Include actual artifact content (not symlinks)
---create-statistical-package     # Create researcher-ready statistical package
+--output PATH, -o PATH    # Save archive to specific location
+--minimal                 # Create minimal archive (excludes logs and artifacts)
 ```
+
+**Default Behavior:**
+- ✅ **Always includes**: Input materials, consolidated provenance, comprehensive documentation, statistical package
+- ✅ **Includes by default**: Session logs, artifact content (unless `--minimal` used)
+- 📦 **Result**: Self-contained archive ready for peer review, replication research, and archival
 
 ## Run Mode Details
 
@@ -135,30 +135,20 @@ discernus resume projects/experiment
 
 ## Archive Examples
 
-### Basic Archive
+### Complete Archive (Default)
 ```bash
 discernus archive projects/experiment/runs/20250910T141608Z
 ```
-- Includes: Input materials, provenance data, documentation
-- Use case: Basic preservation and sharing
+- **Includes**: Input materials, provenance data, documentation, statistical package, session logs, artifacts
+- **Use case**: Publication, peer review, complete replication research
 
-### Complete Self-Contained Archive
+### Minimal Archive
 ```bash
-discernus archive projects/experiment/runs/20250910T141608Z \
-  --include-session-logs \
-  --include-artifacts \
-  --create-statistical-package
+discernus archive projects/experiment/runs/20250910T141608Z --minimal
 ```
-- Includes: Everything + session logs + actual artifact content + statistical package
-- Use case: Publication, long-term archival, complete replication
-
-### Statistical Package Only
-```bash
-discernus archive projects/experiment/runs/20250910T141608Z \
-  --create-statistical-package
-```
-- Includes: Researcher-ready data package with import scripts
-- Use case: Sharing data for external statistical analysis
+- **Includes**: Input materials, provenance data, documentation, statistical package
+- **Excludes**: Session logs, artifact content
+- **Use case**: Quick sharing, basic preservation, smaller file size
 
 ## Common Workflows
 
@@ -173,8 +163,8 @@ discernus run projects/experiment --analysis-only --no-auto-commit
 # Prepare data for R/Python/STATA analysis
 discernus run projects/experiment --statistical-prep
 
-# Create statistical package
-discernus archive projects/experiment/runs/LATEST_RUN --create-statistical-package
+# Create complete archive (includes statistical package by default)
+discernus archive projects/experiment/runs/LATEST_RUN
 ```
 
 ### Iterative Research
@@ -185,9 +175,8 @@ discernus run projects/experiment --statistical-prep
 # Later: complete with synthesis
 discernus resume projects/experiment
 
-# Archive final results
-discernus archive projects/experiment/runs/LATEST_RUN \
-  --include-session-logs --include-artifacts
+# Archive final results (complete archive by default)
+discernus archive projects/experiment/runs/LATEST_RUN
 ```
 
 ### Publication Preparation
@@ -197,9 +186,6 @@ discernus run projects/experiment
 
 # Create publication-ready archive
 discernus archive projects/experiment/runs/LATEST_RUN \
-  --include-session-logs \
-  --include-artifacts \
-  --create-statistical-package \
   --output publication_materials/
 ```
 

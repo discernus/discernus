@@ -1,0 +1,131 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "civic_analysis_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Applied three independent analytical approaches with median aggregation",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "DOCUMENT_ID_PLACEHOLDER",
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimensional_scores": {
+        "tribalism": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.9
+        },
+        "dignity": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "manipulation": {
+          "raw_score": 0.5,
+          "salience": 0.4,
+          "confidence": 0.9
+        },
+        "truth": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "resentment": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "justice": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "fear": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "hope": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "fantasy": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.9
+        },
+        "pragmatism": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribalism",
+          "quote_text": "judging the president, the leader of my own party",
+          "confidence": 0.9,
+          "context_type": "explicit_acknowledgment"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "The Constitution is at the foundation of our Republic's success, and we each strive not to lose sight of our promise to defend it.",
+          "confidence": 0.9,
+          "context_type": "foundational_principle"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "The president\u2019s insistence that they be investigated by the Ukrainians is hard to explain other than as a political pursuit.",
+          "confidence": 0.9,
+          "context_type": "implied_motive"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "As a senator-juror, I swore an oath before God to exercise impartial justice.",
+          "confidence": 0.9,
+          "context_type": "direct_assertion"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "corrupting an election to keep oneself in office is perhaps the most abusive and destructive violation of one's oath of office that I can imagine.",
+          "confidence": 0.9,
+          "context_type": "moral_condemnation"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "exercise impartial justice.",
+          "confidence": 0.9,
+          "context_type": "direct_assertion"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "Were I to ignore the evidence that has been presented and disregard what I believe my oath and the Constitution demands of me for the sake of a partisan end, it would, I fear, expose my character to history's rebuke and the censure of my own conscience.",
+          "confidence": 0.9,
+          "context_type": "personal_consequence"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "I will tell my children and their children that I did my duty to the best of my ability, believing that my country expected it of me.",
+          "confidence": 0.9,
+          "context_type": "aspirational_statement"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "",
+          "confidence": 0.9,
+          "context_type": "n/a"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "I acknowledge that my verdict will not remove the president from office.",
+          "confidence": 0.9,
+          "context_type": "realistic_assessment"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

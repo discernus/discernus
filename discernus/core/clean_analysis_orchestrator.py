@@ -22,6 +22,10 @@ THIN Principles:
 - Focus on what we actually need
 """
 
+import os
+# Disable huggingface tokenizers parallelism warning before any imports
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
 import yaml
 import hashlib
 from datetime import datetime, timezone
@@ -73,7 +77,7 @@ class CleanAnalysisOrchestrator:
     def __init__(self, experiment_path: Path, progress_manager=None, 
                  analysis_model: str = "vertex_ai/gemini-2.5-flash",
                  synthesis_model: str = "vertex_ai/gemini-2.5-pro", 
-                 validation_model: str = "vertex_ai/gemini-2.5-flash-lite",
+                 validation_model: str = "vertex_ai/gemini-2.5-pro",
                  derived_metrics_model: str = "vertex_ai/gemini-2.5-pro",
                  dry_run: bool = False,
                  skip_validation: bool = False,
@@ -81,7 +85,6 @@ class CleanAnalysisOrchestrator:
                  statistical_prep: bool = False,
                  skip_synthesis: bool = False,
                  resume_from_stats: bool = False,
-                 ensemble_runs: Optional[int] = None,
                  auto_commit: bool = True,
                  verbosity: str = "normal"):
         """Initialize clean analysis orchestrator."""
@@ -98,7 +101,6 @@ class CleanAnalysisOrchestrator:
         self.statistical_prep = statistical_prep
         self.skip_synthesis = skip_synthesis
         self.resume_from_stats = resume_from_stats
-        self.ensemble_runs = ensemble_runs
         self.auto_commit = auto_commit
         self.verbosity = verbosity
 
@@ -169,9 +171,11 @@ class CleanAnalysisOrchestrator:
         start_time = datetime.now(timezone.utc)
         
         try:
+            self._log_progress("🔧 DEBUG: Starting run_experiment method")
             # Initialize infrastructure
             audit_logger = self._initialize_infrastructure(run_id)
             log_experiment_start(self.security.experiment_name, run_id)
+            self._log_progress("🔧 DEBUG: Infrastructure initialized")
             
             # Handle resume from statistical preparation
             self._log_progress(f"🔍 Checking resume flag: {self.resume_from_stats} (type: {type(self.resume_from_stats)})")
@@ -190,7 +194,9 @@ class CleanAnalysisOrchestrator:
                     raise
             else:
                 self._log_progress("🔄 Resume flag is False, proceeding with normal flow...")
-            
+
+            self._log_progress("🔧 DEBUG: Entering main pipeline execution")
+            self._log_status("🔧 DEBUG: About to start main pipeline")
             self._log_progress("🚀 Starting clean analysis pipeline...")
             
             # Phase 1: Load specifications
@@ -413,8 +419,10 @@ class CleanAnalysisOrchestrator:
                 
                 # Save statistical results
                 if statistical_results.get('stats_hash'):
+                    metadata_dir = results_dir / "metadata"
+                    metadata_dir.mkdir(exist_ok=True)
                     stats_content = self.artifact_storage.get_artifact(statistical_results['stats_hash'])
-                    stats_file = results_dir / "statistical_results.json"
+                    stats_file = metadata_dir / "statistical_results.json"
                     with open(stats_file, 'wb') as f:
                         f.write(stats_content)
                 
@@ -431,7 +439,7 @@ class CleanAnalysisOrchestrator:
                 }
                 
                 # Save results summary
-                summary_file = results_dir / "experiment_summary.json"
+                summary_file = metadata_dir / "experiment_summary.json"
                 with open(summary_file, 'w', encoding='utf-8') as f:
                     json.dump(results_summary, f, indent=2)
                 
@@ -509,30 +517,35 @@ class CleanAnalysisOrchestrator:
             # Corpus index service debug removed (QA agents disabled)
             
             try:
-                assets = self._run_synthesis(self.synthesis_model, self.analysis_model, audit_logger, statistical_results, evidence_results)
+                synthesis_results = self._run_synthesis(self.synthesis_model, self.analysis_model, audit_logger, statistical_results, evidence_results, run_id)
                 self._log_status("Synthesis completed")
                 self._log_phase_timing("synthesis_phase", phase_start)
+                
+                # Extract assets from synthesis results
+                assets = synthesis_results.get("assets", {})
             except Exception as e:
                 # A failure in synthesis is a fatal error for the experiment.
                 self._log_progress(f"❌ FATAL: Synthesis phase failed: {str(e)}")
                 raise CleanAnalysisError(f"Synthesis phase failed with a fatal error: {str(e)}") from e
 
-            # Phase 11: Fact-checking validation (DISABLED - QA agents in penalty box)
-            self._log_progress("📝 Skipping fact-checking validation (QA agents disabled)")
-            fact_check_results = {"status": "skipped", "findings": []}
+            # Phase 11: Fact-checking validation (REMOVED - system deprecated)
+            self._log_progress("📝 Fact-checking system removed - skipping validation phase")
 
-            # Phase 12: Create results with publication readiness
+            # Phase 12: Create outputs with publication readiness
+            self._log_status("🔧 DEBUG: About to execute Phase 12 - Outputs creation")
             if self.progress_manager:
-                self.progress_manager.update_main_progress("Results creation")
+                self.progress_manager.update_main_progress("Outputs creation")
             phase_start = datetime.now(timezone.utc)
             try:
-                results_dir = self._create_clean_results_directory(run_id, statistical_results, assets, fact_check_results)
-                self._log_status(f"Results created: {results_dir}")
-                self._log_phase_timing("results_creation", phase_start)
+                self._log_status("🔧 DEBUG: Calling _create_clean_outputs_directory")
+                outputs_dir = self._create_clean_outputs_directory(run_id, statistical_results, assets)
+                self._log_status(f"Outputs created: {outputs_dir}")
+                self._log_phase_timing("outputs_creation", phase_start)
+                self._log_status("🔧 DEBUG: Phase 12 completed successfully")
             except Exception as e:
-                self._log_progress(f"⚠️ Results creation failed, attempting basic results: {str(e)}")
-                # Create basic results directory
-                results_dir = self._create_basic_results_directory(run_id)
+                self._log_progress(f"⚠️ Outputs creation failed, attempting basic outputs: {str(e)}")
+                # Create basic outputs directory
+                outputs_dir = self._create_basic_outputs_directory(run_id)
             
             # Phase 13: Create provenance organization
             if self.progress_manager:
@@ -568,6 +581,20 @@ class CleanAnalysisOrchestrator:
             # Log final performance summary including cache metrics
             self._log_final_performance_summary()
 
+            # Phase 16: Export CSV files for standard mode
+            self._log_progress("🔧 DEBUG: About to execute Phase 16 - CSV export")
+            if self.progress_manager:
+                self.progress_manager.update_main_progress("CSV export")
+            phase_start = datetime.now(timezone.utc)
+            try:
+                self._log_progress("🔧 DEBUG: Calling _export_standard_mode_csv")
+                csv_export_dir = self._export_standard_mode_csv(analysis_results, statistical_results, evidence_results, audit_logger, run_id)
+                self._log_status(f"CSV export completed: {csv_export_dir}")
+                self._log_phase_timing("csv_export", phase_start)
+                self._log_progress("🔧 DEBUG: Phase 16 completed successfully")
+            except Exception as e:
+                self._log_progress(f"⚠️ CSV export failed: {str(e)} - continuing without CSV files")
+
             # Finalize manifest if it exists
             if self.manifest:
                 try:
@@ -577,7 +604,7 @@ class CleanAnalysisOrchestrator:
 
             return {
                 "run_id": run_id,
-                "results_directory": str(results_dir),
+                "results_directory": str(outputs_dir),
                 "analysis_documents": len(analysis_results),
                 "status": "completed",
                 "warnings": self._get_warnings(),
@@ -636,7 +663,6 @@ class CleanAnalysisOrchestrator:
                 statistical_prep=self.statistical_prep,
                 skip_synthesis=self.skip_synthesis,
                 resume_from_stats=self.resume_from_stats,
-                ensemble_runs=self.ensemble_runs,
                 dry_run=self.dry_run
             )
             
@@ -2189,7 +2215,7 @@ class CleanAnalysisOrchestrator:
             self._log_progress(f"❌ Evidence retrieval phase failed: {str(e)}")
             raise CleanAnalysisError(f"Evidence retrieval phase failed: {str(e)}")
 
-    def _run_synthesis(self, synthesis_model: str, analysis_model: str, audit_logger: AuditLogger, statistical_results: Dict[str, Any], evidence_results: Dict[str, Any] = None) -> Dict[str, Any]:
+    def _run_synthesis(self, synthesis_model: str, analysis_model: str, audit_logger: AuditLogger, statistical_results: Dict[str, Any], evidence_results: Dict[str, Any] = None, run_id: str = None) -> Dict[str, Any]:
         """Run synthesis using SynthesisPromptAssembler and UnifiedSynthesisAgent."""
         self._log_progress("📝 Starting synthesis phase...")
         
@@ -2280,7 +2306,8 @@ class CleanAnalysisOrchestrator:
                 'artifact_storage': self.artifact_storage,
                 'derived_metrics_results': getattr(self, '_derived_metrics_results', {}),
                 'analysis_results': getattr(self, '_analysis_results', []),
-                'corpus_manifest_path': Path(self.experiment_path / "corpus.md") if (self.experiment_path / "corpus.md").exists() else None
+                'corpus_manifest_path': Path(self.experiment_path / "corpus.md") if (self.experiment_path / "corpus.md").exists() else None,
+                'run_id': run_id
             }
             
             assets_dict = synthesis_agent.generate_final_report(assets=assets, artifact_storage=self.artifact_storage)
@@ -2344,7 +2371,10 @@ class CleanAnalysisOrchestrator:
                 "status": "completed",
                 "report_hash": synthesis_hash,
                 "report_length": len(final_report),
-                "assets": final_report, # Pass the string, not the dict
+                "assets": {
+                    "report_hash": synthesis_hash,
+                    "final_report": final_report
+                }
             }
             
         except Exception as e:
@@ -2710,7 +2740,7 @@ class CleanAnalysisOrchestrator:
         
         return "\n".join(evidence_lines)
     
-    def _create_clean_results_directory(self, run_id: str, statistical_results: Dict[str, Any], assets: Dict[str, Any], fact_check_results: Dict[str, Any]) -> Path:
+    def _create_clean_results_directory(self, run_id: str, statistical_results: Dict[str, Any], assets: Dict[str, Any]) -> Path:
         """Create results directory with publication readiness features."""
         # Create run directory structure
         run_dir = self.experiment_path / "runs" / run_id
@@ -2738,24 +2768,13 @@ class CleanAnalysisOrchestrator:
             report_content = self.artifact_storage.get_artifact(assets['report_hash'])
             report_file = results_dir / "final_report.md"
             
-            # Apply fact-checking results if available
-            if fact_check_results.get('status') == 'completed' and fact_check_results.get('findings'):
-                annotated_report = self._apply_fact_checking_to_report(report_content.decode('utf-8'), fact_check_results)
-                with open(report_file, 'w', encoding='utf-8') as f:
-                    f.write(annotated_report)
-                self._log_progress("📝 Annotated final report saved to results")
-            else:
-                with open(report_file, 'wb') as f:
-                    f.write(report_content)
-                self._log_progress("📝 Final report saved to results")
-        
-        # Save fact-checking results
-        fact_check_file = results_dir / "fact_check_results.json"
-        with open(fact_check_file, 'w') as f:
-            json.dump(fact_check_results, f, indent=2)
+            # Save final report (fact-checking system removed)
+            with open(report_file, 'wb') as f:
+                f.write(report_content)
+            self._log_progress("📝 Final report saved to results")
         
         # Save synthesis metadata
-        synthesis_file = results_dir / "assetss.json"
+        synthesis_file = results_dir / "assets.json"
         with open(synthesis_file, 'w') as f:
             # Remove large content to keep metadata file clean
             clean_synthesis = {k: v for k, v in assets.items() if k != 'assets'}
@@ -2770,7 +2789,7 @@ class CleanAnalysisOrchestrator:
             "completion_time": datetime.now(timezone.utc).isoformat(),
             "artifacts": {
                 "statistical_results.json": "Statistical analysis results",
-                "assetss.json": "Synthesis results",
+                "assets.json": "Synthesis results",
                 "corpus/": "Source documents for verification",
                 "evidence/": "Evidence database for quote verification",
                 "metadata/": "Source metadata for context verification"
@@ -2806,7 +2825,7 @@ class CleanAnalysisOrchestrator:
             json.dump({"error": "Statistical analysis failed", "status": "failed"}, f, indent=2)
         
         # Create a placeholder for synthesis results
-        synthesis_file = results_dir / "assetss.json"
+        synthesis_file = results_dir / "assets.json"
         with open(synthesis_file, 'w') as f:
             json.dump({"error": "Synthesis failed", "status": "failed"}, f, indent=2)
         
@@ -3468,7 +3487,7 @@ class CleanAnalysisOrchestrator:
         
         return "\n".join(evidence_lines)
     
-    def _create_clean_results_directory(self, run_id: str, statistical_results: Dict[str, Any], assets: Dict[str, Any], fact_check_results: Dict[str, Any]) -> Path:
+    def _create_clean_results_directory(self, run_id: str, statistical_results: Dict[str, Any], assets: Dict[str, Any]) -> Path:
         """Create results directory with publication readiness features."""
         # Create run directory structure
         run_dir = self.experiment_path / "runs" / run_id
@@ -3496,24 +3515,13 @@ class CleanAnalysisOrchestrator:
             report_content = self.artifact_storage.get_artifact(assets['report_hash'])
             report_file = results_dir / "final_report.md"
             
-            # Apply fact-checking results if available
-            if fact_check_results.get('status') == 'completed' and fact_check_results.get('findings'):
-                annotated_report = self._apply_fact_checking_to_report(report_content.decode('utf-8'), fact_check_results)
-                with open(report_file, 'w', encoding='utf-8') as f:
-                    f.write(annotated_report)
-                self._log_progress("📝 Annotated final report saved to results")
-            else:
-                with open(report_file, 'wb') as f:
-                    f.write(report_content)
-                self._log_progress("📝 Final report saved to results")
-        
-        # Save fact-checking results
-        fact_check_file = results_dir / "fact_check_results.json"
-        with open(fact_check_file, 'w') as f:
-            json.dump(fact_check_results, f, indent=2)
+            # Save final report (fact-checking system removed)
+            with open(report_file, 'wb') as f:
+                f.write(report_content)
+            self._log_progress("📝 Final report saved to results")
         
         # Save synthesis metadata
-        synthesis_file = results_dir / "assetss.json"
+        synthesis_file = results_dir / "assets.json"
         with open(synthesis_file, 'w') as f:
             # Remove large content to keep metadata file clean
             clean_synthesis = {k: v for k, v in assets.items() if k != 'assets'}
@@ -3528,7 +3536,7 @@ class CleanAnalysisOrchestrator:
             "completion_time": datetime.now(timezone.utc).isoformat(),
             "artifacts": {
                 "statistical_results.json": "Statistical analysis results",
-                "assetss.json": "Synthesis results",
+                "assets.json": "Synthesis results",
                 "corpus/": "Source documents for verification",
                 "evidence/": "Evidence database for quote verification",
                 "metadata/": "Source metadata for context verification"
@@ -3564,7 +3572,7 @@ class CleanAnalysisOrchestrator:
             json.dump({"error": "Statistical analysis failed", "status": "failed"}, f, indent=2)
         
         # Create a placeholder for synthesis results
-        synthesis_file = results_dir / "assetss.json"
+        synthesis_file = results_dir / "assets.json"
         with open(synthesis_file, 'w') as f:
             json.dump({"error": "Synthesis failed", "status": "failed"}, f, indent=2)
         
@@ -4020,6 +4028,59 @@ class CleanAnalysisOrchestrator:
             # In a stricter future version, this might raise an exception.
             return None
 
+    def _export_standard_mode_csv(self, analysis_results: List[Dict[str, Any]], statistical_results: Dict[str, Any], evidence_results: Dict[str, Any], audit_logger: AuditLogger, run_id: str) -> Path:
+        """Export CSV files for standard mode (analysis + synthesis + CSV export)."""
+        self._log_progress("📊 Exporting standard mode CSV files...")
+        
+        # Create data directory
+        run_dir = self.experiment_path / "runs" / run_id
+        data_dir = run_dir / "data"
+        data_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Export CSV files using CSVExportAgent
+        try:
+            csv_agent = CSVExportAgent(audit_logger=audit_logger)
+            
+            # Export options for standard mode
+            export_options = ExportOptions(
+                include_derived_metrics=True,
+                include_evidence=True,
+                include_metadata=True,
+                include_statistical_results=True
+            )
+            
+            # Get required hashes from statistical_results and evidence_results
+            scores_hash = statistical_results.get('raw_analysis_data_hash', '')
+            evidence_hash = evidence_results.get('evidence_artifact_hash', '') if evidence_results else ''
+            
+            # Get framework and corpus config
+            framework_config = self.config.get('framework_config', {})
+            corpus_manifest = self.config.get('corpus_manifest', {})
+            
+            # Export CSV files using the mid-point data method (designed for analysis results)
+            result = csv_agent.export_mid_point_data(
+                scores_hash=scores_hash,
+                evidence_hash=evidence_hash,
+                framework_config=framework_config,
+                corpus_manifest=corpus_manifest,
+                export_path=str(data_dir),
+                export_options=export_options
+            )
+            
+            if result.success:
+                self._log_progress(f"✅ Standard mode CSV export completed: {data_dir}")
+                
+                # Create statistical package for standard mode
+                self._create_statistical_package(data_dir, run_id)
+                
+                return data_dir
+            else:
+                raise CleanAnalysisError(f"CSV export failed: {result.error_message}")
+            
+        except Exception as e:
+            self._log_progress(f"❌ CSV export failed: {str(e)}")
+            raise CleanAnalysisError(f"CSV export failed: {str(e)}")
+
     def _export_analysis_only_csv(self, analysis_results: List[Dict[str, Any]], audit_logger: AuditLogger, run_id: str) -> Path:
         """Export CSV files for analysis-only mode."""
         self._log_progress("📊 Exporting analysis-only CSV files...")
@@ -4317,7 +4378,8 @@ class CleanAnalysisOrchestrator:
                 self.analysis_model,
                 audit_logger, 
                 statistical_results,
-                evidence_results
+                evidence_results,
+                run_id
             )
             
             if synthesis_results:
@@ -4332,11 +4394,8 @@ class CleanAnalysisOrchestrator:
                         'stats_hash': statistical_results.get('stats_hash')
                     }
                     
-                    # Create fact-check results (skipped in resume mode)
-                    fact_check_results = {"status": "skipped", "findings": []}
-                    
-                    # Create clean results directory
-                    results_dir = self._create_clean_results_directory(run_id, statistical_results, assets, fact_check_results)
+                    # Create clean results directory (fact-checking system removed)
+                    results_dir = self._create_clean_results_directory(run_id, statistical_results, assets)
                     self._log_progress(f"📁 Results directory created: {results_dir}")
                     
                 except Exception as e:
@@ -4685,3 +4744,337 @@ class CleanAnalysisOrchestrator:
             return f"Resume from stats: {experiment_name}"
         else:
             return f"Complete run: {experiment_name}"
+    
+    def _create_clean_outputs_directory(self, run_id: str, statistical_results: Dict[str, Any], assets: Dict[str, Any]) -> Path:
+        """Create outputs directory with publication readiness features."""
+        # Create run directory structure
+        run_dir = self.experiment_path / "runs" / run_id
+        outputs_dir = run_dir / "outputs"
+        outputs_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Copy corpus documents (CRIT-001)
+        self._copy_corpus_documents_to_outputs(outputs_dir)
+        
+        # Copy evidence database (CRIT-002)
+        self._copy_evidence_database_to_outputs(outputs_dir)
+        
+        # Copy source metadata (CRIT-003)
+        self._copy_source_metadata_to_outputs(outputs_dir)
+        
+        # Save statistical results
+        metadata_dir = outputs_dir / "metadata"
+        metadata_dir.mkdir(exist_ok=True)
+        stats_file = metadata_dir / "statistical_results.json"
+        with open(stats_file, 'w') as f:
+            json.dump(statistical_results, f, indent=2)
+        
+        # Save final report
+        if 'report_hash' in assets:
+            report_content = self.artifact_storage.get_artifact(assets['report_hash'])
+            report_file = outputs_dir / "final_report.md"
+            
+            # Save final report (fact-checking system removed)
+            with open(report_file, 'wb') as f:
+                f.write(report_content)
+            self._log_progress("📝 Final report saved to outputs")
+        
+        # Save synthesis metadata
+        synthesis_file = metadata_dir / "assets.json"  # Fixed typo
+        with open(synthesis_file, 'w') as f:
+            # Remove large content to keep metadata file clean
+            clean_synthesis = {k: v for k, v in assets.items() if k != 'assets'}
+            json.dump(clean_synthesis, f, indent=2)
+        
+        # Create experiment summary
+        summary = {
+            "experiment_name": self.security.experiment_name,
+            "run_id": run_id,
+            "framework": self.config.get("framework", "unknown"),
+            "corpus": self.config.get("corpus", "unknown"),
+            "completion_time": datetime.now(timezone.utc).isoformat(),
+            "artifacts": {
+                "metadata/statistical_results.json": "Statistical analysis results",
+                "metadata/assets.json": "Synthesis results",
+                "corpus/": "Source documents for verification",
+                "evidence/": "Evidence database for quote verification",
+                "metadata/": "Source metadata for context verification"
+            }
+        }
+        
+        summary_file = metadata_dir / "experiment_summary.json"
+        with open(summary_file, 'w') as f:
+            json.dump(summary, f, indent=2)
+        
+        return outputs_dir
+    
+    def _create_basic_outputs_directory(self, run_id: str) -> Path:
+        """Create a basic outputs directory in case of failure."""
+        self._log_progress(f"⚠️ Creating basic outputs directory for run {run_id}")
+        run_dir = self.experiment_path / "runs" / run_id
+        outputs_dir = run_dir / "outputs"
+        outputs_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Create basic summary
+        summary = {
+            "experiment_name": self.security.experiment_name,
+            "run_id": run_id,
+            "status": "basic_outputs_created",
+            "completion_time": datetime.now(timezone.utc).isoformat()
+        }
+        
+        summary_file = outputs_dir / "experiment_summary.json"
+        with open(summary_file, 'w') as f:
+            json.dump(summary, f, indent=2)
+        
+        return outputs_dir
+
+    def _copy_corpus_documents_to_outputs(self, outputs_dir: Path) -> None:
+        """Copy corpus documents to outputs directory for source verification."""
+        try:
+            corpus_outputs_dir = outputs_dir / "corpus"
+            corpus_outputs_dir.mkdir(exist_ok=True)
+            
+            corpus_documents = self._load_corpus_documents()
+            corpus_dir = self.experiment_path / "corpus"
+            documents_copied = 0
+            
+            for doc_info in corpus_documents:
+                filename = doc_info.get("filename")
+                if not filename:
+                    continue
+                
+                source_file = corpus_dir / filename
+                if source_file.exists():
+                    target_file = corpus_outputs_dir / filename
+                    shutil.copy2(str(source_file), str(target_file))
+                    documents_copied += 1
+            
+            self._log_progress(f"📄 Copied {documents_copied} corpus documents to outputs")
+            
+        except Exception as e:
+            self._log_progress(f"⚠️ Failed to copy corpus documents to outputs: {str(e)}")
+    
+    def _copy_evidence_database_to_outputs(self, outputs_dir: Path) -> None:
+        """Copy evidence database to outputs directory."""
+        try:
+            evidence_outputs_dir = outputs_dir / "evidence"
+            evidence_outputs_dir.mkdir(exist_ok=True)
+            
+            # Find evidence database in artifacts
+            evidence_database_found = False
+            for artifact_hash, artifact_info in self.artifact_storage.registry.items():
+                metadata = artifact_info.get("metadata", {})
+                if metadata.get("artifact_type", "").startswith("evidence_v6"):
+                    evidence_content = self.artifact_storage.get_artifact(artifact_hash)
+                    evidence_file = evidence_outputs_dir / "evidence_database.json"
+                    with open(evidence_file, "wb") as f:
+                        f.write(evidence_content)
+                    evidence_database_found = True
+                    break
+            
+            if evidence_database_found:
+                self._log_progress("📊 Evidence database copied to outputs")
+            else:
+                self._log_progress("⚠️ No evidence database found to copy")
+                
+        except Exception as e:
+            self._log_progress(f"⚠️ Failed to copy evidence database to outputs: {str(e)}")
+    
+    def _copy_source_metadata_to_outputs(self, outputs_dir: Path) -> None:
+        """Copy source metadata to outputs directory."""
+        try:
+            metadata_outputs_dir = outputs_dir / "metadata"
+            metadata_outputs_dir.mkdir(exist_ok=True)
+            
+            # Create basic source metadata
+            source_metadata = {
+                "experiment_name": self.security.experiment_name,
+                "framework": self.config.get("framework", "unknown"),
+                "corpus": self.config.get("corpus", "unknown"),
+                "run_timestamp": datetime.now(timezone.utc).isoformat(),
+                "total_documents": len(self._load_corpus_documents())
+            }
+            
+            metadata_file = metadata_outputs_dir / "source_metadata.json"
+            with open(metadata_file, "w") as f:
+                json.dump(source_metadata, f, indent=2)
+            
+            self._log_progress("📋 Source metadata copied to outputs")
+            
+        except Exception as e:
+            self._log_progress(f"⚠️ Failed to copy source metadata to outputs: {str(e)}")
+    
+    def _create_statistical_package(self, data_dir: Path, run_id: str) -> None:
+        """Create statistical package directory with researcher-ready data package."""
+        try:
+            self._log_progress("📦 Creating statistical package...")
+            
+            # Create statistical package directory
+            run_dir = self.experiment_path / "runs" / run_id
+            stats_package_dir = run_dir / "statistical_package"
+            stats_package_dir.mkdir(parents=True, exist_ok=True)
+            
+            # Copy main dataset
+            scores_file = data_dir / "scores.csv"
+            if scores_file.exists():
+                shutil.copy2(str(scores_file), str(stats_package_dir / "discernus_data.csv"))
+            
+            # Copy evidence file
+            evidence_file = data_dir / "evidence.csv"
+            if evidence_file.exists():
+                shutil.copy2(str(evidence_file), str(stats_package_dir / "full_evidence.csv"))
+            
+            # Create variable codebook
+            self._create_variable_codebook(stats_package_dir)
+            
+            # Create README
+            self._create_statistical_package_readme(stats_package_dir)
+            
+            # Create import scripts
+            self._create_import_scripts(stats_package_dir)
+            
+            self._log_progress(f"✅ Statistical package created: {stats_package_dir}")
+            
+        except Exception as e:
+            self._log_progress(f"⚠️ Failed to create statistical package: {str(e)}")
+    
+    def _create_variable_codebook(self, stats_package_dir: Path) -> None:
+        """Create variable codebook with column definitions."""
+        try:
+            codebook_file = stats_package_dir / "variable_codebook.csv"
+            
+            # Basic codebook structure
+            codebook_data = [
+                ["variable_name", "description", "data_type", "value_range", "notes"],
+                ["document_id", "Unique identifier for each document", "string", "alphanumeric", "Primary key"],
+                ["document_name", "Human-readable document name", "string", "text", "Source document identifier"],
+                ["dimension_*", "Framework dimension scores", "float", "0.0-1.0", "Normalized scores for each framework dimension"],
+                ["confidence_*", "Confidence scores for dimensions", "float", "0.0-1.0", "LLM confidence in scoring"],
+                ["evidence_count", "Number of supporting evidence quotes", "integer", "0+", "Count of evidence quotes found"],
+                ["analysis_timestamp", "When analysis was performed", "datetime", "ISO format", "Analysis completion time"]
+            ]
+            
+            with open(codebook_file, 'w', newline='', encoding='utf-8') as f:
+                import csv
+                writer = csv.writer(f)
+                writer.writerows(codebook_data)
+                
+        except Exception as e:
+            self._log_progress(f"⚠️ Failed to create variable codebook: {str(e)}")
+    
+    def _create_statistical_package_readme(self, stats_package_dir: Path) -> None:
+        """Create README for statistical package."""
+        try:
+            readme_file = stats_package_dir / "README.txt"
+            
+            readme_content = f"""Statistical Package for {self.security.experiment_name}
+Generated by Discernus on {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')}
+
+This package contains analysis-ready data for statistical analysis.
+
+FILES:
+- discernus_data.csv: Main dataset with scores and metadata
+- full_evidence.csv: Complete evidence quotes supporting the analysis
+- variable_codebook.csv: Column definitions and data dictionary
+- import_scripts/: Tool-specific import scripts
+
+USAGE:
+1. Load discernus_data.csv into your preferred statistical tool
+2. Review variable_codebook.csv for column definitions
+3. Use import_scripts/ for automated data loading
+4. Perform your own statistical analysis and interpretation
+
+CITATION:
+Text analysis performed using Discernus; statistical analysis by [your method]
+
+For questions about the text analysis methodology, refer to the complete
+provenance documentation in the parent directory.
+"""
+            
+            with open(readme_file, 'w', encoding='utf-8') as f:
+                f.write(readme_content)
+                
+        except Exception as e:
+            self._log_progress(f"⚠️ Failed to create statistical package README: {str(e)}")
+    
+    def _create_import_scripts(self, stats_package_dir: Path) -> None:
+        """Create import scripts for common statistical tools."""
+        try:
+            scripts_dir = stats_package_dir / "import_scripts"
+            scripts_dir.mkdir(exist_ok=True)
+            
+            # R script
+            r_script = scripts_dir / "import_r.R"
+            with open(r_script, 'w') as f:
+                f.write("""# R Import Script for Discernus Data
+# Load the main dataset
+data <- read.csv("discernus_data.csv", stringsAsFactors = FALSE)
+
+# Load evidence data
+evidence <- read.csv("full_evidence.csv", stringsAsFactors = FALSE)
+
+# Load variable codebook
+codebook <- read.csv("variable_codebook.csv", stringsAsFactors = FALSE)
+
+# Basic data exploration
+str(data)
+summary(data)
+
+# Check for missing values
+sapply(data, function(x) sum(is.na(x)))
+""")
+            
+            # SPSS script
+            spss_script = scripts_dir / "import_spss.sps"
+            with open(spss_script, 'w') as f:
+                f.write("""* SPSS Import Script for Discernus Data
+GET DATA
+  /TYPE=TXT
+  /FILE="discernus_data.csv"
+  /DELCASE=LINE
+  /DELIMITERS=","
+  /ARRANGEMENT=DELIMITED
+  /FIRSTCASE=2
+  /IMPORTCASE=ALL
+  /VARIABLES=
+  document_id A20
+  document_name A50
+  dimension_* F8.3
+  confidence_* F8.3
+  evidence_count F8.0
+  analysis_timestamp A30.
+
+* Basic descriptive statistics
+DESCRIPTIVES VARIABLES=ALL
+  /STATISTICS=MEAN STDDEV MIN MAX.
+
+* Check for missing values
+FREQUENCIES VARIABLES=ALL
+  /STATISTICS=ALL.
+""")
+            
+            # Stata script
+            stata_script = scripts_dir / "import_stata.do"
+            with open(stata_script, 'w') as f:
+                f.write("""* Stata Import Script for Discernus Data
+import delimited "discernus_data.csv", clear
+
+* Set variable labels
+label variable document_id "Document identifier"
+label variable document_name "Document name"
+label variable evidence_count "Number of evidence quotes"
+
+* Basic data exploration
+describe
+summarize
+
+* Check for missing values
+misstable summarize
+
+* Save as Stata format
+save "discernus_data.dta", replace
+""")
+            
+        except Exception as e:
+            self._log_progress(f"⚠️ Failed to create import scripts: {str(e)}")
+

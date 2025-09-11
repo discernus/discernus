@@ -50,12 +50,12 @@ class THINComplianceChecker:
                         'evidence_indexer_agent', 'classification_agent', 'csv_export_agent']
         
         # Core Processing Agents (Single major responsibility)
-        core_agents = ['enhanced_analysis_agent', 'intelligent_extractor_agent', 
-                      'evidence_quality_measurement']
+        core_agents = ['enhanced_analysis_agent', 'automated_derived_metrics', 
+                      'automated_statistical_analysis', 'automated_visualization']
         
         # Complex Integration Agents (Multiple data types, caching, RAG)
-        complex_agents = ['comprehensive_knowledge_curator', 'deprecated/txtai_evidence_curator',
-                         'evidence_curator', 'rag_enhanced_interpreter', 'experiment_coherence_agent']
+        complex_agents = ['evidence_retriever_agent', 'unified_synthesis_agent', 
+                         'experiment_coherence_agent', 'csv_export_agent']
         
         # Orchestration Agents (Pipeline coordination)
         orchestration_agents = ['pipeline', 'investigative_synthesis_agent']

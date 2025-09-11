@@ -182,7 +182,7 @@ class TestOrchestratorIntegrationControlled:
             # Verify other expected files exist
             assert (results_dir / "final_report.md").exists()
             assert (results_dir / "statistical_results.json").exists()
-            assert (results_dir / "assetss.json").exists()
+            assert (results_dir / "assets.json").exists()
 
     def test_orchestrator_interface_compliance(self, orchestrator_nano):
         """Test that orchestrator implements expected interface."""

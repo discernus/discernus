@@ -139,6 +139,34 @@
 
 ## Ensemble Analysis Approaches
 
+### [ANALYSIS-001] Parameterize Internal Ensemble Analysis Approach
+
+**Description**: Make the current internal 3-run median aggregation approach configurable, allowing researchers to adjust the number of analytical approaches and aggregation method.
+
+**Current Implementation**: Analysis agent uses hardcoded 3-run median aggregation with three fixed approaches:
+- Evidence-First Analysis
+- Context-Weighted Analysis  
+- Pattern-Based Analysis
+
+**Proposed Enhancement**:
+- Configurable number of analytical approaches (3-7 range)
+- Selectable aggregation methods (median, mean, weighted mean)
+- Customizable approach types via prompt templates
+- CLI parameter: `--internal-ensemble-runs` and `--aggregation-method`
+
+**Why Deferred**:
+- Current 3-run median approach works well and provides good self-consistency
+- Not critical for alpha release functionality
+- Requires prompt template refactoring and configuration system changes
+- Would increase complexity without clear evidence of need
+
+**Strategic Value**:
+- **Research Flexibility**: Allow researchers to tune ensemble approach for their specific needs
+- **Methodological Transparency**: Make internal consistency approach explicit and configurable
+- **Academic Standards**: Support different aggregation preferences for different research contexts
+
+**Timeline**: Post-alpha release (v11+)
+
 ### Multi-Model Independent Self-Consistency Analysis
 
 **Description**: Implement independent self-consistency using multiple different LLM models (Claude, GPT-4o, Gemini Pro) with confidence-weighted median aggregation

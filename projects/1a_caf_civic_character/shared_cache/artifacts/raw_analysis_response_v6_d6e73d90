@@ -1,0 +1,131 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "civic_analysis_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Applied three independent analytical approaches with median aggregation for robust scoring.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "ab348df3d593...",
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimensional_scores": {
+        "tribalism": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "dignity": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "manipulation": {
+          "raw_score": 0.3,
+          "salience": 0.2,
+          "confidence": 0.8
+        },
+        "truth": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "resentment": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "justice": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "fear": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "hope": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "fantasy": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "pragmatism": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribalism",
+          "quote_text": "It will not help the citizens of Mississippi, of Alabama, and Georgia, who are qualified to vote but lack a sixth-grade education.",
+          "confidence": 0.9,
+          "context_type": "group_specific_grievance"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "We will march with the spirit of love and with the spirit of dignity that we have shown here today.",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "It will not protect the hundreds and thousands of people who have been arrested upon trumped-up charges.",
+          "confidence": 0.8,
+          "context_type": "accusation_of_deception"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "Do you know that in Albany, Georgia, nine of our leaders have been indicted, not by Dixiecrats, but by the federal government for peaceful protest?",
+          "confidence": 0.9,
+          "context_type": "factual_assertion_challenge"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "We are tired! We are tired of being beaten by policemen. We are tired of seeing our people locked up in jails over and over again.",
+          "confidence": 0.9,
+          "context_type": "statement_of_grievance"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "If we do not get meaningful legislation out of this Congress, the time will come when we will not confine our marching to Washington.",
+          "confidence": 0.9,
+          "context_type": "demand_for_equitable_change"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "What did the federal government do when Albany police deputies beat Attorney C.B. King and left him half-dead? What did the federal government do when local police officials kicked and assaulted the pregnant wife of Slatter King, and she lost her baby?",
+          "confidence": 0.9,
+          "context_type": "rhetorical_question_highlighting_threat"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "We will splinter the segregated South into a thousand pieces and put them together in the image of God and democracy.",
+          "confidence": 0.9,
+          "context_type": "vision_of_positive_future"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": ""
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "We need a bill that will provide for the homeless and starving people of this nation. We need a bill to ensure the equality of a maid who earns five dollars a week...We must have a good FEPC bill.",
+          "confidence": 0.9,
+          "context_type": "specific_policy_recommendation"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

@@ -23,7 +23,7 @@ class InputMaterialsConsolidator:
     
     def __init__(self, run_directory: Path):
         self.run_dir = run_directory
-        self.results_dir = run_directory / "results"
+        self.results_dir = run_directory / "outputs"
         self.experiment_path = run_directory.parent.parent  # Go up from runs/run_id to experiment root
         
     def consolidate_input_materials(self) -> Dict[str, Any]:

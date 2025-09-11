@@ -71,7 +71,7 @@ The tools in this directory enforce adherence to THIN (Thoughtful, Human-centric
 
 ✅ COMPLIANT AGENTS (10/12 = 83%)
 ❌ VIOLATIONS FOUND:
-  - comprehensive_knowledge_curator: Missing prompt.yaml (CRITICAL)
+  - evidence_retriever_agent: Has prompt.yaml (OK)
   - csv_export_agent: Inline prompt patterns (MEDIUM)
 
 📊 COMPLIANCE SCORE: 83%

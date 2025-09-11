@@ -19,7 +19,7 @@ from datetime import datetime
 from discernus.gateway.llm_gateway import LLMGateway
 from discernus.gateway.model_registry import ModelRegistry
 from discernus.core.audit_logger import AuditLogger
-from discernus.core.deprecated.parsing_utils import parse_llm_json_response
+import json
 from discernus.core.validation import ValidationIssue, ValidationResult
 
 
@@ -587,13 +587,8 @@ class ExperimentCoherenceAgent:
         Avoid complex JSON extraction - let the LLM return clean JSON.
         """
         try:
-            # THIN: Robust JSON parsing with markdown fallbacks
-            data = parse_llm_json_response(
-                response=response,
-                llm_gateway=self.llm_gateway,
-                model=self.model,
-                audit_logger=self.audit_logger
-            )
+            # THIN: Simple JSON parsing
+            data = json.loads(response)
             
             # Convert to ValidationResult with LLM intelligence
             issues = []

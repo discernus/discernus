@@ -1,0 +1,977 @@
+{
+  "metadata": {
+    "agent": "EvidenceRetriever",
+    "timestamp": "2025-09-10T22:38:22.010661",
+    "framework_hash": "c646faf38360f40ed12ef5c8d27d0fb02e418b150275088d0b4dd19021bede16",
+    "total_findings": 12,
+    "total_quotes": 57
+  },
+  "evidence_results": [
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Strong Negative Correlation (-0.94) between Tribalism and Dignity raw scores, confirming the framework's core theoretical opposition."
+      },
+      "queries_used": [
+        "quotes demonstrating high tribalism and low dignity, especially from Steve King or JD Vance",
+        "quotes demonstrating high dignity and low tribalism, especially from John McCain or Cory Booker",
+        "contrasting examples of exclusionary 'us vs. them' language versus inclusive 'shared humanity' language"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Our nation's history \u2013 bills and debates we've seen in this very body \u2013 we know our nation's history is scarred by many wretched injustices: slavery and the denial of universal suffrage, Jim Crow and segregation.",
+          "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+          "dimension": "resentment",
+          "confidence": 0.9,
+          "relevance_score": 0.5725433230400085,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+            "dimension": "resentment",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "You cannot deny justice to any American without it affecting us all.",
+          "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+          "dimension": "dignity",
+          "confidence": 0.9,
+          "relevance_score": 0.5530453324317932,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+            "dimension": "dignity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "It's another life loss to an, an illegal criminal alien who was unlawfully present in America, who had no business to be here,",
+          "document_name": "steve_king_2017_house_floor_738780d9.txt",
+          "dimension": "tribalism",
+          "confidence": 0.9,
+          "relevance_score": 0.4370468258857727,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor_738780d9.txt",
+            "dimension": "tribalism",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+          "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+          "dimension": "tribalism",
+          "confidence": 0.9,
+          "relevance_score": 0.2781621217727661,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+            "dimension": "tribalism",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We're doing that and the very, very basic and simple principle that American leaders should look out for Americans.",
+          "document_name": "jd_vance_2022_natcon_conference_516a3c9c.txt",
+          "dimension": "hope",
+          "confidence": 0.8,
+          "relevance_score": 0.2156861573457718,
+          "metadata": {
+            "document_name": "jd_vance_2022_natcon_conference_516a3c9c.txt",
+            "dimension": "hope",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 5
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Strong Positive Correlation (+0.94) between Tribalism and Fear raw scores, indicating that exclusionary in-group rhetoric is frequently paired with threat-focused language."
+      },
+      "queries_used": [
+        "quotes that combine 'us vs. them' framing with 'existential threat' language",
+        "examples of fear appeals used to reinforce in-group identity, particularly from populist speakers",
+        "rhetoric about threats to 'our way of life' from speakers with high tribalism scores"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Not making us safer, not making us stronger, in fact making us more vulnerable as a community.",
+          "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+          "dimension": "fear",
+          "confidence": 0.8,
+          "relevance_score": 0.41830718517303467,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+            "dimension": "fear",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy_261b893a.txt",
+          "dimension": "tribalism",
+          "confidence": 0.9,
+          "relevance_score": 0.40017610788345337,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy_261b893a.txt",
+            "dimension": "tribalism",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+          "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+          "dimension": "tribalism",
+          "confidence": 0.9,
+          "relevance_score": 0.37625429034233093,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+            "dimension": "tribalism",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The real threat to American democracy is that American voters keep on voting for less immigration and our politicians keep on rewarding us with more.",
+          "document_name": "jd_vance_2022_natcon_conference_516a3c9c.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.3601999282836914,
+          "metadata": {
+            "document_name": "jd_vance_2022_natcon_conference_516a3c9c.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 4
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Strong Positive Correlation (+0.92) between Manipulation and Resentment raw scores, suggesting a common rhetorical strategy of pairing grievance exploitation with misleading framing."
+      },
+      "queries_used": [
+        "quotes that simultaneously demonstrate 'grievance exploitation' and 'strategic distortion of information'",
+        "examples of 'blame-focused rhetoric' framed in a conspiratorial or misleading way",
+        "evidence from Steve King or Bernie Sanders that combines 'the system is rigged' themes with 'they're hiding the truth' implications"
+      ],
+      "quotes": [
+        {
+          "quote_text": "That's pretty clear in the Constitution.",
+          "document_name": "steve_king_2017_house_floor_738780d9.txt",
+          "dimension": "truth",
+          "confidence": 0.8,
+          "relevance_score": 0.49034541845321655,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor_738780d9.txt",
+            "dimension": "truth",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy_261b893a.txt",
+          "dimension": "tribalism",
+          "confidence": 0.9,
+          "relevance_score": 0.4673020839691162,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy_261b893a.txt",
+            "dimension": "tribalism",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Were I to ignore the evidence that has been presented and disregard what I believe my oath and the Constitution demands of me for the sake of a partisan end, it would, I fear, expose my character to history's rebuke and the censure of my own conscience.",
+          "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.3648364841938019,
+          "metadata": {
+            "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Today you have more concentration of ownership in America than we have ever had in the history of this country in sector after sector...",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy_261b893a.txt",
+          "dimension": "pragmatism",
+          "confidence": 0.7,
+          "relevance_score": 0.34642112255096436,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy_261b893a.txt",
+            "dimension": "pragmatism",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They'll throw out every label and judgment and cultural debate in the book to keep us distracted because the last thing they want us to realize is that the division that is actually hurting our country the most is how endless greed is costing the lives of everyone else.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+          "dimension": "manipulation",
+          "confidence": 0.9,
+          "relevance_score": 0.32826024293899536,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+            "dimension": "manipulation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The president\u2019s insistence that they be investigated by the Ukrainians is hard to explain other than as a political pursuit.",
+          "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+          "dimension": "manipulation",
+          "confidence": 0.9,
+          "relevance_score": 0.3118892312049866,
+          "metadata": {
+            "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+            "dimension": "manipulation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 6
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Significant difference in Tribalism raw scores between rhetorical styles (p=0.045), with Populist speakers (King, Vance, Sanders, AOC) scoring highest."
+      },
+      "queries_used": [
+        "high tribalism quotes from Steve King, JD Vance, or Bernie Sanders",
+        "low tribalism quotes from Institutional speakers like John McCain or Cory Booker",
+        "direct comparisons of 'in-group preference' rhetoric between populist and institutional speakers"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+          "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+          "dimension": "tribalism",
+          "confidence": 0.9,
+          "relevance_score": 0.5910414457321167,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+            "dimension": "tribalism",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our nation's history \u2013 bills and debates we've seen in this very body \u2013 we know our nation's history is scarred by many wretched injustices: slavery and the denial of universal suffrage, Jim Crow and segregation.",
+          "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+          "dimension": "resentment",
+          "confidence": 0.9,
+          "relevance_score": 0.5681500434875488,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+            "dimension": "resentment",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The same billionaires are taking a wrecking ball to our country and they derive their power from dividing working people apart. They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+          "dimension": "tribalism",
+          "confidence": 0.9,
+          "relevance_score": 0.44369614124298096,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+            "dimension": "tribalism",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy_261b893a.txt",
+          "dimension": "resentment",
+          "confidence": 0.9,
+          "relevance_score": 0.416743665933609,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy_261b893a.txt",
+            "dimension": "resentment",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Today you have more concentration of ownership in America than we have ever had in the history of this country in sector after sector...",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy_261b893a.txt",
+          "dimension": "pragmatism",
+          "confidence": 0.7,
+          "relevance_score": 0.41194018721580505,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy_261b893a.txt",
+            "dimension": "pragmatism",
+            "confidence": 0.7,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 5
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Archetypal High-Virtue Profile: John McCain has the highest Civic Character Index (0.76) and is classified as 'Authentic Virtue'."
+      },
+      "queries_used": [
+        "quotes from John McCain's concession speech demonstrating high dignity, truth, and hope",
+        "examples of McCain emphasizing 'universal human worth' and 'shared humanity'",
+        "evidence of John McCain showing 'constructive optimism' and 'pragmatism' in a concession context"
+      ],
+      "quotes": [
+        {
+          "quote_text": "The American people have spoken, and they have spoken clearly.",
+          "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+          "dimension": "truth",
+          "confidence": 0.9,
+          "relevance_score": 0.6525899171829224,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+            "dimension": "truth",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "It is natural tonight to feel some disappointment, but tomorrow we must move beyond it and work together to get our country moving again.",
+          "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+          "dimension": "resentment",
+          "confidence": 0.9,
+          "relevance_score": 0.6423678994178772,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+            "dimension": "resentment",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "though we have come a long way from the old injustices that once stained our nation's reputation and denied some Americans the full blessings of American citizenship",
+          "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+          "dimension": "justice",
+          "confidence": 0.9,
+          "relevance_score": 0.4809434413909912,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+            "dimension": "justice",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+          "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+          "dimension": "tribalism",
+          "confidence": 0.9,
+          "relevance_score": 0.47216710448265076,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+            "dimension": "tribalism",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 4
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Archetypal High-Vice Profile: Steve King has the lowest Civic Character Index (-0.62) and is classified as 'Strategic Pathology'."
+      },
+      "queries_used": [
+        "quotes from Steve King's speech demonstrating high tribalism, manipulation, and resentment",
+        "examples of Steve King using 'group supremacy claims' and 'blame-focused rhetoric'",
+        "evidence of Steve King's 'strategic pathology' through combined use of fear and resentment"
+      ],
+      "quotes": [
+        {
+          "quote_text": "costing thousands of lives in America.",
+          "document_name": "steve_king_2017_house_floor_738780d9.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.5340937376022339,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor_738780d9.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our nation's history \u2013 bills and debates we've seen in this very body \u2013 we know our nation's history is scarred by many wretched injustices: slavery and the denial of universal suffrage, Jim Crow and segregation.",
+          "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+          "dimension": "resentment",
+          "confidence": 0.9,
+          "relevance_score": 0.4870303273200989,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+            "dimension": "resentment",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "sad, sad story told by Laura Wilkerson yesterday",
+          "document_name": "steve_king_2017_house_floor_738780d9.txt",
+          "dimension": "resentment",
+          "confidence": 0.9,
+          "relevance_score": 0.461663156747818,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor_738780d9.txt",
+            "dimension": "resentment",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "That's pretty clear in the Constitution.",
+          "document_name": "steve_king_2017_house_floor_738780d9.txt",
+          "dimension": "truth",
+          "confidence": 0.8,
+          "relevance_score": 0.4242064952850342,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor_738780d9.txt",
+            "dimension": "truth",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 4
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "High Internal Consistency of the Vice Scale (Cronbach's \u03b1 = 0.91), indicating that vice dimensions co-occur reliably."
+      },
+      "queries_used": [
+        "quotes from JD Vance or Steve King that co-locate themes of tribalism, fear, and resentment",
+        "single sentences or short passages that contain markers for multiple vice dimensions (e.g., manipulation, fantasy)",
+        "evidence of a coherent 'vice-dominant' rhetorical pattern in a single speaker"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Our nation's history \u2013 bills and debates we've seen in this very body \u2013 we know our nation's history is scarred by many wretched injustices: slavery and the denial of universal suffrage, Jim Crow and segregation.",
+          "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+          "dimension": "resentment",
+          "confidence": 0.9,
+          "relevance_score": 0.4799400866031647,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+            "dimension": "resentment",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Not making us safer, not making us stronger, in fact making us more vulnerable as a community.",
+          "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+          "dimension": "fear",
+          "confidence": 0.8,
+          "relevance_score": 0.41584503650665283,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+            "dimension": "fear",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people have spoken, and they have spoken clearly.",
+          "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+          "dimension": "truth",
+          "confidence": 0.9,
+          "relevance_score": 0.313464492559433,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+            "dimension": "truth",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "corrupting an election to keep oneself in office is perhaps the most abusive and destructive violation of one's oath of office that I can imagine.",
+          "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+          "dimension": "resentment",
+          "confidence": 0.9,
+          "relevance_score": 0.21707609295845032,
+          "metadata": {
+            "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+            "dimension": "resentment",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Lord, wake me up with an idea on how to, how to preserve our Constitution,",
+          "document_name": "steve_king_2017_house_floor_738780d9.txt",
+          "dimension": "hope",
+          "confidence": 0.6,
+          "relevance_score": 0.16608308255672455,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor_738780d9.txt",
+            "dimension": "hope",
+            "confidence": 0.6,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "What did the federal government do when Albany police deputies beat Attorney C.B. King and left him half-dead? What did the federal government do when local police officials kicked and assaulted the pregnant wife of Slatter King, and she lost her baby?",
+          "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.16269753873348236,
+          "metadata": {
+            "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 6
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "High Internal Consistency of the Virtue Scale (Cronbach's \u03b1 = 0.93), indicating that virtue dimensions co-occur reliably."
+      },
+      "queries_used": [
+        "quotes from Cory Booker or John McCain that co-locate themes of dignity, justice, and hope",
+        "single sentences or short passages that contain markers for multiple virtue dimensions (e.g., truth, pragmatism)",
+        "evidence of a coherent 'virtue-dominant' rhetorical pattern in a single speaker"
+      ],
+      "quotes": [
+        {
+          "quote_text": "You cannot deny justice to any American without it affecting us all.",
+          "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+          "dimension": "dignity",
+          "confidence": 0.9,
+          "relevance_score": 0.5802943706512451,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+            "dimension": "dignity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our nation's history \u2013 bills and debates we've seen in this very body \u2013 we know our nation's history is scarred by many wretched injustices: slavery and the denial of universal suffrage, Jim Crow and segregation.",
+          "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+          "dimension": "resentment",
+          "confidence": 0.9,
+          "relevance_score": 0.537103533744812,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+            "dimension": "resentment",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The American people have spoken, and they have spoken clearly.",
+          "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+          "dimension": "truth",
+          "confidence": 0.9,
+          "relevance_score": 0.26416951417922974,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+            "dimension": "truth",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+          "dimension": "pragmatism",
+          "confidence": 0.9,
+          "relevance_score": 0.23991096019744873,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+            "dimension": "pragmatism",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "As a senator-juror, I swore an oath before God to exercise impartial justice.",
+          "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+          "dimension": "truth",
+          "confidence": 0.9,
+          "relevance_score": 0.2279137223958969,
+          "metadata": {
+            "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+            "dimension": "truth",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 5
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Contradictory Profile of Alexandria Ocasio-Cortez, classified as both 'Authentic Virtue' and 'Strategic Pathology' with a near-neutral Civic Character Index (0.01)."
+      },
+      "queries_used": [
+        "quotes from AOC that show high resentment and high hope simultaneously",
+        "examples of AOC combining strong 'dignity' appeals with strong 'tribalism' appeals",
+        "rhetoric from AOC that demonstrates 'incoherent messaging' by blending high-virtue and high-vice themes"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Our lives deserve dignity and our work deserves respect.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+          "dimension": "dignity",
+          "confidence": 0.9,
+          "relevance_score": 0.448289155960083,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+            "dimension": "dignity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "You cannot deny justice to any American without it affecting us all.",
+          "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+          "dimension": "dignity",
+          "confidence": 0.9,
+          "relevance_score": 0.3936293423175812,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+            "dimension": "dignity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+          "dimension": "resentment",
+          "confidence": 0.9,
+          "relevance_score": 0.39101386070251465,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+            "dimension": "resentment",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our nation's history \u2013 bills and debates we've seen in this very body \u2013 we know our nation's history is scarred by many wretched injustices: slavery and the denial of universal suffrage, Jim Crow and segregation.",
+          "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+          "dimension": "resentment",
+          "confidence": 0.9,
+          "relevance_score": 0.3804529309272766,
+          "metadata": {
+            "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+            "dimension": "resentment",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "They'll throw out every label and judgment and cultural debate in the book to keep us distracted because the last thing they want us to realize is that the division that is actually hurting our country the most is how endless greed is costing the lives of everyone else.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+          "dimension": "manipulation",
+          "confidence": 0.9,
+          "relevance_score": 0.27903324365615845,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+            "dimension": "manipulation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "corrupting an election to keep oneself in office is perhaps the most abusive and destructive violation of one's oath of office that I can imagine.",
+          "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+          "dimension": "resentment",
+          "confidence": 0.9,
+          "relevance_score": 0.27718067169189453,
+          "metadata": {
+            "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+            "dimension": "resentment",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 6
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Nuanced Tension in a High-Virtue Speaker: Mitt Romney has a positive Civic Character Index (0.30) but the highest 'truth_tension' score (0.25) in the dataset."
+      },
+      "queries_used": [
+        "quotes from Mitt Romney's impeachment speech that appeal to 'intellectual honesty' and 'factual accuracy'",
+        "quotes from Mitt Romney's speech that could be interpreted as 'strategic distortion' or 'misleading framing'",
+        "evidence where Romney uses factually correct statements in a way that implies manipulation or hidden deception"
+      ],
+      "quotes": [
+        {
+          "quote_text": "As a senator-juror, I swore an oath before God to exercise impartial justice.",
+          "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+          "dimension": "truth",
+          "confidence": 0.9,
+          "relevance_score": 0.5645205974578857,
+          "metadata": {
+            "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+            "dimension": "truth",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "The president\u2019s insistence that they be investigated by the Ukrainians is hard to explain other than as a political pursuit.",
+          "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+          "dimension": "manipulation",
+          "confidence": 0.9,
+          "relevance_score": 0.5249852538108826,
+          "metadata": {
+            "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+            "dimension": "manipulation",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "corrupting an election to keep oneself in office is perhaps the most abusive and destructive violation of one's oath of office that I can imagine.",
+          "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+          "dimension": "resentment",
+          "confidence": 0.9,
+          "relevance_score": 0.5028374195098877,
+          "metadata": {
+            "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+            "dimension": "resentment",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "exercise impartial justice.",
+          "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+          "dimension": "justice",
+          "confidence": 0.9,
+          "relevance_score": 0.4056590497493744,
+          "metadata": {
+            "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+            "dimension": "justice",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 4
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Populist Rhetorical Signature: The four populist speakers analyzed (King, Vance, Sanders, AOC) have the four highest average Resentment scores."
+      },
+      "queries_used": [
+        "quotes demonstrating 'grievance exploitation' or 'blame-focused rhetoric' from any populist speaker",
+        "examples of 'the system is rigged' framing from Bernie Sanders or AOC",
+        "evidence of blame-focused rhetoric from JD Vance or Steve King"
+      ],
+      "quotes": [
+        {
+          "quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+          "document_name": "bernie_sanders_2025_fighting_oligarchy_261b893a.txt",
+          "dimension": "resentment",
+          "confidence": 0.9,
+          "relevance_score": 0.516537070274353,
+          "metadata": {
+            "document_name": "bernie_sanders_2025_fighting_oligarchy_261b893a.txt",
+            "dimension": "resentment",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "costing thousands of lives in America.",
+          "document_name": "steve_king_2017_house_floor_738780d9.txt",
+          "dimension": "fear",
+          "confidence": 0.9,
+          "relevance_score": 0.40774527192115784,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor_738780d9.txt",
+            "dimension": "fear",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "That's pretty clear in the Constitution.",
+          "document_name": "steve_king_2017_house_floor_738780d9.txt",
+          "dimension": "truth",
+          "confidence": 0.8,
+          "relevance_score": 0.3969150185585022,
+          "metadata": {
+            "document_name": "steve_king_2017_house_floor_738780d9.txt",
+            "dimension": "truth",
+            "confidence": 0.8,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+          "dimension": "pragmatism",
+          "confidence": 0.9,
+          "relevance_score": 0.372880220413208,
+          "metadata": {
+            "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+            "dimension": "pragmatism",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 4
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Civil Rights Rhetorical Signature: John Lewis's speech shows a unique profile with high Resentment (0.8) and Justice (0.9), and high Tribalism (0.7) and Dignity (0.7), reflecting the dual nature of protest rhetoric."
+      },
+      "queries_used": [
+        "quotes from John Lewis that combine 'grievance' language with appeals to 'procedural fairness'",
+        "examples from John Lewis of using in-group identity ('our people') while also appealing to universal 'dignity'",
+        "evidence of John Lewis blending themes of resentment and justice in the March on Washington speech"
+      ],
+      "quotes": [
+        {
+          "quote_text": "We will march with the spirit of love and with the spirit of dignity that we have shown here today.",
+          "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+          "dimension": "dignity",
+          "confidence": 0.9,
+          "relevance_score": 0.6920710802078247,
+          "metadata": {
+            "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+            "dimension": "dignity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "If we do not get meaningful legislation out of this Congress, the time will come when we will not confine our marching to Washington.",
+          "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+          "dimension": "justice",
+          "confidence": 0.9,
+          "relevance_score": 0.6316772103309631,
+          "metadata": {
+            "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+            "dimension": "justice",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Our lives deserve dignity and our work deserves respect.",
+          "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+          "dimension": "dignity",
+          "confidence": 0.9,
+          "relevance_score": 0.4161456227302551,
+          "metadata": {
+            "document_name": "alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt",
+            "dimension": "dignity",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "We are tired! We are tired of being beaten by policemen. We are tired of seeing our people locked up in jails over and over again.",
+          "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+          "dimension": "resentment",
+          "confidence": 0.9,
+          "relevance_score": 0.394840806722641,
+          "metadata": {
+            "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+            "dimension": "resentment",
+            "confidence": 0.9,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 4
+    }
+  ]
+}

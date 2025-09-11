@@ -164,16 +164,35 @@ class CSVExportAgent:
         try:
             if self.artifact_storage:
                 artifact_content = self.artifact_storage.get_artifact(artifact_hash)
-                return json.loads(artifact_content.decode('utf-8'))
+                raw_response = artifact_content.decode('utf-8')
+            else:
+                # Use experiment-agnostic shared cache path discovery
+                shared_cache_path = Path(self.experiment_path) / "shared_cache" / "artifacts"
+                artifact_path = shared_cache_path / artifact_hash
+                if not artifact_path.exists():
+                    raise FileNotFoundError(f"Artifact not found: {artifact_hash}")
 
-            # Use experiment-agnostic shared cache path discovery
-            shared_cache_path = Path(self.experiment_path) / "shared_cache" / "artifacts"
-            artifact_path = shared_cache_path / artifact_hash
-            if not artifact_path.exists():
-                raise FileNotFoundError(f"Artifact not found: {artifact_hash}")
-
-            with open(artifact_path, 'rb') as f:
-                return json.loads(f.read().decode('utf-8'))
+                with open(artifact_path, 'rb') as f:
+                    raw_response = f.read().decode('utf-8')
+            
+            # Check if response contains JSON markers and extract if needed
+            if '<<<DISCERNUS_ANALYSIS_JSON_v6>>>' in raw_response:
+                start_marker = '<<<DISCERNUS_ANALYSIS_JSON_v6>>>'
+                end_marker = '<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
+                
+                start_idx = raw_response.find(start_marker)
+                end_idx = raw_response.find(end_marker)
+                
+                if start_idx != -1 and end_idx != -1:
+                    json_content = raw_response[start_idx + len(start_marker):end_idx].strip()
+                    return json.loads(json_content)
+                else:
+                    # Fallback to parsing entire response as JSON
+                    return json.loads(raw_response)
+            else:
+                # No markers, parse as direct JSON
+                return json.loads(raw_response)
+                
         except Exception as e:
             raise CSVExportError(f"Failed to load artifact {artifact_hash}: {str(e)}")
 
