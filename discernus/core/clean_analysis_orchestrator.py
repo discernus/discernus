@@ -499,6 +499,16 @@ class CleanAnalysisOrchestrator:
                 # Validate that evidence retrieval actually succeeded
                 if not evidence_results or evidence_results.get('status') in ['failed', 'error', 'no_evidence_available']:
                     raise CleanAnalysisError(f"Evidence retrieval failed with status: {evidence_results.get('status', 'unknown')}")
+                
+                # Phase 8.5: Generate CSV files (we have all the data we need now)
+                phase_start = datetime.now(timezone.utc)
+                self._log_progress("📊 Phase 8.5: CSV Export - Generating CSV files from in-memory data...")
+                try:
+                    csv_export_dir = self._generate_csv_files_direct(analysis_results, statistical_results, evidence_results, run_id)
+                    self._log_status(f"CSV export completed: {csv_export_dir}")
+                    self._log_phase_timing("csv_export", phase_start)
+                except Exception as e:
+                    self._log_progress(f"⚠️ CSV export failed: {str(e)} - continuing without CSV files")
                     
             except Exception as e:
                 # Evidence retrieval failure is FATAL - no fallback, no continuing
@@ -590,19 +600,7 @@ class CleanAnalysisOrchestrator:
             # Log final performance summary including cache metrics
             self._log_final_performance_summary()
 
-            # Phase 16: Export CSV files for standard mode
-            self._log_progress("🔧 DEBUG: About to execute Phase 16 - CSV export")
-            if self.progress_manager:
-                self.progress_manager.update_main_progress("CSV export")
-            phase_start = datetime.now(timezone.utc)
-            try:
-                self._log_progress("🔧 DEBUG: Calling _export_standard_mode_csv")
-                csv_export_dir = self._export_standard_mode_csv(analysis_results, statistical_results, evidence_results, audit_logger, run_id)
-                self._log_status(f"CSV export completed: {csv_export_dir}")
-                self._log_phase_timing("csv_export", phase_start)
-                self._log_progress("🔧 DEBUG: Phase 16 completed successfully")
-            except Exception as e:
-                self._log_progress(f"⚠️ CSV export failed: {str(e)} - continuing without CSV files")
+            # Phase 16: CSV export moved to Phase 8.5 (after evidence retrieval)
 
             # Finalize manifest if it exists
             if self.manifest:
@@ -4037,6 +4035,177 @@ class CleanAnalysisOrchestrator:
             # In a stricter future version, this might raise an exception.
             return None
 
+    def _generate_csv_files_direct(self, analysis_results: List[Dict[str, Any]], statistical_results: Dict[str, Any], evidence_results: Dict[str, Any], run_id: str) -> Path:
+        """Generate CSV files directly from in-memory data (no artifact loading)."""
+        self._log_progress("📊 Generating CSV files from in-memory data...")
+        
+        # Create data directory
+        run_dir = self.experiment_path / "runs" / run_id
+        data_dir = run_dir / "data"
+        data_dir.mkdir(parents=True, exist_ok=True)
+        
+        try:
+            # Generate scores.csv from analysis_results
+            self._generate_scores_csv(analysis_results, data_dir)
+            
+            # Generate evidence.csv from evidence_results
+            self._generate_evidence_csv(evidence_results, data_dir)
+            
+            # Generate metadata.csv from framework and corpus config
+            self._generate_metadata_csv(statistical_results, data_dir)
+            
+            self._log_progress(f"✅ CSV files generated: {data_dir}")
+            return data_dir
+            
+        except Exception as e:
+            self._log_progress(f"❌ CSV generation failed: {str(e)}")
+            raise CleanAnalysisError(f"CSV generation failed: {str(e)}")
+
+    def _generate_scores_csv(self, analysis_results: List[Dict[str, Any]], data_dir: Path) -> None:
+        """Generate scores.csv from analysis results."""
+        import csv
+        import json
+        
+        scores_file = data_dir / "scores.csv"
+        
+        # Extract all unique score dimensions from the actual analysis data
+        all_score_keys = set()
+        for result in analysis_results:
+            if 'analysis_result' in result:
+                analysis_result = result['analysis_result']
+                result_content = analysis_result.get('result_content', {})
+                raw_response = result_content.get('raw_analysis_response', '')
+                
+                # Parse the raw response to get the actual analysis data
+                if '<<<DISCERNUS_ANALYSIS_JSON_v6>>>' in raw_response:
+                    start_marker = '<<<DISCERNUS_ANALYSIS_JSON_v6>>>'
+                    end_marker = '<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
+                    start_idx = raw_response.find(start_marker)
+                    end_idx = raw_response.find(end_marker)
+                    
+                    if start_idx != -1 and end_idx != -1:
+                        json_content = raw_response[start_idx + len(start_marker):end_idx].strip()
+                        try:
+                            analysis_data = json.loads(json_content)
+                            document_analyses = analysis_data.get('document_analyses', [])
+                            for doc_analysis in document_analyses:
+                                dimensional_scores = doc_analysis.get('dimensional_scores', {})
+                                all_score_keys.update(dimensional_scores.keys())
+                        except json.JSONDecodeError:
+                            continue
+        
+        score_columns = sorted(list(all_score_keys))
+        headers = ['document_id', 'filename'] + score_columns + ['evidence_hash']
+        
+        with open(scores_file, 'w', newline='', encoding='utf-8') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow(headers)
+            
+            for result in analysis_results:
+                if 'analysis_result' in result:
+                    analysis_result = result['analysis_result']
+                    result_content = analysis_result.get('result_content', {})
+                    raw_response = result_content.get('raw_analysis_response', '')
+                    
+                    # Parse the raw response to get the actual analysis data
+                    dimensional_scores = {}
+                    if '<<<DISCERNUS_ANALYSIS_JSON_v6>>>' in raw_response:
+                        start_marker = '<<<DISCERNUS_ANALYSIS_JSON_v6>>>'
+                        end_marker = '<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
+                        start_idx = raw_response.find(start_marker)
+                        end_idx = raw_response.find(end_marker)
+                        
+                        if start_idx != -1 and end_idx != -1:
+                            json_content = raw_response[start_idx + len(start_marker):end_idx].strip()
+                            try:
+                                analysis_data = json.loads(json_content)
+                                document_analyses = analysis_data.get('document_analyses', [])
+                                if document_analyses:
+                                    dimensional_scores = document_analyses[0].get('dimensional_scores', {})
+                            except json.JSONDecodeError:
+                                pass
+                    
+                    row = [
+                        result.get('document_id', ''),
+                        result.get('filename', ''),
+                    ]
+                    
+                    # Add scores for each dimension (use raw_score)
+                    for col in score_columns:
+                        if col in dimensional_scores:
+                            score_data = dimensional_scores[col]
+                            if isinstance(score_data, dict):
+                                row.append(score_data.get('raw_score', ''))
+                            else:
+                                row.append(score_data)
+                        else:
+                            row.append('')
+                    
+                    # Add evidence hash
+                    row.append(result.get('evidence_hash', ''))
+                    
+                    writer.writerow(row)
+
+    def _generate_evidence_csv(self, evidence_results: Dict[str, Any], data_dir: Path) -> None:
+        """Generate evidence.csv from evidence results."""
+        import csv
+        
+        evidence_file = data_dir / "evidence.csv"
+        
+        headers = ['document_id', 'evidence_hash', 'dimension', 'score', 'quote_text', 'reasoning']
+        
+        with open(evidence_file, 'w', newline='', encoding='utf-8') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow(headers)
+            
+            # Extract evidence from evidence_results
+            evidence_data = evidence_results.get('evidence_results', [])
+            for evidence_item in evidence_data:
+                row = [
+                    evidence_item.get('document_id', ''),
+                    evidence_item.get('evidence_hash', ''),
+                    evidence_item.get('dimension', ''),
+                    evidence_item.get('score', ''),
+                    evidence_item.get('quote_text', ''),
+                    evidence_item.get('reasoning', '')
+                ]
+                writer.writerow(row)
+
+    def _generate_metadata_csv(self, statistical_results: Dict[str, Any], data_dir: Path) -> None:
+        """Generate metadata.csv from framework and corpus config."""
+        import csv
+        from datetime import datetime
+        
+        metadata_file = data_dir / "metadata.csv"
+        
+        headers = ['experiment_name', 'framework_name', 'framework_version', 'corpus_size', 'export_timestamp', 'gasket_version']
+        
+        with open(metadata_file, 'w', newline='', encoding='utf-8') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow(headers)
+            
+            # Get framework config
+            framework_config = self.config.get('framework_config', {})
+            corpus_manifest = self.config.get('corpus_manifest', {})
+            
+            # Extract metadata
+            experiment_name = self.security.experiment_name
+            framework_name = framework_config.get('name', 'unknown')
+            framework_version = framework_config.get('version', 'unknown')
+            corpus_size = len(corpus_manifest.get('documents', []))
+            export_timestamp = datetime.now().isoformat()
+            gasket_version = "v7.0"
+            
+            row = [
+                experiment_name,
+                framework_name,
+                framework_version,
+                corpus_size,
+                export_timestamp,
+                gasket_version
+            ]
+            writer.writerow(row)
+
     def _export_standard_mode_csv(self, analysis_results: List[Dict[str, Any]], statistical_results: Dict[str, Any], evidence_results: Dict[str, Any], audit_logger: AuditLogger, run_id: str) -> Path:
         """Export CSV files for standard mode (analysis + synthesis + CSV export)."""
         self._log_progress("📊 Exporting standard mode CSV files...")
@@ -4049,13 +4218,14 @@ class CleanAnalysisOrchestrator:
         # Export CSV files using CSVExportAgent
         try:
             csv_agent = CSVExportAgent(audit_logger=audit_logger)
+            csv_agent.artifact_storage = self.artifact_storage
             
             # Export options for standard mode
             export_options = ExportOptions(
-                include_derived_metrics=True,
-                include_evidence=True,
+                include_calculated_metrics=True,
+                evidence_detail_level="quotes",
                 include_metadata=True,
-                include_statistical_results=True
+                export_format="standard"
             )
             
             # Get required hashes from statistical_results and evidence_results
