@@ -1,202 +1,407 @@
-# Contributing to Discernus
+# Contributing to Discernus Development Tools
 
-Thank you for your interest in contributing to Discernus! This document provides guidelines for contributing to the project.
+Thank you for your interest in contributing to the Discernus development tools! This collection provides utilities, testing harnesses, and productivity tools for computational social science research.
 
-## Code of Conduct
+## 🎯 Project Overview
 
-By participating in this project, you agree to abide by our Code of Conduct. Please be respectful and constructive in all interactions.
+The Discernus tools repository contains utilities organized into categories:
 
-## Getting Started
+- **Auditing Tools** - Quality assurance and compliance checking
+- **Compliance Tools** - Standards and regulatory compliance
+- **Framework Tools** - Framework development and validation
+- **Prompt Engineering** - LLM optimization and testing
+- **Testing Harnesses** - Specialized testing utilities
+- **IDE Integration** - Development workflow tools
 
-### Prerequisites
-- Python 3.13+
-- Git
-- Basic understanding of the project architecture
+## 🚀 Getting Started
 
-### Development Setup
-1. Fork the repository
-2. Clone your fork: `git clone https://github.com/your-username/discernus.git`
-3. Install in development mode: `pip install -e .`
-4. Install development dependencies: `pip install -e .[dev]`
-5. Run tests: `make test`
+### Development Environment
 
-## Types of Contributions
+```bash
+# Clone the repository
+git clone https://github.com/discernus/tools.git
+cd tools
 
-### Bug Reports
-- Use the bug report template
-- Provide clear reproduction steps
-- Include error logs and environment details
-- Search existing issues first
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-### Feature Requests
-- Use the feature request template
-- Explain the use case and value
-- Consider implementation complexity
-- Discuss with maintainers first for large features
+# Install development dependencies
+pip install -e ".[dev]"
 
-### Code Contributions
-- Fork the repository
-- Create a feature branch
-- Make your changes
-- Add tests for new functionality
-- Ensure all tests pass
-- Submit a pull request
+# Run tests to verify setup
+pytest tests/
+```
 
-### Documentation
-- Improve existing documentation
-- Add examples and tutorials
-- Fix typos and clarify explanations
-- Update API documentation
+### Project Structure
 
-### Framework Contributions
-- Submit new framework specifications
-- Improve existing frameworks
-- Add framework validation tools
-- Create framework examples
+```
+tools/
+├── scripts/                # Main tool collection
+│   ├── auditing/          # Quality assurance
+│   ├── compliance_tools/  # Standards compliance
+│   ├── cursor_tools/      # IDE integration
+│   ├── framework_researcher/  # Framework development
+│   ├── framework_validation/  # Framework quality
+│   └── prompt_engineering/    # LLM optimization
+├── tests/                 # Test suite
+├── docs/                  # Documentation
+├── examples/              # Usage examples
+└── templates/             # Reusable templates
+```
 
-## Development Workflow
+## 🛠️ Development Guidelines
 
-### Branching Strategy
-- `main` - Stable releases
-- `develop` - Development branch
-- `feature/*` - Feature branches
-- `hotfix/*` - Critical fixes
+### Code Quality Standards
 
-### Pull Request Process
-1. Create a feature branch from `develop`
-2. Make your changes
-3. Add tests for new functionality
-4. Ensure all tests pass
-5. Update documentation if needed
-6. Submit pull request to `develop`
+- **Python 3.8+** compatibility required
+- **Clear documentation** for all tools
+- **Comprehensive testing** for new functionality
+- **Cross-platform compatibility** (Windows, macOS, Linux)
+- **Minimal dependencies** to reduce maintenance burden
 
-### Code Style
-- Follow PEP 8
-- Use `black` for formatting
-- Use `isort` for import sorting
-- Use `flake8` for linting
-- Maximum line length: 120 characters
+### Tool Design Principles
 
-### Testing
-- Write unit tests for new functionality
-- Ensure existing tests pass
-- Aim for high test coverage
-- Test edge cases and error conditions
+1. **Single Responsibility** - Each tool does one thing well
+2. **Composability** - Tools work together in workflows
+3. **Configurability** - Flexible configuration options
+4. **Reliability** - Robust error handling and recovery
+5. **Performance** - Efficient resource usage
 
-### Documentation
-- Update docstrings for new functions
-- Add examples where helpful
-- Update README if needed
-- Keep documentation current
+## 🔧 Tool Categories
 
-## Framework Development
+### 1. Auditing Tools
 
-### Framework Structure
-Frameworks should follow the specification format:
-- Clear description and purpose
-- Academic references
-- Measurable dimensions
-- Validation criteria
+**Purpose**: Quality assurance and compliance checking
 
-### Framework Validation
-- Test with sample data
-- Ensure reproducibility
-- Validate against specifications
-- Document limitations
+**Current Tools**:
+- Dependency license auditing
+- Code quality assessment
+- Research provenance validation
+- Performance monitoring
 
-### Framework Submission
-1. Create framework specification
-2. Add validation tests
-3. Include example usage
-4. Submit pull request
-5. Address review feedback
+**Contribution Opportunities**:
+- Security vulnerability scanning
+- Academic integrity checking
+- Automated quality reporting
+- Integration with CI/CD systems
 
-## Issue Labels
+**Example Tool Structure**:
+```python
+#!/usr/bin/env python3
+"""
+Tool Name: Brief description
 
-### Bug Labels
-- `bug` - General bug
-- `critical` - Critical bug
-- `regression` - Regression bug
-- `needs-triage` - Needs initial review
+Usage:
+    python tool_name.py [options] [arguments]
 
-### Feature Labels
-- `enhancement` - New feature
-- `framework` - Framework-related
-- `cli` - CLI-related
-- `documentation` - Documentation
+Examples:
+    python tool_name.py --input file.txt --output report.html
+"""
 
-### Priority Labels
-- `high` - High priority
-- `medium` - Medium priority
-- `low` - Low priority
+import argparse
+import logging
+from pathlib import Path
 
-### Status Labels
-- `needs-triage` - Needs initial review
-- `in-progress` - Currently being worked on
-- `needs-review` - Ready for review
-- `blocked` - Blocked on something
+def main():
+    parser = argparse.ArgumentParser(description="Tool description")
+    parser.add_argument("input", help="Input file or directory")
+    parser.add_argument("--output", help="Output file")
+    parser.add_argument("--verbose", action="store_true", help="Verbose output")
+    
+    args = parser.parse_args()
+    
+    # Tool implementation
+    result = process_input(args.input)
+    
+    if args.output:
+        save_result(result, args.output)
+    else:
+        print_result(result)
 
-## Release Process
+if __name__ == "__main__":
+    main()
+```
 
-### Version Numbering
-We use semantic versioning (MAJOR.MINOR.PATCH):
-- MAJOR: Breaking changes
-- MINOR: New features (backward compatible)
-- PATCH: Bug fixes (backward compatible)
+### 2. Framework Research Tools
 
-### Release Checklist
-- [ ] All tests pass
-- [ ] Documentation updated
-- [ ] Changelog updated
-- [ ] Version number bumped
-- [ ] Release notes prepared
+**Purpose**: Framework development and validation support
 
-## Community Guidelines
+**Current Tools**:
+- Framework synthesis and documentation
+- Research methodology validation
+- Academic literature integration
+- Statistical validation support
 
-### Communication
-- Be respectful and constructive
-- Use clear and concise language
-- Provide context for questions
-- Help others when possible
+**Contribution Opportunities**:
+- Enhanced natural language generation
+- Integration with academic databases
+- Automated citation management
+- Multi-format documentation export
 
-### Reporting Issues
-- Search existing issues first
-- Use appropriate templates
-- Provide sufficient detail
-- Be patient with responses
+### 3. Prompt Engineering Tools
 
-### Contributing Code
-- Follow coding standards
-- Write clear commit messages
-- Test your changes
-- Respond to feedback
+**Purpose**: LLM optimization and testing
 
-## Getting Help
+**Current Tools**:
+- Systematic prompt testing harness
+- Response quality analysis
+- A/B testing for prompt variants
+- Performance optimization tools
 
-### Documentation
-- Check the documentation first
-- Look for existing issues
-- Search the codebase
+**Contribution Opportunities**:
+- Advanced prompt optimization algorithms
+- Multi-model testing support
+- Cost optimization tools
+- Prompt template libraries
 
-### Community Support
-- GitHub Discussions for questions
-- GitHub Issues for bugs
-- Discord/Slack for real-time chat
+## 📋 Contribution Process
 
-### Maintainer Contact
-- @discernus-team for general questions
-- @discernus-maintainers for technical issues
+### 1. Planning Phase
 
-## License
+1. **Check existing tools** for similar functionality
+2. **Create GitHub issue** describing the proposed tool
+3. **Discuss design approach** with maintainers
+4. **Get approval** before starting development
 
-By contributing to Discernus, you agree that your contributions will be licensed under the same license as the project (GPL v3.0-or-later).
+### 2. Development Phase
 
-## Recognition
+1. **Create feature branch** from `main`
+2. **Follow naming conventions** for tools and files
+3. **Implement with comprehensive error handling**
+4. **Add configuration options** for flexibility
+5. **Include usage examples** and documentation
 
-Contributors will be recognized in:
-- CONTRIBUTORS.md file
-- Release notes
-- Project documentation
-- Community acknowledgments
+### 3. Testing Phase
 
-Thank you for contributing to Discernus!
+1. **Write unit tests** for core functionality
+2. **Add integration tests** for tool workflows
+3. **Test cross-platform compatibility**
+4. **Validate with real-world data**
+5. **Performance testing** for resource usage
+
+### 4. Documentation Phase
+
+1. **Write clear docstrings** for all functions
+2. **Create usage examples** with sample data
+3. **Update main README** with tool description
+4. **Add tool-specific documentation** if complex
+
+### 5. Review Phase
+
+1. **Create pull request** with detailed description
+2. **Address review feedback** promptly
+3. **Ensure all tests pass** in CI
+4. **Update documentation** based on feedback
+
+## 🧪 Testing Guidelines
+
+### Test Structure
+
+```
+tests/
+├── auditing/              # Auditing tool tests
+├── compliance_tools/      # Compliance tool tests
+├── framework_researcher/  # Framework tool tests
+├── prompt_engineering/    # Prompt tool tests
+├── integration/           # Cross-tool integration tests
+├── fixtures/              # Test data and fixtures
+└── utils/                 # Test utilities
+```
+
+### Test Requirements
+
+#### Unit Tests
+- Test individual tool functions
+- Mock external dependencies
+- Cover error conditions
+- Fast execution (< 1 second per test)
+
+#### Integration Tests
+- Test complete tool workflows
+- Use realistic test data
+- Verify tool interactions
+- Moderate execution time (< 10 seconds)
+
+#### Performance Tests
+- Measure resource usage
+- Test with large datasets
+- Verify scalability
+- Document performance characteristics
+
+### Test Data Management
+
+```python
+# Use fixtures for test data
+@pytest.fixture
+def sample_framework():
+    return Path("tests/fixtures/sample_framework.md")
+
+@pytest.fixture
+def test_config():
+    return {
+        "input_format": "markdown",
+        "output_format": "html",
+        "validation_level": "strict"
+    }
+
+def test_tool_functionality(sample_framework, test_config):
+    result = process_framework(sample_framework, test_config)
+    assert result.is_valid
+    assert len(result.warnings) == 0
+```
+
+## 📚 Documentation Standards
+
+### Tool Documentation
+
+Each tool should include:
+
+1. **Header docstring** with purpose and usage
+2. **Command-line help** with clear descriptions
+3. **Configuration options** with examples
+4. **Error messages** that guide users to solutions
+5. **Examples** with real-world use cases
+
+### README Updates
+
+When adding new tools:
+
+1. **Add to tool category** in main README
+2. **Include brief description** and primary use case
+3. **Provide usage example** with sample command
+4. **Link to detailed documentation** if available
+
+### Code Documentation
+
+```python
+def validate_framework_structure(framework_path: Path, spec_version: str = "v10") -> ValidationResult:
+    """Validate framework against specification requirements.
+    
+    This function checks framework files for compliance with Discernus
+    framework specifications, including required sections, formatting,
+    and academic standards.
+    
+    Args:
+        framework_path: Path to the framework markdown file
+        spec_version: Specification version to validate against (default: "v10")
+        
+    Returns:
+        ValidationResult containing:
+            - is_valid: Boolean indicating overall validation status
+            - errors: List of critical validation failures
+            - warnings: List of non-critical issues
+            - suggestions: List of improvement recommendations
+            
+    Raises:
+        FileNotFoundError: If framework file doesn't exist
+        ValidationError: If framework format is severely malformed
+        
+    Example:
+        >>> result = validate_framework_structure(Path("pdaf_v10.md"))
+        >>> if result.is_valid:
+        ...     print("Framework is valid!")
+        >>> else:
+        ...     print(f"Validation failed: {result.errors}")
+    """
+```
+
+## 🔒 Security Guidelines
+
+### Input Validation
+
+- **Sanitize file paths** to prevent directory traversal
+- **Validate configuration** to prevent code injection
+- **Limit resource usage** to prevent DoS attacks
+- **Handle sensitive data** appropriately
+
+### Dependency Management
+
+- **Minimal dependencies** to reduce attack surface
+- **Pin versions** in requirements files
+- **Regular security updates** for dependencies
+- **Vulnerability scanning** in CI pipeline
+
+### Error Handling
+
+```python
+def safe_file_operation(file_path: Path) -> Optional[str]:
+    """Safely read file with proper error handling."""
+    try:
+        # Validate path is within allowed directories
+        resolved_path = file_path.resolve()
+        if not is_safe_path(resolved_path):
+            raise SecurityError(f"Path outside allowed directories: {resolved_path}")
+            
+        # Read file with size limits
+        if resolved_path.stat().st_size > MAX_FILE_SIZE:
+            raise FileSizeError(f"File too large: {resolved_path}")
+            
+        return resolved_path.read_text(encoding='utf-8')
+        
+    except (OSError, UnicodeDecodeError) as e:
+        logging.error(f"Failed to read file {file_path}: {e}")
+        return None
+    except SecurityError as e:
+        logging.warning(f"Security violation: {e}")
+        return None
+```
+
+## 🎯 Tool Quality Checklist
+
+### Before Submitting
+
+- [ ] **Functionality** - Tool works as intended
+- [ ] **Error handling** - Graceful failure modes
+- [ ] **Documentation** - Clear usage instructions
+- [ ] **Testing** - Comprehensive test coverage
+- [ ] **Performance** - Acceptable resource usage
+- [ ] **Cross-platform** - Works on major platforms
+- [ ] **Configuration** - Flexible options
+- [ ] **Integration** - Works with existing tools
+
+### Code Review Checklist
+
+- [ ] **Code quality** - Clean, readable implementation
+- [ ] **Security** - No obvious vulnerabilities
+- [ ] **Dependencies** - Justified and minimal
+- [ ] **Backward compatibility** - Doesn't break existing workflows
+- [ ] **Documentation** - Complete and accurate
+- [ ] **Tests** - Adequate coverage and quality
+
+## 📞 Getting Help
+
+### Communication Channels
+
+1. **GitHub Issues** - Bug reports and feature requests
+2. **GitHub Discussions** - General questions and ideas
+3. **Email** - tools@discernus.ai for direct contact
+4. **Documentation** - Check existing tool docs first
+
+### Common Questions
+
+**Q: How do I add a new tool category?**
+A: Create a new directory under `scripts/` and update the main README.
+
+**Q: What's the difference between auditing and compliance tools?**
+A: Auditing tools check quality, compliance tools verify standards adherence.
+
+**Q: How do I test tools that require external services?**
+A: Use mocking for unit tests, integration tests for real service validation.
+
+**Q: Can I contribute tools in other languages?**
+A: Python is preferred, but shell scripts and other languages are acceptable for specific use cases.
+
+## 📄 License
+
+By contributing to Discernus Tools, you agree that your contributions will be licensed under the MIT License.
+
+This permissive licensing enables:
+- Maximum adoption across research communities
+- Integration with proprietary development tools
+- Flexibility for diverse research environments
+- Compatibility with various licensing requirements
+
+---
+
+Thank you for helping improve computational social science research tools!

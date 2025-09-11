@@ -44,7 +44,7 @@ This directory contains the enhanced framework validation system that combines:
 - **`test_report_generation.py`**: Test script for report generation
 - **`README.md`**: This documentation
 
-**Note**: The enhanced validator now imports the canonical `FrameworkValidator` from `scripts/framework_validation/` and `DiscernusLibrarian` from `discernus/librarian/` rather than duplicating code.
+**Note**: The enhanced validator now imports the canonical `FrameworkValidator` from `scripts/framework_validation/` and librarian tools from the Discernus Tools repository rather than duplicating code.
 
 ## 🚀 Usage
 
@@ -520,7 +520,7 @@ This tool is designed for:
 
 - **Framework Specification v10.0**: `/docs/specifications/FRAMEWORK_SPECIFICATION.md`
 - **Canonical Framework Validator**: `/scripts/framework_validation/`
-- **DiscernusLibrarian**: `/discernus/librarian/`
+- **Librarian Tools**: Available in the [Discernus Tools](https://github.com/discernus/tools) repository
 - **Framework Examples**: `/frameworks/reference/flagship/`
 
 ## 🔗 Related Tools

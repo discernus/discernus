@@ -36,11 +36,36 @@ env/
 # IDE and Editor files
 .idea/
 .vscode/
+.cursor/
+.claude/
 *.swp
 *.swo
 *~
 .project
 .pydevproject
+
+# Development and AI assistant files
+CLAUDE.md
+CURSOR_AGENT_QUICK_START.md
+*.code-workspace
+*.workspace
+
+# Development and debug files (root level only)
+/debug_*.py
+/test_*.py
+/experiment_output.log
+*.tmp
+*.temp
+
+# Temporary setup scripts
+scripts/check_github_repos.py
+scripts/create_github_repos.py
+scripts/setup_repositories.py
+scripts/simple_repo_setup.py
+
+# Cache directories
+.ruff_cache/
+.pytest_cache/
 
 # OS generated files
 .DS_Store
