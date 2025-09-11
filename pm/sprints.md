@@ -44,39 +44,41 @@
 **Timeline**: 1-2 weeks - must complete before resuming gauntlet testing
 **Dependencies**: None - can begin immediately
 
-#### [BUG-001] Fix Intermittent Final Report Generation Failure
+#### [BUG-001] Fix Intermittent Final Report Generation Failure ✅ **COMPLETED**
 
 - **Description**: Fix intermittent bug where draft synthesis reports are created but not moved to outputs/final_report.md
 - **Purpose**: Ensure consistent final report generation for all experiments
 - **Priority**: HIGH - Core output missing
 - **Acceptance Criteria**:
-  - Final report consistently generated in outputs/ directory
-  - No manual intervention required
-  - assets.json file properly created with report_hash
-  - All experiments produce final_report.md
+  - Final report consistently generated in outputs/ directory ✅
+  - No manual intervention required ✅
+  - assets.json file properly created with report_hash ✅
+  - All experiments produce final_report.md ✅
+- **Solution**: Fixed JSON serialization error with NumPy types in _create_clean_outputs_directory
 - **Technical Details**:
-  - Investigate orchestrator final report saving logic
-  - Check for race conditions in synthesis completion
-  - Verify assets.json generation and report_hash storage
-  - Test with different framework complexities
+  - Root cause: TypeError when serializing np.bool_, np.integer, np.floating to JSON
+  - Added convert_to_serializable() helper function to handle NumPy types
+  - Prevents silent fallback to basic_outputs_created status
+  - Final report and assets.json now generate consistently
 - **Estimated Effort**: 2-3 days
 
-#### [BUG-002] Fix CSV Export Generation
+#### [BUG-002] Fix CSV Export Generation ✅ **COMPLETED**
 
 - **Description**: Implement missing CSV export functionality for scores.csv, evidence.csv, and metadata.csv
 - **Purpose**: Enable data analysis workflow with structured data exports
 - **Priority**: HIGH - Core feature missing
 - **Acceptance Criteria**:
-  - scores.csv with analysis scores and derived metrics
-  - evidence.csv with supporting quotes and evidence
-  - metadata.csv with document and run metadata
-  - Statistical package with import scripts
-  - All CSV files in data/ directory
+  - scores.csv with analysis scores and derived metrics ✅
+  - evidence.csv with supporting quotes and evidence ✅
+  - metadata.csv with document and run metadata ✅
+  - Statistical package with import scripts ✅
+  - All CSV files in data/ directory ✅
+- **Solution**: Implemented direct CSV generation in Phase 8.5 using in-memory data
 - **Technical Details**:
-  - Check orchestrator CSV generation logic
-  - Verify data export agent functionality
-  - Test CSV generation in isolation
-  - Compare with working CSV generation in other parts of system
+  - Replaced complex artifact loading with direct data conversion
+  - Generate CSV files when all data is available in memory
+  - Fixed data structure parsing for dimensional scores and evidence quotes
+  - All three CSV files now working properly with real data
 - **Estimated Effort**: 2-3 days
 
 #### [BUG-003] Fix Standalone Validation Command
