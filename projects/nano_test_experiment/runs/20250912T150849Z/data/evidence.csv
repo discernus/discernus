@@ -1,0 +1,5 @@
+document_id,evidence_hash,dimension,score,quote_text,reasoning
+positive_test.txt,3114790f30df7a37,positive_sentiment,1.0,This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.,"Confidence: 1.0, Context: direct_statement"
+positive_test.txt,3114790f30df7a37,negative_sentiment,1.0,,"Confidence: 1.0, Context: absence_of_evidence"
+negative_test.txt,3114790f30df7a37,positive_sentiment,1.0,,"Confidence: 1.0, Context: absence_of_evidence"
+negative_test.txt,3114790f30df7a37,negative_sentiment,1.0,This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless.,"Confidence: 1.0, Context: direct_statement"
