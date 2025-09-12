@@ -163,8 +163,8 @@ class AutomatedDerivedMetricsAgent:
             framework_content=framework_content,
             experiment_name=experiment_spec.get('name', 'Unknown'),
             experiment_description=experiment_spec.get('description', 'No description'),
-            data_columns=data_structure_info.get('columns', []),
-            sample_data=data_structure_info.get('sample_data', [])
+            data_columns=data_structure_info.get('columns', 'No data structure info'),
+            sample_data=data_structure_info.get('sample_data', 'No sample data')
         )
         
         # Generate functions using LLM
@@ -174,6 +174,7 @@ class AutomatedDerivedMetricsAgent:
         })
         
         try:
+            # Temporarily disable structured output to test basic functionality
             response, metadata = self.llm_gateway.execute_call(
                 model=self.model,
                 prompt=prompt,
@@ -183,35 +184,79 @@ class AutomatedDerivedMetricsAgent:
             if not response:
                 raise ValueError("LLM returned empty response")
             
-            # Debug: Check for problematic strings
-            if 'metric_name_1' in response:
-                print(f"🔍 DEBUG: LLM response contains 'metric_name_1'")
-                print(f"🔍 DEBUG: Response preview: {response[:500]}")
-            
-            # Extract code using ThinOutputExtractor
-            code_blocks = self.extractor.extract_code_blocks(response)
-            
-            if not code_blocks:
-                # Fallback: try to extract from markdown code blocks
-                import re
-                markdown_blocks = re.findall(r'```python\n(.*?)\n```', response, re.DOTALL)
-                if markdown_blocks:
-                    code_blocks = markdown_blocks
-                else:
-                    # Last resort: return the raw response and hope for the best
-                    print("⚠️ Warning: No code blocks found, using raw response")
-                    code_blocks = [response]
-            
-            # Use the first (and typically only) code block
-            extracted_code = code_blocks[0] if code_blocks else response
-            
-            self._log_event("LLM_GENERATION_SUCCESS", {
-                "response_length": len(response),
-                "extracted_length": len(extracted_code),
-                "code_blocks_found": len(code_blocks)
-            })
-            
-            return extracted_code
+            # Handle structured output response
+            if isinstance(response, dict):
+                # Try different possible field names for the code
+                code_field = None
+                if 'code' in response:
+                    code_field = 'code'
+                elif 'python_module' in response:
+                    code_field = 'python_module'
+                elif 'python_code' in response:
+                    code_field = 'python_code'
+                elif 'content' in response:
+                    code_field = 'content'
+                
+                if code_field:
+                    # Structured output response - extract the code directly
+                    extracted_code = response[code_field]
+                    language = response.get('language', 'python')
+                    
+                    self._log_event("LLM_GENERATION_SUCCESS", {
+                        "response_type": "structured_output",
+                        "language": language,
+                        "code_field": code_field,
+                        "code_length": len(extracted_code)
+                    })
+                    
+                    return extracted_code
+            elif isinstance(response, list) and len(response) > 0:
+                # Handle array response format
+                first_item = response[0]
+                if isinstance(first_item, dict) and 'content' in first_item:
+                    extracted_code = first_item['content']
+                    
+                    self._log_event("LLM_GENERATION_SUCCESS", {
+                        "response_type": "structured_output_array",
+                        "array_length": len(response),
+                        "code_length": len(extracted_code)
+                    })
+                    
+                    return extracted_code
+            else:
+                # Fallback to parsing for non-structured output
+                print("⚠️ Warning: Non-structured response, falling back to parsing")
+                
+                # Debug: Check for problematic strings
+                if 'metric_name_1' in str(response):
+                    print(f"🔍 DEBUG: LLM response contains 'metric_name_1'")
+                    print(f"🔍 DEBUG: Response preview: {str(response)[:500]}")
+                
+                # Extract code using ThinOutputExtractor
+                code_blocks = self.extractor.extract_code_blocks(str(response))
+                
+                if not code_blocks:
+                    # Fallback: try to extract from markdown code blocks
+                    import re
+                    markdown_blocks = re.findall(r'```python\n(.*?)\n```', str(response), re.DOTALL)
+                    if markdown_blocks:
+                        code_blocks = markdown_blocks
+                    else:
+                        # Last resort: return the raw response and hope for the best
+                        print("⚠️ Warning: No code blocks found, using raw response")
+                        code_blocks = [str(response)]
+                
+                # Use the first (and typically only) code block
+                extracted_code = code_blocks[0] if code_blocks else str(response)
+                
+                self._log_event("LLM_GENERATION_SUCCESS", {
+                    "response_type": "parsed_output",
+                    "response_length": len(str(response)),
+                    "extracted_length": len(extracted_code),
+                    "code_blocks_found": len(code_blocks)
+                })
+                
+                return extracted_code
         
         except Exception as e:
             self._log_event("LLM_GENERATION_FAILED", {
