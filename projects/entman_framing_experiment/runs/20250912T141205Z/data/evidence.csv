@@ -1,0 +1,22 @@
+document_id,evidence_hash,dimension,score,quote_text,reasoning
+crisis_management.txt,3114790f30df7a37,problem_definition,0.9,"We are writing to inform you of a serious data security incident that occurred on September 14, 2025.","Confidence: 0.9, Context: explicit statement"
+crisis_management.txt,3114790f30df7a37,causal_attribution,0.8,detected unauthorized access to our customer database,"Confidence: 0.8, Context: causal explanation"
+crisis_management.txt,3114790f30df7a37,moral_evaluation,0.9,We sincerely apologize for this incident and are working tirelessly to prevent future occurrences.,"Confidence: 0.9, Context: apology and commitment"
+crisis_management.txt,3114790f30df7a37,treatment_recommendation,0.9,"Our response includes:
+- Immediate system lockdown and security audit
+- Notification to law enforcement and cybersecurity experts
+- Implementation of enhanced security measures
+- Free credit monitoring for affected customers
+- 24/7 customer support hotline","Confidence: 0.9, Context: action plan"
+political_attack_ad.txt,3114790f30df7a37,problem_definition,1.0,Senator Johnson's opponent has a record of failure and corruption that threatens our community.,"Confidence: 1.0, Context: explicit statement"
+political_attack_ad.txt,3114790f30df7a37,causal_attribution,1.0,"His policies have destroyed jobs, raised taxes, and left families struggling to make ends meet.","Confidence: 1.0, Context: direct blame"
+political_attack_ad.txt,3114790f30df7a37,moral_evaluation,1.0,"His moral character is questionable. He's been caught in multiple ethics violations, taking money from special interests while voting against the people's interests. He represents everything that's wrong with Washington politics.","Confidence: 1.0, Context: moral judgment"
+political_attack_ad.txt,3114790f30df7a37,treatment_recommendation,1.0,"Senator Johnson stands for integrity, family values, and real solutions. Don't let corruption win. Vote Johnson for Senate.","Confidence: 1.0, Context: call to action"
+corporate_apology.txt,3114790f30df7a37,problem_definition,0.9,the environmental incident that occurred at our facility,"Confidence: 0.9, Context: direct statement"
+corporate_apology.txt,3114790f30df7a37,causal_attribution,0.9,"take full responsibility for the environmental incident that occurred at our facility on August 8, 2025. Our investigation has determined that the chemical spill was caused by equipment failure that we should have prevented through proper maintenance and oversight.","Confidence: 0.9, Context: direct explanation of cause and responsibility"
+corporate_apology.txt,3114790f30df7a37,moral_evaluation,0.9,This failure represents a breach of our core values and our commitment to environmental stewardship.,"Confidence: 0.9, Context: statement of values and regret"
+corporate_apology.txt,3114790f30df7a37,treatment_recommendation,0.9,Our corrective actions include: - Complete equipment overhaul and safety system upgrades - Enhanced training for all personnel on environmental protocols - Independent environmental audit and compliance review - Community compensation fund for affected residents - Regular public reporting on our environmental performance,"Confidence: 0.9, Context: list of specific actions"
+policy_advocacy.txt,3114790f30df7a37,problem_definition,0.9,"My fellow Americans, today I want to talk about a crisis that affects every family in this country - our broken healthcare system.","Confidence: 0.9, Context: opening_statement_and_theme_setting"
+policy_advocacy.txt,3114790f30df7a37,causal_attribution,0.8,"My fellow Americans, today I want to talk about a crisis that affects every family in this country - our broken healthcare system.","Confidence: 0.8, Context: systemic_causal_framing"
+policy_advocacy.txt,3114790f30df7a37,moral_evaluation,0.9,"Every family deserves access to quality, affordable healthcare. No one should have to choose between their health and their financial security.","Confidence: 0.9, Context: ethical_justification_and_value_invocation"
+policy_advocacy.txt,3114790f30df7a37,treatment_recommendation,0.9,Our solution is comprehensive healthcare reform that: Provides universal coverage for all Americans; Controls prescription drug costs; Expands mental health services; Protects patients with pre-existing conditions; Reduces administrative costs and waste.,"Confidence: 0.9, Context: specific_policy_proposals"

@@ -1,0 +1,5 @@
+document_id,filename,causal_attribution,moral_evaluation,problem_definition,treatment_recommendation,framing_coherence_index,framing_independence_score,message_completeness_index,salience_weighted_message_completeness,strategic_framing_profile,evidence_hash
+d0a474fc58a4...,crisis_management.txt,0.3,0.8,0.9,0.9,0.6640091518201929,0.248746859276655,0.725,0.8282756158514817,0.0,db8cfd7d19c84626
+924d08d33436,political_attack_ad.txt,0.95,0.9,0.9,0.75,0.8716005023667873,0.075,0.875,0.8821458744015772,1.0,ef11271583a69b21
+5fbf6a44ce54...,corporate_apology.txt,0.9,0.9,0.9,0.9,0.9,0.0,0.9,0.8997500694251598,0.0,49bf891228b97579
+5d70053d9254...,policy_advocacy.txt,0.8,0.9,0.9,0.9,0.8738851890731822,0.043301270189221926,0.875,0.8791531902381654,0.0,3b51488e5747c920
