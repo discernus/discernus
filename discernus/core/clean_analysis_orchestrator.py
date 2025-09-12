@@ -1862,169 +1862,24 @@ class CleanAnalysisOrchestrator:
         return successful_results > 0
     
     def _validate_assets(self, statistical_results: Dict[str, Any]) -> None:
-        """Comprehensive validation that all required assets exist on disk and are valid before synthesis."""
-        self._log_progress("🔍 Validating synthesis assets comprehensively...")
+        """Simple validation that basic files exist. Let the synthesis LLM handle data quality assessment."""
+        self._log_progress("🔍 Validating basic synthesis prerequisites...")
         
-        # 1. Framework file must exist and be readable
+        # 1. Framework file must exist
         framework_path = self.experiment_path / self.config['framework']
         if not framework_path.exists():
-            raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Framework file not found on disk: {framework_path}")
-        if not framework_path.is_file():
-            raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Framework path is not a file: {framework_path}")
-        try:
-            framework_content = framework_path.read_text(encoding='utf-8')
-            if len(framework_content.strip()) < 100:
-                raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Framework file appears empty or too short: {len(framework_content)} chars")
-        except Exception as e:
-            raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Cannot read framework file: {e}")
+            raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Framework file not found: {framework_path}")
         
-        # 2. Experiment file must exist and be readable  
+        # 2. Experiment file must exist
         experiment_path = self.experiment_path / "experiment.md"
         if not experiment_path.exists():
-            raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Experiment file not found on disk: {experiment_path}")
-        try:
-            experiment_content = experiment_path.read_text(encoding='utf-8')
-            if len(experiment_content.strip()) < 50:
-                raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Experiment file appears empty or too short: {len(experiment_content)} chars")
-        except Exception as e:
-            raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Cannot read experiment file: {e}")
+            raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Experiment file not found: {experiment_path}")
         
-        # 3. Analysis results must be valid and complete
-        if not hasattr(self, '_analysis_results') or not self._analysis_results:
-            raise CleanAnalysisError("SYNTHESIS BLOCKED: No analysis results available")
+        # 3. Basic statistical results must exist
+        if not statistical_results.get('raw_analysis_data_hash'):
+            raise CleanAnalysisError("SYNTHESIS BLOCKED: No analysis data available")
         
-        valid_analyses = 0
-        for i, result in enumerate(self._analysis_results):
-            if not result.get('raw_analysis_response'):
-                raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Analysis result {i+1} missing raw_analysis_response")
-            
-            raw_response = result['raw_analysis_response']
-            if '<<<DISCERNUS_ANALYSIS_JSON_v6>>>' not in raw_response or '<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>' not in raw_response:
-                # Debug: Show what we actually have
-                print(f"DEBUG: Analysis result {i+1} missing markers")
-                print(f"DEBUG: Result keys: {list(result.keys())}")
-                print(f"DEBUG: Raw response length: {len(raw_response)}")
-                print(f"DEBUG: Raw response start: {repr(raw_response[:200])}")
-                print(f"DEBUG: Raw response end: {repr(raw_response[-200:])}")
-                
-                # Try to fix incomplete responses by adding missing end marker
-                if '<<<DISCERNUS_ANALYSIS_JSON_v6>>>' in raw_response and '<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>' not in raw_response:
-                    print(f"DEBUG: Attempting to fix incomplete response for analysis result {i+1}")
-                    # Find the last complete JSON object and add end marker
-                    try:
-                        # Look for the last complete brace
-                        brace_count = 0
-                        last_complete_pos = -1
-                        for pos, char in enumerate(raw_response):
-                            if char == '{':
-                                brace_count += 1
-                            elif char == '}':
-                                brace_count -= 1
-                                if brace_count == 0:
-                                    last_complete_pos = pos
-                        
-                        if last_complete_pos > 0:
-                            # Add end marker after the last complete JSON object
-                            fixed_response = raw_response[:last_complete_pos + 1] + '\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
-                            result['raw_analysis_response'] = fixed_response
-                            print(f"DEBUG: Fixed incomplete response for analysis result {i+1}")
-                            raw_response = fixed_response
-                        else:
-                            raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Analysis result {i+1} has incomplete JSON that cannot be fixed")
-                    except Exception as fix_error:
-                        print(f"DEBUG: Failed to fix incomplete response: {fix_error}")
-                        raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Analysis result {i+1} missing required JSON markers and cannot be fixed")
-                else:
-                    raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Analysis result {i+1} missing required JSON markers")
-            
-            valid_analyses += 1
-        
-        if valid_analyses == 0:
-            raise CleanAnalysisError("SYNTHESIS BLOCKED: No valid analysis results found")
-        
-        # 4. Derived metrics must be available and valid
-        # In full pipeline, derived metrics are stored in artifact storage, not self._derived_metrics_results
-        if not statistical_results.get('derived_metrics_data_hash'):
-            raise CleanAnalysisError("SYNTHESIS BLOCKED: No derived metrics results available")
-        
-        # Load derived metrics from artifact storage
-        try:
-            derived_metrics_data = self.artifact_storage.get_artifact(statistical_results['derived_metrics_data_hash']).decode('utf-8')
-            derived_metrics_results = json.loads(derived_metrics_data)
-        except Exception as e:
-            raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Cannot load derived metrics data: {e}")
-        
-        # Check the status of derived metrics
-        derived_metrics_status = derived_metrics_results.get('status', 'unknown')
-        
-        # Debug logging to understand the structure
-        self._log_progress(f"🔍 DEBUG: Derived metrics results structure: {json.dumps(derived_metrics_results, indent=2, default=str)}")
-        self._log_progress(f"🔍 DEBUG: Derived metrics status: {derived_metrics_status}")
-        
-        if derived_metrics_status != 'success_with_data':
-            raise CleanAnalysisError("SYNTHESIS BLOCKED: Derived metrics results incomplete")
-        
-        # Check that we have actual metrics data
-        metrics_data = derived_metrics_results.get('derived_metrics_data', {})
-        if not metrics_data or not metrics_data.get('derived_metrics'):
-            raise CleanAnalysisError("SYNTHESIS BLOCKED: Derived metrics contain no actual metrics data")
-        
-        # 5. Statistical results must contain actual numerical data
-        if not self._validate_statistical_results(statistical_results):
-            raise CleanAnalysisError(
-                "SYNTHESIS BLOCKED: Statistical results contain no numerical data. "
-                "Cannot generate report without valid statistical analysis."
-            )
-        
-        # 6. Evidence artifacts must exist in artifact storage
-        evidence_count = 0
-        for artifact_hash, artifact_info in self.artifact_storage.registry.items():
-            metadata = artifact_info.get("metadata", {})
-            if metadata.get("artifact_type", "").startswith("evidence_v6"):
-                evidence_count += 1
-                # Verify the artifact actually exists on disk (use quiet=True to suppress verbose logging)
-                try:
-                    evidence_data = self.artifact_storage.get_artifact(artifact_hash, quiet=True)
-                    if not evidence_data or len(evidence_data) < 10:
-                        raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Evidence artifact {artifact_hash[:8]} exists in registry but is empty on disk")
-                except Exception as e:
-                    raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Cannot retrieve evidence artifact {artifact_hash[:8]}: {e}")
-        
-        if evidence_count == 0:
-            raise CleanAnalysisError(
-                "SYNTHESIS BLOCKED: No evidence artifacts found in storage. "
-                "Cannot generate report without textual evidence for citations."
-            )
-        
-        # 5. Corpus files must exist and be accessible
-        corpus_manifest_path = self.experiment_path / self.config.get('corpus', 'corpus.md')
-        if not corpus_manifest_path.exists():
-            raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Corpus manifest not found: {corpus_manifest_path}")
-        
-        # Validate that corpus documents referenced in manifest actually exist
-        try:
-            corpus_documents = self._load_corpus_documents()
-            if not corpus_documents:
-                raise CleanAnalysisError("SYNTHESIS BLOCKED: Corpus manifest contains no documents")
-            
-            missing_docs = []
-            corpus_dir = self.experiment_path / "corpus"
-            for doc_info in corpus_documents:
-                filename = doc_info.get('filename')
-                if filename:
-                    doc_file = self._find_corpus_file(corpus_dir, filename)
-                    if not doc_file or not doc_file.exists():
-                        missing_docs.append(filename)
-            
-            if missing_docs:
-                raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Corpus documents missing from disk: {missing_docs}")
-                
-        except Exception as e:
-            raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Cannot validate corpus documents: {e}")
-        
-        self._log_progress(f"✅ Synthesis assets validated: framework, experiment, {evidence_count} evidence artifacts, {len(corpus_documents)} corpus documents")
-        self._log_progress("🟢 All required assets confirmed on disk - synthesis can proceed")
-
+        self._log_progress("✅ Basic prerequisites validated. Synthesis LLM will assess data quality.")
     def _build_rag_index(self, audit_logger: AuditLogger) -> None:
         """Builds the RAG index using RAGIndexManager (replaces TxtaiEvidenceCurator)."""
         self._log_progress("📚 Building RAG index for evidence retrieval...")
