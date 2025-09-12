@@ -592,11 +592,27 @@ class ExperimentCoherenceAgent:
         Parse LLM validation response using THIN principles.
         
         THIN Approach: Trust LLM intelligence with simple parsing and graceful fallbacks.
-        Avoid complex JSON extraction - let the LLM return clean JSON.
+        Handle common LLM response formats including markdown code blocks.
         """
         try:
-            # THIN: Simple JSON parsing
-            data = json.loads(response)
+            # Try to find JSON in the response (handle markdown code blocks)
+            json_content = response.strip()
+            
+            # Look for JSON in markdown code blocks
+            if "```json" in response:
+                json_start = response.find("```json") + 7
+                json_end = response.rfind("```")
+                if json_end > json_start:
+                    json_content = response[json_start:json_end].strip()
+            elif "```" in response:
+                # Try to find any code block
+                code_start = response.find("```") + 3
+                code_end = response.rfind("```")
+                if code_end > code_start:
+                    json_content = response[code_start:code_end].strip()
+            
+            # Parse the JSON content
+            data = json.loads(json_content)
             
             # Convert to ValidationResult with LLM intelligence
             issues = []
