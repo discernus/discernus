@@ -4625,43 +4625,41 @@ class CleanAnalysisOrchestrator:
         csv_agent.artifact_storage = None  # Use file-based loading
         
         # Map derived metrics to document analyses before CSV export
+        # Access the nested structure: derived_metrics_results['derived_metrics_results']['derived_metrics_data']['derived_metrics']
+        derived_metrics_list = []
         if derived_metrics_results and 'derived_metrics_results' in derived_metrics_results:
-            derived_metrics_data = derived_metrics_results['derived_metrics_results']
-            if 'derived_metrics_data' in derived_metrics_data:
-                derived_metrics_list = derived_metrics_data.get('derived_metrics', [])
+            derived_metrics_data = derived_metrics_results.get('derived_metrics_results', {}).get('derived_metrics_data', {})
+            derived_metrics_list = derived_metrics_data.get('derived_metrics', [])
+        
+        if derived_metrics_list:
+            # Create a mapping of document names to derived metrics
+            derived_metrics_map = {}
+            for metric_item in derived_metrics_list:
+                # The derived metrics are now DataFrame records with calculated values
+                # Extract the derived metrics columns (exclude raw_analysis_response)
+                derived_metrics = {}
+                for key, value in metric_item.items():
+                    if key != 'raw_analysis_response':
+                        derived_metrics[key] = value
                 
-                # Create a mapping of document names to derived metrics
-                derived_metrics_map = {}
-                for metric_item in derived_metrics_list:
-                    if 'result_content' in metric_item:
-                        result_content = metric_item['result_content']
-                        if 'raw_analysis_response' in result_content:
-                            # Parse the JSON to get document name and add derived metrics
-                            raw_response = result_content['raw_analysis_response']
-                            start_marker = '<<<DISCERNUS_ANALYSIS_JSON_v6>>>'
-                            end_marker = '<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
-                            start_idx = raw_response.find(start_marker)
-                            end_idx = raw_response.find(end_marker)
-                            
-                            if start_idx != -1 and end_idx != -1:
-                                json_content = raw_response[start_idx + len(start_marker):end_idx].strip()
-                                try:
-                                    parsed_response = json.loads(json_content)
-                                    if 'document_analyses' in parsed_response:
-                                        for doc_analysis in parsed_response['document_analyses']:
-                                            doc_name = doc_analysis.get('document_name', 'unknown')
-                                            # Calculate derived metrics for this document
-                                            dimensional_scores = doc_analysis.get('dimensional_scores', {})
-                                            if 'positive_sentiment' in dimensional_scores and 'negative_sentiment' in dimensional_scores:
-                                                pos_score = dimensional_scores['positive_sentiment'].get('raw_score', 0.0)
-                                                neg_score = dimensional_scores['negative_sentiment'].get('raw_score', 0.0)
-                                                
-                                                derived_metrics_map[doc_name] = {
-                                                    'net_sentiment': pos_score - neg_score,
-                                                    'sentiment_magnitude': (pos_score + neg_score) / 2.0
-                                                }
-                                except json.JSONDecodeError:
-                                    continue
+                # Parse the raw_analysis_response to get the document name
+                raw_response = metric_item.get('raw_analysis_response', '')
+                if raw_response:
+                    start_marker = '<<<DISCERNUS_ANALYSIS_JSON_v6>>>'
+                    end_marker = '<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
+                    start_idx = raw_response.find(start_marker)
+                    end_idx = raw_response.find(end_marker)
+                    
+                    if start_idx != -1 and end_idx != -1:
+                        json_content = raw_response[start_idx + len(start_marker):end_idx].strip()
+                        try:
+                            parsed_response = json.loads(json_content)
+                            if 'document_analyses' in parsed_response:
+                                for doc_analysis in parsed_response['document_analyses']:
+                                    doc_name = doc_analysis.get('document_name', 'unknown')
+                                    derived_metrics_map[doc_name] = derived_metrics
+                        except json.JSONDecodeError:
+                            continue
                 
                 # Add derived metrics to each document analysis
                 for doc_analysis in processed_document_analyses:
@@ -4669,11 +4667,8 @@ class CleanAnalysisOrchestrator:
                     if doc_name in derived_metrics_map:
                         doc_analysis['derived_metrics'] = derived_metrics_map[doc_name]
                     else:
-                        # Default values if not found
-                        doc_analysis['derived_metrics'] = {
-                            'net_sentiment': 0.0,
-                            'sentiment_magnitude': 0.0
-                        }
+                        # Default empty derived metrics if not found
+                        doc_analysis['derived_metrics'] = {}
         
         # Update analysis_data to include derived metrics
         analysis_data = {
