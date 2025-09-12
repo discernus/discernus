@@ -1,0 +1,9 @@
+document_id,evidence_hash,dimension,score,quote_text,reasoning,confidence
+negative_test_1.txt,,negative_sentiment,,I'm devastated by the results.,,1.0
+positive_test_2.txt,,positive_sentiment,,What a superb morning! All systems are operating flawlessly. I'm excited about what's coming next. Achievement surrounds us. The group performed outstandingly. We're reaching incredible goals. Hopefulness permeates everything. Such a marvelous chance! I'm delighted by the advancement. Everything appears glowing and encouraging.,,0.95
+negative_test_1.txt,,negative_sentiment,,I'm devastated by the results.,,1.0
+negative_test_1.txt,,negative_sentiment,,I'm devastated by the results.,,1.0
+negative_test_1.txt,,negative_sentiment,,I'm devastated by the results.,,1.0
+negative_test_1.txt,,negative_sentiment,,I'm devastated by the results.,,1.0
+negative_test_1.txt,,negative_sentiment,,I'm devastated by the results.,,1.0
+negative_test_1.txt,,negative_sentiment,,I'm devastated by the results.,,1.0
