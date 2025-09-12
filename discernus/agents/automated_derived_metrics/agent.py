@@ -188,12 +188,31 @@ class AutomatedDerivedMetricsAgent:
                 print(f"🔍 DEBUG: LLM response contains 'metric_name_1'")
                 print(f"🔍 DEBUG: Response preview: {response[:500]}")
             
+            # Extract code using ThinOutputExtractor
+            code_blocks = self.extractor.extract_code_blocks(response)
+            
+            if not code_blocks:
+                # Fallback: try to extract from markdown code blocks
+                import re
+                markdown_blocks = re.findall(r'```python\n(.*?)\n```', response, re.DOTALL)
+                if markdown_blocks:
+                    code_blocks = markdown_blocks
+                else:
+                    # Last resort: return the raw response and hope for the best
+                    print("⚠️ Warning: No code blocks found, using raw response")
+                    code_blocks = [response]
+            
+            # Use the first (and typically only) code block
+            extracted_code = code_blocks[0] if code_blocks else response
+            
             self._log_event("LLM_GENERATION_SUCCESS", {
-                "response_length": len(response)
+                "response_length": len(response),
+                "extracted_length": len(extracted_code),
+                "code_blocks_found": len(code_blocks)
             })
             
-            return response
-            
+            return extracted_code
+        
         except Exception as e:
             self._log_event("LLM_GENERATION_FAILED", {
                 "error": str(e)
