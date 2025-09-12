@@ -609,7 +609,7 @@ FRAMEWORK TO ANALYZE:
 
 TASK: Determine if this framework measures opposing constructs or unidimensional constructs.
 
-OPPOSING CONSTRUCTS are dimensions designed to be conceptually opposite (like Hope vs Fear, Truth vs Manipulation, Dignity vs Tribalism). These should be negatively correlated and require oppositional construct validation.
+OPPOSING CONSTRUCTS are dimensions designed to be conceptually opposite (like Dimension A vs Dimension B, or positive vs negative variants of the same concept). These should be negatively correlated and require oppositional construct validation.
 
 UNIDIMENSIONAL CONSTRUCTS are dimensions that should correlate positively with each other and can be validated using traditional reliability measures like Cronbach's Alpha.
 
