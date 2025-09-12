@@ -1,0 +1,2 @@
+2025-09-12 08:53:53.810 | INFO     | discernus.core.logging_config:setup_logging:220 | Logging system initialized
+2025-09-12 08:53:53.847 | INFO     | discernus.core.logging_config:log_experiment_start:243 | Experiment started
