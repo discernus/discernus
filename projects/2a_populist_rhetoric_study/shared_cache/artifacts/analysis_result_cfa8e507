@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_3ac4736e1a83",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "populist_discourse_factorial_analysis",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Applied three independent analytical approaches with median aggregation to a political speech.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{{artifact_id}}\",\n      \"document_name\": \"Trump_SOTU_2019.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"crisis_restoration_temporal_narrative\": {\n          \"raw_score\": 1.0,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        },\n        \"popular_ Sovereignty_claims\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 1.0,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 1.0\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 1.0,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"To make Washington accountable, we have eliminated more regulations in our first year than any administration in the history of our country.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"implied_elite_failure\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_temporal_narrative\",\n          \"quote_text\": \"That night, our new administration had already taken very swift action. A new tide of optimism was already sweeping across our land. Each day since, we have gone forward with a clear vision and a righteous mission: to make America great again for all Americans.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"thematic_framing\"\n        },\n        {\n          \"dimension\": \"popular_ Sovereignty_claims\",\n          \"quote_text\": \"The people dreamed this country, the people built this country, and it's the people who are making America great again.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"direct_assertion_of_popular_authority\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"MS-13 and other criminal gangs to break into our country.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"identification_of_external_threat\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"Unfair trade deals that sacrificed our prosperity and shipped away our companies, our jobs, and our wealth.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"blaming_systemic_failures\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"My promise to them from the very beginning of this great journey.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"personal_commitment_contrast\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"All of us, together, as one team, one people, and one American family can do anything.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"direct_unity_call\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"my highest loyalty, my greatest compassion, my constant concern is for America's children, America's struggling workers, and America's forgotten communities.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"national_interest_prioritization\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"We enacted the biggest tax cuts and reforms in American history. Our massive tax cuts provide tremendous relief for the middle class and small business.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"direct_policy_benefit_claim\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "a8dd2e616df54e305174b6f07a137c103ec62ce373d78b5e39a8163ca4877ebc",
+  "execution_metadata": {
+    "start_time": "2025-09-12T04:54:28.508822+00:00",
+    "end_time": "2025-09-12T04:55:30.333771+00:00",
+    "duration_seconds": 61.824941
+  },
+  "input_artifacts": {
+    "framework_hash": "c7ca846464ee222fe98e7543c781d9218914ab6092e79c166915581f883a8992",
+    "document_hashes": [
+      "b2f29f4c3eb351236190290c141516384ef86e8482096afd80953a9fee3b642a"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "2a_populist_rhetoric_study",
+      "experiment_root": "/Volumes/code/discernus/projects/2a_populist_rhetoric_study",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250912T045053Z_cd6b8f27"
+  }
+}

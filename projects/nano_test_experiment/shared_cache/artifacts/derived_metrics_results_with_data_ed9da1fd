@@ -1,0 +1,1 @@
+{"status": "success_with_data", "derived_metrics_data": {"derived_metrics": [{"document_id": "doc1", "net_sentiment": 0.8}, {"document_id": "doc2", "net_sentiment": -0.3}]}}

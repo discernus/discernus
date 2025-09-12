@@ -163,7 +163,7 @@ class AutomatedDerivedMetricsAgent:
             framework_content=framework_content,
             experiment_name=experiment_spec.get('name', 'Unknown'),
             experiment_description=experiment_spec.get('description', 'No description'),
-            data_columns=data_structure_info.get('columns', 'No data structure info'),
+            data_columns=data_structure_info.get('columns_info', 'No data structure info'),
             sample_data=data_structure_info.get('sample_data', 'No sample data')
         )
         
@@ -174,11 +174,27 @@ class AutomatedDerivedMetricsAgent:
         })
         
         try:
-            # Temporarily disable structured output to test basic functionality
+            # Use structured output for Vertex AI
+            response_schema = {
+                "type": "object",
+                "properties": {
+                    "language": {
+                        "type": "string",
+                        "description": "The programming language of the generated code."
+                    },
+                    "code": {
+                        "type": "string", 
+                        "description": "The complete, executable Python code string."
+                    }
+                },
+                "required": ["language", "code"]
+            }
+            
             response, metadata = self.llm_gateway.execute_call(
                 model=self.model,
                 prompt=prompt,
-                temperature=0.1
+                temperature=0.1,
+                response_schema=response_schema
             )
             
             if not response:
@@ -186,51 +202,36 @@ class AutomatedDerivedMetricsAgent:
             
             # Handle structured output response
             if isinstance(response, dict):
-                # Try different possible field names for the code
-                code_field = None
+                # Check for different possible field names
                 if 'code' in response:
-                    code_field = 'code'
-                elif 'python_module' in response:
-                    code_field = 'python_module'
-                elif 'python_code' in response:
-                    code_field = 'python_code'
-                elif 'content' in response:
-                    code_field = 'content'
-                
-                if code_field:
-                    # Structured output response - extract the code directly
-                    extracted_code = response[code_field]
+                    extracted_code = response['code']
                     language = response.get('language', 'python')
-                    
+                elif 'python_module' in response:
+                    extracted_code = response['python_module']
+                    language = response.get('language', 'python')
+                elif 'module_content' in response:
+                    extracted_code = response['module_content']
+                    language = response.get('language', 'python')
+                elif 'module' in response:
+                    extracted_code = response['module']
+                    language = response.get('language', 'python')
+                else:
+                    # Fallback for non-structured responses
+                    print("⚠️ Warning: Structured output failed, falling back to parsing")
+                    extracted_code = None
+                    language = 'python'
+                
+                if extracted_code:
                     self._log_event("LLM_GENERATION_SUCCESS", {
                         "response_type": "structured_output",
                         "language": language,
-                        "code_field": code_field,
-                        "code_length": len(extracted_code)
-                    })
-                    
-                    return extracted_code
-            elif isinstance(response, list) and len(response) > 0:
-                # Handle array response format
-                first_item = response[0]
-                if isinstance(first_item, dict) and 'content' in first_item:
-                    extracted_code = first_item['content']
-                    
-                    self._log_event("LLM_GENERATION_SUCCESS", {
-                        "response_type": "structured_output_array",
-                        "array_length": len(response),
                         "code_length": len(extracted_code)
                     })
                     
                     return extracted_code
             else:
-                # Fallback to parsing for non-structured output
-                print("⚠️ Warning: Non-structured response, falling back to parsing")
-                
-                # Debug: Check for problematic strings
-                if 'metric_name_1' in str(response):
-                    print(f"🔍 DEBUG: LLM response contains 'metric_name_1'")
-                    print(f"🔍 DEBUG: Response preview: {str(response)[:500]}")
+                # Fallback for non-structured responses
+                print("⚠️ Warning: Structured output failed, falling back to parsing")
                 
                 # Extract code using ThinOutputExtractor
                 code_blocks = self.extractor.extract_code_blocks(str(response))
@@ -534,7 +535,7 @@ Generate ONLY this one function. Do not generate multiple functions."""
                 sample_data = "No sample data available"
             
             return {
-                'columns': '\n'.join(columns_info),
+                'columns_info': '\n'.join(columns_info),
                 'sample_data': sample_data
             }
             

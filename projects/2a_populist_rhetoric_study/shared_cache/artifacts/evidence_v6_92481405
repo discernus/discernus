@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "6b6f4ea6f620bbdc271813dca2f3bf276fde6dea92c31a535d3f6c06bb23cb15"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-12T04:54:28.506785+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "I will not allow the mistakes of recent decades past to define the course of our future. For too long, we've watched our middle class shrink as we've exported our jobs and wealth to foreign countries.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:54:28.506766+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "a new chapter of American greatness is now beginning. A new national pride is sweeping across our Nation... What we are witnessing today is the renewal of the American spirit.",
+      "confidence": 0.95,
+      "context_type": "thematic_summary",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:54:28.506770+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "Finally, the chorus became an earthquake, and the people turned out by the tens of millions, and they were all united by one very simple, but crucial demand: that America must put its own citizens first.",
+      "confidence": 0.9,
+      "context_type": "thematic_summary",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:54:28.506771+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "It is not compassionate, but reckless to allow uncontrolled entry from places where proper vetting cannot occur. Those given the high honor of admission to the United States should support this country and love its people and its values.",
+      "confidence": 0.85,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:54:28.506773+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "We have begun to drain the swamp of government corruption by imposing a 5-year ban on lobbying by executive branch officials and a lifetime ban on becoming lobbyists for a foreign government.",
+      "confidence": 0.85,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:54:28.506773+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "my job is not to represent the world. My job is to represent the United States of America.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:54:28.506774+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "We are one people, with one destiny. We all bleed the same blood. We all salute the same great American flag. And we all are made by the same God.",
+      "confidence": 0.95,
+      "context_type": "rhetorical_flourish",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:54:28.506778+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "America must put its own citizens first... We will soon begin the construction of a great, great wall along our southern border.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:54:28.506779+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2018.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "For too long, we've watched our middle class shrink as we've exported our jobs and wealth to foreign countries... I am not going to let America and its great companies and workers be taken advantage of us any longer. They have taken advantage of our country. No longer.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:54:28.506783+00:00"
+    }
+  ]
+}

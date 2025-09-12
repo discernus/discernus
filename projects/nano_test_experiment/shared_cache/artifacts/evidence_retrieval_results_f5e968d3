@@ -1,0 +1,431 @@
+{
+  "metadata": {
+    "agent": "EvidenceRetriever",
+    "timestamp": "2025-09-12T14:25:49.224217",
+    "framework_hash": "11ab06fe79b4b8ac20e998fcb6e8c77c36eb762f887dae8d6f7680d3d656225c",
+    "total_findings": 10,
+    "total_quotes": 20
+  },
+  "evidence_results": [
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Perfect Negative Correlation (r=-1.0): An absolute inverse relationship was observed where a high score in positive sentiment corresponds to a low score in negative sentiment, and vice versa. This is an artifact of the N=2 test data."
+      },
+      "queries_used": [
+        "positive sentiment 1.0 negative sentiment 0.0",
+        "negative sentiment 1.0 positive sentiment 0.0",
+        "inverse relationship between positive and negative scores"
+      ],
+      "quotes": [
+        {
+          "quote_text": "This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless.",
+          "document_name": "negative_test.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.3383001685142517,
+          "metadata": {
+            "document_name": "negative_test.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.",
+          "document_name": "positive_test.txt",
+          "dimension": "positive_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.2771059274673462,
+          "metadata": {
+            "document_name": "positive_test.txt",
+            "dimension": "positive_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "'Positive Test' Group - Maximum Positive Score: The 'Positive Test' case yielded a perfect score of 1.0 for `positive_sentiment`."
+      },
+      "queries_used": [
+        "positive_sentiment_raw score 1.0",
+        "evidence of dominant positive language",
+        "praise optimism success enthusiasm"
+      ],
+      "quotes": [
+        {
+          "quote_text": "This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.",
+          "document_name": "positive_test.txt",
+          "dimension": "positive_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.6589910387992859,
+          "metadata": {
+            "document_name": "positive_test.txt",
+            "dimension": "positive_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless.",
+          "document_name": "negative_test.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.42335236072540283,
+          "metadata": {
+            "document_name": "negative_test.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "'Positive Test' Group - Zero Negative Score: The 'Positive Test' case simultaneously scored 0.0 for `negative_sentiment`, indicating a complete absence of negative language."
+      },
+      "queries_used": [
+        "negative_sentiment_raw score 0.0",
+        "absence of negative language",
+        "no criticism pessimism failure"
+      ],
+      "quotes": [
+        {
+          "quote_text": "This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless.",
+          "document_name": "negative_test.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.5675399899482727,
+          "metadata": {
+            "document_name": "negative_test.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.",
+          "document_name": "positive_test.txt",
+          "dimension": "positive_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.3371153473854065,
+          "metadata": {
+            "document_name": "positive_test.txt",
+            "dimension": "positive_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "'Negative Test' Group - Maximum Negative Score: The 'Negative Test' case yielded a perfect score of 1.0 for `negative_sentiment`."
+      },
+      "queries_used": [
+        "negative_sentiment_raw score 1.0",
+        "evidence of dominant negative language",
+        "criticism pessimism failure despair"
+      ],
+      "quotes": [
+        {
+          "quote_text": "This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless.",
+          "document_name": "negative_test.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.605019211769104,
+          "metadata": {
+            "document_name": "negative_test.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.",
+          "document_name": "positive_test.txt",
+          "dimension": "positive_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.34539473056793213,
+          "metadata": {
+            "document_name": "positive_test.txt",
+            "dimension": "positive_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "'Negative Test' Group - Zero Positive Score: The 'Negative Test' case simultaneously scored 0.0 for `positive_sentiment`, indicating a complete absence of positive language."
+      },
+      "queries_used": [
+        "positive_sentiment_raw score 0.0",
+        "absence of positive language",
+        "no praise optimism success"
+      ],
+      "quotes": [
+        {
+          "quote_text": "This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.",
+          "document_name": "positive_test.txt",
+          "dimension": "positive_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.6162050366401672,
+          "metadata": {
+            "document_name": "positive_test.txt",
+            "dimension": "positive_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless.",
+          "document_name": "negative_test.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.4940071105957031,
+          "metadata": {
+            "document_name": "negative_test.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Extreme Scoring Dichotomy: All scores observed in the dataset are either 0.0 or 1.0. No intermediate scores (e.g., 0.1-0.9) were recorded, indicating the test cases were polar opposites."
+      },
+      "queries_used": [
+        "sentiment score 1.0",
+        "sentiment score 0.0",
+        "no moderate sentiment scores"
+      ],
+      "quotes": [
+        {
+          "quote_text": "This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.",
+          "document_name": "positive_test.txt",
+          "dimension": "positive_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.46367311477661133,
+          "metadata": {
+            "document_name": "positive_test.txt",
+            "dimension": "positive_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless.",
+          "document_name": "negative_test.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.44406288862228394,
+          "metadata": {
+            "document_name": "negative_test.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Confirmation of 'Dominant Positive' Scoring Rule: The observed `positive_sentiment` score of 1.0 directly validates the framework's scoring calibration for '0.9-1.0: Dominant positive language throughout'."
+      },
+      "queries_used": [
+        "evidence for positive_sentiment 1.0",
+        "dominant positive language throughout",
+        "excellent wonderful fantastic"
+      ],
+      "quotes": [
+        {
+          "quote_text": "This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.",
+          "document_name": "positive_test.txt",
+          "dimension": "positive_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.21422645449638367,
+          "metadata": {
+            "document_name": "positive_test.txt",
+            "dimension": "positive_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless.",
+          "document_name": "negative_test.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.014866303652524948,
+          "metadata": {
+            "document_name": "negative_test.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Confirmation of 'Dominant Negative' Scoring Rule: The observed `negative_sentiment` score of 1.0 directly validates the framework's scoring calibration for '0.9-1.0: Dominant negative language throughout'."
+      },
+      "queries_used": [
+        "evidence for negative_sentiment 1.0",
+        "dominant negative language throughout",
+        "terrible failure disastrous"
+      ],
+      "quotes": [
+        {
+          "quote_text": "This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless.",
+          "document_name": "negative_test.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.5606926679611206,
+          "metadata": {
+            "document_name": "negative_test.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.",
+          "document_name": "positive_test.txt",
+          "dimension": "positive_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.21628709137439728,
+          "metadata": {
+            "document_name": "positive_test.txt",
+            "dimension": "positive_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Absence of Ambiguity in Test Data: The results show no documents with mixed sentiment (e.g., moderate positive and moderate negative), which aligns with the framework's intended use for simple, clear-cut test cases."
+      },
+      "queries_used": [
+        "high positive sentiment and low negative sentiment",
+        "low positive sentiment and high negative sentiment",
+        "no mixed or moderate sentiment"
+      ],
+      "quotes": [
+        {
+          "quote_text": "This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.",
+          "document_name": "positive_test.txt",
+          "dimension": "positive_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.44452986121177673,
+          "metadata": {
+            "document_name": "positive_test.txt",
+            "dimension": "positive_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless.",
+          "document_name": "negative_test.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.42999786138534546,
+          "metadata": {
+            "document_name": "negative_test.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Zero Score Variance within Groups: The descriptive statistics show a standard deviation of NaN and identical min/max/quartile values, confirming all documents within a test group received the exact same scores."
+      },
+      "queries_used": [
+        "evidence for positive test group scores",
+        "evidence for negative test group scores",
+        "uniform scores within test group"
+      ],
+      "quotes": [
+        {
+          "quote_text": "This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.",
+          "document_name": "positive_test.txt",
+          "dimension": "positive_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.13416312634944916,
+          "metadata": {
+            "document_name": "positive_test.txt",
+            "dimension": "positive_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless.",
+          "document_name": "negative_test.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.063590869307518,
+          "metadata": {
+            "document_name": "negative_test.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    }
+  ]
+}

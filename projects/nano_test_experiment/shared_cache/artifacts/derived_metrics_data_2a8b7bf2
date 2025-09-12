@@ -1,0 +1,38 @@
+{
+  "status": "success",
+  "functions_generated": 7,
+  "output_file": "automatedderivedmetricsagent_functions.py",
+  "module_size": 9150,
+  "derived_metrics_results": {
+    "generation_metadata": {
+      "status": "success",
+      "functions_generated": 7,
+      "output_file": "automatedderivedmetricsagent_functions.py",
+      "module_size": 9150
+    },
+    "derived_metrics_data": {
+      "status": "success",
+      "original_count": 2,
+      "derived_count": 2,
+      "derived_metrics": [
+        {
+          "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"sentiment_binary_v1\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 1.0,\n    \"analysis_notes\": \"Applied three independent analytical approaches with median aggregation. Document exhibited clear, dominant positive sentiment.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"6950ccbc6b14...\",\n      \"document_name\": \"positive_test.txt\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 1.0,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"negative_sentiment\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_evidence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+          "net_sentiment": 1.0,
+          "overall_sentiment_intensity": 1.0,
+          "sentiment_contention": 0.0
+        },
+        {
+          "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"sentiment_binary_v1\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 1.0,\n    \"analysis_notes\": \"Applied three independent analytical approaches with median aggregation. Document exhibited extremely clear sentiment.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{{artifact_id}}\",\n      \"document_name\": \"negative_test.txt\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 1.0,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"negative_sentiment\",\n          \"quote_text\": \"This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"direct_statement\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+          "net_sentiment": -1.0,
+          "overall_sentiment_intensity": 1.0,
+          "sentiment_contention": 0.0
+        }
+      ],
+      "columns_added": [
+        "sentiment_contention",
+        "net_sentiment",
+        "overall_sentiment_intensity"
+      ]
+    }
+  }
+}

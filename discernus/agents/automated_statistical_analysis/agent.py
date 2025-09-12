@@ -325,22 +325,69 @@ class AutomatedStatisticalAnalysisAgent:
             # Log what we're generating
             print("🔧 Generating statistical analysis functions...")
             
-            # Use the pre-assembled prompt directly with the LLM
+            # Use structured output for Vertex AI
+            response_schema = {
+                "type": "object",
+                "properties": {
+                    "language": {
+                        "type": "string",
+                        "description": "The programming language of the generated code."
+                    },
+                    "code": {
+                        "type": "string", 
+                        "description": "The complete, executable Python code string."
+                    }
+                },
+                "required": ["language", "code"]
+            }
+            
             response, metadata = self.llm_gateway.execute_call(
                 model=self.model,
                 prompt=pre_assembled_prompt,
-                temperature=0.1
+                temperature=0.1,
+                response_schema=response_schema
             )
             
             if not response:
                 raise ValueError("LLM returned empty response")
             
-            self._log_event("PROMPT_BASED_GENERATION_SUCCESS", {
-                "response_length": len(response),
-                "response_preview": response[:500]
-            })
-            
-            return response
+            # Handle structured output response
+            if isinstance(response, dict):
+                # Check for different possible field names
+                if 'code' in response:
+                    extracted_code = response['code']
+                    language = response.get('language', 'python')
+                elif 'python_module' in response:
+                    extracted_code = response['python_module']
+                    language = response.get('language', 'python')
+                elif 'module_content' in response:
+                    extracted_code = response['module_content']
+                    language = response.get('language', 'python')
+                elif 'module' in response:
+                    extracted_code = response['module']
+                    language = response.get('language', 'python')
+                else:
+                    # Fallback for non-structured responses
+                    print("⚠️ Warning: Structured output failed, using raw response")
+                    extracted_code = str(response)
+                    language = 'python'
+                
+                self._log_event("PROMPT_BASED_GENERATION_SUCCESS", {
+                    "response_type": "structured_output",
+                    "language": language,
+                    "code_length": len(extracted_code)
+                })
+                
+                return extracted_code
+            else:
+                # Fallback for non-structured responses
+                print("⚠️ Warning: Structured output failed, using raw response")
+                self._log_event("PROMPT_BASED_GENERATION_SUCCESS", {
+                    "response_type": "raw_output",
+                    "response_length": len(str(response))
+                })
+                
+                return str(response)
             
         except Exception as e:
             self._log_event("PROMPT_BASED_GENERATION_FAILED", {

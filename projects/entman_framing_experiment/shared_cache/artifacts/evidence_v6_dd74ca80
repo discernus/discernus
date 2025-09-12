@@ -1,0 +1,53 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "d0a474fc58a406ed35bd034a4c33e69ffb79ec9f9b431f36e346668062e25505"
+    ],
+    "total_evidence_pieces": 4,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-12T14:12:05.465359+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "crisis_management.txt",
+      "dimension": "problem_definition",
+      "quote_text": "We are writing to inform you of a serious data security incident that occurred on September 14, 2025.",
+      "confidence": 0.9,
+      "context_type": "explicit statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T14:12:05.465351+00:00"
+    },
+    {
+      "document_name": "crisis_management.txt",
+      "dimension": "causal_attribution",
+      "quote_text": "detected unauthorized access to our customer database",
+      "confidence": 0.8,
+      "context_type": "causal explanation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T14:12:05.465355+00:00"
+    },
+    {
+      "document_name": "crisis_management.txt",
+      "dimension": "moral_evaluation",
+      "quote_text": "We sincerely apologize for this incident and are working tirelessly to prevent future occurrences.",
+      "confidence": 0.9,
+      "context_type": "apology and commitment",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T14:12:05.465356+00:00"
+    },
+    {
+      "document_name": "crisis_management.txt",
+      "dimension": "treatment_recommendation",
+      "quote_text": "Our response includes:\n- Immediate system lockdown and security audit\n- Notification to law enforcement and cybersecurity experts\n- Implementation of enhanced security measures\n- Free credit monitoring for affected customers\n- 24/7 customer support hotline",
+      "confidence": 0.9,
+      "context_type": "action plan",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T14:12:05.465357+00:00"
+    }
+  ]
+}

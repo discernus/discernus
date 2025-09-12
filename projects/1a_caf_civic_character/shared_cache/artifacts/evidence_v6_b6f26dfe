@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "0c32812a4f8237d0732c6a372a0a025acd202ba2dc48a1f4904d0fb399e53e65"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-12T14:14:06.961840+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "tribalism",
+      "quote_text": "This is a system in our country that feeds upon certain communities and not others.",
+      "confidence": 0.8,
+      "context_type": "criticism_of_systemic_bias",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T14:14:06.961826+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "dignity",
+      "quote_text": "Our criminal justice system, as it stands right now, is an affront to who we say we are as a nation. We profess -- we actually swear an oath to the flag -- that we are a nation of liberty and justice for all.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T14:14:06.961830+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "manipulation",
+      "quote_text": "I'm making no accusations",
+      "confidence": 0.7,
+      "context_type": "disclaimer_of_intent",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T14:14:06.961832+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "truth",
+      "quote_text": "Since 1980 alone, our federal prison population has exploded by eight hundred percent \u2013 an 800 percent increase in our prison population.",
+      "confidence": 0.9,
+      "context_type": "statistical_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T14:14:06.961833+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "resentment",
+      "quote_text": "But I want to return to this fact: that we are poised to do this bill because of the deeply savage, broken criminal justice system that we have.",
+      "confidence": 0.95,
+      "context_type": "problem_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T14:14:06.961834+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "justice",
+      "quote_text": "Our criminal justice system, as it stands right now, is an affront to who we say we are as a nation. We profess \u2013 we actually swear an oath to the flag \u2013 that we are a nation of liberty and justice for all.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T14:14:06.961835+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "fear",
+      "quote_text": "Our prisons and jails have become warehouses for people that are struggling with trauma, struggling with disease, struggling with illness.",
+      "confidence": 0.85,
+      "context_type": "problem_description",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T14:14:06.961836+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "hope",
+      "quote_text": "When a young person is sent up the river, we need to remember that all rivers can change course.",
+      "confidence": 0.9,
+      "context_type": "metaphorical_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T14:14:06.961837+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "fantasy",
+      "quote_text": "This legislation is a product of compromise.",
+      "confidence": 0.8,
+      "context_type": "acknowledgment_of_limitations",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T14:14:06.961837+00:00"
+    },
+    {
+      "document_name": "cory_booker_2018_first_step_act_0c32812a.txt",
+      "dimension": "pragmatism",
+      "quote_text": "This legislation is a product of compromise. This legislation is just one step in the right direction, but if we pass this legislation, it is a step in the right direction, and I hope momentum for greater, urgently needed reforms that are supported by conservatives in this country and progressives.",
+      "confidence": 0.9,
+      "context_type": "action_plan",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T14:14:06.961838+00:00"
+    }
+  ]
+}

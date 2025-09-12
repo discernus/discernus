@@ -1,0 +1,76 @@
+{
+  "artifact_transformations": [],
+  "audit_references": {
+    "current_time": "2025-09-12T05:02:36.404155+00:00",
+    "log_files": {
+      "agents": "logs/agents.jsonl",
+      "artifacts": "logs/artifacts.jsonl",
+      "costs": "logs/costs.jsonl",
+      "llm_interactions": "logs/llm_interactions.jsonl",
+      "orchestrator": "logs/orchestrator.jsonl",
+      "system": "logs/system.jsonl"
+    },
+    "logs_directory": "/Volumes/code/discernus/projects/2a_populist_rhetoric_study/session/20250912T045053Z/logs",
+    "session_id": "20250912T045053Z_cd6b8f27",
+    "start_time": "2025-09-12T04:50:53.851959+00:00"
+  },
+  "cache_analysis": {
+    "artifact_storage": {
+      "artifacts_dir": "/Volumes/code/discernus/projects/2a_populist_rhetoric_study/shared_cache/artifacts",
+      "total_artifacts": 23,
+      "total_bytes": 286198,
+      "total_mb": 0.27
+    },
+    "cache_hits": 0,
+    "cache_misses": 0,
+    "hit_rate": 0.0
+  },
+  "cost_tracking": {
+    "total_cost_usd": 0.07946375
+  },
+  "created_at": "2025-09-12T04:50:53.852995+00:00",
+  "execution_timeline": [],
+  "experiment_config": {},
+  "finalized_at": "2025-09-12T05:02:36.404138+00:00",
+  "input_artifacts": {},
+  "llm_interactions": [
+    {
+      "agent_name": "ExperimentCoherenceAgent",
+      "interaction_hash": "",
+      "metadata": {
+        "agent": "ExperimentCoherenceAgent",
+        "cost": 0.07946375,
+        "tokens_used": 32169
+      },
+      "model": "vertex_ai/gemini-2.5-pro",
+      "prompt_length": 0,
+      "response_length": 0,
+      "stage": "validation",
+      "timestamp": "2025-09-12T04:51:36.584416+00:00"
+    }
+  ],
+  "manifest_version": "2.0",
+  "performance_metrics": {},
+  "quality_assurance": {},
+  "resume_capability": {
+    "can_resume_from_stats": true,
+    "resume_artifacts": [],
+    "resume_metadata": {
+      "analysis_documents": 5,
+      "csv_export_completed": true,
+      "derived_metrics_completed": true,
+      "resume_timestamp": "2025-09-12T05:02:36.105662+00:00"
+    },
+    "statistical_prep_completed": true
+  },
+  "run_metadata": {},
+  "run_mode": {
+    "analysis_only": false,
+    "dry_run": false,
+    "ensemble_runs": null,
+    "mode_type": "statistical_prep",
+    "resume_from_stats": false,
+    "skip_synthesis": false,
+    "statistical_prep": true
+  }
+}

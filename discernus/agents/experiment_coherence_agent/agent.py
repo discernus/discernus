@@ -291,11 +291,37 @@ class ExperimentCoherenceAgent:
                 specification_references=specification_references
             )
             
+            # Use structured output for validation results
+            response_schema = {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean",
+                        "description": "Whether the experiment is valid"
+                    },
+                    "issues": {
+                        "type": "array",
+                        "items": {"type": "string"},
+                        "description": "List of validation issues found"
+                    },
+                    "model": {
+                        "type": "string", 
+                        "description": "The model used for validation"
+                    },
+                    "validated_at": {
+                        "type": "string",
+                        "description": "Timestamp of validation"
+                    }
+                },
+                "required": ["success", "issues", "model", "validated_at"]
+            }
+            
             # Call LLM for validation
             raw_response, metadata = self.llm_gateway.execute_call(
                 model=self.model,
                 prompt=prompt,
-                system_prompt="You are a validation expert for the Discernus research platform."
+                system_prompt="You are a validation expert for the Discernus research platform.",
+                response_schema=response_schema
             )
 
             # Check if the LLM call was successful
@@ -317,7 +343,7 @@ class ExperimentCoherenceAgent:
                 )
 
             # Check if response is empty
-            if not raw_response or not raw_response.strip():
+            if not raw_response or (isinstance(raw_response, str) and not raw_response.strip()):
                 error_msg = "LLM returned empty response"
                 if self.audit_logger:
                     self.audit_logger.log_error("llm_validation_empty_response", error_msg, {"agent": self.agent_name})
@@ -341,8 +367,28 @@ class ExperimentCoherenceAgent:
                     {"response": raw_response}
                 )
             
-            # Parse validation result
-            result = self._parse_validation_response(raw_response)
+            # Parse validation result - handle structured output
+            if isinstance(raw_response, dict):
+                # Structured output response
+                result = ValidationResult(
+                    success=raw_response.get('success', False),
+                    issues=[ValidationIssue(
+                        category="validation",
+                        description=issue,
+                        impact="Unknown",
+                        fix="Review experiment configuration",
+                        priority="MEDIUM",
+                        affected_files=[]
+                    ) for issue in raw_response.get('issues', [])],
+                    suggestions=[],
+                    llm_metadata={
+                        "model": raw_response.get('model', 'unknown'),
+                        "validated_at": raw_response.get('validated_at', 'unknown')
+                    }
+                )
+            else:
+                # Fallback to parsing
+                result = self._parse_validation_response(str(raw_response))
             
             # Use LLM validation results only (THIN approach - let LLM handle statistical validation)
             all_issues = result.issues

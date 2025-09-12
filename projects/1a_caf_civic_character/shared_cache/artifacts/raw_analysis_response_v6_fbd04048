@@ -1,0 +1,131 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "civic_analysis_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Applied three independent analytical approaches with median aggregation, focusing on explicit statements, rhetorical context, and repetition patterns.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "mitt_romney_2020_impeachment_9ebec73f",
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimensional_scores": {
+        "tribalism": {
+          "raw_score": 0.3,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "dignity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "manipulation": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "truth": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "resentment": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.85
+        },
+        "justice": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "fear": {
+          "raw_score": 0.6,
+          "salience": 0.5,
+          "confidence": 0.8
+        },
+        "hope": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.85
+        },
+        "fantasy": {
+          "raw_score": 0.5,
+          "salience": 0.5,
+          "confidence": 0.8
+        },
+        "pragmatism": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribalism",
+          "quote_text": "I'm aware that there are people in my party and in my state who will strenuously disapprove of my decision, and in some quarters I will be vehemently denounced.",
+          "confidence": 0.9,
+          "context_type": "explicit_recognition_of_partisan_backlash"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "My faith is at the heart of who I am. I take an oath before God as enormously consequential.",
+          "confidence": 0.95,
+          "context_type": "personal_conviction_and_higher_duty"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "Corrupting an election to keep oneself in office is perhaps the most abusive and destructive violation of one's oath of office that I can imagine.",
+          "confidence": 0.9,
+          "context_type": "direct_accusation_of_abuse_of_power"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "The historic meaning of the words 'high crimes and misdemeanors,' the writings of the founders, and my own reasoned judgment convince me that a president can indeed commit acts against the public trust...",
+          "confidence": 0.95,
+          "context_type": "explanation_of_a_reasoned_judgment"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "what the president did was wrong \u2014 grievously wrong.",
+          "confidence": 0.85,
+          "context_type": "moral_judgment_of_past_actions"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "The grave question the Constitution tasks senators to answer is whether the president committed an act so extreme and egregious that it rises to the level of a high crime and misdemeanor. Yes, he did.",
+          "confidence": 0.95,
+          "context_type": "direct_statement_of_judicial_conclusion"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "it would, I fear, expose my character to history's rebuke and the censure of my own conscience.",
+          "confidence": 0.9,
+          "context_type": "personal_moral_stakes"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "I will tell my children and their children that I did my duty to the best of my ability, believing that my country expected it of me.",
+          "confidence": 0.85,
+          "context_type": "long-term_legacy_and_national_ideals"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "To maintain that the lack of a codified and comprehensive list of all the outrageous acts that a president might conceivably commit renders Congress powerless to remove such a president defies reason.",
+          "confidence": 0.85,
+          "context_type": "refutation_of_a_defense_argument"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "I acknowledge that my verdict will not remove the president from office.",
+          "confidence": 0.95,
+          "context_type": "realistic_assessment"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

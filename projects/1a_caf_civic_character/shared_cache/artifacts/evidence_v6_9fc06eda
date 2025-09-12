@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "9ebec73f000084ff7ceb77c737df2a77d5231179a7f864aa74e58dd7a4889d5d"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-12T04:46:46.778205+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "tribalism",
+      "quote_text": "I'm aware that there are people in my party and in my state who will strenuously disapprove of my decision, and in some quarters I will be vehemently denounced.",
+      "confidence": 0.9,
+      "context_type": "explicit_recognition_of_partisan_backlash",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:46:46.778181+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "dignity",
+      "quote_text": "My faith is at the heart of who I am. I take an oath before God as enormously consequential.",
+      "confidence": 0.95,
+      "context_type": "personal_conviction_and_higher_duty",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:46:46.778184+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "manipulation",
+      "quote_text": "Corrupting an election to keep oneself in office is perhaps the most abusive and destructive violation of one's oath of office that I can imagine.",
+      "confidence": 0.9,
+      "context_type": "direct_accusation_of_abuse_of_power",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:46:46.778185+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "truth",
+      "quote_text": "The historic meaning of the words 'high crimes and misdemeanors,' the writings of the founders, and my own reasoned judgment convince me that a president can indeed commit acts against the public trust...",
+      "confidence": 0.95,
+      "context_type": "explanation_of_a_reasoned_judgment",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:46:46.778186+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "resentment",
+      "quote_text": "what the president did was wrong \u2014 grievously wrong.",
+      "confidence": 0.85,
+      "context_type": "moral_judgment_of_past_actions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:46:46.778188+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "justice",
+      "quote_text": "The grave question the Constitution tasks senators to answer is whether the president committed an act so extreme and egregious that it rises to the level of a high crime and misdemeanor. Yes, he did.",
+      "confidence": 0.95,
+      "context_type": "direct_statement_of_judicial_conclusion",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:46:46.778192+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "fear",
+      "quote_text": "it would, I fear, expose my character to history's rebuke and the censure of my own conscience.",
+      "confidence": 0.9,
+      "context_type": "personal_moral_stakes",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:46:46.778193+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "hope",
+      "quote_text": "I will tell my children and their children that I did my duty to the best of my ability, believing that my country expected it of me.",
+      "confidence": 0.85,
+      "context_type": "long-term_legacy_and_national_ideals",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:46:46.778200+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "fantasy",
+      "quote_text": "To maintain that the lack of a codified and comprehensive list of all the outrageous acts that a president might conceivably commit renders Congress powerless to remove such a president defies reason.",
+      "confidence": 0.85,
+      "context_type": "refutation_of_a_defense_argument",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:46:46.778201+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "pragmatism",
+      "quote_text": "I acknowledge that my verdict will not remove the president from office.",
+      "confidence": 0.95,
+      "context_type": "realistic_assessment",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:46:46.778202+00:00"
+    }
+  ]
+}

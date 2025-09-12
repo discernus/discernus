@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "b2f29f4c3eb351236190290c141516384ef86e8482096afd80953a9fee3b642a"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-12T04:55:30.333124+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "To make Washington accountable, we have eliminated more regulations in our first year than any administration in the history of our country.",
+      "confidence": 0.9,
+      "context_type": "implied_elite_failure",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:55:30.333111+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "crisis_restoration_temporal_narrative",
+      "quote_text": "That night, our new administration had already taken very swift action. A new tide of optimism was already sweeping across our land. Each day since, we have gone forward with a clear vision and a righteous mission: to make America great again for all Americans.",
+      "confidence": 1.0,
+      "context_type": "thematic_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:55:30.333114+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "popular_ Sovereignty_claims",
+      "quote_text": "The people dreamed this country, the people built this country, and it's the people who are making America great again.",
+      "confidence": 1.0,
+      "context_type": "direct_assertion_of_popular_authority",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:55:30.333115+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "MS-13 and other criminal gangs to break into our country.",
+      "confidence": 0.8,
+      "context_type": "identification_of_external_threat",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:55:30.333117+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "Unfair trade deals that sacrificed our prosperity and shipped away our companies, our jobs, and our wealth.",
+      "confidence": 0.8,
+      "context_type": "blaming_systemic_failures",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:55:30.333118+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "My promise to them from the very beginning of this great journey.",
+      "confidence": 0.8,
+      "context_type": "personal_commitment_contrast",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:55:30.333119+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "All of us, together, as one team, one people, and one American family can do anything.",
+      "confidence": 1.0,
+      "context_type": "direct_unity_call",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:55:30.333120+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "my highest loyalty, my greatest compassion, my constant concern is for America's children, America's struggling workers, and America's forgotten communities.",
+      "confidence": 1.0,
+      "context_type": "national_interest_prioritization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:55:30.333121+00:00"
+    },
+    {
+      "document_name": "Trump_SOTU_2019.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "We enacted the biggest tax cuts and reforms in American history. Our massive tax cuts provide tremendous relief for the middle class and small business.",
+      "confidence": 1.0,
+      "context_type": "direct_policy_benefit_claim",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:55:30.333122+00:00"
+    }
+  ]
+}

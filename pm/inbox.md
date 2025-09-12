@@ -238,3 +238,12 @@
 - Check if `calculate_derived_metrics(df)` is being called correctly
 - Verify DataFrame conversion and derived metrics calculation
 - Test derived metrics functions in isolation
+
+### Bugs Moved to Sprint 16
+
+**Note**: The following critical bugs have been moved to Sprint 16 (Alpha Release Preparation) for immediate resolution:
+
+- **[ALPHA-008] Derived Metrics Synthesis Regression** - CRITICAL priority
+- **[ALPHA-009] Derived Metrics Syntax Error** - HIGH priority
+
+**Total Bugs Moved**: 2 critical bugs moved to Sprint 16

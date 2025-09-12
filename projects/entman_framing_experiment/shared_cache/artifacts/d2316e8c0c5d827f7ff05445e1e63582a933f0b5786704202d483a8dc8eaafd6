@@ -1,0 +1,382 @@
+{
+  "document_analyses": [
+    {
+      "document_id": "d0a474fc58a4...",
+      "document_name": "crisis_management.txt",
+      "dimensional_scores": {
+        "problem_definition": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "causal_attribution": {
+          "raw_score": 0.3,
+          "salience": 0.2,
+          "confidence": 0.8
+        },
+        "moral_evaluation": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "treatment_recommendation": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "problem_definition",
+          "quote_text": "We are writing to inform you of a serious data security incident that occurred on September 14, 2025.",
+          "confidence": 0.9,
+          "context_type": "explicit statement"
+        },
+        {
+          "dimension": "causal_attribution",
+          "quote_text": "detected unauthorized access to our customer database",
+          "confidence": 0.8,
+          "context_type": "causal explanation"
+        },
+        {
+          "dimension": "moral_evaluation",
+          "quote_text": "We sincerely apologize for this incident and are working tirelessly to prevent future occurrences.",
+          "confidence": 0.9,
+          "context_type": "apology and commitment"
+        },
+        {
+          "dimension": "treatment_recommendation",
+          "quote_text": "Our response includes:\n- Immediate system lockdown and security audit\n- Notification to law enforcement and cybersecurity experts\n- Implementation of enhanced security measures\n- Free credit monitoring for affected customers\n- 24/7 customer support hotline",
+          "confidence": 0.9,
+          "context_type": "action plan"
+        }
+      ],
+      "analysis_scores": {
+        "problem_definition": 0.9,
+        "causal_attribution": 0.3,
+        "moral_evaluation": 0.8,
+        "treatment_recommendation": 0.9
+      },
+      "derived_metrics": {
+        "message_completeness_index": 0.725,
+        "framing_coherence_index": 0.6640091518201929,
+        "salience_weighted_message_completeness": 0.8282756158514817,
+        "strategic_framing_profile": 0.0,
+        "framing_independence_score": 0.248746859276655
+      }
+    },
+    {
+      "document_id": "924d08d33436",
+      "document_name": "political_attack_ad.txt",
+      "dimensional_scores": {
+        "problem_definition": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "causal_attribution": {
+          "raw_score": 0.95,
+          "salience": 1.0,
+          "confidence": 1.0
+        },
+        "moral_evaluation": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 1.0
+        },
+        "treatment_recommendation": {
+          "raw_score": 0.75,
+          "salience": 0.75,
+          "confidence": 1.0
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "problem_definition",
+          "quote_text": "Senator Johnson's opponent has a record of failure and corruption that threatens our community.",
+          "confidence": 1.0,
+          "context_type": "explicit statement"
+        },
+        {
+          "dimension": "causal_attribution",
+          "quote_text": "His policies have destroyed jobs, raised taxes, and left families struggling to make ends meet.",
+          "confidence": 1.0,
+          "context_type": "direct blame"
+        },
+        {
+          "dimension": "moral_evaluation",
+          "quote_text": "His moral character is questionable. He's been caught in multiple ethics violations, taking money from special interests while voting against the people's interests. He represents everything that's wrong with Washington politics.",
+          "confidence": 1.0,
+          "context_type": "moral judgment"
+        },
+        {
+          "dimension": "treatment_recommendation",
+          "quote_text": "Senator Johnson stands for integrity, family values, and real solutions. Don't let corruption win. Vote Johnson for Senate.",
+          "confidence": 1.0,
+          "context_type": "call to action"
+        }
+      ],
+      "analysis_scores": {
+        "problem_definition": 0.9,
+        "causal_attribution": 0.95,
+        "moral_evaluation": 0.9,
+        "treatment_recommendation": 0.75
+      },
+      "derived_metrics": {
+        "message_completeness_index": 0.875,
+        "framing_coherence_index": 0.8716005023667873,
+        "salience_weighted_message_completeness": 0.8821458744015772,
+        "strategic_framing_profile": 1.0,
+        "framing_independence_score": 0.075
+      }
+    },
+    {
+      "document_id": "5fbf6a44ce54...",
+      "document_name": "corporate_apology.txt",
+      "dimensional_scores": {
+        "problem_definition": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "causal_attribution": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "moral_evaluation": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "treatment_recommendation": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "problem_definition",
+          "quote_text": "the environmental incident that occurred at our facility",
+          "confidence": 0.9,
+          "context_type": "direct statement"
+        },
+        {
+          "dimension": "causal_attribution",
+          "quote_text": "take full responsibility for the environmental incident that occurred at our facility on August 8, 2025. Our investigation has determined that the chemical spill was caused by equipment failure that we should have prevented through proper maintenance and oversight.",
+          "confidence": 0.9,
+          "context_type": "direct explanation of cause and responsibility"
+        },
+        {
+          "dimension": "moral_evaluation",
+          "quote_text": "This failure represents a breach of our core values and our commitment to environmental stewardship.",
+          "confidence": 0.9,
+          "context_type": "statement of values and regret"
+        },
+        {
+          "dimension": "treatment_recommendation",
+          "quote_text": "Our corrective actions include: - Complete equipment overhaul and safety system upgrades - Enhanced training for all personnel on environmental protocols - Independent environmental audit and compliance review - Community compensation fund for affected residents - Regular public reporting on our environmental performance",
+          "confidence": 0.9,
+          "context_type": "list of specific actions"
+        }
+      ],
+      "analysis_scores": {
+        "problem_definition": 0.9,
+        "causal_attribution": 0.9,
+        "moral_evaluation": 0.9,
+        "treatment_recommendation": 0.9
+      },
+      "derived_metrics": {
+        "message_completeness_index": 0.9,
+        "framing_coherence_index": 0.9,
+        "salience_weighted_message_completeness": 0.8997500694251598,
+        "strategic_framing_profile": 0.0,
+        "framing_independence_score": 0.0
+      }
+    },
+    {
+      "document_id": "5d70053d9254...",
+      "document_name": "policy_advocacy.txt",
+      "dimensional_scores": {
+        "problem_definition": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "causal_attribution": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.8
+        },
+        "moral_evaluation": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "treatment_recommendation": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "problem_definition",
+          "quote_text": "My fellow Americans, today I want to talk about a crisis that affects every family in this country - our broken healthcare system.",
+          "confidence": 0.9,
+          "context_type": "opening_statement_and_theme_setting"
+        },
+        {
+          "dimension": "causal_attribution",
+          "quote_text": "My fellow Americans, today I want to talk about a crisis that affects every family in this country - our broken healthcare system.",
+          "confidence": 0.8,
+          "context_type": "systemic_causal_framing"
+        },
+        {
+          "dimension": "moral_evaluation",
+          "quote_text": "Every family deserves access to quality, affordable healthcare. No one should have to choose between their health and their financial security.",
+          "confidence": 0.9,
+          "context_type": "ethical_justification_and_value_invocation"
+        },
+        {
+          "dimension": "treatment_recommendation",
+          "quote_text": "Our solution is comprehensive healthcare reform that: Provides universal coverage for all Americans; Controls prescription drug costs; Expands mental health services; Protects patients with pre-existing conditions; Reduces administrative costs and waste.",
+          "confidence": 0.9,
+          "context_type": "specific_policy_proposals"
+        }
+      ],
+      "analysis_scores": {
+        "problem_definition": 0.9,
+        "causal_attribution": 0.8,
+        "moral_evaluation": 0.9,
+        "treatment_recommendation": 0.9
+      },
+      "derived_metrics": {
+        "message_completeness_index": 0.875,
+        "framing_coherence_index": 0.8738851890731822,
+        "salience_weighted_message_completeness": 0.8791531902381654,
+        "strategic_framing_profile": 0.0,
+        "framing_independence_score": 0.043301270189221926
+      }
+    }
+  ],
+  "evidence_data": [
+    {
+      "document_name": "crisis_management.txt",
+      "dimension": "problem_definition",
+      "quote_text": "We are writing to inform you of a serious data security incident that occurred on September 14, 2025.",
+      "confidence": 0.9,
+      "context_type": "explicit statement"
+    },
+    {
+      "document_name": "crisis_management.txt",
+      "dimension": "causal_attribution",
+      "quote_text": "detected unauthorized access to our customer database",
+      "confidence": 0.8,
+      "context_type": "causal explanation"
+    },
+    {
+      "document_name": "crisis_management.txt",
+      "dimension": "moral_evaluation",
+      "quote_text": "We sincerely apologize for this incident and are working tirelessly to prevent future occurrences.",
+      "confidence": 0.9,
+      "context_type": "apology and commitment"
+    },
+    {
+      "document_name": "crisis_management.txt",
+      "dimension": "treatment_recommendation",
+      "quote_text": "Our response includes:\n- Immediate system lockdown and security audit\n- Notification to law enforcement and cybersecurity experts\n- Implementation of enhanced security measures\n- Free credit monitoring for affected customers\n- 24/7 customer support hotline",
+      "confidence": 0.9,
+      "context_type": "action plan"
+    },
+    {
+      "document_name": "political_attack_ad.txt",
+      "dimension": "problem_definition",
+      "quote_text": "Senator Johnson's opponent has a record of failure and corruption that threatens our community.",
+      "confidence": 1.0,
+      "context_type": "explicit statement"
+    },
+    {
+      "document_name": "political_attack_ad.txt",
+      "dimension": "causal_attribution",
+      "quote_text": "His policies have destroyed jobs, raised taxes, and left families struggling to make ends meet.",
+      "confidence": 1.0,
+      "context_type": "direct blame"
+    },
+    {
+      "document_name": "political_attack_ad.txt",
+      "dimension": "moral_evaluation",
+      "quote_text": "His moral character is questionable. He's been caught in multiple ethics violations, taking money from special interests while voting against the people's interests. He represents everything that's wrong with Washington politics.",
+      "confidence": 1.0,
+      "context_type": "moral judgment"
+    },
+    {
+      "document_name": "political_attack_ad.txt",
+      "dimension": "treatment_recommendation",
+      "quote_text": "Senator Johnson stands for integrity, family values, and real solutions. Don't let corruption win. Vote Johnson for Senate.",
+      "confidence": 1.0,
+      "context_type": "call to action"
+    },
+    {
+      "document_name": "corporate_apology.txt",
+      "dimension": "problem_definition",
+      "quote_text": "the environmental incident that occurred at our facility",
+      "confidence": 0.9,
+      "context_type": "direct statement"
+    },
+    {
+      "document_name": "corporate_apology.txt",
+      "dimension": "causal_attribution",
+      "quote_text": "take full responsibility for the environmental incident that occurred at our facility on August 8, 2025. Our investigation has determined that the chemical spill was caused by equipment failure that we should have prevented through proper maintenance and oversight.",
+      "confidence": 0.9,
+      "context_type": "direct explanation of cause and responsibility"
+    },
+    {
+      "document_name": "corporate_apology.txt",
+      "dimension": "moral_evaluation",
+      "quote_text": "This failure represents a breach of our core values and our commitment to environmental stewardship.",
+      "confidence": 0.9,
+      "context_type": "statement of values and regret"
+    },
+    {
+      "document_name": "corporate_apology.txt",
+      "dimension": "treatment_recommendation",
+      "quote_text": "Our corrective actions include: - Complete equipment overhaul and safety system upgrades - Enhanced training for all personnel on environmental protocols - Independent environmental audit and compliance review - Community compensation fund for affected residents - Regular public reporting on our environmental performance",
+      "confidence": 0.9,
+      "context_type": "list of specific actions"
+    },
+    {
+      "document_name": "policy_advocacy.txt",
+      "dimension": "problem_definition",
+      "quote_text": "My fellow Americans, today I want to talk about a crisis that affects every family in this country - our broken healthcare system.",
+      "confidence": 0.9,
+      "context_type": "opening_statement_and_theme_setting"
+    },
+    {
+      "document_name": "policy_advocacy.txt",
+      "dimension": "causal_attribution",
+      "quote_text": "My fellow Americans, today I want to talk about a crisis that affects every family in this country - our broken healthcare system.",
+      "confidence": 0.8,
+      "context_type": "systemic_causal_framing"
+    },
+    {
+      "document_name": "policy_advocacy.txt",
+      "dimension": "moral_evaluation",
+      "quote_text": "Every family deserves access to quality, affordable healthcare. No one should have to choose between their health and their financial security.",
+      "confidence": 0.9,
+      "context_type": "ethical_justification_and_value_invocation"
+    },
+    {
+      "document_name": "policy_advocacy.txt",
+      "dimension": "treatment_recommendation",
+      "quote_text": "Our solution is comprehensive healthcare reform that: Provides universal coverage for all Americans; Controls prescription drug costs; Expands mental health services; Protects patients with pre-existing conditions; Reduces administrative costs and waste.",
+      "confidence": 0.9,
+      "context_type": "specific_policy_proposals"
+    }
+  ],
+  "analysis_metadata": {
+    "framework_name": "framework.md",
+    "framework_version": "v1.0"
+  }
+}

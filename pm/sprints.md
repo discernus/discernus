@@ -225,6 +225,55 @@
   - Model selection guidance for alpha users
 - **Dependencies**: None
 - **Effort**: 1 day
+
+#### [ALPHA-007] Brand Messaging & Project README Alignment
+
+- **Description**: Carefully edit the overall project README to set proper expectations and align on brand messaging for Discernus alpha release
+- **Purpose**: Ensure professional presentation and consistent messaging for alpha users and research community
+- **Priority**: HIGH - Alpha release presentation
+- **Acceptance Criteria**:
+  - Main project README.md reflects alpha release status and limitations
+  - Brand messaging aligned with alpha strategy (Vertex AI only)
+  - Clear expectations set for alpha users
+  - Messaging consistent with user documentation
+  - Discernus positioned appropriately for academic/research audience
+  - Proper alpha disclaimers and limitations included
+  - References to alpha model strategy documentation
+  - Professional, academic tone throughout
+- **Dependencies**: [ALPHA-006] - Alpha model strategy documentation
+- **Effort**: 1-2 days
+
+#### [ALPHA-008] Fix Derived Metrics Synthesis Regression ✅ COMPLETED
+
+- **Description**: Fix synthesis phase failure with "SYNTHESIS BLOCKED: Derived metrics results incomplete" error
+- **Purpose**: Enable full pipeline functionality for alpha release
+- **Priority**: CRITICAL - Alpha release blocker
+- **Acceptance Criteria**:
+  - ✅ Full pipeline (`discernus run .`) works without synthesis errors
+  - ✅ Synthesis phase can access derived metrics results
+  - ✅ Data flow between statistical phase and synthesis phase fixed
+  - ✅ Both statistical-prep and full pipeline modes work consistently
+  - ✅ All test experiments complete successfully in full mode
+- **Dependencies**: None
+- **Effort**: 2-3 days
+- **Bug Reference**: [BUG-005] from inbox
+- **Solution**: Fixed data structure mismatch - synthesis validation now checks artifact storage instead of instance variables
+
+#### [ALPHA-009] Fix Derived Metrics Syntax Error ✅ COMPLETED
+
+- **Description**: Fix Python syntax errors in generated derived metrics functions for complex frameworks
+- **Purpose**: Enable sophisticated framework analysis for alpha release
+- **Priority**: HIGH - Limits system capability
+- **Acceptance Criteria**:
+  - ✅ Complex frameworks (civic character, constitutional health) work without syntax errors
+  - ✅ Generated Python functions have valid syntax
+  - ✅ Derived metrics agent generates clean, executable code
+  - ✅ All framework types work regardless of complexity
+  - ✅ Error handling for malformed LLM responses
+- **Dependencies**: None
+- **Effort**: 1-2 days
+- **Bug Reference**: [BUG-006] from inbox
+- **Solution**: Added ThinOutputExtractor to extract clean Python code from LLM responses, with fallback to markdown code block extraction
   - **✅ Quick Start Guide**: COMPLETE - Created `docs/user/QUICK_START_GUIDE.md` with 5-minute tutorial
   - **✅ Performance Guide**: COMPLETE - Created `docs/user/PERFORMANCE_GUIDE.md` with benchmarks
   - **✅ Release Notes**: COMPLETE - Created `docs/user/RELEASE_NOTES.md` with alpha features
