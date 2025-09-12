@@ -1,0 +1,22 @@
+{
+  "status": "completed",
+  "stats_hash": "c8cfdc5acddeddf100d05471f52a9df059b21ed8d3aae788b6578a577a8c0c3f",
+  "raw_analysis_data_hash": "30610c70ec547a4fe7daab84ef0199ac78901b51f7c5c0532dc57317bb633aed",
+  "derived_metrics_data_hash": "004c4ea308874ca6d1dee0691a31a2fc01c1a922c54698edee844ba2c703d58e",
+  "functions_generated": 3,
+  "statistical_summary": {
+    "generation_metadata": {
+      "status": "success",
+      "functions_generated": 3,
+      "output_file": "automatedstatisticalanalysisagent_functions.py",
+      "module_size": 19093
+    },
+    "statistical_data": {
+      "calculate_descriptive_statistics": {
+        "power_assessment": {
+          "tier": "Tier 3 (Exploratory)",
+          "sample_size": 4,
+          "caveat": "Exploratory analysis - results are suggestive rather than conclusive (N=4)."
+        },
+        "descriptive_statistics": {
+          "negative": {
