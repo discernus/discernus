@@ -1,0 +1,107 @@
+{
+  "status": "completed",
+  "stats_hash": "eec8cc2f032e107d125a3a12d31b93733784ce96bfc02e5b4921bbcad4640dd8",
+  "raw_analysis_data_hash": "cc4bfc496d9e490762656b29242bd92df92fe2a80068153660fed849767fad27",
+  "derived_metrics_data_hash": "004c4ea308874ca6d1dee0691a31a2fc01c1a922c54698edee844ba2c703d58e",
+  "functions_generated": 2,
+  "statistical_summary": {
+    "generation_metadata": {
+      "status": "success",
+      "functions_generated": 2,
+      "output_file": "automatedstatisticalanalysisagent_functions.py",
+      "module_size": 11920
+    },
+    "statistical_data": {
+      "check_data_validity": {
+        "analysis_type": "Data Validity Check",
+        "total_rows_checked": 2,
+        "checks": {
+          "missing_values": {
+            "positive_sentiment_raw": 0,
+            "positive_sentiment_salience": 0,
+            "positive_sentiment_confidence": 0,
+            "negative_sentiment_raw": 0,
+            "negative_sentiment_salience": 0,
+            "negative_sentiment_confidence": 0
+          },
+          "out_of_range_scores": {
+            "positive_sentiment_raw": 0,
+            "positive_sentiment_salience": 0,
+            "positive_sentiment_confidence": 0,
+            "negative_sentiment_raw": 0,
+            "negative_sentiment_salience": 0,
+            "negative_sentiment_confidence": 0
+          }
+        },
+        "overall_status": "PASS",
+        "summary": "All checked scores are present and within the valid [0.0, 1.0] range."
+      },
+      "generate_statistical_summary_report": "STATISTICAL ANALYSIS SUMMARY REPORT\n==================================================\nAnalysis Timestamp: Unknown\nSample Size: Unknown\nAlpha Level: Unknown\nVariables: 0\n",
+      "perform_statistical_analysis": {
+        "analysis_metadata": {
+          "timestamp": "2025-09-11T20:52:54.292797",
+          "sample_size": 2,
+          "alpha_level": 0.05,
+          "variables_analyzed": [
+            "positive_sentiment_raw",
+            "positive_sentiment_salience",
+            "positive_sentiment_confidence",
+            "negative_sentiment_raw",
+            "negative_sentiment_salience",
+            "negative_sentiment_confidence"
+          ]
+        }
+      },
+      "run_complete_statistical_analysis": {
+        "analysis_metadata": {
+          "timestamp": "2025-09-11T20:52:54.339048",
+          "sample_size": 2,
+          "alpha_level": 0.05,
+          "variables_analyzed": [
+            "positive_sentiment_raw",
+            "positive_sentiment_salience",
+            "positive_sentiment_confidence",
+            "negative_sentiment_raw",
+            "negative_sentiment_salience",
+            "negative_sentiment_confidence"
+          ]
+        }
+      },
+      "summarize_sentiment_scores": {
+        "analysis_type": "Descriptive Statistics (Tier 3 Exploratory)",
+        "sample_size": 2,
+        "notes": "Results are purely descriptive due to extremely low sample size (N=2). No statistical inference is possible.",
+        "summary_by_document": [
+          {
+            "document_name": "negative_test.txt",
+            "positive_sentiment_raw_mean": 0.0,
+            "positive_sentiment_raw_std": NaN,
+            "positive_sentiment_raw_min": 0.0,
+            "positive_sentiment_raw_max": 0.0,
+            "positive_sentiment_raw_count": 1,
+            "negative_sentiment_raw_mean": 1.0,
+            "negative_sentiment_raw_std": NaN,
+            "negative_sentiment_raw_min": 1.0,
+            "negative_sentiment_raw_max": 1.0,
+            "negative_sentiment_raw_count": 1
+          },
+          {
+            "document_name": "positive_test.txt",
+            "positive_sentiment_raw_mean": 1.0,
+            "positive_sentiment_raw_std": NaN,
+            "positive_sentiment_raw_min": 1.0,
+            "positive_sentiment_raw_max": 1.0,
+            "positive_sentiment_raw_count": 1,
+            "negative_sentiment_raw_mean": 0.0,
+            "negative_sentiment_raw_std": NaN,
+            "negative_sentiment_raw_min": 0.0,
+            "negative_sentiment_raw_max": 0.0,
+            "negative_sentiment_raw_count": 1
+          }
+        ]
+      }
+    },
+    "status": "success_with_data",
+    "validation_passed": true
+  }
+}
