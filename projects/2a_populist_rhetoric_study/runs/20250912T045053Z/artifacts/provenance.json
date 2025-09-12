@@ -1,0 +1,79 @@
+{
+  "run_metadata": {
+    "experiment_name": "2a_populist_rhetoric_study",
+    "run_timestamp": "Unknown",
+    "framework_version": "Unknown",
+    "model_used": "Unknown",
+    "total_artifacts": 23,
+    "organized_artifacts": 23
+  },
+  "directory_structure": {
+    "artifacts/analysis_plans/": "What the LLM planned to analyze",
+    "artifacts/analysis_results/": "Raw analysis outputs from LLM",
+    "artifacts/statistical_results/": "Mathematical computations and metrics",
+    "artifacts/evidence/": "Curated quotes and supporting data",
+    "artifacts/reports/": "Final synthesis outputs and reports",
+    "artifacts/inputs/": "Framework, corpus, and experiment configuration",
+    "technical/": "System logs and model interaction records"
+  },
+  "pipeline_stages": {
+    "inputs_and_system": {
+      "artifacts": 18,
+      "total_size_mb": 0.246490478515625
+    },
+    "analysis": {
+      "artifacts": 5,
+      "total_size_mb": 0.026449203491210938
+    }
+  },
+  "artifact_descriptions": {
+    "Trump_Inaugural_2017_0e0bb704.txt": "Source document from research corpus",
+    "trump_sotu_2017_14ad8f3e.txt": "Source document from research corpus",
+    "Trump_SOTU_2018_6b6f4ea6.txt": "Source document from research corpus",
+    "Trump_SOTU_2019_b2f29f4c.txt": "Source document from research corpus",
+    "Trump_SOTU_2025_c97acead.txt": "Source document from research corpus",
+    "Trump_SOTU_2020_fbaf4dc2.txt": "Source document from research corpus",
+    "cache_test_0e72d9d0": "Artifact of type cache_test",
+    "evidence_v6_0f2b9952": "Artifact of type evidence_v6",
+    "evidence_v6_672f34a5": "Artifact of type evidence_v6",
+    "evidence_v6_92481405": "Artifact of type evidence_v6",
+    "evidence_v6_a8dd2e61": "Artifact of type evidence_v6",
+    "evidence_v6_c492246c": "Artifact of type evidence_v6",
+    "raw_analysis_response_v6_23530949": "Raw analysis response from LLM with scores and reasoning",
+    "raw_analysis_response_v6_31216c05": "Raw analysis response from LLM with scores and reasoning",
+    "raw_analysis_response_v6_bb9ad451": "Raw analysis response from LLM with scores and reasoning",
+    "raw_analysis_response_v6_c5e7ff3c": "Raw analysis response from LLM with scores and reasoning",
+    "raw_analysis_response_v6_e749ea8c": "Raw analysis response from LLM with scores and reasoning",
+    "analysis_result_2f70eef8": "Artifact of type analysis_result",
+    "analysis_result_50ba9a14": "Artifact of type analysis_result",
+    "analysis_result_643d5435": "Artifact of type analysis_result",
+    "analysis_result_be84b723": "Artifact of type analysis_result",
+    "analysis_result_cfa8e507": "Artifact of type analysis_result",
+    "validation_result_3ee29807": "Artifact of type validation_result"
+  },
+  "navigation_guide": {
+    "primary_researcher": [
+      "FINAL_REPORT.md",
+      "artifacts/statistical_results/",
+      "artifacts/evidence/"
+    ],
+    "internal_reviewer": [
+      "METHODOLOGY_SUMMARY.md",
+      "STATISTICAL_SUMMARY.md"
+    ],
+    "replication_researcher": [
+      "artifacts/",
+      "technical/manifest.json",
+      "README.md"
+    ],
+    "fraud_auditor": [
+      "technical/manifest.json",
+      "technical/logs/",
+      "provenance.json"
+    ],
+    "llm_skeptic": [
+      "technical/model_interactions/",
+      "artifacts/statistical_results/"
+    ]
+  }
+}
