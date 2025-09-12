@@ -1,0 +1,2685 @@
+{
+  "status": "completed",
+  "stats_hash": "825f64b1821889e7df65821611e3968d391c7f18108c74d159feda9c0e337b64",
+  "raw_analysis_data_hash": "e22f119911d3a0b44ff5d4bbc5db214fabba99d2c7c71d619e93e48035f38330",
+  "derived_metrics_data_hash": "9e004c7dc61f6c0f5f448d349c6867c8b91216eb1ee8156b7d3aaca22dfef741",
+  "functions_generated": 8,
+  "statistical_summary": {
+    "generation_metadata": {
+      "status": "success",
+      "functions_generated": 8,
+      "output_file": "automatedstatisticalanalysisagent_functions.py",
+      "module_size": 15364,
+      "function_code_content": "import pandas as pd\nimport numpy as np\nimport scipy.stats as stats\nfrom typing import Dict, Any, Optional, List\nimport warnings\nimport itertools\nimport re\n\ndef _get_metadata_mapping(doc_name: str) -> Dict[str, str]:\n    \"\"\"\n    Maps a document name to its metadata (career_phase, event_type, audience).\n\n    This function contains a hardcoded mapping based on the experiment specification\n    and sample data provided. It is designed to be robust to variations in filenames.\n\n    Args:\n        doc_name: The document name (e.g., 'early_career/charlie_kirk_cpac_2020.txt').\n\n    Returns:\n        A dictionary containing 'career_phase', 'event_type', and 'audience'.\n    \"\"\"\n    doc_name_lower = doc_name.lower()\n    \n    # Default values\n    meta = {\n        'career_phase': 'Unknown',\n        'event_type': 'Unknown',\n        'audience': 'Unknown'\n    }\n\n    # 1. Determine Event Type and Audience\n    if 'cpac' in doc_name_lower:\n        meta['event_type'] = 'CPAC'\n        meta['audience'] = 'Conservative Activists'\n    elif 'rnc' in doc_name_lower:\n        meta['event_type'] = 'RNC'\n        meta['audience'] = 'Republican Delegates'\n    elif 'america_fest' in doc_name_lower or 'amfest' in doc_name_lower:\n        meta['event_type'] = 'America Fest'\n        meta['audience'] = 'TPUSA Supporters'\n    elif 'sas' in doc_name_lower or 'student_action_summit' in doc_name_lower:\n        meta['event_type'] = 'Student Action Summit'\n        meta['audience'] = 'College Students'\n    elif 'western_conservative_summit' in doc_name_lower:\n        meta['event_type'] = 'Western Conservative Summit'\n        meta['audience'] = 'Conservative Activists'\n    elif 'college' in doc_name_lower:\n        meta['event_type'] = 'College Speech'\n        meta['audience'] = 'College Students'\n\n    # 2. Determine Career Phase from year\n    year_match = re.search(r'(201[89]|202[0-4])', doc_name_lower)\n    if year_match:\n        year = int(year_match.group(0))\n        if year <= 2020:\n            meta['career_phase'] = 'Early (<=2020)'\n        elif 2021 <= year <= 2022:\n            meta['career_phase'] = 'Mid (2021-2022)'\n        else: # 2023-2024\n            meta['career_phase'] = 'Late (2023-2024)'\n\n    return meta\n\ndef _add_metadata_groups(data: pd.DataFrame) -> pd.DataFrame:\n    \"\"\"\n    Adds grouping columns ('career_phase', 'event_type', 'audience') to the DataFrame.\n    \"\"\"\n    if 'document_name' not in data.columns:\n        return data\n    \n    meta_df = data['document_name'].apply(_get_metadata_mapping).apply(pd.Series)\n    return pd.concat([data, meta_df], axis=1)\n\ndef _cronbach_alpha(df: pd.DataFrame) -> Optional[float]:\n    \"\"\"\n    Calculates Cronbach's alpha for a given set of items (columns).\n    \"\"\"\n    df = df.dropna()\n    if df.shape[1] < 2 or df.shape[0] < 2:\n        return None\n    \n    k = df.shape[1]\n    item_vars = df.var(axis=0, ddof=1).sum()\n    total_var = df.sum(axis=1).var(ddof=1)\n    \n    if total_var == 0:\n        return 1.0 # Perfect correlation if no variance in total\n        \n    return (k / (k - 1)) * (1 - item_vars / total_var)\n\ndef calculate_descriptive_statistics(data: pd.DataFrame, **kwargs) -> Optional[Dict[str, Any]]:\n    \"\"\"\n    Calculates descriptive statistics for all numeric dimensions and derived metrics.\n\n    Methodology:\n    This is an exploratory analysis. Given the small sample size (N < 15), results are\n    suggestive rather than conclusive. This function computes the mean, standard\n    deviation, median, 25th percentile (Q1), and 75th percentile (Q3) for all\n    relevant numeric columns in the dataset.\n\n    Args:\n        data (pd.DataFrame): DataFrame containing the analysis data.\n        **kwargs: Additional keyword arguments (unused).\n\n    Returns:\n        A dictionary of descriptive statistics for each variable, or None on error.\n    \"\"\"\n    if data.empty:\n        return {\"warning\": \"Input data is empty.\", \"statistics\": None}\n\n    # Note: The framework specifies 'compersion', but the data structure provides 'compassion'.\n    # We proceed using the 'compassion' columns as provided in the actual data.\n    score_cols = [\n        'tribal_dominance_raw', 'tribal_dominance_salience',\n        'individual_dignity_raw', 'individual_dignity_salience',\n        'fear_raw', 'fear_salience',\n        'hope_raw', 'hope_salience',\n        'envy_raw', 'envy_salience',\n        'compassion_raw', 'compassion_salience',\n        'enmity_raw', 'enmity_salience',\n        'amity_raw', 'amity_salience',\n        'fragmentative_goals_raw', 'fragmentative_goals_salience',\n        'cohesive_goals_raw', 'cohesive_goals_salience'\n    ]\n    \n    derived_cols = [\n        'identity_tension', 'emotional_tension', 'success_tension', \n        'relational_tension', 'goal_tension', 'strategic_contradiction_index',\n        'descriptive_cohesion_index', 'motivational_cohesion_index', 'full_cohesion_index'\n    ]\n\n    numeric_cols = [col for col in score_cols + derived_cols if col in data.columns]\n    \n    if not numeric_cols:\n        return {\"warning\": \"No numeric columns found for analysis.\", \"statistics\": None}\n\n    try:\n        with warnings.catch_warnings():\n            warnings.simplefilter(\"ignore\", category=RuntimeWarning)\n            desc_stats = data[numeric_cols].describe().to_dict()\n\n        results = {}\n        for col, stats_dict in desc_stats.items():\n            results[col] = {\n                'count': stats_dict.get('count', 0),\n                'mean': stats_dict.get('mean', np.nan),\n                'std': stats_dict.get('std', np.nan),\n                'min': stats_dict.get('min', np.nan),\n                'q1_25%': stats_dict.get('25%', np.nan),\n                'median_50%': stats_dict.get('50%', np.nan),\n                'q3_75%': stats_dict.get('75%', np.nan),\n                'max': stats_dict.get('max', np.nan)\n            }\n        \n        return {\n            \"analysis_tier\": \"Tier 3 (Exploratory)\",\n            \"power_caveat\": f\"Exploratory analysis - results are suggestive rather than conclusive (N={len(data)}).\",\n            \"statistics\": results\n        }\n    except Exception as e:\n        return {\"error\": f\"Failed to calculate descriptive statistics: {str(e)}\"}\n\ndef perform_correlation_analysis(data: pd.DataFrame, **kwargs) -> Optional[Dict[str, Any]]:\n    \"\"\"\n    Performs a non-parametric correlation analysis between CFF dimension scores.\n\n    Methodology:\n    This is a Tier 3 (Exploratory) analysis. Due to the small sample size (N < 15),\n    Spearman's rank-order correlation is used, as it is more robust to non-normality\n    and outliers than Pearson's correlation. The function calculates the correlation\n    coefficient (rho) and the p-value for each pair of raw score dimensions.\n\n    Args:\n        data (pd.DataFrame): DataFrame containing the analysis data.\n        **kwargs: Additional keyword arguments (unused).\n\n    Returns:\n        A dictionary containing correlation results, or None on error.\n    \"\"\"\n    if data.empty or len(data) < 3:\n        return {\"warning\": f\"Insufficient data for correlation analysis (N={len(data)}). Requires at least 3 data points.\"}\n\n    raw_score_cols = [col for col in data.columns if col.endswith('_raw')]\n    df_corr = data[raw_score_cols].dropna()\n\n    if len(df_corr) < 3:\n        return {\"warning\": f\"Insufficient non-null data for correlation analysis (N={len(df_corr)}).\"}\n\n    results = {}\n    try:\n        for col1, col2 in itertools.combinations(df_corr.columns, 2):\n            rho, p_value = stats.spearmanr(df_corr[col1], df_corr[col2])\n            key = f\"{col1}__vs__{col2}\"\n            results[key] = {\n                'rho': rho,\n                'p_value': p_value\n            }\n        \n        return {\n            \"analysis_tier\": \"Tier 3 (Exploratory)\",\n            \"power_caveat\": f\"Exploratory analysis - results are suggestive rather than conclusive (N={len(df_corr)}). P-values should be interpreted with extreme caution.\",\n            \"correlations\": results\n        }\n    except Exception as e:\n        return {\"error\": f\"Failed to perform correlation analysis: {str(e)}\"}\n\n\ndef perform_group_comparison_analysis(data: pd.DataFrame, **kwargs) -> Optional[Dict[str, Any]]:\n    \"\"\"\n    Performs non-parametric group comparisons for CFF dimensions.\n\n    Methodology:\n    This is a Tier 3 (Exploratory) analysis. Given the very small group sizes (N < 5 per group),\n    non-parametric tests are used. For variables with 2 groups, the Mann-Whitney U test is used.\n    For variables with >2 groups, the Kruskal-Wallis H test is used. Results indicate potential\n    patterns but are not statistically conclusive.\n\n    Args:\n        data (pd.DataFrame): DataFrame containing the analysis data.\n        **kwargs: Additional keyword arguments (unused).\n\n    Returns:\n        A dictionary of group comparison results, or None on error.\n    \"\"\"\n    if data.empty or len(data) < 3:\n        return {\"warning\": f\"Insufficient data for group comparison (N={len(data)}).\"}\n\n    try:\n        data = _add_metadata_groups(data)\n        grouping_vars = ['career_phase', 'event_type', 'audience']\n        metric_cols = [col for col in data.columns if '_raw' in col or '_index' in col]\n        \n        all_results = {}\n\n        for group_by in grouping_vars:\n            if group_by not in data.columns or data[group_by].nunique() < 2:\n                continue\n\n            group_results = {}\n            for metric in metric_cols:\n                groups = [group[metric].dropna() for name, group in data.groupby(group_by)]\n                group_names = [name for name, group in data.groupby(group_by)]\n                \n                # Filter out empty groups\n                valid_groups_data = [g for g in groups if not g.empty]\n                valid_group_names = [gn for g, gn in zip(groups, group_names) if not g.empty]\n\n                if len(valid_groups_data) < 2:\n                    continue\n\n                test_result = {}\n                if len(valid_groups_data) == 2:\n                    try:\n                        stat, p_value = stats.mannwhitneyu(*valid_groups_data, alternative='two-sided')\n                        test_result = {'test': 'Mann-Whitney U', 'statistic': stat, 'p_value': p_value}\n                    except ValueError:\n                        # Occurs if all values are the same\n                        test_result = {'test': 'Mann-Whitney U', 'error': 'Cannot compute, all values are identical.'}\n                else:\n                    try:\n                        stat, p_value = stats.kruskal(*valid_groups_data)\n                        test_result = {'test': 'Kruskal-Wallis H', 'statistic': stat, 'p_value': p_value}\n                    except ValueError:\n                        test_result = {'test': 'Kruskal-Wallis H', 'error': 'Cannot compute, all values are identical.'}\n                \n                # Add descriptive stats for each group\n                desc_stats = {}\n                for i, group_data in enumerate(valid_groups_data):\n                    desc_stats[valid_group_names[i]] = {\n                        'n': len(group_data),\n                        'median': group_data.median(),\n                        'mean': group_data.mean(),\n                        'std': group_data.std()\n                    }\n                test_result['descriptive_stats_by_group'] = desc_stats\n                group_results[metric] = test_result\n            \n            all_results[f\"comparison_by_{group_by}\"] = group_results\n\n        return {\n            \"analysis_tier\": \"Tier 3 (Exploratory)\",\n            \"power_caveat\": f\"Exploratory analysis with very small group sizes (N={len(data)}). Results are suggestive of patterns, not statistically conclusive.\",\n            \"group_comparisons\": all_results\n        }\n    except Exception as e:\n        return {\"error\": f\"Failed to perform group comparison analysis: {str(e)}\"}\n\n\ndef calculate_internal_consistency(data: pd.DataFrame, **kwargs) -> Optional[Dict[str, Any]]:\n    \"\"\"\n    Calculates the internal consistency (Cronbach's alpha) for conceptual groups of dimensions.\n\n    Methodology:\n    This is a Tier 3 (Exploratory) analysis. Cronbach's alpha assesses how well a set of items\n    (dimensions) measure a single underlying latent construct. We test two constructs:\n    1. 'Fragmentative' dimensions: tribal_dominance, fear, envy, enmity, fragmentative_goals.\n    2. 'Cohesive' dimensions: individual_dignity, hope, compassion, amity, cohesive_goals.\n    Results should be interpreted with caution due to the small sample size (N < 15).\n\n    Args:\n        data (pd.DataFrame): DataFrame containing the analysis data.\n        **kwargs: Additional keyword arguments (unused).\n\n    Returns:\n        A dictionary with Cronbach's alpha for each conceptual group, or None on error.\n    \"\"\"\n    if data.empty or len(data) < 3:\n        return {\"warning\": f\"Insufficient data for reliability analysis (N={len(data)}).\"}\n\n    try:\n        fragmentative_dims = [\n            'tribal_dominance_raw', 'fear_raw', 'envy_raw', 'enmity_raw', 'fragmentative_goals_raw'\n        ]\n        cohesive_dims = [\n            'individual_dignity_raw', 'hope_raw', 'compassion_raw', 'amity_raw', 'cohesive_goals_raw'\n        ]\n\n        # Ensure columns exist\n        fragmentative_dims = [col for col in fragmentative_dims if col in data.columns]\n        cohesive_dims = [col for col in cohesive_dims if col in data.columns]\n\n        alpha_fragmentative = _cronbach_alpha(data[fragmentative_dims])\n        alpha_cohesive = _cronbach_alpha(data[cohesive_dims])\n\n        return {\n            \"analysis_tier\": \"Tier 3 (Exploratory)\",\n            \"power_caveat\": f\"Exploratory analysis - results are suggestive rather than conclusive (N={len(data)}).\",\n            \"cronbach_alpha\": {\n                'fragmentative_construct': alpha_fragmentative,\n                'cohesive_construct': alpha_cohesive\n            },\n            \"note\": \"'compassion_raw' was used in the 'cohesive_construct' as a substitute for the framework's 'compersion' based on the available data structure.\"\n        }\n    except Exception as e:\n        return {\"error\": f\"Failed to calculate internal consistency: {str(e)}\"}\n\ndef perform_statistical_analysis(data: pd.DataFrame, **kwargs) -> Dict[str, Any]:\n    \"\"\"\n    Master function that executes all statistical analyses and returns combined results.\n\n    Args:\n        data (pd.DataFrame): pandas DataFrame containing analysis data.\n        **kwargs: Additional parameters passed to individual functions.\n\n    Returns:\n        A dictionary containing the combined results from all statistical analyses.\n    \"\"\"\n    results = {}\n    \n    if not isinstance(data, pd.DataFrame) or data.empty:\n        return {\"error\": \"Input data must be a non-empty pandas DataFrame.\"}\n\n    # H4 & H5: Summarize tension and cohesion indices via descriptive stats\n    results['descriptive_statistics'] = calculate_descriptive_statistics(data, **kwargs)\n    \n    # General exploration of relationships\n    results['correlation_analysis'] = perform_correlation_analysis(data, **kwargs)\n    \n    # H1, H2, H3: Test for differences between groups\n    results['group_comparison_analysis'] = perform_group_comparison_analysis(data, **kwargs)\n    \n    # Assess internal consistency of framework constructs\n    results['internal_consistency_analysis'] = calculate_internal_consistency(data, **kwargs)\n    \n    return results\n",
+      "cached_with_code": true
+    },
+    "statistical_data": {
+      "calculate_descriptive_statistics": {
+        "analysis_tier": "Tier 3 (Exploratory)",
+        "power_caveat": "Exploratory analysis - results are suggestive rather than conclusive (N=14).",
+        "statistics": {
+          "tribal_dominance_raw": {
+            "count": 14.0,
+            "mean": 0.8571428571428573,
+            "std": 0.06753102665027064,
+            "min": 0.7,
+            "q1_25%": 0.8125,
+            "median_50%": 0.9,
+            "q3_75%": 0.9,
+            "max": 0.9
+          },
+          "tribal_dominance_salience": {
+            "count": 14.0,
+            "mean": 0.8785714285714288,
+            "std": 0.07774288420142413,
+            "min": 0.75,
+            "q1_25%": 0.8,
+            "median_50%": 0.9,
+            "q3_75%": 0.9,
+            "max": 1.0
+          },
+          "individual_dignity_raw": {
+            "count": 14.0,
+            "mean": 0.21071428571428577,
+            "std": 0.14435342769713536,
+            "min": 0.0,
+            "q1_25%": 0.1,
+            "median_50%": 0.2,
+            "q3_75%": 0.2875,
+            "max": 0.6
+          },
+          "individual_dignity_salience": {
+            "count": 14.0,
+            "mean": 0.19642857142857145,
+            "std": 0.17809276506088886,
+            "min": 0.0,
+            "q1_25%": 0.1,
+            "median_50%": 0.15000000000000002,
+            "q3_75%": 0.2,
+            "max": 0.7
+          },
+          "fear_raw": {
+            "count": 14.0,
+            "mean": 0.8285714285714286,
+            "std": 0.0892582375303981,
+            "min": 0.6,
+            "q1_25%": 0.8,
+            "median_50%": 0.8500000000000001,
+            "q3_75%": 0.9,
+            "max": 0.9
+          },
+          "fear_salience": {
+            "count": 14.0,
+            "mean": 0.8214285714285715,
+            "std": 0.11387288073563859,
+            "min": 0.5,
+            "q1_25%": 0.8,
+            "median_50%": 0.875,
+            "q3_75%": 0.9,
+            "max": 0.9
+          },
+          "hope_raw": {
+            "count": 14.0,
+            "mean": 0.7821428571428573,
+            "std": 0.07992097745500014,
+            "min": 0.7,
+            "q1_25%": 0.7,
+            "median_50%": 0.775,
+            "q3_75%": 0.8375,
+            "max": 0.9
+          },
+          "hope_salience": {
+            "count": 14.0,
+            "mean": 0.7821428571428573,
+            "std": 0.10671158623768388,
+            "min": 0.6,
+            "q1_25%": 0.7,
+            "median_50%": 0.8,
+            "q3_75%": 0.8875,
+            "max": 0.9
+          },
+          "envy_raw": {
+            "count": 14.0,
+            "mean": 0.6164285714285713,
+            "std": 0.22311111901599937,
+            "min": 0.0,
+            "q1_25%": 0.525,
+            "median_50%": 0.675,
+            "q3_75%": 0.775,
+            "max": 0.88
+          },
+          "envy_salience": {
+            "count": 14.0,
+            "mean": 0.5392857142857143,
+            "std": 0.20771520020355852,
+            "min": 0.0,
+            "q1_25%": 0.42500000000000004,
+            "median_50%": 0.55,
+            "q3_75%": 0.6875,
+            "max": 0.8
+          },
+          "compassion_raw": {
+            "count": 12.0,
+            "mean": 0.008333333333333333,
+            "std": 0.028867513459481294,
+            "min": 0.0,
+            "q1_25%": 0.0,
+            "median_50%": 0.0,
+            "q3_75%": 0.0,
+            "max": 0.1
+          },
+          "compassion_salience": {
+            "count": 12.0,
+            "mean": 0.004166666666666667,
+            "std": 0.014433756729740647,
+            "min": 0.0,
+            "q1_25%": 0.0,
+            "median_50%": 0.0,
+            "q3_75%": 0.0,
+            "max": 0.05
+          },
+          "enmity_raw": {
+            "count": 14.0,
+            "mean": 0.9035714285714287,
+            "std": 0.04143709650823722,
+            "min": 0.8,
+            "q1_25%": 0.9,
+            "median_50%": 0.9,
+            "q3_75%": 0.9,
+            "max": 1.0
+          },
+          "enmity_salience": {
+            "count": 14.0,
+            "mean": 0.8928571428571429,
+            "std": 0.08052028616141702,
+            "min": 0.7,
+            "q1_25%": 0.9,
+            "median_50%": 0.9,
+            "q3_75%": 0.9375,
+            "max": 1.0
+          },
+          "amity_raw": {
+            "count": 14.0,
+            "mean": 0.2857142857142857,
+            "std": 0.2692072203201977,
+            "min": 0.0,
+            "q1_25%": 0.1,
+            "median_50%": 0.2,
+            "q3_75%": 0.4,
+            "max": 0.8
+          },
+          "amity_salience": {
+            "count": 14.0,
+            "mean": 0.26785714285714285,
+            "std": 0.27777075693203096,
+            "min": 0.0,
+            "q1_25%": 0.0625,
+            "median_50%": 0.1,
+            "q3_75%": 0.4,
+            "max": 0.8
+          },
+          "fragmentative_goals_raw": {
+            "count": 13.0,
+            "mean": 0.8346153846153848,
+            "std": 0.1125178048588596,
+            "min": 0.5,
+            "q1_25%": 0.8,
+            "median_50%": 0.9,
+            "q3_75%": 0.9,
+            "max": 0.9
+          },
+          "fragmentative_goals_salience": {
+            "count": 13.0,
+            "mean": 0.8038461538461539,
+            "std": 0.11982893790305563,
+            "min": 0.5,
+            "q1_25%": 0.75,
+            "median_50%": 0.8,
+            "q3_75%": 0.9,
+            "max": 0.9
+          },
+          "cohesive_goals_raw": {
+            "count": 14.0,
+            "mean": 0.3714285714285715,
+            "std": 0.279225774181097,
+            "min": 0.0,
+            "q1_25%": 0.1625,
+            "median_50%": 0.4,
+            "q3_75%": 0.4375,
+            "max": 0.9
+          },
+          "cohesive_goals_salience": {
+            "count": 14.0,
+            "mean": 0.36071428571428577,
+            "std": 0.28432008738024844,
+            "min": 0.0,
+            "q1_25%": 0.1125,
+            "median_50%": 0.35,
+            "q3_75%": 0.5,
+            "max": 0.9
+          }
+        }
+      },
+      "calculate_internal_consistency": {
+        "analysis_tier": "Tier 3 (Exploratory)",
+        "power_caveat": "Exploratory analysis - results are suggestive rather than conclusive (N=14).",
+        "cronbach_alpha": {
+          "fragmentative_construct": 0.3753081506538872,
+          "cohesive_construct": 0.648753626038645
+        },
+        "note": "'compassion_raw' was used in the 'cohesive_construct' as a substitute for the framework's 'compersion' based on the available data structure."
+      },
+      "perform_correlation_analysis": {
+        "warning": "Insufficient non-null data for correlation analysis (N=0)."
+      },
+      "perform_group_comparison_analysis": {
+        "analysis_tier": "Tier 3 (Exploratory)",
+        "power_caveat": "Exploratory analysis with very small group sizes (N=14). Results are suggestive of patterns, not statistically conclusive.",
+        "group_comparisons": {
+          "comparison_by_career_phase": {
+            "tribal_dominance_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 2.6684844596521216,
+              "p_value": 0.44560962537291526,
+              "descriptive_stats_by_group": {
+                "Early (<=2020)": {
+                  "n": 7,
+                  "median": 0.9,
+                  "mean": 0.8571428571428571,
+                  "std": 0.07867957924694434
+                },
+                "Late (2023-2024)": {
+                  "n": 3,
+                  "median": 0.9,
+                  "mean": 0.85,
+                  "std": 0.08660254037844388
+                },
+                "Mid (2021-2022)": {
+                  "n": 2,
+                  "median": 0.9,
+                  "mean": 0.9,
+                  "std": 0.0
+                },
+                "Unknown": {
+                  "n": 2,
+                  "median": 0.825,
+                  "mean": 0.825,
+                  "std": 0.03535533905932733
+                }
+              }
+            },
+            "individual_dignity_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 3.3164291238537187,
+              "p_value": 0.3453625546232664,
+              "descriptive_stats_by_group": {
+                "Early (<=2020)": {
+                  "n": 7,
+                  "median": 0.25,
+                  "mean": 0.22142857142857145,
+                  "std": 0.10745984853711198
+                },
+                "Late (2023-2024)": {
+                  "n": 3,
+                  "median": 0.2,
+                  "mean": 0.3,
+                  "std": 0.264575131106459
+                },
+                "Mid (2021-2022)": {
+                  "n": 2,
+                  "median": 0.15000000000000002,
+                  "mean": 0.15000000000000002,
+                  "std": 0.07071067811865477
+                },
+                "Unknown": {
+                  "n": 2,
+                  "median": 0.1,
+                  "mean": 0.1,
+                  "std": 0.0
+                }
+              }
+            },
+            "fear_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 3.6688144329896883,
+              "p_value": 0.2995183741193516,
+              "descriptive_stats_by_group": {
+                "Early (<=2020)": {
+                  "n": 7,
+                  "median": 0.8,
+                  "mean": 0.7928571428571429,
+                  "std": 0.1017700489198215
+                },
+                "Late (2023-2024)": {
+                  "n": 3,
+                  "median": 0.9,
+                  "mean": 0.9,
+                  "std": 0.0
+                },
+                "Mid (2021-2022)": {
+                  "n": 2,
+                  "median": 0.8500000000000001,
+                  "mean": 0.8500000000000001,
+                  "std": 0.07071067811865474
+                },
+                "Unknown": {
+                  "n": 2,
+                  "median": 0.825,
+                  "mean": 0.825,
+                  "std": 0.10606601717798214
+                }
+              }
+            },
+            "hope_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 4.570925553319914,
+              "p_value": 0.20605046840737068,
+              "descriptive_stats_by_group": {
+                "Early (<=2020)": {
+                  "n": 7,
+                  "median": 0.7,
+                  "mean": 0.7571428571428572,
+                  "std": 0.07867957924694434
+                },
+                "Late (2023-2024)": {
+                  "n": 3,
+                  "median": 0.85,
+                  "mean": 0.85,
+                  "std": 0.04999999999999999
+                },
+                "Mid (2021-2022)": {
+                  "n": 2,
+                  "median": 0.825,
+                  "mean": 0.825,
+                  "std": 0.10606601717798214
+                },
+                "Unknown": {
+                  "n": 2,
+                  "median": 0.725,
+                  "mean": 0.725,
+                  "std": 0.03535533905932741
+                }
+              }
+            },
+            "envy_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 1.0600321027287292,
+              "p_value": 0.7867301804644553,
+              "descriptive_stats_by_group": {
+                "Early (<=2020)": {
+                  "n": 7,
+                  "median": 0.6,
+                  "mean": 0.557142857142857,
+                  "std": 0.2760262237369417
+                },
+                "Late (2023-2024)": {
+                  "n": 3,
+                  "median": 0.7,
+                  "mean": 0.7266666666666666,
+                  "std": 0.14189197769195175
+                },
+                "Mid (2021-2022)": {
+                  "n": 2,
+                  "median": 0.6000000000000001,
+                  "mean": 0.6000000000000001,
+                  "std": 0.28284271247461906
+                },
+                "Unknown": {
+                  "n": 2,
+                  "median": 0.675,
+                  "mean": 0.675,
+                  "std": 0.03535533905932733
+                }
+              }
+            },
+            "compassion_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 1.000000000000012,
+              "p_value": 0.8012519569011979,
+              "descriptive_stats_by_group": {
+                "Early (<=2020)": {
+                  "n": 6,
+                  "median": 0.0,
+                  "mean": 0.016666666666666666,
+                  "std": 0.040824829046386304
+                },
+                "Late (2023-2024)": {
+                  "n": 3,
+                  "median": 0.0,
+                  "mean": 0.0,
+                  "std": 0.0
+                },
+                "Mid (2021-2022)": {
+                  "n": 1,
+                  "median": 0.0,
+                  "mean": 0.0,
+                  "std": NaN
+                },
+                "Unknown": {
+                  "n": 2,
+                  "median": 0.0,
+                  "mean": 0.0,
+                  "std": 0.0
+                }
+              }
+            },
+            "enmity_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 0.9562310030395055,
+              "p_value": 0.8118410443024063,
+              "descriptive_stats_by_group": {
+                "Early (<=2020)": {
+                  "n": 7,
+                  "median": 0.9,
+                  "mean": 0.9,
+                  "std": 0.05773502691896256
+                },
+                "Late (2023-2024)": {
+                  "n": 3,
+                  "median": 0.9,
+                  "mean": 0.9166666666666666,
+                  "std": 0.028867513459481253
+                },
+                "Mid (2021-2022)": {
+                  "n": 2,
+                  "median": 0.9,
+                  "mean": 0.9,
+                  "std": 0.0
+                },
+                "Unknown": {
+                  "n": 2,
+                  "median": 0.9,
+                  "mean": 0.9,
+                  "std": 0.0
+                }
+              }
+            },
+            "amity_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 3.919942473633749,
+              "p_value": 0.27023967139132815,
+              "descriptive_stats_by_group": {
+                "Early (<=2020)": {
+                  "n": 7,
+                  "median": 0.1,
+                  "mean": 0.2285714285714286,
+                  "std": 0.28702082220799313
+                },
+                "Late (2023-2024)": {
+                  "n": 3,
+                  "median": 0.5,
+                  "mean": 0.5499999999999999,
+                  "std": 0.22912878474779205
+                },
+                "Mid (2021-2022)": {
+                  "n": 2,
+                  "median": 0.25,
+                  "mean": 0.25,
+                  "std": 0.21213203435596428
+                },
+                "Unknown": {
+                  "n": 2,
+                  "median": 0.125,
+                  "mean": 0.125,
+                  "std": 0.10606601717798214
+                }
+              }
+            },
+            "fragmentative_goals_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 4.0849673202614385,
+              "p_value": 0.25243415692565685,
+              "descriptive_stats_by_group": {
+                "Early (<=2020)": {
+                  "n": 6,
+                  "median": 0.9,
+                  "mean": 0.8333333333333334,
+                  "std": 0.16329931618554522
+                },
+                "Late (2023-2024)": {
+                  "n": 3,
+                  "median": 0.85,
+                  "mean": 0.85,
+                  "std": 0.04999999999999999
+                },
+                "Mid (2021-2022)": {
+                  "n": 2,
+                  "median": 0.875,
+                  "mean": 0.875,
+                  "std": 0.03535533905932741
+                },
+                "Unknown": {
+                  "n": 2,
+                  "median": 0.775,
+                  "mean": 0.775,
+                  "std": 0.03535533905932741
+                }
+              }
+            },
+            "cohesive_goals_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 3.4242814242814203,
+              "p_value": 0.33071615997544834,
+              "descriptive_stats_by_group": {
+                "Early (<=2020)": {
+                  "n": 7,
+                  "median": 0.3,
+                  "mean": 0.3428571428571429,
+                  "std": 0.3505098327538656
+                },
+                "Late (2023-2024)": {
+                  "n": 3,
+                  "median": 0.45,
+                  "mean": 0.5499999999999999,
+                  "std": 0.2179449471770337
+                },
+                "Mid (2021-2022)": {
+                  "n": 2,
+                  "median": 0.4,
+                  "mean": 0.4,
+                  "std": 0.0
+                },
+                "Unknown": {
+                  "n": 2,
+                  "median": 0.175,
+                  "mean": 0.175,
+                  "std": 0.03535533905932738
+                }
+              }
+            },
+            "compersion_raw": {
+              "test": "Mann-Whitney U",
+              "statistic": 1.0,
+              "p_value": 1.0,
+              "descriptive_stats_by_group": {
+                "Early (<=2020)": {
+                  "n": 1,
+                  "median": 0.5,
+                  "mean": 0.5,
+                  "std": NaN
+                },
+                "Mid (2021-2022)": {
+                  "n": 1,
+                  "median": 0.0,
+                  "mean": 0.0,
+                  "std": NaN
+                }
+              }
+            }
+          },
+          "comparison_by_event_type": {
+            "tribal_dominance_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 2.9726796407185625,
+              "p_value": 0.704198010150319,
+              "descriptive_stats_by_group": {
+                "CPAC": {
+                  "n": 3,
+                  "median": 0.9,
+                  "mean": 0.9,
+                  "std": 0.0
+                },
+                "College Speech": {
+                  "n": 1,
+                  "median": 0.9,
+                  "mean": 0.9,
+                  "std": NaN
+                },
+                "RNC": {
+                  "n": 2,
+                  "median": 0.825,
+                  "mean": 0.825,
+                  "std": 0.10606601717798214
+                },
+                "Student Action Summit": {
+                  "n": 2,
+                  "median": 0.8500000000000001,
+                  "mean": 0.8500000000000001,
+                  "std": 0.07071067811865474
+                },
+                "Unknown": {
+                  "n": 4,
+                  "median": 0.8500000000000001,
+                  "mean": 0.825,
+                  "std": 0.09574271077563384
+                },
+                "Western Conservative Summit": {
+                  "n": 2,
+                  "median": 0.875,
+                  "mean": 0.875,
+                  "std": 0.03535533905932741
+                }
+              }
+            },
+            "individual_dignity_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 6.373066511987629,
+              "p_value": 0.27159105492562735,
+              "descriptive_stats_by_group": {
+                "CPAC": {
+                  "n": 3,
+                  "median": 0.2,
+                  "mean": 0.16666666666666666,
+                  "std": 0.15275252316519466
+                },
+                "College Speech": {
+                  "n": 1,
+                  "median": 0.3,
+                  "mean": 0.3,
+                  "std": NaN
+                },
+                "RNC": {
+                  "n": 2,
+                  "median": 0.44999999999999996,
+                  "mean": 0.44999999999999996,
+                  "std": 0.21213203435596426
+                },
+                "Student Action Summit": {
+                  "n": 2,
+                  "median": 0.15000000000000002,
+                  "mean": 0.15000000000000002,
+                  "std": 0.07071067811865477
+                },
+                "Unknown": {
+                  "n": 4,
+                  "median": 0.15000000000000002,
+                  "mean": 0.1625,
+                  "std": 0.07500000000000001
+                },
+                "Western Conservative Summit": {
+                  "n": 2,
+                  "median": 0.15000000000000002,
+                  "mean": 0.15000000000000002,
+                  "std": 0.07071067811865477
+                }
+              }
+            },
+            "fear_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 7.037478522336775,
+              "p_value": 0.2178678729026248,
+              "descriptive_stats_by_group": {
+                "CPAC": {
+                  "n": 3,
+                  "median": 0.9,
+                  "mean": 0.8666666666666667,
+                  "std": 0.05773502691896256
+                },
+                "College Speech": {
+                  "n": 1,
+                  "median": 0.8,
+                  "mean": 0.8,
+                  "std": NaN
+                },
+                "RNC": {
+                  "n": 2,
+                  "median": 0.9,
+                  "mean": 0.9,
+                  "std": 0.0
+                },
+                "Student Action Summit": {
+                  "n": 2,
+                  "median": 0.7,
+                  "mean": 0.7,
+                  "std": 0.14142135623730953
+                },
+                "Unknown": {
+                  "n": 4,
+                  "median": 0.9,
+                  "mean": 0.8624999999999999,
+                  "std": 0.07500000000000001
+                },
+                "Western Conservative Summit": {
+                  "n": 2,
+                  "median": 0.775,
+                  "mean": 0.775,
+                  "std": 0.03535533905932741
+                }
+              }
+            },
+            "hope_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 6.268583724569634,
+              "p_value": 0.2809548241702501,
+              "descriptive_stats_by_group": {
+                "CPAC": {
+                  "n": 3,
+                  "median": 0.7,
+                  "mean": 0.7166666666666667,
+                  "std": 0.028867513459481315
+                },
+                "College Speech": {
+                  "n": 1,
+                  "median": 0.7,
+                  "mean": 0.7,
+                  "std": NaN
+                },
+                "RNC": {
+                  "n": 2,
+                  "median": 0.8500000000000001,
+                  "mean": 0.8500000000000001,
+                  "std": 0.07071067811865474
+                },
+                "Student Action Summit": {
+                  "n": 2,
+                  "median": 0.8500000000000001,
+                  "mean": 0.8500000000000001,
+                  "std": 0.07071067811865474
+                },
+                "Unknown": {
+                  "n": 4,
+                  "median": 0.7749999999999999,
+                  "mean": 0.7875,
+                  "std": 0.10307764064044153
+                },
+                "Western Conservative Summit": {
+                  "n": 2,
+                  "median": 0.775,
+                  "mean": 0.775,
+                  "std": 0.03535533905932741
+                }
+              }
+            },
+            "envy_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 9.283801498127339,
+              "p_value": 0.09826579302189963,
+              "descriptive_stats_by_group": {
+                "CPAC": {
+                  "n": 3,
+                  "median": 0.4,
+                  "mean": 0.3,
+                  "std": 0.2645751311064591
+                },
+                "College Speech": {
+                  "n": 1,
+                  "median": 0.7,
+                  "mean": 0.7,
+                  "std": NaN
+                },
+                "RNC": {
+                  "n": 2,
+                  "median": 0.8400000000000001,
+                  "mean": 0.8400000000000001,
+                  "std": 0.056568542494923775
+                },
+                "Student Action Summit": {
+                  "n": 2,
+                  "median": 0.65,
+                  "mean": 0.65,
+                  "std": 0.21213203435596428
+                },
+                "Unknown": {
+                  "n": 4,
+                  "median": 0.7,
+                  "mean": 0.7,
+                  "std": 0.08164965809277262
+                },
+                "Western Conservative Summit": {
+                  "n": 2,
+                  "median": 0.625,
+                  "mean": 0.625,
+                  "std": 0.03535533905932741
+                }
+              }
+            },
+            "compassion_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 11.000000000000009,
+              "p_value": 0.05137998348306932,
+              "descriptive_stats_by_group": {
+                "CPAC": {
+                  "n": 3,
+                  "median": 0.0,
+                  "mean": 0.0,
+                  "std": 0.0
+                },
+                "College Speech": {
+                  "n": 1,
+                  "median": 0.1,
+                  "mean": 0.1,
+                  "std": NaN
+                },
+                "RNC": {
+                  "n": 2,
+                  "median": 0.0,
+                  "mean": 0.0,
+                  "std": 0.0
+                },
+                "Student Action Summit": {
+                  "n": 1,
+                  "median": 0.0,
+                  "mean": 0.0,
+                  "std": NaN
+                },
+                "Unknown": {
+                  "n": 3,
+                  "median": 0.0,
+                  "mean": 0.0,
+                  "std": 0.0
+                },
+                "Western Conservative Summit": {
+                  "n": 2,
+                  "median": 0.0,
+                  "mean": 0.0,
+                  "std": 0.0
+                }
+              }
+            },
+            "enmity_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 5.310638297872336,
+              "p_value": 0.3791569046930682,
+              "descriptive_stats_by_group": {
+                "CPAC": {
+                  "n": 3,
+                  "median": 0.9,
+                  "mean": 0.9,
+                  "std": 0.0
+                },
+                "College Speech": {
+                  "n": 1,
+                  "median": 0.9,
+                  "mean": 0.9,
+                  "std": NaN
+                },
+                "RNC": {
+                  "n": 2,
+                  "median": 0.9,
+                  "mean": 0.9,
+                  "std": 0.0
+                },
+                "Student Action Summit": {
+                  "n": 2,
+                  "median": 0.8500000000000001,
+                  "mean": 0.8500000000000001,
+                  "std": 0.07071067811865474
+                },
+                "Unknown": {
+                  "n": 4,
+                  "median": 0.9,
+                  "mean": 0.9125,
+                  "std": 0.024999999999999967
+                },
+                "Western Conservative Summit": {
+                  "n": 2,
+                  "median": 0.95,
+                  "mean": 0.95,
+                  "std": 0.07071067811865474
+                }
+              }
+            },
+            "amity_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 6.748415361670397,
+              "p_value": 0.24003336357318192,
+              "descriptive_stats_by_group": {
+                "CPAC": {
+                  "n": 3,
+                  "median": 0.1,
+                  "mean": 0.06666666666666667,
+                  "std": 0.05773502691896258
+                },
+                "College Speech": {
+                  "n": 1,
+                  "median": 0.2,
+                  "mean": 0.2,
+                  "std": NaN
+                },
+                "RNC": {
+                  "n": 2,
+                  "median": 0.575,
+                  "mean": 0.575,
+                  "std": 0.3181980515339464
+                },
+                "Student Action Summit": {
+                  "n": 2,
+                  "median": 0.4,
+                  "mean": 0.4,
+                  "std": 0.0
+                },
+                "Unknown": {
+                  "n": 4,
+                  "median": 0.35,
+                  "mean": 0.375,
+                  "std": 0.35000000000000003
+                },
+                "Western Conservative Summit": {
+                  "n": 2,
+                  "median": 0.07500000000000001,
+                  "mean": 0.07500000000000001,
+                  "std": 0.03535533905932738
+                }
+              }
+            },
+            "fragmentative_goals_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 1.147058823529413,
+              "p_value": 0.8867357259666794,
+              "descriptive_stats_by_group": {
+                "CPAC": {
+                  "n": 3,
+                  "median": 0.9,
+                  "mean": 0.8833333333333333,
+                  "std": 0.028867513459481315
+                },
+                "RNC": {
+                  "n": 2,
+                  "median": 0.875,
+                  "mean": 0.875,
+                  "std": 0.03535533905932741
+                },
+                "Student Action Summit": {
+                  "n": 2,
+                  "median": 0.7,
+                  "mean": 0.7,
+                  "std": 0.28284271247461906
+                },
+                "Unknown": {
+                  "n": 4,
+                  "median": 0.8500000000000001,
+                  "mean": 0.85,
+                  "std": 0.05773502691896256
+                },
+                "Western Conservative Summit": {
+                  "n": 2,
+                  "median": 0.825,
+                  "mean": 0.825,
+                  "std": 0.10606601717798214
+                }
+              }
+            },
+            "cohesive_goals_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 6.768393393393397,
+              "p_value": 0.23844284323403137,
+              "descriptive_stats_by_group": {
+                "CPAC": {
+                  "n": 3,
+                  "median": 0.4,
+                  "mean": 0.3,
+                  "std": 0.17320508075688776
+                },
+                "College Speech": {
+                  "n": 1,
+                  "median": 0.3,
+                  "mean": 0.3,
+                  "std": NaN
+                },
+                "RNC": {
+                  "n": 2,
+                  "median": 0.675,
+                  "mean": 0.675,
+                  "std": 0.31819805153394637
+                },
+                "Student Action Summit": {
+                  "n": 2,
+                  "median": 0.55,
+                  "mean": 0.55,
+                  "std": 0.21213203435596423
+                },
+                "Unknown": {
+                  "n": 4,
+                  "median": 0.30000000000000004,
+                  "mean": 0.35,
+                  "std": 0.34156502553198664
+                },
+                "Western Conservative Summit": {
+                  "n": 2,
+                  "median": 0.075,
+                  "mean": 0.075,
+                  "std": 0.10606601717798213
+                }
+              }
+            },
+            "compersion_raw": {
+              "test": "Mann-Whitney U",
+              "statistic": 0.0,
+              "p_value": 1.0,
+              "descriptive_stats_by_group": {
+                "Student Action Summit": {
+                  "n": 1,
+                  "median": 0.0,
+                  "mean": 0.0,
+                  "std": NaN
+                },
+                "Unknown": {
+                  "n": 1,
+                  "median": 0.5,
+                  "mean": 0.5,
+                  "std": NaN
+                }
+              }
+            }
+          },
+          "comparison_by_audience": {
+            "tribal_dominance_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 1.8406936127744487,
+              "p_value": 0.6061198387912281,
+              "descriptive_stats_by_group": {
+                "College Students": {
+                  "n": 3,
+                  "median": 0.9,
+                  "mean": 0.8666666666666667,
+                  "std": 0.05773502691896256
+                },
+                "Conservative Activists": {
+                  "n": 5,
+                  "median": 0.9,
+                  "mean": 0.89,
+                  "std": 0.022360679774997918
+                },
+                "Republican Delegates": {
+                  "n": 2,
+                  "median": 0.825,
+                  "mean": 0.825,
+                  "std": 0.10606601717798214
+                },
+                "Unknown": {
+                  "n": 4,
+                  "median": 0.8500000000000001,
+                  "mean": 0.825,
+                  "std": 0.09574271077563384
+                }
+              }
+            },
+            "individual_dignity_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 4.5452242846094295,
+              "p_value": 0.20829168329262573,
+              "descriptive_stats_by_group": {
+                "College Students": {
+                  "n": 3,
+                  "median": 0.2,
+                  "mean": 0.19999999999999998,
+                  "std": 0.09999999999999999
+                },
+                "Conservative Activists": {
+                  "n": 5,
+                  "median": 0.2,
+                  "mean": 0.16,
+                  "std": 0.1140175425099138
+                },
+                "Republican Delegates": {
+                  "n": 2,
+                  "median": 0.44999999999999996,
+                  "mean": 0.44999999999999996,
+                  "std": 0.21213203435596426
+                },
+                "Unknown": {
+                  "n": 4,
+                  "median": 0.15000000000000002,
+                  "mean": 0.1625,
+                  "std": 0.07500000000000001
+                }
+              }
+            },
+            "fear_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 4.664755154639171,
+              "p_value": 0.19805693467215846,
+              "descriptive_stats_by_group": {
+                "College Students": {
+                  "n": 3,
+                  "median": 0.8,
+                  "mean": 0.7333333333333334,
+                  "std": 0.11547005383792519
+                },
+                "Conservative Activists": {
+                  "n": 5,
+                  "median": 0.8,
+                  "mean": 0.8300000000000001,
+                  "std": 0.0670820393249937
+                },
+                "Republican Delegates": {
+                  "n": 2,
+                  "median": 0.9,
+                  "mean": 0.9,
+                  "std": 0.0
+                },
+                "Unknown": {
+                  "n": 4,
+                  "median": 0.9,
+                  "mean": 0.8624999999999999,
+                  "std": 0.07500000000000001
+                }
+              }
+            },
+            "hope_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 2.7241001564945213,
+              "p_value": 0.4361472496561086,
+              "descriptive_stats_by_group": {
+                "College Students": {
+                  "n": 3,
+                  "median": 0.8,
+                  "mean": 0.7999999999999999,
+                  "std": 0.10000000000000003
+                },
+                "Conservative Activists": {
+                  "n": 5,
+                  "median": 0.75,
+                  "mean": 0.74,
+                  "std": 0.04183300132670381
+                },
+                "Republican Delegates": {
+                  "n": 2,
+                  "median": 0.8500000000000001,
+                  "mean": 0.8500000000000001,
+                  "std": 0.07071067811865474
+                },
+                "Unknown": {
+                  "n": 4,
+                  "median": 0.7749999999999999,
+                  "mean": 0.7875,
+                  "std": 0.10307764064044153
+                }
+              }
+            },
+            "envy_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 8.053913857677902,
+              "p_value": 0.044910511125413444,
+              "descriptive_stats_by_group": {
+                "College Students": {
+                  "n": 3,
+                  "median": 0.7,
+                  "mean": 0.6666666666666666,
+                  "std": 0.1527525231651947
+                },
+                "Conservative Activists": {
+                  "n": 5,
+                  "median": 0.5,
+                  "mean": 0.43,
+                  "std": 0.2588435821108957
+                },
+                "Republican Delegates": {
+                  "n": 2,
+                  "median": 0.8400000000000001,
+                  "mean": 0.8400000000000001,
+                  "std": 0.056568542494923775
+                },
+                "Unknown": {
+                  "n": 4,
+                  "median": 0.7,
+                  "mean": 0.7,
+                  "std": 0.08164965809277262
+                }
+              }
+            },
+            "compassion_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 4.999999999999998,
+              "p_value": 0.1717971442967333,
+              "descriptive_stats_by_group": {
+                "College Students": {
+                  "n": 2,
+                  "median": 0.05,
+                  "mean": 0.05,
+                  "std": 0.07071067811865477
+                },
+                "Conservative Activists": {
+                  "n": 5,
+                  "median": 0.0,
+                  "mean": 0.0,
+                  "std": 0.0
+                },
+                "Republican Delegates": {
+                  "n": 2,
+                  "median": 0.0,
+                  "mean": 0.0,
+                  "std": 0.0
+                },
+                "Unknown": {
+                  "n": 3,
+                  "median": 0.0,
+                  "mean": 0.0,
+                  "std": 0.0
+                }
+              }
+            },
+            "enmity_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 3.0204255319148845,
+              "p_value": 0.38848666952976185,
+              "descriptive_stats_by_group": {
+                "College Students": {
+                  "n": 3,
+                  "median": 0.9,
+                  "mean": 0.8666666666666667,
+                  "std": 0.05773502691896256
+                },
+                "Conservative Activists": {
+                  "n": 5,
+                  "median": 0.9,
+                  "mean": 0.9199999999999999,
+                  "std": 0.04472135954999578
+                },
+                "Republican Delegates": {
+                  "n": 2,
+                  "median": 0.9,
+                  "mean": 0.9,
+                  "std": 0.0
+                },
+                "Unknown": {
+                  "n": 4,
+                  "median": 0.9,
+                  "mean": 0.9125,
+                  "std": 0.024999999999999967
+                }
+              }
+            },
+            "amity_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 6.397483221476507,
+              "p_value": 0.09379438409321696,
+              "descriptive_stats_by_group": {
+                "College Students": {
+                  "n": 3,
+                  "median": 0.4,
+                  "mean": 0.3333333333333333,
+                  "std": 0.11547005383792516
+                },
+                "Conservative Activists": {
+                  "n": 5,
+                  "median": 0.1,
+                  "mean": 0.06999999999999999,
+                  "std": 0.044721359549995794
+                },
+                "Republican Delegates": {
+                  "n": 2,
+                  "median": 0.575,
+                  "mean": 0.575,
+                  "std": 0.3181980515339464
+                },
+                "Unknown": {
+                  "n": 4,
+                  "median": 0.35,
+                  "mean": 0.375,
+                  "std": 0.35000000000000003
+                }
+              }
+            },
+            "fragmentative_goals_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 0.5588235294117637,
+              "p_value": 0.9057905989044316,
+              "descriptive_stats_by_group": {
+                "College Students": {
+                  "n": 2,
+                  "median": 0.7,
+                  "mean": 0.7,
+                  "std": 0.28284271247461906
+                },
+                "Conservative Activists": {
+                  "n": 5,
+                  "median": 0.9,
+                  "mean": 0.86,
+                  "std": 0.0651920240520265
+                },
+                "Republican Delegates": {
+                  "n": 2,
+                  "median": 0.875,
+                  "mean": 0.875,
+                  "std": 0.03535533905932741
+                },
+                "Unknown": {
+                  "n": 4,
+                  "median": 0.8500000000000001,
+                  "mean": 0.85,
+                  "std": 0.05773502691896256
+                }
+              }
+            },
+            "cohesive_goals_raw": {
+              "test": "Kruskal-Wallis H",
+              "statistic": 4.985285285285286,
+              "p_value": 0.17287780442002937,
+              "descriptive_stats_by_group": {
+                "College Students": {
+                  "n": 3,
+                  "median": 0.4,
+                  "mean": 0.4666666666666666,
+                  "std": 0.20816659994661324
+                },
+                "Conservative Activists": {
+                  "n": 5,
+                  "median": 0.15,
+                  "mean": 0.21000000000000002,
+                  "std": 0.1816590212458495
+                },
+                "Republican Delegates": {
+                  "n": 2,
+                  "median": 0.675,
+                  "mean": 0.675,
+                  "std": 0.31819805153394637
+                },
+                "Unknown": {
+                  "n": 4,
+                  "median": 0.30000000000000004,
+                  "mean": 0.35,
+                  "std": 0.34156502553198664
+                }
+              }
+            },
+            "compersion_raw": {
+              "test": "Mann-Whitney U",
+              "statistic": 0.0,
+              "p_value": 1.0,
+              "descriptive_stats_by_group": {
+                "College Students": {
+                  "n": 1,
+                  "median": 0.0,
+                  "mean": 0.0,
+                  "std": NaN
+                },
+                "Unknown": {
+                  "n": 1,
+                  "median": 0.5,
+                  "mean": 0.5,
+                  "std": NaN
+                }
+              }
+            }
+          }
+        }
+      },
+      "perform_statistical_analysis": {
+        "descriptive_statistics": {
+          "analysis_tier": "Tier 3 (Exploratory)",
+          "power_caveat": "Exploratory analysis - results are suggestive rather than conclusive (N=14).",
+          "statistics": {
+            "tribal_dominance_raw": {
+              "count": 14.0,
+              "mean": 0.8571428571428573,
+              "std": 0.06753102665027064,
+              "min": 0.7,
+              "q1_25%": 0.8125,
+              "median_50%": 0.9,
+              "q3_75%": 0.9,
+              "max": 0.9
+            },
+            "tribal_dominance_salience": {
+              "count": 14.0,
+              "mean": 0.8785714285714288,
+              "std": 0.07774288420142413,
+              "min": 0.75,
+              "q1_25%": 0.8,
+              "median_50%": 0.9,
+              "q3_75%": 0.9,
+              "max": 1.0
+            },
+            "individual_dignity_raw": {
+              "count": 14.0,
+              "mean": 0.21071428571428577,
+              "std": 0.14435342769713536,
+              "min": 0.0,
+              "q1_25%": 0.1,
+              "median_50%": 0.2,
+              "q3_75%": 0.2875,
+              "max": 0.6
+            },
+            "individual_dignity_salience": {
+              "count": 14.0,
+              "mean": 0.19642857142857145,
+              "std": 0.17809276506088886,
+              "min": 0.0,
+              "q1_25%": 0.1,
+              "median_50%": 0.15000000000000002,
+              "q3_75%": 0.2,
+              "max": 0.7
+            },
+            "fear_raw": {
+              "count": 14.0,
+              "mean": 0.8285714285714286,
+              "std": 0.0892582375303981,
+              "min": 0.6,
+              "q1_25%": 0.8,
+              "median_50%": 0.8500000000000001,
+              "q3_75%": 0.9,
+              "max": 0.9
+            },
+            "fear_salience": {
+              "count": 14.0,
+              "mean": 0.8214285714285715,
+              "std": 0.11387288073563859,
+              "min": 0.5,
+              "q1_25%": 0.8,
+              "median_50%": 0.875,
+              "q3_75%": 0.9,
+              "max": 0.9
+            },
+            "hope_raw": {
+              "count": 14.0,
+              "mean": 0.7821428571428573,
+              "std": 0.07992097745500014,
+              "min": 0.7,
+              "q1_25%": 0.7,
+              "median_50%": 0.775,
+              "q3_75%": 0.8375,
+              "max": 0.9
+            },
+            "hope_salience": {
+              "count": 14.0,
+              "mean": 0.7821428571428573,
+              "std": 0.10671158623768388,
+              "min": 0.6,
+              "q1_25%": 0.7,
+              "median_50%": 0.8,
+              "q3_75%": 0.8875,
+              "max": 0.9
+            },
+            "envy_raw": {
+              "count": 14.0,
+              "mean": 0.6164285714285713,
+              "std": 0.22311111901599937,
+              "min": 0.0,
+              "q1_25%": 0.525,
+              "median_50%": 0.675,
+              "q3_75%": 0.775,
+              "max": 0.88
+            },
+            "envy_salience": {
+              "count": 14.0,
+              "mean": 0.5392857142857143,
+              "std": 0.20771520020355852,
+              "min": 0.0,
+              "q1_25%": 0.42500000000000004,
+              "median_50%": 0.55,
+              "q3_75%": 0.6875,
+              "max": 0.8
+            },
+            "compassion_raw": {
+              "count": 12.0,
+              "mean": 0.008333333333333333,
+              "std": 0.028867513459481294,
+              "min": 0.0,
+              "q1_25%": 0.0,
+              "median_50%": 0.0,
+              "q3_75%": 0.0,
+              "max": 0.1
+            },
+            "compassion_salience": {
+              "count": 12.0,
+              "mean": 0.004166666666666667,
+              "std": 0.014433756729740647,
+              "min": 0.0,
+              "q1_25%": 0.0,
+              "median_50%": 0.0,
+              "q3_75%": 0.0,
+              "max": 0.05
+            },
+            "enmity_raw": {
+              "count": 14.0,
+              "mean": 0.9035714285714287,
+              "std": 0.04143709650823722,
+              "min": 0.8,
+              "q1_25%": 0.9,
+              "median_50%": 0.9,
+              "q3_75%": 0.9,
+              "max": 1.0
+            },
+            "enmity_salience": {
+              "count": 14.0,
+              "mean": 0.8928571428571429,
+              "std": 0.08052028616141702,
+              "min": 0.7,
+              "q1_25%": 0.9,
+              "median_50%": 0.9,
+              "q3_75%": 0.9375,
+              "max": 1.0
+            },
+            "amity_raw": {
+              "count": 14.0,
+              "mean": 0.2857142857142857,
+              "std": 0.2692072203201977,
+              "min": 0.0,
+              "q1_25%": 0.1,
+              "median_50%": 0.2,
+              "q3_75%": 0.4,
+              "max": 0.8
+            },
+            "amity_salience": {
+              "count": 14.0,
+              "mean": 0.26785714285714285,
+              "std": 0.27777075693203096,
+              "min": 0.0,
+              "q1_25%": 0.0625,
+              "median_50%": 0.1,
+              "q3_75%": 0.4,
+              "max": 0.8
+            },
+            "fragmentative_goals_raw": {
+              "count": 13.0,
+              "mean": 0.8346153846153848,
+              "std": 0.1125178048588596,
+              "min": 0.5,
+              "q1_25%": 0.8,
+              "median_50%": 0.9,
+              "q3_75%": 0.9,
+              "max": 0.9
+            },
+            "fragmentative_goals_salience": {
+              "count": 13.0,
+              "mean": 0.8038461538461539,
+              "std": 0.11982893790305563,
+              "min": 0.5,
+              "q1_25%": 0.75,
+              "median_50%": 0.8,
+              "q3_75%": 0.9,
+              "max": 0.9
+            },
+            "cohesive_goals_raw": {
+              "count": 14.0,
+              "mean": 0.3714285714285715,
+              "std": 0.279225774181097,
+              "min": 0.0,
+              "q1_25%": 0.1625,
+              "median_50%": 0.4,
+              "q3_75%": 0.4375,
+              "max": 0.9
+            },
+            "cohesive_goals_salience": {
+              "count": 14.0,
+              "mean": 0.36071428571428577,
+              "std": 0.28432008738024844,
+              "min": 0.0,
+              "q1_25%": 0.1125,
+              "median_50%": 0.35,
+              "q3_75%": 0.5,
+              "max": 0.9
+            }
+          }
+        },
+        "correlation_analysis": {
+          "warning": "Insufficient non-null data for correlation analysis (N=0)."
+        },
+        "group_comparison_analysis": {
+          "analysis_tier": "Tier 3 (Exploratory)",
+          "power_caveat": "Exploratory analysis with very small group sizes (N=14). Results are suggestive of patterns, not statistically conclusive.",
+          "group_comparisons": {
+            "comparison_by_career_phase": {
+              "tribal_dominance_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 2.6684844596521216,
+                "p_value": 0.44560962537291526,
+                "descriptive_stats_by_group": {
+                  "Early (<=2020)": {
+                    "n": 7,
+                    "median": 0.9,
+                    "mean": 0.8571428571428571,
+                    "std": 0.07867957924694434
+                  },
+                  "Late (2023-2024)": {
+                    "n": 3,
+                    "median": 0.9,
+                    "mean": 0.85,
+                    "std": 0.08660254037844388
+                  },
+                  "Mid (2021-2022)": {
+                    "n": 2,
+                    "median": 0.9,
+                    "mean": 0.9,
+                    "std": 0.0
+                  },
+                  "Unknown": {
+                    "n": 2,
+                    "median": 0.825,
+                    "mean": 0.825,
+                    "std": 0.03535533905932733
+                  }
+                }
+              },
+              "individual_dignity_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 3.3164291238537187,
+                "p_value": 0.3453625546232664,
+                "descriptive_stats_by_group": {
+                  "Early (<=2020)": {
+                    "n": 7,
+                    "median": 0.25,
+                    "mean": 0.22142857142857145,
+                    "std": 0.10745984853711198
+                  },
+                  "Late (2023-2024)": {
+                    "n": 3,
+                    "median": 0.2,
+                    "mean": 0.3,
+                    "std": 0.264575131106459
+                  },
+                  "Mid (2021-2022)": {
+                    "n": 2,
+                    "median": 0.15000000000000002,
+                    "mean": 0.15000000000000002,
+                    "std": 0.07071067811865477
+                  },
+                  "Unknown": {
+                    "n": 2,
+                    "median": 0.1,
+                    "mean": 0.1,
+                    "std": 0.0
+                  }
+                }
+              },
+              "fear_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 3.6688144329896883,
+                "p_value": 0.2995183741193516,
+                "descriptive_stats_by_group": {
+                  "Early (<=2020)": {
+                    "n": 7,
+                    "median": 0.8,
+                    "mean": 0.7928571428571429,
+                    "std": 0.1017700489198215
+                  },
+                  "Late (2023-2024)": {
+                    "n": 3,
+                    "median": 0.9,
+                    "mean": 0.9,
+                    "std": 0.0
+                  },
+                  "Mid (2021-2022)": {
+                    "n": 2,
+                    "median": 0.8500000000000001,
+                    "mean": 0.8500000000000001,
+                    "std": 0.07071067811865474
+                  },
+                  "Unknown": {
+                    "n": 2,
+                    "median": 0.825,
+                    "mean": 0.825,
+                    "std": 0.10606601717798214
+                  }
+                }
+              },
+              "hope_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 4.570925553319914,
+                "p_value": 0.20605046840737068,
+                "descriptive_stats_by_group": {
+                  "Early (<=2020)": {
+                    "n": 7,
+                    "median": 0.7,
+                    "mean": 0.7571428571428572,
+                    "std": 0.07867957924694434
+                  },
+                  "Late (2023-2024)": {
+                    "n": 3,
+                    "median": 0.85,
+                    "mean": 0.85,
+                    "std": 0.04999999999999999
+                  },
+                  "Mid (2021-2022)": {
+                    "n": 2,
+                    "median": 0.825,
+                    "mean": 0.825,
+                    "std": 0.10606601717798214
+                  },
+                  "Unknown": {
+                    "n": 2,
+                    "median": 0.725,
+                    "mean": 0.725,
+                    "std": 0.03535533905932741
+                  }
+                }
+              },
+              "envy_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 1.0600321027287292,
+                "p_value": 0.7867301804644553,
+                "descriptive_stats_by_group": {
+                  "Early (<=2020)": {
+                    "n": 7,
+                    "median": 0.6,
+                    "mean": 0.557142857142857,
+                    "std": 0.2760262237369417
+                  },
+                  "Late (2023-2024)": {
+                    "n": 3,
+                    "median": 0.7,
+                    "mean": 0.7266666666666666,
+                    "std": 0.14189197769195175
+                  },
+                  "Mid (2021-2022)": {
+                    "n": 2,
+                    "median": 0.6000000000000001,
+                    "mean": 0.6000000000000001,
+                    "std": 0.28284271247461906
+                  },
+                  "Unknown": {
+                    "n": 2,
+                    "median": 0.675,
+                    "mean": 0.675,
+                    "std": 0.03535533905932733
+                  }
+                }
+              },
+              "compassion_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 1.000000000000012,
+                "p_value": 0.8012519569011979,
+                "descriptive_stats_by_group": {
+                  "Early (<=2020)": {
+                    "n": 6,
+                    "median": 0.0,
+                    "mean": 0.016666666666666666,
+                    "std": 0.040824829046386304
+                  },
+                  "Late (2023-2024)": {
+                    "n": 3,
+                    "median": 0.0,
+                    "mean": 0.0,
+                    "std": 0.0
+                  },
+                  "Mid (2021-2022)": {
+                    "n": 1,
+                    "median": 0.0,
+                    "mean": 0.0,
+                    "std": NaN
+                  },
+                  "Unknown": {
+                    "n": 2,
+                    "median": 0.0,
+                    "mean": 0.0,
+                    "std": 0.0
+                  }
+                }
+              },
+              "enmity_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 0.9562310030395055,
+                "p_value": 0.8118410443024063,
+                "descriptive_stats_by_group": {
+                  "Early (<=2020)": {
+                    "n": 7,
+                    "median": 0.9,
+                    "mean": 0.9,
+                    "std": 0.05773502691896256
+                  },
+                  "Late (2023-2024)": {
+                    "n": 3,
+                    "median": 0.9,
+                    "mean": 0.9166666666666666,
+                    "std": 0.028867513459481253
+                  },
+                  "Mid (2021-2022)": {
+                    "n": 2,
+                    "median": 0.9,
+                    "mean": 0.9,
+                    "std": 0.0
+                  },
+                  "Unknown": {
+                    "n": 2,
+                    "median": 0.9,
+                    "mean": 0.9,
+                    "std": 0.0
+                  }
+                }
+              },
+              "amity_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 3.919942473633749,
+                "p_value": 0.27023967139132815,
+                "descriptive_stats_by_group": {
+                  "Early (<=2020)": {
+                    "n": 7,
+                    "median": 0.1,
+                    "mean": 0.2285714285714286,
+                    "std": 0.28702082220799313
+                  },
+                  "Late (2023-2024)": {
+                    "n": 3,
+                    "median": 0.5,
+                    "mean": 0.5499999999999999,
+                    "std": 0.22912878474779205
+                  },
+                  "Mid (2021-2022)": {
+                    "n": 2,
+                    "median": 0.25,
+                    "mean": 0.25,
+                    "std": 0.21213203435596428
+                  },
+                  "Unknown": {
+                    "n": 2,
+                    "median": 0.125,
+                    "mean": 0.125,
+                    "std": 0.10606601717798214
+                  }
+                }
+              },
+              "fragmentative_goals_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 4.0849673202614385,
+                "p_value": 0.25243415692565685,
+                "descriptive_stats_by_group": {
+                  "Early (<=2020)": {
+                    "n": 6,
+                    "median": 0.9,
+                    "mean": 0.8333333333333334,
+                    "std": 0.16329931618554522
+                  },
+                  "Late (2023-2024)": {
+                    "n": 3,
+                    "median": 0.85,
+                    "mean": 0.85,
+                    "std": 0.04999999999999999
+                  },
+                  "Mid (2021-2022)": {
+                    "n": 2,
+                    "median": 0.875,
+                    "mean": 0.875,
+                    "std": 0.03535533905932741
+                  },
+                  "Unknown": {
+                    "n": 2,
+                    "median": 0.775,
+                    "mean": 0.775,
+                    "std": 0.03535533905932741
+                  }
+                }
+              },
+              "cohesive_goals_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 3.4242814242814203,
+                "p_value": 0.33071615997544834,
+                "descriptive_stats_by_group": {
+                  "Early (<=2020)": {
+                    "n": 7,
+                    "median": 0.3,
+                    "mean": 0.3428571428571429,
+                    "std": 0.3505098327538656
+                  },
+                  "Late (2023-2024)": {
+                    "n": 3,
+                    "median": 0.45,
+                    "mean": 0.5499999999999999,
+                    "std": 0.2179449471770337
+                  },
+                  "Mid (2021-2022)": {
+                    "n": 2,
+                    "median": 0.4,
+                    "mean": 0.4,
+                    "std": 0.0
+                  },
+                  "Unknown": {
+                    "n": 2,
+                    "median": 0.175,
+                    "mean": 0.175,
+                    "std": 0.03535533905932738
+                  }
+                }
+              },
+              "compersion_raw": {
+                "test": "Mann-Whitney U",
+                "statistic": 1.0,
+                "p_value": 1.0,
+                "descriptive_stats_by_group": {
+                  "Early (<=2020)": {
+                    "n": 1,
+                    "median": 0.5,
+                    "mean": 0.5,
+                    "std": NaN
+                  },
+                  "Mid (2021-2022)": {
+                    "n": 1,
+                    "median": 0.0,
+                    "mean": 0.0,
+                    "std": NaN
+                  }
+                }
+              }
+            },
+            "comparison_by_event_type": {
+              "tribal_dominance_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 2.9726796407185625,
+                "p_value": 0.704198010150319,
+                "descriptive_stats_by_group": {
+                  "CPAC": {
+                    "n": 3,
+                    "median": 0.9,
+                    "mean": 0.9,
+                    "std": 0.0
+                  },
+                  "College Speech": {
+                    "n": 1,
+                    "median": 0.9,
+                    "mean": 0.9,
+                    "std": NaN
+                  },
+                  "RNC": {
+                    "n": 2,
+                    "median": 0.825,
+                    "mean": 0.825,
+                    "std": 0.10606601717798214
+                  },
+                  "Student Action Summit": {
+                    "n": 2,
+                    "median": 0.8500000000000001,
+                    "mean": 0.8500000000000001,
+                    "std": 0.07071067811865474
+                  },
+                  "Unknown": {
+                    "n": 4,
+                    "median": 0.8500000000000001,
+                    "mean": 0.825,
+                    "std": 0.09574271077563384
+                  },
+                  "Western Conservative Summit": {
+                    "n": 2,
+                    "median": 0.875,
+                    "mean": 0.875,
+                    "std": 0.03535533905932741
+                  }
+                }
+              },
+              "individual_dignity_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 6.373066511987629,
+                "p_value": 0.27159105492562735,
+                "descriptive_stats_by_group": {
+                  "CPAC": {
+                    "n": 3,
+                    "median": 0.2,
+                    "mean": 0.16666666666666666,
+                    "std": 0.15275252316519466
+                  },
+                  "College Speech": {
+                    "n": 1,
+                    "median": 0.3,
+                    "mean": 0.3,
+                    "std": NaN
+                  },
+                  "RNC": {
+                    "n": 2,
+                    "median": 0.44999999999999996,
+                    "mean": 0.44999999999999996,
+                    "std": 0.21213203435596426
+                  },
+                  "Student Action Summit": {
+                    "n": 2,
+                    "median": 0.15000000000000002,
+                    "mean": 0.15000000000000002,
+                    "std": 0.07071067811865477
+                  },
+                  "Unknown": {
+                    "n": 4,
+                    "median": 0.15000000000000002,
+                    "mean": 0.1625,
+                    "std": 0.07500000000000001
+                  },
+                  "Western Conservative Summit": {
+                    "n": 2,
+                    "median": 0.15000000000000002,
+                    "mean": 0.15000000000000002,
+                    "std": 0.07071067811865477
+                  }
+                }
+              },
+              "fear_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 7.037478522336775,
+                "p_value": 0.2178678729026248,
+                "descriptive_stats_by_group": {
+                  "CPAC": {
+                    "n": 3,
+                    "median": 0.9,
+                    "mean": 0.8666666666666667,
+                    "std": 0.05773502691896256
+                  },
+                  "College Speech": {
+                    "n": 1,
+                    "median": 0.8,
+                    "mean": 0.8,
+                    "std": NaN
+                  },
+                  "RNC": {
+                    "n": 2,
+                    "median": 0.9,
+                    "mean": 0.9,
+                    "std": 0.0
+                  },
+                  "Student Action Summit": {
+                    "n": 2,
+                    "median": 0.7,
+                    "mean": 0.7,
+                    "std": 0.14142135623730953
+                  },
+                  "Unknown": {
+                    "n": 4,
+                    "median": 0.9,
+                    "mean": 0.8624999999999999,
+                    "std": 0.07500000000000001
+                  },
+                  "Western Conservative Summit": {
+                    "n": 2,
+                    "median": 0.775,
+                    "mean": 0.775,
+                    "std": 0.03535533905932741
+                  }
+                }
+              },
+              "hope_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 6.268583724569634,
+                "p_value": 0.2809548241702501,
+                "descriptive_stats_by_group": {
+                  "CPAC": {
+                    "n": 3,
+                    "median": 0.7,
+                    "mean": 0.7166666666666667,
+                    "std": 0.028867513459481315
+                  },
+                  "College Speech": {
+                    "n": 1,
+                    "median": 0.7,
+                    "mean": 0.7,
+                    "std": NaN
+                  },
+                  "RNC": {
+                    "n": 2,
+                    "median": 0.8500000000000001,
+                    "mean": 0.8500000000000001,
+                    "std": 0.07071067811865474
+                  },
+                  "Student Action Summit": {
+                    "n": 2,
+                    "median": 0.8500000000000001,
+                    "mean": 0.8500000000000001,
+                    "std": 0.07071067811865474
+                  },
+                  "Unknown": {
+                    "n": 4,
+                    "median": 0.7749999999999999,
+                    "mean": 0.7875,
+                    "std": 0.10307764064044153
+                  },
+                  "Western Conservative Summit": {
+                    "n": 2,
+                    "median": 0.775,
+                    "mean": 0.775,
+                    "std": 0.03535533905932741
+                  }
+                }
+              },
+              "envy_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 9.283801498127339,
+                "p_value": 0.09826579302189963,
+                "descriptive_stats_by_group": {
+                  "CPAC": {
+                    "n": 3,
+                    "median": 0.4,
+                    "mean": 0.3,
+                    "std": 0.2645751311064591
+                  },
+                  "College Speech": {
+                    "n": 1,
+                    "median": 0.7,
+                    "mean": 0.7,
+                    "std": NaN
+                  },
+                  "RNC": {
+                    "n": 2,
+                    "median": 0.8400000000000001,
+                    "mean": 0.8400000000000001,
+                    "std": 0.056568542494923775
+                  },
+                  "Student Action Summit": {
+                    "n": 2,
+                    "median": 0.65,
+                    "mean": 0.65,
+                    "std": 0.21213203435596428
+                  },
+                  "Unknown": {
+                    "n": 4,
+                    "median": 0.7,
+                    "mean": 0.7,
+                    "std": 0.08164965809277262
+                  },
+                  "Western Conservative Summit": {
+                    "n": 2,
+                    "median": 0.625,
+                    "mean": 0.625,
+                    "std": 0.03535533905932741
+                  }
+                }
+              },
+              "compassion_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 11.000000000000009,
+                "p_value": 0.05137998348306932,
+                "descriptive_stats_by_group": {
+                  "CPAC": {
+                    "n": 3,
+                    "median": 0.0,
+                    "mean": 0.0,
+                    "std": 0.0
+                  },
+                  "College Speech": {
+                    "n": 1,
+                    "median": 0.1,
+                    "mean": 0.1,
+                    "std": NaN
+                  },
+                  "RNC": {
+                    "n": 2,
+                    "median": 0.0,
+                    "mean": 0.0,
+                    "std": 0.0
+                  },
+                  "Student Action Summit": {
+                    "n": 1,
+                    "median": 0.0,
+                    "mean": 0.0,
+                    "std": NaN
+                  },
+                  "Unknown": {
+                    "n": 3,
+                    "median": 0.0,
+                    "mean": 0.0,
+                    "std": 0.0
+                  },
+                  "Western Conservative Summit": {
+                    "n": 2,
+                    "median": 0.0,
+                    "mean": 0.0,
+                    "std": 0.0
+                  }
+                }
+              },
+              "enmity_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 5.310638297872336,
+                "p_value": 0.3791569046930682,
+                "descriptive_stats_by_group": {
+                  "CPAC": {
+                    "n": 3,
+                    "median": 0.9,
+                    "mean": 0.9,
+                    "std": 0.0
+                  },
+                  "College Speech": {
+                    "n": 1,
+                    "median": 0.9,
+                    "mean": 0.9,
+                    "std": NaN
+                  },
+                  "RNC": {
+                    "n": 2,
+                    "median": 0.9,
+                    "mean": 0.9,
+                    "std": 0.0
+                  },
+                  "Student Action Summit": {
+                    "n": 2,
+                    "median": 0.8500000000000001,
+                    "mean": 0.8500000000000001,
+                    "std": 0.07071067811865474
+                  },
+                  "Unknown": {
+                    "n": 4,
+                    "median": 0.9,
+                    "mean": 0.9125,
+                    "std": 0.024999999999999967
+                  },
+                  "Western Conservative Summit": {
+                    "n": 2,
+                    "median": 0.95,
+                    "mean": 0.95,
+                    "std": 0.07071067811865474
+                  }
+                }
+              },
+              "amity_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 6.748415361670397,
+                "p_value": 0.24003336357318192,
+                "descriptive_stats_by_group": {
+                  "CPAC": {
+                    "n": 3,
+                    "median": 0.1,
+                    "mean": 0.06666666666666667,
+                    "std": 0.05773502691896258
+                  },
+                  "College Speech": {
+                    "n": 1,
+                    "median": 0.2,
+                    "mean": 0.2,
+                    "std": NaN
+                  },
+                  "RNC": {
+                    "n": 2,
+                    "median": 0.575,
+                    "mean": 0.575,
+                    "std": 0.3181980515339464
+                  },
+                  "Student Action Summit": {
+                    "n": 2,
+                    "median": 0.4,
+                    "mean": 0.4,
+                    "std": 0.0
+                  },
+                  "Unknown": {
+                    "n": 4,
+                    "median": 0.35,
+                    "mean": 0.375,
+                    "std": 0.35000000000000003
+                  },
+                  "Western Conservative Summit": {
+                    "n": 2,
+                    "median": 0.07500000000000001,
+                    "mean": 0.07500000000000001,
+                    "std": 0.03535533905932738
+                  }
+                }
+              },
+              "fragmentative_goals_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 1.147058823529413,
+                "p_value": 0.8867357259666794,
+                "descriptive_stats_by_group": {
+                  "CPAC": {
+                    "n": 3,
+                    "median": 0.9,
+                    "mean": 0.8833333333333333,
+                    "std": 0.028867513459481315
+                  },
+                  "RNC": {
+                    "n": 2,
+                    "median": 0.875,
+                    "mean": 0.875,
+                    "std": 0.03535533905932741
+                  },
+                  "Student Action Summit": {
+                    "n": 2,
+                    "median": 0.7,
+                    "mean": 0.7,
+                    "std": 0.28284271247461906
+                  },
+                  "Unknown": {
+                    "n": 4,
+                    "median": 0.8500000000000001,
+                    "mean": 0.85,
+                    "std": 0.05773502691896256
+                  },
+                  "Western Conservative Summit": {
+                    "n": 2,
+                    "median": 0.825,
+                    "mean": 0.825,
+                    "std": 0.10606601717798214
+                  }
+                }
+              },
+              "cohesive_goals_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 6.768393393393397,
+                "p_value": 0.23844284323403137,
+                "descriptive_stats_by_group": {
+                  "CPAC": {
+                    "n": 3,
+                    "median": 0.4,
+                    "mean": 0.3,
+                    "std": 0.17320508075688776
+                  },
+                  "College Speech": {
+                    "n": 1,
+                    "median": 0.3,
+                    "mean": 0.3,
+                    "std": NaN
+                  },
+                  "RNC": {
+                    "n": 2,
+                    "median": 0.675,
+                    "mean": 0.675,
+                    "std": 0.31819805153394637
+                  },
+                  "Student Action Summit": {
+                    "n": 2,
+                    "median": 0.55,
+                    "mean": 0.55,
+                    "std": 0.21213203435596423
+                  },
+                  "Unknown": {
+                    "n": 4,
+                    "median": 0.30000000000000004,
+                    "mean": 0.35,
+                    "std": 0.34156502553198664
+                  },
+                  "Western Conservative Summit": {
+                    "n": 2,
+                    "median": 0.075,
+                    "mean": 0.075,
+                    "std": 0.10606601717798213
+                  }
+                }
+              },
+              "compersion_raw": {
+                "test": "Mann-Whitney U",
+                "statistic": 0.0,
+                "p_value": 1.0,
+                "descriptive_stats_by_group": {
+                  "Student Action Summit": {
+                    "n": 1,
+                    "median": 0.0,
+                    "mean": 0.0,
+                    "std": NaN
+                  },
+                  "Unknown": {
+                    "n": 1,
+                    "median": 0.5,
+                    "mean": 0.5,
+                    "std": NaN
+                  }
+                }
+              }
+            },
+            "comparison_by_audience": {
+              "tribal_dominance_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 1.8406936127744487,
+                "p_value": 0.6061198387912281,
+                "descriptive_stats_by_group": {
+                  "College Students": {
+                    "n": 3,
+                    "median": 0.9,
+                    "mean": 0.8666666666666667,
+                    "std": 0.05773502691896256
+                  },
+                  "Conservative Activists": {
+                    "n": 5,
+                    "median": 0.9,
+                    "mean": 0.89,
+                    "std": 0.022360679774997918
+                  },
+                  "Republican Delegates": {
+                    "n": 2,
+                    "median": 0.825,
+                    "mean": 0.825,
+                    "std": 0.10606601717798214
+                  },
+                  "Unknown": {
+                    "n": 4,
+                    "median": 0.8500000000000001,
+                    "mean": 0.825,
+                    "std": 0.09574271077563384
+                  }
+                }
+              },
+              "individual_dignity_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 4.5452242846094295,
+                "p_value": 0.20829168329262573,
+                "descriptive_stats_by_group": {
+                  "College Students": {
+                    "n": 3,
+                    "median": 0.2,
+                    "mean": 0.19999999999999998,
+                    "std": 0.09999999999999999
+                  },
+                  "Conservative Activists": {
+                    "n": 5,
+                    "median": 0.2,
+                    "mean": 0.16,
+                    "std": 0.1140175425099138
+                  },
+                  "Republican Delegates": {
+                    "n": 2,
+                    "median": 0.44999999999999996,
+                    "mean": 0.44999999999999996,
+                    "std": 0.21213203435596426
+                  },
+                  "Unknown": {
+                    "n": 4,
+                    "median": 0.15000000000000002,
+                    "mean": 0.1625,
+                    "std": 0.07500000000000001
+                  }
+                }
+              },
+              "fear_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 4.664755154639171,
+                "p_value": 0.19805693467215846,
+                "descriptive_stats_by_group": {
+                  "College Students": {
+                    "n": 3,
+                    "median": 0.8,
+                    "mean": 0.7333333333333334,
+                    "std": 0.11547005383792519
+                  },
+                  "Conservative Activists": {
+                    "n": 5,
+                    "median": 0.8,
+                    "mean": 0.8300000000000001,
+                    "std": 0.0670820393249937
+                  },
+                  "Republican Delegates": {
+                    "n": 2,
+                    "median": 0.9,
+                    "mean": 0.9,
+                    "std": 0.0
+                  },
+                  "Unknown": {
+                    "n": 4,
+                    "median": 0.9,
+                    "mean": 0.8624999999999999,
+                    "std": 0.07500000000000001
+                  }
+                }
+              },
+              "hope_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 2.7241001564945213,
+                "p_value": 0.4361472496561086,
+                "descriptive_stats_by_group": {
+                  "College Students": {
+                    "n": 3,
+                    "median": 0.8,
+                    "mean": 0.7999999999999999,
+                    "std": 0.10000000000000003
+                  },
+                  "Conservative Activists": {
+                    "n": 5,
+                    "median": 0.75,
+                    "mean": 0.74,
+                    "std": 0.04183300132670381
+                  },
+                  "Republican Delegates": {
+                    "n": 2,
+                    "median": 0.8500000000000001,
+                    "mean": 0.8500000000000001,
+                    "std": 0.07071067811865474
+                  },
+                  "Unknown": {
+                    "n": 4,
+                    "median": 0.7749999999999999,
+                    "mean": 0.7875,
+                    "std": 0.10307764064044153
+                  }
+                }
+              },
+              "envy_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 8.053913857677902,
+                "p_value": 0.044910511125413444,
+                "descriptive_stats_by_group": {
+                  "College Students": {
+                    "n": 3,
+                    "median": 0.7,
+                    "mean": 0.6666666666666666,
+                    "std": 0.1527525231651947
+                  },
+                  "Conservative Activists": {
+                    "n": 5,
+                    "median": 0.5,
+                    "mean": 0.43,
+                    "std": 0.2588435821108957
+                  },
+                  "Republican Delegates": {
+                    "n": 2,
+                    "median": 0.8400000000000001,
+                    "mean": 0.8400000000000001,
+                    "std": 0.056568542494923775
+                  },
+                  "Unknown": {
+                    "n": 4,
+                    "median": 0.7,
+                    "mean": 0.7,
+                    "std": 0.08164965809277262
+                  }
+                }
+              },
+              "compassion_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 4.999999999999998,
+                "p_value": 0.1717971442967333,
+                "descriptive_stats_by_group": {
+                  "College Students": {
+                    "n": 2,
+                    "median": 0.05,
+                    "mean": 0.05,
+                    "std": 0.07071067811865477
+                  },
+                  "Conservative Activists": {
+                    "n": 5,
+                    "median": 0.0,
+                    "mean": 0.0,
+                    "std": 0.0
+                  },
+                  "Republican Delegates": {
+                    "n": 2,
+                    "median": 0.0,
+                    "mean": 0.0,
+                    "std": 0.0
+                  },
+                  "Unknown": {
+                    "n": 3,
+                    "median": 0.0,
+                    "mean": 0.0,
+                    "std": 0.0
+                  }
+                }
+              },
+              "enmity_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 3.0204255319148845,
+                "p_value": 0.38848666952976185,
+                "descriptive_stats_by_group": {
+                  "College Students": {
+                    "n": 3,
+                    "median": 0.9,
+                    "mean": 0.8666666666666667,
+                    "std": 0.05773502691896256
+                  },
+                  "Conservative Activists": {
+                    "n": 5,
+                    "median": 0.9,
+                    "mean": 0.9199999999999999,
+                    "std": 0.04472135954999578
+                  },
+                  "Republican Delegates": {
+                    "n": 2,
+                    "median": 0.9,
+                    "mean": 0.9,
+                    "std": 0.0
+                  },
+                  "Unknown": {
+                    "n": 4,
+                    "median": 0.9,
+                    "mean": 0.9125,
+                    "std": 0.024999999999999967
+                  }
+                }
+              },
+              "amity_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 6.397483221476507,
+                "p_value": 0.09379438409321696,
+                "descriptive_stats_by_group": {
+                  "College Students": {
+                    "n": 3,
+                    "median": 0.4,
+                    "mean": 0.3333333333333333,
+                    "std": 0.11547005383792516
+                  },
+                  "Conservative Activists": {
+                    "n": 5,
+                    "median": 0.1,
+                    "mean": 0.06999999999999999,
+                    "std": 0.044721359549995794
+                  },
+                  "Republican Delegates": {
+                    "n": 2,
+                    "median": 0.575,
+                    "mean": 0.575,
+                    "std": 0.3181980515339464
+                  },
+                  "Unknown": {
+                    "n": 4,
+                    "median": 0.35,
+                    "mean": 0.375,
+                    "std": 0.35000000000000003
+                  }
+                }
+              },
+              "fragmentative_goals_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 0.5588235294117637,
+                "p_value": 0.9057905989044316,
+                "descriptive_stats_by_group": {
+                  "College Students": {
+                    "n": 2,
+                    "median": 0.7,
+                    "mean": 0.7,
+                    "std": 0.28284271247461906
+                  },
+                  "Conservative Activists": {
+                    "n": 5,
+                    "median": 0.9,
+                    "mean": 0.86,
+                    "std": 0.0651920240520265
+                  },
+                  "Republican Delegates": {
+                    "n": 2,
+                    "median": 0.875,
+                    "mean": 0.875,
+                    "std": 0.03535533905932741
+                  },
+                  "Unknown": {
+                    "n": 4,
+                    "median": 0.8500000000000001,
+                    "mean": 0.85,
+                    "std": 0.05773502691896256
+                  }
+                }
+              },
+              "cohesive_goals_raw": {
+                "test": "Kruskal-Wallis H",
+                "statistic": 4.985285285285286,
+                "p_value": 0.17287780442002937,
+                "descriptive_stats_by_group": {
+                  "College Students": {
+                    "n": 3,
+                    "median": 0.4,
+                    "mean": 0.4666666666666666,
+                    "std": 0.20816659994661324
+                  },
+                  "Conservative Activists": {
+                    "n": 5,
+                    "median": 0.15,
+                    "mean": 0.21000000000000002,
+                    "std": 0.1816590212458495
+                  },
+                  "Republican Delegates": {
+                    "n": 2,
+                    "median": 0.675,
+                    "mean": 0.675,
+                    "std": 0.31819805153394637
+                  },
+                  "Unknown": {
+                    "n": 4,
+                    "median": 0.30000000000000004,
+                    "mean": 0.35,
+                    "std": 0.34156502553198664
+                  }
+                }
+              },
+              "compersion_raw": {
+                "test": "Mann-Whitney U",
+                "statistic": 0.0,
+                "p_value": 1.0,
+                "descriptive_stats_by_group": {
+                  "College Students": {
+                    "n": 1,
+                    "median": 0.0,
+                    "mean": 0.0,
+                    "std": NaN
+                  },
+                  "Unknown": {
+                    "n": 1,
+                    "median": 0.5,
+                    "mean": 0.5,
+                    "std": NaN
+                  }
+                }
+              }
+            }
+          }
+        },
+        "internal_consistency_analysis": {
+          "analysis_tier": "Tier 3 (Exploratory)",
+          "power_caveat": "Exploratory analysis - results are suggestive rather than conclusive (N=14).",
+          "cronbach_alpha": {
+            "fragmentative_construct": 0.3753081506538872,
+            "cohesive_construct": 0.648753626038645
+          },
+          "note": "'compassion_raw' was used in the 'cohesive_construct' as a substitute for the framework's 'compersion' based on the available data structure."
+        }
+      }
+    },
+    "status": "success_with_data",
+    "validation_passed": true
+  }
+}
