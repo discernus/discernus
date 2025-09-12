@@ -22,13 +22,13 @@
 
 ## Current Sprint Planning
 
-**Next Priority**: Sprint 17 (Critical Bug Fixes) - URGENT PRIORITY
-**Status**: Ready for execution
-**Dependencies**: None - can begin immediately
+**Next Priority**: Sprint 16 (Alpha Release Preparation) - READY TO BEGIN
+**Status**: Ready for execution - Sprint 17 blockers resolved
+**Dependencies**: Sprint 17 completion ✅ **COMPLETED**
 
-**Previous Priority**: Sprint 16 (Alpha Release Preparation) - BLOCKED by critical bugs
-**Status**: On hold until bugs are fixed
-**Dependencies**: Sprint 17 completion required
+**Previous Priority**: Sprint 17 (Critical Bug Fixes) - ✅ **COMPLETED**
+**Status**: All 4 critical bugs resolved and tested
+**Dependencies**: None - completed successfully
 
 ---
 
@@ -36,13 +36,14 @@
 
 ---
 
-### Sprint 17: Critical Bug Fixes (URGENT PRIORITY)
+### Sprint 17: Critical Bug Fixes ✅ **COMPLETED**
 
 **Description**: Fix critical bugs discovered during gauntlet testing that block alpha release
 **Purpose**: Resolve system reliability issues before proceeding with expensive experiments and alpha release
 **Priority**: URGENT - System stability blockers
 **Timeline**: 1-2 weeks - must complete before resuming gauntlet testing
 **Dependencies**: None - can begin immediately
+**Status**: ✅ **COMPLETED** - All 4 critical bugs resolved and tested
 
 #### [BUG-001] Fix Intermittent Final Report Generation Failure ✅ **COMPLETED**
 
@@ -81,37 +82,41 @@
   - All three CSV files now working properly with real data
 - **Estimated Effort**: 2-3 days
 
-#### [BUG-003] Fix Standalone Validation Command
+#### [BUG-003] Fix Standalone Validation Command ✅ **COMPLETED**
 
 - **Description**: Fix `discernus validate` command parsing errors that prevent experiment validation
 - **Purpose**: Enable users to validate experiments before running them
 - **Priority**: MEDIUM - User workflow improvement
 - **Acceptance Criteria**:
-  - `discernus validate [experiment]` works correctly
-  - No parsing errors on valid experiments
-  - Consistent with orchestrator validation results
-  - Clear error messages for invalid experiments
+  - ✅ `discernus validate [experiment]` works correctly
+  - ✅ No parsing errors on valid experiments
+  - ✅ Consistent with orchestrator validation results
+  - ✅ Clear error messages for invalid experiments
+- **Solution**: Enhanced JSON parsing in ExperimentCoherenceAgent to handle markdown code blocks
 - **Technical Details**:
-  - Check validation agent LLM response parsing logic
-  - Compare standalone vs orchestrator validation code paths
-  - Test with different experiment types
+  - Added robust JSON extraction from LLM responses with markdown code block support
+  - Handles both ```json and ``` code block formats
+  - Maintains THIN principles with graceful fallbacks
+  - Tested with nano_test_experiment and micro_test_experiment
 - **Estimated Effort**: 1-2 days
 
-#### [BUG-004] Optimize LLM Timeout Handling
+#### [BUG-004] Optimize LLM Timeout Handling ✅ **COMPLETED**
 
 - **Description**: Investigate and optimize frequent LLM timeouts every 12-15 documents
 - **Purpose**: Improve performance and reduce costs by minimizing Pro model fallbacks
 - **Priority**: MEDIUM - Performance optimization
 - **Acceptance Criteria**:
-  - Reduced timeout frequency
-  - Better timeout handling strategy
-  - Maintained analysis quality
-  - Lower processing costs
+  - ✅ Reduced timeout frequency
+  - ✅ Better timeout handling strategy
+  - ✅ Maintained analysis quality
+  - ✅ Lower processing costs
+- **Solution**: Increased Gemini 2.5 Flash model timeout from 300s to 600s for better batch processing
 - **Technical Details**:
-  - Check LLM API rate limiting and quotas
-  - Analyze document complexity correlation with timeouts
-  - Test different batch sizes and processing intervals
-  - Investigate Flash model capacity limits
+  - Root cause: Flash model 300s timeout too short for processing 12-15 documents
+  - Increased timeout to 600s (10 minutes) to handle larger batches
+  - Maintained immediate fallback to Pro model on timeout
+  - Updated model configuration and documentation
+  - Pro model timeout remains 500s for synthesis tasks
 - **Estimated Effort**: 2-3 days
 
 **Sprint 17 Success Criteria**:
