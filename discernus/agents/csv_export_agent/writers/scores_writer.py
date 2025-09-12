@@ -34,15 +34,21 @@ def generate_scores_csv(
 
     # Dynamically discover all score columns (framework-agnostic)
     all_score_keys = set()
+    all_derived_metrics_keys = set()
     for doc in document_analyses:
         analysis_scores = doc.get('analysis_scores', {})
         all_score_keys.update(analysis_scores.keys())
+        
+        # Also discover derived metrics
+        derived_metrics = doc.get('derived_metrics', {})
+        all_derived_metrics_keys.update(derived_metrics.keys())
 
     # Sort keys for consistent output
     score_columns = sorted(list(all_score_keys))
+    derived_metrics_columns = sorted(list(all_derived_metrics_keys))
 
     # Define CSV headers
-    headers = ['document_id', 'filename'] + score_columns + ['evidence_hash']
+    headers = ['document_id', 'filename'] + score_columns + derived_metrics_columns + ['evidence_hash']
 
     # Apply column name formatting based on export format
     headers = format_column_names_func(headers, export_options)
@@ -55,6 +61,7 @@ def generate_scores_csv(
             document_id = doc.get('document_id', 'unknown')
             document_name = doc.get('document_name', 'unknown')
             analysis_scores = doc.get('analysis_scores', {})
+            derived_metrics = doc.get('derived_metrics', {})
 
             # Create evidence hash for this document
             evidence_hash = create_evidence_hash_func(doc)
@@ -67,6 +74,12 @@ def generate_scores_csv(
                 score_value = analysis_scores.get(score_key)
                 # Convert None to empty string for CSV
                 row.append(score_value if score_value is not None else '')
+
+            # Add derived metrics in consistent order
+            for metric_key in derived_metrics_columns:
+                metric_value = derived_metrics.get(metric_key)
+                # Convert None to empty string for CSV
+                row.append(metric_value if metric_value is not None else '')
 
             row.append(evidence_hash)
             writer.writerow(row)

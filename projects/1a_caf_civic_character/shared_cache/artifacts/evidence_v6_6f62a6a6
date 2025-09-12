@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "516a3c9c12409642e43f0c54a8cfaf2755825c1994a38856b234afd6bf948e63"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-11T23:11:00.294393+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "jd_vance_2022_natcon_conference_516a3c9c.txt",
+      "dimension": "tribalism",
+      "quote_text": "my interest is not in protecting the good people of another country. I'm a senator for the state of Ohio. Our leaders have to protect the interests of the citizens of this country.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T23:11:00.294364+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference_516a3c9c.txt",
+      "dimension": "dignity",
+      "quote_text": "They are very hardworking people and they're very good people.",
+      "confidence": 0.7,
+      "context_type": "descriptive_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T23:11:00.294371+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference_516a3c9c.txt",
+      "dimension": "manipulation",
+      "quote_text": "the only illegal people in this country are the people whose grandparents were born here, according to the Biden administration.",
+      "confidence": 0.8,
+      "context_type": "hyperbolic_claim",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T23:11:00.294373+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference_516a3c9c.txt",
+      "dimension": "truth",
+      "quote_text": "The 20,000 resident Delta is almost all recent Haitian immigrants.",
+      "confidence": 0.6,
+      "context_type": "specific_data_point",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T23:11:00.294375+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference_516a3c9c.txt",
+      "dimension": "resentment",
+      "quote_text": "our elites love to accuse the residents there of having white privilege. Go to Breathitt County, Kentucky, and tell me that these are privileged people.",
+      "confidence": 0.8,
+      "context_type": "blame_attribution",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T23:11:00.294377+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference_516a3c9c.txt",
+      "dimension": "justice",
+      "quote_text": "",
+      "confidence": 0.6,
+      "context_type": "",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T23:11:00.294379+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference_516a3c9c.txt",
+      "dimension": "fear",
+      "quote_text": "The real threat to American democracy is that American voters keep on voting for less immigration and our politicians keep on rewarding us with more.",
+      "confidence": 0.9,
+      "context_type": "threat_assessment",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T23:11:00.294380+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference_516a3c9c.txt",
+      "dimension": "hope",
+      "quote_text": "the national conservative movement is winning the debate and we're changing the conversation.",
+      "confidence": 0.8,
+      "context_type": "positive_outlook",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T23:11:00.294382+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference_516a3c9c.txt",
+      "dimension": "fantasy",
+      "quote_text": "the dumbest of all possible foreign policy solutions and answers for our country is that we should let China make all of our stuff and we should fight a war with China.",
+      "confidence": 0.7,
+      "context_type": "oversimplification",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T23:11:00.294383+00:00"
+    },
+    {
+      "document_name": "jd_vance_2022_natcon_conference_516a3c9c.txt",
+      "dimension": "pragmatism",
+      "quote_text": "People don't go and fight and die just for principles. They also, importantly, they go and fight and die for their home, for their families, and for the future of their children.",
+      "confidence": 0.7,
+      "context_type": "realistic_motivation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T23:11:00.294390+00:00"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "3671de4a6c31fc2bb356ceed5589d1b4bb2288df674bf0d827dc973872b462a3"
+    ],
+    "total_evidence_pieces": 2,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-12T02:43:23.995972+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "positive_test_2.txt",
+      "dimension": "positive_sentiment",
+      "quote_text": "What a superb morning! All systems are operating flawlessly. I'm excited about what's coming next. Achievement surrounds us. The group performed outstandingly. We're reaching incredible goals. Hopefulness permeates everything. Such a marvelous chance! I'm delighted by the advancement. Everything appears glowing and encouraging.",
+      "confidence": 1.0,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T02:43:23.995968+00:00"
+    },
+    {
+      "document_name": "positive_test_2.txt",
+      "dimension": "negative_sentiment",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T02:43:23.995970+00:00"
+    }
+  ]
+}

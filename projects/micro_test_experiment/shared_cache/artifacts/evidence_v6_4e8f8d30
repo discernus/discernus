@@ -1,0 +1,33 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "123e5c9fe4425f26d19c815d8f4b304e6c211e38014847dc087f108396aa6134"
+    ],
+    "total_evidence_pieces": 2,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-12T04:25:26.683714+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "negative_test_1.txt",
+      "dimension": "positive_sentiment",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:25:26.683710+00:00"
+    },
+    {
+      "document_name": "negative_test_1.txt",
+      "dimension": "negative_sentiment",
+      "quote_text": "Everything looks dark and hopeless.",
+      "confidence": 1.0,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:25:26.683712+00:00"
+    }
+  ]
+}

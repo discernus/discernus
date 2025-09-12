@@ -1,8 +1,0 @@
-{
-  "success": false,
-  "issues": [
-    "Failed to load experiment artifacts: No framework file found in /Volumes/code/discernus/projects/nano_test_experiment. Expected one of: framework.md, caf_v10.md, cff_v10.md, pdaf_v10.md, chf_v10.md, ecf_v10.md, framework_v10.md, caf_v10_0_1.md, caf_v10_0_2.md, caf_v10_0_3.md, cff_v10_0_1.md, cff_v10_0_2.md, cff_v10_0_3.md, pdaf_v10_0_1.md, pdaf_v10_0_2.md, pdaf_v10_0_3.md, chf_v10_0_1.md, chf_v10_0_2.md, chf_v10_0_3.md, ecf_v10_0_1.md, ecf_v10_0_2.md, ecf_v10_0_3.md"
-  ],
-  "model": "vertex_ai/gemini-2.5-pro",
-  "validated_at": "2025-09-11T15:25:11.558957+00:00"
-}

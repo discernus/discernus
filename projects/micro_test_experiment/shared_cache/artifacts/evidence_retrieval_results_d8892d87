@@ -1,0 +1,389 @@
+{
+  "metadata": {
+    "agent": "EvidenceRetriever",
+    "timestamp": "2025-09-12T01:25:22.465938",
+    "framework_hash": "c2e32ec3cf0ed3fdd8f0b1856b8c20312b7a5b98b0eb21729b404d0f6de1ae3b",
+    "total_findings": 10,
+    "total_quotes": 17
+  },
+  "evidence_results": [
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Extreme negative correlation (r = -0.997) between Positive Sentiment and Negative Sentiment, indicating that texts scoring high on one dimension score low on the other, confirming they measure opposing constructs."
+      },
+      "queries_used": [
+        "(positive_sentiment > 0.8) AND (negative_sentiment < 0.2)",
+        "(negative_sentiment > 0.8) AND (positive_sentiment < 0.2)",
+        "\"dominant positive language\" OR \"dominant negative language\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test_1.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.3541742265224457,
+          "metadata": {
+            "document_name": "negative_test_1.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 1
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Perfect separation of scores for the 'positive' document group, which received very high Positive Sentiment scores (mean=0.95) and zero Negative Sentiment scores (mean=0.0)."
+      },
+      "queries_used": [
+        "(document_name:positive*) AND (positive_sentiment > 0.8)",
+        "\"praise\" OR \"optimism\" OR \"success\" OR \"enthusiasm\" AND (negative_sentiment = 0.0)",
+        "\"excellent\" OR \"wonderful\" OR \"fantastic\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test_1.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.5721699595451355,
+          "metadata": {
+            "document_name": "negative_test_1.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "What a superb morning! All systems are operating flawlessly. I'm excited about what's coming next. Achievement surrounds us. The group performed outstandingly. We're reaching incredible goals. Hopefulness permeates everything. Such a marvelous chance! I'm delighted by the advancement. Everything appears glowing and encouraging.",
+          "document_name": "positive_test_2.txt",
+          "dimension": "positive_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.30074307322502136,
+          "metadata": {
+            "document_name": "positive_test_2.txt",
+            "dimension": "positive_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Perfect separation of scores for the 'negative' document group, which received maximum Negative Sentiment scores (mean=1.0) and zero Positive Sentiment scores (mean=0.0)."
+      },
+      "queries_used": [
+        "(document_name:negative*) AND (negative_sentiment > 0.8)",
+        "\"criticism\" OR \"pessimism\" OR \"failure\" OR \"despair\" AND (positive_sentiment = 0.0)",
+        "\"terrible\" OR \"awful\" OR \"disastrous\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test_1.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.6284931302070618,
+          "metadata": {
+            "document_name": "negative_test_1.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "What an awful predicament. All plans are failing miserably. I'm dreading what's to come. Defeat engulfs us. The group performed dreadfully. We're encountering catastrophe. Despair saturates everything. Such a calamitous result! I'm crushed by the setbacks. Everything appears bleak and discouraging.",
+          "document_name": "negative_test_2.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.4857555031776428,
+          "metadata": {
+            "document_name": "negative_test_2.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "The derived 'net_sentiment' metric perfectly distinguishes between groups, with a mean of +0.95 for the positive group and -1.0 for the negative group."
+      },
+      "queries_used": [
+        "net_sentiment > 0.9",
+        "net_sentiment < -0.9",
+        "(document_name:positive*) AND \"success\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test_1.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.5844097137451172,
+          "metadata": {
+            "document_name": "negative_test_1.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.",
+          "document_name": "positive_test_1.txt",
+          "dimension": "positive_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.5138267278671265,
+          "metadata": {
+            "document_name": "positive_test_1.txt",
+            "dimension": "positive_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "The 'sentiment_magnitude' (emotional intensity) is nearly identical between the positive (mean=0.475) and negative (mean=0.5) groups, suggesting both categories contain equally strong emotional language."
+      },
+      "queries_used": [
+        "sentiment_magnitude > 0.45",
+        "\"dominant positive language throughout\"",
+        "\"dominant negative language throughout\""
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test_1.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.4266832768917084,
+          "metadata": {
+            "document_name": "negative_test_1.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "What a superb morning! All systems are operating flawlessly. I'm excited about what's coming next. Achievement surrounds us. The group performed outstandingly. We're reaching incredible goals. Hopefulness permeates everything. Such a marvelous chance! I'm delighted by the advancement. Everything appears glowing and encouraging.",
+          "document_name": "positive_test_2.txt",
+          "dimension": "positive_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.36921510100364685,
+          "metadata": {
+            "document_name": "positive_test_2.txt",
+            "dimension": "positive_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Extremely high eta-squared values (\u03b7\u00b2 > 0.99) from ANOVA show that knowing a document's category ('positive' vs. 'negative') almost completely explains the variance in its sentiment scores."
+      },
+      "queries_used": [
+        "(document_name:positive*) AND \"superb\"",
+        "(document_name:negative*) AND \"dreadful\"",
+        "Show quotes that demonstrate the starkest contrast between the two groups"
+      ],
+      "quotes": [
+        {
+          "quote_text": "What a superb morning! All systems are operating flawlessly. I'm excited about what's coming next. Achievement surrounds us. The group performed outstandingly. We're reaching incredible goals. Hopefulness permeates everything. Such a marvelous chance! I'm delighted by the advancement. Everything appears glowing and encouraging.",
+          "document_name": "positive_test_2.txt",
+          "dimension": "positive_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.45777803659439087,
+          "metadata": {
+            "document_name": "positive_test_2.txt",
+            "dimension": "positive_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test_1.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.2940576374530792,
+          "metadata": {
+            "document_name": "negative_test_1.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "The large negative Cronbach's Alpha (\u03b1 = -507) provides strong statistical evidence for discriminant validity, confirming the framework's dimensions measure opposing concepts."
+      },
+      "queries_used": [
+        "\"wonderful\" AND NOT \"failure\"",
+        "\"awful\" AND NOT \"success\"",
+        "Find texts that exclusively use words from either the positive or negative marker list, but not both."
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test_1.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.4252671003341675,
+          "metadata": {
+            "document_name": "negative_test_1.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "What an awful predicament. All plans are failing miserably. I'm dreading what's to come. Defeat engulfs us. The group performed dreadfully. We're encountering catastrophe. Despair saturates everything. Such a calamitous result! I'm crushed by the setbacks. Everything appears bleak and discouraging.",
+          "document_name": "negative_test_2.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.4251883327960968,
+          "metadata": {
+            "document_name": "negative_test_2.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "High Positive Sentiment scores (0.9-1.0) are strongly associated with texts containing marker words like 'great', 'excellent', and 'wonderful'."
+      },
+      "queries_used": [
+        "(positive_sentiment > 0.9) AND \"great\"",
+        "(positive_sentiment > 0.9) AND (\"excellent\" OR \"wonderful\")",
+        "evidence where raw_score > 0.9 for positive_sentiment"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test_1.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.6212368607521057,
+          "metadata": {
+            "document_name": "negative_test_1.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "What a superb morning! All systems are operating flawlessly. I'm excited about what's coming next. Achievement surrounds us. The group performed outstandingly. We're reaching incredible goals. Hopefulness permeates everything. Such a marvelous chance! I'm delighted by the advancement. Everything appears glowing and encouraging.",
+          "document_name": "positive_test_2.txt",
+          "dimension": "positive_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.5383545756340027,
+          "metadata": {
+            "document_name": "positive_test_2.txt",
+            "dimension": "positive_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "High Negative Sentiment scores (0.9-1.0) are strongly associated with texts containing marker words like 'bad', 'terrible', and 'failure'."
+      },
+      "queries_used": [
+        "(negative_sentiment > 0.9) AND \"bad\"",
+        "(negative_sentiment > 0.9) AND (\"terrible\" OR \"failure\")",
+        "evidence where raw_score > 0.9 for negative_sentiment"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test_1.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.6695607900619507,
+          "metadata": {
+            "document_name": "negative_test_1.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 1
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "The zero standard deviation for several key metrics (e.g., negative_sentiment in the positive group) indicates perfect scoring agreement for those items."
+      },
+      "queries_used": [
+        "(document_name:positive*) AND (negative_sentiment = 0.0)",
+        "(document_name:negative*) AND (positive_sentiment = 0.0)",
+        "(document_name:negative*) AND (net_sentiment = -1.0)"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test_1.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.6193451881408691,
+          "metadata": {
+            "document_name": "negative_test_1.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 1
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "9ebec73f000084ff7ceb77c737df2a77d5231179a7f864aa74e58dd7a4889d5d"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-11T23:10:20.039576+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "tribalism",
+      "quote_text": "I'm aware that there are people in my party and in my state who will vehemently disapprove of my decision, and in some quarters I will be vehemently denounced.",
+      "confidence": 0.9,
+      "context_type": "explicit_rejection_of_group_loyalty",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T23:10:20.039544+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "dignity",
+      "quote_text": "My faith is at the heart of who I am. I take an oath before God as enormously consequential.",
+      "confidence": 0.95,
+      "context_type": "direct_statement_of_universal_principle",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T23:10:20.039557+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "manipulation",
+      "quote_text": "I sought to hear testimony from John Bolton not only because I believed he could add context to the charges, but also because I hoped that what he might say could raise reasonable doubt and thus remove from me the awful obligation to vote for impeachment.",
+      "confidence": 0.9,
+      "context_type": "absence_of_manipulative_intent",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T23:10:20.039559+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "truth",
+      "quote_text": "The president asked a foreign government to investigate his political rival. The president withheld vital military funds from that government to press it to do so. The president delayed funds for an American ally at war with Russian invaders. The president\u2019s purpose was personal and political. Accordingly, the president is guilty of an appalling abuse of public trust.",
+      "confidence": 0.95,
+      "context_type": "direct_assertion_of_facts_and_conclusion",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T23:10:20.039561+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "resentment",
+      "quote_text": "While ignoring a conflict of interest is not a crime, it is surely very wrong.",
+      "confidence": 0.9,
+      "context_type": "acknowledgment_of_wrongdoing_without_grievance_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T23:10:20.039563+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "justice",
+      "quote_text": "I swore an oath before God to exercise impartial justice.",
+      "confidence": 0.95,
+      "context_type": "direct_statement_of_commitment_to_justice",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T23:10:20.039564+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "fear",
+      "quote_text": "Were I to ignore the evidence that has been presented and disregard what I believe my oath and the Constitution demands of me for the sake of a partisan end, it would, I fear, expose my character to history's rebuke and the censure of my own conscience.",
+      "confidence": 0.85,
+      "context_type": "personal_moral_consequence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T23:10:20.039566+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "hope",
+      "quote_text": "I believe that our Constitution was inspired by Providence. I'm convinced that freedom itself is dependent on the strength and vitality of our national character.",
+      "confidence": 0.85,
+      "context_type": "positive_vision_for_the_nation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T23:10:20.039568+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "fantasy",
+      "quote_text": "I knew from the outset that being tasked with judging the president, the leader of my own party, would be the most difficult decision I have ever faced. I was not wrong.",
+      "confidence": 0.9,
+      "context_type": "acknowledgment_of_difficulty_and_reality",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T23:10:20.039570+00:00"
+    },
+    {
+      "document_name": "mitt_romney_2020_impeachment_9ebec73f.txt",
+      "dimension": "pragmatism",
+      "quote_text": "I acknowledge that my verdict will not remove the president from office.",
+      "confidence": 0.9,
+      "context_type": "acknowledgment_of_real_world_constraints",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T23:10:20.039572+00:00"
+    }
+  ]
+}

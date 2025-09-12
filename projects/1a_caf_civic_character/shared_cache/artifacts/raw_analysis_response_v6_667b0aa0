@@ -1,0 +1,131 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "civic_analysis_framework",
+    "framework_version": "1.0.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Applied three independent analytical approaches (Evidence-First, Context-Weighted, Pattern-Based) with median aggregation. The document is a classic example of a concession speech, prioritizing themes of dignity, justice, hope, and pragmatism to foster national unity after a divisive election. The scores reflect a strong emphasis on civic virtue and a deliberate rejection of divisive rhetoric.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "john_mccain_2008_concession_ff9b26f2.txt",
+      "document_name": "john_mccain_2008_concession_ff9b26f2.txt",
+      "dimensional_scores": {
+        "tribalism": {
+          "raw_score": 0.0,
+          "salience": 0.2,
+          "confidence": 0.9
+        },
+        "dignity": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "manipulation": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "truth": {
+          "raw_score": 0.7,
+          "salience": 0.5,
+          "confidence": 0.8
+        },
+        "resentment": {
+          "raw_score": 0.0,
+          "salience": 0.2,
+          "confidence": 0.9
+        },
+        "justice": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "fear": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.8
+        },
+        "hope": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "fantasy": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "pragmatism": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribalism",
+          "quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "dignity",
+          "quote_text": "There is no better evidence of this than the election of an African-American to the presidency of the United States.",
+          "confidence": 0.95,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "manipulation",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence_of_evidence"
+        },
+        {
+          "dimension": "truth",
+          "quote_text": "Every candidate makes mistakes, and I'm sure I made my share of them.",
+          "confidence": 0.8,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "resentment",
+          "quote_text": "though we fell short, the failure is mine, not yours.",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "justice",
+          "quote_text": "The American people have spoken, and they have spoken clearly.",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "defend our security in a dangerous world",
+          "confidence": 0.8,
+          "context_type": "context_setting"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity...",
+          "confidence": 0.9,
+          "context_type": "call_to_action"
+        },
+        {
+          "dimension": "fantasy",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": "absence_of_evidence"
+        },
+        {
+          "dimension": "pragmatism",
+          "quote_text": "These are difficult times for our country, and I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

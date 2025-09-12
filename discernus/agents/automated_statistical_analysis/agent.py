@@ -115,38 +115,27 @@ class AutomatedStatisticalAnalysisAgent:
                     workspace_path
                 )
             
-            # Extract clean functions using THIN delimiter approach
-            extracted_functions = self.extractor.extract_code_blocks(generated_functions)
-            
-            if not extracted_functions:
-                # Debug: Log the raw response to understand why extraction failed
-                self._log_event("EXTRACTION_DEBUG", {
-                    "raw_response_length": len(generated_functions),
-                    "raw_response_preview": generated_functions[:1000],
-                    "delimiter_start_found": "<<<DISCERNUS_FUNCTION_START>>>" in generated_functions,
-                    "delimiter_end_found": "<<<DISCERNUS_FUNCTION_END>>>" in generated_functions
-                })
-                
-                # Try fallback: create a simple descriptive statistics function
-                self._log_event("FALLBACK_GENERATION", {"reason": "LLM did not use delimiters"})
-                extracted_functions = [self._create_fallback_statistical_function()]
-            
-            # Combine all functions into single module
-            function_module = self._create_statistical_module(extracted_functions, experiment_spec)
+            # THIN approach: Save raw LLM response directly as Python module
+            # No parsing - let the LLM generate complete, valid Python code
+            function_module = generated_functions
             
             # Save to workspace
             output_file = workspace_path / "automatedstatisticalanalysisagent_functions.py"
             output_file.write_text(function_module)
             
+            # Count functions by analyzing the generated code (simple heuristic)
+            # Count function definitions in the generated code
+            functions_count = function_module.count('def ')
+            
             self._log_event("STATISTICAL_GENERATION_SUCCESS", {
-                "functions_extracted": len(extracted_functions),
+                "functions_extracted": functions_count,
                 "output_file": str(output_file.name),
                 "module_size": len(function_module)
             })
             
             return {
                 "status": "success",
-                "functions_generated": len(extracted_functions),
+                "functions_generated": functions_count,
                 "output_file": str(output_file.name),
                 "module_size": len(function_module)
             }

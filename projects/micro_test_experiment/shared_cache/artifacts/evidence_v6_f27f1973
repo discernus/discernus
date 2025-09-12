@@ -1,0 +1,33 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "68b092892a2216aa8ebd70a470a361c86d2bf3ceb23469275acd0fb85d9367a9"
+    ],
+    "total_evidence_pieces": 2,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-12T04:23:12.833078+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "negative_test_2.txt",
+      "dimension": "positive_sentiment",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:23:12.833073+00:00"
+    },
+    {
+      "document_name": "negative_test_2.txt",
+      "dimension": "negative_sentiment",
+      "quote_text": "What an awful predicament. All plans are failing miserably. I'm dreading what's to come. Defeat engulfs us. The group performed dreadfully. We're encountering catastrophe. Despair saturates everything. Such a calamitous result! I'm crushed by the setbacks. Everything appears bleak and discouraging.",
+      "confidence": 1.0,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T04:23:12.833075+00:00"
+    }
+  ]
+}

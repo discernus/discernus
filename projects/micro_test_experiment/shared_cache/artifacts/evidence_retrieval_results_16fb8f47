@@ -1,0 +1,203 @@
+{
+  "metadata": {
+    "agent": "EvidenceRetriever",
+    "timestamp": "2025-09-12T01:18:54.414857",
+    "framework_hash": "c2e32ec3cf0ed3fdd8f0b1856b8c20312b7a5b98b0eb21729b404d0f6de1ae3b",
+    "total_findings": 7,
+    "total_quotes": 7
+  },
+  "evidence_results": [
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Perfect Group Separation (Positive): Texts in the 'positive' category receive near-maximal scores for `positive_sentiment` (mean 0.95) and zero for `negative_sentiment`, demonstrating the model's ability to correctly classify positive examples."
+      },
+      "queries_used": [
+        "sentiment_category: positive AND positive_sentiment.raw_score > 0.9",
+        "sentiment_category: positive AND negative_sentiment.raw_score == 0.0",
+        "evidence: \"excellent\" OR \"wonderful\" AND positive_sentiment.raw_score > 0.8"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test_1.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.5964348316192627,
+          "metadata": {
+            "document_name": "negative_test_1.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 1
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Perfect Group Separation (Negative): Texts in the 'negative' category receive maximal scores for `negative_sentiment` (mean 1.0) and zero for `positive_sentiment`, demonstrating perfect classification of negative examples."
+      },
+      "queries_used": [
+        "sentiment_category: negative AND negative_sentiment.raw_score > 0.9",
+        "sentiment_category: negative AND positive_sentiment.raw_score == 0.0",
+        "evidence: \"terrible\" OR \"failure\" AND negative_sentiment.raw_score > 0.8"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test_1.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.7367444038391113,
+          "metadata": {
+            "document_name": "negative_test_1.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 1
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Strong Inverse Correlation: The `positive_sentiment` and `negative_sentiment` dimensions exhibit a near-perfect inverse correlation (r = -0.997), confirming they measure opposing constructs as intended by the framework."
+      },
+      "queries_used": [
+        "positive_sentiment.raw_score > 0.9 AND negative_sentiment.raw_score < 0.1",
+        "negative_sentiment.raw_score > 0.9 AND positive_sentiment.raw_score < 0.1"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test_1.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.5811464190483093,
+          "metadata": {
+            "document_name": "negative_test_1.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 1
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "High Efficacy of 'net_sentiment' (Positive): The derived `net_sentiment` metric proves to be a highly effective classifier, with scores for 'positive' texts clustering near the maximum possible value (mean 0.95)."
+      },
+      "queries_used": [
+        "net_sentiment > 0.9",
+        "sentiment_category: positive AND net_sentiment > 0.9"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test_1.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.5453603267669678,
+          "metadata": {
+            "document_name": "negative_test_1.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 1
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "High Efficacy of 'net_sentiment' (Negative): The derived `net_sentiment` metric effectively isolates 'negative' texts, assigning them a consistent and maximally negative score of -1.0."
+      },
+      "queries_used": [
+        "net_sentiment < -0.9",
+        "sentiment_category: negative AND net_sentiment == -1.0"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test_1.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.5473664402961731,
+          "metadata": {
+            "document_name": "negative_test_1.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 1
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Ineffectiveness of 'sentiment_magnitude': The `sentiment_magnitude` metric fails to differentiate between groups (p > 0.05), with 'positive' (mean 0.475) and 'negative' (mean 0.5) texts yielding nearly identical scores."
+      },
+      "queries_used": [
+        "sentiment_category: positive AND sentiment_magnitude > 0.45 AND sentiment_magnitude < 0.5",
+        "sentiment_category: negative AND sentiment_magnitude == 0.5"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test_1.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.5044440031051636,
+          "metadata": {
+            "document_name": "negative_test_1.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 1
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Extreme and Unambiguous Scoring: The model consistently assigns extreme scores (0.0, 0.9, or 1.0), suggesting the corpus contains documents with very clear, non-ambiguous sentiment that aligns with the framework's scoring rubric."
+      },
+      "queries_used": [
+        "positive_sentiment.raw_score == 1.0",
+        "negative_sentiment.raw_score == 1.0",
+        "positive_sentiment.raw_score == 0.0 AND negative_sentiment.raw_score > 0.8"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test_1.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.5409508347511292,
+          "metadata": {
+            "document_name": "negative_test_1.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 1
+    }
+  ]
+}

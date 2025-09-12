@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "ab348df3d5935730da5e8a325da4ad335990ada10bb69e024307832e5c39659e"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-11T22:56:39.231589+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "tribalism",
+      "quote_text": "our people locked up in jails over and over again.",
+      "confidence": 0.8,
+      "context_type": "group_identification",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T22:56:39.231550+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "dignity",
+      "quote_text": "march with the spirit of love and with the spirit of dignity that we have shown here today.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T22:56:39.231563+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "manipulation",
+      "quote_text": "politicians who build their careers on immoral compromises and ally themselves with open forms of political, economic, and social exploitation.",
+      "confidence": 0.9,
+      "context_type": "criticism_of_others",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T22:56:39.231567+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "truth",
+      "quote_text": "Unless Title Three is put in this bill, there's nothing to protect the young children and old women who must face police dogs and fire hoses in the South",
+      "confidence": 0.9,
+      "context_type": "factual_assertion",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T22:56:39.231569+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "resentment",
+      "quote_text": "We are tired! We are tired of being beaten by policemen. We are tired of seeing our people locked up in jails over and over again.",
+      "confidence": 0.9,
+      "context_type": "grievance_expression",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T22:56:39.231574+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "justice",
+      "quote_text": "We need a bill to ensure the equality of a maid who earns five dollars a week in the home of a family whose total income is one hundred thousand dollars a year.",
+      "confidence": 0.9,
+      "context_type": "demand_for_fair_outcomes",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T22:56:39.231576+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "fear",
+      "quote_text": "who must face police dogs and fire hoses in the South",
+      "confidence": 0.9,
+      "context_type": "threat_description",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T22:56:39.231578+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "hope",
+      "quote_text": "splinter the segregated South into a thousand pieces and put them together in the image of God and democracy.",
+      "confidence": 0.9,
+      "context_type": "positive_vision",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T22:56:39.231580+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "fantasy",
+      "quote_text": "They're talking about slow down and stop. We will not stop!",
+      "confidence": 0.9,
+      "context_type": "rejection_of_unrealistic_solutions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T22:56:39.231583+00:00"
+    },
+    {
+      "document_name": "john_lewis_1963_march_on_washington_ab348df3.txt",
+      "dimension": "pragmatism",
+      "quote_text": "To those who have said, \"Be patient and wait,\" we must say that we cannot be patient.",
+      "confidence": 0.9,
+      "context_type": "rejection_of_compromise",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-11T22:56:39.231584+00:00"
+    }
+  ]
+}

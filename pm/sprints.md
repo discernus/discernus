@@ -277,8 +277,83 @@
 
 ---
 
+### Sprint 18: Agent Parsing Consistency (HIGH PRIORITY)
+
+**Description**: Update all agents to use consistent "raw Python objects, no JSON parsing" pattern
+**Purpose**: Eliminate parsing errors and align all agents with the system's current architecture
+**Priority**: HIGH - System consistency and reliability
+**Timeline**: 1-2 weeks
+**Dependencies**: Sprint 17 completion (critical bugs must be fixed first)
+
+#### [CONSISTENCY-001] Update DerivedMetricsAgent to Raw Python Pattern
+
+- **Description**: Fix DerivedMetricsAgent parsing error by adopting the same pattern as UnifiedSynthesisAgent
+- **Purpose**: Eliminate `'\n        "metric_name_1"'` parsing error and make agent consistent with system architecture
+- **Priority**: HIGH - Currently blocking statistical prep feature
+- **Status**: Ready for execution
+- **Root Cause**: Agent still uses old JSON/delimiter parsing while system has moved to raw Python objects
+- **Current Error**: `'\n        "metric_name_1"'` - string processing failure in function generation
+- **Solution Pattern**: Follow UnifiedSynthesisAgent approach:
+  - Skip all LLM response parsing
+  - Save raw LLM response directly as Python code
+  - Use `eval()` or `exec()` to load functions
+  - Avoid JSON serialization entirely
+- **Acceptance Criteria**:
+  - ✅ Statistical prep feature works without parsing errors
+  - ✅ DerivedMetricsAgent generates functions successfully
+  - ✅ No more `'\n        "metric_name_1"'` errors
+  - ✅ Agent follows same pattern as UnifiedSynthesisAgent
+  - ✅ All derived metrics calculations work correctly
+- **Files to Update**:
+  - `discernus/agents/automated_derived_metrics/agent.py`
+  - `discernus/agents/automated_derived_metrics/prompt.yaml`
+- **Dependencies**: None
+- **Effort**: 2-3 days
+
+#### [CONSISTENCY-002] Update StatisticalAnalysisAgent to Raw Python Pattern
+
+- **Description**: Update StatisticalAnalysisAgent to use raw Python objects instead of delimiter parsing
+- **Purpose**: Make all agents consistent with the system's current architecture
+- **Priority**: MEDIUM - Not currently blocking, but inconsistent with system design
+- **Status**: Ready for execution
+- **Current Issue**: Still uses old delimiter parsing (`<<<DISCERNUS_FUNCTION_START>>>`) despite docstring claiming "no parsing"
+- **Solution Pattern**: Follow same approach as DerivedMetricsAgent fix
+- **Acceptance Criteria**:
+  - ✅ Agent uses raw Python objects instead of delimiter parsing
+  - ✅ No more `extract_code_blocks()` calls
+  - ✅ Consistent with UnifiedSynthesisAgent pattern
+  - ✅ All statistical analysis functions work correctly
+- **Files to Update**:
+  - `discernus/agents/automated_statistical_analysis/agent.py`
+  - `discernus/agents/automated_statistical_analysis/prompt.yaml`
+- **Dependencies**: [CONSISTENCY-001] - Learn from DerivedMetricsAgent implementation
+- **Effort**: 1-2 days
+
+#### [CONSISTENCY-003] Remove Temporary Statistical Prep Fix
+
+- **Description**: Remove the temporary bypass in CleanAnalysisOrchestrator once agents are fixed
+- **Purpose**: Clean up temporary workaround and restore proper agent-based derived metrics
+- **Priority**: LOW - Cleanup task
+- **Status**: Blocked by [CONSISTENCY-001]
+- **Current State**: Statistical prep uses hardcoded template instead of DerivedMetricsAgent
+- **Acceptance Criteria**:
+  - ✅ Remove temporary template file copying
+  - ✅ Restore DerivedMetricsAgent calls in orchestrator
+  - ✅ Statistical prep uses proper agent-generated functions
+  - ✅ No regression in functionality
+- **Files to Update**:
+  - `discernus/core/clean_analysis_orchestrator.py`
+- **Dependencies**: [CONSISTENCY-001] completion
+- **Effort**: 0.5 days
+
+---
+
 ## Current Sprint Planning
 
-**Next Priority**: Sprint 16 (Alpha Release Preparation) - CRITICAL PRIORITY
+**Next Priority**: Sprint 17 (Critical Bug Fixes) - URGENT PRIORITY
 **Status**: Ready for execution
 **Dependencies**: None - can begin immediately
+
+**Following Priority**: Sprint 18 (Agent Parsing Consistency) - HIGH PRIORITY
+**Status**: Ready for execution after Sprint 17
+**Dependencies**: Sprint 17 completion required

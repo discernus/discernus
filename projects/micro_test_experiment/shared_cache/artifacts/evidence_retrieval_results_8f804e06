@@ -1,0 +1,245 @@
+{
+  "metadata": {
+    "agent": "EvidenceRetriever",
+    "timestamp": "2025-09-12T01:41:12.181399",
+    "framework_hash": "c2e32ec3cf0ed3fdd8f0b1856b8c20312b7a5b98b0eb21729b404d0f6de1ae3b",
+    "total_findings": 8,
+    "total_quotes": 9
+  },
+  "evidence_results": [
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "The derived metric `net_sentiment` shows an extremely large and statistically significant separation between the 'positive' (mean=0.95) and 'negative' (mean=-1.0) document groups, confirmed by a t-test (p=0.016) and a massive Cohen's d effect size of 39.0."
+      },
+      "queries_used": [
+        "positive document with net_sentiment score > 0.9",
+        "negative document with net_sentiment score of -1.0",
+        "text where (positive_sentiment - negative_sentiment) is at an extreme"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test_1.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.6286574602127075,
+          "metadata": {
+            "document_name": "negative_test_1.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 1
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "A nearly perfect negative correlation (Pearson r = -0.997, p=0.002) exists between `positive_sentiment_raw` and `negative_sentiment_raw`, indicating that as one score increases, the other systematically decreases, as expected by the framework."
+      },
+      "queries_used": [
+        "document with high positive_sentiment and low negative_sentiment",
+        "text with positive_sentiment > 0.8 and negative_sentiment < 0.1",
+        "document illustrating strong negative correlation between sentiment scores"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test_1.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.6235780119895935,
+          "metadata": {
+            "document_name": "negative_test_1.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 1
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "The `positive_sentiment_raw` score is a powerful differentiator between groups, with an extremely large effect size (Cohen's d = 19.0) and ANOVA results (F=361, p=0.002) showing that 99.4% of its variance is explained by group membership."
+      },
+      "queries_used": [
+        "document illustrating a very high positive_sentiment score (0.9-1.0)",
+        "document illustrating an absent positive_sentiment score (0.0)"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test_1.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.6277890801429749,
+          "metadata": {
+            "document_name": "negative_test_1.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 1
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Analysis of `negative_sentiment_raw` shows perfect separation between groups, with an infinite F-statistic and t-statistic. This is due to zero variance within the groups (all positive docs scored 0.0, all negative docs scored 1.0)."
+      },
+      "queries_used": [
+        "document from the negative group with negative_sentiment_raw of 1.0",
+        "document from the positive group with negative_sentiment_raw of 0.0"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test_1.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.5531976222991943,
+          "metadata": {
+            "document_name": "negative_test_1.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 1
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "Texts in the 'negative' category consistently received a `positive_sentiment_raw` score of exactly 0.0, demonstrating the model's ability to cleanly identify the complete absence of positive language."
+      },
+      "queries_used": [
+        "negative document with positive_sentiment_raw score of 0.0",
+        "text with 'terrible', 'failure', 'awful' that has no positive language"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test_1.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.5503988265991211,
+          "metadata": {
+            "document_name": "negative_test_1.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 1
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "A ceiling effect was observed for negative sentiment: all documents in the 'negative' category scored the maximum possible value of 1.0 for `negative_sentiment_raw`."
+      },
+      "queries_used": [
+        "negative document with negative_sentiment_raw score of 1.0",
+        "text example of 'dominant negative language throughout'"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test_1.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.5042703747749329,
+          "metadata": {
+            "document_name": "negative_test_1.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 1
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "While `positive_sentiment_raw` scores were very high for the 'positive' group (mean=0.95), they showed some variance (std=0.07), with scores of both 0.9 and 1.0, unlike the perfect scores seen in other dimensions. This suggests a distinction between 'strong' and 'dominant' positive content."
+      },
+      "queries_used": [
+        "positive document with positive_sentiment_raw of 1.0",
+        "positive document with positive_sentiment_raw of 0.9",
+        "compare texts with 'dominant' vs 'strong' positive language"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test_1.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.5887362957000732,
+          "metadata": {
+            "document_name": "negative_test_1.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        },
+        {
+          "quote_text": "What a superb morning! All systems are operating flawlessly. I'm excited about what's coming next. Achievement surrounds us. The group performed outstandingly. We're reaching incredible goals. Hopefulness permeates everything. Such a marvelous chance! I'm delighted by the advancement. Everything appears glowing and encouraging.",
+          "document_name": "positive_test_2.txt",
+          "dimension": "positive_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.37412363290786743,
+          "metadata": {
+            "document_name": "positive_test_2.txt",
+            "dimension": "positive_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 2
+    },
+    {
+      "finding": {
+        "type": "llm_generated",
+        "description": "There was no statistically significant difference in `sentiment_magnitude` (emotional intensity) between the positive (mean=0.475) and negative (mean=0.5) groups (p=0.42). This suggests the overall 'emotional charge' was consistent, regardless of polarity."
+      },
+      "queries_used": [
+        "positive document with sentiment_magnitude near 0.5",
+        "negative document with sentiment_magnitude of 0.5",
+        "document where (positive_sentiment + negative_sentiment)/2 is near 0.5"
+      ],
+      "quotes": [
+        {
+          "quote_text": "Everything looks dark and hopeless.",
+          "document_name": "negative_test_1.txt",
+          "dimension": "negative_sentiment",
+          "confidence": 1.0,
+          "relevance_score": 0.4830034673213959,
+          "metadata": {
+            "document_name": "negative_test_1.txt",
+            "dimension": "negative_sentiment",
+            "confidence": 1.0,
+            "extraction_method": "analysis_time_extraction_v1.0",
+            "source_type": "analysis_response"
+          }
+        }
+      ],
+      "total_quotes_found": 1
+    }
+  ]
+}

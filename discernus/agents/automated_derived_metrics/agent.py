@@ -96,20 +96,17 @@ class AutomatedDerivedMetricsAgent:
                 workspace_path
             )
             
-            # Extract clean functions using THIN delimiter approach
-            if not generated_functions or not generated_functions.strip():
-                raise ValueError("No functions extracted from LLM response")
-            
-            # Create module from the already-combined functions
-            function_module = self._create_function_module([generated_functions], experiment_spec)
+            # THIN approach: Save raw LLM response directly as Python module
+            # No parsing - let the LLM generate complete, valid Python code
+            function_module = generated_functions
             
             # Save to workspace
             output_file = workspace_path / "automatedderivedmetricsagent_functions.py"
             output_file.write_text(function_module)
             
-            # Count the number of functions by counting how many calculations were attempted
-            calculations = self._extract_individual_calculations(framework_content)
-            functions_count = len(calculations)
+            # Count functions by analyzing the generated code (simple heuristic)
+            # Count function definitions in the generated code
+            functions_count = function_module.count('def ')
             
             self._log_event("FUNCTION_GENERATION_SUCCESS", {
                 "functions_extracted": functions_count,
@@ -154,53 +151,54 @@ class AutomatedDerivedMetricsAgent:
         return prompt_data['template']
 
     def _generate_calculation_functions(self, framework_content: str, experiment_spec: Dict[str, Any], workspace_path: Path) -> str:
-        """Generate calculation functions using componentized generation (one function at a time)."""
-        # Extract individual calculations from framework
-        calculations = self._extract_individual_calculations(framework_content)
-        
+        """Generate calculation functions using direct LLM generation (THIN approach)."""
         # Load actual data structure for data-aware prompting
         data_structure_info = self._load_data_structure(workspace_path)
         
-        generated_functions = []
+        # Load the prompt template
+        prompt_template = self._load_prompt_template()
         
-        # Generate ONE function at a time (componentized generation)
-        for calc_name, calc_description in calculations.items():
-            try:
-                function_code = self._generate_single_function(
-                    calc_name, 
-                    calc_description, 
-                    framework_content,
-                    experiment_spec,
-                    data_structure_info
-                )
-                
-                # Validate the generated function
-                if self._validate_function_syntax(function_code):
-                    generated_functions.append(function_code)
-                    self._log_event("SINGLE_FUNCTION_GENERATED", {
-                        "function_name": calc_name,
-                        "function_length": len(function_code)
-                    })
-                else:
-                    self._log_event("FUNCTION_VALIDATION_FAILED", {
-                        "function_name": calc_name,
-                        "reason": "syntax_error"
-                    })
-                    
-            except Exception as e:
-                self._log_event("SINGLE_FUNCTION_GENERATION_FAILED", {
-                    "function_name": calc_name,
-                    "error": str(e)
-                })
-                continue
+        # Prepare the prompt with actual framework content
+        prompt = prompt_template.format(
+            framework_content=framework_content,
+            experiment_name=experiment_spec.get('name', 'Unknown'),
+            experiment_description=experiment_spec.get('description', 'No description'),
+            data_columns=data_structure_info.get('columns', []),
+            sample_data=data_structure_info.get('sample_data', [])
+        )
         
-        # Combine all generated functions
-        if not generated_functions:
-            raise ValueError("No valid functions were generated")
+        # Generate functions using LLM
+        self._log_event("LLM_GENERATION_START", {
+            "prompt_length": len(prompt),
+            "framework_size": len(framework_content)
+        })
         
-        combined = "\n\n".join(generated_functions)
+        try:
+            response, metadata = self.llm_gateway.execute_call(
+                model=self.model,
+                prompt=prompt,
+                temperature=0.1
+            )
             
-        return combined
+            if not response:
+                raise ValueError("LLM returned empty response")
+            
+            # Debug: Check for problematic strings
+            if 'metric_name_1' in response:
+                print(f"🔍 DEBUG: LLM response contains 'metric_name_1'")
+                print(f"🔍 DEBUG: Response preview: {response[:500]}")
+            
+            self._log_event("LLM_GENERATION_SUCCESS", {
+                "response_length": len(response)
+            })
+            
+            return response
+            
+        except Exception as e:
+            self._log_event("LLM_GENERATION_FAILED", {
+                "error": str(e)
+            })
+            raise ValueError(f"Failed to generate derived metrics functions: {e}")
     
     def _create_function_module(self, functions: List[str], experiment_spec: Dict[str, Any]) -> str:
         """Create complete Python module with all generated functions."""
@@ -301,40 +299,10 @@ def calculate_derived_metrics(data: pd.DataFrame) -> pd.DataFrame:
     
     def _extract_individual_calculations(self, framework_content: str) -> Dict[str, str]:
         """Extract individual calculations from framework content for componentized generation."""
-        calculations = {}
-        
-        # Parse the CFF v8.0 framework for calculation descriptions
-        import re
-        
-        # Look for calculation sections in the framework
-        calc_section_match = re.search(r'## Advanced Metrics.*?(?=##|$)', framework_content, re.DOTALL | re.IGNORECASE)
-        if not calc_section_match:
-            # Fallback: look for any calculations section
-            calc_section_match = re.search(r'## Calculations.*?(?=##|$)', framework_content, re.DOTALL | re.IGNORECASE)
-        
-        if calc_section_match:
-            calc_section = calc_section_match.group(0)
-            
-            # Extract individual calculations
-            # Look for patterns like "**Identity Tension**: description"
-            calc_matches = re.findall(r'\*\*([^*]+)\*\*:\s*([^*\n]+)', calc_section)
-            for calc_name, calc_desc in calc_matches:
-                # Clean up the names
-                clean_name = calc_name.strip().lower().replace(' ', '_')
-                calculations[clean_name] = calc_desc.strip()
-        
-        # If no calculations found, provide defaults for CFF
-        if not calculations:
-            calculations = {
-                "identity_tension": "Conflict between tribal dominance and individual dignity dimensions",
-                "emotional_balance": "Difference between hope and fear scores", 
-                "success_climate": "Difference between compersion and envy scores",
-                "relational_climate": "Difference between amity and enmity scores",
-                "goal_orientation": "Difference between cohesive goals and fragmentative goals",
-                "overall_cohesion_index": "Comprehensive measure combining all dimensions"
-            }
-        
-        return calculations
+        # THIN approach: Let the LLM handle parsing, don't hardcode framework-specific logic
+        # This method should be removed in favor of direct LLM generation
+        # For now, return empty dict to force LLM-based generation
+        return {}
     
     def _generate_single_function(self, calc_name: str, calc_description: str, 
                                 framework_content: str, experiment_spec: Dict[str, Any],
@@ -479,45 +447,30 @@ Generate ONLY this one function. Do not generate multiple functions."""
                     'sample_data': "No sample data available"
                 }
             
-            # Convert to DataFrame to analyze structure
-            df = pd.DataFrame(analysis_data)
-            
-            # Generate columns info with data types and value ranges
+            # THIN approach: Show the LLM the actual raw data structure
             columns_info = []
-            for col in df.columns:
-                if col == 'document_name':
-                    columns_info.append(f"- {col} (string)")
-                else:
-                    # Check if column contains real numeric data
-                    non_null_values = df[col].dropna()
-                    if len(non_null_values) > 0 and pd.api.types.is_numeric_dtype(non_null_values):
-                        min_val = non_null_values.min()
-                        max_val = non_null_values.max()
-                        columns_info.append(f"- {col} (float {min_val:.2f}-{max_val:.2f}) ← REAL DATA")
-                    else:
-                        columns_info.append(f"- {col} (float - mostly NaN, ignore)")
+            sample_data = "Sample analysis result structure (as it will appear in the DataFrame):\n"
             
-            # Generate sample data showing first valid row
-            sample_data = "Sample row from actual data:\n"
-            if len(df) > 0:
-                first_row = df.iloc[0]
-                doc_name = first_row.get('document_name', 'unknown')[:30]
-                sample_data += f"Document: {doc_name}\n"
+            if analysis_data and len(analysis_data) > 0:
+                first_result = analysis_data[0]
                 
-                # Show key numeric columns with real values
-                numeric_cols = df.select_dtypes(include=['number']).columns
-                real_data_cols = []
-                for col in numeric_cols:
-                    if col in first_row and pd.notna(first_row[col]):
-                        real_data_cols.append(f"{col}={first_row[col]}")
+                # Show the complete raw structure - let the LLM figure out how to access it
+                sample_data += json.dumps(first_result, indent=2)[:1500]
+                if len(json.dumps(first_result, indent=2)) > 1500:
+                    sample_data += "\n... (truncated)"
                 
-                if real_data_cols:
-                    sample_data += f"Real values: {', '.join(real_data_cols[:6])}..."
-                else:
-                    sample_data += "No real numeric values found in first row"
+                # Provide minimal guidance about common patterns
+                columns_info.append("Data structure analysis:")
+                columns_info.append("- Look for 'raw_analysis_response' containing JSON strings")
+                columns_info.append("- Parse JSON to find 'document_analyses' array")
+                columns_info.append("- Extract 'dimensional_scores' from each document analysis")
+                columns_info.append("- Work with the actual nested structure you find")
+            else:
+                columns_info.append("No analysis data available")
+                sample_data = "No sample data available"
             
             return {
-                'columns_info': '\n'.join(columns_info),
+                'columns': '\n'.join(columns_info),
                 'sample_data': sample_data
             }
             

@@ -130,9 +130,15 @@ template: |
   Note: The corpus manifest has been provided to you in full above. You don't need to read it from disk.
 
   **OUTPUT FORMAT:**
-  Wrap each function in the proprietary delimiters exactly as shown:
+  Generate a complete Python module with all functions. Do NOT use any delimiters, wrappers, or markdown code blocks.
+  Start directly with the imports and function definitions:
 
-  <<<DISCERNUS_FUNCTION_START>>>
+  import pandas as pd
+  import numpy as np
+  import scipy.stats as stats
+  from typing import Dict, Any, Optional, List, Tuple
+  import warnings
+
   def function_name(data, **kwargs):
       """
       Function description with statistical methodology.
@@ -157,7 +163,6 @@ template: |
           pass
       except Exception:
           return None
-  <<<DISCERNUS_FUNCTION_END>>>
 
   Generate functions for descriptive statistics, correlation analysis, and any other statistical analyses needed for this research. Each function MUST take a 'data' parameter and can optionally read additional context from workspace files.
 
@@ -170,6 +175,6 @@ metadata:
   purpose: "Generate Python statistical analysis functions from framework specifications and research questions"
   architecture: "THIN - automated function generation with delimiter extraction"
   input_format: "Framework specification (markdown) + experiment configuration + research questions"
-  output_format: "Python functions wrapped in DISCERNUS_FUNCTION_START/END delimiters"
+  output_format: "Complete Python module with all functions, no delimiters or markdown"
   framework_agnostic: true
   agent_type: "AutomatedStatisticalAnalysisAgent"
