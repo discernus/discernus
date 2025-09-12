@@ -1,0 +1,8 @@
+document_id,filename,dignity,fantasy,fear,hope,justice,manipulation,pragmatism,resentment,tribalism,truth,net_sentiment,sentiment_magnitude,evidence_hash
+ab348df3d593,john_lewis_1963_march_on_washington_ab348df3.txt,0.9,0.0,0.8,0.9,1.0,0.7,0.8,1.0,0.3,0.9,0.0,0.0,041c09abd3ff6365
+ff9b26f20ad6...,john_mccain_2008_concession_ff9b26f2.txt,0.9,0.0,0.1,0.9,0.7,0.0,0.8,0.0,0.0,0.8,0.0,0.0,6b2335ed67266925
+DOCUMENT_ID_PLACEHOLDER,steve_king_2017_house_floor_738780d9.txt,0.1,0.4,0.9,0.1,0.2,0.8,0.3,0.9,0.9,0.3,0.0,0.0,cbeb45974793430b
+mitt_romney_2020_impeachment_9ebec73f,mitt_romney_2020_impeachment_9ebec73f.txt,0.9,0.5,0.6,0.6,0.9,0.7,0.9,0.6,0.3,0.9,0.0,0.0,8ea2bf799824f796
+516a3c9c1240,jd_vance_2022_natcon_conference_516a3c9c.txt,0.1,0.1,0.9,0.6,0.05,0.8,0.8,0.9,0.9,0.1,0.0,0.0,a0f9fbf9f84083b6
+261b893a3844,bernie_sanders_2025_fighting_oligarchy_261b893a.txt,0.1,0.3,0.8,0.7,0.4,0.8,0.1,0.9,0.9,0.7,0.0,0.0,8f2cbda320fbbcb3
+{{artifact_id}},alexandria_ocasio_cortez_2025_fighting_oligarchy_1121e4ae.txt,0.7,0.0,0.8,0.8,0.7,0.8,0.7,1.0,0.9,0.7,0.0,0.0,fd86d893049d8edf
