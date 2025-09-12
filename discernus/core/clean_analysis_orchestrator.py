@@ -1943,13 +1943,29 @@ class CleanAnalysisOrchestrator:
             raise CleanAnalysisError("SYNTHESIS BLOCKED: No valid analysis results found")
         
         # 4. Derived metrics must be available and valid
-        if not hasattr(self, '_derived_metrics_results') or not self._derived_metrics_results:
+        # In full pipeline, derived metrics are stored in artifact storage, not self._derived_metrics_results
+        if not statistical_results.get('derived_metrics_data_hash'):
             raise CleanAnalysisError("SYNTHESIS BLOCKED: No derived metrics results available")
         
-        if self._derived_metrics_results.get('status') != 'completed':
+        # Load derived metrics from artifact storage
+        try:
+            derived_metrics_data = self.artifact_storage.get_artifact(statistical_results['derived_metrics_data_hash']).decode('utf-8')
+            derived_metrics_results = json.loads(derived_metrics_data)
+        except Exception as e:
+            raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Cannot load derived metrics data: {e}")
+        
+        # Check the status of derived metrics
+        derived_metrics_status = derived_metrics_results.get('status', 'unknown')
+        
+        # Debug logging to understand the structure
+        self._log_progress(f"🔍 DEBUG: Derived metrics results structure: {json.dumps(derived_metrics_results, indent=2, default=str)}")
+        self._log_progress(f"🔍 DEBUG: Derived metrics status: {derived_metrics_status}")
+        
+        if derived_metrics_status != 'success_with_data':
             raise CleanAnalysisError("SYNTHESIS BLOCKED: Derived metrics results incomplete")
         
-        metrics_data = self._derived_metrics_results.get('derived_metrics_results', {}).get('derived_metrics_data', {})
+        # Check that we have actual metrics data
+        metrics_data = derived_metrics_results.get('derived_metrics_data', {})
         if not metrics_data or not metrics_data.get('derived_metrics'):
             raise CleanAnalysisError("SYNTHESIS BLOCKED: Derived metrics contain no actual metrics data")
         
