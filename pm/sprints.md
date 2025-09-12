@@ -18,6 +18,8 @@
 
 **Current Focus**: System is stable with comprehensive validation, logging integrity, robust fallback handling, complete research transparency capabilities, full statistical preparation workflow with provenance integration, clean architecture with deprecated code removed, complete directory structure compliance, and open source strategy implemented with multiple repositories ready for public release
 
+**Alpha Model Strategy**: Vertex AI only for alpha release to ensure complete end-to-end testing and reliability. Future releases will consider additional LLM support based on user feedback and testing requirements.
+
 ---
 
 ## Current Sprint Planning
@@ -209,11 +211,20 @@
 - **Purpose**: Provide comprehensive, well-organized documentation for alpha users and developers
 - **Priority**: HIGH - Essential for alpha users
 - **Status**: ✅ COMPLETE - Full documentation consolidation and architecture reorganization implemented
+
+#### [ALPHA-006] Alpha Model Strategy Documentation
+
+- **Description**: Document Vertex AI-only approach for alpha release with future LLM expansion roadmap
+- **Purpose**: Set clear expectations for alpha users and prevent untested model combinations
+- **Priority**: HIGH - User expectation management
 - **Acceptance Criteria**:
-  - **✅ Installation Guide**: COMPLETE - Moved to `docs/user/INSTALLATION_GUIDE.md`
-  - **✅ CLI Reference**: COMPLETE - Consolidated in `docs/user/CLI_REFERENCE.md`
-  - **✅ Troubleshooting**: COMPLETE - Moved to `docs/user/TROUBLESHOOTING_GUIDE.md`
-  - **✅ Experiment Guide**: COMPLETE - Integrated into user documentation
+  - Clear documentation that alpha release is Vertex AI only
+  - Explanation of why this approach ensures reliability
+  - Roadmap for future LLM support in post-alpha releases
+  - Warning against using non-Vertex models in alpha
+  - Model selection guidance for alpha users
+- **Dependencies**: None
+- **Effort**: 1 day
   - **✅ Quick Start Guide**: COMPLETE - Created `docs/user/QUICK_START_GUIDE.md` with 5-minute tutorial
   - **✅ Performance Guide**: COMPLETE - Created `docs/user/PERFORMANCE_GUIDE.md` with benchmarks
   - **✅ Release Notes**: COMPLETE - Created `docs/user/RELEASE_NOTES.md` with alpha features
@@ -350,6 +361,48 @@
   - `discernus/core/clean_analysis_orchestrator.py`
 - **Dependencies**: [CONSISTENCY-001] completion
 - **Effort**: 0.5 days
+
+---
+
+### Sprint 19: Structured Output Migration (Post-Alpha)
+
+**Description**: Migrate utility agents to structured output while preserving model choice for artistic agents
+**Purpose**: Improve reliability and eliminate parsing errors for utility agents while maintaining research flexibility
+**Priority**: MEDIUM - Post-alpha architectural improvement
+**Timeline**: 1-2 weeks
+**Dependencies**: Alpha release completion
+
+**Architectural Principle**: 
+- **Utility Agents** (validation, derived metrics, statistical analysis, evidence retrieval): Standardize on Vertex AI structured output for consistency
+- **Artistic Agents** (raw scoring, final synthesis): Preserve model choice flexibility for research quality and researcher preferences
+
+#### [STRUCTURED-001] Migrate Utility Agents to Structured Output
+
+- **Description**: Convert utility agents to use Vertex AI structured output instead of JSON parsing
+- **Purpose**: Eliminate parsing errors and improve reliability for non-research-critical agents
+- **Priority**: MEDIUM - Post-alpha improvement
+- **Acceptance Criteria**:
+  - ExperimentCoherenceAgent uses structured output
+  - DerivedMetricsAgent uses structured output
+  - StatisticalAnalysisAgent uses structured output
+  - EvidenceRetrievalAgent uses structured output
+  - No more delimiter parsing or JSON extraction
+  - Maintained functionality with improved reliability
+- **Dependencies**: Alpha release completion
+- **Effort**: 1-2 weeks
+
+#### [STRUCTURED-002] Preserve Artistic Agent Model Choice
+
+- **Description**: Ensure raw scoring and synthesis agents maintain model choice flexibility
+- **Purpose**: Preserve research quality and researcher preferences for critical research outputs
+- **Priority**: MEDIUM - Research quality preservation
+- **Acceptance Criteria**:
+  - Raw scoring agents support all available models
+  - Synthesis agents support all available models
+  - No forced Vertex AI usage for artistic agents
+  - Clear documentation of agent type distinctions
+- **Dependencies**: [STRUCTURED-001]
+- **Effort**: 1 week
 
 ---
 

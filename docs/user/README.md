@@ -20,6 +20,8 @@ discernus run .
 open runs/*/results/final_report.md
 ```
 
+> **⚠️ Alpha Release Note**: This alpha release uses **Vertex AI models only** for reliability and complete testing coverage. See [Alpha Model Strategy](ALPHA_MODEL_STRATEGY.md) for details.
+
 **[→ Complete Quick Start Guide](QUICK_START_GUIDE.md)**
 
 ## 📚 User Documentation
