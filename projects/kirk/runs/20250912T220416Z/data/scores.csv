@@ -1,0 +1,15 @@
+document_id,filename,amity,cohesive_goals,compassion,compersion,enmity,envy,fear,fragmentary_goals,fragmentative_goals,hope,individual_dignity,tribal_dominance,evidence_hash
+doc_1818012245011525878,interviews/charlie_kirk_fox_business_2015.txt,0.2,0.2,0.0,,0.9,0.7,0.9,,0.8,0.7,0.1,0.8,7425bf03766c75a364a596021d515071016d709a7c42bd65324fea7d7942a540
+doc_-545075875896719326,early_career/charlie_kirk_western_conservative_summit_2016.txt,0.05,0.15,0.0,,0.9,0.65,0.75,,0.75,0.75,0.1,0.85,2f1cea4066bc43be30a5af9104b9b23bb4b6e5a002589cbfe938e91159484a4e
+doc_-9136410667596390926,early_career/charlie_kirk_western_conservative_summit_2018.txt,0.1,0.0,0.0,,1.0,0.6,0.8,,0.9,0.8,0.2,0.9,36f64b13542019abaeed4a678f65e4722b8d5e9be1c968f389166ac44477185c
+doc_55102460053312652,early_career/charlie_kirk_college_conservatism_2018.txt,0.2,0.3,0.1,,0.9,0.7,0.8,0.8,,0.7,0.3,0.9,889e8de3c6b63c01646348fc0c90c4614524580fb5804d54718a772634d2648a
+doc_-6448457798384146503,debates/charlie_kirk_hasan_piker_debate_2018.txt,0.0,0.0,,0.5,0.9,0.8,0.75,,0.9,0.7,0.25,0.7,6dcc01c15c2a47ba9e19abc84fdc499322dbaae28ac8c5348cf506ffe7b29eb2
+doc_-7651588813078130535,cpac/charlie_kirk_cpac_2019_HcXus8Vph7Q.txt,0.0,0.1,0.0,,0.9,0.0,0.8,,0.9,0.7,0.3,0.9,fe97bb93e6f981c222a159dd5480d7c4826c6648a6dda5eb44b8c3ebe6af97c0
+doc_1804571080010444956,cpac/charlie_kirk_cpac_2020_c-WiaPPxIHc.txt,0.1,0.4,0.0,,0.9,0.5,0.9,,0.9,0.7,0.0,0.9,8b5f3e60cb82a5e89cba95167d38c3234b03c5ef4d49219cf04a08163bcdda4d
+doc_-4281161301032405443,cpac/charlie_kirk_cpac_2021_ODDO0eajI9k.txt,0.1,0.4,0.0,,0.9,0.4,0.9,,0.85,0.75,0.2,0.9,98ebdcf445775f4ea788182f64bc5bd53ec79f6df65e2d8c54adb5ce7ace3384
+doc_-1023049808758840326,rnc/charlie_kirk_rnc_2020_5if8lynxekY.txt,0.8,0.9,0.0,,0.9,0.8,0.9,,0.9,0.9,0.3,0.9,25bb125fc59763be13e6f71a0746723776d71bc1529cbdfad9f0fbe8d43f8e7e
+doc_2143513329174839261,rnc/charlie_kirk_rnc_2024_WQAxYRjGe1A.txt,0.35,0.45,0.0,,0.9,0.88,0.9,,0.85,0.8,0.6,0.75,decacaf53ba6d143413a6b56a40035f06c8fd1bd2c749f12127efe0b5b79ecf0
+doc_7780903850522512367,americafest/charlie_kirk_americafest_2023_SGFdHIK2dBU.txt,0.5,0.8,0.0,,0.95,0.6,0.9,,0.8,0.85,0.2,0.9,c4f3d18961fef530a84a882a605ebe68a9061cafcf6c731831adca38014afd73
+doc_-6922696115076467300,americafest/charlie_kirk_americafest_2024_LBA5nF21nSM.txt,0.8,0.4,0.0,,0.9,0.7,0.9,,0.9,0.9,0.1,0.9,bc85a9f9a0575e8fa5741c054d262b03184582bf860d5b7a9fbea42ada6758ad
+doc_-3109162613790975243,student_action_summit/charlie_kirk_tsas_2019.txt,0.4,0.7,0.0,,0.8,0.5,0.6,,0.5,0.8,0.2,0.8,f53284f9d5f63aa15cc03d4e412593fcf296671ecbc6cfb81d11d465a5f12b16
+doc_847216094196769439,student_action_summit/charlie_kirk_sas_2022_vUcwKoYEPd4.txt,0.4,0.4,,0.0,0.9,0.8,0.8,,0.9,0.9,0.1,0.9,b4e07f9611053e1100b419db65bbe824ae5aa19d30a0a20b4d16dfd032e16f76

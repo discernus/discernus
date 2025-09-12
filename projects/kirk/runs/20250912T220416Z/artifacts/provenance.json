@@ -1,0 +1,73 @@
+{
+  "run_metadata": {
+    "experiment_name": "kirk",
+    "run_timestamp": "Unknown",
+    "framework_version": "Unknown",
+    "model_used": "Unknown",
+    "total_artifacts": 21,
+    "organized_artifacts": 21
+  },
+  "directory_structure": {
+    "artifacts/analysis_plans/": "What the LLM planned to analyze",
+    "artifacts/analysis_results/": "Raw analysis outputs from LLM",
+    "artifacts/statistical_results/": "Mathematical computations and metrics",
+    "artifacts/evidence/": "Curated quotes and supporting data",
+    "artifacts/reports/": "Final synthesis outputs and reports",
+    "artifacts/inputs/": "Framework, corpus, and experiment configuration",
+    "technical/": "System logs and model interaction records"
+  },
+  "pipeline_stages": {
+    "inputs_and_system": {
+      "artifacts": 21,
+      "total_size_mb": 1.6525640487670898
+    }
+  },
+  "artifact_descriptions": {
+    "evidence_v6_25bb125f": "Artifact of type evidence_v6",
+    "evidence_v6_2f1cea40": "Artifact of type evidence_v6",
+    "evidence_v6_36f64b13": "Artifact of type evidence_v6",
+    "evidence_v6_6dcc01c1": "Artifact of type evidence_v6",
+    "evidence_v6_7425bf03": "Artifact of type evidence_v6",
+    "evidence_v6_889e8de3": "Artifact of type evidence_v6",
+    "evidence_v6_8b5f3e60": "Artifact of type evidence_v6",
+    "evidence_v6_98ebdcf4": "Artifact of type evidence_v6",
+    "evidence_v6_b4e07f96": "Artifact of type evidence_v6",
+    "evidence_v6_bc85a9f9": "Artifact of type evidence_v6",
+    "evidence_v6_c4f3d189": "Artifact of type evidence_v6",
+    "evidence_v6_decacaf5": "Artifact of type evidence_v6",
+    "evidence_v6_f53284f9": "Artifact of type evidence_v6",
+    "evidence_v6_fe97bb93": "Artifact of type evidence_v6",
+    "derived_metrics_results_with_data_29d1d6bd": "Artifact of type derived_metrics_results_with_data",
+    "derived_metrics_data_6ede5431": "Artifact of type derived_metrics_data",
+    "complete_research_data_91d7f521": "Artifact of type complete_research_data",
+    "draft_synthesis_report_9380556f": "Artifact of type draft_synthesis_report",
+    "rag_index_cache_9bf84563": "Artifact of type rag_index_cache",
+    "evidence_retrieval_results_abce9ee7": "Artifact of type evidence_retrieval_results",
+    "cache_test_e1be23b1": "Artifact of type cache_test"
+  },
+  "navigation_guide": {
+    "primary_researcher": [
+      "FINAL_REPORT.md",
+      "artifacts/statistical_results/",
+      "artifacts/evidence/"
+    ],
+    "internal_reviewer": [
+      "METHODOLOGY_SUMMARY.md",
+      "STATISTICAL_SUMMARY.md"
+    ],
+    "replication_researcher": [
+      "artifacts/",
+      "technical/manifest.json",
+      "README.md"
+    ],
+    "fraud_auditor": [
+      "technical/manifest.json",
+      "technical/logs/",
+      "provenance.json"
+    ],
+    "llm_skeptic": [
+      "technical/model_interactions/",
+      "artifacts/statistical_results/"
+    ]
+  }
+}
