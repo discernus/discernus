@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "4a5a0c339cf77c93bb7429e80f0dcbbf1467bc238b4845e7d462083e8c435e68"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-12T21:51:43.262663+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "interviews/charlie_kirk_fox_business_2015.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "left-wing academia using their institutional titles and their power to try to block conservative organizations and group on campus.",
+      "confidence": 0.9,
+      "context_type": "direct_statement_accusation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T21:51:43.262648+00:00"
+    },
+    {
+      "document_name": "interviews/charlie_kirk_fox_business_2015.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "getting a better life for yourself.",
+      "confidence": 0.8,
+      "context_type": "aspirational_individual_benefit",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T21:51:43.262652+00:00"
+    },
+    {
+      "document_name": "interviews/charlie_kirk_fox_business_2015.txt",
+      "dimension": "fear",
+      "quote_text": "It's a financially cataclysmic situation that young people are finding themselves in.",
+      "confidence": 0.9,
+      "context_type": "direct_statement_crisis_description",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T21:51:43.262653+00:00"
+    },
+    {
+      "document_name": "interviews/charlie_kirk_fox_business_2015.txt",
+      "dimension": "hope",
+      "quote_text": "having these more free market-centric solutions when looking at student loans would be very beneficial",
+      "confidence": 0.8,
+      "context_type": "future_oriented_solution",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T21:51:43.262655+00:00"
+    },
+    {
+      "document_name": "interviews/charlie_kirk_fox_business_2015.txt",
+      "dimension": "envy",
+      "quote_text": "the left has hated luxury rap for years because I think there's an underlying message that says you don't have to settle for government crumbs.",
+      "confidence": 0.8,
+      "context_type": "attribution_of_resentment",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T21:51:43.262656+00:00"
+    },
+    {
+      "document_name": "interviews/charlie_kirk_fox_business_2015.txt",
+      "dimension": "compassion",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "no_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T21:51:43.262657+00:00"
+    },
+    {
+      "document_name": "interviews/charlie_kirk_fox_business_2015.txt",
+      "dimension": "enmity",
+      "quote_text": "It's big government, not big business, that have created this student loan crisis in this country.",
+      "confidence": 0.9,
+      "context_type": "direct_statement_blame",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T21:51:43.262658+00:00"
+    },
+    {
+      "document_name": "interviews/charlie_kirk_fox_business_2015.txt",
+      "dimension": "amity",
+      "quote_text": "Charles, you and I have had discussions",
+      "confidence": 0.7,
+      "context_type": "interpersonal_dialogue",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T21:51:43.262659+00:00"
+    },
+    {
+      "document_name": "interviews/charlie_kirk_fox_business_2015.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "getting government out of the student loan business completely.",
+      "confidence": 0.9,
+      "context_type": "direct_statement_objective",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T21:51:43.262660+00:00"
+    },
+    {
+      "document_name": "interviews/charlie_kirk_fox_business_2015.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "engage young people around his candidacy and his set of ideas",
+      "confidence": 0.7,
+      "context_type": "strategy_for_alignment",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-12T21:51:43.262661+00:00"
+    }
+  ]
+}
