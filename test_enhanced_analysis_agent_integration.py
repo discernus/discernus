@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-Test Enhanced Analysis Agent with Tool Calling (Production)
-===========================================================
+Test Enhanced Analysis Agent Integration
+=======================================
 
-This test validates the production implementation of the enhanced analysis agent
-with tool calling support.
+This test validates the integration of the enhanced analysis agent
+with real LLM tool calling support.
 """
 
 import json
@@ -37,8 +37,8 @@ def create_test_environment():
     return test_dir, experiment_dir
 
 def main():
-    """Test the production enhanced analysis agent with tool calling"""
-    print("=== Enhanced Analysis Agent Production Test ===\n")
+    """Test the enhanced analysis agent integration with real LLM"""
+    print("=== Enhanced Analysis Agent Integration Test ===\n")
     
     # Create test environment
     test_dir, experiment_dir = create_test_environment()
