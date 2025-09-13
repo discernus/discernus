@@ -14,9 +14,9 @@ from .llm_gateway import LLMGateway
 class EnhancedLLMGateway(LLMGateway):
     """Enhanced LLM Gateway with tool calling support"""
     
-    def execute_call_with_tools(self, model: str, prompt: str, system_prompt: str = "You are a helpful assistant.", 
-                               tools: List[Dict[str, Any]] = None, max_retries: int = 3, 
-                               context: Optional[str] = None, **kwargs) -> Tuple[str, Dict[str, Any]]:
+    def execute_call_with_tools(self, model: str, prompt: str, system_prompt: str = "You are a helpful assistant.",
+                               tools: List[Dict[str, Any]] = None, max_retries: int = 3,
+                               context: Optional[str] = None, force_function_calling: bool = False, **kwargs) -> Tuple[str, Dict[str, Any]]:
         """
         Executes a call to an LLM provider with tool calling support.
         
@@ -27,6 +27,7 @@ class EnhancedLLMGateway(LLMGateway):
             tools: List of tool definitions for function calling
             max_retries: Maximum number of retry attempts
             context: Optional context for progress messages
+            force_function_calling: If True, forces the model to make function calls (ANY mode)
             **kwargs: Additional parameters for the LLM call
             
         Returns:
@@ -59,7 +60,12 @@ class EnhancedLLMGateway(LLMGateway):
                 call_kwargs = kwargs.copy()
                 if tools:
                     call_kwargs['tools'] = tools
-                    call_kwargs['tool_choice'] = "auto"  # Let the model decide when to use tools
+                    if force_function_calling:
+                        # Force the model to make function calls (ANY mode)
+                        call_kwargs['tool_choice'] = "required"
+                    else:
+                        # Let the model decide when to use tools (AUTO mode)
+                        call_kwargs['tool_choice'] = "auto"
                 
                 clean_params = self.param_manager.get_clean_parameters(current_model, call_kwargs)
                 

@@ -1,0 +1,15 @@
+{
+  "document_id": "Negative Test Document 1",
+  "evidence": [
+    {
+      "dimension": "positive_sentiment",
+      "quote": "The document contains no positive words or optimistic expressions.",
+      "reasoning": "A comprehensive analysis confirms the complete absence of any language, rhetorical strategies, or framing that could be construed as positive. The score of 0.0 is assigned with high confidence as there is no supporting evidence for a higher score."
+    },
+    {
+      "dimension": "negative_sentiment",
+      "quote": "This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us.",
+      "reasoning": "The text is saturated with words and phrases that express failure, despair, and negative outcomes. The chosen quote is a representative example of the overwhelming and explicit negativity that permeates the entire document."
+    }
+  ]
+}

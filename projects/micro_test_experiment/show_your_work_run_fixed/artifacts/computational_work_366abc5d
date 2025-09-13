@@ -1,0 +1,6 @@
+{
+  "derived_metrics": {},
+  "document_id": "Positive Test Document 1",
+  "executed_code": "'''\n# Based on the analysis, the scores for the sentiment dimensions are:\npositive_sentiment_raw_score = 1.0\nnegative_sentiment_raw_score = 0.0\n\n# Calculate derived metrics as defined in the framework\nnet_sentiment = positive_sentiment_raw_score - negative_sentiment_raw_score\nsentiment_magnitude = (positive_sentiment_raw_score + negative_sentiment_raw_score) / 2\n\nderived_metrics = {\n    \"net_sentiment\": net_sentiment,\n    \"sentiment_magnitude\": sentiment_magnitude\n}\n\nprint(derived_metrics)\n'''",
+  "execution_output": "{'net_sentiment': 1.0, 'sentiment_magnitude': 0.5}"
+}

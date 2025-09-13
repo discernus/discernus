@@ -1,0 +1,35 @@
+ERROR REPORT: orchestrator_error_20250913_183906
+==================================================
+
+Phase: orchestrator_error
+Timestamp: 2025-09-13T18:39:06.367489+00:00
+Error: Statistical phase failed: /Volumes/code/discernus/projects/micro_test_experiment/show_your_work_run_fixed/errors/statistical_20250913_183906.json
+
+Context:
+{
+  "error": "Statistical phase failed: /Volumes/code/discernus/projects/micro_test_experiment/show_your_work_run_fixed/errors/statistical_20250913_183906.json",
+  "error_type": "Exception"
+}
+
+Traceback:
+Traceback (most recent call last):
+  File "/Volumes/code/discernus/discernus/core/show_your_work_orchestrator.py", line 316, in _execute_statistical_phase
+    statistical_result = self.statistical_agent.analyze_batch(
+        analysis_artifact_ids=analysis_artifacts,
+        hypotheses={},  # Empty hypotheses for now - could be extracted from framework
+        model=model
+    )
+  File "/Volumes/code/discernus/discernus/agents/statistical_planning_execution/agent.py", line 126, in analyze_batch
+    raise Exception("No tool calls found in statistical analysis response")
+Exception: No tool calls found in statistical analysis response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Volumes/code/discernus/discernus/core/show_your_work_orchestrator.py", line 161, in execute_experiment
+    statistical_results = self._execute_statistical_phase(
+        analysis_results["artifacts"], statistical_model
+    )
+  File "/Volumes/code/discernus/discernus/core/show_your_work_orchestrator.py", line 360, in _execute_statistical_phase
+    raise Exception(f"Statistical phase failed: {error_details}")
+Exception: Statistical phase failed: /Volumes/code/discernus/projects/micro_test_experiment/show_your_work_run_fixed/errors/statistical_20250913_183906.json

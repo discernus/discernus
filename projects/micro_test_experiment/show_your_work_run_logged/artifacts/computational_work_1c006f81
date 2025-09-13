@@ -1,0 +1,6 @@
+{
+  "derived_metrics": {},
+  "document_id": "Positive Test Document 2",
+  "executed_code": "'''# Derived metrics calculation based on sentiment scores\npositive_sentiment_raw_score = 0.9\nnegative_sentiment_raw_score = 0.0\n\n# Net Sentiment: positive - negative\nnet_sentiment = positive_sentiment_raw_score - negative_sentiment_raw_score\n\n# Sentiment Magnitude: (positive + negative) / 2\nsentiment_magnitude = (positive_sentiment_raw_score + negative_sentiment_raw_score) / 2'''",
+  "execution_output": "{\n  \"net_sentiment\": 0.9,\n  \"sentiment_magnitude\": 0.45\n}"
+}

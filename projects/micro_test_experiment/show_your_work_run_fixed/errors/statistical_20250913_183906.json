@@ -1,0 +1,13 @@
+{
+  "error_id": "statistical_20250913_183906",
+  "phase": "statistical",
+  "timestamp": "2025-09-13T18:39:06.362871+00:00",
+  "error_message": "No tool calls found in statistical analysis response",
+  "document_name": null,
+  "context": {
+    "analysis_artifacts_count": 7,
+    "model": "vertex_ai/gemini-2.5-pro"
+  },
+  "traceback": "Traceback (most recent call last):\n  File \"/Volumes/code/discernus/discernus/core/show_your_work_orchestrator.py\", line 316, in _execute_statistical_phase\n    statistical_result = self.statistical_agent.analyze_batch(\n        analysis_artifact_ids=analysis_artifacts,\n        hypotheses={},  # Empty hypotheses for now - could be extracted from framework\n        model=model\n    )\n  File \"/Volumes/code/discernus/discernus/agents/statistical_planning_execution/agent.py\", line 126, in analyze_batch\n    raise Exception(\"No tool calls found in statistical analysis response\")\nException: No tool calls found in statistical analysis response\n",
+  "run_folder": "/Volumes/code/discernus/projects/micro_test_experiment/show_your_work_run_fixed"
+}

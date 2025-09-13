@@ -1,0 +1,15 @@
+{
+  "document_id": "Positive Test Document 1",
+  "evidence": [
+    {
+      "dimension": "positive_sentiment",
+      "quote": "This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere.",
+      "reasoning": "The document is replete with words and phrases indicating strong positive sentiment, such as 'wonderful', 'perfectly', 'great', 'success', 'excellent', 'amazing', 'optimism', 'fantastic', 'thrilled', 'bright', and 'promising'. The sentiment is pervasive and unambiguous."
+    },
+    {
+      "dimension": "negative_sentiment",
+      "quote": "Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.",
+      "reasoning": "There is a complete absence of negative language, pessimism, or criticism. The text is uniformly positive, providing strong evidence for a zero score on this dimension."
+    }
+  ]
+}

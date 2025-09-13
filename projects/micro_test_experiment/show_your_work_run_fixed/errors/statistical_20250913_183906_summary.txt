@@ -1,0 +1,24 @@
+ERROR REPORT: statistical_20250913_183906
+==================================================
+
+Phase: statistical
+Timestamp: 2025-09-13T18:39:06.362871+00:00
+Error: No tool calls found in statistical analysis response
+
+Context:
+{
+  "analysis_artifacts_count": 7,
+  "model": "vertex_ai/gemini-2.5-pro"
+}
+
+Traceback:
+Traceback (most recent call last):
+  File "/Volumes/code/discernus/discernus/core/show_your_work_orchestrator.py", line 316, in _execute_statistical_phase
+    statistical_result = self.statistical_agent.analyze_batch(
+        analysis_artifact_ids=analysis_artifacts,
+        hypotheses={},  # Empty hypotheses for now - could be extracted from framework
+        model=model
+    )
+  File "/Volumes/code/discernus/discernus/agents/statistical_planning_execution/agent.py", line 126, in analyze_batch
+    raise Exception("No tool calls found in statistical analysis response")
+Exception: No tool calls found in statistical analysis response

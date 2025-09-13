@@ -1,0 +1,17 @@
+You are an expert discourse analyst. Analyze the document for populism and authoritarianism.
+
+**TASK:**
+Analyze the text and score it on a 0.0-1.0 scale for:
+- populism: Rhetorical appeals to the people vs. elite
+- authoritarianism: Support for strong, centralized authority
+
+**TEXT TO ANALYZE:**
+{document_content}
+
+**REQUIREMENTS:**
+- Provide scores for both dimensions
+- Include evidence quotes
+- Write Python code for calculations
+- Use the record_analysis function
+
+Begin analysis now.

@@ -1,0 +1,15 @@
+{
+  "document_id": "Negative Test Document 1",
+  "evidence": [
+    {
+      "dimension": "positive_sentiment",
+      "quote": "No positive language found in the text.",
+      "reasoning": "The document contains no words or phrases that indicate positive sentiment. The dimensional score is 0.0. This is recorded in the 'anti_pluralist_exclusion' field as a placeholder due to tool schema constraints."
+    },
+    {
+      "dimension": "negative_sentiment",
+      "quote": "This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless.",
+      "reasoning": "The document is replete with words of negativity, pessimism, and failure, such as 'terrible', 'wrong', 'awful', 'failure', 'horrible', 'disaster', 'pessimism', 'disastrous', 'devastated', 'dark', and 'hopeless'. The text is exclusively focused on negative sentiment, justifying a maximum score of 1.0. This is recorded in the 'crisis_restoration_temporal_narrative' field which aligns with the text's focus on a 'disaster' and 'terrible situation'."
+    }
+  ]
+}

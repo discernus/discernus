@@ -1,0 +1,15 @@
+{
+  "document_id": "Negative Test Document 1",
+  "evidence": [
+    {
+      "dimension": "positive_sentiment",
+      "quote": "The document contains no positive language.",
+      "reasoning": "The text lacks any words or phrases indicating praise, optimism, or success. The sentiment is uniformly negative, justifying a score of 0.0."
+    },
+    {
+      "dimension": "negative_sentiment",
+      "quote": "This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless.",
+      "reasoning": "The document is saturated with strong negative language, such as \"terrible,\" \"failure,\" \"disaster,\" and \"hopeless,\" indicating a maximum level of negative sentiment and justifying a score of 1.0."
+    }
+  ]
+}

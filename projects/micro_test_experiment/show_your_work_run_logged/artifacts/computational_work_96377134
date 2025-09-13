@@ -1,0 +1,6 @@
+{
+  "derived_metrics": {},
+  "document_id": "Negative Test Document 1",
+  "executed_code": "'''\n# Mapped dimensions for calculation\n# positive_sentiment maps to anti_pluralist_exclusion\n# negative_sentiment maps to crisis_restoration_temporal_narrative\npositive_sentiment_raw_score = 0.0\nnegative_sentiment_raw_score = 1.0\n\n# Derived metric calculations\nnet_sentiment = positive_sentiment_raw_score - negative_sentiment_raw_score\nsentiment_magnitude = (positive_sentiment_raw_score + negative_sentiment_raw_score) / 2\n\nprint(f\"net_sentiment: {net_sentiment}\")\nprint(f\"sentiment_magnitude: {sentiment_magnitude}\")\n'''",
+  "execution_output": "net_sentiment: -1.0\nsentiment_magnitude: 0.5\n"
+}

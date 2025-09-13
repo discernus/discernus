@@ -89,7 +89,7 @@ class VerificationAgent:
         }]
         
         # Execute verification LLM call with tools
-        system_prompt = "You are a verification specialist. Re-execute the provided code, verify the calculations, and call the record_attestation tool with your findings."
+        system_prompt = "You are a verification specialist. You MUST re-execute the provided code, verify the calculations, and call the record_attestation tool with your findings. This is MANDATORY - you must call the record_attestation tool."
         
         self.audit.log_agent_event(self.agent_name, "verification_start", {
             "model": model,
@@ -103,6 +103,7 @@ class VerificationAgent:
             prompt=prompt,
             system_prompt=system_prompt,
             tools=tools,
+            force_function_calling=True,  # Force the model to make function calls
             context=f"Verifying analysis for document {document_id}"
         )
         

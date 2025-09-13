@@ -1,0 +1,15 @@
+{
+  "document_id": "Positive Test Document 1",
+  "evidence": [
+    {
+      "dimension": "positive_sentiment",
+      "quote": "This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.",
+      "reasoning": "The document is replete with words indicating success, optimism, and positive feelings, such as \"wonderful\", \"perfectly\", \"great\", \"success\", \"excellent\", \"amazing\", \"optimism\", \"fantastic\", \"thrilled\", \"bright\", and \"promising\". The sentiment is consistently and overwhelmingly positive throughout the entire text, justifying a high score."
+    },
+    {
+      "dimension": "negative_sentiment",
+      "quote": "",
+      "reasoning": "The document contains no words, phrases, or expressions that indicate negative sentiment. It is entirely focused on positive themes."
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "derived_metrics": {},
+  "document_id": "Positive Test Document 1",
+  "executed_code": "'''\n# Set dimensional scores based on analysis\npositive_score = 0.9\nnegative_score = 0.0\n\n# Calculate derived metrics as defined in the framework\nnet_sentiment = positive_score - negative_score\nsentiment_magnitude = (positive_score + negative_score) / 2\n\nderived_metrics = {\n    \"net_sentiment\": net_sentiment,\n    \"sentiment_magnitude\": sentiment_magnitude\n}\n\nprint(derived_metrics)\n'''",
+  "execution_output": "{'net_sentiment': 0.9, 'sentiment_magnitude': 0.45}"
+}

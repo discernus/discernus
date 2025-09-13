@@ -107,14 +107,15 @@ class StatisticalPlanningExecutionAgent:
         }]
         
         # Execute LLM call with tools
-        system_prompt = "You are a statistical analysis expert. Analyze the provided data using appropriate statistical tests and call the record_statistical_results tool with your results and the code you executed."
+        system_prompt = "You are a statistical analysis expert. You MUST call the record_statistical_results tool with your results and the code you executed. This is MANDATORY - you must call the record_statistical_results tool."
         
         response_content, metadata = self.llm_gateway.execute_call_with_tools(
             model=model,
             prompt=prompt,
             system_prompt=system_prompt,
             tools=tools,
-            context=f"Statistical analysis of {len(analysis_data)} documents"
+            context=f"Statistical analysis of {len(analysis_data)} documents",
+            force_function_calling=True
         )
         
         if not metadata.get('success'):
@@ -146,11 +147,22 @@ class StatisticalPlanningExecutionAgent:
         })
         
         return {
+            "success": True,
             "statistics_artifact": statistics_artifact,
             "work_artifact": work_artifact,
             "csv_artifact": csv_artifact,
             "metadata": metadata
         }
+    
+    def execute_statistical_analysis(self, 
+                                   analysis_artifacts: List[str], 
+                                   model: str = "vertex_ai/gemini-2.5-flash") -> Dict[str, Any]:
+        """Execute statistical analysis - wrapper method for orchestrator compatibility"""
+        return self.analyze_batch(
+            analysis_artifact_ids=analysis_artifacts,
+            hypotheses={},  # Empty hypotheses for now
+            model=model
+        )
     
     def _create_statistical_prompt(self, analysis_data: List[Dict[str, Any]], 
                                   hypotheses: Dict[str, Any]) -> str:
@@ -183,7 +195,7 @@ STATISTICAL ANALYSIS REQUIREMENTS:
 4. Generate aggregated data rows for CSV export
 5. Use Python with numpy, pandas, scipy.stats, and pingouin libraries
 6. Execute your analysis code internally
-7. Call the record_statistical_results tool with your results
+7. **CRITICAL: You MUST call the record_statistical_results tool with your results**
 
 COMMON STATISTICAL TESTS TO CONSIDER:
 - Descriptive statistics (mean, median, std, min, max)
@@ -193,7 +205,13 @@ COMMON STATISTICAL TESTS TO CONSIDER:
 - Reliability analysis (Cronbach's alpha)
 - Effect size calculations
 
-Ensure your analysis is appropriate for the data type and research questions.
+**MANDATORY TOOL CALL:**
+You MUST call the record_statistical_results tool with:
+- statistics_payload: Object containing tests array and aggregated_rows array
+- executed_code: The Python code you executed
+- execution_output: The output from your code execution
+
+This is REQUIRED - do not proceed without calling this tool.
 """
     
     def _save_statistics_artifact(self, function_args: Dict[str, Any]) -> str:

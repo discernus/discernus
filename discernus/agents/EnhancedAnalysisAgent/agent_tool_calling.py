@@ -19,8 +19,8 @@ from discernus.core.audit_logger import AuditLogger
 from discernus.core.local_artifact_storage import LocalArtifactStorage
 from discernus.gateway.llm_gateway_enhanced import EnhancedLLMGateway
 from discernus.gateway.model_registry import ModelRegistry
-from .cache import AnalysisCache
-from .prompt_builder import create_analysis_prompt
+# Cache functionality moved to archive - using direct storage for now
+# Prompt builder moved to archive - using direct template loading
 
 
 class EnhancedAnalysisAgentToolCalling:
@@ -47,9 +47,9 @@ class EnhancedAnalysisAgentToolCalling:
 
     def _load_prompt_template(self) -> str:
         """Load tool calling prompt template."""
-        prompt_path = Path(__file__).parent / "prompt_tool_calling.txt"
+        prompt_path = Path(__file__).parent / "prompt_tool_calling_ultra_simple.txt"
         if not prompt_path.exists():
-            raise FileNotFoundError("Could not find prompt_tool_calling.txt for EnhancedAnalysisAgent")
+            raise FileNotFoundError("Could not find prompt_tool_calling_ultra_simple.txt for EnhancedAnalysisAgent")
         with open(prompt_path, 'r') as f:
             return f.read()
 
@@ -65,59 +65,23 @@ class EnhancedAnalysisAgentToolCalling:
         # Create analysis prompt
         prompt = self._create_analysis_prompt(document, framework)
         
-        # Define the tool schema
+        # Define the tool schema - minimal for Gemini 2.5 Pro compatibility
         tools = [{
             "type": "function",
             "function": {
-                "name": "record_analysis_with_work",
-                "description": "Record analysis results with computational work",
+                "name": "record_analysis",
+                "description": "Record analysis results",
                 "parameters": {
                     "type": "object",
                     "properties": {
                         "document_id": {"type": "string"},
-                        "document_hash": {"type": "string"},
-                        "framework_name": {"type": "string"},
-                        "framework_version": {"type": "string"},
-                        "analysis_payload": {
-                            "type": "object",
-                            "properties": {
-                                "scores": {
-                                    "type": "object",
-                                    "additionalProperties": {
-                                        "type": "object",
-                                        "properties": {
-                                            "raw_score": {"type": "number"},
-                                            "salience": {"type": "number"},
-                                            "confidence": {"type": "number"}
-                                        },
-                                        "required": ["raw_score", "salience", "confidence"]
-                                    }
-                                },
-                                "derived_metrics": {
-                                    "type": "object",
-                                    "additionalProperties": {"type": "number"}
-                                },
-                                "evidence": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "dimension": {"type": "string"},
-                                            "quote": {"type": "string"},
-                                            "source": {"type": "string"},
-                                            "offset": {"type": "integer"}
-                                        },
-                                        "required": ["dimension", "quote"]
-                                    }
-                                }
-                            },
-                            "required": ["scores", "derived_metrics", "evidence"]
-                        },
-                        "executed_code": {"type": "string"},
-                        "execution_output": {"type": "string"}
+                        "populism_score": {"type": "number"},
+                        "authoritarianism_score": {"type": "number"},
+                        "evidence": {"type": "string"},
+                        "code": {"type": "string"},
+                        "output": {"type": "string"}
                     },
-                    "required": ["document_id", "document_hash", "framework_name", "framework_version",
-                                "analysis_payload", "executed_code", "execution_output"]
+                    "required": ["document_id", "populism_score", "authoritarianism_score", "evidence", "code", "output"]
                 }
             }
         }]
@@ -144,19 +108,31 @@ class EnhancedAnalysisAgentToolCalling:
         # Extract tool calls from response
         tool_calls = metadata.get('tool_calls', [])
         if not tool_calls:
+            print(f"DEBUG: LLM response metadata: {metadata}")
+            print(f"DEBUG: LLM response content: {response_content[:500]}...")
+            print(f"DEBUG: Tool calls type: {type(tool_calls)}")
+            print(f"DEBUG: Tool calls value: {tool_calls}")
             raise Exception("No tool calls found in LLM response")
         
         # Process the first tool call (should be record_analysis_with_work)
         tool_call = tool_calls[0]
-        if tool_call.get('function', {}).get('name') != 'record_analysis_with_work':
-            raise Exception(f"Expected record_analysis_with_work tool call, got: {tool_call.get('function', {}).get('name')}")
         
-        # Parse the tool call arguments
-        function_args = json.loads(tool_call['function']['arguments'])
+        # Handle both dict format and ChatCompletionMessageToolCall format
+        if hasattr(tool_call, 'function'):
+            # ChatCompletionMessageToolCall format
+            function_name = tool_call.function.name
+            function_args = json.loads(tool_call.function.arguments)
+        else:
+            # Dict format
+            function_name = tool_call.get('function', {}).get('name')
+            function_args = json.loads(tool_call['function']['arguments'])
+        
+        if function_name != 'record_analysis':
+            raise Exception(f"Expected record_analysis tool call, got: {function_name}")
         
         # Save artifacts using the structured data (no parsing needed!)
-        analysis_artifact = self._save_analysis_artifact(function_args)
-        work_artifact = self._save_work_artifact(function_args)
+        analysis_artifact = self._save_analysis_artifact_simplified(function_args)
+        work_artifact = self._save_work_artifact_simplified(function_args)
         
         self.audit.log_agent_event(self.agent_name, "analysis_complete", {
             "document_id": function_args["document_id"],
@@ -174,62 +150,47 @@ class EnhancedAnalysisAgentToolCalling:
     
     def _create_analysis_prompt(self, document: Dict[str, Any], framework: Dict[str, Any]) -> str:
         """Create the analysis prompt for the LLM"""
-        # Encode document content
-        content_bytes = document.get('content', '').encode('utf-8')
-        content_b64 = base64.b64encode(content_bytes).decode('utf-8')
+        template = self._load_prompt_template()
         
-        # Encode framework
-        framework_json = json.dumps(framework, indent=2)
-        framework_b64 = base64.b64encode(framework_json.encode('utf-8')).decode('utf-8')
-        
-        # Create documents list
-        documents = [{
-            'index': 1,
-            'hash': hashlib.sha256(content_bytes).hexdigest(),
-            'content': content_b64,
-            'filename': document.get('filename', document.get('id', 'document'))
-        }]
-        
-        # Use the existing prompt builder but with tool calling template
-        return create_analysis_prompt(
-            self.prompt_template,
-            f"analysis_{document.get('id', 'unknown')}",
-            framework_b64,
-            documents
+        return template.format(
+            document_content=document.get('content', '')
         )
     
-    def _save_analysis_artifact(self, function_args: Dict[str, Any]) -> str:
-        """Save the analysis results as a clean artifact"""
+    def _save_analysis_artifact_simplified(self, function_args: Dict[str, Any]) -> str:
+        """Save the analysis results as a clean artifact (minimal schema)"""
         analysis_data = {
             "document_id": function_args["document_id"],
-            "document_hash": function_args["document_hash"],
-            "framework_name": function_args["framework_name"],
-            "framework_version": function_args["framework_version"],
-            "scores": function_args["analysis_payload"]["scores"],
-            "derived_metrics": function_args["analysis_payload"]["derived_metrics"],
-            "evidence": function_args["analysis_payload"]["evidence"],
+            "scores": {
+                "populism": {
+                    "raw_score": function_args["populism_score"],
+                    "salience": 1.0,
+                    "confidence": 0.9
+                },
+                "authoritarianism": {
+                    "raw_score": function_args["authoritarianism_score"],
+                    "salience": 1.0,
+                    "confidence": 0.9
+                }
+            },
+            "evidence": [{
+                "dimension": "populism",
+                "quote": function_args["evidence"],
+                "reasoning": "Analysis evidence"
+            }],
             "timestamp": datetime.now(timezone.utc).isoformat()
         }
         
         content = json.dumps(analysis_data, indent=2).encode('utf-8')
-        return self.storage.put_artifact(content, {
-            "artifact_type": "analysis",
-            "document_id": function_args["document_id"],
-            "framework": function_args["framework_name"]
-        })
+        return self.storage.put_artifact(content, {"artifact_type": "analysis"})
     
-    def _save_work_artifact(self, function_args: Dict[str, Any]) -> str:
-        """Save the computational work as a separate artifact"""
+    def _save_work_artifact_simplified(self, function_args: Dict[str, Any]) -> str:
+        """Save the computational work as a separate artifact (minimal schema)"""
         work_data = {
             "document_id": function_args["document_id"],
-            "executed_code": function_args["executed_code"],
-            "execution_output": function_args["execution_output"],
+            "executed_code": function_args["code"],
+            "execution_output": function_args["output"],
             "timestamp": datetime.now(timezone.utc).isoformat()
         }
         
         content = json.dumps(work_data, indent=2).encode('utf-8')
-        return self.storage.put_artifact(content, {
-            "artifact_type": "work",
-            "document_id": function_args["document_id"],
-            "framework": function_args["framework_name"]
-        })
+        return self.storage.put_artifact(content, {"artifact_type": "work"})

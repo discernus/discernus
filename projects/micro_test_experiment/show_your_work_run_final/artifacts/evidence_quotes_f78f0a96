@@ -1,0 +1,15 @@
+{
+  "document_id": "Positive Test Document 2",
+  "evidence": [
+    {
+      "dimension": "positive_sentiment",
+      "quote": "What a superb morning! All systems are operating flawlessly. I'm excited about what's coming next. Achievement surrounds us.",
+      "reasoning": "The text is overwhelmingly dominated by positive language, using words like 'superb,' 'flawlessly,' 'excited,' and 'achievement' to create a strong sense of optimism and success."
+    },
+    {
+      "dimension": "negative_sentiment",
+      "quote": "The document contains no instances of negative language.",
+      "reasoning": "The analysis confirms the complete absence of any words, phrases, or themes that would indicate negative sentiment. The text is uniformly positive."
+    }
+  ]
+}

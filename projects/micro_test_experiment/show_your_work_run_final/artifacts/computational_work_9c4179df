@@ -1,0 +1,6 @@
+{
+  "derived_metrics": {},
+  "document_id": "Positive Test Document 2",
+  "executed_code": "'''\n# Analysis based on the 'Sentiment Binary Framework v1.0'\npositive_sentiment_score = 0.9\nnegative_sentiment_score = 0.0\n\n# Derived metrics calculation\nnet_sentiment = positive_sentiment_score - negative_sentiment_score\nsentiment_magnitude = (positive_sentiment_score + negative_sentiment_score) / 2\n\nprint(f\"net_sentiment: {net_sentiment}\")\nprint(f\"sentiment_magnitude: {sentiment_magnitude}\")\n'''",
+  "execution_output": "net_sentiment: 0.9\nsentiment_magnitude: 0.45\n"
+}

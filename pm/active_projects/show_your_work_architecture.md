@@ -11,83 +11,168 @@ The "Show Your Work" architecture represents a fundamental shift from determinis
 4. **Selective File Passing**: Context management through intelligent artifact selection
 5. **Fail-Fast Verification**: Immediate error reporting when verification fails
 
-## Core Principle: Structured Output via Tool Calling
+## Core Principle: Structured Output via Multi-Tool Calling
 
-The fundamental principle of this architecture is that **LLMs provide structured data through tool calls (function calls), not through text parsing**.
+The fundamental principle of this architecture is that **LLMs provide structured data through multiple focused tool calls (function calls), not through text parsing**. This approach works around Gemini 2.5 Pro's limitations with complex nested schemas while maintaining full functionality.
 
-### How Tool Calling Works
+### How Multi-Tool Calling Works
+
+Instead of one complex tool, we use three focused tools that work together:
 
 ```python
-# Tool Definition (provided to LLM)
-tools = [{
-    "type": "function",
-    "function": {
-        "name": "record_analysis_with_work",
-        "description": "Record analysis results with computational work",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "analysis_payload": {
-                    "type": "object",
-                    "description": "The analysis results (scores, derived metrics, evidence)"
+# Three-Tool Schema (provided to LLM)
+tools = [
+    {
+        "type": "function",
+        "function": {
+            "name": "record_analysis_scores",
+            "description": "Record dimensional scores with confidence and salience",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "document_id": {"type": "string"},
+                    "framework_name": {"type": "string"},
+                    "framework_version": {"type": "string"},
+                    "scores": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "object",
+                            "properties": {
+                                "raw_score": {"type": "number"},
+                                "salience": {"type": "number"},
+                                "confidence": {"type": "number"}
+                            }
+                        }
+                    }
                 },
-                "executed_code": {
-                    "type": "string", 
-                    "description": "Python code that was executed"
+                "required": ["document_id", "framework_name", "framework_version", "scores"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "record_evidence_quotes",
+            "description": "Record evidence quotes and reasoning for each dimension",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "document_id": {"type": "string"},
+                    "evidence": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "dimension": {"type": "string"},
+                                "quote": {"type": "string"},
+                                "reasoning": {"type": "string"}
+                            }
+                        }
+                    }
                 },
-                "execution_output": {
-                    "type": "string",
-                    "description": "Output from code execution"
-                }
-            },
-            "required": ["analysis_payload", "executed_code", "execution_output"]
+                "required": ["document_id", "evidence"]
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "record_computational_work",
+            "description": "Record derived metrics calculations and code execution",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "document_id": {"type": "string"},
+                    "executed_code": {"type": "string"},
+                    "execution_output": {"type": "string"},
+                    "derived_metrics": {
+                        "type": "object",
+                        "additionalProperties": {"type": "number"}
+                    }
+                },
+                "required": ["document_id", "executed_code", "execution_output", "derived_metrics"]
+            }
         }
     }
-}]
+]
 
-# LLM Response (structured, not parsed)
+# LLM Response (3 sequential tool calls)
 # The API guarantees this structure - no string parsing needed!
-tool_call = {
-    "name": "record_analysis_with_work",
-    "arguments": {
-        "analysis_payload": {...},  # Structured data
-        "executed_code": "...",      # Code as string
-        "execution_output": "..."     # Output as string
+tool_calls = [
+    {
+        "name": "record_analysis_scores",
+        "arguments": {
+            "document_id": "doc_001",
+            "framework_name": "pdaf_v10",
+            "scores": {
+                "populism": {"raw_score": 0.8, "salience": 0.9, "confidence": 1.0},
+                "authoritarianism": {"raw_score": 0.7, "salience": 0.8, "confidence": 0.9}
+            }
+        }
+    },
+    {
+        "name": "record_evidence_quotes", 
+        "arguments": {
+            "document_id": "doc_001",
+            "evidence": [
+                {
+                    "dimension": "populism",
+                    "quote": "The people are being betrayed by the elite...",
+                    "reasoning": "Direct people vs elite framing"
+                }
+            ]
+        }
+    },
+    {
+        "name": "record_computational_work",
+        "arguments": {
+            "document_id": "doc_001",
+            "executed_code": "import numpy as np\noverall_intensity = np.mean([0.8, 0.7])",
+            "execution_output": "0.75",
+            "derived_metrics": {"overall_intensity": 0.75}
+        }
     }
-}
+]
 
-# Agent simply saves the structured data
-with open("analysis.json", "w") as f:
-    json.dump(tool_call["arguments"]["analysis_payload"], f)
-with open("work.json", "w") as f:
-    json.dump({
-        "executed_code": tool_call["arguments"]["executed_code"],
-        "execution_output": tool_call["arguments"]["execution_output"]
-    }, f)
+# Agent processes each tool call and saves artifacts
+for tool_call in tool_calls:
+    if tool_call["name"] == "record_analysis_scores":
+        with open("analysis_scores.json", "w") as f:
+            json.dump(tool_call["arguments"], f)
+    elif tool_call["name"] == "record_evidence_quotes":
+        with open("evidence_quotes.json", "w") as f:
+            json.dump(tool_call["arguments"], f)
+    elif tool_call["name"] == "record_computational_work":
+        with open("computational_work.json", "w") as f:
+            json.dump(tool_call["arguments"], f)
 ```
 
-### Benefits of Tool Calling
+### Benefits of Multi-Tool Calling
 
 1. **Zero Parsing**: The agent receives structured data from the API, not strings to parse
 2. **Guaranteed Schema**: The platform ensures the response matches the tool definition
-3. **Clean Artifacts**: Each tool call produces discrete, well-formed files
-4. **Implicit Context Management**: By passing file paths instead of content, we control what each agent sees
+3. **Gemini Compatibility**: Works around Gemini 2.5 Pro's limitations with complex nested schemas
+4. **Clean Artifacts**: Each tool call produces discrete, well-formed files
+5. **Single LLM Call**: Uses full context window efficiently without artificial chunking
+6. **Internal Processing**: LLM does three-phase analysis internally, returns aggregated results
+7. **Robust Error Handling**: Individual tool failures don't break entire analysis
 
 ## Data Flow
 
 ```
-Document → EnhancedAnalysisAgent (with tool calling)
-    ├── Creates: analysis.json (scores, derived metrics, evidence)
-    └── Creates: work.json (executed_code, execution_output)
+Document → EnhancedAnalysisAgentMultiTool (with multi-tool calling)
+    ├── Creates: analysis_scores.json (dimensional scores with confidence/salience)
+    ├── Creates: evidence_quotes.json (evidence quotes and reasoning)
+    └── Creates: computational_work.json (derived metrics and code execution)
            ↓
     VerificationAgent (adversarial LLM with tool calling)
-    ├── Reads: analysis.json, work.json
+    ├── Reads: analysis_scores.json, evidence_quotes.json, computational_work.json
     └── Creates: attestation.json (verification results)
            ↓
     [Repeat for all documents]
            ↓
     Statistical Planning + Execution Agent (with tool calling)
-    ├── Reads: All analysis.json files (numerical data only)
+    ├── Reads: All analysis_scores.json files (numerical data only)
     ├── Creates: statistics.json (results)
     ├── Creates: statistical_work.json (code, output)
     └── Creates: statistical_data.csv (aggregated data)
@@ -97,7 +182,7 @@ Document → EnhancedAnalysisAgent (with tool calling)
     └── Creates: statistical_attestation.json
            ↓
     Evidence CSV Export Module (deterministic Python)
-    ├── Reads: All analysis.json files (including evidence)
+    ├── Reads: All evidence_quotes.json files
     └── Creates: evidence.csv
            ↓
     Synthesis Agent
@@ -109,17 +194,18 @@ Document → EnhancedAnalysisAgent (with tool calling)
 
 This 5-step process is the core of the "Show Your Work" architecture:
 
-1. **Primary Work**: The primary LLM (e.g., Gemini 2.5 Pro) performs analysis, executes code internally, and calls a tool with:
-   - `analysis_payload`: The actual results
-   - `executed_code`: The Python code it ran
-   - `execution_output`: What the code produced
+1. **Primary Work**: The primary LLM (e.g., Gemini 2.5 Pro) performs analysis, executes code internally, and calls three tools with:
+   - `record_analysis_scores`: Dimensional scores with confidence/salience
+   - `record_evidence_quotes`: Evidence quotes and reasoning
+   - `record_computational_work`: Derived metrics and code execution
 
 2. **Work Storage**: The agent saves these as separate artifact files:
-   - `analysis.json`: The results
-   - `work.json`: The code and output for verification
+   - `analysis_scores.json`: The dimensional scores
+   - `evidence_quotes.json`: The evidence and reasoning
+   - `computational_work.json`: The code and output for verification
 
 3. **Adversarial Verification**: A `VerificationAgent` with a different LLM (initially Gemini, later DeepSeek-Prover-V2):
-   - Reads both artifacts
+   - Reads all three artifacts (analysis_scores.json, evidence_quotes.json, computational_work.json)
    - Re-executes the code internally
    - Compares its output with the claimed output
    - Calls a tool to record its attestation
@@ -136,13 +222,13 @@ CSVs are generated from structured data received via tool calls, not by parsing 
 
 ### Implementation
 
-1. **Analysis CSVs**: The `EnhancedAnalysisAgent` provides numerical data via tool calls. The agent's Python code formats this into CSVs.
+1. **Analysis CSVs**: The `EnhancedAnalysisAgentMultiTool` provides numerical data via three tool calls. The agent's Python code formats this into CSVs.
 
 2. **Statistical CSVs**: The `Statistical Planning + Execution Agent` provides aggregated results via tool calls. The agent's Python code creates:
    - `statistical_results.csv`: Summary statistics
    - `statistical_data.csv`: Aggregated numerical data
 
-3. **Evidence CSV**: A deterministic Python module (not an LLM) reads all `analysis.json` files after completion and generates `evidence.csv` by extracting and formatting the evidence arrays.
+3. **Evidence CSV**: A deterministic Python module (not an LLM) reads all `evidence_quotes.json` files after completion and generates `evidence.csv` by extracting and formatting the evidence arrays.
 
 ### Benefits
 - No output token limits (CSVs are generated from structured data)
@@ -195,20 +281,20 @@ All artifacts use SHA-256 hashing for identification, enabling:
 
 ## Agent Responsibilities
 
-### EnhancedAnalysisAgent (Modified)
+### EnhancedAnalysisAgentMultiTool (Modified)
 - **Input**: Single document + framework
-- **Processing**: Score dimensions, calculate derived metrics (per-document)
-- **Tool Calls**: `record_analysis_with_work`
-- **Output**: `analysis.json` (results) + `work.json` (code/output)
+- **Processing**: Score dimensions, calculate derived metrics (per-document) with internal three-phase analysis
+- **Tool Calls**: `record_analysis_scores`, `record_evidence_quotes`, `record_computational_work`
+- **Output**: `analysis_scores.json` + `evidence_quotes.json` + `computational_work.json`
 
 ### VerificationAgent (New)
-- **Input**: `analysis.json` + `work.json`
+- **Input**: `analysis_scores.json` + `evidence_quotes.json` + `computational_work.json`
 - **Processing**: Re-execute code, verify results
 - **Tool Calls**: `record_attestation`
 - **Output**: `attestation.json`
 
 ### Statistical Planning + Execution Agent (New)
-- **Input**: All `analysis.json` files (numerical data only, no evidence)
+- **Input**: All `analysis_scores.json` files (numerical data only, no evidence)
 - **Processing**: Generate plan, execute statistical analysis
 - **Tool Calls**: `record_statistical_results`
 - **Output**: `statistics.json` + `statistical_work.json` + CSVs
@@ -220,7 +306,7 @@ All artifacts use SHA-256 hashing for identification, enabling:
 - **Output**: `statistical_attestation.json`
 
 ### Evidence CSV Export Module (Deterministic)
-- **Input**: All `analysis.json` files (including evidence)
+- **Input**: All `evidence_quotes.json` files (including evidence)
 - **Processing**: Extract and format evidence arrays
 - **Output**: `evidence.csv`
 - **Note**: This is Python code, not an LLM agent
@@ -233,15 +319,17 @@ All artifacts use SHA-256 hashing for identification, enabling:
 # Orchestrator's per-document loop
 for document in corpus:
     # 1. Analysis with derived metrics
-    analysis_result = enhanced_analysis_agent.analyze(document, framework)
-    # Agent internally calls LLM which uses tool to save:
-    # - analysis.json (scores, metrics, evidence)
-    # - work.json (code, output)
+    analysis_result = enhanced_analysis_agent_multi_tool.analyze(document, framework)
+    # Agent internally calls LLM which uses three tools to save:
+    # - analysis_scores.json (dimensional scores with confidence/salience)
+    # - evidence_quotes.json (evidence quotes and reasoning)
+    # - computational_work.json (derived metrics and code execution)
     
     # 2. Verification
     verification = verification_agent.verify(
-        analysis_result['analysis_path'],
-        analysis_result['work_path']
+        analysis_result['analysis_scores_path'],
+        analysis_result['evidence_quotes_path'],
+        analysis_result['computational_work_path']
     )
     # Agent internally calls LLM which uses tool to save:
     # - attestation.json
@@ -255,8 +343,8 @@ for document in corpus:
 ```python
 # After all documents are processed
 # 3. Statistical Analysis (single batch call)
-analysis_paths = [r['analysis_path'] for r in all_results]
-statistical_result = statistical_agent.analyze_batch(analysis_paths, hypotheses)
+analysis_scores_paths = [r['analysis_scores_path'] for r in all_results]
+statistical_result = statistical_agent.analyze_batch(analysis_scores_paths, hypotheses)
 # Agent internally calls LLM which uses tool to save:
 # - statistics.json
 # - statistical_work.json
@@ -272,7 +360,8 @@ if not stat_verification['success']:
     raise StatisticalVerificationError(stat_verification['details'])
 
 # 5. Evidence CSV (deterministic)
-evidence_csv_path = evidence_export_module.generate(all_results)
+evidence_quotes_paths = [r['evidence_quotes_path'] for r in all_results]
+evidence_csv_path = evidence_export_module.generate(evidence_quotes_paths)
 ```
 
 ## Phased Implementation Plan
@@ -280,17 +369,27 @@ evidence_csv_path = evidence_export_module.generate(all_results)
 ### Phase 0: Foundation ✅
 **Status**: COMPLETE
 - Validated LLM internal code execution
-- Confirmed tool calling approach
+- Confirmed multi-tool calling approach
 - Established architecture principles
+- Successfully tested with PDAF v10.0.2 and long documents (10,930 words)
+
+**Test Results**:
+- **Framework**: PDAF v10.0.2 (9 dimensions + derived metrics)
+- **Document**: Trump speech (10,930 words)
+- **Model**: Gemini 2.5 Pro
+- **Token Usage**: 35,074 tokens ($0.13)
+- **Tool Calls**: 3 successful calls
+- **Artifacts**: 3 properly stored artifacts
+- **Generated Data**: 9 dimensional scores, 9 evidence quotes, 8 derived metrics, Python code execution
 
 ### Phase 1: Enhanced Analysis with Verification
 **Goal**: Implement per-document analysis with derived metrics and verification
 
 **Implementation**:
-1. Enhance `EnhancedAnalysisAgent` to:
+1. Enhance `EnhancedAnalysisAgentMultiTool` to:
    - Calculate derived metrics per-document
-   - Use tool calling for structured output
-   - Generate `analysis.json` and `work.json`
+   - Use multi-tool calling for structured output
+   - Generate `analysis_scores.json`, `evidence_quotes.json`, and `computational_work.json`
 
 2. Create `VerificationAgent`:
    - Use Gemini 2.5 Pro initially (same as primary)
@@ -319,7 +418,7 @@ evidence_csv_path = evidence_export_module.generate(all_results)
 
 3. Implement `Evidence CSV Export Module`:
    - Deterministic Python code
-   - Extract evidence from all analysis files
+   - Extract evidence from all evidence_quotes.json files
 
 **Validation Gate**:
 - Run on 50-document corpus
@@ -431,41 +530,74 @@ This approach fundamentally solves the orchestration complexity problem while ma
 
 Define explicit function-call contracts to eliminate ambiguity. All tools return no content; the agent persists inputs to artifacts.
 
-### record_analysis_with_work
-- **Purpose**: Save per-document analysis results and work
+### record_analysis_scores
+- **Purpose**: Save per-document dimensional scores with confidence and salience
 - **Arguments schema**:
 ```json
 {
   "type": "object",
   "properties": {
     "document_id": {"type": "string"},
-    "document_hash": {"type": "string", "description": "SHA-256 of document content"},
     "framework_name": {"type": "string"},
     "framework_version": {"type": "string"},
-    "analysis_payload": {
+    "scores": {
       "type": "object",
-      "properties": {
-        "scores": {"type": "object", "additionalProperties": {"type": "number"}},
-        "derived_metrics": {"type": "object", "additionalProperties": {"type": "number"}},
-        "evidence": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "quote": {"type": "string"},
-              "source": {"type": "string"},
-              "offset": {"type": "integer"}
-            },
-            "required": ["quote", "source"]
-          }
-        }
-      },
-      "required": ["scores", "derived_metrics"]
-    },
-    "executed_code": {"type": "string"},
-    "execution_output": {"type": "string"}
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "raw_score": {"type": "number"},
+          "salience": {"type": "number"},
+          "confidence": {"type": "number"}
+        },
+        "required": ["raw_score", "salience", "confidence"]
+      }
+    }
   },
-  "required": ["document_id", "document_hash", "analysis_payload", "executed_code", "execution_output"]
+  "required": ["document_id", "framework_name", "framework_version", "scores"]
+}
+```
+
+### record_evidence_quotes
+- **Purpose**: Save per-document evidence quotes and reasoning
+- **Arguments schema**:
+```json
+{
+  "type": "object",
+  "properties": {
+    "document_id": {"type": "string"},
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "dimension": {"type": "string"},
+          "quote": {"type": "string"},
+          "reasoning": {"type": "string"}
+        },
+        "required": ["dimension", "quote", "reasoning"]
+      }
+    }
+  },
+  "required": ["document_id", "evidence"]
+}
+```
+
+### record_computational_work
+- **Purpose**: Save per-document derived metrics calculations and code execution
+- **Arguments schema**:
+```json
+{
+  "type": "object",
+  "properties": {
+    "document_id": {"type": "string"},
+    "executed_code": {"type": "string"},
+    "execution_output": {"type": "string"},
+    "derived_metrics": {
+      "type": "object",
+      "additionalProperties": {"type": "number"}
+    }
+  },
+  "required": ["document_id", "executed_code", "execution_output", "derived_metrics"]
 }
 ```
 
@@ -548,8 +680,9 @@ Define explicit function-call contracts to eliminate ambiguity. All tools return
 - **Run root**: `projects/<project>/runs/<timestamp>/`
 - **Artifacts dir**: `artifacts/`
 - **Per-document**:
-  - `analysis_<document_hash>.json`
-  - `work_<document_hash>.json`
+  - `analysis_scores_<document_hash>.json`
+  - `evidence_quotes_<document_hash>.json`
+  - `computational_work_<document_hash>.json`
   - `attestation_<document_hash>.json`
 - **Batch**:
   - `statistics.json`

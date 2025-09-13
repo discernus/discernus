@@ -1,0 +1,15 @@
+{
+  "document_id": "Negative Test Document 2",
+  "evidence": [
+    {
+      "dimension": "positive_sentiment",
+      "quote": "Everything appears bleak and discouraging.",
+      "reasoning": "The text contains no positive language. This quote summarizes the complete absence of optimism, instead confirming the negative outlook."
+    },
+    {
+      "dimension": "negative_sentiment",
+      "quote": "What an awful predicament. All plans are failing miserably. ... Defeat engulfs us. ... Despair saturates everything. Such a calamitous result!",
+      "reasoning": "The document is saturated with words indicating failure, despair, and catastrophe, such as 'awful', 'failing miserably', 'defeat', 'dreadfully', 'catastrophe', 'despair', and 'calamitous'. The entire text is a strong expression of negative sentiment."
+    }
+  ]
+}
