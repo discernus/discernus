@@ -44,8 +44,12 @@ class StatisticalVerificationAgent:
                                    statistics_artifact_id: str, 
                                    work_artifact_id: str,
                                    csv_artifact_id: str,
-                                   model: str = "vertex_ai/gemini-2.5-pro") -> Dict[str, Any]:
+                                   model: str = None) -> Dict[str, Any]:
         """Verify statistical analysis by re-executing the code and comparing results"""
+        
+        # Select verifier model (Phase 2: specialized verifiers, Phase 1: fallback to Gemini)
+        if model is None:
+            model = self._select_verifier_model()
         
         # Load the artifacts
         statistics_data = self.storage.get_artifact(statistics_artifact_id)
@@ -193,3 +197,57 @@ For the tool call, provide:
             "artifact_type": "statistical_attestation",
             "verifier_model": function_args["verifier_model"]
         })
+    
+    def _select_verifier_model(self) -> str:
+        """Select the appropriate verifier model based on availability and phase"""
+        try:
+            # Try to get specialized verifier models from registry
+            registry = ModelRegistry()
+            available_models = registry.list_models()
+            
+            # Phase 2: Try specialized verifiers first
+            primary_verifier = "openrouter/deepseek/deepseek-prover-v2"
+            secondary_verifier = "openrouter/meta-llama/llama-3.1-405b-instruct"
+            
+            if primary_verifier in available_models:
+                self.audit.log_agent_event(self.agent_name, "model_selection", {
+                    "selected_model": primary_verifier,
+                    "selection_reason": "primary_verifier_available",
+                    "phase": "phase_2"
+                })
+                return primary_verifier
+            
+            if secondary_verifier in available_models:
+                self.audit.log_agent_event(self.agent_name, "model_selection", {
+                    "selected_model": secondary_verifier,
+                    "selection_reason": "secondary_verifier_available",
+                    "phase": "phase_2"
+                })
+                return secondary_verifier
+            
+            # Phase 1: Fallback to Gemini Pro
+            fallback_model = "vertex_ai/gemini-2.5-pro"
+            if fallback_model in available_models:
+                self.audit.log_agent_event(self.agent_name, "model_selection", {
+                    "selected_model": fallback_model,
+                    "selection_reason": "specialized_verifiers_unavailable",
+                    "phase": "phase_1"
+                })
+                return fallback_model
+            
+            # Last resort: Gemini Flash
+            last_resort = "vertex_ai/gemini-2.5-flash"
+            self.audit.log_agent_event(self.agent_name, "model_selection", {
+                "selected_model": last_resort,
+                "selection_reason": "fallback_models_unavailable",
+                "phase": "phase_1"
+            })
+            return last_resort
+            
+        except Exception as e:
+            # If registry fails, use Gemini Pro as safe fallback
+            self.audit.log_agent_event(self.agent_name, "model_selection_error", {
+                "error": str(e),
+                "fallback_model": "vertex_ai/gemini-2.5-pro"
+            })
+            return "vertex_ai/gemini-2.5-pro"
