@@ -216,13 +216,9 @@ class CleanAnalysisOrchestrator:
             # Phase 2: Validation (unless skipped)
             if not self.skip_validation:
                 phase_start = datetime.now(timezone.utc)
-                try:
-                    self._run_coherence_validation(self.validation_model, audit_logger)
-                    self._log_status("Experiment coherence validated")
-                    self._log_phase_timing("coherence_validation", phase_start)
-                except Exception as e:
-                    self._log_progress(f"⚠️ Coherence validation failed, continuing with warning: {str(e)}")
-                    # Continue with warning - validation failure shouldn't block experiment
+                self._run_coherence_validation(self.validation_model, audit_logger)
+                self._log_status("Experiment coherence validated")
+                self._log_phase_timing("coherence_validation", phase_start)
             
             # Phase 3: Validate corpus files
             phase_start = datetime.now(timezone.utc)
@@ -309,55 +305,17 @@ class CleanAnalysisOrchestrator:
                 self._log_progress(f"❌ Analysis phase failed: {str(e)}")
                 raise CleanAnalysisError(f"Analysis phase failed: {str(e)}")
             
-            # Phase 5: Run derived metrics - RE-ENABLED FOR TESTING
-            # Testing if DerivedMetricsAgent can generate proper derived metrics
+            # Phase 5: Run derived metrics using consistent cached implementation
             if self.progress_manager:
                 self.progress_manager.update_main_progress("Derived metrics")
             phase_start = datetime.now(timezone.utc)
             try:
-                # Create temporary workspace for derived metrics
-                workspace_path = self.experiment_path / "temp_derived_metrics"
-                workspace_path.mkdir(exist_ok=True)
-                
-                # Write framework content to workspace
-                framework_path = self.experiment_path / self.config['framework']
-                framework_content = framework_path.read_text(encoding='utf-8')
-                (workspace_path / "framework_content.md").write_text(framework_content)
-                
-                # Write experiment spec to workspace
-                experiment_spec = {
-                    "name": self.config.get('experiment_name', 'Test Experiment'),
-                    "description": "Test experiment for derived metrics",
-                    "framework": "framework.md"
-                }
-                (workspace_path / "experiment_spec.json").write_text(json.dumps(experiment_spec, indent=2))
-                
-                # Write analysis results to workspace
-                analysis_data_file = workspace_path / "analysis_data.json"
-                analysis_data_file.write_text(json.dumps(analysis_results, indent=2))
-                
-                # Run derived metrics agent
-                derived_metrics_agent = AutomatedDerivedMetricsAgent(
-                    model=self.derived_metrics_model,
-                    audit_logger=audit_logger
+                self._log_progress("📊 Running derived metrics phase using cached implementation...")
+                derived_metrics_results = self._run_derived_metrics_phase(
+                    self.derived_metrics_model, 
+                    audit_logger, 
+                    analysis_results
                 )
-                
-                derived_metrics_results = derived_metrics_agent.generate_functions(workspace_path)
-                
-                # Execute the derived metrics functions to calculate actual values
-                self._log_progress("🔧 Executing derived metrics functions...")
-                derived_metrics_data = self._execute_derived_metrics_functions(workspace_path, analysis_results, audit_logger)
-                
-                # Combine function generation results with execution results
-                derived_metrics_results['derived_metrics_results'] = {
-                    'generation_metadata': {
-                        'status': derived_metrics_results.get('status', 'completed'),
-                        'functions_generated': derived_metrics_results.get('functions_generated', 0),
-                        'output_file': derived_metrics_results.get('output_file', ''),
-                        'module_size': derived_metrics_results.get('module_size', 0)
-                    },
-                    'derived_metrics_data': derived_metrics_data
-                }
                 
                 # Store derived metrics results for synthesis access
                 self._derived_metrics_results = derived_metrics_results
@@ -366,7 +324,9 @@ class CleanAnalysisOrchestrator:
                 self._log_phase_timing("derived_metrics_phase", phase_start)
                 
             except Exception as e:
+                import traceback
                 self._log_progress(f"❌ Derived metrics phase failed: {str(e)}")
+                self._log_progress(f"❌ Full traceback: {traceback.format_exc()}")
                 raise CleanAnalysisError(f"Derived metrics phase failed: {str(e)}")
             
             # Statistical preparation mode: Export CSV and exit after derived metrics
@@ -982,7 +942,14 @@ class CleanAnalysisOrchestrator:
             # Check if cached validation was successful
             if not cached_validation.get('success', False):
                 issues = cached_validation.get('issues', ['Unknown validation failure'])
-                raise CleanAnalysisError(f"Experiment validation failed (cached): {'; '.join(issues)}")
+                # Handle both string and dict formats in cached data
+                if issues and isinstance(issues[0], dict):
+                    # If issues are dictionaries, extract descriptions
+                    issue_descriptions = [issue.get('description', str(issue)) for issue in issues]
+                else:
+                    # If issues are already strings, use them directly
+                    issue_descriptions = issues
+                raise CleanAnalysisError(f"Experiment validation failed (cached): {'; '.join(issue_descriptions)}")
             
             self.performance_metrics["cache_hits"] += 1
             return
@@ -1449,6 +1416,7 @@ class CleanAnalysisOrchestrator:
                     else:
                         self._log_progress("⚠️ Cached statistical functions missing code content - may need regeneration")
                 else:
+                    self._log_progress("🔧 Cache miss - generating new statistical analysis functions")
                     # Initialize statistical analysis agent
                     from ..agents.automated_statistical_analysis.agent import AutomatedStatisticalAnalysisAgent
                     stats_agent = AutomatedStatisticalAnalysisAgent(
@@ -1473,7 +1441,44 @@ class CleanAnalysisOrchestrator:
                 )
                 
                 # CRITICAL: Validate that we got actual statistical results
-                if not self._validate_statistical_results(statistical_results):
+                self._log_progress(f"🔍 Statistical results validation - results keys: {list(statistical_results.keys())}")
+                
+                # DEBUG: What exact structure are we validating?
+                if 'statistical_results' in statistical_results:
+                    self._log_progress("🔍 DEBUGGING: Found nested 'statistical_results' key - extracting...")
+                    actual_results = statistical_results['statistical_results']
+                    self._log_progress(f"🔍 DEBUGGING: Actual statistical results keys: {list(actual_results.keys())}")
+                else:
+                    actual_results = statistical_results
+                    self._log_progress(f"🔍 DEBUGGING: Using direct statistical results")
+                
+                self._log_progress(f"🔍 Statistical results content: {statistical_results}")
+                
+                # Debug each result in detail
+                for func_name, result in actual_results.items():
+                    self._log_progress(f"🔍 Function '{func_name}': type={type(result)}, value={result}")
+                    if isinstance(result, dict):
+                        self._log_progress(f"🔍   - status: {result.get('status', 'NO_STATUS')}")
+                        self._log_progress(f"🔍   - keys: {list(result.keys())}")
+                        # Check for numerical content specifically
+                        numerical_found = []
+                        for key, value in result.items():
+                            if isinstance(value, (int, float)):
+                                numerical_found.append(f"{key}={value}")
+                            elif isinstance(value, (list, dict)):
+                                numerical_found.append(f"{key}={type(value).__name__}")
+                        self._log_progress(f"🔍   - numerical content: {numerical_found}")
+                
+                # Use the correct results for validation
+                if not self._validate_statistical_results(actual_results):
+                    self._log_progress("❌ Statistical results validation failed")
+                    self._log_progress(f"❌ VALIDATION DEBUG: Validating {len(actual_results)} results")
+                    for name, res in actual_results.items():
+                        is_dict = isinstance(res, dict)
+                        status_ok = res.get('status') != 'failed' if is_dict else 'N/A'
+                        has_num = any(isinstance(v, (int, float, list, dict)) for v in res.values() if v is not None) if is_dict else False
+                        self._log_progress(f"❌   {name}: dict={is_dict}, status_ok={status_ok}, numerical={has_num}")
+                    
                     raise CleanAnalysisError(
                         "Statistical analysis phase failed: No numerical results produced. "
                         "Generated functions but failed to execute or produce statistical outputs. "
@@ -1560,7 +1565,9 @@ class CleanAnalysisOrchestrator:
                     shutil.rmtree(temp_workspace)
         
         except Exception as e:
+            import traceback
             self._log_progress(f"❌ Statistical analysis phase failed: {str(e)}")
+            self._log_progress(f"❌ Full traceback: {traceback.format_exc()}")
             raise CleanAnalysisError(f"Statistical analysis phase failed: {str(e)}")
     
     def _execute_derived_metrics_functions(self, workspace_path: Path, analysis_results: List[Dict[str, Any]], audit_logger: AuditLogger) -> Dict[str, Any]:
@@ -1577,11 +1584,41 @@ class CleanAnalysisOrchestrator:
         if not functions_file.exists():
             raise CleanAnalysisError("Derived metrics functions file not found")
         
-        # Import the generated module
+        # Load the generated functions - handle JSON format
         try:
-            spec = importlib.util.spec_from_file_location("derived_metrics_functions", functions_file)
-            derived_metrics_module = importlib.util.module_from_spec(spec)
-            spec.loader.exec_module(derived_metrics_module)
+            # Read the functions file
+            functions_content = functions_file.read_text(encoding='utf-8')
+            
+            # Check if it's JSON format (starts with [)
+            if functions_content.strip().startswith('['):
+                # Parse JSON and extract the Python code
+                functions_data = json.loads(functions_content)
+                if isinstance(functions_data, list) and len(functions_data) > 0:
+                    python_code = functions_data[0].get('content', '')
+                else:
+                    raise CleanAnalysisError("Invalid JSON format in derived metrics functions file")
+            else:
+                # Direct Python code
+                python_code = functions_content
+            
+            # Create a temporary module from the Python code
+            import tempfile
+            import os
+            
+            # Create a temporary file with the Python code
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as temp_file:
+                temp_file.write(python_code)
+                temp_file_path = temp_file.name
+            
+            try:
+                # Import the temporary module
+                spec = importlib.util.spec_from_file_location("derived_metrics_functions", temp_file_path)
+                derived_metrics_module = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(derived_metrics_module)
+            finally:
+                # Clean up the temporary file
+                os.unlink(temp_file_path)
+                
         except Exception as e:
             raise CleanAnalysisError(f"Failed to import derived metrics functions: {e}")
         
@@ -1606,7 +1643,9 @@ class CleanAnalysisOrchestrator:
         # Execute derived metrics calculation
         try:
             if hasattr(derived_metrics_module, 'calculate_derived_metrics'):
+                self._log_progress("🔍 About to call calculate_derived_metrics...")
                 derived_df = derived_metrics_module.calculate_derived_metrics(df)
+                self._log_progress("✅ calculate_derived_metrics completed successfully")
                 
                 # Convert back to dictionary format for storage
                 derived_metrics_results = derived_df.to_dict('records')
@@ -1637,12 +1676,18 @@ class CleanAnalysisOrchestrator:
         if not functions_file.exists():
             raise CleanAnalysisError("Statistical analysis functions file not found")
         
+        self._log_progress(f"🔍 Statistical functions file exists: {functions_file}")
+        self._log_progress(f"🔍 File size: {functions_file.stat().st_size} bytes")
+        
         # Import the generated module
         try:
             spec = importlib.util.spec_from_file_location("statistical_analysis_functions", functions_file)
             stats_module = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(stats_module)
+            self._log_progress(f"🔍 Successfully imported statistical analysis module")
+            self._log_progress(f"🔍 Module functions: {[name for name in dir(stats_module) if not name.startswith('_')]}")
         except Exception as e:
+            self._log_progress(f"❌ Failed to import statistical analysis functions: {e}")
             raise CleanAnalysisError(f"Failed to import statistical analysis functions: {e}")
         
         # Convert analysis results to DataFrame format expected by statistical functions
@@ -1650,18 +1695,27 @@ class CleanAnalysisOrchestrator:
         
         # Execute statistical analysis
         try:
+            self._log_progress(f"🔍 Checking for perform_statistical_analysis function...")
             if hasattr(stats_module, 'perform_statistical_analysis'):
+                self._log_progress(f"🔍 Found perform_statistical_analysis function, executing...")
                 # The generated function now expects a data parameter
                 statistical_results = stats_module.perform_statistical_analysis(analysis_data)
+                self._log_progress(f"🔍 Statistical analysis completed successfully")
+                self._log_progress(f"🔍 Results type: {type(statistical_results)}")
+                self._log_progress(f"🔍 Results keys: {list(statistical_results.keys()) if isinstance(statistical_results, dict) else 'Not a dict'}")
                 
                 return {
                     "status": "success",
                     "statistical_results": statistical_results
                 }
             else:
+                self._log_progress(f"❌ Generated module missing 'perform_statistical_analysis' function")
                 raise CleanAnalysisError("Generated module missing 'perform_statistical_analysis' function")
                 
         except Exception as e:
+            self._log_progress(f"❌ Failed to execute statistical analysis functions: {e}")
+            import traceback
+            self._log_progress(f"❌ Full traceback: {traceback.format_exc()}")
             raise CleanAnalysisError(f"Failed to execute statistical analysis functions: {e}")
     
     def _prepare_documents_for_analysis(self, corpus_documents: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
@@ -1705,14 +1759,15 @@ class CleanAnalysisOrchestrator:
         import os
         
         try:
-            
             # Load the generated statistical functions module
             functions_file = workspace_path / "automatedstatisticalanalysisagent_functions.py"
-            self._log_progress(f"🔍 Looking for functions file at: {functions_file}")
-            self._log_progress(f"🔍 Workspace path: {workspace_path}")
-            self._log_progress(f"🔍 Workspace exists: {workspace_path.exists()}")
-            if workspace_path.exists():
-                self._log_progress(f"🔍 Workspace contents: {list(workspace_path.iterdir())}")
+            print(f"🔍 DEBUG: Looking for functions file at: {functions_file}")
+            print(f"🔍 DEBUG: File exists: {functions_file.exists()}")
+            
+            if functions_file.exists():
+                print(f"🔍 DEBUG: File size: {functions_file.stat().st_size} bytes")
+                print(f"🔍 DEBUG: First 200 chars of file:")
+                print(repr(functions_file.read_text(encoding='utf-8')[:200]))
             
             if not functions_file.exists():
                 raise CleanAnalysisError(f"Statistical functions file not found at {functions_file}")
@@ -1721,6 +1776,8 @@ class CleanAnalysisOrchestrator:
             spec = importlib.util.spec_from_file_location("statistical_functions", functions_file)
             stats_module = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(stats_module)
+            print(f"🔍 DEBUG: Module loaded successfully")
+            print(f"🔍 DEBUG: Module dir() = {[name for name in dir(stats_module) if not name.startswith('__')]}")
             
             # Convert analysis results to DataFrame format expected by statistical functions
             analysis_data = self._convert_analysis_to_dataframe(analysis_results)
@@ -1735,7 +1792,14 @@ class CleanAnalysisOrchestrator:
                              and callable(getattr(stats_module, name))
                              and name not in type_annotations]
             
-
+            self._log_progress(f"🔢 Found {len(function_names)} statistical functions: {function_names}")
+            self._log_progress(f"🔍 Analysis data shape: {analysis_data.shape if hasattr(analysis_data, 'shape') else 'No shape'}")
+            self._log_progress(f"🔍 Analysis data columns: {list(analysis_data.columns) if hasattr(analysis_data, 'columns') else 'No columns'}")
+            
+            if len(function_names) == 0:
+                self._log_progress("⚠️ No statistical functions found in module!")
+                return {"error": "No statistical functions found", "status": "failed"}
+            
             self._log_progress(f"🔢 Executing {len(function_names)} statistical functions...")
             
             for func_name in function_names:
@@ -1789,6 +1853,7 @@ class CleanAnalysisOrchestrator:
     def _convert_analysis_to_dataframe(self, analysis_results: List[Dict[str, Any]]) -> pd.DataFrame:
         """Convert individual analysis results to pandas DataFrame for statistical functions."""
         import pandas as pd
+        import json
         
         if not analysis_results or len(analysis_results) == 0:
             raise CleanAnalysisError("No analysis results to convert")
@@ -1847,7 +1912,10 @@ class CleanAnalysisOrchestrator:
     
     def _validate_statistical_results(self, statistical_results: Dict[str, Any]) -> bool:
         """Validate that statistical analysis produced actual numerical results."""
+        print("🔍 VALIDATION DEBUG: _validate_statistical_results called")
+        print(f"🔍 VALIDATION DEBUG: statistical_results = {statistical_results}")
         if not statistical_results:
+            print("🔍 VALIDATION DEBUG: statistical_results is empty - returning False")
             return False
         
         # Check that we have at least one successful statistical function result
@@ -5070,7 +5138,16 @@ class CleanAnalysisOrchestrator:
             elif isinstance(obj, (np.bool_, bool)):
                 return bool(obj)
             elif isinstance(obj, dict):
-                return {k: convert_to_serializable(v) for k, v in obj.items()}
+                # Handle tuple keys by converting them to string representations
+                serializable_dict = {}
+                for k, v in obj.items():
+                    if isinstance(k, tuple):
+                        # Convert tuple keys to string format: ('a', 'b') -> "a__b"
+                        serializable_key = "__".join(str(item) for item in k)
+                    else:
+                        serializable_key = k
+                    serializable_dict[serializable_key] = convert_to_serializable(v)
+                return serializable_dict
             elif isinstance(obj, list):
                 return [convert_to_serializable(item) for item in obj]
             else:
