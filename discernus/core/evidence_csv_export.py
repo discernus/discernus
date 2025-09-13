@@ -3,153 +3,183 @@
 Evidence CSV Export Module
 =========================
 
-This module generates evidence.csv from analysis artifacts.
-This is deterministic Python code, not an LLM agent.
+Deterministic module for generating evidence.csv from analysis artifacts.
+This replaces LLM-based CSV generation to avoid output token constraints.
 """
 
 import json
 import csv
-import io
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, List, Optional
+from io import StringIO
 
 from discernus.core.local_artifact_storage import LocalArtifactStorage
-from discernus.core.audit_logger import AuditLogger
 
 
 class EvidenceCSVExportModule:
-    """Deterministic module for generating evidence.csv from analysis artifacts"""
-
-    def __init__(self, artifact_storage: LocalArtifactStorage, audit_logger: AuditLogger):
-        self.storage = artifact_storage
-        self.audit = audit_logger
-        self.module_name = "EvidenceCSVExportModule"
-        
-        self.audit.log_agent_event(self.module_name, "initialization", {
-            "capabilities": ["deterministic_csv_generation", "evidence_extraction"]
-        })
-
-    def generate_evidence_csv(self, analysis_artifact_ids: List[str]) -> str:
-        """Generate evidence.csv from analysis artifacts"""
-        
-        self.audit.log_agent_event(self.module_name, "csv_generation_start", {
-            "num_artifacts": len(analysis_artifact_ids)
-        })
-        
-        # Load all analysis artifacts and extract evidence
-        evidence_rows = []
-        
-        for artifact_id in analysis_artifact_ids:
-            artifact_content = self.storage.get_artifact(artifact_id)
-            if not artifact_content:
-                self.audit.log_agent_event(self.module_name, "artifact_load_error", {
-                    "artifact_id": artifact_id,
-                    "error": "Could not load artifact"
-                })
-                continue
-            
-            try:
-                analysis_content = json.loads(artifact_content.decode('utf-8'))
-                
-                # Extract evidence from this analysis
-                document_id = analysis_content.get('document_id', 'unknown')
-                framework_name = analysis_content.get('framework_name', 'unknown')
-                evidence_list = analysis_content.get('evidence', [])
-                
-                for evidence_item in evidence_list:
-                    row = {
-                        'document_id': document_id,
-                        'framework_name': framework_name,
-                        'dimension': evidence_item.get('dimension', ''),
-                        'quote_text': evidence_item.get('quote', ''),
-                        'source': evidence_item.get('source', ''),
-                        'offset': evidence_item.get('offset', 0),
-                        'confidence': evidence_item.get('confidence', 0.0)
-                    }
-                    evidence_rows.append(row)
-                    
-            except Exception as e:
-                self.audit.log_agent_event(self.module_name, "artifact_parse_error", {
-                    "artifact_id": artifact_id,
-                    "error": str(e)
-                })
-                continue
-        
-        # Generate CSV content
-        csv_content = self._generate_csv_content(evidence_rows)
-        
-        # Save CSV artifact
-        csv_artifact_id = self.storage.put_artifact(
-            csv_content.encode('utf-8'),
-            {
-                "artifact_type": "evidence_csv",
-                "num_rows": len(evidence_rows),
-                "generated_at": datetime.now(timezone.utc).isoformat()
-            }
-        )
-        
-        self.audit.log_agent_event(self.module_name, "csv_generation_complete", {
-            "csv_artifact_id": csv_artifact_id,
-            "num_rows": len(evidence_rows)
-        })
-        
-        return csv_artifact_id
+    """Deterministic evidence CSV export module"""
     
-    def _generate_csv_content(self, evidence_rows: List[Dict[str, Any]]) -> str:
-        """Generate CSV content from evidence rows"""
+    def __init__(self, storage: LocalArtifactStorage):
+        """
+        Initialize the evidence CSV export module
         
-        if not evidence_rows:
-            return "document_id,framework_name,dimension,quote_text,source,offset,confidence\n"
+        Args:
+            storage: The artifact storage instance
+        """
+        self.storage = storage
+    
+    def generate_evidence_csv(self, analysis_artifacts: List[str]) -> Dict[str, Any]:
+        """
+        Generate evidence.csv from analysis artifacts
         
-        # Define CSV fieldnames
-        fieldnames = [
-            'document_id',
-            'framework_name', 
-            'dimension',
-            'quote_text',
-            'source',
-            'offset',
-            'confidence'
-        ]
+        Args:
+            analysis_artifacts: List of analysis artifact IDs
+            
+        Returns:
+            Dictionary with success status and artifact information
+        """
+        try:
+            evidence_data = []
+            
+            # Process each analysis artifact
+            for artifact_id in analysis_artifacts:
+                if not artifact_id.endswith("_analysis.json"):
+                    continue  # Skip non-analysis artifacts
+                
+                try:
+                    # Load analysis artifact
+                    artifact_content = self.storage.get_artifact(artifact_id)
+                    analysis_data = json.loads(artifact_content.decode('utf-8'))
+                    
+                    # Extract evidence data
+                    document_analyses = analysis_data.get("document_analyses", [])
+                    
+                    for doc_analysis in document_analyses:
+                        document_id = doc_analysis.get("document_id", "unknown")
+                        document_name = doc_analysis.get("document_name", "unknown")
+                        evidence_list = doc_analysis.get("evidence", [])
+                        
+                        for evidence_item in evidence_list:
+                            evidence_data.append({
+                                "document_id": document_id,
+                                "document_name": document_name,
+                                "dimension": evidence_item.get("dimension", ""),
+                                "quote_text": evidence_item.get("quote_text", ""),
+                                "confidence": evidence_item.get("confidence", 0.0),
+                                "context_type": evidence_item.get("context_type", "")
+                            })
+                
+                except Exception as e:
+                    # Skip corrupted artifacts but continue processing
+                    print(f"Warning: Could not process artifact {artifact_id}: {e}")
+                    continue
+            
+            if not evidence_data:
+                return {
+                    "success": False,
+                    "error": "No evidence data found in analysis artifacts"
+                }
+            
+            # Generate CSV content
+            csv_content = self._generate_csv_content(evidence_data)
+            
+            # Store CSV artifact
+            csv_artifact_id = self.storage.put_artifact(
+                csv_content.encode('utf-8'),
+                {
+                    "artifact_type": "evidence_csv",
+                    "source_artifacts": analysis_artifacts,
+                    "row_count": len(evidence_data)
+                }
+            )
+            
+            return {
+                "success": True,
+                "artifacts": [csv_artifact_id],
+                "row_count": len(evidence_data),
+                "csv_size_bytes": len(csv_content)
+            }
+            
+        except Exception as e:
+            return {
+                "success": False,
+                "error": f"Failed to generate evidence CSV: {e}"
+            }
+    
+    def _generate_csv_content(self, evidence_data: List[Dict[str, Any]]) -> str:
+        """
+        Generate CSV content from evidence data
         
-        # Generate CSV content
-        output = io.StringIO()
+        Args:
+            evidence_data: List of evidence records
+            
+        Returns:
+            CSV content as string
+        """
+        if not evidence_data:
+            return ""
+        
+        # Create CSV in memory
+        output = StringIO()
+        fieldnames = ["document_id", "document_name", "dimension", "quote_text", "confidence", "context_type"]
+        
         writer = csv.DictWriter(output, fieldnames=fieldnames)
         writer.writeheader()
-        writer.writerows(evidence_rows)
+        
+        for record in evidence_data:
+            writer.writerow(record)
         
         return output.getvalue()
     
-    def get_evidence_summary(self, analysis_artifact_ids: List[str]) -> Dict[str, Any]:
-        """Get a summary of evidence data for reporting"""
+    def get_evidence_summary(self, analysis_artifacts: List[str]) -> Dict[str, Any]:
+        """
+        Get a summary of evidence data without generating the full CSV
         
-        evidence_rows = []
-        dimension_counts = {}
-        framework_counts = {}
-        
-        for artifact_id in analysis_artifact_ids:
-            artifact_content = self.storage.get_artifact(artifact_id)
-            if not artifact_content:
-                continue
+        Args:
+            analysis_artifacts: List of analysis artifact IDs
             
-            try:
-                analysis_content = json.loads(artifact_content.decode('utf-8'))
-                evidence_list = analysis_content.get('evidence', [])
+        Returns:
+            Evidence summary statistics
+        """
+        try:
+            total_evidence = 0
+            dimensions = set()
+            documents = set()
+            
+            for artifact_id in analysis_artifacts:
+                if not artifact_id.endswith("_analysis.json"):
+                    continue
                 
-                framework_name = analysis_content.get('framework_name', 'unknown')
-                framework_counts[framework_name] = framework_counts.get(framework_name, 0) + len(evidence_list)
-                
-                for evidence_item in evidence_list:
-                    dimension = evidence_item.get('dimension', 'unknown')
-                    dimension_counts[dimension] = dimension_counts.get(dimension, 0) + 1
+                try:
+                    artifact_content = self.storage.get_artifact(artifact_id)
+                    analysis_data = json.loads(artifact_content.decode('utf-8'))
                     
-            except Exception:
-                continue
-        
-        return {
-            "total_evidence_items": sum(dimension_counts.values()),
-            "dimension_counts": dimension_counts,
-            "framework_counts": framework_counts,
-            "num_documents": len(analysis_artifact_ids)
-        }
+                    document_analyses = analysis_data.get("document_analyses", [])
+                    
+                    for doc_analysis in document_analyses:
+                        document_name = doc_analysis.get("document_name", "unknown")
+                        documents.add(document_name)
+                        
+                        evidence_list = doc_analysis.get("evidence", [])
+                        total_evidence += len(evidence_list)
+                        
+                        for evidence_item in evidence_list:
+                            dimension = evidence_item.get("dimension", "")
+                            if dimension:
+                                dimensions.add(dimension)
+                
+                except Exception:
+                    continue
+            
+            return {
+                "total_evidence_items": total_evidence,
+                "unique_dimensions": len(dimensions),
+                "unique_documents": len(documents),
+                "dimensions": sorted(list(dimensions)),
+                "documents": sorted(list(documents))
+            }
+            
+        except Exception as e:
+            return {
+                "error": f"Failed to generate evidence summary: {e}"
+            }
