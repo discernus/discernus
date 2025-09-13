@@ -991,8 +991,20 @@ class CleanAnalysisOrchestrator:
         
         # Check validation result
         if not validation_result.success:
-            issues = [issue.description for issue in validation_result.issues]
-            raise CleanAnalysisError(f"Experiment validation failed: {'; '.join(issues)}")
+            # Handle both ValidationIssue objects and dictionaries
+            issue_descriptions = []
+            for issue in validation_result.issues:
+                if hasattr(issue, 'description'):
+                    # ValidationIssue object
+                    issue_descriptions.append(issue.description)
+                elif isinstance(issue, dict):
+                    # Dictionary format
+                    issue_descriptions.append(issue.get('description', str(issue)))
+                else:
+                    # Fallback
+                    issue_descriptions.append(str(issue))
+            
+            raise CleanAnalysisError(f"Experiment validation failed: {'; '.join(issue_descriptions)}")
     
     def _validate_corpus_files_exist(self) -> List[str]:
         """Validate that all corpus files actually exist."""

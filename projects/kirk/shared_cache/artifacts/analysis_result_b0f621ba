@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_73835080590e",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "kirk",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"cohesive_flourishing_framework\",\n    \"framework_version\": \"10.1.0\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Applied three independent analytical approaches with median aggregation, focusing on specified dimensional definitions and critical distinctions.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"americafest/charlie_kirk_americafest_2023_SGFdHIK2dBU.txt\",\n      \"document_name\": \"americafest/charlie_kirk_americafest_2023_SGFdHIK2dBU.txt\",\n      \"dimensional_scores\": {\n        \"tribal_dominance\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"individual_dignity\": {\n          \"raw_score\": 0.05,\n          \"salience\": 0.05,\n          \"confidence\": 0.6\n        },\n        \"fear\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.85,\n          \"confidence\": 0.95\n        },\n        \"hope\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.85,\n          \"confidence\": 0.95\n        },\n        \"envy\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.7\n        },\n        \"mudita\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"enmity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"amity\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.05,\n          \"confidence\": 0.6\n        },\n        \"fragmentative_goals\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.85\n        },\n        \"cohesive_goals\": {\n          \"raw_score\": 0.75,\n          \"salience\": 0.8,\n          \"confidence\": 0.85\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"tribal_dominance\",\n          \"quote_text\": \"we as a movement, as a conservative movement, need a vision.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"individual_dignity\",\n          \"quote_text\": \"if you judge somebody on the basis of skin, you are a racist. And we should instead care about character, not the complexion of somebody's skin.\",\n          \"confidence\": 0.6,\n          \"context_type\": \"indirect_critique\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"we're in a very important time in our nation's history, and we as a movement... need a vision. Without a vision, the people perish, is what it says in the Scriptures.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"existential_threat_framing\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"we are going to win in the end because the only way they've been able to have even a slight advantage against us is by suppressing us without our consent, censoring us, outright cheating.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"optimistic_future\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"The vision of our opponents and the Marxist totalitarian left is filled with venom, hatred, darkness, resentment, arrogance, and despair.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"attribution_to_others\"\n        },\n        {\n          \"dimension\": \"mudita\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"Now, we know what the bad guys are fighting for\",\n          \"confidence\": 0.95,\n          \"context_type\": \"adversarial_positioning\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"Great to see all of you.\",\n          \"confidence\": 0.6,\n          \"context_type\": \"internal_greeting\"\n        },\n        {\n          \"dimension\": \"fragmentative_goals\",\n          \"quote_text\": \"The one thing that the totalitarian left wants to do for our society is to destroy the distinction between God and man, between man and woman, between good and evil.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"stated_objective_against_opponent\"\n        },\n        {\n          \"dimension\": \"cohesive_goals\",\n          \"quote_text\": \"Our vision needs to be clear and bold. How about this? We want a country where our kids love America again.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"desired_future_state_for_in_group\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "92bb0262c45731c8eff599964a21249b38d6ebcfc09ce1eeb513cc2a25d914fe",
+  "execution_metadata": {
+    "start_time": "2025-09-13T02:15:41.042182+00:00",
+    "end_time": "2025-09-13T02:16:16.268925+00:00",
+    "duration_seconds": 35.226727
+  },
+  "input_artifacts": {
+    "framework_hash": "3a090a7d30db1dae4b4542f24ba898e79d7c1460451746b9e9ada94c7f33b485",
+    "document_hashes": [
+      "f1a7d51f8f7fd5bb580ff14623687a15975d8bf401532b1c0c9fc6cb62dc62f0"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "kirk",
+      "experiment_root": "/Volumes/code/discernus/projects/kirk",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250913T015658Z_44277b93"
+  }
+}

@@ -149,9 +149,51 @@ class LLMGateway(BaseGateway):
 
                 clean_params = self.param_manager.get_clean_parameters(current_model, call_kwargs)
                 
+                # Log detailed LLM interaction request
+                from ..core.logging_config import get_logger
+                from datetime import datetime
+                llm_logger = get_logger("llm_interactions")
+                
+                request_data = {
+                    "model": current_model,
+                    "messages": messages,
+                    "clean_params": clean_params,
+                    "attempt": attempts,
+                    "timestamp": datetime.now().isoformat()
+                }
+                llm_logger.info("LLM Request", extra={"llm_request": request_data})
+                
                 # Use rate-limited completion function for this provider
                 completion_func = self._get_rate_limited_completion(current_model)
-                response = completion_func(model=current_model, messages=messages, stream=False, **clean_params)
+                try:
+                    response = completion_func(model=current_model, messages=messages, stream=False, **clean_params)
+                    
+                    # Log detailed LLM interaction response
+                    response_content = getattr(getattr(getattr(response, 'choices', [{}])[0], 'message', {}), 'content', '') or ""
+                    response_data = {
+                        "model": current_model,
+                        "response_type": type(response).__name__,
+                        "response_content": response_content,
+                        "response_content_length": len(str(response_content)),
+                        "usage": getattr(response, 'usage', None).__dict__ if getattr(response, 'usage', None) else None,
+                        "attempt": attempts,
+                        "timestamp": datetime.now().isoformat()
+                    }
+                    llm_logger.info("LLM Response", extra={"llm_response": response_data})
+                    
+                except Exception as e:
+                    # Log detailed LLM interaction error
+                    error_data = {
+                        "model": current_model,
+                        "error": str(e),
+                        "error_type": type(e).__name__,
+                        "messages": messages,
+                        "clean_params": clean_params,
+                        "attempt": attempts,
+                        "timestamp": datetime.now().isoformat()
+                    }
+                    llm_logger.error("LLM Error", extra={"llm_error": error_data})
+                    raise
                 
                 # Extract content from response
                 content = getattr(getattr(getattr(response, 'choices', [{}])[0], 'message', {}), 'content', '') or ""

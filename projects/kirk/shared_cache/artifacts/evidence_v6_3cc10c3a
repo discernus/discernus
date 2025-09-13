@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "f3a93a632917faf5b9d145e8108dec439748b0c6cc8d0b610025f755b2d05fe3"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-13T02:18:11.555052+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "student_action_summit/charlie_kirk_sas_2022_vUcwKoYEPd4.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "If you are here illegally, you are deported from the United States of America. Period. No amnesty.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:18:11.555026+00:00"
+    },
+    {
+      "document_name": "student_action_summit/charlie_kirk_sas_2022_vUcwKoYEPd4.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "We need to be able to have the confidence, the backbone to say this thing is true and this thing is false. We need to be able to have the confidence, the backbone to say this thing is true and this thing is false. We need to be able to have the confidence, the backbone to say this thing is true and this thing is false. And moreover, we need to be able to say this thing is good and this thing is bad. We must not be afraid to speak our minds, to state our clear and informed opinions about the world as we see it.",
+      "confidence": 0.8,
+      "context_type": "call_to_action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:18:11.555033+00:00"
+    },
+    {
+      "document_name": "student_action_summit/charlie_kirk_sas_2022_vUcwKoYEPd4.txt",
+      "dimension": "fear",
+      "quote_text": "Our country is literally dying, and I don't mean that in the abstract way that hysterical politicians sometimes mean it. I mean it in a really basic way. More of us are dying than are being born. We have not had an above-replacement birth rate in half a century.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:18:11.555036+00:00"
+    },
+    {
+      "document_name": "student_action_summit/charlie_kirk_sas_2022_vUcwKoYEPd4.txt",
+      "dimension": "hope",
+      "quote_text": "You guys are the beginning of the greatest political comeback in American history. From every corner of the nation, a spark ignited. This is going to be the end of spectator politics. A generation awakened, not with rage, but with resolve, anchored in truth, rooted in tradition, driven by something deeper.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:18:11.555038+00:00"
+    },
+    {
+      "document_name": "student_action_summit/charlie_kirk_sas_2022_vUcwKoYEPd4.txt",
+      "dimension": "envy",
+      "quote_text": "Why is it that our young, why you, the next generation, have to compete to buy a home against a Chinese oligarch?",
+      "confidence": 0.9,
+      "context_type": "rhetorical_question",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:18:11.555039+00:00"
+    },
+    {
+      "document_name": "student_action_summit/charlie_kirk_sas_2022_vUcwKoYEPd4.txt",
+      "dimension": "mudita",
+      "quote_text": "I am glad that women are promoting the trad life on TikTok. I really am. I like it. I'm not on TikTok, but I'm glad. That's wonderful.",
+      "confidence": 0.8,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:18:11.555041+00:00"
+    },
+    {
+      "document_name": "student_action_summit/charlie_kirk_sas_2022_vUcwKoYEPd4.txt",
+      "dimension": "enmity",
+      "quote_text": "This guy wants to bring back government supermarkets. I say bring back because the government used to be in the food distribution business. For anybody who's old enough, they will tell you that if you were poor like I was in New York City, like I was, you would stand in lines to get cheese, peanut butter, and a bunch of other things. The government would give the stuff out.",
+      "confidence": 0.9,
+      "context_type": "characterization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:18:11.555043+00:00"
+    },
+    {
+      "document_name": "student_action_summit/charlie_kirk_sas_2022_vUcwKoYEPd4.txt",
+      "dimension": "amity",
+      "quote_text": "We need to work very hard with all of our candidates to make sure they have the resources that they need. But the fact of the matter is we cannot win without the grassroots. And we cannot win without the people in this room. We certainly cannot win without our allies and our friends like Charlie and the Turning Point crew.",
+      "confidence": 0.85,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:18:11.555045+00:00"
+    },
+    {
+      "document_name": "student_action_summit/charlie_kirk_sas_2022_vUcwKoYEPd4.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "We are not going to have boys and girls sports. We are not going to have men and women's locker rooms. We are not going to allow radical campus protests to interrupt all of our university campuses all across the country.",
+      "confidence": 0.85,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:18:11.555046+00:00"
+    },
+    {
+      "document_name": "student_action_summit/charlie_kirk_sas_2022_vUcwKoYEPd4.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "We are going to rebuild the economy. We are going to restore the southern border. We are going to keep our kids and our community safe, and we are going to be the strongest nation on the face of the earth.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:18:11.555048+00:00"
+    }
+  ]
+}

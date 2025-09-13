@@ -1,0 +1,440 @@
+{
+  "raw_analysis_results": [
+    {
+      "analysis_id": "analysis_10abeb033cb9",
+      "result_hash": "8a4ac3a2ec8bdcd4e1587dcaedfd1ad2075c6f4430bd08c190f8d227342ca799",
+      "result_content": {
+        "analysis_id": "analysis_10abeb033cb9",
+        "agent_name": "EnhancedAnalysisAgent",
+        "agent_version": "enhanced_v2.1_raw_output",
+        "experiment_name": "micro_test_experiment",
+        "model_used": "vertex_ai/gemini-2.5-flash",
+        "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"sentiment_binary_v1\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 1.0,\n    \"analysis_notes\": \"Applied three independent analytical approaches with median aggregation for sentiment analysis.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{{artifact_id}}\",\n      \"document_name\": \"positive_test_1.txt\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 1.0,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"negative_sentiment\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"overall_absence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+        "evidence_hash": "1fbc05aa665eebba35b57c741ede46fbc4c7a8a50d2bca7c46877d1c2a5ecd1f",
+        "execution_metadata": {
+          "start_time": "2025-09-12T20:13:05.938676+00:00",
+          "end_time": "2025-09-12T20:13:19.650486+00:00",
+          "duration_seconds": 13.711776
+        },
+        "input_artifacts": {
+          "framework_hash": "178020617d567968935db724ea6eeb1f4debda637043ba96a1cd8859fcf9dc22",
+          "document_hashes": [
+            "26c27e1e47385f483ab2ef36e82b95f807d9fa48154395bcf45f9489ef3ed1ba"
+          ],
+          "num_documents": 1
+        },
+        "provenance": {
+          "security_boundary": {
+            "experiment_name": "micro_test_experiment",
+            "experiment_root": "/Volumes/code/discernus/projects/micro_test_experiment",
+            "boundary_type": "filesystem",
+            "security_level": "experiment_scoped"
+          },
+          "audit_session_id": "20250912T201223Z_c3a9300d"
+        }
+      },
+      "cached": true
+    },
+    {
+      "analysis_id": "analysis_c59f132cd433",
+      "result_hash": "0b4d815a904fefcdb7096769fbd94254e90e7f5738a16e324401bce2423c7716",
+      "result_content": {
+        "analysis_id": "analysis_c59f132cd433",
+        "agent_name": "EnhancedAnalysisAgent",
+        "agent_version": "enhanced_v2.1_raw_output",
+        "experiment_name": "micro_test_experiment",
+        "model_used": "vertex_ai/gemini-2.5-flash",
+        "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"sentiment_binary_v1\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.98,\n    \"analysis_notes\": \"Applied three independent analytical approaches with median aggregation. Document shows strong positive sentiment and complete absence of negative sentiment.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"positive_test_2.txt\",\n      \"document_name\": \"positive_test_2.txt\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 0.95,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"What a superb morning! All systems are operating flawlessly. I'm excited about what's coming next. Achievement surrounds us. The group performed outstandingly. We're reaching incredible goals. Hopefulness permeates everything. Such a marvelous chance! I'm delighted by the advancement. Everything appears glowing and encouraging.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"negative_sentiment\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_evidence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+        "evidence_hash": "d6be6673396a2b505e4047297e1f03d69c27ee648df308c82807f9ddc74a2805",
+        "execution_metadata": {
+          "start_time": "2025-09-12T20:13:19.651127+00:00",
+          "end_time": "2025-09-12T20:13:35.093304+00:00",
+          "duration_seconds": 15.442169
+        },
+        "input_artifacts": {
+          "framework_hash": "178020617d567968935db724ea6eeb1f4debda637043ba96a1cd8859fcf9dc22",
+          "document_hashes": [
+            "3671de4a6c31fc2bb356ceed5589d1b4bb2288df674bf0d827dc973872b462a3"
+          ],
+          "num_documents": 1
+        },
+        "provenance": {
+          "security_boundary": {
+            "experiment_name": "micro_test_experiment",
+            "experiment_root": "/Volumes/code/discernus/projects/micro_test_experiment",
+            "boundary_type": "filesystem",
+            "security_level": "experiment_scoped"
+          },
+          "audit_session_id": "20250912T201223Z_c3a9300d"
+        }
+      },
+      "cached": true
+    },
+    {
+      "analysis_id": "analysis_ceae493876a6",
+      "result_hash": "5b331a214d72e6389c8c2601a7409b633f9a518fdfef37fb9becfa9ae95eb0ab",
+      "result_content": {
+        "analysis_id": "analysis_ceae493876a6",
+        "agent_name": "EnhancedAnalysisAgent",
+        "agent_version": "enhanced_v2.1_raw_output",
+        "experiment_name": "micro_test_experiment",
+        "model_used": "vertex_ai/gemini-2.5-flash",
+        "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"sentiment_binary_v1\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.98,\n    \"analysis_notes\": \"Applied three independent analytical approaches with median aggregation. Document exhibits clear and dominant negative sentiment.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{{artifact_id}}\",\n      \"document_name\": \"negative_test_1.txt\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 1.0,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"negative_sentiment\",\n          \"quote_text\": \"Everything looks dark and hopeless.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"direct_statement\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+        "evidence_hash": "a108d9ba5feb164a085dc6cd48fea435748cf6ae838dff4f4d3909a82093520c",
+        "execution_metadata": {
+          "start_time": "2025-09-12T20:13:35.093720+00:00",
+          "end_time": "2025-09-12T20:13:52.542137+00:00",
+          "duration_seconds": 17.448408
+        },
+        "input_artifacts": {
+          "framework_hash": "178020617d567968935db724ea6eeb1f4debda637043ba96a1cd8859fcf9dc22",
+          "document_hashes": [
+            "123e5c9fe4425f26d19c815d8f4b304e6c211e38014847dc087f108396aa6134"
+          ],
+          "num_documents": 1
+        },
+        "provenance": {
+          "security_boundary": {
+            "experiment_name": "micro_test_experiment",
+            "experiment_root": "/Volumes/code/discernus/projects/micro_test_experiment",
+            "boundary_type": "filesystem",
+            "security_level": "experiment_scoped"
+          },
+          "audit_session_id": "20250912T201223Z_c3a9300d"
+        }
+      },
+      "cached": true
+    },
+    {
+      "analysis_id": "analysis_39d66267a094",
+      "result_hash": "8390327968cc0948436b464675bcafc79a8cfb7e22fbacefac1a78b9a9e4c1d5",
+      "result_content": {
+        "analysis_id": "analysis_39d66267a094",
+        "agent_name": "EnhancedAnalysisAgent",
+        "agent_version": "enhanced_v2.1_raw_output",
+        "experiment_name": "micro_test_experiment",
+        "model_used": "vertex_ai/gemini-2.5-flash",
+        "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"sentiment_binary_v1\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.98,\n    \"analysis_notes\": \"Applied three independent analytical approaches with median aggregation for sentiment analysis. Document exhibits clear and dominant negative sentiment.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{{artifact_id}}\",\n      \"document_name\": \"negative_test_2.txt\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 0.95,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"negative_sentiment\",\n          \"quote_text\": \"What an awful predicament. All plans are failing miserably. I'm dreading what's to come. Defeat engulfs us. The group performed dreadfully. We're encountering catastrophe. Despair saturates everything. Such a calamitous result! I'm crushed by the setbacks. Everything appears bleak and discouraging.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"dominant_expression\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+        "evidence_hash": "4f456af48b3ea9f64f0deda408e7b3738fcce32e3aecaa9bb5cb47bc529fbdac",
+        "execution_metadata": {
+          "start_time": "2025-09-12T20:13:52.542849+00:00",
+          "end_time": "2025-09-12T20:14:14.086160+00:00",
+          "duration_seconds": 21.543307
+        },
+        "input_artifacts": {
+          "framework_hash": "178020617d567968935db724ea6eeb1f4debda637043ba96a1cd8859fcf9dc22",
+          "document_hashes": [
+            "68b092892a2216aa8ebd70a470a361c86d2bf3ceb23469275acd0fb85d9367a9"
+          ],
+          "num_documents": 1
+        },
+        "provenance": {
+          "security_boundary": {
+            "experiment_name": "micro_test_experiment",
+            "experiment_root": "/Volumes/code/discernus/projects/micro_test_experiment",
+            "boundary_type": "filesystem",
+            "security_level": "experiment_scoped"
+          },
+          "audit_session_id": "20250912T201223Z_c3a9300d"
+        }
+      },
+      "cached": true
+    }
+  ],
+  "derived_metrics_results": {
+    "status": "completed",
+    "derived_metrics_hash": "3ec4b973364df4b098fa3d3f751405176731b617dcb33d6b177d080657593d89",
+    "functions_generated": 6,
+    "derived_metrics_results": {
+      "generation_metadata": {
+        "status": "success",
+        "functions_generated": 6,
+        "output_file": "automatedderivedmetricsagent_functions.py",
+        "module_size": 6273
+      },
+      "derived_metrics_data": {
+        "status": "success",
+        "original_count": 4,
+        "derived_count": 4,
+        "derived_metrics": [
+          {
+            "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"sentiment_binary_v1\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 1.0,\n    \"analysis_notes\": \"Applied three independent analytical approaches with median aggregation for sentiment analysis.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{{artifact_id}}\",\n      \"document_name\": \"positive_test_1.txt\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 1.0,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"negative_sentiment\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"overall_absence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+            "net_sentiment": 1.0,
+            "sentiment_magnitude": 0.5
+          },
+          {
+            "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"sentiment_binary_v1\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.98,\n    \"analysis_notes\": \"Applied three independent analytical approaches with median aggregation. Document shows strong positive sentiment and complete absence of negative sentiment.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"positive_test_2.txt\",\n      \"document_name\": \"positive_test_2.txt\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 0.95,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"What a superb morning! All systems are operating flawlessly. I'm excited about what's coming next. Achievement surrounds us. The group performed outstandingly. We're reaching incredible goals. Hopefulness permeates everything. Such a marvelous chance! I'm delighted by the advancement. Everything appears glowing and encouraging.\",\n          \"confidence\": 0.98,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"negative_sentiment\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_evidence\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+            "net_sentiment": 0.95,
+            "sentiment_magnitude": 0.475
+          },
+          {
+            "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"sentiment_binary_v1\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.98,\n    \"analysis_notes\": \"Applied three independent analytical approaches with median aggregation. Document exhibits clear and dominant negative sentiment.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{{artifact_id}}\",\n      \"document_name\": \"negative_test_1.txt\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 1.0,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"negative_sentiment\",\n          \"quote_text\": \"Everything looks dark and hopeless.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"direct_statement\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+            "net_sentiment": -1.0,
+            "sentiment_magnitude": 0.5
+          },
+          {
+            "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"sentiment_binary_v1\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.98,\n    \"analysis_notes\": \"Applied three independent analytical approaches with median aggregation for sentiment analysis. Document exhibits clear and dominant negative sentiment.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{{artifact_id}}\",\n      \"document_name\": \"negative_test_2.txt\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 0.95,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"positive_sentiment\",\n          \"quote_text\": \"\",\n          \"confidence\": 1.0,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"negative_sentiment\",\n          \"quote_text\": \"What an awful predicament. All plans are failing miserably. I'm dreading what's to come. Defeat engulfs us. The group performed dreadfully. We're encountering catastrophe. Despair saturates everything. Such a calamitous result! I'm crushed by the setbacks. Everything appears bleak and discouraging.\",\n          \"confidence\": 1.0,\n          \"context_type\": \"dominant_expression\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+            "net_sentiment": -0.95,
+            "sentiment_magnitude": 0.475
+          }
+        ],
+        "columns_added": [
+          "sentiment_magnitude",
+          "net_sentiment"
+        ]
+      },
+      "status": "success_with_data",
+      "validation_passed": true
+    }
+  },
+  "statistical_results": {
+    "generation_metadata": {
+      "status": "success",
+      "functions_generated": 6,
+      "output_file": "automatedstatisticalanalysisagent_functions.py",
+      "module_size": 11685
+    },
+    "statistical_data": {
+      "calculate_descriptive_statistics": {
+        "analysis_tier": "Tier 3 (Exploratory)",
+        "power_assessment": "Exploratory analysis - results are suggestive rather than conclusive (N=4)",
+        "statistics_by_group": {
+          "negative": {
+            "positive_sentiment_raw__mean": 0.0,
+            "positive_sentiment_raw__std": 0.0,
+            "positive_sentiment_raw__count": 2.0,
+            "positive_sentiment_raw__min": 0.0,
+            "positive_sentiment_raw__max": 0.0,
+            "negative_sentiment_raw__mean": 0.975,
+            "negative_sentiment_raw__std": 0.03535533905932741,
+            "negative_sentiment_raw__count": 2.0,
+            "negative_sentiment_raw__min": 0.95,
+            "negative_sentiment_raw__max": 1.0,
+            "net_sentiment__mean": -0.975,
+            "net_sentiment__std": 0.03535533905932741,
+            "net_sentiment__count": 2.0,
+            "net_sentiment__min": -1.0,
+            "net_sentiment__max": -0.95,
+            "sentiment_magnitude__mean": 0.4875,
+            "sentiment_magnitude__std": 0.017677669529663705,
+            "sentiment_magnitude__count": 2.0,
+            "sentiment_magnitude__min": 0.475,
+            "sentiment_magnitude__max": 0.5
+          },
+          "positive": {
+            "positive_sentiment_raw__mean": 0.975,
+            "positive_sentiment_raw__std": 0.03535533905932741,
+            "positive_sentiment_raw__count": 2.0,
+            "positive_sentiment_raw__min": 0.95,
+            "positive_sentiment_raw__max": 1.0,
+            "negative_sentiment_raw__mean": 0.0,
+            "negative_sentiment_raw__std": 0.0,
+            "negative_sentiment_raw__count": 2.0,
+            "negative_sentiment_raw__min": 0.0,
+            "negative_sentiment_raw__max": 0.0,
+            "net_sentiment__mean": 0.975,
+            "net_sentiment__std": 0.03535533905932741,
+            "net_sentiment__count": 2.0,
+            "net_sentiment__min": 0.95,
+            "net_sentiment__max": 1.0,
+            "sentiment_magnitude__mean": 0.4875,
+            "sentiment_magnitude__std": 0.017677669529663705,
+            "sentiment_magnitude__count": 2.0,
+            "sentiment_magnitude__min": 0.475,
+            "sentiment_magnitude__max": 0.5
+          }
+        }
+      },
+      "calculate_reliability_analysis": {
+        "analysis_tier": "Tier 3 (Exploratory)",
+        "power_assessment": "Exploratory analysis - results are suggestive rather than conclusive (N=4)",
+        "cronbachs_alpha": 0.9993429697766099,
+        "num_items": 2,
+        "notes": "Calculated on positive_sentiment and reverse-coded negative_sentiment."
+      },
+      "perform_anova_analysis": {
+        "analysis_tier": "Tier 3 (Exploratory)",
+        "power_assessment": "Exploratory analysis - results are suggestive rather than conclusive (N=4, min group n=2)",
+        "anova_results": {
+          "positive_sentiment_raw": {
+            "f_statistic": 1520.999999999897,
+            "p_value": 0.0006568145207795253,
+            "eta_squared": 0.9986868023637557
+          },
+          "negative_sentiment_raw": {
+            "f_statistic": 1520.999999999897,
+            "p_value": 0.0006568145207795253,
+            "eta_squared": 0.9986868023637557
+          },
+          "net_sentiment": {
+            "f_statistic": 3042.0000000000646,
+            "p_value": 0.0003285690905187532,
+            "eta_squared": 0.9993429697766097
+          },
+          "sentiment_magnitude": {
+            "f_statistic": 0.0,
+            "p_value": 1.0,
+            "eta_squared": 1.9721522630525262e-29
+          }
+        }
+      },
+      "perform_statistical_analysis": {
+        "descriptive_statistics": {
+          "analysis_tier": "Tier 3 (Exploratory)",
+          "power_assessment": "Exploratory analysis - results are suggestive rather than conclusive (N=4)",
+          "statistics_by_group": {
+            "negative": {
+              "positive_sentiment_raw__mean": 0.0,
+              "positive_sentiment_raw__std": 0.0,
+              "positive_sentiment_raw__count": 2.0,
+              "positive_sentiment_raw__min": 0.0,
+              "positive_sentiment_raw__max": 0.0,
+              "negative_sentiment_raw__mean": 0.975,
+              "negative_sentiment_raw__std": 0.03535533905932741,
+              "negative_sentiment_raw__count": 2.0,
+              "negative_sentiment_raw__min": 0.95,
+              "negative_sentiment_raw__max": 1.0,
+              "net_sentiment__mean": -0.975,
+              "net_sentiment__std": 0.03535533905932741,
+              "net_sentiment__count": 2.0,
+              "net_sentiment__min": -1.0,
+              "net_sentiment__max": -0.95,
+              "sentiment_magnitude__mean": 0.4875,
+              "sentiment_magnitude__std": 0.017677669529663705,
+              "sentiment_magnitude__count": 2.0,
+              "sentiment_magnitude__min": 0.475,
+              "sentiment_magnitude__max": 0.5
+            },
+            "positive": {
+              "positive_sentiment_raw__mean": 0.975,
+              "positive_sentiment_raw__std": 0.03535533905932741,
+              "positive_sentiment_raw__count": 2.0,
+              "positive_sentiment_raw__min": 0.95,
+              "positive_sentiment_raw__max": 1.0,
+              "negative_sentiment_raw__mean": 0.0,
+              "negative_sentiment_raw__std": 0.0,
+              "negative_sentiment_raw__count": 2.0,
+              "negative_sentiment_raw__min": 0.0,
+              "negative_sentiment_raw__max": 0.0,
+              "net_sentiment__mean": 0.975,
+              "net_sentiment__std": 0.03535533905932741,
+              "net_sentiment__count": 2.0,
+              "net_sentiment__min": 0.95,
+              "net_sentiment__max": 1.0,
+              "sentiment_magnitude__mean": 0.4875,
+              "sentiment_magnitude__std": 0.017677669529663705,
+              "sentiment_magnitude__count": 2.0,
+              "sentiment_magnitude__min": 0.475,
+              "sentiment_magnitude__max": 0.5
+            }
+          }
+        },
+        "anova_analysis": {
+          "analysis_tier": "Tier 3 (Exploratory)",
+          "power_assessment": "Exploratory analysis - results are suggestive rather than conclusive (N=4, min group n=2)",
+          "anova_results": {
+            "positive_sentiment_raw": {
+              "f_statistic": 1520.999999999897,
+              "p_value": 0.0006568145207795253,
+              "eta_squared": 0.9986868023637557
+            },
+            "negative_sentiment_raw": {
+              "f_statistic": 1520.999999999897,
+              "p_value": 0.0006568145207795253,
+              "eta_squared": 0.9986868023637557
+            },
+            "net_sentiment": {
+              "f_statistic": 3042.0000000000646,
+              "p_value": 0.0003285690905187532,
+              "eta_squared": 0.9993429697766097
+            },
+            "sentiment_magnitude": {
+              "f_statistic": 0.0,
+              "p_value": 1.0,
+              "eta_squared": 1.9721522630525262e-29
+            }
+          }
+        },
+        "t_tests": {
+          "analysis_tier": "Tier 3 (Exploratory)",
+          "power_assessment": "Exploratory analysis - results are suggestive rather than conclusive (N=4)",
+          "comparison": "positive_vs_negative",
+          "test_results": {
+            "positive_sentiment_raw": {
+              "welch_t_statistic": 38.999999999999964,
+              "welch_t_p_value": 0.016320007937620288,
+              "mann_whitney_u_statistic": 4.0,
+              "mann_whitney_u_p_value": 0.22067136191984682,
+              "cohens_d": 38.999999999999964
+            },
+            "negative_sentiment_raw": {
+              "welch_t_statistic": -38.999999999999964,
+              "welch_t_p_value": 0.016320007937620288,
+              "mann_whitney_u_statistic": 0.0,
+              "mann_whitney_u_p_value": 0.22067136191984682,
+              "cohens_d": -38.999999999999964
+            },
+            "net_sentiment": {
+              "welch_t_statistic": 55.154328932550655,
+              "welch_t_p_value": 0.0003285690905187608,
+              "mann_whitney_u_statistic": 4.0,
+              "mann_whitney_u_p_value": 0.3333333333333333,
+              "cohens_d": 55.154328932550655
+            },
+            "sentiment_magnitude": {
+              "welch_t_statistic": 0.0,
+              "welch_t_p_value": 1.0,
+              "mann_whitney_u_statistic": 2.0,
+              "mann_whitney_u_p_value": 1.0,
+              "cohens_d": 0.0
+            }
+          }
+        },
+        "reliability_analysis": {
+          "analysis_tier": "Tier 3 (Exploratory)",
+          "power_assessment": "Exploratory analysis - results are suggestive rather than conclusive (N=4)",
+          "cronbachs_alpha": 0.9993429697766099,
+          "num_items": 2,
+          "notes": "Calculated on positive_sentiment and reverse-coded negative_sentiment."
+        }
+      },
+      "perform_t_tests": {
+        "analysis_tier": "Tier 3 (Exploratory)",
+        "power_assessment": "Exploratory analysis - results are suggestive rather than conclusive (N=4)",
+        "comparison": "positive_vs_negative",
+        "test_results": {
+          "positive_sentiment_raw": {
+            "welch_t_statistic": 38.999999999999964,
+            "welch_t_p_value": 0.016320007937620288,
+            "mann_whitney_u_statistic": 4.0,
+            "mann_whitney_u_p_value": 0.22067136191984682,
+            "cohens_d": 38.999999999999964
+          },
+          "negative_sentiment_raw": {
+            "welch_t_statistic": -38.999999999999964,
+            "welch_t_p_value": 0.016320007937620288,
+            "mann_whitney_u_statistic": 0.0,
+            "mann_whitney_u_p_value": 0.22067136191984682,
+            "cohens_d": -38.999999999999964
+          },
+          "net_sentiment": {
+            "welch_t_statistic": 55.154328932550655,
+            "welch_t_p_value": 0.0003285690905187608,
+            "mann_whitney_u_statistic": 4.0,
+            "mann_whitney_u_p_value": 0.3333333333333333,
+            "cohens_d": 55.154328932550655
+          },
+          "sentiment_magnitude": {
+            "welch_t_statistic": 0.0,
+            "welch_t_p_value": 1.0,
+            "mann_whitney_u_statistic": 2.0,
+            "mann_whitney_u_p_value": 1.0,
+            "cohens_d": 0.0
+          }
+        }
+      }
+    },
+    "status": "success_with_data",
+    "validation_passed": true
+  }
+}

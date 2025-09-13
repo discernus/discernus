@@ -159,13 +159,21 @@ class AutomatedDerivedMetricsAgent:
         prompt_template = self._load_prompt_template()
         
         # Prepare the prompt with actual framework content
+        # Debug: Check for None values before formatting
+        framework_content = framework_content or 'No framework content'
+        experiment_name = experiment_spec.get('name', 'Unknown') or 'Unknown'
+        experiment_description = experiment_spec.get('description', 'No description') or 'No description'
+        data_columns = data_structure_info.get('columns_info', 'No data structure info') or 'No data structure info'
+        sample_data = data_structure_info.get('sample_data', 'No sample data') or 'No sample data'
+        
         prompt = prompt_template.format(
             framework_content=framework_content,
-            experiment_name=experiment_spec.get('name', 'Unknown'),
-            experiment_description=experiment_spec.get('description', 'No description'),
-            data_columns=data_structure_info.get('columns_info', 'No data structure info'),
-            sample_data=data_structure_info.get('sample_data', 'No sample data')
+            experiment_name=experiment_name,
+            experiment_description=experiment_description,
+            data_columns=data_columns,
+            sample_data=sample_data
         )
+        
         
         # Generate functions using LLM
         self._log_event("LLM_GENERATION_START", {
@@ -190,6 +198,15 @@ class AutomatedDerivedMetricsAgent:
                 "required": ["language", "code"]
             }
             
+            # Debug: Check parameters before LLM call
+            self._log_event("LLM_CALL_PARAMS", {
+                "model": self.model,
+                "prompt_length": len(prompt) if prompt else 0,
+                "prompt_is_none": prompt is None,
+                "temperature": 0.1,
+                "response_schema_keys": list(response_schema.keys()) if response_schema else []
+            })
+            
             response, metadata = self.llm_gateway.execute_call(
                 model=self.model,
                 prompt=prompt,
@@ -197,14 +214,48 @@ class AutomatedDerivedMetricsAgent:
                 response_schema=response_schema
             )
             
+            print(f"🔍 Debug: LLM response type: {type(response)}, value: {response}")
+            print(f"🔍 Debug: LLM metadata: {metadata}")
+            
             if not response:
                 raise ValueError("LLM returned empty response")
             
-            # Handle structured output response
+            # Use robust extraction approach - no more key guessing!
+            def looks_like_python_code(text):
+                """Check if a string looks like Python code."""
+                if not isinstance(text, str) or len(text) < 50:
+                    return False
+                python_indicators = ['import pandas', 'import numpy', 'def ', 'import ', 'pd.DataFrame', 'return ']
+                return sum(indicator in text for indicator in python_indicators) >= 2
+            
+            # Auto-detect Python code in any structure
+            extracted_code = None
+            if isinstance(response, dict):
+                # Find the longest Python code string in any key
+                max_length = 0
+                for key, value in response.items():
+                    if isinstance(value, str) and looks_like_python_code(value) and len(value) > max_length:
+                        extracted_code = value
+                        max_length = len(value)
+                        print(f"🔍 Auto-detected Python code in key '{key}' (length: {len(value)})")
+            elif isinstance(response, str) and looks_like_python_code(response):
+                extracted_code = response
+                print(f"🔍 Response is direct Python code (length: {len(response)})")
+            
+            if extracted_code and len(extracted_code) > 100:
+                return extracted_code
+            
+            # Fallback to old approach
             if isinstance(response, dict):
                 # Check for different possible field names
                 if 'code' in response:
                     extracted_code = response['code']
+                    language = response.get('language', 'python')
+                elif 'python_code' in response:
+                    extracted_code = response['python_code']
+                    language = response.get('language', 'python')
+                elif 'python_module_code' in response:
+                    extracted_code = response['python_module_code']
                     language = response.get('language', 'python')
                 elif 'python_module' in response:
                     extracted_code = response['python_module']
@@ -232,6 +283,7 @@ class AutomatedDerivedMetricsAgent:
             else:
                 # Fallback for non-structured responses
                 print("⚠️ Warning: Structured output failed, falling back to parsing")
+                print(f"🔍 Debug: response type: {type(response)}, value: {response}")
                 
                 # Extract code using ThinOutputExtractor
                 code_blocks = self.extractor.extract_code_blocks(str(response))

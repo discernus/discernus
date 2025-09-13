@@ -1,5 +1,0 @@
-document_id,filename,negative_sentiment,positive_sentiment,net_sentiment,sentiment_magnitude,evidence_hash
-{{artifact_id}},positive_test_1.txt,0.0,1.0,0.0,0.0,19704fdf007e2e62
-{{artifact_id}},positive_test_2.txt,0.0,0.9,0.0,0.0,02890e609b1c2810
-{{artifact_id}},negative_test_1.txt,1.0,0.0,0.0,0.0,1df0fd00dfe8af15
-[DOCUMENT_ID_PLACEHOLDER],negative_test_2.txt,1.0,0.0,0.0,0.0,73b7bd318754930f

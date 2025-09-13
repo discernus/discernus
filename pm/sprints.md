@@ -13,10 +13,12 @@
 
 **Latest Updates**:
 
+- ❌ **REGRESSION DISCOVERED**: micro_test_experiment failure with statistical analysis execution error
+- ❌ **REGRESSION DISCOVERED**: temp_derived_metrics directory creation bug in orchestration
 - ✅ **Sprint 12.1 COMPLETED**: Directory structure remediation with standard mode CSV export, dual directory consolidation, and complete specification compliance
 - ✅ **Sprint 14 COMPLETED**: Open source strategy and licensing with multiple repository creation, GPL v3 license implementation, and public release branch preparation
 
-**Current Focus**: System is stable with comprehensive validation, logging integrity, robust fallback handling, complete research transparency capabilities, full statistical preparation workflow with provenance integration, clean architecture with deprecated code removed, complete directory structure compliance, and open source strategy implemented with multiple repositories ready for public release
+**Current Focus**: URGENT - Critical regressions discovered during micro_test_experiment execution. System has statistical analysis execution failure and temporary directory creation bugs that must be fixed before resuming testing. Sprint 18 (Critical Regression Fixes) is now the top priority.
 
 **Alpha Model Strategy**: Vertex AI only for alpha release to ensure complete end-to-end testing and reliability. Future releases will consider additional LLM support based on user feedback and testing requirements.
 
@@ -24,13 +26,17 @@
 
 ## Current Sprint Planning
 
-**Next Priority**: Sprint 16 (Alpha Release Preparation) - READY TO BEGIN
-**Status**: Ready for execution - Sprint 17 blockers resolved
-**Dependencies**: Sprint 17 completion ✅ **COMPLETED**
+**Next Priority**: Sprint 18 (Critical Regression Fixes) - URGENT PRIORITY
+**Status**: Ready for execution - System functionality blockers
+**Dependencies**: None - can begin immediately
 
 **Previous Priority**: Sprint 17 (Critical Bug Fixes) - ✅ **COMPLETED**
 **Status**: All 4 critical bugs resolved and tested
 **Dependencies**: None - completed successfully
+
+**Blocked Priority**: Sprint 16 (Alpha Release Preparation) - BLOCKED
+**Status**: Blocked by Sprint 18 regression fixes
+**Dependencies**: Sprint 18 completion required
 
 ---
 
@@ -342,7 +348,81 @@
 
 ---
 
-### Sprint 18: Agent Parsing Consistency (HIGH PRIORITY)
+### Sprint 18: Critical Regression Fixes (URGENT PRIORITY)
+
+**Description**: Fix critical regressions discovered during micro_test_experiment execution
+**Purpose**: Resolve system failures that prevent basic experiment execution
+**Priority**: URGENT - System functionality blockers
+**Timeline**: 1-2 days - must complete before resuming testing
+**Dependencies**: None - can begin immediately
+
+#### [REGRESSION-001] Fix Statistical Analysis Execution Failure
+
+- **Description**: Fix "No numerical results produced" error in statistical analysis phase
+- **Purpose**: Enable statistical analysis functions to execute and produce results
+- **Priority**: CRITICAL - Blocks all experiments with statistical analysis
+- **Status**: Ready for execution
+- **Root Cause**: Statistical analysis functions generated but fail to execute or produce outputs
+- **Error Details**: "Statistical analysis phase failed: No numerical results produced. Generated functions but failed to execute or produce statistical outputs."
+- **Acceptance Criteria**:
+  - ✅ Statistical analysis functions execute successfully
+  - ✅ Numerical results are produced and stored
+  - ✅ micro_test_experiment completes without statistical errors
+  - ✅ All experiments with statistical analysis work correctly
+- **Files to Investigate**:
+  - `discernus/agents/automated_statistical_analysis/agent.py`
+  - `discernus/core/clean_analysis_orchestrator.py`
+  - Generated statistical functions in temp directories
+- **Dependencies**: None
+- **Effort**: 1-2 days
+
+#### [REGRESSION-002] Remove Temporary Directory Creation Bug
+
+- **Description**: Fix temp_derived_metrics directory creation during orchestration
+- **Purpose**: Clean up temporary directory artifacts that should not be created
+- **Priority**: HIGH - System cleanliness and architecture compliance
+- **Status**: Ready for execution
+- **Root Cause**: Orchestration creates temp_derived_metrics directory as bug fixing artifact
+- **Current Issue**: Directory `/projects/micro_test_experiment/temp_derived_metrics/` created with files that should not exist
+- **Acceptance Criteria**:
+  - ✅ No temp_derived_metrics directories created during orchestration
+  - ✅ All temporary files cleaned up properly
+  - ✅ System follows clean architecture principles
+  - ✅ No leftover artifacts in experiment directories
+- **Files to Investigate**:
+  - `discernus/core/clean_analysis_orchestrator.py`
+  - `discernus/agents/automated_derived_metrics/agent.py`
+- **Dependencies**: [REGRESSION-001] - Fix statistical analysis first
+- **Effort**: 0.5 days
+
+#### [REGRESSION-003] Investigate Statistical Analysis Agent Execution
+
+- **Description**: Deep dive into why statistical analysis functions fail to execute
+- **Purpose**: Understand root cause of statistical analysis execution failure
+- **Priority**: HIGH - Required for [REGRESSION-001] fix
+- **Status**: Ready for execution
+- **Investigation Areas**:
+  - Function generation vs execution gap
+  - Data structure compatibility issues
+  - Error handling in statistical analysis
+  - Integration between agents and orchestrator
+- **Acceptance Criteria**:
+  - ✅ Root cause identified and documented
+  - ✅ Clear fix strategy defined
+  - ✅ All execution paths tested
+  - ✅ Error handling improved
+- **Dependencies**: None
+- **Effort**: 1 day
+
+**Sprint 18 Success Criteria**:
+- micro_test_experiment runs successfully end-to-end
+- No temporary directories created during orchestration
+- Statistical analysis produces valid numerical results
+- System ready for continued testing
+
+---
+
+### Sprint 19: Agent Parsing Consistency (HIGH PRIORITY)
 
 **Description**: Update all agents to use consistent "raw Python objects, no JSON parsing" pattern
 **Purpose**: Eliminate parsing errors and align all agents with the system's current architecture

@@ -120,6 +120,7 @@ template: |
   7. Functions should follow the exact signature: def function_name(data, **kwargs):
   8. **MANDATORY**: Create grouping mappings based on the corpus manifest content already provided to you
   9. **MANDATORY**: Map document names to metadata fields directly in your functions - you have all the information needed
+  10. **CRITICAL**: All dictionary keys in return values must be strings, not tuples - use string representations like "positive_sentiment_raw__mean" instead of ('positive_sentiment_raw', 'mean')
 
   **WORKSPACE FILES AVAILABLE:**
   - Raw analysis data: JSON files in the current directory (full dataset)
@@ -165,6 +166,45 @@ template: |
           return None
 
   Generate functions for descriptive statistics, correlation analysis, and any other statistical analyses needed for this research. Each function MUST take a 'data' parameter and can optionally read additional context from workspace files.
+
+  # MANDATORY WRAPPER FUNCTION
+  After generating all individual statistical analysis functions, you MUST generate a final wrapper function called `perform_statistical_analysis` that:
+  1. Takes a 'data' parameter (pandas DataFrame)
+  2. Calls all individual statistical functions
+  3. Aggregates their results into a single dictionary
+  4. Returns the combined results
+
+  def perform_statistical_analysis(data, **kwargs):
+      """
+      Master function that executes all statistical analyses and returns combined results.
+      
+      Args:
+          data: pandas DataFrame containing analysis data
+          **kwargs: Additional parameters passed to individual functions
+          
+      Returns:
+          dict: Combined results from all statistical analyses
+      """
+      import sys
+      results = {{}}
+      
+      # Call all individual statistical functions and aggregate results
+      try:
+          results['descriptive_statistics'] = calculate_descriptive_statistics(data, **kwargs)
+      except NameError:
+          pass
+          
+      try:
+          results['anova_analysis'] = perform_anova_analysis(data, **kwargs) 
+      except NameError:
+          pass
+          
+      try:
+          results['reliability_analysis'] = calculate_reliability_analysis(data, **kwargs)
+      except NameError:
+          pass
+      
+      return results
 
   **REMEMBER**: You have the complete corpus manifest above. Create direct mappings from document names to metadata fields based on this information. Do not generate code to parse files - you are the intelligence that understands the relationships.
 

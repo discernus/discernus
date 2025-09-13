@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_b57162f437f6",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "kirk",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"cohesive_flourishing_framework\",\n    \"framework_version\": \"10.1.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Applied three independent analytical approaches with median aggregation for robust scoring. The document is a political speech from Charlie Kirk at a conservative summit, highly adversarial and focused on in-group mobilization.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"d052bf49edd2\",\n      \"document_name\": \"early_career/charlie_kirk_western_conservative_summit_2016.txt\",\n      \"dimensional_scores\": {\n        \"tribal_dominance\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"individual_dignity\": {\n          \"raw_score\": 0.45,\n          \"salience\": 0.55,\n          \"confidence\": 0.8\n        },\n        \"fear\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"hope\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"envy\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"mudita\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.9\n        },\n        \"enmity\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.95,\n          \"confidence\": 0.95\n        },\n        \"amity\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.5,\n          \"confidence\": 0.8\n        },\n        \"fragmentative_goals\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.85,\n          \"confidence\": 0.95\n        },\n        \"cohesive_goals\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.85\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"tribal_dominance\",\n          \"quote_text\": \"These are the young patriots that are doing the work that is necessary to fight back against the intolerant left on our campuses.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"group_identity_assertion\"\n        },\n        {\n          \"dimension\": \"individual_dignity\",\n          \"quote_text\": \"The First Amendment is this entire country. It's not a zone.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"rhetorical_defense_of_rights\"\n        },\n        {\n          \"dimension\": \"fear\",\n          \"quote_text\": \"What is going on right now is a fight for freedom versus slavery, capitalism versus socialism.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"existential_threat_framing\"\n        },\n        {\n          \"dimension\": \"hope\",\n          \"quote_text\": \"We have the youngest, most diverse, most energetic party.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"optimistic_group_characterization\"\n        },\n        {\n          \"dimension\": \"envy\",\n          \"quote_text\": \"shamelessly enjoyed the fruits of the free market while simultaneously using those devices to bash it.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"critique_of_perceived_hypocrisy\"\n        },\n        {\n          \"dimension\": \"mudita\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.9,\n          \"context_type\": \"absence_of_evidence\"\n        },\n        {\n          \"dimension\": \"enmity\",\n          \"quote_text\": \"fight back against the intolerant left on our campuses.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"adversarial_positioning\"\n        },\n        {\n          \"dimension\": \"amity\",\n          \"quote_text\": \"These are the young patriots that are doing the work that is necessary to fight back against the intolerant left on our campuses.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"in_group_solidarity\"\n        },\n        {\n          \"dimension\": \"fragmentative_goals\",\n          \"quote_text\": \"What is going on right now is a fight for freedom versus slavery, capitalism versus socialism.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"zero_sum_conflict_framing\"\n        },\n        {\n          \"dimension\": \"cohesive_goals\",\n          \"quote_text\": \"resistance movement of liberty-minded, freedom-centric student organizations that are banding together to fight back against these very, very dangerous ideas.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"in_group_mobilization_goal\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "62f9462082b9613797479ca45e0f0e14e87f38afa45b5f69cea349fddbafe868",
+  "execution_metadata": {
+    "start_time": "2025-09-13T01:58:18.544122+00:00",
+    "end_time": "2025-09-13T01:59:00.597591+00:00",
+    "duration_seconds": 42.053457
+  },
+  "input_artifacts": {
+    "framework_hash": "3a090a7d30db1dae4b4542f24ba898e79d7c1460451746b9e9ada94c7f33b485",
+    "document_hashes": [
+      "d052bf49edd262a14b194bbd5402c5d29aed509bb17cd4f14aeefd03a4d191cc"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "kirk",
+      "experiment_root": "/Volumes/code/discernus/projects/kirk",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250913T015658Z_44277b93"
+  }
+}

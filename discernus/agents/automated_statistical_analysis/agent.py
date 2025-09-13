@@ -115,13 +115,17 @@ class AutomatedStatisticalAnalysisAgent:
                     workspace_path
                 )
             
-            # THIN approach: Save raw LLM response directly as Python module
-            # No parsing - let the LLM generate complete, valid Python code
+            # THIN approach: Extract Python code from LLM response
             function_module = generated_functions
+            
+            # Use the same robust extraction for string responses
+            if isinstance(function_module, str):
+                function_module = self._extract_python_code_robustly(function_module)
             
             # Save to workspace
             output_file = workspace_path / "automatedstatisticalanalysisagent_functions.py"
             output_file.write_text(function_module)
+            print(f"🔍 Written {len(function_module)} chars to {output_file.name}")
             
             # Count functions by analyzing the generated code (simple heuristic)
             # Count function definitions in the generated code
@@ -312,6 +316,78 @@ class AutomatedStatisticalAnalysisAgent:
             
         return combined
     
+    def _extract_python_code_robustly(self, response) -> str:
+        """
+        Robustly extract Python code from any LLM response structure.
+        No more guessing key names - this finds Python code anywhere!
+        """
+        def looks_like_python_code(text):
+            """Check if a string looks like Python code."""
+            if not isinstance(text, str) or len(text) < 50:
+                return False
+            # Look for Python keywords and structure
+            python_indicators = ['import pandas', 'import numpy', 'def ', 'import ', 'pd.DataFrame', 'return ']
+            return sum(indicator in text for indicator in python_indicators) >= 2
+        
+        # Strategy 1: If it's a string, check if it's already Python code
+        if isinstance(response, str):
+            if looks_like_python_code(response):
+                return response
+            # Try parsing as JSON first
+            try:
+                response = json.loads(response)
+            except json.JSONDecodeError:
+                return response  # Return as-is if not JSON
+        
+        # Strategy 2: If it's a dict, find the longest Python code string
+        if isinstance(response, dict):
+            candidate_code = None
+            max_length = 0
+            found_key = None
+            
+            # First, try all values directly
+            for key, value in response.items():
+                if isinstance(value, str) and looks_like_python_code(value):
+                    if len(value) > max_length:
+                        candidate_code = value
+                        found_key = key
+                        max_length = len(value)
+            
+            if candidate_code:
+                print(f"🔍 Auto-detected Python code in key '{found_key}' (length: {len(candidate_code)})")
+                return candidate_code
+            
+            # Strategy 3: Try nested structures (JSON arrays, etc.)
+            for key, value in response.items():
+                if isinstance(value, str):
+                    try:
+                        nested_data = json.loads(value)
+                        if isinstance(nested_data, list) and len(nested_data) > 0:
+                            for item in nested_data:
+                                if isinstance(item, dict):
+                                    for nested_key, nested_value in item.items():
+                                        if looks_like_python_code(nested_value):
+                                            print(f"🔍 Found Python code in nested: {key}[0].{nested_key}")
+                                            return nested_value
+                    except json.JSONDecodeError:
+                        continue
+        
+        # Strategy 4: If it's a list, check all items
+        if isinstance(response, list):
+            for i, item in enumerate(response):
+                if isinstance(item, str) and looks_like_python_code(item):
+                    print(f"🔍 Found Python code in list item {i}")
+                    return item
+                elif isinstance(item, dict):
+                    for key, value in item.items():
+                        if isinstance(value, str) and looks_like_python_code(value):
+                            print(f"🔍 Found Python code in list[{i}].{key}")
+                            return value
+        
+        # Fallback: return string representation
+        print("⚠️ No Python code detected - returning string representation")
+        return str(response)
+
     def _generate_functions_with_prompt(self, pre_assembled_prompt: str) -> str:
         """Generate statistical analysis functions using a pre-assembled prompt.
         
@@ -351,26 +427,71 @@ class AutomatedStatisticalAnalysisAgent:
             if not response:
                 raise ValueError("LLM returned empty response")
             
-            # Handle structured output response
+            # Use robust extraction - no more guessing key names!
+            extracted_code = self._extract_python_code_robustly(response)
+            
+            if extracted_code and isinstance(extracted_code, str) and len(extracted_code) > 100:
+                return extracted_code
+            
+            # Old fallback code for reference (should rarely be reached now)
             if isinstance(response, dict):
                 # Check for different possible field names
                 if 'code' in response:
                     extracted_code = response['code']
                     language = response.get('language', 'python')
+                elif 'module_code' in response:
+                    print(f"🔍 Found module_code in response")
+                    extracted_code = response['module_code']
+                    language = response.get('language', 'python')
                 elif 'python_module' in response:
                     extracted_code = response['python_module']
                     language = response.get('language', 'python')
                 elif 'module_content' in response:
+                    print(f"🔍 Found module_content in response")
                     extracted_code = response['module_content']
                     language = response.get('language', 'python')
                 elif 'module' in response:
+                    print(f"🔍 Found module in response")
                     extracted_code = response['module']
+                    language = response.get('language', 'python')
+                elif 'statistical_functions_module' in response:
+                    print(f"🔍 Found statistical_functions_module in response")
+                    extracted_code = response['statistical_functions_module']
+                    language = response.get('language', 'python')
+                elif 'python_code' in response:
+                    print(f"🔍 Found python_code in response")
+                    extracted_code = response['python_code']
                     language = response.get('language', 'python')
                 else:
                     # Fallback for non-structured responses
                     print("⚠️ Warning: Structured output failed, using raw response")
-                    extracted_code = str(response)
-                    language = 'python'
+                    print(f"🔍 Response keys: {list(response.keys()) if isinstance(response, dict) else 'Not a dict'}")
+                    print(f"🔍 Response type: {type(response)}")
+                    
+                    # Try to extract Python code from complex JSON structures
+                    if isinstance(response, dict):
+                        # Look for nested JSON content that might contain actual Python code
+                        for key, value in response.items():
+                            if isinstance(value, str):
+                                try:
+                                    # Try parsing as JSON array
+                                    import json
+                                    parsed = json.loads(value)
+                                    if isinstance(parsed, list) and len(parsed) > 0:
+                                        if isinstance(parsed[0], dict) and 'content' in parsed[0]:
+                                            extracted_code = parsed[0]['content']
+                                            print(f"🔍 Extracted Python code from nested JSON structure (length: {len(extracted_code)})")
+                                            language = 'python'
+                                            break
+                                except (json.JSONDecodeError, KeyError, IndexError):
+                                    continue
+                        else:
+                            # If no nested structure found, fallback to string conversion
+                            extracted_code = str(response)
+                            language = 'python'
+                    else:
+                        extracted_code = str(response)
+                        language = 'python'
                 
                 self._log_event("PROMPT_BASED_GENERATION_SUCCESS", {
                     "response_type": "structured_output",

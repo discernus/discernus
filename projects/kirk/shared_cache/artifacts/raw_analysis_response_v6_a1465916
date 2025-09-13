@@ -1,0 +1,131 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cohesive_flourishing_framework",
+    "framework_version": "10.1.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Applied three independent analytical approaches with median aggregation for a debate transcript.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "34ae6acac5fb...",
+      "document_name": "debates/charlie_kirk_hasan_piker_debate_2018.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "individual_dignity": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "fear": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "hope": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "envy": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "mudita": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.85
+        },
+        "enmity": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "amity": {
+          "raw_score": 0.3,
+          "salience": 0.3,
+          "confidence": 0.8
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "cohesive_goals": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "If you keep laughing to the victims' families from Cuba, from Venezuela, from Korea, from Vietnam, from Mao's China, from Stalin's Russia, the number one killer of citizens, of innocent civilians the last 100 years has been the very idea that you shamelessly wear on your sleeve every single day.",
+          "confidence": 0.95,
+          "context_type": "accusatory_framing"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "Who cares what our GDP is if the person who is dying of abject poverty can't heal himself because we don't have a socialized medicine, for example?",
+          "confidence": 0.9,
+          "context_type": "moral_appeal"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "If you lose your job, you might lose your healthcare, and you might literally die.",
+          "confidence": 0.95,
+          "context_type": "dire_consequence"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "And we're going to hopefully come to some resolution at the end of this.",
+          "confidence": 0.85,
+          "context_type": "moderator_statement"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "The 84% of the stock market is owned by the top 10% of wealth.",
+          "confidence": 0.9,
+          "context_type": "statistic_to_highlight_inequity"
+        },
+        {
+          "dimension": "mudita",
+          "quote_text": "3.9 million Americans have gone off food stamps and into the labor force under this president. That should be applauded by everybody.",
+          "confidence": 0.9,
+          "context_type": "celebratory_statement"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "Stop being an idiot, dude. God damn it.",
+          "confidence": 0.95,
+          "context_type": "direct_insult"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "And so I just want to thank both of you for having a constructive and lively debate. Give both of them a big round of applause.",
+          "confidence": 0.9,
+          "context_type": "moderator_closing_remarks"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "We should reject socialism. No, no, we should.",
+          "confidence": 0.9,
+          "context_type": "explicit_rejection_of_ideology"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "We need to bring that back and have socialism for everyone. For example, Medicare for all would be a good place to start.",
+          "confidence": 0.9,
+          "context_type": "policy_proposal_for_universal_benefit"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

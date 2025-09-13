@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "d052bf49edd262a14b194bbd5402c5d29aed509bb17cd4f14aeefd03a4d191cc"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-13T01:59:00.596639+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "early_career/charlie_kirk_western_conservative_summit_2016.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "These are the young patriots that are doing the work that is necessary to fight back against the intolerant left on our campuses.",
+      "confidence": 0.95,
+      "context_type": "group_identity_assertion",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T01:59:00.596613+00:00"
+    },
+    {
+      "document_name": "early_career/charlie_kirk_western_conservative_summit_2016.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "The First Amendment is this entire country. It's not a zone.",
+      "confidence": 0.8,
+      "context_type": "rhetorical_defense_of_rights",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T01:59:00.596618+00:00"
+    },
+    {
+      "document_name": "early_career/charlie_kirk_western_conservative_summit_2016.txt",
+      "dimension": "fear",
+      "quote_text": "What is going on right now is a fight for freedom versus slavery, capitalism versus socialism.",
+      "confidence": 0.95,
+      "context_type": "existential_threat_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T01:59:00.596621+00:00"
+    },
+    {
+      "document_name": "early_career/charlie_kirk_western_conservative_summit_2016.txt",
+      "dimension": "hope",
+      "quote_text": "We have the youngest, most diverse, most energetic party.",
+      "confidence": 0.9,
+      "context_type": "optimistic_group_characterization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T01:59:00.596622+00:00"
+    },
+    {
+      "document_name": "early_career/charlie_kirk_western_conservative_summit_2016.txt",
+      "dimension": "envy",
+      "quote_text": "shamelessly enjoyed the fruits of the free market while simultaneously using those devices to bash it.",
+      "confidence": 0.9,
+      "context_type": "critique_of_perceived_hypocrisy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T01:59:00.596624+00:00"
+    },
+    {
+      "document_name": "early_career/charlie_kirk_western_conservative_summit_2016.txt",
+      "dimension": "mudita",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T01:59:00.596627+00:00"
+    },
+    {
+      "document_name": "early_career/charlie_kirk_western_conservative_summit_2016.txt",
+      "dimension": "enmity",
+      "quote_text": "fight back against the intolerant left on our campuses.",
+      "confidence": 0.95,
+      "context_type": "adversarial_positioning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T01:59:00.596629+00:00"
+    },
+    {
+      "document_name": "early_career/charlie_kirk_western_conservative_summit_2016.txt",
+      "dimension": "amity",
+      "quote_text": "These are the young patriots that are doing the work that is necessary to fight back against the intolerant left on our campuses.",
+      "confidence": 0.8,
+      "context_type": "in_group_solidarity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T01:59:00.596630+00:00"
+    },
+    {
+      "document_name": "early_career/charlie_kirk_western_conservative_summit_2016.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "What is going on right now is a fight for freedom versus slavery, capitalism versus socialism.",
+      "confidence": 0.95,
+      "context_type": "zero_sum_conflict_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T01:59:00.596632+00:00"
+    },
+    {
+      "document_name": "early_career/charlie_kirk_western_conservative_summit_2016.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "resistance movement of liberty-minded, freedom-centric student organizations that are banding together to fight back against these very, very dangerous ideas.",
+      "confidence": 0.85,
+      "context_type": "in_group_mobilization_goal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T01:59:00.596634+00:00"
+    }
+  ]
+}

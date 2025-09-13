@@ -1,0 +1,131 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cohesive_flourishing_framework",
+    "framework_version": "10.1.0",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Applied three independent analytical approaches with median aggregation based on explicit evidence, rhetorical context, and repetition patterns. The document exhibits strong 'us vs. them' rhetoric, with high fear and enmity, coupled with hope for the in-group's success and fragmentative goals for opposing structures.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "8184c62545d3...",
+      "document_name": "early_career/charlie_kirk_western_conservative_summit_2018.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "individual_dignity": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.6
+        },
+        "fear": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "hope": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "envy": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "mudita": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 0.8
+        },
+        "enmity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "amity": {
+          "raw_score": 0.2,
+          "salience": 0.2,
+          "confidence": 0.7
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "cohesive_goals": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.6
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "America is the greatest country in the history of the world. 100% Make no mistake. We are the luckiest people ever to live to live at this time in this country.",
+          "confidence": 0.95,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "there is no value in being a victim and there is only value in being a victor and that every single person in the world goes through pain and hurt. You're not special.",
+          "confidence": 0.6,
+          "context_type": "critical_statement"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "The ideas that are being taught in our universities and in our high schools are a direct threat to the future of our country." and "This can go either way... We can either recommit to our founding values of free enterprise, individual liberty and respect for Western civilization. We can go a completely different direction. One that deteriorates the individual, one that destroys the Judeo-Christian ethic, one that absolutely eliminates the private property rights and you name it, and turns America into a society of victims and not victors.",
+          "confidence": 0.95,
+          "context_type": "problem_framing"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "We are now on 1,300 college and high school campuses across the country, which is just amazing. We are going to have over 1,000 young women leaders at our Young Women's Leadership Summit next week in Dallas.",
+          "confidence": 0.9,
+          "context_type": "progress_report"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "the problem is that these black politicians have had their pockets lined to keep black people dependent.",
+          "confidence": 0.9,
+          "context_type": "accusation"
+        },
+        {
+          "dimension": "mudita",
+          "quote_text": "",
+          "confidence": 0.8,
+          "context_type": "absence_of_evidence"
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "Our enemies make no mistake. We are up against the media, as the media versus the people, versus the American people. But look, we're willing to take on that battle.",
+          "confidence": 0.95,
+          "context_type": "adversarial_framing"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "Thank you guys so much for coming out. I hope we get to keep the energy up.",
+          "confidence": 0.7,
+          "context_type": "direct_address"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "It's about destroying a monolith. It's about encouraging black people to think independently and to look at policies and to talk about things that will actually help them and to remove emotion from the equation.",
+          "confidence": 0.95,
+          "context_type": "strategic_objective"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "they found out that they had so much in common to want to improve the black community.",
+          "confidence": 0.6,
+          "context_type": "limited_common_ground"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

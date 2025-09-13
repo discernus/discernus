@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "4a5a0c339cf77c93bb7429e80f0dcbbf1467bc238b4845e7d462083e8c435e68"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-13T01:58:18.542011+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "interviews/charlie_kirk_fox_business_2015.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "Repetition of \"the left,\" \"progressives,\" \"left-wing academics\" as antagonists, contrasted with \"conservative organizations,\" \"us taxpayers,\" and \"young people.\" The phrase \"why should the left own an entire genre of music\" is repeated.",
+      "confidence": 0.9,
+      "context_type": "pattern_emphasis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T01:58:18.541979+00:00"
+    },
+    {
+      "document_name": "interviews/charlie_kirk_fox_business_2015.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "I always say that college administrators are very tolerant of other people's opinions as long as you agree with them. And you know those diversity bumper stickers, this diversity in all aspects accept diversity of thought.",
+      "confidence": 0.6,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T01:58:18.541985+00:00"
+    },
+    {
+      "document_name": "interviews/charlie_kirk_fox_business_2015.txt",
+      "dimension": "fear",
+      "quote_text": "It's a financially cataclysmic situation that young people are finding themselves in... This is an equation for a generation that will be perpetually financially under water.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T01:58:18.541988+00:00"
+    },
+    {
+      "document_name": "interviews/charlie_kirk_fox_business_2015.txt",
+      "dimension": "hope",
+      "quote_text": "Repeated positive framing of \"dream of having a G5\" and \"better life for yourself,\" as well as \"free market-centric solutions would be very beneficial.\" These ideas are presented as a clear alternative path.",
+      "confidence": 0.8,
+      "context_type": "pattern_emphasis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T01:58:18.541991+00:00"
+    },
+    {
+      "document_name": "interviews/charlie_kirk_fox_business_2015.txt",
+      "dimension": "envy",
+      "quote_text": "the left has hated luxury rap for years because I think there's an underlying message that says you don't have to settle for government crumbs. You can actually dream of having a G5.",
+      "confidence": 0.8,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T01:58:18.541993+00:00"
+    },
+    {
+      "document_name": "interviews/charlie_kirk_fox_business_2015.txt",
+      "dimension": "mudita",
+      "quote_text": "I think it's a good thing that Dr. Carson is starting to use rap and hip hop.",
+      "confidence": 0.5,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T01:58:18.541995+00:00"
+    },
+    {
+      "document_name": "interviews/charlie_kirk_fox_business_2015.txt",
+      "dimension": "enmity",
+      "quote_text": "Phrases like \"government is to blame,\" \"left-wing academics using their power to try to block,\" \"wrong and disgraceful,\" \"intolerance of the tolerance crowd,\" and \"bureaucrats in Washington, D.C. that have created unnatural market interactions\" all contribute to a sustained pattern of adversarial positioning and blame.",
+      "confidence": 0.9,
+      "context_type": "pattern_emphasis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T01:58:18.541997+00:00"
+    },
+    {
+      "document_name": "interviews/charlie_kirk_fox_business_2015.txt",
+      "dimension": "amity",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "absence_of_evidence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T01:58:18.542001+00:00"
+    },
+    {
+      "document_name": "interviews/charlie_kirk_fox_business_2015.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "Repeated accusations of \"blocking conservative organizations,\" \"disallowing a conservative group,\" and implicitly, the \"left own[ing] an entire genre.\" These describe actions that lead to separation and exclusion.",
+      "confidence": 0.8,
+      "context_type": "pattern_emphasis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T01:58:18.542003+00:00"
+    },
+    {
+      "document_name": "interviews/charlie_kirk_fox_business_2015.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "It's important to remember that they want to improve their livelihood.",
+      "confidence": 0.5,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T01:58:18.542006+00:00"
+    }
+  ]
+}

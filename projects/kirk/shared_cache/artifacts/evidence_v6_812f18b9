@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "e36243cdef4ed38fd317df9c93b44b912b4268c32233ab3091b68a5aa0aaec27"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-13T02:16:55.047299+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "charlie_kirk_americafest_2024_LBA5nF21nSM.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "It became a symbol of American masculinity coming back into our culture. It became a symbol that American greatness is what we demand, that we deserve.",
+      "confidence": 0.9,
+      "context_type": "rhetorical_emphasis",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:16:55.047258+00:00"
+    },
+    {
+      "document_name": "charlie_kirk_americafest_2024_LBA5nF21nSM.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "",
+      "confidence": 0.9,
+      "context_type": "not_present",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:16:55.047268+00:00"
+    },
+    {
+      "document_name": "charlie_kirk_americafest_2024_LBA5nF21nSM.txt",
+      "dimension": "fear",
+      "quote_text": "We were seeing our country disappear and vanish from us. But here's where you come in. For every single one of you in this audience that never wavered.",
+      "confidence": 0.95,
+      "context_type": "crisis_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:16:55.047271+00:00"
+    },
+    {
+      "document_name": "charlie_kirk_americafest_2024_LBA5nF21nSM.txt",
+      "dimension": "hope",
+      "quote_text": "You guys are the beginning portion of the greatest political comeback in American history.",
+      "confidence": 0.9,
+      "context_type": "optimistic_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:16:55.047274+00:00"
+    },
+    {
+      "document_name": "charlie_kirk_americafest_2024_LBA5nF21nSM.txt",
+      "dimension": "envy",
+      "quote_text": "Kamala Harris had a billion dollars and, hey by the way, where did that billion dollars go? She sent it to China? She sent it to Zelenskyy?",
+      "confidence": 0.75,
+      "context_type": "implied_illegitimacy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:16:55.047277+00:00"
+    },
+    {
+      "document_name": "charlie_kirk_americafest_2024_LBA5nF21nSM.txt",
+      "dimension": "mudita",
+      "quote_text": "This is your victory.",
+      "confidence": 0.6,
+      "context_type": "group_self_congratulation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:16:55.047280+00:00"
+    },
+    {
+      "document_name": "charlie_kirk_americafest_2024_LBA5nF21nSM.txt",
+      "dimension": "enmity",
+      "quote_text": "We need to combine forces and defeat the incumbent regime.",
+      "confidence": 0.95,
+      "context_type": "direct_adversarial_positioning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:16:55.047283+00:00"
+    },
+    {
+      "document_name": "charlie_kirk_americafest_2024_LBA5nF21nSM.txt",
+      "dimension": "amity",
+      "quote_text": "As long as we can agree on the big stuff, the country is collapsing, things are amiss, we need to combine forces and defeat the incumbent regime, welcome aboard, we are going to make America great again.",
+      "confidence": 0.7,
+      "context_type": "call_for_internal_unity",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:16:55.047286+00:00"
+    },
+    {
+      "document_name": "charlie_kirk_americafest_2024_LBA5nF21nSM.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "we will primary you and remove you from office immediately.",
+      "confidence": 0.9,
+      "context_type": "explicit_divisive_objective",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:16:55.047290+00:00"
+    },
+    {
+      "document_name": "charlie_kirk_americafest_2024_LBA5nF21nSM.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "America Fest is the starting point for us to take America to greater heights in 2025.",
+      "confidence": 0.9,
+      "context_type": "collective_future_vision",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:16:55.047293+00:00"
+    }
+  ]
+}

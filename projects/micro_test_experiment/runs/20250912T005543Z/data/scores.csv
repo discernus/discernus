@@ -1,5 +1,0 @@
-document_id,filename,negative_sentiment,positive_sentiment,evidence_hash
-doc_-6211463692741720430,positive_test_1.txt,0.0,1.0,3fc2747cf10c10582c035cdb8ccd30452d3c62c82d584c416eb3c12210b60a68
-doc_-4289448880365663806,positive_test_2.txt,0.0,0.9,521f37f7b8489248aec29804466ecdc38c93cd3274ae38c8d5d5c2aa54dcb359
-doc_2176509251732477760,negative_test_1.txt,1.0,0.0,da7578dfbf9fd74e52bafaeeed69efddcae994f96f9ed3c02308e8b26b11ec05
-doc_-3255260642875116357,negative_test_2.txt,1.0,0.0,5d8af4f0d5f59330217a37fd543cf4c11bf7c5fc0d2954dfcd6df995e4f82f68

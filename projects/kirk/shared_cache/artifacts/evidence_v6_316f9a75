@@ -1,0 +1,113 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "318908f1da8b08b3e9ffd219b32892f42f4f35e5a08ad94e280372a8b8c975c5"
+    ],
+    "total_evidence_pieces": 10,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-13T02:14:06.273707+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "cpac/charlie_kirk_cpac_2021_ODDO0eajI9k.txt",
+      "dimension": "tribal_dominance",
+      "quote_text": "If you do not support breaking up Big Tech or challenging Big Tech, you are not a conservative. You are a corporatist.",
+      "confidence": 0.9,
+      "context_type": "exclusionary_test",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:14:06.273687+00:00"
+    },
+    {
+      "document_name": "cpac/charlie_kirk_cpac_2021_ODDO0eajI9k.txt",
+      "dimension": "individual_dignity",
+      "quote_text": "You at least get some due process rights. You at least get, you're supposed to get representation by an attorney. You're able to sue your government if they do something illegal to you.",
+      "confidence": 0.6,
+      "context_type": "indirect_mention_of_rights",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:14:06.273690+00:00"
+    },
+    {
+      "document_name": "cpac/charlie_kirk_cpac_2021_ODDO0eajI9k.txt",
+      "dimension": "fear",
+      "quote_text": "They can wipe away the existence of an idea of a human being, of a political movement instantaneously.",
+      "confidence": 0.95,
+      "context_type": "existential_threat_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:14:06.273692+00:00"
+    },
+    {
+      "document_name": "cpac/charlie_kirk_cpac_2021_ODDO0eajI9k.txt",
+      "dimension": "hope",
+      "quote_text": "We're going to win big and we're going to win for the next couple decades. Our best days are ahead.",
+      "confidence": 0.7,
+      "context_type": "optimistic_future_vision",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:14:06.273693+00:00"
+    },
+    {
+      "document_name": "cpac/charlie_kirk_cpac_2021_ODDO0eajI9k.txt",
+      "dimension": "envy",
+      "quote_text": "When a group of people in a concentrated area controlling trillion-dollar companies decide to impose a viewpoint that is completely contrary to the American way of life, and then we say, well, we can't do anything because they're a private company. Excuse me.",
+      "confidence": 0.85,
+      "context_type": "resentment_towards_power_and_influence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:14:06.273695+00:00"
+    },
+    {
+      "document_name": "cpac/charlie_kirk_cpac_2021_ODDO0eajI9k.txt",
+      "dimension": "mudita",
+      "quote_text": "",
+      "confidence": 0.7,
+      "context_type": "absent",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:14:06.273696+00:00"
+    },
+    {
+      "document_name": "cpac/charlie_kirk_cpac_2021_ODDO0eajI9k.txt",
+      "dimension": "enmity",
+      "quote_text": "Google decides to digitally assassinate a certain person?",
+      "confidence": 0.9,
+      "context_type": "adversarial_framing_rhetorical_question",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:14:06.273698+00:00"
+    },
+    {
+      "document_name": "cpac/charlie_kirk_cpac_2021_ODDO0eajI9k.txt",
+      "dimension": "amity",
+      "quote_text": "It is an honor to be with you guys today.",
+      "confidence": 0.6,
+      "context_type": "in_group_camaraderie",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:14:06.273700+00:00"
+    },
+    {
+      "document_name": "cpac/charlie_kirk_cpac_2021_ODDO0eajI9k.txt",
+      "dimension": "fragmentative_goals",
+      "quote_text": "If you do not support breaking up Big Tech or challenging Big Tech, you are not a conservative. You are a corporatist.",
+      "confidence": 0.85,
+      "context_type": "divisive_objective_and_litmus_test",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:14:06.273702+00:00"
+    },
+    {
+      "document_name": "cpac/charlie_kirk_cpac_2021_ODDO0eajI9k.txt",
+      "dimension": "cohesive_goals",
+      "quote_text": "restoring election integrity in our country for fair and free elections.",
+      "confidence": 0.7,
+      "context_type": "positive_societal_objective",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-13T02:14:06.273703+00:00"
+    }
+  ]
+}

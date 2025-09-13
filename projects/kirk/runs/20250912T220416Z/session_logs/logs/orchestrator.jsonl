@@ -1,2 +1,0 @@
-{"log_type":"orchestrator","event_type":"manifest_run_mode_set","data":{"mode_type":"standard","statistical_prep":false,"resume_from_stats":false},"session_id":"20250912T220416Z_3e0a0f1b","timestamp":"2025-09-12T22:04:16.551670+00:00"}
-{"log_type":"orchestrator","event_type":"provenance_organization","data":{"run_dir":"/Volumes/code/discernus/projects/kirk/runs/20250912T220416Z","artifacts_organized":21,"directory_structure":"academic_standard_v1.0"},"session_id":"20250912T220416Z_3e0a0f1b","timestamp":"2025-09-12T22:06:54.040136+00:00"}

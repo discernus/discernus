@@ -1,0 +1,131 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "cohesive_flourishing_framework",
+    "framework_version": "10.1.0",
+    "analyst_confidence": 0.9,
+    "analysis_notes": "Applied three independent analytical approaches with median aggregation, focusing on specified dimensional definitions and critical distinctions.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "americafest/charlie_kirk_americafest_2023_SGFdHIK2dBU.txt",
+      "document_name": "americafest/charlie_kirk_americafest_2023_SGFdHIK2dBU.txt",
+      "dimensional_scores": {
+        "tribal_dominance": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "individual_dignity": {
+          "raw_score": 0.05,
+          "salience": 0.05,
+          "confidence": 0.6
+        },
+        "fear": {
+          "raw_score": 0.8,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "hope": {
+          "raw_score": 0.8,
+          "salience": 0.85,
+          "confidence": 0.95
+        },
+        "envy": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.7
+        },
+        "mudita": {
+          "raw_score": 0.0,
+          "salience": 0.0,
+          "confidence": 1.0
+        },
+        "enmity": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "amity": {
+          "raw_score": 0.1,
+          "salience": 0.05,
+          "confidence": 0.6
+        },
+        "fragmentative_goals": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.85
+        },
+        "cohesive_goals": {
+          "raw_score": 0.75,
+          "salience": 0.8,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "tribal_dominance",
+          "quote_text": "we as a movement, as a conservative movement, need a vision.",
+          "confidence": 0.95,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "individual_dignity",
+          "quote_text": "if you judge somebody on the basis of skin, you are a racist. And we should instead care about character, not the complexion of somebody's skin.",
+          "confidence": 0.6,
+          "context_type": "indirect_critique"
+        },
+        {
+          "dimension": "fear",
+          "quote_text": "we're in a very important time in our nation's history, and we as a movement... need a vision. Without a vision, the people perish, is what it says in the Scriptures.",
+          "confidence": 0.95,
+          "context_type": "existential_threat_framing"
+        },
+        {
+          "dimension": "hope",
+          "quote_text": "we are going to win in the end because the only way they've been able to have even a slight advantage against us is by suppressing us without our consent, censoring us, outright cheating.",
+          "confidence": 0.95,
+          "context_type": "optimistic_future"
+        },
+        {
+          "dimension": "envy",
+          "quote_text": "The vision of our opponents and the Marxist totalitarian left is filled with venom, hatred, darkness, resentment, arrogance, and despair.",
+          "confidence": 0.7,
+          "context_type": "attribution_to_others"
+        },
+        {
+          "dimension": "mudita",
+          "quote_text": "",
+          "confidence": 1.0,
+          "context_type": ""
+        },
+        {
+          "dimension": "enmity",
+          "quote_text": "Now, we know what the bad guys are fighting for",
+          "confidence": 0.95,
+          "context_type": "adversarial_positioning"
+        },
+        {
+          "dimension": "amity",
+          "quote_text": "Great to see all of you.",
+          "confidence": 0.6,
+          "context_type": "internal_greeting"
+        },
+        {
+          "dimension": "fragmentative_goals",
+          "quote_text": "The one thing that the totalitarian left wants to do for our society is to destroy the distinction between God and man, between man and woman, between good and evil.",
+          "confidence": 0.85,
+          "context_type": "stated_objective_against_opponent"
+        },
+        {
+          "dimension": "cohesive_goals",
+          "quote_text": "Our vision needs to be clear and bold. How about this? We want a country where our kids love America again.",
+          "confidence": 0.85,
+          "context_type": "desired_future_state_for_in_group"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>
