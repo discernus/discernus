@@ -23,8 +23,8 @@ from discernus.core.local_artifact_storage import LocalArtifactStorage
 from discernus.gateway.llm_gateway_enhanced import EnhancedLLMGateway
 from discernus.gateway.model_registry import ModelRegistry
 
-from .cache import AnalysisCache
-from .prompt_builder import create_analysis_prompt
+from tmp.AnalysisAgent.cache import AnalysisCache
+from tmp.AnalysisAgent.prompt_builder import create_analysis_prompt
 
 
 class ExtendedAnalysisAgent:
@@ -51,9 +51,10 @@ class ExtendedAnalysisAgent:
 
     def _load_prompt_template(self) -> str:
         """Load the original 3-shot prompt template."""
-        prompt_path = Path(__file__).parent / "prompt.txt"
+        # Use the prompt from the tmp directory
+        prompt_path = Path("/Volumes/code/discernus/tmp/AnalysisAgent/prompt_3run.yaml")
         if not prompt_path.exists():
-            raise FileNotFoundError("Could not find prompt.txt for ExtendedAnalysisAgent")
+            raise FileNotFoundError("Could not find prompt_3run.yaml for ExtendedAnalysisAgent")
         with open(prompt_path, 'r') as f:
             return f.read()
 

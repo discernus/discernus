@@ -1,0 +1,18 @@
+{
+  "derived_metrics": {
+    "democratic_authoritarian_tension": 0.0,
+    "internal_external_focus_tension": 0.0,
+    "crisis_elite_attribution_tension": 0.0,
+    "populist_strategic_contradiction_index": 0.0,
+    "salience_weighted_core_populism_index": 0.9,
+    "salience_weighted_populism_mechanisms_index": 0.9,
+    "salience_weighted_boundary_distinctions_index": 0.9,
+    "salience_weighted_overall_populism_index": 0.9
+  },
+  "statistical_analysis": {
+    "extracted_from_response": true
+  },
+  "calculations": {
+    "raw_response": "```json\n{\n  \"derived_metrics\": {\n    \"democratic_authoritarian_tension\": 0.0,\n    \"internal_external_focus_tension\": 0.0,\n    \"crisis_elite_attribution_tension\": 0.0,\n    \"populist_strategic_contradiction_index\": 0.0,\n    \"salience_weighted_core_populism_index\": 0.9,\n    \"salience_weighted_populism_mechanisms_index\": 0.9,\n    \"salience_weighted_boundary_distinctions_index\": 0.9,\n    \"salience_weighted_overall_populism_index\": 0.9\n  },\n  \"statistical_analysis\": {\n    \"total_populism_score\": 8.1,\n    \"dominant_dimensions\": [\n      \"manichaean_people_elite_framing\",\n      \"crisis_restoration_narrative\",\n      \"anti_pluralist_exclusion\",\n      \"homogeneous_people_construction\",\n      \"nationalist_exclusion\",\n      \"economic_populist_appeals\"\n    ],\n    \"tension_analysis\": \"The analysis reveals a consistent lack of strategic tension across the calculated indices, indicating that the populist appeals are not characterized by internal contradictions in their salience or raw scores. This sugge..."
+  }
+}
