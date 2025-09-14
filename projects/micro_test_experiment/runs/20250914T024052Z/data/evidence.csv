@@ -1,0 +1,3 @@
+document_id,evidence_hash,dimension,score,quote_text,reasoning
+123e5c9fe442...,3114790f30df7a37,positive_sentiment,0.0,,"Confidence: 0.0, Context: unknown"
+123e5c9fe442...,3114790f30df7a37,negative_sentiment,0.0,,"Confidence: 0.0, Context: unknown"
