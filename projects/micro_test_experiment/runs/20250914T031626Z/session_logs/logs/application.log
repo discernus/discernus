@@ -1,0 +1,16 @@
+2025-09-13 23:16:26.086 | INFO     | discernus.core.logging_config:setup_logging:220 | Logging system initialized
+2025-09-13 23:16:26.088 | INFO     | discernus.core.logging_config:log_experiment_start:243 | Experiment started
+2025-09-13 23:16:26.124 | INFO     | discernus.gateway.llm_gateway:execute_call:164 | LLM Request
+2025-09-13 23:16:58.470 | INFO     | discernus.gateway.llm_gateway:execute_call:182 | LLM Response
+2025-09-13 23:16:58.539 | INFO     | discernus.gateway.llm_gateway_enhanced:execute_call_with_tools:83 | LLM Tool Call Request
+2025-09-13 23:17:12.523 | INFO     | discernus.gateway.llm_gateway_enhanced:execute_call_with_tools:105 | LLM Tool Call Response
+2025-09-13 23:17:12.524 | INFO     | discernus.core.logging_config:perf_timer:458 | Performance: llm_call_with_tools completed in 13.986s
+2025-09-13 23:17:12.572 | INFO     | discernus.gateway.llm_gateway_enhanced:execute_call_with_tools:83 | LLM Tool Call Request
+2025-09-13 23:17:52.727 | INFO     | discernus.gateway.llm_gateway_enhanced:execute_call_with_tools:105 | LLM Tool Call Response
+2025-09-13 23:17:52.728 | INFO     | discernus.core.logging_config:perf_timer:458 | Performance: llm_call_with_tools completed in 40.157s
+2025-09-13 23:17:52.762 | INFO     | discernus.gateway.llm_gateway_enhanced:execute_call_with_tools:83 | LLM Tool Call Request
+2025-09-13 23:18:04.192 | INFO     | discernus.gateway.llm_gateway_enhanced:execute_call_with_tools:105 | LLM Tool Call Response
+2025-09-13 23:18:04.194 | INFO     | discernus.core.logging_config:perf_timer:458 | Performance: llm_call_with_tools completed in 11.432s
+2025-09-13 23:18:04.261 | INFO     | discernus.gateway.llm_gateway_enhanced:execute_call_with_tools:83 | LLM Tool Call Request
+2025-09-13 23:18:20.601 | INFO     | discernus.gateway.llm_gateway_enhanced:execute_call_with_tools:105 | LLM Tool Call Response
+2025-09-13 23:18:20.601 | INFO     | discernus.core.logging_config:perf_timer:458 | Performance: llm_call_with_tools completed in 16.342s
