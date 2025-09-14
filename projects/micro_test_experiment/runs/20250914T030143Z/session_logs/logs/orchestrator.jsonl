@@ -1,0 +1,2 @@
+{"log_type":"orchestrator","event_type":"manifest_run_mode_set","data":{"mode_type":"analysis_only","statistical_prep":false,"resume_from_stats":false},"session_id":"20250914T030143Z_f8a8c9b7","timestamp":"2025-09-14T03:01:44.001001+00:00"}
+{"log_type":"orchestrator","event_type":"provenance_organization","data":{"run_dir":"/Volumes/code/discernus/projects/micro_test_experiment/runs/20250914T030143Z","artifacts_organized":16,"directory_structure":"academic_standard_v1.0"},"session_id":"20250914T030143Z_f8a8c9b7","timestamp":"2025-09-14T03:03:39.949101+00:00"}
