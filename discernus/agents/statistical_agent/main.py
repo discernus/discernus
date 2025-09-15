@@ -849,6 +849,8 @@ Use the generate_csv_file tool for each CSV file. Ensure proper CSV formatting w
                         "cached_artifact_hash": artifact_hash
                     })
                     
+                    # Add cached flag to indicate this result came from cache
+                    cached_result["cached"] = True
                     return cached_result
                     
                 except Exception as e:

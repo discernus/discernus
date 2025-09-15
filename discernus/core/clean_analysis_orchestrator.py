@@ -486,18 +486,15 @@ class CleanAnalysisOrchestrator:
             self._corpus_index_service = None
 
             # Phase 7.5: Validate Index Readiness (GATE)
-            self._log_progress("🔍 Validating index readiness before proceeding...")
+            self._log_progress("🔍 Validating readiness before proceeding...")
             
-            # Validate RAG index is operational
-            if not hasattr(self, 'rag_index') or not self.rag_index:
-                error_msg = "RAG index not available - cannot proceed to evidence retrieval"
-                self._log_progress(f"❌ {error_msg}")
-                raise CleanAnalysisError(error_msg)
+            # RAG index validation removed - EvidenceRetrieverAgent builds its own evidence wrapper
+            # No separate RAG index needed for evidence retrieval phase
             
             # Corpus index service validation skipped (QA agents disabled)
             
             # Corpus index service testing skipped (QA agents disabled)
-            self._log_progress("✅ RAG index validated and operational - proceeding to evidence retrieval")
+            self._log_progress("✅ Ready to proceed to evidence retrieval")
 
             # Phase 8: Run evidence retrieval to curate supporting quotes
             phase_start = datetime.now(timezone.utc)
@@ -935,21 +932,24 @@ class CleanAnalysisOrchestrator:
         corpus_content = corpus_path.read_text(encoding='utf-8')
         experiment_content = experiment_path.read_text(encoding='utf-8')
         
-        # Initialize validation caching
-        from .validation_cache import ValidationCacheManager
+        # Initialize unified validation caching
+        from .unified_cache_manager import ValidationCacheManager
         validation_cache_manager = ValidationCacheManager(self.artifact_storage, audit_logger)
         
-        # Generate cache key based on all validation inputs
-        cache_key = validation_cache_manager.generate_cache_key(
-            framework_content, experiment_content, corpus_content, validation_model
+        # Generate deterministic cache key based on all validation inputs
+        cache_key = validation_cache_manager.generate_validation_cache_key(
+            framework_content=framework_content,
+            experiment_content=experiment_content,
+            corpus_content=corpus_content,
+            validation_model=validation_model
         )
         
         # Check cache first
-        cache_result = validation_cache_manager.check_cache(cache_key)
+        cache_result = validation_cache_manager.check_cache(cache_key, "ValidationPhase")
         
         if cache_result.hit:
             self._log_progress("💾 Using cached validation result")
-            cached_validation = cache_result.cached_validation
+            cached_validation = cache_result.cached_content
             
             # Check if cached validation was successful
             if not cached_validation.get('success', False):
@@ -1007,8 +1007,8 @@ class CleanAnalysisOrchestrator:
             "validated_at": datetime.now(timezone.utc).isoformat()
         }
         
-        # Store validation result in cache
-        validation_cache_manager.store_validation_result(cache_key, validation_data, validation_model)
+        # Store validation result in cache using unified cache manager
+        validation_cache_manager.store_cache(cache_key, validation_data, "ValidationPhase")
         
         # Check validation result
         if not validation_result.success:
@@ -1169,9 +1169,14 @@ class CleanAnalysisOrchestrator:
                     scores_result = result.get('score_extraction', {})
                     evidence_result = result.get('evidence_extraction', {})
                     
-                    # Track cache performance (new agent doesn't have explicit cache flags)
-                    # Assume cache miss for now since new agent handles caching internally
-                    self.performance_metrics["cache_misses"] += 1
+                    # Track cache performance - check if analysis was cached
+                    analysis_result = result.get('analysis_result', {})
+                    was_cached = analysis_result.get('cached', False)
+                    if was_cached:
+                        self.performance_metrics["cache_hits"] += 1
+                        self._log_progress(f"💾 Cache hit for analysis: {prepared_doc.get('filename', 'Unknown')}")
+                    else:
+                        self.performance_metrics["cache_misses"] += 1
 
                     # Store the full result with raw_analysis_response at top level for statistical processing
                     full_result = {
@@ -1402,6 +1407,14 @@ class CleanAnalysisOrchestrator:
                 corpus_manifest=corpus_content,
                 batch_id=batch_id
             )
+            
+            # Check if result came from cache
+            was_cached = functions_result.get("cached", False)
+            if was_cached:
+                self.performance_metrics["cache_hits"] += 1
+                self._log_progress(f"💾 Cache hit for statistical analysis: {batch_id}")
+            else:
+                self.performance_metrics["cache_misses"] += 1
             
             # Extract results from StatisticalAgent output
             if functions_result and isinstance(functions_result, dict):
@@ -2116,7 +2129,11 @@ class CleanAnalysisOrchestrator:
             if hasattr(self.artifact_storage, 'registry') and self.artifact_storage.registry:
                 for artifact_hash, artifact_info in self.artifact_storage.registry.items():
                     metadata = artifact_info.get("metadata", {})
-                    if metadata.get("artifact_type", "").startswith("evidence_v6"):
+                    # Look for evidence artifacts by type or by name pattern
+                    artifact_type = metadata.get("artifact_type", "")
+                    if (artifact_type.startswith("evidence_v6") or 
+                        artifact_type.startswith("evidence_extraction") or
+                        artifact_hash.startswith("evidence_extraction_")):
                         evidence_artifact_hashes.append(artifact_hash)
             
             if not evidence_artifact_hashes:
