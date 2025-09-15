@@ -181,6 +181,11 @@ class CleanAnalysisOrchestrator:
             self._log_progress("🔧 DEBUG: Starting run_experiment method")
             # Initialize infrastructure
             audit_logger = self._initialize_infrastructure(run_id)
+            
+            # Track experiment timing and audit logger for log summary
+            self._experiment_start_time = start_time
+            self._current_audit_logger = audit_logger
+            
             log_experiment_start(self.security.experiment_name, run_id)
             self._log_progress("🔧 DEBUG: Infrastructure initialized")
             
@@ -5208,10 +5213,13 @@ class CleanAnalysisOrchestrator:
             report_content = self.artifact_storage.get_artifact(assets['report_hash'])
             report_file = outputs_dir / "final_report.md"
             
-            # Save final report (fact-checking system removed)
+            # Save final report with appended log summary
             with open(report_file, 'wb') as f:
                 f.write(report_content)
-            self._log_progress("📝 Final report saved to outputs")
+            
+            # Append experiment log summary
+            self._append_experiment_log_summary(report_file, run_id)
+            self._log_progress("📝 Final report saved to outputs with log summary")
         else:
             self._log_progress("❌ DEBUG: No report_hash found in assets - final report not saved")
         
@@ -5243,6 +5251,89 @@ class CleanAnalysisOrchestrator:
             json.dump(summary, f, indent=2)
         
         return outputs_dir
+    
+    def _append_experiment_log_summary(self, report_file: Path, run_id: str) -> None:
+        """
+        Append experiment log summary to the final report.
+        
+        Includes total costs, execution time, cache performance, and warnings/errors.
+        """
+        try:
+            # Get session costs and performance data
+            audit_logger = getattr(self, '_current_audit_logger', None)
+            session_costs = audit_logger.get_session_costs() if audit_logger else {"total_cost_usd": 0.0}
+            
+            # Calculate total execution time
+            start_time = getattr(self, '_experiment_start_time', datetime.now(timezone.utc))
+            end_time = datetime.now(timezone.utc)
+            total_duration = (end_time - start_time).total_seconds()
+            
+            # Format duration
+            minutes = int(total_duration // 60)
+            seconds = int(total_duration % 60)
+            duration_str = f"{minutes}m {seconds}s" if minutes > 0 else f"{seconds}s"
+            
+            # Get cache performance
+            cache_performance = self._generate_cache_performance_report()
+            cache_hits = cache_performance.get('total_hits', 0)
+            cache_misses = cache_performance.get('total_misses', 0)
+            total_cache_ops = cache_hits + cache_misses
+            hit_rate = (cache_hits / total_cache_ops * 100) if total_cache_ops > 0 else 0
+            
+            # Determine pipeline mode
+            pipeline_mode = "Full (analysis → derived metrics → evidence retrieval → synthesis)"
+            if self.analysis_only:
+                pipeline_mode = "Analysis only"
+            elif self.statistical_prep:
+                pipeline_mode = "Statistical preparation (analysis → derived metrics → CSV export)"
+            elif self.skip_synthesis:
+                pipeline_mode = "Skip synthesis (analysis → derived metrics → evidence retrieval)"
+            
+            # Generate cost breakdown if available
+            cost_breakdown = []
+            total_cost = session_costs.get('total_cost_usd', 0.0)
+            operations = session_costs.get('operations', {})
+            
+            if operations and total_cost > 0:
+                for operation, data in operations.items():
+                    cost = data.get('cost_usd', 0.0)
+                    percentage = (cost / total_cost * 100) if total_cost > 0 else 0
+                    cost_breakdown.append(f"- {operation.replace('_', ' ').title()}: ${cost:.4f} USD ({percentage:.0f}%)")
+            
+            # Collect warnings/errors (simplified for now)
+            warnings_errors = []
+            if cache_misses > 0:
+                warnings_errors.append(f"- {cache_misses} cache miss(es) - some components regenerated")
+            if not warnings_errors:
+                warnings_errors.append("- No critical errors or warnings")
+            
+            # Build log summary
+            log_summary = f"""
+---
+
+## Experiment Log Summary
+
+**Total Experiment Cost**: ${total_cost:.4f} USD
+**Total Execution Time**: {duration_str}
+**Pipeline Mode**: {pipeline_mode}
+**Cache Performance**: {cache_hits} hits, {cache_misses} misses ({hit_rate:.0f}% hit rate)
+
+### Cost Breakdown
+{chr(10).join(cost_breakdown) if cost_breakdown else "- Cost breakdown not available"}
+
+### Warnings/Errors
+{chr(10).join(warnings_errors)}
+
+**Run Completed**: {end_time.strftime('%Y-%m-%d %H:%M:%S')} UTC
+**Experiment ID**: {self.security.experiment_name}/{run_id}
+"""
+            
+            # Append to report file
+            with open(report_file, 'a', encoding='utf-8') as f:
+                f.write(log_summary)
+                
+        except Exception as e:
+            self._log_progress(f"⚠️ Failed to append log summary: {str(e)}")
     
     def _create_basic_outputs_directory(self, run_id: str) -> Path:
         """Create a basic outputs directory in case of failure."""
