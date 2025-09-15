@@ -81,7 +81,7 @@ class CleanAnalysisOrchestrator:
                  analysis_model: str = "vertex_ai/gemini-2.5-flash",
                  synthesis_model: str = "vertex_ai/gemini-2.5-pro", 
                  validation_model: str = "vertex_ai/gemini-2.5-pro",
-                 derived_metrics_model: str = "vertex_ai/gemini-2.5-flash",
+                 derived_metrics_model: str = "vertex_ai/gemini-2.5-flash-lite",
                  dry_run: bool = False,
                  skip_validation: bool = False,
                  analysis_only: bool = False,
