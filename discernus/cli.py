@@ -312,6 +312,12 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
                 rich_console.print_success("✅ Full experiment pipeline completed successfully!")
                 rich_console.print_info("📊 All phases completed: analysis → derived metrics → evidence retrieval → synthesis")
             
+            # Display cost information if available
+            costs = result.get('costs', {})
+            total_cost = costs.get('total_cost_usd', 0.0)
+            if total_cost > 0:
+                rich_console.print_info(f"💰 Total experiment cost: ${total_cost:.4f} USD")
+            
             if result.get('results_directory'):
                 rich_console.print_info(f"📁 Results saved to: {result['results_directory']}")
             if result.get('mode') == 'resume_from_stats' and result.get('resumed_from'):
@@ -440,6 +446,12 @@ def resume(ctx, experiment_path: str, analysis_model: Optional[str], synthesis_m
                 rich_console.print_info("📊 Full experiment pipeline now complete")
             else:
                 rich_console.print_success("✅ Resume completed successfully!")
+            
+            # Display cost information if available
+            costs = result.get('costs', {})
+            total_cost = costs.get('total_cost_usd', 0.0)
+            if total_cost > 0:
+                rich_console.print_info(f"💰 Total experiment cost: ${total_cost:.4f} USD")
                 
             if result.get('results_directory'):
                 rich_console.print_info(f"📁 Results saved to: {result['results_directory']}")

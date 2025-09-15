@@ -114,11 +114,12 @@ template: |
   **Corpus**: [corpus_filename] ([document_count] documents)
   **Analysis Model**: [analysis_model_used]
   **Synthesis Model**: [synthesis_model_used]
+  **Total Cost**: [total_cost_if_available]
 
   ---
   ```
   
-  Use only metadata that is actually available in the experiment_metadata. This header enables traceability of results.
+  Use only metadata that is actually available in the experiment_metadata. This header enables traceability of results and cost transparency.
 
   ## 1. Executive Summary (2-3 paragraphs)
   - Key findings with statistical support

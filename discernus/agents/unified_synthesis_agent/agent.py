@@ -156,6 +156,12 @@ class UnifiedSynthesisAgent:
             
             # 5. Assemble experiment metadata with model information
             run_id = assets.get('run_id', 'Unknown')
+            
+            # Extract cost information if available
+            costs = assets.get('costs', {})
+            total_cost = costs.get('total_cost_usd', 0.0)
+            cost_info = f"Total Cost: ${total_cost:.4f} USD" if total_cost > 0 else "Total Cost: Not available"
+            
             experiment_metadata = f"""
             Experiment: {Path(assets['experiment_path']).parent.name}
             Run ID: {run_id}
@@ -163,6 +169,7 @@ class UnifiedSynthesisAgent:
             Analysis Model: {getattr(self, 'analysis_model', 'Unknown')}
             Synthesis Model: {getattr(self, 'synthesis_model', 'Unknown')}
             Document Count: {len(research_data.get('documents', []))}
+            {cost_info}
             """
 
             # 6. Assemble prompt using template (no complex assembler needed)

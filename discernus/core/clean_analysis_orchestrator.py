@@ -2314,6 +2314,9 @@ class CleanAnalysisOrchestrator:
             synthesis_agent.analysis_model = analysis_model
             synthesis_agent.synthesis_model = synthesis_model
             
+            # Get current session costs for report header
+            session_costs = audit_logger.get_session_costs() if audit_logger else {"total_cost_usd": 0.0}
+            
             # Create assets dictionary for the new interface
             assets = {
                 'framework_path': Path(self.experiment_path / self.config["framework"]),
@@ -2324,7 +2327,8 @@ class CleanAnalysisOrchestrator:
                 'derived_metrics_results': getattr(self, '_derived_metrics_results', {}),
                 'analysis_results': getattr(self, '_analysis_results', []),
                 'corpus_manifest_path': Path(self.experiment_path / "corpus.md") if (self.experiment_path / "corpus.md").exists() else None,
-                'run_id': run_id
+                'run_id': run_id,
+                'costs': session_costs
             }
             
             assets_dict = synthesis_agent.generate_final_report(assets=assets, artifact_storage=self.artifact_storage)
