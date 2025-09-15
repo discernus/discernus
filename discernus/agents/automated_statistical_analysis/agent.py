@@ -363,6 +363,30 @@ class AutomatedStatisticalAnalysisAgent:
                     try:
                         nested_data = json.loads(value)
                         if isinstance(nested_data, list) and len(nested_data) > 0:
+                            # Special handling for function arrays (like python_module)
+                            if key == "python_module" or all(isinstance(item, dict) and ("code" in item or "content" in item) for item in nested_data):
+                                # This is a function array - combine all function codes
+                                combined_code = []
+                                combined_code.append("import pandas as pd")
+                                combined_code.append("import numpy as np")
+                                combined_code.append("import scipy.stats as stats")
+                                combined_code.append("from typing import Dict, Any, Optional, List, Tuple")
+                                combined_code.append("import warnings")
+                                combined_code.append("")
+                                
+                                for item in nested_data:
+                                    if isinstance(item, dict):
+                                        # Try both "code" and "content" fields
+                                        function_code = item.get("code") or item.get("content")
+                                        if function_code and looks_like_python_code(function_code):
+                                            combined_code.append(function_code)
+                                            combined_code.append("")
+                                
+                                combined_python = "\n".join(combined_code)
+                                print(f"🔍 Combined {len(nested_data)} functions from {key} into Python module")
+                                return combined_python
+                            
+                            # Original nested handling
                             for item in nested_data:
                                 if isinstance(item, dict):
                                     for nested_key, nested_value in item.items():

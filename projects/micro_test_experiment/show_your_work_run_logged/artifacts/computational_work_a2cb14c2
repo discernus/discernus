@@ -1,6 +1,0 @@
-{
-  "derived_metrics": {},
-  "document_id": "Negative Test Document 2",
-  "executed_code": "\npositive_score = 0.0\nnegative_score = 1.0\nnet_sentiment = positive_score - negative_score\nsentiment_magnitude = (positive_score + negative_score) / 2\n",
-  "execution_output": "net_sentiment: -1.0\nsentiment_magnitude: 0.5"
-}

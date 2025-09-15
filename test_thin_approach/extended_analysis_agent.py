@@ -23,6 +23,8 @@ from discernus.core.local_artifact_storage import LocalArtifactStorage
 from discernus.gateway.llm_gateway_enhanced import EnhancedLLMGateway
 from discernus.gateway.model_registry import ModelRegistry
 
+import sys
+sys.path.append('/Volumes/code/discernus')
 from tmp.AnalysisAgent.cache import AnalysisCache
 from tmp.AnalysisAgent.prompt_builder import create_analysis_prompt
 

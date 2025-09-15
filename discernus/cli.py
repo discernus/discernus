@@ -128,7 +128,7 @@ def cli(ctx, verbose, quiet, no_color, config):
     Common Examples:
       python3 -m discernus.cli run                          # Run experiment in current directory
       python3 -m discernus.cli run --dry-run                # Preview what would be executed
-      python3 -m discernus.cli run --analysis-only          # Run analysis only, skip synthesis
+      python3 -m discernus.cli run --analysis-only          # Run analysis only, no CSV export
       python3 -m discernus.cli validate --dry-run           # Preview validation checks
       python3 -m discernus.cli debug --verbose --agent analysis  # Debug analysis agent with test mode
       python3 -m discernus.cli promote --cleanup            # Promote and clean up development files
@@ -178,7 +178,7 @@ def cli(ctx, verbose, quiet, no_color, config):
 @click.option('--skip-validation', is_flag=True, envvar='DISCERNUS_SKIP_VALIDATION', 
               help='Skip coherence validation (not recommended - validation catches common issues)')
 @click.option('--analysis-only', is_flag=True, envvar='DISCERNUS_ANALYSIS_ONLY', 
-              help='Run analysis and export CSV only, skip synthesis report (useful for data exploration)')
+              help='Run analysis only, skip synthesis and CSV export (useful for testing analysis agent)')
 @click.option('--statistical-prep', is_flag=True, envvar='DISCERNUS_STATISTICAL_PREP', 
               help='Run analysis + derived metrics + CSV export, skip synthesis. Perfect for external statistical analysis workflows. Outputs: scores.csv, evidence.csv, metadata.csv')
 @click.option('--skip-synthesis', is_flag=True, envvar='DISCERNUS_SKIP_SYNTHESIS', 

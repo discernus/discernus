@@ -1,0 +1,7 @@
+{
+  "analysis_id": "analysis_3cafd40d",
+  "step": "derived_metrics_generation",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "derived_metrics": "```python\n# Provided dimensional scores\nscores = {\n  \"positive_sentiment\": {\n    \"raw_score\": 1.0,\n    \"salience\": 1.0,\n    \"confidence\": 1.0\n  },\n  \"negative_sentiment\": {\n    \"raw_score\": 0.0,\n    \"salience\": 0.0,\n    \"confidence\": 1.0\n  }\n}\n\n# Calculate Net Sentiment\nnet_sentiment = scores[\"positive_sentiment\"][\"raw_score\"] - scores[\"negative_sentiment\"][\"raw_score\"]\n\n# Calculate Sentiment Magnitude\nsentiment_magnitude = (scores[\"positive_sentiment\"][\"raw_score\"] + scores[\"negative_sentiment\"][\"raw_score\"]) / 2\n\n# Store results in a dictionary\nderived_metrics_results = {\n    \"net_sentiment\": net_sentiment,\n    \"sentiment_magnitude\": sentiment_magnitude\n}\n\nprint(derived_metrics_results)\n```\n\n```json\n{\n  \"net_sentiment\": 1.0,\n  \"sentiment_magnitude\": 0.5\n}\n```",
+  "timestamp": "2025-09-15T02:25:36.285915+00:00"
+}

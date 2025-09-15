@@ -114,7 +114,7 @@ derived_metrics:
     description: "Net sentiment balance (positive - negative)"
     formula: "dimensions.positive_sentiment.raw_score - dimensions.negative_sentiment.raw_score"
   - name: "sentiment_magnitude"
-    description: "Combined emotional intensity (positive + negative)"
+    description: "Average emotional intensity (positive + negative) / 2"
     formula: "(dimensions.positive_sentiment.raw_score + dimensions.negative_sentiment.raw_score) / 2"
 
 output_schema:

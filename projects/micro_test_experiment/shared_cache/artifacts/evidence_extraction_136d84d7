@@ -1,0 +1,7 @@
+{
+  "analysis_id": "analysis_b0fe3dfb",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "evidence_extraction": "```json\n{\n  \"negative_test_2.txt\": {\n    \"positive_sentiment\": [],\n    \"negative_sentiment\": [\n      \"What an awful predicament. All plans are failing miserably. I'm dreading what's to come. Defeat engulfs us. The group performed dreadfully.\",\n      \"We're encountering catastrophe. Despair saturates everything. Such a calamitous result! I'm crushed by the setbacks. Everything appears bleak and discouraging.\"\n    ]\n  }\n}\n```",
+  "timestamp": "2025-09-15T02:26:15.749651+00:00"
+}

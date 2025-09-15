@@ -9,7 +9,7 @@ current orchestrator is designed for notebook generation.
 
 Architecture:
 1. Load specs (experiment.md, framework, corpus)
-2. Run analysis (using EnhancedAnalysisAgent)
+2. Run analysis (using AnalysisAgent)
 3. Run coherence validation (ExperimentCoherenceAgent)
 4. Generate statistical analysis (AutomatedStatisticalAnalysisAgent)
 5. Run synthesis (UnifiedSynthesisAgent)
@@ -40,7 +40,9 @@ from .audit_logger import AuditLogger
 from .local_artifact_storage import LocalArtifactStorage
 from .enhanced_manifest import EnhancedManifest
 from ..agents.experiment_coherence_agent import ExperimentCoherenceAgent
-from ..agents.EnhancedAnalysisAgent.main import EnhancedAnalysisAgent
+from ..agents.analysis_agent.main import AnalysisAgent
+from ..gateway.llm_gateway_enhanced import EnhancedLLMGateway
+from ..gateway.model_registry import ModelRegistry
 from ..agents.automated_statistical_analysis.agent import AutomatedStatisticalAnalysisAgent
 from ..agents.automated_derived_metrics.agent import AutomatedDerivedMetricsAgent
 # TxtaiEvidenceCurator removed from mainline; use RAGIndexManager instead
@@ -115,6 +117,10 @@ class CleanAnalysisOrchestrator:
 
         # Progress manager for UI feedback
         self.progress_manager = progress_manager
+        
+        # Initialize model registry and LLM gateway for Show Your Work agents
+        self.model_registry = ModelRegistry()
+        self.llm_gateway = EnhancedLLMGateway(self.model_registry)
 
         # Testing and development mode flags
         self.test_mode = False
@@ -248,9 +254,11 @@ class CleanAnalysisOrchestrator:
                 
                 # Mode-specific handling after analysis
                 if self.analysis_only:
-                    # Analysis-only mode: Export CSV and exit
-                    self._log_progress("📊 Analysis-only mode: Exporting CSV and completing...")
-                    results_dir = self._export_analysis_only_csv(analysis_results, audit_logger, run_id)
+                    # Analysis-only mode: Complete analysis and exit (no CSV export)
+                    self._log_progress("📊 Analysis-only mode: Analysis complete, no CSV export")
+                    run_dir = self.experiment_path / "runs" / run_id
+                    results_dir = run_dir / "results"
+                    results_dir.mkdir(parents=True, exist_ok=True)
                     
                     # Create provenance organization
                     self._create_provenance_organization(run_id, audit_logger)
@@ -679,9 +687,11 @@ class CleanAnalysisOrchestrator:
             
             # Initialize LLM Gateway (matching legacy pattern)
             self._log_progress("🔧 Initializing LLM Gateway...")
-            from ..gateway.llm_gateway import LLMGateway
-            from ..gateway.model_registry import ModelRegistry
-            self.llm_gateway = LLMGateway(ModelRegistry())
+            # Use the already initialized EnhancedLLMGateway for Show Your Work
+            if not hasattr(self, 'llm_gateway'):
+                from ..gateway.llm_gateway import LLMGateway
+                from ..gateway.model_registry import ModelRegistry
+                self.llm_gateway = LLMGateway(ModelRegistry())
             
             # Performance monitoring already initialized in constructor
             
@@ -943,12 +953,15 @@ class CleanAnalysisOrchestrator:
             if not cached_validation.get('success', False):
                 issues = cached_validation.get('issues', ['Unknown validation failure'])
                 # Handle both string and dict formats in cached data
-                if issues and isinstance(issues[0], dict):
-                    # If issues are dictionaries, extract descriptions
-                    issue_descriptions = [issue.get('description', str(issue)) for issue in issues]
+                if issues and len(issues) > 0:
+                    if isinstance(issues[0], dict):
+                        # If issues are dictionaries, extract descriptions
+                        issue_descriptions = [issue.get('description', str(issue)) for issue in issues]
+                    else:
+                        # If issues are already strings, use them directly
+                        issue_descriptions = [str(issue) for issue in issues]
                 else:
-                    # If issues are already strings, use them directly
-                    issue_descriptions = issues
+                    issue_descriptions = ['Unknown validation failure']
                 raise CleanAnalysisError(f"Experiment validation failed (cached): {'; '.join(issue_descriptions)}")
             
             self.performance_metrics["cache_hits"] += 1
@@ -1104,8 +1117,8 @@ class CleanAnalysisOrchestrator:
         # Prepare documents for analysis
         prepared_documents = self._prepare_documents_for_analysis(corpus_documents)
         
-        # Initialize analysis agent
-        analysis_agent = EnhancedAnalysisAgent(
+        # Initialize analysis agent (Production THIN v2.0 with 6-step approach)
+        analysis_agent = AnalysisAgent(
             security_boundary=self.security,
             audit_logger=audit_logger,
             artifact_storage=self.artifact_storage
@@ -1134,34 +1147,38 @@ class CleanAnalysisOrchestrator:
                 # Analyze single document (analysis agent handles its own caching)
                 self._log_progress(f"🔬 Analyzing document: {prepared_doc.get('filename', 'Unknown')}")
                 result = analysis_agent.analyze_documents(
-                    corpus_documents=[prepared_doc],
                     framework_content=framework_content,
-                    experiment_config=self.config,
-                    model=analysis_model
+                    documents=[prepared_doc],
+                    experiment_metadata=self.config
                 )
                 
-                if result and 'analysis_result' in result:
-                    # Extract analysis result from agent response
-                    analysis_result = result['analysis_result']
-                    result_content = analysis_result.get('result_content', {})
-
-                    # Track cache performance based on analysis agent's caching
-                    if analysis_result.get('cached', False):
-                        self.performance_metrics["cache_hits"] += 1
-                    else:
-                        self.performance_metrics["cache_misses"] += 1
-
-                    # The raw_analysis_response is stored in result_content, not nested deeper
-                    raw_analysis_response = result_content.get('raw_analysis_response', '')
+                if result and 'composite_analysis' in result:
+                    # Extract analysis result from new AnalysisAgent response
+                    composite_analysis = result['composite_analysis']
+                    raw_analysis_response = composite_analysis.get('raw_analysis_response', '')
+                    
+                    # Extract scores and evidence from the new structure
+                    scores_result = result.get('score_extraction', {})
+                    evidence_result = result.get('evidence_extraction', {})
+                    
+                    # Track cache performance (new agent doesn't have explicit cache flags)
+                    # Assume cache miss for now since new agent handles caching internally
+                    self.performance_metrics["cache_misses"] += 1
 
                     # Store the full result with raw_analysis_response at top level for statistical processing
                     full_result = {
-                        'analysis_result': analysis_result,
+                        'analysis_result': {
+                            'result_content': {
+                                'raw_analysis_response': raw_analysis_response
+                            },
+                            'cached': False  # New agent handles caching internally
+                        },
                         'raw_analysis_response': raw_analysis_response,
-                        'scores_hash': result.get('scores_hash', ''),
-                        'evidence_hash': result.get('evidence_hash', ''),
+                        'scores_hash': scores_result.get('artifact_hash', ''),
+                        'evidence_hash': evidence_result.get('artifact_hash', ''),
                         'document_id': prepared_doc.get('document_id', ''),
-                        'filename': prepared_doc.get('filename', 'Unknown')
+                        'filename': prepared_doc.get('filename', 'Unknown'),
+                        'verification_status': result.get('verification', {}).get('verification_status', 'unknown')
                     }
 
                     analysis_results.append(full_result)
@@ -4419,17 +4436,27 @@ class CleanAnalysisOrchestrator:
             if not raw_response:
                 continue
                 
-            # Extract JSON from the delimited response
+            # Extract JSON from the response (handle both old delimited format and new markdown format)
             start_marker = '<<<DISCERNUS_ANALYSIS_JSON_v6>>>'
             end_marker = '<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
             
             start_idx = raw_response.find(start_marker)
             end_idx = raw_response.find(end_marker)
             
-            if start_idx == -1 or end_idx == -1:
-                continue
-                
-            json_content = raw_response[start_idx + len(start_marker):end_idx].strip()
+            if start_idx != -1 and end_idx != -1:
+                # Old delimited format
+                json_content = raw_response[start_idx + len(start_marker):end_idx].strip()
+            else:
+                # New markdown format - extract JSON from ```json blocks
+                if '```json' in raw_response and '```' in raw_response:
+                    start_idx = raw_response.find('```json') + 7
+                    end_idx = raw_response.rfind('```')
+                    if start_idx > 6 and end_idx > start_idx:
+                        json_content = raw_response[start_idx:end_idx].strip()
+                    else:
+                        continue
+                else:
+                    continue
             
             try:
                 analysis_data = json.loads(json_content)
@@ -4523,17 +4550,27 @@ class CleanAnalysisOrchestrator:
             if not raw_response:
                 continue
                 
-            # Extract JSON from the delimited response
+            # Extract JSON from the response (handle both old delimited format and new markdown format)
             start_marker = '<<<DISCERNUS_ANALYSIS_JSON_v6>>>'
             end_marker = '<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
             
             start_idx = raw_response.find(start_marker)
             end_idx = raw_response.find(end_marker)
             
-            if start_idx == -1 or end_idx == -1:
-                continue
-                
-            json_content = raw_response[start_idx + len(start_marker):end_idx].strip()
+            if start_idx != -1 and end_idx != -1:
+                # Old delimited format
+                json_content = raw_response[start_idx + len(start_marker):end_idx].strip()
+            else:
+                # New markdown format - extract JSON from ```json blocks
+                if '```json' in raw_response and '```' in raw_response:
+                    start_idx = raw_response.find('```json') + 7
+                    end_idx = raw_response.rfind('```')
+                    if start_idx > 6 and end_idx > start_idx:
+                        json_content = raw_response[start_idx:end_idx].strip()
+                    else:
+                        continue
+                else:
+                    continue
             
             try:
                 analysis_data = json.loads(json_content)

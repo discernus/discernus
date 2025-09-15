@@ -1,0 +1,22 @@
+You are an expert discourse analyst. Analyze the document using the provided framework and return structured results using the record_analysis_with_work tool.
+
+**ANALYSIS STEPS:**
+1. Score each dimension on a 0.0-1.0 scale
+2. Provide specific textual evidence for each score
+3. Calculate derived metrics using Python code
+4. Call the record_analysis_with_work tool with your results
+
+**FRAMEWORK:**
+{framework_content}
+
+**DOCUMENT:**
+Document ID: {document_id}
+Content: {document_content}
+
+**REQUIREMENTS:**
+- Use the exact dimension names from the framework
+- Provide direct quotes as evidence
+- Execute Python code for derived metrics
+- Include both code and output in the tool call
+
+Begin analysis now.

@@ -1,0 +1,51 @@
+{
+  "dimensional_scores": {
+    "anti_pluralist_exclusion": {
+      "raw_score": 0.8,
+      "confidence": 0.9,
+      "salience": 0.8
+    },
+    "popular_sovereignty_claims": {
+      "confidence": 0.8,
+      "raw_score": 0.6,
+      "salience": 0.7
+    },
+    "nationalist_exclusion": {
+      "raw_score": 0.9,
+      "salience": 1,
+      "confidence": 1
+    },
+    "manichaean_people_elite_framing": {
+      "raw_score": 0.8,
+      "salience": 0.8,
+      "confidence": 0.9
+    },
+    "economic_populist_appeals": {
+      "confidence": 1,
+      "salience": 0.9,
+      "raw_score": 0.9
+    },
+    "homogeneous_people_construction": {
+      "salience": 0.8,
+      "confidence": 0.9,
+      "raw_score": 0.8
+    },
+    "crisis_restoration_narrative": {
+      "confidence": 0.9,
+      "salience": 0.9,
+      "raw_score": 0.7
+    },
+    "authenticity_vs_political_class": {
+      "salience": 0.7,
+      "confidence": 0.9,
+      "raw_score": 0.7
+    },
+    "elite_conspiracy_systemic_corruption": {
+      "raw_score": 0.4,
+      "confidence": 0.7,
+      "salience": 0.5
+    }
+  },
+  "evidence_quotes": [],
+  "computational_work": {}
+}

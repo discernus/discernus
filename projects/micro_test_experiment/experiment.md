@@ -6,20 +6,20 @@ Complete pipeline validation with 4 documents, 2 dimensions, 2 derived metrics, 
 ## Research Questions
 - How do sentiment categories differ in positive and negative sentiment scores?
 - What are the patterns in net sentiment and sentiment magnitude across different sentiment categories?
-- Are there significant differences between positive and negative sentiment groups in ANOVA analysis?
+- What descriptive patterns emerge between positive and negative sentiment groups?
 
 ## Expected Outcomes
-Statistical comparison of sentiment scores between positive and negative sentiment categories, including ANOVA analysis, descriptive statistics, and derived metric calculations.
+Descriptive analysis of sentiment scores between positive and negative sentiment categories, including descriptive statistics, derived metric calculations, and pattern identification.
 
 ## Data Grouping and Custom Variable Mapping
 
 **Primary Analysis Variable**: sentiment_category (positive vs negative)
 - Two groups: positive (n=2), negative (n=2)
-- Both groups meet ANOVA requirements (n≥2)
+- Sample size N=4 suitable for descriptive analysis and case study patterns
 
 **Statistical Analysis Requirements**:
-- ANOVA comparison between sentiment categories
 - Descriptive statistics for all dimensions and derived metrics
+- Pattern analysis between sentiment categories
 - Reliability analysis for measurement consistency
 
 ---
@@ -41,17 +41,17 @@ components:
 # 5.3: Hypotheses (Optional but Recommended)
 hypotheses:
   - id: "H1"
-    description: "Positive sentiment documents show significantly higher positive sentiment scores than negative sentiment documents"
+    description: "Positive sentiment documents show higher positive sentiment scores than negative sentiment documents"
     falsifiable: true
     mutually_exclusive: true
     collective_exhaustive: true
   - id: "H2"
-    description: "Negative sentiment documents show significantly higher negative sentiment scores than positive sentiment documents"
+    description: "Negative sentiment documents show higher negative sentiment scores than positive sentiment documents"
     falsifiable: true
     mutually_exclusive: true
     collective_exhaustive: true
   - id: "H3"
-    description: "There are significant differences between positive and negative sentiment groups in ANOVA analysis"
+    description: "There are observable patterns between positive and negative sentiment groups in descriptive analysis"
     falsifiable: true
     mutually_exclusive: true
     collective_exhaustive: true

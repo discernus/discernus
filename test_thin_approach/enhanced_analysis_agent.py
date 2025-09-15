@@ -17,6 +17,8 @@ from discernus.core.security_boundary import ExperimentSecurityBoundary
 from discernus.core.audit_logger import AuditLogger
 from discernus.core.local_artifact_storage import LocalArtifactStorage
 from discernus.gateway.llm_gateway_enhanced import EnhancedLLMGateway
+import sys
+sys.path.append('/Volumes/code/discernus')
 from tmp.AnalysisAgent.prompt_builder import create_analysis_prompt
 
 
@@ -144,112 +146,42 @@ CRITICAL REQUIREMENTS:
 
     def _load_prompt_template(self) -> str:
         """Load the enhanced prompt template with markup instructions."""
-        return """You are an expert political discourse analyst specializing in populist rhetoric analysis using the Populist Discourse Analysis Framework (PDAF) v10.0.2.
+        # Load the original YAML template and add markup instructions
+        original_template_path = Path("/Volumes/code/discernus/tmp/AnalysisAgent/prompt_3run.yaml")
+        with open(original_template_path, 'r') as f:
+            yaml_content = f.read()
+        
+        # Extract the template content from YAML
+        import yaml
+        yaml_data = yaml.safe_load(yaml_content)
+        base_template = yaml_data['template']
+        
+        # Add markup instructions to the template
+        markup_addition = """
 
-ANALYSIS TASK:
-Perform a comprehensive analysis of the provided document(s) using the PDAF framework. Your analysis must include:
+**DOCUMENT MARKUP REQUIREMENT (NEW):**
+In addition to the analysis above, you must also provide a marked-up version of the original document with systematic dimensional annotations.
 
-1. **Dimensional Scoring**: Score each of the 9 PDAF dimensions on a 0-1 scale for:
-   - raw_score: Presence/strength of the dimension
-   - salience: Emphasis/importance in the discourse
-   - confidence: Your confidence in the assessment
+For the marked_up_document field, you must:
+1. Include the COMPLETE original document text
+2. Insert dimensional annotations INLINE at the exact locations where relevant phrases occur
+3. Use this format: [DIMENSION_NAME: "quoted text from document"]
+4. Mark ALL text relevant to each dimension, not just the evidence quotes
+5. Preserve the full context and flow of the original document
+6. Format the output in MARKDOWN for human readability
 
-2. **Evidence Collection**: Provide 1-2 high-quality quotes per dimension that best exemplify the scoring.
+This creates a comprehensive markup showing your complete reasoning for each dimensional score, allowing researchers to see exactly how you interpreted the document without losing any context.
 
-3. **Document Markup**: Systematically annotate the original document with dimensional markers using this format:
-   [DIMENSION_NAME: "quoted text from document"]
-   
-   Mark ALL text relevant to each dimension, not just the evidence quotes. This creates a comprehensive markup showing your complete reasoning.
+Example of inline markup in Markdown:
+```markdown
+# State of the Union Address - Marked Up Document
 
-INTERNAL CONSISTENCY APPROACH:
-Perform three independent analytical approaches:
-- Evidence-First: Start with quotes, then score
-- Context-Weighted: Consider broader context and framing
-- Pattern-Based: Look for rhetorical patterns and structures
+My fellow Americans, three years ago, we launched the Great American Comeback. Tonight, I stand before you to share the incredible results. [HOMOGENEOUS_PEOPLE_CONSTRUCTION: Jobs are booming, incomes are soaring, poverty is plummeting, crime is falling, confidence is surging, and our country is thriving and highly respected again!] [POPULAR_SOVEREIGNTY_CLAIMS: The agenda I will lay out this evening is not a Republican agenda or a Democrat agenda. It's the agenda of the American people.] [CRISIS_RESTORATION_NARRATIVE: This year, America will recognize two important anniversaries that show us the majesty of America's mission and the power of American pride.]
+```
 
-Then aggregate using median for scores and select the most representative evidence.
-
-OUTPUT FORMAT:
-Return your complete analysis in this exact JSON structure:
-
-{
-  "analysis_metadata": {
-    "framework_name": "populist_discourse_analysis_framework",
-    "framework_version": "10.0.2",
-    "analyst_confidence": 0.95,
-    "analysis_notes": "Applied three independent analytical approaches with median aggregation and comprehensive document markup",
-    "internal_consistency_approach": "3-run median aggregation with markup"
-  },
-  "document_analyses": [
-    {
-      "document_id": "DOCUMENT_ID_PLACEHOLDER",
-      "document_name": "DOCUMENT_NAME",
-      "dimensional_scores": {
-        "manichaean_people_elite_framing": {
-          "raw_score": 0.8,
-          "salience": 0.7,
-          "confidence": 0.9
-        },
-        "crisis_restoration_narrative": {
-          "raw_score": 0.9,
-          "salience": 0.8,
-          "confidence": 0.9
-        },
-        "popular_sovereignty_claims": {
-          "raw_score": 0.7,
-          "salience": 0.6,
-          "confidence": 0.8
-        },
-        "anti_pluralist_exclusion": {
-          "raw_score": 0.7,
-          "salience": 0.6,
-          "confidence": 0.8
-        },
-        "elite_conspiracy_systemic_corruption": {
-          "raw_score": 0.6,
-          "salience": 0.5,
-          "confidence": 0.8
-        },
-        "authenticity_vs_political_class": {
-          "raw_score": 0.8,
-          "salience": 0.7,
-          "confidence": 0.9
-        },
-        "homogeneous_people_construction": {
-          "raw_score": 0.8,
-          "salience": 0.7,
-          "confidence": 0.9
-        },
-        "nationalist_exclusion": {
-          "raw_score": 0.7,
-          "salience": 0.6,
-          "confidence": 0.8
-        },
-        "economic_populist_appeals": {
-          "raw_score": 0.9,
-          "salience": 0.8,
-          "confidence": 0.9
-        }
-      },
-      "evidence": [
-        {
-          "dimension": "manichaean_people_elite_framing",
-          "quote_text": "Exact quote from document",
-          "confidence": 0.9,
-          "context_type": "direct_statement"
-        }
-      ],
-      "marked_up_document": "The complete original document with systematic dimensional markup using [DIMENSION_NAME: \"quoted text\"] format throughout"
-    }
-  ]
-}
-
-CRITICAL REQUIREMENTS:
-- Mark up ALL relevant text, not just evidence quotes
-- Use exact dimension names from the framework
-- Ensure markup covers the complete reasoning for each score
-- Maintain academic rigor and transparency
-- Provide comprehensive provenance for all assessments"""
+Return the complete marked-up document in Markdown format in the marked_up_document field of your JSON response."""
+        
+        return base_template + markup_addition
 
     def run_enhanced_analysis(self, framework_content: str, corpus_documents: List[Dict[str, Any]], 
                              experiment_config: Dict[str, Any], model: str = "vertex_ai/gemini-2.5-flash") -> Dict[str, Any]:
@@ -328,28 +260,7 @@ CRITICAL REQUIREMENTS:
         documents, document_hashes = self._prepare_documents(corpus_documents, analysis_id)
         
         # Create enhanced prompt with markup instructions
-        # Use the original prompt template but add markup instructions
-        original_prompt_template = self._load_original_prompt_template()
-        prompt_text = create_analysis_prompt(original_prompt_template, analysis_id, framework_content, documents)
-        
-        # Add markup instructions to the prompt
-        markup_instructions = """
-
-IMPORTANT: In addition to the analysis above, you must also provide a marked-up version of the original document with systematic dimensional annotations.
-
-For the marked_up_document field, systematically annotate the original document text with dimensional markers using this format:
-[DIMENSION_NAME: "quoted text from document"]
-
-Mark ALL text relevant to each dimension, not just the evidence quotes. This creates a comprehensive markup showing your complete reasoning for each dimensional score.
-
-Example:
-[MANICHAEAN_PEOPLE_ELITE: "No issue better illustrates the divide between America's working class and America's political class than illegal immigration."]
-
-[CRISIS_RESTORATION: "Over the last 2 years, my administration has moved with urgency and historic speed to confront problems neglected by leaders of both parties over many decades."]
-
-Include the complete marked-up document in the marked_up_document field of your JSON response."""
-        
-        prompt_text += markup_instructions
+        prompt_text = create_analysis_prompt(self.prompt_template, analysis_id, framework_content, documents)
         
         # Execute LLM call
         response = self.gateway.execute_call(
@@ -577,11 +488,18 @@ Do the math internally - recalculate the derived metrics using the dimensional s
     def _step6_markup_extraction(self, composite_result: Dict[str, Any], analysis_id: str) -> Dict[str, Any]:
         """Step 6: Extract marked-up document from composite result using Flash Lite."""
         
-        prompt = f"""Extract the marked-up document from this analysis result:
+        prompt = f"""Extract the marked-up document from this analysis result and format it as Markdown for human readability:
 
 {composite_result['raw_analysis_response']}
 
-Return the marked-up document with dimensional annotations in whatever format you think is most useful for provenance and verification."""
+Return the marked-up document in Markdown format with:
+1. A clear header (e.g., "# Document Analysis - Marked Up Text")
+2. The complete original document text with inline dimensional annotations
+3. Use the format: [DIMENSION_NAME: "quoted text from document"]
+4. Preserve all original formatting and context
+5. Make it readable for human researchers
+
+Format as Markdown, not JSON."""
 
         response = self.gateway.execute_call(
             model="vertex_ai/gemini-2.5-flash-lite",

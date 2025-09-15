@@ -247,3 +247,15 @@
 - **[ALPHA-009] Derived Metrics Syntax Error** - HIGH priority
 
 **Total Bugs Moved**: 2 critical bugs moved to Sprint 16
+
+### Task: Cleanup Deprecated Agents
+
+**Issue**: Remove deprecated agent implementations and consolidate to current architecture.
+
+**Scope**:
+- Identify deprecated agents in `/discernus/agents/` directory
+- Remove obsolete agent files and configurations
+- Update references to deprecated agents in codebase
+- Ensure no breaking changes to current functionality
+
+**Priority**: Low - Cleanup task for code quality and maintainability
