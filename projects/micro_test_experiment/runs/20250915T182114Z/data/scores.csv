@@ -1,5 +1,9 @@
-document_id,filename,evidence_hash
-doc_7077249305267185222,positive_test_1.txt,b58c47a8e17397997491a960078f5c37a9e2de21244b2cef694911ebb94614bb
-doc_6563748975676592145,positive_test_2.txt,7945d3a9ef09469d3a11cbc16e288ec78dc4b84d31a4f8eced80b00d56cc6d7a
-doc_1736647074766923388,negative_test_1.txt,07a7112956200139da575a806a76a73df9fca4f6c59fa639db5478040bd7d8a1
-doc_-2867517522434725762,negative_test_2.txt,1301d029ba995fe8b8904f69b7416dcdbed4888073d8e3500cc42c2e4f1bc0c0
+analysis_id,model_used,timestamp,filename,sentiment_dimension,raw_score,salience,confidence
+analysis_ee8e06ee,vertex_ai/gemini-2.5-flash-lite,2025-09-15T18:16:28.230022+00:00,negative_test_1.txt,positive_sentiment,0.0,0.0,1.0
+analysis_ee8e06ee,vertex_ai/gemini-2.5-flash-lite,2025-09-15T18:16:28.230022+00:00,negative_test_1.txt,negative_sentiment,0.9,1.0,1.0
+analysis_82819fbe,vertex_ai/gemini-2.5-flash-lite,2025-09-15T18:16:43.164555+00:00,N/A,positive_sentiment,0.0,0.0,1.0
+analysis_82819fbe,vertex_ai/gemini-2.5-flash-lite,2025-09-15T18:16:43.164555+00:00,N/A,negative_sentiment,1.0,1.0,1.0
+analysis_f857944f,vertex_ai/gemini-2.5-flash-lite,2025-09-15T18:16:03.075304+00:00,N/A,positive_sentiment,1.0,1.0,1.0
+analysis_f857944f,vertex_ai/gemini-2.5-flash-lite,2025-09-15T18:16:03.075304+00:00,N/A,negative_sentiment,0.0,0.0,1.0
+analysis_783f7191,vertex_ai/gemini-2.5-flash-lite,2025-09-15T18:16:15.678731+00:00,N/A,positive_sentiment,1.0,1.0,1.0
+analysis_783f7191,vertex_ai/gemini-2.5-flash-lite,2025-09-15T18:16:15.678731+00:00,N/A,negative_sentiment,0.0,0.0,1.0

@@ -1,7 +1,0 @@
-{
-  "analysis_id": "analysis_50a3be3a",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "evidence_extraction": "```json\n{\n  \"negative_sentiment\": [\n    \"This is a terrible situation.\",\n    \"Everything looks dark and hopeless.\"\n  ]\n}\n```",
-  "timestamp": "2025-09-15T13:34:50.258813+00:00"
-}

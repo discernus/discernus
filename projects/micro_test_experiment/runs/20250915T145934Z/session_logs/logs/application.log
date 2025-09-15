@@ -1,4 +1,0 @@
-2025-09-15 10:59:34.270 | INFO     | discernus.core.logging_config:setup_logging:220 | Logging system initialized
-2025-09-15 10:59:34.272 | INFO     | discernus.core.logging_config:log_experiment_start:243 | Experiment started
-2025-09-15 10:59:34.310 | INFO     | discernus.gateway.llm_gateway:execute_call:164 | LLM Request
-2025-09-15 11:00:35.146 | INFO     | discernus.gateway.llm_gateway:execute_call:182 | LLM Response

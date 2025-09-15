@@ -1,1051 +1,246 @@
 {
-  "034acadec308261f0fca9cef5133e158dfe988fb2e451a6a771f003c30dfa426": {
-    "artifact_path": "analysis_result_034acade",
-    "created_at": "2025-09-13T02:16:55.050478+00:00",
-    "human_filename": "analysis_result_034acade",
+  "06ecb563216c246412e689919fc30cbb161de05df55a29863adfa8095ca16cd4": {
+    "artifact_path": "evidence_extraction_06ecb563",
+    "created_at": "2025-09-15T20:08:32.530862+00:00",
+    "human_filename": "evidence_extraction_06ecb563",
     "is_directory": false,
     "metadata": {
-      "analysis_id": "analysis_44d3e97ac06c",
-      "artifact_type": "analysis_result"
+      "analysis_id": "analysis_c2e21f9f",
+      "artifact_type": "evidence_extraction"
     },
-    "size_bytes": 5942,
-    "source_run": "20250913T015658Z"
+    "size_bytes": 3061,
+    "source_run": "20250915T200718Z"
   },
-  "0913be79ad26514e4bd47cb5989fccb7a5e5dda1b7e94fa82dc1c60f03f780a0": {
-    "artifact_path": "analysis_result_0913be79",
-    "created_at": "2025-09-13T02:18:11.556848+00:00",
-    "human_filename": "analysis_result_0913be79",
+  "0baf0e2ddcb05396c3cadd5f5a05e9ee2592c66244896a74203d003068590977": {
+    "artifact_path": "derived_metrics_0baf0e2d",
+    "created_at": "2025-09-15T20:09:30.591509+00:00",
+    "human_filename": "derived_metrics_0baf0e2d",
     "is_directory": false,
     "metadata": {
-      "analysis_id": "analysis_65cda4c3028c",
-      "artifact_type": "analysis_result"
+      "analysis_id": "analysis_ad1b6c2e",
+      "artifact_type": "derived_metrics"
     },
-    "size_bytes": 7523,
-    "source_run": "20250913T015658Z"
+    "size_bytes": 7119,
+    "source_run": "20250915T200718Z"
   },
-  "1f395bc5c19526653888779b3287438ee02874ece8ed59a7c182669f90b37513": {
-    "artifact_path": "evidence_v6_1f395bc5",
-    "created_at": "2025-09-13T02:11:06.303357+00:00",
-    "human_filename": "evidence_v6_1f395bc5",
+  "0fabe6747ade59e1cc23253ad85e99d4fb4840bcf3385142ba4b2ac8a40a7513": {
+    "artifact_path": "score_extraction_0fabe674",
+    "created_at": "2025-09-15T20:10:35.598112+00:00",
+    "human_filename": "score_extraction_0fabe674",
     "is_directory": false,
     "metadata": {
-      "artifact_type": "evidence_v6",
-      "document_hashes": [
-        "bb976cc552e17c599dff9438eb33e0b8842f0f4ccb05d97f38a53cf88d6be1f5"
-      ],
-      "extraction_method": "analysis_time_extraction"
+      "analysis_id": "analysis_b6a588cd",
+      "artifact_type": "score_extraction"
     },
-    "size_bytes": 6498,
-    "source_run": "20250913T015658Z"
+    "size_bytes": 1298,
+    "source_run": "20250915T200718Z"
   },
-  "250604834035c2ea597e7758918f1607a2975364fd52c90c83961a937c5ef7e4": {
-    "artifact_path": "raw_analysis_response_v6_25060483",
-    "created_at": "2025-09-13T02:15:07.297862+00:00",
-    "human_filename": "raw_analysis_response_v6_25060483",
+  "28485c85806f3c8312616c0bc335f9e9b8be25d963d40ea8bb2490302405a5d9": {
+    "artifact_path": "composite_analysis_28485c85",
+    "created_at": "2025-09-15T20:08:28.894370+00:00",
+    "human_filename": "composite_analysis_28485c85",
     "is_directory": false,
     "metadata": {
-      "artifact_type": "raw_analysis_response_v6",
-      "document_hashes": [
-        "fdc25d0eec8d468e7bbb4ecfc8ab615238ec10d4ba128a7c4ee3ccd02350bdf6"
-      ],
-      "framework_hash": "3a090a7d30db1dae4b4542f24ba898e79d7c1460451746b9e9ada94c7f33b485",
-      "framework_version": "v6.0"
+      "analysis_id": "analysis_c2e21f9f",
+      "artifact_type": "composite_analysis"
     },
-    "size_bytes": 4433,
-    "source_run": "20250913T015658Z"
+    "size_bytes": 11816,
+    "source_run": "20250915T200718Z"
   },
-  "316f9a753ac3d7db16fb9e164cd8f3314996f11a27a7b2256a738bc55304fba5": {
-    "artifact_path": "evidence_v6_316f9a75",
-    "created_at": "2025-09-13T02:14:06.273922+00:00",
-    "human_filename": "evidence_v6_316f9a75",
+  "2b90b08b86b59cadacfc3aaee8933740080333fa1f870ea20ecc2276d6f87ef0": {
+    "artifact_path": "composite_analysis_2b90b08b",
+    "created_at": "2025-09-15T20:10:31.310525+00:00",
+    "human_filename": "composite_analysis_2b90b08b",
     "is_directory": false,
     "metadata": {
-      "artifact_type": "evidence_v6",
-      "document_hashes": [
-        "318908f1da8b08b3e9ffd219b32892f42f4f35e5a08ad94e280372a8b8c975c5"
-      ],
-      "extraction_method": "analysis_time_extraction"
+      "analysis_id": "analysis_b6a588cd",
+      "artifact_type": "composite_analysis"
     },
-    "size_bytes": 5233,
-    "source_run": "20250913T015658Z"
+    "size_bytes": 24617,
+    "source_run": "20250915T200718Z"
   },
-  "318908f1da8b08b3e9ffd219b32892f42f4f35e5a08ad94e280372a8b8c975c5": {
-    "artifact_path": "charlie_kirk_cpac_2021_ODDO0eajI9k_318908f1.txt",
-    "created_at": "2025-09-13T02:12:52.092433+00:00",
-    "human_filename": "charlie_kirk_cpac_2021_ODDO0eajI9k_318908f1.txt",
+  "33df4bdcedd5cda569293cc6bfa965f83cfabb6c3919966c9b0a54dec04136e1": {
+    "artifact_path": "cached_result_33df4bdc",
+    "created_at": "2025-09-15T20:07:53.230855+00:00",
+    "human_filename": "cached_result_33df4bdc",
     "is_directory": false,
     "metadata": {
-      "analysis_id": "analysis_cd88bbe03b5d",
-      "artifact_type": "corpus_document",
-      "original_filename": "cpac/charlie_kirk_cpac_2021_ODDO0eajI9k.txt"
+      "agent": "ValidationPhase",
+      "artifact_type": "cached_result",
+      "cache_key": "validation_517bf8ffb604"
     },
-    "size_bytes": 7835,
-    "source_run": "20250913T015658Z"
+    "size_bytes": 1190,
+    "source_run": "20250915T200718Z"
   },
-  "327e5ae429c0c62ce68d6b47aee21ef88a5f7d3c19f0daf8ded3c710800eac2f": {
-    "artifact_path": "raw_analysis_response_v6_327e5ae4",
-    "created_at": "2025-09-13T02:11:06.301764+00:00",
-    "human_filename": "raw_analysis_response_v6_327e5ae4",
+  "59f52810435e7aed4758f904dae6dc930caedd09737c5f42ea3aa811688eae4a": {
+    "artifact_path": "score_extraction_59f52810",
+    "created_at": "2025-09-15T20:09:25.418147+00:00",
+    "human_filename": "score_extraction_59f52810",
     "is_directory": false,
     "metadata": {
-      "artifact_type": "raw_analysis_response_v6",
-      "document_hashes": [
-        "bb976cc552e17c599dff9438eb33e0b8842f0f4ccb05d97f38a53cf88d6be1f5"
-      ],
-      "framework_hash": "3a090a7d30db1dae4b4542f24ba898e79d7c1460451746b9e9ada94c7f33b485",
-      "framework_version": "v6.0"
+      "analysis_id": "analysis_ad1b6c2e",
+      "artifact_type": "score_extraction"
     },
-    "size_bytes": 6308,
-    "source_run": "20250913T015658Z"
+    "size_bytes": 1227,
+    "source_run": "20250915T200718Z"
   },
-  "32e126a91ccba1d41943afeb9833fec623638866cb19edea591172fe7089765a": {
-    "artifact_path": "cache_test_32e126a9",
-    "created_at": "2025-09-13T01:53:27.086952+00:00",
-    "human_filename": "cache_test_32e126a9",
+  "6804de5eb82a2d8321f705bb1a9336b3a316a32159543488a788abb6654d38e6": {
+    "artifact_path": "marked_up_document_6804de5e",
+    "created_at": "2025-09-15T20:08:44.488171+00:00",
+    "human_filename": "marked_up_document_6804de5e",
     "is_directory": false,
     "metadata": {
-      "artifact_type": "cache_test",
-      "test_key": "cache_test_key"
+      "analysis_id": "analysis_c2e21f9f",
+      "artifact_type": "marked_up_document",
+      "format": "markdown"
     },
-    "size_bytes": 65,
-    "source_run": "20250913T015327Z"
+    "size_bytes": 6212,
+    "source_run": "20250915T200718Z"
   },
-  "34ae6acac5fb781d41f0ea731a4bcfc681f1426063a59f8212783718e3bac0fa": {
-    "artifact_path": "charlie_kirk_hasan_piker_debate_2018_34ae6aca.txt",
-    "created_at": "2025-09-13T02:11:06.308801+00:00",
-    "human_filename": "charlie_kirk_hasan_piker_debate_2018_34ae6aca.txt",
+  "7071fb4b692744018e3330a0c5791a03f814d6f76cfd1170fe389b70ce5bff6d": {
+    "artifact_path": "derived_metrics_7071fb4b",
+    "created_at": "2025-09-15T20:10:41.044887+00:00",
+    "human_filename": "derived_metrics_7071fb4b",
     "is_directory": false,
     "metadata": {
-      "analysis_id": "analysis_a6f11c623657",
-      "artifact_type": "corpus_document",
-      "original_filename": "debates/charlie_kirk_hasan_piker_debate_2018.txt"
+      "analysis_id": "analysis_b6a588cd",
+      "artifact_type": "derived_metrics"
     },
-    "size_bytes": 67470,
-    "source_run": "20250913T015658Z"
+    "size_bytes": 6985,
+    "source_run": "20250915T200718Z"
   },
-  "38822debe4c47a7953932dd59d7a0cec9ddcae6c20f7ccb69e8d1768d3c769d3": {
-    "artifact_path": "raw_analysis_response_v6_38822deb",
-    "created_at": "2025-09-13T01:59:00.596191+00:00",
-    "human_filename": "raw_analysis_response_v6_38822deb",
+  "8adc0718006913bdce1277b61ab4c8291c6d779593decff2dc26df146574d73c": {
+    "artifact_path": "marked_up_document_8adc0718",
+    "created_at": "2025-09-15T20:10:53.621805+00:00",
+    "human_filename": "marked_up_document_8adc0718",
     "is_directory": false,
     "metadata": {
-      "artifact_type": "raw_analysis_response_v6",
-      "document_hashes": [
-        "d052bf49edd262a14b194bbd5402c5d29aed509bb17cd4f14aeefd03a4d191cc"
-      ],
-      "framework_hash": "3a090a7d30db1dae4b4542f24ba898e79d7c1460451746b9e9ada94c7f33b485",
-      "framework_version": "v6.0"
+      "analysis_id": "analysis_b6a588cd",
+      "artifact_type": "marked_up_document",
+      "format": "markdown"
     },
-    "size_bytes": 4535,
-    "source_run": "20250913T015658Z"
+    "size_bytes": 18523,
+    "source_run": "20250915T200718Z"
   },
-  "391b7385c00b06ed1b80183059636176da44df333322684c5f16ab64bda8f499": {
-    "artifact_path": "validation_result_391b7385",
-    "created_at": "2025-09-13T01:54:04.706700+00:00",
-    "human_filename": "validation_result_391b7385",
+  "8bdee80919d0cecf8e216e82c10c9a43b083164dc40a4f1169b56e42fae039f2": {
+    "artifact_path": "evidence_extraction_8bdee809",
+    "created_at": "2025-09-15T20:09:23.101823+00:00",
+    "human_filename": "evidence_extraction_8bdee809",
     "is_directory": false,
     "metadata": {
-      "artifact_type": "validation_result",
-      "cache_key": "validation_0208d429f5c8",
-      "cached_at": "2025-09-13T01:54:04.706015+00:00",
-      "success": false,
-      "validation_model": "vertex_ai/gemini-2.5-pro"
+      "analysis_id": "analysis_ad1b6c2e",
+      "artifact_type": "evidence_extraction"
     },
-    "size_bytes": 4587,
-    "source_run": "20250913T015327Z"
+    "size_bytes": 4813,
+    "source_run": "20250915T200718Z"
   },
-  "3cc10c3a7501f644b9bcdb39049645a74d866112d92b26406bd4c40635070a6b": {
-    "artifact_path": "evidence_v6_3cc10c3a",
-    "created_at": "2025-09-13T02:18:11.555517+00:00",
-    "human_filename": "evidence_v6_3cc10c3a",
+  "8cd92206be7d37d69b2bc683e15bbd6b99349f235cdc1f33a3c1ece95d5ddc68": {
+    "artifact_path": "marked_up_document_8cd92206",
+    "created_at": "2025-09-15T20:09:39.344553+00:00",
+    "human_filename": "marked_up_document_8cd92206",
     "is_directory": false,
     "metadata": {
-      "artifact_type": "evidence_v6",
-      "document_hashes": [
-        "f3a93a632917faf5b9d145e8108dec439748b0c6cc8d0b610025f755b2d05fe3"
-      ],
-      "extraction_method": "analysis_time_extraction"
+      "analysis_id": "analysis_ad1b6c2e",
+      "artifact_type": "marked_up_document",
+      "format": "markdown"
     },
-    "size_bytes": 6798,
-    "source_run": "20250913T015658Z"
+    "size_bytes": 13174,
+    "source_run": "20250915T200718Z"
   },
-  "43cbb23c9c435e63800eed9c20b6005816f99c098af349bde64e2d899a6d3ea7": {
-    "artifact_path": "analysis_result_43cbb23c",
-    "created_at": "2025-09-13T02:11:06.305694+00:00",
-    "human_filename": "analysis_result_43cbb23c",
+  "b7859ce574364224d4e615b299064b8693e8de3121b867a7f781852c023d2629": {
+    "artifact_path": "verification_b7859ce5",
+    "created_at": "2025-09-15T20:10:41.804058+00:00",
+    "human_filename": "verification_b7859ce5",
     "is_directory": false,
     "metadata": {
-      "analysis_id": "analysis_d3d57d1908eb",
-      "artifact_type": "analysis_result"
+      "analysis_id": "analysis_b6a588cd",
+      "artifact_type": "verification"
     },
-    "size_bytes": 7724,
-    "source_run": "20250913T015658Z"
+    "size_bytes": 204,
+    "source_run": "20250915T200718Z"
   },
-  "45da9c92e17f6fd7914533b298e395d836e86078b4eb1c080be63b4e4d2ac3d0": {
-    "artifact_path": "raw_analysis_response_v6_45da9c92",
-    "created_at": "2025-09-13T02:17:37.953406+00:00",
-    "human_filename": "raw_analysis_response_v6_45da9c92",
+  "beb74b25a744769e852dc081944bc408f5b4eadb241f88379688a0f627d01288": {
+    "artifact_path": "verification_beb74b25",
+    "created_at": "2025-09-15T20:08:40.600688+00:00",
+    "human_filename": "verification_beb74b25",
     "is_directory": false,
     "metadata": {
-      "artifact_type": "raw_analysis_response_v6",
-      "document_hashes": [
-        "a2a0fabe2989c9ebfc335eb0784c6476a787a2111f4b5146eebfdef2ad5eb486"
-      ],
-      "framework_hash": "3a090a7d30db1dae4b4542f24ba898e79d7c1460451746b9e9ada94c7f33b485",
-      "framework_version": "v6.0"
+      "analysis_id": "analysis_c2e21f9f",
+      "artifact_type": "verification"
     },
-    "size_bytes": 6441,
-    "source_run": "20250913T015658Z"
+    "size_bytes": 204,
+    "source_run": "20250915T200718Z"
   },
-  "472db0cdb353f4b1de9e2d5c4434c296080ecb806b35e355f89025c9d335d069": {
-    "artifact_path": "validation_result_472db0cd",
-    "created_at": "2025-09-13T01:57:38.815475+00:00",
-    "human_filename": "validation_result_472db0cd",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "validation_result",
-      "cache_key": "validation_19f0addd3243",
-      "cached_at": "2025-09-13T01:57:38.814975+00:00",
-      "success": true,
-      "validation_model": "vertex_ai/gemini-2.5-pro"
-    },
-    "size_bytes": 2131,
-    "source_run": "20250913T015658Z"
-  },
-  "4a5a0c339cf77c93bb7429e80f0dcbbf1467bc238b4845e7d462083e8c435e68": {
-    "artifact_path": "charlie_kirk_fox_business_2015_4a5a0c33.txt",
-    "created_at": "2025-09-13T01:57:38.854793+00:00",
-    "human_filename": "charlie_kirk_fox_business_2015_4a5a0c33.txt",
-    "is_directory": false,
-    "metadata": {
-      "analysis_id": "analysis_b94e07b6e983",
-      "artifact_type": "corpus_document",
-      "original_filename": "interviews/charlie_kirk_fox_business_2015.txt"
-    },
-    "size_bytes": 5690,
-    "source_run": "20250913T015658Z"
-  },
-  "4d48c3412bce83c50400e8b2d7834ba3f596860b3c029a497fdf92661f75fbd2": {
-    "artifact_path": "evidence_v6_4d48c341",
-    "created_at": "2025-09-13T02:17:37.954586+00:00",
-    "human_filename": "evidence_v6_4d48c341",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "evidence_v6",
-      "document_hashes": [
-        "a2a0fabe2989c9ebfc335eb0784c6476a787a2111f4b5146eebfdef2ad5eb486"
-      ],
-      "extraction_method": "analysis_time_extraction"
-    },
-    "size_bytes": 6933,
-    "source_run": "20250913T015658Z"
-  },
-  "4e6e51926880b8f98d92510ea4259559bddd433bc24d6a626800e69e0d2851bc": {
-    "artifact_path": "statistical_analysis_functions_4e6e5192",
-    "created_at": "2025-09-13T02:21:47.094405+00:00",
-    "human_filename": "statistical_analysis_functions_4e6e5192",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "statistical_analysis_functions",
-      "cache_key": "statistical_analysis_458164b7bf85",
-      "functions_generated": 14,
-      "generation_model": "unknown",
-      "has_function_code": true
-    },
-    "size_bytes": 34547,
-    "source_run": "20250913T015658Z"
-  },
-  "52f5e66b7081a48eb94b8aa913ceb60546b46bbc1822143109618911a96436e3": {
-    "artifact_path": "cache_test_52f5e66b",
-    "created_at": "2025-09-13T01:49:15.521545+00:00",
-    "human_filename": "cache_test_52f5e66b",
+  "ca39db1ddc31fa7d731ee8bdb7841fdb5545527d071682daf818cacc06ac5fc6": {
+    "artifact_path": "cache_test_ca39db1d",
+    "created_at": "2025-09-15T20:07:18.649401+00:00",
+    "human_filename": "cache_test_ca39db1d",
     "is_directory": false,
     "metadata": {
       "artifact_type": "cache_test",
       "test_key": "cache_test_key"
     },
     "size_bytes": 65,
-    "source_run": "20250913T014915Z"
+    "source_run": "20250915T200718Z"
   },
-  "5507820245efb35e4d08ac5aa023a0b53861593d27220702fcba56afe79a1221": {
-    "artifact_path": "validation_result_55078202",
-    "created_at": "2025-09-13T01:54:51.344341+00:00",
-    "human_filename": "validation_result_55078202",
+  "d57536ffd48b90089ecc2707dca2d5c49d419f2d103e9ed064a2341a42b23041": {
+    "artifact_path": "verification_d57536ff",
+    "created_at": "2025-09-15T20:09:31.336900+00:00",
+    "human_filename": "verification_d57536ff",
     "is_directory": false,
     "metadata": {
-      "artifact_type": "validation_result",
-      "cache_key": "validation_0208d429f5c8",
-      "cached_at": "2025-09-13T01:54:51.343947+00:00",
-      "success": false,
-      "validation_model": "vertex_ai/gemini-2.5-pro"
+      "analysis_id": "analysis_ad1b6c2e",
+      "artifact_type": "verification"
     },
-    "size_bytes": 2160,
-    "source_run": "20250913T015414Z"
+    "size_bytes": 204,
+    "source_run": "20250915T200718Z"
   },
-  "570748a1bc306cfbfcb1185d1d1c8b423da5ff75f5666ac63e3d5cd04186e737": {
-    "artifact_path": "analysis_result_570748a1",
-    "created_at": "2025-09-13T02:11:39.527478+00:00",
-    "human_filename": "analysis_result_570748a1",
+  "e71d56aeb60981fcdc6019e2c8092799022114673fdec59de2ff030919f3590c": {
+    "artifact_path": "score_extraction_e71d56ae",
+    "created_at": "2025-09-15T20:08:34.000807+00:00",
+    "human_filename": "score_extraction_e71d56ae",
     "is_directory": false,
     "metadata": {
-      "analysis_id": "analysis_a6f11c623657",
-      "artifact_type": "analysis_result"
+      "analysis_id": "analysis_c2e21f9f",
+      "artifact_type": "score_extraction"
     },
-    "size_bytes": 6014,
-    "source_run": "20250913T015658Z"
+    "size_bytes": 1298,
+    "source_run": "20250915T200718Z"
   },
-  "5c962adeacc43007eab488176199f08a66947026982a5f16946dabf8225434c7": {
-    "artifact_path": "raw_analysis_response_v6_5c962ade",
-    "created_at": "2025-09-13T02:15:41.040161+00:00",
-    "human_filename": "raw_analysis_response_v6_5c962ade",
+  "eea1fd30cf771d869bc6d654b9a82a71111708e956a28bb30ef4151d31425e2b": {
+    "artifact_path": "composite_analysis_eea1fd30",
+    "created_at": "2025-09-15T20:09:19.921994+00:00",
+    "human_filename": "composite_analysis_eea1fd30",
     "is_directory": false,
     "metadata": {
-      "artifact_type": "raw_analysis_response_v6",
-      "document_hashes": [
-        "9146e8c185a7f802969f9bd9566da151eb49fcf8c879f7eee19eeb9e0d5fe9e0"
-      ],
-      "framework_hash": "3a090a7d30db1dae4b4542f24ba898e79d7c1460451746b9e9ada94c7f33b485",
-      "framework_version": "v6.0"
+      "analysis_id": "analysis_ad1b6c2e",
+      "artifact_type": "composite_analysis"
     },
-    "size_bytes": 4701,
-    "source_run": "20250913T015658Z"
+    "size_bytes": 19100,
+    "source_run": "20250915T200718Z"
   },
-  "5d947ac573a8a1d7350ffaedf00f8c40d0c1812f36f600dbe01029779d2964c2": {
-    "artifact_path": "analysis_result_5d947ac5",
-    "created_at": "2025-09-13T02:12:15.391352+00:00",
-    "human_filename": "analysis_result_5d947ac5",
+  "f2f550c4b96d98b165dbc5286c615d13af0c15d1be015ecaea283f732666329c": {
+    "artifact_path": "derived_metrics_f2f550c4",
+    "created_at": "2025-09-15T20:08:39.702783+00:00",
+    "human_filename": "derived_metrics_f2f550c4",
     "is_directory": false,
     "metadata": {
-      "analysis_id": "analysis_b89e328fb68f",
-      "artifact_type": "analysis_result"
+      "analysis_id": "analysis_c2e21f9f",
+      "artifact_type": "derived_metrics"
     },
-    "size_bytes": 6332,
-    "source_run": "20250913T015658Z"
+    "size_bytes": 7538,
+    "source_run": "20250915T200718Z"
   },
-  "609624a0bb5e2d2f94bc52a83bf12b0c418a5b583bbc8c7c5365dd9bc972084d": {
-    "artifact_path": "raw_analysis_response_v6_609624a0",
-    "created_at": "2025-09-13T02:12:15.389006+00:00",
-    "human_filename": "raw_analysis_response_v6_609624a0",
+  "fd497a61c9b5e08ceadbdf04e9fca6d8089f37fd74c4dabc7a3bf32d26b2e6ce": {
+    "artifact_path": "evidence_extraction_fd497a61",
+    "created_at": "2025-09-15T20:10:33.819723+00:00",
+    "human_filename": "evidence_extraction_fd497a61",
     "is_directory": false,
     "metadata": {
-      "artifact_type": "raw_analysis_response_v6",
-      "document_hashes": [
-        "8acbee53885c27417edba82d1eb0294824adf627fa697ada7e9d69837612b3a3"
-      ],
-      "framework_hash": "3a090a7d30db1dae4b4542f24ba898e79d7c1460451746b9e9ada94c7f33b485",
-      "framework_version": "v6.0"
+      "analysis_id": "analysis_b6a588cd",
+      "artifact_type": "evidence_extraction"
     },
-    "size_bytes": 4917,
-    "source_run": "20250913T015658Z"
-  },
-  "62257a9a22ea68372bdde49336bc3c2987f1a1a1dbb301fea9ed285381eadc0c": {
-    "artifact_path": "evidence_v6_62257a9a",
-    "created_at": "2025-09-13T01:58:18.542286+00:00",
-    "human_filename": "evidence_v6_62257a9a",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "evidence_v6",
-      "document_hashes": [
-        "4a5a0c339cf77c93bb7429e80f0dcbbf1467bc238b4845e7d462083e8c435e68"
-      ],
-      "extraction_method": "analysis_time_extraction"
-    },
-    "size_bytes": 5840,
-    "source_run": "20250913T015658Z"
-  },
-  "62f9462082b9613797479ca45e0f0e14e87f38afa45b5f69cea349fddbafe868": {
-    "artifact_path": "evidence_v6_62f94620",
-    "created_at": "2025-09-13T01:59:00.596908+00:00",
-    "human_filename": "evidence_v6_62f94620",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "evidence_v6",
-      "document_hashes": [
-        "d052bf49edd262a14b194bbd5402c5d29aed509bb17cd4f14aeefd03a4d191cc"
-      ],
-      "extraction_method": "analysis_time_extraction"
-    },
-    "size_bytes": 5247,
-    "source_run": "20250913T015658Z"
-  },
-  "64f4d34535b23b2d405f95749d551f4fe77367569beabfd70931d2fedd639cc7": {
-    "artifact_path": "analysis_result_64f4d345",
-    "created_at": "2025-09-13T02:17:37.955656+00:00",
-    "human_filename": "analysis_result_64f4d345",
-    "is_directory": false,
-    "metadata": {
-      "analysis_id": "analysis_01a9307cbdc3",
-      "artifact_type": "analysis_result"
-    },
-    "size_bytes": 7855,
-    "source_run": "20250913T015658Z"
-  },
-  "673e2199bb750fed934a3e7217457b60df3a468558f54861c92820e1db6c1de9": {
-    "artifact_path": "evidence_v6_673e2199",
-    "created_at": "2025-09-13T02:11:39.525976+00:00",
-    "human_filename": "evidence_v6_673e2199",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "evidence_v6",
-      "document_hashes": [
-        "34ae6acac5fb781d41f0ea731a4bcfc681f1426063a59f8212783718e3bac0fa"
-      ],
-      "extraction_method": "analysis_time_extraction"
-    },
-    "size_bytes": 5321,
-    "source_run": "20250913T015658Z"
-  },
-  "6e35f2de997f5b2804b833b05a411b3ec4d5fbfabb8e9c2887843d2200d737bc": {
-    "artifact_path": "raw_analysis_response_v6_6e35f2de",
-    "created_at": "2025-09-13T02:12:52.083984+00:00",
-    "human_filename": "raw_analysis_response_v6_6e35f2de",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "raw_analysis_response_v6",
-      "document_hashes": [
-        "9c9a8d08d06db6b0ca1799c05194a8f6ebae7d131edd83d6430b0efd0b0cd386"
-      ],
-      "framework_hash": "3a090a7d30db1dae4b4542f24ba898e79d7c1460451746b9e9ada94c7f33b485",
-      "framework_version": "v6.0"
-    },
-    "size_bytes": 4752,
-    "source_run": "20250913T015658Z"
-  },
-  "72afae775905796e1109c45b182eba9e5f389e89121b3fe7178b62b3a1476aaf": {
-    "artifact_path": "validation_result_72afae77",
-    "created_at": "2025-09-13T01:48:36.368041+00:00",
-    "human_filename": "validation_result_72afae77",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "validation_result",
-      "cache_key": "validation_00d117fb00e2",
-      "cached_at": "2025-09-13T01:48:36.366747+00:00",
-      "success": false,
-      "validation_model": "vertex_ai/gemini-2.5-pro"
-    },
-    "size_bytes": 4833,
-    "source_run": "20250913T014746Z"
-  },
-  "752041bb921d53e7268bd0e2e6ca07ec12283e49eb3abc4554c2a1d393b916e4": {
-    "artifact_path": "cache_test_752041bb",
-    "created_at": "2025-09-13T01:54:14.434456+00:00",
-    "human_filename": "cache_test_752041bb",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "cache_test",
-      "test_key": "cache_test_key"
-    },
-    "size_bytes": 65,
-    "source_run": "20250913T015414Z"
-  },
-  "78e856c7bd9f0f4fa9130962a7dc01d5462222e2d158623d32698529391c4914": {
-    "artifact_path": "evidence_v6_78e856c7",
-    "created_at": "2025-09-13T02:12:52.085961+00:00",
-    "human_filename": "evidence_v6_78e856c7",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "evidence_v6",
-      "document_hashes": [
-        "9c9a8d08d06db6b0ca1799c05194a8f6ebae7d131edd83d6430b0efd0b0cd386"
-      ],
-      "extraction_method": "analysis_time_extraction"
-    },
-    "size_bytes": 5319,
-    "source_run": "20250913T015658Z"
-  },
-  "812f18b90e9165daab0a8652e7ae1a41651348c460429adecd65beb11e9a3764": {
-    "artifact_path": "evidence_v6_812f18b9",
-    "created_at": "2025-09-13T02:16:55.047927+00:00",
-    "human_filename": "evidence_v6_812f18b9",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "evidence_v6",
-      "document_hashes": [
-        "e36243cdef4ed38fd317df9c93b44b912b4268c32233ab3091b68a5aa0aaec27"
-      ],
-      "extraction_method": "analysis_time_extraction"
-    },
-    "size_bytes": 5111,
-    "source_run": "20250913T015658Z"
-  },
-  "8184c62545d32c9568f4b6ea2b7707b7869adb8509b62ecc50b001675ddc5cd0": {
-    "artifact_path": "charlie_kirk_western_conservative_summit_2018_8184c625.txt",
-    "created_at": "2025-09-13T01:59:00.599848+00:00",
-    "human_filename": "charlie_kirk_western_conservative_summit_2018_8184c625.txt",
-    "is_directory": false,
-    "metadata": {
-      "analysis_id": "analysis_282b98a19547",
-      "artifact_type": "corpus_document",
-      "original_filename": "early_career/charlie_kirk_western_conservative_summit_2018.txt"
-    },
-    "size_bytes": 17380,
-    "source_run": "20250913T015658Z"
-  },
-  "8406285929a852d60e2273be8e8a6cfab1c3c3c851000f50fc77b2f6699c4052": {
-    "artifact_path": "analysis_result_84062859",
-    "created_at": "2025-09-13T02:15:07.302063+00:00",
-    "human_filename": "analysis_result_84062859",
-    "is_directory": false,
-    "metadata": {
-      "analysis_id": "analysis_375e26682a04",
-      "artifact_type": "analysis_result"
-    },
-    "size_bytes": 5848,
-    "source_run": "20250913T015658Z"
-  },
-  "84c2568b4c70c6a049b35be2261bb60e997da3af81f97334fe8bf0762d5377a4": {
-    "artifact_path": "validation_result_84c2568b",
-    "created_at": "2025-09-13T01:56:00.936704+00:00",
-    "human_filename": "validation_result_84c2568b",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "validation_result",
-      "cache_key": "validation_34a887c773d5",
-      "cached_at": "2025-09-13T01:56:00.936141+00:00",
-      "success": false,
-      "validation_model": "vertex_ai/gemini-2.5-pro"
-    },
-    "size_bytes": 3228,
-    "source_run": "20250913T015520Z"
-  },
-  "8acbee53885c27417edba82d1eb0294824adf627fa697ada7e9d69837612b3a3": {
-    "artifact_path": "charlie_kirk_cpac_2019_HcXus8Vph7Q_8acbee53.txt",
-    "created_at": "2025-09-13T02:11:39.529999+00:00",
-    "human_filename": "charlie_kirk_cpac_2019_HcXus8Vph7Q_8acbee53.txt",
-    "is_directory": false,
-    "metadata": {
-      "analysis_id": "analysis_b89e328fb68f",
-      "artifact_type": "corpus_document",
-      "original_filename": "cpac/charlie_kirk_cpac_2019_HcXus8Vph7Q.txt"
-    },
-    "size_bytes": 9826,
-    "source_run": "20250913T015658Z"
-  },
-  "9146e8c185a7f802969f9bd9566da151eb49fcf8c879f7eee19eeb9e0d5fe9e0": {
-    "artifact_path": "charlie_kirk_rnc_2024_WQAxYRjGe1A_9146e8c1.txt",
-    "created_at": "2025-09-13T02:15:07.304303+00:00",
-    "human_filename": "charlie_kirk_rnc_2024_WQAxYRjGe1A_9146e8c1.txt",
-    "is_directory": false,
-    "metadata": {
-      "analysis_id": "analysis_5bf7bec6a82a",
-      "artifact_type": "corpus_document",
-      "original_filename": "rnc/charlie_kirk_rnc_2024_WQAxYRjGe1A.txt"
-    },
-    "size_bytes": 3872,
-    "source_run": "20250913T015658Z"
-  },
-  "924d2dffc932d0e127a2c9e495287495a85433d8bd70a00909aac629d4bae374": {
-    "artifact_path": "evidence_v6_924d2dff",
-    "created_at": "2025-09-13T02:12:15.389856+00:00",
-    "human_filename": "evidence_v6_924d2dff",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "evidence_v6",
-      "document_hashes": [
-        "8acbee53885c27417edba82d1eb0294824adf627fa697ada7e9d69837612b3a3"
-      ],
-      "extraction_method": "analysis_time_extraction"
-    },
-    "size_bytes": 5585,
-    "source_run": "20250913T015658Z"
-  },
-  "92bb0262c45731c8eff599964a21249b38d6ebcfc09ce1eeb513cc2a25d914fe": {
-    "artifact_path": "evidence_v6_92bb0262",
-    "created_at": "2025-09-13T02:16:16.268241+00:00",
-    "human_filename": "evidence_v6_92bb0262",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "evidence_v6",
-      "document_hashes": [
-        "f1a7d51f8f7fd5bb580ff14623687a15975d8bf401532b1c0c9fc6cb62dc62f0"
-      ],
-      "extraction_method": "analysis_time_extraction"
-    },
-    "size_bytes": 5306,
-    "source_run": "20250913T015658Z"
-  },
-  "9c9a8d08d06db6b0ca1799c05194a8f6ebae7d131edd83d6430b0efd0b0cd386": {
-    "artifact_path": "charlie_kirk_cpac_2020_c-WiaPPxIHc_9c9a8d08.txt",
-    "created_at": "2025-09-13T02:12:15.393525+00:00",
-    "human_filename": "charlie_kirk_cpac_2020_c-WiaPPxIHc_9c9a8d08.txt",
-    "is_directory": false,
-    "metadata": {
-      "analysis_id": "analysis_3503e3fee678",
-      "artifact_type": "corpus_document",
-      "original_filename": "cpac/charlie_kirk_cpac_2020_c-WiaPPxIHc.txt"
-    },
-    "size_bytes": 15904,
-    "source_run": "20250913T015658Z"
-  },
-  "9d35f0ae60256dec7dc349be76eee45e8f73762577e9c4c92db6dcd4d3097db4": {
-    "artifact_path": "cache_test_9d35f0ae",
-    "created_at": "2025-09-13T01:55:04.180292+00:00",
-    "human_filename": "cache_test_9d35f0ae",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "cache_test",
-      "test_key": "cache_test_key"
-    },
-    "size_bytes": 65,
-    "source_run": "20250913T015504Z"
-  },
-  "a0b01ad018174894f4ca614f9101f81eb6d04efb3eb2bbd35b29f144070710b9": {
-    "artifact_path": "derived_metrics_functions_a0b01ad0",
-    "created_at": "2025-09-13T02:20:02.058595+00:00",
-    "human_filename": "derived_metrics_functions_a0b01ad0",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "derived_metrics_functions",
-      "cache_key": "derived_metrics_a0af459326df",
-      "functions_generated": 13,
-      "generation_model": "unknown",
-      "has_function_code": true
-    },
-    "size_bytes": 15138,
-    "source_run": "20250913T015658Z"
-  },
-  "a1465916858defba2cf3e1e452f125d93ede91847ee8b2eec43560563ca2c9d0": {
-    "artifact_path": "raw_analysis_response_v6_a1465916",
-    "created_at": "2025-09-13T02:11:39.524369+00:00",
-    "human_filename": "raw_analysis_response_v6_a1465916",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "raw_analysis_response_v6",
-      "document_hashes": [
-        "34ae6acac5fb781d41f0ea731a4bcfc681f1426063a59f8212783718e3bac0fa"
-      ],
-      "framework_hash": "3a090a7d30db1dae4b4542f24ba898e79d7c1460451746b9e9ada94c7f33b485",
-      "framework_version": "v6.0"
-    },
-    "size_bytes": 4599,
-    "source_run": "20250913T015658Z"
-  },
-  "a229d4b3ce7560510d584dde674ae05f7787448db10ef19c840e4ba11ebd65d5": {
-    "artifact_path": "cache_test_a229d4b3",
-    "created_at": "2025-09-13T01:47:46.102337+00:00",
-    "human_filename": "cache_test_a229d4b3",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "cache_test",
-      "test_key": "cache_test_key"
-    },
-    "size_bytes": 65,
-    "source_run": "20250913T014746Z"
-  },
-  "a2a0fabe2989c9ebfc335eb0784c6476a787a2111f4b5146eebfdef2ad5eb486": {
-    "artifact_path": "charlie_kirk_tsas_2019_a2a0fabe.txt",
-    "created_at": "2025-09-13T02:16:55.054878+00:00",
-    "human_filename": "charlie_kirk_tsas_2019_a2a0fabe.txt",
-    "is_directory": false,
-    "metadata": {
-      "analysis_id": "analysis_01a9307cbdc3",
-      "artifact_type": "corpus_document",
-      "original_filename": "student_action_summit/charlie_kirk_tsas_2019.txt"
-    },
-    "size_bytes": 17146,
-    "source_run": "20250913T015658Z"
-  },
-  "a6a6eacaece7be042e451da3845a0b7c067484467ada3e458674c266c5d87640": {
-    "artifact_path": "cache_test_a6a6eaca",
-    "created_at": "2025-09-13T01:56:58.031320+00:00",
-    "human_filename": "cache_test_a6a6eaca",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "cache_test",
-      "test_key": "cache_test_key"
-    },
-    "size_bytes": 65,
-    "source_run": "20250913T015658Z"
-  },
-  "a8b9f5d875bc712973c9f12e3309409c1a06c1509fda3272eb42991dde5a86ee": {
-    "artifact_path": "cache_test_a8b9f5d8",
-    "created_at": "2025-09-13T01:55:20.570255+00:00",
-    "human_filename": "cache_test_a8b9f5d8",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "cache_test",
-      "test_key": "cache_test_key"
-    },
-    "size_bytes": 65,
-    "source_run": "20250913T015520Z"
-  },
-  "aa855ef7f8ae87b718bcb9bde312b92ec14f1cec96c7b795e74c38e64399377a": {
-    "artifact_path": "cache_test_aa855ef7",
-    "created_at": "2025-09-13T01:56:14.941372+00:00",
-    "human_filename": "cache_test_aa855ef7",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "cache_test",
-      "test_key": "cache_test_key"
-    },
-    "size_bytes": 65,
-    "source_run": "20250913T015614Z"
-  },
-  "ae90a3e69da5842ccbb27f567100670a9d298820b22f11a0246146f534b80fea": {
-    "artifact_path": "raw_analysis_response_v6_ae90a3e6",
-    "created_at": "2025-09-13T02:18:11.554100+00:00",
-    "human_filename": "raw_analysis_response_v6_ae90a3e6",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "raw_analysis_response_v6",
-      "document_hashes": [
-        "f3a93a632917faf5b9d145e8108dec439748b0c6cc8d0b610025f755b2d05fe3"
-      ],
-      "framework_hash": "3a090a7d30db1dae4b4542f24ba898e79d7c1460451746b9e9ada94c7f33b485",
-      "framework_version": "v6.0"
-    },
-    "size_bytes": 6108,
-    "source_run": "20250913T015658Z"
-  },
-  "af206b7904b3303286b9ae8f5df81df30b0b2e763e8758bea75336f70f3263b7": {
-    "artifact_path": "analysis_result_af206b79",
-    "created_at": "2025-09-13T01:59:39.278500+00:00",
-    "human_filename": "analysis_result_af206b79",
-    "is_directory": false,
-    "metadata": {
-      "analysis_id": "analysis_282b98a19547",
-      "artifact_type": "analysis_result"
-    },
-    "size_bytes": 6791,
-    "source_run": "20250913T015658Z"
-  },
-  "b0f621bac36bb20e49b17262a7a52785f081163edfd995b5feb1a215c7df5f6d": {
-    "artifact_path": "analysis_result_b0f621ba",
-    "created_at": "2025-09-13T02:16:16.269211+00:00",
-    "human_filename": "analysis_result_b0f621ba",
-    "is_directory": false,
-    "metadata": {
-      "analysis_id": "analysis_73835080590e",
-      "artifact_type": "analysis_result"
-    },
-    "size_bytes": 6017,
-    "source_run": "20250913T015658Z"
-  },
-  "b4298246cd873fc4d4f29dc5a6989331644925049073f5f1246a212d73153102": {
-    "artifact_path": "raw_analysis_response_v6_b4298246",
-    "created_at": "2025-09-13T02:14:06.273225+00:00",
-    "human_filename": "raw_analysis_response_v6_b4298246",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "raw_analysis_response_v6",
-      "document_hashes": [
-        "318908f1da8b08b3e9ffd219b32892f42f4f35e5a08ad94e280372a8b8c975c5"
-      ],
-      "framework_hash": "3a090a7d30db1dae4b4542f24ba898e79d7c1460451746b9e9ada94c7f33b485",
-      "framework_version": "v6.0"
-    },
-    "size_bytes": 4697,
-    "source_run": "20250913T015658Z"
-  },
-  "bb976cc552e17c599dff9438eb33e0b8842f0f4ccb05d97f38a53cf88d6be1f5": {
-    "artifact_path": "charlie_kirk_college_conservatism_2018_bb976cc5.txt",
-    "created_at": "2025-09-13T01:59:39.280241+00:00",
-    "human_filename": "charlie_kirk_college_conservatism_2018_bb976cc5.txt",
-    "is_directory": false,
-    "metadata": {
-      "analysis_id": "analysis_d3d57d1908eb",
-      "artifact_type": "corpus_document",
-      "original_filename": "early_career/charlie_kirk_college_conservatism_2018.txt"
-    },
-    "size_bytes": 84979,
-    "source_run": "20250913T015658Z"
-  },
-  "be725b9432917db2ff931d275dc572706a20b0db7e720793fabb992619da7ed5": {
-    "artifact_path": "analysis_result_be725b94",
-    "created_at": "2025-09-13T02:14:06.274905+00:00",
-    "human_filename": "analysis_result_be725b94",
-    "is_directory": false,
-    "metadata": {
-      "analysis_id": "analysis_cd88bbe03b5d",
-      "artifact_type": "analysis_result"
-    },
-    "size_bytes": 6111,
-    "source_run": "20250913T015658Z"
-  },
-  "c108ba97e4eb9f846ad018b44df5b8c9010391359486f86717f5441a923d6fd3": {
-    "artifact_path": "evidence_v6_c108ba97",
-    "created_at": "2025-09-13T01:59:39.277605+00:00",
-    "human_filename": "evidence_v6_c108ba97",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "evidence_v6",
-      "document_hashes": [
-        "8184c62545d32c9568f4b6ea2b7707b7869adb8509b62ecc50b001675ddc5cd0"
-      ],
-      "extraction_method": "analysis_time_extraction"
-    },
-    "size_bytes": 341,
-    "source_run": "20250913T015658Z"
-  },
-  "c1ab73768d44493030f8ca6e05d4f1cdba50614a0a1f7414d4839fd83f9f54ad": {
-    "artifact_path": "rag_index_cache_c1ab7376",
-    "created_at": "2025-09-13T02:18:12.985757+00:00",
-    "human_filename": "rag_index_cache_c1ab7376",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "rag_index_cache",
-      "created_at": "2025-09-13T02:18:12.985115+00:00",
-      "documents_count": 120,
-      "evidence_count": 14,
-      "has_documents": true,
-      "index_size_bytes": 180201,
-      "rag_cache_key": "rag_index_a34f77f274b78fe8"
-    },
-    "size_bytes": 180201,
-    "source_run": "20250913T015658Z"
-  },
-  "c93e2e327290678b06e34c2bf850f031719671b9f42a28e2fb02ff208da0738c": {
-    "artifact_path": "analysis_result_c93e2e32",
-    "created_at": "2025-09-13T02:12:52.088655+00:00",
-    "human_filename": "analysis_result_c93e2e32",
-    "is_directory": false,
-    "metadata": {
-      "analysis_id": "analysis_3503e3fee678",
-      "artifact_type": "analysis_result"
-    },
-    "size_bytes": 6167,
-    "source_run": "20250913T015658Z"
-  },
-  "cb57442fe1b4a2876a03a02a5ab7b6480bf224b40179d7adc15637040a121da5": {
-    "artifact_path": "analysis_result_cb57442f",
-    "created_at": "2025-09-13T02:15:41.041780+00:00",
-    "human_filename": "analysis_result_cb57442f",
-    "is_directory": false,
-    "metadata": {
-      "analysis_id": "analysis_5bf7bec6a82a",
-      "artifact_type": "analysis_result"
-    },
-    "size_bytes": 6120,
-    "source_run": "20250913T015658Z"
-  },
-  "cc05ea026ab29dbb0fd31758a5c038e22f3e336cbfc4fba3235b26fcf0178299": {
-    "artifact_path": "cache_test_cc05ea02",
-    "created_at": "2025-09-13T01:52:43.709221+00:00",
-    "human_filename": "cache_test_cc05ea02",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "cache_test",
-      "test_key": "cache_test_key"
-    },
-    "size_bytes": 65,
-    "source_run": "20250913T015243Z"
-  },
-  "ccc46da51e20322fa748222bcc40459f5f90064b1bf0add1311cfca284e39507": {
-    "artifact_path": "raw_analysis_response_v6_ccc46da5",
-    "created_at": "2025-09-13T02:16:16.267283+00:00",
-    "human_filename": "raw_analysis_response_v6_ccc46da5",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "raw_analysis_response_v6",
-      "document_hashes": [
-        "f1a7d51f8f7fd5bb580ff14623687a15975d8bf401532b1c0c9fc6cb62dc62f0"
-      ],
-      "framework_hash": "3a090a7d30db1dae4b4542f24ba898e79d7c1460451746b9e9ada94c7f33b485",
-      "framework_version": "v6.0"
-    },
-    "size_bytes": 4602,
-    "source_run": "20250913T015658Z"
-  },
-  "d052bf49edd262a14b194bbd5402c5d29aed509bb17cd4f14aeefd03a4d191cc": {
-    "artifact_path": "charlie_kirk_western_conservative_summit_2016_d052bf49.txt",
-    "created_at": "2025-09-13T01:58:18.544835+00:00",
-    "human_filename": "charlie_kirk_western_conservative_summit_2016_d052bf49.txt",
-    "is_directory": false,
-    "metadata": {
-      "analysis_id": "analysis_b57162f437f6",
-      "artifact_type": "corpus_document",
-      "original_filename": "early_career/charlie_kirk_western_conservative_summit_2016.txt"
-    },
-    "size_bytes": 11023,
-    "source_run": "20250913T015658Z"
-  },
-  "d8262b1e5070a257287417c7631a89b65487e69daf90e76a54ef270fa6afe008": {
-    "artifact_path": "cache_test_d8262b1e",
-    "created_at": "2025-09-13T01:49:31.479757+00:00",
-    "human_filename": "cache_test_d8262b1e",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "cache_test",
-      "test_key": "cache_test_key"
-    },
-    "size_bytes": 65,
-    "source_run": "20250913T014931Z"
-  },
-  "dacc918512150cb4a62934cf22d305875d4319d67cf1e6191a9543261f122564": {
-    "artifact_path": "raw_analysis_response_v6_dacc9185",
-    "created_at": "2025-09-13T02:16:55.045638+00:00",
-    "human_filename": "raw_analysis_response_v6_dacc9185",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "raw_analysis_response_v6",
-      "document_hashes": [
-        "e36243cdef4ed38fd317df9c93b44b912b4268c32233ab3091b68a5aa0aaec27"
-      ],
-      "framework_hash": "3a090a7d30db1dae4b4542f24ba898e79d7c1460451746b9e9ada94c7f33b485",
-      "framework_version": "v6.0"
-    },
-    "size_bytes": 4527,
-    "source_run": "20250913T015658Z"
-  },
-  "dfc492983c591a7565969b369d4d6ea6f82b019e1de018d6ec5f06196e5504d5": {
-    "artifact_path": "derived_metrics_results_with_data_dfc49298",
-    "created_at": "2025-09-13T02:20:02.077034+00:00",
-    "human_filename": "derived_metrics_results_with_data_dfc49298",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "derived_metrics_results_with_data"
-    },
-    "size_bytes": 82757,
-    "source_run": "20250913T015658Z"
-  },
-  "e14895709441c5441f4bfac3810ba25ecca21bd448cb0c6a8edd67ef5c581f22": {
-    "artifact_path": "evidence_v6_e1489570",
-    "created_at": "2025-09-13T02:15:41.040991+00:00",
-    "human_filename": "evidence_v6_e1489570",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "evidence_v6",
-      "document_hashes": [
-        "9146e8c185a7f802969f9bd9566da151eb49fcf8c879f7eee19eeb9e0d5fe9e0"
-      ],
-      "extraction_method": "analysis_time_extraction"
-    },
-    "size_bytes": 341,
-    "source_run": "20250913T015658Z"
-  },
-  "e36243cdef4ed38fd317df9c93b44b912b4268c32233ab3091b68a5aa0aaec27": {
-    "artifact_path": "charlie_kirk_americafest_2024_LBA5nF21nSM_e36243cd.txt",
-    "created_at": "2025-09-13T02:16:16.271067+00:00",
-    "human_filename": "charlie_kirk_americafest_2024_LBA5nF21nSM_e36243cd.txt",
-    "is_directory": false,
-    "metadata": {
-      "analysis_id": "analysis_44d3e97ac06c",
-      "artifact_type": "corpus_document",
-      "original_filename": "americafest/charlie_kirk_americafest_2024_LBA5nF21nSM.txt"
-    },
-    "size_bytes": 23029,
-    "source_run": "20250913T015658Z"
-  },
-  "edaaac153af27134cd5f7ad3debcbd5b8fea6ab41acb1f05e5ebcb63ec9be75c": {
-    "artifact_path": "evidence_v6_edaaac15",
-    "created_at": "2025-09-13T02:15:07.299883+00:00",
-    "human_filename": "evidence_v6_edaaac15",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "evidence_v6",
-      "document_hashes": [
-        "fdc25d0eec8d468e7bbb4ecfc8ab615238ec10d4ba128a7c4ee3ccd02350bdf6"
-      ],
-      "extraction_method": "analysis_time_extraction"
-    },
-    "size_bytes": 5096,
-    "source_run": "20250913T015658Z"
-  },
-  "eee8636a90a22b996e4ad3e874678457aa3f5b9bc39270b211377b6fd9891f7b": {
-    "artifact_path": "raw_analysis_response_v6_eee8636a",
-    "created_at": "2025-09-13T01:58:18.541539+00:00",
-    "human_filename": "raw_analysis_response_v6_eee8636a",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "raw_analysis_response_v6",
-      "document_hashes": [
-        "4a5a0c339cf77c93bb7429e80f0dcbbf1467bc238b4845e7d462083e8c435e68"
-      ],
-      "framework_hash": "3a090a7d30db1dae4b4542f24ba898e79d7c1460451746b9e9ada94c7f33b485",
-      "framework_version": "v6.0"
-    },
-    "size_bytes": 5241,
-    "source_run": "20250913T015658Z"
-  },
-  "f02553012efed9313c808806dea3b50e18ab3bd10fe6a42cdf35e3c3fa5b7268": {
-    "artifact_path": "analysis_result_f0255301",
-    "created_at": "2025-09-13T01:59:00.597870+00:00",
-    "human_filename": "analysis_result_f0255301",
-    "is_directory": false,
-    "metadata": {
-      "analysis_id": "analysis_b57162f437f6",
-      "artifact_type": "analysis_result"
-    },
-    "size_bytes": 5950,
-    "source_run": "20250913T015658Z"
-  },
-  "f1a7d51f8f7fd5bb580ff14623687a15975d8bf401532b1c0c9fc6cb62dc62f0": {
-    "artifact_path": "charlie_kirk_americafest_2023_SGFdHIK2dBU_f1a7d51f.txt",
-    "created_at": "2025-09-13T02:15:41.042683+00:00",
-    "human_filename": "charlie_kirk_americafest_2023_SGFdHIK2dBU_f1a7d51f.txt",
-    "is_directory": false,
-    "metadata": {
-      "analysis_id": "analysis_73835080590e",
-      "artifact_type": "corpus_document",
-      "original_filename": "americafest/charlie_kirk_americafest_2023_SGFdHIK2dBU.txt"
-    },
-    "size_bytes": 14966,
-    "source_run": "20250913T015658Z"
-  },
-  "f3a93a632917faf5b9d145e8108dec439748b0c6cc8d0b610025f755b2d05fe3": {
-    "artifact_path": "charlie_kirk_sas_2022_vUcwKoYEPd4_f3a93a63.txt",
-    "created_at": "2025-09-13T02:17:37.958393+00:00",
-    "human_filename": "charlie_kirk_sas_2022_vUcwKoYEPd4_f3a93a63.txt",
-    "is_directory": false,
-    "metadata": {
-      "analysis_id": "analysis_65cda4c3028c",
-      "artifact_type": "corpus_document",
-      "original_filename": "student_action_summit/charlie_kirk_sas_2022_vUcwKoYEPd4.txt"
-    },
-    "size_bytes": 238328,
-    "source_run": "20250913T015658Z"
-  },
-  "f5d5ac52f70facc43fc1764ba5ceaeccf34132db97ad85c0fad23b1c5f411aa4": {
-    "artifact_path": "analysis_result_f5d5ac52",
-    "created_at": "2025-09-13T01:58:18.543244+00:00",
-    "human_filename": "analysis_result_f5d5ac52",
-    "is_directory": false,
-    "metadata": {
-      "analysis_id": "analysis_b94e07b6e983",
-      "artifact_type": "analysis_result"
-    },
-    "size_bytes": 6728,
-    "source_run": "20250913T015658Z"
-  },
-  "fa378dd2b2e327334f48b64baf66b3721519a30bc7d3d2011a4331d88eac01de": {
-    "artifact_path": "raw_analysis_response_v6_fa378dd2",
-    "created_at": "2025-09-13T01:59:39.275431+00:00",
-    "human_filename": "raw_analysis_response_v6_fa378dd2",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "raw_analysis_response_v6",
-      "document_hashes": [
-        "8184c62545d32c9568f4b6ea2b7707b7869adb8509b62ecc50b001675ddc5cd0"
-      ],
-      "framework_hash": "3a090a7d30db1dae4b4542f24ba898e79d7c1460451746b9e9ada94c7f33b485",
-      "framework_version": "v6.0"
-    },
-    "size_bytes": 5374,
-    "source_run": "20250913T015658Z"
-  },
-  "fa733dfbd3ded80edb4bde2e7b6977b6cfc26b15dbf1d2b83f78c2720731478e": {
-    "artifact_path": "cache_test_fa733dfb",
-    "created_at": "2025-09-13T01:49:01.512305+00:00",
-    "human_filename": "cache_test_fa733dfb",
-    "is_directory": false,
-    "metadata": {
-      "artifact_type": "cache_test",
-      "test_key": "cache_test_key"
-    },
-    "size_bytes": 65,
-    "source_run": "20250913T014901Z"
-  },
-  "fdc25d0eec8d468e7bbb4ecfc8ab615238ec10d4ba128a7c4ee3ccd02350bdf6": {
-    "artifact_path": "charlie_kirk_rnc_2020_5if8lynxekY_fdc25d0e.txt",
-    "created_at": "2025-09-13T02:14:06.276534+00:00",
-    "human_filename": "charlie_kirk_rnc_2020_5if8lynxekY_fdc25d0e.txt",
-    "is_directory": false,
-    "metadata": {
-      "analysis_id": "analysis_375e26682a04",
-      "artifact_type": "corpus_document",
-      "original_filename": "rnc/charlie_kirk_rnc_2020_5if8lynxekY.txt"
-    },
-    "size_bytes": 3923,
-    "source_run": "20250913T015658Z"
+    "size_bytes": 3572,
+    "source_run": "20250915T200718Z"
   }
 }
