@@ -458,6 +458,61 @@ def resume(ctx, experiment_path: str, analysis_model: Optional[str], synthesis_m
         exit_general_error(str(e))
 
 @cli.command()
+@click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True, path_type=str))
+@click.option('--quiet', is_flag=True, help='Suppress progress messages')
+@click.pass_context
+def cleanup(ctx, experiment_path: str, quiet: bool):
+    """Clean up orphaned artifact registry entries.
+    
+    Removes registry entries for artifacts that no longer exist on disk.
+    This fixes warnings about missing artifacts during experiment runs.
+    """
+    from pathlib import Path
+    from .core.security_boundary import ExperimentSecurityBoundary
+    from .core.local_artifact_storage import LocalArtifactStorage
+    from .cli_console import DiscernusConsole
+    
+    rich_console = DiscernusConsole()
+    
+    try:
+        # Initialize security boundary
+        exp_path = Path(experiment_path).resolve()
+        if not exp_path.exists():
+            rich_console.print_error(f"Experiment path does not exist: {exp_path}")
+            ctx.exit(1)
+            
+        security = ExperimentSecurityBoundary(exp_path)
+        
+        # Initialize artifact storage for shared cache
+        shared_cache_dir = exp_path / "shared_cache"
+        if not shared_cache_dir.exists():
+            rich_console.print_error(f"No shared cache found at: {shared_cache_dir}")
+            rich_console.print_info("Run an experiment first to create the cache structure")
+            ctx.exit(1)
+            
+        artifact_storage = LocalArtifactStorage(
+            security_boundary=security,
+            run_folder=shared_cache_dir,
+            run_name="cleanup"
+        )
+        
+        # Run cleanup
+        stats = artifact_storage.cleanup_orphaned_entries(quiet=quiet)
+        
+        if not quiet:
+            rich_console.print_success(f"Registry cleanup completed!")
+            rich_console.print_info(f"📊 Processed: {stats['total_processed']} entries")
+            rich_console.print_info(f"🗑️  Removed: {stats['orphaned_removed']} orphaned entries")
+            rich_console.print_info(f"✅ Valid: {stats['valid_entries']} entries")
+            
+        if stats['orphaned_removed'] > 0:
+            rich_console.print_info("💡 Warnings about missing artifacts should now be resolved")
+        
+    except Exception as e:
+        rich_console.print_error(f"Cleanup failed: {e}")
+        ctx.exit(1)
+
+@cli.command()
 @click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))
 @click.option('--agent', type=click.Choice(['analysis', 'synthesis', 'statistical', 'fact-checker', 'validation']), 
               help='Focus debugging on specific agent: analysis (document processing), synthesis (report generation), statistical (statistical analysis), fact-checker (fact validation), validation (experiment coherence)')

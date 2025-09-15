@@ -390,6 +390,51 @@ class LocalArtifactStorage:
             "artifacts_dir": str(self.artifacts_dir)
         }
     
+    def cleanup_orphaned_entries(self, quiet: bool = False) -> Dict[str, int]:
+        """
+        Remove orphaned registry entries for artifacts that no longer exist on disk.
+        
+        Args:
+            quiet: If True, suppress progress messages
+            
+        Returns:
+            Dictionary with cleanup statistics
+        """
+        if not quiet:
+            print("🧹 Cleaning up orphaned artifact registry entries...")
+        
+        orphaned_entries = []
+        valid_entries = {}
+        
+        for hash_id, info in self.registry.items():
+            artifact_path = self.artifacts_dir / info.get("artifact_path", f"artifact_{hash_id[:8]}")
+            
+            if artifact_path.exists():
+                # Artifact file exists, keep the registry entry
+                valid_entries[hash_id] = info
+            else:
+                # Artifact file missing, mark as orphaned
+                orphaned_entries.append(hash_id)
+                if not quiet:
+                    print(f"   🗑️  Removing orphaned entry: {info.get('human_filename', hash_id[:12])}")
+        
+        # Update registry with only valid entries
+        if orphaned_entries:
+            self.registry = valid_entries
+            self._save_registry()
+            
+            if not quiet:
+                print(f"✅ Cleanup complete: removed {len(orphaned_entries)} orphaned entries")
+        else:
+            if not quiet:
+                print("✅ No orphaned entries found - registry is clean")
+        
+        return {
+            "orphaned_removed": len(orphaned_entries),
+            "valid_entries": len(valid_entries),
+            "total_processed": len(orphaned_entries) + len(valid_entries)
+        }
+    
     def _get_timestamp(self) -> str:
         """Get current timestamp in ISO format."""
         from datetime import datetime, timezone

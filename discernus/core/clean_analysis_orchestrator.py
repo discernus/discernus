@@ -676,6 +676,11 @@ class CleanAnalysisOrchestrator:
                 run_name=run_id
             )
             
+            # Clean up orphaned registry entries to prevent warnings
+            cleanup_stats = self.artifact_storage.cleanup_orphaned_entries(quiet=True)
+            if cleanup_stats['orphaned_removed'] > 0:
+                self._log_progress(f"🧹 Cleaned up {cleanup_stats['orphaned_removed']} orphaned cache entries")
+            
             # Verify caching is working
             self._verify_caching_performance()
             
