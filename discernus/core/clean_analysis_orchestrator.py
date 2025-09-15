@@ -516,7 +516,9 @@ class CleanAnalysisOrchestrator:
             # Corpus index service debug removed (QA agents disabled)
             
             try:
-                evidence_results = self._run_evidence_retrieval_phase(self.synthesis_model, audit_logger, statistical_results, run_id)
+                # Use Flash for evidence retrieval planning (cost optimization)
+                evidence_model = "vertex_ai/gemini-2.5-flash"
+                evidence_results = self._run_evidence_retrieval_phase(evidence_model, audit_logger, statistical_results, run_id)
                 self._log_status("Evidence retrieval completed")
                 self._log_phase_timing("evidence_retrieval_phase", phase_start)
                 
