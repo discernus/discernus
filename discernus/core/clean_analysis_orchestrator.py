@@ -1342,6 +1342,15 @@ class CleanAnalysisOrchestrator:
                     self._log_progress("🔧 Generating derived metrics functions...")
                     functions_result = derived_metrics_agent.generate_functions(temp_workspace)
                     
+                    # Read the generated function code to include in cache
+                    functions_file = temp_workspace / "automatedderivedmetricsagent_functions.py"
+                    if functions_file.exists():
+                        function_code_content = functions_file.read_text(encoding='utf-8')
+                        functions_result['function_code_content'] = function_code_content
+                        functions_result['cached_with_code'] = True
+                    else:
+                        functions_result['cached_with_code'] = False
+                    
                     # Store in cache for future use
                     cache_manager.store_cache(cache_key, functions_result, "DerivedMetricsPhase")
                 
