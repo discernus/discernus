@@ -284,7 +284,34 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
         result = orchestrator.run_experiment()
         
         if result.get('status') in ['completed', 'completed_analysis_only', 'completed_statistical_prep', 'completed_skip_synthesis', 'completed_resume_synthesis']:
-            rich_console.print_success("✅ Experiment completed successfully!")
+            # Provide accurate completion messages based on what was actually completed
+            status = result.get('status')
+            pipeline_status = result.get('pipeline_status', 'full_completion')
+            
+            if status == 'completed_analysis_only':
+                rich_console.print_success("✅ Analysis phase completed successfully!")
+                rich_console.print_info("📊 Partial pipeline completion - analysis only")
+                if result.get('remaining_phases'):
+                    remaining = ', '.join(result['remaining_phases'])
+                    rich_console.print_info(f"⏭️  Remaining phases: {remaining}")
+            elif status == 'completed_statistical_prep':
+                rich_console.print_success("✅ Statistical preparation completed successfully!")
+                rich_console.print_info("📊 Partial pipeline completion - ready for external statistical analysis")
+                if result.get('remaining_phases'):
+                    remaining = ', '.join(result['remaining_phases'])
+                    rich_console.print_info(f"⏭️  Remaining phases: {remaining}")
+                rich_console.print_info("💡 Use 'discernus resume' to complete synthesis later")
+            elif status == 'completed_skip_synthesis':
+                rich_console.print_success("✅ Pipeline completed (synthesis skipped)!")
+                rich_console.print_info("📊 All phases completed except synthesis")
+            elif status == 'completed_resume_synthesis':
+                rich_console.print_success("✅ Synthesis resume completed successfully!")
+                rich_console.print_info("📊 Full pipeline now complete")
+            else:
+                # Full completion
+                rich_console.print_success("✅ Full experiment pipeline completed successfully!")
+                rich_console.print_info("📊 All phases completed: analysis → derived metrics → evidence retrieval → synthesis")
+            
             if result.get('results_directory'):
                 rich_console.print_info(f"📁 Results saved to: {result['results_directory']}")
             if result.get('mode') == 'resume_from_stats' and result.get('resumed_from'):
@@ -405,7 +432,15 @@ def resume(ctx, experiment_path: str, analysis_model: Optional[str], synthesis_m
         result = orchestrator.run_experiment()
         
         if result.get('status') in ['completed', 'completed_analysis_only', 'completed_statistical_prep', 'completed_skip_synthesis', 'completed_resume_synthesis']:
-            rich_console.print_success("✅ Resume completed successfully!")
+            # Provide accurate completion messages for resume operations
+            status = result.get('status')
+            
+            if status == 'completed_resume_synthesis':
+                rich_console.print_success("✅ Synthesis resume completed successfully!")
+                rich_console.print_info("📊 Full experiment pipeline now complete")
+            else:
+                rich_console.print_success("✅ Resume completed successfully!")
+                
             if result.get('results_directory'):
                 rich_console.print_info(f"📁 Results saved to: {result['results_directory']}")
             if result.get('mode') == 'resume_from_stats' and result.get('resumed_from'):

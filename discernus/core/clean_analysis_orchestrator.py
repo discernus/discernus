@@ -278,13 +278,21 @@ class CleanAnalysisOrchestrator:
                             self._log_progress(f"⚠️ Manifest finalization failed: {str(e)}")
                     
                     duration = (datetime.now(timezone.utc) - start_time).total_seconds()
-                    log_experiment_complete(self.security.experiment_name, run_id, duration)
+                    
+                    # Log partial completion for analysis-only mode
+                    from .logging_config import get_logger
+                    logger = get_logger(__name__)
+                    logger.info(f"Analysis-only completed (partial pipeline): {self.security.experiment_name}")
+                    
                     return {
                         "run_id": run_id,
                         "results_directory": str(results_dir),
                         "analysis_documents": len(analysis_results),
                         "status": "completed_analysis_only",
                         "mode": "analysis_only",
+                        "pipeline_status": "partial_completion",
+                        "completed_phases": ["validation", "analysis"],
+                        "remaining_phases": ["derived_metrics", "evidence_retrieval", "synthesis"],
                         "duration_seconds": duration,
                         "performance_metrics": self._get_performance_summary(),
                         "costs": audit_logger.get_session_costs() if audit_logger else {"total_cost_usd": 0.0}
@@ -399,13 +407,20 @@ class CleanAnalysisOrchestrator:
                     self._log_progress(f"      discernus resume {self.experiment_path}")
                     self._log_progress("   💡 Perfect for external statistical analysis workflows!")
                     
-                    log_experiment_complete(self.security.experiment_name, run_id, duration)
+                    # Log partial completion for statistical prep mode
+                    from .logging_config import get_logger
+                    logger = get_logger(__name__)
+                    logger.info(f"Statistical preparation completed (partial pipeline): {self.security.experiment_name}")
+                    
                     return {
                         "run_id": run_id,
                         "results_directory": str(results_dir),
                         "analysis_documents": len(analysis_results),
                         "status": "completed_statistical_prep",
-                        "mode": "statistical_prep",
+                        "mode": "statistical_prep", 
+                        "pipeline_status": "partial_completion",
+                        "completed_phases": ["validation", "analysis", "derived_metrics", "csv_export"],
+                        "remaining_phases": ["evidence_retrieval", "synthesis"],
                         "duration_seconds": duration,
                         "performance_metrics": self._get_performance_summary(),
                         "costs": audit_logger.get_session_costs() if audit_logger else {"total_cost_usd": 0.0}
