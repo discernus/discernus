@@ -17,28 +17,30 @@
 - ✅ **PROTOTYPE VALIDATED**: Testing shows excellent alignment between markup density and scoring
 - 🔄 **ARCHITECTURE PIVOT**: Migrating to Show Your Work architecture with tool calling and adversarial attestation
 - ✅ **Phase 0.5 COMPLETED**: Analysis agent converted to tool calling (partial migration)
-- ❌ **MIGRATION INCOMPLETE**: Statistical analysis broken due to format mismatch, missing computational work artifacts
+- ✅ **STATISTICAL ANALYSIS FIXED**: Removed THICK antipatterns, statistical analysis now works correctly
+- ✅ **CACHE SYSTEM IMPROVED**: Fixed input-based caching for better cache hit rates
+- ✅ **TEMP WORKSPACE CLEANUP**: Eliminated THICK temp directory creation antipattern
 - 📋 **MIGRATION PLAN CREATED**: Comprehensive 4-phase migration plan documented
 
-**Current Focus**: **Enhanced Analysis Agent Integration** - Integrate the new 6-step THIN analysis agent with inline markup as the default analysis approach. This agent provides superior transparency, reliability, and human-readable output compared to previous approaches.
+**Current Focus**: **Evidence Retrieval Phase** - The statistical analysis phase now works correctly after removing THICK antipatterns. The next blocking issue is the "RAG index not available" error in the evidence retrieval phase.
 
-**Migration Strategy**: Replace existing analysis agent with enhanced version while maintaining full orchestrator compatibility and experiment agnosticism.
+**Migration Strategy**: Continue systematic refactoring of CleanAnalysisOrchestrator to use Show Your Work patterns while preserving mature functionality. Focus on evidence retrieval phase next.
 
 ---
 
 ## Current Sprint Planning
 
-**Next Priority**: Sprint EAA-1 (Enhanced Analysis Agent Integration) - **URGENT PRIORITY**
-**Status**: Ready for execution - Replace existing analysis agent with superior THIN approach
+**Next Priority**: Evidence Retrieval Phase Fix - **URGENT PRIORITY**
+**Status**: Ready for execution - Fix "RAG index not available" error blocking experiments
 **Dependencies**: None - can begin immediately
 
-**Following Priority**: Sprint SYW-1 (Fix Current Hybrid) - **HIGH PRIORITY**  
-**Status**: Blocked by Sprint EAA-1 completion
-**Dependencies**: Sprint EAA-1 must complete first
+**Following Priority**: Sprint EAA-1 (Enhanced Analysis Agent Integration) - **HIGH PRIORITY**
+**Status**: Ready for execution - Replace existing analysis agent with superior THIN approach
+**Dependencies**: Evidence retrieval fix completion
 
 **Future Priority**: Sprint SYW-2 (Add Verification Layer) - **MEDIUM PRIORITY**
-**Status**: Planned - depends on EAA-1 and SYW-1
-**Dependencies**: Enhanced analysis agent must be integrated
+**Status**: Planned - depends on evidence retrieval fix and EAA-1
+**Dependencies**: Evidence retrieval must work, enhanced analysis agent must be integrated
 
 ---
 
@@ -441,7 +443,7 @@
 **Contract Goal**: Produce research data artifact containing analysis scores, statistical results, and computational work in synthesis-compatible format
 **Dependencies**: None - can start immediately
 
-#### [SYW1-001] Fix Statistical Analysis Data Format
+#### [SYW1-001] Fix Statistical Analysis Data Format ✅ **COMPLETED**
 
 - **Description**: Update statistical analysis to work with new tool-calling artifact format
 - **Purpose**: Restore statistical analysis functionality broken by tool-calling migration
@@ -463,6 +465,59 @@
   - Statistical function execution pipeline
 - **Dependencies**: None
 - **Effort**: 2-3 days
+- **COMPLETION DATE**: 2025-01-15
+- **ACTUAL SOLUTION**: Removed THICK validation logic and temp workspace creation antipatterns. StatisticalAgent now handles its own data management using THIN v2.0 approach with LLM internal execution.
+
+#### [SYW1-001.5] Fix Cache System for LLM-Based Workflows ✅ **COMPLETED**
+
+- **Description**: Fix cache key generation to use input-based caching instead of output-based caching
+- **Purpose**: Enable proper cache hits for LLM-based systems where outputs vary slightly
+- **Priority**: HIGH - Required for cost efficiency and performance
+- **Root Cause**: Cache keys based on LLM outputs caused zero cache hits due to slight variations
+- **Solution Strategy**:
+  - Update `DerivedMetricsCacheManager` and `StatisticalAnalysisCacheManager` to use input-based cache keys
+  - Include framework content, experiment content, corpus content, model, and prompt template hash
+  - Remove output-based cache key generation that caused cache misses
+- **Acceptance Criteria**:
+  - ✅ Cache keys based on inputs (framework, experiment, corpus, model, prompt)
+  - ✅ Cache hits occur when inputs haven't changed
+  - ✅ Prompt template changes invalidate cache appropriately
+  - ✅ No regression in caching functionality
+- **Files to Update**:
+  - `discernus/core/derived_metrics_cache.py` (generate_cache_key method)
+  - `discernus/core/statistical_analysis_cache.py` (generate_cache_key method)
+  - `discernus/core/clean_analysis_orchestrator.py` (cache manager calls)
+- **Dependencies**: None
+- **Effort**: 1 day
+- **COMPLETION DATE**: 2025-01-15
+
+#### [SYW1-001.6] Fix Evidence Retrieval Phase ⚠️ **URGENT**
+
+- **Description**: Fix "RAG index not available" error blocking experiments after statistical analysis
+- **Purpose**: Enable experiments to proceed through evidence retrieval phase
+- **Priority**: URGENT - Blocking all experiments after statistical analysis completion
+- **Current Error**: "RAG index not available - cannot proceed to evidence retrieval"
+- **Investigation Areas**:
+  - EvidenceRetrieverAgent initialization and configuration
+  - RAG index creation and population logic
+  - Integration between statistical analysis and evidence retrieval phases
+  - Missing dependencies or configuration for evidence retrieval
+- **Solution Strategy**:
+  - Debug evidence retrieval phase initialization
+  - Check EvidenceRetrieverAgent dependencies and configuration
+  - Validate RAG index creation process
+  - Ensure proper handoff from statistical analysis to evidence retrieval
+- **Acceptance Criteria**:
+  - ✅ Evidence retrieval phase initializes correctly
+  - ✅ RAG index created and populated successfully
+  - ✅ Evidence retrieval completes without errors
+  - ✅ Experiments can proceed through all phases
+- **Files to Investigate**:
+  - `discernus/core/clean_analysis_orchestrator.py` (evidence retrieval phase)
+  - `discernus/agents/evidence_retriever_agent/` (agent implementation)
+  - RAG index creation and management logic
+- **Dependencies**: [SYW1-001] - Statistical analysis must work first
+- **Effort**: 1-2 days
 
 #### [SYW1-002] Add Missing Computational Work Artifacts
 
@@ -793,8 +848,9 @@ The following sprints were part of the old architecture and are no longer releva
 - Backward compatibility maintained
 - CSV export working
 
-### Phase 1: Fix Current Hybrid ⚠️ **IN PROGRESS**
-- Sprint SYW-1 addresses critical functionality gaps
+### Phase 1: Fix Current Hybrid ⚠️ **PARTIALLY COMPLETED**
+- Sprint SYW-1: Statistical analysis fixed, cache system improved
+- **REMAINING**: Evidence retrieval phase ("RAG index not available" error)
 - Target: Restore end-to-end pipeline functionality
 
 ### Phase 2: Add Verification Layer 📋 **PLANNED**
