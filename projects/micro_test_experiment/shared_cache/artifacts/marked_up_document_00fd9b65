@@ -1,0 +1,7 @@
+# Document Analysis - Marked Up Text
+
+# Negative Test Document 2
+
+**Context**: Sample text with negative sentiment
+
+[NEGATIVE_SENTIMENT: "What an awful predicament."] [NEGATIVE_SENTIMENT: "All plans are failing miserably."] [NEGATIVE_SENTIMENT: "I'm dreading what's to come."] [NEGATIVE_SENTIMENT: "Defeat engulfs us."] [NEGATIVE_SENTIMENT: "The group performed dreadfully."] [NEGATIVE_SENTIMENT: "We're encountering catastrophe."] [NEGATIVE_SENTIMENT: "Despair saturates everything."] [NEGATIVE_SENTIMENT: "Such a calamitous result!"] [NEGATIVE_SENTIMENT: "I'm crushed by the setbacks."] [NEGATIVE_SENTIMENT: "Everything appears bleak and discouraging."]

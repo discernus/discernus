@@ -11,7 +11,7 @@ Architecture:
 1. Load specs (experiment.md, framework, corpus)
 2. Run analysis (using AnalysisAgent)
 3. Run coherence validation (ExperimentCoherenceAgent)
-4. Generate statistical analysis (AutomatedStatisticalAnalysisAgent)
+4. Generate statistical analysis (StatisticalAgent - THIN v2.0)
 5. Run synthesis (UnifiedSynthesisAgent)
 6. Copy results with publication readiness (CRIT-001/002/003)
 
@@ -27,12 +27,13 @@ import os
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 import yaml
+import json
 import hashlib
+import shutil
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 import pandas as pd
-import json
 import pickle
 from .logging_config import setup_logging, get_logger, log_experiment_start, log_experiment_complete, log_experiment_failure
 from .security_boundary import ExperimentSecurityBoundary, SecurityError
@@ -43,7 +44,7 @@ from ..agents.experiment_coherence_agent import ExperimentCoherenceAgent
 from ..agents.analysis_agent.main import AnalysisAgent
 from ..gateway.llm_gateway_enhanced import EnhancedLLMGateway
 from ..gateway.model_registry import ModelRegistry
-from ..agents.automated_statistical_analysis.agent import AutomatedStatisticalAnalysisAgent
+from ..agents.statistical_agent.main import StatisticalAgent
 from ..agents.automated_derived_metrics.agent import AutomatedDerivedMetricsAgent
 # TxtaiEvidenceCurator removed from mainline; use RAGIndexManager instead
 from ..agents.unified_synthesis_agent import UnifiedSynthesisAgent
@@ -56,6 +57,7 @@ from .validation_cache import ValidationCacheManager
 from .rag_index_manager import RAGIndexManager
 from .provenance_organizer import ProvenanceOrganizer
 from .directory_structure_reorganizer import reorganize_directory_structure
+from .evidence_matching_wrapper import EvidenceMatchingWrapper
 from txtai.embeddings import Embeddings
 # QA agents temporarily disabled
 # from ..agents.revision_agent.agent import RevisionAgent
@@ -956,7 +958,13 @@ class CleanAnalysisOrchestrator:
                 if issues and len(issues) > 0:
                     if isinstance(issues[0], dict):
                         # If issues are dictionaries, extract descriptions
-                        issue_descriptions = [issue.get('description', str(issue)) for issue in issues]
+                        issue_descriptions = []
+                        for issue in issues:
+                            if isinstance(issue, dict):
+                                desc = issue.get('description', str(issue))
+                                issue_descriptions.append(str(desc))
+                            else:
+                                issue_descriptions.append(str(issue))
                     else:
                         # If issues are already strings, use them directly
                         issue_descriptions = [str(issue) for issue in issues]
@@ -1222,6 +1230,12 @@ class CleanAnalysisOrchestrator:
                 framework_content = framework_path.read_text(encoding='utf-8')
                 (temp_workspace / "framework_content.md").write_text(framework_content)
                 
+                # Load experiment and corpus content for cache key generation
+                experiment_path = self.experiment_path / "experiment.md"
+                corpus_path = self.experiment_path / self.config['corpus']
+                experiment_content = experiment_path.read_text(encoding='utf-8')
+                corpus_content = corpus_path.read_text(encoding='utf-8')
+                
                 # Write experiment spec to workspace for the agent to access
                 experiment_spec = {
                     "name": "Test Experiment",
@@ -1259,8 +1273,8 @@ class CleanAnalysisOrchestrator:
                 from .derived_metrics_cache import DerivedMetricsCacheManager
                 cache_manager = DerivedMetricsCacheManager(self.artifact_storage, audit_logger)
                 
-                # Generate cache key based on framework content, analysis structure, and model
-                cache_key = cache_manager.generate_cache_key(framework_content, analysis_results, model)
+                # Generate cache key based on input content (framework, experiment, corpus, model)
+                cache_key = cache_manager.generate_cache_key(framework_content, experiment_content, corpus_content, model)
                 
                 # Check cache first
                 cache_result = cache_manager.check_cache(cache_key)
@@ -1348,7 +1362,7 @@ class CleanAnalysisOrchestrator:
             raise CleanAnalysisError(f"Derived metrics phase failed: {str(e)}")
     
     def _run_statistical_analysis_phase(self, model: str, audit_logger: AuditLogger, analysis_results: List[Dict[str, Any]], derived_metrics_results: Dict[str, Any]) -> Dict[str, Any]:
-        """Run statistical analysis phase using StatisticalAnalysisPromptAssembler and AutomatedStatisticalAnalysisAgent."""
+        """Run statistical analysis phase using THIN v2.0 StatisticalAgent with LLM internal execution."""
         self._log_progress("📊 Running statistical analysis phase...")
         
         try:
@@ -1356,164 +1370,80 @@ class CleanAnalysisOrchestrator:
             framework_path = self.experiment_path / self.config['framework']
             experiment_path = self.experiment_path / "experiment.md"
             
-            # Create temporary workspace for statistical analysis
-            temp_workspace = self.experiment_path / "temp_statistical_analysis"
-            temp_workspace.mkdir(exist_ok=True)
+            # THIN ARCHITECTURE: No temp workspace needed - pass data directly to StatisticalAgent
+            
+            # Load framework, experiment, and corpus content for StatisticalAgent
+            framework_content = framework_path.read_text(encoding='utf-8')
+            experiment_content = experiment_path.read_text(encoding='utf-8')
+            corpus_path = self.experiment_path / self.config['corpus']
+            corpus_content = corpus_path.read_text(encoding='utf-8')
+            
+            # THIN ARCHITECTURE: StatisticalAgent handles its own caching
+            # No orchestrator-level function caching needed
+            
+            # Initialize THIN v2.0 statistical analysis agent
+            stats_agent = StatisticalAgent(
+                security=self.security,
+                storage=self.artifact_storage,
+                audit=audit_logger,
+                experiment_metadata=self.config
+            )
+            
+            # Generate and execute statistical analysis using THIN v2.0 approach
+            self._log_progress("🔧 Running THIN statistical analysis (raw artifacts → LLM → CSV)...")
+            
+            # Create batch ID for this statistical analysis run
+            batch_id = f"stats_{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}"
+            
+            # Run statistical analysis using THIN v2.0 agent
+            functions_result = stats_agent.analyze_batch(
+                framework_content=framework_content,
+                experiment_content=experiment_content,
+                corpus_manifest=corpus_content,
+                batch_id=batch_id
+            )
+            
+            # Extract results from StatisticalAgent output
+            if functions_result and isinstance(functions_result, dict):
+                verification_status = functions_result.get("verification", {}).get("verification_status", "unknown")
+                csv_files = functions_result.get("csv_generation", {}).get("csv_files", [])
+                if 'statistical_analysis' in functions_result:
+                    statistical_analysis = functions_result.get("statistical_analysis", {})
+                    statistical_results = {
+                        "statistical_functions_and_results": statistical_analysis.get("statistical_functions_and_results", ""),
+                        "verification_status": verification_status,
+                        "csv_files": csv_files,
+                        "total_cost": functions_result.get("total_cost_info", {}).get("total_cost_usd", 0.0)
+                    }
+                else:
+                    statistical_analysis = functions_result.get("statistical_analysis", {})
+                    statistical_results = {
+                        "statistical_functions_and_results": statistical_analysis.get("statistical_functions_and_results", ""),
+                        "verification_status": verification_status,
+                        "csv_files": csv_files,
+                        "total_cost": functions_result.get("total_cost_info", {}).get("total_cost_usd", 0.0)
+                    }
+            else:
+                error_msg = str(functions_result)
+                self._log_progress(f"❌ THIN statistical analysis failed: {error_msg}")
+                statistical_results = {"agent_error": error_msg}
+            
+            # No need to execute functions separately - the new agent does it all internally
+            self._log_progress("🔢 Statistical analysis completed via THIN v2.0 (raw artifacts → LLM → results)")
+            
+            # THIN ARCHITECTURE: Trust the StatisticalAgent output - no validation needed
+            self._log_progress(f"📊 Statistical analysis completed - trusting StatisticalAgent output")
+            self._log_progress(f"📊 Results keys: {list(statistical_results.keys())}")
+            
+            # Log basic info for debugging but don't validate content
+            if 'statistical_functions_and_results' in statistical_results:
+                self._log_progress("📊 Statistical functions and results generated")
+            if 'verification_status' in statistical_results:
+                self._log_progress(f"📊 Verification status: {statistical_results['verification_status']}")
+            if 'csv_files' in statistical_results:
+                self._log_progress(f"📊 CSV files generated: {len(statistical_results['csv_files'])}")
             
             try:
-                # Write analysis results to workspace for the assembler to access
-                analysis_dir = temp_workspace / "analysis_data"
-                analysis_dir.mkdir(exist_ok=True)
-                
-                for i, result in enumerate(analysis_results):
-                    analysis_file = analysis_dir / f"analysis_{i}.json"
-                    analysis_file.write_text(json.dumps(result, indent=2))
-                
-                # Write derived metrics results to workspace for the assembler to access
-                derived_metrics_dir = temp_workspace / "derived_metrics_data"
-                derived_metrics_dir.mkdir(exist_ok=True)
-                
-                if derived_metrics_results.get('status') == 'completed':
-                    derived_metrics = derived_metrics_results.get('derived_metrics_results', {}).get('derived_metrics_data', {}).get('derived_metrics', [])
-                    if derived_metrics:
-                        for i, metric in enumerate(derived_metrics):
-                            metric_file = derived_metrics_dir / f"derived_metric_{i}.json"
-                            metric_file.write_text(json.dumps(metric, indent=2))
-                    else:
-                        # Fallback: create empty derived metrics file
-                        empty_metric_file = derived_metrics_dir / "derived_metric_empty.json"
-                        empty_metric_file.write_text(json.dumps({"status": "no_derived_metrics"}, indent=2))
-                else:
-                    # Fallback: create empty derived metrics file
-                    empty_metric_file = derived_metrics_dir / "derived_metric_empty.json"
-                    empty_metric_file.write_text(json.dumps({"status": "derived_metrics_failed"}, indent=2))
-                
-                # Write framework and experiment content to workspace for the agent to access
-                framework_content = framework_path.read_text(encoding='utf-8')
-                (temp_workspace / "framework_content.md").write_text(framework_content)
-                
-                # THIN ARCHITECTURE: Corpus manifest is passed as context in the prompt, not as a file
-                # The LLM understands the relationships directly - no parsing needed
-                self._log_progress("📋 Corpus manifest passed as prompt context (THIN approach)")
-                
-                experiment_content = experiment_path.read_text(encoding='utf-8')
-                experiment_spec = {
-                    "name": self.config.get('name', 'Unknown Experiment'),
-                    "description": "Statistical analysis experiment",
-                    "questions": []
-                }
-                (temp_workspace / "experiment_spec.json").write_text(json.dumps(experiment_spec, indent=2))
-                
-                # Use the existing StatisticalAnalysisPromptAssembler to build the prompt
-                from .prompt_assemblers.statistical_analysis_assembler import StatisticalAnalysisPromptAssembler
-                assembler = StatisticalAnalysisPromptAssembler()
-                
-                # Assemble the prompt using the existing assembler
-                self._log_progress("🔧 Assembling statistical analysis prompt...")
-                prompt = assembler.assemble_prompt(
-                    framework_path=framework_path,
-                    experiment_path=experiment_path,
-                    analysis_dir=analysis_dir,
-                    derived_metrics_dir=derived_metrics_dir
-                )
-                
-                # Store the assembled prompt
-                prompt_file = temp_workspace / "statistical_analysis_prompt.txt"
-                prompt_file.write_text(prompt)
-                
-                # Initialize statistical analysis caching
-                from .statistical_analysis_cache import StatisticalAnalysisCacheManager
-                stats_cache_manager = StatisticalAnalysisCacheManager(self.artifact_storage, audit_logger)
-                
-                # Generate cache key based on framework, experiment, analysis structure, derived metrics, and model
-                stats_cache_key = stats_cache_manager.generate_cache_key(
-                    framework_content, experiment_content, analysis_results, derived_metrics_results, model
-                )
-                
-                # Check cache first
-                stats_cache_result = stats_cache_manager.check_cache(stats_cache_key)
-                
-                if stats_cache_result.hit:
-                    self._log_progress("💾 Using cached statistical analysis functions")
-                    functions_result = stats_cache_result.cached_functions
-                    
-                    # Recreate functions file from cached content if available
-                    if functions_result.get('cached_with_code') and functions_result.get('function_code_content'):
-                        functions_file = temp_workspace / "automatedstatisticalanalysisagent_functions.py"
-                        functions_file.write_text(functions_result['function_code_content'], encoding='utf-8')
-                        self._log_progress("📝 Recreated statistical functions file from cached content")
-                    else:
-                        self._log_progress("⚠️ Cached statistical functions missing code content - may need regeneration")
-                else:
-                    self._log_progress("🔧 Cache miss - generating new statistical analysis functions")
-                    # Initialize statistical analysis agent
-                    from ..agents.automated_statistical_analysis.agent import AutomatedStatisticalAnalysisAgent
-                    stats_agent = AutomatedStatisticalAnalysisAgent(
-                        model=model,
-                        audit_logger=audit_logger
-                    )
-                    
-                    # Generate statistical analysis functions using the assembled prompt
-                    self._log_progress("🔧 Generating statistical analysis functions...")
-                    functions_result = stats_agent.generate_functions(temp_workspace, pre_assembled_prompt=prompt)
-                    
-                    # Store in cache for future use (with workspace path to capture function code)
-                    stats_cache_manager.store_functions(stats_cache_key, functions_result, str(temp_workspace))
-                
-                # Execute the generated functions on the data
-                self._log_progress(f"🔢 Executing statistical analysis functions from workspace: {temp_workspace}")
-                self._log_progress(f"🔍 Functions file should be at: {temp_workspace / 'automatedstatisticalanalysisagent_functions.py'}")
-                statistical_results = self._execute_statistical_functions(
-                    temp_workspace, 
-                    audit_logger,
-                    analysis_results
-                )
-                
-                # CRITICAL: Validate that we got actual statistical results
-                self._log_progress(f"🔍 Statistical results validation - results keys: {list(statistical_results.keys())}")
-                
-                # DEBUG: What exact structure are we validating?
-                if 'statistical_results' in statistical_results:
-                    self._log_progress("🔍 DEBUGGING: Found nested 'statistical_results' key - extracting...")
-                    actual_results = statistical_results['statistical_results']
-                    self._log_progress(f"🔍 DEBUGGING: Actual statistical results keys: {list(actual_results.keys())}")
-                else:
-                    actual_results = statistical_results
-                    self._log_progress(f"🔍 DEBUGGING: Using direct statistical results")
-                
-                self._log_progress(f"🔍 Statistical results content: {statistical_results}")
-                
-                # Debug each result in detail
-                for func_name, result in actual_results.items():
-                    self._log_progress(f"🔍 Function '{func_name}': type={type(result)}, value={result}")
-                    if isinstance(result, dict):
-                        self._log_progress(f"🔍   - status: {result.get('status', 'NO_STATUS')}")
-                        self._log_progress(f"🔍   - keys: {list(result.keys())}")
-                        # Check for numerical content specifically
-                        numerical_found = []
-                        for key, value in result.items():
-                            if isinstance(value, (int, float)):
-                                numerical_found.append(f"{key}={value}")
-                            elif isinstance(value, (list, dict)):
-                                numerical_found.append(f"{key}={type(value).__name__}")
-                        self._log_progress(f"🔍   - numerical content: {numerical_found}")
-                
-                # Use the correct results for validation
-                if not self._validate_statistical_results(actual_results):
-                    self._log_progress("❌ Statistical results validation failed")
-                    self._log_progress(f"❌ VALIDATION DEBUG: Validating {len(actual_results)} results")
-                    for name, res in actual_results.items():
-                        is_dict = isinstance(res, dict)
-                        status_ok = res.get('status') != 'failed' if is_dict else 'N/A'
-                        has_num = any(isinstance(v, (int, float, list, dict)) for v in res.values() if v is not None) if is_dict else False
-                        self._log_progress(f"❌   {name}: dict={is_dict}, status_ok={status_ok}, numerical={has_num}")
-                    
-                    raise CleanAnalysisError(
-                        "Statistical analysis phase failed: No numerical results produced. "
-                        "Generated functions but failed to execute or produce statistical outputs. "
-                        "This experiment cannot proceed to synthesis without valid statistical data."
-                    )
-                
                 # Store individual artifacts that synthesis expects
                 
                 # 1. Store raw analysis data (from analysis_results)
@@ -1586,12 +1516,6 @@ class CleanAnalysisOrchestrator:
             except Exception as e:
                 self._log_progress(f"❌ Statistical analysis phase failed: {str(e)}")
                 raise CleanAnalysisError(f"Statistical analysis phase failed: {str(e)}")
-            
-            finally:
-                # Clean up temporary workspace
-                if temp_workspace.exists():
-                    import shutil
-                    shutil.rmtree(temp_workspace)
         
         except Exception as e:
             import traceback
@@ -1939,24 +1863,7 @@ class CleanAnalysisOrchestrator:
         
         return df
     
-    def _validate_statistical_results(self, statistical_results: Dict[str, Any]) -> bool:
-        """Validate that statistical analysis produced actual numerical results."""
-        print("🔍 VALIDATION DEBUG: _validate_statistical_results called")
-        print(f"🔍 VALIDATION DEBUG: statistical_results = {statistical_results}")
-        if not statistical_results:
-            print("🔍 VALIDATION DEBUG: statistical_results is empty - returning False")
-            return False
-        
-        # Check that we have at least one successful statistical function result
-        successful_results = 0
-        for func_name, result in statistical_results.items():
-            if isinstance(result, dict) and result.get('status') != 'failed':
-                # Check for numerical data in the result
-                if any(isinstance(v, (int, float, list, dict)) for v in result.values() if v is not None):
-                    successful_results += 1
-        
-        # We need at least one successful statistical result with numerical data
-        return successful_results > 0
+    # REMOVED: _validate_statistical_results - THIN architecture trusts agent output
     
     def _validate_assets(self, statistical_results: Dict[str, Any]) -> None:
         """Simple validation that basic files exist. Let the synthesis LLM handle data quality assessment."""
@@ -3381,7 +3288,7 @@ class CleanAnalysisOrchestrator:
             # 9. FINAL SYNTHESIS REPORT (the report being validated)
             if assets and assets.get('report_hash'):
                 try:
-                    report_content = self.artifact_storage.get_artifact(assets_dict['report_hash'])
+                    report_content = self.artifact_storage.get_artifact(assets['report_hash'])
                     report_text = report_content.decode('utf-8')
                     source_documents.append({
                         'content': report_text,

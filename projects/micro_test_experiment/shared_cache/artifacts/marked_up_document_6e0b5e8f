@@ -1,7 +1,0 @@
-# Document Analysis - Marked Up Text
-
-# Positive Test Document 2
-
-**Context**: Sample text with positive sentiment
-
-What a [POSITIVE_SENTIMENT: "superb"] morning! All systems are operating [POSITIVE_SENTIMENT: "flawlessly"]. I'm [POSITIVE_SENTIMENT: "excited"] about what's coming next. [POSITIVE_SENTIMENT: "Achievement"] surrounds us. The group performed [POSITIVE_SENTIMENT: "outstandingly"]. We're reaching [POSITIVE_SENTIMENT: "incredible goals"]. [POSITIVE_SENTIMENT: "Hopefulness"] permeates everything. Such a [POSITIVE_SENTIMENT: "marvelous"] chance! I'm [POSITIVE_SENTIMENT: "delighted"] by the [POSITIVE_SENTIMENT: "advancement"]. Everything appears [POSITIVE_SENTIMENT: "glowing"] and [POSITIVE_SENTIMENT: "encouraging"].

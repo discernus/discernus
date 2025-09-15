@@ -1,7 +1,0 @@
-# Document Analysis - Marked Up Text
-
-# Negative Test Document 1
-
-**Context**: Sample text with negative sentiment
-
-This is a [NEGATIVE_SENTIMENT: terrible situation]. Everything is [NEGATIVE_SENTIMENT: going wrong]. I feel [NEGATIVE_SENTIMENT: awful] about the future. [NEGATIVE_SENTIMENT: Failure] surrounds us. The team did a [NEGATIVE_SENTIMENT: horrible job]. We're [NEGATIVE_SENTIMENT: facing disaster]. [NEGATIVE_SENTIMENT: Pessimism fills the air]. What a [NEGATIVE_SENTIMENT: disastrous outcome]! I'm [NEGATIVE_SENTIMENT: devastated] by the results. Everything looks [NEGATIVE_SENTIMENT: dark and hopeless].

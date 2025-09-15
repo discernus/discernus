@@ -1,7 +1,0 @@
-{
-  "analysis_id": "analysis_bd093413",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "evidence_extraction": "```json\n{\n  \"positive_sentiment\": [\n    \"This is a wonderful day!\",\n    \"Everything is going perfectly.\",\n    \"Success is everywhere.\",\n    \"The team did an excellent job.\",\n    \"We're achieving amazing results.\",\n    \"Optimism fills the air.\",\n    \"What a fantastic opportunity!\",\n    \"I'm thrilled with the progress.\",\n    \"Everything looks bright and promising.\"\n  ],\n  \"negative_sentiment\": []\n}\n```",
-  "timestamp": "2025-09-15T02:23:49.865255+00:00"
-}

@@ -1,0 +1,38 @@
+{
+  "success": false,
+  "issues": [
+    {
+      "category": "trinity_coherence",
+      "description": "The experiment includes hypotheses (H1, H2) that imply inferential statistical comparison between groups, but the corpus sample size (N=4) is insufficient for any form of hypothesis testing. The v10.0 experiment specification explicitly disallows hypothesis testing for N<10, permitting only 'Case study analysis, qualitative patterns, individual document insights' for N=4-9.",
+      "impact": "The platform will block execution as the requested statistical analysis (hypothesis testing) is invalid for the provided sample size, violating the platform's statistical power requirements and leading to statistically meaningless results.",
+      "fix": "Either increase the corpus size to meet the minimum requirements for inferential testing (N>=20), or revise the Research Questions and Hypotheses to focus solely on descriptive analysis and qualitative pattern identification, which is appropriate for a sample of N=4. For example, change H1 to be a descriptive expectation: 'It is expected that positive sentiment documents will show higher mean positive sentiment scores...'",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "capabilities_mismatch",
+      "description": "The experiment requests 'Reliability analysis for measurement consistency', but this type of analysis (e.g., Cronbach's alpha) is statistically invalid and uninterpretable with a total sample size of N=4 and only two dimensions. This constitutes an attempt to run an underpowered analysis.",
+      "impact": "The experiment will be blocked because the requested reliability analysis cannot be performed meaningfully on the provided data, violating the platform's statistical power enforcement rules.",
+      "fix": "Remove the 'Reliability analysis' requirement from the 'Statistical Analysis Requirements' section of the experiment. This type of analysis should only be requested for corpora with a substantially larger sample size (typically N>30) and more than two items to compare.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The narrative description of the 'sentiment_magnitude' derived metric in the framework's 'Analytical Methodology' section ('Combined intensity... (positive + negative)') is inconsistent with the formula in the YAML appendix ('(dimensions.positive_sentiment.raw_score + dimensions.negative_sentiment.raw_score) / 2'). The formula calculates an average, while the narrative implies a sum.",
+      "impact": "This may cause confusion for researchers reading the framework's narrative, but it does not affect execution as the system correctly uses the YAML formula. The calculated metric will be an average, not a sum.",
+      "fix": "Update the narrative description in the 'Analytical Methodology' section of the framework to match the formula, for example: 'Sentiment Magnitude: The average intensity of emotional language ((positive + negative) / 2)'.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "sentiment_binary_v1.md"
+      ]
+    }
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-09-15T13:00:47.320064+00:00"
+}

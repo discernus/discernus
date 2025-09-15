@@ -1,0 +1,7 @@
+{
+  "analysis_id": "analysis_686731a1",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "evidence_extraction": "```json\n{\n  \"negative_test_1.txt\": {\n    \"positive_sentiment\": [\n      \"No positive language or optimistic expressions are present in the document.\"\n    ],\n    \"negative_sentiment\": [\n      \"This is a terrible situation. Everything is going wrong. I feel awful about the future.\",\n      \"Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless.\"\n    ]\n  }\n}\n```",
+  "timestamp": "2025-09-15T13:24:50.690065+00:00"
+}

@@ -1,7 +1,0 @@
-{
-  "analysis_id": "analysis_47295a9a",
-  "step": "derived_metrics_generation",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "derived_metrics": "## Code:\n\n```python\nimport json\n\ndef calculate_derived_metrics(scores):\n    \"\"\"\n    Calculates derived metrics based on provided sentiment scores.\n\n    Args:\n        scores (dict): A dictionary containing 'positive_sentiment' and 'negative_sentiment' scores.\n\n    Returns:\n        dict: A dictionary containing the calculated 'net_sentiment' and 'sentiment_magnitude'.\n    \"\"\"\n    positive_sentiment = scores.get(\"positive_sentiment\", {}).get(\"raw_score\", 0.0)\n    negative_sentiment = scores.get(\"negative_sentiment\", {}).get(\"raw_score\", 0.0)\n\n    net_sentiment = positive_sentiment - negative_sentiment\n    sentiment_magnitude = (positive_sentiment + negative_sentiment) / 2\n\n    return {\n        \"net_sentiment\": net_sentiment,\n        \"sentiment_magnitude\": sentiment_magnitude\n    }\n\n# Provided dimensional scores\ndimensional_scores = {\n  \"positive_sentiment\": {\n    \"raw_score\": 0.0,\n    \"salience\": 0.0,\n    \"confidence\": 1.0\n  },\n  \"negative_sentiment\": {\n    \"raw_score\": 1.0,\n    \"salience\": 1.0,\n    \"confidence\": 1.0\n  }\n}\n\n# Calculate derived metrics\nderived_metrics_results = calculate_derived_metrics(dimensional_scores)\n\nprint(json.dumps(derived_metrics_results, indent=2))\n```\n\n## Results:\n\n```json\n{\n  \"net_sentiment\": -1.0,\n  \"sentiment_magnitude\": 0.5\n}\n```",
-  "timestamp": "2025-09-15T02:24:31.284517+00:00"
-}

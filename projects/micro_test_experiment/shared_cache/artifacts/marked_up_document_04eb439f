@@ -1,0 +1,9 @@
+# Document Analysis - Marked Up Text
+
+Hash: 26c27e1e47385f48
+Content:
+# Positive Test Document 1
+
+**Context**: Sample text with [POSITIVE_SENTIMENT: positive] sentiment
+
+This is a [POSITIVE_SENTIMENT: wonderful] day! Everything is going [POSITIVE_SENTIMENT: perfectly]. I feel [POSITIVE_SENTIMENT: great] about the future. [POSITIVE_SENTIMENT: Success] is everywhere. The team did an [POSITIVE_SENTIMENT: excellent] job. We're achieving [POSITIVE_SENTIMENT: amazing] results. [POSITIVE_SENTIMENT: Optimism] fills the air. What a [POSITIVE_SENTIMENT: fantastic] opportunity! I'm [POSITIVE_SENTIMENT: thrilled] with the progress. Everything looks [POSITIVE_SENTIMENT: bright] and [POSITIVE_SENTIMENT: promising].

@@ -1,0 +1,7 @@
+{
+  "analysis_id": "analysis_a62cd21f",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "evidence_extraction": "```json\n{\n  \"positive_sentiment\": [\n    \"This is a wonderful day! Everything is going perfectly. I feel great about the future. Success is everywhere.\",\n    \"We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.\"\n  ],\n  \"negative_sentiment\": [\n    \"No negative language or expressions were found in the document.\"\n  ]\n}\n```",
+  "timestamp": "2025-09-15T13:25:44.036332+00:00"
+}

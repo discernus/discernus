@@ -37,57 +37,73 @@ class StatisticalAnalysisCacheManager:
         self.audit = audit
     
     def generate_cache_key(self, framework_content: str, experiment_content: str, 
-                          analysis_results: List[Dict[str, Any]], 
-                          derived_metrics_results: Dict[str, Any], model: str) -> str:
+                          corpus_content: str, model: str) -> str:
         """
         Generate deterministic cache key for statistical analysis functions.
         
         Args:
             framework_content: Framework markdown content
             experiment_content: Experiment markdown content
-            analysis_results: List of analysis result dictionaries
-            derived_metrics_results: Derived metrics results dictionary
+            corpus_content: Corpus manifest content
             model: LLM model used for function generation
             
         Returns:
-            Deterministic cache key based on content hashes and model
+            Deterministic cache key based on input content hashes and model
         """
-        # Create structure hash from analysis results (not content, just structure)
-        analysis_structure = []
-        for result in analysis_results:
-            # Extract just the structure/schema, not the actual values
-            structure = {
-                'has_analysis_result': 'analysis_result' in result,
-                'has_raw_response': 'raw_analysis_response' in result,
-                'has_scores_hash': 'scores_hash' in result,
-                'has_evidence_hash': 'evidence_hash' in result,
-                'filename': result.get('filename', 'unknown')
-            }
-            analysis_structure.append(structure)
-        
-        analysis_structure_hash = hashlib.sha256(
-            json.dumps(analysis_structure, sort_keys=True).encode()
-        ).hexdigest()[:16]
-        
-        # Create structure hash from derived metrics results
-        derived_metrics_structure = {
-            'status': derived_metrics_results.get('status', 'unknown'),
-            'has_derived_metrics_results': 'derived_metrics_results' in derived_metrics_results,
-            'functions_generated': derived_metrics_results.get('functions_generated', 0)
-        }
-        
-        derived_metrics_structure_hash = hashlib.sha256(
-            json.dumps(derived_metrics_structure, sort_keys=True).encode()
-        ).hexdigest()[:16]
-        
         # Include prompt template hash to invalidate cache when prompt changes
         prompt_template_hash = self._get_prompt_template_hash()
         
-        # Combine all inputs for cache key
-        cache_content = f'{framework_content}{experiment_content}{analysis_structure_hash}{derived_metrics_structure_hash}{model}{prompt_template_hash}'
-        cache_hash = hashlib.sha256(cache_content.encode()).hexdigest()[:12]
+        # Combine all input content for cache key (not outputs from previous phases)
+        combined_content = f'{framework_content}{experiment_content}{corpus_content}{model}{prompt_template_hash}'
+        cache_hash = hashlib.sha256(combined_content.encode()).hexdigest()[:12]
         
         return f"statistical_analysis_{cache_hash}"
+    
+    def _extract_python_code_from_response(self, llm_response: str) -> str:
+        """
+        Extract Python code from StatisticalAgent LLM response.
+        
+        Args:
+            llm_response: Raw LLM response containing Python code
+            
+        Returns:
+            Extracted Python code or empty string if not found
+        """
+        if not llm_response:
+            return ""
+        
+        # Look for Python code blocks in markdown format
+        import re
+        
+        # Pattern 1: ```python ... ```
+        python_pattern = r'```python\s*\n(.*?)\n```'
+        match = re.search(python_pattern, llm_response, re.DOTALL)
+        if match:
+            return match.group(1).strip()
+        
+        # Pattern 2: ``` ... ``` (generic code block)
+        code_pattern = r'```\s*\n(.*?)\n```'
+        match = re.search(code_pattern, llm_response, re.DOTALL)
+        if match:
+            code = match.group(1).strip()
+            # Check if it looks like Python code
+            if any(keyword in code for keyword in ['import ', 'def ', 'class ', 'pandas', 'numpy']):
+                return code
+        
+        # Pattern 3: Look for function definitions directly
+        if 'def ' in llm_response and 'import ' in llm_response:
+            # Try to extract everything from the first import to the end
+            lines = llm_response.split('\n')
+            start_idx = None
+            for i, line in enumerate(lines):
+                if line.strip().startswith('import '):
+                    start_idx = i
+                    break
+            
+            if start_idx is not None:
+                return '\n'.join(lines[start_idx:]).strip()
+        
+        return ""
     
     def _get_prompt_template_hash(self) -> str:
         """Get hash of the current prompt template to invalidate cache when prompt changes."""
@@ -169,8 +185,30 @@ class StatisticalAnalysisCacheManager:
         # Create enhanced functions result that includes the actual function code
         enhanced_functions_result = functions_result.copy()
         
-        # If workspace_path is provided, read the actual function file content
-        if workspace_path:
+        # Check if this is from StatisticalAgent (THIN v2.0) or AutomatedStatisticalAnalysisAgent
+        if 'statistical_analysis' in functions_result and 'statistical_functions_and_results' in functions_result['statistical_analysis']:
+            # This is from StatisticalAgent - extract code from the LLM response
+            statistical_analysis = functions_result['statistical_analysis']
+            llm_response = statistical_analysis.get('statistical_functions_and_results', '')
+            
+            # Extract Python code from the LLM response
+            function_code = self._extract_python_code_from_response(llm_response)
+            if function_code:
+                enhanced_functions_result['function_code_content'] = function_code
+                enhanced_functions_result['cached_with_code'] = True
+                print(f"💾 Cached statistical function code content from StatisticalAgent ({len(function_code)} chars)")
+                
+                # Also save to workspace if provided
+                if workspace_path:
+                    from pathlib import Path
+                    functions_file = Path(workspace_path) / "automatedstatisticalanalysisagent_functions.py"
+                    functions_file.write_text(function_code, encoding='utf-8')
+                    print(f"📝 Saved statistical functions to workspace: {functions_file}")
+            else:
+                enhanced_functions_result['cached_with_code'] = False
+                print(f"⚠️ Could not extract Python code from StatisticalAgent response")
+        elif workspace_path:
+            # This is from AutomatedStatisticalAnalysisAgent - read the function file
             from pathlib import Path
             functions_file = Path(workspace_path) / "automatedstatisticalanalysisagent_functions.py"
             if functions_file.exists():
@@ -178,7 +216,7 @@ class StatisticalAnalysisCacheManager:
                     function_code = functions_file.read_text(encoding='utf-8')
                     enhanced_functions_result['function_code_content'] = function_code
                     enhanced_functions_result['cached_with_code'] = True
-                    print(f"💾 Cached statistical function code content ({len(function_code)} chars)")
+                    print(f"💾 Cached statistical function code content from file ({len(function_code)} chars)")
                 except Exception as e:
                     print(f"⚠️ Failed to read statistical function file for caching: {e}")
                     enhanced_functions_result['cached_with_code'] = False

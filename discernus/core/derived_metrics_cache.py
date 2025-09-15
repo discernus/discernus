@@ -36,40 +36,40 @@ class DerivedMetricsCacheManager:
         self.storage = storage
         self.audit = audit
     
-    def generate_cache_key(self, framework_content: str, analysis_results: List[Dict[str, Any]], model: str) -> str:
+    def generate_cache_key(self, framework_content: str, experiment_content: str, 
+                          corpus_content: str, model: str) -> str:
         """
         Generate deterministic cache key for derived metrics functions.
         
         Args:
             framework_content: Framework markdown content
-            analysis_results: List of analysis result dictionaries
+            experiment_content: Experiment markdown content
+            corpus_content: Corpus manifest content
             model: LLM model used for function generation
             
         Returns:
-            Deterministic cache key based on content hashes and model
+            Deterministic cache key based on input content hashes and model
         """
-        # Create structure hash from analysis results (not content, just structure)
-        analysis_structure = []
-        for result in analysis_results:
-            # Extract just the structure/schema, not the actual values
-            structure = {
-                'has_analysis_result': 'analysis_result' in result,
-                'has_raw_response': 'raw_analysis_response' in result,
-                'has_scores_hash': 'scores_hash' in result,
-                'has_evidence_hash': 'evidence_hash' in result,
-                'filename': result.get('filename', 'unknown')
-            }
-            analysis_structure.append(structure)
+        # Include prompt template hash to invalidate cache when prompt changes
+        prompt_template_hash = self._get_prompt_template_hash()
         
-        analysis_structure_hash = hashlib.sha256(
-            json.dumps(analysis_structure, sort_keys=True).encode()
-        ).hexdigest()[:16]
-        
-        # Combine framework, analysis structure, and model for cache key
-        cache_content = f'{framework_content}{analysis_structure_hash}{model}'
-        cache_hash = hashlib.sha256(cache_content.encode()).hexdigest()[:12]
+        # Combine all input content for cache key (not outputs from previous phases)
+        combined_content = f'{framework_content}{experiment_content}{corpus_content}{model}{prompt_template_hash}'
+        cache_hash = hashlib.sha256(combined_content.encode()).hexdigest()[:12]
         
         return f"derived_metrics_{cache_hash}"
+    
+    def _get_prompt_template_hash(self) -> str:
+        """Get hash of the current prompt template to invalidate cache when prompt changes."""
+        try:
+            from pathlib import Path
+            prompt_path = Path(__file__).parent.parent / "agents" / "derived_metrics_agent" / "prompt.yaml"
+            if prompt_path.exists():
+                prompt_content = prompt_path.read_text(encoding='utf-8')
+                return hashlib.sha256(prompt_content.encode()).hexdigest()[:8]
+        except Exception:
+            pass
+        return "unknown"
     
     def check_cache(self, cache_key: str, agent_name: str = "DerivedMetricsAgent") -> DerivedMetricsCacheResult:
         """
