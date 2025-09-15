@@ -90,6 +90,35 @@ class EvidenceMatchingWrapper:
                             # Try alternative structure
                             evidence_list = evidence_data.get('evidence_collection', [])
                         
+                        # THIN approach: If no structured evidence found, pass raw content to LLM
+                        # Let the EvidenceRetrieverAgent handle evidence extraction internally
+                        if not evidence_list:
+                            # Store the raw evidence data for LLM processing
+                            raw_evidence_text = ""
+                            if 'evidence_extraction' in evidence_data:
+                                raw_evidence_text = str(evidence_data['evidence_extraction'])
+                            elif 'raw_analysis_response' in evidence_data:
+                                raw_evidence_text = str(evidence_data['raw_analysis_response'])
+                            else:
+                                # Use the entire artifact as raw text
+                                raw_evidence_text = json.dumps(evidence_data, indent=2)
+                            
+                            if raw_evidence_text.strip():
+                                # Create a single evidence document with raw content
+                                # The LLM will extract quotes from this during retrieval
+                                evidence_documents.append({
+                                    'id': len(evidence_documents),
+                                    'text': raw_evidence_text.strip(),
+                                    'metadata': {
+                                        'document_name': f"Evidence from {evidence_data.get('analysis_id', 'unknown')}",
+                                        'dimension': 'raw_evidence',
+                                        'confidence': 1.0,
+                                        'extraction_method': 'raw_content',
+                                        'source_type': 'analysis_artifact'
+                                    }
+                                })
+                            continue  # Skip the structured processing below
+                        
                         for evidence in evidence_list:
                             quote_text = evidence.get('quote_text', '')
                             # Only index evidence with actual quotes (not empty, None, or whitespace)
