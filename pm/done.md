@@ -73,6 +73,63 @@
 
 ---
 
+### 🎯 **SYW1-001: Fix Statistical Analysis Data Format** ✅ **COMPLETED**
+
+**Description**: Update statistical analysis to work with new tool-calling artifact format
+**Purpose**: Restore statistical analysis functionality broken by tool-calling migration
+**Priority**: CRITICAL - Blocking all experiments
+**Completion Date**: 2025-01-15
+
+**Root Cause**: Statistical functions expect old CSV format but get new tool-calling delimited JSON
+**Current Error**: "No valid document analyses found in individual results"
+
+**Solution Strategy**:
+- Debug `_convert_analysis_to_dataframe()` method in CleanAnalysisOrchestrator
+- Ensure proper extraction of dimensional scores from new format
+- Validate DataFrame structure matches statistical function expectations
+- Add comprehensive logging for debugging data flow
+
+**Acceptance Criteria**:
+- ✅ Statistical functions receive properly formatted DataFrame
+- ✅ All dimensional scores extracted correctly from tool-calling artifacts
+- ✅ Statistical analysis produces numerical results
+- ✅ No "No valid document analyses found" errors
+
+**Files Updated**:
+- `discernus/core/clean_analysis_orchestrator.py` (_convert_analysis_to_dataframe)
+- Statistical function execution pipeline
+
+**Actual Solution**: Removed THICK validation logic and temp workspace creation antipatterns. StatisticalAgent now handles its own data management using THIN v2.0 approach with LLM internal execution.
+
+---
+
+### 🎯 **SYW1-001.5: Fix Cache System for LLM-Based Workflows** ✅ **COMPLETED**
+
+**Description**: Fix cache key generation to use input-based caching instead of output-based caching
+**Purpose**: Enable proper cache hits for LLM-based systems where outputs vary slightly
+**Priority**: HIGH - Required for cost efficiency and performance
+**Completion Date**: 2025-01-15
+
+**Root Cause**: Cache keys based on LLM outputs caused zero cache hits due to slight variations
+
+**Solution Strategy**:
+- Update `DerivedMetricsCacheManager` and `StatisticalAnalysisCacheManager` to use input-based cache keys
+- Include framework content, experiment content, corpus content, model, and prompt template hash
+- Remove output-based cache key generation that caused cache misses
+
+**Acceptance Criteria**:
+- ✅ Cache keys based on inputs (framework, experiment, corpus, model, prompt)
+- ✅ Cache hits occur when inputs haven't changed
+- ✅ Prompt template changes invalidate cache appropriately
+- ✅ No regression in caching functionality
+
+**Files Updated**:
+- `discernus/core/derived_metrics_cache.py` (generate_cache_key method)
+- `discernus/core/statistical_analysis_cache.py` (generate_cache_key method)
+- `discernus/core/clean_analysis_orchestrator.py` (cache manager calls)
+
+---
+
 ### 🎯 **SPRINT 7: Research Validation & Experimental Studies** ✅ **COMPLETED**
 
 **Timeline**: 3-4 weeks ✅ **COMPLETED**
