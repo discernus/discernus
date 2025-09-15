@@ -51,9 +51,7 @@ from ..agents.unified_synthesis_agent import UnifiedSynthesisAgent
 from ..agents.csv_export_agent import CSVExportAgent, ExportOptions
 from ..gateway.llm_gateway import LLMGateway
 from ..gateway.model_registry import ModelRegistry
-from .rag_index_cache import RAGIndexCacheManager
-from .statistical_analysis_cache import StatisticalAnalysisCacheManager
-from .validation_cache import ValidationCacheManager
+from .unified_cache_manager import ValidationCacheManager, DerivedMetricsCacheManager, StatisticalAnalysisCacheManager, AnalysisCacheManager
 from .rag_index_manager import RAGIndexManager
 from .provenance_organizer import ProvenanceOrganizer
 from .directory_structure_reorganizer import reorganize_directory_structure
@@ -933,7 +931,6 @@ class CleanAnalysisOrchestrator:
         experiment_content = experiment_path.read_text(encoding='utf-8')
         
         # Initialize unified validation caching
-        from .unified_cache_manager import ValidationCacheManager
         validation_cache_manager = ValidationCacheManager(self.artifact_storage, audit_logger)
         
         # Generate deterministic cache key based on all validation inputs
@@ -1058,13 +1055,15 @@ class CleanAnalysisOrchestrator:
         corpus_content = corpus_path.read_text(encoding='utf-8')
         experiment_content = experiment_path.read_text(encoding='utf-8')
         
-        # Initialize validation caching
-        from .validation_cache import ValidationCacheManager
+        # Initialize unified validation caching
         validation_cache_manager = ValidationCacheManager(self.artifact_storage, self.audit_logger)
         
         # Generate cache key based on all validation inputs
-        return validation_cache_manager.generate_cache_key(
-            framework_content, experiment_content, corpus_content, validation_model
+        return validation_cache_manager.generate_validation_cache_key(
+            framework_content=framework_content,
+            experiment_content=experiment_content,
+            corpus_content=corpus_content,
+            validation_model=validation_model
         )
     
     def _load_corpus_documents(self) -> List[Dict[str, Any]]:
@@ -1114,8 +1113,17 @@ class CleanAnalysisOrchestrator:
         return corpus_dir / filename
     
     def _run_analysis_phase(self, analysis_model: str, audit_logger: AuditLogger) -> List[Dict[str, Any]]:
-        """Run analysis phase with individual document processing."""
+        """Run analysis phase with unified caching."""
         self._log_progress("🔬 Running analysis phase...")
+        
+        # Load all content for cache key generation
+        framework_path = self.experiment_path / self.config['framework']
+        experiment_path = self.experiment_path / "experiment.md"
+        corpus_path = self.experiment_path / self.config['corpus']
+        
+        framework_content = framework_path.read_text(encoding='utf-8')
+        experiment_content = experiment_path.read_text(encoding='utf-8')
+        corpus_content = corpus_path.read_text(encoding='utf-8')
         
         # Load corpus documents
         corpus_documents = self._load_corpus_documents()
@@ -1124,6 +1132,32 @@ class CleanAnalysisOrchestrator:
 
         # Prepare documents for analysis
         prepared_documents = self._prepare_documents_for_analysis(corpus_documents)
+        
+        # Include all document contents in cache key (analysis depends on all document content)
+        all_document_contents = "".join([doc.get('content', '') for doc in prepared_documents])
+        combined_corpus_content = corpus_content + all_document_contents
+        
+        # Initialize unified analysis caching
+        cache_manager = AnalysisCacheManager(self.artifact_storage, audit_logger)
+        
+        # Generate cache key based on ALL inputs that affect analysis output
+        cache_key = cache_manager.generate_analysis_cache_key(
+            framework_content=framework_content,
+            experiment_content=experiment_content,
+            corpus_content=combined_corpus_content,
+            analysis_model=analysis_model
+        )
+        
+        # Check cache first
+        cache_result = cache_manager.check_cache(cache_key, "AnalysisPhase")
+        if cache_result.hit:
+            self._log_progress("💾 Using cached analysis results")
+            self.performance_metrics["cache_hits"] += 1
+            return cache_result.cached_content["analysis_results"]
+        
+        # Cache miss - perform analysis
+        self._log_progress("🔍 Cache miss - performing analysis...")
+        self.performance_metrics["cache_misses"] += 1
         
         # Initialize analysis agent (Production THIN v2.0 with 6-step approach)
         analysis_agent = AnalysisAgent(
@@ -1169,14 +1203,7 @@ class CleanAnalysisOrchestrator:
                     scores_result = result.get('score_extraction', {})
                     evidence_result = result.get('evidence_extraction', {})
                     
-                    # Track cache performance - check if analysis was cached
-                    analysis_result = result.get('analysis_result', {})
-                    was_cached = analysis_result.get('cached', False)
-                    if was_cached:
-                        self.performance_metrics["cache_hits"] += 1
-                        self._log_progress(f"💾 Cache hit for analysis: {prepared_doc.get('filename', 'Unknown')}")
-                    else:
-                        self.performance_metrics["cache_misses"] += 1
+                    # Cache performance is now tracked at the phase level, not document level
 
                     # Store the full result with raw_analysis_response at top level for statistical processing
                     full_result = {
@@ -1210,6 +1237,9 @@ class CleanAnalysisOrchestrator:
         
         if not analysis_results:
             raise CleanAnalysisError("No documents were successfully analyzed")
+        
+        # Store analysis results in cache for future use
+        cache_manager.store_cache(cache_key, {"analysis_results": analysis_results}, "AnalysisPhase")
         
         self._log_progress(f"✅ Analysis phase completed: {len(analysis_results)} documents processed")
         return analysis_results
@@ -1274,19 +1304,24 @@ class CleanAnalysisOrchestrator:
                 prompt_file = temp_workspace / "derived_metrics_prompt.txt"
                 prompt_file.write_text(prompt)
                 
-                # Initialize derived metrics caching
-                from .derived_metrics_cache import DerivedMetricsCacheManager
+                # Initialize unified derived metrics caching
                 cache_manager = DerivedMetricsCacheManager(self.artifact_storage, audit_logger)
                 
                 # Generate cache key based on input content (framework, experiment, corpus, model)
-                cache_key = cache_manager.generate_cache_key(framework_content, experiment_content, corpus_content, model)
+                cache_key = cache_manager.generate_derived_metrics_cache_key(
+                    framework_content=framework_content,
+                    experiment_content=experiment_content,
+                    corpus_content=corpus_content,
+                    derived_metrics_model=model,
+                    analysis_results_hash=""  # TODO: Add analysis results hash for proper dependency
+                )
                 
                 # Check cache first
-                cache_result = cache_manager.check_cache(cache_key)
+                cache_result = cache_manager.check_cache(cache_key, "DerivedMetricsPhase")
                 
                 if cache_result.hit:
                     self._log_progress("💾 Using cached derived metrics functions")
-                    functions_result = cache_result.cached_functions
+                    functions_result = cache_result.cached_content
                     
                     # Recreate functions file from cached content if available
                     if functions_result.get('cached_with_code') and functions_result.get('function_code_content'):
@@ -1307,8 +1342,8 @@ class CleanAnalysisOrchestrator:
                     self._log_progress("🔧 Generating derived metrics functions...")
                     functions_result = derived_metrics_agent.generate_functions(temp_workspace)
                     
-                    # Store in cache for future use (with workspace path to capture function code)
-                    cache_manager.store_functions(cache_key, functions_result, str(temp_workspace))
+                    # Store in cache for future use
+                    cache_manager.store_cache(cache_key, functions_result, "DerivedMetricsPhase")
                 
                 # Execute the generated functions on analysis data
                 self._log_progress("🔢 Executing derived metrics functions on analysis data...")
