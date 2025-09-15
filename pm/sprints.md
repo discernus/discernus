@@ -1,6 +1,6 @@
-# Discernus v10 Sprints
+# Discernus v10 Sprints - Show Your Work Migration
 
-**Purpose**: Organized backlog with sprint planning, dependencies, and detailed item specifications.
+**Purpose**: Organized backlog focused on migrating from existing pipeline to Show Your Work architecture.
 
 **Usage**:
 
@@ -13,534 +13,798 @@
 
 **Latest Updates**:
 
-- ❌ **REGRESSION DISCOVERED**: micro_test_experiment failure with statistical analysis execution error
-- ❌ **REGRESSION DISCOVERED**: temp_derived_metrics directory creation bug in orchestration
-- ✅ **Sprint 12.1 COMPLETED**: Directory structure remediation with standard mode CSV export, dual directory consolidation, and complete specification compliance
-- ✅ **Sprint 14 COMPLETED**: Open source strategy and licensing with multiple repository creation, GPL v3 license implementation, and public release branch preparation
+- 🎯 **NEW ENHANCED ANALYSIS AGENT**: Successfully developed 6-step THIN approach with inline markup
+- ✅ **PROTOTYPE VALIDATED**: Testing shows excellent alignment between markup density and scoring
+- 🔄 **ARCHITECTURE PIVOT**: Migrating to Show Your Work architecture with tool calling and adversarial attestation
+- ✅ **Phase 0.5 COMPLETED**: Analysis agent converted to tool calling (partial migration)
+- ❌ **MIGRATION INCOMPLETE**: Statistical analysis broken due to format mismatch, missing computational work artifacts
+- 📋 **MIGRATION PLAN CREATED**: Comprehensive 4-phase migration plan documented
 
-**Current Focus**: URGENT - Critical regressions discovered during micro_test_experiment execution. System has statistical analysis execution failure and temporary directory creation bugs that must be fixed before resuming testing. Sprint 18 (Critical Regression Fixes) is now the top priority.
+**Current Focus**: **Enhanced Analysis Agent Integration** - Integrate the new 6-step THIN analysis agent with inline markup as the default analysis approach. This agent provides superior transparency, reliability, and human-readable output compared to previous approaches.
 
-**Alpha Model Strategy**: Vertex AI only for alpha release to ensure complete end-to-end testing and reliability. Future releases will consider additional LLM support based on user feedback and testing requirements.
+**Migration Strategy**: Replace existing analysis agent with enhanced version while maintaining full orchestrator compatibility and experiment agnosticism.
 
 ---
 
 ## Current Sprint Planning
 
-**Next Priority**: Sprint 18 (Critical Regression Fixes) - URGENT PRIORITY
-**Status**: Ready for execution - System functionality blockers
+**Next Priority**: Sprint EAA-1 (Enhanced Analysis Agent Integration) - **URGENT PRIORITY**
+**Status**: Ready for execution - Replace existing analysis agent with superior THIN approach
 **Dependencies**: None - can begin immediately
 
-**Previous Priority**: Sprint 17 (Critical Bug Fixes) - ✅ **COMPLETED**
-**Status**: All 4 critical bugs resolved and tested
-**Dependencies**: None - completed successfully
+**Following Priority**: Sprint SYW-1 (Fix Current Hybrid) - **HIGH PRIORITY**  
+**Status**: Blocked by Sprint EAA-1 completion
+**Dependencies**: Sprint EAA-1 must complete first
 
-**Blocked Priority**: Sprint 16 (Alpha Release Preparation) - BLOCKED
-**Status**: Blocked by Sprint 18 regression fixes
-**Dependencies**: Sprint 18 completion required
-
----
-
-## New Sprint Structure
+**Future Priority**: Sprint SYW-2 (Add Verification Layer) - **MEDIUM PRIORITY**
+**Status**: Planned - depends on EAA-1 and SYW-1
+**Dependencies**: Enhanced analysis agent must be integrated
 
 ---
 
-### Sprint 17: Critical Bug Fixes ✅ **COMPLETED**
+## Statistical Agent Development Sprints
 
-**Description**: Fix critical bugs discovered during gauntlet testing that block alpha release
-**Purpose**: Resolve system reliability issues before proceeding with expensive experiments and alpha release
-**Priority**: URGENT - System stability blockers
-**Timeline**: 1-2 weeks - must complete before resuming gauntlet testing
-**Dependencies**: None - can begin immediately
-**Status**: ✅ **COMPLETED** - All 4 critical bugs resolved and tested
+### Sprint SA-1: Build THIN Statistical Agent ⚠️ **HIGH PRIORITY**
 
-#### [BUG-001] Fix Intermittent Final Report Generation Failure ✅ **COMPLETED**
+**Description**: Build a THIN statistical agent that performs statistical analysis using LLM internal execution with minimal tool calling
+**Purpose**: Enable comprehensive statistical analysis of analysis results with full Show Your Work transparency
+**Priority**: HIGH - Critical for research validation and statistical rigor
+**Timeline**: 2 weeks - after EAA-1 completion
+**Success Criteria**: Statistical agent processes analysis artifacts and produces verified statistical results with CSV outputs
+**Dependencies**: Sprint EAA-1 (Enhanced Analysis Agent Integration) must complete first
 
-- **Description**: Fix intermittent bug where draft synthesis reports are created but not moved to outputs/final_report.md
-- **Purpose**: Ensure consistent final report generation for all experiments
-- **Priority**: HIGH - Core output missing
+#### [SA1-001] Create Statistical Agent Structure
+
+- **Description**: Build the basic statistical agent with THIN architecture
+- **Purpose**: Create the foundation for statistical analysis capabilities
+- **Priority**: CRITICAL - Foundation for all statistical work
+- **Requirements**:
+  - **Name**: `statistical_agent` (not statistical_planning_execution_agent)
+  - **Location**: `discernus/agents/statistical_agent/`
+  - **THIN approach**: LLM does statistical planning, execution, and verification internally
+  - **Minimal tool calling**: Only for deterministic verification (thumbs up/down)
+  - **No parsing**: Raw content in, structured output via tool calls
+- **Solution Strategy**:
+  - Create single agent with two internal steps
+  - Step 1: Statistical planning + execution (no tool calls)
+  - Step 2: Internal verification (tool call for thumbs up/down)
+  - Use existing agent base class and patterns
 - **Acceptance Criteria**:
-  - Final report consistently generated in outputs/ directory ✅
-  - No manual intervention required ✅
-  - assets.json file properly created with report_hash ✅
-  - All experiments produce final_report.md ✅
-- **Solution**: Fixed JSON serialization error with NumPy types in _create_clean_outputs_directory
-- **Technical Details**:
-  - Root cause: TypeError when serializing np.bool_, np.integer, np.floating to JSON
-  - Added convert_to_serializable() helper function to handle NumPy types
-  - Prevents silent fallback to basic_outputs_created status
-  - Final report and assets.json now generate consistently
-- **Estimated Effort**: 2-3 days
-
-#### [BUG-002] Fix CSV Export Generation ✅ **COMPLETED**
-
-- **Description**: Implement missing CSV export functionality for scores.csv, evidence.csv, and metadata.csv
-- **Purpose**: Enable data analysis workflow with structured data exports
-- **Priority**: HIGH - Core feature missing
-- **Acceptance Criteria**:
-  - scores.csv with analysis scores and derived metrics ✅
-  - evidence.csv with supporting quotes and evidence ✅
-  - metadata.csv with document and run metadata ✅
-  - Statistical package with import scripts ✅
-  - All CSV files in data/ directory ✅
-- **Solution**: Implemented direct CSV generation in Phase 8.5 using in-memory data
-- **Technical Details**:
-  - Replaced complex artifact loading with direct data conversion
-  - Generate CSV files when all data is available in memory
-  - Fixed data structure parsing for dimensional scores and evidence quotes
-  - All three CSV files now working properly with real data
-- **Estimated Effort**: 2-3 days
-
-#### [BUG-003] Fix Standalone Validation Command ✅ **COMPLETED**
-
-- **Description**: Fix `discernus validate` command parsing errors that prevent experiment validation
-- **Purpose**: Enable users to validate experiments before running them
-- **Priority**: MEDIUM - User workflow improvement
-- **Acceptance Criteria**:
-  - ✅ `discernus validate [experiment]` works correctly
-  - ✅ No parsing errors on valid experiments
-  - ✅ Consistent with orchestrator validation results
-  - ✅ Clear error messages for invalid experiments
-- **Solution**: Enhanced JSON parsing in ExperimentCoherenceAgent to handle markdown code blocks
-- **Technical Details**:
-  - Added robust JSON extraction from LLM responses with markdown code block support
-  - Handles both ```json and ``` code block formats
-  - Maintains THIN principles with graceful fallbacks
-  - Tested with nano_test_experiment and micro_test_experiment
-- **Estimated Effort**: 1-2 days
-
-#### [BUG-004] Optimize LLM Timeout Handling ✅ **COMPLETED**
-
-- **Description**: Investigate and optimize frequent LLM timeouts every 12-15 documents
-- **Purpose**: Improve performance and reduce costs by minimizing Pro model fallbacks
-- **Priority**: MEDIUM - Performance optimization
-- **Acceptance Criteria**:
-  - ✅ Reduced timeout frequency
-  - ✅ Better timeout handling strategy
-  - ✅ Maintained analysis quality
-  - ✅ Lower processing costs
-- **Solution**: Increased Gemini 2.5 Flash model timeout from 300s to 600s for better batch processing
-- **Technical Details**:
-  - Root cause: Flash model 300s timeout too short for processing 12-15 documents
-  - Increased timeout to 600s (10 minutes) to handle larger batches
-  - Maintained immediate fallback to Pro model on timeout
-  - Updated model configuration and documentation
-  - Pro model timeout remains 500s for synthesis tasks
-- **Estimated Effort**: 2-3 days
-
-**Sprint 17 Success Criteria**:
-- All 4 bugs resolved and tested
-- Gauntlet testing can resume with confidence
-- System stability improved for alpha release
-- No regression in existing functionality
-
----
-
-### Sprint 16: Alpha Release Preparation (BLOCKED - ON HOLD)
-
-**Description**: Essential items required for alpha release readiness
-**Purpose**: Ensure system is ready for alpha release with essential testing, basic documentation, and core performance validation
-**Priority**: CRITICAL - Alpha release blockers (BLOCKED by Sprint 17)
-**Timeline**: 2-3 weeks - must complete before alpha release
-**Dependencies**: Sprint 17 completion required
-
-#### [ALPHA-001] Essential Test Gauntlet Run
-
-- **Description**: Run essential test suite to validate Alpha Release readiness using specific, appropriate experiments
-- **Purpose**: Ensure core systems work correctly before release with concrete, measurable tests
-- **Priority**: HIGH - Release validation
-- **Acceptance Criteria**:
-  - **Tier 1 Tests (Must Pass)**: nano_test_experiment and micro_test_experiment complete successfully
-  - **Tier 2 Tests (Should Pass)**: At least 2 of 3 small experiments pass (business_ethics, entman_framing, lakoff_framing)
-  - **Tier 3 Test (Nice to Pass)**: 1a_caf_civic_character completes successfully
-  - **Tier 4 Tests (Culmination)**: 1b_chf_constitutional_health (54 docs, 30+ min) and vanderveen_presidential_pdaf (56 docs, 20+ min) complete successfully with clean runs (no shared cache)
-- **Clean Slate Validation**: Each test starts with only essential files (corpus folder, experiment.md, framework, corpus manifest)
-- **Full Pipeline Test**: `discernus run [relative path]` produces complete final_report.md with no "could not do" mentions or errors
-- **Archive Validation**: Archive step places all assets in correct locations
-- **Sequential CLI Test**: Step-by-step CLI execution (analysis only → check → continue → final) produces identical results
-  - **Core Functionality**: CLI commands work, analysis completes, synthesis generates reports
-  - **Framework Validation**: v10 frameworks parse and execute correctly
-  - **Evidence Architecture**: Evidence retrieval and integration works
-  - **No Critical Regressions**: All previously working functionality still works
-  - **Results Documented**: Test results logged with pass/fail status and timing
-- **Dependencies**: None
-- **Effort**: 1 week
-
-#### [ALPHA-002] Core Performance & Scalability Validation
-
-- **Description**: Validate core performance characteristics and document basic scalability limits using specific experiments
-- **Purpose**: Provide essential performance information for alpha users with concrete benchmarks
-- **Priority**: HIGH - Release readiness
-- **Acceptance Criteria**:
-  - **Performance Benchmarks**: Document timing for nano (30s), micro (2min), small (5min), medium (10min), large (20-30min) experiments
-  - **Resource Requirements**: Memory usage, disk space, API costs for each experiment tier
-  - **Scalability Limits**: Maximum corpus size tested (56 documents for alpha), known breaking points
-  - **Performance Targets**: nano < 1min, micro < 3min, small < 8min, medium < 15min, large < 45min
-  - **Clean Run Validation**: Tier 4 tests complete successfully without shared cache (full system validation)
-  - **Known Limitations**: Document what doesn't work and basic workarounds
-  - **Cost Estimates**: API cost per document for different experiment sizes
-  - **Release Readiness**: Clear go/no-go decision based on performance data
-- **Dependencies**: [ALPHA-001]
-- **Effort**: 1 week
-
-#### [ALPHA-003] Essential Unit Testing Implementation
-
-- **Description**: Implement focused unit testing for critical functions that can break silently
-- **Purpose**: Prevent silent failures that could break research
-- **Priority**: HIGH - Quality assurance
-- **Acceptance Criteria**:
-  - Framework validation tests (schema parsing, required field checking)
-  - Statistical calculation tests (basic ANOVA, correlations, effect sizes)
-  - Data validation tests (score range validation, JSON schema compliance)
-  - All tests run in < 30 seconds with no flaky tests
-  - Test coverage ≥ 60% for critical modules
-- **Dependencies**: None
-- **Effort**: 1 week
-
-#### [ALPHA-004] Basic Automated Testing Infrastructure
-
-- **Description**: Establish basic automated testing infrastructure for regression prevention
-- **Purpose**: Catch regressions and maintain code quality during alpha development
-- **Priority**: HIGH - Quality assurance
-- **Acceptance Criteria**:
-  - All existing tests pass without import errors
-  - Automated test suite runs in < 30 seconds
-  - Basic GitHub Actions workflow for core tests
-  - Test coverage ≥ 60% for core modules
-  - Critical functions have unit tests
-  - No flaky or non-deterministic tests
-- **Dependencies**: [ALPHA-003]
-- **Effort**: 1 week
-
-#### [ALPHA-005] Essential Alpha Documentation
-
-- **Description**: Complete documentation consolidation and create missing components for Alpha Release
-- **Purpose**: Provide comprehensive, well-organized documentation for alpha users and developers
-- **Priority**: HIGH - Essential for alpha users
-- **Status**: ✅ COMPLETE - Full documentation consolidation and architecture reorganization implemented
-
-#### [ALPHA-006] Alpha Model Strategy Documentation
-
-- **Description**: Document Vertex AI-only approach for alpha release with future LLM expansion roadmap
-- **Purpose**: Set clear expectations for alpha users and prevent untested model combinations
-- **Priority**: HIGH - User expectation management
-- **Acceptance Criteria**:
-  - Clear documentation that alpha release is Vertex AI only
-  - Explanation of why this approach ensures reliability
-  - Roadmap for future LLM support in post-alpha releases
-  - Warning against using non-Vertex models in alpha
-  - Model selection guidance for alpha users
-- **Dependencies**: None
-- **Effort**: 1 day
-
-#### [ALPHA-007] Brand Messaging & Project README Alignment
-
-- **Description**: Carefully edit the overall project README to set proper expectations and align on brand messaging for Discernus alpha release
-- **Purpose**: Ensure professional presentation and consistent messaging for alpha users and research community
-- **Priority**: HIGH - Alpha release presentation
-- **Acceptance Criteria**:
-  - Main project README.md reflects alpha release status and limitations
-  - Brand messaging aligned with alpha strategy (Vertex AI only)
-  - Clear expectations set for alpha users
-  - Messaging consistent with user documentation
-  - Discernus positioned appropriately for academic/research audience
-  - Proper alpha disclaimers and limitations included
-  - References to alpha model strategy documentation
-  - Professional, academic tone throughout
-- **Dependencies**: [ALPHA-006] - Alpha model strategy documentation
-- **Effort**: 1-2 days
-
-#### [ALPHA-008] Fix Derived Metrics Synthesis Regression ✅ COMPLETED
-
-- **Description**: Fix synthesis phase failure with "SYNTHESIS BLOCKED: Derived metrics results incomplete" error
-- **Purpose**: Enable full pipeline functionality for alpha release
-- **Priority**: CRITICAL - Alpha release blocker
-- **Acceptance Criteria**:
-  - ✅ Full pipeline (`discernus run .`) works without synthesis errors
-  - ✅ Synthesis phase can access derived metrics results
-  - ✅ Data flow between statistical phase and synthesis phase fixed
-  - ✅ Both statistical-prep and full pipeline modes work consistently
-  - ✅ All test experiments complete successfully in full mode
-- **Dependencies**: None
-- **Effort**: 2-3 days
-- **Bug Reference**: [BUG-005] from inbox
-- **Solution**: Fixed data structure mismatch - synthesis validation now checks artifact storage instead of instance variables
-
-#### [ALPHA-009] Fix Derived Metrics Syntax Error ✅ COMPLETED
-
-- **Description**: Fix Python syntax errors in generated derived metrics functions for complex frameworks
-- **Purpose**: Enable sophisticated framework analysis for alpha release
-- **Priority**: HIGH - Limits system capability
-- **Acceptance Criteria**:
-  - ✅ Complex frameworks (civic character, constitutional health) work without syntax errors
-  - ✅ Generated Python functions have valid syntax
-  - ✅ Derived metrics agent generates clean, executable code
-  - ✅ All framework types work regardless of complexity
-  - ✅ Error handling for malformed LLM responses
-- **Dependencies**: None
-- **Effort**: 1-2 days
-- **Bug Reference**: [BUG-006] from inbox
-- **Solution**: Added ThinOutputExtractor to extract clean Python code from LLM responses, with fallback to markdown code block extraction
-  - **✅ Quick Start Guide**: COMPLETE - Created `docs/user/QUICK_START_GUIDE.md` with 5-minute tutorial
-  - **✅ Performance Guide**: COMPLETE - Created `docs/user/PERFORMANCE_GUIDE.md` with benchmarks
-  - **✅ Release Notes**: COMPLETE - Created `docs/user/RELEASE_NOTES.md` with alpha features
-  - **✅ Documentation Cleanup**: COMPLETE - Full consolidation with user/developer separation
-- **Consolidation Results**:
-  - **New Structure**: `docs/user/` for users, `docs/developer/` for developers
-  - **Navigation**: Clear entry points for each user type
-  - **Content**: Consolidated duplicate documentation
-  - **Archives**: Moved outdated docs to `docs/archive/`
-  - **Cross-References**: Updated all links and navigation
-- **Files Created**:
-  - `docs/user/README.md` - Main user entry point
-  - `docs/user/QUICK_START_GUIDE.md` - 5-minute tutorial
-  - `docs/user/PERFORMANCE_GUIDE.md` - Performance benchmarks
-  - `docs/user/RELEASE_NOTES.md` - Alpha release notes
-  - `docs/user/PROVENANCE_GUIDE.md` - User-friendly research tracking guide
-  - `docs/README.md` - Main documentation index
-  - `docs/archive/README.md` - Archive documentation
-- **Files Moved**:
-  - `docs/INSTALLATION_GUIDE.md` → `docs/user/`
-  - `docs/CLI_REFERENCE.md` → `docs/user/`
-  - `docs/SYSTEM_STATUS.md` → `docs/user/`
-  - `docs/developer/troubleshooting/TROUBLESHOOTING_GUIDE.md` → `docs/user/`
-  - `docs/PROVENANCE_SYSTEM.md` → `docs/architecture/`
-  - `docs/synthesis_agent_architecture_v2.md` → `docs/archive/`
-  - `docs/ARCHIVE.md` → `docs/archive/`
-  - `docs/architecture/DISCERNUS_SYSTEM_ARCHITECTURE.md` → `docs/developer/architecture/`
-  - `docs/architecture/DUAL_TRACK_LOGGING_ARCHITECTURE.md` → `docs/developer/architecture/`
-  - `docs/architecture/typesense_bm25_pipeline_documentation.md` → `docs/developer/architecture/`
-  - `docs/architecture/INTEGRATED_PROVENANCE_VALIDATION_SPEC.md` → `docs/archive/`
-- **Dependencies**: [ALPHA-001], [ALPHA-002] - Performance data from gauntlet testing
-- **Effort**: 1 week (7-11 hours total) - COMPLETED
-
-#### [ALPHA-006] CLI Help Text Cleanup
-
-- **Description**: Streamline and simplify CLI help text to reduce verbosity and improve usability
-- **Purpose**: Make CLI more user-friendly by providing concise, focused help information
-- **Priority**: MEDIUM - User experience improvement
-- **Acceptance Criteria**:
-  - **Concise Help**: Main help shows only essential commands with brief descriptions
-  - **Hierarchical Help**: Detailed help available via --help flag for specific commands
-  - **Clear Examples**: Each command shows 1-2 practical examples
-  - **Remove Redundancy**: Eliminate repetitive or overly verbose explanations
-  - **Focus on Core**: Prioritize run, validate, list commands in main help
-  - **Consistent Format**: Standardized help text format across all commands
-  - **Quick Reference**: Help text fits in standard terminal without scrolling
-- **Dependencies**: None
+  - ✅ Agent inherits from proper base class
+  - ✅ Two-step internal process (planning+execution, verification)
+  - ✅ No parsing of input files
+  - ✅ Raw content passed to LLM
+  - ✅ Tool calling only for verification step
+- **Files to Create**:
+  - `discernus/agents/statistical_agent/__init__.py`
+  - `discernus/agents/statistical_agent/main.py`
+  - `discernus/agents/statistical_agent/prompt.yaml`
+- **Dependencies**: Sprint EAA-1 completion
 - **Effort**: 2-3 days
 
-#### [ALPHA-007] Promote Function and Workbench Concept Review
+#### [SA1-002] Implement Statistical Analysis Logic
 
-- **Description**: Examine and evaluate the promote function and workbench concept in the CLI for alpha release readiness
-- **Purpose**: Ensure promote functionality and workbench concept are properly implemented and documented for alpha users
-- **Priority**: MEDIUM - Feature completeness
+- **Description**: Implement the core statistical analysis functionality
+- **Purpose**: Enable LLM to perform comprehensive statistical analysis
+- **Priority**: HIGH - Core functionality
+- **Requirements**:
+  - **Input handling**: Framework content, analysis artifacts, experiment content, corpus content
+  - **Statistical planning**: LLM determines appropriate statistical tests
+  - **Data aggregation**: LLM aggregates data from multiple analysis artifacts
+  - **Code execution**: LLM generates and executes statistical code internally
+  - **CSV generation**: LLM produces CSV files for human researchers
+- **Solution Strategy**:
+  - Use LLM internal execution for all statistical work
+  - Provide raw file content, let LLM figure out structure
+  - LLM generates Python code using numpy, pandas, scipy.stats, pingouin
+  - LLM executes code internally and saves results
+  - No parsing or data extraction in software
 - **Acceptance Criteria**:
-  - **Promote Function Analysis**: Review current promote command implementation and functionality
-  - **Workbench Concept Review**: Examine workbench directory structure and usage patterns
-  - **Integration Assessment**: Evaluate how promote and workbench integrate with core CLI workflow
-  - **Documentation Gap Analysis**: Identify missing documentation for promote and workbench features
-  - **User Experience Review**: Assess usability and discoverability of promote/workbench features
-  - **Alpha Readiness**: Determine if promote/workbench features are ready for alpha release
-  - **Recommendations**: Provide specific recommendations for improvement or removal
-  - **Implementation Plan**: If needed, create plan for completing or fixing promote/workbench functionality
+  - ✅ Handles any framework and experiment combination
+  - ✅ Aggregates data from multiple analysis artifacts
+  - ✅ Generates appropriate statistical tests
+  - ✅ Executes statistical code internally
+  - ✅ Produces CSV outputs for researchers
+  - ✅ No framework-specific assumptions
+- **Files to Update**:
+  - `discernus/agents/statistical_agent/main.py` (core logic)
+  - `discernus/agents/statistical_agent/prompt.yaml` (statistical prompts)
+- **Dependencies**: [SA1-001] - Agent structure must exist
+- **Effort**: 3-4 days
+
+#### [SA1-003] Add Verification and Tool Calling
+
+- **Description**: Implement internal verification with minimal tool calling
+- **Purpose**: Ensure statistical analysis accuracy and provide deterministic verification
+- **Priority**: HIGH - Required for Show Your Work principles
+- **Requirements**:
+  - **Internal verification**: LLM verifies its own statistical work
+  - **Tool calling**: Single tool call for thumbs up/down verification
+  - **Deterministic output**: Clear verification status
+  - **Error handling**: Graceful handling of verification failures
+- **Solution Strategy**:
+  - LLM reviews its own statistical work
+  - Calls `verify_statistical_analysis` tool with boolean result
+  - Tool schema: `{"verified": true/false}`
+  - No complex verification logic in software
+- **Acceptance Criteria**:
+  - ✅ LLM verifies its own work internally
+  - ✅ Single tool call for verification result
+  - ✅ Deterministic boolean output
+  - ✅ Error handling for tool call failures
+  - ✅ Clear verification status reporting
+- **Files to Update**:
+  - `discernus/agents/statistical_agent/main.py` (verification logic)
+  - `discernus/agents/statistical_agent/prompt.yaml` (verification prompts)
+- **Dependencies**: [SA1-002] - Core logic must exist
+- **Effort**: 1-2 days
+
+#### [SA1-004] Integrate with Orchestrator
+
+- **Description**: Ensure statistical agent works with existing orchestrator
+- **Purpose**: Enable statistical analysis in production pipeline
+- **Priority**: HIGH - Required for end-to-end functionality
+- **Requirements**:
+  - **Orchestrator compatibility**: Works with existing orchestrator
+  - **CLI integration**: Works with all existing CLI flags
+  - **Experiment agnosticism**: Handles any framework/experiment combination
+  - **Batch processing**: Efficiently processes multiple analysis artifacts
+- **Solution Strategy**:
+  - Update orchestrator to use new statistical agent
+  - Ensure CLI flags work correctly
+  - Test with various frameworks and experiments
+  - Optimize for batch processing
+- **Acceptance Criteria**:
+  - ✅ Works with existing orchestrator
+  - ✅ All CLI flags work correctly
+  - ✅ Processes any framework without modification
+  - ✅ Handles multiple analysis artifacts efficiently
+  - ✅ No regression in existing functionality
+- **Files to Update**:
+  - `discernus/core/clean_analysis_orchestrator.py`
+  - `discernus/cli.py` (if needed for new flags)
+  - `discernus/agents/__init__.py` (agent registration)
+- **Dependencies**: [SA1-001], [SA1-002], [SA1-003] - All agent components must be ready
+- **Effort**: 2-3 days
+
+#### [SA1-005] Add Logging and Cost Tracking
+
+- **Description**: Integrate with project's logging and cost tracking systems
+- **Purpose**: Full observability and cost management for statistical analysis
+- **Priority**: MEDIUM - Required for production monitoring
+- **Requirements**:
+  - **Audit logging**: All statistical agent events logged
+  - **Cost tracking**: Token usage and costs tracked
+  - **Performance metrics**: Processing time, success rates
+  - **Resume capability**: Caching for interrupted operations
+- **Solution Strategy**:
+  - Use existing `AuditLogger` for all events
+  - Track costs per LLM call
+  - Implement caching for resume capability
+  - Add performance timing
+- **Acceptance Criteria**:
+  - ✅ All agent actions logged with timestamps
+  - ✅ Token usage and costs tracked
+  - ✅ Processing times logged
+  - ✅ Caching enables resume from any step
+  - ✅ Cost reports generated per experiment
+- **Files to Update**:
+  - `discernus/agents/statistical_agent/main.py` (logging integration)
+  - `discernus/core/audit_logger.py` (if needed for new event types)
+- **Dependencies**: [SA1-001] - Agent must exist first
+- **Effort**: 1-2 days
+
+#### [SA1-006] Comprehensive Testing and Validation
+
+- **Description**: Thorough testing of statistical agent
+- **Purpose**: Ensure production readiness and reliability
+- **Priority**: HIGH - Required before deployment
+- **Testing Requirements**:
+  - **Unit tests**: All agent methods tested
+  - **Integration tests**: Full orchestrator integration
+  - **Performance tests**: Multiple analysis artifacts processing
+  - **Framework tests**: Multiple framework compatibility
+  - **Verification tests**: Tool calling reliability
+- **Solution Strategy**:
+  - Create comprehensive test suite
+  - Test with various frameworks and experiments
+  - Performance testing with multiple analysis artifacts
+  - Test verification scenarios and error handling
+  - Validate cost tracking and logging
+- **Acceptance Criteria**:
+  - ✅ All unit tests pass
+  - ✅ Integration tests pass
+  - ✅ Multiple analysis artifacts processing successful
+  - ✅ Multiple frameworks work correctly
+  - ✅ Verification scenarios work reliably
+  - ✅ Cost tracking accurate
+  - ✅ No memory leaks or performance issues
+- **Files to Create**:
+  - `discernus/tests/test_statistical_agent_integration.py`
+  - `discernus/tests/test_statistical_agent_performance.py`
+  - `discernus/tests/test_statistical_agent_verification.py`
+- **Dependencies**: [SA1-001] through [SA1-005] - All components must be complete
+- **Effort**: 2-3 days
+
+---
+
+## Enhanced Analysis Agent Integration Sprints
+
+### Sprint EAA-1: Integrate Enhanced Analysis Agent as Default ⚠️ **URGENT**
+
+**Description**: Replace existing analysis agent with the new 6-step THIN approach featuring inline markup, comprehensive logging, and full orchestrator compatibility
+**Purpose**: Deploy superior analysis agent that provides better transparency, reliability, and human-readable output
+**Priority**: URGENT - Critical improvement to core analysis functionality
+**Timeline**: 2 weeks - comprehensive integration with full testing
+**Success Criteria**: Enhanced analysis agent becomes default with full orchestrator compatibility, experiment agnosticism, and production readiness
+**Dependencies**: None - can start immediately
+
+#### [EAA1-001] Create Production Analysis Agent
+
+- **Description**: Build production-ready analysis agent based on enhanced prototype
+- **Purpose**: Create the new default analysis agent with all production requirements
+- **Priority**: CRITICAL - Foundation for all other tasks
+- **Requirements**:
+  - **Name**: `analysis_agent` (not enhanced_analysis_agent)
+  - **Location**: `discernus/agents/analysis_agent/`
+  - **Externalized prompt**: YAML file in `discernus/agents/analysis_agent/prompt.yaml`
+  - **Complete experiment agnosticism**: No framework-specific assumptions
+  - **6-step THIN approach**: Composite analysis → Evidence extraction → Score extraction → Derived metrics → Verification → Markup extraction
+- **Solution Strategy**:
+  - Adapt `test_thin_approach/enhanced_analysis_agent.py` for production
+  - Remove all framework-specific code (PDAF references, etc.)
+  - Implement proper agent base class inheritance
+  - Add comprehensive error handling and retry logic
+  - Ensure 1000+ document processing capability
+- **Acceptance Criteria**:
+  - ✅ Agent inherits from proper base class
+  - ✅ Completely framework agnostic (no hardcoded dimensions)
+  - ✅ Externalized YAML prompt template
+  - ✅ Handles any framework via prompt parameters
+  - ✅ Robust error handling for long document sequences
+  - ✅ Memory efficient for 1000+ document processing
+- **Files to Create**:
+  - `discernus/agents/analysis_agent/__init__.py`
+  - `discernus/agents/analysis_agent/main.py`
+  - `discernus/agents/analysis_agent/prompt.yaml`
 - **Dependencies**: None
+- **Effort**: 3-4 days
+
+#### [EAA1-002] Implement Content-Addressable Asset Naming
+
+- **Description**: Ensure all artifacts use human-readable, content-addressable naming per project standards
+- **Purpose**: Maintain artifact discoverability and caching compatibility
+- **Priority**: HIGH - Required for orchestrator integration
+- **Current Issue**: Prototype uses generic names like `enhanced_analysis_results.json`
+- **Solution Strategy**:
+  - Use `LocalArtifactStorage` for all artifact storage
+  - Generate descriptive names with content hashes
+  - Follow existing naming conventions: `analysis_result_<hash>.json`, `evidence_<hash>.json`, etc.
+  - Ensure markup artifacts are properly named: `marked_up_document_<hash>.md`
+- **Acceptance Criteria**:
+  - ✅ All artifacts use content-addressable storage
+  - ✅ Human-readable names with descriptive prefixes
+  - ✅ Consistent with existing artifact naming patterns
+  - ✅ Markup documents saved as `.md` files
+  - ✅ Artifacts accessible via standard storage interface
+- **Files to Update**:
+  - `discernus/agents/analysis_agent/main.py` (artifact storage methods)
+- **Dependencies**: [EAA1-001] - Agent must exist first
+- **Effort**: 1-2 days
+
+#### [EAA1-003] Add Comprehensive Logging and Cost Tracking
+
+- **Description**: Integrate with project's logging and cost tracking systems
+- **Purpose**: Full observability and cost management for production use
+- **Priority**: HIGH - Required for production monitoring
+- **Requirements**:
+  - **Audit logging**: All agent events logged via `AuditLogger`
+  - **Cost tracking**: Token usage and costs tracked per step
+  - **Performance metrics**: Processing time, success rates, error rates
+  - **Resume capability**: Caching for interrupted operations
+- **Solution Strategy**:
+  - Use existing `AuditLogger` for all agent events
+  - Track costs per LLM call (Flash vs Flash Lite)
+  - Implement caching at each step for resume capability
+  - Add performance timing for each analysis step
+  - Log all errors with context for debugging
+- **Acceptance Criteria**:
+  - ✅ All agent actions logged with timestamps
+  - ✅ Token usage and costs tracked per model
+  - ✅ Processing times logged for each step
+  - ✅ Caching enables resume from any step
+  - ✅ Error logging includes full context
+  - ✅ Cost reports generated per experiment
+- **Files to Update**:
+  - `discernus/agents/analysis_agent/main.py` (logging integration)
+  - `discernus/core/audit_logger.py` (if needed for new event types)
+- **Dependencies**: [EAA1-001] - Agent must exist first
+- **Effort**: 2-3 days
+
+#### [EAA1-004] Integrate with Orchestrator
+
+- **Description**: Ensure new analysis agent works seamlessly with existing orchestrator
+- **Purpose**: Maintain orchestrator compatibility while upgrading analysis capability
+- **Priority**: HIGH - Required for end-to-end functionality
+- **Requirements**:
+  - **Orchestrator compatibility**: Drop-in replacement for existing analysis agent
+  - **CLI integration**: Works with all existing CLI flags
+  - **Experiment agnosticism**: Handles any framework/experiment combination
+  - **Batch processing**: Efficiently processes large document sets
+- **Solution Strategy**:
+  - Update orchestrator to use new analysis agent
+  - Ensure CLI flags work correctly (model selection, etc.)
+  - Test with various frameworks and experiments
+  - Optimize for batch processing efficiency
+  - Maintain backward compatibility with existing experiments
+- **Acceptance Criteria**:
+  - ✅ Drop-in replacement for existing analysis agent
+  - ✅ All CLI flags work correctly
+  - ✅ Processes any framework without modification
+  - ✅ Handles 1000+ documents without failures
+  - ✅ Maintains existing orchestrator interface
+  - ✅ No regression in existing functionality
+- **Files to Update**:
+  - `discernus/core/clean_analysis_orchestrator.py`
+  - `discernus/cli.py` (if needed for new flags)
+  - `discernus/agents/__init__.py` (agent registration)
+- **Dependencies**: [EAA1-001], [EAA1-002], [EAA1-003] - All agent components must be ready
+- **Effort**: 2-3 days
+
+#### [EAA1-005] Add Caching and Resume Capability
+
+- **Description**: Implement comprehensive caching system for resume operations
+- **Purpose**: Enable interrupted experiments to resume from cached data
+- **Priority**: HIGH - Required for production reliability
+- **Requirements**:
+  - **Step-level caching**: Cache results after each of the 6 steps
+  - **Resume capability**: Resume from any cached step
+  - **Cache invalidation**: Smart cache invalidation based on input changes
+  - **Storage efficiency**: Efficient storage of large markup documents
+- **Solution Strategy**:
+  - Implement caching after each analysis step
+  - Add resume logic to skip completed steps
+  - Use content hashing for cache invalidation
+  - Optimize storage for large markup files
+  - Add cache management utilities
+- **Acceptance Criteria**:
+  - ✅ Each step cached independently
+  - ✅ Resume from any step works correctly
+  - ✅ Cache invalidation on input changes
+  - ✅ Efficient storage of large documents
+  - ✅ Cache management commands available
+  - ✅ No data loss on interruption
+- **Files to Update**:
+  - `discernus/agents/analysis_agent/main.py` (caching logic)
+  - `discernus/core/local_artifact_storage.py` (if needed for optimizations)
+- **Dependencies**: [EAA1-001], [EAA1-002] - Agent and storage must exist
+- **Effort**: 2-3 days
+
+#### [EAA1-006] Comprehensive Testing and Validation
+
+- **Description**: Thorough testing of integrated analysis agent
+- **Purpose**: Ensure production readiness and reliability
+- **Priority**: HIGH - Required before deployment
+- **Testing Requirements**:
+  - **Unit tests**: All agent methods tested
+  - **Integration tests**: Full orchestrator integration
+  - **Performance tests**: 1000+ document processing
+  - **Framework tests**: Multiple framework compatibility
+  - **Resume tests**: Interruption and resume scenarios
+- **Solution Strategy**:
+  - Create comprehensive test suite
+  - Test with various frameworks and experiments
+  - Performance testing with large document sets
+  - Test resume scenarios and error handling
+  - Validate cost tracking and logging
+- **Acceptance Criteria**:
+  - ✅ All unit tests pass
+  - ✅ Integration tests pass
+  - ✅ 1000+ document processing successful
+  - ✅ Multiple frameworks work correctly
+  - ✅ Resume scenarios work reliably
+  - ✅ Cost tracking accurate
+  - ✅ No memory leaks or performance issues
+- **Files to Create**:
+  - `discernus/tests/test_analysis_agent_integration.py`
+  - `discernus/tests/test_analysis_agent_performance.py`
+  - `discernus/tests/test_analysis_agent_resume.py`
+- **Dependencies**: [EAA1-001] through [EAA1-005] - All components must be complete
 - **Effort**: 3-4 days
 
 ---
 
-### Sprint 18: Critical Regression Fixes (URGENT PRIORITY)
+## Show Your Work Migration Sprints
 
-**Description**: Fix critical regressions discovered during micro_test_experiment execution
-**Purpose**: Resolve system failures that prevent basic experiment execution
-**Priority**: URGENT - System functionality blockers
-**Timeline**: 1-2 days - must complete before resuming testing
-**Dependencies**: None - can begin immediately
+### Migration Philosophy
 
-#### [REGRESSION-001] Fix Statistical Analysis Execution Failure
+**Contract-Driven Development**: The UnifiedSynthesisAgent is the final consumer of all pipeline artifacts. We define its exact data contracts first, then build each upstream component to meet those contracts. This ensures:
+- No synthesis compatibility issues
+- Clear success criteria for each component  
+- Systematic progression through the pipeline
+- End-to-end validation at each step
 
-- **Description**: Fix "No numerical results produced" error in statistical analysis phase
-- **Purpose**: Enable statistical analysis functions to execute and produce results
-- **Priority**: CRITICAL - Blocks all experiments with statistical analysis
-- **Status**: Ready for execution
-- **Root Cause**: Statistical analysis functions generated but fail to execute or produce outputs
-- **Error Details**: "Statistical analysis phase failed: No numerical results produced. Generated functions but failed to execute or produce statistical outputs."
-- **Acceptance Criteria**:
-  - ✅ Statistical analysis functions execute successfully
-  - ✅ Numerical results are produced and stored
-  - ✅ micro_test_experiment completes without statistical errors
-  - ✅ All experiments with statistical analysis work correctly
-- **Files to Investigate**:
-  - `discernus/agents/automated_statistical_analysis/agent.py`
-  - `discernus/core/clean_analysis_orchestrator.py`
-  - Generated statistical functions in temp directories
-- **Dependencies**: None
-- **Effort**: 1-2 days
+**Evidence Pipeline Already Compatible**: Analysis of the evidence curation process reveals it's already 80% Show Your Work compliant - it reads tool-calling artifacts (evidence_v6) and produces synthesis-compatible output. This accelerates our migration timeline.
 
-#### [REGRESSION-002] Remove Temporary Directory Creation Bug
+**Systematic Refactoring Over Replacement**: Rather than building a new orchestrator, we systematically refactor the existing CleanAnalysisOrchestrator to use Show Your Work patterns while preserving mature functionality.
 
-- **Description**: Fix temp_derived_metrics directory creation during orchestration
-- **Purpose**: Clean up temporary directory artifacts that should not be created
-- **Priority**: HIGH - System cleanliness and architecture compliance
-- **Status**: Ready for execution
-- **Root Cause**: Orchestration creates temp_derived_metrics directory as bug fixing artifact
-- **Current Issue**: Directory `/projects/micro_test_experiment/temp_derived_metrics/` created with files that should not exist
-- **Acceptance Criteria**:
-  - ✅ No temp_derived_metrics directories created during orchestration
-  - ✅ All temporary files cleaned up properly
-  - ✅ System follows clean architecture principles
-  - ✅ No leftover artifacts in experiment directories
-- **Files to Investigate**:
-  - `discernus/core/clean_analysis_orchestrator.py`
-  - `discernus/agents/automated_derived_metrics/agent.py`
-- **Dependencies**: [REGRESSION-001] - Fix statistical analysis first
-- **Effort**: 0.5 days
-
-#### [REGRESSION-003] Investigate Statistical Analysis Agent Execution
-
-- **Description**: Deep dive into why statistical analysis functions fail to execute
-- **Purpose**: Understand root cause of statistical analysis execution failure
-- **Priority**: HIGH - Required for [REGRESSION-001] fix
-- **Status**: Ready for execution
-- **Investigation Areas**:
-  - Function generation vs execution gap
-  - Data structure compatibility issues
-  - Error handling in statistical analysis
-  - Integration between agents and orchestrator
-- **Acceptance Criteria**:
-  - ✅ Root cause identified and documented
-  - ✅ Clear fix strategy defined
-  - ✅ All execution paths tested
-  - ✅ Error handling improved
-- **Dependencies**: None
-- **Effort**: 1 day
-
-**Sprint 18 Success Criteria**:
-- micro_test_experiment runs successfully end-to-end
-- No temporary directories created during orchestration
-- Statistical analysis produces valid numerical results
-- System ready for continued testing
+**Reference**: See `pm/active_projects/synthesis_data_contracts.md` for detailed synthesis requirements.
 
 ---
 
-### Sprint 19: Agent Parsing Consistency (HIGH PRIORITY)
+### Sprint SYW-1: Meet Research Data Contract ⚠️ **URGENT**
 
-**Description**: Update all agents to use consistent "raw Python objects, no JSON parsing" pattern
-**Purpose**: Eliminate parsing errors and align all agents with the system's current architecture
-**Priority**: HIGH - System consistency and reliability
-**Timeline**: 1-2 weeks
-**Dependencies**: Sprint 17 completion (critical bugs must be fixed first)
+**Description**: Ensure statistical analysis produces artifacts that meet synthesis agent's research data contract
+**Purpose**: Fix statistical analysis failure and establish foundation for synthesis compatibility  
+**Priority**: URGENT - Required for synthesis to work
+**Timeline**: 1 week - critical path for migration
+**Contract Goal**: Produce research data artifact containing analysis scores, statistical results, and computational work in synthesis-compatible format
+**Dependencies**: None - can start immediately
 
-#### [CONSISTENCY-001] Update DerivedMetricsAgent to Raw Python Pattern
+#### [SYW1-001] Fix Statistical Analysis Data Format
 
-- **Description**: Fix DerivedMetricsAgent parsing error by adopting the same pattern as UnifiedSynthesisAgent
-- **Purpose**: Eliminate `'\n        "metric_name_1"'` parsing error and make agent consistent with system architecture
-- **Priority**: HIGH - Currently blocking statistical prep feature
-- **Status**: Ready for execution
-- **Root Cause**: Agent still uses old JSON/delimiter parsing while system has moved to raw Python objects
-- **Current Error**: `'\n        "metric_name_1"'` - string processing failure in function generation
-- **Solution Pattern**: Follow UnifiedSynthesisAgent approach:
-  - Skip all LLM response parsing
-  - Save raw LLM response directly as Python code
-  - Use `eval()` or `exec()` to load functions
-  - Avoid JSON serialization entirely
+- **Description**: Update statistical analysis to work with new tool-calling artifact format
+- **Purpose**: Restore statistical analysis functionality broken by tool-calling migration
+- **Priority**: CRITICAL - Blocking all experiments
+- **Root Cause**: Statistical functions expect old CSV format but get new tool-calling delimited JSON
+- **Current Error**: "No valid document analyses found in individual results"
+- **Solution Strategy**:
+  - Debug `_convert_analysis_to_dataframe()` method in CleanAnalysisOrchestrator
+  - Ensure proper extraction of dimensional scores from new format
+  - Validate DataFrame structure matches statistical function expectations
+  - Add comprehensive logging for debugging data flow
 - **Acceptance Criteria**:
-  - ✅ Statistical prep feature works without parsing errors
-  - ✅ DerivedMetricsAgent generates functions successfully
-  - ✅ No more `'\n        "metric_name_1"'` errors
-  - ✅ Agent follows same pattern as UnifiedSynthesisAgent
-  - ✅ All derived metrics calculations work correctly
+  - ✅ Statistical functions receive properly formatted DataFrame
+  - ✅ All dimensional scores extracted correctly from tool-calling artifacts
+  - ✅ Statistical analysis produces numerical results
+  - ✅ No "No valid document analyses found" errors
 - **Files to Update**:
-  - `discernus/agents/automated_derived_metrics/agent.py`
-  - `discernus/agents/automated_derived_metrics/prompt.yaml`
+  - `discernus/core/clean_analysis_orchestrator.py` (_convert_analysis_to_dataframe)
+  - Statistical function execution pipeline
 - **Dependencies**: None
 - **Effort**: 2-3 days
 
-#### [CONSISTENCY-002] Update StatisticalAnalysisAgent to Raw Python Pattern
+#### [SYW1-002] Add Missing Computational Work Artifacts
 
-- **Description**: Update StatisticalAnalysisAgent to use raw Python objects instead of delimiter parsing
-- **Purpose**: Make all agents consistent with the system's current architecture
-- **Priority**: MEDIUM - Not currently blocking, but inconsistent with system design
-- **Status**: Ready for execution
-- **Current Issue**: Still uses old delimiter parsing (`<<<DISCERNUS_FUNCTION_START>>>`) despite docstring claiming "no parsing"
-- **Solution Pattern**: Follow same approach as DerivedMetricsAgent fix
+- **Description**: Save computational work data as separate JSON artifacts per Show Your Work architecture
+- **Purpose**: Create proper `computational_work_<hash>.json` files for verification and provenance
+- **Priority**: HIGH - Required for Show Your Work compliance
+- **Current Issue**: Computational work data embedded in analysis results, not saved as separate artifacts
+- **Solution Strategy**:
+  - Modify `_process_tool_calls()` in EnhancedAnalysisAgent
+  - Save computational work tool call data as separate artifacts
+  - Use predictable filenames for Show Your Work compatibility
+  - Maintain backward compatibility with existing format
 - **Acceptance Criteria**:
-  - ✅ Agent uses raw Python objects instead of delimiter parsing
-  - ✅ No more `extract_code_blocks()` calls
-  - ✅ Consistent with UnifiedSynthesisAgent pattern
-  - ✅ All statistical analysis functions work correctly
+  - ✅ `computational_work_<hash>.json` files created for each document
+  - ✅ Files contain executed code, output, and derived metrics
+  - ✅ Artifacts accessible via content-addressable storage
+  - ✅ No regression in existing functionality
 - **Files to Update**:
-  - `discernus/agents/automated_statistical_analysis/agent.py`
-  - `discernus/agents/automated_statistical_analysis/prompt.yaml`
-- **Dependencies**: [CONSISTENCY-001] - Learn from DerivedMetricsAgent implementation
+  - `discernus/agents/EnhancedAnalysisAgent/main.py` (_process_tool_calls)
+- **Dependencies**: None
 - **Effort**: 1-2 days
 
-#### [CONSISTENCY-003] Remove Temporary Statistical Prep Fix
+#### [SYW1-003] Debug Statistical Function Execution
 
-- **Description**: Remove the temporary bypass in CleanAnalysisOrchestrator once agents are fixed
-- **Purpose**: Clean up temporary workaround and restore proper agent-based derived metrics
-- **Priority**: LOW - Cleanup task
-- **Status**: Blocked by [CONSISTENCY-001]
-- **Current State**: Statistical prep uses hardcoded template instead of DerivedMetricsAgent
+- **Description**: Investigate and fix why statistical functions are generated but not executed
+- **Purpose**: Restore statistical analysis execution to working state
+- **Priority**: HIGH - Required for complete pipeline
+- **Current Issue**: Functions generated successfully but execution fails silently
+- **Investigation Areas**:
+  - Function loading and module namespace issues
+  - Data format compatibility between DataFrame and functions
+  - Error handling that may be masking failures
+  - Integration between statistical agent and orchestrator
+- **Solution Strategy**:
+  - Add comprehensive debugging to statistical execution pipeline
+  - Validate function signatures and data format compatibility
+  - Improve error reporting and logging
+  - Test with minimal reproducible case
 - **Acceptance Criteria**:
-  - ✅ Remove temporary template file copying
-  - ✅ Restore DerivedMetricsAgent calls in orchestrator
-  - ✅ Statistical prep uses proper agent-generated functions
-  - ✅ No regression in functionality
+  - ✅ Root cause of execution failure identified and documented
+  - ✅ Statistical functions execute successfully
+  - ✅ Numerical results produced (ANOVA, descriptive stats, etc.)
+  - ✅ Clear error messages for any failures
 - **Files to Update**:
-  - `discernus/core/clean_analysis_orchestrator.py`
-- **Dependencies**: [CONSISTENCY-001] completion
-- **Effort**: 0.5 days
+  - `discernus/core/clean_analysis_orchestrator.py` (_execute_statistical_functions)
+  - Statistical function loading and execution logic
+- **Dependencies**: [SYW1-001] - Data format must be fixed first
+- **Effort**: 2-3 days
+
+#### [SYW1-004] Add Synthesis Compatibility Layer
+
+- **Description**: Ensure synthesis can work with new tool-calling artifacts via compatibility layer
+- **Purpose**: Enable end-to-end pipeline while synthesis migration is pending
+- **Priority**: HIGH - Required for complete pipeline
+- **Current Issue**: Synthesis expects old artifact format, but analysis now produces Show Your Work artifacts
+- **Solution Strategy**:
+  - Create compatibility layer that translates Show Your Work artifacts to expected format
+  - Ensure synthesis can read evidence from `evidence_quotes.json` files
+  - Maintain existing synthesis functionality without full migration
+  - Document what needs full migration in SYW-4
+- **Acceptance Criteria**:
+  - ✅ Synthesis can read new artifact format via compatibility layer
+  - ✅ RAG index populated correctly from new evidence format
+  - ✅ Final report generated with statistical results
+  - ✅ Report quality matches existing standards
+  - ✅ No regression in synthesis functionality
+- **Files to Update**:
+  - `discernus/agents/unified_synthesis_agent.py` (compatibility layer)
+  - Evidence reading and RAG population logic
+- **Dependencies**: [SYW1-001], [SYW1-002], [SYW1-003]
+- **Effort**: 2-3 days
+
+#### [SYW1-005] Validate Evidence Curation Works
+
+- **Description**: Confirm evidence retrieval phase works with tool-calling analysis artifacts
+- **Purpose**: Validate evidence curation can read evidence_v6 artifacts from tool-calling analysis
+- **Priority**: HIGH - Evidence contract validation
+- **Current Status**: Evidence curation should work since it reads evidence_v6 artifacts (which analysis still produces)
+- **Solution Strategy**:
+  - Run micro_test_experiment through evidence retrieval phase
+  - Validate EvidenceRetrieverAgent can build index from evidence_v6 artifacts
+  - Confirm curated evidence artifact created successfully
+  - Test evidence search and retrieval functionality
+- **Acceptance Criteria**:
+  - ✅ Evidence retrieval phase completes successfully
+  - ✅ RAG index built from tool-calling evidence artifacts
+  - ✅ Curated evidence artifact created with proper format
+  - ✅ Evidence search returns relevant quotes for statistical findings
+  - ✅ Evidence ready for synthesis consumption
+- **Dependencies**: [SYW1-001], [SYW1-002], [SYW1-003] - Statistical analysis must work first
+- **Effort**: 1 day
+
+#### [SYW1-006] Validate End-to-End Pipeline
+
+- **Description**: Ensure complete micro_test_experiment runs successfully from start to finish
+- **Purpose**: Validate that all migration changes work together correctly
+- **Priority**: MEDIUM - Integration validation
+- **Solution Strategy**:
+  - Run micro_test_experiment with clean cache
+  - Validate all phases complete successfully including synthesis
+  - Compare results with mature architecture (1b_chf_constitutional_health)
+  - Document any remaining gaps or issues
+- **Acceptance Criteria**:
+  - ✅ micro_test_experiment completes without errors
+  - ✅ Final report generated with statistical results
+  - ✅ All expected artifacts present in shared cache
+  - ✅ CSV exports contain correct data
+  - ✅ Performance within acceptable bounds
+- **Dependencies**: [SYW1-005] - Evidence curation must work
+- **Effort**: 1 day
+
+**Sprint SYW-1 Success Criteria**:
+- ✅ Research data contract met: Statistical analysis produces synthesis-compatible artifacts
+- ✅ micro_test_experiment runs successfully through evidence retrieval phase
+- ✅ Statistical analysis produces valid numerical results
+- ✅ All Show Your Work artifacts properly created and stored (analysis_scores.json, computational_work.json)
+- ✅ Evidence curation works with tool-calling artifacts (evidence_v6 format)
+- ✅ Research data artifact aggregated and available for synthesis
+- ✅ No regression in existing functionality
+- ✅ **BONUS**: Evidence contract partially met (evidence curation already compatible)
 
 ---
 
-### Sprint 19: Structured Output Migration (Post-Alpha)
+### Sprint SYW-2: Complete Evidence Contract 🔍 **MEDIUM PRIORITY**
 
-**Description**: Migrate utility agents to structured output while preserving model choice for artistic agents
-**Purpose**: Improve reliability and eliminate parsing errors for utility agents while maintaining research flexibility
-**Priority**: MEDIUM - Post-alpha architectural improvement
+**Description**: Add verification agent to complete evidence contract (evidence curation already works)
+**Purpose**: Add attestation layer to evidence pipeline for full Show Your Work compliance
+**Priority**: MEDIUM - Evidence curation already functional, verification adds robustness
 **Timeline**: 1-2 weeks
-**Dependencies**: Alpha release completion
+**Contract Status**: **PARTIALLY MET** - Evidence curation works with tool-calling artifacts, just needs verification layer
+**Contract Goal**: Add attestation artifacts to complete evidence contract for synthesis
+**Dependencies**: Sprint SYW-1 completion required
 
-**Architectural Principle**: 
-- **Utility Agents** (validation, derived metrics, statistical analysis, evidence retrieval): Standardize on Vertex AI structured output for consistency
-- **Artistic Agents** (raw scoring, final synthesis): Preserve model choice flexibility for research quality and researcher preferences
+#### [SYW2-001] Create VerificationAgent
 
-#### [STRUCTURED-001] Migrate Utility Agents to Structured Output
-
-- **Description**: Convert utility agents to use Vertex AI structured output instead of JSON parsing
-- **Purpose**: Eliminate parsing errors and improve reliability for non-research-critical agents
-- **Priority**: MEDIUM - Post-alpha improvement
+- **Description**: Implement VerificationAgent that re-executes and validates computational work
+- **Purpose**: Add adversarial attestation layer to Show Your Work architecture
+- **Priority**: HIGH - Core architectural requirement
+- **Solution Strategy**:
+  - Create new VerificationAgent class with tool calling support
+  - Read `analysis_scores.json`, `evidence_quotes.json`, `computational_work.json`
+  - Re-execute code internally and compare results
+  - Use tool calling to generate `attestation.json` files
 - **Acceptance Criteria**:
-  - ExperimentCoherenceAgent uses structured output
-  - DerivedMetricsAgent uses structured output
-  - StatisticalAnalysisAgent uses structured output
-  - EvidenceRetrievalAgent uses structured output
-  - No more delimiter parsing or JSON extraction
-  - Maintained functionality with improved reliability
-- **Dependencies**: Alpha release completion
-- **Effort**: 1-2 weeks
-
-#### [STRUCTURED-002] Preserve Artistic Agent Model Choice
-
-- **Description**: Ensure raw scoring and synthesis agents maintain model choice flexibility
-- **Purpose**: Preserve research quality and researcher preferences for critical research outputs
-- **Priority**: MEDIUM - Research quality preservation
-- **Acceptance Criteria**:
-  - Raw scoring agents support all available models
-  - Synthesis agents support all available models
-  - No forced Vertex AI usage for artistic agents
-  - Clear documentation of agent type distinctions
-- **Dependencies**: [STRUCTURED-001]
+  - ✅ VerificationAgent successfully re-executes computational work
+  - ✅ Generates `attestation_<hash>.json` files with verification results
+  - ✅ Detects and reports calculation discrepancies
+  - ✅ Integrates cleanly with existing orchestrator
+- **Files to Create**:
+  - `discernus/agents/VerificationAgent/agent.py`
+  - `discernus/agents/VerificationAgent/prompt.txt`
+- **Dependencies**: [SYW1-002] - Computational work artifacts must exist
 - **Effort**: 1 week
 
+#### [SYW2-002] Integrate Verification into Orchestrator
+
+- **Description**: Add verification step to CleanAnalysisOrchestrator after each document analysis
+- **Purpose**: Make verification part of standard pipeline
+- **Priority**: MEDIUM - Integration requirement
+- **Solution Strategy**:
+  - Add verification call after each document analysis
+  - Implement fail-fast on verification failure
+  - Add verification metrics to performance tracking
+  - Maintain backward compatibility with verification disabled
+- **Acceptance Criteria**:
+  - ✅ Verification runs automatically after each analysis
+  - ✅ Pipeline fails fast on verification errors
+  - ✅ Verification success rates tracked and reported
+  - ✅ Option to disable verification for testing
+- **Dependencies**: [SYW2-001]
+- **Effort**: 2-3 days
+
+**Sprint SYW-2 Success Criteria**:
+- ✅ All document analyses include verification step
+- ✅ Verification successfully validates computational work  
+- ✅ Pipeline fails appropriately on verification errors
+- ✅ Verification artifacts properly stored and tracked
+- ✅ **ACCELERATED**: Evidence pipeline already 80% Show Your Work compliant
+- ✅ Evidence contract fully met with verification layer added
+
 ---
 
-## Current Sprint Planning
+### Sprint SYW-3: Migrate Statistical Analysis 📊 **MEDIUM PRIORITY**
 
-**Next Priority**: Sprint 17 (Critical Bug Fixes) - URGENT PRIORITY
-**Status**: Ready for execution
-**Dependencies**: None - can begin immediately
+**Description**: Replace existing statistical analysis with Show Your Work tool-calling approach
+**Purpose**: Complete migration of statistical pipeline to Show Your Work architecture
+**Priority**: MEDIUM - Architectural consistency
+**Timeline**: 2-3 weeks
+**Dependencies**: Sprint SYW-2 completion required
 
-**Following Priority**: Sprint 18 (Agent Parsing Consistency) - HIGH PRIORITY
-**Status**: Ready for execution after Sprint 17
-**Dependencies**: Sprint 17 completion required
+#### [SYW3-001] Create Statistical Planning + Execution Agent
+
+- **Description**: New agent that reads `analysis_scores.json` files and uses tool calling for results
+- **Purpose**: Replace existing statistical analysis with Show Your Work approach
+- **Priority**: MEDIUM - Architectural migration
+- **Solution Strategy**:
+  - Create agent that reads all `analysis_scores.json` files directly
+  - Use tool calling for `record_statistical_results`
+  - Generate `statistics.json` and `statistical_work.json`
+  - Create CSVs from structured data, not parsing
+- **Acceptance Criteria**:
+  - ✅ Reads analysis artifacts directly (not CSV)
+  - ✅ Uses tool calling for all statistical results
+  - ✅ Generates proper Show Your Work artifacts
+  - ✅ Maintains same statistical analysis quality
+- **Dependencies**: Sprint SYW-2 completion
+- **Effort**: 1-2 weeks
+
+#### [SYW3-002] Create Statistical Verification Agent
+
+- **Description**: Verify statistical calculations using adversarial attestation
+- **Purpose**: Add verification layer to statistical analysis
+- **Priority**: MEDIUM - Show Your Work compliance
+- **Solution Strategy**:
+  - Re-execute statistical code independently
+  - Compare results with original calculations
+  - Generate `statistical_attestation.json`
+- **Acceptance Criteria**:
+  - ✅ Successfully verifies statistical calculations
+  - ✅ Detects and reports statistical errors
+  - ✅ Generates proper attestation artifacts
+- **Dependencies**: [SYW3-001]
+- **Effort**: 1 week
+
+**Sprint SYW-3 Success Criteria**:
+- Statistical analysis uses tool calling throughout
+- All statistical calculations verified independently
+- CSV generation moved to statistical agent
+- Maintains existing statistical analysis quality
+
+---
+
+### Sprint SYW-4: Complete Show Your Work Pipeline 🎯 **FUTURE**
+
+**Description**: Implement complete Show Your Work architecture with new orchestrator
+**Purpose**: Full migration to Show Your Work architecture
+**Priority**: FUTURE - Complete architectural transition
+**Timeline**: 3-4 weeks
+**Dependencies**: Sprint SYW-3 completion required
+
+#### [SYW4-001] Complete CleanAnalysisOrchestrator Refactoring
+
+- **Description**: Finish refactoring CleanAnalysisOrchestrator to fully support Show Your Work architecture
+- **Purpose**: Complete the systematic refactoring to Show Your Work while preserving all existing functionality
+- **Priority**: FUTURE - Architectural completion
+- **Solution Strategy**:
+  - Refactor remaining components to use Show Your Work artifacts natively
+  - Clean up any remaining hybrid patterns
+  - Optimize artifact management for Show Your Work schema
+  - Preserve all existing CLI, logging, caching, and security functionality
+- **Acceptance Criteria**:
+  - ✅ Orchestrator natively uses Show Your Work artifacts throughout
+  - ✅ All existing functionality preserved (CLI, caching, logging, security)
+  - ✅ Performance maintained or improved
+  - ✅ Clean, consistent Show Your Work patterns throughout
+- **Dependencies**: Sprint SYW-3 completion
+- **Effort**: 1-2 weeks (refactoring vs 2-3 weeks replacement)
+
+#### [SYW4-002] Migrate Synthesis Agent to Show Your Work Artifacts
+
+- **Description**: Update UnifiedSynthesisAgent to read Show Your Work artifacts instead of parsed responses
+- **Purpose**: Enable synthesis to work with new artifact format while maintaining report quality
+- **Priority**: HIGH - Critical for end-to-end pipeline
+- **Current Challenge**: Synthesis agent expects old format artifacts and CSV files
+- **Solution Strategy**:
+  - Update artifact reading to consume `analysis_scores.json`, `evidence_quotes.json`, `computational_work.json`
+  - Modify RAG population to read from `evidence_quotes.json` files directly
+  - Update statistical integration to read from `statistics.json` instead of CSV parsing
+  - Preserve all existing synthesis logic and report generation quality
+  - Maintain academic report format and sophistication
+- **Acceptance Criteria**:
+  - ✅ Synthesis reads Show Your Work artifacts natively
+  - ✅ RAG index populated correctly from new evidence format
+  - ✅ Statistical results integrated from `statistics.json`
+  - ✅ Computational work incorporated from artifact files
+  - ✅ Final report quality matches existing standards
+  - ✅ All synthesis features preserved (fact-checking, evidence retrieval, etc.)
+- **Files to Update**:
+  - `discernus/agents/unified_synthesis_agent.py`
+  - Evidence retrieval and RAG population logic
+  - Statistical integration components
+- **Dependencies**: [SYW4-001] - Orchestrator must provide correct artifact paths
+- **Effort**: 2-3 weeks (complex integration work)
+
+#### [SYW4-003] Migrate Evidence CSV Generation
+
+- **Description**: Create deterministic Evidence CSV Export Module  
+- **Purpose**: Complete Show Your Work evidence handling
+- **Priority**: MEDIUM - CSV export functionality
+- **Solution Strategy**:
+  - Read `evidence_quotes.json` files directly
+  - Generate CSV without LLM involvement
+  - Remove evidence processing from orchestrator
+- **Acceptance Criteria**:
+  - ✅ Evidence CSV generated deterministically
+  - ✅ No LLM calls for CSV generation
+  - ✅ Maintains existing CSV format
+- **Dependencies**: [SYW4-002] - Synthesis migration must be complete first
+- **Effort**: 1 week
+
+**Sprint SYW-4 Success Criteria**:
+- CleanAnalysisOrchestrator fully refactored to Show Your Work architecture
+- All artifacts follow Show Your Work schema natively
+- All existing functionality preserved and enhanced
+- Clean, maintainable codebase ready for production
+
+---
+
+## Legacy Sprint Archive
+
+The following sprints were part of the old architecture and are no longer relevant due to the Show Your Work migration:
+
+### Archived Sprints (Pre-Migration)
+- Sprint 16: Alpha Release Preparation (SUPERSEDED by migration)
+- Sprint 17: Critical Bug Fixes (COMPLETED - incorporated into SYW-1)
+- Sprint 18: Critical Regression Fixes (SUPERSEDED by SYW-1)
+- Sprint 19: Agent Parsing Consistency (SUPERSEDED by tool calling migration)
+- Sprint 19: Structured Output Migration (SUPERSEDED by Show Your Work architecture)
+
+**Note**: These sprints addressed issues that are resolved by the Show Your Work migration or are no longer relevant to the new architecture.
+
+---
+
+## Migration Progress Tracking
+
+### Phase 0.5: Partial Tool Calling ✅ **COMPLETED**
+- Analysis agent converted to tool calling
+- Backward compatibility maintained
+- CSV export working
+
+### Phase 1: Fix Current Hybrid ⚠️ **IN PROGRESS**
+- Sprint SYW-1 addresses critical functionality gaps
+- Target: Restore end-to-end pipeline functionality
+
+### Phase 2: Add Verification Layer 📋 **PLANNED**
+- Sprint SYW-2 implements adversarial attestation
+- Target: Core Show Your Work verification
+
+### Phase 3: Migrate Statistical Analysis 📋 **PLANNED**
+- Sprint SYW-3 completes statistical migration
+- Target: Full tool calling statistical pipeline
+
+### Phase 4: Complete Architecture 📋 **FUTURE**
+- Sprint SYW-4 implements clean Show Your Work orchestrator
+- Target: Production-ready Show Your Work system
