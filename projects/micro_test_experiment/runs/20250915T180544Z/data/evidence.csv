@@ -1,0 +1,560 @@
+document_id,evidence_hash,dimension,score,quote_text,reasoning,confidence
+Evidence from analysis_ee1fd748,,raw_evidence,,"```json
+{
+  ""positive_sentiment"": [
+    ""This is a wonderful day! Everything is going perfectly. I feel great about the future."",
+    ""Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.""
+  ],
+  ""negative_sentiment"": []
+}
+```",,1.0
+Evidence from analysis_485dc5ae,,raw_evidence,,"```json
+{
+  ""positive_sentiment"": {
+    ""evidence"": ""The document is saturated with strong positive language, optimistic expressions, and words indicating success and enthusiasm, clearly dominating the text."",
+    ""evidence_quotes"": [
+      ""What a superb morning! All systems are operating flawlessly. I'm excited about what's coming next."",
+      ""Achievement surrounds us. The group performed outstandingly. We're reaching incredible goals. Hopefulness permeates everything. Such a marvelous chance! I'm delighted by the advancement. Everything appears glowing and encouraging.""
+    ]
+  },
+  ""negative_sentiment"": {
+    ""evidence"": ""No negative language, pessimistic expressions, or words indicating failure or despair were found in the document."",
+    ""evidence_quotes"": []
+  }
+}
+```",,1.0
+Evidence from analysis_874b8503,,raw_evidence,,"```json
+{
+  ""negative_test_1.txt"": {
+    ""positive_sentiment"": [],
+    ""negative_sentiment"": [
+      ""This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless."",
+      ""Everything looks dark and hopeless.""
+    ]
+  }
+}
+```",,1.0
+Evidence from analysis_e90a0c4a,,raw_evidence,,"```json
+{
+  ""negative_sentiment"": [
+    ""What an awful predicament. All plans are failing miserably. I'm dreading what's to come. Defeat engulfs us."",
+    ""Despair saturates everything. Such a calamitous result! I'm crushed by the setbacks. Everything appears bleak and discouraging.""
+  ]
+}
+```",,1.0
+Evidence from analysis_874b8503,,raw_evidence,,"```json
+{
+  ""negative_test_1.txt"": {
+    ""positive_sentiment"": [],
+    ""negative_sentiment"": [
+      ""This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless."",
+      ""Everything looks dark and hopeless.""
+    ]
+  }
+}
+```",,1.0
+Evidence from analysis_e90a0c4a,,raw_evidence,,"```json
+{
+  ""negative_sentiment"": [
+    ""What an awful predicament. All plans are failing miserably. I'm dreading what's to come. Defeat engulfs us."",
+    ""Despair saturates everything. Such a calamitous result! I'm crushed by the setbacks. Everything appears bleak and discouraging.""
+  ]
+}
+```",,1.0
+Evidence from analysis_485dc5ae,,raw_evidence,,"```json
+{
+  ""positive_sentiment"": {
+    ""evidence"": ""The document is saturated with strong positive language, optimistic expressions, and words indicating success and enthusiasm, clearly dominating the text."",
+    ""evidence_quotes"": [
+      ""What a superb morning! All systems are operating flawlessly. I'm excited about what's coming next."",
+      ""Achievement surrounds us. The group performed outstandingly. We're reaching incredible goals. Hopefulness permeates everything. Such a marvelous chance! I'm delighted by the advancement. Everything appears glowing and encouraging.""
+    ]
+  },
+  ""negative_sentiment"": {
+    ""evidence"": ""No negative language, pessimistic expressions, or words indicating failure or despair were found in the document."",
+    ""evidence_quotes"": []
+  }
+}
+```",,1.0
+Evidence from analysis_ee1fd748,,raw_evidence,,"```json
+{
+  ""positive_sentiment"": [
+    ""This is a wonderful day! Everything is going perfectly. I feel great about the future."",
+    ""Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.""
+  ],
+  ""negative_sentiment"": []
+}
+```",,1.0
+Evidence from analysis_ee1fd748,,raw_evidence,,"```json
+{
+  ""positive_sentiment"": [
+    ""This is a wonderful day! Everything is going perfectly. I feel great about the future."",
+    ""Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.""
+  ],
+  ""negative_sentiment"": []
+}
+```",,1.0
+Evidence from analysis_485dc5ae,,raw_evidence,,"```json
+{
+  ""positive_sentiment"": {
+    ""evidence"": ""The document is saturated with strong positive language, optimistic expressions, and words indicating success and enthusiasm, clearly dominating the text."",
+    ""evidence_quotes"": [
+      ""What a superb morning! All systems are operating flawlessly. I'm excited about what's coming next."",
+      ""Achievement surrounds us. The group performed outstandingly. We're reaching incredible goals. Hopefulness permeates everything. Such a marvelous chance! I'm delighted by the advancement. Everything appears glowing and encouraging.""
+    ]
+  },
+  ""negative_sentiment"": {
+    ""evidence"": ""No negative language, pessimistic expressions, or words indicating failure or despair were found in the document."",
+    ""evidence_quotes"": []
+  }
+}
+```",,1.0
+Evidence from analysis_874b8503,,raw_evidence,,"```json
+{
+  ""negative_test_1.txt"": {
+    ""positive_sentiment"": [],
+    ""negative_sentiment"": [
+      ""This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless."",
+      ""Everything looks dark and hopeless.""
+    ]
+  }
+}
+```",,1.0
+Evidence from analysis_e90a0c4a,,raw_evidence,,"```json
+{
+  ""negative_sentiment"": [
+    ""What an awful predicament. All plans are failing miserably. I'm dreading what's to come. Defeat engulfs us."",
+    ""Despair saturates everything. Such a calamitous result! I'm crushed by the setbacks. Everything appears bleak and discouraging.""
+  ]
+}
+```",,1.0
+Evidence from analysis_874b8503,,raw_evidence,,"```json
+{
+  ""negative_test_1.txt"": {
+    ""positive_sentiment"": [],
+    ""negative_sentiment"": [
+      ""This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless."",
+      ""Everything looks dark and hopeless.""
+    ]
+  }
+}
+```",,1.0
+Evidence from analysis_ee1fd748,,raw_evidence,,"```json
+{
+  ""positive_sentiment"": [
+    ""This is a wonderful day! Everything is going perfectly. I feel great about the future."",
+    ""Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.""
+  ],
+  ""negative_sentiment"": []
+}
+```",,1.0
+Evidence from analysis_e90a0c4a,,raw_evidence,,"```json
+{
+  ""negative_sentiment"": [
+    ""What an awful predicament. All plans are failing miserably. I'm dreading what's to come. Defeat engulfs us."",
+    ""Despair saturates everything. Such a calamitous result! I'm crushed by the setbacks. Everything appears bleak and discouraging.""
+  ]
+}
+```",,1.0
+Evidence from analysis_485dc5ae,,raw_evidence,,"```json
+{
+  ""positive_sentiment"": {
+    ""evidence"": ""The document is saturated with strong positive language, optimistic expressions, and words indicating success and enthusiasm, clearly dominating the text."",
+    ""evidence_quotes"": [
+      ""What a superb morning! All systems are operating flawlessly. I'm excited about what's coming next."",
+      ""Achievement surrounds us. The group performed outstandingly. We're reaching incredible goals. Hopefulness permeates everything. Such a marvelous chance! I'm delighted by the advancement. Everything appears glowing and encouraging.""
+    ]
+  },
+  ""negative_sentiment"": {
+    ""evidence"": ""No negative language, pessimistic expressions, or words indicating failure or despair were found in the document."",
+    ""evidence_quotes"": []
+  }
+}
+```",,1.0
+Evidence from analysis_874b8503,,raw_evidence,,"```json
+{
+  ""negative_test_1.txt"": {
+    ""positive_sentiment"": [],
+    ""negative_sentiment"": [
+      ""This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless."",
+      ""Everything looks dark and hopeless.""
+    ]
+  }
+}
+```",,1.0
+Evidence from analysis_ee1fd748,,raw_evidence,,"```json
+{
+  ""positive_sentiment"": [
+    ""This is a wonderful day! Everything is going perfectly. I feel great about the future."",
+    ""Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.""
+  ],
+  ""negative_sentiment"": []
+}
+```",,1.0
+Evidence from analysis_e90a0c4a,,raw_evidence,,"```json
+{
+  ""negative_sentiment"": [
+    ""What an awful predicament. All plans are failing miserably. I'm dreading what's to come. Defeat engulfs us."",
+    ""Despair saturates everything. Such a calamitous result! I'm crushed by the setbacks. Everything appears bleak and discouraging.""
+  ]
+}
+```",,1.0
+Evidence from analysis_485dc5ae,,raw_evidence,,"```json
+{
+  ""positive_sentiment"": {
+    ""evidence"": ""The document is saturated with strong positive language, optimistic expressions, and words indicating success and enthusiasm, clearly dominating the text."",
+    ""evidence_quotes"": [
+      ""What a superb morning! All systems are operating flawlessly. I'm excited about what's coming next."",
+      ""Achievement surrounds us. The group performed outstandingly. We're reaching incredible goals. Hopefulness permeates everything. Such a marvelous chance! I'm delighted by the advancement. Everything appears glowing and encouraging.""
+    ]
+  },
+  ""negative_sentiment"": {
+    ""evidence"": ""No negative language, pessimistic expressions, or words indicating failure or despair were found in the document."",
+    ""evidence_quotes"": []
+  }
+}
+```",,1.0
+Evidence from analysis_ee1fd748,,raw_evidence,,"```json
+{
+  ""positive_sentiment"": [
+    ""This is a wonderful day! Everything is going perfectly. I feel great about the future."",
+    ""Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.""
+  ],
+  ""negative_sentiment"": []
+}
+```",,1.0
+Evidence from analysis_485dc5ae,,raw_evidence,,"```json
+{
+  ""positive_sentiment"": {
+    ""evidence"": ""The document is saturated with strong positive language, optimistic expressions, and words indicating success and enthusiasm, clearly dominating the text."",
+    ""evidence_quotes"": [
+      ""What a superb morning! All systems are operating flawlessly. I'm excited about what's coming next."",
+      ""Achievement surrounds us. The group performed outstandingly. We're reaching incredible goals. Hopefulness permeates everything. Such a marvelous chance! I'm delighted by the advancement. Everything appears glowing and encouraging.""
+    ]
+  },
+  ""negative_sentiment"": {
+    ""evidence"": ""No negative language, pessimistic expressions, or words indicating failure or despair were found in the document."",
+    ""evidence_quotes"": []
+  }
+}
+```",,1.0
+Evidence from analysis_874b8503,,raw_evidence,,"```json
+{
+  ""negative_test_1.txt"": {
+    ""positive_sentiment"": [],
+    ""negative_sentiment"": [
+      ""This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless."",
+      ""Everything looks dark and hopeless.""
+    ]
+  }
+}
+```",,1.0
+Evidence from analysis_e90a0c4a,,raw_evidence,,"```json
+{
+  ""negative_sentiment"": [
+    ""What an awful predicament. All plans are failing miserably. I'm dreading what's to come. Defeat engulfs us."",
+    ""Despair saturates everything. Such a calamitous result! I'm crushed by the setbacks. Everything appears bleak and discouraging.""
+  ]
+}
+```",,1.0
+Evidence from analysis_485dc5ae,,raw_evidence,,"```json
+{
+  ""positive_sentiment"": {
+    ""evidence"": ""The document is saturated with strong positive language, optimistic expressions, and words indicating success and enthusiasm, clearly dominating the text."",
+    ""evidence_quotes"": [
+      ""What a superb morning! All systems are operating flawlessly. I'm excited about what's coming next."",
+      ""Achievement surrounds us. The group performed outstandingly. We're reaching incredible goals. Hopefulness permeates everything. Such a marvelous chance! I'm delighted by the advancement. Everything appears glowing and encouraging.""
+    ]
+  },
+  ""negative_sentiment"": {
+    ""evidence"": ""No negative language, pessimistic expressions, or words indicating failure or despair were found in the document."",
+    ""evidence_quotes"": []
+  }
+}
+```",,1.0
+Evidence from analysis_ee1fd748,,raw_evidence,,"```json
+{
+  ""positive_sentiment"": [
+    ""This is a wonderful day! Everything is going perfectly. I feel great about the future."",
+    ""Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.""
+  ],
+  ""negative_sentiment"": []
+}
+```",,1.0
+Evidence from analysis_874b8503,,raw_evidence,,"```json
+{
+  ""negative_test_1.txt"": {
+    ""positive_sentiment"": [],
+    ""negative_sentiment"": [
+      ""This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless."",
+      ""Everything looks dark and hopeless.""
+    ]
+  }
+}
+```",,1.0
+Evidence from analysis_e90a0c4a,,raw_evidence,,"```json
+{
+  ""negative_sentiment"": [
+    ""What an awful predicament. All plans are failing miserably. I'm dreading what's to come. Defeat engulfs us."",
+    ""Despair saturates everything. Such a calamitous result! I'm crushed by the setbacks. Everything appears bleak and discouraging.""
+  ]
+}
+```",,1.0
+Evidence from analysis_485dc5ae,,raw_evidence,,"```json
+{
+  ""positive_sentiment"": {
+    ""evidence"": ""The document is saturated with strong positive language, optimistic expressions, and words indicating success and enthusiasm, clearly dominating the text."",
+    ""evidence_quotes"": [
+      ""What a superb morning! All systems are operating flawlessly. I'm excited about what's coming next."",
+      ""Achievement surrounds us. The group performed outstandingly. We're reaching incredible goals. Hopefulness permeates everything. Such a marvelous chance! I'm delighted by the advancement. Everything appears glowing and encouraging.""
+    ]
+  },
+  ""negative_sentiment"": {
+    ""evidence"": ""No negative language, pessimistic expressions, or words indicating failure or despair were found in the document."",
+    ""evidence_quotes"": []
+  }
+}
+```",,1.0
+Evidence from analysis_874b8503,,raw_evidence,,"```json
+{
+  ""negative_test_1.txt"": {
+    ""positive_sentiment"": [],
+    ""negative_sentiment"": [
+      ""This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless."",
+      ""Everything looks dark and hopeless.""
+    ]
+  }
+}
+```",,1.0
+Evidence from analysis_e90a0c4a,,raw_evidence,,"```json
+{
+  ""negative_sentiment"": [
+    ""What an awful predicament. All plans are failing miserably. I'm dreading what's to come. Defeat engulfs us."",
+    ""Despair saturates everything. Such a calamitous result! I'm crushed by the setbacks. Everything appears bleak and discouraging.""
+  ]
+}
+```",,1.0
+Evidence from analysis_ee1fd748,,raw_evidence,,"```json
+{
+  ""positive_sentiment"": [
+    ""This is a wonderful day! Everything is going perfectly. I feel great about the future."",
+    ""Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.""
+  ],
+  ""negative_sentiment"": []
+}
+```",,1.0
+Evidence from analysis_485dc5ae,,raw_evidence,,"```json
+{
+  ""positive_sentiment"": {
+    ""evidence"": ""The document is saturated with strong positive language, optimistic expressions, and words indicating success and enthusiasm, clearly dominating the text."",
+    ""evidence_quotes"": [
+      ""What a superb morning! All systems are operating flawlessly. I'm excited about what's coming next."",
+      ""Achievement surrounds us. The group performed outstandingly. We're reaching incredible goals. Hopefulness permeates everything. Such a marvelous chance! I'm delighted by the advancement. Everything appears glowing and encouraging.""
+    ]
+  },
+  ""negative_sentiment"": {
+    ""evidence"": ""No negative language, pessimistic expressions, or words indicating failure or despair were found in the document."",
+    ""evidence_quotes"": []
+  }
+}
+```",,1.0
+Evidence from analysis_874b8503,,raw_evidence,,"```json
+{
+  ""negative_test_1.txt"": {
+    ""positive_sentiment"": [],
+    ""negative_sentiment"": [
+      ""This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless."",
+      ""Everything looks dark and hopeless.""
+    ]
+  }
+}
+```",,1.0
+Evidence from analysis_ee1fd748,,raw_evidence,,"```json
+{
+  ""positive_sentiment"": [
+    ""This is a wonderful day! Everything is going perfectly. I feel great about the future."",
+    ""Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.""
+  ],
+  ""negative_sentiment"": []
+}
+```",,1.0
+Evidence from analysis_e90a0c4a,,raw_evidence,,"```json
+{
+  ""negative_sentiment"": [
+    ""What an awful predicament. All plans are failing miserably. I'm dreading what's to come. Defeat engulfs us."",
+    ""Despair saturates everything. Such a calamitous result! I'm crushed by the setbacks. Everything appears bleak and discouraging.""
+  ]
+}
+```",,1.0
+Evidence from analysis_874b8503,,raw_evidence,,"```json
+{
+  ""negative_test_1.txt"": {
+    ""positive_sentiment"": [],
+    ""negative_sentiment"": [
+      ""This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless."",
+      ""Everything looks dark and hopeless.""
+    ]
+  }
+}
+```",,1.0
+Evidence from analysis_e90a0c4a,,raw_evidence,,"```json
+{
+  ""negative_sentiment"": [
+    ""What an awful predicament. All plans are failing miserably. I'm dreading what's to come. Defeat engulfs us."",
+    ""Despair saturates everything. Such a calamitous result! I'm crushed by the setbacks. Everything appears bleak and discouraging.""
+  ]
+}
+```",,1.0
+Evidence from analysis_ee1fd748,,raw_evidence,,"```json
+{
+  ""positive_sentiment"": [
+    ""This is a wonderful day! Everything is going perfectly. I feel great about the future."",
+    ""Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.""
+  ],
+  ""negative_sentiment"": []
+}
+```",,1.0
+Evidence from analysis_485dc5ae,,raw_evidence,,"```json
+{
+  ""positive_sentiment"": {
+    ""evidence"": ""The document is saturated with strong positive language, optimistic expressions, and words indicating success and enthusiasm, clearly dominating the text."",
+    ""evidence_quotes"": [
+      ""What a superb morning! All systems are operating flawlessly. I'm excited about what's coming next."",
+      ""Achievement surrounds us. The group performed outstandingly. We're reaching incredible goals. Hopefulness permeates everything. Such a marvelous chance! I'm delighted by the advancement. Everything appears glowing and encouraging.""
+    ]
+  },
+  ""negative_sentiment"": {
+    ""evidence"": ""No negative language, pessimistic expressions, or words indicating failure or despair were found in the document."",
+    ""evidence_quotes"": []
+  }
+}
+```",,1.0
+Evidence from analysis_ee1fd748,,raw_evidence,,"```json
+{
+  ""positive_sentiment"": [
+    ""This is a wonderful day! Everything is going perfectly. I feel great about the future."",
+    ""Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.""
+  ],
+  ""negative_sentiment"": []
+}
+```",,1.0
+Evidence from analysis_874b8503,,raw_evidence,,"```json
+{
+  ""negative_test_1.txt"": {
+    ""positive_sentiment"": [],
+    ""negative_sentiment"": [
+      ""This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless."",
+      ""Everything looks dark and hopeless.""
+    ]
+  }
+}
+```",,1.0
+Evidence from analysis_e90a0c4a,,raw_evidence,,"```json
+{
+  ""negative_sentiment"": [
+    ""What an awful predicament. All plans are failing miserably. I'm dreading what's to come. Defeat engulfs us."",
+    ""Despair saturates everything. Such a calamitous result! I'm crushed by the setbacks. Everything appears bleak and discouraging.""
+  ]
+}
+```",,1.0
+Evidence from analysis_485dc5ae,,raw_evidence,,"```json
+{
+  ""positive_sentiment"": {
+    ""evidence"": ""The document is saturated with strong positive language, optimistic expressions, and words indicating success and enthusiasm, clearly dominating the text."",
+    ""evidence_quotes"": [
+      ""What a superb morning! All systems are operating flawlessly. I'm excited about what's coming next."",
+      ""Achievement surrounds us. The group performed outstandingly. We're reaching incredible goals. Hopefulness permeates everything. Such a marvelous chance! I'm delighted by the advancement. Everything appears glowing and encouraging.""
+    ]
+  },
+  ""negative_sentiment"": {
+    ""evidence"": ""No negative language, pessimistic expressions, or words indicating failure or despair were found in the document."",
+    ""evidence_quotes"": []
+  }
+}
+```",,1.0
+Evidence from analysis_ee1fd748,,raw_evidence,,"```json
+{
+  ""positive_sentiment"": [
+    ""This is a wonderful day! Everything is going perfectly. I feel great about the future."",
+    ""Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.""
+  ],
+  ""negative_sentiment"": []
+}
+```",,1.0
+Evidence from analysis_e90a0c4a,,raw_evidence,,"```json
+{
+  ""negative_sentiment"": [
+    ""What an awful predicament. All plans are failing miserably. I'm dreading what's to come. Defeat engulfs us."",
+    ""Despair saturates everything. Such a calamitous result! I'm crushed by the setbacks. Everything appears bleak and discouraging.""
+  ]
+}
+```",,1.0
+Evidence from analysis_874b8503,,raw_evidence,,"```json
+{
+  ""negative_test_1.txt"": {
+    ""positive_sentiment"": [],
+    ""negative_sentiment"": [
+      ""This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless."",
+      ""Everything looks dark and hopeless.""
+    ]
+  }
+}
+```",,1.0
+Evidence from analysis_485dc5ae,,raw_evidence,,"```json
+{
+  ""positive_sentiment"": {
+    ""evidence"": ""The document is saturated with strong positive language, optimistic expressions, and words indicating success and enthusiasm, clearly dominating the text."",
+    ""evidence_quotes"": [
+      ""What a superb morning! All systems are operating flawlessly. I'm excited about what's coming next."",
+      ""Achievement surrounds us. The group performed outstandingly. We're reaching incredible goals. Hopefulness permeates everything. Such a marvelous chance! I'm delighted by the advancement. Everything appears glowing and encouraging.""
+    ]
+  },
+  ""negative_sentiment"": {
+    ""evidence"": ""No negative language, pessimistic expressions, or words indicating failure or despair were found in the document."",
+    ""evidence_quotes"": []
+  }
+}
+```",,1.0
+Evidence from analysis_ee1fd748,,raw_evidence,,"```json
+{
+  ""positive_sentiment"": [
+    ""This is a wonderful day! Everything is going perfectly. I feel great about the future."",
+    ""Success is everywhere. The team did an excellent job. We're achieving amazing results. Optimism fills the air. What a fantastic opportunity! I'm thrilled with the progress. Everything looks bright and promising.""
+  ],
+  ""negative_sentiment"": []
+}
+```",,1.0
+Evidence from analysis_485dc5ae,,raw_evidence,,"```json
+{
+  ""positive_sentiment"": {
+    ""evidence"": ""The document is saturated with strong positive language, optimistic expressions, and words indicating success and enthusiasm, clearly dominating the text."",
+    ""evidence_quotes"": [
+      ""What a superb morning! All systems are operating flawlessly. I'm excited about what's coming next."",
+      ""Achievement surrounds us. The group performed outstandingly. We're reaching incredible goals. Hopefulness permeates everything. Such a marvelous chance! I'm delighted by the advancement. Everything appears glowing and encouraging.""
+    ]
+  },
+  ""negative_sentiment"": {
+    ""evidence"": ""No negative language, pessimistic expressions, or words indicating failure or despair were found in the document."",
+    ""evidence_quotes"": []
+  }
+}
+```",,1.0
+Evidence from analysis_874b8503,,raw_evidence,,"```json
+{
+  ""negative_test_1.txt"": {
+    ""positive_sentiment"": [],
+    ""negative_sentiment"": [
+      ""This is a terrible situation. Everything is going wrong. I feel awful about the future. Failure surrounds us. The team did a horrible job. We're facing disaster. Pessimism fills the air. What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless."",
+      ""Everything looks dark and hopeless.""
+    ]
+  }
+}
+```",,1.0
+Evidence from analysis_e90a0c4a,,raw_evidence,,"```json
+{
+  ""negative_sentiment"": [
+    ""What an awful predicament. All plans are failing miserably. I'm dreading what's to come. Defeat engulfs us."",
+    ""Despair saturates everything. Such a calamitous result! I'm crushed by the setbacks. Everything appears bleak and discouraging.""
+  ]
+}
+```",,1.0
