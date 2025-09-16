@@ -343,9 +343,21 @@ class CleanAnalysisOrchestrator:
             self._log_progress("📊 THIN: Derived metrics available in AnalysisAgent artifacts")
             derived_metrics_results = {"status": "available_in_artifacts", "message": "Derived metrics produced by AnalysisAgent tool calls"}
             
-            # Statistical preparation mode: Copy StatisticalAgent CSV outputs and exit
+            # Statistical preparation mode: Run StatisticalAgent, then copy CSV outputs and exit
             if self.statistical_prep:
-                self._log_progress("📊 Statistical preparation mode: Copying CSV files from StatisticalAgent...")
+                # First run statistical analysis to generate the CSV files
+                self._log_progress("📊 Statistical preparation mode: Running statistical analysis...")
+                phase_start = datetime.now(timezone.utc)
+                try:
+                    statistical_results = self._run_statistical_analysis_phase(self.derived_metrics_model, audit_logger, analysis_results, derived_metrics_results)
+                    self._log_status("Statistical analysis completed")
+                    self._log_phase_timing("statistical_analysis", phase_start)
+                except Exception as e:
+                    self._log_progress(f"❌ Statistical analysis phase failed: {str(e)}")
+                    raise CleanAnalysisError(f"Statistical analysis phase failed: {str(e)}")
+                
+                # Now copy the CSV files that StatisticalAgent produced
+                self._log_progress("📊 Copying CSV files from StatisticalAgent...")
                 results_dir = self._copy_statistical_artifacts_to_results(run_id)
                 
                 # Set resume capability in manifest
