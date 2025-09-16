@@ -1321,7 +1321,7 @@ class CleanAnalysisOrchestrator:
                 batch_id=batch_id
             )
             
-            if statistical_results.get("success"):
+            if statistical_results and statistical_results.get("batch_id"):
                 self._log_progress("✅ StatisticalAgent completed successfully")
                 return {
                     "status": "completed",
