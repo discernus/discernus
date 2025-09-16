@@ -88,7 +88,8 @@ class CleanAnalysisOrchestrator:
                  skip_synthesis: bool = False,
                  resume_from_stats: bool = False,
                  auto_commit: bool = True,
-                 verbosity: str = "normal"):
+                 verbosity: str = "normal",
+                 verbose_trace: bool = False):
         """Initialize clean analysis orchestrator."""
         self.experiment_path = Path(experiment_path).resolve()
 
@@ -105,6 +106,7 @@ class CleanAnalysisOrchestrator:
         self.resume_from_stats = resume_from_stats
         self.auto_commit = auto_commit
         self.verbosity = verbosity
+        self.verbose_trace = verbose_trace
 
         # Initialize core components
         self.security = ExperimentSecurityBoundary(self.experiment_path)
@@ -187,6 +189,11 @@ class CleanAnalysisOrchestrator:
             # Track experiment timing and audit logger for log summary
             self._experiment_start_time = start_time
             self._current_audit_logger = audit_logger
+            
+            # VERBOSE TRACING: Log experiment start
+            if audit_logger.verbose_trace:
+                audit_logger.log_function_call("CleanAnalysisOrchestrator", "run_experiment", 
+                    kwargs={"statistical_prep": self.statistical_prep, "analysis_only": self.analysis_only})
             
             log_experiment_start(self.security.experiment_name, run_id)
             self._log_progress("🔧 DEBUG: Infrastructure initialized")
@@ -675,7 +682,8 @@ class CleanAnalysisOrchestrator:
             self._log_progress("🔧 Initializing audit logger...")
             audit_logger = AuditLogger(
                 security_boundary=self.security,
-                run_folder=run_folder
+                run_folder=run_folder,
+                verbose_trace=self.verbose_trace
             )
             
             # Initialize artifact storage - USE SHARED CACHE for perfect caching (matching legacy)
@@ -1327,6 +1335,12 @@ class CleanAnalysisOrchestrator:
             batch_id = f"stats_{datetime.now().strftime('%Y%m%dT%H%M%SZ')}"
             
             self._log_progress(f"📊 StatisticalAgent analyzing batch: {batch_id} with {len(analysis_artifact_hashes)} artifacts")
+            
+            # VERBOSE TRACING: Log StatisticalAgent call
+            if audit_logger.verbose_trace:
+                audit_logger.log_function_call("StatisticalAgent", "analyze_batch", 
+                    kwargs={"batch_id": batch_id, "artifact_count": len(analysis_artifact_hashes)})
+            
             statistical_results = statistical_agent.analyze_batch(
                 framework_content=framework_content,
                 experiment_content=experiment_content,
@@ -1334,6 +1348,11 @@ class CleanAnalysisOrchestrator:
                 batch_id=batch_id,
                 analysis_artifact_hashes=analysis_artifact_hashes
             )
+            
+            # VERBOSE TRACING: Log StatisticalAgent return
+            if audit_logger.verbose_trace:
+                audit_logger.log_function_return("StatisticalAgent", "analyze_batch", 
+                    result=statistical_results)
             
             if statistical_results and statistical_results.get("batch_id"):
                 self._log_progress("✅ StatisticalAgent completed successfully")

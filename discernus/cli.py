@@ -185,8 +185,10 @@ def cli(ctx, verbose, quiet, no_color, config):
               help='Run full pipeline including statistical analysis, skip synthesis report (useful for custom synthesis workflows)')
 @click.option('--no-auto-commit', is_flag=True, envvar='DISCERNUS_NO_AUTO_COMMIT', 
               help='Disable automatic Git commit after successful run (useful for testing or manual commit control)')
+@click.option('--verbose-trace', is_flag=True, envvar='DISCERNUS_VERBOSE_TRACE',
+              help='Enable verbose call tracing for debugging. Logs function calls, returns, and timing across all components')
 @click.pass_context
-def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str], synthesis_model: Optional[str], validation_model: Optional[str], derived_metrics_model: Optional[str], skip_validation: bool, analysis_only: bool, statistical_prep: bool, skip_synthesis: bool, no_auto_commit: bool):
+def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str], synthesis_model: Optional[str], validation_model: Optional[str], derived_metrics_model: Optional[str], skip_validation: bool, analysis_only: bool, statistical_prep: bool, skip_synthesis: bool, no_auto_commit: bool, verbose_trace: bool):
     """Execute complete experiment (analysis + synthesis). 
     
     EXPERIMENT_PATH: Path to experiment directory (defaults to current directory).
@@ -276,7 +278,8 @@ def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str],
         statistical_prep=statistical_prep,
         skip_synthesis=skip_synthesis,
         auto_commit=not no_auto_commit,
-        verbosity=verbosity
+        verbosity=verbosity,
+        verbose_trace=verbose_trace
     )
     
     try:

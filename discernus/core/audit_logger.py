@@ -14,9 +14,12 @@ Ensures complete academic integrity and reproducibility.
 
 import json
 import hashlib
+import time
+import traceback
+import functools
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Dict, Any, Optional, List, Union
+from typing import Dict, Any, Optional, List, Union, Callable
 from .security_boundary import ExperimentSecurityBoundary
 
 
@@ -26,16 +29,18 @@ class AuditLogger:
     for complete provenance and academic integrity.
     """
     
-    def __init__(self, security_boundary: ExperimentSecurityBoundary, run_folder: Path):
+    def __init__(self, security_boundary: ExperimentSecurityBoundary, run_folder: Path, verbose_trace: bool = False):
         """
         Initialize audit logger for a specific experiment run.
         
         Args:
             security_boundary: Security boundary for file operations
             run_folder: The specific run folder for this experiment
+            verbose_trace: Enable verbose call tracing for debugging
         """
         self.security = security_boundary
         self.run_folder = security_boundary.validate_path(run_folder)
+        self.verbose_trace = verbose_trace
         
         # Create logs directory
         self.logs_dir = self.security.secure_mkdir(run_folder / "logs")
@@ -47,6 +52,7 @@ class AuditLogger:
         self.artifact_log = self.logs_dir / "artifacts.jsonl"
         self.system_log = self.logs_dir / "system.jsonl"
         self.cost_log = self.logs_dir / "costs.jsonl"
+        self.trace_log = self.logs_dir / "trace.jsonl"
         
         # Initialize session metadata
         self.session_id = self._generate_session_id()
@@ -479,6 +485,132 @@ class AuditLogger:
             return (end_dt - start_dt).total_seconds()
         except Exception:
             return 0.0
+    
+    # ========================================
+    # VERBOSE TRACING SYSTEM (Phase 1)
+    # ========================================
+    
+    def log_function_call(self, component: str, function_name: str, args: Dict[str, Any] = None, kwargs: Dict[str, Any] = None):
+        """Log function call with parameters for verbose tracing."""
+        if not self.verbose_trace:
+            return
+            
+        # Get call stack for context
+        stack = traceback.extract_stack()
+        caller_frame = stack[-3] if len(stack) >= 3 else stack[-1]
+        
+        trace_entry = {
+            "timestamp": self._get_timestamp(),
+            "session_id": self.session_id,
+            "event_type": "function_call",
+            "component": component,
+            "function": function_name,
+            "caller": {
+                "file": caller_frame.filename,
+                "line": caller_frame.lineno,
+                "function": caller_frame.name
+            },
+            "parameters": {
+                "args": args or {},
+                "kwargs": kwargs or {}
+            }
+        }
+        
+        self._append_to_log(self.trace_log, trace_entry)
+        
+        # Also print to console for immediate feedback
+        print(f"🔍 TRACE: {component}.{function_name}() called from {caller_frame.filename}:{caller_frame.lineno}")
+    
+    def log_function_return(self, component: str, function_name: str, result: Any = None, duration: float = None):
+        """Log function return with result for verbose tracing."""
+        if not self.verbose_trace:
+            return
+            
+        trace_entry = {
+            "timestamp": self._get_timestamp(),
+            "session_id": self.session_id,
+            "event_type": "function_return",
+            "component": component,
+            "function": function_name,
+            "result_type": type(result).__name__ if result is not None else "None",
+            "duration_seconds": duration
+        }
+        
+        # Include result summary for basic types
+        if isinstance(result, (str, int, float, bool)):
+            trace_entry["result_summary"] = str(result)[:100]
+        elif isinstance(result, (list, dict)):
+            trace_entry["result_summary"] = f"{type(result).__name__} with {len(result)} items"
+        
+        self._append_to_log(self.trace_log, trace_entry)
+        
+        # Also print to console for immediate feedback
+        duration_str = f" ({duration:.3f}s)" if duration else ""
+        print(f"🔍 TRACE: {component}.{function_name}() returned {trace_entry['result_type']}{duration_str}")
+    
+    def trace_calls(self, component: str = None):
+        """
+        Decorator for automatic function call/return tracing.
+        
+        Usage:
+            @audit_logger.trace_calls("StatisticalAgent")
+            def analyze_batch(self, ...):
+                ...
+        """
+        def decorator(func: Callable) -> Callable:
+            comp_name = component or func.__module__.split('.')[-1]
+            
+            @functools.wraps(func)
+            def wrapper(*args, **kwargs):
+                if not self.verbose_trace:
+                    return func(*args, **kwargs)
+                
+                start_time = time.time()
+                
+                # Log function call
+                self.log_function_call(
+                    component=comp_name,
+                    function_name=func.__name__,
+                    args={f"arg_{i}": type(arg).__name__ for i, arg in enumerate(args)},
+                    kwargs={k: type(v).__name__ for k, v in kwargs.items()}
+                )
+                
+                try:
+                    # Execute function
+                    result = func(*args, **kwargs)
+                    
+                    # Log successful return
+                    duration = time.time() - start_time
+                    self.log_function_return(
+                        component=comp_name,
+                        function_name=func.__name__,
+                        result=result,
+                        duration=duration
+                    )
+                    
+                    return result
+                    
+                except Exception as e:
+                    # Log exception
+                    duration = time.time() - start_time
+                    trace_entry = {
+                        "timestamp": self._get_timestamp(),
+                        "session_id": self.session_id,
+                        "event_type": "function_exception",
+                        "component": comp_name,
+                        "function": func.__name__,
+                        "exception_type": type(e).__name__,
+                        "exception_message": str(e),
+                        "duration_seconds": duration
+                    }
+                    
+                    self._append_to_log(self.trace_log, trace_entry)
+                    print(f"🔍 TRACE: {comp_name}.{func.__name__}() raised {type(e).__name__}: {e}")
+                    
+                    raise
+            
+            return wrapper
+        return decorator
 
 
 def create_audit_logger(security_boundary: ExperimentSecurityBoundary, run_folder: Path) -> AuditLogger:
