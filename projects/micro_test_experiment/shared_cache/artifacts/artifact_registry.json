@@ -158,6 +158,18 @@
     "size_bytes": 625,
     "source_run": "20250916T012957Z"
   },
+  "7215f56329c96e6b77b5256762ee55d023d5505e1950d4dd313272d5dda671b1": {
+    "artifact_path": "cache_test_7215f563",
+    "created_at": "2025-09-16T01:54:28.109438+00:00",
+    "human_filename": "cache_test_7215f563",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "cache_test",
+      "test_key": "cache_test_key"
+    },
+    "size_bytes": 65,
+    "source_run": "20250916T015428Z"
+  },
   "752bb60e5bb1c1b44f3ca265a8696c7733a50272d26507c02b8b862028f68403": {
     "artifact_path": "marked_up_document_752bb60e",
     "created_at": "2025-09-16T01:31:47.789993+00:00",
@@ -364,6 +376,18 @@
     },
     "size_bytes": 65,
     "source_run": "20250916T013411Z"
+  },
+  "d4d37b7d37103af4b1504cd53f3bab38192aadeca5670d78eeb9773e79e71aeb": {
+    "artifact_path": "cache_test_d4d37b7d",
+    "created_at": "2025-09-16T01:53:52.822741+00:00",
+    "human_filename": "cache_test_d4d37b7d",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "cache_test",
+      "test_key": "cache_test_key"
+    },
+    "size_bytes": 65,
+    "source_run": "20250916T015352Z"
   },
   "ee4dfbcf58fa27d2f31745d0435b7a4d3c662ac96719c25c4cd0fd0d52dd5a01": {
     "artifact_path": "score_extraction_ee4dfbcf",

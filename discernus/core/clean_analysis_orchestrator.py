@@ -4018,7 +4018,9 @@ class CleanAnalysisOrchestrator:
             # Don't fail the entire resume for this
 
     # REMOVED: _create_evidence_artifacts_from_analysis() - DEPRECATED
-    # Evidence artifacts now handled by EvidenceRetrieverAgent    def _create_provenance_organization(self, run_id: str, audit_logger: AuditLogger) -> None:
+    # Evidence artifacts now handled by EvidenceRetrieverAgent
+    
+    def _create_provenance_organization(self, run_id: str, audit_logger: AuditLogger) -> None:
         """Create provenance organization for the run."""
         try:
             self._log_progress("📊 Creating provenance organization...")
