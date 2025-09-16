@@ -1266,420 +1266,53 @@ class CleanAnalysisOrchestrator:
     # No extraction needed - just pass artifact hashes to next phase
     
     def _run_statistical_analysis_phase(self, model: str, audit_logger: AuditLogger, analysis_results: List[Dict[str, Any]], derived_metrics_results: Dict[str, Any]) -> Dict[str, Any]:
-        """Run statistical analysis phase using THIN v2.0 StatisticalAgent with LLM internal execution."""
-        self._log_progress("📊 Running statistical analysis phase...")
+        """THIN approach: Pass analysis artifact hashes to StatisticalAgent, let it do the work."""
+        self._log_progress("📊 THIN: Delegating statistical analysis to StatisticalAgent...")
         
         try:
-            # Load framework and experiment content
-            framework_path = self.experiment_path / self.config['framework']
-            experiment_path = self.experiment_path / "experiment.md"
+            # Collect analysis artifact hashes
+            analysis_artifact_hashes = []
+            for result in analysis_results:
+                if "scores_hash" in result:
+                    analysis_artifact_hashes.append(result["scores_hash"])
+                if "evidence_hash" in result:
+                    analysis_artifact_hashes.append(result["evidence_hash"])
+                if "derived_metrics_hash" in result:
+                    analysis_artifact_hashes.append(result["derived_metrics_hash"])
             
-            # THIN ARCHITECTURE: No temp workspace needed - pass data directly to StatisticalAgent
+            if not analysis_artifact_hashes:
+                self._log_progress("⚠️ No analysis artifacts found to process")
+                return {"status": "no_artifacts_found", "message": "No analysis artifacts available for statistical processing"}
             
-            # Load framework, experiment, and corpus content for StatisticalAgent
-            framework_content = framework_path.read_text(encoding='utf-8')
-            experiment_content = experiment_path.read_text(encoding='utf-8')
-            corpus_path = self.experiment_path / self.config['corpus']
-            corpus_content = corpus_path.read_text(encoding='utf-8')
-            
-            # THIN ARCHITECTURE: StatisticalAgent handles its own caching
-            # No orchestrator-level function caching needed
-            
-            # Initialize THIN v2.0 statistical analysis agent
-            stats_agent = StatisticalAgent(
-                security=self.security,
-                storage=self.artifact_storage,
-                audit=audit_logger,
-                experiment_metadata=self.config
+            # Initialize StatisticalAgent
+            statistical_agent = StatisticalAgent(
+                security_boundary=self.security,
+                audit_logger=audit_logger,
+                artifact_storage=self.artifact_storage,
+                model=model
             )
             
-            # Generate and execute statistical analysis using THIN v2.0 approach
-            self._log_progress("🔧 Running THIN statistical analysis (raw artifacts → LLM → CSV)...")
-            
-            # Create batch ID for this statistical analysis run
-            batch_id = f"stats_{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}"
-            
-            # Run statistical analysis using THIN v2.0 agent
-            functions_result = stats_agent.analyze_batch(
-                framework_content=framework_content,
-                experiment_content=experiment_content,
-                corpus_manifest=corpus_content,
-                batch_id=batch_id
+            # Let StatisticalAgent read analysis artifacts and produce statistical results
+            self._log_progress(f"📊 StatisticalAgent processing {len(analysis_artifact_hashes)} analysis artifacts...")
+            statistical_results = statistical_agent.process_analysis_artifacts(
+                analysis_artifact_hashes=analysis_artifact_hashes,
+                framework_context=self.config.get("framework_config", {})
             )
             
-            # Check if result came from cache
-            was_cached = functions_result.get("cached", False)
-            if was_cached:
-                self.performance_metrics["cache_hits"] += 1
-                self._log_progress(f"💾 Cache hit for statistical analysis: {batch_id}")
-            else:
-                self.performance_metrics["cache_misses"] += 1
-            
-            # Extract results from StatisticalAgent output
-            if functions_result and isinstance(functions_result, dict):
-                verification_status = functions_result.get("verification", {}).get("verification_status", "unknown")
-                csv_files = functions_result.get("csv_generation", {}).get("csv_files", [])
-                if 'statistical_analysis' in functions_result:
-                    statistical_analysis = functions_result.get("statistical_analysis", {})
-                    statistical_results = {
-                        "statistical_functions_and_results": statistical_analysis.get("statistical_functions_and_results", ""),
-                        "verification_status": verification_status,
-                        "csv_files": csv_files,
-                        "total_cost": functions_result.get("total_cost_info", {}).get("total_cost_usd", 0.0)
-                    }
-                else:
-                    statistical_analysis = functions_result.get("statistical_analysis", {})
-                    statistical_results = {
-                        "statistical_functions_and_results": statistical_analysis.get("statistical_functions_and_results", ""),
-                        "verification_status": verification_status,
-                        "csv_files": csv_files,
-                        "total_cost": functions_result.get("total_cost_info", {}).get("total_cost_usd", 0.0)
-                    }
-            else:
-                error_msg = str(functions_result)
-                self._log_progress(f"❌ THIN statistical analysis failed: {error_msg}")
-                statistical_results = {"agent_error": error_msg}
-            
-            # No need to execute functions separately - the new agent does it all internally
-            self._log_progress("🔢 Statistical analysis completed via THIN v2.0 (raw artifacts → LLM → results)")
-            
-            # THIN ARCHITECTURE: Trust the StatisticalAgent output - no validation needed
-            self._log_progress(f"📊 Statistical analysis completed - trusting StatisticalAgent output")
-            self._log_progress(f"📊 Results keys: {list(statistical_results.keys())}")
-            
-            # Log basic info for debugging but don't validate content
-            if 'statistical_functions_and_results' in statistical_results:
-                self._log_progress("📊 Statistical functions and results generated")
-            if 'verification_status' in statistical_results:
-                self._log_progress(f"📊 Verification status: {statistical_results['verification_status']}")
-            if 'csv_files' in statistical_results:
-                self._log_progress(f"📊 CSV files generated: {len(statistical_results['csv_files'])}")
-            
-            try:
-                # Store individual artifacts that synthesis expects
-                
-                # 1. Store raw analysis data (from analysis_results)
-                raw_analysis_data = []
-                for result in analysis_results:
-                    if 'analysis_result' in result:
-                        raw_analysis_data.append(result['analysis_result'])
-                
-                raw_analysis_data_hash = self.artifact_storage.put_artifact(
-                    json.dumps(raw_analysis_data, indent=2, default=str).encode('utf-8'),
-                    {"artifact_type": "raw_analysis_data"}
-                )
-                
-                # 2. Store derived metrics data
-                derived_metrics_data_hash = self.artifact_storage.put_artifact(
-                    json.dumps(derived_metrics_results, indent=2, default=str).encode('utf-8'),
-                    {"artifact_type": "derived_metrics_data"}
-                )
-                
-                # 3. Store complete statistical results
-                complete_statistical_result = {
-                    "generation_metadata": functions_result,
-                    "statistical_data": statistical_results,
-                    "status": "success_with_data",
-                    "validation_passed": True
-                }
-                
-                # Convert numpy objects to regular Python types for safe repr() serialization
-                def convert_numpy_types(obj):
-                    """Recursively convert numpy types to regular Python types"""
-                    if hasattr(obj, 'item'):  # numpy scalar types
-                        return obj.item()
-                    elif hasattr(obj, 'tolist'):  # numpy arrays
-                        return obj.tolist()
-                    elif isinstance(obj, dict):
-                        return {k: convert_numpy_types(v) for k, v in obj.items()}
-                    elif isinstance(obj, list):
-                        return [convert_numpy_types(item) for item in obj]
-                    elif isinstance(obj, tuple):
-                        return tuple(convert_numpy_types(item) for item in obj)
-                    elif str(obj) == 'nan':  # Handle nan strings
-                        return float('nan')
-                    else:
-                        return obj
-                
-                def safe_repr(obj):
-                    try:
-                        # First convert numpy types, then use repr
-                        converted_obj = convert_numpy_types(obj)
-                        return repr(converted_obj)
-                    except:
-                        return str(obj)
-                
-                statistical_hash = self.artifact_storage.put_artifact(
-                    safe_repr(complete_statistical_result).encode('utf-8'),
-                    {"artifact_type": "statistical_results_with_data"}
-                )
-                
-                self._log_progress(f"✅ Statistical analysis phase completed")
-                
+            if statistical_results.get("success"):
+                self._log_progress("✅ StatisticalAgent completed successfully")
                 return {
                     "status": "completed",
-                    "stats_hash": statistical_hash,
-                    "raw_analysis_data_hash": raw_analysis_data_hash,
-                    "derived_metrics_data_hash": derived_metrics_data_hash,
-                    "functions_generated": functions_result.get('functions_generated', 0),
-                    "statistical_summary": complete_statistical_result
-                }
-                
-            except Exception as e:
-                self._log_progress(f"❌ Statistical analysis phase failed: {str(e)}")
-                raise CleanAnalysisError(f"Statistical analysis phase failed: {str(e)}")
-        
-        except Exception as e:
-            import traceback
-            self._log_progress(f"❌ Statistical analysis phase failed: {str(e)}")
-            self._log_progress(f"❌ Full traceback: {traceback.format_exc()}")
-            raise CleanAnalysisError(f"Statistical analysis phase failed: {str(e)}")
-    
-    def _execute_statistical_analysis_functions(self, workspace_path: Path, audit_logger: AuditLogger, analysis_results: List[Dict[str, Any]]) -> Dict[str, Any]:
-        """Execute the generated statistical analysis functions on the data."""
-        import sys
-        import importlib.util
-        
-        # Load the generated statistical analysis functions module
-        functions_file = workspace_path / "automatedstatisticalanalysisagent_functions.py"
-        if not functions_file.exists():
-            raise CleanAnalysisError("Statistical analysis functions file not found")
-        
-        self._log_progress(f"🔍 Statistical functions file exists: {functions_file}")
-        self._log_progress(f"🔍 File size: {functions_file.stat().st_size} bytes")
-        
-        # Import the generated module
-        try:
-            spec = importlib.util.spec_from_file_location("statistical_analysis_functions", functions_file)
-            stats_module = importlib.util.module_from_spec(spec)
-            spec.loader.exec_module(stats_module)
-            self._log_progress(f"🔍 Successfully imported statistical analysis module")
-            self._log_progress(f"🔍 Module functions: {[name for name in dir(stats_module) if not name.startswith('_')]}")
-        except Exception as e:
-            self._log_progress(f"❌ Failed to import statistical analysis functions: {e}")
-            raise CleanAnalysisError(f"Failed to import statistical analysis functions: {e}")
-        
-        # Convert analysis results to DataFrame format expected by statistical functions
-        analysis_data = self._convert_analysis_to_dataframe(analysis_results)
-        
-        # Execute statistical analysis
-        try:
-            self._log_progress(f"🔍 Checking for perform_statistical_analysis function...")
-            if hasattr(stats_module, 'perform_statistical_analysis'):
-                self._log_progress(f"🔍 Found perform_statistical_analysis function, executing...")
-                # The generated function now expects a data parameter
-                statistical_results = stats_module.perform_statistical_analysis(analysis_data)
-                self._log_progress(f"🔍 Statistical analysis completed successfully")
-                self._log_progress(f"🔍 Results type: {type(statistical_results)}")
-                self._log_progress(f"🔍 Results keys: {list(statistical_results.keys()) if isinstance(statistical_results, dict) else 'Not a dict'}")
-                
-                return {
-                    "status": "success",
-                    "statistical_results": statistical_results
+                    "statistical_results_hash": statistical_results.get("results_hash"),
+                    "csv_artifacts": statistical_results.get("csv_artifacts", []),
+                    "metadata": statistical_results.get("metadata", {})
                 }
             else:
-                self._log_progress(f"❌ Generated module missing 'perform_statistical_analysis' function")
-                raise CleanAnalysisError("Generated module missing 'perform_statistical_analysis' function")
+                raise CleanAnalysisError(f"StatisticalAgent failed: {statistical_results.get("error")}")
                 
         except Exception as e:
-            self._log_progress(f"❌ Failed to execute statistical analysis functions: {e}")
-            import traceback
-            self._log_progress(f"❌ Full traceback: {traceback.format_exc()}")
-            raise CleanAnalysisError(f"Failed to execute statistical analysis functions: {e}")
-    
-    def _prepare_documents_for_analysis(self, corpus_documents: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        """Prepare corpus documents for analysis by loading content and adding document_id."""
-        prepared_docs = []
-        corpus_dir = self.experiment_path / "corpus"
-        
-        for doc_info in corpus_documents:
-            filename = doc_info.get('filename')
-            if not filename:
-                continue
-            
-            source_file = self._find_corpus_file(corpus_dir, filename)
-            if not source_file or not source_file.exists():
-                self._log_progress(f"⚠️ Skipping missing file for analysis: {filename}")
-                continue
-            
-            document_content = source_file.read_text(encoding='utf-8')
-            
-            # Add document_id if not present (assuming filename is unique enough)
-            # For now, we'll use a simple hash of the filename
-            doc_id = f"doc_{hash(filename)}"
-            
-            prepared_docs.append({
-                'filename': filename,
-                'content': document_content,
-                'document_id': doc_id,
-                'metadata': doc_info.get('metadata', {})
-            })
-        
-        return prepared_docs
-    
-    # REMOVED: Duplicate _run_statistical_analysis method that was causing workspace path confusion
-    
-    def _execute_statistical_functions(self, workspace_path: Path, audit_logger: AuditLogger, analysis_results: List[Dict[str, Any]]) -> Dict[str, Any]:
-        """Execute the generated statistical functions on analysis data."""
-        import pandas as pd
-        import numpy as np
-        import sys
-        import importlib.util
-        import os
-        
-        try:
-            # Load the generated statistical functions module
-            functions_file = workspace_path / "automatedstatisticalanalysisagent_functions.py"
-            print(f"🔍 DEBUG: Looking for functions file at: {functions_file}")
-            print(f"🔍 DEBUG: File exists: {functions_file.exists()}")
-            
-            if functions_file.exists():
-                print(f"🔍 DEBUG: File size: {functions_file.stat().st_size} bytes")
-                print(f"🔍 DEBUG: First 200 chars of file:")
-                print(repr(functions_file.read_text(encoding='utf-8')[:200]))
-            
-            if not functions_file.exists():
-                raise CleanAnalysisError(f"Statistical functions file not found at {functions_file}")
-            
-            # Import the generated module
-            spec = importlib.util.spec_from_file_location("statistical_functions", functions_file)
-            stats_module = importlib.util.module_from_spec(spec)
-            spec.loader.exec_module(stats_module)
-            print(f"🔍 DEBUG: Module loaded successfully")
-            print(f"🔍 DEBUG: Module dir() = {[name for name in dir(stats_module) if not name.startswith('__')]}")
-            
-            # Convert analysis results to DataFrame format expected by statistical functions
-            analysis_data = self._convert_analysis_to_dataframe(analysis_results)
-            
-            # Execute each statistical function and collect results
-            statistical_outputs = {}
-            
-            # Get all functions from the module that don't start with underscore and aren't type annotations
-            type_annotations = {'Any', 'Dict', 'List', 'Optional', 'Tuple', 'Union', 'Callable', 'TypeVar', 'Generic'}
-            function_names = [name for name in dir(stats_module) 
-                             if not name.startswith('_') 
-                             and callable(getattr(stats_module, name))
-                             and name not in type_annotations]
-            
-            self._log_progress(f"🔢 Found {len(function_names)} statistical functions: {function_names}")
-            self._log_progress(f"🔍 Analysis data shape: {analysis_data.shape if hasattr(analysis_data, 'shape') else 'No shape'}")
-            self._log_progress(f"🔍 Analysis data columns: {list(analysis_data.columns) if hasattr(analysis_data, 'columns') else 'No columns'}")
-            
-            if len(function_names) == 0:
-                self._log_progress("⚠️ No statistical functions found in module!")
-                return {"error": "No statistical functions found", "status": "failed"}
-            
-            self._log_progress(f"🔢 Executing {len(function_names)} statistical functions...")
-            
-            for func_name in function_names:
-                try:
-                    func = getattr(stats_module, func_name)
-                    self._log_progress(f"  📊 Running {func_name}...")
-                    
-                    # Execute the function with the analysis data
-                    result = func(analysis_data)
-                    
-                    # Store result with THIN approach - handle DataFrames specially
-                    if hasattr(result, 'to_dict'):  # pandas DataFrame
-                        statistical_outputs[func_name] = {
-                            "type": "dataframe",
-                            "data": result.to_dict('records'),
-                            "columns": list(result.columns),
-                            "index": list(result.index),
-                            "shape": result.shape
-                        }
-                    elif isinstance(result, dict):
-                        # Handle nested DataFrames in dictionary results
-                        serialized_result = {}
-                        for key, value in result.items():
-                            if hasattr(value, 'to_dict'):  # pandas DataFrame
-                                serialized_result[key] = {
-                                    "type": "dataframe", 
-                                    "data": value.to_dict('records'),
-                                    "columns": list(value.columns),
-                                    "index": list(value.index),
-                                    "shape": value.shape
-                                }
-                            else:
-                                serialized_result[key] = value
-                        statistical_outputs[func_name] = serialized_result
-                    else:
-                        # Store simple objects directly
-                        statistical_outputs[func_name] = result
-                    
-                    self._log_progress(f"  ✅ {func_name} completed")
-                    
-                except Exception as e:
-                    self._log_progress(f"  ⚠️ {func_name} failed: {str(e)}")
-                    statistical_outputs[func_name] = {"error": str(e), "status": "failed"}
-        
-            return statistical_outputs
-        
-        except Exception as e:
-            self._log_progress(f"❌ Statistical execution failed: {str(e)}")
-            raise CleanAnalysisError(f"Failed to execute statistical functions: {str(e)}")
-    
-    def _convert_analysis_to_dataframe(self, analysis_results: List[Dict[str, Any]]) -> pd.DataFrame:
-        """Convert individual analysis results to pandas DataFrame for statistical functions."""
-        import pandas as pd
-        import json
-        
-        if not analysis_results or len(analysis_results) == 0:
-            raise CleanAnalysisError("No analysis results to convert")
-        
-        self._log_progress(f"🔍 Converting {len(analysis_results)} individual analysis results to DataFrame...")
-        
-        # Aggregate document analyses from all individual results
-        all_rows = []
-        
-        for i, analysis_result in enumerate(analysis_results):
-            # Each analysis_result is now an individual document analysis
-            raw_response = analysis_result.get('raw_analysis_response', '')
-            
-            if not raw_response:
-                self._log_progress(f"⚠️ Skipping analysis result {i+1} - no raw response")
-                continue
-            
-            # Extract JSON from the delimited response
-            start_marker = '<<<DISCERNUS_ANALYSIS_JSON_v6>>>'
-            end_marker = '<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
-            
-            start_idx = raw_response.find(start_marker)
-            end_idx = raw_response.find(end_marker)
-            
-            if start_idx == -1 or end_idx == -1:
-                self._log_progress(f"⚠️ Skipping analysis result {i+1} - no JSON markers found")
-                continue
-            
-            json_content = raw_response[start_idx + len(start_marker):end_idx].strip()
-            
-            try:
-                analysis_data = json.loads(json_content)
-            except json.JSONDecodeError as e:
-                self._log_progress(f"⚠️ Skipping analysis result {i+1} - JSON parsing failed: {str(e)}")
-                continue
-            
-            # Process document analyses from this individual result
-            for doc_analysis in analysis_data.get('document_analyses', []):
-                row = {'document_name': doc_analysis.get('document_name', '')}
-                
-                # Add dimensional scores (both raw_score and salience)
-                for dimension, scores in doc_analysis.get('dimensional_scores', {}).items():
-                    row[f"{dimension}_raw"] = scores.get('raw_score', 0.0)
-                    row[f"{dimension}_salience"] = scores.get('salience', 0.0)
-                    row[f"{dimension}_confidence"] = scores.get('confidence', 0.0)
-                
-                all_rows.append(row)
-        
-        if not all_rows:
-            raise CleanAnalysisError("No valid document analyses found in individual results")
-        
-        df = pd.DataFrame(all_rows)
-        self._log_progress(f"📊 Converted individual analysis to DataFrame: {len(df)} documents, {len(df.columns)} features")
-        
-        return df
-    
-    # REMOVED: _validate_statistical_results - THIN architecture trusts agent output
+            self._log_progress(f"❌ Statistical analysis phase failed: {str(e)}")
+            raise CleanAnalysisError(f"Statistical analysis failed: {str(e)}")
     
     def _validate_assets(self, statistical_results: Dict[str, Any]) -> None:
         """Simple validation that basic files exist. Let the synthesis LLM handle data quality assessment."""
