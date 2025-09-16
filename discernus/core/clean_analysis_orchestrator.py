@@ -1521,108 +1521,41 @@ class CleanAnalysisOrchestrator:
             self.performance_metrics["cache_misses"] += 1
 
     def _run_evidence_retrieval_phase(self, model: str, audit_logger: AuditLogger, statistical_results: Dict[str, Any], run_id: str = None) -> Dict[str, Any]:
-        """Run evidence retrieval phase using EvidenceRetrieverAgent to curate supporting quotes."""
-        self._log_progress("🔍 Starting evidence retrieval phase...")
+        """THIN: Simple evidence retrieval - let agent handle all preparation."""
+        self._log_progress("🔍 THIN: Delegating evidence retrieval to self-sufficient agent...")
         
         try:
-            # Find framework specification artifact
-            framework_hash = None
-            if hasattr(self.artifact_storage, 'registry') and self.artifact_storage.registry:
-                for artifact_hash, artifact_info in self.artifact_storage.registry.items():
-                    metadata = artifact_info.get("metadata", {})
-                    if metadata.get("artifact_type") == "framework_specification":
-                        framework_hash = artifact_hash
-                        break
+            # Collect analysis artifact hashes from current session
+            analysis_artifact_hashes = []
+            for result in getattr(self, '_analysis_results', []):
+                if 'scores_hash' in result:
+                    analysis_artifact_hashes.append(result['scores_hash'])
+                if 'evidence_hash' in result:
+                    analysis_artifact_hashes.append(result['evidence_hash'])
             
-            if not framework_hash:
-                # Create framework specification from framework file
-                framework_path = self.experiment_path / self.config['framework']
-                if framework_path.exists():
-                    framework_content = framework_path.read_text(encoding='utf-8')
-                    framework_spec = {
-                        "name": self.config.get('framework', 'Unknown Framework'),
-                        "content": framework_content,
-                        "source_file": str(framework_path)
-                    }
-                    framework_content_json = json.dumps(framework_spec, indent=2).encode('utf-8')
-                    framework_hash = self.artifact_storage.put_artifact(
-                        framework_content_json,
-                        {"artifact_type": "framework_specification", "agent": "orchestrator"}
-                    )
-                    self._log_progress(f"✅ Created framework specification artifact: {framework_hash}")
-                else:
-                    raise CleanAnalysisError(f"Framework file not found: {framework_path}")
+            # Get statistical results hash from StatisticalAgent output
+            statistical_results_hash = statistical_results.get('statistical_results_hash') if statistical_results else None
             
-            # Find statistical results artifact
-            statistical_results_hash = None
-            if hasattr(self.artifact_storage, 'registry') and self.artifact_storage.registry:
-                for artifact_hash, artifact_info in self.artifact_storage.registry.items():
-                    metadata = artifact_info.get("metadata", {})
-                    if metadata.get("artifact_type") == "statistical_results_with_data":
-                        statistical_results_hash = artifact_hash
-                        break
+            # Framework path
+            framework_path = self.experiment_path / self.config['framework']
             
-            if not statistical_results_hash:
-                # Store current statistical results - convert tuple keys to strings for JSON serialization
-                def convert_tuple_keys_for_json(obj):
-                    """Convert tuple keys to strings for safe JSON serialization."""
-                    if isinstance(obj, dict):
-                        converted = {}
-                        for k, v in obj.items():
-                            if isinstance(k, tuple):
-                                converted_key = str(k)
-                            else:
-                                converted_key = k
-                            converted[converted_key] = convert_tuple_keys_for_json(v)
-                        return converted
-                    elif isinstance(obj, list):
-                        return [convert_tuple_keys_for_json(item) for item in obj]
-                    elif isinstance(obj, tuple):
-                        return tuple(convert_tuple_keys_for_json(item) for item in obj)
-                    else:
-                        return obj
-                
-                safe_statistical_results = convert_tuple_keys_for_json(statistical_results)
-                statistical_content = json.dumps(safe_statistical_results, indent=2).encode('utf-8')
-                statistical_results_hash = self.artifact_storage.put_artifact(
-                    statistical_content,
-                    {"artifact_type": "statistical_results_with_data", "agent": "orchestrator"}
-                )
-                self._log_progress(f"✅ Created statistical results artifact: {statistical_results_hash}")
-            
-            # Collect evidence artifact hashes
-            evidence_artifact_hashes = []
-            if hasattr(self.artifact_storage, 'registry') and self.artifact_storage.registry:
-                for artifact_hash, artifact_info in self.artifact_storage.registry.items():
-                    metadata = artifact_info.get("metadata", {})
-                    # Look for evidence artifacts by type or by name pattern
-                    artifact_type = metadata.get("artifact_type", "")
-                    if (artifact_type.startswith("evidence_v6") or 
-                        artifact_type.startswith("evidence_extraction") or
-                        artifact_hash.startswith("evidence_extraction_")):
-                        evidence_artifact_hashes.append(artifact_hash)
-            
-            if not evidence_artifact_hashes:
-                self._log_progress("⚠️ No evidence artifacts found - evidence retrieval will be limited")
-                return {"status": "no_evidence_available", "message": "No evidence artifacts found"}
-            
-            # Initialize EvidenceRetrieverAgent with shared infrastructure
+            # Initialize self-sufficient EvidenceRetrieverAgent
             agent_config = {
                 'experiment_path': str(self.experiment_path),
                 'run_id': run_id or datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ"),
-                'artifact_storage': self.artifact_storage,  # Share the same artifact storage instance
-                'security_boundary': self.security,  # Share the same security boundary instance
-                'model': model  # Pass the synthesis model for evidence retrieval
+                'artifact_storage': self.artifact_storage,
+                'security_boundary': self.security,
+                'model': model
             }
             
             evidence_agent = EvidenceRetrieverAgent(agent_config)
             
-            # Run evidence retrieval
-            self._log_progress("🔍 Running evidence retrieval agent...")
+            # THIN: Let agent handle all preparation internally
+            self._log_progress("🔍 Running self-sufficient evidence retrieval agent...")
             evidence_results = evidence_agent.run(
-                framework_hash=framework_hash,
-                statistical_results=statistical_results,  # Pass parsed results directly
-                evidence_artifact_hashes=evidence_artifact_hashes
+                analysis_artifact_hashes=analysis_artifact_hashes,
+                statistical_results_hash=statistical_results_hash,
+                framework_path=framework_path
             )
             
             self._log_progress(f"✅ Evidence retrieval completed: {evidence_results.get('evidence_quotes_found', 0)} quotes found")
