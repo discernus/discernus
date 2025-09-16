@@ -218,4 +218,150 @@ Use LLM calls instead. The software orchestrates, the LLM provides intelligence.
 - **NEVER use `read_file` + `edit_file`** for inbox operations - this defeats context efficiency
 - **Append Format**: Add new items under "## Inbox Items" section with simple bullet format
 - **Example Format**: "- [ ] Brief description of the item"
-- **File Size Limit**: If inbox.md exceeds 50 lines, suggest grooming instead of adding more items 
+- **File Size Limit**: If inbox.md exceeds 50 lines, suggest grooming instead of adding more items
+
+# 🔍 DEBUGGING RULES - MANDATORY USE OF VERBOSE TRACING SYSTEM
+
+## 🚨 CRITICAL: NO MORE AD-HOC DEBUG LOGGING
+
+### FORBIDDEN DEBUGGING PATTERNS - NEVER DO THESE:
+- **NEVER add `print(f"DEBUG: ...")` statements** - Use verbose tracing instead
+- **NEVER add manual debug logging** like "Let me add some debug logging to see what's happening"
+- **NEVER add temporary debug prints** that need to be cleaned up later
+- **NEVER say "The logs show that X was set to true, but there's no evidence of Y running"** - Use tracing instead
+- **NEVER add debug statements to trace execution flow** - Use `--verbose-trace` flag
+- **NEVER add manual logging to understand component calls** - Use built-in tracing system
+
+### ✅ REQUIRED DEBUGGING PATTERNS - ALWAYS DO THESE:
+
+#### 1. USE VERBOSE TRACING FOR ALL DEBUGGING
+```bash
+# ALWAYS use this for debugging:
+discernus run <experiment> --verbose-trace
+
+# NEVER add manual debug prints - use the built-in system
+```
+
+#### 2. EXAMINE TRACE LOGS SYSTEMATICALLY
+```bash
+# Check trace logs for function calls and returns:
+cat projects/<experiment>/session/<timestamp>/logs/trace.jsonl
+
+# Check agent logs for detailed execution:
+cat projects/<experiment>/session/<timestamp>/logs/agents.jsonl
+
+# Check orchestrator logs for workflow:
+cat projects/<experiment>/session/<timestamp>/logs/orchestrator.jsonl
+```
+
+#### 3. USE TRACE LOGS TO IDENTIFY ISSUES
+- **Function Call Tracing**: See exactly which functions are called and from where
+- **Parameter Tracing**: See what parameters are passed to each function
+- **Return Value Tracing**: See what each function returns and its type
+- **Performance Tracing**: See execution timing for each function
+- **Exception Tracing**: See exactly where and why exceptions occur
+
+#### 4. STRATEGIC TRACING ADDITIONS
+- **Add tracing to key orchestrator methods** using `audit_logger.log_function_call()`
+- **Add tracing to agent interfaces** using `audit_logger.log_function_return()`
+- **Use `@audit_logger.trace_calls()` decorator** for automatic tracing
+- **Trace artifact flows** between components for debugging data issues
+
+## 🎯 DEBUGGING WORKFLOW - MANDATORY SEQUENCE
+
+### Step 1: Enable Verbose Tracing
+```bash
+discernus run <experiment> --verbose-trace
+```
+
+### Step 2: Examine Trace Logs
+```bash
+# Check what functions were called and when:
+cat projects/<experiment>/session/<timestamp>/logs/trace.jsonl | jq '.event_type, .component, .function'
+
+# Check specific component execution:
+cat projects/<experiment>/session/<timestamp>/logs/trace.jsonl | jq 'select(.component == "StatisticalAgent")'
+```
+
+### Step 3: Analyze Agent Logs
+```bash
+# Check detailed agent execution:
+cat projects/<experiment>/session/<timestamp>/logs/agents.jsonl | jq '.agent_name, .event_type, .data'
+```
+
+### Step 4: Identify Root Cause
+- **Use trace logs to see exact call stack**
+- **Use agent logs to see detailed execution steps**
+- **Use orchestrator logs to see workflow progression**
+- **Never guess - always trace the actual execution**
+
+### Step 5: Fix Based on Evidence
+- **Fix the actual issue identified in trace logs**
+- **Don't add debug prints - fix the root cause**
+- **Use trace logs to verify the fix works**
+
+## 🚫 ANTI-PATTERNS - NEVER DO THESE
+
+### BAD DEBUGGING APPROACH:
+```
+"The logs show that statistical_prep_completed was set to true, but there's no evidence of the StatisticalAgent actually running. Let me check if there's an issue with the _run_statistical_analysis_phase method. Let me add some debug logging to see what's happening."
+```
+
+### GOOD DEBUGGING APPROACH:
+```
+"Let me run with --verbose-trace to see exactly what's happening with the StatisticalAgent call. I'll examine the trace logs to see if the function is being called and what it returns."
+```
+
+## ✅ SUCCESS PATTERNS
+
+### When Debugging Issues:
+1. **ALWAYS start with `--verbose-trace`**
+2. **ALWAYS examine trace.jsonl first**
+3. **ALWAYS check agents.jsonl for detailed execution**
+4. **ALWAYS use trace logs to identify root cause**
+5. **NEVER add manual debug prints**
+
+### When Adding New Tracing:
+1. **Add strategic tracing to key methods**
+2. **Use `audit_logger.log_function_call()` and `log_function_return()`**
+3. **Use `@audit_logger.trace_calls()` decorator for automatic tracing**
+4. **Trace artifact flows between components**
+
+## 🎯 DEBUGGING VELOCITY RULES
+
+### MANDATORY DEBUGGING SEQUENCE:
+1. **Run with `--verbose-trace`** (30 seconds)
+2. **Examine trace logs** (2 minutes)
+3. **Identify root cause from evidence** (5 minutes)
+4. **Fix based on trace data** (10 minutes)
+5. **Verify fix with trace logs** (2 minutes)
+
+### TOTAL DEBUGGING TIME: ~20 minutes vs. hours of manual debugging
+
+### NEVER SPEND TIME ON:
+- Adding manual debug prints
+- Guessing what's happening
+- Adding temporary logging
+- Manual execution tracing
+- Ad-hoc debugging approaches
+
+### ALWAYS SPEND TIME ON:
+- Using verbose tracing system
+- Analyzing trace log evidence
+- Fixing root causes identified in traces
+- Adding strategic tracing to key methods
+- Using trace logs to verify fixes
+
+## 🚨 ENFORCEMENT RULES
+
+### If You Catch Yourself About To:
+- Add `print(f"DEBUG: ...")` → **STOP** and use `--verbose-trace` instead
+- Add manual debug logging → **STOP** and examine trace logs instead
+- Guess what's happening → **STOP** and trace the actual execution instead
+- Add temporary debug prints → **STOP** and use the built-in tracing system instead
+
+### Remember:
+- **Verbose tracing system exists and works perfectly**
+- **Trace logs contain all the information you need**
+- **Manual debug prints are unnecessary and counterproductive**
+- **Use the system that was built for this purpose** 
