@@ -1284,19 +1284,29 @@ class CleanAnalysisOrchestrator:
                 self._log_progress("⚠️ No analysis artifacts found to process")
                 return {"status": "no_artifacts_found", "message": "No analysis artifacts available for statistical processing"}
             
-            # Initialize StatisticalAgent
+            # Initialize StatisticalAgent with correct interface
             statistical_agent = StatisticalAgent(
-                security_boundary=self.security,
-                audit_logger=audit_logger,
-                artifact_storage=self.artifact_storage,
-                model=model
+                security=self.security,
+                storage=self.artifact_storage,
+                audit=audit_logger,
+                experiment_metadata=self.config
             )
             
-            # Let StatisticalAgent read analysis artifacts and produce statistical results
-            self._log_progress(f"📊 StatisticalAgent processing {len(analysis_artifact_hashes)} analysis artifacts...")
-            statistical_results = statistical_agent.process_analysis_artifacts(
-                analysis_artifact_hashes=analysis_artifact_hashes,
-                framework_context=self.config.get("framework_config", {})
+            # Let StatisticalAgent analyze with content (not hashes)
+            framework_path = self.experiment_path / self.config['framework']
+            framework_content = framework_path.read_text(encoding='utf-8')
+            experiment_content = (self.experiment_path / "experiment.md").read_text(encoding='utf-8')
+            corpus_manifest_path = self.experiment_path / self.config['corpus']
+            corpus_manifest = corpus_manifest_path.read_text(encoding='utf-8')
+            
+            batch_id = f"stats_{datetime.now().strftime('%Y%m%dT%H%M%SZ')}"
+            
+            self._log_progress(f"📊 StatisticalAgent analyzing batch: {batch_id}")
+            statistical_results = statistical_agent.analyze_batch(
+                framework_content=framework_content,
+                experiment_content=experiment_content,
+                corpus_manifest=corpus_manifest,
+                batch_id=batch_id
             )
             
             if statistical_results.get("success"):
