@@ -409,13 +409,14 @@ Use the generate_csv_file tool for each CSV file. Ensure proper CSV formatting w
         self.audit.log_agent_event(self.agent_name, "step3_started", {
             "batch_id": batch_id,
             "step": "csv_generation",
-            "model": "vertex_ai/gemini-2.5-flash-lite",
+            "model": "vertex_ai/gemini-2.5-flash",
             "artifacts_count": len(analysis_artifacts)
         })
 
         start_time = datetime.now(timezone.utc)
+        # Use Flash model for CSV generation (more capable than Flash-Lite for large data)
         response_content, response_metadata = self.gateway.execute_call_with_tools(
-            model="vertex_ai/gemini-2.5-flash-lite",
+            model="vertex_ai/gemini-2.5-flash",
             prompt=prompt,
             tools=csv_tools
         )
@@ -424,7 +425,7 @@ Use the generate_csv_file tool for each CSV file. Ensure proper CSV formatting w
         
         # Extract cost information from response metadata
         csv_cost_info = {
-            "model": "vertex_ai/gemini-2.5-flash-lite",
+            "model": "vertex_ai/gemini-2.5-flash",
             "execution_time_seconds": execution_time,
             "prompt_length": len(prompt),
             "artifacts_processed": len(analysis_artifacts),
@@ -437,7 +438,12 @@ Use the generate_csv_file tool for each CSV file. Ensure proper CSV formatting w
         # Extract CSV generation results from metadata
         csv_files = []
         tool_calls = response_metadata.get('tool_calls', [])
-        if tool_calls:
+        
+        if not response_metadata.get('success', False):
+            self.logger.error(f"CSV generation failed: {response_metadata.get('error', 'Unknown error')}")
+        elif not tool_calls:
+            self.logger.warning(f"No tool calls made by Flash model for CSV generation. Response: {response_content[:200]}...")
+        else:
             for tool_call in tool_calls:
                 if hasattr(tool_call, 'function') and tool_call.function.name == "generate_csv_file":
                     try:
@@ -452,13 +458,16 @@ Use the generate_csv_file tool for each CSV file. Ensure proper CSV formatting w
                             "path": str(csv_path),
                             "size": len(csv_content)
                         })
+                        self.logger.info(f"Generated CSV file: {filename} ({len(csv_content)} chars)")
                     except (json.JSONDecodeError, Exception) as e:
                         self.logger.error(f"Error processing CSV generation: {e}")
+                else:
+                    self.logger.warning(f"Unexpected tool call: {tool_call.function.name if hasattr(tool_call, 'function') else 'unknown'}")
         
         csv_result = {
             "batch_id": batch_id,
             "step": "csv_generation",
-            "model_used": "vertex_ai/gemini-2.5-flash-lite",
+            "model_used": "vertex_ai/gemini-2.5-flash",
             "csv_files": csv_files,
             "cost_info": csv_cost_info,
             "timestamp": datetime.now(timezone.utc).isoformat()

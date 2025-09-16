@@ -1,9 +1,0 @@
-analysis_id,model_used,timestamp,filename,sentiment_dimension,raw_score,salience,confidence
-analysis_ee8e06ee,vertex_ai/gemini-2.5-flash-lite,2025-09-15T18:16:28.230022+00:00,negative_test_1.txt,positive_sentiment,0.0,0.0,1.0
-analysis_ee8e06ee,vertex_ai/gemini-2.5-flash-lite,2025-09-15T18:16:28.230022+00:00,negative_test_1.txt,negative_sentiment,0.9,1.0,1.0
-analysis_82819fbe,vertex_ai/gemini-2.5-flash-lite,2025-09-15T18:16:43.164555+00:00,N/A,positive_sentiment,0.0,0.0,1.0
-analysis_82819fbe,vertex_ai/gemini-2.5-flash-lite,2025-09-15T18:16:43.164555+00:00,N/A,negative_sentiment,1.0,1.0,1.0
-analysis_f857944f,vertex_ai/gemini-2.5-flash-lite,2025-09-15T18:16:03.075304+00:00,N/A,positive_sentiment,1.0,1.0,1.0
-analysis_f857944f,vertex_ai/gemini-2.5-flash-lite,2025-09-15T18:16:03.075304+00:00,N/A,negative_sentiment,0.0,0.0,1.0
-analysis_783f7191,vertex_ai/gemini-2.5-flash-lite,2025-09-15T18:16:15.678731+00:00,N/A,positive_sentiment,1.0,1.0,1.0
-analysis_783f7191,vertex_ai/gemini-2.5-flash-lite,2025-09-15T18:16:15.678731+00:00,N/A,negative_sentiment,0.0,0.0,1.0

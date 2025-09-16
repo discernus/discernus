@@ -1,7 +1,0 @@
-{
-  "analysis_id": "analysis_ee8e06ee",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "evidence_extraction": "```json\n{\n  \"negative_test_1.txt\": {\n    \"positive_sentiment\": [],\n    \"negative_sentiment\": [\n      \"This is a terrible situation.\",\n      \"Failure surrounds us.\",\n      \"The team did a horrible job. We're facing disaster.\",\n      \"Pessimism fills the air. What a disastrous outcome!\",\n      \"I'm devastated by the results. Everything looks dark and hopeless.\"\n    ]\n  }\n}\n```",
-  "timestamp": "2025-09-15T18:16:27.623691+00:00"
-}

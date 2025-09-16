@@ -22,7 +22,9 @@
 - ✅ **TEMP WORKSPACE CLEANUP**: Eliminated THICK temp directory creation antipattern
 - 📋 **MIGRATION PLAN CREATED**: Comprehensive 4-phase migration plan documented
 
-**Current Focus**: **Evidence Retrieval Phase** - The statistical analysis phase now works correctly after removing THICK antipatterns. The next blocking issue is the "RAG index not available" error in the evidence retrieval phase.
+**Current Focus**: **Critical Data Structure Error** - The experiment execution is failing with `'list' object has no attribute 'get'` error during initialization. This is blocking all experiments and needs immediate resolution.
+
+**Next Priority**: **Evidence Retrieval Phase** - After fixing the data structure error, the next blocking issue is the "RAG index not available" error in the evidence retrieval phase.
 
 **Migration Strategy**: Continue systematic refactoring of CleanAnalysisOrchestrator to use Show Your Work patterns while preserving mature functionality. Focus on evidence retrieval phase next.
 
@@ -30,17 +32,112 @@
 
 ## Current Sprint Planning
 
-**Next Priority**: Evidence Retrieval Phase Fix - **URGENT PRIORITY**
-**Status**: Ready for execution - Fix "RAG index not available" error blocking experiments
+**Next Priority**: Critical Data Structure Error Fix - **URGENT PRIORITY**
+**Status**: Blocking all experiments - Fix `'list' object has no attribute 'get'` error during initialization
 **Dependencies**: None - can begin immediately
 
-**Following Priority**: Sprint EAA-1 (Enhanced Analysis Agent Integration) - **HIGH PRIORITY**
+**Following Priority**: Evidence Retrieval Phase Fix - **URGENT PRIORITY**
+**Status**: Ready for execution - Fix "RAG index not available" error blocking experiments
+**Dependencies**: Data structure error fix completion
+
+**Future Priority**: Sprint EAA-1 (Enhanced Analysis Agent Integration) - **HIGH PRIORITY**
 **Status**: Ready for execution - Replace existing analysis agent with superior THIN approach
 **Dependencies**: Evidence retrieval fix completion
 
 **Future Priority**: Sprint SYW-2 (Add Verification Layer) - **MEDIUM PRIORITY**
 **Status**: Planned - depends on evidence retrieval fix and EAA-1
 **Dependencies**: Evidence retrieval must work, enhanced analysis agent must be integrated
+
+---
+
+## Critical Bug Fix Sprints
+
+### Sprint BUG-1: Fix Data Structure Error ⚠️ **URGENT PRIORITY**
+
+**Description**: Fix `'list' object has no attribute 'get'` error that blocks all experiment execution
+**Purpose**: Restore basic experiment functionality to enable further development
+**Priority**: URGENT - Blocking all experiments
+**Timeline**: 1-2 days - critical path blocker
+**Success Criteria**: Experiments can run successfully in statistical preparation mode
+**Dependencies**: None - can start immediately
+
+#### [BUG1-001] Debug Data Structure Mismatch
+
+- **Description**: Identify exact location where list is being treated as dictionary with `.get()` calls
+- **Purpose**: Pinpoint root cause of the data structure error
+- **Priority**: CRITICAL - Must identify root cause before fixing
+- **Current Status**: Error occurs during `_initialize_infrastructure` phase, before detailed logging
+- **Investigation Areas**:
+  - `_verify_caching_performance` method in orchestrator
+  - Artifact storage registry structure
+  - Data structure assumptions in initialization code
+  - YAML parsing results being treated as dictionaries
+- **Solution Strategy**:
+  - Add comprehensive debug logging to trace exact error location
+  - Check data structure types at each step of initialization
+  - Validate artifact storage registry structure
+  - Test with minimal reproducible case
+- **Acceptance Criteria**:
+  - ✅ Exact error location identified and documented
+  - ✅ Root cause of data structure mismatch understood
+  - ✅ Debug logging shows data structure types at each step
+  - ✅ Minimal reproducible case created
+- **Files to Investigate**:
+  - `discernus/core/clean_analysis_orchestrator.py` (_initialize_infrastructure, _verify_caching_performance)
+  - `discernus/core/local_artifact_storage.py` (registry structure)
+  - YAML parsing and data structure handling
+- **Dependencies**: None
+- **Effort**: 1 day
+
+#### [BUG1-002] Fix Data Structure Handling
+
+- **Description**: Correct the data structure handling to prevent list/dictionary mismatch
+- **Purpose**: Restore experiment execution functionality
+- **Priority**: CRITICAL - Must fix to enable experiments
+- **Solution Strategy**:
+  - Fix data structure assumptions in identified locations
+  - Ensure proper type checking before `.get()` calls
+  - Validate artifact storage registry structure
+  - Add defensive programming for data structure handling
+- **Acceptance Criteria**:
+  - ✅ No more `'list' object has no attribute 'get'` errors
+  - ✅ Experiments can run successfully in statistical preparation mode
+  - ✅ All data structure handling is type-safe
+  - ✅ No regression in existing functionality
+- **Files to Update**:
+  - `discernus/core/clean_analysis_orchestrator.py` (identified error locations)
+  - `discernus/core/local_artifact_storage.py` (if registry structure issues)
+- **Dependencies**: [BUG1-001] - Root cause must be identified first
+- **Effort**: 1 day
+
+#### [BUG1-003] Add Provenance Integration for Marked-Up Documents
+
+- **Description**: Copy marked-up documents to experiment run folder and create README for interpretation
+- **Purpose**: Complete provenance integration by including marked-up documents in experiment runs
+- **Priority**: HIGH - Required for provenance completeness
+- **Current Issue**: Marked-up documents are generated but not copied to experiment run folder
+- **Solution Strategy**:
+  - Copy marked-up documents from shared cache to experiment run folder
+  - Create README explaining how to interpret marked-up documents
+  - Update provenance specification to include marked-up document handling
+  - Ensure marked-up documents are discoverable in experiment runs
+- **Acceptance Criteria**:
+  - ✅ Marked-up documents copied to experiment run folder
+  - ✅ README created explaining document interpretation
+  - ✅ Provenance specification updated
+  - ✅ Marked-up documents discoverable in experiment runs
+- **Files to Update**:
+  - `discernus/core/clean_analysis_orchestrator.py` (provenance integration)
+  - `pm/active_projects/STATISTICAL_PREPARATION_PROVENANCE_INTEGRATION.md` (specification update)
+- **Dependencies**: [BUG1-002] - Experiments must run first
+- **Effort**: 1 day
+
+**Sprint BUG-1 Success Criteria**:
+- ✅ No more data structure errors during experiment execution
+- ✅ Experiments run successfully in statistical preparation mode
+- ✅ Marked-up documents included in experiment run provenance
+- ✅ Provenance integration specification updated
+- ✅ All existing functionality preserved
 
 ---
 

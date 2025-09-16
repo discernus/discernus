@@ -1,0 +1,32 @@
+{
+  "success": true,
+  "issues": [
+    {
+      "category": "trinity_coherence",
+      "description": "The prose `Document Overview` in the corpus manifest file (`corpus.md`) states the 'Early Career' phase is '(2018)'. However, the experiment specification and the machine-readable `analytical_groupings` YAML in the same corpus manifest correctly define this phase as 2018-2019 and include documents from both years.",
+      "impact": "This is a minor documentation inconsistency that could cause confusion for a human reader. It does not affect machine execution, as the system will correctly use the YAML manifest for grouping, but it undermines the principle of human-first readability.",
+      "fix": "In `corpus.md`, update the prose under the `## Document Overview` section to reflect the correct date range for the 'Early Career' phase. Change 'Early Career (2018)' to 'Early Career (2018-2019)'.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "trinity_coherence",
+      "description": "The experiment's statistical plan correctly identifies that the total sample size (N=14) is insufficient for inferential statistics like ANOVA, adhering to platform guidelines. However, it does not explicitly acknowledge the more severe limitations for the planned subgroup comparisons (e.g., by audience or event type), where some groups have as few as 2 or 3 documents.",
+      "impact": "While the overall approach is sound, the lack of explicit acknowledgement of subgroup limitations could lead to over-interpreting descriptive differences between groups with very small sample sizes (e.g., 'republican_delegates' n=2 vs 'college_students' n=3).",
+      "fix": "In the `Statistical Analysis Plan` or `Risk Mitigation` section of `experiment.md`, add a note acknowledging the small sample sizes of analytical subgroups and stating that any observed patterns from these comparisons should be treated as preliminary and interpreted with extreme caution.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md"
+      ]
+    }
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-09-15T20:16:52.291590+00:00",
+  "cache_metadata": {
+    "cache_key": "validation_517bf8ffb604",
+    "cached_at": "2025-01-15T14:30:00Z",
+    "agent_name": "ValidationPhase"
+  }
+}

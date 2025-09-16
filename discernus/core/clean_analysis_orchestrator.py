@@ -45,13 +45,12 @@ from ..agents.analysis_agent.main import AnalysisAgent
 from ..gateway.llm_gateway_enhanced import EnhancedLLMGateway
 from ..gateway.model_registry import ModelRegistry
 from ..agents.statistical_agent.main import StatisticalAgent
-from ..agents.automated_derived_metrics.agent import AutomatedDerivedMetricsAgent
 # TxtaiEvidenceCurator removed from mainline; use RAGIndexManager instead
 from ..agents.unified_synthesis_agent import UnifiedSynthesisAgent
 from ..agents.csv_export_agent import CSVExportAgent, ExportOptions
 from ..gateway.llm_gateway import LLMGateway
 from ..gateway.model_registry import ModelRegistry
-from .unified_cache_manager import ValidationCacheManager, DerivedMetricsCacheManager, StatisticalAnalysisCacheManager, AnalysisCacheManager
+from .unified_cache_manager import ValidationCacheManager, StatisticalAnalysisCacheManager, AnalysisCacheManager
 from .rag_index_manager import RAGIndexManager
 from .provenance_organizer import ProvenanceOrganizer
 from .directory_structure_reorganizer import reorganize_directory_structure
@@ -219,6 +218,17 @@ class CleanAnalysisOrchestrator:
             try:
                 self.config = self._load_specs()
                 self._log_status("Specifications loaded")
+                
+                # Debug: Check config structure
+                self._log_progress(f"🔧 DEBUG: Config type: {type(self.config)}")
+                self._log_progress(f"🔧 DEBUG: Config keys: {list(self.config.keys()) if isinstance(self.config, dict) else 'Not a dict'}")
+                if isinstance(self.config, dict) and 'hypotheses' in self.config:
+                    self._log_progress(f"🔧 DEBUG: Hypotheses type: {type(self.config['hypotheses'])}")
+                    if isinstance(self.config['hypotheses'], list) and len(self.config['hypotheses']) > 0:
+                        self._log_progress(f"🔧 DEBUG: First hypothesis type: {type(self.config['hypotheses'][0])}")
+                        if isinstance(self.config['hypotheses'][0], dict):
+                            self._log_progress(f"🔧 DEBUG: First hypothesis keys: {list(self.config['hypotheses'][0].keys())}")
+                
                 self._log_phase_timing("specifications_loading", phase_start)
             except Exception as e:
                 self._log_progress(f"❌ Failed to load specifications: {str(e)}")
@@ -326,17 +336,13 @@ class CleanAnalysisOrchestrator:
                 self._log_progress(f"❌ Analysis phase failed: {str(e)}")
                 raise CleanAnalysisError(f"Analysis phase failed: {str(e)}")
             
-            # Phase 5: Run derived metrics using consistent cached implementation
+            # Phase 5: Extract derived metrics from AnalysisAgent artifacts (THIN approach)
             if self.progress_manager:
                 self.progress_manager.update_main_progress("Derived metrics")
             phase_start = datetime.now(timezone.utc)
             try:
-                self._log_progress("📊 Running derived metrics phase using cached implementation...")
-                derived_metrics_results = self._run_derived_metrics_phase(
-                    self.derived_metrics_model, 
-                    audit_logger, 
-                    analysis_results
-                )
+                self._log_progress("📊 Extracting derived metrics from analysis artifacts...")
+                derived_metrics_results = self._extract_derived_metrics_from_analysis(analysis_results)
                 
                 # Store derived metrics results for synthesis access
                 self._derived_metrics_results = derived_metrics_results
@@ -346,9 +352,9 @@ class CleanAnalysisOrchestrator:
                 
             except Exception as e:
                 import traceback
-                self._log_progress(f"❌ Derived metrics phase failed: {str(e)}")
+                self._log_progress(f"❌ Derived metrics extraction failed: {str(e)}")
                 self._log_progress(f"❌ Full traceback: {traceback.format_exc()}")
-                raise CleanAnalysisError(f"Derived metrics phase failed: {str(e)}")
+                raise CleanAnalysisError(f"Derived metrics extraction failed: {str(e)}")
             
             # Statistical preparation mode: Export CSV and exit after derived metrics
             if self.statistical_prep:
@@ -422,7 +428,7 @@ class CleanAnalysisOrchestrator:
                         "results_directory": str(results_dir),
                         "analysis_documents": len(analysis_results),
                         "status": "completed_statistical_prep",
-                        "mode": "statistical_prep", 
+                        "mode": "statistical_prep",
                         "pipeline_status": "partial_completion",
                         "completed_phases": ["validation", "analysis", "derived_metrics", "csv_export"],
                         "remaining_phases": ["evidence_retrieval", "synthesis"],
@@ -740,11 +746,14 @@ class CleanAnalysisOrchestrator:
             # Retrieve test data by finding the artifact with the test_key metadata
             retrieved_data = None
             for artifact_hash, artifact_info in self.artifact_storage.registry.items():
-                metadata = artifact_info.get("metadata", {})
-                if metadata.get("test_key") == test_key:
-                    artifact_bytes = self.artifact_storage.get_artifact(artifact_hash)
-                    retrieved_data = json.loads(artifact_bytes.decode('utf-8'))
-                    break
+                self._log_progress(f"🔧 DEBUG: artifact_info type: {type(artifact_info)}")
+                self._log_progress(f"🔧 DEBUG: artifact_info: {artifact_info}")
+                if isinstance(artifact_info, dict):
+                    metadata = artifact_info.get("metadata", {})
+                    if metadata.get("test_key") == test_key:
+                        artifact_bytes = self.artifact_storage.get_artifact(artifact_hash)
+                        retrieved_data = json.loads(artifact_bytes.decode('utf-8'))
+                        break
             
             if retrieved_data and retrieved_data.get("test") == "data":
                 self._log_progress("✅ Cache performance verified - storage and retrieval working")
@@ -1271,171 +1280,52 @@ class CleanAnalysisOrchestrator:
         self._log_progress(f"✅ Analysis phase completed: {len(analysis_results)} documents processed")
         return analysis_results
     
-    def _run_derived_metrics_phase(self, model: str, audit_logger: AuditLogger, analysis_results: List[Dict[str, Any]]) -> Dict[str, Any]:
-        """Run derived metrics phase using DerivedMetricsPromptAssembler and AutomatedDerivedMetricsAgent."""
-        self._log_progress("📊 Running derived metrics phase...")
+    def _extract_derived_metrics_from_analysis(self, analysis_results: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """Extract derived metrics from AnalysisAgent artifacts - THIN approach."""
+        self._log_progress("📊 Extracting derived metrics from analysis artifacts...")
         
         try:
-            # Load framework content
-            framework_path = self.experiment_path / self.config['framework']
+            derived_metrics_list = []
             
-            # Create temporary workspace for derived metrics
-            temp_workspace = self.experiment_path / "temp_derived_metrics"
-            temp_workspace.mkdir(exist_ok=True)
+            for result in analysis_results:
+                if 'derived_metrics' in result:
+                    # Extract derived metrics from each analysis result
+                    derived_metrics_list.append({
+                        'analysis_id': result.get('analysis_id', 'unknown'),
+                        'derived_metrics': result['derived_metrics']
+                    })
             
-            try:
-                # Write analysis results to workspace for the assembler to sample
-                analysis_dir = temp_workspace / "analysis_data"
-                analysis_dir.mkdir(exist_ok=True)
-                
-                # Write framework content to workspace for the agent to access
-                framework_content = framework_path.read_text(encoding='utf-8')
-                (temp_workspace / "framework_content.md").write_text(framework_content)
-                
-                # Load experiment and corpus content for cache key generation
-                experiment_path = self.experiment_path / "experiment.md"
-                corpus_path = self.experiment_path / self.config['corpus']
-                experiment_content = experiment_path.read_text(encoding='utf-8')
-                corpus_content = corpus_path.read_text(encoding='utf-8')
-                
-                # Write experiment spec to workspace for the agent to access
-                experiment_spec = {
-                    "name": "Test Experiment",
-                    "description": "Test experiment for derived metrics",
-                    "framework": "framework.md"
-                }
-                (temp_workspace / "experiment_spec.json").write_text(json.dumps(experiment_spec, indent=2))
-                
-                # Write analysis results as individual files for the assembler to sample
-                for i, result in enumerate(analysis_results):
-                    analysis_file = analysis_dir / f"analysis_{i}.json"
-                    analysis_file.write_text(json.dumps(result, indent=2))
-                
-                # Also create analysis_data.json for the derived metrics agent
-                analysis_data_file = temp_workspace / "analysis_data.json"
-                analysis_data_file.write_text(json.dumps(analysis_results, indent=2))
-                
-                # Use the existing DerivedMetricsPromptAssembler to build the prompt
-                from .prompt_assemblers.derived_metrics_assembler import DerivedMetricsPromptAssembler
-                assembler = DerivedMetricsPromptAssembler()
-                
-                # Assemble the prompt using the existing assembler
-                self._log_progress("🔧 Assembling derived metrics prompt...")
-                prompt = assembler.assemble_prompt(
-                    framework_path=framework_path,
-                    analysis_dir=analysis_dir,
-                    sample_size=3
-                )
-                
-                # Store the assembled prompt
-                prompt_file = temp_workspace / "derived_metrics_prompt.txt"
-                prompt_file.write_text(prompt)
-                
-                # Initialize unified derived metrics caching
-                cache_manager = DerivedMetricsCacheManager(self.artifact_storage, audit_logger)
-                
-                # Generate cache key based on input content (framework, experiment, corpus, model)
-                cache_key = cache_manager.generate_derived_metrics_cache_key(
-                    framework_content=framework_content,
-                    experiment_content=experiment_content,
-                    corpus_content=corpus_content,
-                    derived_metrics_model=model,
-                    analysis_results_hash=""  # TODO: Add analysis results hash for proper dependency
-                )
-                
-                # Check cache first
-                cache_result = cache_manager.check_cache(cache_key, "DerivedMetricsPhase")
-                
-                if cache_result.hit:
-                    self._log_progress("💾 Using cached derived metrics functions")
-                    functions_result = cache_result.cached_content
-                    
-                    # Recreate functions file from cached content if available
-                    if functions_result.get('cached_with_code') and functions_result.get('function_code_content'):
-                        functions_file = temp_workspace / "automatedderivedmetricsagent_functions.py"
-                        functions_file.write_text(functions_result['function_code_content'], encoding='utf-8')
-                        self._log_progress("📝 Recreated functions file from cached content")
-                    else:
-                        self._log_progress("⚠️ Cached functions missing code content - may need regeneration")
-                else:
-                    # Initialize derived metrics agent
-                    from ..agents.automated_derived_metrics.agent import AutomatedDerivedMetricsAgent
-                    derived_metrics_agent = AutomatedDerivedMetricsAgent(
-                        model=model,
-                        audit_logger=audit_logger
-                    )
-                    
-                    # Generate derived metrics functions using the assembled prompt
-                    self._log_progress("🔧 Generating derived metrics functions...")
-                    functions_result = derived_metrics_agent.generate_functions(temp_workspace)
-                    
-                    # Read the generated function code to include in cache
-                    functions_file = temp_workspace / "automatedderivedmetricsagent_functions.py"
-                    if functions_file.exists():
-                        function_code_content = functions_file.read_text(encoding='utf-8')
-                        functions_result['function_code_content'] = function_code_content
-                        functions_result['cached_with_code'] = True
-                    else:
-                        functions_result['cached_with_code'] = False
-                    
-                    # Store in cache for future use
-                    cache_manager.store_cache(cache_key, functions_result, "DerivedMetricsPhase")
-                
-                # Execute the generated functions on analysis data
-                self._log_progress("🔢 Executing derived metrics functions on analysis data...")
-                derived_metrics_results = self._execute_derived_metrics_functions(
-                    temp_workspace, 
-                    analysis_results, 
-                    audit_logger
-                )
-                
-                # CRITICAL: Validate that we got actual derived metrics results
-                if not derived_metrics_results or not isinstance(derived_metrics_results, dict):
-                    raise CleanAnalysisError(
-                        "Derived metrics phase failed: No results produced. "
-                        "Generated functions but failed to execute or produce derived metrics outputs."
-                    )
-                
-                if derived_metrics_results.get('status') != 'success':
-                    raise CleanAnalysisError(
-                        f"Derived metrics phase failed: {derived_metrics_results.get('error', 'Unknown error')}"
-                    )
-                
-                # Store derived metrics results in artifact storage
-                complete_derived_metrics_result = {
-                    "generation_metadata": functions_result,
-                    "derived_metrics_data": derived_metrics_results,
-                    "status": "success_with_data",
-                    "validation_passed": True
-                }
-                
-                derived_metrics_hash = self.artifact_storage.put_artifact(
-                    json.dumps(complete_derived_metrics_result, indent=2).encode('utf-8'),
-                    {"artifact_type": "derived_metrics_results_with_data"}
-                )
-                
-                self._log_progress(f"✅ Derived metrics phase completed: {len(derived_metrics_results)} result sets")
-                
+            if not derived_metrics_list:
+                self._log_progress("⚠️ No derived metrics found in analysis artifacts")
                 return {
-                    "status": "completed",
-                    "derived_metrics_hash": derived_metrics_hash,
-                    "functions_generated": functions_result.get('functions_generated', 0),
-                    "derived_metrics_results": complete_derived_metrics_result
+                    "status": "no_metrics_found",
+                    "derived_metrics_hash": None,
+                    "message": "No derived metrics artifacts found in analysis results"
                 }
-                
-            except Exception as e:
-                self._log_progress(f"❌ Derived metrics phase failed: {str(e)}")
-                raise CleanAnalysisError(f"Derived metrics phase failed: {str(e)}")
             
-            finally:
-                # Clean up temporary workspace
-                if temp_workspace.exists():
-                    import shutil
-                    shutil.rmtree(temp_workspace)
-        
+            # Store extracted derived metrics as artifact
+            derived_metrics_data = {
+                "derived_metrics": derived_metrics_list,
+                "total_documents": len(derived_metrics_list),
+                "extraction_timestamp": datetime.now(timezone.utc).isoformat()
+            }
+            
+            derived_metrics_hash = self.artifact_storage.put_artifact(
+                json.dumps(derived_metrics_data, indent=2).encode('utf-8'),
+                {"artifact_type": "derived_metrics_data"}
+            )
+            
+            self._log_progress(f"✅ Extracted derived metrics from {len(derived_metrics_list)} analysis artifacts")
+            
+            return {
+                "status": "completed",
+                "derived_metrics_hash": derived_metrics_hash,
+                "derived_metrics_results": derived_metrics_data
+            }
+            
         except Exception as e:
-            self._log_progress(f"❌ Derived metrics phase failed: {str(e)}")
-            raise CleanAnalysisError(f"Derived metrics phase failed: {str(e)}")
+            self._log_progress(f"❌ Failed to extract derived metrics: {str(e)}")
+            raise CleanAnalysisError(f"Failed to extract derived metrics: {str(e)}")
     
     def _run_statistical_analysis_phase(self, model: str, audit_logger: AuditLogger, analysis_results: List[Dict[str, Any]], derived_metrics_results: Dict[str, Any]) -> Dict[str, Any]:
         """Run statistical analysis phase using THIN v2.0 StatisticalAgent with LLM internal execution."""
@@ -1606,102 +1496,6 @@ class CleanAnalysisOrchestrator:
             self._log_progress(f"❌ Statistical analysis phase failed: {str(e)}")
             self._log_progress(f"❌ Full traceback: {traceback.format_exc()}")
             raise CleanAnalysisError(f"Statistical analysis phase failed: {str(e)}")
-    
-    def _execute_derived_metrics_functions(self, workspace_path: Path, analysis_results: List[Dict[str, Any]], audit_logger: AuditLogger) -> Dict[str, Any]:
-        """Execute the generated derived metrics functions on analysis data."""
-        import pandas as pd
-        import numpy as np
-        import sys
-        import importlib.util
-        import json
-        import re
-        
-        # Load the generated derived metrics functions module
-        functions_file = workspace_path / "automatedderivedmetricsagent_functions.py"
-        if not functions_file.exists():
-            raise CleanAnalysisError("Derived metrics functions file not found")
-        
-        # Load the generated functions - handle JSON format
-        try:
-            # Read the functions file
-            functions_content = functions_file.read_text(encoding='utf-8')
-            
-            # Check if it's JSON format (starts with [)
-            if functions_content.strip().startswith('['):
-                # Parse JSON and extract the Python code
-                functions_data = json.loads(functions_content)
-                if isinstance(functions_data, list) and len(functions_data) > 0:
-                    python_code = functions_data[0].get('content', '')
-                else:
-                    raise CleanAnalysisError("Invalid JSON format in derived metrics functions file")
-            else:
-                # Direct Python code
-                python_code = functions_content
-            
-            # Create a temporary module from the Python code
-            import tempfile
-            import os
-            
-            # Create a temporary file with the Python code
-            with tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as temp_file:
-                temp_file.write(python_code)
-                temp_file_path = temp_file.name
-            
-            try:
-                # Import the temporary module
-                spec = importlib.util.spec_from_file_location("derived_metrics_functions", temp_file_path)
-                derived_metrics_module = importlib.util.module_from_spec(spec)
-                spec.loader.exec_module(derived_metrics_module)
-            finally:
-                # Clean up the temporary file
-                os.unlink(temp_file_path)
-                
-        except Exception as e:
-            raise CleanAnalysisError(f"Failed to import derived metrics functions: {e}")
-        
-        # Create DataFrame from analysis results - THIN approach
-        # Pass the raw analysis responses directly as the functions expect
-        analysis_data = []
-        for result in analysis_results:
-            if isinstance(result, dict) and 'raw_analysis_response' in result:
-                analysis_data.append({
-                    'raw_analysis_response': result['raw_analysis_response']
-                })
-        
-        if not analysis_data:
-            raise CleanAnalysisError("No valid analysis data found for derived metrics calculation")
-        
-        # Create DataFrame from analysis data
-        try:
-            df = pd.DataFrame(analysis_data)
-        except Exception as e:
-            raise CleanAnalysisError(f"Failed to create DataFrame from analysis data: {e}")
-        
-        # Execute derived metrics calculation
-        try:
-            if hasattr(derived_metrics_module, 'calculate_derived_metrics'):
-                self._log_progress("🔍 About to call calculate_derived_metrics...")
-                derived_df = derived_metrics_module.calculate_derived_metrics(df)
-                self._log_progress("✅ calculate_derived_metrics completed successfully")
-                
-                # Convert back to dictionary format for storage
-                derived_metrics_results = derived_df.to_dict('records')
-                
-                return {
-                    "status": "success",
-                    "original_count": len(analysis_data),
-                    "derived_count": len(derived_metrics_results),
-                    "derived_metrics": derived_metrics_results,
-                    "columns_added": list(set(derived_df.columns) - set(df.columns))
-                }
-            else:
-                raise CleanAnalysisError("Generated module missing 'calculate_derived_metrics' function")
-                
-        except Exception as e:
-            import traceback
-            self._log_progress(f"❌ Derived metrics execution error: {str(e)}")
-            self._log_progress(f"❌ Full traceback: {traceback.format_exc()}")
-            raise CleanAnalysisError(f"Failed to execute derived metrics functions: {e}")
     
     def _execute_statistical_analysis_functions(self, workspace_path: Path, audit_logger: AuditLogger, analysis_results: List[Dict[str, Any]]) -> Dict[str, Any]:
         """Execute the generated statistical analysis functions on the data."""
@@ -3756,13 +3550,6 @@ class CleanAnalysisOrchestrator:
         except Exception as e:
             self._log_progress(f"⚠️ Failed to copy source metadata: {str(e)}")
     
-    def _log_progress(self, message: str):
-        """Log progress with rich console output."""
-        self.logger.debug(message)
-    
-    def _log_status(self, message: str):
-        """Log status updates."""
-        self.logger.info(f"STATUS: {message}")
 
     def _validate_synthesis_prerequisites(self, evidence_hashes: List[str], research_data_hash: str) -> None:
         """
@@ -4533,171 +4320,50 @@ class CleanAnalysisOrchestrator:
         return results_dir
 
     def _export_statistical_prep_csv(self, analysis_results: List[Dict[str, Any]], derived_metrics_results: Dict[str, Any], audit_logger: AuditLogger, run_id: str) -> Path:
-        """Export CSV files for statistical preparation mode with derived metrics."""
-        self._log_progress("📊 Exporting statistical preparation CSV files...")
+        """THIN CSV Export: Pass artifact hashes to CSV agent, let it figure out data structures."""
+        self._log_progress("📊 THIN CSV Export: Delegating to CSV agent...")
         
         # Create results directory
         run_dir = self.experiment_path / "runs" / run_id
         results_dir = run_dir / "results"
         results_dir.mkdir(parents=True, exist_ok=True)
         
-        # Prepare analysis data for CSV export by processing individual analysis results
-        processed_document_analyses = []
+        # THIN approach: Just collect artifact hashes and let CSV agent handle the parsing
+        analysis_artifact_hashes = []
+        for result in analysis_results:
+            if 'scores_hash' in result:
+                analysis_artifact_hashes.append(result['scores_hash'])
+            if 'evidence_hash' in result:
+                analysis_artifact_hashes.append(result['evidence_hash'])
         
-        for analysis_result in analysis_results:
-            raw_response = analysis_result.get('raw_analysis_response', '')
-            if not raw_response:
-                continue
-                
-            # Extract JSON from the response (handle both old delimited format and new markdown format)
-            start_marker = '<<<DISCERNUS_ANALYSIS_JSON_v6>>>'
-            end_marker = '<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
-            
-            start_idx = raw_response.find(start_marker)
-            end_idx = raw_response.find(end_marker)
-            
-            if start_idx != -1 and end_idx != -1:
-                # Old delimited format
-                json_content = raw_response[start_idx + len(start_marker):end_idx].strip()
-            else:
-                # New markdown format - extract JSON from ```json blocks
-                if '```json' in raw_response and '```' in raw_response:
-                    start_idx = raw_response.find('```json') + 7
-                    end_idx = raw_response.rfind('```')
-                    if start_idx > 6 and end_idx > start_idx:
-                        json_content = raw_response[start_idx:end_idx].strip()
-                    else:
-                        continue
-                else:
-                    continue
-            
-            try:
-                analysis_data = json.loads(json_content)
-                processed_document_analyses.extend(analysis_data.get('document_analyses', []))
-            except json.JSONDecodeError:
-                continue
+        derived_metrics_hash = None
+        if derived_metrics_results and derived_metrics_results.get('status') == 'completed':
+            derived_metrics_hash = derived_metrics_results.get('derived_metrics_hash')
         
-        # Convert dimensional_scores to analysis_scores format for CSV export
-        # Also prepare evidence data for CSV export
-        evidence_data = []
-        for doc_analysis in processed_document_analyses:
-            dimensional_scores = doc_analysis.get('dimensional_scores', {})
-            analysis_scores = {}
-            for dimension, scores in dimensional_scores.items():
-                analysis_scores[dimension] = scores.get('raw_score', 0.0)
-            doc_analysis['analysis_scores'] = analysis_scores
-            
-            # Extract evidence data for CSV export
-            evidence_items = doc_analysis.get('evidence', [])
-            for evidence_item in evidence_items:
-                evidence_data.append({
-                    'document_name': doc_analysis.get('document_name', 'unknown'),
-                    'dimension': evidence_item.get('dimension', 'unknown'),
-                    'quote_text': evidence_item.get('quote_text', ''),
-                    'confidence': evidence_item.get('confidence', 0.0),
-                    'context_type': evidence_item.get('context_type', 'unknown')
-                })
-        
-        # Store derived metrics as artifact
-        shared_cache_dir = self.experiment_path / "shared_cache" / "artifacts"
-        shared_cache_dir.mkdir(parents=True, exist_ok=True)
-        derived_metrics_json = json.dumps(derived_metrics_results, indent=2)
-        derived_metrics_hash = hashlib.sha256(derived_metrics_json.encode('utf-8')).hexdigest()
-        derived_metrics_file = shared_cache_dir / derived_metrics_hash
-        derived_metrics_file.write_text(derived_metrics_json)
-        
-        # Initialize CSV Export Agent
+        # Initialize CSV Export Agent with artifact storage
         csv_agent = CSVExportAgent(audit_logger=audit_logger)
-        csv_agent.experiment_path = self.experiment_path
-        csv_agent.artifact_storage = None  # Use file-based loading
+        csv_agent.artifact_storage = self.artifact_storage
         
-        # Map derived metrics to document analyses before CSV export
-        # Access the nested structure: derived_metrics_results['derived_metrics_results']['derived_metrics_data']['derived_metrics']
-        derived_metrics_list = []
-        if derived_metrics_results and 'derived_metrics_results' in derived_metrics_results:
-            derived_metrics_data = derived_metrics_results.get('derived_metrics_results', {}).get('derived_metrics_data', {})
-            derived_metrics_list = derived_metrics_data.get('derived_metrics', [])
+        # Use existing export method - let CSV agent figure out the data structures
+        # Pass first available hash as both scores and evidence (CSV agent will handle duplicates)
+        primary_hash = analysis_artifact_hashes[0] if analysis_artifact_hashes else ""
         
-        if derived_metrics_list:
-            # Create a mapping of document names to derived metrics
-            derived_metrics_map = {}
-            for metric_item in derived_metrics_list:
-                # The derived metrics are now DataFrame records with calculated values
-                # Extract the derived metrics columns (exclude raw_analysis_response)
-                derived_metrics = {}
-                for key, value in metric_item.items():
-                    if key != 'raw_analysis_response':
-                        derived_metrics[key] = value
-                
-                # Parse the raw_analysis_response to get the document name
-                raw_response = metric_item.get('raw_analysis_response', '')
-                if raw_response:
-                    start_marker = '<<<DISCERNUS_ANALYSIS_JSON_v6>>>'
-                    end_marker = '<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>'
-                    start_idx = raw_response.find(start_marker)
-                    end_idx = raw_response.find(end_marker)
-                    
-                    if start_idx != -1 and end_idx != -1:
-                        json_content = raw_response[start_idx + len(start_marker):end_idx].strip()
-                        try:
-                            parsed_response = json.loads(json_content)
-                            if 'document_analyses' in parsed_response:
-                                for doc_analysis in parsed_response['document_analyses']:
-                                    doc_name = doc_analysis.get('document_name', 'unknown')
-                                    derived_metrics_map[doc_name] = derived_metrics
-                        except json.JSONDecodeError:
-                            continue
-                
-                # Add derived metrics to each document analysis
-                for doc_analysis in processed_document_analyses:
-                    doc_name = doc_analysis.get('document_name', 'unknown')
-                    if doc_name in derived_metrics_map:
-                        doc_analysis['derived_metrics'] = derived_metrics_map[doc_name]
-                    else:
-                        # Default empty derived metrics if not found
-                        doc_analysis['derived_metrics'] = {}
-        
-        # Update analysis_data to include derived metrics
-        analysis_data = {
-            "document_analyses": processed_document_analyses,
-            "evidence_data": evidence_data,
-            "analysis_metadata": {
-                "framework_name": self.config.get('framework', 'unknown'),
-                "framework_version": "v1.0"
-            }
-        }
-        
-        # Store updated analysis data as artifact
-        analysis_json = json.dumps(analysis_data, indent=2)
-        analysis_hash = hashlib.sha256(analysis_json.encode('utf-8')).hexdigest()
-        
-        # Save to shared cache
-        shared_cache_dir = self.experiment_path / "shared_cache" / "artifacts"
-        shared_cache_dir.mkdir(parents=True, exist_ok=True)
-        analysis_file = shared_cache_dir / analysis_hash
-        analysis_file.write_text(analysis_json)
-        
-        # Prepare framework and corpus configs
-        framework_config = {"name": self.config.get('framework', 'unknown'), "version": "v1.0"}
-        corpus_manifest = {"corpus_name": self.security.experiment_name, "documents": []}
-        
-        # Export CSV files with derived metrics
         export_result = csv_agent.export_mid_point_data(
-            scores_hash=analysis_hash,
-            evidence_hash=analysis_hash,
-            framework_config=framework_config,
-            corpus_manifest=corpus_manifest,
+            scores_hash=primary_hash,
+            evidence_hash=primary_hash,
+            framework_config=self.config.get('framework_config', {}),
+            corpus_manifest=self.config.get('corpus_manifest', {}),
             export_path=str(results_dir),
             export_options=ExportOptions(include_calculated_metrics=True)
         )
         
         if export_result.success:
-            self._log_progress(f"✅ Statistical preparation CSV export successful: {len(export_result.files_created)} files created")                                                                                                     
+            self._log_progress(f"✅ THIN CSV export successful: {len(export_result.files_created)} files created")
             for file in export_result.files_created:
                 self._log_progress(f"   • {file}")
         else:
-            self._log_progress(f"❌ Statistical preparation CSV export failed: {export_result.error_message}")
-            raise CleanAnalysisError(f"Statistical preparation CSV export failed: {export_result.error_message}")
+            self._log_progress(f"❌ THIN CSV export failed: {export_result.error_message}")
+            raise CleanAnalysisError(f"CSV export failed: {export_result.error_message}")
         
         return results_dir
 
