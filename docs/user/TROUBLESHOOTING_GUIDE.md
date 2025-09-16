@@ -18,6 +18,25 @@ This guide provides strategic troubleshooting approaches for Discernus that **pr
 ### Success Metric
 **"If debugging requires understanding LLM responses, you're debugging the wrong layer."** Focus on infrastructure reliability, not content analysis.
 
+### Debugging Methodology: Examine Before Adding
+
+**Core Principle**: Before adding debug output or print statements, examine existing code and logs first.
+
+**Proper Debugging Sequence**:
+1. **Check existing audit logs** for relevant agent events in `logs/agents.jsonl`
+2. **Examine component implementation** to understand interface and return values
+3. **Look for existing logging statements** and event types in the code
+4. **Check orchestrator integration points** to see how components are called
+5. **Only add debug output as last resort** if existing logging is insufficient
+
+**Why This Matters**:
+- **Eliminates redundant work** - Logging often already exists
+- **Maintains code quality** - No temporary debug prints to clean up
+- **Faster debugging** - Direct examination vs. adding new code
+- **Better understanding** - Shows actual system flow, not just "is it called?"
+
+**Anti-Pattern**: Immediately adding `print(f"DEBUG: ...")` statements without first checking existing logging infrastructure.
+
 ## Strategic Diagnostic Approaches
 
 ### 1. Agent Drift Detection

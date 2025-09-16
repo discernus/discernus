@@ -1,0 +1,7 @@
+{
+  "analysis_id": "analysis_8dfa1419",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "evidence_extraction": "```json\n{\n  \"negative_sentiment\": [\n    \"This is a terrible situation. Everything is going wrong. I feel awful about the future.\",\n    \"What a disastrous outcome! I'm devastated by the results. Everything looks dark and hopeless.\"\n  ]\n}\n```",
+  "timestamp": "2025-09-16T14:52:07.511129+00:00"
+}

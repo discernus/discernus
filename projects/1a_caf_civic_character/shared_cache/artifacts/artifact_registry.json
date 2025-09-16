@@ -1,0 +1,39 @@
+{
+  "00cdcb8f5448b232084adf6273c98150d3d4a5aaa51d264de0f3f6babc7a8229": {
+    "artifact_path": "cached_result_00cdcb8f",
+    "created_at": "2025-09-16T13:39:32.836832+00:00",
+    "human_filename": "cached_result_00cdcb8f",
+    "is_directory": false,
+    "metadata": {
+      "agent": "ValidationPhase",
+      "artifact_type": "cached_result",
+      "cache_key": "validation_ef442c400e69"
+    },
+    "size_bytes": 2588,
+    "source_run": "20250916T133848Z"
+  },
+  "37882f48dcd699984e3883209ec186e5405fe7f7ca132f7cbf432c58d89b1c33": {
+    "artifact_path": "cache_test_37882f48",
+    "created_at": "2025-09-16T13:39:52.500417+00:00",
+    "human_filename": "cache_test_37882f48",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "cache_test",
+      "test_key": "cache_test_key"
+    },
+    "size_bytes": 65,
+    "source_run": "20250916T133952Z"
+  },
+  "b4dede1786e3155f5be5545ba7a54588cb76dd87d2e3a8681cd297fc3dff0222": {
+    "artifact_path": "cache_test_b4dede17",
+    "created_at": "2025-09-16T13:38:48.984963+00:00",
+    "human_filename": "cache_test_b4dede17",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "cache_test",
+      "test_key": "cache_test_key"
+    },
+    "size_bytes": 65,
+    "source_run": "20250916T133848Z"
+  }
+}

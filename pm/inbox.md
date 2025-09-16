@@ -259,3 +259,35 @@
 - Ensure no breaking changes to current functionality
 
 **Priority**: Low - Cleanup task for code quality and maintainability
+
+### Feature: Verbose Call Tracing for Debug Mode
+
+**Issue**: Cursor agents frequently add manual debug output to trace component calls and returns, creating inconsistent debugging patterns across the codebase.
+
+**Current State**:
+- **48+ debug print statements** scattered across codebase (`print(f"DEBUG:`)
+- **Ad-hoc debugging approach** - agents add debug output manually when troubleshooting
+- **Inconsistent patterns** - different debug formats and locations
+- **Existing audit logging** - sophisticated dual-track logging system already in place
+
+**Proposed Solution**:
+- **Verbose tracing mode** for AuditLogger with configurable detail levels
+- **Function decorators** for selective component tracing (`@audit_logger.trace_calls`)
+- **Import tracking** and call/return logging with performance timing
+- **Smart filtering** with component whitelist/blacklist and log level controls
+- **Log analysis tools** for efficient trace data querying
+
+**Benefits**:
+- Eliminates repetitive manual debugging work
+- Provides consistent debugging interface
+- Preserves debug info in audit trail
+- Reduces agent drift toward ad-hoc solutions
+- Better than current scattered debug prints
+
+**Considerations**:
+- Performance impact on LLM-heavy operations
+- Log volume management for large experiments
+- Security boundary compliance
+- THIN architecture compliance
+
+**Priority**: Medium - Would improve debugging efficiency and code quality

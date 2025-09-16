@@ -1,0 +1,55 @@
+{
+  "success": false,
+  "issues": [
+    {
+      "category": "trinity_coherence",
+      "description": "The 2x3 factorial corpus design is critically unbalanced and incomplete. It contains an empty cell (Conservative / Civil Rights: n=0) and multiple cells with only one document (e.g., Civil Rights / Progressive: n=1). This makes the primary proposed statistical test, a two-way ANOVA, impossible to execute as it violates the minimum sample size requirements per group (n\u22652) for inferential testing.",
+      "impact": "The experiment will fail during statistical analysis. The system cannot perform a two-way ANOVA on a dataset with empty cells or groups with n=1. The central research questions about interaction effects between ideology and era cannot be answered.",
+      "fix": "To enable a 2x3 ANOVA, the corpus must be redesigned to be fully balanced. Ensure each of the 6 cells in the Ideology \u00d7 Era matrix contains at least 2 documents. This requires adding documents to the 'Civil Rights / Conservative' cell (currently n=0) and the 'Civil Rights / Progressive' and 'Institutional / Progressive' cells (currently n=1).",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The description of the corpus as 'balanced' in both the experiment and corpus specifications is factually incorrect. The cell counts are 1, 0, 1, 2, 2, 2, which is not a balanced design for a 2x3 factorial analysis.",
+      "impact": "The experiment's description is misleading and misrepresents the statistical viability of the research design. This undermines the credibility of the setup.",
+      "fix": "Remove the term 'balanced' when describing the corpus in both the experiment and corpus files, or redesign the corpus to be truly balanced as per the other blocking issue.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The 'Populist Era' is defined with conflicting date ranges. The experiment specification prose states '2022-2025', but the associated document list includes speeches from 2017 and 2022, and the corpus manifest more accurately defines the era as '2017-2025'.",
+      "impact": "This inconsistency creates ambiguity regarding the temporal boundaries of a key experimental factor, which could affect interpretation and replication.",
+      "fix": "Standardize the definition of the 'Populist Era' across all documents. It is recommended to update the experiment specification prose to match the corpus manifest's range of '2017-2025'.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The framework's human-readable version identifier in its title ('v10.0') is inconsistent with the machine-readable version in its YAML appendix ('framework_version: \"1.0.0\"').",
+      "impact": "This can create confusion for researchers trying to reference or version-control the framework, although it does not block execution because the `spec_version: \"10.0\"` is correct.",
+      "fix": "For clarity and consistency, align the `framework_version` field in the YAML metadata to match the human-readable version (e.g., set `framework_version: \"10.0.0\"`).",
+      "priority": "QUALITY",
+      "affected_files": [
+        "framework.md"
+      ]
+    }
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-09-16T13:40:49.852407+00:00",
+  "cache_metadata": {
+    "cache_key": "validation_f45e3a580394",
+    "cached_at": "2025-01-15T14:30:00Z",
+    "agent_name": "ValidationPhase"
+  }
+}

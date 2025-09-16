@@ -1,0 +1,23 @@
+{
+  "batch_id": "stats_20250916T155409Z",
+  "step": "csv_generation",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "csv_files": [
+    {
+      "filename": "scores.csv",
+      "path": "/Volumes/code/discernus/projects/nano_test_experiment/runs/20250916T151623Z/data/scores.csv",
+      "size": 149
+    }
+  ],
+  "cost_info": {
+    "model": "vertex_ai/gemini-2.5-flash",
+    "execution_time_seconds": 15.098554,
+    "prompt_length": 3822,
+    "artifacts_processed": 2,
+    "response_cost": 0.0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "total_tokens": 0
+  },
+  "timestamp": "2025-09-16T19:55:13.607885+00:00"
+}

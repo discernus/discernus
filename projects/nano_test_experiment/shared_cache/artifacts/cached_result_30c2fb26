@@ -1,0 +1,33 @@
+{
+  "success": true,
+  "issues": [
+    {
+      "category": "trinity_coherence",
+      "description": "The experiment's hypotheses, H1 ('The pipeline correctly identifies positive vs negative sentiment') and H2 ('The analysis agent can process simple dimensional scoring'), are marked as 'mutually_exclusive: true'. These statements are not mutually exclusive; in fact, H2 is a necessary component for H1 to be true.",
+      "impact": "The logical properties assigned to the hypotheses are incorrect, which may lead to misinterpretation of the experiment's formal structure. This does not block execution but represents a flaw in the research design's logical rigor.",
+      "fix": "Review the logical relationship between the hypotheses and set 'mutually_exclusive' to false.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "trinity_coherence",
+      "description": "The corpus contains only 2 documents. Per the v10.0 Experiment Specification, a sample size of N<4 is only suitable for 'single case or comparative case analysis' and cannot support any form of statistical hypothesis testing.",
+      "impact": "The results of this experiment will be purely qualitative and descriptive for the two specific documents. No generalizable or statistically significant conclusions can be drawn. This is acceptable for a pipeline validation test but must not be interpreted as a research finding.",
+      "fix": "No fix is required if the goal is strictly pipeline validation. If any statistical analysis is intended, the corpus must be expanded to meet the minimum sample size requirements (e.g., N > 10 for descriptive statistics).",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    }
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-09-16T14:51:43.943559+00:00",
+  "cache_metadata": {
+    "cache_key": "validation_c0789dc57de7",
+    "cached_at": "2025-01-15T14:30:00Z",
+    "agent_name": "ValidationPhase"
+  }
+}

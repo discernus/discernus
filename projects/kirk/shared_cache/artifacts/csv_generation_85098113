@@ -1,0 +1,38 @@
+{
+  "batch_id": "stats_20250916T201308Z",
+  "step": "csv_generation",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "csv_files": [
+    {
+      "filename": "scores.csv",
+      "path": "/Volumes/code/discernus/projects/kirk/runs/20250916T201308Z/data/scores.csv",
+      "size": 458
+    },
+    {
+      "filename": "derived_metrics.csv",
+      "path": "/Volumes/code/discernus/projects/kirk/runs/20250916T201308Z/data/derived_metrics.csv",
+      "size": 491
+    },
+    {
+      "filename": "metadata.csv",
+      "path": "/Volumes/code/discernus/projects/kirk/runs/20250916T201308Z/data/metadata.csv",
+      "size": 248
+    },
+    {
+      "filename": "evidence.csv",
+      "path": "/Volumes/code/discernus/projects/kirk/runs/20250916T201308Z/data/evidence.csv",
+      "size": 28
+    }
+  ],
+  "cost_info": {
+    "model": "vertex_ai/gemini-2.5-flash",
+    "execution_time_seconds": 30.879531,
+    "prompt_length": 8676,
+    "artifacts_processed": 2,
+    "response_cost": 0.0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "total_tokens": 0
+  },
+  "timestamp": "2025-09-16T20:16:09.881449+00:00"
+}
