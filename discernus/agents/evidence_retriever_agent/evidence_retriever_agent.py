@@ -65,12 +65,12 @@ class EvidenceRetrieverAgent:
         
     def run(self, **kwargs) -> Dict[str, Any]:
         """
-        Main execution method for evidence retrieval.
+        Main execution method for evidence retrieval - ENHANCED FOR SELF-SUFFICIENCY.
         
         Args:
-            framework_hash: Hash of framework specification artifact
-            statistical_results: Parsed statistical results dictionary (not hash)
-            evidence_artifact_hashes: List of evidence artifact hashes
+            analysis_artifact_hashes: List of analysis artifact hashes (agent finds evidence artifacts)
+            statistical_results_hash: Hash of statistical results artifact (agent reads directly)
+            framework_path: Path to framework file (agent reads directly)
             
         Returns:
             Dictionary containing evidence retrieval results and artifact hash
@@ -78,26 +78,36 @@ class EvidenceRetrieverAgent:
         try:
             self.logger.info("Starting evidence retrieval process...")
             
-            # Extract parameters
-            framework_hash = kwargs.get('framework_hash')
-            statistical_results = kwargs.get('statistical_results')  # Now expecting parsed dict, not hash
-            evidence_artifact_hashes = kwargs.get('evidence_artifact_hashes', [])
+            # Extract parameters - NEW THIN INTERFACE
+            analysis_artifact_hashes = kwargs.get('analysis_artifact_hashes', [])
+            statistical_results_hash = kwargs.get('statistical_results_hash')
+            framework_path = kwargs.get('framework_path')
             
-            if not framework_hash:
-                raise ValueError("framework_hash is required")
-            if not statistical_results:
-                raise ValueError("statistical_results is required")
-            if not evidence_artifact_hashes:
-                raise ValueError("evidence_artifact_hashes list is required")
+            # Backward compatibility with old interface
+            if not analysis_artifact_hashes:
+                # Fall back to old interface if new parameters not provided
+                framework_hash = kwargs.get('framework_hash')
+                statistical_results = kwargs.get('statistical_results')
+                evidence_artifact_hashes = kwargs.get('evidence_artifact_hashes', [])
+                if framework_hash and statistical_results and evidence_artifact_hashes:
+                    return self._run_legacy_interface(framework_hash, statistical_results, evidence_artifact_hashes)
             
-            # Step 1: Load framework and use statistical results directly
-            self.logger.info("Step 1: Loading framework and using statistical results...")
-            framework_spec = self._load_framework_specification(framework_hash)
-            # statistical_results is already parsed, no loading needed
+            if not analysis_artifact_hashes:
+                raise ValueError("analysis_artifact_hashes list is required")
+            if not statistical_results_hash:
+                raise ValueError("statistical_results_hash is required") 
+            if not framework_path:
+                raise ValueError("framework_path is required")
+            
+            # Step 1: SELF-SUFFICIENT - Load framework and statistical results directly
+            self.logger.info("Step 1: Self-sufficient loading of framework and statistical results...")
+            framework_spec = self._load_framework_from_path(framework_path)
+            statistical_results = self._load_statistical_results_from_hash(statistical_results_hash)
             self.logger.info("Successfully loaded framework and statistical results")
             
-            # Step 2: Build evidence wrapper
-            self.logger.info("Step 2: Building evidence wrapper...")
+            # Step 2: SELF-SUFFICIENT - Find evidence artifacts from analysis hashes
+            self.logger.info("Step 2: Self-sufficient evidence artifact discovery...")
+            evidence_artifact_hashes = self._find_evidence_artifacts_from_analysis(analysis_artifact_hashes)
             self.evidence_wrapper = self._build_evidence_wrapper(evidence_artifact_hashes)
             
             if not self.evidence_wrapper:
@@ -482,4 +492,106 @@ IMPORTANT: Your response must be valid JSON and must be wrapped in the exact del
             
         except Exception as e:
             self.logger.error(f"Failed to store evidence results: {e}")
+            raise
+    
+    def _load_framework_from_path(self, framework_path: Path) -> Dict[str, Any]:
+        """SELF-SUFFICIENT: Load framework directly from file path."""
+        try:
+            framework_path = Path(framework_path)
+            if not framework_path.exists():
+                raise FileNotFoundError(f"Framework file not found: {framework_path}")
+            
+            framework_content = framework_path.read_text(encoding='utf-8')
+            
+            # Create framework specification structure
+            framework_spec = {
+                "name": framework_path.stem,
+                "content": framework_content,
+                "source_file": str(framework_path)
+            }
+            
+            self.logger.info(f"Successfully loaded framework from {framework_path}")
+            return framework_spec
+            
+        except Exception as e:
+            self.logger.error(f"Failed to load framework from {framework_path}: {e}")
+            raise
+    
+    def _load_statistical_results_from_hash(self, statistical_results_hash: str) -> Dict[str, Any]:
+        """SELF-SUFFICIENT: Load statistical results from artifact hash."""
+        try:
+            if not statistical_results_hash:
+                raise ValueError("statistical_results_hash is required")
+            
+            # Read statistical results artifact
+            content = self.artifact_storage.get_artifact(statistical_results_hash)
+            if not content:
+                raise ValueError(f"Statistical results artifact not found: {statistical_results_hash}")
+            
+            statistical_results = json.loads(content.decode('utf-8'))
+            self.logger.info(f"Successfully loaded statistical results from hash: {statistical_results_hash[:8]}")
+            return statistical_results
+            
+        except Exception as e:
+            self.logger.error(f"Failed to load statistical results from {statistical_results_hash}: {e}")
+            raise
+    
+    def _find_evidence_artifacts_from_analysis(self, analysis_artifact_hashes: List[str]) -> List[str]:
+        """SELF-SUFFICIENT: Find evidence artifacts from analysis artifact hashes."""
+        try:
+            evidence_artifact_hashes = []
+            
+            # Search artifact registry for evidence artifacts
+            if hasattr(self.artifact_storage, 'registry') and self.artifact_storage.registry:
+                for artifact_hash, artifact_info in self.artifact_storage.registry.items():
+                    if isinstance(artifact_info, dict):
+                        metadata = artifact_info.get("metadata", {})
+                        artifact_type = metadata.get("artifact_type", "")
+                        
+                        # Look for evidence artifacts by type patterns
+                        if (artifact_type.startswith("evidence_v6") or 
+                            artifact_type.startswith("evidence_extraction") or
+                            artifact_hash.startswith("evidence_extraction_")):
+                            evidence_artifact_hashes.append(artifact_hash)
+            
+            if not evidence_artifact_hashes:
+                self.logger.warning("No evidence artifacts found in registry")
+                return []
+            
+            self.logger.info(f"Found {len(evidence_artifact_hashes)} evidence artifacts")
+            return evidence_artifact_hashes
+            
+        except Exception as e:
+            self.logger.error(f"Failed to find evidence artifacts: {e}")
+            raise
+    
+    def _run_legacy_interface(self, framework_hash: str, statistical_results: Dict[str, Any], evidence_artifact_hashes: List[str]) -> Dict[str, Any]:
+        """BACKWARD COMPATIBILITY: Run with old interface for gradual migration."""
+        try:
+            self.logger.info("Running with legacy interface for backward compatibility")
+            
+            # Step 1: Load framework and use statistical results directly
+            framework_spec = self._load_framework_specification(framework_hash)
+            
+            # Step 2: Build evidence wrapper
+            self.evidence_wrapper = self._build_evidence_wrapper(evidence_artifact_hashes)
+            if not self.evidence_wrapper:
+                raise RuntimeError("Failed to build evidence wrapper")
+            
+            # Step 3: Use LLM to identify key findings and retrieve evidence
+            evidence_results = self._llm_driven_evidence_retrieval(framework_spec, statistical_results)
+            
+            # Step 4: Store evidence results
+            evidence_artifact_hash = self._store_evidence_results(evidence_results, framework_hash)
+            
+            return {
+                "status": "success",
+                "framework": framework_spec.get('name', 'Unknown'),
+                "evidence_quotes_found": sum(len(result['quotes']) for result in evidence_results),
+                "evidence_artifact_hash": evidence_artifact_hash,
+                "evidence_results": evidence_results
+            }
+            
+        except Exception as e:
+            self.logger.error(f"Legacy interface execution failed: {e}")
             raise
