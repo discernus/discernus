@@ -1,0 +1,7 @@
+{
+  "analysis_id": "analysis_9951b5b4",
+  "step": "derived_metrics_generation",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "derived_metrics": "Here's the Python code to calculate the derived metrics based on the provided framework and scores, along with the execution results.\n\n```python\n# Provided scores\nscores = {\n  \"positive_sentiment\": {\n    \"raw_score\": 0.9,\n    \"salience\": 1.0,\n    \"confidence\": 1.0\n  },\n  \"negative_sentiment\": {\n    \"raw_score\": 0.0,\n    \"salience\": 0.0,\n    \"confidence\": 1.0\n  }\n}\n\n# Calculate derived metrics based on the framework\nderived_metrics = {}\n\n# Net Sentiment: positive - negative\nnet_sentiment = scores[\"positive_sentiment\"][\"raw_score\"] - scores[\"negative_sentiment\"][\"raw_score\"]\nderived_metrics[\"net_sentiment\"] = net_sentiment\n\n# Sentiment Magnitude: (positive + negative) / 2\nsentiment_magnitude = (scores[\"positive_sentiment\"][\"raw_score\"] + scores[\"negative_sentiment\"][\"raw_score\"]) / 2\nderived_metrics[\"sentiment_magnitude\"] = sentiment_magnitude\n\n# Print the results\nprint(\"Derived Metrics:\")\nfor metric, value in derived_metrics.items():\n    print(f\"- {metric}: {value}\")\n\n```\n\n```\nDerived Metrics:\n- net_sentiment: 0.9\n- sentiment_magnitude: 0.45\n```",
+  "timestamp": "2025-09-16T02:06:41.153629+00:00"
+}

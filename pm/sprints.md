@@ -22,9 +22,9 @@
 - ✅ **TEMP WORKSPACE CLEANUP**: Eliminated THICK temp directory creation antipattern
 - 📋 **MIGRATION PLAN CREATED**: Comprehensive 4-phase migration plan documented
 
-**Current Focus**: **Critical Data Structure Error** - The experiment execution is failing with `'list' object has no attribute 'get'` error during initialization. This is blocking all experiments and needs immediate resolution.
+**Current Focus**: **Evidence Management THIN Refactoring** - After successful THIN orchestrator neurosurgery (removed 770+ lines of THICK code), the next priority is moving evidence preparation logic from orchestrator to EvidenceRetrieverAgent for proper THIN architecture.
 
-**Next Priority**: **Evidence Retrieval Phase** - After fixing the data structure error, the next blocking issue is the "RAG index not available" error in the evidence retrieval phase.
+**Status**: Data structure error RESOLVED, orchestrator successfully converted to THIN traffic cop. Ready for evidence management refactoring.
 
 **Migration Strategy**: Continue systematic refactoring of CleanAnalysisOrchestrator to use Show Your Work patterns while preserving mature functionality. Focus on evidence retrieval phase next.
 
@@ -52,14 +52,22 @@
 
 ## Critical Bug Fix Sprints
 
-### Sprint BUG-1: Fix Data Structure Error ⚠️ **URGENT PRIORITY**
+### Sprint BUG-1: Fix Data Structure Error ✅ **COMPLETED**
 
 **Description**: Fix `'list' object has no attribute 'get'` error that blocks all experiment execution
 **Purpose**: Restore basic experiment functionality to enable further development
-**Priority**: URGENT - Blocking all experiments
-**Timeline**: 1-2 days - critical path blocker
-**Success Criteria**: Experiments can run successfully in statistical preparation mode
-**Dependencies**: None - can start immediately
+**Priority**: COMPLETED - Was blocking all experiments
+**Timeline**: COMPLETED - Fixed in 1 day
+**Success Criteria**: ✅ Experiments can run successfully in statistical preparation mode
+**Dependencies**: None - completed immediately
+
+**COMPLETION SUMMARY**:
+- ✅ Data structure error completely resolved
+- ✅ THIN orchestrator neurosurgery completed: removed 770+ lines of THICK code
+- ✅ Orchestrator converted from customs inspector to traffic cop
+- ✅ Statistical processing delegated to StatisticalAgent
+- ✅ CSV generation delegated to StatisticalAgent tool calls
+- ✅ End-to-end functionality confirmed with micro_test_experiment
 
 #### [BUG1-001] Debug Data Structure Mismatch
 
@@ -324,6 +332,130 @@
   - `discernus/tests/test_statistical_agent_verification.py`
 - **Dependencies**: [SA1-001] through [SA1-005] - All components must be complete
 - **Effort**: 2-3 days
+
+---
+
+## Evidence Management THIN Refactoring Sprint
+
+### Sprint EM-1: Move Evidence Preparation from Orchestrator to EvidenceRetrieverAgent ⚠️ **HIGH PRIORITY**
+
+**Description**: Complete THIN architecture by moving evidence preparation logic from orchestrator to EvidenceRetrieverAgent
+**Purpose**: Eliminate remaining THICK customs inspector behavior from orchestrator, make EvidenceRetrieverAgent self-sufficient
+**Priority**: HIGH - Completes THIN architecture transformation
+**Timeline**: 3-5 days - focused refactoring with testing
+**Success Criteria**: Orchestrator just passes artifact hashes to EvidenceRetrieverAgent, which handles all evidence preparation internally
+**Dependencies**: None - orchestrator neurosurgery complete, system working
+
+#### [EM1-001] Analyze Current Evidence Preparation Logic
+
+- **Description**: Document exactly what evidence preparation the orchestrator currently does
+- **Purpose**: Understand what needs to move to EvidenceRetrieverAgent
+- **Priority**: CRITICAL - Must understand before refactoring
+- **Current THICK Behavior in Orchestrator**:
+  - **Framework artifact discovery/creation** (lines 1528-1554): Searches registry, creates framework specification artifact
+  - **Statistical results artifact discovery/creation** (lines 1556-1591): Searches registry, creates statistical results artifact with JSON serialization
+  - **Evidence artifact discovery** (lines 1593-1607): Searches registry for evidence artifacts by type patterns
+  - **Agent configuration** (lines 1609-1616): Complex configuration with shared infrastructure
+- **Solution Strategy**:
+  - Document current interface between orchestrator and EvidenceRetrieverAgent
+  - Identify what preparation logic should move to agent
+  - Design new THIN interface: pass hashes, let agent handle discovery/preparation
+- **Acceptance Criteria**:
+  - ✅ Current evidence preparation logic fully documented
+  - ✅ New THIN interface designed
+  - ✅ Clear migration plan for moving logic to agent
+- **Files to Analyze**:
+  - `discernus/core/clean_analysis_orchestrator.py` (_run_evidence_retrieval_phase method)
+  - `discernus/agents/evidence_retriever_agent/evidence_retriever_agent.py` (current interface)
+- **Dependencies**: None
+- **Effort**: 1 day
+
+#### [EM1-002] Enhance EvidenceRetrieverAgent Self-Sufficiency
+
+- **Description**: Update EvidenceRetrieverAgent to handle all evidence preparation internally
+- **Purpose**: Make agent self-sufficient so orchestrator can just pass simple inputs
+- **Priority**: HIGH - Core refactoring work
+- **Enhancement Areas**:
+  - **Artifact Discovery**: Agent finds its own evidence artifacts from analysis hashes
+  - **Framework Reading**: Agent reads framework directly from path (not pre-created artifact)
+  - **Statistical Results Reading**: Agent reads statistical results from artifact hash (not parsed dict)
+  - **Self-Configuration**: Agent handles its own infrastructure setup
+- **Solution Strategy**:
+  - Modify agent to accept simpler inputs: analysis_hashes, statistical_hash, framework_path
+  - Move artifact discovery logic from orchestrator to agent
+  - Add framework reading capability to agent
+  - Add statistical results artifact reading to agent
+- **Acceptance Criteria**:
+  - ✅ Agent accepts analysis artifact hashes and finds evidence artifacts itself
+  - ✅ Agent reads framework directly from path
+  - ✅ Agent reads statistical results from artifact hash
+  - ✅ Agent handles all infrastructure setup internally
+  - ✅ No regression in evidence retrieval quality
+- **Files to Update**:
+  - `discernus/agents/evidence_retriever_agent/evidence_retriever_agent.py` (main logic)
+  - `discernus/agents/evidence_retriever_agent/prompt.yaml` (if needed)
+- **Dependencies**: [EM1-001] - Analysis must be complete
+- **Effort**: 2-3 days
+
+#### [EM1-003] Simplify Orchestrator Evidence Phase
+
+- **Description**: Replace THICK evidence preparation with simple THIN agent call
+- **Purpose**: Complete orchestrator transformation to pure traffic cop
+- **Priority**: HIGH - Final THIN architecture step
+- **Current THICK Code to Remove**:
+  - **80+ lines of evidence preparation** (framework discovery, statistical results creation, evidence discovery)
+  - **Complex agent configuration** (shared infrastructure setup)
+  - **Data structure transformation** (tuple key conversion, JSON serialization)
+- **Solution Strategy**:
+  - Replace entire `_run_evidence_retrieval_phase` method with simple agent call
+  - Pass only artifact hashes and paths to enhanced EvidenceRetrieverAgent
+  - Remove all evidence artifact discovery and preparation logic
+  - Let agent handle all the complexity internally
+- **Acceptance Criteria**:
+  - ✅ Orchestrator evidence phase reduced to ~10 lines
+  - ✅ No evidence artifact discovery in orchestrator
+  - ✅ No data structure transformation in orchestrator
+  - ✅ Evidence retrieval works exactly as before
+  - ✅ No regression in synthesis quality
+- **Files to Update**:
+  - `discernus/core/clean_analysis_orchestrator.py` (_run_evidence_retrieval_phase method)
+- **Dependencies**: [EM1-002] - Enhanced agent must be ready
+- **Effort**: 1 day
+
+#### [EM1-004] Integration Testing and Validation
+
+- **Description**: Comprehensive testing of THIN evidence management
+- **Purpose**: Ensure evidence refactoring maintains quality and functionality
+- **Priority**: HIGH - Quality assurance
+- **Testing Requirements**:
+  - **Unit tests**: EvidenceRetrieverAgent with new interface
+  - **Integration tests**: Full pipeline with THIN evidence management
+  - **Quality tests**: Evidence retrieval quality matches previous version
+  - **Performance tests**: No performance regression
+- **Solution Strategy**:
+  - Test enhanced EvidenceRetrieverAgent independently
+  - Test full pipeline with multiple experiments
+  - Compare evidence quality before/after refactoring
+  - Validate synthesis reports maintain quality
+- **Acceptance Criteria**:
+  - ✅ All tests pass with enhanced agent
+  - ✅ Full pipeline works end-to-end
+  - ✅ Evidence retrieval quality maintained
+  - ✅ No performance regression
+  - ✅ Synthesis reports maintain quality
+- **Files to Create/Update**:
+  - `discernus/tests/test_evidence_retriever_agent_enhanced.py`
+  - Integration test updates
+- **Dependencies**: [EM1-003] - Orchestrator changes must be complete
+- **Effort**: 1-2 days
+
+**Sprint EM-1 Success Criteria**:
+- ✅ EvidenceRetrieverAgent is completely self-sufficient
+- ✅ Orchestrator evidence phase reduced to simple agent call (~10 lines)
+- ✅ 80-100 lines of THICK evidence preparation removed from orchestrator
+- ✅ Evidence retrieval quality maintained or improved
+- ✅ Full pipeline works end-to-end with THIN evidence management
+- ✅ Orchestrator is now pure traffic cop for all phases
 
 ---
 
