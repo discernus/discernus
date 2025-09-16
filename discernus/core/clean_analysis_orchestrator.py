@@ -1332,7 +1332,7 @@ class CleanAnalysisOrchestrator:
             corpus_manifest_path = self.experiment_path / self.config['corpus']
             corpus_manifest = corpus_manifest_path.read_text(encoding='utf-8')
             
-            batch_id = f"stats_{datetime.now().strftime('%Y%m%dT%H%M%SZ')}"
+            batch_id = f"stats_{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}"
             
             self._log_progress(f"📊 StatisticalAgent analyzing batch: {batch_id} with {len(analysis_artifact_hashes)} artifacts")
             

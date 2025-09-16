@@ -658,20 +658,15 @@ Use the generate_csv_file tool for each CSV file. Ensure proper CSV formatting w
         
         # Look for existing run directories or create a new one
         runs_dir = experiment_path / "runs"
-        if runs_dir.exists():
-            # Find the most recent run directory
-            run_dirs = [d for d in runs_dir.iterdir() if d.is_dir()]
-            if run_dirs:
-                latest_run = max(run_dirs, key=lambda x: x.stat().st_mtime)
-                data_dir = latest_run / "data"
-            else:
-                # Create new run directory
-                run_id = datetime.now().strftime("%Y%m%dT%H%M%SZ")
-                data_dir = runs_dir / run_id / "data"
+        
+        # Extract run_id from batch_id (format: "stats_20250916T200726Z")
+        if batch_id.startswith("stats_"):
+            run_id = batch_id[6:]  # Remove "stats_" prefix
         else:
-            # Create runs structure
+            # Fallback to current timestamp
             run_id = datetime.now().strftime("%Y%m%dT%H%M%SZ")
-            data_dir = runs_dir / run_id / "data"
+        
+        data_dir = runs_dir / run_id / "data"
         
         # Ensure data directory exists
         data_dir.mkdir(parents=True, exist_ok=True)
