@@ -28,13 +28,13 @@ os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 import yaml
 import json
-import hashlib
+# REMOVED: import hashlib - unused
 import shutil
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 import pandas as pd
-import pickle
+# REMOVED: import pickle - unused
 from .logging_config import setup_logging, get_logger, log_experiment_start, log_experiment_complete, log_experiment_failure
 from .security_boundary import ExperimentSecurityBoundary, SecurityError
 from .audit_logger import AuditLogger
@@ -50,7 +50,7 @@ from ..agents.unified_synthesis_agent import UnifiedSynthesisAgent
 # CSVExportAgent DEPRECATED - StatisticalAgent produces CSV via tool calls
 from ..gateway.llm_gateway import LLMGateway
 from ..gateway.model_registry import ModelRegistry
-from .unified_cache_manager import ValidationCacheManager, StatisticalAnalysisCacheManager, AnalysisCacheManager
+from .unified_cache_manager import ValidationCacheManager, AnalysisCacheManager
 from .rag_index_manager import RAGIndexManager
 from .provenance_organizer import ProvenanceOrganizer
 from .directory_structure_reorganizer import reorganize_directory_structure
