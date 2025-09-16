@@ -1314,6 +1314,36 @@ class CleanAnalysisOrchestrator:
             self._log_progress(f"❌ Statistical analysis phase failed: {str(e)}")
             raise CleanAnalysisError(f"Statistical analysis failed: {str(e)}")
     
+    def _prepare_documents_for_analysis(self, corpus_documents: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """Prepare corpus documents for analysis by loading content and adding document_id."""
+        prepared_docs = []
+        corpus_dir = self.experiment_path / "corpus"
+        
+        for doc_info in corpus_documents:
+            filename = doc_info.get('filename')
+            if not filename:
+                continue
+            
+            source_file = self._find_corpus_file(corpus_dir, filename)
+            if not source_file or not source_file.exists():
+                self._log_progress(f"⚠️ Skipping missing file for analysis: {filename}")
+                continue
+            
+            document_content = source_file.read_text(encoding='utf-8')
+            
+            # Add document_id if not present (assuming filename is unique enough)
+            # For now, we'll use a simple hash of the filename
+            doc_id = f"doc_{hash(filename)}"
+            
+            prepared_docs.append({
+                'filename': filename,
+                'content': document_content,
+                'document_id': doc_id,
+                'metadata': doc_info.get('metadata', {})
+            })
+        
+        return prepared_docs
+    
     def _validate_assets(self, statistical_results: Dict[str, Any]) -> None:
         """Simple validation that basic files exist. Let the synthesis LLM handle data quality assessment."""
         self._log_progress("🔍 Validating basic synthesis prerequisites...")
