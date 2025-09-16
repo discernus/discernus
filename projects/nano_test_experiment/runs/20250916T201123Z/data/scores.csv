@@ -1,0 +1,3 @@
+analysis_id,dimension,raw_score,salience,confidence
+analysis_1d91dd78,positive_sentiment,0.9,1.0,1.0
+analysis_1d91dd78,negative_sentiment,0.0,0.0,1.0
