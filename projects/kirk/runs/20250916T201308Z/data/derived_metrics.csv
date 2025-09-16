@@ -1,0 +1,10 @@
+analysis_id,metric_name,metric_value
+analysis_e7715d0f,identity_tension,0.0
+analysis_e7715d0f,emotional_tension,0.047999999999999996
+analysis_e7715d0f,success_tension,0.0
+analysis_e7715d0f,relational_tension,0.0
+analysis_e7715d0f,goal_tension,0.0
+analysis_e7715d0f,strategic_contradiction_index,0.0096
+analysis_e7715d0f,descriptive_cohesion_index,0.07142857142857142
+analysis_e7715d0f,motivational_cohesion_index,0.05714285714285714
+analysis_e7715d0f,full_cohesion_index,0.02857142857142857
