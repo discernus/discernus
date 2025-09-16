@@ -1,0 +1,5 @@
+document_id,filename,negative_sentiment,positive_sentiment,evidence_hash
+positive_test_1.txt,positive_test_1.txt,0.0,1.0,06ab94542eeb33bf
+3671de4a6c31fc2b,positive_test_2.txt,0.0,0.95,f3623d598b028e7a
+negative_test_1.txt,Negative Test Document 1,0.95,0.0,c0c493abf945b9a1
+negative_test_2.txt,negative_test_2.txt,0.95,0.0,8be2ef014dd0a89b
