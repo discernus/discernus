@@ -1,0 +1,7 @@
+{
+  "analysis_id": "analysis_18a94f32",
+  "step": "derived_metrics_generation",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "derived_metrics": "```python\nimport json\n\n# Input dimensional scores\nscores_data = {\n  \"positive_sentiment\": {\n    \"raw_score\": 1.0,\n    \"salience\": 1.0,\n    \"confidence\": 1.0\n  },\n  \"negative_sentiment\": {\n    \"raw_score\": 0.0,\n    \"salience\": 0.0,\n    \"confidence\": 1.0\n  }\n}\n\n# Derived metrics formulas from the framework\n# Net Sentiment: Balance between positive and negative sentiment (positive - negative)\n# Sentiment Magnitude: Average emotional intensity (positive + negative) / 2\n\n# Calculate derived metrics\npositive_sentiment_score = scores_data[\"positive_sentiment\"][\"raw_score\"]\nnegative_sentiment_score = scores_data[\"negative_sentiment\"][\"raw_score\"]\n\nnet_sentiment = positive_sentiment_score - negative_sentiment_score\nsentiment_magnitude = (positive_sentiment_score + negative_sentiment_score) / 2\n\n# Prepare results\nderived_metrics_results = {\n    \"net_sentiment\": net_sentiment,\n    \"sentiment_magnitude\": sentiment_magnitude\n}\n\nprint(json.dumps(derived_metrics_results, indent=2))\n```\n\n```json\n{\n  \"net_sentiment\": 1.0,\n  \"sentiment_magnitude\": 0.5\n}\n```",
+  "timestamp": "2025-09-16T13:32:51.587203+00:00"
+}

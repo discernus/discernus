@@ -20,7 +20,7 @@ Descriptive analysis of sentiment scores between positive and negative sentiment
 **Statistical Analysis Requirements**:
 - Descriptive statistics for all dimensions and derived metrics
 - Pattern analysis between sentiment categories
-- Reliability analysis for measurement consistency
+- Basic measurement consistency checks (reliability analysis not feasible with N=4)
 
 ---
 
@@ -35,7 +35,7 @@ metadata:
 
 # 5.2: Components (Required)
 components:
-  framework: "sentiment_binary_v1.md"
+  framework: "sentiment_with_derived_metrics_v1.md"
   corpus: "corpus.md"
 
 # 5.3: Hypotheses (Optional but Recommended)

@@ -1,0 +1,7 @@
+{
+  "analysis_id": "analysis_c829f3bd",
+  "step": "derived_metrics_generation",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "derived_metrics": "```python\nimport json\n\nscores_data = [\n  {\n    \"document_id\": \"positive_test_1\",\n    \"positive_sentiment\": {\n      \"raw_score\": 1.0,\n      \"salience\": 1.0,\n      \"confidence\": 1.0,\n      \"evidence\": \"The text was overwhelmingly positive.\"\n    },\n    \"negative_sentiment\": {\n      \"raw_score\": 0.0,\n      \"salience\": 0.0,\n      \"confidence\": 1.0,\n      \"evidence\": \"No negative sentiment was detected.\"\n    }\n  }\n]\n\nresults = []\n\nfor record in scores_data:\n    positive_sentiment = record[\"positive_sentiment\"][\"raw_score\"]\n    negative_sentiment = record[\"negative_sentiment\"][\"raw_score\"]\n\n    # Calculate Net Sentiment\n    net_sentiment = positive_sentiment - negative_sentiment\n\n    # Calculate Sentiment Magnitude\n    sentiment_magnitude = (positive_sentiment + negative_sentiment) / 2\n\n    results.append({\n        \"document_id\": record[\"document_id\"],\n        \"net_sentiment\": net_sentiment,\n        \"sentiment_magnitude\": sentiment_magnitude\n    })\n\nprint(json.dumps(results, indent=2))\n```\n\n```json\n[\n  {\n    \"document_id\": \"positive_test_1\",\n    \"net_sentiment\": 1.0,\n    \"sentiment_magnitude\": 0.5\n  }\n]\n```",
+  "timestamp": "2025-09-16T13:32:31.748820+00:00"
+}

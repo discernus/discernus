@@ -1,0 +1,76 @@
+{
+  "artifact_transformations": [],
+  "audit_references": {
+    "current_time": "2025-09-16T13:33:29.702527+00:00",
+    "log_files": {
+      "agents": "logs/agents.jsonl",
+      "artifacts": "logs/artifacts.jsonl",
+      "costs": "logs/costs.jsonl",
+      "llm_interactions": "logs/llm_interactions.jsonl",
+      "orchestrator": "logs/orchestrator.jsonl",
+      "system": "logs/system.jsonl"
+    },
+    "logs_directory": "/Volumes/code/discernus/projects/micro_test_experiment/session/20250916T133139Z/logs",
+    "session_id": "20250916T133139Z_3ffe184f",
+    "start_time": "2025-09-16T13:31:39.191255+00:00"
+  },
+  "cache_analysis": {
+    "artifact_storage": {
+      "artifacts_dir": "/Volumes/code/discernus/projects/micro_test_experiment/shared_cache/artifacts",
+      "total_artifacts": 62,
+      "total_bytes": 93943,
+      "total_mb": 0.09
+    },
+    "cache_hits": 0,
+    "cache_misses": 0,
+    "hit_rate": 0.0
+  },
+  "cost_tracking": {
+    "total_cost_usd": 0.05702000000000001
+  },
+  "created_at": "2025-09-16T13:31:39.193017+00:00",
+  "execution_timeline": [],
+  "experiment_config": {},
+  "finalized_at": "2025-09-16T13:33:29.702479+00:00",
+  "input_artifacts": {},
+  "llm_interactions": [
+    {
+      "agent_name": "ExperimentCoherenceAgent",
+      "interaction_hash": "",
+      "metadata": {
+        "agent": "ExperimentCoherenceAgent",
+        "cost": 0.05702000000000001,
+        "tokens_used": 21221
+      },
+      "model": "vertex_ai/gemini-2.5-pro",
+      "prompt_length": 0,
+      "response_length": 0,
+      "stage": "validation",
+      "timestamp": "2025-09-16T13:32:15.466268+00:00"
+    }
+  ],
+  "manifest_version": "2.0",
+  "performance_metrics": {},
+  "quality_assurance": {},
+  "resume_capability": {
+    "can_resume_from_stats": true,
+    "resume_artifacts": [],
+    "resume_metadata": {
+      "analysis_documents": 4,
+      "csv_export_completed": true,
+      "derived_metrics_completed": true,
+      "resume_timestamp": "2025-09-16T13:33:29.145421+00:00"
+    },
+    "statistical_prep_completed": true
+  },
+  "run_metadata": {},
+  "run_mode": {
+    "analysis_only": false,
+    "dry_run": false,
+    "ensemble_runs": null,
+    "mode_type": "statistical_prep",
+    "resume_from_stats": false,
+    "skip_synthesis": false,
+    "statistical_prep": true
+  }
+}
