@@ -96,6 +96,7 @@ class StatisticalAgent:
             Dictionary containing statistical results, verification status, and CSV paths
         """
         
+        
         self.audit.log_agent_event(self.agent_name, "batch_analysis_started", {
             "batch_id": batch_id,
             "framework_length": len(framework_content),
@@ -110,7 +111,7 @@ class StatisticalAgent:
         try:
             # Step 1: Statistical Execution (Pro)
             statistical_result = self._step1_statistical_execution(
-                framework_content, experiment_content, corpus_manifest, batch_id
+                framework_content, experiment_content, corpus_manifest, batch_id, analysis_artifact_hashes
             )
             
             # Step 2: Verification (Lite + tool calling)
@@ -162,7 +163,8 @@ class StatisticalAgent:
                                    framework_content: str,
                                    experiment_content: str,
                                    corpus_manifest: str,
-                                   batch_id: str) -> Dict[str, Any]:
+                                   batch_id: str,
+                                   analysis_artifact_hashes: Optional[List[str]] = None) -> Dict[str, Any]:
         """
         Step 1: Generate and execute statistical analysis functions using Gemini 2.5 Pro.
         

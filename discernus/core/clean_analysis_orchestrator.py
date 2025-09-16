@@ -179,8 +179,10 @@ class CleanAnalysisOrchestrator:
         
         try:
             self._log_progress("🔧 DEBUG: Starting run_experiment method")
+            self._log_progress("🔧 DEBUG: About to initialize infrastructure")
             # Initialize infrastructure
             audit_logger = self._initialize_infrastructure(run_id)
+            self._log_progress("🔧 DEBUG: Infrastructure initialized successfully")
             
             # Track experiment timing and audit logger for log summary
             self._experiment_start_time = start_time
@@ -1287,6 +1289,7 @@ class CleanAnalysisOrchestrator:
     def _run_statistical_analysis_phase(self, model: str, audit_logger: AuditLogger, analysis_results: List[Dict[str, Any]], derived_metrics_results: Dict[str, Any]) -> Dict[str, Any]:
         """THIN approach: Pass analysis artifact hashes to StatisticalAgent, let it do the work."""
         self._log_progress("📊 THIN: Delegating statistical analysis to StatisticalAgent...")
+        self._log_progress(f"🔧 DEBUG: _run_statistical_analysis_phase called with {len(analysis_results)} analysis results")
         
         try:
             # Collect analysis artifact hashes
