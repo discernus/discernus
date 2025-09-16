@@ -172,6 +172,7 @@ class CleanAnalysisOrchestrator:
         - Statistical Prep: analysis + derived metrics + CSV export
         - Analysis Only: analysis + CSV export
         """
+        self._log_progress(f"🔧 DEBUG: run_experiment started, statistical_prep={self.statistical_prep}")
         
         run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
         start_time = datetime.now(timezone.utc)
@@ -343,8 +344,11 @@ class CleanAnalysisOrchestrator:
             self._log_progress("📊 THIN: Derived metrics available in AnalysisAgent artifacts")
             derived_metrics_results = {"status": "available_in_artifacts", "message": "Derived metrics produced by AnalysisAgent tool calls"}
             
+            self._log_progress("🔧 DEBUG: Derived metrics logic completed, about to check statistical_prep")
             # Statistical preparation mode: Run StatisticalAgent, then copy CSV outputs and exit
+            self._log_progress(f"🔧 DEBUG: About to check statistical_prep flag: {self.statistical_prep}")
             if self.statistical_prep:
+                self._log_progress("🔧 DEBUG: Inside statistical_prep block - about to run StatisticalAgent")
                 # First run statistical analysis to generate the CSV files
                 self._log_progress("📊 Statistical preparation mode: Running statistical analysis...")
                 phase_start = datetime.now(timezone.utc)
@@ -1182,7 +1186,10 @@ class CleanAnalysisOrchestrator:
         if cache_result.hit:
             self._log_progress("💾 Using cached analysis results")
             self.performance_metrics["cache_hits"] += 1
-            return cache_result.cached_content["analysis_results"]
+            # CRITICAL: Store cached results in self._analysis_results for later phases
+            analysis_results = cache_result.cached_content["analysis_results"]
+            self._analysis_results = analysis_results
+            return analysis_results
         
         # Cache miss - perform analysis
         self._log_progress("🔍 Cache miss - performing analysis...")
@@ -1283,6 +1290,7 @@ class CleanAnalysisOrchestrator:
         
         try:
             # Collect analysis artifact hashes
+            self._log_progress(f"🔧 DEBUG: Collecting artifact hashes from {len(analysis_results)} analysis results")
             analysis_artifact_hashes = []
             for result in analysis_results:
                 if "scores_hash" in result:
@@ -1291,6 +1299,8 @@ class CleanAnalysisOrchestrator:
                     analysis_artifact_hashes.append(result["evidence_hash"])
                 if "derived_metrics_hash" in result:
                     analysis_artifact_hashes.append(result["derived_metrics_hash"])
+            
+            self._log_progress(f"🔧 DEBUG: Collected {len(analysis_artifact_hashes)} artifact hashes")
             
             if not analysis_artifact_hashes:
                 self._log_progress("⚠️ No analysis artifacts found to process")
@@ -1313,21 +1323,22 @@ class CleanAnalysisOrchestrator:
             
             batch_id = f"stats_{datetime.now().strftime('%Y%m%dT%H%M%SZ')}"
             
-            self._log_progress(f"📊 StatisticalAgent analyzing batch: {batch_id}")
+            self._log_progress(f"📊 StatisticalAgent analyzing batch: {batch_id} with {len(analysis_artifact_hashes)} artifacts")
             statistical_results = statistical_agent.analyze_batch(
                 framework_content=framework_content,
                 experiment_content=experiment_content,
                 corpus_manifest=corpus_manifest,
-                batch_id=batch_id
+                batch_id=batch_id,
+                analysis_artifact_hashes=analysis_artifact_hashes
             )
             
             if statistical_results and statistical_results.get("batch_id"):
                 self._log_progress("✅ StatisticalAgent completed successfully")
                 return {
                     "status": "completed",
-                    "statistical_results_hash": statistical_results.get("results_hash"),
-                    "csv_artifacts": statistical_results.get("csv_artifacts", []),
-                    "metadata": statistical_results.get("metadata", {})
+                    "statistical_results_hash": statistical_results.get("cache_hash"),
+                    "csv_artifacts": statistical_results.get("csv_generation", {}).get("csv_files", []),
+                    "metadata": statistical_results.get("total_cost_info", {})
                 }
             else:
                 raise CleanAnalysisError(f"StatisticalAgent failed: {statistical_results.get("error")}")

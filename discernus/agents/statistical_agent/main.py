@@ -81,7 +81,8 @@ class StatisticalAgent:
                      framework_content: str,
                      experiment_content: str,
                      corpus_manifest: str,
-                     batch_id: str) -> Dict[str, Any]:
+                     batch_id: str,
+                     analysis_artifact_hashes: Optional[List[str]] = None) -> Dict[str, Any]:
         """
         Perform comprehensive statistical analysis on a batch of analysis artifacts.
         
@@ -170,7 +171,7 @@ class StatisticalAgent:
         """
         
         # Discover and load analysis artifacts from shared cache
-        analysis_artifacts = self._discover_analysis_artifacts(batch_id)
+        analysis_artifacts = self._discover_analysis_artifacts(batch_id, analysis_artifact_hashes)
         
         if not analysis_artifacts:
             raise ValueError(f"No analysis artifacts found for batch {batch_id}")
@@ -490,31 +491,71 @@ Use the generate_csv_file tool for each CSV file. Ensure proper CSV formatting w
         
         return csv_result
 
-    def _discover_analysis_artifacts(self, batch_id: str) -> Dict[str, Any]:
+    def _discover_analysis_artifacts(self, batch_id: str, specific_hashes: Optional[List[str]] = None) -> Dict[str, Any]:
         """
         Discover analysis artifacts from shared cache for the given batch.
         
-        Looks for score_extraction and derived_metrics artifacts that match
-        the batch or experiment.
+        Args:
+            batch_id: Batch identifier for logging
+            specific_hashes: If provided, load only these specific artifact hashes.
+                           If None, falls back to loading from current analysis session.
+        
+        Returns:
+            Dictionary of artifact_hash -> artifact_data
         """
         artifacts = {}
         
-        # Search through artifact registry for analysis artifacts
-        for artifact_hash, artifact_info in self.storage.registry.items():
-            metadata = artifact_info.get("metadata", {})
-            artifact_type = metadata.get("artifact_type", "")
+        if specific_hashes:
+            # THIN approach: Load only the specific artifacts requested by orchestrator
+            self.logger.info(f"Loading {len(specific_hashes)} specific artifacts for batch {batch_id}")
             
-            # Look for score and derived metrics artifacts
-            if artifact_type in ["score_extraction", "derived_metrics"]:
+            for artifact_hash in specific_hashes:
                 try:
                     artifact_content = self.storage.get_artifact(artifact_hash)
                     artifact_data = json.loads(artifact_content.decode('utf-8'))
                     artifacts[artifact_hash] = artifact_data
                 except Exception as e:
-                    self.logger.warning(f"Could not load artifact {artifact_hash}: {e}")
+                    self.logger.warning(f"Could not load specific artifact {artifact_hash}: {e}")
                     continue
+            
+            self.logger.info(f"Successfully loaded {len(artifacts)} specific artifacts")
+            return artifacts
         
-        self.logger.info(f"Discovered {len(artifacts)} analysis artifacts for batch {batch_id}")
+        # Fallback: Load from current analysis session (legacy behavior)
+        self.logger.warning("No specific artifacts provided, falling back to current session discovery")
+        
+        analysis_sessions = {}
+        for artifact_hash, artifact_info in self.storage.registry.items():
+            metadata = artifact_info.get("metadata", {})
+            artifact_type = metadata.get("artifact_type", "")
+            analysis_id = metadata.get("analysis_id", "")
+            
+            if artifact_type in ["score_extraction", "derived_metrics"] and analysis_id:
+                if analysis_id not in analysis_sessions:
+                    analysis_sessions[analysis_id] = []
+                analysis_sessions[analysis_id].append((artifact_hash, artifact_info))
+        
+        if not analysis_sessions:
+            self.logger.warning(f"No analysis artifacts found for batch {batch_id}")
+            return artifacts
+        
+        # Use the most recent analysis session
+        current_analysis_id = max(analysis_sessions.keys())
+        current_artifacts = analysis_sessions[current_analysis_id]
+        
+        self.logger.info(f"Using analysis session {current_analysis_id} with {len(current_artifacts)} artifacts")
+        
+        # Load artifacts from current analysis session
+        for artifact_hash, artifact_info in current_artifacts:
+            try:
+                artifact_content = self.storage.get_artifact(artifact_hash)
+                artifact_data = json.loads(artifact_content.decode('utf-8'))
+                artifacts[artifact_hash] = artifact_data
+            except Exception as e:
+                self.logger.warning(f"Could not load artifact {artifact_hash}: {e}")
+                continue
+        
+        self.logger.info(f"Discovered {len(artifacts)} analysis artifacts from current session")
         return artifacts
 
     def _prepare_statistical_prompt(self,
