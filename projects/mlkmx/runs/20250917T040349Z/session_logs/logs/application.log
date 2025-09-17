@@ -1,0 +1,12 @@
+2025-09-17 00:03:49.910 | INFO     | discernus.core.logging_config:setup_logging:220 | Logging system initialized
+2025-09-17 00:03:49.913 | INFO     | discernus.core.logging_config:log_experiment_start:243 | Experiment started
+2025-09-17 00:03:50.851 | INFO     | discernus.gateway.llm_gateway:execute_call:164 | LLM Request
+2025-09-17 00:05:06.546 | INFO     | discernus.gateway.llm_gateway:execute_call:182 | LLM Response
+2025-09-17 00:05:06.552 | INFO     | discernus.gateway.llm_gateway_enhanced:execute_call_with_tools:83 | LLM Tool Call Request
+2025-09-17 00:05:19.651 | INFO     | discernus.gateway.llm_gateway_enhanced:execute_call_with_tools:105 | LLM Tool Call Response
+2025-09-17 00:05:19.659 | INFO     | discernus.gateway.llm_gateway_enhanced:execute_call_with_tools:83 | LLM Tool Call Request
+2025-09-17 00:05:53.596 | INFO     | discernus.gateway.llm_gateway_enhanced:execute_call_with_tools:105 | LLM Tool Call Response
+2025-09-17 00:05:54.888 | INFO     | discernus.gateway.llm_gateway:execute_call:164 | LLM Request
+2025-09-17 00:06:16.912 | INFO     | discernus.gateway.llm_gateway:execute_call:182 | LLM Response
+2025-09-17 00:06:17.428 | INFO     | discernus.gateway.llm_gateway:execute_call:164 | LLM Request
+2025-09-17 00:08:33.365 | INFO     | discernus.gateway.llm_gateway:execute_call:182 | LLM Response

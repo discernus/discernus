@@ -1,0 +1,25 @@
+{
+  "status": "completed",
+  "statistical_results_hash": "4831018f460ae55086640e74f34f6c40b5db577ceba818661a7f2d735ed6fe4a",
+  "csv_artifacts": [],
+  "metadata": {
+    "total_cost_usd": 0.0,
+    "total_execution_time_seconds": 122.735701,
+    "total_tokens": 0,
+    "cost_breakdown": {
+      "statistical_execution": 0.0,
+      "verification": 0.0,
+      "csv_generation": 0.0
+    },
+    "performance_breakdown": {
+      "statistical_execution_time": 75.695359,
+      "verification_time": 13.10165,
+      "csv_generation_time": 33.938692
+    },
+    "models_used": [
+      "vertex_ai/gemini-2.5-pro",
+      "vertex_ai/gemini-2.5-flash-lite",
+      "vertex_ai/gemini-2.5-flash"
+    ]
+  }
+}
