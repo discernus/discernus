@@ -1,0 +1,12 @@
+analysis_id,model_used,timestamp,metric_name,metric_value
+"analysis_f52b5745","vertex_ai/gemini-2.5-flash-lite","2025-09-16T23:13:16.099498+00:00","individualizing_tension",0.05000000000000002
+"analysis_f52b5745","vertex_ai/gemini-2.5-flash-lite","2025-09-16T23:13:16.099498+00:00","binding_tension",0.4550000000000001
+"analysis_f52b5745","vertex_ai/gemini-2.5-flash-lite","2025-09-16T23:13:16.099498+00:00","liberty_tension",0.0
+"analysis_f52b5745","vertex_ai/gemini-2.5-flash-lite","2025-09-16T23:13:16.099498+00:00","moral_strategic_contradiction_index",0.08416666666666668
+"analysis_f52b5745","vertex_ai/gemini-2.5-flash-lite","2025-09-16T23:13:16.099498+00:00","moral_salience_concentration",0.17559434790306395
+"analysis_f52b5745","vertex_ai/gemini-2.5-flash-lite","2025-09-16T23:13:16.099498+00:00","individualizing_foundations_mean",0.9125
+"analysis_f52b5745","vertex_ai/gemini-2.5-flash-lite","2025-09-16T23:13:16.099498+00:00","binding_foundations_mean",0.75
+"analysis_f52b5745","vertex_ai/gemini-2.5-flash-lite","2025-09-16T23:13:16.099498+00:00","liberty_foundation_mean",0.875
+"analysis_f52b5745","vertex_ai/gemini-2.5-flash-lite","2025-09-16T23:13:16.099498+00:00","individualizing_salience_mean",0.9125
+"analysis_f52b5745","vertex_ai/gemini-2.5-flash-lite","2025-09-16T23:13:16.099498+00:00","binding_salience_mean",0.7
+"analysis_f52b5745","vertex_ai/gemini-2.5-flash-lite","2025-09-16T23:13:16.099498+00:00","liberty_salience_mean",0.875
