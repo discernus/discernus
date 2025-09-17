@@ -175,6 +175,8 @@ class CleanAnalysisOrchestrator:
         - Analysis Only: analysis + CSV export
         """
         self._log_progress(f"🔧 DEBUG: run_experiment started, statistical_prep={self.statistical_prep}")
+        self._log_progress(f"🔧 DEBUG: analysis_only={self.analysis_only}, skip_synthesis={self.skip_synthesis}")
+        self._log_progress(f"🔧 DEBUG: resume_from_stats={self.resume_from_stats}")
         
         run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
         start_time = datetime.now(timezone.utc)
@@ -365,12 +367,14 @@ class CleanAnalysisOrchestrator:
                     statistical_results = self._run_statistical_analysis_phase(self.derived_metrics_model, audit_logger, analysis_results, derived_metrics_results)
                     self._log_status("Statistical analysis completed")
                     self._log_phase_timing("statistical_analysis", phase_start)
+                    self._log_progress(f"🔧 DEBUG: Statistical analysis phase completed successfully, results: {type(statistical_results)}")
                 except Exception as e:
                     self._log_progress(f"❌ Statistical analysis phase failed: {str(e)}")
                     raise CleanAnalysisError(f"Statistical analysis phase failed: {str(e)}")
                 
                 # Now copy the CSV files that StatisticalAgent produced
                 self._log_progress("📊 Copying CSV files from StatisticalAgent...")
+                self._log_progress(f"🔧 DEBUG: About to call _copy_statistical_artifacts_to_results with run_id: {run_id}")
                 results_dir = self._copy_statistical_artifacts_to_results(run_id)
                 
                 # Set resume capability in manifest
@@ -429,6 +433,14 @@ class CleanAnalysisOrchestrator:
                     self._log_progress("   🔄 To complete synthesis later, run:")
                     self._log_progress(f"      discernus resume {self.experiment_path}")
                     self._log_progress("   💡 Perfect for external statistical analysis workflows!")
+                    
+                    # WORKAROUND: Ensure CSV files are always copied regardless of code path
+                    self._log_progress("🔧 WORKAROUND: Ensuring CSV files are copied to results directory...")
+                    try:
+                        fallback_results_dir = self._copy_statistical_artifacts_to_results(run_id)
+                        self._log_progress(f"✅ WORKAROUND: CSV files copied to {fallback_results_dir}")
+                    except Exception as e:
+                        self._log_progress(f"⚠️ WORKAROUND: CSV copy failed (non-fatal): {str(e)}")
                     
                     # Log partial completion for statistical prep mode
                     from .logging_config import get_logger
@@ -652,6 +664,14 @@ class CleanAnalysisOrchestrator:
                 except Exception as e:
                     self._log_progress(f"⚠️ Manifest finalization failed: {str(e)}")
 
+            # WORKAROUND: Ensure CSV files are always copied regardless of code path
+            self._log_progress("🔧 WORKAROUND: Ensuring CSV files are copied to results directory...")
+            try:
+                fallback_results_dir = self._copy_statistical_artifacts_to_results(run_id)
+                self._log_progress(f"✅ WORKAROUND: CSV files copied to {fallback_results_dir}")
+            except Exception as e:
+                self._log_progress(f"⚠️ WORKAROUND: CSV copy failed (non-fatal): {str(e)}")
+            
             return {
                 "run_id": run_id,
                 "results_directory": str(outputs_dir),
@@ -1040,9 +1060,22 @@ class CleanAnalysisOrchestrator:
                 )
 
         # Prepare validation result for caching
+        issues_list = []
+        if hasattr(validation_result, 'issues') and validation_result.issues:
+            for issue in validation_result.issues:
+                if hasattr(issue, 'description'):
+                    # ValidationIssue object
+                    issues_list.append(issue.description)
+                elif isinstance(issue, dict):
+                    # Dictionary format
+                    issues_list.append(issue.get('description', str(issue)))
+                else:
+                    # Fallback
+                    issues_list.append(str(issue))
+        
         validation_data = {
             "success": validation_result.success,
-            "issues": [issue.description for issue in validation_result.issues] if hasattr(validation_result, 'issues') else [],
+            "issues": issues_list,
             "model": validation_model,
             "validated_at": datetime.now(timezone.utc).isoformat()
         }
@@ -1052,18 +1085,23 @@ class CleanAnalysisOrchestrator:
         
         # Check validation result
         if not validation_result.success:
-            # Handle both ValidationIssue objects and dictionaries
+            # Handle all possible issue formats
             issue_descriptions = []
             for issue in validation_result.issues:
-                if hasattr(issue, 'description'):
-                    # ValidationIssue object
-                    issue_descriptions.append(issue.description)
-                elif isinstance(issue, dict):
-                    # Dictionary format
-                    issue_descriptions.append(issue.get('description', str(issue)))
-                else:
-                    # Fallback
-                    issue_descriptions.append(str(issue))
+                try:
+                    if hasattr(issue, 'description'):
+                        # ValidationIssue object
+                        issue_descriptions.append(str(issue.description))
+                    elif isinstance(issue, dict):
+                        # Dictionary format
+                        desc = issue.get('description', issue.get('message', str(issue)))
+                        issue_descriptions.append(str(desc))
+                    else:
+                        # Fallback - convert to string
+                        issue_descriptions.append(str(issue))
+                except Exception as e:
+                    # Ultimate fallback
+                    issue_descriptions.append(f"Validation issue (error processing: {e})")
             
             raise CleanAnalysisError(f"Experiment validation failed: {'; '.join(issue_descriptions)}")
     
@@ -1199,6 +1237,39 @@ class CleanAnalysisOrchestrator:
             # CRITICAL: Store cached results in self._analysis_results for later phases
             analysis_results = cache_result.cached_content["analysis_results"]
             self._analysis_results = analysis_results
+            
+            # CRITICAL: Extract derived metrics from cached results and create derived_metrics_hash
+            for result in analysis_results:
+                if 'raw_analysis_response' in result:
+                    try:
+                        # Parse the raw analysis response to extract derived metrics
+                        import json
+                        raw_response = result['raw_analysis_response']
+                        if raw_response.startswith('```json\n'):
+                            raw_response = raw_response[8:-3]  # Remove ```json\n and ```
+                        
+                        analysis_data = json.loads(raw_response)
+                        if 'document_analyses' in analysis_data and len(analysis_data['document_analyses']) > 0:
+                            doc_analysis = analysis_data['document_analyses'][0]
+                            if 'derived_metrics' in doc_analysis:
+                                # Create derived metrics hash by storing the derived metrics as an artifact
+                                derived_metrics_content = json.dumps(doc_analysis['derived_metrics']).encode('utf-8')
+                                derived_metrics_hash = self.artifact_storage.put_artifact(
+                                    derived_metrics_content,
+                                    metadata={
+                                        "artifact_type": "derived_metrics",
+                                        "document_id": result.get('document_id', 'unknown'),
+                                        "filename": result.get('filename', 'unknown'),
+                                        "framework_name": "Moral Foundations Theory Framework",
+                                        "framework_version": "10.0"
+                                    }
+                                )
+                                result['derived_metrics_hash'] = derived_metrics_hash
+                                self._log_progress(f"📊 Created derived metrics hash from cached results: {derived_metrics_hash[:8]}...")
+                    except Exception as e:
+                        self._log_progress(f"⚠️ Failed to extract derived metrics from cached results: {str(e)}")
+                        continue
+            
             return analysis_results
         
         # Cache miss - perform analysis
@@ -1245,9 +1316,10 @@ class CleanAnalysisOrchestrator:
                     composite_analysis = result['composite_analysis']
                     raw_analysis_response = composite_analysis.get('raw_analysis_response', '')
                     
-                    # Extract scores and evidence from the new structure
+                    # Extract scores, evidence, and derived metrics from the new structure
                     scores_result = result.get('score_extraction', {})
                     evidence_result = result.get('evidence_extraction', {})
+                    derived_metrics_result = result.get('derived_metrics', {})
                     
                     # Cache performance is now tracked at the phase level, not document level
 
@@ -1262,6 +1334,7 @@ class CleanAnalysisOrchestrator:
                         'raw_analysis_response': raw_analysis_response,
                         'scores_hash': scores_result.get('artifact_hash', ''),
                         'evidence_hash': evidence_result.get('artifact_hash', ''),
+                        'derived_metrics_hash': derived_metrics_result.get('artifact_hash', ''),
                         'document_id': prepared_doc.get('document_id', ''),
                         'filename': prepared_doc.get('filename', 'Unknown'),
                         'verification_status': result.get('verification', {}).get('verification_status', 'unknown')
@@ -1297,21 +1370,25 @@ class CleanAnalysisOrchestrator:
     def _run_statistical_analysis_phase(self, model: str, audit_logger: AuditLogger, analysis_results: List[Dict[str, Any]], derived_metrics_results: Dict[str, Any]) -> Dict[str, Any]:
         """THIN approach: Pass analysis artifact hashes to StatisticalAgent, let it do the work."""
         self._log_progress("📊 THIN: Delegating statistical analysis to StatisticalAgent...")
-        self._log_progress(f"🔧 DEBUG: _run_statistical_analysis_phase called with {len(analysis_results)} analysis results")
+        self.logger.info(f"🔧 DEBUG: _run_statistical_analysis_phase called with {len(analysis_results)} analysis results")
         
         try:
             # Collect analysis artifact hashes
-            self._log_progress(f"🔧 DEBUG: Collecting artifact hashes from {len(analysis_results)} analysis results")
+            self.logger.info(f"🔧 DEBUG: Collecting artifact hashes from {len(analysis_results)} analysis results")
             analysis_artifact_hashes = []
-            for result in analysis_results:
-                if "scores_hash" in result:
+            for i, result in enumerate(analysis_results):
+                self.logger.info(f"🔧 DEBUG: Result {i}: {list(result.keys())}")
+                if "scores_hash" in result and result["scores_hash"]:
                     analysis_artifact_hashes.append(result["scores_hash"])
-                if "evidence_hash" in result:
+                    self.logger.info(f"🔧 DEBUG: Added scores_hash: {result['scores_hash'][:8]}...")
+                if "evidence_hash" in result and result["evidence_hash"]:
                     analysis_artifact_hashes.append(result["evidence_hash"])
-                if "derived_metrics_hash" in result:
+                    self.logger.info(f"🔧 DEBUG: Added evidence_hash: {result['evidence_hash'][:8]}...")
+                if "derived_metrics_hash" in result and result["derived_metrics_hash"]:
                     analysis_artifact_hashes.append(result["derived_metrics_hash"])
+                    self.logger.info(f"🔧 DEBUG: Added derived_metrics_hash: {result['derived_metrics_hash'][:8]}...")
             
-            self._log_progress(f"🔧 DEBUG: Collected {len(analysis_artifact_hashes)} artifact hashes")
+            self.logger.info(f"🔧 DEBUG: Collected {len(analysis_artifact_hashes)} artifact hashes: {[h[:8] + '...' for h in analysis_artifact_hashes]}")
             
             if not analysis_artifact_hashes:
                 self._log_progress("⚠️ No analysis artifacts found to process")
@@ -1589,7 +1666,7 @@ class CleanAnalysisOrchestrator:
                     analysis_artifact_hashes.append(result['evidence_hash'])
             
             # Get statistical results hash from StatisticalAgent output
-            statistical_results_hash = statistical_results.get('statistical_results_hash') if statistical_results else None
+            statistical_results_hash = statistical_results.get('cache_hash') if statistical_results else None
             
             # Framework path
             framework_path = self.experiment_path / self.config['framework']
@@ -3441,6 +3518,8 @@ class CleanAnalysisOrchestrator:
     def _copy_statistical_artifacts_to_results(self, run_id: str) -> Path:
         """THIN approach: Copy CSV files produced by StatisticalAgent to results directory."""
         self._log_progress("📊 THIN: Copying StatisticalAgent CSV outputs to results...")
+        self._log_progress(f"🔧 DEBUG: _copy_statistical_artifacts_to_results called with run_id: {run_id}")
+        self._log_progress(f"🔧 DEBUG: Artifact registry has {len(self.artifact_storage.registry)} entries")
         
         # Create results directory
         run_dir = self.experiment_path / "runs" / run_id
@@ -3449,18 +3528,45 @@ class CleanAnalysisOrchestrator:
         
         # Find CSV artifacts produced by StatisticalAgent
         csv_files_copied = 0
+        self._log_progress(f"🔧 DEBUG: Searching for CSV artifacts in {len(self.artifact_storage.registry)} registry entries")
+        
+        csv_generation_artifacts = 0
         for artifact_hash, artifact_info in self.artifact_storage.registry.items():
             if isinstance(artifact_info, dict):
                 metadata = artifact_info.get("metadata", {})
-                if metadata.get("artifact_type") in ["statistical_csv", "derived_metrics_csv", "analysis_scores_csv"]:
-                    # Copy CSV file to results directory with human-readable name
-                    artifact_path = self.artifact_storage.artifacts_dir / artifact_hash
-                    if artifact_path.exists():
-                        csv_name = metadata.get("csv_filename", f"{metadata.get('artifact_type', 'data')}.csv")
-                        target_path = results_dir / csv_name
-                        target_path.write_bytes(artifact_path.read_bytes())
-                        csv_files_copied += 1
-                        self._log_progress(f"   • Copied: {csv_name}")
+                artifact_type = metadata.get("artifact_type")
+                if artifact_type == "csv_generation":
+                    csv_generation_artifacts += 1
+                    self._log_progress(f"🔧 DEBUG: Found csv_generation artifact: {artifact_hash[:8]}...")
+                if metadata.get("artifact_type") in ["statistical_csv", "derived_metrics_csv", "analysis_scores_csv", "csv_generation"]:
+                    if metadata.get("artifact_type") == "csv_generation":
+                        # Handle CSV generation artifact - copy files from their actual locations
+                        try:
+                            artifact_path = self.artifact_storage.artifacts_dir / artifact_hash
+                            if artifact_path.exists():
+                                import json
+                                artifact_content = json.loads(artifact_path.read_text())
+                                if "csv_files" in artifact_content:
+                                    for csv_file in artifact_content["csv_files"]:
+                                        source_path = Path(csv_file["path"])
+                                        if source_path.exists():
+                                            target_path = results_dir / csv_file["filename"]
+                                            target_path.write_bytes(source_path.read_bytes())
+                                            csv_files_copied += 1
+                                            self._log_progress(f"   • Copied: {csv_file['filename']}")
+                        except Exception as e:
+                            self._log_progress(f"⚠️ Failed to copy CSV generation artifact: {str(e)}")
+                    else:
+                        # Handle other CSV artifact types
+                        artifact_path = self.artifact_storage.artifacts_dir / artifact_hash
+                        if artifact_path.exists():
+                            csv_name = metadata.get("csv_filename", f"{metadata.get('artifact_type', 'data')}.csv")
+                            target_path = results_dir / csv_name
+                            target_path.write_bytes(artifact_path.read_bytes())
+                            csv_files_copied += 1
+                            self._log_progress(f"   • Copied: {csv_name}")
+        
+        self._log_progress(f"🔧 DEBUG: Found {csv_generation_artifacts} csv_generation artifacts total")
         
         if csv_files_copied == 0:
             self._log_progress("⚠️ No CSV files found from StatisticalAgent - may need to run statistical phase first")

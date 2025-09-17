@@ -146,7 +146,10 @@ class StatisticalAgent:
             })
             
             # Store result in cache for future use
-            self.store_cache(batch_id, final_result)
+            cache_hash = self.store_cache(batch_id, final_result)
+            
+            # Add cache hash to final result for orchestrator
+            final_result["cache_hash"] = cache_hash
             
             return final_result
             
@@ -667,17 +670,26 @@ Use the generate_csv_file tool for each CSV file. Ensure proper CSV formatting w
             run_id = datetime.now().strftime("%Y%m%dT%H%M%SZ")
         
         data_dir = runs_dir / run_id / "data"
+        results_dir = runs_dir / run_id / "results"
         
-        # Ensure data directory exists
+        # Ensure both directories exist
         data_dir.mkdir(parents=True, exist_ok=True)
+        results_dir.mkdir(parents=True, exist_ok=True)
         
-        # Write CSV file
-        csv_path = data_dir / filename
-        with open(csv_path, 'w', encoding='utf-8') as f:
+        # Write CSV file to both data and results directories
+        data_csv_path = data_dir / filename
+        results_csv_path = results_dir / filename
+        
+        # Write to data directory (for internal processing)
+        with open(data_csv_path, 'w', encoding='utf-8') as f:
             f.write(csv_content)
         
-        self.logger.info(f"Wrote CSV file: {csv_path}")
-        return csv_path
+        # Write to results directory (for user access)
+        with open(results_csv_path, 'w', encoding='utf-8') as f:
+            f.write(csv_content)
+        
+        self.logger.info(f"Wrote CSV file to data: {data_csv_path} and results: {results_csv_path}")
+        return data_csv_path  # Keep original return for compatibility
 
     def generate_functions(self, workspace_path: Path, pre_assembled_prompt: str = None) -> Dict[str, Any]:
         """
