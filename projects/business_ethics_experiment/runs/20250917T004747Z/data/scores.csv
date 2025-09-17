@@ -1,0 +1,11 @@
+analysis_id,filename,dimension,raw_score,salience,confidence
+analysis_f20d05b3,stakeholder_capitalism_report.txt,customer_service,0.9,0.9,0.95
+analysis_f20d05b3,stakeholder_capitalism_report.txt,customer_exploitation,0.0,0.0,1.0
+analysis_f20d05b3,stakeholder_capitalism_report.txt,employee_development,0.9,0.8,0.95
+analysis_f20d05b3,stakeholder_capitalism_report.txt,employee_exploitation,0.0,0.0,1.0
+analysis_f20d05b3,stakeholder_capitalism_report.txt,accountability,0.9,0.8,0.95
+analysis_f20d05b3,stakeholder_capitalism_report.txt,opacity,0.0,0.0,1.0
+analysis_f20d05b3,stakeholder_capitalism_report.txt,financial_responsibility,0.7,0.6,0.9
+analysis_f20d05b3,stakeholder_capitalism_report.txt,financial_manipulation,0.0,0.0,1.0
+analysis_f20d05b3,stakeholder_capitalism_report.txt,sustainable_purpose,1.0,1.0,0.95
+analysis_f20d05b3,stakeholder_capitalism_report.txt,short_term_extraction,0.0,0.0,1.0
