@@ -1,0 +1,13 @@
+analysis_id,dimension,raw_score,salience,confidence
+analysis_f52b5745,care,0.9,0.9,0.95
+analysis_f52b5745,harm,0.95,0.95,0.95
+analysis_f52b5745,fairness,0.9,0.9,0.95
+analysis_f52b5745,cheating,0.9,0.85,0.95
+analysis_f52b5745,loyalty,0.8,0.75,0.9
+analysis_f52b5745,betrayal,0.65,0.6,0.85
+analysis_f52b5745,authority,0.55,0.4,0.8
+analysis_f52b5745,subversion,0.7,0.65,0.9
+analysis_f52b5745,sanctity,0.9,0.9,0.95
+analysis_f52b5745,degradation,0.9,0.9,0.95
+analysis_f52b5745,liberty,0.8,0.8,0.9
+analysis_f52b5745,oppression,0.95,0.95,0.95
