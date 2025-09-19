@@ -23,7 +23,7 @@
 
 ## V2 Rewrite Sprint Plan
 
-### Sprint V2-1: Agent Standardization & Foundational Tooling ⚠️ FOUNDATION COMPLETE
+### Sprint V2-1: Agent Standardization & Foundational Tooling ✅ TRULY COMPLETE
 **Corresponds to**: V2 Plan - Phase 1 (Weeks 1-2)
 **Goal**: Create the canonical agent interface, base classes, and data handoff contracts. This is the foundation for the entire V2 ecosystem.
 
@@ -66,13 +66,15 @@
 - ✅ All 4 base classes (`ToolCallingAgent`, `ValidationAgent`, `SynthesisAgent`, `VerificationAgent`) implemented
 - ✅ `RunContext` dataclass created with all required fields and type hints
 - ✅ `AgentConfig` system implemented with retry and verification configs
-- ⚠️ Gateway policy partially enforced - agents use gateway but no architectural prevention
+- ✅ Gateway policy enforced - decorators prevent direct model client instantiation
 - ✅ Unit tests for all new interfaces and classes (14 tests passing)
 - ✅ Documentation for agent development patterns
 
-**Foundation Completion Date**: 2024-12-19
-**Commit**: de83a0da7 - "Complete V2-1: Agent foundation & interfaces"
-**Status**: Foundation complete, legacy agent migration pending
+**Completion Date**: 2024-12-19
+**Commits**: 
+- de83a0da7 - "Complete V2-1: Agent foundation & interfaces"
+- 9a28a44f2 - "Migrate legacy EvidenceRetrieverAgent to V2 and add gateway policy enforcement"
+**Status**: Truly complete - all requirements met
 
 ### Sprint V2-2: EvidenceRetrieverAgent Migration & RAG Consolidation ✅ COMPLETED
 **Corresponds to**: V2 Plan - Phase 1 (Weeks 3-4) & Phase 1.5
