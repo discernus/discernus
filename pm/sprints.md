@@ -76,7 +76,7 @@
 - 9a28a44f2 - "Migrate legacy EvidenceRetrieverAgent to V2 and add gateway policy enforcement"
 **Status**: Truly complete - all requirements met
 
-### Sprint V2-2: EvidenceRetrieverAgent Migration & RAG Consolidation ✅ COMPLETED
+### Sprint V2-2: EvidenceRetrieverAgent Migration & RAG Consolidation ⚠️ FOUNDATION COMPLETE
 **Corresponds to**: V2 Plan - Phase 1 (Weeks 3-4) & Phase 1.5
 **Goal**: Migrate the most complex legacy agent to the V2 standard and centralize all RAG logic within it, removing it from the orchestrator.
 
@@ -131,16 +131,17 @@
 - ✅ `RAGIndexManager` created and handles all RAG lifecycle operations
 - ✅ Agent reads framework and statistical results directly from artifacts
 - ✅ Agent discovers evidence artifacts from analysis hashes without orchestrator help
-- ✅ All orchestrator RAG methods deleted (80+ lines removed)
-- ✅ Orchestrator evidence phase reduced to ~10 lines (simple agent call)
+- ❌ All orchestrator RAG methods deleted (80+ lines removed) - **PENDING INTEGRATION**
+- ❌ Orchestrator evidence phase reduced to ~10 lines (simple agent call) - **PENDING INTEGRATION**
 - ✅ No regression in evidence quality (validated with existing experiments)
 - ✅ Unit tests for `RAGIndexManager` and refactored agent
 - ✅ Integration tests showing end-to-end evidence retrieval works
 
-**Completion Date**: 2024-12-19
+**Foundation Completion Date**: 2024-12-19
 **Commit**: a8631afff - "Complete V2-2: RAG consolidation and removal plan"
+**Status**: Foundation complete - V2 agent ready, orchestrator integration pending
 
-### Sprint V2-3: UnifiedSynthesisAgent Migration ✅ COMPLETED
+### Sprint V2-3: UnifiedSynthesisAgent Migration ⚠️ FOUNDATION COMPLETE
 **Corresponds to**: V2 Plan - Phase 2 (Weeks 5-6)
 **Goal**: Migrate the synthesis agent to the new standard, focusing on consuming V2-native artifacts.
 
@@ -183,10 +184,53 @@
 - ✅ No regression in synthesis quality (validated with existing experiments)
 - ✅ Unit tests for refactored agent (15 tests passing)
 - ✅ Integration tests showing end-to-end synthesis works with V2 artifacts
+- ❌ Orchestrator updated to use V2UnifiedSynthesisAgent - **PENDING INTEGRATION**
 
-**Completion Date**: 2024-12-19
+**Foundation Completion Date**: 2024-12-19
 **Commit**: fbf4750ae - "Complete V2-3: UnifiedSynthesisAgent migration to V2 standard"
-**Status**: All requirements met, 15/15 tests passing
+**Status**: Foundation complete - V2 agent ready, orchestrator integration pending
+
+### Sprint V2-3.5: Orchestrator Integration & Legacy Cleanup
+**Corresponds to**: V2 Plan - Integration Phase
+**Goal**: Complete the integration of V2 agents into the orchestrator and remove legacy code.
+
+**Detailed Tasks**:
+
+#### [V2-3.5.1] Update Orchestrator to Use V2 Agents
+- **Evidence Phase**: Replace `EvidenceRetrieverAgent` with `V2EvidenceRetrieverAgent`
+- **Synthesis Phase**: Replace `UnifiedSynthesisAgent` with `V2UnifiedSynthesisAgent`
+- **RunContext Integration**: Update orchestrator to use `RunContext` for data handoffs
+- **Files to Update**: `discernus/core/clean_analysis_orchestrator.py`
+
+#### [V2-3.5.2] Remove RAG Logic from Orchestrator
+- **Delete RAG Methods**: Remove all `_build_*rag_index*` methods (80+ lines)
+- **Remove RAG Caching**: Delete orchestrator-level RAG cache management
+- **Delegate to Agents**: Let `V2EvidenceRetrieverAgent` handle all RAG operations
+- **Files to Update**: `discernus/core/clean_analysis_orchestrator.py`
+
+#### [V2-3.5.3] Legacy Agent Cleanup
+- **Remove Legacy Agents**: Delete old agent implementations once V2 agents are integrated
+- **Update Imports**: Remove references to legacy agents
+- **Clean Dependencies**: Remove unused dependencies and imports
+- **Files to Clean**: Various agent directories
+
+#### [V2-3.5.4] Integration Testing
+- **End-to-End Tests**: Verify V2 agents work in orchestrator context
+- **Performance Testing**: Ensure no regression in pipeline performance
+- **Error Handling**: Test error scenarios with V2 agents
+- **Files to Create**: `discernus/tests/test_v2_orchestrator_integration.py`
+
+**Definition of Done**:
+- ✅ Orchestrator uses `V2EvidenceRetrieverAgent` instead of legacy agent
+- ✅ Orchestrator uses `V2UnifiedSynthesisAgent` instead of legacy agent
+- ✅ Orchestrator uses `RunContext` for all data handoffs between agents
+- ✅ All RAG methods removed from orchestrator (80+ lines deleted)
+- ✅ RAG operations delegated to `V2EvidenceRetrieverAgent`
+- ✅ Legacy agent implementations removed
+- ✅ All imports updated to use V2 agents
+- ✅ End-to-end integration tests passing
+- ✅ No regression in pipeline performance
+- ✅ Error handling works correctly with V2 agents
 
 ### Sprint V2-4: Verification Agent Ecosystem
 **Corresponds to**: V2 Plan - Phase 2 (Weeks 7-8)
