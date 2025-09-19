@@ -16,8 +16,10 @@ from .security_boundary import ExperimentSecurityBoundary
 from .audit_logger import AuditLogger
 from .local_artifact_storage import LocalArtifactStorage
 from .agent_result import AgentResult
+from .gateway_policy_enforcement import require_gateway_usage
 
 
+@require_gateway_usage
 class StandardAgent(ABC):
     """
     Abstract base class for all V2 agents.

@@ -1491,7 +1491,7 @@ class CleanAnalysisOrchestrator:
             raise CleanAnalysisError(f"SYNTHESIS BLOCKED: Experiment file not found: {experiment_path}")
         
         # 3. Basic statistical results must exist
-        if not statistical_results.get('raw_analysis_data_hash'):
+        if not statistical_results.get('statistical_results_hash'):
             raise CleanAnalysisError("SYNTHESIS BLOCKED: No analysis data available")
         
         self._log_progress("✅ Basic prerequisites validated. Synthesis LLM will assess data quality.")
@@ -1666,7 +1666,7 @@ class CleanAnalysisOrchestrator:
                     analysis_artifact_hashes.append(result['evidence_hash'])
             
             # Get statistical results hash from StatisticalAgent output
-            statistical_results_hash = statistical_results.get('cache_hash') if statistical_results else None
+            statistical_results_hash = statistical_results.get('statistical_results_hash') if statistical_results else None
             
             # Framework path
             framework_path = self.experiment_path / self.config['framework']
@@ -1706,13 +1706,17 @@ class CleanAnalysisOrchestrator:
             self._validate_assets(statistical_results)
 
             # Create complete research data structure
-            raw_analysis_data = self.artifact_storage.get_artifact(statistical_results['raw_analysis_data_hash']).decode('utf-8')
-            derived_metrics_data = self.artifact_storage.get_artifact(statistical_results['derived_metrics_data_hash']).decode('utf-8')
+            # Load the actual statistical results from the hash
+            statistical_results_content = self.artifact_storage.get_artifact(statistical_results['statistical_results_hash'])
+            statistical_results_data = json.loads(statistical_results_content.decode('utf-8'))
+            
+            # Extract the actual statistical analysis results
+            actual_statistical_results = statistical_results_data.get('statistical_analysis', {})
             
             research_data = {
-                "raw_analysis_results": json.loads(raw_analysis_data),
-                "derived_metrics_results": json.loads(derived_metrics_data),
-                "statistical_results": statistical_results['statistical_summary']
+                "raw_analysis_results": getattr(self, '_analysis_results', []),
+                "derived_metrics_results": getattr(self, '_derived_metrics_results', {}),
+                "statistical_results": actual_statistical_results
             }
             
             # Convert tuple keys to strings for safe JSON serialization
