@@ -23,7 +23,7 @@
 
 ## V2 Rewrite Sprint Plan
 
-### Sprint V2-1: Agent Standardization & Foundational Tooling ✅ COMPLETED
+### Sprint V2-1: Agent Standardization & Foundational Tooling ⚠️ FOUNDATION COMPLETE
 **Corresponds to**: V2 Plan - Phase 1 (Weeks 1-2)
 **Goal**: Create the canonical agent interface, base classes, and data handoff contracts. This is the foundation for the entire V2 ecosystem.
 
@@ -66,12 +66,13 @@
 - ✅ All 4 base classes (`ToolCallingAgent`, `ValidationAgent`, `SynthesisAgent`, `VerificationAgent`) implemented
 - ✅ `RunContext` dataclass created with all required fields and type hints
 - ✅ `AgentConfig` system implemented with retry and verification configs
-- ✅ Gateway policy enforced - no direct model client instantiation in agents
+- ⚠️ Gateway policy partially enforced - agents use gateway but no architectural prevention
 - ✅ Unit tests for all new interfaces and classes (14 tests passing)
 - ✅ Documentation for agent development patterns
 
-**Completion Date**: 2024-12-19
+**Foundation Completion Date**: 2024-12-19
 **Commit**: de83a0da7 - "Complete V2-1: Agent foundation & interfaces"
+**Status**: Foundation complete, legacy agent migration pending
 
 ### Sprint V2-2: EvidenceRetrieverAgent Migration & RAG Consolidation ✅ COMPLETED
 **Corresponds to**: V2 Plan - Phase 1 (Weeks 3-4) & Phase 1.5
@@ -109,7 +110,7 @@
 - **Files to Create**: `discernus/core/rag_index_manager.py`
 
 #### [V2-2.5] Ensure Agent Self-Sufficiency
-- **Framework Reading**: Agent reads framework directly from path (not pre-created artifact)
+  - **Framework Reading**: Agent reads framework directly from path (not pre-created artifact)
 - **Artifact Discovery**: Agent discovers evidence artifacts from analysis hashes
 - **Statistical Results**: Agent reads statistical results from artifact hash
 - **No Orchestrator Dependencies**: Agent handles all infrastructure setup internally
