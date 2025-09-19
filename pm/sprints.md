@@ -73,7 +73,7 @@
 **Completion Date**: 2024-12-19
 **Commit**: de83a0da7 - "Complete V2-1: Agent foundation & interfaces"
 
-### Sprint V2-2: EvidenceRetrieverAgent Migration & RAG Consolidation
+### Sprint V2-2: EvidenceRetrieverAgent Migration & RAG Consolidation ✅ COMPLETED
 **Corresponds to**: V2 Plan - Phase 1 (Weeks 3-4) & Phase 1.5
 **Goal**: Migrate the most complex legacy agent to the V2 standard and centralize all RAG logic within it, removing it from the orchestrator.
 
@@ -133,6 +133,9 @@
 - ✅ No regression in evidence quality (validated with existing experiments)
 - ✅ Unit tests for `RAGIndexManager` and refactored agent
 - ✅ Integration tests showing end-to-end evidence retrieval works
+
+**Completion Date**: 2024-12-19
+**Commit**: a8631afff - "Complete V2-2: RAG consolidation and removal plan"
 
 ### Sprint V2-3: UnifiedSynthesisAgent Migration
 **Corresponds to**: V2 Plan - Phase 2 (Weeks 5-6)
