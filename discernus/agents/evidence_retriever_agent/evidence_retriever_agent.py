@@ -22,11 +22,15 @@ from ...core.evidence_matching_wrapper import EvidenceMatchingWrapper
 from ...core.local_artifact_storage import LocalArtifactStorage
 from ...core.security_boundary import ExperimentSecurityBoundary
 from ...core.audit_logger import AuditLogger
+from ...core.standard_agent import StandardAgent
+from ...core.agent_base_classes import ToolCallingAgent
+from ...core.agent_result import AgentResult
+from ...core.agent_config import AgentConfig
 from ...gateway.llm_gateway import LLMGateway
 from ...gateway.model_registry import get_model_registry
 
 
-class EvidenceRetrieverAgent:
+class EvidenceRetrieverAgent(ToolCallingAgent):
     """
     Agent responsible for retrieving evidence quotes to support statistical findings.
     
@@ -34,34 +38,147 @@ class EvidenceRetrieverAgent:
     for other agents (like synthesis) to consume.
     """
     
-    def __init__(self, config: Dict[str, Any]):
+    def __init__(self, 
+                 security: ExperimentSecurityBoundary,
+                 storage: LocalArtifactStorage,
+                 audit: AuditLogger,
+                 config: Optional[AgentConfig] = None):
+        """
+        Initialize the EvidenceRetrieverAgent with V2 StandardAgent interface.
+        
+        Args:
+            security: Security boundary for the experiment
+            storage: Artifact storage for persistence
+            audit: Audit logger for provenance tracking
+            config: Optional agent configuration
+        """
+        super().__init__(security, storage, audit, config)
+        
         self.agent_name = "EvidenceRetriever"
         self.logger = logging.getLogger(__name__)
         
-        # Initialize components
-        self.experiment_path = Path(config.get('experiment_path', '.'))
-        self.run_id = config.get('run_id', 'default_run')
-        # Use provided model or default to vertex_ai/gemini-2.5-flash
-        self.model = config.get('model', 'vertex_ai/gemini-2.5-flash')
-        # Use shared security boundary if provided, otherwise create new one
-        if 'security_boundary' in config:
-            self.security_boundary = config['security_boundary']
-            self.logger.info("Using shared security boundary instance")
-        else:
-            self.security_boundary = ExperimentSecurityBoundary(self.experiment_path)
-        # Use shared artifact storage if provided, otherwise create new instance
-        if 'artifact_storage' in config:
-            self.artifact_storage = config['artifact_storage']
-            self.logger.info("Using shared artifact storage instance")
-        else:
-            # Use the existing shared cache artifacts directory
-            self.artifact_storage = LocalArtifactStorage(self.security_boundary, self.experiment_path / "shared_cache")
-            self.logger.info("Created new artifact storage instance")
+        # Initialize LLM gateway
         self.llm_gateway = LLMGateway(get_model_registry())
-        self.audit_logger = AuditLogger(self.security_boundary, self.experiment_path / "session" / self.run_id)
         
         # Evidence wrapper for semantic search
         self.evidence_wrapper = None
+        
+        # Backward compatibility attributes for legacy code
+        self.experiment_path = security.experiment_path
+        self.run_id = "legacy_run"  # Will be overridden by run() method
+        self.model = config.model if config else "vertex_ai/gemini-2.5-flash"
+        self.security_boundary = security
+        self.artifact_storage = storage
+        self.audit_logger = audit
+    
+    @classmethod
+    def from_legacy_config(cls, config: Dict[str, Any]) -> 'EvidenceRetrieverAgent':
+        """
+        Create EvidenceRetrieverAgent from legacy config for backward compatibility.
+        
+        Args:
+            config: Legacy configuration dictionary
+            
+        Returns:
+            EvidenceRetrieverAgent instance
+        """
+        # Extract parameters from legacy config
+        experiment_path = Path(config.get('experiment_path', '.'))
+        run_id = config.get('run_id', 'default_run')
+        model = config.get('model', 'vertex_ai/gemini-2.5-flash')
+        
+        # Use provided dependencies or create new ones
+        security = config.get('security_boundary')
+        storage = config.get('artifact_storage')
+        audit = config.get('audit_logger')
+        
+        # If dependencies not provided, create them (for backward compatibility)
+        if security is None:
+            security = ExperimentSecurityBoundary(experiment_path)
+        if storage is None:
+            storage = LocalArtifactStorage(security, experiment_path / "shared_cache")
+        if audit is None:
+            audit = AuditLogger(security, experiment_path / "session" / run_id)
+        
+        # Create AgentConfig
+        agent_config = AgentConfig(
+            model=model,
+            timeout_seconds=300.0
+        )
+        
+        # Create agent instance
+        agent = cls(security, storage, audit, agent_config)
+        
+        # Set legacy attributes for backward compatibility
+        agent.run_id = run_id
+        
+        return agent
+    
+    def execute(self, **kwargs) -> AgentResult:
+        """
+        V2 StandardAgent execute method.
+        
+        Args:
+            **kwargs: Execution parameters
+            
+        Returns:
+            AgentResult with evidence retrieval results
+        """
+        try:
+            self.log_execution_start(**kwargs)
+            
+            # Call the legacy run method for backward compatibility
+            result = self.run(**kwargs)
+            
+            # Convert legacy result to AgentResult
+            if result.get('status') == 'success':
+                agent_result = AgentResult(
+                    success=True,
+                    artifacts=[result.get('evidence_artifact_hash', '')],
+                    metadata={
+                        'framework': result.get('framework', 'Unknown'),
+                        'evidence_quotes_found': result.get('evidence_quotes_found', 0),
+                        'findings_processed': len(result.get('evidence_results', []))
+                    }
+                )
+            else:
+                agent_result = AgentResult(
+                    success=False,
+                    artifacts=[],
+                    metadata={},
+                    error_message=result.get('error', 'Unknown error')
+                )
+            
+            self.log_execution_complete(agent_result)
+            return agent_result
+            
+        except Exception as e:
+            self.log_execution_error(e)
+            return AgentResult(
+                success=False,
+                artifacts=[],
+                metadata={},
+                error_message=str(e)
+            )
+    
+    def get_capabilities(self) -> List[str]:
+        """Get agent capabilities"""
+        return [
+            "evidence_retrieval",
+            "rag_search",
+            "semantic_search",
+            "framework_agnostic_analysis",
+            "tool_calling",
+            "structured_output"
+        ]
+    
+    def get_required_inputs(self) -> List[str]:
+        """Get required input parameters"""
+        return ["analysis_artifact_hashes", "statistical_results_hash", "framework_path"]
+    
+    def get_optional_inputs(self) -> List[str]:
+        """Get optional input parameters"""
+        return ["framework_hash", "statistical_results", "evidence_artifact_hashes"]
         
     def run(self, **kwargs) -> Dict[str, Any]:
         """
@@ -120,6 +237,7 @@ class EvidenceRetrieverAgent:
             
             # Step 4: Store evidence results
             self.logger.info("Step 4: Storing evidence results...")
+            framework_hash = self._calculate_framework_hash(framework_path)
             evidence_artifact_hash = self._store_evidence_results(evidence_results, framework_hash)  # Use framework_hash for metadata
             
             # Log success
@@ -494,6 +612,13 @@ IMPORTANT: Your response must be valid JSON and must be wrapped in the exact del
             self.logger.error(f"Failed to store evidence results: {e}")
             raise
     
+    def _calculate_framework_hash(self, framework_path: Path) -> str:
+        """Calculate hash for framework file."""
+        import hashlib
+        framework_path = Path(framework_path)
+        framework_content = framework_path.read_text(encoding='utf-8')
+        return hashlib.sha256(framework_content.encode('utf-8')).hexdigest()
+
     def _load_framework_from_path(self, framework_path: Path) -> Dict[str, Any]:
         """SELF-SUFFICIENT: Load framework directly from file path."""
         try:
