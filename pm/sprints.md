@@ -190,51 +190,21 @@
 **Commit**: fbf4750ae - "Complete V2-3: UnifiedSynthesisAgent migration to V2 standard"
 **Status**: Foundation complete - V2 agent ready, orchestrator integration pending
 
-### Sprint V2-3.5: Orchestrator Integration & Legacy Cleanup
-**Corresponds to**: V2 Plan - Integration Phase
-**Goal**: Complete the integration of V2 agents into the orchestrator and remove legacy code.
+### Sprint V2-3.5: ~~Orchestrator Integration & Legacy Cleanup~~ ❌ CANCELLED
+**Strategic Decision**: Skip legacy orchestrator integration in favor of building new V2 orchestrator from scratch.
 
-**Detailed Tasks**:
+**Rationale**:
+- Legacy orchestrator (4,394 lines) is monolithic and architecturally incompatible with V2 patterns
+- Integration effort would be massive and temporary (thrown away when V2 orchestrator is built)
+- Risk of introducing bugs in working V1 system
+- Better to build clean V2 orchestrator with V2 patterns from the start
 
-#### [V2-3.5.1] Update Orchestrator to Use V2 Agents
-- **Evidence Phase**: Replace `EvidenceRetrieverAgent` with `V2EvidenceRetrieverAgent`
-- **Synthesis Phase**: Replace `UnifiedSynthesisAgent` with `V2UnifiedSynthesisAgent`
-- **RunContext Integration**: Update orchestrator to use `RunContext` for data handoffs
-- **Files to Update**: `discernus/core/clean_analysis_orchestrator.py`
+**Alternative Path**: Complete agent foundation + build new V2 orchestrator (Sprints V2-4, V2-5, V2-6)
 
-#### [V2-3.5.2] Remove RAG Logic from Orchestrator
-- **Delete RAG Methods**: Remove all `_build_*rag_index*` methods (80+ lines)
-- **Remove RAG Caching**: Delete orchestrator-level RAG cache management
-- **Delegate to Agents**: Let `V2EvidenceRetrieverAgent` handle all RAG operations
-- **Files to Update**: `discernus/core/clean_analysis_orchestrator.py`
-
-#### [V2-3.5.3] Legacy Agent Cleanup
-- **Remove Legacy Agents**: Delete old agent implementations once V2 agents are integrated
-- **Update Imports**: Remove references to legacy agents
-- **Clean Dependencies**: Remove unused dependencies and imports
-- **Files to Clean**: Various agent directories
-
-#### [V2-3.5.4] Integration Testing
-- **End-to-End Tests**: Verify V2 agents work in orchestrator context
-- **Performance Testing**: Ensure no regression in pipeline performance
-- **Error Handling**: Test error scenarios with V2 agents
-- **Files to Create**: `discernus/tests/test_v2_orchestrator_integration.py`
-
-**Definition of Done**:
-- ✅ Orchestrator uses `V2EvidenceRetrieverAgent` instead of legacy agent
-- ✅ Orchestrator uses `V2UnifiedSynthesisAgent` instead of legacy agent
-- ✅ Orchestrator uses `RunContext` for all data handoffs between agents
-- ✅ All RAG methods removed from orchestrator (80+ lines deleted)
-- ✅ RAG operations delegated to `V2EvidenceRetrieverAgent`
-- ✅ Legacy agent implementations removed
-- ✅ All imports updated to use V2 agents
-- ✅ End-to-end integration tests passing
-- ✅ No regression in pipeline performance
-- ✅ Error handling works correctly with V2 agents
-
-### Sprint V2-4: Verification Agent Ecosystem
+### Sprint V2-4: Verification Agent Ecosystem 🎯 CURRENT FOCUS
 **Corresponds to**: V2 Plan - Phase 2 (Weeks 7-8)
 **Goal**: Build the adversarial attestation layer to complete the "Show Your Work" architecture.
+**Priority**: HIGH - Complete agent foundation before V2 orchestrator
 
 **Detailed Tasks**:
 
@@ -289,9 +259,10 @@
 - ✅ Integration tests showing verification catches actual discrepancies
 - ✅ Performance testing ensures verification doesn't significantly slow pipeline
 
-### Sprint V2-5: V2 Orchestrator Implementation
+### Sprint V2-5: V2 Orchestrator Implementation 🎯 NEXT FOCUS
 **Corresponds to**: V2 Plan - Phase 3
 **Goal**: Build the new, simple, agent-native orchestrator.
+**Priority**: HIGH - Core V2 system implementation
 
 **Detailed Tasks**:
 
@@ -352,9 +323,10 @@
 - ✅ Integration tests showing V2 orchestrator works end-to-end
 - ✅ Performance comparison with V1 orchestrator
 
-### Sprint V2-6: Migration, Cleanup & Rollout
-**Corresponds to**: V2 Plan - Phase 4
-**Goal**: Make the V2 ecosystem the default, document the changes, and remove legacy code.
+### Sprint V2-6: V2 Validation & Migration 🎯 FINAL FOCUS
+**Corresponds to**: V2 Plan - Phase 4 (Validation & Rollout)
+**Goal**: Validate V2 system against V1 and manage migration.
+**Priority**: HIGH - Ensure V2 system is production-ready
 
 **Detailed Tasks**:
 
