@@ -19,12 +19,12 @@ total_documents: 2
 date_range: "2024"
 
 documents:
-  - filename: "positive_test.txt"
+  - filename: "corpus/positive_test.txt"
     document_id: "pos_test"
     metadata:
       type: "test"
       sentiment: "positive"
-  - filename: "negative_test.txt"
+  - filename: "corpus/negative_test.txt"
     document_id: "neg_test"
     metadata:
       type: "test"

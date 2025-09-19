@@ -1,7 +1,0 @@
-{
-  "analysis_id": "analysis_a5228f66",
-  "step": "score_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "scores_extraction": "```json\n{\n  \"document_id\": \"document_0\",\n  \"document_name\": \"Nano Test Corpus\",\n  \"dimensional_scores\": {\n    \"positive_sentiment\": {\n      \"raw_score\": 0.1,\n      \"salience\": 0.1,\n      \"confidence\": 0.9\n    },\n    \"negative_sentiment\": {\n      \"raw_score\": 0.1,\n      \"salience\": 0.1,\n      \"confidence\": 0.9\n    }\n  }\n}\n```",
-  "timestamp": "2025-09-19T15:57:00.651528+00:00"
-}

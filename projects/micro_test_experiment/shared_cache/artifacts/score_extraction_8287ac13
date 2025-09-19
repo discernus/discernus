@@ -1,7 +1,0 @@
-{
-  "analysis_id": "analysis_c829f3bd",
-  "step": "score_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "scores_extraction": "```json\n[\n  {\n    \"document_id\": \"positive_test_1\",\n    \"positive_sentiment\": {\n      \"raw_score\": 1.0,\n      \"salience\": 1.0,\n      \"confidence\": 1.0\n    },\n    \"negative_sentiment\": {\n      \"raw_score\": 0.0,\n      \"salience\": 0.0,\n      \"confidence\": 1.0\n    }\n  }\n]\n```",
-  "timestamp": "2025-09-16T13:32:30.444283+00:00"
-}

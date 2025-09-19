@@ -90,7 +90,7 @@ class V2StatisticalAgent(ToolCallingAgent):
             # Extract required data from RunContext
             # THIN PRINCIPLE: Orchestrator should have already loaded this data
             framework_content = run_context.metadata.get("framework_content")
-            corpus_content = run_context.metadata.get("corpus_content")
+            corpus_manifest_content = run_context.metadata.get("corpus_manifest_content")
             analysis_artifacts = run_context.analysis_artifacts
             
             if not framework_content:
@@ -101,12 +101,12 @@ class V2StatisticalAgent(ToolCallingAgent):
                     error_message="framework_content not found in RunContext"
                 )
             
-            if not corpus_content:
+            if not corpus_manifest_content:
                 return AgentResult(
                     success=False,
                     artifacts=[],
-                    metadata={"agent_name": self.agent_name, "error": "corpus_content not found in RunContext"},
-                    error_message="corpus_content not found in RunContext"
+                    metadata={"agent_name": self.agent_name, "error": "corpus_manifest_content not found in RunContext"},
+                    error_message="corpus_manifest_content not found in RunContext"
                 )
             
             if not analysis_artifacts:
@@ -127,7 +127,7 @@ class V2StatisticalAgent(ToolCallingAgent):
             legacy_result = self.legacy_agent.analyze_batch(
                 framework_content=framework_content,
                 experiment_content="",  # Not needed for statistical analysis
-                corpus_manifest=corpus_content,
+                corpus_manifest=corpus_manifest_content,
                 batch_id=batch_id,
                 analysis_artifact_hashes=analysis_artifacts
             )

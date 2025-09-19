@@ -25,6 +25,8 @@ from .agent_result import AgentResult
 from .standard_agent import StandardAgent
 from .local_artifact_storage import LocalArtifactStorage
 from .audit_logger import AuditLogger
+import yaml
+import re
 
 
 @dataclass
@@ -95,10 +97,11 @@ class FullExperimentStrategy(ExecutionStrategy):
         
         try:
             # THIN PRINCIPLE: Orchestrator handles file I/O, not agents
-            # Load framework and corpus content and pass to agents via RunContext
             framework_content = self._load_framework_content(Path(run_context.framework_path))
-            corpus_content = self._load_corpus_content(Path(run_context.corpus_path))
-            
+            corpus_manifest_path = Path(run_context.corpus_path)
+            corpus_documents = self._load_corpus_documents(corpus_manifest_path)
+            corpus_manifest_content = corpus_manifest_path.read_text(encoding='utf-8')
+
             if not framework_content:
                 return ExperimentResult(
                     success=False,
@@ -107,23 +110,24 @@ class FullExperimentStrategy(ExecutionStrategy):
                     metadata=metadata,
                     error_message="Failed to load framework content"
                 )
-            
-            if not corpus_content:
+
+            if not corpus_documents:
                 return ExperimentResult(
                     success=False,
                     phases_completed=phases_completed,
                     artifacts=artifacts,
                     metadata=metadata,
-                    error_message="Failed to load corpus content"
+                    error_message="Failed to load corpus documents"
                 )
-            
+
             # Add content to RunContext metadata for agents to use
             run_context.metadata["framework_content"] = framework_content
-            run_context.metadata["corpus_content"] = corpus_content
+            run_context.metadata["corpus_documents"] = corpus_documents
+            run_context.metadata["corpus_manifest_content"] = corpus_manifest_content
             # Phase 1: Coherence validation
-            if "coherence" in agents:
+            if "Coherence" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "coherence"})
-                coherence_result = agents["coherence"].execute(run_context=run_context)
+                coherence_result = agents["Coherence"].execute(run_context=run_context)
                 if not coherence_result.success:
                     return ExperimentResult(
                         success=False,
@@ -138,9 +142,9 @@ class FullExperimentStrategy(ExecutionStrategy):
                 audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "coherence"})
             
             # Phase 2: Analysis
-            if "analysis" in agents:
+            if "Analysis" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "analysis"})
-                analysis_result = agents["analysis"].execute(run_context=run_context)
+                analysis_result = agents["Analysis"].execute(run_context=run_context)
                 if not analysis_result.success:
                     return ExperimentResult(
                         success=False,
@@ -155,9 +159,9 @@ class FullExperimentStrategy(ExecutionStrategy):
                 audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "analysis"})
             
             # Phase 3: Statistical analysis
-            if "statistical" in agents:
+            if "Statistical" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "statistical"})
-                statistical_result = agents["statistical"].execute(run_context=run_context)
+                statistical_result = agents["Statistical"].execute(run_context=run_context)
                 if not statistical_result.success:
                     return ExperimentResult(
                         success=False,
@@ -172,9 +176,9 @@ class FullExperimentStrategy(ExecutionStrategy):
                 audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "statistical"})
             
             # Phase 4: Evidence retrieval
-            if "evidence" in agents:
+            if "Evidence" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "evidence"})
-                evidence_result = agents["evidence"].execute(run_context=run_context)
+                evidence_result = agents["Evidence"].execute(run_context=run_context)
                 if not evidence_result.success:
                     return ExperimentResult(
                         success=False,
@@ -189,9 +193,9 @@ class FullExperimentStrategy(ExecutionStrategy):
                 audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "evidence"})
             
             # Phase 5: Synthesis
-            if "synthesis" in agents:
+            if "Synthesis" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "synthesis"})
-                synthesis_result = agents["synthesis"].execute(run_context=run_context)
+                synthesis_result = agents["Synthesis"].execute(run_context=run_context)
                 if not synthesis_result.success:
                     return ExperimentResult(
                         success=False,
@@ -206,9 +210,9 @@ class FullExperimentStrategy(ExecutionStrategy):
                 audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "synthesis"})
             
             # Phase 6: Verification (if enabled)
-            if run_context.metadata.get("verification_enabled", True) and "verification" in agents:
+            if run_context.metadata.get("verification_enabled", True) and "Verification" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "verification"})
-                verification_result = agents["verification"].execute(run_context=run_context)
+                verification_result = agents["Verification"].execute(run_context=run_context)
                 if not verification_result.success:
                     return ExperimentResult(
                         success=False,
@@ -249,12 +253,39 @@ class FullExperimentStrategy(ExecutionStrategy):
             return framework_path.read_text(encoding='utf-8')
         except Exception as e:
             return None
-    
-    def _load_corpus_content(self, corpus_path: Path) -> Optional[str]:
-        """Load corpus content from file."""
+
+    def _load_corpus_documents(self, corpus_manifest_path: Path) -> Optional[List[Dict[str, str]]]:
+        """Load individual documents based on the corpus manifest."""
         try:
-            return corpus_path.read_text(encoding='utf-8')
+            if not corpus_manifest_path.exists():
+                return None
+            
+            manifest_text = corpus_manifest_path.read_text(encoding='utf-8')
+
+            # Extract YAML block from markdown
+            yaml_match = re.search(r"```yaml\n(.*?)```", manifest_text, re.DOTALL)
+            if not yaml_match:
+                # Assume the whole file is YAML if no markdown fence is found
+                yaml_content = manifest_text
+            else:
+                yaml_content = yaml_match.group(1)
+
+            manifest = yaml.safe_load(yaml_content)
+            
+            documents = []
+            corpus_dir = corpus_manifest_path.parent
+            
+            for doc_info in manifest.get('documents', []):
+                doc_path = corpus_dir / doc_info['filename']
+                if doc_path.exists():
+                    content = doc_path.read_text(encoding='utf-8')
+                    documents.append({
+                        "id": doc_info.get('document_id', doc_info['filename']),
+                        "content": content,
+                    })
+            return documents
         except Exception as e:
+            # Potentially log this error
             return None
 
 
@@ -280,10 +311,38 @@ class AnalysisOnlyStrategy(ExecutionStrategy):
         metadata = {}
         
         try:
+            # THIN PRINCIPLE: Orchestrator handles file I/O, not agents
+            framework_content = self._load_framework_content(Path(run_context.framework_path))
+            corpus_manifest_path = Path(run_context.corpus_path)
+            corpus_documents = self._load_corpus_documents(corpus_manifest_path)
+            corpus_manifest_content = corpus_manifest_path.read_text(encoding='utf-8')
+
+            if not framework_content:
+                return ExperimentResult(
+                    success=False,
+                    phases_completed=phases_completed,
+                    artifacts=artifacts,
+                    metadata=metadata,
+                    error_message="Failed to load framework content"
+                )
+            
+            if not corpus_documents:
+                return ExperimentResult(
+                    success=False,
+                    phases_completed=phases_completed,
+                    artifacts=artifacts,
+                    metadata=metadata,
+                    error_message="Failed to load corpus documents"
+                )
+
+            run_context.metadata["framework_content"] = framework_content
+            run_context.metadata["corpus_documents"] = corpus_documents
+            run_context.metadata["corpus_manifest_content"] = corpus_manifest_content
+
             # Phase 1: Coherence validation
-            if "coherence" in agents:
+            if "Coherence" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "coherence"})
-                coherence_result = agents["coherence"].execute(run_context=run_context)
+                coherence_result = agents["Coherence"].execute(run_context=run_context)
                 if not coherence_result.success:
                     return ExperimentResult(
                         success=False,
@@ -298,9 +357,9 @@ class AnalysisOnlyStrategy(ExecutionStrategy):
                 audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "coherence"})
             
             # Phase 2: Analysis
-            if "analysis" in agents:
+            if "Analysis" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "analysis"})
-                analysis_result = agents["analysis"].execute(run_context=run_context)
+                analysis_result = agents["Analysis"].execute(run_context=run_context)
                 if not analysis_result.success:
                     return ExperimentResult(
                         success=False,
@@ -341,12 +400,39 @@ class AnalysisOnlyStrategy(ExecutionStrategy):
             return framework_path.read_text(encoding='utf-8')
         except Exception as e:
             return None
-    
-    def _load_corpus_content(self, corpus_path: Path) -> Optional[str]:
-        """Load corpus content from file."""
+
+    def _load_corpus_documents(self, corpus_manifest_path: Path) -> Optional[List[Dict[str, str]]]:
+        """Load individual documents based on the corpus manifest."""
         try:
-            return corpus_path.read_text(encoding='utf-8')
+            if not corpus_manifest_path.exists():
+                return None
+            
+            manifest_text = corpus_manifest_path.read_text(encoding='utf-8')
+            
+            # Extract YAML block from markdown
+            yaml_match = re.search(r"```yaml\n(.*?)```", manifest_text, re.DOTALL)
+            if not yaml_match:
+                # Assume the whole file is YAML if no markdown fence is found
+                yaml_content = manifest_text
+            else:
+                yaml_content = yaml_match.group(1)
+
+            manifest = yaml.safe_load(yaml_content)
+            
+            documents = []
+            corpus_dir = corpus_manifest_path.parent
+            
+            for doc_info in manifest.get('documents', []):
+                doc_path = corpus_dir / doc_info['filename']
+                if doc_path.exists():
+                    content = doc_path.read_text(encoding='utf-8')
+                    documents.append({
+                        "id": doc_info.get('document_id', doc_info['filename']),
+                        "content": content,
+                    })
+            return documents
         except Exception as e:
+            # Potentially log this error
             return None
 
 
@@ -373,10 +459,37 @@ class StatisticalPrepStrategy(ExecutionStrategy):
         metadata = {}
         
         try:
+            # THIN PRINCIPLE: Orchestrator handles file I/O, not agents
+            framework_content = self._load_framework_content(Path(run_context.framework_path))
+            corpus_manifest_path = Path(run_context.corpus_path)
+            corpus_documents = self._load_corpus_documents(corpus_manifest_path)
+            corpus_manifest_content = corpus_manifest_path.read_text(encoding='utf-8')
+
+            if not framework_content:
+                return ExperimentResult(
+                    success=False,
+                    phases_completed=phases_completed,
+                    artifacts=artifacts,
+                    metadata=metadata,
+                    error_message="Failed to load framework content"
+                )
+            
+            if not corpus_documents:
+                return ExperimentResult(
+                    success=False,
+                    phases_completed=phases_completed,
+                    artifacts=artifacts,
+                    metadata=metadata,
+                    error_message="Failed to load corpus documents"
+                )
+
+            run_context.metadata["framework_content"] = framework_content
+            run_context.metadata["corpus_documents"] = corpus_documents
+            run_context.metadata["corpus_manifest_content"] = corpus_manifest_content
             # Phase 1: Coherence validation
-            if "coherence" in agents:
+            if "Coherence" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "coherence"})
-                coherence_result = agents["coherence"].execute(run_context=run_context)
+                coherence_result = agents["Coherence"].execute(run_context=run_context)
                 if not coherence_result.success:
                     return ExperimentResult(
                         success=False,
@@ -391,9 +504,9 @@ class StatisticalPrepStrategy(ExecutionStrategy):
                 audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "coherence"})
             
             # Phase 2: Analysis
-            if "analysis" in agents:
+            if "Analysis" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "analysis"})
-                analysis_result = agents["analysis"].execute(run_context=run_context)
+                analysis_result = agents["Analysis"].execute(run_context=run_context)
                 if not analysis_result.success:
                     return ExperimentResult(
                         success=False,
@@ -408,9 +521,9 @@ class StatisticalPrepStrategy(ExecutionStrategy):
                 audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "analysis"})
             
             # Phase 3: Statistical analysis
-            if "statistical" in agents:
+            if "Statistical" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "statistical"})
-                statistical_result = agents["statistical"].execute(run_context=run_context)
+                statistical_result = agents["Statistical"].execute(run_context=run_context)
                 if not statistical_result.success:
                     return ExperimentResult(
                         success=False,
@@ -451,12 +564,39 @@ class StatisticalPrepStrategy(ExecutionStrategy):
             return framework_path.read_text(encoding='utf-8')
         except Exception as e:
             return None
-    
-    def _load_corpus_content(self, corpus_path: Path) -> Optional[str]:
-        """Load corpus content from file."""
+
+    def _load_corpus_documents(self, corpus_manifest_path: Path) -> Optional[List[Dict[str, str]]]:
+        """Load individual documents based on the corpus manifest."""
         try:
-            return corpus_path.read_text(encoding='utf-8')
+            if not corpus_manifest_path.exists():
+                return None
+            
+            manifest_text = corpus_manifest_path.read_text(encoding='utf-8')
+
+            # Extract YAML block from markdown
+            yaml_match = re.search(r"```yaml\n(.*?)```", manifest_text, re.DOTALL)
+            if not yaml_match:
+                # Assume the whole file is YAML if no markdown fence is found
+                yaml_content = manifest_text
+            else:
+                yaml_content = yaml_match.group(1)
+
+            manifest = yaml.safe_load(yaml_content)
+            
+            documents = []
+            corpus_dir = corpus_manifest_path.parent
+            
+            for doc_info in manifest.get('documents', []):
+                doc_path = corpus_dir / doc_info['filename']
+                if doc_path.exists():
+                    content = doc_path.read_text(encoding='utf-8')
+                    documents.append({
+                        "id": doc_info.get('document_id', doc_info['filename']),
+                        "content": content,
+                    })
+            return documents
         except Exception as e:
+            # Potentially log this error
             return None
 
 
@@ -484,6 +624,15 @@ class ResumeFromStatsStrategy(ExecutionStrategy):
         metadata = {}
         
         try:
+            # THIN PRINCIPLE: Orchestrator handles file I/O, not agents
+            framework_content = self._load_framework_content(Path(run_context.framework_path))
+            # In resume mode, we may not need to reload all documents, but we need the manifest for context.
+            corpus_manifest_path = Path(run_context.corpus_path)
+            corpus_manifest_content = corpus_manifest_path.read_text(encoding='utf-8')
+
+            run_context.metadata["framework_content"] = framework_content
+            run_context.metadata["corpus_manifest_content"] = corpus_manifest_content
+
             # Check if we have statistical results
             if not run_context.statistical_results:
                 return ExperimentResult(
@@ -495,9 +644,9 @@ class ResumeFromStatsStrategy(ExecutionStrategy):
                 )
             
             # Phase 1: Evidence retrieval
-            if "evidence" in agents:
+            if "Evidence" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "evidence"})
-                evidence_result = agents["evidence"].execute(run_context=run_context)
+                evidence_result = agents["Evidence"].execute(run_context=run_context)
                 if not evidence_result.success:
                     return ExperimentResult(
                         success=False,
@@ -512,9 +661,9 @@ class ResumeFromStatsStrategy(ExecutionStrategy):
                 audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "evidence"})
             
             # Phase 2: Synthesis
-            if "synthesis" in agents:
+            if "Synthesis" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "synthesis"})
-                synthesis_result = agents["synthesis"].execute(run_context=run_context)
+                synthesis_result = agents["Synthesis"].execute(run_context=run_context)
                 if not synthesis_result.success:
                     return ExperimentResult(
                         success=False,
@@ -529,9 +678,9 @@ class ResumeFromStatsStrategy(ExecutionStrategy):
                 audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "synthesis"})
             
             # Phase 3: Verification (if enabled)
-            if run_context.metadata.get("verification_enabled", True) and "verification" in agents:
+            if run_context.metadata.get("verification_enabled", True) and "Verification" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "verification"})
-                verification_result = agents["verification"].execute(run_context=run_context)
+                verification_result = agents["Verification"].execute(run_context=run_context)
                 if not verification_result.success:
                     return ExperimentResult(
                         success=False,
@@ -572,7 +721,7 @@ class ResumeFromStatsStrategy(ExecutionStrategy):
             return framework_path.read_text(encoding='utf-8')
         except Exception as e:
             return None
-    
+
     def _load_corpus_content(self, corpus_path: Path) -> Optional[str]:
         """Load corpus content from file."""
         try:

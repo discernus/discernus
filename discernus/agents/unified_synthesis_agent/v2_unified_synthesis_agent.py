@@ -71,7 +71,7 @@ class V2UnifiedSynthesisAgent(SynthesisAgent):
         self.analysis_model = None
         self.synthesis_model = self.model
 
-    def execute(self, run_context: RunContext) -> AgentResult:
+    def execute(self, run_context: RunContext, **kwargs) -> AgentResult:
         """
         V2 StandardAgent execute method.
         
@@ -84,59 +84,39 @@ class V2UnifiedSynthesisAgent(SynthesisAgent):
         self.logger.info(f"Starting {self.agent_name} synthesis for experiment_id: {run_context.experiment_id}")
         
         try:
-            # Validate required inputs from RunContext
-            if not self._validate_run_context(run_context):
-                return AgentResult(
-                    success=False,
-                    artifacts=[],
-                    metadata={},
-                    error_message="RunContext missing required synthesis inputs"
-                )
-            
-            # Extract synthesis inputs from RunContext
-            synthesis_inputs = self._extract_synthesis_inputs(run_context)
-            
-            # Generate the synthesis report
+            self.log_execution_start(run_context=run_context, **kwargs)
+
+            # 1. Validate and extract necessary data from RunContext
+            synthesis_inputs = self._validate_and_extract_inputs(run_context)
+
+            # 2. Generate the synthesis report by calling the LLM
             self.logger.info("Generating synthesis report...")
             synthesis_result = self._generate_synthesis_report(synthesis_inputs)
-            
-            # Store synthesis results
+
+            # 3. Store the synthesis report as a persistent artifact
             self.logger.info("Storing synthesis results...")
             synthesis_artifact_hash = self._store_synthesis_results(synthesis_result, run_context)
-            
-            # Update RunContext with new synthesis artifact
-            run_context.add_artifact("synthesis", "synthesis_report", synthesis_artifact_hash)
+
+            # 4. Update the RunContext with the results
             run_context.synthesis_results = synthesis_result
+            run_context.add_artifact("synthesis", synthesis_artifact_hash, synthesis_artifact_hash)
             run_context.metadata["latest_synthesis_hash"] = synthesis_artifact_hash
             
-            # Log completion
-            self.audit.log_agent_event(
-                self.agent_name,
-                "synthesis_complete",
-                {
+            # 5. Log completion and return the result
+            result = AgentResult(
+                success=True,
+                artifacts=[synthesis_artifact_hash],
+                metadata={
                     "report_length": len(synthesis_result.get('final_report', '')),
                     "synthesis_artifact_hash": synthesis_artifact_hash,
-                    "framework": synthesis_inputs.get('framework_name', 'Unknown')
                 }
             )
-            
-            return AgentResult(
-                success=True,
-                artifacts=[{"type": "synthesis_report", "hash": synthesis_artifact_hash}],
-                metadata={
-                    "framework": synthesis_inputs.get('framework_name', 'Unknown'),
-                    "report_length": len(synthesis_result.get('final_report', '')),
-                    "synthesis_result": synthesis_result
-                }
-            )
-            
+            self.log_execution_complete(result)
+            return result
+
         except Exception as e:
             self.logger.error(f"{self.agent_name} synthesis failed: {e}", exc_info=True)
-            self.audit.log_error(
-                "synthesis_failed",
-                str(e),
-                {"agent": self.agent_name, "experiment_id": run_context.experiment_id}
-            )
+            self.log_execution_error(e)
             return AgentResult(success=False, artifacts=[], metadata={}, error_message=f"Synthesis failed: {e}")
 
     def synthesize(self, source_data: Dict[str, Any], **kwargs) -> AgentResult:
@@ -182,8 +162,8 @@ class V2UnifiedSynthesisAgent(SynthesisAgent):
         return [
             "analysis_results",
             "statistical_results", 
-            "framework_path",
-            "experiment_path"
+            "framework_content",
+            "corpus_documents"
         ]
 
     def get_optional_inputs(self) -> List[str]:
@@ -195,84 +175,70 @@ class V2UnifiedSynthesisAgent(SynthesisAgent):
             "verification_results"
         ]
 
-    def _validate_run_context(self, run_context: RunContext) -> bool:
-        """Validate that RunContext contains required synthesis inputs."""
-        required_fields = [
-            'analysis_results',
-            'statistical_results',
-            'metadata'
-        ]
-        
-        for field in required_fields:
-            if not hasattr(run_context, field) or not getattr(run_context, field):
-                self.logger.error(f"RunContext missing required field: {field}")
-                return False
-        
-        # Check for framework and corpus paths
-        if not run_context.framework_path:
-            self.logger.error("RunContext missing framework_path")
-            return False
-            
-        if not run_context.corpus_path:
-            self.logger.error("RunContext missing corpus_path")
-            return False
-        
-        return True
+    def _validate_and_extract_inputs(self, run_context: RunContext) -> Dict[str, Any]:
+        """Validate RunContext and extract all necessary data for synthesis."""
+        if not run_context:
+            raise ValueError("RunContext is required.")
 
-    def _extract_synthesis_inputs(self, run_context: RunContext) -> Dict[str, Any]:
-        """Extract synthesis inputs from RunContext."""
-        return {
-            'analysis_results': run_context.analysis_results,
-            'statistical_results': run_context.statistical_results,
-            'evidence': run_context.evidence,
-            'derived_metrics': run_context.derived_metrics,
-            'framework_path': run_context.framework_path,
-            'corpus_path': run_context.corpus_path,
-            'experiment_path': run_context.metadata.get('experiment_path', f"{run_context.corpus_path}/experiment.md"),
-            'framework_name': Path(run_context.framework_path).name,
-            'experiment_name': run_context.experiment_id,
-            'run_id': run_context.experiment_id,
-            'computational_work': run_context.metadata.get('computational_work', {}),
-            'verification_results': run_context.metadata.get('verification_results', [])
-        }
+        inputs = {}
+        required_fields = [
+            "analysis_results", "statistical_results"
+        ]
+        for field in required_fields:
+            if not getattr(run_context, field):
+                raise ValueError(f"RunContext is missing required field: {field}")
+            inputs[field] = getattr(run_context, field)
+
+        required_metadata = ["framework_content"]
+        for meta_field in required_metadata:
+            if meta_field not in run_context.metadata:
+                raise ValueError(f"RunContext metadata is missing required field: {meta_field}")
+            inputs[meta_field] = run_context.metadata[meta_field]
+            
+        # Optional fields
+        inputs['evidence'] = run_context.evidence or []
+        inputs['derived_metrics'] = run_context.derived_metrics or {}
+        inputs['computational_work'] = run_context.metadata.get('computational_work', {})
+        inputs['verification_results'] = run_context.metadata.get('verification_results', [])
+        
+        # Experiment info
+        inputs['experiment_name'] = run_context.experiment_id
+        inputs['framework_name'] = Path(run_context.framework_path).name
+
+        # Load experiment content from the standard file path
+        experiment_file_path = Path(run_context.corpus_path).parent / 'experiment.md'
+        if experiment_file_path.exists():
+            inputs['experiment_content'] = experiment_file_path.read_text(encoding='utf-8')
+        else:
+            inputs['experiment_content'] = "No experiment content file found."
+
+        # The orchestrator should have loaded this already
+        inputs['corpus_manifest_content'] = run_context.metadata.get("corpus_manifest_content", "No corpus manifest content found.")
+
+        return inputs
 
     def _generate_synthesis_report(self, inputs: Dict[str, Any]) -> Dict[str, Any]:
         """Generate the synthesis report using V2 native formats."""
         try:
-            # Load framework and experiment content
-            framework_content = self._load_framework_content(inputs['framework_path'])
-            experiment_content = self._load_experiment_content(inputs['experiment_path'])
-            
-            # Prepare research data from V2 native formats
+            # Prepare all data contexts by serializing them to JSON for the LLM
             research_data_context = self._prepare_research_data_context(inputs)
-            
-            # Prepare evidence context from V2 evidence format
             evidence_context = self._prepare_evidence_context(inputs['evidence'])
-            
-            # Prepare computational work context
             computational_context = self._prepare_computational_context(inputs.get('computational_work', {}))
-            
-            # Prepare verification context
             verification_context = self._prepare_verification_context(inputs.get('verification_results', []))
-            
-            # Assemble experiment metadata
             experiment_metadata = self._assemble_experiment_metadata(inputs)
-            
-            # Load corpus manifest
-            corpus_manifest = self._load_corpus_manifest(inputs['corpus_path'])
-            
+
             # Assemble prompt using template
             base_prompt = self.prompt_template['template'].format(
-                experiment_metadata=experiment_metadata,
-                framework_content=framework_content,
-                experiment_content=experiment_content,
-                corpus_manifest=corpus_manifest,
-                research_data=research_data_context,
-                evidence_context=evidence_context,
-                computational_context=computational_context,
-                verification_context=verification_context
+                experiment_metadata=json.dumps(experiment_metadata, indent=2),
+                framework_content=inputs['framework_content'],
+                experiment_content=inputs['experiment_content'],
+                corpus_manifest=inputs['corpus_manifest_content'],
+                research_data=json.dumps(research_data_context, indent=2),
+                evidence_context=json.dumps(evidence_context, indent=2),
+                computational_context=json.dumps(computational_context, indent=2),
+                verification_context=json.dumps(verification_context, indent=2)
             )
-            
+
             # Execute LLM call
             final_report, metadata = self.llm_gateway.execute_call(
                 model=self.model,
@@ -280,125 +246,65 @@ class V2UnifiedSynthesisAgent(SynthesisAgent):
                 temperature=0.2,
                 context="Generating comprehensive research report"
             )
-            
+
             # Log cost information
             if metadata.get("usage"):
                 self._log_synthesis_cost(metadata)
-            
+
             return {
                 "final_report": final_report,
                 "llm_metadata": metadata,
-                "synthesis_inputs": inputs
             }
-            
+
         except Exception as e:
             self.logger.error(f"Synthesis report generation failed: {e}", exc_info=True)
             raise
 
-    def _load_framework_content(self, framework_path: str) -> str:
-        """Load framework content from file."""
-        try:
-            path = Path(framework_path)
-            if not path.exists():
-                raise FileNotFoundError(f"Framework file not found: {framework_path}")
-            return path.read_text(encoding='utf-8')
-        except Exception as e:
-            self.logger.error(f"Failed to load framework content: {e}")
-            raise
-
-    def _load_experiment_content(self, experiment_path: str) -> str:
-        """Load experiment content from file."""
-        try:
-            path = Path(experiment_path)
-            if not path.exists():
-                raise FileNotFoundError(f"Experiment file not found: {experiment_path}")
-            return path.read_text(encoding='utf-8')
-        except Exception as e:
-            self.logger.error(f"Failed to load experiment content: {e}")
-            raise
-
-    def _prepare_research_data_context(self, inputs: Dict[str, Any]) -> str:
-        """Prepare research data context from V2 native formats."""
-        # Combine analysis results and statistical results
-        research_data = {
+    def _prepare_research_data_context(self, inputs: Dict[str, Any]) -> Dict:
+        """Prepare research data context by combining relevant data."""
+        return {
             "analysis_results": inputs['analysis_results'],
             "statistical_results": inputs['statistical_results'],
             "derived_metrics": inputs.get('derived_metrics', {})
         }
-        
-        # Convert to safe representation for LLM
-        safe_research_data = self._convert_tuple_keys_for_repr(research_data)
-        research_data_repr = repr(safe_research_data)
-        
-        return f"Complete Research Data:\n{research_data_repr}"
 
-    def _prepare_evidence_context(self, evidence: List[Dict[str, Any]]) -> str:
-        """Prepare evidence context from V2 evidence format."""
+    def _prepare_evidence_context(self, evidence: List[Dict[str, Any]]) -> Dict:
+        """Prepare evidence context, providing raw data for the LLM."""
         if not evidence:
-            return "⚠️ **EVIDENCE STATUS**: No evidence available for synthesis."
+            return {"status": "No evidence available for synthesis."}
         
-        evidence_lines = [
-            "🔍 **EVIDENCE AVAILABLE FOR SYNTHESIS**",
-            f"Found {len(evidence)} evidence pieces.",
-            "",
-            "📋 **EVIDENCE CITATION REQUIREMENTS**:",
-            "- Every major statistical claim MUST be supported by evidence",
-            "- Use format: 'As [Speaker] stated: \"[exact quote]\" (Source: [document_name])'",
-            "- Include speaker identification and source document for every quote",
-            "- Weave evidence quotes naturally into your analysis",
-            ""
-        ]
-        
-        # Add evidence pieces
-        for i, evidence_piece in enumerate(evidence[:10]):  # Limit to first 10
-            quote_text = evidence_piece.get('quote_text', '')
-            if quote_text and quote_text.strip():
-                display_quote = quote_text[:200] + ('...' if len(quote_text) > 200 else '')
-                evidence_lines.append(f"📝 Evidence {i+1}: \"{display_quote}\"")
-                evidence_lines.append(f"   Source: {evidence_piece.get('document_name', 'Unknown')} | Confidence: {evidence_piece.get('confidence', 0.0):.2f}")
-                evidence_lines.append("")
-        
-        return "\n".join(evidence_lines)
+        return {
+            "status": f"Evidence available. Found {len(evidence)} findings.",
+            "evidence_payload": evidence
+        }
 
-    def _prepare_computational_context(self, computational_work: Dict[str, Any]) -> str:
+    def _prepare_computational_context(self, computational_work: Dict[str, Any]) -> Dict:
         """Prepare computational work context."""
         if not computational_work:
-            return "No computational work available for synthesis."
-        
-        return f"Computational Work:\n{json.dumps(computational_work, indent=2)}"
+            return {"status": "No computational work available for synthesis."}
+        return computational_work
 
-    def _prepare_verification_context(self, verification_results: List[Dict[str, Any]]) -> str:
+    def _prepare_verification_context(self, verification_results: List[Dict[str, Any]]) -> Dict:
         """Prepare verification results context."""
         if not verification_results:
-            return "No verification results available for synthesis."
-        
+            return {"status": "No verification results available for synthesis."}
+
         verified_count = sum(1 for result in verification_results if result.get('verified', False))
         total_count = len(verification_results)
         
-        return f"Verification Results: {verified_count}/{total_count} verified\n{json.dumps(verification_results, indent=2)}"
+        return {
+            "status": f"{verified_count}/{total_count} items verified.",
+            "verification_payload": verification_results
+        }
 
-    def _assemble_experiment_metadata(self, inputs: Dict[str, Any]) -> str:
-        """Assemble experiment metadata."""
-        return f"""
-        Experiment: {inputs['experiment_name']}
-        Run ID: {inputs['run_id']}
-        Framework: {inputs['framework_name']}
-        Analysis Model: {self.analysis_model or 'Unknown'}
-        Synthesis Model: {self.synthesis_model}
-        Document Count: {len(inputs['analysis_results'].get('documents', []))}
-        Evidence Count: {len(inputs['evidence'])}
-        """
-
-    def _load_corpus_manifest(self, corpus_path: str) -> str:
-        """Load corpus manifest."""
-        try:
-            path = Path(corpus_path)
-            if path.exists():
-                return path.read_text(encoding='utf-8')
-            return "Corpus manifest not available"
-        except Exception as e:
-            self.logger.warning(f"Failed to load corpus manifest: {e}")
-            return "Corpus manifest not available"
+    def _assemble_experiment_metadata(self, inputs: Dict[str, Any]) -> Dict:
+        """Assemble experiment metadata into a dictionary."""
+        return {
+           "experiment_name": inputs['experiment_name'],
+           "framework_name": inputs['framework_name'],
+           "synthesis_model": self.synthesis_model,
+           "evidence_findings_count": len(inputs.get('evidence', []))
+        }
 
     def _convert_tuple_keys_for_repr(self, obj):
         """Convert tuple keys to strings for safe repr() serialization."""
@@ -436,33 +342,57 @@ class V2UnifiedSynthesisAgent(SynthesisAgent):
         """Get basic synthesis prompt template."""
         return {
             "template": """
-You are an expert academic synthesis agent. Generate a comprehensive research report using the provided data.
+You are an expert academic synthesis agent. Your task is to generate a comprehensive, publication-ready research report by synthesizing the provided JSON data objects. Adhere strictly to an academic tone.
 
-Experiment Metadata:
+### Instructions:
+1.  **Synthesize, Do Not Summarize**: Do not simply list the data. Weave the information from all provided JSON objects into a coherent, well-structured academic narrative.
+2.  **Cite Evidence**: When making claims based on the `research_data`, you MUST support them with specific quotes from the `evidence_context`. Use parenthetical citations referencing the document ID.
+3.  **Structure**: The report should include an introduction, methodology, results, discussion, and conclusion.
+4.  **Tone**: Maintain a neutral, objective, and analytical tone throughout.
+
+### Data Payloads (JSON Objects):
+
+**Experiment Metadata:**
+```json
 {experiment_metadata}
+```
 
-Framework Specification:
+**Framework Specification:**
+```
 {framework_content}
+```
 
-Experiment Specification:
+**Experiment Specification:**
+```
 {experiment_content}
+```
 
-Corpus Manifest:
+**Corpus Manifest:**
+```
 {corpus_manifest}
+```
 
-Research Data:
+**Research Data (Analysis, Statistics, Metrics):**
+```json
 {research_data}
+```
 
-Evidence Context:
+**Evidence Context (for citation):**
+```json
 {evidence_context}
+```
 
-Computational Context:
+**Computational Context (optional):**
+```json
 {computational_context}
+```
 
-Verification Context:
+**Verification Context (optional):**
+```json
 {verification_context}
+```
 
-Generate a comprehensive academic report that synthesizes all available information.
+Begin the report now.
 """
         }
 
@@ -488,28 +418,25 @@ Generate a comprehensive academic report that synthesizes all available informat
     def _store_synthesis_results(self, synthesis_result: Dict[str, Any], run_context: RunContext) -> str:
         """Store synthesis results as a structured artifact."""
         timestamp = datetime.now().isoformat()
-        artifact_data = {
-            "agent_name": self.agent_name,
-            "timestamp": timestamp,
-            "experiment_id": run_context.experiment_id,
-            "synthesis_result": synthesis_result,
-            "summary": f"Generated synthesis report with {len(synthesis_result.get('final_report', ''))} characters"
-        }
         
-        # Store as JSON artifact
-        artifact_content = json.dumps(artifact_data, indent=2).encode('utf-8')
-        artifact_hash = self.storage.store_artifact(
+        # The final report is the markdown content we want to store.
+        final_report_content = synthesis_result.get("final_report", "# Synthesis Report Error\n\nNo report content was generated.")
+        
+        # Store the markdown report directly.
+        artifact_content = final_report_content.encode('utf-8')
+        artifact_hash = self.storage.put_artifact(
             content=artifact_content,
-            artifact_type="synthesis_report_v2",
             metadata={
+                "artifact_type": "synthesis_report_v2_markdown",
                 "agent": self.agent_name,
                 "timestamp": timestamp,
                 "experiment_id": run_context.experiment_id,
-                "report_length": len(synthesis_result.get('final_report', ''))
+                "report_length": len(final_report_content),
+                "llm_metadata": synthesis_result.get("llm_metadata", {})
             }
         )
         
-        self.logger.info(f"Stored synthesis results as artifact: {artifact_hash}")
+        self.logger.info(f"Stored synthesis markdown report as artifact: {artifact_hash}")
         return artifact_hash
 
     @classmethod

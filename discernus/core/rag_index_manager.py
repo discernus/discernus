@@ -3,89 +3,121 @@
 RAG Index Manager
 =================
 
-A dedicated, concern-specific component for building and managing RAG indexes.
-This adheres to THIN principles by centralizing RAG logic instead of bloating
-the orchestrator.
+Handles the creation, caching, and querying of RAG (Retrieval-Augmented Generation)
+indexes for the V2 agent ecosystem. This ensures that index building is efficient
+and indexes can be reused across runs when the underlying data has not changed.
 """
 
-from typing import List, Dict, Any, Tuple
-from txtai.embeddings import Embeddings
+import hashlib
+import json
+import logging
+from pathlib import Path
+from typing import List, Dict, Any, Optional
+
+import numpy as np
+from txtai import embeddings
+
+from .local_artifact_storage import LocalArtifactStorage
+from .audit_logger import AuditLogger
+from .security_boundary import ExperimentSecurityBoundary
 
 
 class RAGIndexManager:
-    """Handles the creation and management of txtai RAG indexes."""
+    """Manages the lifecycle of RAG indexes."""
 
-    def __init__(self, artifact_storage):
+    def __init__(self, storage: LocalArtifactStorage, audit: AuditLogger, security: ExperimentSecurityBoundary):
         """
-        Initialize the RAGIndexManager.
+        Initializes the RAGIndexManager.
 
         Args:
-            artifact_storage: An instance of LocalArtifactStorage.
+            storage: The artifact storage system.
+            audit: The audit logger.
+            security: The experiment security boundary.
         """
-        self.artifact_storage = artifact_storage
+        self.storage = storage
+        self.audit = audit
+        self.security = security
+        self.logger = logging.getLogger(__name__)
+        self.embeddings = None
+        self.current_index_key = None
 
-    def build_index_from_documents(
-        self, documents: List[Dict[str, Any]]
-    ) -> Embeddings:
-        """
-        Build a searchable txtai index from a list of document dictionaries.
+    def get_corpus_cache_key(self, corpus_documents: List[Dict[str, str]]) -> str:
+        """Generates a cache key from the content of corpus documents."""
+        hasher = hashlib.sha256()
+        for doc in sorted(corpus_documents, key=lambda x: x['id']):
+            hasher.update(doc['content'].encode('utf-8'))
+        return f"rag_index_{hasher.hexdigest()}"
 
-        This method encapsulates the best practices learned from research:
-        - It explicitly enables content storage via the {"content": True} flag.
-        - It formats the data correctly for txtai's .index() method.
+    def is_index_cached(self, cache_key: str) -> bool:
+        """Checks if an index is already cached in artifact storage."""
+        # A directory artifact is registered by its hash (which is our cache_key)
+        return self.storage.artifact_exists(cache_key)
 
-        Args:
-            documents: A list of document dictionaries, each expected to have
-                       at least a 'content' key.
+    def build_index_from_corpus(self, corpus_documents: List[Dict[str, str]], cache_key: str):
+        """Builds a new RAG index from corpus documents and saves it."""
+        if not corpus_documents:
+            self.logger.warning("Corpus is empty. Cannot build RAG index.")
+            return
 
-        Returns:
-            The configured and indexed txtai Embeddings object.
-        """
-        # Initialize txtai with content storage enabled, per best practices.
-        rag_index = Embeddings({"content": True})
+        self.logger.info(f"Building new RAG index for cache key: {cache_key}")
+        
+        # Create a temporary directory to build the index
+        temp_index_dir = self.storage.run_folder / f"tmp_index_{cache_key}"
+        temp_index_dir.mkdir(parents=True, exist_ok=True)
 
-        # Format the documents into a list of tuples for indexing.
-        # The format is (unique_id, data, tags). We use the list index as the id.
-        documents_to_index = [
-            (i, doc["content"], None) for i, doc in enumerate(documents)
-        ]
+        try:
+            self.embeddings = embeddings.Embeddings({"path": "sentence-transformers/all-MiniLM-L6-v2", "content": True})
+            
+            # Prepare data for txtai
+            data = [(doc["id"], doc["content"], None) for doc in corpus_documents]
+            
+            self.embeddings.index(data)
+            self.embeddings.save(str(temp_index_dir))
 
-        # Build the index.
-        rag_index.index(documents_to_index)
+            # Store the directory as a content-addressable artifact
+            metadata = {
+                "artifact_type": "rag_index",
+                "document_count": len(corpus_documents),
+                "cache_key": cache_key
+            }
+            dir_hash = self.storage.put_directory_artifact(temp_index_dir, metadata)
 
-        return rag_index
+            # Important: The true hash of the directory is calculated by the storage,
+            # which should match our cache key if the content is identical.
+            if dir_hash != cache_key:
+                self.logger.warning(f"RAG index hash mismatch. Expected {cache_key}, got {dir_hash}. This may indicate non-determinism.")
 
-    def build_comprehensive_index(
-        self, source_documents: List[Dict[str, Any]]
-    ) -> Embeddings:
-        """
-        Build a comprehensive RAG index with full metadata preservation.
+            self.current_index_key = dir_hash
 
-        This method is designed for fact-checking and other use cases that require
-        access to both document content and metadata for retrieval.
+        finally:
+            # Clean up the temporary directory
+            import shutil
+            shutil.rmtree(temp_index_dir)
 
-        Args:
-            source_documents: List of document dictionaries with 'content' and 'metadata' keys.
+    def load_index(self, cache_key: str):
+        """Loads a pre-existing RAG index from the cache."""
+        if not self.is_index_cached(cache_key):
+            raise FileNotFoundError(f"RAG index with cache key '{cache_key}' not found.")
 
-        Returns:
-            The configured and indexed txtai Embeddings object with stored documents.
-        """
-        # Initialize txtai with content storage enabled, per best practices.
-        rag_index = Embeddings({"content": True})
+        self.logger.info(f"Loading RAG index from cache: {cache_key}")
+        index_path = self.storage.get_directory_artifact_path(cache_key)
+        self.embeddings = embeddings.Embeddings({"content": True})
+        self.embeddings.load(str(index_path))
+        self.current_index_key = cache_key
 
-        # Prepare documents for txtai indexing with metadata preservation
-        documents = []
-        for i, doc in enumerate(source_documents):
-            documents.append({
-                'id': i,
-                'text': doc['content'],
-                'metadata': doc.get('metadata', {})
+    def search(self, query: str, top_k: int = 5) -> List[Dict[str, Any]]:
+        """Searches the loaded RAG index."""
+        if not self.embeddings:
+            raise RuntimeError("No RAG index is loaded. Call build_index or load_index first.")
+
+        results = self.embeddings.search(query, top_k)
+        
+        # Format results to be consistent
+        formatted_results = []
+        for res in results:
+            formatted_results.append({
+                "id": res["id"],
+                "text": res["text"],
+                "score": res["score"],
             })
-
-        # Store documents separately for content retrieval (txtai only stores embeddings)
-        rag_index.documents = documents
-
-        # Index the documents using txtai
-        rag_index.index(documents)
-
-        return rag_index
+        return formatted_results

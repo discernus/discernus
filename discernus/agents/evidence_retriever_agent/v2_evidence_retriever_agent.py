@@ -25,6 +25,7 @@ from ...core.security_boundary import ExperimentSecurityBoundary
 from ...core.audit_logger import AuditLogger
 from ...gateway.llm_gateway import LLMGateway
 from ...gateway.model_registry import get_model_registry
+from ...core.rag_index_manager import RAGIndexManager
 
 
 class V2EvidenceRetrieverAgent(ToolCallingAgent):
@@ -56,112 +57,69 @@ class V2EvidenceRetrieverAgent(ToolCallingAgent):
         
         # Initialize LLM gateway
         self.llm_gateway = LLMGateway(get_model_registry())
-        
-        # Evidence wrapper for semantic search
-        self.evidence_wrapper = None
-        
-        # RAG index for evidence retrieval
-        self.rag_index = None
+
+        # RAG Index Manager for evidence retrieval
+        self.rag_manager = RAGIndexManager(storage, audit, security)
     
-    def execute(self, **kwargs) -> AgentResult:
+    def execute(self, run_context: RunContext, **kwargs) -> AgentResult:
         """
         Execute evidence retrieval using V2 interface.
         
         Args:
-            **kwargs: Execution parameters including RunContext
+            run_context: The RunContext object
+            **kwargs: Additional execution parameters
             
         Returns:
             AgentResult with evidence retrieval results
         """
         try:
-            self.log_execution_start(**kwargs)
-            
-            # Extract RunContext from kwargs
-            run_context = kwargs.get('run_context')
-            if not run_context:
-                raise ValueError("run_context is required")
-            
-            if not isinstance(run_context, RunContext):
-                raise ValueError("run_context must be a RunContext instance")
-            
-            # Update phase
-            run_context.update_phase("evidence_retrieval")
-            
-            # Get required data from RunContext
-            framework_path = run_context.framework_path
-            statistical_results = run_context.statistical_results
-            analysis_artifacts = run_context.analysis_artifacts
-            
-            if not framework_path:
-                raise ValueError("framework_path not found in RunContext")
-            if not statistical_results:
-                raise ValueError("statistical_results not found in RunContext")
-            if not analysis_artifacts:
-                raise ValueError("analysis_artifacts not found in RunContext")
-            
-            # Step 1: Load framework specification
-            self.logger.info("Step 1: Loading framework specification...")
-            framework_spec = self._load_framework_from_path(framework_path)
-            
-            # Step 2: Find evidence artifacts from analysis artifacts
-            self.logger.info("Step 2: Finding evidence artifacts from analysis artifacts...")
-            evidence_artifact_hashes = self._find_evidence_artifacts_from_analysis(analysis_artifacts)
-            
-            # Step 3: Build evidence wrapper
-            self.logger.info("Step 3: Building evidence wrapper...")
-            self.evidence_wrapper = self._build_evidence_wrapper(evidence_artifact_hashes)
-            if not self.evidence_wrapper:
-                raise RuntimeError("Failed to build evidence wrapper")
-            
-            # Step 4: Use LLM to identify key findings and retrieve evidence
-            self.logger.info("Step 4: Using LLM to identify findings and retrieve evidence...")
-            evidence_results = self._llm_driven_evidence_retrieval(framework_spec, statistical_results)
-            
-            # Step 5: Store evidence results
-            self.logger.info("Step 5: Storing evidence results...")
-            framework_hash = self._calculate_framework_hash(framework_path)
-            evidence_artifact_hash = self._store_evidence_results(evidence_results, framework_hash)
-            
-            # Update RunContext with results
-            run_context.evidence = {
-                "evidence_results": evidence_results,
-                "evidence_quotes_found": sum(len(result['quotes']) for result in evidence_results),
-                "framework": framework_spec.get('name', 'Unknown')
-            }
+            self.log_execution_start(run_context=run_context, **kwargs)
+
+            # 1. Validate inputs from RunContext
+            framework_content, statistical_results, corpus_documents = self._validate_and_extract_inputs(run_context)
+
+            # 2. Build or load a cached RAG index from the corpus documents
+            index_cache_key = self.rag_manager.get_corpus_cache_key(corpus_documents)
+            if not self.rag_manager.is_index_cached(index_cache_key):
+                self.logger.info(f"Building new RAG index with cache key: {index_cache_key}")
+                self.rag_manager.build_index_from_corpus(corpus_documents, index_cache_key)
+            else:
+                self.logger.info(f"Loading cached RAG index with cache key: {index_cache_key}")
+                self.rag_manager.load_index(index_cache_key)
+
+            # 3. Use LLM to identify key statistical findings that require evidence
+            key_findings = self._extract_key_findings(statistical_results)
+            if not key_findings:
+                self.logger.warning("No key statistical findings identified. Skipping evidence retrieval.")
+                run_context.evidence = [] # Explicitly set evidence to empty list
+                return AgentResult(success=True, artifacts=[], metadata={"message": "No findings to process"})
+
+            # 4. For each finding, generate queries and retrieve evidence from the RAG index
+            evidence_results = self._retrieve_evidence_for_findings(key_findings, framework_content)
+
+            # 5. Store the final evidence artifact
+            evidence_artifact_hash = self._store_evidence_results(evidence_results, index_cache_key)
+
+            # 6. Update RunContext and return result
+            run_context.evidence = evidence_results
             run_context.add_artifact("evidence", evidence_artifact_hash, evidence_artifact_hash)
-            
-            # Log success
-            self.audit.log_agent_event(self.agent_name, "evidence_retrieval_complete", {
-                "framework": framework_spec.get('name', 'Unknown'),
-                "evidence_quotes_found": sum(len(result['quotes']) for result in evidence_results),
-                "evidence_artifact_hash": evidence_artifact_hash
-            })
-            
-            # Create result
+
             result = AgentResult(
                 success=True,
                 artifacts=[evidence_artifact_hash],
                 metadata={
-                    "framework": framework_spec.get('name', 'Unknown'),
-                    "evidence_quotes_found": sum(len(result['quotes']) for result in evidence_results),
+                    "quotes_found": sum(len(e.get("quotes", [])) for e in evidence_results),
                     "findings_processed": len(evidence_results)
                 }
             )
-            
             self.log_execution_complete(result)
             return result
-            
+
         except Exception as e:
-            self.logger.error(f"Evidence retrieval failed: {e}")
+            self.logger.error(f"Evidence retrieval failed: {e}", exc_info=True)
             self.log_execution_error(e)
-            
-            return AgentResult(
-                success=False,
-                artifacts=[],
-                metadata={},
-                error_message=str(e)
-            )
-    
+            return AgentResult(success=False, artifacts=[], metadata={}, error_message=str(e))
+
     def get_capabilities(self) -> List[str]:
         """Get agent capabilities"""
         return [
@@ -180,7 +138,26 @@ class V2EvidenceRetrieverAgent(ToolCallingAgent):
     def get_optional_inputs(self) -> List[str]:
         """Get optional input parameters"""
         return []
-    
+
+    def _validate_and_extract_inputs(self, run_context: RunContext):
+        """Validates required inputs are in the RunContext and returns them."""
+        if not run_context:
+            raise ValueError("run_context is required")
+
+        framework_content = run_context.metadata.get("framework_content")
+        if not framework_content:
+            raise ValueError("framework_content not found in RunContext")
+
+        statistical_results = run_context.statistical_results
+        if not statistical_results:
+            raise ValueError("statistical_results not found in RunContext")
+
+        corpus_documents = run_context.metadata.get("corpus_documents")
+        if not corpus_documents:
+            raise ValueError("corpus_documents not found in RunContext")
+            
+        return framework_content, statistical_results, corpus_documents
+
     def _load_framework_from_path(self, framework_path: str) -> Dict[str, Any]:
         """Load framework specification from file path."""
         try:
@@ -336,18 +313,19 @@ class V2EvidenceRetrieverAgent(ToolCallingAgent):
             self.logger.error(f"Failed to extract key findings: {e}")
             return []
     
-    def _generate_evidence_queries(self, finding: Dict[str, Any], framework_spec: Dict[str, Any]) -> List[str]:
+    def _generate_evidence_queries(self, finding: Dict[str, Any], framework_content: str) -> List[str]:
         """Generate evidence queries for a finding."""
         try:
             # Create a prompt for query generation
             prompt = f"""
             Based on this statistical finding and framework, generate 2-3 specific evidence queries:
             
-            Finding: {finding}
-            Framework: {framework_spec.get('name', 'Unknown')}
+            Finding: {json.dumps(finding, indent=2)}
+            Framework Description: {framework_content[:1000]}
             
-            Generate queries that would help find evidence to support or refute this finding.
-            Focus on specific, searchable terms related to the finding.
+            Generate queries that would help find textual evidence in a corpus to support or refute this finding.
+            Focus on specific, searchable terms, phrases, or concepts related to the finding.
+            Return a JSON list of strings. Example: ["query 1", "query 2"]
             """
             
             # Use LLM to generate queries
@@ -356,8 +334,18 @@ class V2EvidenceRetrieverAgent(ToolCallingAgent):
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.1
             )
-            
+
             # Parse response to extract queries
+            try:
+                # Find the JSON list in the response
+                json_match = re.search(r'\[.*\]', response, re.DOTALL)
+                if json_match:
+                    queries = json.loads(json_match.group())
+                    return queries[:3]
+            except json.JSONDecodeError:
+                self.logger.warning(f"Could not decode JSON from LLM response for query generation: {response}")
+
+            # Fallback for non-JSON responses
             queries = []
             lines = response.split('\n')
             for line in lines:
@@ -377,19 +365,19 @@ class V2EvidenceRetrieverAgent(ToolCallingAgent):
     def _retrieve_evidence_for_query(self, query: str) -> List[Dict[str, Any]]:
         """Retrieve evidence for a specific query."""
         try:
-            if not self.evidence_wrapper:
+            if not self.rag_manager: # Changed from evidence_wrapper to rag_manager
                 return []
             
             # Use the evidence wrapper to search
-            results = self.evidence_wrapper.search_evidence(query, limit=5)
+            results = self.rag_manager.search(query, top_k=5) # Changed from evidence_wrapper to rag_manager
             
             # Format results
             evidence = []
             for result in results:
                 evidence.append({
-                    "quote_text": result.get('quote_text', ''),
+                    "text": result.get('text', ''), # Changed from quote_text to text
                     "document_name": result.get('document_name', 'unknown'),
-                    "relevance_score": result.get('relevance_score', 0.0),
+                    "score": result.get('score', 0.0), # Changed from relevance_score to score
                     "metadata": result.get('metadata', {})
                 })
             
@@ -407,13 +395,13 @@ class V2EvidenceRetrieverAgent(ToolCallingAgent):
             unique_evidence = []
             
             for item in evidence:
-                quote_text = item.get('quote_text', '')
+                quote_text = item.get('text', '') # Changed from quote_text to text
                 if quote_text and quote_text not in seen_quotes:
                     seen_quotes.add(quote_text)
                     unique_evidence.append(item)
             
             # Sort by relevance score
-            unique_evidence.sort(key=lambda x: x.get('relevance_score', 0.0), reverse=True)
+            unique_evidence.sort(key=lambda x: x.get('score', 0.0), reverse=True) # Changed from relevance_score to score
             
             return unique_evidence[:10]  # Limit to top 10
             
@@ -421,22 +409,22 @@ class V2EvidenceRetrieverAgent(ToolCallingAgent):
             self.logger.error(f"Failed to deduplicate and rank evidence: {e}")
             return evidence
     
-    def _store_evidence_results(self, evidence_results: List[Dict[str, Any]], framework_hash: str) -> str:
+    def _store_evidence_results(self, evidence_results: List[Dict[str, Any]], cache_key: str) -> str:
         """Store evidence results in artifact storage."""
         try:
             evidence_data = {
                 "evidence_data": evidence_results,
-                "framework_hash": framework_hash,
+                "rag_cache_key": cache_key,
                 "timestamp": datetime.now().isoformat(),
                 "agent": self.agent_name,
-                "total_quotes": sum(len(result['quotes']) for result in evidence_results)
+                "total_quotes": sum(len(e.get("quotes", [])) for e in evidence_results)
             }
             
             # Store as artifact
-            artifact_id = f"evidence_v2_{int(datetime.now().timestamp())}"
-            self.storage.store_artifact(artifact_id, json.dumps(evidence_data, indent=2))
+            artifact_id = f"evidence_v2_{datetime.now().strftime('%Y%m%d%H%M%S')}"
+            artifact_hash = self.storage.store_artifact(artifact_id, json.dumps(evidence_data, indent=2))
             
-            return artifact_id
+            return artifact_hash
             
         except Exception as e:
             self.logger.error(f"Failed to store evidence results: {e}")

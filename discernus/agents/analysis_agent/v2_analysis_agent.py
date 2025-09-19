@@ -91,8 +91,8 @@ class V2AnalysisAgent(ToolCallingAgent):
             # Extract required data from RunContext
             # THIN PRINCIPLE: Orchestrator should have already loaded this data
             framework_content = run_context.metadata.get("framework_content")
-            corpus_content = run_context.metadata.get("corpus_content")
-            
+            corpus_documents = run_context.metadata.get("corpus_documents")
+
             if not framework_content:
                 return AgentResult(
                     success=False,
@@ -100,26 +100,26 @@ class V2AnalysisAgent(ToolCallingAgent):
                     metadata={"agent_name": self.agent_name, "error": "framework_content not found in RunContext"},
                     error_message="framework_content not found in RunContext"
                 )
-            
-            if not corpus_content:
+
+            if not corpus_documents:
                 return AgentResult(
                     success=False,
                     artifacts=[],
-                    metadata={"agent_name": self.agent_name, "error": "corpus_content not found in RunContext"},
-                    error_message="corpus_content not found in RunContext"
+                    metadata={"agent_name": self.agent_name, "error": "corpus_documents not found in RunContext"},
+                    error_message="corpus_documents not found in RunContext"
                 )
-            
+
             # Generate batch ID for this analysis
             batch_id = f"v2_analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
-            
+
             # THIN PRINCIPLE: Let the legacy agent handle all the intelligence
             # We only adapt the interface, not the business logic
             self.logger.info(f"Calling legacy AnalysisAgent.analyze_documents for batch {batch_id}")
-            
-            # Create documents list - let LLM figure out the structure
-            # THIN PRINCIPLE: No parsing, just pass raw data to LLM
-            documents = [{"content": corpus_content}]  # Simple structure, let LLM interpret
-            
+
+            # The legacy agent expects a list of dicts with a 'content' key.
+            # The orchestrator now provides this structure directly.
+            documents = corpus_documents
+
             legacy_result = self.legacy_agent.analyze_documents(
                 framework_content=framework_content,
                 documents=documents

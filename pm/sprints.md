@@ -16,14 +16,9 @@
 - ✅ **ARCHITECTURE PIVOT**: We have formally adopted the V2 Integrated Ecosystem Rewrite plan.
 - ✅ **ANALYSIS COMPLETE**: The V1 orchestrator (`CleanAnalysisOrchestrator`) has been analyzed and confirmed to be a monolithic source of technical debt. The aborted `ShowYourWorkOrchestrator` has been deleted.
 - 📋 **PLANNING COMPLETE**: This document now reflects the full V2 rewrite plan.
-- 🎉 **V2 ECOSYSTEM COMPLETE**: V2 orchestrator with real V2 agents is fully functional!
-  - ✅ V2AnalysisAgent: Real LLM integration, THIN architecture
-  - ✅ V2StatisticalAgent: Real LLM integration, artifact storage
-  - ✅ V2 Orchestrator: End-to-end execution in 116.42 seconds
-  - ✅ 12 comprehensive artifacts generated per experiment
-  - ⚠️ CLI integration pending (V2 works via direct instantiation)
+- ⚠️ **V2 FOUNDATION COMPLETE, AGENT MIGRATION IN PROGRESS**: Foundational V2 components (Orchestrator, Standard Interfaces) are built, but the V2 agents are not fully implemented or integrated. End-to-end tests rely on mocks.
 
-**Current Focus**: **Phase 5: V2 Validation & Migration**. The V2 ecosystem is now fully functional with real V2 agents. The immediate priority is CLI integration and production validation.
+**Current Focus**: **Phase 5: V2 Validation & Migration**. The immediate priority is to complete the V2 agent implementations, fix architectural inconsistencies, and achieve a truly functional end-to-end pipeline.
 
 ---
 
@@ -82,7 +77,7 @@
 - 9a28a44f2 - "Migrate legacy EvidenceRetrieverAgent to V2 and add gateway policy enforcement"
 **Status**: Truly complete - all requirements met
 
-### Sprint V2-2: EvidenceRetrieverAgent Migration & RAG Consolidation ⚠️ FOUNDATION COMPLETE
+### Sprint V2-2: EvidenceRetrieverAgent Migration & RAG Consolidation 🔴 IN PROGRESS
 **Corresponds to**: V2 Plan - Phase 1 (Weeks 3-4) & Phase 1.5
 **Goal**: Migrate the most complex legacy agent to the V2 standard and centralize all RAG logic within it, removing it from the orchestrator.
 
@@ -130,24 +125,24 @@
 - **Files to Update**: `discernus/core/clean_analysis_orchestrator.py`
 
 **Definition of Done**:
-- ✅ `EvidenceRetrieverAgent` implements `StandardAgent` interface
-- ✅ Constructor uses proper dependency injection (no `Dict[str, Any]` config)
-- ✅ Agent has clear method separation for evidence workflow
-- ✅ Tool calling integrated with `record_evidence_finding` and `verify_evidence_relevance`
-- ✅ `RAGIndexManager` created and handles all RAG lifecycle operations
-- ✅ Agent reads framework and statistical results directly from artifacts
-- ✅ Agent discovers evidence artifacts from analysis hashes without orchestrator help
-- ❌ All orchestrator RAG methods deleted (80+ lines removed) - **PENDING INTEGRATION**
-- ❌ Orchestrator evidence phase reduced to ~10 lines (simple agent call) - **PENDING INTEGRATION**
-- ✅ No regression in evidence quality (validated with existing experiments)
-- ✅ Unit tests for `RAGIndexManager` and refactored agent
-- ✅ Integration tests showing end-to-end evidence retrieval works
+- ❌ `EvidenceRetrieverAgent` implements `StandardAgent` interface
+- ❌ Constructor uses proper dependency injection (no `Dict[str, Any]` config)
+- ❌ Agent has clear method separation for evidence workflow
+- ❌ Tool calling integrated with `record_evidence_finding` and `verify_evidence_relevance`
+- ❌ `RAGIndexManager` created and handles all RAG lifecycle operations
+- ❌ Agent reads framework and statistical results directly from artifacts
+- ❌ Agent discovers evidence artifacts from analysis hashes without orchestrator help
+- ❌ All orchestrator RAG methods deleted (80+ lines removed)
+- ❌ Orchestrator evidence phase reduced to ~10 lines (simple agent call)
+- ❌ No regression in evidence quality (validated with existing experiments)
+- ❌ Unit tests for `RAGIndexManager` and refactored agent
+- ❌ Integration tests showing end-to-end evidence retrieval works
 
-**Foundation Completion Date**: 2024-12-19
-**Commit**: a8631afff - "Complete V2-2: RAG consolidation and removal plan"
-**Status**: Foundation complete - V2 agent ready, orchestrator integration pending
+**Foundation Completion Date**: TBD
+**Commit**: TBD
+**Status**: In Progress - Agent requires full implementation.
 
-### Sprint V2-3: UnifiedSynthesisAgent Migration ⚠️ FOUNDATION COMPLETE
+### Sprint V2-3: UnifiedSynthesisAgent Migration 🔴 IN PROGRESS
 **Corresponds to**: V2 Plan - Phase 2 (Weeks 5-6)
 **Goal**: Migrate the synthesis agent to the new standard, focusing on consuming V2-native artifacts.
 
@@ -179,22 +174,22 @@
 - **Tool Calling**: Add structured output via tool calling for report metadata
 
 **Definition of Done**:
-- ✅ `UnifiedSynthesisAgent` implements `StandardAgent` interface
-- ✅ Agent constructor uses proper dependency injection
-- ✅ Agent reads all inputs from `RunContext` object (no filesystem scanning)
-- ✅ Agent consumes V2 artifact formats (`analysis_scores.json`, `evidence_quotes.json`, `computational_work.json`)
-- ✅ CSV parsing logic removed and replaced with structured data consumption
-- ✅ Computational work and verification results integrated into synthesis
-- ✅ Statistical results presented with consistent significant digits and disclosure
-- ✅ Tool calling implemented for structured report metadata output
-- ✅ No regression in synthesis quality (validated with existing experiments)
-- ✅ Unit tests for refactored agent (15 tests passing)
-- ✅ Integration tests showing end-to-end synthesis works with V2 artifacts
-- ❌ Orchestrator updated to use V2UnifiedSynthesisAgent - **PENDING INTEGRATION**
+- ❌ `UnifiedSynthesisAgent` implements `StandardAgent` interface
+- ❌ Agent constructor uses proper dependency injection
+- ❌ Agent reads all inputs from `RunContext` object (no filesystem scanning)
+- ❌ Agent consumes V2 artifact formats (`analysis_scores.json`, `evidence_quotes.json`, `computational_work.json`)
+- ❌ CSV parsing logic removed and replaced with structured data consumption
+- ❌ Computational work and verification results integrated into synthesis
+- ❌ Statistical results presented with consistent significant digits and disclosure
+- ❌ Tool calling implemented for structured report metadata output
+- ❌ No regression in synthesis quality (validated with existing experiments)
+- ❌ Unit tests for refactored agent (15 tests passing)
+- ❌ Integration tests showing end-to-end synthesis works with V2 artifacts
+- ❌ Orchestrator updated to use V2UnifiedSynthesisAgent
 
-**Foundation Completion Date**: 2024-12-19
-**Commit**: fbf4750ae - "Complete V2-3: UnifiedSynthesisAgent migration to V2 standard"
-**Status**: Foundation complete - V2 agent ready, orchestrator integration pending
+**Foundation Completion Date**: TBD
+**Commit**: TBD
+**Status**: In Progress - Agent requires full implementation.
 
 ### Sprint V2-3.5: ~~Orchestrator Integration & Legacy Cleanup~~ ❌ CANCELLED
 **Strategic Decision**: Skip legacy orchestrator integration in favor of building new V2 orchestrator from scratch.
@@ -274,7 +269,7 @@
 - ✅ Integration tests showing verification catches actual discrepancies
 - ✅ Performance testing ensures verification doesn't significantly slow pipeline
 
-### Sprint V2-5: V2 Orchestrator Implementation ✅ COMPLETED
+### Sprint V2-5: V2 Orchestrator Implementation ⚠️ CORE COMPLETE, INTEGRATION PENDING
 **Corresponds to**: V2 Plan - Phase 3
 **Goal**: Build the new, simple, agent-native orchestrator.
 **Priority**: HIGH - Core V2 system implementation
@@ -335,14 +330,14 @@
 - ✅ Verification integration optional at each step
 - ✅ Files remain canonical source of truth (no DB footprint)
 - ✅ Unit tests for orchestrator and all strategies (22 tests passing)
-- ✅ Integration tests showing V2 orchestrator works end-to-end
+- ❌ Integration tests showing V2 orchestrator works end-to-end **with real agents**.
 - ❌ Performance comparison with V1 orchestrator - **PENDING**
 
 **Completion Date**: 2024-12-19
 **Commit**: 5388142d4 - "Complete Sprint V2-5: V2 Orchestrator Implementation"
-**Status**: Core implementation complete, CLI integration pending
+**Status**: Core implementation is complete, but full integration with a complete, real V2 agent suite is pending.
 
-### Sprint V2-6: Legacy Agent Migration to V2 ✅ COMPLETED
+### Sprint V2-6: Legacy Agent Migration to V2 ⚠️ IN PROGRESS, THIN VIOLATION CORRECTED
 **Corresponds to**: V2 Plan - Phase 4 (Agent Completion)
 **Goal**: Migrate AnalysisAgent and StatisticalAgent to V2 StandardAgent interface.
 **Priority**: HIGH - Complete V2 agent ecosystem for production readiness
@@ -357,7 +352,7 @@
 - **Wrapper Logic**: Wrap existing `analyze_documents()` logic in `execute()` method
 - **Return Conversion**: Convert dict returns to `AgentResult` objects
 - **Files Created**: `discernus/agents/analysis_agent/v2_analysis_agent.py`
-- **THIN Compliance**: No parsing or file I/O logic, orchestrator handles infrastructure
+- **THIN Compliance**: **Corrected.** Initial implementation violated THIN principles by performing file I/O. This was fixed, but the data handoff from orchestrator remains brittle (passes manifest as single document).
 
 #### [V2-6.2] Create V2StatisticalAgent ✅
 - **Base Class**: Inherit from `StandardAgent` and `ToolCallingAgent`
@@ -369,13 +364,13 @@
 - **Files Created**: `discernus/agents/statistical_agent/v2_statistical_agent.py`
 - **Artifact Integration**: Properly stores analysis artifacts for statistical processing
 
-#### [V2-6.3] Test V2 Orchestrator with Real Agents ✅
+#### [V2-6.3] Test V2 Orchestrator with Real Agents ⚠️ INCOMPLETE
 - **Integration Test**: Run `nano_test_experiment` with real V2 agents
 - **LLM Integration**: Test actual LLM calls and error handling
 - **Data Flow**: Test real file I/O, artifact storage, and RAG operations
 - **Performance**: Measure execution time and resource usage
 - **Files Created**: `test_v2_orchestrator_real_agents.py`
-- **Results**: ✅ **SUCCESS** - Full end-to-end execution in 116.42 seconds with 12 artifacts
+- **Results**: 🔴 **FAILURE** - Test relies on mock agents for Evidence and Synthesis, proving the pipeline is not end-to-end functional.
 
 #### [V2-6.4] CLI Integration ⚠️ PENDING
 - **CLI Flag**: Add `--orchestrator-version=v2` for backward-compatible rollout
@@ -390,56 +385,69 @@
 - ✅ Both agents wrap existing `analyze_documents()` logic in `execute()` method
 - ✅ Both agents return `AgentResult` objects instead of dicts
 - ✅ Both agents have proper `get_capabilities()` methods
-- ✅ V2 orchestrator successfully runs `nano_test_experiment` with real V2 agents
+- ❌ V2 orchestrator successfully runs `nano_test_experiment` with **all real** V2 agents.
 - ⚠️ CLI integration with `--orchestrator-version=v2` flag working (PENDING)
 - ✅ Unit tests for both V2 agents (15+ tests each)
-- ✅ Integration tests showing end-to-end pipeline with real agents
+- ❌ Integration tests showing end-to-end pipeline with real agents **(no mocks)**.
 - ✅ Performance testing shows V2 agents meet or exceed V1 performance
 - ✅ Error handling tested with real LLM failures and edge cases
 
-**Completion Date**: December 19, 2024
-**Status**: ✅ **COMPLETED** - V2 agents fully functional with real LLM integration
+**Completion Date**: TBD
+**Status**: ⚠️ **IN PROGRESS** - Wrappers are created, but integration is incomplete and brittle.
 
-### Sprint V2-7: V2 Validation & Migration 🎯 FINAL FOCUS
+### Sprint V2-7: V2 Validation & Migration 🎯 CURRENT FOCUS
 **Corresponds to**: V2 Plan - Phase 5 (Validation & Rollout)
 **Goal**: Validate V2 system against V1 and manage migration.
-**Priority**: HIGH - Ensure V2 system is production-ready
+**Priority**: CRITICAL - Ensure V2 system is production-ready.
 
 **Detailed Tasks**:
 
-#### [V2-7.1] Validation Testing
-- **Parity Testing**: Run same experiments through both V1 and V2 orchestrators
-- **Output Comparison**: Byte-identical results where applicable across experiment matrix
-- **Performance Testing**: Measure speed, cost, reliability improvements
-- **Error Handling**: Comprehensive failure scenarios and recovery testing
-- **Acceptance Criteria**: V2 must match or exceed V1 performance and reliability
+#### [V2-7.1] Fix Orchestrator Data Flow
+- **Problem**: Orchestrator passes the entire corpus manifest file as a single document, which is incorrect.
+- **Solution**: Modify `ExecutionStrategy` to read the corpus manifest, load each referenced document's content, and pass a list of document contents to the `V2AnalysisAgent`.
+- **Files to Update**: `discernus/core/execution_strategies.py`
 
-#### [V2-7.2] Make V2 Default
+#### [V2-7.2] Complete Agent Implementations
+- **V2EvidenceRetrieverAgent**: Complete the full implementation based on the V2 standard.
+- **V2UnifiedSynthesisAgent**: Complete the full implementation based on the V2 standard.
+- **Files to Update**: `discernus/agents/evidence_retriever_agent/v2_evidence_retriever_agent.py`, `discernus/agents/unified_synthesis_agent/v2_unified_synthesis_agent.py`
+
+#### [V2-7.3] Solidify Integration Testing
+- **Remove Mocks**: Update `test_v2_orchestrator_real_agents.py` to use the real `V2EvidenceRetrieverAgent` and `V2UnifiedSynthesisAgent`.
+- **Add Micro Test**: Create `test_v2_orchestrator_micro_experiment.py` to validate the pipeline against a different framework and corpus.
+- **Add Cache Clearing**: Ensure tests clear caches before execution to guarantee a clean run.
+- **Files to Update**: `test_v2_orchestrator_real_agents.py`
+
+#### [V2-7.4] Make V2 Default
 - **CLI Default**: Switch default orchestrator to V2
 - **Deprecation Warnings**: Add warnings for V1 usage
 - **Rollback Capability**: Maintain `--orchestrator-version=v1` for emergency rollback
 - **Files to Update**: `discernus/cli.py`
 
-#### [V2-7.3] Documentation & Migration Guide
+#### [V2-7.5] Documentation & Migration Guide
 - **API Documentation**: Complete documentation for new agent ecosystem
 - **Migration Guide**: Guide for extending the system with new agents
 - **Architecture Documentation**: Update project architecture docs
 - **Agent Development Guide**: Patterns and best practices for V2 agents
 - **Files to Create**: `docs/v2_architecture.md`, `docs/agent_development_guide.md`
 
-#### [V2-7.4] Legacy Code Cleanup
+#### [V2-7.6] Legacy Code Cleanup
 - **Remove V1 Orchestrator**: Delete `CleanAnalysisOrchestrator` and associated code
 - **Clean Up Imports**: Remove references to deprecated classes
 - **Update Tests**: Migrate tests to use V2 patterns
 - **Files to Remove**: `discernus/core/clean_analysis_orchestrator.py` and related files
 
-#### [V2-7.5] Production Monitoring
+#### [V2-7.7] Production Monitoring
 - **Logging**: Ensure comprehensive logging for V2 orchestrator
 - **Metrics**: Performance and reliability metrics collection
 - **Alerting**: Set up monitoring and alerting for production use
 - **Cost Tracking**: Enhanced cost tracking for V2 agent ecosystem
 
 **Definition of Done**:
+- ✅ **Primary Goal**: Successfully run both `nano_test_experiment` and `micro_test_experiment` back-to-back using the full, real V2 agent pipeline with caches cleared between runs.
+- ✅ Orchestrator correctly loads individual documents from the corpus manifest and passes them to the analysis agent.
+- ✅ `test_v2_orchestrator_real_agents.py` passes using **zero** mock agents.
+- ✅ `test_v2_orchestrator_micro_experiment.py` passes using **zero** mock agents.
 - ✅ Parity testing complete - V2 matches V1 output across experiment matrix
 - ✅ Performance testing shows V2 meets or exceeds V1 benchmarks
 - ✅ V2 orchestrator is CLI default with deprecation warnings for V1
@@ -451,6 +459,46 @@
 - ✅ Cost tracking enhanced for V2 ecosystem
 - ✅ Emergency rollback to V1 capability maintained
 - ✅ Architecture documentation updated to reflect V2 design
+
+### Sprint V2-8: Restore Advanced CLI Functionality ⏳ PENDING
+**Corresponds to**: V2 Plan - Phase 5 (CLI Parity)
+**Goal**: Restore all major V1 CLI options to the V2 `run` command and implement a V2 `resume` command.
+**Priority**: HIGH - Achieve full feature parity for researcher workflows.
+
+**Detailed Tasks**:
+
+#### [V2-8.1] Implement Execution Modes (`--analysis-only`, etc.)
+- **Task**: Create new `ExecutionStrategy` classes (`AnalysisOnlyStrategy`, `StatisticalPrepStrategy`, `SkipSynthesisStrategy`) to support partial pipeline runs.
+- **Details**: The orchestrator must gracefully stop after the specified phase and ensure all necessary artifacts up to that point are saved.
+
+#### [V2-8.2] Implement Model Selection Flags
+- **Task**: Plumb model selection flags (`--analysis-model`, `--synthesis-model`, etc.) from the CLI down to the individual V2 agents.
+- **Details**: Requires modifying agent constructors and the orchestrator to pass model names to the `LLMGateway`.
+
+#### [V2-8.3] Implement `--dry-run` and `--verbose-trace`
+- **Task**: Add logic to V2 execution strategies to simulate a run without executing expensive operations. Plumb the verbose trace flag to the `AuditLogger`.
+- **Details**: `--dry-run` should print the agents that would be called and the artifacts that would be created.
+
+#### [V2-8.4] Implement Experiment Validation (`--skip-validation`)
+- **Task**: Create a `V2ExperimentCoherenceAgent` and integrate it as the first step in the execution strategy. The `--skip-validation` flag will bypass it.
+- **Details**: Reintroduces the robust validation step from the V1 CLI.
+
+#### [V2-8.5] Implement Automatic Git Commits (`--no-auto-commit`)
+- **Task**: Add logic to the `V2Orchestrator` to automatically commit results to Git upon successful completion of a run.
+- **Details**: Restores critical provenance tracking. The `--no-auto-commit` flag will disable this behavior.
+
+#### [V2-8.6] Implement V2 `resume` Command
+- **Task**: Create a `discernus resume` command that can resume a partial V2 run (e.g., one created with `--statistical-prep`).
+- **Details**: Requires the orchestrator to save a resume manifest and the `resume` command to load it and restart the pipeline from the correct phase.
+
+**Definition of Done**:
+- ⏳ The `discernus run` command supports `--analysis-only`, `--statistical-prep`, and `--skip-synthesis`.
+- ⏳ The `discernus run` command supports all model selection flags.
+- ⏳ The `discernus run` command supports `--dry-run` and `--verbose-trace`.
+- ⏳ The `discernus run` command runs a validation step by default, which can be disabled with `--skip-validation`.
+- ⏳ Successful runs are automatically committed to Git, which can be disabled with `--no-auto-commit`.
+- ⏳ A new `discernus resume` command is implemented and functional for V2 experiments.
+- ⏳ All restored options are covered by integration tests.
 
 ---
 

@@ -72,6 +72,18 @@ from discernus.core.provenance_consolidator import consolidate_run_provenance
 from discernus.core.input_materials_consolidator import consolidate_input_materials
 from discernus.core.golden_run_documentation_generator import generate_golden_run_documentation
 
+# V2 Imports
+from discernus.core.v2_orchestrator import V2Orchestrator, V2OrchestratorConfig
+from discernus.core.execution_strategies import FullExperimentStrategy
+from discernus.core.security_boundary import ExperimentSecurityBoundary
+from discernus.core.audit_logger import AuditLogger
+from discernus.core.local_artifact_storage import LocalArtifactStorage
+from discernus.agents.analysis_agent.v2_analysis_agent import V2AnalysisAgent
+from discernus.agents.statistical_agent.v2_statistical_agent import V2StatisticalAgent
+from discernus.agents.evidence_retriever_agent.v2_evidence_retriever_agent import V2EvidenceRetrieverAgent
+from discernus.agents.unified_synthesis_agent.v2_unified_synthesis_agent import V2UnifiedSynthesisAgent
+
+
 def _validate_models(models_to_validate: List[tuple[str, str]]):
     """Validate that specified models are available in the registry."""
     try:
@@ -161,181 +173,80 @@ def cli(ctx, verbose, quiet, no_color, config):
 
 @cli.command()
 @click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True, path_type=str))
-@click.option('--dry-run', is_flag=True, envvar='DISCERNUS_DRY_RUN', 
-              help='Preview what would be executed without running (useful for understanding experiment flow)')
-@click.option('--analysis-model', envvar='DISCERNUS_ANALYSIS_MODEL',
-              default='vertex_ai/gemini-2.5-flash',
-              help='LLM model for document analysis. Use flash for speed, pro for accuracy. Examples: vertex_ai/gemini-2.5-flash, openai/gpt-4o')
-@click.option('--synthesis-model', envvar='DISCERNUS_SYNTHESIS_MODEL',
-              default='vertex_ai/gemini-2.5-pro',
-              help='LLM model for report synthesis. Pro recommended for complex analysis. Examples: vertex_ai/gemini-2.5-pro, openai/gpt-4o')
-@click.option('--validation-model', envvar='DISCERNUS_VALIDATION_MODEL',
-              default='vertex_ai/gemini-2.5-pro',
-              help='LLM model for experiment validation. Pro model provides high-quality validation')
-@click.option('--derived-metrics-model', envvar='DISCERNUS_DERIVED_METRICS_MODEL',
-              default='vertex_ai/gemini-2.5-pro',
-              help='LLM model for statistical analysis and derived metrics. Pro recommended for complex calculations')
-@click.option('--skip-validation', is_flag=True, envvar='DISCERNUS_SKIP_VALIDATION', 
-              help='Skip coherence validation (not recommended - validation catches common issues)')
-@click.option('--analysis-only', is_flag=True, envvar='DISCERNUS_ANALYSIS_ONLY', 
-              help='Run analysis only, skip synthesis and CSV export (useful for testing analysis agent)')
-@click.option('--statistical-prep', is_flag=True, envvar='DISCERNUS_STATISTICAL_PREP', 
-              help='Run analysis + derived metrics + CSV export, skip synthesis. Perfect for external statistical analysis workflows. Outputs: scores.csv, evidence.csv, metadata.csv')
-@click.option('--skip-synthesis', is_flag=True, envvar='DISCERNUS_SKIP_SYNTHESIS', 
-              help='Run full pipeline including statistical analysis, skip synthesis report (useful for custom synthesis workflows)')
-@click.option('--no-auto-commit', is_flag=True, envvar='DISCERNUS_NO_AUTO_COMMIT', 
-              help='Disable automatic Git commit after successful run (useful for testing or manual commit control)')
-@click.option('--verbose-trace', is_flag=True, envvar='DISCERNUS_VERBOSE_TRACE',
-              help='Enable verbose call tracing for debugging. Logs function calls, returns, and timing across all components')
 @click.pass_context
-def run(ctx, experiment_path: str, dry_run: bool, analysis_model: Optional[str], synthesis_model: Optional[str], validation_model: Optional[str], derived_metrics_model: Optional[str], skip_validation: bool, analysis_only: bool, statistical_prep: bool, skip_synthesis: bool, no_auto_commit: bool, verbose_trace: bool):
-    """Execute complete experiment (analysis + synthesis). 
-    
-    EXPERIMENT_PATH: Path to experiment directory (defaults to current directory).
-    The experiment directory must contain experiment.md, corpus.md, and framework files.
-    """
-    exp_path = Path(str(experiment_path)).resolve()
-    
-    # Check if experiment path exists
-    if not exp_path.exists():
-        click.echo(f"❌ Experiment path does not exist: {exp_path}")
-        sys.exit(1)
-    
-    if not exp_path.is_dir():
-        click.echo(f"❌ Experiment path is not a directory: {exp_path}")
-        sys.exit(1)
-    
-    click.echo("🔬 Using clean pipeline for all experiments")
-    
-    # Get configuration and apply defaults
-    config = ctx.obj['config']
-    verbosity = ctx.obj['verbosity']
-    
-    # Apply config defaults for None values
-    if analysis_model is None:
-        analysis_model = config.analysis_model
-    if synthesis_model is None:
-        synthesis_model = config.synthesis_model
-    if validation_model is None:
-        validation_model = config.validation_model
-    if derived_metrics_model is None:
-        derived_metrics_model = config.derived_metrics_model
-    
-    # Override config booleans if CLI flags are set
-    if not dry_run:
-        dry_run = config.dry_run
-    if not skip_validation:
-        skip_validation = config.skip_validation
-    if not no_auto_commit:
-        no_auto_commit = not config.auto_commit
-    
-    # Validate models against registry before proceeding
-    
-    # Validate mutually exclusive modes
-    mode_count = sum([analysis_only, statistical_prep, skip_synthesis])
-    if mode_count > 1:
-        rich_console.print_error("❌ Only one mode can be specified at a time")
-        rich_console.print_info("   Available modes: --analysis-only, --statistical-prep, --skip-synthesis")
-        exit_invalid_usage("Multiple modes specified")
-    
-    # Provide mode guidance if no mode specified
-    if mode_count == 0:
-        rich_console.print_info("💡 Workflow modes available:")
-        rich_console.print_info("   • Default: Full analysis + synthesis pipeline")
-        rich_console.print_info("   • --analysis-only: Analysis + CSV export only (data exploration)")
-        rich_console.print_info("   • --statistical-prep: Analysis + derived metrics + CSV export (external stats)")
-        rich_console.print_info("   • --skip-synthesis: Full pipeline except synthesis (custom synthesis)")
-        rich_console.print_info("   • Use 'discernus resume' to complete synthesis from statistical-prep runs")
-    
-    # Provide specific guidance for statistical preparation mode
-    if statistical_prep:
-        rich_console.print_info("📊 Statistical Preparation Mode Selected")
-        rich_console.print_info("   This mode will:")
-        rich_console.print_info("   • Run document analysis")
-        rich_console.print_info("   • Calculate derived metrics")
-        rich_console.print_info("   • Export CSV files for external statistical analysis")
-        rich_console.print_info("   • Skip synthesis report generation")
-        rich_console.print_info("   • Allow resume to synthesis later with 'discernus resume'")
-    
-    models_to_validate = [
-        ("analysis", analysis_model),
-        ("synthesis", synthesis_model),
-        ("validation", validation_model),
-        ("derived_metrics", derived_metrics_model)
-    ]
-    _validate_models(models_to_validate)
-    
-    # Initialize orchestrator
-    orchestrator = CleanAnalysisOrchestrator(
-        experiment_path=exp_path,
-        analysis_model=analysis_model,
-        synthesis_model=synthesis_model,
-        validation_model=validation_model,
-        derived_metrics_model=derived_metrics_model,
-        dry_run=dry_run,
-        skip_validation=skip_validation,
-        analysis_only=analysis_only,
-        statistical_prep=statistical_prep,
-        skip_synthesis=skip_synthesis,
-        auto_commit=not no_auto_commit,
-        verbosity=verbosity,
-        verbose_trace=verbose_trace
-    )
-    
+def run(ctx, experiment_path: str):
+    """Execute a V2 experiment."""
+    exp_path = Path(experiment_path).resolve()
+
+    if not exp_path.exists() or not exp_path.is_dir():
+        rich_console.print_error(f"❌ Experiment path not found: {exp_path}")
+        exit_file_error("Experiment path not found.")
+
+    rich_console.print_section(f"🚀 Running V2 Experiment: {exp_path.name}")
+
     try:
-        # Execute experiment
-        result = orchestrator.run_experiment()
+        # 1. Initialize core components
+        run_name = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%d_%H%M%S")
+        run_folder = exp_path / "runs" / run_name
+        run_folder.mkdir(parents=True, exist_ok=True)
+
+        security = ExperimentSecurityBoundary(exp_path)
+        storage = LocalArtifactStorage(security, run_folder, run_name)
+        audit = AuditLogger(security, run_folder)
+
+        # 2. Find framework and corpus files
+        framework_file = None
+        if (exp_path / "framework.md").exists():
+            framework_file = exp_path / "framework.md"
+        else:
+            # Look for any other .md file that is not corpus.md or experiment.md
+            for md_file in exp_path.glob('*.md'):
+                if md_file.name not in ['corpus.md', 'experiment.md']:
+                    framework_file = md_file
+                    break
         
-        if result.get('status') in ['completed', 'completed_analysis_only', 'completed_statistical_prep', 'completed_skip_synthesis', 'completed_resume_synthesis']:
-            # Provide accurate completion messages based on what was actually completed
-            status = result.get('status')
-            pipeline_status = result.get('pipeline_status', 'full_completion')
-            
-            if status == 'completed_analysis_only':
-                rich_console.print_success("✅ Analysis phase completed successfully!")
-                rich_console.print_info("📊 Partial pipeline completion - analysis only")
-                if result.get('remaining_phases'):
-                    remaining = ', '.join(result['remaining_phases'])
-                    rich_console.print_info(f"⏭️  Remaining phases: {remaining}")
-            elif status == 'completed_statistical_prep':
-                rich_console.print_success("✅ Statistical preparation completed successfully!")
-                rich_console.print_info("📊 Partial pipeline completion - ready for external statistical analysis")
-                if result.get('remaining_phases'):
-                    remaining = ', '.join(result['remaining_phases'])
-                    rich_console.print_info(f"⏭️  Remaining phases: {remaining}")
-                rich_console.print_info("💡 Use 'discernus resume' to complete synthesis later")
-            elif status == 'completed_skip_synthesis':
-                rich_console.print_success("✅ Pipeline completed (synthesis skipped)!")
-                rich_console.print_info("📊 All phases completed except synthesis")
-            elif status == 'completed_resume_synthesis':
-                rich_console.print_success("✅ Synthesis resume completed successfully!")
-                rich_console.print_info("📊 Full pipeline now complete")
-            else:
-                # Full completion
-                rich_console.print_success("✅ Full experiment pipeline completed successfully!")
-                rich_console.print_info("📊 All phases completed: analysis → derived metrics → evidence retrieval → synthesis")
-            
-            # Display cost information if available
-            costs = result.get('costs', {})
-            total_cost = costs.get('total_cost_usd', 0.0)
-            if total_cost > 0:
-                rich_console.print_info(f"💰 Total experiment cost: ${total_cost:.4f} USD")
-            
-            if result.get('results_directory'):
-                rich_console.print_info(f"📁 Results saved to: {result['results_directory']}")
-            if result.get('mode') == 'resume_from_stats' and result.get('resumed_from'):
-                rich_console.print_info(f"🔄 Resumed from statistical preparation run: {result['resumed_from']}")
+        if not framework_file:
+            rich_console.print_error(f"❌ Framework file (.md) not found in: {exp_path}")
+            exit_file_error("Framework file not found.")
+
+        corpus_file = exp_path / "corpus.md"
+        if not corpus_file.exists():
+            rich_console.print_error(f"❌ corpus.md not found in: {exp_path}")
+            exit_file_error("corpus.md not found.")
+
+        # 3. Configure Orchestrator
+        config = V2OrchestratorConfig(
+            experiment_id=exp_path.name,
+            framework_path=str(framework_file),
+            corpus_path=str(corpus_file),
+            output_dir=str(run_folder)
+        )
+
+        orchestrator = V2Orchestrator(config, security, storage, audit)
+
+        # 4. Register Agents
+        orchestrator.register_agent("Analysis", V2AnalysisAgent(security, storage, audit))
+        orchestrator.register_agent("Statistical", V2StatisticalAgent(security, storage, audit))
+        orchestrator.register_agent("Evidence", V2EvidenceRetrieverAgent(security, storage, audit))
+        orchestrator.register_agent("Synthesis", V2UnifiedSynthesisAgent(security, storage, audit))
+
+        # 5. Execute Strategy
+        strategy = FullExperimentStrategy()
+        result = orchestrator.execute_strategy(strategy)
+
+        if result.success:
+            rich_console.print_success("✅ V2 Experiment Completed Successfully!")
+            rich_console.print_info(f"📁 Artifacts saved in: {storage.run_folder}")
             exit_success()
         else:
-            rich_console.print_error(f"❌ Experiment failed: {result.get('error', 'Unknown error')}")
-            exit_general_error(result.get('error', 'Unknown error'))
-            
-    except CleanAnalysisError as e:
-        rich_console.print_error(f"❌ Analysis error: {e}")
-        exit_general_error(str(e))
+            rich_console.print_error(f"❌ V2 Experiment Failed: {result.error_message}")
+            exit_general_error(result.error_message)
+
     except Exception as e:
-        rich_console.print_error(f"❌ Unexpected error: {e}")
-        exit_general_error(str(e))
+        rich_console.print_error(f"❌ An unexpected error occurred: {e}")
+        import traceback
+        traceback.print_exc()
+        exit_infrastructure_error(str(e))
 
 @cli.command()
 @click.argument('experiment_path', default='.', type=str)
@@ -471,61 +382,6 @@ def resume(ctx, experiment_path: str, analysis_model: Optional[str], synthesis_m
     except Exception as e:
         rich_console.print_error(f"❌ Unexpected error during resume: {e}")
         exit_general_error(str(e))
-
-@cli.command()
-@click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True, path_type=str))
-@click.option('--quiet', is_flag=True, help='Suppress progress messages')
-@click.pass_context
-def cleanup(ctx, experiment_path: str, quiet: bool):
-    """Clean up orphaned artifact registry entries.
-    
-    Removes registry entries for artifacts that no longer exist on disk.
-    This fixes warnings about missing artifacts during experiment runs.
-    """
-    from pathlib import Path
-    from .core.security_boundary import ExperimentSecurityBoundary
-    from .core.local_artifact_storage import LocalArtifactStorage
-    from .cli_console import DiscernusConsole
-    
-    rich_console = DiscernusConsole()
-    
-    try:
-        # Initialize security boundary
-        exp_path = Path(experiment_path).resolve()
-        if not exp_path.exists():
-            rich_console.print_error(f"Experiment path does not exist: {exp_path}")
-            ctx.exit(1)
-            
-        security = ExperimentSecurityBoundary(exp_path)
-        
-        # Initialize artifact storage for shared cache
-        shared_cache_dir = exp_path / "shared_cache"
-        if not shared_cache_dir.exists():
-            rich_console.print_error(f"No shared cache found at: {shared_cache_dir}")
-            rich_console.print_info("Run an experiment first to create the cache structure")
-            ctx.exit(1)
-            
-        artifact_storage = LocalArtifactStorage(
-            security_boundary=security,
-            run_folder=shared_cache_dir,
-            run_name="cleanup"
-        )
-        
-        # Run cleanup
-        stats = artifact_storage.cleanup_orphaned_entries(quiet=quiet)
-        
-        if not quiet:
-            rich_console.print_success(f"Registry cleanup completed!")
-            rich_console.print_info(f"📊 Processed: {stats['total_processed']} entries")
-            rich_console.print_info(f"🗑️  Removed: {stats['orphaned_removed']} orphaned entries")
-            rich_console.print_info(f"✅ Valid: {stats['valid_entries']} entries")
-            
-        if stats['orphaned_removed'] > 0:
-            rich_console.print_info("💡 Warnings about missing artifacts should now be resolved")
-        
-    except Exception as e:
-        rich_console.print_error(f"Cleanup failed: {e}")
-        ctx.exit(1)
 
 @cli.command()
 @click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))

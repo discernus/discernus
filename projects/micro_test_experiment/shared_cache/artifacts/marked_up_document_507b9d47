@@ -1,9 +1,0 @@
-# Document Analysis - Marked Up Text
-
-Hash: 123e5c9fe4425f26
-Content:
-# Negative Test Document 1
-
-**Context**: Sample text with [NEGATIVE_SENTIMENT: negative sentiment]
-
-[NEGATIVE_SENTIMENT: This is a terrible situation]. [NEGATIVE_SENTIMENT: Everything is going wrong]. [NEGATIVE_SENTIMENT: I feel awful about the future]. [NEGATIVE_SENTIMENT: Failure surrounds us]. The team did a [NEGATIVE_SENTIMENT: horrible job]. [NEGATIVE_SENTIMENT: We're facing disaster]. [NEGATIVE_SENTIMENT: Pessimism fills the air]. [NEGATIVE_SENTIMENT: What a disastrous outcome!] [NEGATIVE_SENTIMENT: I'm devastated by the results]. [NEGATIVE_SENTIMENT: Everything looks dark and hopeless].

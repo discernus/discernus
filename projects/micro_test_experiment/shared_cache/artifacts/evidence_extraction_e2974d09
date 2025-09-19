@@ -1,7 +1,0 @@
-{
-  "analysis_id": "analysis_c829f3bd",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "evidence_extraction": "```json\n{\n  \"document_id\": \"positive_test_1\",\n  \"evidence_quotes\": {\n    \"positive_sentiment\": [\n      \"Everything is going perfectly. I feel great about the future.\",\n      \"The team did an excellent job. We're achieving amazing results.\"\n    ],\n    \"negative_sentiment\": [\n      \"No explicit negative language or pessimistic expressions were found in the document.\"\n    ]\n  }\n}\n```",
-  "timestamp": "2025-09-16T13:32:29.651730+00:00"
-}
