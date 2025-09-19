@@ -1,0 +1,7 @@
+{
+  "analysis_id": "analysis_b964c713",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "evidence_extraction": "```json\n{\n  \"positive_sentiment\": [\n    \"Document with positive sentiment language\",\n    \"This document is purely descriptive and contains no expressions of positive emotion.\"\n  ],\n  \"negative_sentiment\": [\n    \"Document with negative sentiment language\",\n    \"The text is neutral and factual, lacking any pessimistic or critical language.\"\n  ]\n}\n```",
+  "timestamp": "2025-09-19T16:03:18.588645+00:00"
+}

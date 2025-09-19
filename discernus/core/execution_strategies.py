@@ -96,12 +96,8 @@ class FullExperimentStrategy(ExecutionStrategy):
         try:
             # THIN PRINCIPLE: Orchestrator handles file I/O, not agents
             # Load framework and corpus content and pass to agents via RunContext
-            print(f"DEBUG: Loading framework from: {run_context.framework_path}")
-            print(f"DEBUG: Loading corpus from: {run_context.corpus_path}")
             framework_content = self._load_framework_content(Path(run_context.framework_path))
             corpus_content = self._load_corpus_content(Path(run_context.corpus_path))
-            print(f"DEBUG: Framework content loaded: {framework_content is not None}")
-            print(f"DEBUG: Corpus content loaded: {corpus_content is not None}")
             
             if not framework_content:
                 return ExperimentResult(

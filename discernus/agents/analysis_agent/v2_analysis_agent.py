@@ -12,6 +12,7 @@ THIN PRINCIPLES:
 - Orchestrator handles file I/O, agent handles analysis only
 """
 
+import json
 import logging
 from typing import Dict, Any, List, Optional
 from datetime import datetime
@@ -119,15 +120,10 @@ class V2AnalysisAgent(ToolCallingAgent):
             # THIN PRINCIPLE: No parsing, just pass raw data to LLM
             documents = [{"content": corpus_content}]  # Simple structure, let LLM interpret
             
-            print(f"DEBUG: Calling legacy agent with framework length: {len(framework_content)}")
-            print(f"DEBUG: Calling legacy agent with documents: {len(documents)}")
-            
             legacy_result = self.legacy_agent.analyze_documents(
                 framework_content=framework_content,
                 documents=documents
             )
-            
-            print(f"DEBUG: Legacy agent result: {legacy_result}")
             
             # Convert legacy result to V2 AgentResult
             # THIN PRINCIPLE: Legacy agent returns data directly, not wrapped in success field
@@ -213,9 +209,22 @@ class V2AnalysisAgent(ToolCallingAgent):
                         }
                     })
                 
+                # Store artifacts in the artifact storage system
+                artifact_hashes = []
+                for artifact in artifacts:
+                    # Store each artifact in the storage system
+                    # Convert content to bytes and create metadata
+                    content_bytes = json.dumps(artifact["content"]).encode('utf-8')
+                    metadata = {
+                        "type": artifact["type"],
+                        **artifact["metadata"]
+                    }
+                    artifact_hash = self.storage.put_artifact(content_bytes, metadata)
+                    artifact_hashes.append(artifact_hash)
+                
                 # Update run context with results
                 run_context.analysis_results = legacy_result
-                run_context.analysis_artifacts = [artifact["content"] for artifact in artifacts]
+                run_context.analysis_artifacts = artifact_hashes
                 
                 # Log success
                 self.audit.log_agent_event(self.agent_name, "analysis_complete", {

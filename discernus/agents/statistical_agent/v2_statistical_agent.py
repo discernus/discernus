@@ -133,15 +133,16 @@ class V2StatisticalAgent(ToolCallingAgent):
             )
             
             # Convert legacy result to V2 AgentResult
-            if legacy_result.get("success", False):
+            # THIN PRINCIPLE: Legacy agent returns data directly, not wrapped in success field
+            if legacy_result and "statistical_analysis" in legacy_result:
                 # Extract artifacts from legacy result
                 artifacts = []
                 
-                # Add statistical results artifact
-                if "statistical_results" in legacy_result:
+                # Add statistical analysis artifact
+                if "statistical_analysis" in legacy_result:
                     artifacts.append({
-                        "type": "statistical_results",
-                        "content": legacy_result["statistical_results"],
+                        "type": "statistical_analysis",
+                        "content": legacy_result["statistical_analysis"],
                         "metadata": {
                             "phase": "statistical",
                             "batch_id": batch_id,
@@ -150,11 +151,11 @@ class V2StatisticalAgent(ToolCallingAgent):
                         }
                     })
                 
-                # Add verification results artifact
-                if "verification_results" in legacy_result:
+                # Add verification artifact
+                if "verification" in legacy_result:
                     artifacts.append({
-                        "type": "verification_results",
-                        "content": legacy_result["verification_results"],
+                        "type": "verification",
+                        "content": legacy_result["verification"],
                         "metadata": {
                             "phase": "statistical",
                             "batch_id": batch_id,
@@ -163,11 +164,24 @@ class V2StatisticalAgent(ToolCallingAgent):
                         }
                     })
                 
-                # Add CSV generation results artifact
-                if "csv_results" in legacy_result:
+                # Add CSV generation artifact
+                if "csv_generation" in legacy_result:
                     artifacts.append({
-                        "type": "csv_results",
-                        "content": legacy_result["csv_results"],
+                        "type": "csv_generation",
+                        "content": legacy_result["csv_generation"],
+                        "metadata": {
+                            "phase": "statistical",
+                            "batch_id": batch_id,
+                            "timestamp": datetime.now().isoformat(),
+                            "agent_name": self.agent_name
+                        }
+                    })
+                
+                # Add total cost info artifact
+                if "total_cost_info" in legacy_result:
+                    artifacts.append({
+                        "type": "total_cost_info",
+                        "content": legacy_result["total_cost_info"],
                         "metadata": {
                             "phase": "statistical",
                             "batch_id": batch_id,
@@ -177,7 +191,7 @@ class V2StatisticalAgent(ToolCallingAgent):
                     })
                 
                 # Update run context with results
-                run_context.statistical_results = legacy_result.get("statistical_results", {})
+                run_context.statistical_results = legacy_result.get("statistical_analysis", {})
                 
                 # Log success
                 self.audit.log_agent_event(self.agent_name, "statistical_analysis_complete", {
