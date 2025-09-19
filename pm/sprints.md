@@ -201,10 +201,19 @@
 
 **Alternative Path**: Complete agent foundation + build new V2 orchestrator (Sprints V2-4, V2-5, V2-6)
 
-### Sprint V2-4: Verification Agent Ecosystem 🎯 CURRENT FOCUS
-**Corresponds to**: V2 Plan - Phase 2 (Weeks 7-8)
-**Goal**: Build the adversarial attestation layer to complete the "Show Your Work" architecture.
-**Priority**: HIGH - Complete agent foundation before V2 orchestrator
+### Sprint V2-4: ~~Verification Agent Ecosystem~~ ❌ CANCELLED
+**Strategic Decision**: Skip separate verification agents - current embedded verification is already adversarial and working well.
+
+**Rationale**:
+- Current embedded verification uses independent LLM calls with separate prompts
+- Verification steps are already adversarial (agent verifies its own work with fresh LLM context)
+- Embedded approach is simpler, proven, and follows same architectural principles
+- Focus should be on V2 orchestrator which provides the real architectural value
+
+**Current Verification Status**: ✅ **ALREADY WORKING**
+- Analysis Agent: `_step5_verification()` with independent LLM call
+- Statistical Agent: `_step2_verification()` with independent LLM call
+- Both use separate prompts and tool calling for structured verification results
 
 **Detailed Tasks**:
 
@@ -259,7 +268,7 @@
 - ✅ Integration tests showing verification catches actual discrepancies
 - ✅ Performance testing ensures verification doesn't significantly slow pipeline
 
-### Sprint V2-5: V2 Orchestrator Implementation 🎯 NEXT FOCUS
+### Sprint V2-5: V2 Orchestrator Implementation 🎯 CURRENT FOCUS
 **Corresponds to**: V2 Plan - Phase 3
 **Goal**: Build the new, simple, agent-native orchestrator.
 **Priority**: HIGH - Core V2 system implementation
