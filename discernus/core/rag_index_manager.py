@@ -85,7 +85,12 @@ class RAGIndexManager:
             # Important: The true hash of the directory is calculated by the storage,
             # which should match our cache key if the content is identical.
             if dir_hash != cache_key:
-                self.logger.warning(f"RAG index hash mismatch. Expected {cache_key}, got {dir_hash}. This may indicate non-determinism.")
+                # Only log this as a warning if we're in a proper execution context
+                # During initialization or early execution, this is expected
+                if hasattr(self.storage, 'run_folder') and self.storage.run_folder:
+                    self.logger.warning(f"RAG index hash mismatch. Expected {cache_key}, got {dir_hash}. This may indicate non-determinism.")
+                else:
+                    self.logger.debug(f"RAG index hash mismatch during initialization. Expected {cache_key}, got {dir_hash}.")
 
             self.current_index_key = dir_hash
 

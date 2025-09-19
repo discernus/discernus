@@ -178,7 +178,7 @@ class CleanAnalysisOrchestrator:
         self._log_progress(f"🔧 DEBUG: analysis_only={self.analysis_only}, skip_synthesis={self.skip_synthesis}")
         self._log_progress(f"🔧 DEBUG: resume_from_stats={self.resume_from_stats}")
         
-        run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+        run_id = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
         start_time = datetime.now(timezone.utc)
         
         try:
@@ -1409,7 +1409,7 @@ class CleanAnalysisOrchestrator:
             corpus_manifest_path = self.experiment_path / self.config['corpus']
             corpus_manifest = corpus_manifest_path.read_text(encoding='utf-8')
             
-            batch_id = f"stats_{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}"
+            batch_id = f"stats_{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}"
             
             self._log_progress(f"📊 StatisticalAgent analyzing batch: {batch_id} with {len(analysis_artifact_hashes)} artifacts")
             
@@ -1674,7 +1674,7 @@ class CleanAnalysisOrchestrator:
             # Initialize self-sufficient EvidenceRetrieverAgent
             agent_config = {
                 'experiment_path': str(self.experiment_path),
-                'run_id': run_id or datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ"),
+                'run_id': run_id or datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S"),
                 'artifact_storage': self.artifact_storage,
                 'security_boundary': self.security,
                 'model': model

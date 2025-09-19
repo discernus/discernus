@@ -1,0 +1,7 @@
+{
+  "analysis_id": "analysis_b8b68cbb",
+  "step": "score_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "scores_extraction": "Here are the dimensional scores extracted from the analysis result, presented in a way that might be useful for further processing:\n\n```json\n[\n  {\n    \"document_id\": \"document_0\",\n    \"positive_sentiment\": {\n      \"raw_score\": 1.0,\n      \"salience\": 1.0,\n      \"confidence\": 1.0\n    },\n    \"negative_sentiment\": {\n      \"raw_score\": 0.0,\n      \"salience\": 0.0,\n      \"confidence\": 1.0\n    }\n  },\n  {\n    \"document_id\": \"document_1\",\n    \"positive_sentiment\": {\n      \"raw_score\": 0.0,\n      \"salience\": 0.0,\n      \"confidence\": 1.0\n    },\n    \"negative_sentiment\": {\n      \"raw_score\": 1.0,\n      \"salience\": 1.0,\n      \"confidence\": 1.0\n    }\n  }\n]\n```\n\nThis format provides a clear list of documents, each with its respective sentiment scores (raw_score, salience, and confidence) for both positive and negative sentiment. This structure is easily parsable and can be used for tasks like:\n\n*   **Aggregation:** Calculating average scores across documents.\n*   **Filtering:** Selecting documents based on score thresholds.\n*   **Visualization:** Plotting scores for comparison.\n*   **Further Analysis:** Using these scores as features in another machine learning model.",
+  "timestamp": "2025-09-19T21:47:03.081408+00:00"
+}

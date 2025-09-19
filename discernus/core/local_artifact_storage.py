@@ -187,6 +187,32 @@ class LocalArtifactStorage:
                 extension = Path(original_name).suffix or ".md"
                 return f"{base_name}_{short_hash}{extension}"
             return f"framework_{short_hash}.md"
+        elif artifact_type == "composite_analysis":
+            return f"composite_analysis_{short_hash}.json"
+        elif artifact_type == "evidence_extraction":
+            return f"evidence_extraction_{short_hash}.json"
+        elif artifact_type == "score_extraction":
+            return f"score_extraction_{short_hash}.json"
+        elif artifact_type == "derived_metrics":
+            return f"derived_metrics_{short_hash}.json"
+        elif artifact_type == "verification":
+            return f"verification_{short_hash}.json"
+        elif artifact_type == "marked_up_document":
+            return f"marked_up_document_{short_hash}.md"
+        elif artifact_type == "statistical_analysis":
+            return f"statistical_analysis_{short_hash}.json"
+        elif artifact_type == "statistical_verification":
+            return f"statistical_verification_{short_hash}.json"
+        elif artifact_type == "statistical_analysis_cache":
+            return f"statistical_analysis_cache_{short_hash}.json"
+        elif artifact_type == "csv_generation":
+            return f"csv_generation_{short_hash}.json"
+        elif artifact_type == "evidence_retrieval":
+            return f"evidence_retrieval_{short_hash}.json"
+        elif artifact_type == "validation_report":
+            return f"validation_report_{short_hash}.json"
+        elif artifact_type == "synthesis_report_v2_markdown":
+            return f"synthesis_report_v2_markdown_{short_hash}.md"
         else:
             return f"{artifact_type}_{short_hash}"
     

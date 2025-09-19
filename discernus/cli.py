@@ -46,7 +46,7 @@ except ImportError:
 # Disable huggingface tokenizers parallelism warning
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
-from discernus.core.clean_analysis_orchestrator import CleanAnalysisOrchestrator, CleanAnalysisError
+# CleanAnalysisOrchestrator deprecated - using V2 orchestrator only
 from discernus.core.config import get_config, get_config_file_path
 from discernus.core.exit_codes import (
     ExitCode, exit_success, exit_general_error, exit_invalid_usage, 
@@ -82,6 +82,7 @@ from discernus.agents.analysis_agent.v2_analysis_agent import V2AnalysisAgent
 from discernus.agents.statistical_agent.v2_statistical_agent import V2StatisticalAgent
 from discernus.agents.evidence_retriever_agent.v2_evidence_retriever_agent import V2EvidenceRetrieverAgent
 from discernus.agents.unified_synthesis_agent.v2_unified_synthesis_agent import V2UnifiedSynthesisAgent
+from discernus.agents.validation_agent.v2_validation_agent import V2ValidationAgent
 
 
 def _validate_models(models_to_validate: List[tuple[str, str]]):
@@ -225,6 +226,7 @@ def run(ctx, experiment_path: str):
         orchestrator = V2Orchestrator(config, security, storage, audit)
 
         # 4. Register Agents
+        orchestrator.register_agent("Validation", V2ValidationAgent(security, storage, audit))
         orchestrator.register_agent("Analysis", V2AnalysisAgent(security, storage, audit))
         orchestrator.register_agent("Statistical", V2StatisticalAgent(security, storage, audit))
         orchestrator.register_agent("Evidence", V2EvidenceRetrieverAgent(security, storage, audit))
@@ -287,101 +289,12 @@ def resume(ctx, experiment_path: str, analysis_model: Optional[str], synthesis_m
         click.echo(f"❌ Experiment path is not a directory: {exp_path}")
         sys.exit(1)
     
-    click.echo("🔄 Resume from statistical preparation mode")
-    
-    # Get configuration and apply defaults
-    config = ctx.obj['config']
-    verbosity = ctx.obj['verbosity']
-    
-    # Apply config defaults for None values
-    if analysis_model is None:
-        analysis_model = config.analysis_model
-    if synthesis_model is None:
-        synthesis_model = config.synthesis_model
-    if validation_model is None:
-        validation_model = config.validation_model
-    if derived_metrics_model is None:
-        derived_metrics_model = config.derived_metrics_model
-    if not no_auto_commit:
-        no_auto_commit = not config.auto_commit
-    
-    # Check for existing statistical preparation results
-    stats_runs = list(exp_path.glob("runs/*/results/scores.csv"))
-    if not stats_runs:
-        rich_console.print_error("❌ No statistical preparation results found to resume from")
-        rich_console.print_info("   Run with --statistical-prep first to create statistical preparation results")
-        exit_invalid_usage("No statistical preparation results found")
-    
-    # Use the most recent statistical preparation run
-    latest_stats_run = max(stats_runs, key=lambda p: p.stat().st_mtime)
-    rich_console.print_info(f"📊 Resuming from statistical preparation: {latest_stats_run.parent}")
-    rich_console.print_info("🔄 Resume Mode: Completing synthesis from statistical preparation")
-    rich_console.print_info("   This will:")
-    rich_console.print_info("   • Load existing analysis and derived metrics results")
-    rich_console.print_info("   • Run evidence retrieval and synthesis")
-    rich_console.print_info("   • Generate final research report with citations")
-    rich_console.print_info("   • Create complete synthesis assets")
-    
-    # Validate models
-    models_to_validate = [
-        ("analysis", analysis_model),
-        ("synthesis", synthesis_model),
-        ("validation", validation_model),
-        ("derived_metrics", derived_metrics_model)
-    ]
-    _validate_models(models_to_validate)
-    
-    # Initialize orchestrator with resume mode
-    orchestrator = CleanAnalysisOrchestrator(
-        experiment_path=exp_path,
-        analysis_model=analysis_model,
-        synthesis_model=synthesis_model,
-        validation_model=validation_model,
-        derived_metrics_model=derived_metrics_model,
-        dry_run=dry_run,
-        skip_validation=False,
-        analysis_only=False,
-        statistical_prep=False,
-        resume_from_stats=True,
-        auto_commit=not no_auto_commit,
-        verbosity=verbosity
-    )
-    
-    try:
-        # Execute resume
-        result = orchestrator.run_experiment()
-        
-        if result.get('status') in ['completed', 'completed_analysis_only', 'completed_statistical_prep', 'completed_skip_synthesis', 'completed_resume_synthesis']:
-            # Provide accurate completion messages for resume operations
-            status = result.get('status')
-            
-            if status == 'completed_resume_synthesis':
-                rich_console.print_success("✅ Synthesis resume completed successfully!")
-                rich_console.print_info("📊 Full experiment pipeline now complete")
-            else:
-                rich_console.print_success("✅ Resume completed successfully!")
-            
-            # Display cost information if available
-            costs = result.get('costs', {})
-            total_cost = costs.get('total_cost_usd', 0.0)
-            if total_cost > 0:
-                rich_console.print_info(f"💰 Total experiment cost: ${total_cost:.4f} USD")
-                
-            if result.get('results_directory'):
-                rich_console.print_info(f"📁 Results saved to: {result['results_directory']}")
-            if result.get('mode') == 'resume_from_stats' and result.get('resumed_from'):
-                rich_console.print_info(f"🔄 Resumed from statistical preparation run: {result['resumed_from']}")
-            exit_success()
-        else:
-            rich_console.print_error(f"❌ Resume failed: {result.get('error', 'Unknown error')}")
-            exit_general_error(result.get('error', 'Unknown error'))
-            
-    except CleanAnalysisError as e:
-        rich_console.print_error(f"❌ Resume error: {e}")
-        exit_general_error(str(e))
-    except Exception as e:
-        rich_console.print_error(f"❌ Unexpected error during resume: {e}")
-        exit_general_error(str(e))
+    # V2 orchestrator doesn't support resume mode yet
+    # TODO: Implement resume functionality in V2 orchestrator
+    rich_console.print_error("❌ Resume command not yet implemented in V2 orchestrator")
+    rich_console.print_info("   The V2 orchestrator is still under development.")
+    rich_console.print_info("   For now, please use the full 'discernus run' command.")
+    exit_invalid_usage("Resume command not implemented in V2 orchestrator")
 
 @cli.command()
 @click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))
@@ -409,29 +322,12 @@ def debug(ctx, experiment_path: str, agent: Optional[str], verbose: bool, test_m
     if test_mode:
         click.echo("🧪 Running in test mode with limited data")
     
-    # Initialize orchestrator in debug mode
-    orchestrator = CleanAnalysisOrchestrator(
-        experiment_path=exp_path,
-        debug_mode=True,
-        debug_agent=agent,
-        verbose_debug=verbose,
-        test_mode=test_mode,
-        verbosity='verbose' if verbose else ctx.obj['verbosity']
-    )
-    
-    try:
-        result = orchestrator.debug_experiment()
-        
-        if result.success:
-            rich_console.print_success("✅ Debug session completed")
-            exit_success()
-        else:
-            rich_console.print_error(f"❌ Debug session failed: {result.error}")
-            exit_general_error(result.error)
-            
-    except Exception as e:
-        rich_console.print_error(f"❌ Debug error: {e}")
-        exit_general_error(str(e))
+    # V2 orchestrator doesn't support debug mode yet
+    # TODO: Implement debug functionality in V2 orchestrator
+    rich_console.print_error("❌ Debug command not yet implemented in V2 orchestrator")
+    rich_console.print_info("   The V2 orchestrator is still under development.")
+    rich_console.print_info("   For now, please use the full 'discernus run' command.")
+    exit_invalid_usage("Debug command not implemented in V2 orchestrator")
 
 @cli.command()
 @click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))

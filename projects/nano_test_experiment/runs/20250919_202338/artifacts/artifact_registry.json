@@ -1,0 +1,277 @@
+{
+  "170698e8709e1c66115f88ef5b6d7df55d80485bcf00137b222c5bf58067b19b": {
+    "artifact_path": "unknown_170698e8",
+    "created_at": "2025-09-19T20:24:37.549166+00:00",
+    "human_filename": "unknown_170698e8",
+    "is_directory": false,
+    "metadata": {
+      "agent_name": "V2AnalysisAgent",
+      "batch_id": "v2_analysis_20250919_162413",
+      "phase": "analysis",
+      "timestamp": "2025-09-19T16:24:37.547517",
+      "type": "markup_extraction"
+    },
+    "size_bytes": 3371,
+    "source_run": "20250919_202338"
+  },
+  "17f7833b7e5987940d19565c8c1c976c2c9399c478de5244a556d55417c18c37": {
+    "artifact_path": "unknown_17f7833b",
+    "created_at": "2025-09-19T20:24:37.548073+00:00",
+    "human_filename": "unknown_17f7833b",
+    "is_directory": false,
+    "metadata": {
+      "agent_name": "V2AnalysisAgent",
+      "batch_id": "v2_analysis_20250919_162413",
+      "phase": "analysis",
+      "timestamp": "2025-09-19T16:24:37.547513",
+      "type": "evidence_extraction"
+    },
+    "size_bytes": 1418,
+    "source_run": "20250919_202338"
+  },
+  "2d59a7ccca6966f9c4fec682548191793354539f7650daa85d44b548c64cade8": {
+    "artifact_path": "statistical_analysis_cache_2d59a7cc",
+    "created_at": "2025-09-19T20:25:44.715310+00:00",
+    "human_filename": "statistical_analysis_cache_2d59a7cc",
+    "is_directory": false,
+    "metadata": {
+      "agent_name": "StatisticalAgent",
+      "artifact_type": "statistical_analysis_cache",
+      "batch_id": "v2_statistical_20250919_162437",
+      "cached_at": "2025-09-19T20:25:44.714931+00:00"
+    },
+    "size_bytes": 14682,
+    "source_run": "20250919_202338"
+  },
+  "308c59437acd8e21b8101a2e01fe65af48af36ca8bf37e222c5f461d2e46c7d7": {
+    "artifact_path": "score_extraction_308c5943",
+    "created_at": "2025-09-19T20:24:33.725949+00:00",
+    "human_filename": "score_extraction_308c5943",
+    "is_directory": false,
+    "metadata": {
+      "analysis_id": "analysis_4fff8046",
+      "artifact_type": "score_extraction"
+    },
+    "size_bytes": 749,
+    "source_run": "20250919_202338"
+  },
+  "329d84b378d96c7713b10eb3fa4552fca4aa859f267a885cc3123a38710ba96d": {
+    "artifact_path": "329d84b378d96c7713b10eb3fa4552fca4aa859f267a885cc3123a38710ba96d",
+    "created_at": "2025-09-19T20:25:46.277226+00:00",
+    "human_filename": "329d84b378d96c7713b10eb3fa4552fca4aa859f267a885cc3123a38710ba96d",
+    "is_directory": true,
+    "metadata": {
+      "artifact_type": "rag_index",
+      "cache_key": "rag_index_ab0684db4633c95e969a32ebe78c336033970c3f442ae0cfb7ca30b1625fc574",
+      "document_count": 2
+    },
+    "size_bytes": null,
+    "source_run": "20250919_202338"
+  },
+  "47eb9f974100ca8145f16b6c784ab9661d709a80ad86ca5140e4894fd76c0b4f": {
+    "artifact_path": "statistical_verification_47eb9f97",
+    "created_at": "2025-09-19T20:25:24.242107+00:00",
+    "human_filename": "statistical_verification_47eb9f97",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "statistical_verification",
+      "batch_id": "v2_statistical_20250919_162437"
+    },
+    "size_bytes": 448,
+    "source_run": "20250919_202338"
+  },
+  "58e51c3608820b7a8692003f6a6cc34c7de0355faf46973d760ba42a67f47ade": {
+    "artifact_path": "evidence_extraction_58e51c36",
+    "created_at": "2025-09-19T20:24:32.570850+00:00",
+    "human_filename": "evidence_extraction_58e51c36",
+    "is_directory": false,
+    "metadata": {
+      "analysis_id": "analysis_4fff8046",
+      "artifact_type": "evidence_extraction"
+    },
+    "size_bytes": 1345,
+    "source_run": "20250919_202338"
+  },
+  "6daa2b255a9b24ecc163b4f0a156147d6016c47aa94f973e4e979a36a6e984b1": {
+    "artifact_path": "synthesis_report_v2_markdown_6daa2b25",
+    "created_at": "2025-09-19T20:26:51.077874+00:00",
+    "human_filename": "synthesis_report_v2_markdown_6daa2b25",
+    "is_directory": false,
+    "metadata": {
+      "agent": "V2UnifiedSynthesisAgent",
+      "artifact_type": "synthesis_report_v2_markdown",
+      "experiment_id": "nano_test_experiment",
+      "llm_metadata": {
+        "attempts": 1,
+        "model": "vertex_ai/gemini-2.5-pro",
+        "success": true,
+        "usage": {
+          "completion_tokens": 5654,
+          "prompt_tokens": 12810,
+          "response_cost_usd": 0.0725525,
+          "total_tokens": 18464
+        }
+      },
+      "report_length": 18087,
+      "timestamp": "2025-09-19T16:26:51.076528"
+    },
+    "size_bytes": 18099,
+    "source_run": "20250919_202338"
+  },
+  "7100446fa173cae0df53fe944676507dbf48deb392c7edfda69904cfb6207439": {
+    "artifact_path": "statistical_analysis_7100446f",
+    "created_at": "2025-09-19T20:25:23.706130+00:00",
+    "human_filename": "statistical_analysis_7100446f",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "statistical_analysis",
+      "batch_id": "v2_statistical_20250919_162437"
+    },
+    "size_bytes": 12667,
+    "source_run": "20250919_202338"
+  },
+  "7c414cac9e20f881b98fb35df67fc4f6086b90062c37d8f93dc89e3919a42119": {
+    "artifact_path": "verification_7c414cac",
+    "created_at": "2025-09-19T20:24:35.736430+00:00",
+    "human_filename": "verification_7c414cac",
+    "is_directory": false,
+    "metadata": {
+      "analysis_id": "analysis_4fff8046",
+      "artifact_type": "verification"
+    },
+    "size_bytes": 204,
+    "source_run": "20250919_202338"
+  },
+  "8f0e0c7fab67afa585c231853db22f8a779b6f86fd948328207de86d81ac6b89": {
+    "artifact_path": "unknown_8f0e0c7f",
+    "created_at": "2025-09-19T20:24:37.548343+00:00",
+    "human_filename": "unknown_8f0e0c7f",
+    "is_directory": false,
+    "metadata": {
+      "agent_name": "V2AnalysisAgent",
+      "batch_id": "v2_analysis_20250919_162413",
+      "phase": "analysis",
+      "timestamp": "2025-09-19T16:24:37.547514",
+      "type": "score_extraction"
+    },
+    "size_bytes": 822,
+    "source_run": "20250919_202338"
+  },
+  "9418093c72801c872beb61619d7907ab9546bc6b5acf70c80d564f5605e799b0": {
+    "artifact_path": "derived_metrics_9418093c",
+    "created_at": "2025-09-19T20:24:35.286245+00:00",
+    "human_filename": "derived_metrics_9418093c",
+    "is_directory": false,
+    "metadata": {
+      "analysis_id": "analysis_4fff8046",
+      "artifact_type": "derived_metrics"
+    },
+    "size_bytes": 2005,
+    "source_run": "20250919_202338"
+  },
+  "ac1c9f04f52825f4825ef15220cbc8d1f884933f9cf6c55214a88aea30f69a68": {
+    "artifact_path": "artifact_ac1c9f04",
+    "created_at": "2025-09-19T20:25:55.313167+00:00",
+    "human_filename": "artifact_ac1c9f04",
+    "is_directory": false,
+    "metadata": {},
+    "size_bytes": 2715,
+    "source_run": "20250919_202338"
+  },
+  "b04759a5709b9e7407b36cb41cb6a6077cab125dd23bfbb54ed02b26bf5457ce": {
+    "artifact_path": "marked_up_document_b04759a5",
+    "created_at": "2025-09-19T20:24:37.547002+00:00",
+    "human_filename": "marked_up_document_b04759a5",
+    "is_directory": false,
+    "metadata": {
+      "analysis_id": "analysis_4fff8046",
+      "artifact_type": "marked_up_document",
+      "format": "markdown"
+    },
+    "size_bytes": 3087,
+    "source_run": "20250919_202338"
+  },
+  "b7ec88a8725d2ebe8fad4490024d87a1688dba56d65314d1b75d6139acd3e27a": {
+    "artifact_path": "validation_report_v2_b7ec88a8",
+    "created_at": "2025-09-19T20:24:13.686533+00:00",
+    "human_filename": "validation_report_v2_b7ec88a8",
+    "is_directory": false,
+    "metadata": {
+      "agent": "V2ValidationAgent",
+      "artifact_type": "validation_report_v2",
+      "experiment_id": "nano_test_experiment",
+      "timestamp": "2025-09-19T16:24:13.684979"
+    },
+    "size_bytes": 1238,
+    "source_run": "20250919_202338"
+  },
+  "bd42095a2c92ecbc6c60952b6c0252f35df7e9cfc1b4af8e70945abdf324fc53": {
+    "artifact_path": "csv_generation_bd42095a",
+    "created_at": "2025-09-19T20:25:44.712943+00:00",
+    "human_filename": "csv_generation_bd42095a",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "csv_generation",
+      "batch_id": "v2_statistical_20250919_162437"
+    },
+    "size_bytes": 452,
+    "source_run": "20250919_202338"
+  },
+  "d78ebb619f544bc072f41eed3c22c0b7a4c5b20fec088e80c1a301a028743edf": {
+    "artifact_path": "composite_analysis_d78ebb61",
+    "created_at": "2025-09-19T20:24:31.407314+00:00",
+    "human_filename": "composite_analysis_d78ebb61",
+    "is_directory": false,
+    "metadata": {
+      "analysis_id": "analysis_4fff8046",
+      "artifact_type": "composite_analysis"
+    },
+    "size_bytes": 5825,
+    "source_run": "20250919_202338"
+  },
+  "f1fc406ce9186f6eac717de7d6b036643cddb9276c37ddddb5befc64c4f32a7c": {
+    "artifact_path": "unknown_f1fc406c",
+    "created_at": "2025-09-19T20:24:37.547842+00:00",
+    "human_filename": "unknown_f1fc406c",
+    "is_directory": false,
+    "metadata": {
+      "agent_name": "V2AnalysisAgent",
+      "batch_id": "v2_analysis_20250919_162413",
+      "phase": "analysis",
+      "timestamp": "2025-09-19T16:24:37.547510",
+      "type": "composite_analysis"
+    },
+    "size_bytes": 5884,
+    "source_run": "20250919_202338"
+  },
+  "f464450184998a0733383f43724f21dd78b5128476dcf7fcd43f47b16dd6014a": {
+    "artifact_path": "unknown_f4644501",
+    "created_at": "2025-09-19T20:24:37.548679+00:00",
+    "human_filename": "unknown_f4644501",
+    "is_directory": false,
+    "metadata": {
+      "agent_name": "V2AnalysisAgent",
+      "batch_id": "v2_analysis_20250919_162413",
+      "phase": "analysis",
+      "timestamp": "2025-09-19T16:24:37.547515",
+      "type": "derived_metrics"
+    },
+    "size_bytes": 2078,
+    "source_run": "20250919_202338"
+  },
+  "faf65173eddab05cb5ae58d67d78bd16957d4182e445b7ad10e3740f7ca16e82": {
+    "artifact_path": "unknown_faf65173",
+    "created_at": "2025-09-19T20:24:37.548935+00:00",
+    "human_filename": "unknown_faf65173",
+    "is_directory": false,
+    "metadata": {
+      "agent_name": "V2AnalysisAgent",
+      "batch_id": "v2_analysis_20250919_162413",
+      "phase": "analysis",
+      "timestamp": "2025-09-19T16:24:37.547516",
+      "type": "verification"
+    },
+    "size_bytes": 277,
+    "source_run": "20250919_202338"
+  }
+}

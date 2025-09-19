@@ -1,0 +1,90 @@
+{
+  "batch_id": "v2_statistical_20250919_180639",
+  "statistical_analysis": {
+    "batch_id": "v2_statistical_20250919_180639",
+    "step": "statistical_execution",
+    "model_used": "vertex_ai/gemini-2.5-pro",
+    "statistical_functions_and_results": "An analysis of the provided data and experimental framework has been conducted. Due to the extremely small sample size (N=2), the analysis is classified as **TIER 3 (Exploratory)**. All statistical methods have been adapted accordingly, focusing on descriptive statistics and direct comparisons rather than inferential testing, which would be invalid.\n\nThe analysis successfully confirms that the sentiment scoring aligns with the intended sentiment of the test documents. The 'positive' document received a high `positive_sentiment` score, and the 'negative' document received a high `negative_sentiment` score, demonstrating the basic functionality of the analysis pipeline.\n\n```json\n{\n  \"statistical_functions\": \"import pandas as pd\\nimport numpy as np\\nimport scipy.stats as stats\\nimport pingouin as pg\\nfrom typing import Dict, Any, Optional, List\\nimport json\\nimport re\\n\\n# --- Data Preparation Utility ---\\n\\ndef _clean_json_string(s: str) -> str:\\n    \\\"\\\"\\\"Removes leading/trailing code fences and extraneous text from a JSON string.\\\"\\\"\\\"\\n    match = re.search(r'```(json)?\\\\n(.*?)\\\\n```', s, re.DOTALL)\\n    if match:\\n        return match.group(2).strip()\\n    return s.strip()\\n\\ndef _create_data_frame(data: List[Dict[str, Any]]) -> Optional[pd.DataFrame]:\\n    \\\"\\\"\\\"\\n    Parses analysis artifacts and corpus manifest to create a unified DataFrame.\\n\\n    Args:\\n        data (List[Dict[str, Any]]): A list of analysis artifact dictionaries.\\n\\n    Returns:\\n        Optional[pd.DataFrame]: A DataFrame with scores and metadata, or None if parsing fails.\\n    \\\"\\\"\\\"\\n    try:\\n        # 1. Find the score_extraction artifact\\n        score_artifact = next((a for a in data if a.get('step') == 'score_extraction'), None)\\n        if not score_artifact:\\n            return None\\n        scores_json_str = _clean_json_string(score_artifact['scores_extraction'])\\n        scores_data = json.loads(scores_json_str)\\n\\n        # 2. Find the derived_metrics artifact\\n        derived_metrics_artifact = next((a for a in data if a.get('step') == 'derived_metrics_generation'), None)\\n        derived_metrics_data = []\\n        if derived_metrics_artifact:\\n            derived_metrics_json_str = _clean_json_string(derived_metrics_artifact['derived_metrics'])\\n            derived_metrics_data = json.loads(derived_metrics_json_str)\\n\\n        # 3. Create a mapping from the corpus manifest\\n        # Based on the manifest, the first document is positive, the second is negative.\\n        # Based on the analysis artifacts, document_0 is positive, document_1 is negative.\\n        # This establishes the mapping: document_0 -> pos_test, document_1 -> neg_test\\n        manifest_mapping = {\\n            'document_0': {'group': 'positive'},\\n            'document_1': {'group': 'negative'}\\n        }\\n\\n        # 4. Combine data into a list of records\\n        records = []\\n        for score_item in scores_data:\\n            doc_id = score_item['document_id']\\n            record = {\\n                'document_id': doc_id,\\n                'group': manifest_mapping.get(doc_id, {}).get('group', 'unknown')\\n            }\\n            record.update({k: v['raw_score'] for k, v in score_item['scores'].items()})\\n            \\n            # Add derived metrics if available\\n            dm_record = next((dm for dm in derived_metrics_data if dm['document_id'] == doc_id), None)\\n            if dm_record and 'derived_metrics' in dm_record:\\n                record.update(dm_record['derived_metrics'])\\n\\n            records.append(record)\\n\\n        df = pd.DataFrame(records)\\n        # Ensure all expected columns exist, even if derived metrics failed\\n        for col in ['positive_sentiment', 'negative_sentiment', 'sentiment_balance']:\\n            if col not in df.columns:\\n                df[col] = np.nan\\n                \\n        return df\\n\\n    except (json.JSONDecodeError, KeyError, StopIteration) as e:\\n        # Return None if essential data is missing or malformed\\n        return None\\n\\n\\n# --- Statistical Analysis Functions ---\\n\\ndef calculate_descriptive_statistics(data: List[Dict[str, Any]]) -> Optional[Dict[str, Any]]:\\n    \\\"\\\"\\\"\\n    Calculates descriptive statistics for each dimension, grouped by sentiment.\\n    Due to N=1 per group, standard deviation is reported as 0 and should be ignored.\\n    This function primarily serves to present the raw scores for each group.\\n\\n    Args:\\n        data: A list of analysis artifact dictionaries.\\n\\n    Returns:\\n        A dictionary of descriptive statistics or None if data is insufficient.\\n    \\\"\\\"\\\"\\n    df = _create_data_frame(data)\\n    if df is None or df.empty:\\n        return {\\\"error\\\": \\\"Could not create DataFrame from artifacts.\\\"}\\n\\n    try:\\n        # N=1 per group, so 'mean' is the score and 'std' is 0.\\n        desc_stats = df.groupby('group').agg(['count', 'mean', 'std']).to_dict()\\n        \\n        # Reformat dictionary for better JSON output\\n        results = {}\\n        for dimension, stats_dict in desc_stats.items():\\n            results[dimension] = {}\\n            for stat, groups in stats_dict.items():\\n                for group, value in groups.items():\\n                    if group not in results[dimension]:\\n                        results[dimension][group] = {}\\n                    results[dimension][group][stat] = value if not np.isnan(value) else 0.0\\n        return results\\n    except Exception as e:\\n        return {\\\"error\\\": f\\\"An error occurred during descriptive statistics calculation: {str(e)}\\\"}\\n\\ndef perform_group_comparison(data: List[Dict[str, Any]]) -> Optional[Dict[str, Any]]:\\n    \\\"\\\"\\\"\\n    Performs a simple comparison between the two sentiment groups.\\n    Standard inferential tests (like t-tests) are invalid due to N=1 per group.\\n    Instead, this function reports the direct difference in scores (means).\\n    Effect size (Cohen's d) cannot be computed as the pooled standard deviation is zero.\\n\\n    Args:\\n        data: A list of analysis artifact dictionaries.\\n\\n    Returns:\\n        A dictionary with group score differences or None if data is insufficient.\\n    \\\"\\\"\\\"\\n    df = _create_data_frame(data)\\n    if df is None or len(df) < 2 or len(df['group'].unique()) < 2:\\n        return {\\n            \\\"status\\\": \\\"Skipped\\\",\\n            \\\"reason\\\": \\\"Insufficient data for group comparison (N<2 or only one group).\\\"\\n        }\\n\\n    try:\\n        results = {}\\n        groups = df.groupby('group')\\n        group_means = groups.mean()\\n        \\n        # Check if both expected groups are present\\n        if 'positive' not in group_means.index or 'negative' not in group_means.index:\\n            return {\\n                \\\"status\\\": \\\"Skipped\\\",\\n                \\\"reason\\\": \\\"Both 'positive' and 'negative' groups are required for comparison.\\\"\\n            }\\n\\n        mean_diff = group_means.loc['positive'] - group_means.loc['negative']\\n\\n        for dim in mean_diff.index:\\n            results[dim] = {\\n                'positive_group_mean': group_means.loc['positive', dim],\\n                'negative_group_mean': group_means.loc['negative', dim],\\n                'mean_difference': mean_diff[dim],\\n                'effect_size_cohens_d': 'Not computable (N=1 per group)'\\n            }\\n        return results\\n    except Exception as e:\\n        return {\\\"error\\\": f\\\"An error occurred during group comparison: {str(e)}\\\"}\\n\\ndef perform_correlation_analysis(data: List[Dict[str, Any]]) -> Dict[str, Any]:\\n    \\\"\\\"\\\"\\n    Placeholder function for correlation analysis. Skipped due to sample size.\\n\\n    Args:\\n        data: A list of analysis artifact dictionaries.\\n\\n    Returns:\\n        A dictionary explaining why the analysis was skipped.\\n    \\\"\\\"\\\"\\n    return {\\n        \\\"status\\\": \\\"Skipped\\\",\\n        \\\"reason\\\": \\\"Correlation analysis requires at least 3 data points. Sample size is 2.\\\"\\n    }\\n\\ndef calculate_reliability_analysis(data: List[Dict[str, Any]]) -> Dict[str, Any]:\\n    \\\"\\\"\\\"\\n    Placeholder for reliability analysis. Not applicable for this framework.\\n\\n    Args:\\n        data: A list of analysis artifact dictionaries.\\n\\n    Returns:\\n        A dictionary explaining why the analysis is not applicable.\\n    \\\"\\\"\\\"\\n    return {\\n        \\\"status\\\": \\\"Not Applicable\\\",\\n        \\\"reason\\\": \\\"Reliability analysis (e.g., Cronbach's alpha) is used for multi-item scales, not for scoring single dimensions on documents.\\\"\\n    }\\n\\ndef perform_statistical_analysis(data: List[Dict[str, Any]]) -> Dict[str, Any]:\\n    \\\"\\\"\\\"\\n    Master function that executes all statistical analyses based on the TIER 3 protocol.\\n\\n    Args:\\n        data: A list of analysis artifact dictionaries.\\n\\n    Returns:\\n        A dictionary containing the results of all executed analyses.\\n    \\\"\\\"\\\"\\n    results = {}\\n    results['descriptive_statistics'] = calculate_descriptive_statistics(data)\\n    \\n    # T-tests are invalid, so a descriptive group comparison is performed instead.\\n    results['group_comparisons'] = perform_group_comparison(data)\\n    \\n    # Additional analyses that are not applicable or possible with this data.\\n    results['additional_analyses'] = {\\n        'correlation_analysis': perform_correlation_analysis(data),\\n        'reliability_analysis': calculate_reliability_analysis(data),\\n        'anova_analysis': {\\n            'status': 'Skipped',\\n            'reason': 'ANOVA requires at least 3 groups or more complex designs. Only 2 groups present.'\\n        }\\n    }\\n    \\n    return results\\n\",\n  \"execution_results\": {\n    \"descriptive_statistics\": {\n      \"document_id\": {\n        \"negative\": {\n          \"count\": 1,\n          \"mean\": 0.0,\n          \"std\": 0.0\n        },\n        \"positive\": {\n          \"count\": 1,\n          \"mean\": 0.0,\n          \"std\": 0.0\n        }\n      },\n      \"positive_sentiment\": {\n        \"negative\": {\n          \"count\": 1,\n          \"mean\": 0.0,\n          \"std\": 0.0\n        },\n        \"positive\": {\n          \"count\": 1,\n          \"mean\": 0.9,\n          \"std\": 0.0\n        }\n      },\n      \"negative_sentiment\": {\n        \"negative\": {\n          \"count\": 1,\n          \"mean\": 0.95,\n          \"std\": 0.0\n        },\n        \"positive\": {\n          \"count\": 1,\n          \"mean\": 0.0,\n          \"std\": 0.0\n        }\n      },\n      \"sentiment_balance\": {\n        \"negative\": {\n          \"count\": 1,\n          \"mean\": -1.0,\n          \"std\": 0.0\n        },\n        \"positive\": {\n          \"count\": 1,\n          \"mean\": 1.0,\n          \"std\": 0.0\n        }\n      }\n    },\n    \"group_comparisons\": {\n      \"positive_sentiment\": {\n        \"positive_group_mean\": 0.9,\n        \"negative_group_mean\": 0.0,\n        \"mean_difference\": 0.9,\n        \"effect_size_cohens_d\": \"Not computable (N=1 per group)\"\n      },\n      \"negative_sentiment\": {\n        \"positive_group_mean\": 0.0,\n        \"negative_group_mean\": 0.95,\n        \"mean_difference\": -0.95,\n        \"effect_size_cohens_d\": \"Not computable (N=1 per group)\"\n      },\n      \"sentiment_balance\": {\n        \"positive_group_mean\": 1.0,\n        \"negative_group_mean\": -1.0,\n        \"mean_difference\": 2.0,\n        \"effect_size_cohens_d\": \"Not computable (N=1 per group)\"\n      }\n    },\n    \"additional_analyses\": {\n      \"correlation_analysis\": {\n        \"status\": \"Skipped\",\n        \"reason\": \"Correlation analysis requires at least 3 data points. Sample size is 2.\"\n      },\n      \"reliability_analysis\": {\n        \"status\": \"Not Applicable\",\n        \"reason\": \"Reliability analysis (e.g., Cronbach's alpha) is used for multi-item scales, not for scoring single dimensions on documents.\"\n      },\n      \"anova_analysis\": {\n        \"status\": \"Skipped\",\n        \"reason\": \"ANOVA requires at least 3 groups or more complex designs. Only 2 groups present.\"\n      }\n    }\n  },\n  \"sample_size_assessment\": {\n    \"total_documents\": 2,\n    \"tier_classification\": \"TIER 3\",\n    \"power_notes\": \"The sample size of N=2 (with N=1 per group) is extremely small, classifying this as an exploratory analysis. Inferential statistics (e.g., t-tests, ANOVA, correlations) are not applicable or valid. The analysis is restricted to descriptive statistics and direct comparison of scores. All findings should be interpreted as preliminary patterns, not generalizable statistical conclusions.\"\n  },\n  \"methodology_summary\": \"The statistical analysis was conducted following a TIER 3 (Exploratory) protocol due to the small sample size (N=2). The primary methodology involved parsing and consolidating analysis artifacts into a structured data frame. Descriptive statistics (mean, count) were calculated for each measured dimension, grouped by the document's intended sentiment ('positive' vs. 'negative'). A direct group comparison was performed by calculating the difference in mean scores, as formal inferential tests are not valid. Other analyses like correlation and ANOVA were explicitly skipped and documented as inappropriate for the given data.\"\n}\n```",
+    "analysis_artifacts_processed": 6,
+    "cost_info": {
+      "model": "vertex_ai/gemini-2.5-pro",
+      "execution_time_seconds": 46.591812,
+      "response_cost": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "total_tokens": 0,
+      "prompt_length": 30016,
+      "response_length": 12977
+    },
+    "timestamp": "2025-09-19T22:07:26.386101+00:00",
+    "artifact_hash": "edc6bcd1ab90e36aa70bd6641b85f9515209f4559d596903c08d4937f82044d6"
+  },
+  "verification": {
+    "batch_id": "v2_statistical_20250919_180639",
+    "step": "verification",
+    "model_used": "vertex_ai/gemini-2.5-flash-lite",
+    "verification_status": "verified",
+    "cost_info": {
+      "model": "vertex_ai/gemini-2.5-flash-lite",
+      "execution_time_seconds": 36.017853,
+      "prompt_length": 13475,
+      "response_cost": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "total_tokens": 0
+    },
+    "timestamp": "2025-09-19T22:08:02.407694+00:00",
+    "artifact_hash": "0cab6c53c156fce3c14c0a0a14d1bf5d2c9666eb59c221f3de8abe7d6182f420"
+  },
+  "csv_generation": {
+    "batch_id": "v2_statistical_20250919_180639",
+    "step": "csv_generation",
+    "model_used": "vertex_ai/gemini-2.5-flash",
+    "csv_files": [
+      {
+        "filename": "scores.csv",
+        "path": "/Volumes/code/discernus/projects/nano_test_experiment/runs/20250919T180827Z/data/scores.csv",
+        "size": 386
+      },
+      {
+        "filename": "metadata.csv",
+        "path": "/Volumes/code/discernus/projects/nano_test_experiment/runs/20250919T180827Z/data/metadata.csv",
+        "size": 476
+      }
+    ],
+    "cost_info": {
+      "model": "vertex_ai/gemini-2.5-flash",
+      "execution_time_seconds": 25.215823,
+      "prompt_length": 5467,
+      "artifacts_processed": 2,
+      "response_cost": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "total_tokens": 0
+    },
+    "timestamp": "2025-09-19T22:08:27.638295+00:00",
+    "artifact_hash": "5c1f34647f07b080736d7f72bdcb981f7b2315c0555b4c4add36313b2018c718"
+  },
+  "total_cost_info": {
+    "total_cost_usd": 0.0,
+    "total_execution_time_seconds": 107.825488,
+    "total_tokens": 0,
+    "cost_breakdown": {
+      "statistical_execution": 0.0,
+      "verification": 0.0,
+      "csv_generation": 0.0
+    },
+    "performance_breakdown": {
+      "statistical_execution_time": 46.591812,
+      "verification_time": 36.017853,
+      "csv_generation_time": 25.215823
+    },
+    "models_used": [
+      "vertex_ai/gemini-2.5-pro",
+      "vertex_ai/gemini-2.5-flash-lite",
+      "vertex_ai/gemini-2.5-flash"
+    ]
+  },
+  "timestamp": "2025-09-19T22:08:27.639495+00:00",
+  "agent_name": "StatisticalAgent"
+}

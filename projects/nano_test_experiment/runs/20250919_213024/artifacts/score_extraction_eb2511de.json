@@ -1,0 +1,7 @@
+{
+  "analysis_id": "analysis_b6673e13",
+  "step": "score_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "scores_extraction": "```json\n[\n  {\n    \"document_id\": \"75223e7316afbb75\",\n    \"document_name\": \"document_0\",\n    \"positive_sentiment\": {\n      \"raw_score\": 1.0,\n      \"salience\": 1.0,\n      \"confidence\": 1.0\n    },\n    \"negative_sentiment\": {\n      \"raw_score\": 0.0,\n      \"salience\": 0.0,\n      \"confidence\": 1.0\n    }\n  },\n  {\n    \"document_id\": \"1818539970c2cbb3\",\n    \"document_name\": \"document_1\",\n    \"positive_sentiment\": {\n      \"raw_score\": 0.0,\n      \"salience\": 0.0,\n      \"confidence\": 1.0\n    },\n    \"negative_sentiment\": {\n      \"raw_score\": 1.0,\n      \"salience\": 1.0,\n      \"confidence\": 1.0\n    }\n  }\n]\n```",
+  "timestamp": "2025-09-19T21:31:08.775471+00:00"
+}

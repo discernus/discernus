@@ -93,6 +93,14 @@ class V2StatisticalAgent(ToolCallingAgent):
             corpus_manifest_content = run_context.metadata.get("corpus_manifest_content")
             analysis_artifacts = run_context.analysis_artifacts
             
+            # Debug: Log what we received from RunContext
+            self.logger.info(f"DEBUG: RunContext analysis_artifacts: {analysis_artifacts}")
+            self.logger.info(f"DEBUG: RunContext analysis_artifacts type: {type(analysis_artifacts)}")
+            if hasattr(run_context, 'analysis_results'):
+                self.logger.info(f"DEBUG: RunContext has analysis_results: {run_context.analysis_results is not None}")
+            else:
+                self.logger.info("DEBUG: RunContext has no analysis_results attribute")
+            
             if not framework_content:
                 return AgentResult(
                     success=False,
@@ -191,7 +199,8 @@ class V2StatisticalAgent(ToolCallingAgent):
                     })
                 
                 # Update run context with results
-                run_context.statistical_results = legacy_result.get("statistical_analysis", {})
+                statistical_analysis = legacy_result.get("statistical_analysis", {})
+                run_context.statistical_results = statistical_analysis
                 
                 # Log success
                 self.audit.log_agent_event(self.agent_name, "statistical_analysis_complete", {

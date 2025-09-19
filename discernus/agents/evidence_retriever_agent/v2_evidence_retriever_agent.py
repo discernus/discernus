@@ -73,10 +73,13 @@ class V2EvidenceRetrieverAgent(ToolCallingAgent):
             AgentResult with evidence retrieval results
         """
         try:
+            self.logger.info("V2EvidenceRetrieverAgent starting execution")
             self.log_execution_start(run_context=run_context, **kwargs)
 
             # 1. Validate inputs from RunContext
+            self.logger.info("Starting evidence retrieval validation...")
             framework_content, statistical_results, corpus_documents = self._validate_and_extract_inputs(run_context)
+            self.logger.info("Evidence retrieval validation completed successfully")
 
             # 2. Build or load a cached RAG index from the corpus documents
             index_cache_key = self.rag_manager.get_corpus_cache_key(corpus_documents)
@@ -88,7 +91,9 @@ class V2EvidenceRetrieverAgent(ToolCallingAgent):
                 self.rag_manager.load_index(index_cache_key)
 
             # 3. Use LLM to identify key statistical findings that require evidence
+            self.logger.info("Extracting key findings from statistical results...")
             key_findings = self._extract_key_findings(statistical_results)
+            self.logger.info(f"Found {len(key_findings)} key findings")
             if not key_findings:
                 error_msg = "No key statistical findings were identified by the LLM. Cannot proceed with evidence retrieval."
                 self.logger.error(error_msg)
@@ -100,7 +105,13 @@ class V2EvidenceRetrieverAgent(ToolCallingAgent):
                 )
 
             # 4. For each finding, generate queries and retrieve evidence from the RAG index
-            evidence_results = self._retrieve_evidence_for_findings(key_findings, framework_content)
+            evidence_results = []
+            for finding in key_findings:
+                # Generate queries for this finding
+                queries = self._generate_evidence_queries(finding, framework_content)
+                for query in queries:
+                    evidence = self._retrieve_evidence_for_query(query)
+                    evidence_results.extend(evidence)
 
             # 5. Store the final evidence artifact
             evidence_artifact_hash = self._store_evidence_results(evidence_results, index_cache_key)
@@ -292,26 +303,163 @@ class V2EvidenceRetrieverAgent(ToolCallingAgent):
         try:
             findings = []
             
-            # Look for common statistical result patterns
-            if 'findings' in statistical_results:
-                findings.extend(statistical_results['findings'])
+            # Debug logging
+            self.logger.info(f"Statistical results keys: {list(statistical_results.keys())}")
+            self.logger.info(f"Statistical results type: {type(statistical_results)}")
             
-            if 'key_findings' in statistical_results:
-                findings.extend(statistical_results['key_findings'])
+            # Look for statistical analysis results in the V2 format
+            if 'statistical_functions_and_results' in statistical_results:
+                # The statistical results are stored as a JSON string in the statistical_functions_and_results field
+                import json
+                try:
+                    # Extract JSON from the markdown code block
+                    json_str = statistical_results['statistical_functions_and_results']
+                    if '```json' in json_str:
+                        # Find the start and end of the JSON block
+                        start_idx = json_str.find('```json') + 7
+                        end_idx = json_str.rfind('```')
+                        if end_idx > start_idx:
+                            json_str = json_str[start_idx:end_idx].strip()
+                    analysis = json.loads(json_str)
+                    if 'execution_results' in analysis:
+                        results = analysis['execution_results']
+                    else:
+                        results = {}
+                except (json.JSONDecodeError, KeyError, IndexError) as e:
+                    self.logger.error(f"Failed to parse statistical_functions_and_results: {e}")
+                    results = {}
+            elif 'statistical_analysis' in statistical_results:
+                analysis = statistical_results['statistical_analysis']
+                if 'execution_results' in analysis:
+                    results = analysis['execution_results']
+                else:
+                    results = {}
+            else:
+                results = {}
             
-            if 'results' in statistical_results:
-                results = statistical_results['results']
-                if isinstance(results, list):
-                    findings.extend(results)
-                elif isinstance(results, dict):
-                    for key, value in results.items():
-                        if isinstance(value, dict) and 'significance' in value:
+            # Extract findings from group comparison
+            if 'group_comparisons' in results and results['group_comparisons']:
+                # New format: group_comparisons is a dict of comparisons
+                group_comps = results['group_comparisons']
+                for comparison_name, comparison_data in group_comps.items():
+                    if isinstance(comparison_data, dict) and 'mean_difference' in comparison_data:
+                        mean_diff = comparison_data['mean_difference']
+                        if isinstance(mean_diff, dict) and 'value' in mean_diff:
                             findings.append({
-                                "dimension": key,
-                                "significance": value['significance'],
-                                "description": value.get('description', '')
+                                "dimension": comparison_data.get('dependent_variable', comparison_name),
+                                "type": "group_comparison",
+                                "description": f"Group comparison shows {comparison_data.get('dependent_variable', comparison_name)} difference: {mean_diff['value']:.3f}",
+                                "raw_data": comparison_data
+                            })
+            elif 'group_comparison' in results and results['group_comparison']:
+                group_comp = results['group_comparison']
+                # Check for mean_differences (plural) first, then mean_difference (singular)
+                if 'mean_differences' in group_comp:
+                    for dimension, difference in group_comp['mean_differences'].items():
+                        findings.append({
+                            "dimension": dimension,
+                            "type": "group_comparison",
+                            "description": f"Group comparison shows {dimension} difference: {difference:.3f}",
+                            "raw_data": {"mean_difference": difference}
+                        })
+                else:
+                    # Fallback to old format
+                    for dimension, stats in group_comp.items():
+                        if isinstance(stats, dict) and 'mean_difference' in stats:
+                            findings.append({
+                                "dimension": dimension,
+                                "type": "group_comparison",
+                                "description": f"Group comparison shows {dimension} difference: {stats['mean_difference']:.3f}",
+                                "raw_data": stats
+                            })
+            elif 'additional_analyses' in results and results['additional_analyses']:
+                additional = results['additional_analyses']
+                if 'group_differences' in additional and additional['group_differences']:
+                    group_comp = additional['group_differences']
+                    for dimension, stats in group_comp.items():
+                        if isinstance(stats, dict) and 'mean_difference' in stats:
+                            findings.append({
+                                "dimension": dimension,
+                                "type": "group_comparison",
+                                "description": f"Group comparison shows {dimension} difference: {stats['mean_difference']:.3f}",
+                                "raw_data": stats
+                            })
+                elif 'group_comparison' in additional and additional['group_comparison']:
+                    group_comp = additional['group_comparison']
+                    for dimension, stats in group_comp.items():
+                        if isinstance(stats, dict) and 'mean_difference' in stats:
+                            findings.append({
+                                "dimension": dimension,
+                                "type": "group_comparison",
+                                "description": f"Group comparison shows {dimension} difference: {stats['mean_difference']:.3f}",
+                                "raw_data": stats
                             })
             
+            # Extract findings from descriptive statistics
+            if 'descriptive_statistics' in results and results['descriptive_statistics']:
+                desc_stats = results['descriptive_statistics']
+                # Check for overall_statistics (plural) first, then overall (singular)
+                if 'overall_statistics' in desc_stats:
+                    overall = desc_stats['overall_statistics']
+                    for dimension, stats in overall.items():
+                        if isinstance(stats, dict) and 'mean' in stats:
+                            findings.append({
+                                "dimension": dimension,
+                                "type": "descriptive",
+                                "description": f"Overall {dimension} mean: {stats['mean']:.3f}",
+                                "raw_data": stats
+                            })
+                elif 'overall' in desc_stats:
+                    overall = desc_stats['overall']
+                    for dimension, stats in overall.items():
+                        if isinstance(stats, dict) and 'mean' in stats:
+                            findings.append({
+                                "dimension": dimension,
+                                "type": "descriptive",
+                                "description": f"Overall {dimension} mean: {stats['mean']:.3f}",
+                                "raw_data": stats
+                            })
+            
+            # Extract findings from correlation analysis
+            if 'correlation_analysis' in results and results['correlation_analysis']:
+                corr_analysis = results['correlation_analysis']
+                if 'correlation_coefficient' in corr_analysis:
+                    findings.append({
+                        "dimension": "correlation",
+                        "type": "correlation_analysis",
+                        "description": f"Correlation coefficient: {corr_analysis['correlation_coefficient']:.3f}",
+                        "raw_data": corr_analysis
+                    })
+                elif 'correlation_matrix' in corr_analysis and corr_analysis['correlation_matrix']:
+                    findings.append({
+                        "dimension": "correlation",
+                        "type": "correlation_analysis",
+                        "description": f"Correlation analysis completed",
+                        "raw_data": corr_analysis['correlation_matrix']
+                    })
+            
+            # Fallback: Look for common statistical result patterns
+            if not findings:
+                if 'findings' in statistical_results:
+                    findings.extend(statistical_results['findings'])
+                
+                if 'key_findings' in statistical_results:
+                    findings.extend(statistical_results['key_findings'])
+                
+                if 'results' in statistical_results:
+                    results = statistical_results['results']
+                    if isinstance(results, list):
+                        findings.extend(results)
+                    elif isinstance(results, dict):
+                        for key, value in results.items():
+                            if isinstance(value, dict) and 'significance' in value:
+                                findings.append({
+                                    "dimension": key,
+                                    "significance": value['significance'],
+                                    "description": value.get('description', '')
+                                })
+            
+            self.logger.info(f"Extracted {len(findings)} key findings from statistical results")
             return findings
             
         except Exception as e:
@@ -321,11 +469,21 @@ class V2EvidenceRetrieverAgent(ToolCallingAgent):
     def _generate_evidence_queries(self, finding: Dict[str, Any], framework_content: str) -> List[str]:
         """Generate evidence queries for a finding."""
         try:
+            # Debug logging to understand the data types
+            self.logger.debug(f"Finding type: {type(finding)}, Framework content type: {type(framework_content)}")
+            
+            # Ensure finding is serializable
+            try:
+                finding_json = json.dumps(finding, indent=2)
+            except (TypeError, ValueError) as e:
+                self.logger.warning(f"Finding not JSON serializable: {e}. Using string representation.")
+                finding_json = str(finding)
+            
             # Create a prompt for query generation
             prompt = f"""
             Based on this statistical finding and framework, generate 2-3 specific evidence queries:
             
-            Finding: {json.dumps(finding, indent=2)}
+            Finding: {finding_json}
             Framework Description: {framework_content[:1000]}
             
             Generate queries that would help find textual evidence in a corpus to support or refute this finding.
@@ -334,25 +492,39 @@ class V2EvidenceRetrieverAgent(ToolCallingAgent):
             """
             
             # Use LLM to generate queries
-            response = self.llm_gateway.call_llm(
+            response = self.llm_gateway.execute_call(
                 model=self.config.model if self.config else "vertex_ai/gemini-2.5-flash",
-                messages=[{"role": "user", "content": prompt}],
+                prompt=prompt,
                 temperature=0.1
             )
+
+            # Handle tuple response from LLM gateway
+            if isinstance(response, tuple):
+                content, metadata = response
+            else:
+                content = response.get('content', '') if isinstance(response, dict) else str(response)
+
+            # Debug logging for response handling
+            self.logger.debug(f"Response type: {type(response)}, Content type: {type(content)}")
+            
+            # Ensure content is a string
+            if not isinstance(content, str):
+                self.logger.warning(f"Content is not a string: {type(content)}. Converting to string.")
+                content = str(content)
 
             # Parse response to extract queries
             try:
                 # Find the JSON list in the response
-                json_match = re.search(r'\[.*\]', response, re.DOTALL)
+                json_match = re.search(r'\[.*\]', content, re.DOTALL)
                 if json_match:
                     queries = json.loads(json_match.group())
                     return queries[:3]
             except json.JSONDecodeError:
-                self.logger.warning(f"Could not decode JSON from LLM response for query generation: {response}")
+                self.logger.warning(f"Could not decode JSON from LLM response for query generation: {content}")
 
             # Fallback for non-JSON responses
             queries = []
-            lines = response.split('\n')
+            lines = content.split('\n')
             for line in lines:
                 line = line.strip()
                 if line and not line.startswith('#') and not line.startswith('-'):
@@ -364,8 +536,12 @@ class V2EvidenceRetrieverAgent(ToolCallingAgent):
             return queries[:3]  # Limit to 3 queries
             
         except Exception as e:
-            self.logger.error(f"Failed to generate evidence queries: {e}")
-            return [str(finding.get('description', 'statistical finding'))]
+            self.logger.error(f"Failed to generate evidence queries: {e}", exc_info=True)
+            # Provide a safe fallback
+            if isinstance(finding, dict):
+                return [str(finding.get('description', 'statistical finding'))]
+            else:
+                return [str(finding)]
     
     def _retrieve_evidence_for_query(self, query: str) -> List[Dict[str, Any]]:
         """Retrieve evidence for a specific query."""
@@ -427,7 +603,10 @@ class V2EvidenceRetrieverAgent(ToolCallingAgent):
             
             # Store as artifact
             artifact_id = f"evidence_v2_{datetime.now().strftime('%Y%m%d%H%M%S')}"
-            artifact_hash = self.storage.store_artifact(artifact_id, json.dumps(evidence_data, indent=2))
+            artifact_hash = self.storage.put_artifact(
+                json.dumps(evidence_data, indent=2).encode('utf-8'),
+                {"artifact_type": "evidence_retrieval", "artifact_id": artifact_id}
+            )
             
             return artifact_hash
             

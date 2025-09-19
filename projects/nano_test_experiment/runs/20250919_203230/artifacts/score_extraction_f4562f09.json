@@ -1,0 +1,7 @@
+{
+  "analysis_id": "analysis_f4361da4",
+  "step": "score_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "scores_extraction": "```json\n[\n  {\n    \"document_id\": \"document_0\",\n    \"positive_sentiment_raw_score\": 0.95,\n    \"positive_sentiment_salience\": 1.0,\n    \"positive_sentiment_confidence\": 1.0,\n    \"negative_sentiment_raw_score\": 0.0,\n    \"negative_sentiment_salience\": 0.0,\n    \"negative_sentiment_confidence\": 1.0\n  },\n  {\n    \"document_id\": \"document_1\",\n    \"positive_sentiment_raw_score\": 0.0,\n    \"positive_sentiment_salience\": 0.0,\n    \"positive_sentiment_confidence\": 1.0,\n    \"negative_sentiment_raw_score\": 0.95,\n    \"negative_sentiment_salience\": 1.0,\n    \"negative_sentiment_confidence\": 1.0\n  }\n]\n```",
+  "timestamp": "2025-09-19T20:33:12.541884+00:00"
+}

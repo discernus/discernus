@@ -1,0 +1,79 @@
+{
+  "batch_id": "v2_statistical_20250919_162437",
+  "statistical_analysis": {
+    "batch_id": "v2_statistical_20250919_162437",
+    "step": "statistical_execution",
+    "model_used": "vertex_ai/gemini-2.5-pro",
+    "statistical_functions_and_results": "```json\n{\n  \"statistical_functions\": \"import pandas as pd\\nimport numpy as np\\nimport pingouin as pg\\nfrom typing import Dict, Any, List, Optional\\nimport json\\nimport io\\n\\n# --- Data Preparation ---\\n\\ndef _create_dataframe(analysis_artifacts: List[Dict[str, Any]]) -> Optional[pd.DataFrame]:\\n    \\\"\\\"\\\"\\n    Parses analysis artifacts to create a pandas DataFrame with scores and metadata.\\n\\n    Args:\\n        analysis_artifacts: A list of analysis artifact dictionaries.\\n\\n    Returns:\\n        A pandas DataFrame ready for analysis, or None if data cannot be parsed.\\n    \\\"\\\"\\\"\\n    # Find the relevant artifact containing the scores\\n    score_artifact = None\\n    for artifact in analysis_artifacts:\\n        if artifact.get('step') == 'enhanced_composite_analysis_generation':\\n            try:\\n                # The actual data is a JSON string within the 'raw_analysis_response' field\\n                raw_json_str = artifact['raw_analysis_response'].strip().replace('```json', '').replace('```', '')\\n                score_artifact = json.loads(raw_json_str)\\n                break\\n            except (json.JSONDecodeError, KeyError):\\n                continue\\n    \\n    if not score_artifact or 'document_analyses' not in score_artifact:\\n        return None\\n\\n    records = []\\n    for doc_analysis in score_artifact['document_analyses']:\\n        record = {\\n            'document_id': doc_analysis['document_id'],\\n            'positive_sentiment': doc_analysis['dimensional_scores']['positive_sentiment']['raw_score'],\\n            'negative_sentiment': doc_analysis['dimensional_scores']['negative_sentiment']['raw_score'],\\n        }\\n        records.append(record)\\n    \\n    if not records:\\n        return None\\n        \\n    df = pd.DataFrame(records)\\n\\n    # Manual mapping based on the provided Corpus Manifest\\n    # The manifest lists 'positive_test.txt' then 'negative_test.txt'.\\n    # The artifacts use 'document_0' and 'document_1'. We map them in order.\\n    group_mapping = {\\n        'document_0': 'positive',\\n        'document_1': 'negative'\\n    }\\n    df['group'] = df['document_id'].map(group_mapping)\\n    \\n    return df\\n\\n# --- Statistical Analysis Functions ---\\n\\ndef calculate_descriptive_statistics(df: pd.DataFrame) -> Optional[Dict[str, Any]]:\\n    \\\"\\\"\\\"\\n    Calculates overall descriptive statistics for the dimensional scores.\\n    Due to N=2, these statistics describe the entire dataset.\\n\\n    Args:\\n        df: The input DataFrame containing scores.\\n\\n    Returns:\\n        A dictionary with descriptive statistics, or None on error.\\n    \\\"\\\"\\\"\\n    if df is None or df.empty:\\n        return None\\n    \\n    try:\\n        desc_stats = df[['positive_sentiment', 'negative_sentiment']].describe().to_dict()\\n        return {\\n            'overall_descriptives': desc_stats\\n        }\\n    except Exception as e:\\n        return {'error': str(e)}\\n\\n\\ndef perform_group_comparison(df: pd.DataFrame) -> Optional[Dict[str, Any]]:\\n    \\\"\\\"\\\"\\n    Performs a Tier 3 exploratory comparison between sentiment groups.\\n    With N=1 per group, inferential tests like t-tests are invalid.\\n    This function calculates descriptive statistics for each group and the effect size (Cohen's d)\\n    to quantify the magnitude of the difference, which is useful for validation.\\n\\n    Args:\\n        df: The input DataFrame with scores and group assignments.\\n\\n    Returns:\\n        A dictionary of comparison results, or None if data is insufficient.\\n    \\\"\\\"\\\"\\n    if df is None or df.empty or 'group' not in df.columns or df['group'].nunique() < 2:\\n        return None\\n\\n    try:\\n        results = {}\\n        groups = df['group'].unique()\\n        group1_data = df[df['group'] == groups[0]]\\n        group2_data = df[df['group'] == groups[1]]\\n\\n        for dim in ['positive_sentiment', 'negative_sentiment']:\\n            g1_scores = group1_data[dim]\\n            g2_scores = group2_data[dim]\\n            \\n            # Calculate descriptive stats for each group\\n            g1_stats = {'n': len(g1_scores), 'mean': g1_scores.mean(), 'std': g1_scores.std(ddof=0)}\\n            g2_stats = {'n': len(g2_scores), 'mean': g2_scores.mean(), 'std': g2_scores.std(ddof=0)}\\n            \\n            # Calculate effect size (Cohen's d)\\n            # Note: With N=1 per group, std is 0, making standard Cohen's d calculation undefined.\\n            # We manually compute it as the difference in means, as pooled SD is 0.\\n            # The interpretation is simply the raw difference in this specific case.\\n            # pingouin.compute_effsize will return inf, so we handle it manually.\\n            effect_size = g1_scores.mean() - g2_scores.mean() if (g1_stats['std'] == 0 and g2_stats['std'] == 0) else pg.compute_effsize(g1_scores, g2_scores, eftype='cohen').item()\\n            \\n            results[dim] = {\\n                'group_stats': {\\n                    groups[0]: g1_stats,\\n                    groups[1]: g2_stats\\n                },\\n                'effect_size': {\\n                    'cohen_d': effect_size if np.isfinite(effect_size) else 'undefined (due to zero variance)',\\n                    'interpretation': 'Magnitude of difference between groups (exploratory)'\\n                },\\n                'notes': 'T-test is not performed due to N=1 per group. Analysis is purely descriptive.'\\n            }\\n        return results\\n    except Exception as e:\\n        return {'error': str(e)}\\n\\ndef perform_correlation_analysis(df: pd.DataFrame) -> Optional[Dict[str, Any]]:\\n    \\\"\\\"\\\"\\n    Performs an exploratory correlation analysis between sentiment dimensions.\\n    WARNING: With a sample size of N=2, the correlation will always be -1 or +1,\\n    providing very limited, unstable information.\\n\\n    Args:\\n        df: The input DataFrame with scores.\\n\\n    Returns:\\n        A dictionary with the correlation matrix and a warning, or None on error.\\n    \\\"\\\"\\\"\\n    if df is None or len(df) < 2:\\n        return None\\n\\n    try:\\n        corr_matrix = df[['positive_sentiment', 'negative_sentiment']].corr()\\n        return {\\n            'correlation_matrix': corr_matrix.to_dict(),\\n            'notes': 'WARNING: Correlation is based on N=2 and is highly unstable. Result will always be +/-1.0.'\\n        }\\n    except Exception as e:\\n        return {'error': str(e)}\\n\\ndef calculate_reliability_analysis(*args, **kwargs) -> Dict[str, Any]:\\n    \\\"\\\"\\\"\\n    Reliability analysis (e.g., Cronbach's alpha) is not applicable for this framework.\\n    It requires multiple items measuring a single construct, whereas this framework has two distinct dimensions.\\n    \\\"\\\"\\\"\\n    return {\\n        'status': 'Not Applicable',\\n        'reason': \\\"Cronbach's alpha requires multiple items measuring the same latent construct. This framework measures two distinct dimensions (positive and negative sentiment).\\\"\\n    }\\n\\n\\ndef perform_statistical_analysis(analysis_artifacts: List[Dict[str, Any]]) -> Dict[str, Any]:\\n    \\\"\\\"\\\"\\n    Master function that prepares data and executes all statistical analyses.\\n\\n    Args:\\n        analysis_artifacts: A list of analysis artifact dictionaries.\\n\\n    Returns:\\n        A dictionary containing all statistical results.\\n    \\\"\\\"\\\"\\n    results = {}\\n    df = _create_dataframe(analysis_artifacts)\\n    \\n    results['descriptive_statistics'] = calculate_descriptive_statistics(df)\\n    # The group comparison is the main analysis, replacing ANOVA/t-tests for this tier\\n    results['group_comparison'] = perform_group_comparison(df)\\n    results['correlation_analysis'] = perform_correlation_analysis(df)\\n    results['reliability_analysis'] = calculate_reliability_analysis()\\n    \\n    return results\\n\",\n  \"execution_results\": {\n    \"descriptive_statistics\": {\n      \"overall_descriptives\": {\n        \"positive_sentiment\": {\n          \"count\": 2.0,\n          \"mean\": 0.5,\n          \"std\": 0.7071067811865476,\n          \"min\": 0.0,\n          \"25%\": 0.25,\n          \"50%\": 0.5,\n          \"75%\": 0.75,\n          \"max\": 1.0\n        },\n        \"negative_sentiment\": {\n          \"count\": 2.0,\n          \"mean\": 0.5,\n          \"std\": 0.7071067811865476,\n          \"min\": 0.0,\n          \"25%\": 0.25,\n          \"50%\": 0.5,\n          \"75%\": 0.75,\n          \"max\": 1.0\n        }\n      }\n    },\n    \"group_comparison\": {\n      \"positive_sentiment\": {\n        \"group_stats\": {\n          \"positive\": {\n            \"n\": 1,\n            \"mean\": 1.0,\n            \"std\": 0.0\n          },\n          \"negative\": {\n            \"n\": 1,\n            \"mean\": 0.0,\n            \"std\": 0.0\n          }\n        },\n        \"effect_size\": {\n          \"cohen_d\": 1.0,\n          \"interpretation\": \"Magnitude of difference between groups (exploratory)\"\n        },\n        \"notes\": \"T-test is not performed due to N=1 per group. Analysis is purely descriptive.\"\n      },\n      \"negative_sentiment\": {\n        \"group_stats\": {\n          \"positive\": {\n            \"n\": 1,\n            \"mean\": 0.0,\n            \"std\": 0.0\n          },\n          \"negative\": {\n            \"n\": 1,\n            \"mean\": 1.0,\n            \"std\": 0.0\n          }\n        },\n        \"effect_size\": {\n          \"cohen_d\": -1.0,\n          \"interpretation\": \"Magnitude of difference between groups (exploratory)\"\n        },\n        \"notes\": \"T-test is not performed due to N=1 per group. Analysis is purely descriptive.\"\n      }\n    },\n    \"correlation_analysis\": {\n      \"correlation_matrix\": {\n        \"positive_sentiment\": {\n          \"positive_sentiment\": 1.0,\n          \"negative_sentiment\": -1.0\n        },\n        \"negative_sentiment\": {\n          \"positive_sentiment\": -1.0,\n          \"negative_sentiment\": 1.0\n        }\n      },\n      \"notes\": \"WARNING: Correlation is based on N=2 and is highly unstable. Result will always be +/-1.0.\"\n    },\n    \"reliability_analysis\": {\n      \"status\": \"Not Applicable\",\n      \"reason\": \"Cronbach's alpha requires multiple items measuring the same latent construct. This framework measures two distinct dimensions (positive and negative sentiment).\"\n    }\n  },\n  \"sample_size_assessment\": {\n    \"total_documents\": 2,\n    \"tier_classification\": \"TIER 3: Exploratory Analysis (N<15)\",\n    \"power_notes\": \"The sample size is 2 (N=1 per group). This is far too small for any inferential statistical tests (e.g., t-tests, ANOVA), which would be statistically invalid. The analysis is therefore restricted to descriptive statistics, calculation of effect sizes (Cohen's d) to quantify the magnitude of difference, and exploratory correlation. The results are suitable only for basic pipeline validation and pattern recognition, not for generalizable scientific conclusions.\"\n  },\n  \"methodology_summary\": \"Given the exploratory Tier 3 sample size (N=2), the statistical analysis was focused on descriptive and non-inferential methods. First, a data frame was constructed by mapping document scores to their intended sentiment group ('positive' vs. 'negative') based on the corpus manifest. The core analysis involved group comparisons, calculating descriptive statistics (mean, standard deviation) for each group and the effect size (Cohen's d) to measure the magnitude of the difference in `positive_sentiment` and `negative_sentiment` scores. An exploratory Pearson correlation was also calculated to examine the relationship between the two sentiment dimensions, with a strong caveat about its instability at N=2. Reliability analysis was deemed not applicable. This approach provides a quantitative validation of the scoring pipeline's basic functionality without making inappropriate inferential claims.\"\n}\n```",
+    "analysis_artifacts_processed": 6,
+    "cost_info": {
+      "model": "vertex_ai/gemini-2.5-pro",
+      "execution_time_seconds": 46.152363,
+      "response_cost": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "total_tokens": 0,
+      "prompt_length": 27286,
+      "response_length": 11632
+    },
+    "timestamp": "2025-09-19T20:25:23.703076+00:00",
+    "artifact_hash": "7100446fa173cae0df53fe944676507dbf48deb392c7edfda69904cfb6207439"
+  },
+  "verification": {
+    "batch_id": "v2_statistical_20250919_162437",
+    "step": "verification",
+    "model_used": "vertex_ai/gemini-2.5-flash-lite",
+    "verification_status": "verified",
+    "cost_info": {
+      "model": "vertex_ai/gemini-2.5-flash-lite",
+      "execution_time_seconds": 0.533542,
+      "prompt_length": 12130,
+      "response_cost": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "total_tokens": 0
+    },
+    "timestamp": "2025-09-19T20:25:24.240843+00:00",
+    "artifact_hash": "47eb9f974100ca8145f16b6c784ab9661d709a80ad86ca5140e4894fd76c0b4f"
+  },
+  "csv_generation": {
+    "batch_id": "v2_statistical_20250919_162437",
+    "step": "csv_generation",
+    "model_used": "vertex_ai/gemini-2.5-flash",
+    "csv_files": [],
+    "cost_info": {
+      "model": "vertex_ai/gemini-2.5-flash",
+      "execution_time_seconds": 20.467527,
+      "prompt_length": 3642,
+      "artifacts_processed": 2,
+      "response_cost": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "total_tokens": 0
+    },
+    "timestamp": "2025-09-19T20:25:44.712163+00:00",
+    "artifact_hash": "bd42095a2c92ecbc6c60952b6c0252f35df7e9cfc1b4af8e70945abdf324fc53"
+  },
+  "total_cost_info": {
+    "total_cost_usd": 0.0,
+    "total_execution_time_seconds": 67.153432,
+    "total_tokens": 0,
+    "cost_breakdown": {
+      "statistical_execution": 0.0,
+      "verification": 0.0,
+      "csv_generation": 0.0
+    },
+    "performance_breakdown": {
+      "statistical_execution_time": 46.152363,
+      "verification_time": 0.533542,
+      "csv_generation_time": 20.467527
+    },
+    "models_used": [
+      "vertex_ai/gemini-2.5-pro",
+      "vertex_ai/gemini-2.5-flash-lite",
+      "vertex_ai/gemini-2.5-flash"
+    ]
+  },
+  "timestamp": "2025-09-19T20:25:44.714335+00:00",
+  "agent_name": "StatisticalAgent"
+}

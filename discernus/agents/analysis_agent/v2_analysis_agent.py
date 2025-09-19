@@ -137,6 +137,7 @@ class V2AnalysisAgent(ToolCallingAgent):
                         "type": "composite_analysis",
                         "content": legacy_result["composite_analysis"],
                         "metadata": {
+                            "artifact_type": "composite_analysis",
                             "phase": "analysis",
                             "batch_id": batch_id,
                             "timestamp": datetime.now().isoformat(),
@@ -150,6 +151,7 @@ class V2AnalysisAgent(ToolCallingAgent):
                         "type": "evidence_extraction",
                         "content": legacy_result["evidence_extraction"],
                         "metadata": {
+                            "artifact_type": "evidence_extraction",
                             "phase": "analysis",
                             "batch_id": batch_id,
                             "timestamp": datetime.now().isoformat(),
@@ -163,6 +165,7 @@ class V2AnalysisAgent(ToolCallingAgent):
                         "type": "score_extraction",
                         "content": legacy_result["score_extraction"],
                         "metadata": {
+                            "artifact_type": "score_extraction",
                             "phase": "analysis",
                             "batch_id": batch_id,
                             "timestamp": datetime.now().isoformat(),
@@ -176,6 +179,7 @@ class V2AnalysisAgent(ToolCallingAgent):
                         "type": "derived_metrics",
                         "content": legacy_result["derived_metrics"],
                         "metadata": {
+                            "artifact_type": "derived_metrics",
                             "phase": "analysis",
                             "batch_id": batch_id,
                             "timestamp": datetime.now().isoformat(),
@@ -189,6 +193,7 @@ class V2AnalysisAgent(ToolCallingAgent):
                         "type": "verification",
                         "content": legacy_result["verification"],
                         "metadata": {
+                            "artifact_type": "verification",
                             "phase": "analysis",
                             "batch_id": batch_id,
                             "timestamp": datetime.now().isoformat(),
@@ -202,6 +207,7 @@ class V2AnalysisAgent(ToolCallingAgent):
                         "type": "markup_extraction",
                         "content": legacy_result["markup_extraction"],
                         "metadata": {
+                            "artifact_type": "marked_up_document",
                             "phase": "analysis",
                             "batch_id": batch_id,
                             "timestamp": datetime.now().isoformat(),

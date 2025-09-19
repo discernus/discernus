@@ -121,7 +121,7 @@ class StatisticalAgent:
             
             # Step 3: CSV Generation (Lite + tool calling)
             csv_result = self._step3_csv_generation(
-                batch_id
+                batch_id, analysis_artifact_hashes
             )
             
             # Calculate total costs and performance metrics
@@ -354,7 +354,7 @@ If there are errors or discrepancies, call with verified=false."""
         
         return verification_result
 
-    def _step3_csv_generation(self, batch_id: str) -> Dict[str, Any]:
+    def _step3_csv_generation(self, batch_id: str, analysis_artifact_hashes: Optional[List[str]] = None) -> Dict[str, Any]:
         """
         Step 3: Generate CSV files for researchers using Flash Lite.
         
@@ -385,7 +385,7 @@ If there are errors or discrepancies, call with verified=false."""
         ]
         
         # Discover analysis artifacts for CSV generation
-        analysis_artifacts = self._discover_analysis_artifacts(batch_id)
+        analysis_artifacts = self._discover_analysis_artifacts(batch_id, analysis_artifact_hashes)
         
         # Prepare artifact content for CSV generation
         artifacts_content = ""
@@ -527,6 +527,11 @@ Use the generate_csv_file tool for each CSV file. Ensure proper CSV formatting w
             return artifacts
         
         # Fallback: Load from current analysis session (legacy behavior)
+        # Guard: Only attempt fallback if storage registry is properly initialized
+        if not hasattr(self.storage, 'registry') or not self.storage.registry:
+            self.logger.error("Storage registry not initialized. Cannot discover artifacts.")
+            return {}
+            
         self.logger.warning("No specific artifacts provided, falling back to current session discovery")
         
         analysis_sessions = {}

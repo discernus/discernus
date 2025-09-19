@@ -124,22 +124,22 @@ class FullExperimentStrategy(ExecutionStrategy):
             run_context.metadata["framework_content"] = framework_content
             run_context.metadata["corpus_documents"] = corpus_documents
             run_context.metadata["corpus_manifest_content"] = corpus_manifest_content
-            # Phase 1: Coherence validation
-            if "Coherence" in agents:
-                audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "coherence"})
-                coherence_result = agents["Coherence"].execute(run_context=run_context)
-                if not coherence_result.success:
+            # Phase 1: Validation
+            if "Validation" in agents:
+                audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "validation"})
+                validation_result = agents["Validation"].execute(run_context=run_context)
+                if not validation_result.success:
                     return ExperimentResult(
                         success=False,
                         phases_completed=phases_completed,
                         artifacts=artifacts,
                         metadata=metadata,
-                        error_message=f"Coherence validation failed: {coherence_result.error_message}"
+                        error_message=f"Validation failed: {validation_result.error_message}"
                     )
-                phases_completed.append("coherence")
-                artifacts.extend(coherence_result.artifacts)
-                run_context.update_phase("coherence")
-                audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "coherence"})
+                phases_completed.append("validation")
+                artifacts.extend(validation_result.artifacts)
+                run_context.update_phase("validation")
+                audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "validation"})
             
             # Phase 2: Analysis
             if "Analysis" in agents:
@@ -339,22 +339,22 @@ class AnalysisOnlyStrategy(ExecutionStrategy):
             run_context.metadata["corpus_documents"] = corpus_documents
             run_context.metadata["corpus_manifest_content"] = corpus_manifest_content
 
-            # Phase 1: Coherence validation
-            if "Coherence" in agents:
-                audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "coherence"})
-                coherence_result = agents["Coherence"].execute(run_context=run_context)
-                if not coherence_result.success:
+            # Phase 1: Validation
+            if "Validation" in agents:
+                audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "validation"})
+                validation_result = agents["Validation"].execute(run_context=run_context)
+                if not validation_result.success:
                     return ExperimentResult(
                         success=False,
                         phases_completed=phases_completed,
                         artifacts=artifacts,
                         metadata=metadata,
-                        error_message=f"Coherence validation failed: {coherence_result.error_message}"
+                        error_message=f"Validation failed: {validation_result.error_message}"
                     )
-                phases_completed.append("coherence")
-                artifacts.extend(coherence_result.artifacts)
-                run_context.update_phase("coherence")
-                audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "coherence"})
+                phases_completed.append("validation")
+                artifacts.extend(validation_result.artifacts)
+                run_context.update_phase("validation")
+                audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "validation"})
             
             # Phase 2: Analysis
             if "Analysis" in agents:
@@ -486,22 +486,22 @@ class StatisticalPrepStrategy(ExecutionStrategy):
             run_context.metadata["framework_content"] = framework_content
             run_context.metadata["corpus_documents"] = corpus_documents
             run_context.metadata["corpus_manifest_content"] = corpus_manifest_content
-            # Phase 1: Coherence validation
-            if "Coherence" in agents:
-                audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "coherence"})
-                coherence_result = agents["Coherence"].execute(run_context=run_context)
-                if not coherence_result.success:
+            # Phase 1: Validation
+            if "Validation" in agents:
+                audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "validation"})
+                validation_result = agents["Validation"].execute(run_context=run_context)
+                if not validation_result.success:
                     return ExperimentResult(
                         success=False,
                         phases_completed=phases_completed,
                         artifacts=artifacts,
                         metadata=metadata,
-                        error_message=f"Coherence validation failed: {coherence_result.error_message}"
+                        error_message=f"Validation failed: {validation_result.error_message}"
                     )
-                phases_completed.append("coherence")
-                artifacts.extend(coherence_result.artifacts)
-                run_context.update_phase("coherence")
-                audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "coherence"})
+                phases_completed.append("validation")
+                artifacts.extend(validation_result.artifacts)
+                run_context.update_phase("validation")
+                audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "validation"})
             
             # Phase 2: Analysis
             if "Analysis" in agents:
