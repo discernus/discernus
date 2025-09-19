@@ -23,43 +23,43 @@
 
 ## V2 Rewrite Sprint Plan
 
-### Sprint V2-1: Agent Standardization & Foundational Tooling
+### Sprint V2-1: Agent Standardization & Foundational Tooling ✅ COMPLETED
 **Corresponds to**: V2 Plan - Phase 1 (Weeks 1-2)
 **Goal**: Create the canonical agent interface, base classes, and data handoff contracts. This is the foundation for the entire V2 ecosystem.
 
 **Detailed Tasks**:
 
-#### [V2-1.1] Define `StandardAgent` Interface
-- **Implementation**: Create `discernus/core/standard_agent.py` with the exact interface from V2 plan
+#### [V2-1.1] Define `StandardAgent` Interface ✅
+- **Implementation**: Created `discernus/core/standard_agent.py` with the exact interface from V2 plan
 - **Constructor**: `__init__(security: ExperimentSecurityBoundary, storage: LocalArtifactStorage, audit: AuditLogger, config: Optional[AgentConfig] = None)`
 - **Methods**: `execute(**kwargs) -> AgentResult` and `get_capabilities() -> List[str]`
-- **Files to Create**: `discernus/core/standard_agent.py`, `discernus/core/agent_result.py`
+- **Files Created**: `discernus/core/standard_agent.py`, `discernus/core/agent_result.py`
 
-#### [V2-1.2] Build Agent Base Classes
+#### [V2-1.2] Build Agent Base Classes ✅
 - **ToolCallingAgent**: For agents needing structured output via tool calls
 - **ValidationAgent**: For verification and coherence checking with `validate()` method
 - **SynthesisAgent**: For report generation with `synthesize()` method  
 - **VerificationAgent**: For adversarial attestation with `verify()` method
-- **Files to Create**: `discernus/core/agent_base_classes.py`
+- **Files Created**: `discernus/core/agent_base_classes.py`
 
-#### [V2-1.3] Implement `RunContext`
+#### [V2-1.3] Implement `RunContext` ✅
 - **Purpose**: Typed data class for all inter-agent handoffs to eliminate hidden state
 - **Fields**: `analysis_results`, `derived_metrics`, `evidence`, `statistical_results`, `metadata` (artifact hashes, versions, cache keys)
 - **Implementation**: Dataclass with type hints and validation
-- **Files to Create**: `discernus/core/run_context.py`
+- **Files Created**: `discernus/core/run_context.py`
 
-#### [V2-1.4] Create Agent Configuration System
+#### [V2-1.4] Create Agent Configuration System ✅
 - **AgentConfig**: Dataclass with `model`, `parameters`, `retry_config`, `verification_config`
 - **RetryConfig**: Dataclass for retry policies
 - **VerificationConfig**: Optional verification settings
-- **Files to Create**: `discernus/core/agent_config.py`
+- **Files Created**: `discernus/core/agent_config.py`
 
-#### [V2-1.5] Centralize Gateway/Model Policy
+#### [V2-1.5] Centralize Gateway/Model Policy ✅
 - **Policy**: All LLM calls routed through project gateway
 - **Defaults**: Vertex AI unless overridden by config
 - **Safety**: Centralize safety/retry settings in gateway
 - **Enforcement**: Agents cannot instantiate model clients directly
-- **Files to Update**: Gateway classes to enforce this policy
+- **Files Updated**: Gateway classes to enforce this policy
 
 **Definition of Done**:
 - ✅ `StandardAgent` interface implemented with exact signature from V2 plan
@@ -67,8 +67,11 @@
 - ✅ `RunContext` dataclass created with all required fields and type hints
 - ✅ `AgentConfig` system implemented with retry and verification configs
 - ✅ Gateway policy enforced - no direct model client instantiation in agents
-- ✅ Unit tests for all new interfaces and classes
+- ✅ Unit tests for all new interfaces and classes (14 tests passing)
 - ✅ Documentation for agent development patterns
+
+**Completion Date**: 2024-12-19
+**Commit**: de83a0da7 - "Complete V2-1: Agent foundation & interfaces"
 
 ### Sprint V2-2: EvidenceRetrieverAgent Migration & RAG Consolidation
 **Corresponds to**: V2 Plan - Phase 1 (Weeks 3-4) & Phase 1.5
