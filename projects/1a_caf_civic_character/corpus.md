@@ -26,6 +26,17 @@ total_documents: 8
 date_range: "1963-2025"
 description: "Diverse political speeches for testing CAF dimensional analysis"
 
+groupings:
+  speaker_type:
+    institutional:
+      - "institutional"
+      - "institutional_progressive"
+    populist:
+      - "populist_conservative"
+      - "populist_progressive"
+    civil_rights:
+      - "civil_rights"
+
 documents:
   - document_id: "john_lewis_1963_march"
     filename: "john_lewis_1963_march_on_washington_ab348df3.txt"

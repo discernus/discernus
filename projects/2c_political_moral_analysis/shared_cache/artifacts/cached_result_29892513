@@ -1,0 +1,43 @@
+{
+  "success": false,
+  "issues": [
+    {
+      "category": "capabilities_mismatch",
+      "description": "The experiment plans to conduct inferential statistical analyses, including 'correlation analysis' and 'reliability analysis', on a corpus of only 8 documents (N=8). According to the Experiment Specification v10.0, this sample size is insufficient for such tests and is only appropriate for 'Case study analysis, qualitative patterns, individual document insights'.",
+      "impact": "The experiment will be blocked as it attempts an underpowered statistical analysis. Any results from the proposed inferential tests would be statistically invalid, unreliable, and violate the platform's minimum requirements for statistical power.",
+      "fix": "Either (a) expand the corpus to a size appropriate for the desired analyses (e.g., N > 20 for meaningful correlation analysis), or (b) revise the 'Research Questions' and 'Expected Outcomes' in experiment.md to focus on qualitative analysis, descriptive statistics, and case studies, removing claims about achieving 'statistical confidence' through inferential methods.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "trinity_coherence",
+      "description": "The prose section of the corpus manifest states its purpose is for 'validating Moral Foundations Theory v6.0 framework', which is inconsistent with the experiment's use of the 'Moral Foundations Theory v10.0' framework.",
+      "impact": "This documentation mismatch creates confusion about the corpus's intended purpose and could lead to errors in future use or replication of the study.",
+      "fix": "In 'corpus.md', update the purpose statement in the prose section to correctly state it is for use with the 'Moral Foundations Theory v10.0 framework'.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The framework's machine-readable metadata contains 'framework_version: \"1.0.0\"', which is inconsistent with the human-readable title 'Moral Foundations Theory Framework v10.0' and the experiment's reference to 'v10.0'.",
+      "impact": "This versioning inconsistency can cause confusion for researchers attempting to track framework versions and replicate the experiment.",
+      "fix": "In the machine-readable appendix of 'mft_v10.md', change the `framework_version` from '1.0.0' to '10.0.0' to align with the framework's title and the experiment's context.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "mft_v10.md"
+      ]
+    }
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-09-16T23:09:05.045137+00:00",
+  "cache_metadata": {
+    "cache_key": "validation_7c86f01e3704",
+    "cached_at": "2025-01-15T14:30:00Z",
+    "agent_name": "ValidationPhase"
+  }
+}

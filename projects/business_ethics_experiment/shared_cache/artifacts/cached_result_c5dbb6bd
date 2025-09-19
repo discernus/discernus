@@ -1,0 +1,43 @@
+{
+  "success": false,
+  "issues": [
+    {
+      "category": "trinity_coherence",
+      "description": "The experiment proposes hypothesis testing (H1, H2, H3) involving correlations and comparisons between document groups. However, the machine-readable corpus manifest (`corpus.md`) specifies a total of 4 documents (N=4).",
+      "impact": "According to the Experiment Specification v10.0, a sample size of N<10 is only sufficient for case study analysis and qualitative insights, not inferential statistics or hypothesis testing. The experiment is critically underpowered, and any statistical results would be invalid. Execution is blocked to prevent invalid analysis.",
+      "fix": "Either 1) significantly expand the machine-readable corpus in `corpus.md` to a size appropriate for statistical testing (N>20 is recommended, N>10 is the absolute minimum for descriptive statistics), or 2) rewrite the experiment's hypotheses and research questions to focus on qualitative, descriptive, case-study level analysis, removing the falsifiable predictions that imply statistical testing.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The prose section of the corpus manifest (`corpus.md`) describes 18 distinct documents, but the machine-readable YAML appendix lists `total_documents: 4` and includes manifest entries for only 4 documents.",
+      "impact": "This is a critical discrepancy between the human-readable description and the machine-readable configuration. The Discernus system will only process the 4 documents defined in the YAML, leading to an analysis that does not match the researcher's stated corpus design and exacerbates the statistical power issue.",
+      "fix": "Reconcile the prose and YAML sections of `corpus.md`. If all 18 documents are intended for analysis, add their corresponding entries to the YAML `documents` list and update `total_documents` to 18.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The YAML appendix in `corpus.md` specifies `spec_version: \"10.0\"`. The current specification for corpus manifests is v8.0.2.",
+      "impact": "While the provided YAML structure is currently compatible, this version mismatch could cause parsing or validation errors with future system updates. It creates ambiguity about which specification standard the file adheres to.",
+      "fix": "In `corpus.md`, change `spec_version: \"10.0\"` to `spec_version: \"8.0.2\"` to align with the current corpus specification standard.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md"
+      ]
+    }
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-09-16T23:51:53.581451+00:00",
+  "cache_metadata": {
+    "cache_key": "validation_637d08112913",
+    "cached_at": "2025-01-15T14:30:00Z",
+    "agent_name": "ValidationPhase"
+  }
+}

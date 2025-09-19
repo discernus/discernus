@@ -1,0 +1,7 @@
+{
+  "analysis_id": "analysis_ee792a91",
+  "step": "score_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "scores_extraction": "Here are the dimensional scores extracted from the analysis result:\n\n**Document: Trump_SOTU_2020**\n\n*   **Manichaean People vs. Elite Framing:**\n    *   Raw Score: 0.8\n    *   Salience: 0.7\n    *   Confidence: 0.9\n*   **Crisis-Restoration Narrative:**\n    *   Raw Score: 0.9\n    *   Salience: 0.9\n    *   Confidence: 0.9\n*   **Popular Sovereignty Claims:**\n    *   Raw Score: 0.6\n    *   Salience: 0.5\n    *   Confidence: 0.8\n*   **Anti-Pluralist Exclusion:**\n    *   Raw Score: 0.7\n    *   Salience: 0.6\n    *   Confidence: 0.8\n*   **Elite Conspiracy / Systemic Corruption:**\n    *   Raw Score: 0.8\n    *   Salience: 0.7\n    *   Confidence: 0.8\n*   **Authenticity vs. Political Class:**\n    *   Raw Score: 0.8\n    *   Salience: 0.7\n    *   Confidence: 0.9\n*   **Homogeneous People Construction:**\n    *   Raw Score: 0.9\n    *   Salience: 0.9\n    *   Confidence: 0.9\n*   **Nationalist Exclusion:**\n    *   Raw Score: 0.9\n    *   Salience: 0.9\n    *   Confidence: 0.9\n*   **Economic Populist Appeals:**\n    *   Raw Score: 0.95\n    *   Salience: 0.95\n    *   Confidence: 0.9",
+  "timestamp": "2025-09-16T21:15:35.746126+00:00"
+}

@@ -1,19 +1,19 @@
-# Populist Discourse Factorial Analysis: Presidential Speech Patterns Across Time and Context
+# Populist Discourse Case Study Analysis: Presidential Speech Patterns Across Time and Context
 
 ## Abstract
 
-This experiment analyzes populist discourse patterns in presidential speeches using the Populist Discourse Analysis Framework (PDAF) v10.0. The analysis employs a temporal design examining speech patterns across different contexts spanning 2017-2025. The corpus includes 6 presidential speeches representing different speech types and time periods, enabling comprehensive analysis of populist discourse evolution and contextual variation.
+This experiment analyzes populist discourse patterns in presidential speeches using the Populist Discourse Analysis Framework (PDAF) v10.0. The analysis employs a case study approach examining speech patterns across different contexts spanning 2017-2025. The corpus includes 6 presidential speeches representing different speech types and time periods, enabling comprehensive case study analysis of populist discourse evolution and contextual variation.
 
 ## Research Questions
 
 1. What patterns exist in populist discourse dimensions across presidential speeches?
 2. What relationships exist between temporal factors and populist discourse measures?
 3. How do populist discourse patterns vary across different speech contexts?
-4. What statistical relationships exist between populist anchor dimensions and strategic tension measures?
+4. What patterns exist between populist anchor dimensions and strategic tension measures?
 
 ## Expected Outcomes
 
-This experiment will produce empirical findings on temporal discourse effects, strategic coherence patterns, anchor relationship patterns, and speech context effects. The analysis will include temporal pattern analysis, multi-evaluation reliability, populist dimension clustering, strategic tension analysis, speech context analysis, and reliability analysis.
+This experiment will produce empirical findings on temporal discourse effects, strategic coherence patterns, anchor relationship patterns, and speech context effects. The analysis will include case study analysis of temporal patterns, multi-evaluation reliability, populist dimension clustering, strategic tension analysis, speech context analysis, and reliability analysis.
 
 ## Methodology
 
@@ -42,7 +42,7 @@ This experiment will produce empirical findings on temporal discourse effects, s
 **Temporal Balance**: 6 speeches across 3 time periods, enabling temporal pattern analysis and speech context comparison.
 
 ### Enhanced Statistical Analysis
-- **Temporal pattern analysis**: Statistical tests for dimension patterns across time periods
+- **Temporal pattern analysis**: Case study analysis of dimension patterns across time periods
 - **Multi-evaluation reliability**: 3 independent assessments per document (N=18 total evaluations)
 - **Populist dimension clustering**: Anchor profile similarities within/across speeches
 - **Strategic tension analysis**: Relationships between PSCI and populist intensity measures
@@ -75,6 +75,8 @@ metadata:
   experiment_name: "populist_discourse_factorial_analysis"
   author: "Discernus Research Team"
   spec_version: "10.0"
+  analysis_type: "case_study"
+  sample_size: 6
 
 components:
   framework: "pdaf_v10.md"

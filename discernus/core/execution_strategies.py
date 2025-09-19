@@ -95,8 +95,8 @@ class FullExperimentStrategy(ExecutionStrategy):
         try:
             # Phase 1: Coherence validation
             if "coherence" in agents:
-                audit.log_agent_event("phase_start", {"phase": "coherence"})
-                coherence_result = agents["coherence"].execute(run_context)
+                audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "coherence"})
+                coherence_result = agents["coherence"].execute(run_context=run_context)
                 if not coherence_result.success:
                     return ExperimentResult(
                         success=False,
@@ -108,12 +108,12 @@ class FullExperimentStrategy(ExecutionStrategy):
                 phases_completed.append("coherence")
                 artifacts.extend(coherence_result.artifacts)
                 run_context.update_phase("coherence")
-                audit.log_agent_event("phase_complete", {"phase": "coherence"})
+                audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "coherence"})
             
             # Phase 2: Analysis
             if "analysis" in agents:
-                audit.log_agent_event("phase_start", {"phase": "analysis"})
-                analysis_result = agents["analysis"].execute(run_context)
+                audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "analysis"})
+                analysis_result = agents["analysis"].execute(run_context=run_context)
                 if not analysis_result.success:
                     return ExperimentResult(
                         success=False,
@@ -125,12 +125,12 @@ class FullExperimentStrategy(ExecutionStrategy):
                 phases_completed.append("analysis")
                 artifacts.extend(analysis_result.artifacts)
                 run_context.update_phase("analysis")
-                audit.log_agent_event("phase_complete", {"phase": "analysis"})
+                audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "analysis"})
             
             # Phase 3: Statistical analysis
             if "statistical" in agents:
-                audit.log_agent_event("phase_start", {"phase": "statistical"})
-                statistical_result = agents["statistical"].execute(run_context)
+                audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "statistical"})
+                statistical_result = agents["statistical"].execute(run_context=run_context)
                 if not statistical_result.success:
                     return ExperimentResult(
                         success=False,
@@ -142,12 +142,12 @@ class FullExperimentStrategy(ExecutionStrategy):
                 phases_completed.append("statistical")
                 artifacts.extend(statistical_result.artifacts)
                 run_context.update_phase("statistical")
-                audit.log_agent_event("phase_complete", {"phase": "statistical"})
+                audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "statistical"})
             
             # Phase 4: Evidence retrieval
             if "evidence" in agents:
-                audit.log_agent_event("phase_start", {"phase": "evidence"})
-                evidence_result = agents["evidence"].execute(run_context)
+                audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "evidence"})
+                evidence_result = agents["evidence"].execute(run_context=run_context)
                 if not evidence_result.success:
                     return ExperimentResult(
                         success=False,
@@ -159,12 +159,12 @@ class FullExperimentStrategy(ExecutionStrategy):
                 phases_completed.append("evidence")
                 artifacts.extend(evidence_result.artifacts)
                 run_context.update_phase("evidence")
-                audit.log_agent_event("phase_complete", {"phase": "evidence"})
+                audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "evidence"})
             
             # Phase 5: Synthesis
             if "synthesis" in agents:
-                audit.log_agent_event("phase_start", {"phase": "synthesis"})
-                synthesis_result = agents["synthesis"].execute(run_context)
+                audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "synthesis"})
+                synthesis_result = agents["synthesis"].execute(run_context=run_context)
                 if not synthesis_result.success:
                     return ExperimentResult(
                         success=False,
@@ -176,12 +176,12 @@ class FullExperimentStrategy(ExecutionStrategy):
                 phases_completed.append("synthesis")
                 artifacts.extend(synthesis_result.artifacts)
                 run_context.update_phase("synthesis")
-                audit.log_agent_event("phase_complete", {"phase": "synthesis"})
+                audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "synthesis"})
             
             # Phase 6: Verification (if enabled)
             if run_context.metadata.get("verification_enabled", True) and "verification" in agents:
-                audit.log_agent_event("phase_start", {"phase": "verification"})
-                verification_result = agents["verification"].execute(run_context)
+                audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "verification"})
+                verification_result = agents["verification"].execute(run_context=run_context)
                 if not verification_result.success:
                     return ExperimentResult(
                         success=False,
@@ -193,7 +193,7 @@ class FullExperimentStrategy(ExecutionStrategy):
                 phases_completed.append("verification")
                 artifacts.extend(verification_result.artifacts)
                 run_context.update_phase("verification")
-                audit.log_agent_event("phase_complete", {"phase": "verification"})
+                audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "verification"})
             
             # Calculate execution time
             end_time = datetime.now(timezone.utc)
@@ -241,8 +241,8 @@ class AnalysisOnlyStrategy(ExecutionStrategy):
         try:
             # Phase 1: Coherence validation
             if "coherence" in agents:
-                audit.log_agent_event("phase_start", {"phase": "coherence"})
-                coherence_result = agents["coherence"].execute(run_context)
+                audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "coherence"})
+                coherence_result = agents["coherence"].execute(run_context=run_context)
                 if not coherence_result.success:
                     return ExperimentResult(
                         success=False,
@@ -254,12 +254,12 @@ class AnalysisOnlyStrategy(ExecutionStrategy):
                 phases_completed.append("coherence")
                 artifacts.extend(coherence_result.artifacts)
                 run_context.update_phase("coherence")
-                audit.log_agent_event("phase_complete", {"phase": "coherence"})
+                audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "coherence"})
             
             # Phase 2: Analysis
             if "analysis" in agents:
-                audit.log_agent_event("phase_start", {"phase": "analysis"})
-                analysis_result = agents["analysis"].execute(run_context)
+                audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "analysis"})
+                analysis_result = agents["analysis"].execute(run_context=run_context)
                 if not analysis_result.success:
                     return ExperimentResult(
                         success=False,
@@ -271,7 +271,7 @@ class AnalysisOnlyStrategy(ExecutionStrategy):
                 phases_completed.append("analysis")
                 artifacts.extend(analysis_result.artifacts)
                 run_context.update_phase("analysis")
-                audit.log_agent_event("phase_complete", {"phase": "analysis"})
+                audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "analysis"})
             
             # Calculate execution time
             end_time = datetime.now(timezone.utc)
@@ -320,8 +320,8 @@ class StatisticalPrepStrategy(ExecutionStrategy):
         try:
             # Phase 1: Coherence validation
             if "coherence" in agents:
-                audit.log_agent_event("phase_start", {"phase": "coherence"})
-                coherence_result = agents["coherence"].execute(run_context)
+                audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "coherence"})
+                coherence_result = agents["coherence"].execute(run_context=run_context)
                 if not coherence_result.success:
                     return ExperimentResult(
                         success=False,
@@ -333,12 +333,12 @@ class StatisticalPrepStrategy(ExecutionStrategy):
                 phases_completed.append("coherence")
                 artifacts.extend(coherence_result.artifacts)
                 run_context.update_phase("coherence")
-                audit.log_agent_event("phase_complete", {"phase": "coherence"})
+                audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "coherence"})
             
             # Phase 2: Analysis
             if "analysis" in agents:
-                audit.log_agent_event("phase_start", {"phase": "analysis"})
-                analysis_result = agents["analysis"].execute(run_context)
+                audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "analysis"})
+                analysis_result = agents["analysis"].execute(run_context=run_context)
                 if not analysis_result.success:
                     return ExperimentResult(
                         success=False,
@@ -350,12 +350,12 @@ class StatisticalPrepStrategy(ExecutionStrategy):
                 phases_completed.append("analysis")
                 artifacts.extend(analysis_result.artifacts)
                 run_context.update_phase("analysis")
-                audit.log_agent_event("phase_complete", {"phase": "analysis"})
+                audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "analysis"})
             
             # Phase 3: Statistical analysis
             if "statistical" in agents:
-                audit.log_agent_event("phase_start", {"phase": "statistical"})
-                statistical_result = agents["statistical"].execute(run_context)
+                audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "statistical"})
+                statistical_result = agents["statistical"].execute(run_context=run_context)
                 if not statistical_result.success:
                     return ExperimentResult(
                         success=False,
@@ -367,7 +367,7 @@ class StatisticalPrepStrategy(ExecutionStrategy):
                 phases_completed.append("statistical")
                 artifacts.extend(statistical_result.artifacts)
                 run_context.update_phase("statistical")
-                audit.log_agent_event("phase_complete", {"phase": "statistical"})
+                audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "statistical"})
             
             # Calculate execution time
             end_time = datetime.now(timezone.utc)
@@ -427,8 +427,8 @@ class ResumeFromStatsStrategy(ExecutionStrategy):
             
             # Phase 1: Evidence retrieval
             if "evidence" in agents:
-                audit.log_agent_event("phase_start", {"phase": "evidence"})
-                evidence_result = agents["evidence"].execute(run_context)
+                audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "evidence"})
+                evidence_result = agents["evidence"].execute(run_context=run_context)
                 if not evidence_result.success:
                     return ExperimentResult(
                         success=False,
@@ -440,12 +440,12 @@ class ResumeFromStatsStrategy(ExecutionStrategy):
                 phases_completed.append("evidence")
                 artifacts.extend(evidence_result.artifacts)
                 run_context.update_phase("evidence")
-                audit.log_agent_event("phase_complete", {"phase": "evidence"})
+                audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "evidence"})
             
             # Phase 2: Synthesis
             if "synthesis" in agents:
-                audit.log_agent_event("phase_start", {"phase": "synthesis"})
-                synthesis_result = agents["synthesis"].execute(run_context)
+                audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "synthesis"})
+                synthesis_result = agents["synthesis"].execute(run_context=run_context)
                 if not synthesis_result.success:
                     return ExperimentResult(
                         success=False,
@@ -457,12 +457,12 @@ class ResumeFromStatsStrategy(ExecutionStrategy):
                 phases_completed.append("synthesis")
                 artifacts.extend(synthesis_result.artifacts)
                 run_context.update_phase("synthesis")
-                audit.log_agent_event("phase_complete", {"phase": "synthesis"})
+                audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "synthesis"})
             
             # Phase 3: Verification (if enabled)
             if run_context.metadata.get("verification_enabled", True) and "verification" in agents:
-                audit.log_agent_event("phase_start", {"phase": "verification"})
-                verification_result = agents["verification"].execute(run_context)
+                audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "verification"})
+                verification_result = agents["verification"].execute(run_context=run_context)
                 if not verification_result.success:
                     return ExperimentResult(
                         success=False,
@@ -474,7 +474,7 @@ class ResumeFromStatsStrategy(ExecutionStrategy):
                 phases_completed.append("verification")
                 artifacts.extend(verification_result.artifacts)
                 run_context.update_phase("verification")
-                audit.log_agent_event("phase_complete", {"phase": "verification"})
+                audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "verification"})
             
             # Calculate execution time
             end_time = datetime.now(timezone.utc)

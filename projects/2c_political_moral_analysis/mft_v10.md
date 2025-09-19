@@ -305,7 +305,7 @@ The framework's analytical methodology and computational specifications are prov
 
 metadata:
   framework_name: "moral_foundations_theory_framework"
-  framework_version: "1.0.0"
+  framework_version: "10.0.0"
   author: "Discernus Project"
   spec_version: "10.0"
 

@@ -55,7 +55,7 @@ class StandardAgent(ABC):
         elif isinstance(self.config, dict):
             config_keys = list(self.config.keys())
             
-        self.audit.log_agent_event("initialization", {
+        self.audit.log_agent_event(self.__class__.__name__, "initialization", {
             "agent_type": self.__class__.__name__,
             "config_keys": config_keys
         })
@@ -124,14 +124,14 @@ class StandardAgent(ABC):
     
     def log_execution_start(self, **kwargs) -> None:
         """Log the start of agent execution"""
-        self.audit.log_agent_event("execution_start", {
+        self.audit.log_agent_event(self.__class__.__name__, "execution_start", {
             "agent_type": self.__class__.__name__,
             "input_keys": list(kwargs.keys())
         })
     
     def log_execution_complete(self, result: AgentResult) -> None:
         """Log the completion of agent execution"""
-        self.audit.log_agent_event("execution_complete", {
+        self.audit.log_agent_event(self.__class__.__name__, "execution_complete", {
             "agent_type": self.__class__.__name__,
             "success": result.success,
             "artifacts_count": len(result.artifacts),
@@ -140,7 +140,7 @@ class StandardAgent(ABC):
     
     def log_execution_error(self, error: Exception) -> None:
         """Log agent execution errors"""
-        self.audit.log_agent_event("execution_error", {
+        self.audit.log_agent_event(self.__class__.__name__, "execution_error", {
             "agent_type": self.__class__.__name__,
             "error_type": type(error).__name__,
             "error_message": str(error)

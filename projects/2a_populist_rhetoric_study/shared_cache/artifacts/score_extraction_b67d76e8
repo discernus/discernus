@@ -1,0 +1,7 @@
+{
+  "analysis_id": "analysis_6f154849",
+  "step": "score_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "scores_extraction": "Here are the dimensional scores extracted from the analysis result:\n\n*   **manichaean_people_elite_framing**: 0.9 (salience: 0.9, confidence: 1.0)\n*   **crisis_restoration_narrative**: 1.0 (salience: 1.0, confidence: 1.0)\n*   **popular_sovereignty_claims**: 0.9 (salience: 0.8, confidence: 1.0)\n*   **anti_pluralist_exclusion**: 0.1 (salience: 0.1, confidence: 0.9)\n*   **elite_conspiracy_systemic_corruption**: 0.8 (salience: 0.7, confidence: 0.9)\n*   **authenticity_vs_political_class**: 0.6 (salience: 0.5, confidence: 0.8)\n*   **homogeneous_people_construction**: 1.0 (salience: 0.9, confidence: 1.0)\n*   **nationalist_exclusion**: 1.0 (salience: 0.9, confidence: 1.0)\n*   **economic_populist_appeals**: 0.9 (salience: 0.9, confidence: 1.0)",
+  "timestamp": "2025-09-16T21:08:21.489220+00:00"
+}

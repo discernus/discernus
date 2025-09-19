@@ -1,0 +1,33 @@
+{
+  "success": false,
+  "issues": [
+    {
+      "category": "trinity_coherence",
+      "description": "The corpus manifest (`corpus.md`) is internally inconsistent. The human-readable narrative describes 12 documents selected for analysis, but the machine-readable YAML appendix defines a corpus with `total_documents: 4` and lists only 4 documents. The machine-readable manifest is the source of truth for execution.",
+      "impact": "The experiment will execute on only 4 documents, not the 12 intended by the researcher. This invalidates the corpus design rationale and undermines the entire experiment's scope.",
+      "fix": "Update the YAML `documents` list in `corpus.md` to include all 12 documents described in the narrative. Change `total_documents` from 4 to 12. Ensure a `document_id` and relevant `metadata` are provided for each of the 12 documents.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "capabilities_mismatch",
+      "description": "The experiment specifies primary, secondary, and tertiary hypotheses that require statistical validation (correlation, pattern comparison). However, the machine-readable corpus only contains 4 documents. According to the 'Statistical Power and Methodology Requirements' in the Experiment Specification v10.0, a sample size of N<10 is insufficient for hypothesis testing and is restricted to 'Case study analysis' only.",
+      "impact": "The core research questions and hypotheses cannot be statistically tested with the provided corpus, leading to an invalid experiment. The platform's statistical power enforcement rules prevent running underpowered analyses.",
+      "fix": "Expand the corpus to meet the minimum sample size for the intended statistical analysis. For correlation and group comparisons, a minimum of N=10-19 is required for descriptive statistics, and N=20+ for limited inferential testing. This requires fixing the primary issue with the corpus manifest to include all 12 (or more) documents.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    }
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-09-17T00:11:26.140745+00:00",
+  "cache_metadata": {
+    "cache_key": "validation_f6a27fe88e4d",
+    "cached_at": "2025-01-15T14:30:00Z",
+    "agent_name": "ValidationPhase"
+  }
+}

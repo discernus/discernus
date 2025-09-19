@@ -1,0 +1,7 @@
+{
+  "analysis_id": "analysis_b970f238",
+  "step": "score_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "scores_extraction": "Here are the dimensional scores from the analysis result:\n\n**Document: Conservative Family Values Speech**\n\n*   **authority_vs_empathy:**\n    *   raw\\_score: 0.95\n    *   salience: 0.9\n    *   confidence: 0.95\n*   **competition_vs_cooperation:**\n    *   raw\\_score: 0.95\n    *   salience: 0.9\n    *   confidence: 0.95\n*   **self_reliance_vs_interdependence:**\n    *   raw\\_score: 0.95\n    *   salience: 0.9\n    *   confidence: 0.95",
+  "timestamp": "2025-09-17T00:13:17.844495+00:00"
+}

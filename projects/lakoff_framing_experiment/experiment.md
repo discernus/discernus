@@ -1,33 +1,33 @@
-# Lakoff Framing Framework Experiment: Family Moral Systems in Political Discourse
+# Lakoff Framing Framework Case Study: Family Moral Systems in Political Discourse
 
 **Experiment Name**: lakoff_framing_experiment  
 **Framework**: framework.md  
 **Corpus**: corpus.md  
-**Date**: August 29, 2025  
+**Date**: September 16, 2025  
 **Researcher**: Discernus Research Team  
 
 ---
 
 ## Research Question
 
-How do family-based moral systems manifest in contemporary political communication, and to what extent do they demonstrate the coherence predicted by Lakoff's Moral Politics theory?
+How do family-based moral systems manifest in contemporary political communication, and what patterns emerge in their moral reasoning approaches?
 
-## Hypotheses
+## Research Focus
 
-### Primary Hypothesis (H1): Family Model Coherence
+### Primary Focus: Family Model Patterns
 Political communications will cluster around coherent family models, with Strict Father components (Authority, Competition, Self-Reliance) appearing together and competing with Nurturant Parent components (Empathy, Cooperation, Interdependence).
 
-**Falsifiable Prediction**: Communications will show positive correlations within family model dimensions and negative correlations between opposing models.
+**Case Study Approach**: Analyze individual documents to identify family model patterns and coherence characteristics.
 
-### Secondary Hypothesis (H2): Strategic Deployment
+### Secondary Focus: Strategic Deployment
 Political speakers will strategically emphasize specific family model dimensions based on their ideological positioning and communication goals.
 
-**Falsifiable Prediction**: Different political ideologies will show distinct family model emphasis patterns.
+**Case Study Approach**: Compare family model emphasis patterns across different political ideologies.
 
-### Tertiary Hypothesis (H3): Salience-Intensity Alignment
+### Tertiary Focus: Salience-Intensity Patterns
 The salience (rhetorical emphasis) of family model dimensions will align with their intensity (moral reasoning strength), indicating strategic moral framework deployment.
 
-**Falsifiable Prediction**: High-intensity dimensions will also show high salience scores.
+**Case Study Approach**: Examine individual documents to identify alignment between moral emphasis and reasoning strength.
 
 ## Experimental Design
 
@@ -39,14 +39,14 @@ The Lakoff Framing Framework v10.0 will analyze discourse across three bipolar d
 
 ### Analysis Methodology
 - **Dual-Track Scoring**: Family model intensity (0.0-1.0) and salience assessment (0.0-1.0)
-- **Coherence Testing**: Empirical validation of Lakoff's family model clustering hypothesis
+- **Pattern Analysis**: Case study examination of Lakoff's family model clustering patterns
 - **Strategic Pattern Recognition**: Classification of moral political approaches
 
 ### Expected Outcomes
 - Quantification of family model deployment across political communications
-- Testing of family model coherence hypothesis
+- Case study analysis of family model patterns
 - Identification of strategic moral framework patterns
-- Validation of cognitive linguistics approach to political analysis
+- Exploration of cognitive linguistics approach to political analysis
 
 ## Corpus Rationale
 
@@ -64,7 +64,7 @@ This corpus design will provide sufficient variation to test the framework's abi
 
 2. **Family Model Discrimination**: The framework should successfully distinguish between Strict Father and Nurturant Parent orientations across all three dimensions.
 
-3. **Coherence Validation**: Statistical analysis should reveal the predicted clustering of family model components as hypothesized by Lakoff's theory.
+3. **Pattern Recognition**: Case study analysis should reveal distinct patterns of family model components as suggested by Lakoff's theory.
 
 4. **Strategic Pattern Recognition**: The framework should identify distinct communication profiles based on family model emphasis patterns.
 
@@ -86,6 +86,8 @@ metadata:
   experiment_name: "lakoff_framing_experiment"
   author: "Discernus Research Team"
   spec_version: "10.0"
+  analysis_type: "case_study"
+  sample_size: 4
 
 # 4.2: Components
 components:

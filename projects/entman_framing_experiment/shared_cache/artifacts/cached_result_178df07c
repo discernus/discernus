@@ -1,0 +1,44 @@
+{
+  "success": false,
+  "issues": [
+    {
+      "category": "specification",
+      "description": "The corpus manifest ('corpus.md') contains a critical discrepancy between the human-readable prose and the machine-readable YAML appendix. The prose section describes a collection of 15 documents, while the YAML manifest explicitly lists `total_documents: 4` and only provides manifest entries for four files.",
+      "impact": "The Discernus platform will only process the 4 documents listed in the machine-readable YAML appendix, ignoring the other 11 mentioned in the prose. This results in an experiment running on a much smaller and potentially unrepresentative dataset than the researcher intended, invalidating the results.",
+      "fix": "Update the YAML appendix in `corpus.md` to include manifest entries for all 15 documents described in the prose section. Ensure the `total_documents` field is corrected to 15.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "trinity_coherence",
+      "description": "The experiment's hypotheses require inferential statistical testing (correlation analysis for H1, group comparisons for H2) that is impossible with the provided corpus size. The corpus manifest defines only 4 documents (N=4), which is far below the minimum sample size for even limited hypothesis testing (N=20-29) as per the v10.0 Experiment Specification.",
+      "impact": "The experiment cannot be executed as designed. At N=4, only qualitative case study analysis is permissible. Falsifiable predictions for H1 (correlation) and H2 (group differences) cannot be tested, making the primary research questions unanswerable with this corpus. The experiment will fail coherence validation.",
+      "fix": "Expand the corpus to meet the minimum sample size requirements for the intended statistical analysis. For limited inferential testing, a minimum of N=20 is required. To adequately test the specified hypotheses with sufficient statistical power, a sample size of N\u226530 is recommended.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "trinity_coherence",
+      "description": "The experiment's secondary hypothesis (H2) requires comparing different types of communications (campaign, policy, crisis). The corpus manifest (with N=4) provides a unique `context` value for each document, resulting in analytical groups of size n=1. The v10.0 Experiment Specification forbids inferential testing on groups with fewer than two members.",
+      "impact": "The statistical comparison required to test H2 cannot be performed. The experiment is not executable as designed because no valid groups exist for comparison (e.g., ANOVA).",
+      "fix": "Augment the corpus to ensure each analytical group (defined by the `context` metadata field) contains at least 2 documents, and preferably more for adequate statistical power. This will allow for valid group comparisons to test H2.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    }
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-09-17T00:03:18.488524+00:00",
+  "cache_metadata": {
+    "cache_key": "validation_72ca19f0ba66",
+    "cached_at": "2025-01-15T14:30:00Z",
+    "agent_name": "ValidationPhase"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "success": false,
+  "issues": [
+    {
+      "category": "trinity_coherence",
+      "description": "The experiment is designed for comparative hypothesis testing, but the corpus size is statistically insufficient. The hypotheses (H1-H6) aim to determine if one speaker's scores are 'higher' than the other's, implying inferential statistical tests (e.g., t-test). However, the corpus provides only one document per speaker (n=1 for each group, N=2 total).",
+      "impact": "This design violates the platform's statistical executability rules as defined in Experiment Specification v10.0 and Corpus Specification v8.0.2. The rules state that for N<4, only 'comparative case analysis' is permitted, and for inferential tests like ANOVA or t-tests, each group must have n\u22652. The experiment will be blocked because it attempts an underpowered analysis that cannot yield statistically significant results.",
+      "fix": "To proceed, the researcher must either: 1) Expand the corpus to include at least two documents per speaker to enable valid statistical comparison. or 2) Reframe the Research Questions and Hypotheses in the 'experiment.md' to reflect a qualitative, descriptive case study comparison, removing language that implies statistical hypothesis testing (e.g., change 'will score higher' to 'is expected to show more evidence of').",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    }
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-09-17T02:16:18.622631+00:00",
+  "cache_metadata": {
+    "cache_key": "validation_847fe7989bad",
+    "cached_at": "2025-01-15T14:30:00Z",
+    "agent_name": "ValidationPhase"
+  }
+}

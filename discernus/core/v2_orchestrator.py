@@ -76,10 +76,11 @@ class V2Orchestrator:
         self.agents: Dict[str, StandardAgent] = {}
         
         # Initialize logging
-        self.logger = audit.get_logger("V2Orchestrator")
+        from .logging_config import get_logger
+        self.logger = get_logger("V2Orchestrator")
         
         # Log orchestrator initialization
-        self.audit.log_agent_event("orchestrator_initialization", {
+        self.audit.log_agent_event("V2Orchestrator", "orchestrator_initialization", {
             "experiment_id": config.experiment_id,
             "framework_path": config.framework_path,
             "corpus_path": config.corpus_path,
@@ -99,7 +100,7 @@ class V2Orchestrator:
         self.logger.info(f"Registered agent: {name}")
         
         # Log agent registration
-        self.audit.log_agent_event("agent_registration", {
+        self.audit.log_agent_event("V2Orchestrator", "agent_registration", {
             "agent_name": name,
             "agent_type": agent.__class__.__name__,
             "capabilities": agent.get_capabilities()
@@ -134,7 +135,7 @@ class V2Orchestrator:
         })
         
         # Log strategy execution start
-        self.audit.log_agent_event("strategy_execution_start", {
+        self.audit.log_agent_event("V2Orchestrator", "strategy_execution_start", {
             "strategy": strategy.__class__.__name__,
             "experiment_id": self.config.experiment_id,
             "agents_available": list(self.agents.keys())
@@ -145,7 +146,7 @@ class V2Orchestrator:
             result = strategy.execute(self.agents, run_context, self.storage, self.audit)
             
             # Log successful completion
-            self.audit.log_agent_event("strategy_execution_complete", {
+            self.audit.log_agent_event("V2Orchestrator", "strategy_execution_complete", {
                 "strategy": strategy.__class__.__name__,
                 "experiment_id": self.config.experiment_id,
                 "success": result.success,
@@ -157,7 +158,7 @@ class V2Orchestrator:
             
         except Exception as e:
             # Log execution failure
-            self.audit.log_agent_event("strategy_execution_failed", {
+            self.audit.log_agent_event("V2Orchestrator", "strategy_execution_failed", {
                 "strategy": strategy.__class__.__name__,
                 "experiment_id": self.config.experiment_id,
                 "error": str(e),

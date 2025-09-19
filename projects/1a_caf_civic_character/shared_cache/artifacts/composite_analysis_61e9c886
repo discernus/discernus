@@ -1,0 +1,10 @@
+{
+  "analysis_id": "analysis_ec2ac47f",
+  "step": "enhanced_composite_analysis_generation",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "",
+  "document_hashes": [
+    "738780d93cc3c43b"
+  ],
+  "timestamp": "2025-09-16T20:46:16.615398+00:00"
+}

@@ -1,7 +1,0 @@
-{
-  "analysis_id": "analysis_12ed6a5a",
-  "step": "verification",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "verification_status": "unknown",
-  "timestamp": "2025-09-16T19:40:05.500540+00:00"
-}

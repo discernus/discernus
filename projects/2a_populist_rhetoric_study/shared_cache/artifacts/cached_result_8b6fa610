@@ -1,0 +1,34 @@
+{
+  "success": false,
+  "issues": [
+    {
+      "category": "trinity_coherence",
+      "description": "The experiment design requests comparative statistical analyses across temporal periods ('Early', 'Mid', 'Recent') and speech types ('Inaugural', 'Joint Session', 'State of the Union'), but several analytical groups have a sample size of n=1. Specifically, the 'Recent' period group, the 'inaugural_address' speech type group, and the 'joint_session_address' speech type group each contain only one document. This is insufficient for the requested statistical comparisons.",
+      "impact": "The experiment is underpowered for the requested inferential statistical analysis. Execution will be blocked because comparative tests like ANOVA or t-tests cannot be performed on groups with fewer than two members, as stated in the Discernus Experiment Specification v10.0.",
+      "fix": "Either re-scope the experiment to use descriptive statistics and qualitative comparisons for the n=1 groups, designating them as baselines, or expand the corpus to include at least two documents for every group intended for comparative statistical analysis.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "trinity_coherence",
+      "description": "The human-readable 'Populist Discourse Dimensions' section within 'corpus.md' lists a set of dimensions (e.g., 'Anti-Establishment Rhetoric', 'Mobilization Appeals', 'Simplification') that are inconsistent with the dimensions defined in the 'pdaf_v10.md' framework (e.g., 'crisis_restoration_narrative', 'popular_sovereignty_claims', 'authenticity_vs_political_class').",
+      "impact": "This discrepancy does not prevent execution, as the machine-readable framework file is the authoritative source for analysis. However, it creates significant documentation confusion, potentially misleading any researcher who consults the corpus manifest to understand the analytical model.",
+      "fix": "Update the 'Populist Discourse Dimensions' descriptive section in 'corpus.md' to accurately reflect the nine dimensions specified in the 'pdaf_v10.md' framework file.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "pdaf_v10.md"
+      ]
+    }
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-09-16T21:02:47.682848+00:00",
+  "cache_metadata": {
+    "cache_key": "validation_f169c1a5f10e",
+    "cached_at": "2025-01-15T14:30:00Z",
+    "agent_name": "ValidationPhase"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "batch_id": "stats_20250917T034804Z",
+  "step": "csv_generation",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "csv_files": [
+    {
+      "filename": "scores.csv",
+      "path": "/Volumes/code/discernus/projects/2c_political_moral_analysis/runs/20250917T034804Z/data/scores.csv",
+      "size": 331
+    },
+    {
+      "filename": "derived_metrics.csv",
+      "path": "/Volumes/code/discernus/projects/2c_political_moral_analysis/runs/20250917T034804Z/data/derived_metrics.csv",
+      "size": 1454
+    },
+    {
+      "filename": "analysis_metadata.csv",
+      "path": "/Volumes/code/discernus/projects/2c_political_moral_analysis/runs/20250917T034804Z/data/analysis_metadata.csv",
+      "size": 412
+    }
+  ],
+  "cost_info": {
+    "model": "vertex_ai/gemini-2.5-flash",
+    "execution_time_seconds": 28.391204,
+    "prompt_length": 17331,
+    "artifacts_processed": 2,
+    "response_cost": 0.0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "total_tokens": 0
+  },
+  "timestamp": "2025-09-17T03:50:13.698860+00:00"
+}

@@ -1,2 +1,0 @@
-analysis_id,step,model_used,timestamp,overall_sentiment_score,sentiment_dominance,sentiment_balance
-analysis_1d91dd78,derived_metrics_generation,vertex_ai/gemini-2.5-flash-lite,2025-09-16T19:39:52.955718+00:00,0.54,positive,0.9

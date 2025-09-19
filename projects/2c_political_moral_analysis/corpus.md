@@ -3,7 +3,7 @@
 **Version**: 3.0  
 **Created**: July 25, 2025  
 **Updated**: July 31, 2025  
-**Purpose**: Diverse American political speech corpus for validating Moral Foundations Theory v6.0 framework
+**Purpose**: Diverse American political speech corpus for validating Moral Foundations Theory v10.0 framework
 
 ## Collection Methodology
 

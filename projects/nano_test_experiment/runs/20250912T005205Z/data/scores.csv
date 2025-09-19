@@ -1,3 +1,0 @@
-document_id,filename,negative_sentiment,positive_sentiment,evidence_hash
-doc_5256609103196968464,positive_test.txt,0.0,1.0,da2ab040d93ac584da971380ac1cfb6ba72f611e01e48ba0ac0517a4d689cfc0
-doc_-4098537593719377391,negative_test.txt,1.0,0.0,f3028863fa64bd457e0c559b9d215a7b367dfbe0037a9c01485a32c2431e4574

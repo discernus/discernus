@@ -1,0 +1,7 @@
+{
+  "analysis_id": "analysis_ce3684f5",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "evidence_extraction": "```json\n{\n  \"problem_definition\": [\n    \"today I want to talk about a crisis that affects every family in this country - our broken healthcare system.\",\n    \"The problem is clear: millions of Americans cannot afford basic healthcare.\"\n  ],\n  \"causal_attribution\": [\n    \"our broken healthcare system.\"\n  ],\n  \"moral_evaluation\": [\n    \"Every family deserves access to quality, affordable healthcare.\",\n    \"No one should have to choose between their health and their financial security.\"\n  ],\n  \"treatment_recommendation\": [\n    \"Our solution is comprehensive healthcare reform that: - Provides universal coverage for all Americans - Controls prescription drug costs - Expands mental health services - Protects patients with pre-existing conditions - Reduces administrative costs and waste\",\n    \"The time for action is now. Let's build a healthcare system that works for everyone, not just those who can afford it.\"\n  ]\n}\n```",
+  "timestamp": "2025-09-17T00:06:14.512981+00:00"
+}

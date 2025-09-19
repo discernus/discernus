@@ -1,0 +1,7 @@
+{
+  "analysis_id": "analysis_b970f238",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "evidence_extraction": "```json\n{\n  \"authority_vs_empathy\": [\n    \"Parents must have the authority to raise their children according to their values, not according to some government bureaucrat's idea of what's best.\",\n    \"We need strong families with strong parents who have the authority to make decisions for their children.\"\n  ],\n  \"competition_vs_cooperation\": [\n    \"We believe in competition, not handouts. Every American family should have the opportunity to succeed through hard work and determination.\",\n    \"Competition in the marketplace, competition in education, competition in every aspect of American life - this is what drives excellence.\"\n  ],\n  \"self_reliance_vs_interdependence\": [\n    \"Individual responsibility is the cornerstone of our society. When families take responsibility for their own well-being, when parents teach their children to be self-reliant, when we encourage personal initiative rather than government dependency - that's when America thrives.\",\n    \"The liberal approach of government intervention in family matters, of telling parents how to raise their children, of creating dependency on government programs - this undermines the very fabric of our society.\"\n  ]\n}\n```",
+  "timestamp": "2025-09-17T00:13:16.929337+00:00"
+}

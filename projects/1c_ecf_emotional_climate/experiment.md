@@ -25,10 +25,11 @@ This experiment will produce empirical findings on temporal emotional climate ef
 - Psychological environment quantification for audience response prediction
 
 ### 2×3 Factorial Corpus Design
-8 political speeches creating a balanced Ideology × Era experimental matrix:
+9 political speeches creating a balanced Ideology × Era experimental matrix:
 
-**Civil Rights Era (1963)**:
+**Civil Rights Era (1963-1964)**:
 - **Progressive**: John Lewis - March on Washington speech
+- **Conservative**: Barry Goldwater - 1964 RNC Convention speech
 
 **Institutional Era (2008-2020)**:
 - **Conservative**: John McCain - 2008 concession speech
@@ -41,11 +42,11 @@ This experiment will produce empirical findings on temporal emotional climate ef
 - **Conservative**: JD Vance - 2022 NatCon conference speech
 - **Conservative**: Steve King - 2017 House floor speech
 
-**Factorial Balance**: 4 Progressive vs 4 Conservative speakers across 3 eras, enabling sophisticated emotional climate interaction analysis.
+**Factorial Balance**: 4 Progressive vs 5 Conservative speakers across 3 eras, enabling sophisticated emotional climate interaction analysis.
 
 ### Enhanced Statistical Analysis
 - **Two-way ANOVA**: Ideology × Era main effects and interaction analysis for emotional climate
-- **Multi-evaluation reliability**: 3 independent assessments per document (N=24 total evaluations)
+- **Multi-evaluation reliability**: 3 independent assessments per document (N=27 total evaluations)
 - **Emotional climate clustering**: Emotional atmosphere profile similarities within/across ideologies
 - **Emotional axis trajectory analysis**: How fear/hope, enmity/amity, envy/compersion evolve over time
 - **Climate polarization analysis**: Emotional distance patterns by ideology and era

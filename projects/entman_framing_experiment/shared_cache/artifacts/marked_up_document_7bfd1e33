@@ -1,0 +1,25 @@
+# Document Analysis - Marked Up Text
+
+Policy Advocacy Speech
+Congresswoman Davis
+Healthcare Reform Advocacy
+March 15, 2025
+
+My fellow Americans, today I want to talk about [PROBLEM_DEFINITION: a crisis that affects every family in this country] - [CAUSAL_ATTRIBUTION: our broken healthcare system.]
+
+[PROBLEM_DEFINITION: The problem is clear: millions of Americans cannot afford basic healthcare.] [PROBLEM_DEFINITION: Families are choosing between paying rent and paying medical bills.] [PROBLEM_DEFINITION: Parents are skipping doctor visits because they can't afford the co-pays.] [PROBLEM_DEFINITION: Seniors are rationing their medications to make them last longer.]
+
+[MORAL_EVALUATION: This is not the America we want to be.] [MORAL_EVALUATION: Every family deserves access to quality, affordable healthcare.] [MORAL_EVALUATION: No one should have to choose between their health and their financial security.]
+
+[TREATMENT_RECOMMENDATION: Our solution is comprehensive healthcare reform that:]
+[TREATMENT_RECOMMENDATION: - Provides universal coverage for all Americans]
+[TREATMENT_RECOMMENDATION: - Controls prescription drug costs]
+[TREATMENT_RECOMMENDATION: - Expands mental health services]
+[TREATMENT_RECOMMENDATION: - Protects patients with pre-existing conditions]
+[TREATMENT_RECOMMENDATION: - Reduces administrative costs and waste]
+
+[MORAL_EVALUATION: This is not about politics - it's about people.] [MORAL_EVALUATION: It's about ensuring that every American family can access the healthcare they need without going bankrupt.]
+
+[TREATMENT_RECOMMENDATION: The time for action is now.] [TREATMENT_RECOMMENDATION: Let's build a healthcare system that works for everyone, not just those who can afford it.]
+
+Thank you, and [TREATMENT_RECOMMENDATION: let's work together to fix this crisis.]

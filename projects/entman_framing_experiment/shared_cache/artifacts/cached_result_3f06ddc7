@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "issues": [],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-09-17T00:04:26.168463+00:00",
+  "cache_metadata": {
+    "cache_key": "validation_09ead5fe2f78",
+    "cached_at": "2025-01-15T14:30:00Z",
+    "agent_name": "ValidationPhase"
+  }
+}

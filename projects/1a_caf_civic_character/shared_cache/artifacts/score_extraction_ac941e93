@@ -1,0 +1,7 @@
+{
+  "analysis_id": "analysis_11f3b1a6",
+  "step": "score_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "scores_extraction": "Here are the dimensional scores extracted from the analysis result:\n\n**Tribalism:**\n*   Raw Score: 0.8\n*   Salience: 0.8\n*   Confidence: 0.9\n\n**Dignity:**\n*   Raw Score: 0.9\n*   Salience: 0.9\n*   Confidence: 0.95\n\n**Manipulation:**\n*   Raw Score: 0.8\n*   Salience: 0.8\n*   Confidence: 0.9\n\n**Truth:**\n*   Raw Score: 0.7\n*   Salience: 0.7\n*   Confidence: 0.9\n\n**Resentment:**\n*   Raw Score: 0.9\n*   Salience: 0.9\n*   Confidence: 0.95\n\n**Justice:**\n*   Raw Score: 0.8\n*   Salience: 0.8\n*   Confidence: 0.9\n\n**Fear:**\n*   Raw Score: 0.9\n*   Salience: 0.9\n*   Confidence: 0.95\n\n**Hope:**\n*   Raw Score: 0.9\n*   Salience: 0.9\n*   Confidence: 0.95\n\n**Fantasy:**\n*   Raw Score: 0.2\n*   Salience: 0.2\n*   Confidence: 0.9\n\n**Pragmatism:**\n*   Raw Score: 0.8\n*   Salience: 0.8\n*   Confidence: 0.9",
+  "timestamp": "2025-09-16T20:51:34.279599+00:00"
+}

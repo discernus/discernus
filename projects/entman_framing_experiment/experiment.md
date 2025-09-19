@@ -1,33 +1,33 @@
-# Entman Framing Functions Experiment: Strategic Communication Analysis
+# Entman Framing Functions Case Study: Strategic Communication Analysis
 
 **Experiment Name**: entman_framing_experiment  
 **Framework**: framework.md  
 **Corpus**: corpus.md  
-**Date**: August 29, 2025  
+**Date**: September 16, 2025  
 **Researcher**: Discernus Research Team  
 
 ---
 
 ## Research Question
 
-How do strategic communicators deploy the four independent framing functions (Problem Definition, Causal Attribution, Moral Evaluation, Treatment Recommendation) and to what extent do these functions operate independently as predicted by Entman's theory?
+How do strategic communicators deploy the four independent framing functions (Problem Definition, Causal Attribution, Moral Evaluation, Treatment Recommendation) and what patterns emerge in their framing approaches?
 
-## Hypotheses
+## Research Focus
 
-### Primary Hypothesis (H1): Framing Function Independence
-The four framing functions will operate as independent analytical dimensions, with communications showing varying emphasis across functions without necessary correlation.
+### Primary Focus: Framing Function Patterns
+The four framing functions will operate as independent analytical dimensions, with communications showing varying emphasis across functions.
 
-**Falsifiable Prediction**: Statistical analysis will reveal low correlations between framing functions, supporting Entman's independence hypothesis.
+**Case Study Approach**: Analyze individual documents to identify framing function patterns and independence characteristics.
 
-### Secondary Hypothesis (H2): Strategic Function Deployment
+### Secondary Focus: Strategic Function Deployment
 Different types of strategic communications will emphasize different framing functions based on their communication goals and audience targeting.
 
-**Falsifiable Prediction**: Campaign communications will emphasize different functions than policy advocacy, which will differ from crisis communications.
+**Case Study Approach**: Compare framing function emphasis patterns across different communication types (campaign, policy, crisis).
 
-### Tertiary Hypothesis (H3): Message Completeness Variation
+### Tertiary Focus: Message Completeness Patterns
 Communications will show varying levels of completeness across the four framing functions, revealing strategic choices about which functions to emphasize or omit.
 
-**Falsifiable Prediction**: High-completeness messages will show balanced scores across all functions, while strategic messages will show selective function emphasis.
+**Case Study Approach**: Examine individual documents to identify completeness patterns and strategic function selection.
 
 ## Experimental Design
 
@@ -40,14 +40,14 @@ The Entman Framing Functions Framework v10.0 will analyze discourse across four 
 
 ### Analysis Methodology
 - **Dual-Track Scoring**: Function intensity (0.0-1.0) and salience assessment (0.0-1.0)
-- **Independence Testing**: Empirical validation of Entman's framing function independence hypothesis
+- **Pattern Analysis**: Case study examination of Entman's framing function patterns
 - **Strategic Pattern Recognition**: Classification of communication approaches based on function emphasis
 
 ### Expected Outcomes
 - Quantification of framing function deployment across strategic communications
-- Testing of framing function independence hypothesis
+- Case study analysis of framing function patterns
 - Identification of strategic communication patterns
-- Validation of systematic framing analysis methodology
+- Exploration of systematic framing analysis methodology
 
 ## Corpus Rationale
 
@@ -63,7 +63,7 @@ This corpus design will provide sufficient variation to test the framework's abi
 
 1. **Framework-Corpus Fit**: The framework should demonstrate strong fit with the selected corpus, indicating appropriate analytical domain alignment.
 
-2. **Function Independence**: Statistical analysis should reveal low correlations between framing functions, supporting Entman's independence hypothesis.
+2. **Function Pattern Recognition**: Case study analysis should reveal distinct patterns of framing function deployment, supporting Entman's independence hypothesis.
 
 3. **Strategic Pattern Recognition**: The framework should identify distinct communication profiles based on framing function emphasis patterns.
 
@@ -87,6 +87,8 @@ metadata:
   experiment_name: "entman_framing_experiment"
   author: "Discernus Research Team"
   spec_version: "10.0"
+  analysis_type: "case_study"
+  sample_size: 4
 
 # 4.2: Components
 components:

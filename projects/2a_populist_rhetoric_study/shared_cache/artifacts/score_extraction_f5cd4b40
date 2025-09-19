@@ -1,0 +1,7 @@
+{
+  "analysis_id": "analysis_d17b1956",
+  "step": "score_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "scores_extraction": "```json\n{\n  \"manichaean_people_elite_framing\": {\n    \"raw_score\": 0.7,\n    \"salience\": 0.6,\n    \"confidence\": 0.9\n  },\n  \"crisis_restoration_narrative\": {\n    \"raw_score\": 0.9,\n    \"salience\": 0.9,\n    \"confidence\": 0.95\n  },\n  \"popular_sovereignty_claims\": {\n    \"raw_score\": 0.8,\n    \"salience\": 0.7,\n    \"confidence\": 0.9\n  },\n  \"anti_pluralist_exclusion\": {\n    \"raw_score\": 0.6,\n    \"salience\": 0.5,\n    \"confidence\": 0.85\n  },\n  \"elite_conspiracy_systemic_corruption\": {\n    \"raw_score\": 0.6,\n    \"salience\": 0.5,\n    \"confidence\": 0.85\n  },\n  \"authenticity_vs_political_class\": {\n    \"raw_score\": 0.6,\n    \"salience\": 0.5,\n    \"confidence\": 0.85\n  },\n  \"homogeneous_people_construction\": {\n    \"raw_score\": 0.9,\n    \"salience\": 0.8,\n    \"confidence\": 0.95\n  },\n  \"nationalist_exclusion\": {\n    \"raw_score\": 0.8,\n    \"salience\": 0.7,\n    \"confidence\": 0.9\n  },\n  \"economic_populist_appeals\": {\n    \"raw_score\": 0.9,\n    \"salience\": 0.8,\n    \"confidence\": 0.95\n  }\n}\n```",
+  "timestamp": "2025-09-16T21:13:37.070499+00:00"
+}

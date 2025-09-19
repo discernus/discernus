@@ -1,0 +1,7 @@
+{
+  "analysis_id": "analysis_38efe84d",
+  "step": "score_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "scores_extraction": "```json\n{\n  \"problem_definition\": {\n    \"raw_score\": 0.9,\n    \"salience\": 0.9,\n    \"confidence\": 0.95\n  },\n  \"causal_attribution\": {\n    \"raw_score\": 1.0,\n    \"salience\": 1.0,\n    \"confidence\": 0.95\n  },\n  \"moral_evaluation\": {\n    \"raw_score\": 0.9,\n    \"salience\": 0.9,\n    \"confidence\": 0.95\n  },\n  \"treatment_recommendation\": {\n    \"raw_score\": 1.0,\n    \"salience\": 1.0,\n    \"confidence\": 0.95\n  }\n}\n```",
+  "timestamp": "2025-09-17T00:05:27.258533+00:00"
+}

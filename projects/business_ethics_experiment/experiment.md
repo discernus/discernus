@@ -1,33 +1,33 @@
-# Business Ethics Framework Experiment: Corporate Ethical Reasoning Analysis
+# Business Ethics Framework Case Study: Corporate Ethical Reasoning Analysis
 
 **Experiment Name**: business_ethics_experiment  
 **Framework**: framework.md  
 **Corpus**: corpus.md  
-**Date**: August 29, 2025  
+**Date**: September 16, 2025  
 **Researcher**: Discernus Research Team  
 
 ---
 
 ## Research Question
 
-How do corporations deploy ethical appeals across stakeholder relations, operational integrity, and strategic vision domains, and to what extent do these ethical dimensions demonstrate strategic coherence or contradiction?
+How do corporations deploy ethical appeals across stakeholder relations, operational integrity, and strategic vision domains, and what patterns emerge in their ethical reasoning approaches?
 
-## Hypotheses
+## Research Focus
 
-### Primary Hypothesis (H1): Ethical Domain Coherence
-Corporate communications will show coherent ethical positioning across the three domains (Stakeholder Relations, Operational Integrity, Strategic Vision), with consistent stakeholder capitalism or shareholder primacy orientations.
+### Primary Focus: Ethical Domain Patterns
+Corporate communications will show distinct ethical positioning patterns across the three domains (Stakeholder Relations, Operational Integrity, Strategic Vision), revealing stakeholder capitalism or shareholder primacy orientations.
 
-**Falsifiable Prediction**: Communications will show positive correlations within ethical domains and consistent positioning across domains.
+**Case Study Approach**: Analyze individual documents to identify ethical reasoning patterns and domain emphasis.
 
-### Secondary Hypothesis (H2): Strategic Ethical Positioning
+### Secondary Focus: Strategic Ethical Positioning
 Different types of corporate communications will emphasize different ethical dimensions based on their strategic goals and stakeholder targeting.
 
-**Falsifiable Prediction**: Annual reports will emphasize different ethical dimensions than crisis communications, which will differ from product launches.
+**Case Study Approach**: Compare ethical emphasis patterns across different communication types (annual reports, crisis communications, product launches).
 
-### Tertiary Hypothesis (H3): Salience-Intensity Alignment
+### Tertiary Focus: Salience-Intensity Patterns
 The salience (strategic emphasis) of ethical dimensions will align with their intensity (ethical reasoning strength), indicating strategic ethical framework deployment.
 
-**Falsifiable Prediction**: High-intensity ethical dimensions will also show high salience scores, revealing corporate responsibility priorities.
+**Case Study Approach**: Examine individual documents to identify alignment between ethical emphasis and reasoning strength.
 
 ## Experimental Design
 
@@ -39,14 +39,14 @@ The Business Ethics Framework v10.0 will analyze corporate communications across
 
 ### Analysis Methodology
 - **Dual-Track Scoring**: Ethical dimension intensity (0.0-1.0) and salience assessment (0.0-1.0)
-- **Domain Coherence Testing**: Empirical validation of ethical positioning consistency across domains
+- **Domain Pattern Analysis**: Case study examination of ethical positioning patterns across domains
 - **Strategic Pattern Recognition**: Classification of corporate responsibility approaches based on ethical emphasis
 
 ### Expected Outcomes
 - Quantification of ethical dimension deployment across corporate communications
-- Testing of ethical domain coherence hypothesis
+- Case study analysis of ethical domain patterns
 - Identification of strategic ethical positioning patterns
-- Validation of stakeholder theory and virtue ethics approaches
+- Exploration of stakeholder theory and virtue ethics approaches through qualitative analysis
 
 ## Corpus Rationale
 
@@ -64,7 +64,7 @@ This corpus design will provide sufficient variation to test the framework's abi
 
 2. **Ethical Domain Discrimination**: The framework should successfully distinguish between stakeholder capitalism and shareholder primacy orientations across all three domains.
 
-3. **Coherence Validation**: Statistical analysis should reveal the predicted clustering of ethical dimensions within domains as hypothesized by stakeholder theory.
+3. **Pattern Recognition**: Case study analysis should reveal distinct patterns of ethical dimensions within domains as suggested by stakeholder theory.
 
 4. **Strategic Pattern Recognition**: The framework should identify distinct corporate responsibility profiles based on ethical emphasis patterns.
 
@@ -86,6 +86,8 @@ metadata:
   experiment_name: "business_ethics_experiment"
   author: "Discernus Research Team"
   spec_version: "10.0"
+  analysis_type: "case_study"
+  sample_size: 4
 
 # 4.2: Components
 components:

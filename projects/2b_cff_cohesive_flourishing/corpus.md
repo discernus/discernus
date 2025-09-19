@@ -2,7 +2,7 @@
 
 ## Overview
 
-This corpus contains 5 presidential speeches spanning 2017-2025, providing temporal coverage across different presidential contexts for computational framing analysis using the Cohesive Flourishing Framework v10.0.
+This corpus contains 6 presidential speeches spanning 2017-2025, providing temporal coverage across different presidential contexts for computational framing analysis using the Cohesive Flourishing Framework v10.0.
 
 ## Collection Methodology
 
@@ -14,9 +14,9 @@ The speeches were selected to represent different presidential communication con
 
 ## Corpus Characteristics
 
-- **Total Documents**: 5 speeches
+- **Total Documents**: 6 speeches
 - **Time Period**: 2017-2025 (8-year span)
-- **Speech Types**: 1 inaugural address, 4 State of the Union addresses
+- **Speech Types**: 1 inaugural address, 5 State of the Union addresses
 - **Format**: Plain text (.txt files)
 - **Language**: English
 - **Context**: Presidential speeches in formal settings

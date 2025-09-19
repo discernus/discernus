@@ -1,3 +1,0 @@
-document_id,filename,negative_sentiment,positive_sentiment,net_sentiment,sentiment_intensity,evidence_hash
-6950ccbc6b14...,positive_test.txt,0.0,1.0,,,144868356e2a8692
-{{artifact_id}},negative_test.txt,1.0,0.0,,,1df0fd00dfe8af15

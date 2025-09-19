@@ -1,0 +1,23 @@
+{
+  "success": false,
+  "issues": [
+    {
+      "category": "capabilities_mismatch",
+      "description": "The experiment implies a quantitative comparison between rhetorical styles (e.g., 'institutional' vs. 'populist'), but the total corpus size (N=8) is insufficient for valid inferential statistical analysis according to platform standards. The Experiment Specification v10.0 explicitly states that a sample size of N=4-9 is only suitable for 'Case study analysis, qualitative patterns, individual document insights' and that N<10 allows for 'Descriptive statistics only, no hypothesis testing'.",
+      "impact": "The experiment will be blocked from execution as it attempts an underpowered statistical analysis. Any inferential statistical conclusions drawn from this small sample size would be unreliable and violate platform research quality standards.",
+      "fix": "To proceed, either (1) increase the corpus size to meet the minimum requirements for the desired statistical tests (e.g., N>=20 for limited inferential testing between groups), or (2) revise Research Question 4 and the 'Expected Outcomes' in 'experiment.md' to focus strictly on qualitative and descriptive case-study comparisons, removing any language that suggests a quantitative test of differences between groups.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    }
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-09-16T20:42:02.844093+00:00",
+  "cache_metadata": {
+    "cache_key": "validation_4eece8280042",
+    "cached_at": "2025-01-15T14:30:00Z",
+    "agent_name": "ValidationPhase"
+  }
+}

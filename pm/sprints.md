@@ -336,40 +336,94 @@
 **Commit**: 5388142d4 - "Complete Sprint V2-5: V2 Orchestrator Implementation"
 **Status**: Core implementation complete, CLI integration pending
 
-### Sprint V2-6: V2 Validation & Migration 🎯 FINAL FOCUS
-**Corresponds to**: V2 Plan - Phase 4 (Validation & Rollout)
+### Sprint V2-6: Legacy Agent Migration to V2 🎯 CURRENT FOCUS
+**Corresponds to**: V2 Plan - Phase 4 (Agent Completion)
+**Goal**: Migrate AnalysisAgent and StatisticalAgent to V2 StandardAgent interface.
+**Priority**: HIGH - Complete V2 agent ecosystem for production readiness
+
+**Detailed Tasks**:
+
+#### [V2-6.1] Create V2AnalysisAgent
+- **Base Class**: Inherit from `StandardAgent` and `ToolCallingAgent`
+- **Constructor**: `__init__(security: ExperimentSecurityBoundary, storage: LocalArtifactStorage, audit: AuditLogger, config: Optional[AgentConfig] = None)`
+- **Execute Method**: `execute(run_context: RunContext = None, **kwargs) -> AgentResult`
+- **Capabilities Method**: `get_capabilities() -> List[str]`
+- **Wrapper Logic**: Wrap existing `analyze_batch()` logic in `execute()` method
+- **Return Conversion**: Convert dict returns to `AgentResult` objects
+- **Files to Create**: `discernus/agents/analysis_agent/v2_analysis_agent.py`
+
+#### [V2-6.2] Create V2StatisticalAgent
+- **Base Class**: Inherit from `StandardAgent` and `ToolCallingAgent`
+- **Constructor**: `__init__(security: ExperimentSecurityBoundary, storage: LocalArtifactStorage, audit: AuditLogger, config: Optional[AgentConfig] = None)`
+- **Execute Method**: `execute(run_context: RunContext = None, **kwargs) -> AgentResult`
+- **Capabilities Method**: `get_capabilities() -> List[str]`
+- **Wrapper Logic**: Wrap existing `analyze_batch()` logic in `execute()` method
+- **Return Conversion**: Convert dict returns to `AgentResult` objects
+- **Files to Create**: `discernus/agents/statistical_agent/v2_statistical_agent.py`
+
+#### [V2-6.3] Test V2 Orchestrator with Real Agents
+- **Integration Test**: Run `nano_test_experiment` with real V2 agents
+- **LLM Integration**: Test actual LLM calls and error handling
+- **Data Flow**: Test real file I/O, artifact storage, and RAG operations
+- **Performance**: Measure execution time and resource usage
+- **Files to Create**: `test_v2_orchestrator_real_agents.py`
+
+#### [V2-6.4] CLI Integration
+- **CLI Flag**: Add `--orchestrator-version=v2` for backward-compatible rollout
+- **Default V1**: Keep V1 as default until V2 validation complete
+- **Configuration**: Ensure all existing CLI options work with V2 orchestrator
+- **Files to Update**: `discernus/cli.py`
+
+**Definition of Done**:
+- ✅ `V2AnalysisAgent` implements `StandardAgent` interface with real LLM integration
+- ✅ `V2StatisticalAgent` implements `StandardAgent` interface with real LLM integration
+- ✅ Both agents wrap existing `analyze_batch()` logic in `execute()` method
+- ✅ Both agents return `AgentResult` objects instead of dicts
+- ✅ Both agents have proper `get_capabilities()` methods
+- ✅ V2 orchestrator successfully runs `nano_test_experiment` with real V2 agents
+- ✅ CLI integration with `--orchestrator-version=v2` flag working
+- ✅ Unit tests for both V2 agents (15+ tests each)
+- ✅ Integration tests showing end-to-end pipeline with real agents
+- ✅ Performance testing shows V2 agents meet or exceed V1 performance
+- ✅ Error handling tested with real LLM failures and edge cases
+
+**Completion Date**: TBD
+**Status**: Ready to start - V2 orchestrator architecture complete
+
+### Sprint V2-7: V2 Validation & Migration 🎯 FINAL FOCUS
+**Corresponds to**: V2 Plan - Phase 5 (Validation & Rollout)
 **Goal**: Validate V2 system against V1 and manage migration.
 **Priority**: HIGH - Ensure V2 system is production-ready
 
 **Detailed Tasks**:
 
-#### [V2-6.1] Validation Testing
+#### [V2-7.1] Validation Testing
 - **Parity Testing**: Run same experiments through both V1 and V2 orchestrators
 - **Output Comparison**: Byte-identical results where applicable across experiment matrix
 - **Performance Testing**: Measure speed, cost, reliability improvements
 - **Error Handling**: Comprehensive failure scenarios and recovery testing
 - **Acceptance Criteria**: V2 must match or exceed V1 performance and reliability
 
-#### [V2-6.2] Make V2 Default
+#### [V2-7.2] Make V2 Default
 - **CLI Default**: Switch default orchestrator to V2
 - **Deprecation Warnings**: Add warnings for V1 usage
 - **Rollback Capability**: Maintain `--orchestrator-version=v1` for emergency rollback
 - **Files to Update**: `discernus/cli.py`
 
-#### [V2-6.3] Documentation & Migration Guide
+#### [V2-7.3] Documentation & Migration Guide
 - **API Documentation**: Complete documentation for new agent ecosystem
 - **Migration Guide**: Guide for extending the system with new agents
 - **Architecture Documentation**: Update project architecture docs
 - **Agent Development Guide**: Patterns and best practices for V2 agents
 - **Files to Create**: `docs/v2_architecture.md`, `docs/agent_development_guide.md`
 
-#### [V2-6.4] Legacy Code Cleanup
+#### [V2-7.4] Legacy Code Cleanup
 - **Remove V1 Orchestrator**: Delete `CleanAnalysisOrchestrator` and associated code
 - **Clean Up Imports**: Remove references to deprecated classes
 - **Update Tests**: Migrate tests to use V2 patterns
 - **Files to Remove**: `discernus/core/clean_analysis_orchestrator.py` and related files
 
-#### [V2-6.5] Production Monitoring
+#### [V2-7.5] Production Monitoring
 - **Logging**: Ensure comprehensive logging for V2 orchestrator
 - **Metrics**: Performance and reliability metrics collection
 - **Alerting**: Set up monitoring and alerting for production use

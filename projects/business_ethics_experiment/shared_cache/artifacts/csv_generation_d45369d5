@@ -1,0 +1,38 @@
+{
+  "batch_id": "stats_20250917T004747Z",
+  "step": "csv_generation",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "csv_files": [
+    {
+      "filename": "scores.csv",
+      "path": "/Volumes/code/discernus/projects/business_ethics_experiment/runs/20250917T004747Z/data/scores.csv",
+      "size": 899
+    },
+    {
+      "filename": "derived_metrics.csv",
+      "path": "/Volumes/code/discernus/projects/business_ethics_experiment/runs/20250917T004747Z/data/derived_metrics.csv",
+      "size": 468
+    },
+    {
+      "filename": "metadata.csv",
+      "path": "/Volumes/code/discernus/projects/business_ethics_experiment/runs/20250917T004747Z/data/metadata.csv",
+      "size": 247
+    },
+    {
+      "filename": "evidence.csv",
+      "path": "/Volumes/code/discernus/projects/business_ethics_experiment/runs/20250917T004747Z/data/evidence.csv",
+      "size": 60
+    }
+  ],
+  "cost_info": {
+    "model": "vertex_ai/gemini-2.5-flash",
+    "execution_time_seconds": 48.403965,
+    "prompt_length": 12834,
+    "artifacts_processed": 2,
+    "response_cost": 0.0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "total_tokens": 0
+  },
+  "timestamp": "2025-09-17T00:51:27.169974+00:00"
+}

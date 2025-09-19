@@ -1,0 +1,7 @@
+{
+  "analysis_id": "analysis_1100287d",
+  "step": "score_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "scores_extraction": "Here are the dimensional scores extracted from the analysis result:\n\n**Document ID:** 529772e0aec9e534\n**Document Name:** progressive_family_support.txt\n\n**Dimensional Scores:**\n\n*   **authority_vs_empathy:**\n    *   raw_score: 0.05\n    *   salience: 0.9\n    *   confidence: 0.98\n*   **competition_vs_cooperation:**\n    *   raw_score: 0.0\n    *   salience: 1.0\n    *   confidence: 1.0\n*   **self_reliance_vs_interdependence:**\n    *   raw_score: 0.0\n    *   salience: 0.95\n    *   confidence: 1.0",
+  "timestamp": "2025-09-17T00:13:43.581703+00:00"
+}

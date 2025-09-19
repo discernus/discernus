@@ -1,0 +1,24 @@
+# Document Analysis - Marked Up Text
+
+Corporate Apology Statement
+GreenEnergy Corp
+Environmental Incident Apology
+August 10, 2025
+
+Dear Community Members,
+
+We are writing to [CAUSAL_ATTRIBUTION: "take full responsibility"] for the [PROBLEM_DEFINITION: "environmental incident that occurred at our facility on August 8, 2025"]. [CAUSAL_ATTRIBUTION: "Our investigation has determined that the chemical spill was caused by equipment failure that we should have prevented through proper maintenance and oversight."]
+
+We [MORAL_EVALUATION: "deeply regret this incident"] and the [PROBLEM_DEFINITION: "impact it has had on our community and the environment"]. This [MORAL_EVALUATION: "failure represents a breach of our core values and our commitment to environmental stewardship."] We have [MORAL_EVALUATION: "let down the people who trust us to operate safely and responsibly."]
+
+[TREATMENT_RECOMMENDATION: "Our corrective actions include:"]
+- [TREATMENT_RECOMMENDATION: "Complete equipment overhaul and safety system upgrades"]
+- [TREATMENT_RECOMMENDATION: "Enhanced training for all personnel on environmental protocols"]
+- [TREATMENT_RECOMMENDATION: "Independent environmental audit and compliance review"]
+- [TREATMENT_RECOMMENDATION: "Community compensation fund for affected residents"]
+- [TREATMENT_RECOMMENDATION: "Regular public reporting on our environmental performance"]
+
+We are [MORAL_EVALUATION: "committed to learning from this mistake"] and [MORAL_EVALUATION: "becoming a better corporate citizen"]. The [MORAL_EVALUATION: "trust of our community is precious"], and [MORAL_EVALUATION: "we will work tirelessly to earn it back."]
+
+Sincerely,
+The GreenEnergy Corp Leadership Team

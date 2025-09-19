@@ -2,14 +2,14 @@
 
 **Corpus Name**: Family Moral Systems Political Communications  
 **Framework**: Lakoff Framing Framework v10.0  
-**Documents**: 12 political communications  
+**Documents**: 4 political communications  
 **Date**: August 29, 2025  
 
 ---
 
 ## Corpus Overview
 
-This corpus contains diverse political communications designed to test Lakoff's family moral systems theory. The documents range from campaign speeches to policy statements, representing different ideological positions and family model orientations. Each text is selected to exercise specific dimensions of the Strict Father vs. Nurturant Parent moral frameworks.
+This corpus contains 4 diverse political communications designed to test Lakoff's family moral systems theory. The documents range from campaign speeches to policy statements, representing different ideological positions and family model orientations. Each text is selected to exercise specific dimensions of the Strict Father vs. Nurturant Parent moral frameworks.
 
 ## Document Collection
 
@@ -37,53 +37,6 @@ This corpus contains diverse political communications designed to test Lakoff's 
 **Family Model**: Mixed (Balanced approach)  
 **Content**: Attempts to bridge family model differences through compromise and shared values.
 
-### 5. Evangelical Family Values Address (synthetic)
-**Speaker**: Reverend David Johnson  
-**Context**: Religious-political conference  
-**Family Model**: Strict Father (Authority, Traditional hierarchy)  
-**Content**: Emphasizes biblical family authority, moral discipline, and traditional gender roles.
-
-### 6. Feminist Family Policy Speech (synthetic)
-**Speaker**: Congresswoman Maria Rodriguez (D)  
-**Context**: Women's rights policy forum  
-**Family Model**: Nurturant Parent (Empathy, Cooperation, Equality)  
-**Content**: Focuses on gender equality, cooperative parenting, and empathetic support for diverse family structures.
-
-### 7. Business Leader Family Values (synthetic)
-**Speaker**: CEO Robert Chen  
-**Context**: Corporate responsibility speech  
-**Family Model**: Mixed (Competition + Cooperation)  
-**Content**: Balances competitive business values with cooperative family support policies.
-
-### 8. Military Family Support Statement (synthetic)
-**Speaker**: General Amanda Thompson  
-**Context**: Veterans family support announcement  
-**Family Model**: Strict Father (Authority, Self-Reliance) + Nurturant Parent (Cooperation)  
-**Content**: Combines military authority with family support cooperation.
-
-### 9. Education Policy Family Focus (synthetic)
-**Speaker**: Education Secretary Lisa Park  
-**Context**: National education policy announcement  
-**Family Model**: Nurturant Parent (Empathy, Cooperation, Interdependence)  
-**Content**: Emphasizes family-school cooperation, empathetic support for students, and collective responsibility.
-
-### 10. Economic Policy Family Impact (synthetic)
-**Speaker**: Treasury Secretary Michael Brown  
-**Context**: Economic policy address  
-**Family Model**: Strict Father (Competition, Self-Reliance)  
-**Content**: Focuses on individual economic responsibility, competitive markets, and self-reliance in family finances.
-
-### 11. Healthcare Family Policy (synthetic)
-**Speaker**: Health Secretary Jennifer Davis  
-**Context**: Healthcare reform announcement  
-**Family Model**: Nurturant Parent (Cooperation, Interdependence, Empathy)  
-**Content**: Emphasizes collective healthcare responsibility, family cooperation, and empathetic support for vulnerable families.
-
-### 12. Immigration Family Policy (synthetic)
-**Speaker**: Homeland Security Director Carlos Mendez  
-**Context**: Immigration policy reform speech  
-**Family Model**: Mixed (Authority + Empathy)  
-**Content**: Balances border security authority with family reunification empathy.
 
 ## Corpus Design Rationale
 
@@ -111,8 +64,8 @@ This corpus design ensures comprehensive testing of the framework's analytical c
 
 ```yaml
 name: "Family Moral Systems Political Communications"
-version: "10.0"
-spec_version: "10.0"
+version: "1.0"
+spec_version: "8.0.2"
 total_documents: 4
 date_range: "2025"
 

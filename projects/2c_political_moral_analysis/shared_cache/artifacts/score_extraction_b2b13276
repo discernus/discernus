@@ -1,0 +1,7 @@
+{
+  "analysis_id": "analysis_f52b5745",
+  "step": "score_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "scores_extraction": "```json\n{\n  \"care\": {\n    \"raw_score\": 0.9,\n    \"salience\": 0.9,\n    \"confidence\": 0.95\n  },\n  \"harm\": {\n    \"raw_score\": 0.95,\n    \"salience\": 0.95,\n    \"confidence\": 0.95\n  },\n  \"fairness\": {\n    \"raw_score\": 0.9,\n    \"salience\": 0.9,\n    \"confidence\": 0.95\n  },\n  \"cheating\": {\n    \"raw_score\": 0.9,\n    \"salience\": 0.85,\n    \"confidence\": 0.95\n  },\n  \"loyalty\": {\n    \"raw_score\": 0.8,\n    \"salience\": 0.75,\n    \"confidence\": 0.9\n  },\n  \"betrayal\": {\n    \"raw_score\": 0.65,\n    \"salience\": 0.6,\n    \"confidence\": 0.85\n  },\n  \"authority\": {\n    \"raw_score\": 0.55,\n    \"salience\": 0.4,\n    \"confidence\": 0.8\n  },\n  \"subversion\": {\n    \"raw_score\": 0.7,\n    \"salience\": 0.65,\n    \"confidence\": 0.9\n  },\n  \"sanctity\": {\n    \"raw_score\": 0.9,\n    \"salience\": 0.9,\n    \"confidence\": 0.95\n  },\n  \"degradation\": {\n    \"raw_score\": 0.9,\n    \"salience\": 0.9,\n    \"confidence\": 0.95\n  },\n  \"liberty\": {\n    \"raw_score\": 0.8,\n    \"salience\": 0.8,\n    \"confidence\": 0.9\n  },\n  \"oppression\": {\n    \"raw_score\": 0.95,\n    \"salience\": 0.95,\n    \"confidence\": 0.95\n  }\n}\n```",
+  "timestamp": "2025-09-16T23:13:03.876028+00:00"
+}

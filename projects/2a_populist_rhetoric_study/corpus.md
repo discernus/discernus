@@ -33,22 +33,22 @@ This design enables sophisticated temporal analysis:
 
 ## Populist Discourse Dimensions
 
-The corpus is designed to capture variation across nine populist anchor dimensions:
+The corpus is designed to capture variation across nine populist anchor dimensions as defined by the PDAF v10.0 framework:
 
 ### Core Dimensions
-1. **Manichaean People-Elite Framing**: Clear distinction between "the people" and "the elite"
-2. **Anti-Establishment Rhetoric**: Criticism of political and institutional establishment
+1. **Manichaean People-Elite Framing**: Moral dichotomy between pure, virtuous people and corrupt, self-serving elites
+2. **Crisis-Restoration Narrative**: Decline-crisis-redemption temporal structuring where current crisis stems from elite betrayal
+3. **Popular Sovereignty Claims**: Direct people's will as ultimate political authority, bypassing representative institutions
+4. **Anti-Pluralist Exclusion**: Rejection of legitimate opposition and institutional constraints on popular will
 
 ### Mechanism Dimensions
-3. **Crisis Narratives**: Framing of urgent threats requiring immediate action
-4. **Mobilization Appeals**: Calls for popular action and engagement
-5. **Simplification**: Reduction of complex issues to simple dichotomies
+5. **Elite Conspiracy/Systemic Corruption**: Elite coordination against people's interests through hidden networks or institutional capture
+6. **Authenticity vs Political Class**: Genuine representation versus professional politician artifice
+7. **Homogeneous People Construction**: Unified people identity transcending internal divisions of class, region, or interest
 
 ### Boundary Dimensions
-6. **Exclusionary Populism**: Defining who belongs to "the people"
-7. **Elite Conspiracy Theories**: Systemic corruption and elite manipulation
-8. **Nationalist Appeals**: Emphasis on national identity and sovereignty
-9. **Anti-Intellectualism**: Distrust of expert knowledge and institutions
+8. **Nationalist Exclusion**: Cultural/ethnic homogeneity and external threat emphasis that defines populist community boundaries
+9. **Economic Populist Appeals**: Populist economic discourse regardless of ideological direction—from redistributive left populism to protectionist right populism
 
 ## Strategic Tension Analysis
 

@@ -13,6 +13,7 @@ The corpus employs a balanced factorial design with:
 
 ### Civil Rights Era (1963)
 - **Progressive**: John Lewis - March on Washington speech
+- **Conservative**: Barry Goldwater - 1964 Republican National Convention speech
 
 ### Institutional Era (2008-2020)
 - **Conservative**: John McCain - 2008 Presidential concession speech
@@ -54,7 +55,7 @@ All speeches are sourced from public political discourse including:
 ```yaml
 name: "Emotional Climate Factorial Analysis Corpus"
 version: "10.0"
-total_documents: 8
+total_documents: 9
 date_range: "1963-2025"
 factorial_design: "2×3 (Ideology × Era)"
 
@@ -65,6 +66,13 @@ documents:
     ideology: "progressive"
     era: "civil_rights"
     speech_type: "civil_rights_address"
+    
+  - filename: "barry_goldwater_1964_rnc_convention.txt"
+    speaker: "Barry Goldwater"
+    year: 1964
+    ideology: "conservative"
+    era: "civil_rights"
+    speech_type: "convention_keynote"
     
   - filename: "john_mccain_2008_concession.txt"
     speaker: "John McCain"

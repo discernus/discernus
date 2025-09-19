@@ -131,7 +131,7 @@ class V2EvidenceRetrieverAgent(ToolCallingAgent):
             run_context.add_artifact("evidence", evidence_artifact_hash, evidence_artifact_hash)
             
             # Log success
-            self.audit.log_agent_event("evidence_retrieval_complete", {
+            self.audit.log_agent_event(self.agent_name, "evidence_retrieval_complete", {
                 "framework": framework_spec.get('name', 'Unknown'),
                 "evidence_quotes_found": sum(len(result['quotes']) for result in evidence_results),
                 "evidence_artifact_hash": evidence_artifact_hash

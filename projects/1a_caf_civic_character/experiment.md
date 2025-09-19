@@ -22,12 +22,12 @@ The experiment should produce:
 
 - **Dimensional Analysis**: Individual scores for all 10 CAF dimensions (intensity and salience) for each speech
 - **Character Signatures**: Distinct profiles showing how each speaker balances virtues and vices
-- **Comparative Statistics**: ANOVA results demonstrating significant differences between speakers
+- **Comparative Analysis**: Case study analysis demonstrating patterns and differences between speakers
 - **Pattern Classifications**: Identification of authentic virtue, strategic signaling, strategic pathology, or incoherent messaging patterns
 - **Civic Character Indices**: Salience-weighted scores showing overall character orientation for each speaker
 - **Tension Analysis**: Quantification of strategic contradictions in each speaker's rhetoric
 
-The analysis should reveal clear differentiation between institutional speakers (McCain, Romney, Booker) and populist speakers (King, Vance, Sanders, AOC), with Lewis representing a unique civil rights era perspective.
+The analysis should reveal qualitative patterns and individual document insights across institutional speakers (McCain, Romney, Booker), populist speakers (King, Vance, Sanders, AOC), and Lewis representing a unique civil rights era perspective. This is a case study analysis focusing on individual character signatures rather than statistical comparisons.
 
 ---
 
@@ -37,6 +37,8 @@ metadata:
   experiment_name: "caf_civic_character_pattern_analysis"
   author: "Discernus Research Team"
   spec_version: "10.0"
+  analysis_type: "case_study"
+  sample_size: 8
 
 components:
   framework: "framework.md"

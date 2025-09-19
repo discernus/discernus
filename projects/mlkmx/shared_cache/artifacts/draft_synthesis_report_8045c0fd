@@ -1,0 +1,190 @@
+# Cohesive Flourishing Framework Analysis Report
+
+**Experiment**: mlkmx
+**Run ID**: 20250917T040349Z
+**Date**: 2024-07-24
+**Framework**: cff_v10.md
+**Corpus**: corpus.md (2 documents)
+**Analysis Model**: vertex_ai/gemini-2.5-flash
+**Synthesis Model**: vertex_ai/gemini-2.5-pro
+**Total Cost**: $0.0188 USD
+
+---
+
+## 1. Executive Summary
+
+This report presents a computational analysis of two seminal civil rights texts—Martin Luther King Jr.'s "Letter from Birmingham Jail" (1963) and Malcolm X's "The Ballot or the Bullet" (1964)—using the Cohesive Flourishing Framework (CFF) v10.0. The analysis quantifies the distinct rhetorical strategies employed by each leader, revealing fundamental differences in their approaches to identity, intergroup relations, and social change. The findings indicate that while both leaders utilized high levels of Fear and Hope to galvanize their audiences, their underlying rhetorical structures were diametrically opposed.
+
+The data reveals that Malcolm X's discourse is anchored in high-salience Tribal Dominance (Score = 0.90, Salience = 0.90), Enmity (Score = 0.90, Salience = 0.90), and Envy (Score = 0.80, Salience = 0.70). This rhetorical posture, emphasizing in-group supremacy and zero-sum conflict, results in a strongly negative Full Cohesion Index of -0.32, suggesting a rhetorical strategy oriented toward fragmentation from the existing social and political structure. In stark contrast, Martin Luther King Jr.'s rhetoric is grounded in high-salience Individual Dignity (Score = 0.95, Salience = 0.90), Amity (Score = 0.80, Salience = 0.75), and Cohesive Goals (Score = 0.95, Salience = 0.90). This approach, which appeals to universal human worth and an integrative vision of society, yields a positive Full Cohesion Index of +0.09, indicating a strategy aimed at reforming and strengthening democratic solidarity.
+
+The CFF's capacity to measure co-occurring opposing dimensions proves effective in capturing the complexity of these texts. For instance, Dr. King's letter simultaneously registers high Enmity toward the injustice of segregation and high Amity toward his audience of clergymen, resulting in a higher Strategic Contradiction Index (0.04) than Malcolm X's more rhetorically consistent speech (0.02). This suggests Dr. King engaged in a more complex rhetorical balancing act, condemning systems while appealing to the shared humanity of those within them. The analysis confirms all experimental hypotheses, demonstrating the framework's ability to quantify the profound philosophical and strategic divergences between these two iconic figures.
+
+## 2. Opening Framework: Key Insights
+
+*   **Divergent Identity Anchors**: The analysis reveals a fundamental split in identity framing. Martin Luther King Jr.'s rhetoric is overwhelmingly anchored in **Individual Dignity** (Score = 0.95, Salience = 0.90), while Malcolm X's is almost entirely rooted in **Tribal Dominance** (Score = 0.90, Salience = 0.90). This represents the core difference: a call for universal human rights versus a call for group-based political control.
+*   **Opposing Success Orientations**: The speakers' views on success are diametrically opposed. Malcolm X's discourse is high in **Envy** (Score = 0.80) and devoid of **Compersion** (Score = 0.00), framing economic disparity as a zero-sum struggle. Conversely, Dr. King scores low on Envy (Score = 0.20) but moderately on Compersion (Score = 0.60), celebrating the courage of both Black demonstrators and their white allies.
+*   **Contrasting Cohesion Outcomes**: The composite metrics starkly differentiate the two rhetorical approaches. Dr. King's discourse produces a positive **Full Cohesion Index** (+0.09), indicating a strategy aimed at integration and strengthening social solidarity. Malcolm X's discourse yields a strongly negative index (-0.32), reflecting a rhetorical strategy oriented toward fragmentation and separation.
+*   **The Nuance of Relational Climate**: Both leaders employ high levels of Enmity, but for different purposes. Malcolm X's **Enmity** is directed at an external "enemy" (Score = 0.90). Dr. King's Enmity (Score = 0.75) is directed at the injustice of segregation and the inaction of "white moderates," yet it is paired with high **Amity** (Score = 0.80) in his direct address to his audience, creating a complex relational dynamic.
+*   **Shared Goals, Different Paths**: A surprising finding is the high score for **Cohesive Goals** for both speakers (MLK Jr. = 0.95, MX = 0.90). For Dr. King, this reflects a goal of an integrated "beloved community." For Malcolm X, it reflects the goal of creating a cohesive, self-sufficient Black community, a form of in-group cohesion that is paired with out-group fragmentation.
+*   **Rhetorical Tension as a Strategic Indicator**: Dr. King's letter exhibits a higher **Strategic Contradiction Index** (0.04 vs. 0.02 for MX), driven by higher tension on the emotional, relational, and goal axes. This quantifies his sophisticated strategy of simultaneously holding space for the anger of the oppressed while extending a hand of reconciliation, a more rhetorically complex posture than Malcolm X's more internally consistent message of opposition.
+
+## 4. Methodology
+
+### 4.1 Framework Description
+This analysis employed the **Cohesive Flourishing Framework (CFF) v10.0**, a computational tool designed to analyze discourse for its impact on community cohesion and democratic health. The CFF moves beyond simple sentiment analysis by independently scoring ten conceptual anchors across five opposing pairs, preserving complex rhetorical information where competing appeals are used simultaneously.
+
+The five axes of analysis are:
+*   **Identity Axis**: Tribal Dominance vs. Individual Dignity
+*   **Emotional Climate**: Fear vs. Hope
+*   **Success Orientation**: Envy vs. Compersion
+*   **Relational Climate**: Enmity vs. Amity
+*   **Goal Orientation**: Fragmentative Goals vs. Cohesive Goals
+
+A key feature of the CFF is its dual-track analysis of both **intensity** (a raw 0.0-1.0 score) and **salience** (rhetorical prominence, 0.0-1.0). This allows for a nuanced understanding of not just *what* is said, but what is *emphasized*. The framework generates several derived metrics, including **Tension Indices** to measure rhetorical contradiction and three **Salience-Weighted Cohesion Indices** (Descriptive, Motivational, and Full) that provide an overall measure of a text's orientation toward social fragmentation (-1.0) or cohesion (+1.0).
+
+### 4.2 Corpus Description
+The corpus consists of two historically significant texts from the American Civil Rights Movement:
+1.  **Martin Luther King Jr., "Letter from Birmingham Jail" (1963)**: A 7,000-word open letter written to white moderate clergymen, justifying the strategy of nonviolent direct action.
+2.  **Malcolm X, "The Ballot or the Bullet" (1964)**: A 7,500-word speech delivered in Cleveland, Ohio, outlining the philosophy of Black nationalism.
+
+These texts were selected for their rhetorical richness, historical importance, and their representation of contrasting philosophical approaches to achieving racial justice.
+
+### 4.3 Statistical Methods and Limitations
+The analysis was conducted on a sample size of N=2. According to the study's statistical protocol, this is a **Tier 3 (Exploratory) Analysis**. Consequently, no inferential statistical tests (e.g., t-tests) were performed, as they would be statistically invalid. The analysis focuses on descriptive statistics and direct comparative analysis.
+
+The primary method involves presenting the CFF scores for each speaker side-by-side and calculating the difference to quantify the rhetorical contrasts. All claims are presented as suggestive patterns rather than conclusive findings. The small sample size is a significant limitation; however, for a comparative case study of two unique and influential texts, this descriptive and exploratory approach provides valuable, quantifiable insights into their distinct rhetorical structures. All numerical results are reported to a consistent precision of two to three decimal places, following APA 7th edition guidelines.
+
+## 5. Comprehensive Results
+
+### 5.1 Hypothesis Evaluation
+
+The experiment was designed to test six hypotheses regarding the rhetorical differences between Martin Luther King Jr. and Malcolm X. All six hypotheses were confirmed by the data.
+
+**E1: Identity Dimension Analysis: CONFIRMED.**
+*   The analysis confirmed the expectation that Malcolm X's discourse would emphasize Tribal Dominance, while Dr. King's would emphasize Individual Dignity. Malcolm X scored 0.90 on Tribal Dominance with a salience of 0.90, compared to Dr. King's score of 0.05 and salience of 0.05. Conversely, Dr. King scored 0.95 on Individual Dignity with a salience of 0.90, while Malcolm X scored only 0.10 with a salience of 0.10.
+*   **Evidence**: This stark contrast is exemplified in their own words. As Malcolm X stated, "The political philosophy of black nationalism only means that the black man should control the politics and the politicians in his own community" (Source: malcom_x_ballot_or_bullet.txt). Dr. King, in contrast, appealed to a universal principle: "Now is the time to lift our national policy from the quicksand of racial injustice to the solid rock of human dignity" (Source: mlk_letter_from_birmingham_jail.txt).
+
+**E2: Emotional Climate Analysis: CONFIRMED.**
+*   The data confirmed that while both speakers used appeals to Fear and Hope, their emphasis differed as predicted. Malcolm X scored slightly higher on Fear (0.90 vs. 0.85 for MLK), while Dr. King scored higher on Hope (0.90 vs. 0.70 for MX).
+*   **Evidence**: Malcolm X's fear appeals often centered on existential threats, as when he warned, "Whenever you got a racial powder keg sitting in your lap, you’re in more trouble than if you had an atomic powder keg sitting in your lap" (Source: malcom_x_ballot_or_bullet.txt). Dr. King's hope was rooted in a vision of national redemption: "Let us all hope that the dark clouds of racial prejudice will soon pass away... and in some not too distant tomorrow the radiant stars of love and brotherhood will shine over our great nation" (Source: mlk_letter_from_birmingham_jail.txt).
+
+**E3: Success Orientation Analysis: CONFIRMED.**
+*   The analysis confirmed a clear divergence in framing economic and social success. Malcolm X's discourse registered high Envy (Score = 0.80, Salience = 0.70) and zero Compersion (Score = 0.00). Dr. King's letter showed low Envy (Score = 0.20) but moderate Compersion (Score = 0.60).
+*   **Evidence**: Malcolm X's zero-sum economic view is clear: "when you spend your dollar out of the community in which you live, the community in which you spend your money becomes richer and richer, the community out of which you take your money becomes poorer and poorer" (Source: malcom_x_ballot_or_bullet.txt). Dr. King, conversely, expressed joy in the success of allies, stating, "I am thankful, however, that some of our white brothers in the South have grasped the meaning of this social revolution and committed themselves to it" (Source: mlk_letter_from_birmingham_jail.txt).
+
+**E4: Relational Climate Analysis: CONFIRMED.**
+*   The data confirmed the expected relational positioning. Malcolm X scored higher on Enmity (0.90 vs. 0.75 for MLK), while Dr. King scored significantly higher on Amity (0.80 vs. 0.40 for MX).
+*   **Evidence**: Malcolm X explicitly defined an adversarial relationship: "Anytime you have to rely upon your enemy for a job, you’re in bad shape... and he is your enemy" (Source: malcom_x_ballot_or_bullet.txt). Dr. King, while expressing "grave disappointment" with his audience, framed his letter with appeals to friendship, beginning with "My Dear Fellow Clergymen" and ending with "Yours for the cause of Peace and Brotherhood" (Source: mlk_letter_from_birmingham_jail.txt).
+
+**E5: Goal Orientation Analysis: CONFIRMED.**
+*   The analysis confirmed that Malcolm X's rhetoric contained more Fragmentative Goals, while Dr. King's emphasized Cohesive Goals. Malcolm X scored 0.80 on Fragmentative Goals versus 0.70 for Dr. King. Dr. King scored 0.95 on Cohesive Goals versus 0.90 for Malcolm X.
+*   **Evidence**: Malcolm X's fragmentative orientation is evident in his statement, "Revolutions overturn systems. Revolutions destroy systems" (Source: malcom_x_ballot_or_bullet.txt). Dr. King's cohesive vision is captured in his concept of a shared destiny: "We are caught in an inescapable network of mutuality, tied in a single garment of destiny" (Source: mlk_letter_from_birmingham_jail.txt).
+
+**E6: Cohesion Index Analysis: CONFIRMED.**
+*   The analysis confirmed that Dr. King's discourse would produce higher cohesion indices. Dr. King's Full Cohesion Index was positive (+0.09), while Malcolm X's was strongly negative (-0.32). This pattern held for the Descriptive Index (MLK: +0.16; MX: -0.32) and the Motivational Index (MLK: +0.14; MX: -0.24).
+*   **Evidence**: This aggregate result is the numerical culmination of the dimensional differences noted above. Dr. King's high scores in Individual Dignity, Amity, and Cohesive Goals, weighted by their high salience, drove his index into positive territory, signifying a discourse aimed at strengthening social bonds. Malcolm X's high, salient scores in Tribal Dominance, Enmity, and Envy pulled his index into negative territory, signifying a discourse aimed at social fragmentation.
+
+### 5.2 Descriptive Statistics
+
+The dimensional scores for each speaker reveal starkly different rhetorical profiles. The table below presents the raw scores, salience scores, and the difference between the speakers (MLK Jr. minus Malcolm X) for each of the ten primary CFF dimensions.
+
+| Dimension                 | Speaker                | Raw Score | Salience |
+| ------------------------- | ---------------------- | --------- | -------- |
+| **Tribal Dominance**      | Martin Luther King Jr. | 0.05      | 0.05     |
+|                           | Malcolm X              | 0.90      | 0.90     |
+|                           | *Difference*           | *-0.85*   | *-0.85*  |
+| **Individual Dignity**    | Martin Luther King Jr. | 0.95      | 0.90     |
+|                           | Malcolm X              | 0.10      | 0.10     |
+|                           | *Difference*           | *+0.85*   | *+0.80*  |
+| **Fear**                  | Martin Luther King Jr. | 0.85      | 0.75     |
+|                           | Malcolm X              | 0.90      | 0.80     |
+|                           | *Difference*           | *-0.05*   | *-0.05*  |
+| **Hope**                  | Martin Luther King Jr. | 0.90      | 0.85     |
+|                           | Malcolm X              | 0.70      | 0.70     |
+|                           | *Difference*           | *+0.20*   | *+0.15*  |
+| **Envy**                  | Martin Luther King Jr. | 0.20      | 0.15     |
+|                           | Malcolm X              | 0.80      | 0.70     |
+|                           | *Difference*           | *-0.60*   | *-0.55*  |
+| **Compersion**            | Martin Luther King Jr. | 0.60      | 0.50     |
+|                           | Malcolm X              | 0.00      | 0.00     |
+|                           | *Difference*           | *+0.60*   | *+0.50*  |
+| **Enmity**                | Martin Luther King Jr. | 0.75      | 0.70     |
+|                           | Malcolm X              | 0.90      | 0.90     |
+|                           | *Difference*           | *-0.15*   | *-0.20*  |
+| **Amity**                 | Martin Luther King Jr. | 0.80      | 0.75     |
+|                           | Malcolm X              | 0.40      | 0.30     |
+|                           | *Difference*           | *+0.40*   | *+0.45*  |
+| **Fragmentative Goals**   | Martin Luther King Jr. | 0.70      | 0.65     |
+|                           | Malcolm X              | 0.80      | 0.70     |
+|                           | *Difference*           | *-0.10*   | *-0.05*  |
+| **Cohesive Goals**        | Martin Luther King Jr. | 0.95      | 0.90     |
+|                           | Malcolm X              | 0.90      | 0.90     |
+|                           | *Difference*           | *+0.05*   | *0.00*   |
+
+The most significant differences are observed on the Identity (Tribal Dominance vs. Individual Dignity) and Success Orientation (Envy vs. Compersion) axes. The differences of 0.85 on the Identity axis scores and 0.60 on the Success Orientation axis scores represent the fundamental philosophical divide. While both speakers score high on Fear, Hope, and Cohesive Goals, the salience-weighting reveals that Dr. King places greater rhetorical emphasis on Hope and Cohesive Goals, whereas Malcolm X gives greater prominence to Tribal Dominance and Enmity.
+
+### 5.3 Advanced Metric Analysis
+
+The derived metrics quantify the overall strategic posture and internal consistency of each text.
+
+| Derived Metric                  | Martin Luther King Jr. | Malcolm X | Difference (MLK - MX) |
+| ------------------------------- | ---------------------- | --------- | --------------------- |
+| Descriptive Cohesion Index      | 0.162                  | -0.323    | +0.485                |
+| Motivational Cohesion Index     | 0.143                  | -0.242    | +0.385                |
+| **Full Cohesion Index**         | **0.094**              | **-0.323**| **+0.417**            |
+| Strategic Contradiction Index   | 0.038                  | 0.018     | +0.020                |
+| Identity Tension                | 0.000                  | 0.000     | 0.000                 |
+| Emotional Tension               | 0.101                  | 0.090     | +0.011                |
+| Success Tension                 | 0.000                  | 0.000     | 0.000                 |
+| Relational Tension              | 0.038                  | 0.000     | +0.038                |
+| Goal Tension                    | 0.033                  | 0.000     | +0.033                |
+
+The **Full Cohesion Index** provides the clearest summary of the strategic divergence. Dr. King's positive score (+0.094) is driven by the high, salient scores for Individual Dignity, Hope, Amity, and Cohesive Goals, which outweigh the negative pull of Fear, Enmity, and Fragmentative Goals. In contrast, Malcolm X's strongly negative score (-0.323) is a direct result of the overwhelming salience-weighted influence of Tribal Dominance, Enmity, and Envy.
+
+Interestingly, the **Strategic Contradiction Index** is slightly higher for Dr. King (0.038) than for Malcolm X (0.018). This is not an indicator of incoherent messaging but rather of a more complex rhetorical strategy. The individual tension scores reveal that this is driven by Dr. King's simultaneous use of high-intensity Enmity (condemning injustice) and high-intensity Amity (appealing to his audience), as well as high-intensity Fragmentative Goals (dismantling segregation) and high-intensity Cohesive Goals (building an integrated society). As he states, "I have been so greatly disappointed with the white moderate," a clear expression of Enmity, while also maintaining a conciliatory tone, "I want to try to answer your statement in what I hope will be patient and reasonable terms" (Source: mlk_letter_from_birmingham_jail.txt). Malcolm X's rhetoric is more straightforwardly oppositional, resulting in lower internal tension.
+
+### 5.5 Pattern Recognition and Theoretical Insights
+
+The CFF analysis reveals two distinct rhetorical archetypes for social change. Malcolm X's rhetoric aligns with a **separatist, in-group-focused strategy**, while Dr. King's aligns with an **integrationist, universalist strategy**.
+
+**Malcolm X: The Nationalist-Fragmentative Archetype**
+Malcolm X's discourse is characterized by a powerful and consistent "us vs. them" narrative. The extremely high scores for Tribal Dominance (0.90) and Enmity (0.90) are the central pillars of his rhetoric. This is not simply group pride but a call for political and economic separatism, as he argues, "the black man should control the politics and the politicians in his own community" (Source: malcom_x_ballot_or_bullet.txt). This is paired with high Envy (0.80), which frames the economic system as a zero-sum conflict where one group's gain is another's loss. The complete absence of Compersion (0.00) reinforces this worldview. His high score on Cohesive Goals (0.90) is notable; however, the evidence shows this cohesion is directed inward, toward unifying the "black man" to become "master of his own community," a goal that is fragmentative in the context of the broader nation. This combination of high in-group cohesion and high out-group enmity is a classic pattern described in Social Identity Theory.
+
+**Martin Luther King Jr.: The Integrationist-Cohesive Archetype**
+Dr. King's "Letter" presents a more complex, multi-layered rhetorical strategy. The cornerstone is an appeal to universal **Individual Dignity** (0.95), which transcends group identity. He argues that "Any law that degrades human personality is unjust" (Source: mlk_letter_from_birmingham_jail.txt), framing the struggle in moral and universal terms rather than purely racial ones. While his Enmity score is high (0.75), the target is not a people but a system of injustice and the "appalling silence of the good people." This is strategically balanced with high Amity (0.80) and Compersion (0.60), where he commends his "white brothers" who have joined the struggle. This dual approach allows him to condemn injustice without alienating potential allies, aiming to "bring our nation back to those great wells of democracy" (Source: mlk_letter_from_birmingham_jail.txt). This rhetorical balancing act is numerically captured by the framework's higher tension scores for Dr. King's text.
+
+### 5.6 Framework Effectiveness Assessment
+The Cohesive Flourishing Framework demonstrated high discriminatory power in this comparative analysis. It successfully quantified the profound ideological differences between the two texts, moving beyond a simple "positive" vs. "negative" assessment. The salience-weighting proved crucial in identifying the true anchors of each speaker's message. For example, while both speakers use Hope, Dr. King's is more salient and central to his overall cohesive vision. The framework's ability to score opposing dimensions independently was essential for capturing the nuance of Dr. King's rhetoric, which simultaneously contained high levels of Enmity and Amity. The resulting Cohesion Indices provided a clear, interpretable summary of the overall rhetorical impact on social solidarity, aligning with historical understandings of the two leaders' philosophies. The framework-corpus fit was excellent, as the persuasive and strategic nature of the texts aligned perfectly with the CFF's intended application.
+
+## 6. Discussion
+
+The findings from this computational analysis provide quantitative texture to the well-understood qualitative differences between Malcolm X and Martin Luther King Jr. The CFF framework allows us to move beyond describing their strategies as "separatist" vs. "integrationist" and instead measure the specific rhetorical components that constitute those positions. The data suggests that the primary axis of divergence is not about the presence of anger or hope—both of which are potent in each text—but about the framing of identity. Malcolm X's focus on **Tribal Dominance** creates a clear in-group/out-group dynamic, a powerful tool for mobilization but one that, by definition, scores negatively on a cohesion index aimed at broader social solidarity. Dr. King's appeal to **Individual Dignity** and a "single garment of destiny" provides a foundation for a more cohesive, universalist vision.
+
+The analysis also highlights the strategic complexity of Dr. King's nonviolent approach. His higher scores for rhetorical tension are not a weakness but a feature of a strategy that must simultaneously diagnose a problem (Enmity, Fear, Fragmentative Goals) and propose a shared solution (Amity, Hope, Cohesive Goals). He confronts his audience of white clergymen, calling their moderation a "stumbling block," an act of high Enmity. Yet, he frames this confrontation within a context of Amity, calling them "fellow clergymen and a Christian brother." This rhetorical tightrope walk is a hallmark of his integrationist philosophy.
+
+The implications for understanding social and political discourse are significant. This analysis suggests that the most critical factor in determining whether a message is cohesive or fragmentative may be its core framing of identity—whether it emphasizes exclusionary group power or inclusive, universal worth. Both leaders sought freedom, as Malcolm X himself noted: "We both got the same objective, we just got different ways of getting' at it" (Source: malcom_x_ballot_or_bullet.txt). The CFF provides a methodology for quantifying exactly what those different "ways" entail in rhetorical terms.
+
+## 7. Conclusion
+
+This exploratory comparative analysis successfully applied the Cohesive Flourishing Framework to quantify the distinct rhetorical strategies of Malcolm X and Martin Luther King Jr. The results confirmed all six experimental hypotheses, demonstrating that while both leaders employed powerful emotional appeals, their approaches diverged fundamentally on the axes of Identity, Success Orientation, and Relational Climate. Malcolm X's rhetoric of Tribal Dominance, Enmity, and Envy produced a strongly fragmentative cohesion score, while Dr. King's appeals to Individual Dignity, Amity, and Compersion yielded a cohesive score, despite its sharp critique of injustice.
+
+The study validates the CFF's utility as a tool for nuanced discourse analysis, particularly its ability to measure rhetorical salience and strategic tension. The findings provide a quantitative foundation for understanding the deep philosophical differences between two of the 20th century's most important voices on racial justice. While limited by its sample size, this analysis serves as a powerful proof-of-concept, suggesting that computational methods can provide novel, data-driven insights into historical rhetoric and offer a valuable lens for examining contemporary social and political discourse. Future research could expand this analysis across a larger corpus of texts to map the evolution of each leader's rhetoric and to identify broader archetypes of cohesive and fragmentative communication in social movements.
+
+## 8. Evidence Citations
+
+### malcom_x_ballot_or_bullet.txt
+*   **Tribal Dominance**: "The political philosophy of black nationalism only means that the black man should control the politics and the politicians in his own community."
+*   **Enmity**: "Anytime you have to rely upon your enemy for a job, you’re in bad shape. [applause] When you — and he is your enemy. You wouldn’t be in this country if some enemy hadn’t kidnapped you and brought you here."
+*   **Envy**: "The economic philosophy of black nationalism only means that we have to become involved in a program of reeducation, to educate our people into the importance of knowing that when you spend your dollar out of the community in which you live, the community in which you spend your money becomes richer and richer, the community out of which you take your money becomes poorer and poorer."
+*   **Fear**: "Whenever you got a racial powder keg sitting in your lap, you’re in more trouble than if you had an atomic powder keg sitting in your lap. When a racial powder keg goes off, it doesn’t care who it knocks out the way. Understand this, it’s dangerous."
+*   **Fragmentative Goals**: "Historically, revolutions are bloody, oh yes they are... Revolutions overturn systems. Revolutions destroy systems."
+*   **Amity / Goal Orientation**: "Only, you think that integration will get you freedom; I think that separation will get me freedom. We both got the same objective, we just got different ways of getting' at it."
+
+### mlk_letter_from_birmingham_jail.txt
+*   **Individual Dignity**: "Any law that uplifts human personality is just. Any law that degrades human personality is unjust."
+*   **Individual Dignity**: "Now is the time to lift our national policy from the quicksand of racial injustice to the solid rock of human dignity."
+*   **Cohesive Goals**: "We are caught in an inescapable network of mutuality, tied in a single garment of destiny. Whatever affects one directly, affects all indirectly."
+*   **Hope**: "Let us all hope that the dark clouds of racial prejudice will soon pass away and the deep fog of misunderstanding will be lifted from our fear drenched communities, and in some not too distant tomorrow the radiant stars of love and brotherhood will shine over our great nation with all their scintillating beauty."
+*   **Enmity**: "I have almost reached the regrettable conclusion that the Negro's great stumbling block in his stride toward freedom is not the White Citizen's Counciler or the Ku Klux Klanner, but the white moderate, who is more devoted to 'order' than to justice..."
+*   **Amity**: "I want to try to answer your statement in what I hope will be patient and reasonable terms."
+*   **Compersion**: "I am thankful, however, that some of our white brothers in the South have grasped the meaning of this social revolution and committed themselves to it."
