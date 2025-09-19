@@ -1,11 +1,11 @@
-# Discernus v10 Sprints - Show Your Work Migration
+# Discernus V2 Sprints - Integrated Ecosystem Rewrite
 
-**Purpose**: Organized backlog focused on migrating from existing pipeline to Show Your Work architecture.
+**Purpose**: Organized backlog for the V2 Integrated Ecosystem Rewrite, replacing the previous "Show Your Work" migration plan.
 
 **Usage**:
 
-- "groom our sprints" → organize inbox items into proper sprint structure
-- Items moved here from inbox.md during grooming sessions
+- This plan supersedes the previous incremental refactoring sprints.
+- Each sprint epic corresponds directly to a phase in the `v2_integrated_ecosystem_rewrite_plan.md`.
 
 ---
 
@@ -13,1035 +13,389 @@
 
 **Latest Updates**:
 
-- 🎯 **NEW ENHANCED ANALYSIS AGENT**: Successfully developed 6-step THIN approach with inline markup
-- ✅ **PROTOTYPE VALIDATED**: Testing shows excellent alignment between markup density and scoring
-- 🔄 **ARCHITECTURE PIVOT**: Migrating to Show Your Work architecture with tool calling and adversarial attestation
-- ✅ **Phase 0.5 COMPLETED**: Analysis agent converted to tool calling (partial migration)
-- ✅ **STATISTICAL ANALYSIS FIXED**: Removed THICK antipatterns, statistical analysis now works correctly
-- ✅ **CACHE SYSTEM IMPROVED**: Fixed input-based caching for better cache hit rates
-- ✅ **TEMP WORKSPACE CLEANUP**: Eliminated THICK temp directory creation antipattern
-- 📋 **MIGRATION PLAN CREATED**: Comprehensive 4-phase migration plan documented
+- ✅ **ARCHITECTURE PIVOT**: We have formally adopted the V2 Integrated Ecosystem Rewrite plan.
+- ✅ **ANALYSIS COMPLETE**: The V1 orchestrator (`CleanAnalysisOrchestrator`) has been analyzed and confirmed to be a monolithic source of technical debt. The aborted `ShowYourWorkOrchestrator` has been deleted.
+- 📋 **PLANNING COMPLETE**: This document now reflects the full V2 rewrite plan.
 
-**Current Focus**: **Evidence Management THIN Refactoring** - After successful THIN orchestrator neurosurgery (removed 770+ lines of THICK code), the next priority is moving evidence preparation logic from orchestrator to EvidenceRetrieverAgent for proper THIN architecture.
-
-**Status**: Data structure error RESOLVED, orchestrator successfully converted to THIN traffic cop. Ready for evidence management refactoring.
-
-**Migration Strategy**: Continue systematic refactoring of CleanAnalysisOrchestrator to use Show Your Work patterns while preserving mature functionality. Focus on evidence retrieval phase next.
+**Current Focus**: **Phase 1: Agent Standardization & Foundational Tooling**. The immediate priority is to establish the core interfaces and data contracts that all V2 agents will use.
 
 ---
 
-## Current Sprint Planning
+## V2 Rewrite Sprint Plan
 
-**Next Priority**: Critical Data Structure Error Fix - **URGENT PRIORITY**
-**Status**: Blocking all experiments - Fix `'list' object has no attribute 'get'` error during initialization
-**Dependencies**: None - can begin immediately
+### Sprint V2-1: Agent Standardization & Foundational Tooling
+**Corresponds to**: V2 Plan - Phase 1 (Weeks 1-2)
+**Goal**: Create the canonical agent interface, base classes, and data handoff contracts. This is the foundation for the entire V2 ecosystem.
 
-**Following Priority**: Evidence Retrieval Phase Fix - **URGENT PRIORITY**
-**Status**: Ready for execution - Fix "RAG index not available" error blocking experiments
-**Dependencies**: Data structure error fix completion
+**Detailed Tasks**:
 
-**Future Priority**: Sprint EAA-1 (Enhanced Analysis Agent Integration) - **HIGH PRIORITY**
-**Status**: Ready for execution - Replace existing analysis agent with superior THIN approach
-**Dependencies**: Evidence retrieval fix completion
+#### [V2-1.1] Define `StandardAgent` Interface
+- **Implementation**: Create `discernus/core/standard_agent.py` with the exact interface from V2 plan
+- **Constructor**: `__init__(security: ExperimentSecurityBoundary, storage: LocalArtifactStorage, audit: AuditLogger, config: Optional[AgentConfig] = None)`
+- **Methods**: `execute(**kwargs) -> AgentResult` and `get_capabilities() -> List[str]`
+- **Files to Create**: `discernus/core/standard_agent.py`, `discernus/core/agent_result.py`
 
-**Future Priority**: Sprint SYW-2 (Add Verification Layer) - **MEDIUM PRIORITY**
-**Status**: Planned - depends on evidence retrieval fix and EAA-1
-**Dependencies**: Evidence retrieval must work, enhanced analysis agent must be integrated
+#### [V2-1.2] Build Agent Base Classes
+- **ToolCallingAgent**: For agents needing structured output via tool calls
+- **ValidationAgent**: For verification and coherence checking with `validate()` method
+- **SynthesisAgent**: For report generation with `synthesize()` method  
+- **VerificationAgent**: For adversarial attestation with `verify()` method
+- **Files to Create**: `discernus/core/agent_base_classes.py`
 
----
+#### [V2-1.3] Implement `RunContext`
+- **Purpose**: Typed data class for all inter-agent handoffs to eliminate hidden state
+- **Fields**: `analysis_results`, `derived_metrics`, `evidence`, `statistical_results`, `metadata` (artifact hashes, versions, cache keys)
+- **Implementation**: Dataclass with type hints and validation
+- **Files to Create**: `discernus/core/run_context.py`
 
-## Critical Bug Fix Sprints
+#### [V2-1.4] Create Agent Configuration System
+- **AgentConfig**: Dataclass with `model`, `parameters`, `retry_config`, `verification_config`
+- **RetryConfig**: Dataclass for retry policies
+- **VerificationConfig**: Optional verification settings
+- **Files to Create**: `discernus/core/agent_config.py`
 
-### Sprint BUG-1: Fix Data Structure Error ✅ **COMPLETED**
+#### [V2-1.5] Centralize Gateway/Model Policy
+- **Policy**: All LLM calls routed through project gateway
+- **Defaults**: Vertex AI unless overridden by config
+- **Safety**: Centralize safety/retry settings in gateway
+- **Enforcement**: Agents cannot instantiate model clients directly
+- **Files to Update**: Gateway classes to enforce this policy
 
-**Description**: Fix `'list' object has no attribute 'get'` error that blocks all experiment execution
-**Purpose**: Restore basic experiment functionality to enable further development
-**Priority**: COMPLETED - Was blocking all experiments
-**Timeline**: COMPLETED - Fixed in 1 day
-**Success Criteria**: ✅ Experiments can run successfully in statistical preparation mode
-**Dependencies**: None - completed immediately
+**Definition of Done**:
+- ✅ `StandardAgent` interface implemented with exact signature from V2 plan
+- ✅ All 4 base classes (`ToolCallingAgent`, `ValidationAgent`, `SynthesisAgent`, `VerificationAgent`) implemented
+- ✅ `RunContext` dataclass created with all required fields and type hints
+- ✅ `AgentConfig` system implemented with retry and verification configs
+- ✅ Gateway policy enforced - no direct model client instantiation in agents
+- ✅ Unit tests for all new interfaces and classes
+- ✅ Documentation for agent development patterns
 
-**COMPLETION SUMMARY**:
-- ✅ Data structure error completely resolved
-- ✅ THIN orchestrator neurosurgery completed: removed 770+ lines of THICK code
-- ✅ Orchestrator converted from customs inspector to traffic cop
-- ✅ Statistical processing delegated to StatisticalAgent
-- ✅ CSV generation delegated to StatisticalAgent tool calls
-- ✅ End-to-end functionality confirmed with micro_test_experiment
+### Sprint V2-2: EvidenceRetrieverAgent Migration & RAG Consolidation
+**Corresponds to**: V2 Plan - Phase 1 (Weeks 3-4) & Phase 1.5
+**Goal**: Migrate the most complex legacy agent to the V2 standard and centralize all RAG logic within it, removing it from the orchestrator.
 
-#### [BUG1-001] Debug Data Structure Mismatch
+**Detailed Tasks**:
 
-- **Description**: Identify exact location where list is being treated as dictionary with `.get()` calls
-- **Purpose**: Pinpoint root cause of the data structure error
-- **Priority**: CRITICAL - Must identify root cause before fixing
-- **Current Status**: Error occurs during `_initialize_infrastructure` phase, before detailed logging
-- **Investigation Areas**:
-  - `_verify_caching_performance` method in orchestrator
-  - Artifact storage registry structure
-  - Data structure assumptions in initialization code
-  - YAML parsing results being treated as dictionaries
-- **Solution Strategy**:
-  - Add comprehensive debug logging to trace exact error location
-  - Check data structure types at each step of initialization
-  - Validate artifact storage registry structure
-  - Test with minimal reproducible case
-- **Acceptance Criteria**:
-  - ✅ Exact error location identified and documented
-  - ✅ Root cause of data structure mismatch understood
-  - ✅ Debug logging shows data structure types at each step
-  - ✅ Minimal reproducible case created
-- **Files to Investigate**:
-  - `discernus/core/clean_analysis_orchestrator.py` (_initialize_infrastructure, _verify_caching_performance)
-  - `discernus/core/local_artifact_storage.py` (registry structure)
-  - YAML parsing and data structure handling
-- **Dependencies**: None
-- **Effort**: 1 day
+#### [V2-2.1] Refactor `EvidenceRetrieverAgent` Constructor
+- **Current Issue**: Uses `config: Dict[str, Any]` anti-pattern
+- **Solution**: Replace with proper dependency injection following `AnalysisAgent` pattern
+- **New Constructor**: `__init__(security: ExperimentSecurityBoundary, storage: LocalArtifactStorage, audit: AuditLogger, config: Optional[AgentConfig] = None)`
+- **Files to Update**: `discernus/agents/evidence_retriever_agent/evidence_retriever_agent.py`
 
-#### [BUG1-002] Fix Data Structure Handling
+#### [V2-2.2] Implement Responsibility Separation
+- **Method Structure**: 
+  - `_discover_evidence_artifacts(analysis_hashes: List[str]) -> List[str]`
+  - `_generate_evidence_queries(statistical_results: Dict) -> List[str]`
+  - `_retrieve_evidence(queries: List[str]) -> List[Dict]`
+  - `_structure_evidence_output(evidence: List[Dict]) -> Dict`
+- **Purpose**: Clear separation of concerns within the agent
 
-- **Description**: Correct the data structure handling to prevent list/dictionary mismatch
-- **Purpose**: Restore experiment execution functionality
-- **Priority**: CRITICAL - Must fix to enable experiments
-- **Solution Strategy**:
-  - Fix data structure assumptions in identified locations
-  - Ensure proper type checking before `.get()` calls
-  - Validate artifact storage registry structure
-  - Add defensive programming for data structure handling
-- **Acceptance Criteria**:
-  - ✅ No more `'list' object has no attribute 'get'` errors
-  - ✅ Experiments can run successfully in statistical preparation mode
-  - ✅ All data structure handling is type-safe
-  - ✅ No regression in existing functionality
-- **Files to Update**:
-  - `discernus/core/clean_analysis_orchestrator.py` (identified error locations)
-  - `discernus/core/local_artifact_storage.py` (if registry structure issues)
-- **Dependencies**: [BUG1-001] - Root cause must be identified first
-- **Effort**: 1 day
+#### [V2-2.3] Add Tool Calling Integration
+- **Tools to Add**: 
+  - `record_evidence_finding` for structured output
+  - `verify_evidence_relevance` for verification step
+- **Implementation**: Follow existing tool calling patterns from `AnalysisAgent`
 
-#### [BUG1-003] Add Provenance Integration for Marked-Up Documents
+#### [V2-2.4] Implement "Own RAG" Pattern
+- **RAGIndexManager**: Create dedicated class for RAG lifecycle management
+- **Index Scope Selection**: Choose sources based on `RunContext` and statistical cues
+- **Index Build**: Delegate to `RAGIndexManager` for txtai index with metadata
+- **Caching & Invalidation**: Cache keys from experiment/framework IDs, upstream artifact hashes
+- **Retrieval**: Generate queries via tool call, run top-k lookups with structured quotes
+- **Provenance**: Record cache key, source hashes, retrieval parameters in metadata
+- **Files to Create**: `discernus/core/rag_index_manager.py`
 
-- **Description**: Copy marked-up documents to experiment run folder and create README for interpretation
-- **Purpose**: Complete provenance integration by including marked-up documents in experiment runs
-- **Priority**: HIGH - Required for provenance completeness
-- **Current Issue**: Marked-up documents are generated but not copied to experiment run folder
-- **Solution Strategy**:
-  - Copy marked-up documents from shared cache to experiment run folder
-  - Create README explaining how to interpret marked-up documents
-  - Update provenance specification to include marked-up document handling
-  - Ensure marked-up documents are discoverable in experiment runs
-- **Acceptance Criteria**:
-  - ✅ Marked-up documents copied to experiment run folder
-  - ✅ README created explaining document interpretation
-  - ✅ Provenance specification updated
-  - ✅ Marked-up documents discoverable in experiment runs
-- **Files to Update**:
-  - `discernus/core/clean_analysis_orchestrator.py` (provenance integration)
-  - `pm/active_projects/STATISTICAL_PREPARATION_PROVENANCE_INTEGRATION.md` (specification update)
-- **Dependencies**: [BUG1-002] - Experiments must run first
-- **Effort**: 1 day
+#### [V2-2.5] Ensure Agent Self-Sufficiency
+- **Framework Reading**: Agent reads framework directly from path (not pre-created artifact)
+- **Artifact Discovery**: Agent discovers evidence artifacts from analysis hashes
+- **Statistical Results**: Agent reads statistical results from artifact hash
+- **No Orchestrator Dependencies**: Agent handles all infrastructure setup internally
 
-**Sprint BUG-1 Success Criteria**:
-- ✅ No more data structure errors during experiment execution
-- ✅ Experiments run successfully in statistical preparation mode
-- ✅ Marked-up documents included in experiment run provenance
-- ✅ Provenance integration specification updated
-- ✅ All existing functionality preserved
+#### [V2-2.6] Delete Orchestrator RAG Logic (Phase 1.5)
+- **Remove Methods**: All `_build_fact_checker_rag_index` and `_build_*rag_index*` functions
+- **Normalize Artifacts**: Evidence artifact typing/versioning for agent discovery
+- **Cache Management**: Move to dedicated RAG cache manager
+- **Files to Update**: `discernus/core/clean_analysis_orchestrator.py`
 
----
+**Definition of Done**:
+- ✅ `EvidenceRetrieverAgent` implements `StandardAgent` interface
+- ✅ Constructor uses proper dependency injection (no `Dict[str, Any]` config)
+- ✅ Agent has clear method separation for evidence workflow
+- ✅ Tool calling integrated with `record_evidence_finding` and `verify_evidence_relevance`
+- ✅ `RAGIndexManager` created and handles all RAG lifecycle operations
+- ✅ Agent reads framework and statistical results directly from artifacts
+- ✅ Agent discovers evidence artifacts from analysis hashes without orchestrator help
+- ✅ All orchestrator RAG methods deleted (80+ lines removed)
+- ✅ Orchestrator evidence phase reduced to ~10 lines (simple agent call)
+- ✅ No regression in evidence quality (validated with existing experiments)
+- ✅ Unit tests for `RAGIndexManager` and refactored agent
+- ✅ Integration tests showing end-to-end evidence retrieval works
 
-## Statistical Agent Development Sprints
+### Sprint V2-3: UnifiedSynthesisAgent Migration
+**Corresponds to**: V2 Plan - Phase 2 (Weeks 5-6)
+**Goal**: Migrate the synthesis agent to the new standard, focusing on consuming V2-native artifacts.
 
-### Sprint SA-1: Build THIN Statistical Agent ⚠️ **HIGH PRIORITY**
+**Detailed Tasks**:
 
-**Description**: Build a THIN statistical agent that performs statistical analysis using LLM internal execution with minimal tool calling
-**Purpose**: Enable comprehensive statistical analysis of analysis results with full Show Your Work transparency
-**Priority**: HIGH - Critical for research validation and statistical rigor
-**Timeline**: 2 weeks - after EAA-1 completion
-**Success Criteria**: Statistical agent processes analysis artifacts and produces verified statistical results with CSV outputs
-**Dependencies**: Sprint EAA-1 (Enhanced Analysis Agent Integration) must complete first
+#### [V2-3.1] Refactor `UnifiedSynthesisAgent` Interface
+- **Implement `StandardAgent`**: Update constructor and methods to match standard interface
+- **Constructor**: `__init__(security: ExperimentSecurityBoundary, storage: LocalArtifactStorage, audit: AuditLogger, config: Optional[AgentConfig] = None)`
+- **Execute Method**: `execute(run_context: RunContext) -> AgentResult`
+- **Files to Update**: `discernus/agents/unified_synthesis_agent/agent.py`
 
-#### [SA1-001] Create Statistical Agent Structure
+#### [V2-3.2] Artifact Format Migration
+- **Read V2 Artifacts**: Consume `analysis_scores.json`, `evidence_quotes.json`, `computational_work.json` directly
+- **Remove CSV Parsing**: Eliminate all CSV parsing and old artifact format assumptions
+- **Compatibility Layer**: Temporary adapter for transition period if needed
+- **Raw Object Policy**: Operate on in-memory objects for handoffs; serialize only for final artifacts
 
-- **Description**: Build the basic statistical agent with THIN architecture
-- **Purpose**: Create the foundation for statistical analysis capabilities
-- **Priority**: CRITICAL - Foundation for all statistical work
-- **Requirements**:
-  - **Name**: `statistical_agent` (not statistical_planning_execution_agent)
-  - **Location**: `discernus/agents/statistical_agent/`
-  - **THIN approach**: LLM does statistical planning, execution, and verification internally
-  - **Minimal tool calling**: Only for deterministic verification (thumbs up/down)
-  - **No parsing**: Raw content in, structured output via tool calls
-- **Solution Strategy**:
-  - Create single agent with two internal steps
-  - Step 1: Statistical planning + execution (no tool calls)
-  - Step 2: Internal verification (tool call for thumbs up/down)
-  - Use existing agent base class and patterns
-- **Acceptance Criteria**:
-  - ✅ Agent inherits from proper base class
-  - ✅ Two-step internal process (planning+execution, verification)
-  - ✅ No parsing of input files
-  - ✅ Raw content passed to LLM
-  - ✅ Tool calling only for verification step
-- **Files to Create**:
-  - `discernus/agents/statistical_agent/__init__.py`
-  - `discernus/agents/statistical_agent/main.py`
-  - `discernus/agents/statistical_agent/prompt.yaml`
-- **Dependencies**: Sprint EAA-1 completion
-- **Effort**: 2-3 days
+#### [V2-3.3] Consume `RunContext` for All Inputs
+- **Analysis Results**: Read from `run_context.analysis_results` instead of filesystem discovery
+- **Evidence Data**: Read from `run_context.evidence` instead of scanning for evidence files
+- **Statistical Results**: Read from `run_context.statistical_results` instead of CSV parsing
+- **Metadata**: Use `run_context.metadata` for artifact hashes and cache keys
+- **No Filesystem Scanning**: Remove all logic that discovers artifacts from disk
 
-#### [SA1-002] Implement Statistical Analysis Logic
+#### [V2-3.4] Enhanced Synthesis Features
+- **Computational Work Integration**: Incorporate computational work from V2 artifacts
+- **Verification Result Integration**: Include verification results in synthesis
+- **Statistical Presentation**: Consistent 2-3 significant digits with disclosure
+- **Tool Calling**: Add structured output via tool calling for report metadata
 
-- **Description**: Implement the core statistical analysis functionality
-- **Purpose**: Enable LLM to perform comprehensive statistical analysis
-- **Priority**: HIGH - Core functionality
-- **Requirements**:
-  - **Input handling**: Framework content, analysis artifacts, experiment content, corpus content
-  - **Statistical planning**: LLM determines appropriate statistical tests
-  - **Data aggregation**: LLM aggregates data from multiple analysis artifacts
-  - **Code execution**: LLM generates and executes statistical code internally
-  - **CSV generation**: LLM produces CSV files for human researchers
-- **Solution Strategy**:
-  - Use LLM internal execution for all statistical work
-  - Provide raw file content, let LLM figure out structure
-  - LLM generates Python code using numpy, pandas, scipy.stats, pingouin
-  - LLM executes code internally and saves results
-  - No parsing or data extraction in software
-- **Acceptance Criteria**:
-  - ✅ Handles any framework and experiment combination
-  - ✅ Aggregates data from multiple analysis artifacts
-  - ✅ Generates appropriate statistical tests
-  - ✅ Executes statistical code internally
-  - ✅ Produces CSV outputs for researchers
-  - ✅ No framework-specific assumptions
-- **Files to Update**:
-  - `discernus/agents/statistical_agent/main.py` (core logic)
-  - `discernus/agents/statistical_agent/prompt.yaml` (statistical prompts)
-- **Dependencies**: [SA1-001] - Agent structure must exist
-- **Effort**: 3-4 days
+**Definition of Done**:
+- ✅ `UnifiedSynthesisAgent` implements `StandardAgent` interface
+- ✅ Agent constructor uses proper dependency injection
+- ✅ Agent reads all inputs from `RunContext` object (no filesystem scanning)
+- ✅ Agent consumes V2 artifact formats (`analysis_scores.json`, `evidence_quotes.json`, `computational_work.json`)
+- ✅ CSV parsing logic removed and replaced with structured data consumption
+- ✅ Computational work and verification results integrated into synthesis
+- ✅ Statistical results presented with consistent significant digits and disclosure
+- ✅ Tool calling implemented for structured report metadata output
+- ✅ No regression in synthesis quality (validated with existing experiments)
+- ✅ Unit tests for refactored agent
+- ✅ Integration tests showing end-to-end synthesis works with V2 artifacts
 
-#### [SA1-003] Add Verification and Tool Calling
+### Sprint V2-4: Verification Agent Ecosystem
+**Corresponds to**: V2 Plan - Phase 2 (Weeks 7-8)
+**Goal**: Build the adversarial attestation layer to complete the "Show Your Work" architecture.
 
-- **Description**: Implement internal verification with minimal tool calling
-- **Purpose**: Ensure statistical analysis accuracy and provide deterministic verification
-- **Priority**: HIGH - Required for Show Your Work principles
-- **Requirements**:
-  - **Internal verification**: LLM verifies its own statistical work
-  - **Tool calling**: Single tool call for thumbs up/down verification
-  - **Deterministic output**: Clear verification status
-  - **Error handling**: Graceful handling of verification failures
-- **Solution Strategy**:
-  - LLM reviews its own statistical work
-  - Calls `verify_statistical_analysis` tool with boolean result
-  - Tool schema: `{"verified": true/false}`
-  - No complex verification logic in software
-- **Acceptance Criteria**:
-  - ✅ LLM verifies its own work internally
-  - ✅ Single tool call for verification result
-  - ✅ Deterministic boolean output
-  - ✅ Error handling for tool call failures
-  - ✅ Clear verification status reporting
-- **Files to Update**:
-  - `discernus/agents/statistical_agent/main.py` (verification logic)
-  - `discernus/agents/statistical_agent/prompt.yaml` (verification prompts)
-- **Dependencies**: [SA1-002] - Core logic must exist
-- **Effort**: 1-2 days
+**Detailed Tasks**:
 
-#### [SA1-004] Integrate with Orchestrator
+#### [V2-4.1] Implement `VerificationAgent` Base Class
+- **Base Class**: Create abstract base class extending `StandardAgent`
+- **Verify Method**: `verify(primary_results: Dict[str, Any], computational_work: Dict[str, Any]) -> VerificationResult`
+- **VerificationResult**: Dataclass with `verified: bool`, `discrepancies: List[str]`, `attestation_data: Dict`
+- **Files to Create**: `discernus/core/verification_agent.py`, `discernus/core/verification_result.py`
 
-- **Description**: Ensure statistical agent works with existing orchestrator
-- **Purpose**: Enable statistical analysis in production pipeline
-- **Priority**: HIGH - Required for end-to-end functionality
-- **Requirements**:
-  - **Orchestrator compatibility**: Works with existing orchestrator
-  - **CLI integration**: Works with all existing CLI flags
-  - **Experiment agnosticism**: Handles any framework/experiment combination
-  - **Batch processing**: Efficiently processes multiple analysis artifacts
-- **Solution Strategy**:
-  - Update orchestrator to use new statistical agent
-  - Ensure CLI flags work correctly
-  - Test with various frameworks and experiments
-  - Optimize for batch processing
-- **Acceptance Criteria**:
-  - ✅ Works with existing orchestrator
-  - ✅ All CLI flags work correctly
-  - ✅ Processes any framework without modification
-  - ✅ Handles multiple analysis artifacts efficiently
-  - ✅ No regression in existing functionality
-- **Files to Update**:
-  - `discernus/core/clean_analysis_orchestrator.py`
-  - `discernus/cli.py` (if needed for new flags)
-  - `discernus/agents/__init__.py` (agent registration)
-- **Dependencies**: [SA1-001], [SA1-002], [SA1-003] - All agent components must be ready
-- **Effort**: 2-3 days
+#### [V2-4.2] Build Specific Verification Agents
+- **AnalysisVerificationAgent**: Re-executes computational work from `AnalysisAgent`
+  - Reads `analysis_scores.json` and `computational_work.json`
+  - Re-runs analysis code and compares results
+  - Files: `discernus/agents/analysis_verification_agent/`
+- **StatisticalVerificationAgent**: Validates statistical calculations
+  - Reads `statistics.json` and `statistical_work.json`
+  - Re-executes statistical code and validates results
+  - Files: `discernus/agents/statistical_verification_agent/`
+- **EvidenceVerificationAgent**: Checks evidence relevance and accuracy
+  - Reads `evidence_quotes.json` and validates against source
+  - Verifies evidence retrieval accuracy
+  - Files: `discernus/agents/evidence_verification_agent/`
+- **SynthesisVerificationAgent**: Fact-checks synthesis claims
+  - Reads synthesis report and validates claims against evidence
+  - Cross-references statistical assertions
+  - Files: `discernus/agents/synthesis_verification_agent/`
 
-#### [SA1-005] Add Logging and Cost Tracking
+#### [V2-4.3] Create `CacheIntegrityVerifier`
+- **Purpose**: Verifies cache keys and artifact hashes across phases
+- **Detection**: Identifies stale/mismatched caches
+- **Validation**: Ensures cache coherence throughout pipeline
+- **Files to Create**: `discernus/agents/cache_integrity_verifier/`
 
-- **Description**: Integrate with project's logging and cost tracking systems
-- **Purpose**: Full observability and cost management for statistical analysis
-- **Priority**: MEDIUM - Required for production monitoring
-- **Requirements**:
-  - **Audit logging**: All statistical agent events logged
-  - **Cost tracking**: Token usage and costs tracked
-  - **Performance metrics**: Processing time, success rates
-  - **Resume capability**: Caching for interrupted operations
-- **Solution Strategy**:
-  - Use existing `AuditLogger` for all events
-  - Track costs per LLM call
-  - Implement caching for resume capability
-  - Add performance timing
-- **Acceptance Criteria**:
-  - ✅ All agent actions logged with timestamps
-  - ✅ Token usage and costs tracked
-  - ✅ Processing times logged
-  - ✅ Caching enables resume from any step
-  - ✅ Cost reports generated per experiment
-- **Files to Update**:
-  - `discernus/agents/statistical_agent/main.py` (logging integration)
-  - `discernus/core/audit_logger.py` (if needed for new event types)
-- **Dependencies**: [SA1-001] - Agent must exist first
-- **Effort**: 1-2 days
+#### [V2-4.4] Create `SynthesisFactCheckLite`
+- **Purpose**: Advisory, read-only cross-check of sampled claims against evidence artifacts
+- **No Orchestrator RAG**: Uses only evidence artifacts, no orchestrator RAG dependency
+- **Sampling**: Checks subset of synthesis claims for efficiency
+- **Files to Create**: `discernus/agents/synthesis_fact_check_lite/`
 
-#### [SA1-006] Comprehensive Testing and Validation
+**Definition of Done**:
+- ✅ `VerificationAgent` base class implemented with standard `verify` method
+- ✅ `VerificationResult` dataclass created with verification status and discrepancy tracking
+- ✅ `AnalysisVerificationAgent` re-executes and validates analysis computational work
+- ✅ `StatisticalVerificationAgent` validates statistical calculations independently
+- ✅ `EvidenceVerificationAgent` checks evidence relevance and accuracy
+- ✅ `SynthesisVerificationAgent` fact-checks synthesis claims against evidence
+- ✅ `CacheIntegrityVerifier` detects stale/mismatched caches across phases
+- ✅ `SynthesisFactCheckLite` provides advisory fact-checking without orchestrator RAG
+- ✅ All verification agents follow `StandardAgent` interface
+- ✅ Verification agents produce `attestation_<hash>.json` artifacts
+- ✅ Unit tests for all verification agents
+- ✅ Integration tests showing verification catches actual discrepancies
+- ✅ Performance testing ensures verification doesn't significantly slow pipeline
 
-- **Description**: Thorough testing of statistical agent
-- **Purpose**: Ensure production readiness and reliability
-- **Priority**: HIGH - Required before deployment
-- **Testing Requirements**:
-  - **Unit tests**: All agent methods tested
-  - **Integration tests**: Full orchestrator integration
-  - **Performance tests**: Multiple analysis artifacts processing
-  - **Framework tests**: Multiple framework compatibility
-  - **Verification tests**: Tool calling reliability
-- **Solution Strategy**:
-  - Create comprehensive test suite
-  - Test with various frameworks and experiments
-  - Performance testing with multiple analysis artifacts
-  - Test verification scenarios and error handling
-  - Validate cost tracking and logging
-- **Acceptance Criteria**:
-  - ✅ All unit tests pass
-  - ✅ Integration tests pass
-  - ✅ Multiple analysis artifacts processing successful
-  - ✅ Multiple frameworks work correctly
-  - ✅ Verification scenarios work reliably
-  - ✅ Cost tracking accurate
-  - ✅ No memory leaks or performance issues
-- **Files to Create**:
-  - `discernus/tests/test_statistical_agent_integration.py`
-  - `discernus/tests/test_statistical_agent_performance.py`
-  - `discernus/tests/test_statistical_agent_verification.py`
-- **Dependencies**: [SA1-001] through [SA1-005] - All components must be complete
-- **Effort**: 2-3 days
+### Sprint V2-5: V2 Orchestrator Implementation
+**Corresponds to**: V2 Plan - Phase 3
+**Goal**: Build the new, simple, agent-native orchestrator.
 
----
+**Detailed Tasks**:
 
-## Evidence Management THIN Refactoring Sprint
+#### [V2-5.1] Build `V2Orchestrator` Core
+- **Core Architecture**: 
+  ```python
+  class V2Orchestrator:
+      def __init__(self, agents: Dict[str, StandardAgent]):
+          self.agents = agents
+      def execute_strategy(self, strategy: ExecutionStrategy) -> ExperimentResult:
+          return strategy.execute(self.agents)
+  ```
+- **Agent Registry**: Dynamic agent discovery and capability declaration
+- **Configuration Management**: Clean separation of experiment vs. runtime config
+- **Files to Create**: `discernus/core/v2_orchestrator.py`
 
-### Sprint EM-1: Move Evidence Preparation from Orchestrator to EvidenceRetrieverAgent ⚠️ **HIGH PRIORITY**
+#### [V2-5.2] Implement Strategy Pattern
+- **FullExperimentStrategy**: Complete pipeline execution with verification
+- **AnalysisOnlyStrategy**: Analysis phase only
+- **StatisticalPrepStrategy**: Analysis + statistical phases
+- **ResumeFromStatsStrategy**: Resume from statistical results
+- **Strategy Interface**: 
+  ```python
+  class ExecutionStrategy:
+      def execute(self, agents: Dict[str, StandardAgent]) -> ExperimentResult:
+          # Simple linear execution with verification
+  ```
+- **Files to Create**: `discernus/core/execution_strategies.py`
 
-**Description**: Complete THIN architecture by moving evidence preparation logic from orchestrator to EvidenceRetrieverAgent
-**Purpose**: Eliminate remaining THICK customs inspector behavior from orchestrator, make EvidenceRetrieverAgent self-sufficient
-**Priority**: HIGH - Completes THIN architecture transformation
-**Timeline**: 3-5 days - focused refactoring with testing
-**Success Criteria**: Orchestrator just passes artifact hashes to EvidenceRetrieverAgent, which handles all evidence preparation internally
-**Dependencies**: None - orchestrator neurosurgery complete, system working
+#### [V2-5.3] Implement Resume Capability
+- **Resume Manifest**: Write `resume_manifest.json` after each phase with artifact hashes and minimal metadata
+- **Resume Logic**: `ResumeFromStats` reads manifest instead of directory scans
+- **Cache Integration**: Leverage agent-level caching automatically
+- **Files as Canonical**: Persist all artifacts to disk as source of truth; no DB in this stage
 
-#### [EM1-001] Analyze Current Evidence Preparation Logic
+#### [V2-5.4] Create `ExperimentRunConfig`
+- **Replace Boolean Flags**: Single typed config object instead of multiple boolean flags
+- **Configuration**: Model selection, verification settings, resume options
+- **Files to Create**: `discernus/core/experiment_run_config.py`
 
-- **Description**: Document exactly what evidence preparation the orchestrator currently does
-- **Purpose**: Understand what needs to move to EvidenceRetrieverAgent
-- **Priority**: CRITICAL - Must understand before refactoring
-- **Current THICK Behavior in Orchestrator**:
-  - **Framework artifact discovery/creation** (lines 1528-1554): Searches registry, creates framework specification artifact
-  - **Statistical results artifact discovery/creation** (lines 1556-1591): Searches registry, creates statistical results artifact with JSON serialization
-  - **Evidence artifact discovery** (lines 1593-1607): Searches registry for evidence artifacts by type patterns
-  - **Agent configuration** (lines 1609-1616): Complex configuration with shared infrastructure
-- **Solution Strategy**:
-  - Document current interface between orchestrator and EvidenceRetrieverAgent
-  - Identify what preparation logic should move to agent
-  - Design new THIN interface: pass hashes, let agent handle discovery/preparation
-- **Acceptance Criteria**:
-  - ✅ Current evidence preparation logic fully documented
-  - ✅ New THIN interface designed
-  - ✅ Clear migration plan for moving logic to agent
-- **Files to Analyze**:
-  - `discernus/core/clean_analysis_orchestrator.py` (_run_evidence_retrieval_phase method)
-  - `discernus/agents/evidence_retriever_agent/evidence_retriever_agent.py` (current interface)
-- **Dependencies**: None
-- **Effort**: 1 day
+#### [V2-5.5] Integrate with CLI
+- **CLI Flag**: Add `--orchestrator-version=v2` for backward-compatible rollout
+- **Default V1**: Keep V1 as default until parity validation complete
+- **Configuration**: Ensure all existing CLI options work with V2 orchestrator
+- **Files to Update**: `discernus/cli.py`
 
-#### [EM1-002] Enhance EvidenceRetrieverAgent Self-Sufficiency
+**Definition of Done**:
+- ✅ `V2Orchestrator` implemented with agent registry and strategy execution
+- ✅ All execution strategies implemented (`FullExperimentStrategy`, `AnalysisOnlyStrategy`, etc.)
+- ✅ Strategy pattern allows different execution modes as separate classes
+- ✅ Resume capability uses `resume_manifest.json` (no directory scanning)
+- ✅ `ExperimentRunConfig` replaces boolean flags with typed configuration
+- ✅ CLI integration with `--orchestrator-version=v2` flag
+- ✅ Agent-level caching works automatically with V2 orchestrator
+- ✅ Verification integration optional at each step
+- ✅ Files remain canonical source of truth (no DB footprint)
+- ✅ Unit tests for orchestrator and all strategies
+- ✅ Integration tests showing V2 orchestrator works end-to-end
+- ✅ Performance comparison with V1 orchestrator
 
-- **Description**: Update EvidenceRetrieverAgent to handle all evidence preparation internally
-- **Purpose**: Make agent self-sufficient so orchestrator can just pass simple inputs
-- **Priority**: HIGH - Core refactoring work
-- **Enhancement Areas**:
-  - **Artifact Discovery**: Agent finds its own evidence artifacts from analysis hashes
-  - **Framework Reading**: Agent reads framework directly from path (not pre-created artifact)
-  - **Statistical Results Reading**: Agent reads statistical results from artifact hash (not parsed dict)
-  - **Self-Configuration**: Agent handles its own infrastructure setup
-- **Solution Strategy**:
-  - Modify agent to accept simpler inputs: analysis_hashes, statistical_hash, framework_path
-  - Move artifact discovery logic from orchestrator to agent
-  - Add framework reading capability to agent
-  - Add statistical results artifact reading to agent
-- **Acceptance Criteria**:
-  - ✅ Agent accepts analysis artifact hashes and finds evidence artifacts itself
-  - ✅ Agent reads framework directly from path
-  - ✅ Agent reads statistical results from artifact hash
-  - ✅ Agent handles all infrastructure setup internally
-  - ✅ No regression in evidence retrieval quality
-- **Files to Update**:
-  - `discernus/agents/evidence_retriever_agent/evidence_retriever_agent.py` (main logic)
-  - `discernus/agents/evidence_retriever_agent/prompt.yaml` (if needed)
-- **Dependencies**: [EM1-001] - Analysis must be complete
-- **Effort**: 2-3 days
+### Sprint V2-6: Migration, Cleanup & Rollout
+**Corresponds to**: V2 Plan - Phase 4
+**Goal**: Make the V2 ecosystem the default, document the changes, and remove legacy code.
 
-#### [EM1-003] Simplify Orchestrator Evidence Phase
+**Detailed Tasks**:
 
-- **Description**: Replace THICK evidence preparation with simple THIN agent call
-- **Purpose**: Complete orchestrator transformation to pure traffic cop
-- **Priority**: HIGH - Final THIN architecture step
-- **Current THICK Code to Remove**:
-  - **80+ lines of evidence preparation** (framework discovery, statistical results creation, evidence discovery)
-  - **Complex agent configuration** (shared infrastructure setup)
-  - **Data structure transformation** (tuple key conversion, JSON serialization)
-- **Solution Strategy**:
-  - Replace entire `_run_evidence_retrieval_phase` method with simple agent call
-  - Pass only artifact hashes and paths to enhanced EvidenceRetrieverAgent
-  - Remove all evidence artifact discovery and preparation logic
-  - Let agent handle all the complexity internally
-- **Acceptance Criteria**:
-  - ✅ Orchestrator evidence phase reduced to ~10 lines
-  - ✅ No evidence artifact discovery in orchestrator
-  - ✅ No data structure transformation in orchestrator
-  - ✅ Evidence retrieval works exactly as before
-  - ✅ No regression in synthesis quality
-- **Files to Update**:
-  - `discernus/core/clean_analysis_orchestrator.py` (_run_evidence_retrieval_phase method)
-- **Dependencies**: [EM1-002] - Enhanced agent must be ready
-- **Effort**: 1 day
+#### [V2-6.1] Validation Testing
+- **Parity Testing**: Run same experiments through both V1 and V2 orchestrators
+- **Output Comparison**: Byte-identical results where applicable across experiment matrix
+- **Performance Testing**: Measure speed, cost, reliability improvements
+- **Error Handling**: Comprehensive failure scenarios and recovery testing
+- **Acceptance Criteria**: V2 must match or exceed V1 performance and reliability
 
-#### [EM1-004] Integration Testing and Validation
+#### [V2-6.2] Make V2 Default
+- **CLI Default**: Switch default orchestrator to V2
+- **Deprecation Warnings**: Add warnings for V1 usage
+- **Rollback Capability**: Maintain `--orchestrator-version=v1` for emergency rollback
+- **Files to Update**: `discernus/cli.py`
 
-- **Description**: Comprehensive testing of THIN evidence management
-- **Purpose**: Ensure evidence refactoring maintains quality and functionality
-- **Priority**: HIGH - Quality assurance
-- **Testing Requirements**:
-  - **Unit tests**: EvidenceRetrieverAgent with new interface
-  - **Integration tests**: Full pipeline with THIN evidence management
-  - **Quality tests**: Evidence retrieval quality matches previous version
-  - **Performance tests**: No performance regression
-- **Solution Strategy**:
-  - Test enhanced EvidenceRetrieverAgent independently
-  - Test full pipeline with multiple experiments
-  - Compare evidence quality before/after refactoring
-  - Validate synthesis reports maintain quality
-- **Acceptance Criteria**:
-  - ✅ All tests pass with enhanced agent
-  - ✅ Full pipeline works end-to-end
-  - ✅ Evidence retrieval quality maintained
-  - ✅ No performance regression
-  - ✅ Synthesis reports maintain quality
-- **Files to Create/Update**:
-  - `discernus/tests/test_evidence_retriever_agent_enhanced.py`
-  - Integration test updates
-- **Dependencies**: [EM1-003] - Orchestrator changes must be complete
-- **Effort**: 1-2 days
+#### [V2-6.3] Documentation & Migration Guide
+- **API Documentation**: Complete documentation for new agent ecosystem
+- **Migration Guide**: Guide for extending the system with new agents
+- **Architecture Documentation**: Update project architecture docs
+- **Agent Development Guide**: Patterns and best practices for V2 agents
+- **Files to Create**: `docs/v2_architecture.md`, `docs/agent_development_guide.md`
 
-**Sprint EM-1 Success Criteria**:
-- ✅ EvidenceRetrieverAgent is completely self-sufficient
-- ✅ Orchestrator evidence phase reduced to simple agent call (~10 lines)
-- ✅ 80-100 lines of THICK evidence preparation removed from orchestrator
-- ✅ Evidence retrieval quality maintained or improved
-- ✅ Full pipeline works end-to-end with THIN evidence management
-- ✅ Orchestrator is now pure traffic cop for all phases
+#### [V2-6.4] Legacy Code Cleanup
+- **Remove V1 Orchestrator**: Delete `CleanAnalysisOrchestrator` and associated code
+- **Clean Up Imports**: Remove references to deprecated classes
+- **Update Tests**: Migrate tests to use V2 patterns
+- **Files to Remove**: `discernus/core/clean_analysis_orchestrator.py` and related files
+
+#### [V2-6.5] Production Monitoring
+- **Logging**: Ensure comprehensive logging for V2 orchestrator
+- **Metrics**: Performance and reliability metrics collection
+- **Alerting**: Set up monitoring and alerting for production use
+- **Cost Tracking**: Enhanced cost tracking for V2 agent ecosystem
+
+**Definition of Done**:
+- ✅ Parity testing complete - V2 matches V1 output across experiment matrix
+- ✅ Performance testing shows V2 meets or exceeds V1 benchmarks
+- ✅ V2 orchestrator is CLI default with deprecation warnings for V1
+- ✅ Complete API documentation for V2 agent ecosystem
+- ✅ Migration guide and agent development documentation created
+- ✅ V1 `CleanAnalysisOrchestrator` and legacy code removed
+- ✅ All tests migrated to V2 patterns
+- ✅ Production monitoring and alerting configured
+- ✅ Cost tracking enhanced for V2 ecosystem
+- ✅ Emergency rollback to V1 capability maintained
+- ✅ Architecture documentation updated to reflect V2 design
 
 ---
 
-## Enhanced Analysis Agent Integration Sprints
+## Archived Sprints (Pre-V2 Plan)
 
-### Sprint EAA-1: Integrate Enhanced Analysis Agent as Default ⚠️ **URGENT**
+The following sprints were part of the previous incremental refactoring approach ("Show Your Work Migration") and have been superseded by the V2 Integrated Ecosystem Rewrite. The goals of these sprints are addressed more holistically by the new plan, which favors a foundational rewrite over piecemeal changes to the V1 orchestrator. This section is preserved for historical context.
 
-**Description**: Replace existing analysis agent with the new 6-step THIN approach featuring inline markup, comprehensive logging, and full orchestrator compatibility
-**Purpose**: Deploy superior analysis agent that provides better transparency, reliability, and human-readable output
-**Priority**: URGENT - Critical improvement to core analysis functionality
-**Timeline**: 2 weeks - comprehensive integration with full testing
-**Success Criteria**: Enhanced analysis agent becomes default with full orchestrator compatibility, experiment agnosticism, and production readiness
-**Dependencies**: None - can start immediately
+### Archived Sprint: Critical Bug Fix Sprints
+- **Goal**: Fix data structure errors in the V1 orchestrator.
+- **Status**: Superseded. The V2 orchestrator will not have these issues.
 
-#### [EAA1-001] Create Production Analysis Agent
+### Archived Sprint: Statistical Agent Development Sprints
+- **Goal**: Build a THIN statistical agent.
+- **Status**: Superseded. This will be implemented as part of the V2 agent ecosystem with standardized interfaces.
 
-- **Description**: Build production-ready analysis agent based on enhanced prototype
-- **Purpose**: Create the new default analysis agent with all production requirements
-- **Priority**: CRITICAL - Foundation for all other tasks
-- **Requirements**:
-  - **Name**: `analysis_agent` (not enhanced_analysis_agent)
-  - **Location**: `discernus/agents/analysis_agent/`
-  - **Externalized prompt**: YAML file in `discernus/agents/analysis_agent/prompt.yaml`
-  - **Complete experiment agnosticism**: No framework-specific assumptions
-  - **6-step THIN approach**: Composite analysis → Evidence extraction → Score extraction → Derived metrics → Verification → Markup extraction
-- **Solution Strategy**:
-  - Adapt `test_thin_approach/enhanced_analysis_agent.py` for production
-  - Remove all framework-specific code (PDAF references, etc.)
-  - Implement proper agent base class inheritance
-  - Add comprehensive error handling and retry logic
-  - Ensure 1000+ document processing capability
-- **Acceptance Criteria**:
-  - ✅ Agent inherits from proper base class
-  - ✅ Completely framework agnostic (no hardcoded dimensions)
-  - ✅ Externalized YAML prompt template
-  - ✅ Handles any framework via prompt parameters
-  - ✅ Robust error handling for long document sequences
-  - ✅ Memory efficient for 1000+ document processing
-- **Files to Create**:
-  - `discernus/agents/analysis_agent/__init__.py`
-  - `discernus/agents/analysis_agent/main.py`
-  - `discernus/agents/analysis_agent/prompt.yaml`
-- **Dependencies**: None
-- **Effort**: 3-4 days
+### Archived Sprint: Evidence Management THIN Refactoring Sprint
+- **Goal**: Move evidence preparation from the V1 orchestrator to the `EvidenceRetrieverAgent`.
+- **Status**: Superseded. This is a core part of Sprint V2-2.
 
-#### [EAA1-002] Implement Content-Addressable Asset Naming
+### Archived Sprint: Enhanced Analysis Agent Integration Sprints
+- **Goal**: Integrate a new analysis agent into the V1 orchestrator.
+- **Status**: Superseded. The V2 plan includes migrating all agents, including the analysis agent, to the new standard.
 
-- **Description**: Ensure all artifacts use human-readable, content-addressable naming per project standards
-- **Purpose**: Maintain artifact discoverability and caching compatibility
-- **Priority**: HIGH - Required for orchestrator integration
-- **Current Issue**: Prototype uses generic names like `enhanced_analysis_results.json`
-- **Solution Strategy**:
-  - Use `LocalArtifactStorage` for all artifact storage
-  - Generate descriptive names with content hashes
-  - Follow existing naming conventions: `analysis_result_<hash>.json`, `evidence_<hash>.json`, etc.
-  - Ensure markup artifacts are properly named: `marked_up_document_<hash>.md`
-- **Acceptance Criteria**:
-  - ✅ All artifacts use content-addressable storage
-  - ✅ Human-readable names with descriptive prefixes
-  - ✅ Consistent with existing artifact naming patterns
-  - ✅ Markup documents saved as `.md` files
-  - ✅ Artifacts accessible via standard storage interface
-- **Files to Update**:
-  - `discernus/agents/analysis_agent/main.py` (artifact storage methods)
-- **Dependencies**: [EAA1-001] - Agent must exist first
-- **Effort**: 1-2 days
-
-#### [EAA1-003] Add Comprehensive Logging and Cost Tracking
-
-- **Description**: Integrate with project's logging and cost tracking systems
-- **Purpose**: Full observability and cost management for production use
-- **Priority**: HIGH - Required for production monitoring
-- **Requirements**:
-  - **Audit logging**: All agent events logged via `AuditLogger`
-  - **Cost tracking**: Token usage and costs tracked per step
-  - **Performance metrics**: Processing time, success rates, error rates
-  - **Resume capability**: Caching for interrupted operations
-- **Solution Strategy**:
-  - Use existing `AuditLogger` for all agent events
-  - Track costs per LLM call (Flash vs Flash Lite)
-  - Implement caching at each step for resume capability
-  - Add performance timing for each analysis step
-  - Log all errors with context for debugging
-- **Acceptance Criteria**:
-  - ✅ All agent actions logged with timestamps
-  - ✅ Token usage and costs tracked per model
-  - ✅ Processing times logged for each step
-  - ✅ Caching enables resume from any step
-  - ✅ Error logging includes full context
-  - ✅ Cost reports generated per experiment
-- **Files to Update**:
-  - `discernus/agents/analysis_agent/main.py` (logging integration)
-  - `discernus/core/audit_logger.py` (if needed for new event types)
-- **Dependencies**: [EAA1-001] - Agent must exist first
-- **Effort**: 2-3 days
-
-#### [EAA1-004] Integrate with Orchestrator
-
-- **Description**: Ensure new analysis agent works seamlessly with existing orchestrator
-- **Purpose**: Maintain orchestrator compatibility while upgrading analysis capability
-- **Priority**: HIGH - Required for end-to-end functionality
-- **Requirements**:
-  - **Orchestrator compatibility**: Drop-in replacement for existing analysis agent
-  - **CLI integration**: Works with all existing CLI flags
-  - **Experiment agnosticism**: Handles any framework/experiment combination
-  - **Batch processing**: Efficiently processes large document sets
-- **Solution Strategy**:
-  - Update orchestrator to use new analysis agent
-  - Ensure CLI flags work correctly (model selection, etc.)
-  - Test with various frameworks and experiments
-  - Optimize for batch processing efficiency
-  - Maintain backward compatibility with existing experiments
-- **Acceptance Criteria**:
-  - ✅ Drop-in replacement for existing analysis agent
-  - ✅ All CLI flags work correctly
-  - ✅ Processes any framework without modification
-  - ✅ Handles 1000+ documents without failures
-  - ✅ Maintains existing orchestrator interface
-  - ✅ No regression in existing functionality
-- **Files to Update**:
-  - `discernus/core/clean_analysis_orchestrator.py`
-  - `discernus/cli.py` (if needed for new flags)
-  - `discernus/agents/__init__.py` (agent registration)
-- **Dependencies**: [EAA1-001], [EAA1-002], [EAA1-003] - All agent components must be ready
-- **Effort**: 2-3 days
-
-#### [EAA1-005] Add Caching and Resume Capability
-
-- **Description**: Implement comprehensive caching system for resume operations
-- **Purpose**: Enable interrupted experiments to resume from cached data
-- **Priority**: HIGH - Required for production reliability
-- **Requirements**:
-  - **Step-level caching**: Cache results after each of the 6 steps
-  - **Resume capability**: Resume from any cached step
-  - **Cache invalidation**: Smart cache invalidation based on input changes
-  - **Storage efficiency**: Efficient storage of large markup documents
-- **Solution Strategy**:
-  - Implement caching after each analysis step
-  - Add resume logic to skip completed steps
-  - Use content hashing for cache invalidation
-  - Optimize storage for large markup files
-  - Add cache management utilities
-- **Acceptance Criteria**:
-  - ✅ Each step cached independently
-  - ✅ Resume from any step works correctly
-  - ✅ Cache invalidation on input changes
-  - ✅ Efficient storage of large documents
-  - ✅ Cache management commands available
-  - ✅ No data loss on interruption
-- **Files to Update**:
-  - `discernus/agents/analysis_agent/main.py` (caching logic)
-  - `discernus/core/local_artifact_storage.py` (if needed for optimizations)
-- **Dependencies**: [EAA1-001], [EAA1-002] - Agent and storage must exist
-- **Effort**: 2-3 days
-
-#### [EAA1-006] Comprehensive Testing and Validation
-
-- **Description**: Thorough testing of integrated analysis agent
-- **Purpose**: Ensure production readiness and reliability
-- **Priority**: HIGH - Required before deployment
-- **Testing Requirements**:
-  - **Unit tests**: All agent methods tested
-  - **Integration tests**: Full orchestrator integration
-  - **Performance tests**: 1000+ document processing
-  - **Framework tests**: Multiple framework compatibility
-  - **Resume tests**: Interruption and resume scenarios
-- **Solution Strategy**:
-  - Create comprehensive test suite
-  - Test with various frameworks and experiments
-  - Performance testing with large document sets
-  - Test resume scenarios and error handling
-  - Validate cost tracking and logging
-- **Acceptance Criteria**:
-  - ✅ All unit tests pass
-  - ✅ Integration tests pass
-  - ✅ 1000+ document processing successful
-  - ✅ Multiple frameworks work correctly
-  - ✅ Resume scenarios work reliably
-  - ✅ Cost tracking accurate
-  - ✅ No memory leaks or performance issues
-- **Files to Create**:
-  - `discernus/tests/test_analysis_agent_integration.py`
-  - `discernus/tests/test_analysis_agent_performance.py`
-  - `discernus/tests/test_analysis_agent_resume.py`
-- **Dependencies**: [EAA1-001] through [EAA1-005] - All components must be complete
-- **Effort**: 3-4 days
-
----
-
-## Show Your Work Migration Sprints
-
-### Migration Philosophy
-
-**Contract-Driven Development**: The UnifiedSynthesisAgent is the final consumer of all pipeline artifacts. We define its exact data contracts first, then build each upstream component to meet those contracts. This ensures:
-- No synthesis compatibility issues
-- Clear success criteria for each component  
-- Systematic progression through the pipeline
-- End-to-end validation at each step
-
-**Evidence Pipeline Already Compatible**: Analysis of the evidence curation process reveals it's already 80% Show Your Work compliant - it reads tool-calling artifacts (evidence_v6) and produces synthesis-compatible output. This accelerates our migration timeline.
-
-**Systematic Refactoring Over Replacement**: Rather than building a new orchestrator, we systematically refactor the existing CleanAnalysisOrchestrator to use Show Your Work patterns while preserving mature functionality.
-
-**Reference**: See `pm/active_projects/synthesis_data_contracts.md` for detailed synthesis requirements.
-
----
-
-### Sprint SYW-1: Meet Research Data Contract ⚠️ **URGENT**
-
-**Description**: Ensure statistical analysis produces artifacts that meet synthesis agent's research data contract
-**Purpose**: Fix statistical analysis failure and establish foundation for synthesis compatibility  
-**Priority**: URGENT - Required for synthesis to work
-**Timeline**: 1 week - critical path for migration
-**Contract Goal**: Produce research data artifact containing analysis scores, statistical results, and computational work in synthesis-compatible format
-**Dependencies**: None - can start immediately
-
-#### [SYW1-001.6] Fix Evidence Retrieval Phase ⚠️ **URGENT**
-
-- **Description**: Fix "RAG index not available" error blocking experiments after statistical analysis
-- **Purpose**: Enable experiments to proceed through evidence retrieval phase
-- **Priority**: URGENT - Blocking all experiments after statistical analysis completion
-- **Current Error**: "RAG index not available - cannot proceed to evidence retrieval"
-- **Investigation Areas**:
-  - EvidenceRetrieverAgent initialization and configuration
-  - RAG index creation and population logic
-  - Integration between statistical analysis and evidence retrieval phases
-  - Missing dependencies or configuration for evidence retrieval
-- **Solution Strategy**:
-  - Debug evidence retrieval phase initialization
-  - Check EvidenceRetrieverAgent dependencies and configuration
-  - Validate RAG index creation process
-  - Ensure proper handoff from statistical analysis to evidence retrieval
-- **Acceptance Criteria**:
-  - ✅ Evidence retrieval phase initializes correctly
-  - ✅ RAG index created and populated successfully
-  - ✅ Evidence retrieval completes without errors
-  - ✅ Experiments can proceed through all phases
-- **Files to Investigate**:
-  - `discernus/core/clean_analysis_orchestrator.py` (evidence retrieval phase)
-  - `discernus/agents/evidence_retriever_agent/` (agent implementation)
-  - RAG index creation and management logic
-- **Dependencies**: [SYW1-001] - Statistical analysis must work first
-- **Effort**: 1-2 days
-
-#### [SYW1-002] Add Missing Computational Work Artifacts
-
-- **Description**: Save computational work data as separate JSON artifacts per Show Your Work architecture
-- **Purpose**: Create proper `computational_work_<hash>.json` files for verification and provenance
-- **Priority**: HIGH - Required for Show Your Work compliance
-- **Current Issue**: Computational work data embedded in analysis results, not saved as separate artifacts
-- **Solution Strategy**:
-  - Modify `_process_tool_calls()` in EnhancedAnalysisAgent
-  - Save computational work tool call data as separate artifacts
-  - Use predictable filenames for Show Your Work compatibility
-  - Maintain backward compatibility with existing format
-- **Acceptance Criteria**:
-  - ✅ `computational_work_<hash>.json` files created for each document
-  - ✅ Files contain executed code, output, and derived metrics
-  - ✅ Artifacts accessible via content-addressable storage
-  - ✅ No regression in existing functionality
-- **Files to Update**:
-  - `discernus/agents/EnhancedAnalysisAgent/main.py` (_process_tool_calls)
-- **Dependencies**: None
-- **Effort**: 1-2 days
-
-#### [SYW1-003] Debug Statistical Function Execution
-
-- **Description**: Investigate and fix why statistical functions are generated but not executed
-- **Purpose**: Restore statistical analysis execution to working state
-- **Priority**: HIGH - Required for complete pipeline
-- **Current Issue**: Functions generated successfully but execution fails silently
-- **Investigation Areas**:
-  - Function loading and module namespace issues
-  - Data format compatibility between DataFrame and functions
-  - Error handling that may be masking failures
-  - Integration between statistical agent and orchestrator
-- **Solution Strategy**:
-  - Add comprehensive debugging to statistical execution pipeline
-  - Validate function signatures and data format compatibility
-  - Improve error reporting and logging
-  - Test with minimal reproducible case
-- **Acceptance Criteria**:
-  - ✅ Root cause of execution failure identified and documented
-  - ✅ Statistical functions execute successfully
-  - ✅ Numerical results produced (ANOVA, descriptive stats, etc.)
-  - ✅ Clear error messages for any failures
-- **Files to Update**:
-  - `discernus/core/clean_analysis_orchestrator.py` (_execute_statistical_functions)
-  - Statistical function loading and execution logic
-- **Dependencies**: [SYW1-001] - Data format must be fixed first
-- **Effort**: 2-3 days
-
-#### [SYW1-004] Add Synthesis Compatibility Layer
-
-- **Description**: Ensure synthesis can work with new tool-calling artifacts via compatibility layer
-- **Purpose**: Enable end-to-end pipeline while synthesis migration is pending
-- **Priority**: HIGH - Required for complete pipeline
-- **Current Issue**: Synthesis expects old artifact format, but analysis now produces Show Your Work artifacts
-- **Solution Strategy**:
-  - Create compatibility layer that translates Show Your Work artifacts to expected format
-  - Ensure synthesis can read evidence from `evidence_quotes.json` files
-  - Maintain existing synthesis functionality without full migration
-  - Document what needs full migration in SYW-4
-- **Acceptance Criteria**:
-  - ✅ Synthesis can read new artifact format via compatibility layer
-  - ✅ RAG index populated correctly from new evidence format
-  - ✅ Final report generated with statistical results
-  - ✅ Report quality matches existing standards
-  - ✅ No regression in synthesis functionality
-- **Files to Update**:
-  - `discernus/agents/unified_synthesis_agent.py` (compatibility layer)
-  - Evidence reading and RAG population logic
-- **Dependencies**: [SYW1-001], [SYW1-002], [SYW1-003]
-- **Effort**: 2-3 days
-
-#### [SYW1-005] Validate Evidence Curation Works
-
-- **Description**: Confirm evidence retrieval phase works with tool-calling analysis artifacts
-- **Purpose**: Validate evidence curation can read evidence_v6 artifacts from tool-calling analysis
-- **Priority**: HIGH - Evidence contract validation
-- **Current Status**: Evidence curation should work since it reads evidence_v6 artifacts (which analysis still produces)
-- **Solution Strategy**:
-  - Run micro_test_experiment through evidence retrieval phase
-  - Validate EvidenceRetrieverAgent can build index from evidence_v6 artifacts
-  - Confirm curated evidence artifact created successfully
-  - Test evidence search and retrieval functionality
-- **Acceptance Criteria**:
-  - ✅ Evidence retrieval phase completes successfully
-  - ✅ RAG index built from tool-calling evidence artifacts
-  - ✅ Curated evidence artifact created with proper format
-  - ✅ Evidence search returns relevant quotes for statistical findings
-  - ✅ Evidence ready for synthesis consumption
-- **Dependencies**: [SYW1-001], [SYW1-002], [SYW1-003] - Statistical analysis must work first
-- **Effort**: 1 day
-
-#### [SYW1-006] Validate End-to-End Pipeline
-
-- **Description**: Ensure complete micro_test_experiment runs successfully from start to finish
-- **Purpose**: Validate that all migration changes work together correctly
-- **Priority**: MEDIUM - Integration validation
-- **Solution Strategy**:
-  - Run micro_test_experiment with clean cache
-  - Validate all phases complete successfully including synthesis
-  - Compare results with mature architecture (1b_chf_constitutional_health)
-  - Document any remaining gaps or issues
-- **Acceptance Criteria**:
-  - ✅ micro_test_experiment completes without errors
-  - ✅ Final report generated with statistical results
-  - ✅ All expected artifacts present in shared cache
-  - ✅ CSV exports contain correct data
-  - ✅ Performance within acceptable bounds
-- **Dependencies**: [SYW1-005] - Evidence curation must work
-- **Effort**: 1 day
-
-**Sprint SYW-1 Success Criteria**:
-- ✅ Research data contract met: Statistical analysis produces synthesis-compatible artifacts
-- ✅ micro_test_experiment runs successfully through evidence retrieval phase
-- ✅ Statistical analysis produces valid numerical results
-- ✅ All Show Your Work artifacts properly created and stored (analysis_scores.json, computational_work.json)
-- ✅ Evidence curation works with tool-calling artifacts (evidence_v6 format)
-- ✅ Research data artifact aggregated and available for synthesis
-- ✅ No regression in existing functionality
-- ✅ **BONUS**: Evidence contract partially met (evidence curation already compatible)
-
----
-
-### Sprint SYW-2: Complete Evidence Contract 🔍 **MEDIUM PRIORITY**
-
-**Description**: Add verification agent to complete evidence contract (evidence curation already works)
-**Purpose**: Add attestation layer to evidence pipeline for full Show Your Work compliance
-**Priority**: MEDIUM - Evidence curation already functional, verification adds robustness
-**Timeline**: 1-2 weeks
-**Contract Status**: **PARTIALLY MET** - Evidence curation works with tool-calling artifacts, just needs verification layer
-**Contract Goal**: Add attestation artifacts to complete evidence contract for synthesis
-**Dependencies**: Sprint SYW-1 completion required
-
-#### [SYW2-001] Create VerificationAgent
-
-- **Description**: Implement VerificationAgent that re-executes and validates computational work
-- **Purpose**: Add adversarial attestation layer to Show Your Work architecture
-- **Priority**: HIGH - Core architectural requirement
-- **Solution Strategy**:
-  - Create new VerificationAgent class with tool calling support
-  - Read `analysis_scores.json`, `evidence_quotes.json`, `computational_work.json`
-  - Re-execute code internally and compare results
-  - Use tool calling to generate `attestation.json` files
-- **Acceptance Criteria**:
-  - ✅ VerificationAgent successfully re-executes computational work
-  - ✅ Generates `attestation_<hash>.json` files with verification results
-  - ✅ Detects and reports calculation discrepancies
-  - ✅ Integrates cleanly with existing orchestrator
-- **Files to Create**:
-  - `discernus/agents/VerificationAgent/agent.py`
-  - `discernus/agents/VerificationAgent/prompt.txt`
-- **Dependencies**: [SYW1-002] - Computational work artifacts must exist
-- **Effort**: 1 week
-
-#### [SYW2-002] Integrate Verification into Orchestrator
-
-- **Description**: Add verification step to CleanAnalysisOrchestrator after each document analysis
-- **Purpose**: Make verification part of standard pipeline
-- **Priority**: MEDIUM - Integration requirement
-- **Solution Strategy**:
-  - Add verification call after each document analysis
-  - Implement fail-fast on verification failure
-  - Add verification metrics to performance tracking
-  - Maintain backward compatibility with verification disabled
-- **Acceptance Criteria**:
-  - ✅ Verification runs automatically after each analysis
-  - ✅ Pipeline fails fast on verification errors
-  - ✅ Verification success rates tracked and reported
-  - ✅ Option to disable verification for testing
-- **Dependencies**: [SYW2-001]
-- **Effort**: 2-3 days
-
-**Sprint SYW-2 Success Criteria**:
-- ✅ All document analyses include verification step
-- ✅ Verification successfully validates computational work  
-- ✅ Pipeline fails appropriately on verification errors
-- ✅ Verification artifacts properly stored and tracked
-- ✅ **ACCELERATED**: Evidence pipeline already 80% Show Your Work compliant
-- ✅ Evidence contract fully met with verification layer added
-
----
-
-### Sprint SYW-3: Migrate Statistical Analysis 📊 **MEDIUM PRIORITY**
-
-**Description**: Replace existing statistical analysis with Show Your Work tool-calling approach
-**Purpose**: Complete migration of statistical pipeline to Show Your Work architecture
-**Priority**: MEDIUM - Architectural consistency
-**Timeline**: 2-3 weeks
-**Dependencies**: Sprint SYW-2 completion required
-
-#### [SYW3-001] Create Statistical Planning + Execution Agent
-
-- **Description**: New agent that reads `analysis_scores.json` files and uses tool calling for results
-- **Purpose**: Replace existing statistical analysis with Show Your Work approach
-- **Priority**: MEDIUM - Architectural migration
-- **Solution Strategy**:
-  - Create agent that reads all `analysis_scores.json` files directly
-  - Use tool calling for `record_statistical_results`
-  - Generate `statistics.json` and `statistical_work.json`
-  - Create CSVs from structured data, not parsing
-- **Acceptance Criteria**:
-  - ✅ Reads analysis artifacts directly (not CSV)
-  - ✅ Uses tool calling for all statistical results
-  - ✅ Generates proper Show Your Work artifacts
-  - ✅ Maintains same statistical analysis quality
-- **Dependencies**: Sprint SYW-2 completion
-- **Effort**: 1-2 weeks
-
-#### [SYW3-002] Create Statistical Verification Agent
-
-- **Description**: Verify statistical calculations using adversarial attestation
-- **Purpose**: Add verification layer to statistical analysis
-- **Priority**: MEDIUM - Show Your Work compliance
-- **Solution Strategy**:
-  - Re-execute statistical code independently
-  - Compare results with original calculations
-  - Generate `statistical_attestation.json`
-- **Acceptance Criteria**:
-  - ✅ Successfully verifies statistical calculations
-  - ✅ Detects and reports statistical errors
-  - ✅ Generates proper attestation artifacts
-- **Dependencies**: [SYW3-001]
-- **Effort**: 1 week
-
-**Sprint SYW-3 Success Criteria**:
-- Statistical analysis uses tool calling throughout
-- All statistical calculations verified independently
-- CSV generation moved to statistical agent
-- Maintains existing statistical analysis quality
-
----
-
-### Sprint SYW-4: Complete Show Your Work Pipeline 🎯 **FUTURE**
-
-**Description**: Implement complete Show Your Work architecture with new orchestrator
-**Purpose**: Full migration to Show Your Work architecture
-**Priority**: FUTURE - Complete architectural transition
-**Timeline**: 3-4 weeks
-**Dependencies**: Sprint SYW-3 completion required
-
-#### [SYW4-001] Complete CleanAnalysisOrchestrator Refactoring
-
-- **Description**: Finish refactoring CleanAnalysisOrchestrator to fully support Show Your Work architecture
-- **Purpose**: Complete the systematic refactoring to Show Your Work while preserving all existing functionality
-- **Priority**: FUTURE - Architectural completion
-- **Solution Strategy**:
-  - Refactor remaining components to use Show Your Work artifacts natively
-  - Clean up any remaining hybrid patterns
-  - Optimize artifact management for Show Your Work schema
-  - Preserve all existing CLI, logging, caching, and security functionality
-- **Acceptance Criteria**:
-  - ✅ Orchestrator natively uses Show Your Work artifacts throughout
-  - ✅ All existing functionality preserved (CLI, caching, logging, security)
-  - ✅ Performance maintained or improved
-  - ✅ Clean, consistent Show Your Work patterns throughout
-- **Dependencies**: Sprint SYW-3 completion
-- **Effort**: 1-2 weeks (refactoring vs 2-3 weeks replacement)
-
-#### [SYW4-002] Migrate Synthesis Agent to Show Your Work Artifacts
-
-- **Description**: Update UnifiedSynthesisAgent to read Show Your Work artifacts instead of parsed responses
-- **Purpose**: Enable synthesis to work with new artifact format while maintaining report quality
-- **Priority**: HIGH - Critical for end-to-end pipeline
-- **Current Challenge**: Synthesis agent expects old format artifacts and CSV files
-- **Solution Strategy**:
-  - Update artifact reading to consume `analysis_scores.json`, `evidence_quotes.json`, `computational_work.json`
-  - Modify RAG population to read from `evidence_quotes.json` files directly
-  - Update statistical integration to read from `statistics.json` instead of CSV parsing
-  - Preserve all existing synthesis logic and report generation quality
-  - Maintain academic report format and sophistication
-- **Acceptance Criteria**:
-  - ✅ Synthesis reads Show Your Work artifacts natively
-  - ✅ RAG index populated correctly from new evidence format
-  - ✅ Statistical results integrated from `statistics.json`
-  - ✅ Computational work incorporated from artifact files
-  - ✅ Final report quality matches existing standards
-  - ✅ All synthesis features preserved (fact-checking, evidence retrieval, etc.)
-- **Files to Update**:
-  - `discernus/agents/unified_synthesis_agent.py`
-  - Evidence retrieval and RAG population logic
-  - Statistical integration components
-- **Dependencies**: [SYW4-001] - Orchestrator must provide correct artifact paths
-- **Effort**: 2-3 weeks (complex integration work)
-
-#### [SYW4-003] Migrate Evidence CSV Generation
-
-- **Description**: Create deterministic Evidence CSV Export Module  
-- **Purpose**: Complete Show Your Work evidence handling
-- **Priority**: MEDIUM - CSV export functionality
-- **Solution Strategy**:
-  - Read `evidence_quotes.json` files directly
-  - Generate CSV without LLM involvement
-  - Remove evidence processing from orchestrator
-- **Acceptance Criteria**:
-  - ✅ Evidence CSV generated deterministically
-  - ✅ No LLM calls for CSV generation
-  - ✅ Maintains existing CSV format
-- **Dependencies**: [SYW4-002] - Synthesis migration must be complete first
-- **Effort**: 1 week
-
-**Sprint SYW-4 Success Criteria**:
-- CleanAnalysisOrchestrator fully refactored to Show Your Work architecture
-- All artifacts follow Show Your Work schema natively
-- All existing functionality preserved and enhanced
-- Clean, maintainable codebase ready for production
-
----
-
-## Legacy Sprint Archive
-
-The following sprints were part of the old architecture and are no longer relevant due to the Show Your Work migration:
-
-### Archived Sprints (Pre-Migration)
-- Sprint 16: Alpha Release Preparation (SUPERSEDED by migration)
-- Sprint 17: Critical Bug Fixes (COMPLETED - incorporated into SYW-1)
-- Sprint 18: Critical Regression Fixes (SUPERSEDED by SYW-1)
-- Sprint 19: Agent Parsing Consistency (SUPERSEDED by tool calling migration)
-- Sprint 19: Structured Output Migration (SUPERSEDED by Show Your Work architecture)
-
-**Note**: These sprints addressed issues that are resolved by the Show Your Work migration or are no longer relevant to the new architecture.
+### Archived Sprint: Show Your Work Migration Sprints
+- **Goal**: Incrementally refactor the V1 orchestrator to meet "Show Your Work" contracts.
+- **Status**: Superseded by the full V2 rewrite.
 
 ---
 
 ## Migration Progress Tracking
 
-### Phase 0.5: Partial Tool Calling ✅ **COMPLETED**
-- Analysis agent converted to tool calling
-- Backward compatibility maintained
-- CSV export working
+### Phase 1: Agent Standardization ⚠️ **IN PROGRESS**
+- Sprint V2-1: Define interfaces and base classes
+- Sprint V2-2: Migrate EvidenceRetrieverAgent and consolidate RAG
 
-### Phase 1: Fix Current Hybrid ⚠️ **PARTIALLY COMPLETED**
-- Sprint SYW-1: Statistical analysis fixed, cache system improved
-- **REMAINING**: Evidence retrieval phase ("RAG index not available" error)
-- Target: Restore end-to-end pipeline functionality
+### Phase 2: Complete Agent Ecosystem 📋 **PLANNED**
+- Sprint V2-3: Migrate UnifiedSynthesisAgent
+- Sprint V2-4: Build verification agent ecosystem
 
-### Phase 2: Add Verification Layer 📋 **PLANNED**
-- Sprint SYW-2 implements adversarial attestation
-- Target: Core Show Your Work verification
+### Phase 3: V2 Orchestrator Implementation 📋 **PLANNED**
+- Sprint V2-5: Build agent-native orchestrator
 
-### Phase 3: Migrate Statistical Analysis 📋 **PLANNED**
-- Sprint SYW-3 completes statistical migration
-- Target: Full tool calling statistical pipeline
+### Phase 4: Migration and Cleanup 📋 **FUTURE**
+- Sprint V2-6: Rollout and legacy cleanup
 
-### Phase 4: Complete Architecture 📋 **FUTURE**
-- Sprint SYW-4 implements clean Show Your Work orchestrator
-- Target: Production-ready Show Your Work system
+---
+
+## Success Criteria
+
+- Zero orchestrator RAG code remains; all RAG owned by EvidenceRetriever via `RAGIndexManager`
+- No hidden state between phases; all handoffs via `RunContext`
+- Resume-from-stats uses manifest-only; no directory globbing
+- Output parity (byte-identical where applicable) across a matrix of experiments
+- All LLM calls routed through gateway; files remain canonical; no DB footprint prior to DB stage
