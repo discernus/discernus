@@ -1,0 +1,285 @@
+#!/usr/bin/env python3
+"""
+V2 Orchestrator - Agent-Native Architecture
+===========================================
+
+Simple, clean orchestrator that leverages standardized V2 agents.
+Follows the strategy pattern for different execution modes.
+
+Key Features:
+- Agent registry for dynamic agent discovery
+- Strategy pattern for different execution modes
+- RunContext for explicit data handoffs
+- Resume capability with manifest tracking
+- Clean separation of concerns
+"""
+
+import json
+import hashlib
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Dict, Any, List, Optional, Type
+from dataclasses import dataclass
+
+from .security_boundary import ExperimentSecurityBoundary
+from .audit_logger import AuditLogger
+from .local_artifact_storage import LocalArtifactStorage
+from .run_context import RunContext
+from .agent_result import AgentResult
+from .standard_agent import StandardAgent
+from .execution_strategies import ExecutionStrategy, ExperimentResult
+
+
+@dataclass
+class V2OrchestratorConfig:
+    """Configuration for V2 Orchestrator"""
+    experiment_id: str
+    framework_path: str
+    corpus_path: str
+    output_dir: str
+    resume_from_phase: Optional[str] = None
+    verification_enabled: bool = True
+    cache_enabled: bool = True
+    debug_mode: bool = False
+
+
+class V2Orchestrator:
+    """
+    V2 Orchestrator - Simple, agent-native architecture.
+    
+    This orchestrator follows the strategy pattern where different execution
+    strategies handle different types of experiment runs. The orchestrator
+    itself is just a thin layer that manages agents and delegates execution
+    to strategies.
+    """
+    
+    def __init__(self, 
+                 config: V2OrchestratorConfig,
+                 security: ExperimentSecurityBoundary,
+                 storage: LocalArtifactStorage,
+                 audit: AuditLogger):
+        """
+        Initialize V2 Orchestrator.
+        
+        Args:
+            config: Orchestrator configuration
+            security: Security boundary for the experiment
+            storage: Artifact storage for persistence
+            audit: Audit logger for provenance tracking
+        """
+        self.config = config
+        self.security = security
+        self.storage = storage
+        self.audit = audit
+        
+        # Agent registry - will be populated by strategies
+        self.agents: Dict[str, StandardAgent] = {}
+        
+        # Initialize logging
+        self.logger = audit.get_logger("V2Orchestrator")
+        
+        # Log orchestrator initialization
+        self.audit.log_agent_event("orchestrator_initialization", {
+            "experiment_id": config.experiment_id,
+            "framework_path": config.framework_path,
+            "corpus_path": config.corpus_path,
+            "resume_from_phase": config.resume_from_phase,
+            "verification_enabled": config.verification_enabled
+        })
+    
+    def register_agent(self, name: str, agent: StandardAgent) -> None:
+        """
+        Register an agent with the orchestrator.
+        
+        Args:
+            name: Agent name/identifier
+            agent: Agent instance implementing StandardAgent interface
+        """
+        self.agents[name] = agent
+        self.logger.info(f"Registered agent: {name}")
+        
+        # Log agent registration
+        self.audit.log_agent_event("agent_registration", {
+            "agent_name": name,
+            "agent_type": agent.__class__.__name__,
+            "capabilities": agent.get_capabilities()
+        })
+    
+    def execute_strategy(self, strategy: ExecutionStrategy) -> ExperimentResult:
+        """
+        Execute an experiment using the specified strategy.
+        
+        Args:
+            strategy: Execution strategy to use
+            
+        Returns:
+            ExperimentResult with execution results
+        """
+        self.logger.info(f"Executing strategy: {strategy.__class__.__name__}")
+        
+        # Create initial RunContext
+        run_context = RunContext(
+            experiment_id=self.config.experiment_id,
+            framework_path=self.config.framework_path,
+            corpus_path=self.config.corpus_path
+        )
+        
+        # Add orchestrator metadata
+        run_context.metadata.update({
+            "orchestrator_version": "v2",
+            "verification_enabled": self.config.verification_enabled,
+            "cache_enabled": self.config.cache_enabled,
+            "debug_mode": self.config.debug_mode,
+            "resume_from_phase": self.config.resume_from_phase
+        })
+        
+        # Log strategy execution start
+        self.audit.log_agent_event("strategy_execution_start", {
+            "strategy": strategy.__class__.__name__,
+            "experiment_id": self.config.experiment_id,
+            "agents_available": list(self.agents.keys())
+        })
+        
+        try:
+            # Execute the strategy
+            result = strategy.execute(self.agents, run_context, self.storage, self.audit)
+            
+            # Log successful completion
+            self.audit.log_agent_event("strategy_execution_complete", {
+                "strategy": strategy.__class__.__name__,
+                "experiment_id": self.config.experiment_id,
+                "success": result.success,
+                "phases_completed": result.phases_completed,
+                "artifacts_generated": len(result.artifacts)
+            })
+            
+            return result
+            
+        except Exception as e:
+            # Log execution failure
+            self.audit.log_agent_event("strategy_execution_failed", {
+                "strategy": strategy.__class__.__name__,
+                "experiment_id": self.config.experiment_id,
+                "error": str(e),
+                "error_type": type(e).__name__
+            })
+            
+            # Return failure result
+            return ExperimentResult(
+                success=False,
+                error_message=str(e),
+                phases_completed=[],
+                artifacts=[],
+                metadata={"error_type": type(e).__name__}
+            )
+    
+    def get_agent(self, name: str) -> Optional[StandardAgent]:
+        """Get a registered agent by name."""
+        return self.agents.get(name)
+    
+    def list_agents(self) -> List[str]:
+        """Get list of registered agent names."""
+        return list(self.agents.keys())
+    
+    def get_agent_capabilities(self) -> Dict[str, List[str]]:
+        """Get capabilities of all registered agents."""
+        return {
+            name: agent.get_capabilities() 
+            for name, agent in self.agents.items()
+        }
+    
+    def create_resume_manifest(self, run_context: RunContext) -> Dict[str, Any]:
+        """
+        Create a resume manifest for the current state.
+        
+        Args:
+            run_context: Current run context
+            
+        Returns:
+            Resume manifest dictionary
+        """
+        manifest = {
+            "experiment_id": run_context.experiment_id,
+            "framework_path": run_context.framework_path,
+            "corpus_path": run_context.corpus_path,
+            "current_phase": run_context.current_phase,
+            "completed_phases": run_context.completed_phases,
+            "artifact_hashes": run_context.artifact_hashes,
+            "cache_keys": run_context.cache_keys,
+            "versions": run_context.versions,
+            "metadata": run_context.metadata,
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "orchestrator_version": "v2"
+        }
+        
+        # Store manifest
+        manifest_json = json.dumps(manifest, indent=2)
+        manifest_hash = hashlib.sha256(manifest_json.encode()).hexdigest()
+        
+        self.storage.put_artifact(
+            manifest_json.encode('utf-8'),
+            {
+                "artifact_type": "resume_manifest",
+                "experiment_id": run_context.experiment_id,
+                "phase": run_context.current_phase
+            }
+        )
+        
+        self.logger.info(f"Created resume manifest: {manifest_hash}")
+        return manifest
+    
+    def load_resume_manifest(self, manifest_path: str) -> Optional[Dict[str, Any]]:
+        """
+        Load a resume manifest from file.
+        
+        Args:
+            manifest_path: Path to resume manifest file
+            
+        Returns:
+            Resume manifest dictionary or None if not found
+        """
+        try:
+            manifest_file = Path(manifest_path)
+            if not manifest_file.exists():
+                return None
+                
+            with open(manifest_file, 'r') as f:
+                manifest = json.load(f)
+                
+            # Validate manifest
+            if manifest.get("orchestrator_version") != "v2":
+                self.logger.warning("Resume manifest is not from V2 orchestrator")
+                return None
+                
+            return manifest
+            
+        except Exception as e:
+            self.logger.error(f"Failed to load resume manifest: {e}")
+            return None
+    
+    def resume_from_manifest(self, manifest: Dict[str, Any]) -> RunContext:
+        """
+        Resume execution from a manifest.
+        
+        Args:
+            manifest: Resume manifest dictionary
+            
+        Returns:
+            RunContext restored from manifest
+        """
+        run_context = RunContext(
+            experiment_id=manifest["experiment_id"],
+            framework_path=manifest["framework_path"],
+            corpus_path=manifest["corpus_path"]
+        )
+        
+        # Restore state from manifest
+        run_context.current_phase = manifest.get("current_phase")
+        run_context.completed_phases = manifest.get("completed_phases", [])
+        run_context.artifact_hashes = manifest.get("artifact_hashes", {})
+        run_context.cache_keys = manifest.get("cache_keys", {})
+        run_context.versions = manifest.get("versions", {})
+        run_context.metadata.update(manifest.get("metadata", {}))
+        
+        self.logger.info(f"Resumed from manifest: {manifest['experiment_id']}")
+        return run_context
