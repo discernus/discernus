@@ -1,0 +1,7 @@
+{
+  "analysis_id": "analysis_5d0b05fd",
+  "step": "derived_metrics_generation",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "derived_metrics": "The provided framework does not define any derived metrics. The `derived_metrics` section in the YAML is empty. Therefore, no code can be generated to calculate derived metrics.\n\nIf you would like to define derived metrics, please update the `derived_metrics` section in the framework YAML. For example, you could add a \"sentiment_polarity\" metric calculated as `positive_sentiment - negative_sentiment`.",
+  "timestamp": "2025-09-19T15:56:07.235902+00:00"
+}

@@ -18,6 +18,7 @@ from abc import ABC, abstractmethod
 from datetime import datetime, timezone
 from typing import Dict, Any, List, Optional
 from dataclasses import dataclass
+from pathlib import Path
 
 from .run_context import RunContext
 from .agent_result import AgentResult
@@ -93,6 +94,36 @@ class FullExperimentStrategy(ExecutionStrategy):
         metadata = {}
         
         try:
+            # THIN PRINCIPLE: Orchestrator handles file I/O, not agents
+            # Load framework and corpus content and pass to agents via RunContext
+            print(f"DEBUG: Loading framework from: {run_context.framework_path}")
+            print(f"DEBUG: Loading corpus from: {run_context.corpus_path}")
+            framework_content = self._load_framework_content(Path(run_context.framework_path))
+            corpus_content = self._load_corpus_content(Path(run_context.corpus_path))
+            print(f"DEBUG: Framework content loaded: {framework_content is not None}")
+            print(f"DEBUG: Corpus content loaded: {corpus_content is not None}")
+            
+            if not framework_content:
+                return ExperimentResult(
+                    success=False,
+                    phases_completed=phases_completed,
+                    artifacts=artifacts,
+                    metadata=metadata,
+                    error_message="Failed to load framework content"
+                )
+            
+            if not corpus_content:
+                return ExperimentResult(
+                    success=False,
+                    phases_completed=phases_completed,
+                    artifacts=artifacts,
+                    metadata=metadata,
+                    error_message="Failed to load corpus content"
+                )
+            
+            # Add content to RunContext metadata for agents to use
+            run_context.metadata["framework_content"] = framework_content
+            run_context.metadata["corpus_content"] = corpus_content
             # Phase 1: Coherence validation
             if "coherence" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "coherence"})
@@ -215,6 +246,20 @@ class FullExperimentStrategy(ExecutionStrategy):
                 metadata=metadata,
                 error_message=f"Strategy execution failed: {str(e)}"
             )
+    
+    def _load_framework_content(self, framework_path: Path) -> Optional[str]:
+        """Load framework content from file."""
+        try:
+            return framework_path.read_text(encoding='utf-8')
+        except Exception as e:
+            return None
+    
+    def _load_corpus_content(self, corpus_path: Path) -> Optional[str]:
+        """Load corpus content from file."""
+        try:
+            return corpus_path.read_text(encoding='utf-8')
+        except Exception as e:
+            return None
 
 
 class AnalysisOnlyStrategy(ExecutionStrategy):
@@ -293,6 +338,20 @@ class AnalysisOnlyStrategy(ExecutionStrategy):
                 metadata=metadata,
                 error_message=f"Strategy execution failed: {str(e)}"
             )
+    
+    def _load_framework_content(self, framework_path: Path) -> Optional[str]:
+        """Load framework content from file."""
+        try:
+            return framework_path.read_text(encoding='utf-8')
+        except Exception as e:
+            return None
+    
+    def _load_corpus_content(self, corpus_path: Path) -> Optional[str]:
+        """Load corpus content from file."""
+        try:
+            return corpus_path.read_text(encoding='utf-8')
+        except Exception as e:
+            return None
 
 
 class StatisticalPrepStrategy(ExecutionStrategy):
@@ -389,6 +448,20 @@ class StatisticalPrepStrategy(ExecutionStrategy):
                 metadata=metadata,
                 error_message=f"Strategy execution failed: {str(e)}"
             )
+    
+    def _load_framework_content(self, framework_path: Path) -> Optional[str]:
+        """Load framework content from file."""
+        try:
+            return framework_path.read_text(encoding='utf-8')
+        except Exception as e:
+            return None
+    
+    def _load_corpus_content(self, corpus_path: Path) -> Optional[str]:
+        """Load corpus content from file."""
+        try:
+            return corpus_path.read_text(encoding='utf-8')
+        except Exception as e:
+            return None
 
 
 class ResumeFromStatsStrategy(ExecutionStrategy):
@@ -496,3 +569,17 @@ class ResumeFromStatsStrategy(ExecutionStrategy):
                 metadata=metadata,
                 error_message=f"Strategy execution failed: {str(e)}"
             )
+    
+    def _load_framework_content(self, framework_path: Path) -> Optional[str]:
+        """Load framework content from file."""
+        try:
+            return framework_path.read_text(encoding='utf-8')
+        except Exception as e:
+            return None
+    
+    def _load_corpus_content(self, corpus_path: Path) -> Optional[str]:
+        """Load corpus content from file."""
+        try:
+            return corpus_path.read_text(encoding='utf-8')
+        except Exception as e:
+            return None

@@ -1,0 +1,7 @@
+{
+  "analysis_id": "analysis_d6b4b48d",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "evidence_extraction": "```json\n{\n  \"positive_sentiment\": [\n    \"- **Positive Test**: Document with positive sentiment language\",\n    \"sentiment: \\\"positive\\\"\"\n  ],\n  \"negative_sentiment\": [\n    \"- **Negative Test**: Document with negative sentiment language\",\n    \"sentiment: \\\"negative\\\"\"\n  ]\n}\n```",
+  "timestamp": "2025-09-19T15:57:51.500251+00:00"
+}

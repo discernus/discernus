@@ -1,0 +1,7 @@
+{
+  "analysis_id": "analysis_a5228f66",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "evidence_extraction": "```json\n{\n  \"document_id\": \"document_0\",\n  \"document_name\": \"Nano Test Corpus\",\n  \"positive_sentiment_evidence\": [\n    \"Document with positive sentiment language\",\n    \"sentiment: \\\"positive\\\"\"\n  ],\n  \"negative_sentiment_evidence\": [\n    \"Document with negative sentiment language\",\n    \"sentiment: \\\"negative\\\"\"\n  ]\n}\n```",
+  "timestamp": "2025-09-19T15:56:59.542171+00:00"
+}

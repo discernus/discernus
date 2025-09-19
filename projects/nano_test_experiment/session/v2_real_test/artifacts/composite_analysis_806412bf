@@ -1,0 +1,11 @@
+{
+  "analysis_id": "analysis_6a1cabc4",
+  "step": "enhanced_composite_analysis_generation",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "```json\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"sentiment_binary_v1\",\n    \"framework_version\": \"1.0.0\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Applied three independent analytical approaches with median aggregation. The documents are extremely direct in their sentiment, leading to high scores and confidence for the relevant dimension and zero for the other.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"document_0\",\n      \"document_name\": \"document_0\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 0.9,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence_quotes\": {\n        \"positive_sentiment\": [\n          \"positive sentiment example\"\n        ],\n        \"negative_sentiment\": []\n      },\n      \"marked_up_document\": \"# Document Analysis - Marked Up Text\\n\\nHash: 3ad2d63f22b9bcff\\nContent:\\nThis is a [positive_sentiment: \\\"positive sentiment example\\\"]\\n\"\n    },\n    {\n      \"document_id\": \"document_1\",\n      \"document_name\": \"document_1\",\n      \"dimensional_scores\": {\n        \"positive_sentiment\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 1.0\n        },\n        \"negative_sentiment\": {\n          \"raw_score\": 0.9,\n          \"salience\": 1.0,\n          \"confidence\": 1.0\n        }\n      },\n      \"evidence_quotes\": {\n        \"positive_sentiment\": [],\n        \"negative_sentiment\": [\n          \"negative sentiment example\"\n        ]\n      },\n      \"marked_up_document\": \"# Document Analysis - Marked Up Text\\n\\nHash: c5e610c88fa04dce\\nContent:\\nThis is a [negative_sentiment: \\\"negative sentiment example\\\"]\\n\"\n    }\n  ]\n}\n```",
+  "document_hashes": [
+    "3ad2d63f22b9bcff",
+    "c5e610c88fa04dce"
+  ],
+  "timestamp": "2025-09-19T15:50:43.752423+00:00"
+}
