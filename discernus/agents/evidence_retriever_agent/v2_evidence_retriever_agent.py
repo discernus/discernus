@@ -90,9 +90,14 @@ class V2EvidenceRetrieverAgent(ToolCallingAgent):
             # 3. Use LLM to identify key statistical findings that require evidence
             key_findings = self._extract_key_findings(statistical_results)
             if not key_findings:
-                self.logger.warning("No key statistical findings identified. Skipping evidence retrieval.")
-                run_context.evidence = [] # Explicitly set evidence to empty list
-                return AgentResult(success=True, artifacts=[], metadata={"message": "No findings to process"})
+                error_msg = "No key statistical findings were identified by the LLM. Cannot proceed with evidence retrieval."
+                self.logger.error(error_msg)
+                return AgentResult(
+                    success=False,
+                    artifacts=[],
+                    metadata={"error": error_msg},
+                    error_message=error_msg
+                )
 
             # 4. For each finding, generate queries and retrieve evidence from the RAG index
             evidence_results = self._retrieve_evidence_for_findings(key_findings, framework_content)
