@@ -260,7 +260,8 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple):
                         if isinstance(artifact_hash, str):
                             try:
                                 artifact_metadata = storage.get_artifact_metadata(artifact_hash)
-                                artifact_type = artifact_metadata.get("artifact_type", "unknown")
+                                # Artifact type is stored in metadata.artifact_type, not directly
+                                artifact_type = artifact_metadata.get("metadata", {}).get("artifact_type", "unknown")
                                 artifact_types[artifact_type] = artifact_types.get(artifact_type, 0) + 1
                             except Exception:
                                 # Fallback for artifacts without metadata
