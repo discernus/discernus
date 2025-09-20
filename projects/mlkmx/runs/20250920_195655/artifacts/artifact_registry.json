@@ -12,5 +12,68 @@
     },
     "size_bytes": 624,
     "source_run": "20250920_195655"
+  },
+  "0d758d8c36bee557fd03f91dcb51f7a0da441a3cf5782ffc52bf71411a0614d5": {
+    "artifact_path": "derived_metrics_0d758d8c.json",
+    "created_at": "2025-09-20T20:01:01.270295+00:00",
+    "human_filename": "derived_metrics_0d758d8c.json",
+    "is_directory": false,
+    "metadata": {
+      "analysis_id": "analysis_91cf6676",
+      "artifact_type": "derived_metrics",
+      "document_index": 1
+    },
+    "size_bytes": 7850,
+    "source_run": "20250920_195655"
+  },
+  "17e358466262ae986390b110c37361950ee52b26ff440d383e526383c843a574": {
+    "artifact_path": "composite_analysis_17e35846.json",
+    "created_at": "2025-09-20T19:58:32.992434+00:00",
+    "human_filename": "composite_analysis_17e35846.json",
+    "is_directory": false,
+    "metadata": {
+      "analysis_id": "analysis_91cf6676",
+      "artifact_type": "composite_analysis",
+      "document_index": 0
+    },
+    "size_bytes": 48175,
+    "source_run": "20250920_195655"
+  },
+  "5d52d73948d5fe1eb88c70c2bd2b8811c5f8061a758caed0a773dfc1adae849f": {
+    "artifact_path": "score_extraction_5d52d739.json",
+    "created_at": "2025-09-20T20:00:53.187365+00:00",
+    "human_filename": "score_extraction_5d52d739.json",
+    "is_directory": false,
+    "metadata": {
+      "analysis_id": "analysis_91cf6676",
+      "artifact_type": "score_extraction"
+    },
+    "size_bytes": 1312,
+    "source_run": "20250920_195655"
+  },
+  "a2d4107eb88ae078256774742c80fb8dc52441a82cf401adba01ff6a1494e0db": {
+    "artifact_path": "composite_analysis_a2d4107e.json",
+    "created_at": "2025-09-20T20:00:46.870784+00:00",
+    "human_filename": "composite_analysis_a2d4107e.json",
+    "is_directory": false,
+    "metadata": {
+      "analysis_id": "analysis_91cf6676",
+      "artifact_type": "composite_analysis",
+      "document_index": 1
+    },
+    "size_bytes": 64738,
+    "source_run": "20250920_195655"
+  },
+  "c801af73c83ae0604a1a29e4f765b15f6388ff108453df317a499944ffe19744": {
+    "artifact_path": "evidence_extraction_c801af73.json",
+    "created_at": "2025-09-20T20:00:50.870787+00:00",
+    "human_filename": "evidence_extraction_c801af73.json",
+    "is_directory": false,
+    "metadata": {
+      "analysis_id": "analysis_91cf6676",
+      "artifact_type": "evidence_extraction"
+    },
+    "size_bytes": 5319,
+    "source_run": "20250920_195655"
   }
 }

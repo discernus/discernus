@@ -228,7 +228,7 @@ Focus on the most impactful findings that would benefit from textual evidence.
             return []
 
     def _llm_driven_evidence_retrieval(self, framework_spec: Dict[str, Any], statistical_results: Dict[str, Any]) -> List[Dict[str, Any]]:
-        """Retrieve evidence using LLM-driven approach."""
+        """Retrieve evidence using iterative LLM-driven curation approach."""
         try:
             # Create evidence retrieval prompt
             prompt = self._create_evidence_retrieval_prompt(framework_spec, statistical_results)
@@ -244,31 +244,24 @@ Focus on the most impactful findings that would benefit from textual evidence.
             # Parse response
             evidence_plan = self._parse_llm_response(response)
             
-            # Execute evidence retrieval using RAG
+            # Execute iterative evidence curation
             evidence_results = []
             for finding in evidence_plan.get('key_findings', []):
-                finding_queries = finding.get('queries', [])
-                quotes = []
-                seen_quotes = set()  # Track unique quotes
+                finding_description = finding.get('finding', '')
+                initial_queries = finding.get('queries', [])
                 
-                for query in finding_queries:
-                    # Use RAG to search for evidence
-                    search_results = self.rag_manager.search(query, top_k=3)
-                    for result in search_results:
-                        quote_text = result.get('text', '')
-                        # Only add if we haven't seen this exact quote before
-                        if quote_text and quote_text not in seen_quotes:
-                            seen_quotes.add(quote_text)
-                            quotes.append({
-                                "text": quote_text,
-                                "relevance_score": result.get('score', 0.0),
-                                "query": query
-                            })
+                # Use iterative curation to find the best quotes
+                curated_quotes = self._iterative_quote_curation(
+                    finding_description, 
+                    initial_queries,
+                    max_iterations=3,
+                    max_quotes_per_finding=5
+                )
                 
                 evidence_results.append({
-                    "finding": finding.get('finding', ''),
+                    "finding": finding_description,
                     "dimension": finding.get('dimension', ''),
-                    "quotes": quotes
+                    "quotes": curated_quotes
                 })
             
             return evidence_results
@@ -276,6 +269,158 @@ Focus on the most impactful findings that would benefit from textual evidence.
         except Exception as e:
             self.logger.error(f"Failed to retrieve evidence: {e}")
             raise
+
+    def _iterative_quote_curation(self, finding_description: str, initial_queries: List[str], 
+                                 max_iterations: int = 3, max_quotes_per_finding: int = 5) -> List[Dict[str, Any]]:
+        """
+        Iteratively curate the best quotes for a finding using LLM intelligence.
+        
+        This allows the LLM to:
+        1. Start with broad searches to get many candidates
+        2. Review and select the best quotes
+        3. Refine queries if needed to find better evidence
+        4. Stop when satisfied or hit limits
+        """
+        all_candidates = []
+        seen_quotes = set()
+        current_queries = initial_queries.copy()
+        
+        for iteration in range(max_iterations):
+            self.logger.info(f"Evidence curation iteration {iteration + 1}/{max_iterations} for finding: {finding_description[:50]}...")
+            
+            # Search for new candidates with current queries
+            new_candidates = []
+            for query in current_queries:
+                search_results = self.rag_manager.search(query, top_k=5)  # Get more candidates
+                for result in search_results:
+                    quote_text = result.get('text', '')
+                    if quote_text and quote_text not in seen_quotes:
+                        seen_quotes.add(quote_text)
+                        new_candidates.append({
+                            "text": quote_text,
+                            "relevance_score": result.get('score', 0.0),
+                            "query": query,
+                            "iteration": iteration + 1
+                        })
+            
+            all_candidates.extend(new_candidates)
+            
+            # If we have enough candidates, let LLM curate them
+            if len(all_candidates) >= max_quotes_per_finding or iteration == max_iterations - 1:
+                curated_quotes = self._llm_curate_quotes(
+                    finding_description, 
+                    all_candidates, 
+                    max_quotes_per_finding
+                )
+                
+                if curated_quotes:
+                    self.logger.info(f"Found {len(curated_quotes)} curated quotes for finding")
+                    return curated_quotes
+                elif iteration < max_iterations - 1:
+                    # LLM wasn't satisfied, try refined queries
+                    current_queries = self._generate_refined_queries(finding_description, all_candidates)
+                    if not current_queries:
+                        break
+                else:
+                    # Last iteration, return best candidates by score
+                    return sorted(all_candidates, key=lambda x: x['relevance_score'], reverse=True)[:max_quotes_per_finding]
+        
+        # Fallback: return best candidates by relevance score
+        return sorted(all_candidates, key=lambda x: x['relevance_score'], reverse=True)[:max_quotes_per_finding]
+
+    def _llm_curate_quotes(self, finding_description: str, candidates: List[Dict[str, Any]], 
+                          max_quotes: int) -> List[Dict[str, Any]]:
+        """Use LLM to curate the best quotes from candidates."""
+        if not candidates:
+            return []
+        
+        # Create curation prompt
+        candidates_text = "\n".join([
+            f"{i+1}. Score: {c['relevance_score']:.3f} | Query: {c['query']} | Text: {c['text'][:200]}..."
+            for i, c in enumerate(candidates[:20])  # Limit to top 20 for prompt efficiency
+        ])
+        
+        prompt = f"""
+You are curating evidence quotes for this statistical finding:
+
+FINDING: {finding_description}
+
+CANDIDATE QUOTES:
+{candidates_text}
+
+Select the BEST {max_quotes} quotes that most strongly support this finding. Consider:
+- Relevance to the finding
+- Clarity and impact of the quote
+- Uniqueness (avoid similar quotes)
+- Quality of evidence
+
+Return ONLY the numbers of the selected quotes (e.g., "1, 3, 7, 12, 15").
+If no quotes are suitable, return "NONE".
+"""
+        
+        try:
+            response, _ = self.llm_gateway.execute_call(
+                model="vertex_ai/gemini-2.5-flash",
+                prompt=prompt,
+                system_prompt="You are a helpful assistant for evidence curation.",
+                temperature=0.1
+            )
+            
+            # Parse selected quote indices
+            if "NONE" in response.upper():
+                return []
+            
+            selected_indices = []
+            for part in response.split(','):
+                try:
+                    idx = int(part.strip()) - 1  # Convert to 0-based index
+                    if 0 <= idx < len(candidates):
+                        selected_indices.append(idx)
+                except ValueError:
+                    continue
+            
+            # Return selected quotes
+            selected_quotes = [candidates[i] for i in selected_indices if i < len(candidates)]
+            return selected_quotes[:max_quotes]
+            
+        except Exception as e:
+            self.logger.error(f"Failed to curate quotes: {e}")
+            return []
+
+    def _generate_refined_queries(self, finding_description: str, candidates: List[Dict[str, Any]]) -> List[str]:
+        """Generate refined search queries based on what we've found so far."""
+        if not candidates:
+            return []
+        
+        # Analyze what we've found to generate better queries
+        prompt = f"""
+FINDING: {finding_description}
+
+CURRENT CANDIDATES FOUND: {len(candidates)}
+Top candidates by score:
+{chr(10).join([f"- {c['text'][:100]}... (score: {c['relevance_score']:.3f})" for c in sorted(candidates, key=lambda x: x['relevance_score'], reverse=True)[:5]])}
+
+Generate 2-3 refined search queries that might find BETTER evidence for this finding.
+Focus on different angles or more specific terms that might yield stronger quotes.
+
+Return only the queries, one per line.
+"""
+        
+        try:
+            response, _ = self.llm_gateway.execute_call(
+                model="vertex_ai/gemini-2.5-flash",
+                prompt=prompt,
+                system_prompt="You are a helpful assistant for query refinement.",
+                temperature=0.3
+            )
+            
+            # Parse queries from response
+            queries = [line.strip() for line in response.split('\n') if line.strip()]
+            return queries[:3]  # Limit to 3 refined queries
+            
+        except Exception as e:
+            self.logger.error(f"Failed to generate refined queries: {e}")
+            return []
 
     def _create_evidence_retrieval_prompt(self, framework_spec: Dict[str, Any], statistical_results: Dict[str, Any]) -> str:
         """Create prompt for evidence retrieval."""
