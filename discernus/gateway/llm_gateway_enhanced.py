@@ -123,7 +123,7 @@ class EnhancedLLMGateway(LLMGateway):
                     "response_cost_usd": response_cost
                 }
                 
-                return content, {
+                return response, {
                     "success": True, 
                     "model": current_model, 
                     "usage": usage_data, 
