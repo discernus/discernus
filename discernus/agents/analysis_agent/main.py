@@ -806,13 +806,16 @@ ANALYSIS RESULTS:
 {json.dumps(csv_data, indent=2)}
 
 Your task:
-1. Extract scores and evidence from ALL analysis results
+1. Extract scores, evidence, and derived metrics from ALL analysis results
 2. Generate standard CSV files that work with R, STATA, and pandas
 3. Create separate CSV files for different data types:
-   - scores.csv: Dimensional scores with document_id, document_name, dimension, raw_score, salience, confidence
+   - scores.csv: Dimensional scores AND derived metrics with document_id, document_name, dimension, raw_score, salience, confidence
    - evidence.csv: Evidence quotes with document_id, document_name, dimension, quote_text, confidence
 
-IMPORTANT: Include document identification information in both CSV files so researchers can track which document each score/evidence comes from.
+IMPORTANT: 
+- Include BOTH dimensional scores (positive_sentiment, negative_sentiment) AND derived metrics (net_sentiment, sentiment_magnitude) in scores.csv
+- Include document identification information in both CSV files so researchers can track which document each score/evidence comes from
+- For derived metrics, use the dimension name as the dimension field (e.g., "net_sentiment", "sentiment_magnitude")
 
 Use the generate_csv_file tool for each CSV file. Ensure proper CSV formatting with:
 - Headers in the first row
@@ -931,13 +934,21 @@ Use the generate_csv_file tool for each CSV file. Ensure proper CSV formatting w
     def _write_csv_file(self, filename: str, csv_content: str, analysis_id: str) -> Path:
         """Write CSV content to the appropriate experiment results directory."""
         
-        # Determine output directory - use experiment's results directory
+        # Determine output directory - use the current run directory
         experiment_path = Path(self.security.experiment_root)
         runs_dir = experiment_path / "runs"
         
-        # Use current timestamp for run directory
-        run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-        results_dir = runs_dir / run_id / "results"
+        # Find the most recent run directory (the current one)
+        run_dirs = [d for d in runs_dir.iterdir() if d.is_dir()]
+        if not run_dirs:
+            # Fallback: create a new run directory
+            run_id = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+            current_run_dir = runs_dir / run_id
+        else:
+            # Use the most recent run directory
+            current_run_dir = max(run_dirs, key=lambda d: d.stat().st_mtime)
+        
+        results_dir = current_run_dir / "results"
         
         # Ensure directory exists
         results_dir.mkdir(parents=True, exist_ok=True)
@@ -951,7 +962,8 @@ Use the generate_csv_file tool for each CSV file. Ensure proper CSV formatting w
         self.audit.log_agent_event(self.agent_name, "csv_file_written", {
             "csv_path": str(csv_path),
             "filename": filename,
-            "size": len(csv_content)
+            "size": len(csv_content),
+            "run_directory": str(current_run_dir)
         })
         return csv_path
 
