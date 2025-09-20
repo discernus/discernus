@@ -117,6 +117,61 @@ class LocalArtifactStorage:
         except Exception as e:
             raise LocalArtifactStorageError(f"Failed to store artifact: {e}")
 
+    def store_artifact(self, *args, **kwargs) -> str:
+        """
+        Adapter method for backward compatibility with store_artifact calls.
+        
+        Handles different calling patterns:
+        1. store_artifact(name, data) - from agent_base_classes
+        2. store_artifact(content=..., artifact_type=..., experiment_id=...) - from evidence retriever
+        
+        Returns:
+            SHA-256 hash of the stored content
+        """
+        try:
+            # Handle named parameter calls (evidence retriever pattern)
+            if 'content' in kwargs:
+                content = kwargs['content']
+                # Build metadata from other parameters
+                metadata = {}
+                if 'artifact_type' in kwargs:
+                    metadata['artifact_type'] = kwargs['artifact_type']
+                if 'experiment_id' in kwargs:
+                    metadata['experiment_id'] = kwargs['experiment_id']
+                
+                # Convert content to bytes if needed
+                if isinstance(content, dict):
+                    import json
+                    content = json.dumps(content, indent=2).encode('utf-8')
+                elif isinstance(content, str):
+                    content = content.encode('utf-8')
+                
+                return self.put_artifact(content, metadata)
+            
+            # Handle positional calls (agent_base_classes pattern) 
+            elif len(args) >= 2:
+                name, data = args[0], args[1]
+                # Convert data to bytes
+                if isinstance(data, dict):
+                    import json
+                    content = json.dumps(data, indent=2).encode('utf-8')
+                elif isinstance(data, str):
+                    content = data.encode('utf-8')
+                else:
+                    content = str(data).encode('utf-8')
+                
+                metadata = {
+                    'artifact_name': name,
+                    'artifact_type': 'tool_call_data'
+                }
+                return self.put_artifact(content, metadata)
+            
+            else:
+                raise LocalArtifactStorageError("Invalid arguments for store_artifact")
+                
+        except Exception as e:
+            raise LocalArtifactStorageError(f"Failed to store artifact: {e}")
+
     def _register_artifact(
         self,
         hash_id: str,

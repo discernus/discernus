@@ -98,7 +98,14 @@ class V2ValidationAgent(StandardAgent):
             if not validation_result.success:
                 blocking_issues = [issue for issue in validation_result.issues if issue.priority == "BLOCKING"]
                 if blocking_issues:
-                    error_msg = f"Validation failed with {len(blocking_issues)} blocking issues"
+                    # Create detailed error message with actual issue descriptions
+                    issue_details = []
+                    for issue in blocking_issues:
+                        issue_details.append(f"• {issue.description}")
+                        if hasattr(issue, 'fix') and issue.fix:
+                            issue_details.append(f"  Fix: {issue.fix}")
+                    
+                    error_msg = f"Validation failed with {len(blocking_issues)} blocking issue(s):\n" + "\n".join(issue_details)
                     self.logger.error(error_msg)
                     return AgentResult(
                         success=False,

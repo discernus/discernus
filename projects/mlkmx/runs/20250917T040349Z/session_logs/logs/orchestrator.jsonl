@@ -1,2 +1,0 @@
-{"log_type":"orchestrator","event_type":"manifest_run_mode_set","data":{"mode_type":"standard","statistical_prep":false,"resume_from_stats":false},"session_id":"20250917T040349Z_6af158f4","timestamp":"2025-09-17T04:03:49.912813+00:00"}
-{"log_type":"orchestrator","event_type":"provenance_organization","data":{"run_dir":"/Volumes/code/discernus/projects/mlkmx/runs/20250917T040349Z","artifacts_organized":8,"directory_structure":"academic_standard_v1.0"},"session_id":"20250917T040349Z_6af158f4","timestamp":"2025-09-17T04:08:33.392598+00:00"}

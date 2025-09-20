@@ -134,14 +134,14 @@ name: "mlkmx_civil_rights_speeches"
 version: "1.0.0"
 total_documents: 2
 documents:
-  - filename: "malcom_x_ballot_or_bullet.txt"
+  - filename: "corpus/malcom_x_ballot_or_bullet.txt"
     document_id: "malcolm_x_ballot_bullet_1964"
     speaker: "Malcolm X"
     year: 1964
     title: "The Ballot or the Bullet"
     venue: "Cory Methodist Church, Cleveland, Ohio"
     word_count: 7500
-  - filename: "mlk_letter_from_birmingham_jail.txt"
+  - filename: "corpus/mlk_letter_from_birmingham_jail.txt"
     document_id: "mlk_birmingham_jail_1963"
     speaker: "Martin Luther King Jr."
     year: 1963
