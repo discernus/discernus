@@ -146,8 +146,9 @@ def cli(ctx):
 @click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True, path_type=str))
 @click.option('--verbose-trace', is_flag=True, help='Enable comprehensive function-level tracing for debugging')
 @click.option('--trace-filter', multiple=True, help='Filter tracing to specific components (e.g., statistical, analysis)')
+@click.option('--skip-validation', is_flag=True, help='Skip experiment coherence validation for faster execution')
 @click.pass_context
-def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple):
+def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, skip_validation: bool):
     """Execute a V2 experiment."""
     exp_path = Path(experiment_path).resolve()
 
@@ -198,7 +199,8 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple):
             experiment_id=exp_path.name,
             framework_path=str(framework_file),
             corpus_path=str(corpus_file),
-            output_dir=str(run_folder)
+            output_dir=str(run_folder),
+            skip_validation=skip_validation
         )
 
         orchestrator = V2Orchestrator(config, security, storage, audit)

@@ -127,8 +127,9 @@ class FullExperimentStrategy(ExecutionStrategy):
             run_context.metadata["framework_content"] = framework_content
             run_context.metadata["corpus_documents"] = corpus_documents
             run_context.metadata["corpus_manifest_content"] = corpus_manifest_content
-            # Phase 1: Validation
-            if "Validation" in agents:
+            # Phase 1: Validation (skip if flag is set)
+            skip_validation = run_context.metadata.get("skip_validation", False)
+            if "Validation" in agents and not skip_validation:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "validation"})
                 # Show progress to user
                 try:
@@ -150,6 +151,14 @@ class FullExperimentStrategy(ExecutionStrategy):
                 artifacts.extend(validation_result.artifacts)
                 run_context.update_phase("validation")
                 audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "validation"})
+            elif skip_validation:
+                audit.log_agent_event("FullExperimentStrategy", "phase_skipped", {"phase": "validation", "reason": "skip_validation flag set"})
+                try:
+                    from ..cli_console import rich_console
+                    if rich_console:
+                        rich_console.print_info("⏭️ Skipping validation checks...")
+                except ImportError:
+                    pass
             
             # Phase 2: Analysis
             if "Analysis" in agents:
@@ -403,8 +412,9 @@ class AnalysisOnlyStrategy(ExecutionStrategy):
             run_context.metadata["corpus_documents"] = corpus_documents
             run_context.metadata["corpus_manifest_content"] = corpus_manifest_content
 
-            # Phase 1: Validation
-            if "Validation" in agents:
+            # Phase 1: Validation (skip if flag is set)
+            skip_validation = run_context.metadata.get("skip_validation", False)
+            if "Validation" in agents and not skip_validation:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "validation"})
                 # Show progress to user
                 try:
@@ -426,6 +436,14 @@ class AnalysisOnlyStrategy(ExecutionStrategy):
                 artifacts.extend(validation_result.artifacts)
                 run_context.update_phase("validation")
                 audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "validation"})
+            elif skip_validation:
+                audit.log_agent_event("FullExperimentStrategy", "phase_skipped", {"phase": "validation", "reason": "skip_validation flag set"})
+                try:
+                    from ..cli_console import rich_console
+                    if rich_console:
+                        rich_console.print_info("⏭️ Skipping validation checks...")
+                except ImportError:
+                    pass
             
             # Phase 2: Analysis
             if "Analysis" in agents:
@@ -565,8 +583,9 @@ class StatisticalPrepStrategy(ExecutionStrategy):
             run_context.metadata["corpus_documents"] = corpus_documents
             run_context.metadata["corpus_manifest_content"] = corpus_manifest_content
             
-            # Phase 1: Validation
-            if "Validation" in agents:
+            # Phase 1: Validation (skip if flag is set)
+            skip_validation = run_context.metadata.get("skip_validation", False)
+            if "Validation" in agents and not skip_validation:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "validation"})
                 # Show progress to user
                 try:
@@ -588,6 +607,14 @@ class StatisticalPrepStrategy(ExecutionStrategy):
                 artifacts.extend(validation_result.artifacts)
                 run_context.update_phase("validation")
                 audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "validation"})
+            elif skip_validation:
+                audit.log_agent_event("FullExperimentStrategy", "phase_skipped", {"phase": "validation", "reason": "skip_validation flag set"})
+                try:
+                    from ..cli_console import rich_console
+                    if rich_console:
+                        rich_console.print_info("⏭️ Skipping validation checks...")
+                except ImportError:
+                    pass
             
             # Phase 2: Analysis
             if "Analysis" in agents:

@@ -50,6 +50,7 @@ class V2OrchestratorConfig:
     verification_enabled: bool = True
     cache_enabled: bool = True
     debug_mode: bool = False
+    skip_validation: bool = False
 
 
 class V2Orchestrator:
@@ -140,7 +141,8 @@ class V2Orchestrator:
             "verification_enabled": self.config.verification_enabled,
             "cache_enabled": self.config.cache_enabled,
             "debug_mode": self.config.debug_mode,
-            "resume_from_phase": self.config.resume_from_phase
+            "resume_from_phase": self.config.resume_from_phase,
+            "skip_validation": self.config.skip_validation
         })
         
         # Create input file snapshots for provenance (once per experiment)

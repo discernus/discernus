@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250920_175747_0",
+  "step": "markup_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "marked_up_document": "The recent urban revitalization project has been an <positive>unqualified triumph</positive>, transforming our city's downtown core from a neglected afterthought into a <positive>vibrant, bustling hub</positive> of commerce and community. The <positive>meticulously planned</positive> public spaces, including the <positive>stunning waterfront park</positive> and <positive>pedestrian-friendly avenues</positive>, have <positive>fostered a renewed sense of civic pride</positive>. Local businesses are reporting <positive>record foot traffic</positive>, and the influx of new residents and visitors has created an atmosphere of <positive>palpable optimism and energy</positive> that promises a <positive>bright and prosperous future for all</positive>.\n\nFurthermore, the project's <positive>commitment to sustainable design and green building practices</positive> has set a <positive>new national standard</positive>. The integration of <positive>renewable energy sources</positive>, <positive>advanced water reclamation systems</positive>, and <positive>expansive green roofs</positive> not only minimizes the environmental impact but also <positive>enhances the quality of life</positive> for urban dwellers. This initiative serves as a <positive>powerful testament to what can be achieved</positive> when <positive>bold vision is paired with thoughtful execution</positive>, creating a <positive>legacy of economic vitality and environmental stewardship</positive> that will <positive>benefit generations to come</positive>.",
+  "document_index": 0,
+  "timestamp": "2025-09-20T21:57:59.238018+00:00"
+}
