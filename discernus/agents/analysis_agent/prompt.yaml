@@ -105,7 +105,7 @@ template: |
   **INPUT DATA:**
 
   - A single analytical framework - contains dimensional definitions and analysis guidance
-  - A batch of documents - texts to be analyzed
+  - A single document - text to be analyzed
 
   ---
 
@@ -119,8 +119,8 @@ template: |
 
   Begin analysis now for analysis `{analysis_id}`. Follow these steps in order:
 
-  STEP 1: Apply the framework to all {num_documents} documents using THREE INDEPENDENT ANALYTICAL APPROACHES
-  STEP 2: Calculate the MEDIAN score for each dimension across all three approaches  
+  STEP 1: Apply the framework to the single document using THREE INDEPENDENT ANALYTICAL APPROACHES
+  STEP 2: Calculate the MEDIAN score for each dimension across all three approaches
   STEP 3: Select the BEST evidence quote for each dimension from the three approaches
   STEP 4: Return ONLY the FINAL AGGREGATED RESULT in the exact format specified above
   STEP 5: Verify that your output includes the exact delimiters and follows the JSON schema precisely

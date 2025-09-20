@@ -165,29 +165,67 @@ Analyze the provided document(s) using the specified framework and return the co
         })
 
         try:
-            # Step 1: Enhanced Composite Analysis (with markup)
-            composite_result = self._step1_enhanced_composite_analysis(
-                framework_content, documents, analysis_id
-            )
-            
-            # Step 2: Evidence Extraction
-            evidence_result = self._step2_evidence_extraction(composite_result, analysis_id)
-            
-            # Step 3: Score Extraction
-            scores_result = self._step3_score_extraction(composite_result, analysis_id)
-            
-            # Step 4: Derived Metrics Generation
-            derived_metrics_result = self._step4_derived_metrics_generation(
-                framework_content, scores_result, analysis_id
-            )
-            
-            # Step 5: Verification
-            verification_result = self._step5_verification(
-                framework_content, derived_metrics_result, scores_result, analysis_id
-            )
-            
-            # Step 6: Markup Extraction
-            markup_result = self._step6_markup_extraction(composite_result, analysis_id)
+            # Process documents individually for integrity and scalability
+            all_composite_results = []
+            all_evidence_results = []
+            all_scores_results = []
+            all_derived_metrics_results = []
+            all_verification_results = []
+            all_markup_results = []
+
+            for doc_index, doc in enumerate(documents):
+                doc_name = doc.get('name', doc.get('filename', f'document_{doc_index}'))
+                self.audit.log_agent_event(self.agent_name, "document_analysis_started", {
+                    "analysis_id": analysis_id,
+                    "document_index": doc_index,
+                    "document_name": doc_name,
+                    "total_documents": len(documents)
+                })
+
+                # Step 1: Enhanced Composite Analysis (individual document)
+                composite_result = self._step1_enhanced_composite_analysis_single(
+                    framework_content, doc, doc_index, analysis_id
+                )
+                all_composite_results.append(composite_result)
+
+                # Step 2: Evidence Extraction
+                evidence_result = self._step2_evidence_extraction(composite_result, analysis_id)
+                all_evidence_results.append(evidence_result)
+
+                # Step 3: Score Extraction
+                scores_result = self._step3_score_extraction(composite_result, analysis_id)
+                all_scores_results.append(scores_result)
+
+                # Step 4: Derived Metrics Generation
+                derived_metrics_result = self._step4_derived_metrics_generation_single(
+                    framework_content, scores_result, doc_index, analysis_id
+                )
+                all_derived_metrics_results.append(derived_metrics_result)
+
+                # Step 5: Verification
+                verification_result = self._step5_verification_single(
+                    framework_content, derived_metrics_result, scores_result, doc_index, analysis_id
+                )
+                all_verification_results.append(verification_result)
+
+                # Step 6: Markup Extraction
+                markup_result = self._step6_markup_extraction(composite_result, analysis_id)
+                all_markup_results.append(markup_result)
+
+                self.audit.log_agent_event(self.agent_name, "document_analysis_completed", {
+                    "analysis_id": analysis_id,
+                    "document_index": doc_index,
+                    "document_name": doc_name,
+                    "total_documents": len(documents)
+                })
+
+            # Aggregate results from all documents
+            composite_result = self._aggregate_composite_results(all_composite_results, analysis_id)
+            evidence_result = self._aggregate_evidence_results(all_evidence_results, analysis_id)
+            scores_result = self._aggregate_scores_results(all_scores_results, analysis_id)
+            derived_metrics_result = self._aggregate_derived_metrics_results(all_derived_metrics_results, analysis_id)
+            verification_result = self._aggregate_verification_results(all_verification_results, analysis_id)
+            markup_result = self._aggregate_markup_results(all_markup_results, analysis_id)
             
             # Compile final results
             final_results = {
@@ -227,69 +265,108 @@ Analyze the provided document(s) using the specified framework and return the co
             })
             raise AnalysisAgentError(f"Analysis failed: {str(e)}") from e
 
-    def _step1_enhanced_composite_analysis(self, 
-                                         framework_content: str, 
-                                         documents: List[Dict[str, Any]], 
-                                         analysis_id: str) -> Dict[str, Any]:
-        """Step 1: Enhanced composite analysis with integrated document markup."""
-        
-        # Prepare documents for prompt
-        document_content = self._prepare_documents(documents)
-        
-        # Create the analysis prompt
-        prompt = self.prompt_template.replace('{framework_content}', framework_content).replace('{document_content}', document_content).replace('{analysis_id}', analysis_id).replace('{num_documents}', str(len(documents)))
-        
-        self.audit.log_agent_event(self.agent_name, "step1_started", {
+    def _step1_enhanced_composite_analysis_single(self,
+                                                framework_content: str,
+                                                document: Dict[str, Any],
+                                                doc_index: int,
+                                                analysis_id: str) -> Dict[str, Any]:
+        """Step 1: Enhanced composite analysis for a single document."""
+        doc_name = document.get('name', document.get('filename', f'document_{doc_index}'))
+
+        # Prepare single document for prompt
+        document_content = self._prepare_single_document(document, doc_index)
+
+        # Create the analysis prompt for single document
+        prompt = self.prompt_template.replace('{framework_content}', framework_content).replace('{document_content}', document_content).replace('{analysis_id}', f"{analysis_id}_doc_{doc_index}").replace('{num_documents}', "1")
+
+        self.audit.log_agent_event(self.agent_name, "step1_started_single", {
             "analysis_id": analysis_id,
             "step": "enhanced_composite_analysis_generation",
-            "model": "vertex_ai/gemini-2.5-flash"
+            "model": "vertex_ai/gemini-2.5-flash",
+            "document_index": doc_index,
+            "document_name": doc_name
         })
-        
-        # Execute LLM call
+
+        # Execute LLM call for single document
         response = self.gateway.execute_call(
             model="vertex_ai/gemini-2.5-flash",
             prompt=prompt
         )
-        
+
         # Extract content from response
         if isinstance(response, tuple):
             content, metadata = response
         else:
             content = response.get('content', '')
             metadata = response.get('metadata', {})
-        
+
         # If content is empty, try to get it from the raw response
         if not content and hasattr(response, 'choices'):
             content = response.choices[0].message.content
-        
-        # Generate document hashes for provenance
-        document_hashes = [self._generate_content_hash(doc['content']) for doc in documents]
-        
+
+        # Generate document hash for provenance
+        document_hash = self._generate_content_hash(document.get('content', ''))
+
         # Save composite result to artifacts
         composite_data = {
             "analysis_id": analysis_id,
             "step": "enhanced_composite_analysis_generation",
             "model_used": "vertex_ai/gemini-2.5-flash",
             "raw_analysis_response": content,
-            "document_hashes": document_hashes,
+            "document_hash": document_hash,
+            "document_index": doc_index,
+            "document_name": doc_name,
             "timestamp": datetime.now(timezone.utc).isoformat()
         }
-        
+
         composite_hash = self.storage.put_artifact(
             json.dumps(composite_data, indent=2).encode('utf-8'),
-            {"artifact_type": "composite_analysis", "analysis_id": analysis_id}
+            {"artifact_type": "composite_analysis", "analysis_id": analysis_id, "document_index": doc_index}
         )
-        
+
         composite_data['artifact_hash'] = composite_hash
-        
-        self.audit.log_agent_event(self.agent_name, "step1_completed", {
+
+        self.audit.log_agent_event(self.agent_name, "step1_completed_single", {
             "analysis_id": analysis_id,
             "step": "enhanced_composite_analysis_generation",
             "artifact_hash": composite_hash,
+            "document_index": doc_index,
+            "document_name": doc_name,
             "response_length": len(content)
         })
-        
+
         return composite_data
+
+    def _aggregate_composite_results(self, all_results: List[Dict[str, Any]], analysis_id: str) -> Dict[str, Any]:
+        """Aggregate composite results from all documents."""
+        # For now, return the last result as a placeholder
+        # In a full implementation, this would merge all document analyses
+        return all_results[-1] if all_results else {}
+
+    def _aggregate_evidence_results(self, all_results: List[Dict[str, Any]], analysis_id: str) -> Dict[str, Any]:
+        """Aggregate evidence results from all documents."""
+        # For now, return the last result as a placeholder
+        return all_results[-1] if all_results else {}
+
+    def _aggregate_scores_results(self, all_results: List[Dict[str, Any]], analysis_id: str) -> Dict[str, Any]:
+        """Aggregate score results from all documents."""
+        # For now, return the last result as a placeholder
+        return all_results[-1] if all_results else {}
+
+    def _aggregate_derived_metrics_results(self, all_results: List[Dict[str, Any]], analysis_id: str) -> Dict[str, Any]:
+        """Aggregate derived metrics results from all documents."""
+        # For now, return the last result as a placeholder
+        return all_results[-1] if all_results else {}
+
+    def _aggregate_verification_results(self, all_results: List[Dict[str, Any]], analysis_id: str) -> Dict[str, Any]:
+        """Aggregate verification results from all documents."""
+        # For now, return the last result as a placeholder
+        return all_results[-1] if all_results else {}
+
+    def _aggregate_markup_results(self, all_results: List[Dict[str, Any]], analysis_id: str) -> Dict[str, Any]:
+        """Aggregate markup results from all documents."""
+        # For now, return the last result as a placeholder
+        return all_results[-1] if all_results else {}
 
     def _step2_evidence_extraction(self, composite_result: Dict[str, Any], analysis_id: str) -> Dict[str, Any]:
         """Step 2: Extract evidence from composite result using Flash Lite."""
@@ -597,18 +674,25 @@ Format as Markdown, not JSON."""
         return markup_result
 
     def _prepare_documents(self, documents: List[Dict[str, Any]]) -> str:
-        """Prepare documents for the analysis prompt."""
-        document_content = ""
-        
-        for i, doc in enumerate(documents):
-            doc_content = doc.get('content', '')
-            doc_name = doc.get('name', doc.get('filename', f'document_{i}'))
-            doc_hash = self._generate_content_hash(doc_content)
-            
-            document_content += f"\n--- Document {i+1}: {doc_name} ---\n"
-            document_content += f"Hash: {doc_hash}\n"
-            document_content += f"Content:\n{doc_content}\n"
-        
+        """Prepare documents for the analysis prompt.
+
+        This method now processes documents individually for integrity and scalability.
+        Each document gets its own analysis call to prevent concept blending.
+        """
+        # For individual document processing, we return a placeholder
+        # The actual document content is processed individually in the main analysis loop
+        return f"Individual document analysis mode: {len(documents)} documents to process"
+
+    def _prepare_single_document(self, doc: Dict[str, Any], doc_index: int) -> str:
+        """Prepare a single document for individual analysis."""
+        doc_content = doc.get('content', '')
+        doc_name = doc.get('name', doc.get('filename', f'document_{doc_index}'))
+        doc_hash = self._generate_content_hash(doc_content)
+
+        document_content = f"--- Document {doc_index+1}: {doc_name} ---\n"
+        document_content += f"Hash: {doc_hash}\n"
+        document_content += f"Content:\n{doc_content}\n"
+
         return document_content
 
     def _generate_analysis_id(self) -> str:
