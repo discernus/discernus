@@ -202,25 +202,39 @@ class V2StatisticalAgent(ToolCallingAgent):
                         }
                     })
                 
+                # Store artifacts in the artifact storage system
+                artifact_hashes = []
+                for artifact in artifacts:
+                    # Store each artifact in the storage system
+                    # Convert content to bytes and create metadata
+                    content_bytes = json.dumps(artifact["content"]).encode('utf-8')
+                    metadata = {
+                        "type": artifact["type"],
+                        **artifact["metadata"]
+                    }
+                    artifact_hash = self.storage.put_artifact(content_bytes, metadata)
+                    artifact_hashes.append(artifact_hash)
+                
                 # Update run context with results
                 statistical_analysis = legacy_result.get("statistical_analysis", {})
                 run_context.statistical_results = statistical_analysis
+                run_context.statistical_artifacts = artifact_hashes
                 
                 # Log success
                 self.audit.log_agent_event(self.agent_name, "statistical_analysis_complete", {
                     "batch_id": batch_id,
-                    "artifacts_generated": len(artifacts),
+                    "artifacts_generated": len(artifact_hashes),
                     "analysis_artifacts_count": len(analysis_artifacts)
                 })
                 
                 return AgentResult(
                     success=True,
-                    artifacts=artifacts,
+                    artifacts=artifact_hashes,
                     metadata={
                         "agent_name": self.agent_name,
                         "batch_id": batch_id,
                         "analysis_artifacts_count": len(analysis_artifacts),
-                        "artifacts_count": len(artifacts)
+                        "artifacts_count": len(artifact_hashes)
                     }
                 )
             else:

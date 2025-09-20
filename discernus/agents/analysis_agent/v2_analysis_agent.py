@@ -240,11 +240,11 @@ class V2AnalysisAgent(ToolCallingAgent):
                 
                 return AgentResult(
                     success=True,
-                    artifacts=artifacts,
+                    artifacts=artifact_hashes,
                     metadata={
                         "agent_name": self.agent_name,
                         "batch_id": batch_id,
-                        "artifacts_count": len(artifacts)
+                        "artifacts_count": len(artifact_hashes)
                     }
                 )
             else:
