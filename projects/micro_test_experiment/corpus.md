@@ -21,28 +21,28 @@ total_documents: 4
 date_range: "2024"
 
 documents:
-  - filename: "positive_test_1.txt"
+  - filename: "corpus/positive_test_1.txt"
     document_id: "pos_test_1"
     metadata:
       type: "test"
       sentiment_category: "positive"
       author: "Test_Author_A"
       year: 2024
-  - filename: "positive_test_2.txt"
+  - filename: "corpus/positive_test_2.txt"
     document_id: "pos_test_2"
     metadata:
       type: "test"
       sentiment_category: "positive"
       author: "Test_Author_B"
       year: 2024
-  - filename: "negative_test_1.txt"
+  - filename: "corpus/negative_test_1.txt"
     document_id: "neg_test_1"
     metadata:
       type: "test"
       sentiment_category: "negative"
       author: "Test_Author_C"
       year: 2024
-  - filename: "negative_test_2.txt"
+  - filename: "corpus/negative_test_2.txt"
     document_id: "neg_test_2"
     metadata:
       type: "test"
