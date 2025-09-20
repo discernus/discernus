@@ -119,48 +119,24 @@ def _validate_corpus_documents(experiment_path: Path, corpus_manifest_path: Path
 # Main CLI group
 @click.group()
 @click.version_option(version='0.2.0', prog_name='Discernus')
-@click.option('--verbose', '-v', is_flag=True, envvar='DISCERNUS_VERBOSE', help='Enable verbose output')
-@click.option('--quiet', '-q', is_flag=True, envvar='DISCERNUS_QUIET', help='Enable quiet output (minimal)')
-@click.option('--no-color', is_flag=True, envvar='DISCERNUS_NO_COLOR', help='Disable colored output')
-@click.option('--config', type=click.Path(exists=True), help='Path to config file')
 @click.pass_context
-def cli(ctx, verbose, quiet, no_color, config):
+def cli(ctx):
     """Discernus - Computational Social Science Research Platform (THIN v2.0)
     
     \b
     Quick Start:
-      python3 -m discernus.cli validate projects/my_experiment/  # Validate experiment first
-      python3 -m discernus.cli run projects/my_experiment/       # Run complete experiment
-      python3 -m discernus.cli debug projects/my_experiment/     # Debug with detailed tracing
+      discernus validate projects/my_experiment/  # Validate experiment first
+      discernus run projects/my_experiment/       # Run complete experiment
+      discernus status                            # Check system status
     
     \b
     Common Examples:
-      python3 -m discernus.cli run                          # Run experiment in current directory
-      python3 -m discernus.cli run --dry-run                # Preview what would be executed
-      python3 -m discernus.cli validate --dry-run           # Preview validation checks
-      python3 -m discernus.cli debug --verbose              # Debug with detailed tracing
-      python3 -m discernus.cli status                       # Check system status
-    
-    \b
-    Model Selection Tips:
-      --analysis-model vertex_ai/gemini-2.5-flash          # Fast analysis (default)
-      --synthesis-model vertex_ai/gemini-2.5-pro           # High-quality synthesis (default)
-      --validation-model vertex_ai/gemini-2.5-pro          # High-quality validation (default)
+      discernus run                               # Run experiment in current directory
+      discernus validate                          # Validate experiment structure
+      discernus artifacts                         # Show experiment artifacts
     """
     # Ensure context object exists
     ctx.ensure_object(dict)
-    
-    # Store global options in context
-    ctx.obj['verbose'] = verbose
-    ctx.obj['quiet'] = quiet
-    ctx.obj['no_color'] = no_color
-    ctx.obj['config'] = get_config()
-    
-    # Set verbosity level
-    if verbose and quiet:
-        rich_console.print_warning("Both --verbose and --quiet specified, using verbose")
-    
-    ctx.obj['verbosity'] = 'verbose' if verbose else ('quiet' if quiet else 'normal')
 
 # ============================================================================
 # CORE COMMANDS
@@ -289,45 +265,11 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple):
         exit_infrastructure_error(str(e))
 
 
-@cli.command()
-@click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))
-@click.option('--agent', type=click.Choice(['analysis', 'synthesis', 'statistical', 'fact-checker', 'validation']), 
-              help='Focus debugging on specific agent: analysis (document processing), synthesis (report generation), statistical (statistical analysis), fact-checker (fact validation), validation (experiment coherence)')
-@click.option('--verbose', is_flag=True, help='Enable detailed debug output')
-@click.option('--test-mode', is_flag=True, help='Run in test mode with limited data')
-@click.pass_context
-def debug(ctx, experiment_path: str, agent: Optional[str], verbose: bool, test_mode: bool):
-    """Interactive debugging mode with detailed tracing.
-    
-    EXPERIMENT_PATH: Path to experiment directory (defaults to current directory).
-    """
-    exp_path = Path(experiment_path).resolve()
-    
-    if not exp_path.exists():
-        click.echo(f"❌ Experiment path does not exist: {exp_path}")
-        sys.exit(1)
-    
-    click.echo(f"🐛 Debug mode for experiment: {exp_path}")
-    
-    if agent:
-        click.echo(f"🎯 Focusing on agent: {agent}")
-    
-    if test_mode:
-        click.echo("🧪 Running in test mode with limited data")
-    
-    # V2 orchestrator doesn't support debug mode yet
-    # TODO: Implement debug functionality in V2 orchestrator
-    rich_console.print_error("❌ Debug command not yet implemented in V2 orchestrator")
-    rich_console.print_info("   The V2 orchestrator is still under development.")
-    rich_console.print_info("   For now, please use the full 'discernus run' command.")
-    exit_invalid_usage("Debug command not implemented in V2 orchestrator")
 
 @cli.command()
 @click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))
-@click.option('--dry-run', is_flag=True, 
-              help='Preview what validation would check without actually running it (useful for understanding validation requirements)')
 @click.pass_context
-def validate(ctx, experiment_path: str, dry_run: bool):
+def validate(ctx, experiment_path: str):
     """Validate experiment structure and configuration.
     
     EXPERIMENT_PATH: Path to experiment directory (defaults to current directory).
@@ -339,15 +281,6 @@ def validate(ctx, experiment_path: str, dry_run: bool):
         sys.exit(1)
     
     click.echo(f"🔍 Validating experiment: {exp_path}")
-    
-    if dry_run:
-        click.echo("🧪 DRY RUN - Validation checks that would be performed:")
-        click.echo("   • Experiment manifest structure")
-        click.echo("   • Corpus manifest and document availability")
-        click.echo("   • Framework specification compliance")
-        click.echo("   • Model availability and configuration")
-        click.echo("   • Output directory permissions")
-        return
     
     try:
         # Use ExperimentCoherenceAgent for validation
