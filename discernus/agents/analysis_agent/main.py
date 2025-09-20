@@ -1052,13 +1052,13 @@ Use the generate_csv_file tool for each CSV file. Ensure proper CSV formatting w
 
     def _prepare_single_document(self, doc: Dict[str, Any], doc_index: int) -> str:
         """Prepare a single document for individual analysis."""
-            doc_content = doc.get('content', '')
+        doc_content = doc.get('content', '')
         doc_name = doc.get('id', doc.get('name', doc.get('filename', f'document_{doc_index}')))
-            doc_hash = self._generate_content_hash(doc_content)
+        doc_hash = self._generate_content_hash(doc_content)
             
         document_content = f"--- Document {doc_index+1}: {doc_name} ---\n"
-            document_content += f"Hash: {doc_hash}\n"
-            document_content += f"Content:\n{doc_content}\n"
+        document_content += f"Hash: {doc_hash}\n"
+        document_content += f"Content:\n{doc_content}\n"
         
         return document_content
 
