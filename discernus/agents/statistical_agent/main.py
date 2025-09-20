@@ -355,169 +355,75 @@ If there are errors or discrepancies, call with verified=false."""
         return verification_result
 
     # CSV generation removed - now handled by AnalysisAgent
-            csv_content: CSV content to write
-            batch_id: Batch identifier for organization
-            
-        Returns:
-            Path to the written CSV file
-        """
-        
-        # Determine output directory - use experiment's data directory
-        experiment_path = Path(self.security.experiment_root)
-        
-        # Look for existing run directories or create a new one
-        runs_dir = experiment_path / "runs"
-        
-        # Extract run_id from batch_id (format: "stats_20250916T200726Z")
-        if batch_id.startswith("stats_"):
-            run_id = batch_id[6:]  # Remove "stats_" prefix
-        else:
-            # Fallback to current timestamp
-            run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-        
-        data_dir = runs_dir / run_id / "data"
-        results_dir = runs_dir / run_id / "results"
-        
-        # Ensure both directories exist
-        data_dir.mkdir(parents=True, exist_ok=True)
-        results_dir.mkdir(parents=True, exist_ok=True)
-        
-        # Write CSV file to results directory only (for user access)
-        results_csv_path = results_dir / filename
-        
-        with open(results_csv_path, 'w', encoding='utf-8') as f:
-            f.write(csv_content)
-        
-        self.logger.info(f"Wrote CSV file to results: {results_csv_path}")
-        return results_csv_path
 
-    def generate_functions(self, workspace_path: Path, pre_assembled_prompt: str = None) -> Dict[str, Any]:
+    def _discover_analysis_artifacts(self, batch_id: str, specific_hashes: Optional[List[str]] = None) -> Dict[str, Any]:
         """
-        Compatibility method for orchestrator integration.
-        
-        This method provides the same interface as AutomatedStatisticalAnalysisAgent
-        but uses the new THIN approach with LLM internal execution.
+        Discover analysis artifacts from shared cache for the given batch.
         
         Args:
-            workspace_path: Path to workspace directory (for compatibility)
-            pre_assembled_prompt: Pre-assembled prompt content (if provided)
-            
+            batch_id: Batch identifier for logging
+            specific_hashes: If provided, load only these specific artifact hashes.
+                           If None, falls back to loading from current analysis session.
+        
         Returns:
-            Dictionary with success status and results
+            Dictionary of artifact_hash -> artifact_data
         """
+        artifacts = {}
         
-        try:
-            # If pre-assembled prompt is provided, extract components from it
-            if pre_assembled_prompt:
-                framework_content, experiment_content, corpus_manifest = self._extract_from_assembled_prompt(pre_assembled_prompt)
-            else:
-                # Load components from workspace
-                framework_content = self._load_framework_from_workspace(workspace_path)
-                experiment_content = self._load_experiment_from_workspace(workspace_path)
-                corpus_manifest = self._load_corpus_manifest_from_workspace(workspace_path)
+        if specific_hashes:
+            # THIN approach: Load only the specific artifacts requested by orchestrator
+            self.logger.info(f"Loading {len(specific_hashes)} specific artifacts for batch {batch_id}")
             
-            # Generate batch ID for this statistical analysis
-            batch_id = f"stats_{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}"
+            for artifact_hash in specific_hashes:
+                try:
+                    artifact_content = self.storage.get_artifact(artifact_hash)
+                    artifact_data = json.loads(artifact_content.decode('utf-8'))
+                    artifacts[artifact_hash] = artifact_data
+                except Exception as e:
+                    self.logger.warning(f"Could not load specific artifact {artifact_hash}: {e}")
+                    continue
             
-            # Run the full 3-step analysis
-            result = self.analyze_batch(
-                framework_content=framework_content,
-                experiment_content=experiment_content,
-                corpus_manifest=corpus_manifest,
-                batch_id=batch_id
-            )
+            self.logger.info(f"Successfully loaded {len(artifacts)} specific artifacts")
+            return artifacts
+        
+        # Fallback: Load from current analysis session (legacy behavior)
+        # Guard: Only attempt fallback if storage registry is properly initialized
+        if not hasattr(self.storage, 'registry') or not self.storage.registry:
+            self.logger.error("Storage registry not initialized. Cannot discover artifacts.")
+            return {}
             
-            # Return in format expected by orchestrator
-            return {
-                "success": True,
-                "batch_id": batch_id,
-                "statistical_analysis": result["statistical_analysis"],
-                "verification_status": result["verification"]["verification_status"],
-                "csv_files": result["csv_generation"]["csv_files"],
-                "workspace_path": str(workspace_path)
-            }
+        self.logger.warning("No specific artifacts provided, falling back to current session discovery")
+        
+        analysis_sessions = {}
+        for artifact_hash, artifact_info in self.storage.registry.items():
+            metadata = artifact_info.get("metadata", {})
+            artifact_type = metadata.get("artifact_type", "")
+            analysis_id = metadata.get("analysis_id", "")
             
-        except Exception as e:
-            self.logger.error(f"Statistical analysis failed: {e}")
-            return {
-                "success": False,
-                "error": str(e),
-                "batch_id": None
-            }
-
-    def _extract_from_assembled_prompt(self, prompt: str) -> tuple:
-        """
-        Extract framework, experiment, and corpus content from assembled prompt.
+            if artifact_type in ["composite_analysis", "score_extraction", "derived_metrics", "evidence_extraction"] and analysis_id:
+                if analysis_id not in analysis_sessions:
+                    analysis_sessions[analysis_id] = []
+                analysis_sessions[analysis_id].append((artifact_hash, artifact_info))
         
-        Args:
-            prompt: Pre-assembled prompt string
-            
-        Returns:
-            Tuple of (framework_content, experiment_content, corpus_manifest)
-        """
+        if not analysis_sessions:
+            self.logger.warning(f"No analysis artifacts found for batch {batch_id}")
+            return artifacts
         
-        # Simple extraction based on prompt structure
-        # This is a fallback - ideally the orchestrator should pass components directly
+        # Use the most recent analysis session
+        most_recent_analysis_id = max(analysis_sessions.keys())
+        self.logger.info(f"Using most recent analysis session: {most_recent_analysis_id}")
         
-        framework_content = ""
-        experiment_content = ""
-        corpus_manifest = ""
-        
-        # Try to extract sections from the prompt
-        lines = prompt.split('\n')
-        current_section = None
-        
-        for line in lines:
-            if "**FRAMEWORK SPECIFICATION:**" in line:
-                current_section = "framework"
+        for artifact_hash, artifact_info in analysis_sessions[most_recent_analysis_id]:
+            try:
+                artifact_content = self.storage.get_artifact(artifact_hash)
+                artifact_data = json.loads(artifact_content.decode('utf-8'))
+                artifacts[artifact_hash] = artifact_data
+            except Exception as e:
+                self.logger.warning(f"Could not load artifact {artifact_hash}: {e}")
                 continue
-            elif "**FULL EXPERIMENT CONTENT:**" in line:
-                current_section = "experiment"
-                continue
-            elif "**CORPUS MANIFEST:**" in line:
-                current_section = "corpus"
-                continue
-            elif line.startswith("**") and line.endswith(":**"):
-                current_section = None
-                continue
-                
-            if current_section == "framework":
-                framework_content += line + "\n"
-            elif current_section == "experiment":
-                experiment_content += line + "\n"
-            elif current_section == "corpus":
-                corpus_manifest += line + "\n"
         
-        return framework_content.strip(), experiment_content.strip(), corpus_manifest.strip()
-
-    def _load_framework_from_workspace(self, workspace_path: Path) -> str:
-        """Load framework content from workspace."""
-        framework_file = workspace_path / "framework_content.md"
-        if framework_file.exists():
-            return framework_file.read_text(encoding='utf-8')
-        return ""
-
-    def _load_experiment_from_workspace(self, workspace_path: Path) -> str:
-        """Load experiment content from workspace."""
-        experiment_file = workspace_path / "experiment_spec.json"
-        if experiment_file.exists():
-            return experiment_file.read_text(encoding='utf-8')
-        return ""
-
-    def _load_corpus_manifest_from_workspace(self, workspace_path: Path) -> str:
-        """Load corpus manifest from workspace."""
-        # Look for corpus manifest in various possible locations
-        possible_files = [
-            workspace_path / "corpus_manifest.md",
-            workspace_path / "corpus.md",
-            workspace_path / "corpus_manifest.json"
-        ]
-        
-        for corpus_file in possible_files:
-            if corpus_file.exists():
-                return corpus_file.read_text(encoding='utf-8')
-        
-        return ""
+        self.logger.info(f"Successfully loaded {len(artifacts)} artifacts from analysis session {most_recent_analysis_id}")
+        return artifacts
 
     def _calculate_total_costs(self, statistical_result: Dict[str, Any], 
                              verification_result: Dict[str, Any], 
