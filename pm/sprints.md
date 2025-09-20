@@ -1,30 +1,206 @@
-# Discernus V2 Sprints - Integrated Ecosystem Rewrite
+# Discernus V2 Sprints - Agent Refactoring & Integration Testing
 
-**Purpose**: Organized backlog for the V2 Integrated Ecosystem Rewrite, replacing the previous "Show Your Work" migration plan.
+**Purpose**: Organized backlog for fixing critical agent architecture issues and achieving robust end-to-end functionality.
 
 **Usage**:
-
-- This plan supersedes the previous incremental refactoring sprints.
-- Each sprint epic corresponds directly to a phase in the `v2_integrated_ecosystem_rewrite_plan.md`.
+- Each sprint has clear definition of done criteria
+- Focus on atomic processing and proper agent separation
+- Comprehensive integration testing across experiment sizes
 
 ---
 
 ## Current Status
 
 **Latest Updates**:
+- ✅ **CRITICAL BUGS IDENTIFIED**: AnalysisAgent processes documents incorrectly (batch vs atomic)
+- ✅ **TOKEN LIMIT ISSUES RESOLVED**: Synthesis agent no longer receives massive composite analysis data
+- ✅ **CSV GENERATION DISABLED**: Eliminated timeout issues for alpha release
+- 🔄 **CURRENT FOCUS**: Refactor AnalysisAgent for proper atomic document processing
 
-- ✅ **ARCHITECTURE PIVOT**: We have formally adopted the V2 Integrated Ecosystem Rewrite plan.
-- ✅ **ANALYSIS COMPLETE**: The V1 orchestrator (`CleanAnalysisOrchestrator`) has been analyzed and confirmed to be a monolithic source of technical debt. The aborted `ShowYourWorkOrchestrator` has been deleted.
-- 📋 **PLANNING COMPLETE**: This document now reflects the full V2 rewrite plan.
-- ⚠️ **V2 FOUNDATION COMPLETE, AGENT MIGRATION IN PROGRESS**: Foundational V2 components (Orchestrator, Standard Interfaces) are built, but the V2 agents are not fully implemented or integrated. End-to-end tests rely on mocks.
-
-**Current Focus**: **Phase 5: V2 Validation & Migration**. The immediate priority is to complete the V2 agent implementations, fix architectural inconsistencies, and achieve a truly functional end-to-end pipeline.
+**Current Focus**: **Sprint V2-REFACTOR-1: AnalysisAgent Atomic Processing**. Fix the core architecture issue where documents are processed in batch instead of atomically.
 
 ---
 
-## V2 Rewrite Sprint Plan
+## V2 Agent Refactoring Sprint Plan
 
-### Sprint V2-1: Agent Standardization & Foundational Tooling ✅ TRULY COMPLETE
+### Sprint V2-REFACTOR-1: AnalysisAgent Atomic Processing 🔄 **IN PROGRESS**
+
+**Timeline**: 1-2 weeks
+**Goal**: Refactor AnalysisAgent to process documents atomically instead of in batch
+**Definition of Done**: Each document's composite analysis is immediately processed through steps 2-5, creating atomic artifacts
+
+**Detailed Tasks**:
+
+#### [V2-REFACTOR-1.1] Fix Document Processing Loop
+- **Current Issue**: Documents processed in batch, only last document gets steps 2-5
+- **Fix**: Move steps 2-5 inside the document loop
+- **Code Location**: `discernus/agents/analysis_agent/main.py` lines 103-141
+- **Definition of Done**: Each document gets its own evidence, markup, scores, derived metrics, and verification artifacts
+
+#### [V2-REFACTOR-1.2] Fix Step 2 Evidence Extraction
+- **Current Issue**: LLM gets stuck in loop, repeats same quote 958 times
+- **Fix**: Improve prompt and add validation
+- **Code Location**: `discernus/agents/analysis_agent/main.py` lines 451-490
+- **Definition of Done**: Evidence extraction produces unique, relevant quotes per document
+
+#### [V2-REFACTOR-1.3] Add Error Handling & Validation
+- **Current Issue**: No validation of LLM outputs
+- **Fix**: Add validation for each step's output
+- **Definition of Done**: Each step validates its output and fails gracefully
+
+#### [V2-REFACTOR-1.4] Test with Small Experiment
+- **Test**: Run nano_test_experiment to verify atomic processing
+- **Definition of Done**: All artifacts created correctly, no token limit issues
+
+### Sprint V2-REFACTOR-2: StatisticalAgent Refactoring 📋 **PENDING**
+
+**Timeline**: 1 week
+**Goal**: Refactor StatisticalAgent to work with atomic artifacts from AnalysisAgent
+**Definition of Done**: StatisticalAgent processes atomic score artifacts and produces clean statistical results
+
+**Detailed Tasks**:
+
+#### [V2-REFACTOR-2.1] Update StatisticalAgent Input Processing
+- **Current Issue**: Expects batch artifacts, needs atomic artifacts
+- **Fix**: Process individual score artifacts from AnalysisAgent
+- **Definition of Done**: StatisticalAgent works with atomic score artifacts
+
+#### [V2-REFACTOR-2.2] Fix Statistical Calculation Logic
+- **Current Issue**: May have issues with atomic vs batch processing
+- **Fix**: Ensure statistical calculations work with atomic inputs
+- **Definition of Done**: Statistical calculations produce correct results
+
+#### [V2-REFACTOR-2.3] Test StatisticalAgent Integration
+- **Test**: Run with AnalysisAgent atomic outputs
+- **Definition of Done**: StatisticalAgent produces clean results without errors
+
+### Sprint V2-REFACTOR-3: EvidenceRetrieverAgent Refactoring 📋 **PENDING**
+
+**Timeline**: 1 week
+**Goal**: Refactor EvidenceRetrieverAgent to work with atomic evidence artifacts
+**Definition of Done**: EvidenceRetrieverAgent processes atomic evidence artifacts and produces curated evidence
+
+**Detailed Tasks**:
+
+#### [V2-REFACTOR-3.1] Update EvidenceRetrieverAgent Input Processing
+- **Current Issue**: Not currently used, needs to work with atomic evidence
+- **Fix**: Process individual evidence artifacts from AnalysisAgent
+- **Definition of Done**: EvidenceRetrieverAgent works with atomic evidence artifacts
+
+#### [V2-REFACTOR-3.2] Implement Proper Evidence Curation
+- **Current Issue**: Evidence extraction in AnalysisAgent produces duplicates
+- **Fix**: Move evidence curation to EvidenceRetrieverAgent
+- **Definition of Done**: EvidenceRetrieverAgent produces deduplicated, curated evidence
+
+#### [V2-REFACTOR-3.3] Test EvidenceRetrieverAgent Integration
+- **Test**: Run with AnalysisAgent atomic outputs
+- **Definition of Done**: EvidenceRetrieverAgent produces clean, curated evidence
+
+### Sprint V2-REFACTOR-4: SynthesisAgent Refactoring 📋 **PENDING**
+
+**Timeline**: 1 week
+**Goal**: Refactor SynthesisAgent to work with atomic artifacts and stay within token limits
+**Definition of Done**: SynthesisAgent produces comprehensive reports without token limit issues
+
+**Detailed Tasks**:
+
+#### [V2-REFACTOR-4.1] Fix SynthesisAgent Input Processing
+- **Current Issue**: May still receive too much data
+- **Fix**: Ensure only necessary data is passed to synthesis
+- **Definition of Done**: SynthesisAgent receives only statistical results, curated evidence, and metadata
+
+#### [V2-REFACTOR-4.2] Implement Chunked Synthesis if Needed
+- **Current Issue**: Large experiments may still hit token limits
+- **Fix**: Implement chunked synthesis for large experiments
+- **Definition of Done**: SynthesisAgent handles experiments of any size
+
+#### [V2-REFACTOR-4.3] Test SynthesisAgent Integration
+- **Test**: Run with all atomic artifacts
+- **Definition of Done**: SynthesisAgent produces comprehensive reports without errors
+
+### Sprint V2-INTEGRATION-1: Small Experiment Testing 📋 **PENDING**
+
+**Timeline**: 1 week
+**Goal**: Comprehensive testing with small experiments to verify atomic processing
+**Definition of Done**: All small experiments run successfully end-to-end
+
+**Detailed Tasks**:
+
+#### [V2-INTEGRATION-1.1] Test Nano Experiment
+- **Test**: Run nano_test_experiment with atomic processing
+- **Definition of Done**: Complete success, all artifacts created correctly
+
+#### [V2-INTEGRATION-1.2] Test Micro Experiment
+- **Test**: Run micro_test_experiment with atomic processing
+- **Definition of Done**: Complete success, all artifacts created correctly
+
+#### [V2-INTEGRATION-1.3] Test MLKMX Experiment
+- **Test**: Run mlkmx experiment with atomic processing
+- **Definition of Done**: Complete success, all artifacts created correctly
+
+### Sprint V2-INTEGRATION-2: Medium Experiment Testing 📋 **PENDING**
+
+**Timeline**: 1 week
+**Goal**: Test with medium-sized experiments to verify scalability
+**Definition of Done**: Medium experiments run successfully without token limit issues
+
+**Detailed Tasks**:
+
+#### [V2-INTEGRATION-2.1] Test Business Ethics Experiment
+- **Test**: Run business_ethics_experiment
+- **Definition of Done**: Complete success, proper atomic processing
+
+#### [V2-INTEGRATION-2.2] Test Framing Experiments
+- **Test**: Run entman_framing_experiment and lakoff_framing_experiment
+- **Definition of Done**: Complete success, proper atomic processing
+
+#### [V2-INTEGRATION-2.3] Test Political Experiments
+- **Test**: Run 2a_populist_rhetoric_study
+- **Definition of Done**: Complete success, proper atomic processing
+
+### Sprint V2-INTEGRATION-3: Large Experiment Testing 📋 **PENDING**
+
+**Timeline**: 1 week
+**Goal**: Test with large experiments to verify system robustness
+**Definition of Done**: Large experiments run successfully with proper error handling
+
+**Detailed Tasks**:
+
+#### [V2-INTEGRATION-3.1] Test Kirk Experiment
+- **Test**: Run kirk experiment with atomic processing
+- **Definition of Done**: Complete success, no token limit issues, proper evidence curation
+
+#### [V2-INTEGRATION-3.2] Test Trump Populism Experiment
+- **Test**: Run 2d_trump_populism experiment
+- **Definition of Done**: Complete success, proper atomic processing
+
+#### [V2-INTEGRATION-3.3] Test Constitutional Health Experiment
+- **Test**: Run 1b_chf_constitutional_health experiment
+- **Definition of Done**: Complete success, proper atomic processing
+
+### Sprint V2-INTEGRATION-4: Performance & Reliability Testing 📋 **PENDING**
+
+**Timeline**: 1 week
+**Goal**: Comprehensive performance and reliability testing
+**Definition of Done**: System is robust, reliable, and ready for production use
+
+**Detailed Tasks**:
+
+#### [V2-INTEGRATION-4.1] Stress Testing
+- **Test**: Run multiple experiments in parallel
+- **Definition of Done**: System handles concurrent experiments without issues
+
+#### [V2-INTEGRATION-4.2] Error Recovery Testing
+- **Test**: Test system recovery from various failure modes
+- **Definition of Done**: System recovers gracefully from failures
+
+#### [V2-INTEGRATION-4.3] Performance Optimization
+- **Test**: Optimize system performance based on testing results
+- **Definition of Done**: System meets performance requirements
+
+---
+
+## Sprint V2-1: Agent Standardization & Foundational Tooling ✅ TRULY COMPLETE
 **Corresponds to**: V2 Plan - Phase 1 (Weeks 1-2)
 **Goal**: Create the canonical agent interface, base classes, and data handoff contracts. This is the foundation for the entire V2 ecosystem.
 

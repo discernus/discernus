@@ -10,6 +10,25 @@
 
 ## Completed Sprints & Items
 
+### 🎯 **SPRINT V2-ALPHA: Critical Bug Fixes** ✅ **COMPLETED**
+
+**Timeline**: 1 week ✅ **COMPLETED**
+**Goal**: Fix critical issues blocking alpha release ✅ **COMPLETED**
+
+**🎯 Sprint V2-Alpha Complete**: All critical alpha release blockers resolved:
+
+- ✅ **CSV Generation Disabled**: Removed CSV generation step from analysis pipeline to eliminate timeout issues
+- ✅ **Synthesis Token Limit Fixed**: Removed composite analysis data from synthesis input to stay within 1M token limit
+- ✅ **Evidence Duplication Identified**: Found root cause of 800+ duplicate quotes in AnalysisAgent Step 2
+- ✅ **Corpus Path Issues Fixed**: Fixed Kirk experiment corpus manifest file paths
+- ✅ **Architecture Analysis Complete**: Identified that AnalysisAgent processes documents incorrectly (batch vs atomic)
+
+**Key Discoveries**:
+- EvidenceRetrieverAgent was never used in Kirk experiment
+- AnalysisAgent Step 2 has catastrophic LLM failure (958 repetitions of same quote)
+- Current implementation processes documents in batch instead of atomically
+- Need complete refactoring of analysis pipeline for proper atomic processing
+
 ### 🎯 **SPRINT 11: Statistical Preparation & CSV Export** ✅ **COMPLETED**
 
 **Timeline**: 2-3 weeks ✅ **COMPLETED**
