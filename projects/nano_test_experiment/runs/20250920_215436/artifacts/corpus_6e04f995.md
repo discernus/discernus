@@ -14,7 +14,7 @@ Two short test documents for basic pipeline validation.
 ```yaml
 name: "Nano Test Corpus"
 version: "1.0"
-spec_version: "8.0.2"
+spec_version: "8.0"
 total_documents: 2
 date_range: "2024"
 
