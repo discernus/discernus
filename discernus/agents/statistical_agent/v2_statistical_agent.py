@@ -128,7 +128,7 @@ class V2StatisticalAgent(ToolCallingAgent):
             
             with trace_section("Call legacy StatisticalAgent"):
                 # Generate batch ID for this analysis
-                batch_id = f"v2_statistical_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+                batch_id = f"stats_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
                 trace_data("batch_id", batch_id)
                 
                 # THIN PRINCIPLE: Let the legacy agent handle all the intelligence
