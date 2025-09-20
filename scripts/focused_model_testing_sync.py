@@ -132,10 +132,8 @@ class ModelTestRunner:
         self.gateway = EnhancedLLMGateway(mock_audit)
 
     def run_test(self, test_name: str, model: str, prompt: str) -> List[Dict[str, Any]]:
-        """Runs a single test configuration multiple times."""
-        rich_console.print_section(f"🔬 Running Test: {test_name}")
-        rich_console.print_info(f"   Model: {model}, Runs: {TEST_CONFIG['runs_per_test']}")
-
+        """Runs a single test configuration for a given model and prompt."""
+        rich_console.print_info(f"Running test: {test_name} with model {model}")
         results = []
         for i in range(TEST_CONFIG['runs_per_test']):
             rich_console.print_info(f"--- Starting {test_name} Run {i+1} ---")
@@ -144,7 +142,7 @@ class ModelTestRunner:
             full_prompt = full_prompt.replace('{analysis_id}', f"test_{test_name}_{i+1}")
             full_prompt = full_prompt.replace('{num_documents}', str(1))
 
-            response = self.gateway.execute_call(model=model, prompt=full_prompt)
+            response = self.gateway.execute_call(model=model, prompt=full_prompt, temperature=0.1)
             
             if isinstance(response, tuple):
                 content, metadata = response

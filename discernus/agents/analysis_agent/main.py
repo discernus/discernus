@@ -15,6 +15,7 @@ import hashlib
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, List, Optional
+import yaml
 
 from discernus.core.security_boundary import ExperimentSecurityBoundary
 from discernus.core.audit_logger import AuditLogger
@@ -54,8 +55,20 @@ class AnalysisAgent:
         })
 
     def _load_prompt_template(self) -> str:
-        """Load the framework-agnostic prompt template."""
-        return """You are an expert discourse analyst specializing in systematic content analysis using provided frameworks.
+        """Load the framework-agnostic prompt template from YAML file."""
+        prompt_path = Path(__file__).parent / "prompt.yaml"
+        if prompt_path.exists():
+            with open(prompt_path, 'r') as f:
+                yaml_content = f.read()
+            prompt_data = yaml.safe_load(yaml_content)
+            return prompt_data['template']
+        else:
+            # Fallback to hardcoded template if YAML file doesn't exist
+            self.audit.log_agent_event(self.agent_name, "prompt_fallback", {
+                "reason": "YAML file not found",
+                "fallback_path": str(prompt_path)
+            })
+            return """You are an expert discourse analyst specializing in systematic content analysis using provided frameworks.
 
 ANALYSIS TASK:
 Perform a comprehensive analysis of the provided document(s) using the specified framework. Your analysis must include:
