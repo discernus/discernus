@@ -55,103 +55,17 @@ class AnalysisAgent:
         })
 
     def _load_prompt_template(self) -> str:
-        """Load the framework-agnostic prompt template from YAML file."""
+        """Load the framework-agnostic prompt template from the YAML file."""
         prompt_path = Path(__file__).parent / "prompt.yaml"
-        if prompt_path.exists():
-            with open(prompt_path, 'r') as f:
-                yaml_content = f.read()
-            prompt_data = yaml.safe_load(yaml_content)
-            return prompt_data['template']
-        else:
-            # Fallback to hardcoded template if YAML file doesn't exist
-            self.audit.log_agent_event(self.agent_name, "prompt_fallback", {
-                "reason": "YAML file not found",
-                "fallback_path": str(prompt_path)
-            })
-            return """You are an expert discourse analyst specializing in systematic content analysis using provided frameworks.
-
-ANALYSIS TASK:
-Perform a comprehensive analysis of the provided document(s) using the specified framework. Your analysis must include:
-
-1. **Dimensional Scoring**: Score each framework dimension on a 0-1 scale for:
-   - raw_score: Presence/strength of the dimension
-   - salience: Emphasis/importance in the discourse
-   - confidence: Your confidence in the assessment
-
-2. **Evidence Collection**: Provide 1-2 high-quality quotes per dimension that best exemplify the scoring.
-
-3. **Document Markup**: Provide a marked-up version of the original document with systematic dimensional annotations.
-
-INTERNAL CONSISTENCY APPROACH:
-Perform three independent analytical approaches:
-- Evidence-First: Start with quotes, then score
-- Context-Weighted: Consider broader context and framing
-- Pattern-Based: Look for rhetorical patterns and structures
-
-Then aggregate using median for scores and select the most representative evidence.
-
-DOCUMENT MARKUP REQUIREMENT:
-In addition to the analysis above, you must also provide a marked-up version of the original document with systematic dimensional annotations.
-
-For the marked_up_document field, you must:
-1. Include the COMPLETE original document text
-2. Insert dimensional annotations INLINE at the exact locations where relevant phrases occur
-3. Use this format: [DIMENSION_NAME: "quoted text from document"]
-4. Mark ALL text relevant to each dimension, not just the evidence quotes
-5. Preserve the full context and flow of the original document
-6. Format the output in MARKDOWN for human readability
-
-This creates a comprehensive markup showing your complete reasoning for each dimensional score, allowing researchers to see exactly how you interpreted the document without losing any context.
-
-Example of inline markup in Markdown:
-```markdown
-# Document Analysis - Marked Up Text
-
-My fellow Americans, three years ago, we launched the Great American Comeback. Tonight, I stand before you to share the incredible results. [HOMOGENEOUS_PEOPLE_CONSTRUCTION: Jobs are booming, incomes are soaring, poverty is plummeting, crime is falling, confidence is surging, and our country is thriving and highly respected again!] [POPULAR_SOVEREIGNTY_CLAIMS: The agenda I will lay out this evening is not a Republican agenda or a Democrat agenda. It's the agenda of the American people.] [CRISIS_RESTORATION_NARRATIVE: This year, America will recognize two important anniversaries that show us the majesty of America's mission and the power of American pride.]
-```
-
-Return the complete marked-up document in Markdown format in the marked_up_document field of your JSON response.
-
-OUTPUT FORMAT:
-Return your complete analysis in this exact JSON structure:
-
-{
-  "analysis_metadata": {
-    "framework_name": "FRAMEWORK_NAME",
-    "framework_version": "FRAMEWORK_VERSION",
-    "analyst_confidence": 0.95,
-    "analysis_notes": "Applied three independent analytical approaches with median aggregation",
-    "internal_consistency_approach": "3-run median aggregation"
-  },
-  "document_analyses": [
-    {
-      "document_id": "DOCUMENT_ID_PLACEHOLDER",
-      "document_name": "DOCUMENT_NAME",
-      "dimensional_scores": {
-        "DIMENSION_1": {
-          "raw_score": 0.8,
-          "salience": 0.7,
-          "confidence": 0.9
-        }
-      },
-      "evidence_quotes": {
-        "DIMENSION_1": [
-          "Quote 1 that exemplifies this dimension",
-          "Quote 2 that exemplifies this dimension"
-        ]
-      },
-      "marked_up_document": "# Document Analysis - Marked Up Text\\n\\n[Complete document with inline annotations]"
-    }
-  ]
-}
-
-FRAMEWORK:
-{framework_content}
-
-DOCUMENTS:
-{document_content}
-
-Analyze the provided document(s) using the specified framework and return the complete analysis in the exact JSON format above."""
+        if not prompt_path.exists():
+            error_msg = f"AnalysisAgent prompt file not found at {prompt_path}"
+            self.audit.log_agent_event(self.agent_name, "prompt_error", {"error": error_msg})
+            raise FileNotFoundError(error_msg)
+        
+        with open(prompt_path, 'r') as f:
+            yaml_content = f.read()
+        prompt_data = yaml.safe_load(yaml_content)
+        return prompt_data['template']
 
     def analyze_documents(self, 
                          framework_content: str, 
@@ -240,6 +154,12 @@ Analyze the provided document(s) using the specified framework and return the co
             verification_result = self._aggregate_verification_results(all_verification_results, analysis_id)
             markup_result = self._aggregate_markup_results(all_markup_results, analysis_id)
             
+            # Step 7: CSV Generation (for statistical offramp)
+            csv_result = self._step7_csv_generation(
+                framework_content, all_scores_results, all_evidence_results, 
+                all_derived_metrics_results, analysis_id
+            )
+            
             # Compile final results
             final_results = {
                 "composite_analysis": composite_result,
@@ -248,6 +168,7 @@ Analyze the provided document(s) using the specified framework and return the co
                 "derived_metrics": derived_metrics_result,
                 "verification": verification_result,
                 "markup_extraction": markup_result,
+                "csv_generation": csv_result,
                 "analysis_metadata": {
                     "analysis_id": analysis_id,
                     "agent_name": self.agent_name,
@@ -836,6 +757,171 @@ Format as Markdown, not JSON."""
         # For individual document processing, we return a placeholder
         # The actual document content is processed individually in the main analysis loop
         return f"Individual document analysis mode: {len(documents)} documents to process"
+
+    def _step7_csv_generation(self, 
+                             framework_content: str,
+                             all_scores_results: List[Dict[str, Any]], 
+                             all_evidence_results: List[Dict[str, Any]], 
+                             all_derived_metrics_results: List[Dict[str, Any]], 
+                             analysis_id: str) -> Dict[str, Any]:
+        """Step 7: Generate CSV files for researchers."""
+        
+        # Define CSV generation tool
+        csv_tools = [
+            {
+                "name": "generate_csv_file",
+                "description": "Generate a CSV file with the specified content",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "filename": {
+                            "type": "string",
+                            "description": "Name of the CSV file (e.g., 'scores.csv')"
+                        },
+                        "csv_content": {
+                            "type": "string",
+                            "description": "Complete CSV content with headers and data"
+                        }
+                    },
+                    "required": ["filename", "csv_content"]
+                }
+            }
+        ]
+        
+        # Prepare data for CSV generation
+        csv_data = {
+            "framework_content": framework_content,
+            "scores_results": all_scores_results,
+            "evidence_results": all_evidence_results,
+            "derived_metrics_results": all_derived_metrics_results,
+            "analysis_id": analysis_id
+        }
+        
+        prompt = f"""Transform the analysis results into CSV files for researchers:
+
+FRAMEWORK:
+{framework_content}
+
+ANALYSIS RESULTS:
+{json.dumps(csv_data, indent=2)}
+
+Your task:
+1. Extract scores and evidence from ALL analysis results
+2. Generate standard CSV files that work with R, STATA, and pandas
+3. Create separate CSV files for different data types:
+   - scores.csv: Dimensional scores with document_id, document_name, dimension, raw_score, salience, confidence
+   - evidence.csv: Evidence quotes with document_id, document_name, dimension, quote_text, confidence
+
+IMPORTANT: Include document identification information in both CSV files so researchers can track which document each score/evidence comes from.
+
+Use the generate_csv_file tool for each CSV file. Ensure proper CSV formatting with:
+- Headers in the first row
+- Comma-separated values
+- Quoted strings if they contain commas
+- Standard format compatible with statistical software"""
+
+        self.audit.log_agent_event(self.agent_name, "step7_started", {
+            "analysis_id": analysis_id,
+            "step": "csv_generation",
+            "model": "vertex_ai/gemini-2.5-flash",
+            "documents_count": len(all_scores_results)
+        })
+
+        start_time = datetime.now(timezone.utc)
+        response_content, response_metadata = self.gateway.execute_call_with_tools(
+            model="vertex_ai/gemini-2.5-flash",
+            prompt=prompt,
+            system_prompt="You are a data processing assistant. You MUST use the generate_csv_file tool to create CSV files from the analysis data. Generate separate CSV files for scores and evidence as instructed.",
+            tools=csv_tools,
+            force_function_calling=True
+        )
+        end_time = datetime.now(timezone.utc)
+        execution_time = (end_time - start_time).total_seconds()
+        
+        # Extract cost information
+        csv_cost_info = {
+            "model": "vertex_ai/gemini-2.5-flash",
+            "execution_time_seconds": execution_time,
+            "prompt_length": len(prompt),
+            "documents_processed": len(all_scores_results),
+            "response_cost": response_metadata.get('response_cost', 0.0),
+            "input_tokens": response_metadata.get('input_tokens', 0),
+            "output_tokens": response_metadata.get('output_tokens', 0),
+            "total_tokens": response_metadata.get('total_tokens', 0)
+        }
+        
+        # Parse tool calls to extract CSV files
+        csv_files = []
+        if hasattr(response_content, 'choices') and response_content.choices:
+            for choice in response_content.choices:
+                if hasattr(choice, 'message') and hasattr(choice.message, 'tool_calls'):
+                    for tool_call in choice.message.tool_calls:
+                        if hasattr(tool_call, 'function') and tool_call.function.name == "generate_csv_file":
+                            try:
+                                args = json.loads(tool_call.function.arguments)
+                                filename = args.get('filename')
+                                csv_content = args.get('csv_content')
+                                
+                                if filename and csv_content:
+                                    # Write CSV file to results directory
+                                    csv_path = self._write_csv_file(filename, csv_content, analysis_id)
+                                    csv_files.append({
+                                        "filename": filename,
+                                        "path": str(csv_path),
+                                        "size": len(csv_content)
+                                    })
+                            except Exception as e:
+                                self.logger.warning(f"Failed to process CSV tool call: {e}")
+        
+        # Save CSV generation result
+        csv_result = {
+            "analysis_id": analysis_id,
+            "step": "csv_generation",
+            "model_used": "vertex_ai/gemini-2.5-flash",
+            "csv_files": csv_files,
+            "cost_info": csv_cost_info,
+            "timestamp": datetime.now(timezone.utc).isoformat()
+        }
+        
+        csv_hash = self.storage.put_artifact(
+            json.dumps(csv_result, indent=2).encode('utf-8'),
+            {"artifact_type": "csv_generation", "analysis_id": analysis_id}
+        )
+        
+        csv_result['artifact_hash'] = csv_hash
+        
+        self.audit.log_agent_event(self.agent_name, "step7_completed", {
+            "analysis_id": analysis_id,
+            "step": "csv_generation",
+            "csv_files_created": len(csv_files),
+            "artifact_hash": csv_hash,
+            "execution_time": execution_time
+        })
+        
+        return csv_result
+
+    def _write_csv_file(self, filename: str, csv_content: str, analysis_id: str) -> Path:
+        """Write CSV content to the appropriate experiment results directory."""
+        
+        # Determine output directory - use experiment's results directory
+        experiment_path = Path(self.security.experiment_root)
+        runs_dir = experiment_path / "runs"
+        
+        # Use current timestamp for run directory
+        run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+        results_dir = runs_dir / run_id / "results"
+        
+        # Ensure directory exists
+        results_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Write CSV file to results directory
+        csv_path = results_dir / filename
+        
+        with open(csv_path, 'w', encoding='utf-8') as f:
+            f.write(csv_content)
+        
+        self.logger.info(f"Wrote CSV file to results: {csv_path}")
+        return csv_path
 
     def _prepare_single_document(self, doc: Dict[str, Any], doc_index: int) -> str:
         """Prepare a single document for individual analysis."""
