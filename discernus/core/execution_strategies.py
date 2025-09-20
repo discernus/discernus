@@ -27,6 +27,7 @@ from .local_artifact_storage import LocalArtifactStorage
 from .audit_logger import AuditLogger
 import yaml
 import re
+import json
 
 
 @dataclass
@@ -190,6 +191,25 @@ class FullExperimentStrategy(ExecutionStrategy):
                 phases_completed.append("evidence")
                 artifacts.extend(evidence_result.artifacts)
                 run_context.update_phase("evidence")
+
+                # Load evidence retrieval results into RunContext for synthesis agent
+                evidence_artifact_hash = evidence_result.metadata.get("evidence_artifact_hash")
+                if evidence_artifact_hash:
+                    try:
+                        evidence_content = storage.get_artifact(evidence_artifact_hash)
+                        evidence_data = json.loads(evidence_content.decode('utf-8'))
+                        run_context.evidence = evidence_data.get("evidence_results", [])
+                        audit.log_agent_event("FullExperimentStrategy", "evidence_loaded", {
+                            "evidence_artifact_hash": evidence_artifact_hash,
+                            "evidence_findings": len(run_context.evidence)
+                        })
+                    except Exception as e:
+                        audit.log_agent_event("FullExperimentStrategy", "evidence_load_error", {
+                            "error": str(e),
+                            "evidence_artifact_hash": evidence_artifact_hash
+                        })
+                        # Continue execution - evidence might come from other sources
+
                 audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "evidence"})
             
             # Phase 5: Synthesis
@@ -658,6 +678,25 @@ class ResumeFromStatsStrategy(ExecutionStrategy):
                 phases_completed.append("evidence")
                 artifacts.extend(evidence_result.artifacts)
                 run_context.update_phase("evidence")
+
+                # Load evidence retrieval results into RunContext for synthesis agent
+                evidence_artifact_hash = evidence_result.metadata.get("evidence_artifact_hash")
+                if evidence_artifact_hash:
+                    try:
+                        evidence_content = storage.get_artifact(evidence_artifact_hash)
+                        evidence_data = json.loads(evidence_content.decode('utf-8'))
+                        run_context.evidence = evidence_data.get("evidence_results", [])
+                        audit.log_agent_event("FullExperimentStrategy", "evidence_loaded", {
+                            "evidence_artifact_hash": evidence_artifact_hash,
+                            "evidence_findings": len(run_context.evidence)
+                        })
+                    except Exception as e:
+                        audit.log_agent_event("FullExperimentStrategy", "evidence_load_error", {
+                            "error": str(e),
+                            "evidence_artifact_hash": evidence_artifact_hash
+                        })
+                        # Continue execution - evidence might come from other sources
+
                 audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "evidence"})
             
             # Phase 2: Synthesis

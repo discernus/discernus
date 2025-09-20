@@ -25,7 +25,7 @@ The texts were selected for their:
 - **Venue**: Cory Methodist Church, Cleveland, Ohio
 - **Context**: Delivered during Malcolm X's post-Nation of Islam period, advocating for black nationalism
 - **Length**: Approximately 7,500 words
-- **File**: `corpus/malcom_x_ballot_or_bullet.txt`
+- **File**: `corpus/malcolm_x_ballot_or_bullet.txt`
 
 **Key Themes**:
 - Black nationalism and self-determination
@@ -134,7 +134,7 @@ name: "mlkmx_civil_rights_speeches"
 version: "1.0.0"
 total_documents: 2
 documents:
-  - filename: "corpus/malcom_x_ballot_or_bullet.txt"
+  - filename: "corpus/malcolm_x_ballot_or_bullet.txt"
     document_id: "malcolm_x_ballot_bullet_1964"
     speaker: "Malcolm X"
     year: 1964

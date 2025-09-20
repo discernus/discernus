@@ -1,0 +1,503 @@
+{
+  "agent_name": "V2EvidenceRetrieverAgent",
+  "timestamp": "2025-09-20T07:41:18.531148",
+  "experiment_id": "mlkmx",
+  "evidence_results": [
+    {
+      "finding": "Martin Luther King Jr.'s discourse exhibits very high Individual Dignity (raw_score 0.95, salience 0.95), emphasizing universal human worth and inclusive recognition.",
+      "dimension": "",
+      "quotes": [
+        {
+          "text": "",
+          "relevance_score": 0.26572754979133606,
+          "query": "Martin Luther King Jr. \"every person\" OR \"inherent dignity\" OR \"common humanity\""
+        },
+        {
+          "text": "",
+          "relevance_score": 0.2336357682943344,
+          "query": "Martin Luther King Jr. \"every person\" OR \"inherent dignity\" OR \"common humanity\""
+        },
+        {
+          "text": "",
+          "relevance_score": 0.29113492369651794,
+          "query": "Martin Luther King Jr. \"equal treatment\" OR \"everyone belongs\" universal"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.2827697694301605,
+          "query": "Martin Luther King Jr. \"equal treatment\" OR \"everyone belongs\" universal"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.20548489689826965,
+          "query": "Martin Luther King Jr. universal human worth inclusive recognition"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.2016102522611618,
+          "query": "Martin Luther King Jr. universal human worth inclusive recognition"
+        }
+      ]
+    },
+    {
+      "finding": "Malcolm X's discourse exhibits very high Tribal Dominance (raw_score 0.9, salience 0.9), characterized by in-group supremacy and exclusionary identity patterns.",
+      "dimension": "",
+      "quotes": [
+        {
+          "text": "",
+          "relevance_score": 0.39253848791122437,
+          "query": "Malcolm X \"real Americans\" OR \"our people\" OR \"superior values\""
+        },
+        {
+          "text": "",
+          "relevance_score": 0.2687429189682007,
+          "query": "Malcolm X \"real Americans\" OR \"our people\" OR \"superior values\""
+        },
+        {
+          "text": "",
+          "relevance_score": 0.41551172733306885,
+          "query": "Malcolm X \"not our kind\" OR \"chosen people\" group supremacy"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.29659777879714966,
+          "query": "Malcolm X \"not our kind\" OR \"chosen people\" group supremacy"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.45095565915107727,
+          "query": "Malcolm X exclusionary identity \"us versus them\" rhetoric"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.36184069514274597,
+          "query": "Malcolm X exclusionary identity \"us versus them\" rhetoric"
+        }
+      ]
+    },
+    {
+      "finding": "Malcolm X's discourse shows very high Enmity (raw_score 0.95, salience 0.95), indicating strong hostility and adversarial positioning.",
+      "dimension": "",
+      "quotes": [
+        {
+          "text": "",
+          "relevance_score": 0.4047527313232422,
+          "query": "Malcolm X \"enemy\" OR \"destroy\" OR \"evil\""
+        },
+        {
+          "text": "",
+          "relevance_score": 0.21138030290603638,
+          "query": "Malcolm X \"enemy\" OR \"destroy\" OR \"evil\""
+        },
+        {
+          "text": "",
+          "relevance_score": 0.3309991657733917,
+          "query": "Malcolm X \"corrupt\" OR \"crush\" hostility adversarial"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.2688482701778412,
+          "query": "Malcolm X \"corrupt\" OR \"crush\" hostility adversarial"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.4514574408531189,
+          "query": "Malcolm X moral condemnation dehumanization"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.36635226011276245,
+          "query": "Malcolm X moral condemnation dehumanization"
+        }
+      ]
+    },
+    {
+      "finding": "Martin Luther King Jr.'s discourse demonstrates very high Amity (raw_score 0.95, salience 0.95), emphasizing friendship appeals and cooperative framing.",
+      "dimension": "",
+      "quotes": [
+        {
+          "text": "",
+          "relevance_score": 0.231268972158432,
+          "query": "Martin Luther King Jr. \"friend\" OR \"ally\" OR \"together\""
+        },
+        {
+          "text": "",
+          "relevance_score": 0.14757154881954193,
+          "query": "Martin Luther King Jr. \"friend\" OR \"ally\" OR \"together\""
+        },
+        {
+          "text": "",
+          "relevance_score": 0.19164137542247772,
+          "query": "Martin Luther King Jr. \"united\" OR \"cooperation\" unity language"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.16949546337127686,
+          "query": "Martin Luther King Jr. \"united\" OR \"cooperation\" unity language"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.3697754740715027,
+          "query": "Martin Luther King Jr. cooperative framing common purpose"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.24837593734264374,
+          "query": "Martin Luther King Jr. cooperative framing common purpose"
+        }
+      ]
+    },
+    {
+      "finding": "Malcolm X's discourse exhibits high Envy (raw_score 0.75, salience 0.65), reflecting resentment toward others' success and zero-sum thinking.",
+      "dimension": "",
+      "quotes": [
+        {
+          "text": "",
+          "relevance_score": 0.30128100514411926,
+          "query": "Malcolm X \"privileged elite\" OR \"didn't earn it\" OR \"rigged system\""
+        },
+        {
+          "text": "",
+          "relevance_score": 0.23958979547023773,
+          "query": "Malcolm X \"privileged elite\" OR \"didn't earn it\" OR \"rigged system\""
+        },
+        {
+          "text": "",
+          "relevance_score": 0.3399592936038971,
+          "query": "Malcolm X \"taking our share\" OR \"unfair advantage\" resentment zero-sum"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.3195933997631073,
+          "query": "Malcolm X \"taking our share\" OR \"unfair advantage\" resentment zero-sum"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.3836240768432617,
+          "query": "Malcolm X delegitimizing success"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.22508785128593445,
+          "query": "Malcolm X delegitimizing success"
+        }
+      ]
+    },
+    {
+      "finding": "Martin Luther King Jr.'s discourse shows low Envy (raw_score 0.25, salience 0.15), indicating minimal resentment toward others' success or zero-sum thinking.",
+      "dimension": "",
+      "quotes": [
+        {
+          "text": "",
+          "relevance_score": 0.24876542389392853,
+          "query": "Martin Luther King Jr. (NOT \"privileged elite\" AND NOT \"didn't earn it\")"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.23967736959457397,
+          "query": "Martin Luther King Jr. (NOT \"privileged elite\" AND NOT \"didn't earn it\")"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.3153941333293915,
+          "query": "Martin Luther King Jr. (NOT \"rigged system\" AND NOT \"taking our share\")"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.30093657970428467,
+          "query": "Martin Luther King Jr. (NOT \"rigged system\" AND NOT \"taking our share\")"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.348400354385376,
+          "query": "Martin Luther King Jr. absence of resentment zero-sum thinking"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.2812357246875763,
+          "query": "Martin Luther King Jr. absence of resentment zero-sum thinking"
+        }
+      ]
+    },
+    {
+      "finding": "Malcolm X's discourse contains high Fragmentative Goals (raw_score 0.75, salience 0.65), focusing on divisive zero-sum objectives.",
+      "dimension": "",
+      "quotes": [
+        {
+          "text": "",
+          "relevance_score": 0.390125572681427,
+          "query": "Malcolm X \"divide and conquer\" OR \"tear down\" OR \"separate\""
+        },
+        {
+          "text": "",
+          "relevance_score": 0.24284443259239197,
+          "query": "Malcolm X \"divide and conquer\" OR \"tear down\" OR \"separate\""
+        },
+        {
+          "text": "",
+          "relevance_score": 0.37678125500679016,
+          "query": "Malcolm X \"break apart\" OR \"defeat them\" divisive objectives"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.25137069821357727,
+          "query": "Malcolm X \"break apart\" OR \"defeat them\" divisive objectives"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.21941792964935303,
+          "query": "Malcolm X fragmentation zero-sum goals"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.21074163913726807,
+          "query": "Malcolm X fragmentation zero-sum goals"
+        }
+      ]
+    },
+    {
+      "finding": "Martin Luther King Jr.'s discourse shows low Fragmentative Goals (raw_score 0.15, salience 0.15), with minimal emphasis on divisive objectives.",
+      "dimension": "",
+      "quotes": [
+        {
+          "text": "",
+          "relevance_score": 0.38317635655403137,
+          "query": "Martin Luther King Jr. (NOT \"divide and conquer\" AND NOT \"tear down\")"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.295964777469635,
+          "query": "Martin Luther King Jr. (NOT \"divide and conquer\" AND NOT \"tear down\")"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.38416236639022827,
+          "query": "Martin Luther King Jr. (NOT \"separate\" AND NOT \"defeat them\")"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.29650184512138367,
+          "query": "Martin Luther King Jr. (NOT \"separate\" AND NOT \"defeat them\")"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.3217849135398865,
+          "query": "Martin Luther King Jr. absence of divisive goals"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.3202422261238098,
+          "query": "Martin Luther King Jr. absence of divisive goals"
+        }
+      ]
+    },
+    {
+      "finding": "Martin Luther King Jr.'s discourse consistently demonstrates positive overall Cohesion, particularly a high Full Cohesion Index (0.455), indicating support for democratic institutions and social solidarity.",
+      "dimension": "",
+      "quotes": [
+        {
+          "text": "",
+          "relevance_score": 0.3077528476715088,
+          "query": "Martin Luther King Jr. (hope OR compersion OR amity OR \"individual dignity\" OR \"cohesive goals\")"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.2928435802459717,
+          "query": "Martin Luther King Jr. (hope OR compersion OR amity OR \"individual dignity\" OR \"cohesive goals\")"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.27832722663879395,
+          "query": "Martin Luther King Jr. unity solidarity \"building bridges\""
+        },
+        {
+          "text": "",
+          "relevance_score": 0.22530494630336761,
+          "query": "Martin Luther King Jr. unity solidarity \"building bridges\""
+        },
+        {
+          "text": "",
+          "relevance_score": 0.25906872749328613,
+          "query": "Martin Luther King Jr. \"democratic health\" \"social cohesion\""
+        },
+        {
+          "text": "",
+          "relevance_score": 0.17411860823631287,
+          "query": "Martin Luther King Jr. \"democratic health\" \"social cohesion\""
+        }
+      ]
+    },
+    {
+      "finding": "Malcolm X's discourse consistently demonstrates negative overall Cohesion, particularly a negative Full Cohesion Index (-0.214), suggesting undermining democratic health and promoting fragmentation.",
+      "dimension": "",
+      "quotes": [
+        {
+          "text": "",
+          "relevance_score": 0.3847123980522156,
+          "query": "Malcolm X (fear OR envy OR enmity OR \"tribal dominance\" OR \"fragmentative goals\")"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.24446219205856323,
+          "query": "Malcolm X (fear OR envy OR enmity OR \"tribal dominance\" OR \"fragmentative goals\")"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.32578518986701965,
+          "query": "Malcolm X division fragmentation \"us versus them\""
+        },
+        {
+          "text": "",
+          "relevance_score": 0.2875763475894928,
+          "query": "Malcolm X division fragmentation \"us versus them\""
+        },
+        {
+          "text": "",
+          "relevance_score": 0.38665395975112915,
+          "query": "Malcolm X undermining \"social solidarity\""
+        },
+        {
+          "text": "",
+          "relevance_score": 0.3195016384124756,
+          "query": "Malcolm X undermining \"social solidarity\""
+        }
+      ]
+    },
+    {
+      "finding": "Both Malcolm X and Martin Luther King Jr. exhibit high levels of Fear (raw_score 0.85), indicating a shared emphasis on crisis mentality and existential threat perception.",
+      "dimension": "",
+      "quotes": [
+        {
+          "text": "",
+          "relevance_score": 0.20572645962238312,
+          "query": "\"existential threat\" OR \"catastrophe\" OR \"under attack\""
+        },
+        {
+          "text": "",
+          "relevance_score": 0.12694552540779114,
+          "query": "\"existential threat\" OR \"catastrophe\" OR \"under attack\""
+        },
+        {
+          "text": "",
+          "relevance_score": 0.18561430275440216,
+          "query": "\"running out of time\" OR \"emergency\" crisis mentality"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.1493813395500183,
+          "query": "\"running out of time\" OR \"emergency\" crisis mentality"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.15680938959121704,
+          "query": "threat perception vulnerability"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.08222338557243347,
+          "query": "threat perception vulnerability"
+        }
+      ]
+    },
+    {
+      "finding": "Both Malcolm X and Martin Luther King Jr. exhibit high levels of Hope (raw_score MLK 0.95, MX 0.85), indicating a shared emphasis on progress orientation and optimistic collective vision.",
+      "dimension": "",
+      "quotes": [
+        {
+          "text": "",
+          "relevance_score": 0.07143686711788177,
+          "query": "\"opportunity\" OR \"success\" optimistic vision"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.028566239401698112,
+          "query": "\"opportunity\" OR \"success\" optimistic vision"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.10418286174535751,
+          "query": "progress orientation collective vision"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.06602860987186432,
+          "query": "progress orientation collective vision"
+        }
+      ]
+    },
+    {
+      "finding": "Martin Luther King Jr.'s discourse shows higher Emotional Tension (0.085) compared to Malcolm X (0.0), suggesting a more explicit balancing of both fear and hope appeals.",
+      "dimension": "",
+      "quotes": [
+        {
+          "text": "",
+          "relevance_score": 0.39505302906036377,
+          "query": "Martin Luther King Jr. (fear AND hope) OR (crisis AND opportunity)"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.31519296765327454,
+          "query": "Martin Luther King Jr. (fear AND hope) OR (crisis AND opportunity)"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.3688005805015564,
+          "query": "Martin Luther King Jr. balancing threat and progress"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.3176923990249634,
+          "query": "Martin Luther King Jr. balancing threat and progress"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.31336572766304016,
+          "query": "Martin Luther King Jr. simultaneous appeals to fear and hope"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.2988660931587219,
+          "query": "Martin Luther King Jr. simultaneous appeals to fear and hope"
+        }
+      ]
+    },
+    {
+      "finding": "Malcolm X's discourse has a slightly higher Strategic Contradiction Index (0.17) than Martin Luther King Jr. (0.132), implying slightly more incoherent or mixed messaging overall.",
+      "dimension": "",
+      "quotes": [
+        {
+          "text": "",
+          "relevance_score": 0.47865456342697144,
+          "query": "Malcolm X mixed appeals OR rhetorical contradictions"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.3528922200202942,
+          "query": "Malcolm X mixed appeals OR rhetorical contradictions"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.42813631892204285,
+          "query": "Malcolm X inconsistent messaging OR conflicting rhetoric"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.2897905111312866,
+          "query": "Malcolm X inconsistent messaging OR conflicting rhetoric"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.4305611848831177,
+          "query": "Malcolm X (tension OR contradiction) (identity OR emotional OR success OR relational OR goal)"
+        },
+        {
+          "text": "",
+          "relevance_score": 0.2632410526275635,
+          "query": "Malcolm X (tension OR contradiction) (identity OR emotional OR success OR relational OR goal)"
+        }
+      ]
+    }
+  ],
+  "total_findings": 14,
+  "total_quotes": 82
+}

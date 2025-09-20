@@ -1,0 +1,33 @@
+{
+  "batch_id": "v2_statistical_20250920_082111",
+  "step": "csv_generation",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "csv_files": [
+    {
+      "filename": "scores.csv",
+      "path": "/Volumes/code/discernus/projects/mlkmx/runs/20250920T082817Z/data/scores.csv",
+      "size": 5070
+    },
+    {
+      "filename": "evidence.csv",
+      "path": "/Volumes/code/discernus/projects/mlkmx/runs/20250920T082817Z/data/evidence.csv",
+      "size": 8618
+    },
+    {
+      "filename": "metadata.csv",
+      "path": "/Volumes/code/discernus/projects/mlkmx/runs/20250920T082817Z/data/metadata.csv",
+      "size": 1251
+    }
+  ],
+  "cost_info": {
+    "model": "vertex_ai/gemini-2.5-flash",
+    "execution_time_seconds": 222.854116,
+    "prompt_length": 200989,
+    "artifacts_processed": 6,
+    "response_cost": 0.0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "total_tokens": 0
+  },
+  "timestamp": "2025-09-20T12:28:17.474026+00:00"
+}

@@ -255,7 +255,7 @@ Focus on the most impactful findings that would benefit from textual evidence.
                     search_results = self.rag_manager.search(query, top_k=3)
                     for result in search_results:
                         quotes.append({
-                            "text": result.get('content', ''),
+                            "text": result.get('text', ''),
                             "relevance_score": result.get('score', 0.0),
                             "query": query
                         })

@@ -53,23 +53,75 @@ class TestRAGIndexManager(unittest.TestCase):
         ]
 
         # 2. Instantiate the manager and build the index
-        rag_manager = RAGIndexManager(artifact_storage=self.artifact_storage)
-        rag_index = rag_manager.build_index_from_documents(sample_docs)
+        from discernus.core.audit_logger import AuditLogger
+        audit_logger = AuditLogger(
+            security_boundary=self.security_boundary,
+            run_folder=self.run_folder
+        )
+        rag_manager = RAGIndexManager(
+            storage=self.artifact_storage,
+            audit=audit_logger,
+            security=self.security_boundary
+        )
 
-        # 3. Assert that the index was created and contains the correct number of items
-        self.assertIsNotNone(rag_index)
-        self.assertEqual(rag_index.count(), 3)
+        # 3. Calculate expected cache key
+        cache_key = rag_manager.get_corpus_cache_key(sample_docs)
 
-        # 4. Perform a search and verify the result structure
-        search_results = rag_index.search("wisdom", 1)
+        # 4. Build the index
+        rag_manager.build_index_from_corpus(sample_docs, cache_key)
+
+        # 5. Assert that the index was created and contains the correct number of items
+        self.assertIsNotNone(rag_manager.embeddings)
+        self.assertEqual(rag_manager.embeddings.count(), 3)
+
+        # 6. Perform a search and verify the result structure
+        search_results = rag_manager.search("wisdom", 1)
         self.assertEqual(len(search_results), 1)
-        
-        # 5. Assert that the content is returned directly in the search result
+
+        # 7. Assert that the content is returned directly in the search result
         result_dict = search_results[0]
         self.assertIn("id", result_dict)
         self.assertIn("text", result_dict)
         self.assertIn("score", result_dict)
         self.assertEqual(result_dict["text"], "Brevity is the soul of wit.")
+
+    def test_deterministic_index_building(self):
+        """
+        Test that the same corpus documents always produce the same cache key.
+        This ensures deterministic behavior.
+        """
+        # 1. Define identical sample documents (same content, different order)
+        sample_docs_1 = [
+            {"id": "doc1", "content": "The quick brown fox jumps over the lazy dog."},
+            {"id": "doc2", "content": "A journey of a thousand miles begins with a single step."},
+            {"id": "doc3", "content": "Brevity is the soul of wit."},
+        ]
+
+        sample_docs_2 = [
+            {"id": "doc3", "content": "Brevity is the soul of wit."},  # Different order
+            {"id": "doc1", "content": "The quick brown fox jumps over the lazy dog."},
+            {"id": "doc2", "content": "A journey of a thousand miles begins with a single step."},
+        ]
+
+        # 2. Instantiate the manager
+        from discernus.core.audit_logger import AuditLogger
+        audit_logger = AuditLogger(
+            security_boundary=self.security_boundary,
+            run_folder=self.run_folder
+        )
+        rag_manager = RAGIndexManager(
+            storage=self.artifact_storage,
+            audit=audit_logger,
+            security=self.security_boundary
+        )
+
+        # 3. Calculate cache keys - should be identical despite different ordering
+        cache_key_1 = rag_manager.get_corpus_cache_key(sample_docs_1)
+        cache_key_2 = rag_manager.get_corpus_cache_key(sample_docs_2)
+
+        # 4. Assert that cache keys are identical (deterministic)
+        self.assertEqual(cache_key_1, cache_key_2,
+                        "Cache keys should be identical for same content regardless of document order")
 
 
 if __name__ == '__main__':
