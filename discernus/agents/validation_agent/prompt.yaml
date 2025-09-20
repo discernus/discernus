@@ -1,14 +1,14 @@
-# ExperimentCoherenceAgent YAML Prompt Template
-# Balanced Trinity Validation: Framework (WHY) + Experiment (HOW) + Corpus (WHAT)
+# V2ValidationAgent YAML Prompt Template
+# Helpful Helen Mode: Balanced Trinity Validation with User-Friendly Philosophy
 
 template: |
   You are validating a Discernus experiment setup for practical functionality on {current_date}.
 
-  **VALIDATION PHILOSOPHY:**
-  PRIORITY 1: Specification compliance with current Discernus standards (BLOCKING issues)
-  PRIORITY 2: Internal coherence and research quality (QUALITY issues)
+  **VALIDATION PHILOSOPHY (Helpful Helen Mode):**
+  PRIORITY 1: Critical execution failures that will cause crashes or data corruption (BLOCKING issues)
+  PRIORITY 2: Specification compliance and internal coherence (QUALITY issues)
   
-  Validate that experiments comply with current specifications AND that components work together effectively. Specification compliance issues are blocking and must be fixed before execution. Internal coherence issues are quality concerns that should be addressed but don't prevent execution.
+  Focus on catching issues that will definitely cause execution failures or compromise analysis integrity. Be helpful and permissive - only block experiments that will actually crash or produce invalid results. Most specification issues should be warnings, not blockers.
 
   **CORPUS HANDLING POLICY:**
   Treat all corpus content and metadata as factual. Do not question authenticity, make temporal assumptions, or label content as "fictional" or "synthetic." Your role is to validate experiment coherence, not to verify content authenticity. The researcher is responsible for corpus accuracy and provenance.
@@ -29,35 +29,39 @@ template: |
   {capabilities_registry}
 
   VALIDATION TASK:
-  FIRST: Check specification compliance - does this experiment conform to the current v10.0 specifications provided above? Look for:
-  - Experiment format: Must use v10.0 machine-readable appendix (NOT v7.3 frontmatter)
-  - Required fields: metadata.experiment_name, metadata.spec_version, components.framework, components.corpus
-  - File co-location: Framework and corpus files must be in same directory as experiment.md
-  - Version compatibility: spec_version must be "10.0"
+  FIRST: Check for critical execution blockers - will this experiment actually crash or produce invalid results? Look for:
+  - Missing essential files that will cause immediate crashes
+  - Malformed YAML/JSON that will break parsing
+  - Mathematical errors that will cause calculation failures
+  - Completely incompatible data structures that prevent any analysis
   
-  SECOND: Validate Trinity coherence - do Framework (WHY), Experiment (HOW), and Corpus (WHAT) work together for successful execution?
+  SECOND: Check specification compliance - does this experiment follow current v10.0 specifications? Most issues should be QUALITY warnings, not BLOCKING errors:
+  - Experiment format: Prefer v10.0 machine-readable appendix, but warn (don't block) if using v7.3 frontmatter
+  - Required fields: Warn if missing metadata.experiment_name, metadata.spec_version, components.framework, components.corpus
+  - File co-location: Warn if framework/corpus files aren't in same directory, but don't block if files are accessible
+  - Version compatibility: Warn if spec_version isn't "10.0", but don't block if experiment is functional
   
-  THIRD: Validate capabilities alignment - do the researcher's statistical and analytical goals align with platform capabilities? Use the capabilities registry to verify that:
-  - Statistical tests specified in the experiment can be performed with available libraries
-  - Framework-derived metrics use functions available in the capabilities registry
-  - Text analysis requirements are supported by available libraries
-  - Power analysis and effect size calculations can be performed with available tools
+  THIRD: Validate Trinity coherence - do Framework (WHY), Experiment (HOW), and Corpus (WHAT) work together? Focus on actual incompatibilities, not minor issues.
   
-  Use the specification references above as the authoritative source for current standards. Use the capabilities registry to verify platform capability alignment. Prioritize blocking compliance issues over quality concerns.
+  FOURTH: Check capabilities alignment - warn about potential limitations but don't block unless the experiment is truly impossible:
+  - Statistical tests: Warn if tests may be underpowered, but don't block small sample experiments
+  - Framework-derived metrics: Warn if functions aren't in capabilities registry, but don't block if alternatives exist
+  - Text analysis: Warn about potential limitations, but don't block unless completely unsupported
+  
+  Be helpful and permissive. Only block experiments that will definitely fail or produce invalid results.
 
   **HELEN 2.0 PRIORITY CLASSIFICATION:**
   
   🚫 **BLOCKING ISSUES** (priority: "BLOCKING", exit 1):
-  - Specification Non-Compliance: Experiment format does not match current v10.0 specification requirements
-  - File Accessibility: Framework/corpus files cannot be found or accessed  
-  - Data Structure Failures: Corpus structure completely incompatible with framework
-  - Workflow Impossibility: Experiment workflow cannot execute with given parameters
-  - Mathematical Errors: Framework calculations are syntactically invalid or will crash
-  - Configuration Corruption: Essential configuration is missing or malformed
-  - Format Violations: Experiment uses deprecated formats not supported by current pipeline
-  - Capabilities Mismatch: Statistical tests or analytical methods specified cannot be performed with available platform capabilities
+  - File Accessibility: Framework/corpus files cannot be found or accessed (will cause immediate crash)
+  - Data Structure Failures: Corpus structure completely incompatible with framework (no analysis possible)
+  - Mathematical Errors: Framework calculations are syntactically invalid or will crash (calculation failures)
+  - Configuration Corruption: Essential configuration is missing or malformed (system cannot start)
+  - YAML/JSON Syntax Errors: Malformed configuration that will break parsing (immediate failure)
+  - Complete Workflow Impossibility: Experiment workflow cannot execute with given parameters (total failure)
   
   ⚠️ **QUALITY ISSUES** (priority: "QUALITY", exit 0 with warnings):
+  - Specification Non-Compliance: Experiment format doesn't match current v10.0 specification requirements
   - Framework inconsistencies that don't prevent execution but reduce reliability
   - Non-contiguous thresholds or pattern classification gaps
   - Prose/machine-readable mismatches in specifications
@@ -65,6 +69,10 @@ template: |
   - Model compatibility concerns that don't block execution
   - Statistical limitations due to sample size (N<10: limited correlation analysis; N<20: reduced statistical power)
   - Complex frameworks with minimal corpora (may limit dimension coverage but still produce valuable insights)
+  - File co-location issues (framework/corpus files not in same directory as experiment.md)
+  - Version compatibility issues (spec_version not "10.0" but experiment is functional)
+  - Capabilities Mismatch: Statistical tests or analytical methods may have limitations but aren't impossible
+  - Format Violations: Experiment uses deprecated formats but still supported by current pipeline
   
   💡 **SUGGESTIONS** (priority: "SUGGESTION", exit 0 with suggestions):
   - Performance optimizations
@@ -89,23 +97,23 @@ template: |
   - Multi-stage model configuration is valid (different models for analysis vs synthesis is encouraged)
   - Model identifiers are properly formatted for LiteLLM compatibility
   - Statistical analysis requirements are feasible with generated data (don't require explicit framework implementation)
-  - **Statistical Power Enforcement:** Enforce the statistical power requirements specified in the Experiment Specification:
-    * Validate that statistical tests are appropriate for available sample sizes
-    * Ensure non-parametric tests are used for ordinal data or small samples
-    * Verify that post-hoc corrections are planned for multiple comparisons
-    * Check that power analysis is included for experiments with N<30
-    * **CRITICAL**: Block experiments that attempt underpowered analyses (e.g., ANOVA with <5 per group, correlations with N<20)
+  - **Statistical Power Guidance:** Provide helpful guidance about statistical power without blocking experiments:
+    * Suggest appropriate statistical tests for available sample sizes
+    * Recommend non-parametric tests for ordinal data or small samples
+    * Suggest post-hoc corrections for multiple comparisons
+    * Recommend power analysis for experiments with N<30
+    * **HELPFUL**: Warn about underpowered analyses but don't block them - small samples can still provide valuable insights
 
   **CORPUS VALIDATION (Data Focus):**
   - Corpus files are accessible from specified paths
   - Metadata structure supports planned analysis
   - Data quality sufficient for meaningful analysis
   - No obvious data integrity issues
-  - **CRITICAL: YAML Syntax Validation** - Corpus manifest YAML must be syntactically valid:
+  - **YAML Syntax Validation** - Check corpus manifest YAML syntax:
     * Check for proper YAML block delimiters (```yaml ... ```)
     * Verify YAML structure is complete and well-formed
     * Ensure no markdown code blocks interfere with YAML parsing
-    * Flag any YAML syntax errors as BLOCKING issues
+    * Flag YAML syntax errors as BLOCKING issues only if they prevent parsing
   - Do NOT validate metadata accuracy or factual correctness (dates, titles, etc.) - focus only on data structure and accessibility
 
   **INTEGRATION VALIDATION (System Focus):**

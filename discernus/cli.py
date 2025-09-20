@@ -81,6 +81,62 @@ from discernus.agents.unified_synthesis_agent.v2_unified_synthesis_agent import 
 from discernus.agents.validation_agent.v2_validation_agent import V2ValidationAgent
 
 
+def _parse_experiment_spec(experiment_file: Path, exp_path: Path) -> tuple[Optional[Path], Optional[Path]]:
+    """
+    Parse experiment.md according to v10.0 specification to extract framework and corpus paths.
+    
+    Args:
+        experiment_file: Path to experiment.md file
+        exp_path: Path to experiment directory
+        
+    Returns:
+        Tuple of (framework_file_path, corpus_file_path) or (None, None) if parsing fails
+    """
+    import yaml
+    import re
+    
+    try:
+        # Read experiment.md content
+        content = experiment_file.read_text(encoding='utf-8')
+        
+        # Extract YAML appendix from the end of the file
+        # Look for the machine-readable appendix section
+        yaml_match = re.search(r"```yaml\n(.*?)```", content, re.DOTALL)
+        if not yaml_match:
+            # Try alternative YAML block patterns
+            yaml_match = re.search(r"---\n(.*?)\n---", content, re.DOTALL)
+        
+        if not yaml_match:
+            return None, None
+            
+        yaml_content = yaml_match.group(1)
+        config = yaml.safe_load(yaml_content)
+        
+        # Extract components section
+        components = config.get('components', {})
+        framework_filename = components.get('framework')
+        corpus_filename = components.get('corpus')
+        
+        if not framework_filename or not corpus_filename:
+            return None, None
+            
+        # Build full paths (all files should be in same directory as experiment.md)
+        framework_file = exp_path / framework_filename
+        corpus_file = exp_path / corpus_filename
+        
+        # Verify files exist
+        if not framework_file.exists():
+            return None, None
+        if not corpus_file.exists():
+            return None, None
+            
+        return framework_file, corpus_file
+        
+    except Exception as e:
+        # Log error but don't crash - let caller handle it
+        return None, None
+
+
 def _validate_models(models_to_validate: List[tuple[str, str]]):
     """Validate that specified models are available in the registry."""
     try:
@@ -174,25 +230,22 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, ski
         storage = LocalArtifactStorage(security, run_folder, run_name)
         audit = AuditLogger(security, run_folder)
 
-        # 2. Find framework and corpus files
-        framework_file = None
-        if (exp_path / "framework.md").exists():
-            framework_file = exp_path / "framework.md"
-        else:
-            # Look for any other .md file that is not corpus.md or experiment.md
-            for md_file in exp_path.glob('*.md'):
-                if md_file.name not in ['corpus.md', 'experiment.md']:
-                    framework_file = md_file
-                    break
+        # 2. Parse experiment.md to get framework and corpus specifications
+        experiment_file = exp_path / "experiment.md"
+        if not experiment_file.exists():
+            rich_console.print_error(f"❌ experiment.md not found in: {exp_path}")
+            exit_file_error("experiment.md not found.")
+        
+        # Parse experiment.md according to v10.0 specification
+        framework_file, corpus_file = _parse_experiment_spec(experiment_file, exp_path)
         
         if not framework_file:
-            rich_console.print_error(f"❌ Framework file (.md) not found in: {exp_path}")
+            rich_console.print_error(f"❌ Framework file specified in experiment.md not found: {exp_path}")
             exit_file_error("Framework file not found.")
 
-        corpus_file = exp_path / "corpus.md"
-        if not corpus_file.exists():
-            rich_console.print_error(f"❌ corpus.md not found in: {exp_path}")
-            exit_file_error("corpus.md not found.")
+        if not corpus_file:
+            rich_console.print_error(f"❌ Corpus file specified in experiment.md not found: {exp_path}")
+            exit_file_error("Corpus file not found.")
 
         # 3. Configure Orchestrator
         config = V2OrchestratorConfig(

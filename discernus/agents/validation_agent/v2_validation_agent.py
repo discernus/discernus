@@ -151,8 +151,10 @@ class V2ValidationAgent(StandardAgent):
                 raise ValueError(f"RunContext metadata is missing required field: {meta_field}")
             inputs[meta_field] = run_context.metadata[meta_field]
 
-        # Load experiment content from the standard file path
-        experiment_file_path = Path(run_context.corpus_path).parent / 'experiment.md'
+        # Load experiment content from the experiment directory
+        # According to v10.0 spec, all files (experiment.md, framework, corpus) are in the same directory
+        experiment_dir = Path(run_context.framework_path).parent
+        experiment_file_path = experiment_dir / 'experiment.md'
         if experiment_file_path.exists():
             inputs['experiment_content'] = experiment_file_path.read_text(encoding='utf-8')
         else:
