@@ -15,7 +15,7 @@ THIN PRINCIPLES:
 import json
 import logging
 from typing import Dict, Any, List, Optional
-from datetime import datetime
+from datetime import datetime, timezone
 
 from ...core.standard_agent import StandardAgent
 from ...core.agent_base_classes import ToolCallingAgent
@@ -128,7 +128,7 @@ class V2StatisticalAgent(ToolCallingAgent):
             
             with trace_section("Call legacy StatisticalAgent"):
                 # Generate batch ID for this analysis
-                batch_id = f"stats_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+                batch_id = f"stats_{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}"
                 trace_data("batch_id", batch_id)
                 
                 # THIN PRINCIPLE: Let the legacy agent handle all the intelligence
