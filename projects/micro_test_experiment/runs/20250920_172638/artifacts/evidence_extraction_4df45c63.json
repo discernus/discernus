@@ -1,0 +1,7 @@
+{
+  "analysis_id": "analysis_7da934a8",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "evidence_extraction": "```json\n{\n  \"document_id\": \"document_3\",\n  \"evidence\": {\n    \"positive_sentiment\": [],\n    \"negative_sentiment\": [\n      \"The dam's structural failure and the ensuing flood have created a disastrous humanitarian and ecological crisis.\",\n      \"The long-term consequences are just as dreadful. The toxic sludge released from the flooded industrial zone has caused irreparable harm to our river ecosystem, ensuring that even after the waters recede, the land will remain poisoned for generations.\"\n    ]\n  }\n}\n```",
+  "timestamp": "2025-09-20T17:28:28.850119+00:00"
+}

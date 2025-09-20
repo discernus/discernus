@@ -1,0 +1,28 @@
+{
+  "analysis_id": "analysis_6f57b3fd",
+  "step": "csv_generation",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "csv_files": [
+    {
+      "filename": "scores.csv",
+      "path": "/Volumes/code/discernus/projects/micro_test_experiment/runs/20250920_173047/results/scores.csv",
+      "size": 493
+    },
+    {
+      "filename": "evidence.csv",
+      "path": "/Volumes/code/discernus/projects/micro_test_experiment/runs/20250920_173047/results/evidence.csv",
+      "size": 1749
+    }
+  ],
+  "cost_info": {
+    "model": "vertex_ai/gemini-2.5-flash",
+    "execution_time_seconds": 33.863059,
+    "prompt_length": 32772,
+    "documents_processed": 4,
+    "response_cost": 0.0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "total_tokens": 0
+  },
+  "timestamp": "2025-09-20T17:31:25.820851+00:00"
+}

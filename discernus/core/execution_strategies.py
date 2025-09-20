@@ -156,7 +156,7 @@ class FullExperimentStrategy(ExecutionStrategy):
                 try:
                     from ..cli_console import rich_console
                     if rich_console:
-                        rich_console.print_info("📊 Running document analysis...")
+                        rich_console.print_info("📊 Running document analysis and CSV generation...")
                 except ImportError:
                     pass
                 analysis_result = agents["Analysis"].execute(run_context=run_context)
@@ -432,7 +432,7 @@ class AnalysisOnlyStrategy(ExecutionStrategy):
                 try:
                     from ..cli_console import rich_console
                     if rich_console:
-                        rich_console.print_info("📊 Running document analysis...")
+                        rich_console.print_info("📊 Running document analysis and CSV generation...")
                 except ImportError:
                     pass
                 analysis_result = agents["Analysis"].execute(run_context=run_context)
@@ -593,7 +593,7 @@ class StatisticalPrepStrategy(ExecutionStrategy):
                 try:
                     from ..cli_console import rich_console
                     if rich_console:
-                        rich_console.print_info("📊 Running document analysis...")
+                        rich_console.print_info("📊 Running document analysis and CSV generation...")
                 except ImportError:
                     pass
                 analysis_result = agents["Analysis"].execute(run_context=run_context)

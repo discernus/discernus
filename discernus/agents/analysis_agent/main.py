@@ -764,7 +764,7 @@ Format as Markdown, not JSON."""
                              all_evidence_results: List[Dict[str, Any]], 
                              all_derived_metrics_results: List[Dict[str, Any]], 
                              analysis_id: str) -> Dict[str, Any]:
-        """Step 7: Generate CSV files for researchers."""
+        """Step 7: Generate CSV files for researchers using the sophisticated StatisticalAgent approach."""
         
         # Define CSV generation tool
         csv_tools = [
@@ -788,34 +788,31 @@ Format as Markdown, not JSON."""
             }
         ]
         
-        # Prepare data for CSV generation
-        csv_data = {
-            "framework_content": framework_content,
-            "scores_results": all_scores_results,
-            "evidence_results": all_evidence_results,
-            "derived_metrics_results": all_derived_metrics_results,
-            "analysis_id": analysis_id
-        }
+        # Discover analysis artifacts for CSV generation (like the old StatisticalAgent)
+        analysis_artifacts = self._discover_analysis_artifacts_for_csv(analysis_id)
         
-        prompt = f"""Transform the analysis results into CSV files for researchers:
+        # Prepare artifact content for CSV generation
+        artifacts_content = ""
+        for artifact_hash, artifact_data in analysis_artifacts.items():
+            artifacts_content += f"\n--- ARTIFACT {artifact_hash} ---\n"
+            artifacts_content += json.dumps(artifact_data, indent=2)
+        
+        prompt = f"""Transform the analysis artifacts into CSV files for researchers:
 
 FRAMEWORK:
 {framework_content}
 
-ANALYSIS RESULTS:
-{json.dumps(csv_data, indent=2)}
+ANALYSIS ARTIFACTS:
+{artifacts_content}
 
 Your task:
-1. Extract scores, evidence, and derived metrics from ALL analysis results
+1. Extract scores and evidence from ALL analysis artifacts (composite_analysis, score_extraction, derived_metrics, evidence_extraction)
 2. Generate standard CSV files that work with R, STATA, and pandas
 3. Create separate CSV files for different data types:
-   - scores.csv: Dimensional scores AND derived metrics with document_id, document_name, dimension, raw_score, salience, confidence
+   - scores.csv: Dimensional scores with document_id, document_name, dimension, raw_score, salience, confidence
    - evidence.csv: Evidence quotes with document_id, document_name, dimension, quote_text, confidence
 
-IMPORTANT: 
-- Include BOTH dimensional scores (positive_sentiment, negative_sentiment) AND derived metrics (net_sentiment, sentiment_magnitude) in scores.csv
-- Include document identification information in both CSV files so researchers can track which document each score/evidence comes from
-- For derived metrics, use the dimension name as the dimension field (e.g., "net_sentiment", "sentiment_magnitude")
+IMPORTANT: Include document identification information in both CSV files so researchers can track which document each score/evidence comes from.
 
 Use the generate_csv_file tool for each CSV file. Ensure proper CSV formatting with:
 - Headers in the first row
@@ -966,6 +963,63 @@ Use the generate_csv_file tool for each CSV file. Ensure proper CSV formatting w
             "run_directory": str(current_run_dir)
         })
         return csv_path
+
+    def _discover_analysis_artifacts_for_csv(self, analysis_id: str) -> Dict[str, Any]:
+        """
+        Discover analysis artifacts for CSV generation using the StatisticalAgent approach.
+        
+        Args:
+            analysis_id: Analysis identifier to find artifacts for
+            
+        Returns:
+            Dictionary of artifact_hash -> artifact_data
+        """
+        artifacts = {}
+        
+        # Guard: Only attempt if storage registry is properly initialized
+        if not hasattr(self.storage, 'registry') or not self.storage.registry:
+            self.audit.log_agent_event(self.agent_name, "csv_artifact_discovery_error", {
+                "error": "Storage registry not initialized",
+                "analysis_id": analysis_id
+            })
+            return {}
+        
+        # Find artifacts for this analysis session
+        for artifact_hash, artifact_info in self.storage.registry.items():
+            metadata = artifact_info.get("metadata", {})
+            artifact_type = metadata.get("artifact_type", "")
+            artifact_analysis_id = metadata.get("analysis_id", "")
+            
+            # Include all relevant artifact types for CSV generation
+            if (artifact_type in ["composite_analysis", "score_extraction", "derived_metrics", "evidence_extraction"] 
+                and artifact_analysis_id == analysis_id):
+                try:
+                    artifact_content = self.storage.get_artifact(artifact_hash)
+                    artifact_data = json.loads(artifact_content.decode('utf-8'))
+                    artifacts[artifact_hash] = artifact_data
+                except Exception as e:
+                    self.audit.log_agent_event(self.agent_name, "csv_artifact_load_error", {
+                        "error": str(e),
+                        "artifact_hash": artifact_hash,
+                        "analysis_id": analysis_id
+                    })
+                    continue
+        
+        # Get unique artifact types
+        artifact_types = set()
+        for artifact_data in artifacts.values():
+            if isinstance(artifact_data, dict):
+                artifact_types.add(artifact_data.get("step", "unknown"))
+            else:
+                artifact_types.add("unknown")
+        
+        self.audit.log_agent_event(self.agent_name, "csv_artifact_discovery", {
+            "analysis_id": analysis_id,
+            "artifacts_found": len(artifacts),
+            "artifact_types": list(artifact_types)
+        })
+        
+        return artifacts
 
     def _prepare_single_document(self, doc: Dict[str, Any], doc_index: int) -> str:
         """Prepare a single document for individual analysis."""

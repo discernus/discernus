@@ -1,0 +1,42 @@
+{
+  "validation_success": false,
+  "issues": [
+    {
+      "category": "specification",
+      "description": "The `derived_metrics` section uses the field name `calculation` for defining formulas. The v10.0 Framework specification requires this field to be named `formula`.",
+      "impact": "The derived metrics calculation engine will not find the specified formulas, causing the calculation step to fail and the experiment to halt.",
+      "fix": "In `framework.md`, rename the `calculation` key to `formula` for all entries under the `derived_metrics` section.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "framework.md"
+      ]
+    },
+    {
+      "category": "mathematical_validation",
+      "description": "The derived metric formulas reference dimensions directly (e.g., `positive_sentiment`) instead of accessing their properties. The v10.0 specification requires referencing a specific property of the dimension object, such as `raw_score` (e.g., `dimensions.positive_sentiment.raw_score`).",
+      "impact": "The formula execution engine will be unable to resolve the variable names, resulting in a runtime error and failure of the experiment.",
+      "fix": "Update the formulas in `framework.md` to use the correct object-property access pattern. For example, change `'positive_sentiment - negative_sentiment'` to `'dimensions.positive_sentiment.raw_score - dimensions.negative_sentiment.raw_score'` and `' (positive_sentiment + negative_sentiment) / 2'` to `'(dimensions.positive_sentiment.raw_score + dimensions.negative_sentiment.raw_score) / 2'`.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "framework.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The `output_schema` deviates from the v10.0 specification. It defines `evidence` and `marked_up_document` as top-level properties and omits `evidence` from the `score_object` definition. The specification requires `evidence` to be a string property within each dimension's `score_object`.",
+      "impact": "The output from the analysis agent will not match the schema expected by downstream components, leading to a data validation failure during results processing.",
+      "fix": "In `framework.md`, restructure the `output_schema`. Remove `evidence` and `marked_up_document` from the top-level `required` and `properties` lists. Add `evidence: { type: string }` to the `properties` of the `score_object` in `definitions` and add `\"evidence\"` to the `score_object`'s `required` list.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "framework.md"
+      ]
+    }
+  ],
+  "suggestions": [],
+  "metadata": {
+    "agent": "V2ValidationAgent",
+    "timestamp": "2025-09-20T12:48:32.794030",
+    "experiment_id": "micro_test_experiment",
+    "validation_type": "experiment_coherence"
+  }
+}

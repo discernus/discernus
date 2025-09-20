@@ -89,14 +89,14 @@ analysis_variants:
     derived_metrics:
       - name: "net_sentiment"
         description: "Balance between positive and negative sentiment"
-        calculation: "positive_sentiment - negative_sentiment"
+        formula: "dimensions.positive_sentiment.raw_score - dimensions.negative_sentiment.raw_score"
         interpretation: |
           > 0: Net positive sentiment
           = 0: Balanced sentiment
           < 0: Net negative sentiment
       - name: "sentiment_magnitude"
         description: "Average emotional intensity"
-        calculation: "(positive_sentiment + negative_sentiment) / 2"
+        formula: "(dimensions.positive_sentiment.raw_score + dimensions.negative_sentiment.raw_score) / 2"
         interpretation: |
           > 0.5: High emotional intensity
           0.25-0.5: Moderate emotional intensity
@@ -110,8 +110,6 @@ output_schema:
   type: object
   required:
     - dimensional_scores
-    - evidence
-    - marked_up_document
   properties:
     dimensional_scores:
       type: object
@@ -123,25 +121,6 @@ output_schema:
           $ref: "#/definitions/score_object"
         negative_sentiment:
           $ref: "#/definitions/score_object"
-    evidence:
-      type: array
-      items:
-        type: object
-        required:
-          - dimension
-          - quote_text
-          - confidence
-        properties:
-          dimension:
-            type: string
-          quote_text:
-            type: string
-          confidence:
-            type: number
-            minimum: 0.0
-            maximum: 1.0
-    marked_up_document:
-      type: string
 
 definitions:
   score_object:
@@ -150,6 +129,7 @@ definitions:
       - raw_score
       - salience
       - confidence
+      - evidence
     properties:
       raw_score:
         type: number
@@ -163,4 +143,6 @@ definitions:
         type: number
         minimum: 0.0
         maximum: 1.0
+      evidence:
+        type: string
 ```

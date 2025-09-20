@@ -1,0 +1,9 @@
+{
+  "analysis_id": "analysis_7da934a8",
+  "step": "derived_metrics_generation",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_metrics_response": "Code:\n\n```python\nimport json\n\ndef calculate_derived_metrics(scores_data):\n    results = []\n    for doc_scores in scores_data:\n        positive_sentiment = doc_scores.get(\"positive_sentiment\", {}).get(\"raw_score\", 0.0)\n        negative_sentiment = doc_scores.get(\"negative_sentiment\", {}).get(\"raw_score\", 0.0)\n\n        # Calculate Net Sentiment\n        net_sentiment = positive_sentiment - negative_sentiment\n\n        # Calculate Sentiment Magnitude\n        sentiment_magnitude = (positive_sentiment + negative_sentiment) / 2\n\n        derived_metrics = {\n            \"net_sentiment\": net_sentiment,\n            \"sentiment_magnitude\": sentiment_magnitude\n        }\n        results.append({\n            \"document_id\": doc_scores.get(\"document_id\"),\n            \"derived_metrics\": derived_metrics\n        })\n    return results\n\n# Input scores for document_3\ndocument_scores_input = [\n  {\n    \"document_id\": \"document_3\",\n    \"positive_sentiment\": {\n      \"raw_score\": 0.0,\n      \"salience\": 0.0,\n      \"confidence\": 1.0\n    },\n    \"negative_sentiment\": {\n      \"raw_score\": 1.0,\n      \"salience\": 1.0,\n      \"confidence\": 1.0\n    }\n  }\n]\n\n# Calculate and print derived metrics\nderived_metrics_results = calculate_derived_metrics(document_scores_input)\nprint(json.dumps(derived_metrics_results, indent=2))\n```\n\nResult:\n\n```json\n[\n  {\n    \"document_id\": \"document_3\",\n    \"derived_metrics\": {\n      \"net_sentiment\": -1.0,\n      \"sentiment_magnitude\": 0.5\n    }\n  }\n]\n```",
+  "document_index": 3,
+  "document_name": "document_3",
+  "timestamp": "2025-09-20T17:28:31.779407+00:00"
+}

@@ -1,0 +1,9 @@
+{
+  "analysis_id": "analysis_52d18e43",
+  "step": "derived_metrics_generation",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "raw_metrics_response": "```json\n{\n  \"code\": \"import json\\n\\ndata = {\\n  \\\"document_3\\\": {\\n    \\\"positive_sentiment\\\": {\\n      \\\"raw_score\\\": 0.0,\\n      \\\"salience\\\": 0.0,\\n      \\\"confidence\\\": 1.0\\n    },\\n    \\\"negative_sentiment\\\": {\\n      \\\"raw_score\\\": 1.0,\\n      \\\"salience\\\": 1.0,\\n      \\\"confidence\\\": 1.0\\n    }\\n  }\\n}\\n\\nresults = {}\\n\\nfor doc_id, scores in data.items():\\n    pos_score = scores['positive_sentiment']['raw_score']\\n    neg_score = scores['negative_sentiment']['raw_score']\\n\\n    # Calculate Net Sentiment\\n    net_sentiment = pos_score - neg_score\\n\\n    # Calculate Sentiment Magnitude\\n    sentiment_magnitude = (pos_score + neg_score) / 2\\n\\n    results[doc_id] = {\\n        \\\"net_sentiment\\\": net_sentiment,\\n        \\\"sentiment_magnitude\\\": sentiment_magnitude\\n    }\\n\\nprint(json.dumps(results, indent=2))\\n\",\n  \"results\": {\n    \"document_3\": {\n      \"net_sentiment\": -1.0,\n      \"sentiment_magnitude\": 0.5\n    }\n  }\n}\n```",
+  "document_index": 3,
+  "document_name": "document_3",
+  "timestamp": "2025-09-20T17:17:04.881080+00:00"
+}

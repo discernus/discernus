@@ -312,6 +312,32 @@
     "size_bytes": 1373,
     "source_run": "20250920_143442"
   },
+  "e78fad2a7f95a921c8942d02478a0c07e31e9f39f43c121d8bed38db8469ce55": {
+    "artifact_path": "synthesis_report_v2_markdown_e78fad2a.md",
+    "created_at": "2025-09-20T14:46:26.566079+00:00",
+    "human_filename": "synthesis_report_v2_markdown_e78fad2a.md",
+    "is_directory": false,
+    "metadata": {
+      "agent": "V2UnifiedSynthesisAgent",
+      "artifact_type": "synthesis_report_v2_markdown",
+      "experiment_id": "mlkmx",
+      "llm_metadata": {
+        "attempts": 1,
+        "model": "vertex_ai/gemini-2.5-pro",
+        "success": true,
+        "usage": {
+          "completion_tokens": 8305,
+          "prompt_tokens": 943672,
+          "response_cost_usd": 2.4837550000000004,
+          "total_tokens": 951977
+        }
+      },
+      "report_length": 23758,
+      "timestamp": "2025-09-20T10:46:26.563288"
+    },
+    "size_bytes": 23780,
+    "source_run": "20250920_143442"
+  },
   "ebfe50fe9ae80f8c72603bf5b3f0a695b9af2451264aca28d0c37ebbb2da8cbd": {
     "artifact_path": "score_extraction_ebfe50fe.json",
     "created_at": "2025-09-20T14:38:37.779046+00:00",
