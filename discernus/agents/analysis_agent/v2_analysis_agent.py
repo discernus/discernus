@@ -1,278 +1,151 @@
 #!/usr/bin/env python3
 """
-V2 Analysis Agent for Discernus
-===============================
+V2 Analysis Agent - Atomic Processing Implementation
+==================================================
 
-THIN V2-compliant analysis agent that performs comprehensive document analysis.
+This agent processes documents atomically - each document gets its own artifacts
+for all 6 analysis steps. This prevents token limit issues and ensures proper
+atomic processing.
 
-THIN PRINCIPLES:
-- Intelligence resides in the LLM, not in parsing logic
-- Agent only adapts interfaces, does not add business logic
-- No parsing antipatterns - let LLM handle data interpretation
-- Orchestrator handles file I/O, agent handles analysis only
+THIN Principles:
+- Each document processed individually through all 6 steps
+- No batch processing that could hit token limits
+- Clean separation of concerns
+- Atomic artifacts for downstream consumption
 """
 
 import json
 import logging
+from datetime import datetime, timezone
+from pathlib import Path
 from typing import Dict, Any, List, Optional
-from datetime import datetime
 
-from ...core.standard_agent import StandardAgent
-from ...core.agent_base_classes import ToolCallingAgent
-from ...core.agent_result import AgentResult
-from ...core.run_context import RunContext
-from ...core.agent_config import AgentConfig
-from ...core.security_boundary import ExperimentSecurityBoundary
-from ...core.local_artifact_storage import LocalArtifactStorage
-from ...core.audit_logger import AuditLogger
-
-# Import the existing AnalysisAgent to wrap its logic
-from .main import AnalysisAgent
+from discernus.core.security_boundary import ExperimentSecurityBoundary
+from discernus.core.audit_logger import AuditLogger
+from discernus.core.local_artifact_storage import LocalArtifactStorage
+from discernus.core.agent_result import AgentResult
+from discernus.core.run_context import RunContext
+from discernus.core.standard_agent import ToolCallingAgent
+from discernus.gateway.llm_gateway import LLMGateway
+from discernus.gateway.model_registry import ModelRegistry
 
 
 class V2AnalysisAgent(ToolCallingAgent):
     """
-    THIN V2-compliant analysis agent for document analysis.
+    V2 Analysis Agent with atomic document processing.
     
-    This agent is a thin wrapper around the legacy AnalysisAgent that:
-    1. Adapts the interface to V2 StandardAgent
-    2. Converts result formats
-    3. Does NO parsing, file I/O, or business logic
+    This agent processes each document individually through all 6 analysis steps:
+    1. Composite Analysis
+    2. Evidence Extraction  
+    3. Score Extraction
+    4. Derived Metrics Generation
+    5. Verification
+    6. Markup Extraction
+    
+    Each document gets its own set of artifacts, preventing token limit issues.
     """
-    
+
     def __init__(self, 
                  security: ExperimentSecurityBoundary,
                  storage: LocalArtifactStorage,
-                 audit: AuditLogger,
-                 config: Optional[AgentConfig] = None):
+                 audit: AuditLogger):
         """
-        Initialize the V2 AnalysisAgent.
+        Initialize the V2 Analysis Agent.
         
         Args:
-            security: Security boundary for the experiment
-            storage: Artifact storage for persistence
-            audit: Audit logger for provenance tracking
-            config: Optional agent configuration
+            security: Security boundary for file operations
+            storage: Content-addressable artifact storage
+            audit: Audit logger for comprehensive event tracking
         """
-        super().__init__(security, storage, audit, config)
-        
+        super().__init__()
         self.agent_name = "V2AnalysisAgent"
+        self.security = security
+        self.storage = storage
+        self.audit = audit
+        
+        # Initialize LLM gateway
+        model_registry = ModelRegistry()
+        self.gateway = LLMGateway(model_registry)
+        
+        # Setup logging
         self.logger = logging.getLogger(__name__)
         
-        # Initialize the legacy AnalysisAgent to wrap its functionality
-        self.legacy_agent = AnalysisAgent(security, audit, storage)
+        # Log initialization
+        self.audit.log_agent_event(self.agent_name, "initialization", {
+            "agent_type": "V2AnalysisAgent",
+            "config_keys": []
+        })
+
+    def get_capabilities(self) -> List[str]:
+        """Return agent capabilities."""
+        return [
+            "composite_analysis_with_markup",
+            "evidence_extraction", 
+            "score_extraction",
+            "derived_metrics",
+            "verification",
+            "markup_extraction"
+        ]
 
     def execute(self, run_context: RunContext = None, **kwargs) -> AgentResult:
         """
-        V2 StandardAgent execute method.
-        
-        THIN PRINCIPLE: This method only adapts interfaces and converts formats.
-        It does NOT parse data, read files, or add business logic.
+        Execute atomic document analysis.
         
         Args:
-            run_context: The RunContext object containing all necessary data
-            **kwargs: Additional execution parameters
+            run_context: Run context with experiment data
+            **kwargs: Additional arguments
             
         Returns:
-            AgentResult: Standardized result with artifacts and metadata
+            AgentResult with analysis artifacts
         """
         try:
-            self.logger.info("Starting V2 Analysis Agent execution")
-            
-            # Validate run context
-            if not run_context:
-                return AgentResult(
-                    success=False,
-                    artifacts=[],
-                    metadata={"agent_name": self.agent_name, "error": "run_context is required"},
-                    error_message="run_context is required"
-                )
-            
-            # Extract required data from RunContext
-            # THIN PRINCIPLE: Orchestrator should have already loaded this data
+            # Extract data from run context
             framework_content = run_context.metadata.get("framework_content")
-            corpus_documents = run_context.metadata.get("corpus_documents")
-
+            corpus_documents = run_context.metadata.get("corpus_documents", [])
+            
             if not framework_content:
                 return AgentResult(
                     success=False,
-                    artifacts=[],
-                    metadata={"agent_name": self.agent_name, "error": "framework_content not found in RunContext"},
-                    error_message="framework_content not found in RunContext"
+                    error_message="No framework content provided",
+                    metadata={"agent_name": self.agent_name}
                 )
-
+            
             if not corpus_documents:
                 return AgentResult(
                     success=False,
-                    artifacts=[],
-                    metadata={"agent_name": self.agent_name, "error": "corpus_documents not found in RunContext"},
-                    error_message="corpus_documents not found in RunContext"
+                    error_message="No corpus documents provided", 
+                    metadata={"agent_name": self.agent_name}
                 )
 
             # Generate batch ID for this analysis
             batch_id = f"v2_analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
 
-            # THIN PRINCIPLE: Let the legacy agent handle all the intelligence
-            # We only adapt the interface, not the business logic
-            self.logger.info(f"Calling legacy AnalysisAgent.analyze_documents for batch {batch_id}")
-
-            # The legacy agent expects a list of dicts with a 'content' key.
-            # The orchestrator now provides this structure directly.
+            # Process documents atomically - each document gets its own artifacts
+            self.logger.info(f"Starting atomic document processing for batch {batch_id}")
             documents = corpus_documents
-
-            legacy_result = self.legacy_agent.analyze_documents(
-                framework_content=framework_content,
-                documents=documents
-            )
+            all_artifacts = []
             
-            # Convert legacy result to V2 AgentResult
-            # THIN PRINCIPLE: Legacy agent returns data directly, not wrapped in success field
-            if legacy_result and "composite_analysis" in legacy_result:
-                # Extract artifacts from legacy result
-                artifacts = []
+            for doc_index, doc in enumerate(documents):
+                doc_name = doc.get('id', doc.get('name', doc.get('filename', f'document_{doc_index}')))
+                self.logger.info(f"Processing document {doc_index}: {doc_name}")
                 
-                # Add composite analysis artifact
-                if "composite_analysis" in legacy_result:
-                    artifacts.append({
-                        "type": "composite_analysis",
-                        "content": legacy_result["composite_analysis"],
-                        "metadata": {
-                            "artifact_type": "composite_analysis",
-                            "phase": "analysis",
-                            "batch_id": batch_id,
-                            "timestamp": datetime.now().isoformat(),
-                            "agent_name": self.agent_name
-                        }
-                    })
-                
-                # Add evidence extraction artifact
-                if "evidence_extraction" in legacy_result:
-                    artifacts.append({
-                        "type": "evidence_extraction",
-                        "content": legacy_result["evidence_extraction"],
-                        "metadata": {
-                            "artifact_type": "evidence_extraction",
-                            "phase": "analysis",
-                            "batch_id": batch_id,
-                            "timestamp": datetime.now().isoformat(),
-                            "agent_name": self.agent_name
-                        }
-                    })
-                
-                # Add score extraction artifact
-                if "score_extraction" in legacy_result:
-                    artifacts.append({
-                        "type": "score_extraction",
-                        "content": legacy_result["score_extraction"],
-                        "metadata": {
-                            "artifact_type": "score_extraction",
-                            "phase": "analysis",
-                            "batch_id": batch_id,
-                            "timestamp": datetime.now().isoformat(),
-                            "agent_name": self.agent_name
-                        }
-                    })
-                
-                # Add derived metrics artifact
-                if "derived_metrics" in legacy_result:
-                    artifacts.append({
-                        "type": "derived_metrics",
-                        "content": legacy_result["derived_metrics"],
-                        "metadata": {
-                            "artifact_type": "derived_metrics",
-                            "phase": "analysis",
-                            "batch_id": batch_id,
-                            "timestamp": datetime.now().isoformat(),
-                            "agent_name": self.agent_name
-                        }
-                    })
-                
-                # Add verification artifact
-                if "verification" in legacy_result:
-                    artifacts.append({
-                        "type": "verification",
-                        "content": legacy_result["verification"],
-                        "metadata": {
-                            "artifact_type": "verification",
-                            "phase": "analysis",
-                            "batch_id": batch_id,
-                            "timestamp": datetime.now().isoformat(),
-                            "agent_name": self.agent_name
-                        }
-                    })
-                
-                # Add markup extraction artifact
-                if "markup_extraction" in legacy_result:
-                    artifacts.append({
-                        "type": "markup_extraction",
-                        "content": legacy_result["markup_extraction"],
-                        "metadata": {
-                            "artifact_type": "marked_up_document",
-                            "phase": "analysis",
-                            "batch_id": batch_id,
-                            "timestamp": datetime.now().isoformat(),
-                            "agent_name": self.agent_name
-                        }
-                    })
-                
-                # Add CSV generation artifact (disabled for alpha)
-                if "csv_generation" in legacy_result:
-                    artifacts.append({
-                        "type": "csv_generation",
-                        "content": legacy_result["csv_generation"],
-                        "metadata": {
-                            "artifact_type": "csv_generation",
-                            "phase": "analysis",
-                            "batch_id": batch_id,
-                            "timestamp": datetime.now().isoformat(),
-                            "agent_name": self.agent_name,
-                            "status": "disabled_for_alpha"
-                        }
-                    })
-                
-                # Store artifacts in the artifact storage system
-                artifact_hashes = []
-                for artifact in artifacts:
-                    # Store each artifact in the storage system
-                    # Convert content to bytes and create metadata
-                    content_bytes = json.dumps(artifact["content"]).encode('utf-8')
-                    metadata = {
-                        "type": artifact["type"],
-                        **artifact["metadata"]
-                    }
-                    artifact_hash = self.storage.put_artifact(content_bytes, metadata)
-                    artifact_hashes.append(artifact_hash)
-                
-                # Update run context with results
-                run_context.analysis_results = legacy_result
-                run_context.analysis_artifacts = artifact_hashes
-                
-                # Log success
-                self.audit.log_agent_event(self.agent_name, "analysis_complete", {
+                # Process this document atomically through all 6 steps
+                doc_artifacts = self._process_document_atomically(
+                    framework_content, doc, doc_index, batch_id
+                )
+                all_artifacts.extend(doc_artifacts)
+            
+            # Return results from atomic processing
+            return AgentResult(
+                success=True,
+                artifacts=all_artifacts,
+                metadata={
                     "batch_id": batch_id,
-                    "artifacts_generated": len(artifacts)
-                })
-                
-                return AgentResult(
-                    success=True,
-                    artifacts=artifact_hashes,
-                    metadata={
-                        "agent_name": self.agent_name,
-                        "batch_id": batch_id,
-                        "artifacts_count": len(artifact_hashes)
-                    }
-                )
-            else:
-                # Handle legacy agent failure
-                error_msg = legacy_result.get("error", "Unknown error in legacy analysis")
-                self.logger.error(f"Legacy AnalysisAgent failed: {error_msg}")
-                
-                return AgentResult(
-                    success=False,
-                    artifacts=[],
-                    metadata={"agent_name": self.agent_name, "batch_id": batch_id},
-                    error_message=f"Legacy AnalysisAgent failed: {error_msg}"
-                )
+                    "documents_processed": len(documents),
+                    "agent_name": self.agent_name,
+                    "processing_mode": "atomic"
+                }
+            )
                 
         except Exception as e:
             self.logger.error(f"V2AnalysisAgent execution failed: {e}")
@@ -284,22 +157,525 @@ class V2AnalysisAgent(ToolCallingAgent):
             return AgentResult(
                 success=False,
                 artifacts=[],
-                metadata={"agent_name": self.agent_name, "error": str(e)},
-                error_message=f"V2AnalysisAgent execution failed: {e}"
+                metadata={"agent_name": self.agent_name},
+                error_message=f"V2AnalysisAgent execution failed: {str(e)}"
             )
-    
-    def get_capabilities(self) -> List[str]:
+
+    def _process_document_atomically(self, 
+                                   framework_content: str, 
+                                   doc: Dict[str, Any], 
+                                   doc_index: int, 
+                                   batch_id: str) -> List[Dict[str, Any]]:
         """
-        Get the capabilities of this agent.
+        Process a single document through all 6 analysis steps atomically.
         
+        Args:
+            framework_content: Framework content for analysis
+            doc: Document to process
+            doc_index: Index of document in corpus
+            batch_id: Batch identifier
+            
         Returns:
-            List of capability strings
+            List of artifacts created for this document
         """
-        return [
-            "composite_analysis_with_markup",
-            "evidence_extraction", 
-            "score_extraction",
-            "derived_metrics",
-            "verification",
-            "markup_extraction"
-        ]
+        artifacts = []
+        
+        try:
+            # Step 1: Composite Analysis
+            composite_result = self._step1_composite_analysis(framework_content, doc, doc_index, batch_id)
+            if composite_result:
+                artifacts.append(composite_result)
+            
+            # Step 2: Evidence Extraction
+            evidence_result = self._step2_evidence_extraction(composite_result, doc_index, batch_id)
+            if evidence_result:
+                artifacts.append(evidence_result)
+            
+            # Step 3: Score Extraction
+            scores_result = self._step3_score_extraction(composite_result, doc_index, batch_id)
+            if scores_result:
+                artifacts.append(scores_result)
+            
+            # Step 4: Derived Metrics Generation
+            derived_metrics_result = self._step4_derived_metrics(framework_content, scores_result, doc_index, batch_id)
+            if derived_metrics_result:
+                artifacts.append(derived_metrics_result)
+            
+            # Step 5: Verification
+            verification_result = self._step5_verification(framework_content, derived_metrics_result, scores_result, doc_index, batch_id)
+            if verification_result:
+                artifacts.append(verification_result)
+            
+            # Step 6: Markup Extraction
+            markup_result = self._step6_markup_extraction(composite_result, doc_index, batch_id)
+            if markup_result:
+                artifacts.append(markup_result)
+                
+        except Exception as e:
+            self.logger.error(f"Atomic processing failed for document {doc_index}: {e}")
+            self.audit.log_agent_event(self.agent_name, "atomic_processing_failed", {
+                "document_index": doc_index,
+                "error": str(e)
+            })
+        
+        return artifacts
+
+    def _step1_composite_analysis(self, framework_content: str, doc: Dict[str, Any], doc_index: int, batch_id: str) -> Optional[Dict[str, Any]]:
+        """Step 1: Composite Analysis for a single document."""
+        try:
+            # Create analysis prompt
+            prompt = f"""Analyze this document using the provided framework:
+
+FRAMEWORK:
+{framework_content}
+
+DOCUMENT:
+{doc.get('content', '')}
+
+Provide a comprehensive analysis including:
+1. Dimensional scores
+2. Evidence quotes
+3. Markup of the document
+4. Confidence levels
+
+Return your analysis in a structured format."""
+
+            # Call LLM
+            response = self.gateway.execute_call(
+                model="vertex_ai/gemini-2.5-flash",
+                prompt=prompt
+            )
+            
+            if isinstance(response, tuple):
+                content, metadata = response
+            else:
+                content = response.get('content', '')
+                metadata = response.get('metadata', {})
+            
+            # Create artifact
+            artifact_data = {
+                "analysis_id": f"analysis_{batch_id}_{doc_index}",
+                "step": "composite_analysis",
+                "model_used": "vertex_ai/gemini-2.5-flash",
+                "raw_analysis_response": content,
+                "document_index": doc_index,
+                "timestamp": datetime.now(timezone.utc).isoformat()
+            }
+            
+            # Store artifact
+            content_bytes = json.dumps(artifact_data, indent=2).encode('utf-8')
+            artifact_hash = self.storage.put_artifact(
+                content_bytes,
+                {"artifact_type": "composite_analysis", "document_index": doc_index}
+            )
+            
+            return {
+                "type": "composite_analysis",
+                "content": artifact_data,
+                "metadata": {
+                    "artifact_type": "composite_analysis",
+                    "phase": "analysis",
+                    "batch_id": batch_id,
+                    "document_index": doc_index,
+                    "timestamp": datetime.now().isoformat(),
+                    "agent_name": self.agent_name,
+                    "artifact_hash": artifact_hash
+                }
+            }
+            
+        except Exception as e:
+            self.logger.error(f"Step 1 failed for document {doc_index}: {e}")
+            return None
+
+    def _step2_evidence_extraction(self, composite_result: Dict[str, Any], doc_index: int, batch_id: str) -> Optional[Dict[str, Any]]:
+        """Step 2: Extract evidence from composite result."""
+        try:
+            if not composite_result or 'content' not in composite_result:
+                return None
+                
+            raw_response = composite_result['content'].get('raw_analysis_response', '')
+            
+            # Limit input size to prevent LLM overload
+            if len(raw_response) > 50000:
+                raw_response = raw_response[:50000] + "\n\n[TRUNCATED - Input too large for evidence extraction]"
+            
+            prompt = f"""You are extracting evidence quotes from a discourse analysis. 
+
+ANALYSIS RESULT:
+{raw_response}
+
+TASK: Extract 3-5 high-quality evidence quotes that best exemplify the analysis findings. 
+
+REQUIREMENTS:
+- Extract quotes that directly support the dimensional scores
+- Choose quotes that are clear, impactful, and representative
+- Avoid repetitive or similar quotes
+- Format as a simple JSON array of strings
+
+OUTPUT FORMAT:
+["quote1", "quote2", "quote3", "quote4", "quote5"]
+
+Return ONLY the JSON array, no other text."""
+
+            # Call LLM
+            response = self.gateway.execute_call(
+                model="vertex_ai/gemini-2.5-flash-lite",
+                prompt=prompt
+            )
+            
+            if isinstance(response, tuple):
+                content, metadata = response
+            else:
+                content = response.get('content', '')
+                metadata = response.get('metadata', {})
+            
+            # Validate and clean the response
+            content = self._validate_evidence_extraction(content, doc_index)
+            
+            # Create artifact
+            artifact_data = {
+                "analysis_id": f"analysis_{batch_id}_{doc_index}",
+                "step": "evidence_extraction",
+                "model_used": "vertex_ai/gemini-2.5-flash-lite",
+                "evidence_extraction": content,
+                "document_index": doc_index,
+                "timestamp": datetime.now(timezone.utc).isoformat()
+            }
+            
+            # Store artifact
+            content_bytes = json.dumps(artifact_data, indent=2).encode('utf-8')
+            artifact_hash = self.storage.put_artifact(
+                content_bytes,
+                {"artifact_type": "evidence_extraction", "document_index": doc_index}
+            )
+            
+            return {
+                "type": "evidence_extraction",
+                "content": artifact_data,
+                "metadata": {
+                    "artifact_type": "evidence_extraction",
+                    "phase": "analysis",
+                    "batch_id": batch_id,
+                    "document_index": doc_index,
+                    "timestamp": datetime.now().isoformat(),
+                    "agent_name": self.agent_name,
+                    "artifact_hash": artifact_hash
+                }
+            }
+            
+        except Exception as e:
+            self.logger.error(f"Step 2 failed for document {doc_index}: {e}")
+            return None
+
+    def _step3_score_extraction(self, composite_result: Dict[str, Any], doc_index: int, batch_id: str) -> Optional[Dict[str, Any]]:
+        """Step 3: Extract scores from composite result."""
+        try:
+            if not composite_result or 'content' not in composite_result:
+                return None
+                
+            raw_response = composite_result['content'].get('raw_analysis_response', '')
+            
+            prompt = f"""Extract the dimensional scores from this analysis result:
+
+{raw_response}
+
+Return the scores as a JSON object with dimension names as keys and score values as numbers."""
+
+            # Call LLM
+            response = self.gateway.execute_call(
+                model="vertex_ai/gemini-2.5-flash-lite",
+                prompt=prompt
+            )
+            
+            if isinstance(response, tuple):
+                content, metadata = response
+            else:
+                content = response.get('content', '')
+                metadata = response.get('metadata', {})
+            
+            # Create artifact
+            artifact_data = {
+                "analysis_id": f"analysis_{batch_id}_{doc_index}",
+                "step": "score_extraction",
+                "model_used": "vertex_ai/gemini-2.5-flash-lite",
+                "score_extraction": content,
+                "document_index": doc_index,
+                "timestamp": datetime.now(timezone.utc).isoformat()
+            }
+            
+            # Store artifact
+            content_bytes = json.dumps(artifact_data, indent=2).encode('utf-8')
+            artifact_hash = self.storage.put_artifact(
+                content_bytes,
+                {"artifact_type": "score_extraction", "document_index": doc_index}
+            )
+            
+            return {
+                "type": "score_extraction",
+                "content": artifact_data,
+                "metadata": {
+                    "artifact_type": "score_extraction",
+                    "phase": "analysis",
+                    "batch_id": batch_id,
+                    "document_index": doc_index,
+                    "timestamp": datetime.now().isoformat(),
+                    "agent_name": self.agent_name,
+                    "artifact_hash": artifact_hash
+                }
+            }
+            
+        except Exception as e:
+            self.logger.error(f"Step 3 failed for document {doc_index}: {e}")
+            return None
+
+    def _step4_derived_metrics(self, framework_content: str, scores_result: Dict[str, Any], doc_index: int, batch_id: str) -> Optional[Dict[str, Any]]:
+        """Step 4: Generate derived metrics from scores."""
+        try:
+            if not scores_result or 'content' not in scores_result:
+                return None
+                
+            scores = scores_result['content'].get('score_extraction', '')
+            
+            prompt = f"""Generate derived metrics from these dimensional scores:
+
+FRAMEWORK:
+{framework_content}
+
+SCORES:
+{scores}
+
+Calculate relevant derived metrics and return as JSON."""
+
+            # Call LLM
+            response = self.gateway.execute_call(
+                model="vertex_ai/gemini-2.5-flash-lite",
+                prompt=prompt
+            )
+            
+            if isinstance(response, tuple):
+                content, metadata = response
+            else:
+                content = response.get('content', '')
+                metadata = response.get('metadata', {})
+            
+            # Create artifact
+            artifact_data = {
+                "analysis_id": f"analysis_{batch_id}_{doc_index}",
+                "step": "derived_metrics",
+                "model_used": "vertex_ai/gemini-2.5-flash-lite",
+                "derived_metrics": content,
+                "document_index": doc_index,
+                "timestamp": datetime.now(timezone.utc).isoformat()
+            }
+            
+            # Store artifact
+            content_bytes = json.dumps(artifact_data, indent=2).encode('utf-8')
+            artifact_hash = self.storage.put_artifact(
+                content_bytes,
+                {"artifact_type": "derived_metrics", "document_index": doc_index}
+            )
+            
+            return {
+                "type": "derived_metrics",
+                "content": artifact_data,
+                "metadata": {
+                    "artifact_type": "derived_metrics",
+                    "phase": "analysis",
+                    "batch_id": batch_id,
+                    "document_index": doc_index,
+                    "timestamp": datetime.now().isoformat(),
+                    "agent_name": self.agent_name,
+                    "artifact_hash": artifact_hash
+                }
+            }
+            
+        except Exception as e:
+            self.logger.error(f"Step 4 failed for document {doc_index}: {e}")
+            return None
+
+    def _step5_verification(self, framework_content: str, derived_metrics_result: Dict[str, Any], scores_result: Dict[str, Any], doc_index: int, batch_id: str) -> Optional[Dict[str, Any]]:
+        """Step 5: Verify derived metrics calculations."""
+        try:
+            if not derived_metrics_result or 'content' not in derived_metrics_result:
+                return None
+                
+            derived_metrics = derived_metrics_result['content'].get('derived_metrics', '')
+            scores = scores_result['content'].get('score_extraction', '') if scores_result else '{}'
+            
+            prompt = f"""Verify the derived metrics calculations:
+
+FRAMEWORK:
+{framework_content}
+
+ORIGINAL SCORES:
+{scores}
+
+DERIVED METRICS:
+{derived_metrics}
+
+Check if the calculations are correct and return verification results as JSON."""
+
+            # Call LLM
+            response = self.gateway.execute_call(
+                model="vertex_ai/gemini-2.5-flash-lite",
+                prompt=prompt
+            )
+            
+            if isinstance(response, tuple):
+                content, metadata = response
+            else:
+                content = response.get('content', '')
+                metadata = response.get('metadata', {})
+            
+            # Create artifact
+            artifact_data = {
+                "analysis_id": f"analysis_{batch_id}_{doc_index}",
+                "step": "verification",
+                "model_used": "vertex_ai/gemini-2.5-flash-lite",
+                "verification": content,
+                "document_index": doc_index,
+                "timestamp": datetime.now(timezone.utc).isoformat()
+            }
+            
+            # Store artifact
+            content_bytes = json.dumps(artifact_data, indent=2).encode('utf-8')
+            artifact_hash = self.storage.put_artifact(
+                content_bytes,
+                {"artifact_type": "verification", "document_index": doc_index}
+            )
+            
+            return {
+                "type": "verification",
+                "content": artifact_data,
+                "metadata": {
+                    "artifact_type": "verification",
+                    "phase": "analysis",
+                    "batch_id": batch_id,
+                    "document_index": doc_index,
+                    "timestamp": datetime.now().isoformat(),
+                    "agent_name": self.agent_name,
+                    "artifact_hash": artifact_hash
+                }
+            }
+            
+        except Exception as e:
+            self.logger.error(f"Step 5 failed for document {doc_index}: {e}")
+            return None
+
+    def _step6_markup_extraction(self, composite_result: Dict[str, Any], doc_index: int, batch_id: str) -> Optional[Dict[str, Any]]:
+        """Step 6: Extract markup from composite result."""
+        try:
+            if not composite_result or 'content' not in composite_result:
+                return None
+                
+            raw_response = composite_result['content'].get('raw_analysis_response', '')
+            
+            prompt = f"""Extract the marked-up document from this analysis result:
+
+{raw_response}
+
+Return the marked-up document in markdown format."""
+
+            # Call LLM
+            response = self.gateway.execute_call(
+                model="vertex_ai/gemini-2.5-flash-lite",
+                prompt=prompt
+            )
+            
+            if isinstance(response, tuple):
+                content, metadata = response
+            else:
+                content = response.get('content', '')
+                metadata = response.get('metadata', {})
+            
+            # Create artifact
+            artifact_data = {
+                "analysis_id": f"analysis_{batch_id}_{doc_index}",
+                "step": "markup_extraction",
+                "model_used": "vertex_ai/gemini-2.5-flash-lite",
+                "marked_up_document": content,
+                "document_index": doc_index,
+                "timestamp": datetime.now(timezone.utc).isoformat()
+            }
+            
+            # Store artifact
+            content_bytes = json.dumps(artifact_data, indent=2).encode('utf-8')
+            artifact_hash = self.storage.put_artifact(
+                content_bytes,
+                {"artifact_type": "marked_up_document", "document_index": doc_index}
+            )
+            
+            return {
+                "type": "marked_up_document",
+                "content": artifact_data,
+                "metadata": {
+                    "artifact_type": "marked_up_document",
+                    "phase": "analysis",
+                    "batch_id": batch_id,
+                    "document_index": doc_index,
+                    "timestamp": datetime.now().isoformat(),
+                    "agent_name": self.agent_name,
+                    "artifact_hash": artifact_hash
+                }
+            }
+            
+        except Exception as e:
+            self.logger.error(f"Step 6 failed for document {doc_index}: {e}")
+            return None
+
+    def _validate_evidence_extraction(self, content: str, doc_index: int) -> str:
+        """Validate and clean evidence extraction response."""
+        try:
+            # Try to parse as JSON
+            quotes = json.loads(content.strip())
+            
+            # Validate it's a list of strings
+            if not isinstance(quotes, list):
+                self.audit.log_agent_event(self.agent_name, "evidence_validation_failed", {
+                    "document_index": doc_index,
+                    "error": "Response is not a list",
+                    "content_preview": content[:200]
+                })
+                return '["Evidence extraction failed - invalid format"]'
+            
+            # Check for duplicates
+            unique_quotes = []
+            seen = set()
+            for quote in quotes:
+                if isinstance(quote, str) and quote.strip() and quote not in seen:
+                    unique_quotes.append(quote.strip())
+                    seen.add(quote)
+            
+            # Limit to 5 quotes max
+            unique_quotes = unique_quotes[:5]
+            
+            if len(unique_quotes) == 0:
+                self.audit.log_agent_event(self.agent_name, "evidence_validation_failed", {
+                    "document_index": doc_index,
+                    "error": "No valid quotes found",
+                    "content_preview": content[:200]
+                })
+                return '["Evidence extraction failed - no valid quotes"]'
+            
+            self.audit.log_agent_event(self.agent_name, "evidence_validation_success", {
+                "document_index": doc_index,
+                "quotes_count": len(unique_quotes),
+                "original_count": len(quotes)
+            })
+            
+            return json.dumps(unique_quotes)
+            
+        except json.JSONDecodeError as e:
+            self.audit.log_agent_event(self.agent_name, "evidence_validation_failed", {
+                "document_index": doc_index,
+                "error": f"JSON decode error: {e}",
+                "content_preview": content[:200]
+            })
+            return '["Evidence extraction failed - invalid JSON"]'
+        except Exception as e:
+            self.audit.log_agent_event(self.agent_name, "evidence_validation_failed", {
+                "document_index": doc_index,
+                "error": f"Validation error: {e}",
+                "content_preview": content[:200]
+            })
+            return '["Evidence extraction failed - validation error"]'
