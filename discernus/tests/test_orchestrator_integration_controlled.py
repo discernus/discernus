@@ -22,8 +22,8 @@ from pathlib import Path
 from unittest.mock import patch
 import json
 
-from discernus.core.clean_analysis_orchestrator import CleanAnalysisOrchestrator
-from discernus.agents.EnhancedAnalysisAgent.main import EnhancedAnalysisAgent
+from discernus.core.v2_orchestrator import V2Orchestrator
+from discernus.agents.analysis_agent.main import AnalysisAgent
 from discernus.core.security_boundary import ExperimentSecurityBoundary
 from discernus.core.audit_logger import AuditLogger
 from discernus.core.local_artifact_storage import LocalArtifactStorage
@@ -103,7 +103,7 @@ class TestOrchestratorIntegrationControlled:
         audit = AuditLogger(security, nano_experiment_path / 'session' / 'test_run')
         storage = LocalArtifactStorage(security, nano_experiment_path / 'session' / 'test_run')
         
-        agent = EnhancedAnalysisAgent(
+        agent = AnalysisAgent(
             security_boundary=security,
             audit_logger=audit,
             artifact_storage=storage
@@ -131,14 +131,14 @@ class TestOrchestratorIntegrationControlled:
         assert orchestrator_nano.analysis_model == "test-analysis-model"
         assert orchestrator_nano.synthesis_model == "test-synthesis-model"
         
-        # Test that EnhancedAnalysisAgent requires explicit model parameter
+        # Test that AnalysisAgent requires explicit model parameter
         # (This is already tested in test_model_parameter_required_in_analysis_agent)
         # but we can verify the orchestrator would pass the correct model
-        from discernus.agents.EnhancedAnalysisAgent.main import EnhancedAnalysisAgent
+        from discernus.agents.analysis_agent.main import AnalysisAgent
         import inspect
         
         # Verify the analyze_documents method signature requires model parameter
-        sig = inspect.signature(EnhancedAnalysisAgent.analyze_documents)
+        sig = inspect.signature(AnalysisAgent.analyze_documents)
         model_param = sig.parameters.get('model')
         assert model_param is not None
         assert model_param.default == inspect.Parameter.empty
@@ -276,11 +276,11 @@ class TestOrchestratorRegressionPrevention:
         return Path("discernus/tests/integration/experiments/nano_test_experiment")
     
     def test_no_hardcoded_model_defaults_in_analysis_agent(self):
-        """Test that EnhancedAnalysisAgent has no hardcoded model defaults."""
+        """Test that AnalysisAgent has no hardcoded model defaults."""
         import inspect
         
         # Get the method signature
-        sig = inspect.signature(EnhancedAnalysisAgent.analyze_documents)
+        sig = inspect.signature(AnalysisAgent.analyze_documents)
         
         # Check that model parameter has no default value
         model_param = sig.parameters.get('model')

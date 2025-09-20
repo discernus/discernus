@@ -182,7 +182,7 @@ class UnifiedCacheManager:
             # Map phase names to prompt template paths
             prompt_paths = {
                 "validation": "agents/experiment_coherence_agent/prompt.yaml",
-                "analysis": "agents/EnhancedAnalysisAgent/prompt.yaml", 
+                "analysis": "agents/analysis_agent/prompt.yaml", 
                 "derived_metrics": "agents/automated_derived_metrics/prompt.yaml",
                 "statistical_analysis": "agents/statistical_agent/prompt.yaml"
             }

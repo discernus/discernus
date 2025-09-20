@@ -13,7 +13,7 @@ import pytest
 # Mock analysis result data (based on actual structure)
 MOCK_ANALYSIS_RESULT = {
     "batch_id": "batch_test",
-    "agent_name": "EnhancedAnalysisAgent", 
+    "agent_name": "AnalysisAgent", 
     "raw_analysis_response": """<<<DISCERNUS_ANALYSIS_JSON_v6>>>
 {
   "analysis_metadata": {

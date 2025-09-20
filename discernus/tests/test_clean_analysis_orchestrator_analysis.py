@@ -10,7 +10,7 @@ Key Test Areas:
 1. Individual document processing loop (vs batch processing)
 2. Artifact storage for each document 
 3. Error handling and partial failures
-4. Integration with EnhancedAnalysisAgent
+4. Integration with AnalysisAgent
 5. Path resolution and corpus validation
 """
 
@@ -136,7 +136,7 @@ documents:
         # Mock analysis agent response for individual document
         mock_individual_response = {
             "batch_id": "batch_individual_123",
-            "agent_name": "EnhancedAnalysisAgent",
+            "agent_name": "AnalysisAgent",
             "experiment_name": "test_experiment",
             "raw_analysis_response": "Mock individual analysis response",
             "evidence_hash": "mock_evidence_hash",
@@ -164,7 +164,7 @@ documents:
                     self.corpus_dir / "doc2.txt"
                 ]
                 
-                with patch('discernus.agents.EnhancedAnalysisAgent.main.EnhancedAnalysisAgent') as mock_agent_class:
+                with patch('discernus.agents.analysis_agent.main.AnalysisAgent') as mock_agent_class:
                     # Configure the mock agent properly
                     mock_agent_instance = Mock()
                     mock_agent_instance.analyze_batch.return_value = mock_individual_response
@@ -196,7 +196,7 @@ documents:
         # Mock analysis agent response for batch processing (WRONG)
         mock_batch_response = {
             "batch_id": "batch_all_docs_456", 
-            "agent_name": "EnhancedAnalysisAgent",
+            "agent_name": "AnalysisAgent",
             "experiment_name": "test_experiment",
             "raw_analysis_response": "Mock batch analysis response for ALL documents",
             "evidence_hash": "mock_batch_evidence_hash",
@@ -211,7 +211,7 @@ documents:
                 {'filename': 'doc2.txt', 'metadata': {'author': 'Author 2'}}
             ]
             
-            with patch('discernus.core.clean_analysis_orchestrator.EnhancedAnalysisAgent') as mock_agent_class:
+            with patch('discernus.core.clean_analysis_orchestrator.AnalysisAgent') as mock_agent_class:
                 mock_agent_class.return_value = self.mock_analysis_agent
                 
                 # Call the current (broken) batch processing method
@@ -235,7 +235,7 @@ documents:
         """Test that each document gets its own artifact stored."""
         mock_response = {
             "batch_id": "batch_individual_789",
-            "agent_name": "EnhancedAnalysisAgent", 
+            "agent_name": "AnalysisAgent", 
             "experiment_name": "test_experiment",
             "raw_analysis_response": "Mock analysis response",
             "evidence_hash": "mock_evidence_hash"
@@ -256,7 +256,7 @@ documents:
                     self.corpus_dir / "doc2.txt"  
                 ]
                 
-                with patch('discernus.core.clean_analysis_orchestrator.EnhancedAnalysisAgent') as mock_agent_class:
+                with patch('discernus.core.clean_analysis_orchestrator.AnalysisAgent') as mock_agent_class:
                     mock_agent_class.return_value = self.mock_analysis_agent
                     
                     results = self.orchestrator._run_analysis_phase_individual(
@@ -310,7 +310,7 @@ documents:
                     self.corpus_dir / "doc2.txt"
                 ]
                 
-                with patch('discernus.core.clean_analysis_orchestrator.EnhancedAnalysisAgent') as mock_agent_class:
+                with patch('discernus.core.clean_analysis_orchestrator.AnalysisAgent') as mock_agent_class:
                     mock_agent_class.return_value = self.mock_analysis_agent
                     
                     results = self.orchestrator._run_analysis_phase_individual(
@@ -364,7 +364,7 @@ documents:
             with patch.object(self.orchestrator, '_find_corpus_file') as mock_find_file:
                 mock_find_file.return_value = self.corpus_dir / "doc1.txt"
                 
-                with patch('discernus.core.clean_analysis_orchestrator.EnhancedAnalysisAgent') as mock_agent_class:
+                with patch('discernus.core.clean_analysis_orchestrator.AnalysisAgent') as mock_agent_class:
                     mock_agent_class.return_value = self.mock_analysis_agent
                     
                     self.mock_analysis_agent.analyze_batch.return_value = {

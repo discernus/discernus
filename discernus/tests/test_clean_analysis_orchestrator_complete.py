@@ -262,7 +262,7 @@ metadata:
         score = orchestrator._calculate_performance_score()
         assert score < 70  # Should be lower with slow phases and poor cache hit rate
     
-    @patch('discernus.core.clean_analysis_orchestrator.EnhancedAnalysisAgent')
+    @patch('discernus.core.clean_analysis_orchestrator.AnalysisAgent')
     def test_analysis_phase_with_cache_tracking(self, mock_analysis_agent_class, orchestrator):
         """Test analysis phase includes cache hit/miss tracking."""
         # Mock the analysis agent

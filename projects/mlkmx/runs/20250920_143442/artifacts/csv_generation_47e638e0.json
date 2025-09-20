@@ -1,0 +1,17 @@
+{
+  "batch_id": "v2_statistical_20250920_103945",
+  "step": "csv_generation",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "csv_files": [],
+  "cost_info": {
+    "model": "vertex_ai/gemini-2.5-flash",
+    "execution_time_seconds": 103.537132,
+    "prompt_length": 114412,
+    "artifacts_processed": 6,
+    "response_cost": 0.0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "total_tokens": 0
+  },
+  "timestamp": "2025-09-20T14:43:32.027576+00:00"
+}

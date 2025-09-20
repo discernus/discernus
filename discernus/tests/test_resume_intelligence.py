@@ -230,7 +230,7 @@ workflow:
         
     def test_user_guidance_generation_workflow_changed(self):
         """Test Phase 3: User Guidance - handles workflow changes"""
-        workflow_changes = ["Step 1 agent changed: was AnalysisAgent, now EnhancedAnalysisAgent"]
+        workflow_changes = ["Step 1 agent changed: was AnalysisAgent, now AnalysisAgent"]
         guidance = self.resumption._generate_user_guidance("workflow_changed", workflow_changes, [])
         
         self.assertIn("Workflow changes detected", guidance)
@@ -426,7 +426,7 @@ framework_file: "framework.md"
 corpus: "corpus"
 
 workflow:
-  - agent: "EnhancedAnalysisAgent"  # Changed from AnalysisAgent
+  - agent: "AnalysisAgent"  # Changed from AnalysisAgent
     model: "vertex_ai/gemini-2.5-pro"
   - agent: "DataExtractionAgent"
     model: "vertex_ai/gemini-2.5-pro"

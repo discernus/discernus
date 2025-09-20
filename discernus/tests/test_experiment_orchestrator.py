@@ -21,7 +21,7 @@ class TestExperimentOrchestrator(unittest.TestCase):
             # Manually attach mock objects needed for the test
             self.orchestrator.artifact_storage = MagicMock()
 
-    @patch('discernus.core.experiment_orchestrator.EnhancedAnalysisAgent')
+    @patch('discernus.core.experiment_orchestrator.AnalysisAgent')
     def test_run_analysis_phase_returns_artifact_paths(self, MockAnalysisAgent):
         """
         Verify that _run_analysis_phase correctly collects and returns artifact paths.
