@@ -1,0 +1,16 @@
+{
+  "batch_id": "stats_20250920T194137Z",
+  "step": "verification",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "verification_status": "unknown",
+  "cost_info": {
+    "model": "vertex_ai/gemini-2.5-flash-lite",
+    "execution_time_seconds": 1.099523,
+    "prompt_length": 11376,
+    "response_cost": 0.0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "total_tokens": 0
+  },
+  "timestamp": "2025-09-20T19:42:35.030136+00:00"
+}

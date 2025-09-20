@@ -43,7 +43,7 @@ description: "Full-length speeches by Charlie Kirk spanning early career, interv
 
 documents:
   # Early Career (2015-2018)
-  - filename: "interviews/charlie_kirk_fox_business_2015.txt"
+  - filename: "corpus/interviews/charlie_kirk_fox_business_2015.txt"
     document_id: "charlie_kirk_fox_business_2015"
     metadata:
       speaker: "Charlie Kirk"
@@ -58,7 +58,7 @@ documents:
       extraction_method: "whisper_small"
       confidence: 0.75
 
-  - filename: "early_career/charlie_kirk_western_conservative_summit_2016.txt"
+  - filename: "corpus/early_career/charlie_kirk_western_conservative_summit_2016.txt"
     document_id: "charlie_kirk_western_conservative_summit_2016"
     metadata:
       speaker: "Charlie Kirk"
@@ -73,7 +73,7 @@ documents:
       extraction_method: "whisper_small"
       confidence: 0.75
 
-  - filename: "early_career/charlie_kirk_western_conservative_summit_2018.txt"
+  - filename: "corpus/early_career/charlie_kirk_western_conservative_summit_2018.txt"
     document_id: "charlie_kirk_western_conservative_summit_2018"
     metadata:
       speaker: "Charlie Kirk"
@@ -89,7 +89,7 @@ documents:
       confidence: 0.85
       notes: "Isolated Kirk's portions from joint speech with Candace Owens"
 
-  - filename: "early_career/charlie_kirk_college_conservatism_2018.txt"
+  - filename: "corpus/early_career/charlie_kirk_college_conservatism_2018.txt"
     document_id: "charlie_kirk_college_conservatism_2018"
     metadata:
       speaker: "Charlie Kirk"
@@ -105,7 +105,7 @@ documents:
       confidence: 0.75
 
   # Debates and Interviews
-  - filename: "debates/charlie_kirk_hasan_piker_debate_2018.txt"
+  - filename: "corpus/debates/charlie_kirk_hasan_piker_debate_2018.txt"
     document_id: "charlie_kirk_hasan_piker_debate_2018"
     metadata:
       speaker: "Charlie Kirk"
@@ -122,7 +122,7 @@ documents:
       notes: "High-profile debate with Hasan Piker"
 
   # CPAC Speeches (2019-2021)
-  - filename: "cpac/charlie_kirk_cpac_2019_HcXus8Vph7Q.txt"
+  - filename: "corpus/cpac/charlie_kirk_cpac_2019_HcXus8Vph7Q.txt"
     document_id: "charlie_kirk_cpac_2019_HcXus8Vph7Q"
     metadata:
       speaker: "Charlie Kirk"
@@ -138,7 +138,7 @@ documents:
       extraction_method: "whisper_small"
       confidence: 0.75
 
-  - filename: "cpac/charlie_kirk_cpac_2020_c-WiaPPxIHc.txt"
+  - filename: "corpus/cpac/charlie_kirk_cpac_2020_c-WiaPPxIHc.txt"
     document_id: "charlie_kirk_cpac_2020_c-WiaPPxIHc"
     metadata:
       speaker: "Charlie Kirk"
@@ -154,7 +154,7 @@ documents:
       extraction_method: "whisper_small"
       confidence: 0.75
 
-  - filename: "cpac/charlie_kirk_cpac_2021_ODDO0eajI9k.txt"
+  - filename: "corpus/cpac/charlie_kirk_cpac_2021_ODDO0eajI9k.txt"
     document_id: "charlie_kirk_cpac_2021_ODDO0eajI9k"
     metadata:
       speaker: "Charlie Kirk"
@@ -172,7 +172,7 @@ documents:
       notes: "Wore Rush Limbaugh tie in tribute"
 
   # RNC Speeches (2020-2024)
-  - filename: "rnc/charlie_kirk_rnc_2020_5if8lynxekY.txt"
+  - filename: "corpus/rnc/charlie_kirk_rnc_2020_5if8lynxekY.txt"
     document_id: "charlie_kirk_rnc_2020_5if8lynxekY"
     metadata:
       speaker: "Charlie Kirk"
@@ -188,7 +188,7 @@ documents:
       extraction_method: "whisper_small"
       confidence: 0.75
 
-  - filename: "rnc/charlie_kirk_rnc_2024_WQAxYRjGe1A.txt"
+  - filename: "corpus/rnc/charlie_kirk_rnc_2024_WQAxYRjGe1A.txt"
     document_id: "charlie_kirk_rnc_2024_WQAxYRjGe1A"
     metadata:
       speaker: "Charlie Kirk"
@@ -205,7 +205,7 @@ documents:
       confidence: 0.75
 
   # America Fest Keynotes (2023-2024)
-  - filename: "americafest/charlie_kirk_americafest_2023_SGFdHIK2dBU.txt"
+  - filename: "corpus/americafest/charlie_kirk_americafest_2023_SGFdHIK2dBU.txt"
     document_id: "charlie_kirk_americafest_2023_SGFdHIK2dBU"
     metadata:
       speaker: "Charlie Kirk"
@@ -221,7 +221,7 @@ documents:
       extraction_method: "whisper_small"
       confidence: 0.75
 
-  - filename: "americafest/charlie_kirk_americafest_2024_LBA5nF21nSM.txt"
+  - filename: "corpus/americafest/charlie_kirk_americafest_2024_LBA5nF21nSM.txt"
     document_id: "charlie_kirk_americafest_2024_LBA5nF21nSM"
     metadata:
       speaker: "Charlie Kirk"
@@ -238,7 +238,7 @@ documents:
       confidence: 0.75
 
   # Student Action Summit (2019-2022)
-  - filename: "student_action_summit/charlie_kirk_tsas_2019.txt"
+  - filename: "corpus/student_action_summit/charlie_kirk_tsas_2019.txt"
     document_id: "charlie_kirk_tsas_2019"
     metadata:
       speaker: "Charlie Kirk"
@@ -253,7 +253,7 @@ documents:
       extraction_method: "whisper_small"
       confidence: 0.75
 
-  - filename: "student_action_summit/charlie_kirk_sas_2022_vUcwKoYEPd4.txt"
+  - filename: "corpus/student_action_summit/charlie_kirk_sas_2022_vUcwKoYEPd4.txt"
     document_id: "charlie_kirk_sas_2022_vUcwKoYEPd4"
     metadata:
       speaker: "Charlie Kirk"
