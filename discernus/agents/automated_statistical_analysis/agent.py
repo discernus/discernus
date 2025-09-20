@@ -26,7 +26,7 @@ from pathlib import Path
 from typing import Dict, Any, List
 from datetime import datetime, timezone
 
-from discernus.gateway.llm_gateway import LLMGateway
+from discernus.gateway.llm_gateway_enhanced import EnhancedLLMGateway
 from discernus.gateway.model_registry import ModelRegistry
 from discernus.core.thin_output_extraction import ThinOutputExtractor
 from discernus.core.audit_logger import AuditLogger
@@ -59,7 +59,7 @@ class AutomatedStatisticalAnalysisAgent:
         
         # Initialize LLM gateway
         model_registry = ModelRegistry()
-        self.llm_gateway = LLMGateway(model_registry)
+        self.llm_gateway = EnhancedLLMGateway(model_registry)
         
         # Initialize THIN output extractor
         self.extractor = ThinOutputExtractor()

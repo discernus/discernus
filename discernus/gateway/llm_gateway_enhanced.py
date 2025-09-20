@@ -9,7 +9,7 @@ Show Your Work architecture.
 
 import json
 from typing import Dict, Any, Tuple, List, Optional
-from .llm_gateway import LLMGateway
+from .deprecated.llm_gateway_deprecated import LLMGateway
 
 class EnhancedLLMGateway(LLMGateway):
     """Enhanced LLM Gateway with tool calling support"""

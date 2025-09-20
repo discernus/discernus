@@ -5,7 +5,7 @@ from pathlib import Path
 
 from discernus.orchestration.derived_metrics_pipeline import DerivedMetricsPipeline
 from discernus.core.prompt_assemblers.derived_metrics_assembler import DerivedMetricsPromptAssembler
-from discernus.gateway.llm_gateway import LLMGateway
+from discernus.gateway.llm_gateway_enhanced import EnhancedLLMGateway
 from discernus.core.secure_code_executor import SecureCodeExecutor
 
 class TestDerivedMetricsPipeline(unittest.TestCase):

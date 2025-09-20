@@ -26,7 +26,7 @@ class TestGatewayPolicyEnforcement:
         """Test that functions using gateway don't trigger warnings"""
         @enforce_gateway_policy
         def good_function():
-            from discernus.gateway.llm_gateway import LLMGateway
+            from discernus.gateway.llm_gateway_enhanced import EnhancedLLMGateway
             # Just check the source, don't execute
             return "test"
         
@@ -54,7 +54,7 @@ class TestGatewayPolicyEnforcement:
         @require_gateway_usage
         class GoodAgent:
             def __init__(self):
-                from discernus.gateway.llm_gateway import LLMGateway
+                from discernus.gateway.llm_gateway_enhanced import EnhancedLLMGateway
                 # Just check the source, don't execute
                 pass
             
@@ -89,7 +89,7 @@ class TestGatewayPolicyEnforcement:
         """Test validate_agent_gateway_usage function"""
         class GoodAgent:
             def __init__(self):
-                from discernus.gateway.llm_gateway import LLMGateway
+                from discernus.gateway.llm_gateway_enhanced import EnhancedLLMGateway
                 # Just check the source, don't execute
                 pass
             

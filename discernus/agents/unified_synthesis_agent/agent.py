@@ -15,7 +15,7 @@ import json
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 
-from ...gateway.llm_gateway import LLMGateway
+from ...gateway.llm_gateway_enhanced import EnhancedLLMGateway
 from ...gateway.model_registry import ModelRegistry
 from ...core.audit_logger import AuditLogger
 import yaml
@@ -46,7 +46,7 @@ class UnifiedSynthesisAgent:
         self.model = model
         self.audit_logger = audit_logger
         self.agent_name = "UnifiedSynthesisAgent"
-        self.llm_gateway = LLMGateway(ModelRegistry())
+        self.llm_gateway = EnhancedLLMGateway(ModelRegistry())
         self.enhanced_mode = enhanced_mode
         # Model tracking for provenance
         self.analysis_model = None

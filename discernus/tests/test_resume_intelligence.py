@@ -29,7 +29,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..',
 
 from discernus.core.experiment_lifecycle import ExperimentResumption, ResumeAnalysisResult
 from discernus.gateway.model_registry import ModelRegistry
-from discernus.gateway.llm_gateway import LLMGateway
+from discernus.gateway.llm_gateway_enhanced import EnhancedLLMGateway
 
 
 class TestResumeIntelligence(unittest.TestCase):

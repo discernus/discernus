@@ -240,7 +240,7 @@ class V2StatisticalAgent(StandardAgent):
                 # Check if this is a score extraction artifact
                 if artifact_data.get("step") == "score_extraction":
                     # Extract the scores from the LLM response
-                    scores_response = artifact_data.get("scores_extraction", "")
+                    scores_response = artifact_data.get("score_extraction", "")
                     if scores_response:
                         # Parse the JSON from the LLM response
                         try:
