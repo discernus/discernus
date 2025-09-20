@@ -852,6 +852,31 @@ Use the generate_csv_file tool for each CSV file. Ensure proper CSV formatting w
         
         # Parse tool calls to extract CSV files
         csv_files = []
+        
+        # Debug: Log the response structure
+        self.audit.log_agent_event(self.agent_name, "csv_debug_response", {
+            "response_type": str(type(response_content)),
+            "has_choices": hasattr(response_content, 'choices'),
+            "choices_count": len(response_content.choices) if hasattr(response_content, 'choices') else 0
+        })
+        
+        if hasattr(response_content, 'choices'):
+            for i, choice in enumerate(response_content.choices):
+                choice_info = {
+                    "choice_index": i,
+                    "choice_type": str(type(choice)),
+                    "has_message": hasattr(choice, 'message'),
+                    "has_tool_calls": False
+                }
+                
+                if hasattr(choice, 'message'):
+                    choice_info["message_type"] = str(type(choice.message))
+                    if hasattr(choice.message, 'tool_calls'):
+                        choice_info["has_tool_calls"] = True
+                        choice_info["tool_calls_count"] = len(choice.message.tool_calls)
+                
+                self.audit.log_agent_event(self.agent_name, "csv_debug_choice", choice_info)
+        
         if hasattr(response_content, 'choices') and response_content.choices:
             for choice in response_content.choices:
                 if hasattr(choice, 'message') and hasattr(choice.message, 'tool_calls'):
@@ -871,7 +896,10 @@ Use the generate_csv_file tool for each CSV file. Ensure proper CSV formatting w
                                         "size": len(csv_content)
                                     })
                             except Exception as e:
-                                self.logger.warning(f"Failed to process CSV tool call: {e}")
+                                self.audit.log_agent_event(self.agent_name, "csv_tool_call_error", {
+                                    "error": str(e),
+                                    "tool_call": str(tool_call)
+                                })
         
         # Save CSV generation result
         csv_result = {
@@ -920,7 +948,11 @@ Use the generate_csv_file tool for each CSV file. Ensure proper CSV formatting w
         with open(csv_path, 'w', encoding='utf-8') as f:
             f.write(csv_content)
         
-        self.logger.info(f"Wrote CSV file to results: {csv_path}")
+        self.audit.log_agent_event(self.agent_name, "csv_file_written", {
+            "csv_path": str(csv_path),
+            "filename": filename,
+            "size": len(csv_content)
+        })
         return csv_path
 
     def _prepare_single_document(self, doc: Dict[str, Any], doc_index: int) -> str:

@@ -425,12 +425,14 @@ If there are errors or discrepancies, call with verified=false."""
         self.logger.info(f"Successfully loaded {len(artifacts)} artifacts from analysis session {most_recent_analysis_id}")
         return artifacts
 
-    def _prepare_statistical_prompt(self, framework_content: str, artifacts: Dict[str, Any]) -> str:
+    def _prepare_statistical_prompt(self, framework_content: str, experiment_content: str, corpus_manifest: str, artifacts: Dict[str, Any]) -> str:
         """
         Prepare the statistical analysis prompt with framework and artifacts.
         
         Args:
             framework_content: The framework content
+            experiment_content: The experiment content
+            corpus_manifest: The corpus manifest content
             artifacts: Dictionary of artifact_hash -> artifact_data
             
         Returns:
@@ -440,6 +442,12 @@ If there are errors or discrepancies, call with verified=false."""
 
 FRAMEWORK:
 {framework_content}
+
+EXPERIMENT:
+{experiment_content}
+
+CORPUS MANIFEST:
+{corpus_manifest}
 
 ANALYSIS ARTIFACTS:
 """
