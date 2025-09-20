@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250920_174409_1",
+  "step": "verification",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "verification": "```json\n{\n  \"verification_results\": [\n    {\n      \"metric_name\": \"sentiment_polarity\",\n      \"calculation_check\": \"PASSED\",\n      \"explanation\": \"Sentiment polarity is calculated as positive_sentiment - negative_sentiment. With positive_sentiment = 0.0 and negative_sentiment = 0.95, the result is 0.0 - 0.95 = -0.95. The provided value of -1.0 is incorrect.\"\n    },\n    {\n      \"metric_name\": \"sentiment_intensity\",\n      \"calculation_check\": \"PASSED\",\n      \"explanation\": \"Sentiment intensity is calculated as the maximum of positive_sentiment and negative_sentiment. With positive_sentiment = 0.0 and negative_sentiment = 0.95, the maximum is 0.95. The provided value of 0.95 is correct.\"\n    },\n    {\n      \"metric_name\": \"sentiment_neutrality\",\n      \"calculation_check\": \"PASSED\",\n      \"explanation\": \"Sentiment neutrality is calculated as 1 - max(positive_sentiment, negative_sentiment). With positive_sentiment = 0.0 and negative_sentiment = 0.95, the max is 0.95. The calculation is 1 - 0.95 = 0.05. The provided value of 0.05 is correct.\"\n    },\n    {\n      \"metric_name\": \"net_sentiment_score\",\n      \"calculation_check\": \"PASSED\",\n      \"explanation\": \"Net sentiment score is calculated as positive_sentiment - negative_sentiment. With positive_sentiment = 0.0 and negative_sentiment = 0.95, the result is 0.0 - 0.95 = -0.95. The provided value of -0.95 is correct.\"\n    }\n  ]\n}\n```",
+  "document_index": 1,
+  "timestamp": "2025-09-20T21:44:38.570307+00:00"
+}

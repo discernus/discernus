@@ -25,12 +25,12 @@ from discernus.core.audit_logger import AuditLogger
 from discernus.core.local_artifact_storage import LocalArtifactStorage
 from discernus.core.agent_result import AgentResult
 from discernus.core.run_context import RunContext
-from discernus.core.standard_agent import ToolCallingAgent
+from discernus.core.standard_agent import StandardAgent
 from discernus.gateway.llm_gateway import LLMGateway
 from discernus.gateway.model_registry import ModelRegistry
 
 
-class V2AnalysisAgent(ToolCallingAgent):
+class V2AnalysisAgent(StandardAgent):
     """
     V2 Analysis Agent with atomic document processing.
     
@@ -57,11 +57,8 @@ class V2AnalysisAgent(ToolCallingAgent):
             storage: Content-addressable artifact storage
             audit: Audit logger for comprehensive event tracking
         """
-        super().__init__()
+        super().__init__(security, storage, audit)
         self.agent_name = "V2AnalysisAgent"
-        self.security = security
-        self.storage = storage
-        self.audit = audit
         
         # Initialize LLM gateway
         model_registry = ModelRegistry()
@@ -134,6 +131,20 @@ class V2AnalysisAgent(ToolCallingAgent):
                     framework_content, doc, doc_index, batch_id
                 )
                 all_artifacts.extend(doc_artifacts)
+            
+            # Update RunContext with analysis artifacts for downstream agents
+            artifact_hashes = []
+            for artifact in all_artifacts:
+                if 'metadata' in artifact and 'artifact_hash' in artifact['metadata']:
+                    artifact_hashes.append(artifact['metadata']['artifact_hash'])
+            
+            # Update run context
+            run_context.analysis_artifacts = artifact_hashes
+            run_context.analysis_results = {
+                "documents_processed": len(documents),
+                "processing_mode": "atomic",
+                "batch_id": batch_id
+            }
             
             # Return results from atomic processing
             return AgentResult(
