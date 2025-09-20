@@ -252,15 +252,29 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple):
             rich_console.print_info(f"📁 Artifacts saved in: {storage.run_folder}")
             rich_console.print_info(f"⏱️  Total execution time: {result.execution_time_seconds:.1f} seconds")
 
-            # Show artifact counts by type
-            artifact_types = {}
-            for artifact in result.artifacts:
-                artifact_type = artifact.get("metadata", {}).get("artifact_type", "unknown")
-                artifact_types[artifact_type] = artifact_types.get(artifact_type, 0) + 1
+            # Show artifact counts by type (if storage available)
+            if hasattr(result, 'artifacts') and result.artifacts:
+                try:
+                    artifact_types = {}
+                    for artifact_hash in result.artifacts:
+                        if isinstance(artifact_hash, str):
+                            try:
+                                artifact_metadata = storage.get_artifact_metadata(artifact_hash)
+                                artifact_type = artifact_metadata.get("artifact_type", "unknown")
+                                artifact_types[artifact_type] = artifact_types.get(artifact_type, 0) + 1
+                            except Exception:
+                                # Fallback for artifacts without metadata
+                                artifact_types["unknown"] = artifact_types.get("unknown", 0) + 1
+                        else:
+                            # Fallback for non-string artifacts
+                            artifact_types["unknown"] = artifact_types.get("unknown", 0) + 1
 
-            if artifact_types:
-                artifact_summary = ", ".join([f"{count} {type}" for type, count in artifact_types.items()])
-                rich_console.print_info(f"📦 Generated artifacts: {artifact_summary}")
+                    if artifact_types:
+                        artifact_summary = ", ".join([f"{count} {type}" for type, count in artifact_types.items()])
+                        rich_console.print_info(f"📦 Generated artifacts: {artifact_summary}")
+                except Exception as e:
+                    # Don't fail the entire CLI if artifact counting fails
+                    rich_console.print_info(f"📦 Generated {len(result.artifacts)} artifacts")
 
             exit_success()
         else:
