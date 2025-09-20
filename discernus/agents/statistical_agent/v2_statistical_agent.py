@@ -24,6 +24,7 @@ from ...core.agent_config import AgentConfig
 from ...core.security_boundary import ExperimentSecurityBoundary
 from ...core.local_artifact_storage import LocalArtifactStorage
 from ...core.audit_logger import AuditLogger
+from ...core.verbose_tracing import trace_calls, trace_section, trace_data
 
 # Import the existing StatisticalAgent to wrap its logic
 from .main import StatisticalAgent
@@ -61,6 +62,7 @@ class V2StatisticalAgent(ToolCallingAgent):
         # Initialize the legacy StatisticalAgent to wrap its functionality
         self.legacy_agent = StatisticalAgent(security, storage, audit)
 
+    @trace_calls(include_args=True, include_return=True)
     def execute(self, run_context: RunContext = None, **kwargs) -> AgentResult:
         """
         V2 StandardAgent execute method.
@@ -87,19 +89,17 @@ class V2StatisticalAgent(ToolCallingAgent):
                     error_message="run_context is required"
                 )
             
-            # Extract required data from RunContext
-            # THIN PRINCIPLE: Orchestrator should have already loaded this data
-            framework_content = run_context.metadata.get("framework_content")
-            corpus_manifest_content = run_context.metadata.get("corpus_manifest_content")
-            analysis_artifacts = run_context.analysis_artifacts
-            
-            # Debug: Log what we received from RunContext
-            self.logger.info(f"DEBUG: RunContext analysis_artifacts: {analysis_artifacts}")
-            self.logger.info(f"DEBUG: RunContext analysis_artifacts type: {type(analysis_artifacts)}")
-            if hasattr(run_context, 'analysis_results'):
-                self.logger.info(f"DEBUG: RunContext has analysis_results: {run_context.analysis_results is not None}")
-            else:
-                self.logger.info("DEBUG: RunContext has no analysis_results attribute")
+            with trace_section("Extract data from RunContext"):
+                # THIN PRINCIPLE: Orchestrator should have already loaded this data
+                framework_content = run_context.metadata.get("framework_content")
+                corpus_manifest_content = run_context.metadata.get("corpus_manifest_content")
+                analysis_artifacts = run_context.analysis_artifacts
+                
+                # Trace the data we received
+                trace_data("framework_content", f"Length: {len(framework_content) if framework_content else 'None'}")
+                trace_data("corpus_manifest_content", f"Length: {len(corpus_manifest_content) if corpus_manifest_content else 'None'}")
+                trace_data("analysis_artifacts", analysis_artifacts)
+                trace_data("run_context.analysis_results", hasattr(run_context, 'analysis_results') and run_context.analysis_results is not None)
             
             if not framework_content:
                 return AgentResult(
@@ -125,20 +125,24 @@ class V2StatisticalAgent(ToolCallingAgent):
                     error_message="analysis_artifacts not found in RunContext"
                 )
             
-            # Generate batch ID for this analysis
-            batch_id = f"v2_statistical_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
-            
-            # THIN PRINCIPLE: Let the legacy agent handle all the intelligence
-            # We only adapt the interface, not the business logic
-            self.logger.info(f"Calling legacy StatisticalAgent.analyze_batch for batch {batch_id}")
-            
-            legacy_result = self.legacy_agent.analyze_batch(
-                framework_content=framework_content,
-                experiment_content="",  # Not needed for statistical analysis
-                corpus_manifest=corpus_manifest_content,
-                batch_id=batch_id,
-                analysis_artifact_hashes=analysis_artifacts
-            )
+            with trace_section("Call legacy StatisticalAgent"):
+                # Generate batch ID for this analysis
+                batch_id = f"v2_statistical_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+                trace_data("batch_id", batch_id)
+                
+                # THIN PRINCIPLE: Let the legacy agent handle all the intelligence
+                # We only adapt the interface, not the business logic
+                self.logger.info(f"Calling legacy StatisticalAgent.analyze_batch for batch {batch_id}")
+                
+                legacy_result = self.legacy_agent.analyze_batch(
+                    framework_content=framework_content,
+                    experiment_content="",  # Not needed for statistical analysis
+                    corpus_manifest=corpus_manifest_content,
+                    batch_id=batch_id,
+                    analysis_artifact_hashes=analysis_artifacts
+                )
+                
+                trace_data("legacy_result", f"Type: {type(legacy_result)}, Keys: {list(legacy_result.keys()) if isinstance(legacy_result, dict) else 'Not a dict'}")
             
             # Convert legacy result to V2 AgentResult
             # THIN PRINCIPLE: Legacy agent returns data directly, not wrapped in success field

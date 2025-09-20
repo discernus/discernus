@@ -1,7 +1,0 @@
-{
-  "analysis_id": "analysis_b8b68cbb",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "evidence_extraction": "```json\n{\n  \"document_0\": {\n    \"positive_sentiment\": [\n      \"The recent urban revitalization project has been an unqualified triumph, transforming our city's downtown core from a neglected afterthought into a vibrant, bustling hub of commerce and community.\",\n      \"Local businesses are reporting record foot traffic, and the influx of new residents and visitors has created an atmosphere of palpable optimism and energy that promises a bright and prosperous future for all.\"\n    ],\n    \"negative_sentiment\": []\n  },\n  \"document_1\": {\n    \"positive_sentiment\": [],\n    \"negative_sentiment\": [\n      \"The proposed industrial zoning changes represent a catastrophic betrayal of public trust and an assault on our community's well-being.\",\n      \"Residents are rightfully outraged, fearing the long-term health consequences and the destruction of the natural landscapes that define our town's character.\"\n    ]\n  }\n}\n```",
-  "timestamp": "2025-09-19T21:47:01.720026+00:00"
-}

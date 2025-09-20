@@ -1,0 +1,16 @@
+{
+  "a7626e98a46829e8a4190d3bfa52ce1a77f123e48095608405d1c21fc48adae3": {
+    "artifact_path": "validation_report_a7626e98.json",
+    "created_at": "2025-09-20T00:51:35.948382+00:00",
+    "human_filename": "validation_report_a7626e98.json",
+    "is_directory": false,
+    "metadata": {
+      "agent": "V2ValidationAgent",
+      "artifact_type": "validation_report",
+      "experiment_id": "nano_test_experiment",
+      "timestamp": "2025-09-19T20:51:35.947141"
+    },
+    "size_bytes": 1753,
+    "source_run": "20250920_005057"
+  }
+}

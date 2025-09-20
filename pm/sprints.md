@@ -460,34 +460,81 @@
 - ✅ Emergency rollback to V1 capability maintained
 - ✅ Architecture documentation updated to reflect V2 design
 
-### Sprint V2-8: Restore Advanced CLI Functionality ⏳ PENDING
+### Sprint V2-8: Convert Legacy Agents to V2 Native ⏳ PENDING
+**Corresponds to**: V2 Plan - Technical Debt Reduction
+**Goal**: Convert legacy agent wrappers to true V2 native implementations for better performance and maintainability.
+**Priority**: MEDIUM - Technical debt reduction and performance optimization.
+
+**Detailed Tasks**:
+
+#### [V2-8.1] Convert StatisticalAgent to V2 Native
+- **Current State**: V2StatisticalAgent is a thin wrapper around legacy StatisticalAgent
+- **Target**: Direct V2 StandardAgent implementation with no legacy dependency
+- **Interface**: Replace `analyze_batch()` with native `execute(run_context: RunContext) -> AgentResult`
+- **Data Access**: Use RunContext and artifact storage directly instead of parameter passing
+- **Benefits**: Eliminate wrapper overhead, cleaner architecture, better maintainability
+- **Files to Create**: `discernus/agents/statistical_agent/native_v2_statistical_agent.py`
+- **Files to Update**: Orchestrator registration to use native agent
+
+#### [V2-8.2] Convert AnalysisAgent to V2 Native  
+- **Current State**: V2AnalysisAgent is a thin wrapper around legacy AnalysisAgent
+- **Target**: Direct V2 StandardAgent implementation with no legacy dependency
+- **Interface**: Replace `analyze_documents()` with native `execute(run_context: RunContext) -> AgentResult`
+- **Data Access**: Use RunContext and artifact storage directly instead of parameter passing
+- **Benefits**: Eliminate wrapper overhead, cleaner architecture, better maintainability
+- **Files to Create**: `discernus/agents/analysis_agent/native_v2_analysis_agent.py`
+- **Files to Update**: Orchestrator registration to use native agent
+
+#### [V2-8.3] Performance and Architecture Validation
+- **Benchmark Testing**: Compare wrapper vs native performance across experiment matrix
+- **Memory Profiling**: Measure memory footprint reduction from eliminating double instantiation
+- **Code Quality**: Validate cleaner error handling and logging patterns
+- **Maintainability**: Confirm single implementation is easier to debug and extend
+
+#### [V2-8.4] Migration and Cleanup
+- **Gradual Rollout**: Deploy native agents with fallback to wrapper versions
+- **Legacy Removal**: Remove legacy agent implementations once native versions are proven
+- **Test Migration**: Update all tests to use native agents
+- **Documentation**: Update agent development guide with native patterns
+
+**Definition of Done**:
+- ⏳ StatisticalAgent has native V2 implementation with no legacy dependency
+- ⏳ AnalysisAgent has native V2 implementation with no legacy dependency  
+- ⏳ Both native agents implement StandardAgent interface directly
+- ⏳ Performance testing shows measurable improvements (speed, memory)
+- ⏳ All existing functionality preserved with no regressions
+- ⏳ Legacy agent code removed after successful migration
+- ⏳ Unit and integration tests updated for native implementations
+- ⏳ Documentation updated with native agent development patterns
+
+### Sprint V2-9: Restore Advanced CLI Functionality ⏳ PENDING
 **Corresponds to**: V2 Plan - Phase 5 (CLI Parity)
 **Goal**: Restore all major V1 CLI options to the V2 `run` command and implement a V2 `resume` command.
 **Priority**: HIGH - Achieve full feature parity for researcher workflows.
 
 **Detailed Tasks**:
 
-#### [V2-8.1] Implement Execution Modes (`--analysis-only`, etc.)
+#### [V2-9.1] Implement Execution Modes (`--analysis-only`, etc.)
 - **Task**: Create new `ExecutionStrategy` classes (`AnalysisOnlyStrategy`, `StatisticalPrepStrategy`, `SkipSynthesisStrategy`) to support partial pipeline runs.
 - **Details**: The orchestrator must gracefully stop after the specified phase and ensure all necessary artifacts up to that point are saved.
 
-#### [V2-8.2] Implement Model Selection Flags
+#### [V2-9.2] Implement Model Selection Flags
 - **Task**: Plumb model selection flags (`--analysis-model`, `--synthesis-model`, etc.) from the CLI down to the individual V2 agents.
 - **Details**: Requires modifying agent constructors and the orchestrator to pass model names to the `LLMGateway`.
 
-#### [V2-8.3] Implement `--dry-run` and `--verbose-trace`
+#### [V2-9.3] Implement `--dry-run` and `--verbose-trace`
 - **Task**: Add logic to V2 execution strategies to simulate a run without executing expensive operations. Plumb the verbose trace flag to the `AuditLogger`.
 - **Details**: `--dry-run` should print the agents that would be called and the artifacts that would be created.
 
-#### [V2-8.4] Implement Experiment Validation (`--skip-validation`)
+#### [V2-9.4] Implement Experiment Validation (`--skip-validation`)
 - **Task**: Create a `V2ExperimentCoherenceAgent` and integrate it as the first step in the execution strategy. The `--skip-validation` flag will bypass it.
 - **Details**: Reintroduces the robust validation step from the V1 CLI.
 
-#### [V2-8.5] Implement Automatic Git Commits (`--no-auto-commit`)
+#### [V2-9.5] Implement Automatic Git Commits (`--no-auto-commit`)
 - **Task**: Add logic to the `V2Orchestrator` to automatically commit results to Git upon successful completion of a run.
 - **Details**: Restores critical provenance tracking. The `--no-auto-commit` flag will disable this behavior.
 
-#### [V2-8.6] Implement V2 `resume` Command
+#### [V2-9.6] Implement V2 `resume` Command
 - **Task**: Create a `discernus resume` command that can resume a partial V2 run (e.g., one created with `--statistical-prep`).
 - **Details**: Requires the orchestrator to save a resume manifest and the `resume` command to load it and restart the pipeline from the correct phase.
 

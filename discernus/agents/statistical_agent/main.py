@@ -22,6 +22,7 @@ import yaml
 from ...core.security_boundary import ExperimentSecurityBoundary
 from ...core.local_artifact_storage import LocalArtifactStorage
 from ...core.audit_logger import AuditLogger
+from ...core.verbose_tracing import trace_calls, trace_section, trace_data
 from ...gateway.llm_gateway_enhanced import EnhancedLLMGateway
 from ...gateway.model_registry import get_model_registry
 
@@ -77,6 +78,7 @@ class StatisticalAgent:
             self.logger.error(f"Error loading prompt template: {e}")
             return ""
 
+    @trace_calls(include_args=True, include_return=True)
     def analyze_batch(self,
                      framework_content: str,
                      experiment_content: str,
@@ -162,6 +164,7 @@ class StatisticalAgent:
             })
             raise
 
+    @trace_calls(include_args=True, include_return=True)
     def _step1_statistical_execution(self,
                                    framework_content: str,
                                    experiment_content: str,
@@ -175,8 +178,10 @@ class StatisticalAgent:
         LLM internal execution of the generated functions.
         """
         
-        # Discover and load analysis artifacts from shared cache
-        analysis_artifacts = self._discover_analysis_artifacts(batch_id, analysis_artifact_hashes)
+        with trace_section("Discover analysis artifacts"):
+            # Discover and load analysis artifacts from shared cache
+            analysis_artifacts = self._discover_analysis_artifacts(batch_id, analysis_artifact_hashes)
+            trace_data("analysis_artifacts", f"Found {len(analysis_artifacts)} artifacts: {list(analysis_artifacts.keys())}")
         
         if not analysis_artifacts:
             raise ValueError(f"No analysis artifacts found for batch {batch_id}")

@@ -174,8 +174,10 @@ def cli(ctx, verbose, quiet, no_color, config):
 
 @cli.command()
 @click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True, path_type=str))
+@click.option('--verbose-trace', is_flag=True, help='Enable comprehensive function-level tracing for debugging')
+@click.option('--trace-filter', multiple=True, help='Filter tracing to specific components (e.g., statistical, analysis)')
 @click.pass_context
-def run(ctx, experiment_path: str):
+def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple):
     """Execute a V2 experiment."""
     exp_path = Path(experiment_path).resolve()
 
@@ -184,6 +186,12 @@ def run(ctx, experiment_path: str):
         exit_file_error("Experiment path not found.")
 
     rich_console.print_section(f"🚀 Running V2 Experiment: {exp_path.name}")
+
+    # Setup verbose tracing if requested
+    if verbose_trace:
+        from .core.verbose_tracing import setup_verbose_tracing
+        setup_verbose_tracing(enabled=True, filters=list(trace_filter) if trace_filter else None)
+        rich_console.print_info(f"🔍 Verbose tracing enabled" + (f" (filters: {', '.join(trace_filter)})" if trace_filter else ""))
 
     try:
         # 1. Initialize core components

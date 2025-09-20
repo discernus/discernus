@@ -93,10 +93,15 @@ class V2EvidenceRetrieverAgent(ToolCallingAgent):
             # 3. Use LLM to identify key statistical findings that require evidence
             self.logger.info("Extracting key findings from statistical results...")
             key_findings = self._extract_key_findings(statistical_results)
+            print(f"DEBUG: _extract_key_findings returned: {key_findings}")
+            print(f"DEBUG: key_findings length: {len(key_findings)}")
+            print(f"DEBUG: key_findings boolean: {bool(key_findings)}")
             self.logger.info(f"Found {len(key_findings)} key findings")
             if not key_findings:
+                print("DEBUG: About to return failure due to no key findings")
                 error_msg = "No key statistical findings were identified by the LLM. Cannot proceed with evidence retrieval."
                 self.logger.error(error_msg)
+                print(f"DEBUG: Returning failure with error: {error_msg}")
                 return AgentResult(
                     success=False,
                     artifacts=[],
@@ -304,8 +309,16 @@ class V2EvidenceRetrieverAgent(ToolCallingAgent):
             findings = []
             
             # Debug logging
-            self.logger.info(f"Statistical results keys: {list(statistical_results.keys())}")
-            self.logger.info(f"Statistical results type: {type(statistical_results)}")
+            print(f"DEBUG: Statistical results keys: {list(statistical_results.keys())}")
+            print(f"DEBUG: Statistical results type: {type(statistical_results)}")
+            
+            # Add detailed debug logging to understand the structure
+            import json
+            try:
+                print(f"DEBUG: Full statistical results: {json.dumps(statistical_results, indent=2, default=str)}")
+            except Exception as e:
+                print(f"DEBUG: Could not serialize statistical results: {e}")
+                print(f"DEBUG: Statistical results repr: {repr(statistical_results)}")
             
             # Look for statistical analysis results in the V2 format
             if 'statistical_functions_and_results' in statistical_results:
@@ -337,6 +350,13 @@ class V2EvidenceRetrieverAgent(ToolCallingAgent):
             else:
                 results = {}
             
+            # Debug: Log the parsed results structure
+            print(f"DEBUG: Parsed results keys: {list(results.keys()) if results else 'No results'}")
+            if 'group_comparisons' in results:
+                print(f"DEBUG: Group comparisons structure: {json.dumps(results['group_comparisons'], indent=2, default=str)}")
+            
+            print(f"DEBUG: About to check for findings. Current findings count: {len(findings)}")
+            
             # Extract findings from group comparison
             if 'group_comparisons' in results and results['group_comparisons']:
                 # New format: group_comparisons is a dict of comparisons
@@ -344,17 +364,27 @@ class V2EvidenceRetrieverAgent(ToolCallingAgent):
                 for comparison_name, comparison_data in group_comps.items():
                     if isinstance(comparison_data, dict) and 'mean_difference' in comparison_data:
                         mean_diff = comparison_data['mean_difference']
+                        # Handle both old format (dict with 'value') and new format (direct numeric value)
                         if isinstance(mean_diff, dict) and 'value' in mean_diff:
-                            findings.append({
-                                "dimension": comparison_data.get('dependent_variable', comparison_name),
-                                "type": "group_comparison",
-                                "description": f"Group comparison shows {comparison_data.get('dependent_variable', comparison_name)} difference: {mean_diff['value']:.3f}",
-                                "raw_data": comparison_data
-                            })
+                            diff_value = mean_diff['value']
+                        elif isinstance(mean_diff, (int, float)):
+                            diff_value = mean_diff
+                        else:
+                            continue  # Skip if format is unrecognized
+                        
+                        findings.append({
+                            "dimension": comparison_data.get('dependent_variable', comparison_name),
+                            "type": "group_comparison",
+                            "description": f"Group comparison shows {comparison_data.get('dependent_variable', comparison_name)} difference: {diff_value:.3f}",
+                            "raw_data": comparison_data
+                        })
             elif 'group_comparison' in results and results['group_comparison']:
+                print(f"DEBUG: Found group_comparison (singular)")
                 group_comp = results['group_comparison']
+                print(f"DEBUG: Group comparison keys: {list(group_comp.keys())}")
                 # Check for mean_differences (plural) first, then mean_difference (singular)
                 if 'mean_differences' in group_comp:
+                    print(f"DEBUG: Using mean_differences (plural) path")
                     for dimension, difference in group_comp['mean_differences'].items():
                         findings.append({
                             "dimension": dimension,
@@ -363,9 +393,12 @@ class V2EvidenceRetrieverAgent(ToolCallingAgent):
                             "raw_data": {"mean_difference": difference}
                         })
                 else:
+                    print(f"DEBUG: Using fallback path for individual dimensions")
                     # Fallback to old format
                     for dimension, stats in group_comp.items():
+                        print(f"DEBUG: Processing dimension {dimension} with stats type {type(stats)}")
                         if isinstance(stats, dict) and 'mean_difference' in stats:
+                            print(f"DEBUG: Found mean_difference in {dimension}: {stats['mean_difference']}")
                             findings.append({
                                 "dimension": dimension,
                                 "type": "group_comparison",
