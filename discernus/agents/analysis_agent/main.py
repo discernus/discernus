@@ -451,16 +451,34 @@ Verify that the calculations are correct and the metrics are properly derived fr
     def _step2_evidence_extraction(self, composite_result: Dict[str, Any], analysis_id: str) -> Dict[str, Any]:
         """Step 2: Extract evidence from composite result using Flash Lite."""
         
-        prompt = f"""Extract the evidence section from this analysis result:
+        # Limit input size to prevent LLM overload
+        raw_response = composite_result['raw_analysis_response']
+        if len(raw_response) > 50000:  # Limit to 50K characters
+            raw_response = raw_response[:50000] + "\n\n[TRUNCATED - Input too large for evidence extraction]"
+        
+        prompt = f"""You are extracting evidence quotes from a discourse analysis. 
 
-{composite_result['raw_analysis_response']}
+ANALYSIS RESULT:
+{raw_response}
 
-Return the evidence data in whatever format you think is most useful for the next step."""
+TASK: Extract 3-5 high-quality evidence quotes that best exemplify the analysis findings. 
+
+REQUIREMENTS:
+- Extract quotes that directly support the dimensional scores
+- Choose quotes that are clear, impactful, and representative
+- Avoid repetitive or similar quotes
+- Format as a simple JSON array of strings
+
+OUTPUT FORMAT:
+["quote1", "quote2", "quote3", "quote4", "quote5"]
+
+Return ONLY the JSON array, no other text."""
 
         self.audit.log_agent_event(self.agent_name, "step2_started", {
             "analysis_id": analysis_id,
             "step": "evidence_extraction",
-            "model": "vertex_ai/gemini-2.5-flash-lite"
+            "model": "vertex_ai/gemini-2.5-flash-lite",
+            "input_size": len(raw_response)
         })
 
         response = self.gateway.execute_call(
@@ -474,7 +492,10 @@ Return the evidence data in whatever format you think is most useful for the nex
             content = response.get('content', '')
             metadata = response.get('metadata', {})
         
-        # Save evidence result - no parsing, just store what the LLM produced
+        # Validate and clean the response
+        content = self._validate_evidence_extraction(content, analysis_id)
+        
+        # Save evidence result
         evidence_result = {
             "analysis_id": analysis_id,
             "step": "evidence_extraction",
@@ -498,6 +519,64 @@ Return the evidence data in whatever format you think is most useful for the nex
         })
         
         return evidence_result
+
+    def _validate_evidence_extraction(self, content: str, analysis_id: str) -> str:
+        """Validate and clean evidence extraction response."""
+        try:
+            # Try to parse as JSON
+            import json
+            quotes = json.loads(content.strip())
+            
+            # Validate it's a list of strings
+            if not isinstance(quotes, list):
+                self.audit.log_agent_event(self.agent_name, "evidence_validation_failed", {
+                    "analysis_id": analysis_id,
+                    "error": "Response is not a list",
+                    "content_preview": content[:200]
+                })
+                return '["Evidence extraction failed - invalid format"]'
+            
+            # Check for duplicates
+            unique_quotes = []
+            seen = set()
+            for quote in quotes:
+                if isinstance(quote, str) and quote.strip() and quote not in seen:
+                    unique_quotes.append(quote.strip())
+                    seen.add(quote)
+            
+            # Limit to 5 quotes max
+            unique_quotes = unique_quotes[:5]
+            
+            if len(unique_quotes) == 0:
+                self.audit.log_agent_event(self.agent_name, "evidence_validation_failed", {
+                    "analysis_id": analysis_id,
+                    "error": "No valid quotes found",
+                    "content_preview": content[:200]
+                })
+                return '["Evidence extraction failed - no valid quotes"]'
+            
+            self.audit.log_agent_event(self.agent_name, "evidence_validation_success", {
+                "analysis_id": analysis_id,
+                "quotes_count": len(unique_quotes),
+                "original_count": len(quotes)
+            })
+            
+            return json.dumps(unique_quotes)
+            
+        except json.JSONDecodeError as e:
+            self.audit.log_agent_event(self.agent_name, "evidence_validation_failed", {
+                "analysis_id": analysis_id,
+                "error": f"JSON decode error: {e}",
+                "content_preview": content[:200]
+            })
+            return '["Evidence extraction failed - invalid JSON"]'
+        except Exception as e:
+            self.audit.log_agent_event(self.agent_name, "evidence_validation_failed", {
+                "analysis_id": analysis_id,
+                "error": f"Validation error: {e}",
+                "content_preview": content[:200]
+            })
+            return '["Evidence extraction failed - validation error"]'
 
     def _step3_score_extraction(self, composite_result: Dict[str, Any], analysis_id: str) -> Dict[str, Any]:
         """Step 3: Extract scores from composite result using Flash Lite."""
