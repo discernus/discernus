@@ -404,11 +404,13 @@ ANALYSIS ARTIFACTS:
 {artifacts_content}
 
 Your task:
-1. Extract scores and evidence from all analysis artifacts
+1. Extract scores and evidence from ALL analysis artifacts (composite_analysis, score_extraction, derived_metrics, evidence_extraction)
 2. Generate standard CSV files that work with R, STATA, and pandas
 3. Create separate CSV files for different data types:
-   - scores.csv: Dimensional scores with raw_score, salience, confidence
-   - evidence.csv: Evidence quotes with dimensions and metadata
+   - scores.csv: Dimensional scores with document_id, document_name, dimension, raw_score, salience, confidence
+   - evidence.csv: Evidence quotes with document_id, document_name, dimension, quote_text, confidence
+
+IMPORTANT: Include document identification information in both CSV files so researchers can track which document each score/evidence comes from.
 
 Use the generate_csv_file tool for each CSV file. Ensure proper CSV formatting with:
 - Headers in the first row
@@ -546,7 +548,7 @@ Use the generate_csv_file tool for each CSV file. Ensure proper CSV formatting w
             artifact_type = metadata.get("artifact_type", "")
             analysis_id = metadata.get("analysis_id", "")
             
-            if artifact_type in ["score_extraction", "derived_metrics"] and analysis_id:
+            if artifact_type in ["composite_analysis", "score_extraction", "derived_metrics", "evidence_extraction"] and analysis_id:
                 if analysis_id not in analysis_sessions:
                     analysis_sessions[analysis_id] = []
                 analysis_sessions[analysis_id].append((artifact_hash, artifact_info))
@@ -687,20 +689,14 @@ Use the generate_csv_file tool for each CSV file. Ensure proper CSV formatting w
         data_dir.mkdir(parents=True, exist_ok=True)
         results_dir.mkdir(parents=True, exist_ok=True)
         
-        # Write CSV file to both data and results directories
-        data_csv_path = data_dir / filename
+        # Write CSV file to results directory only (for user access)
         results_csv_path = results_dir / filename
         
-        # Write to data directory (for internal processing)
-        with open(data_csv_path, 'w', encoding='utf-8') as f:
-            f.write(csv_content)
-        
-        # Write to results directory (for user access)
         with open(results_csv_path, 'w', encoding='utf-8') as f:
             f.write(csv_content)
         
-        self.logger.info(f"Wrote CSV file to data: {data_csv_path} and results: {results_csv_path}")
-        return data_csv_path  # Keep original return for compatibility
+        self.logger.info(f"Wrote CSV file to results: {results_csv_path}")
+        return results_csv_path
 
     def generate_functions(self, workspace_path: Path, pre_assembled_prompt: str = None) -> Dict[str, Any]:
         """
