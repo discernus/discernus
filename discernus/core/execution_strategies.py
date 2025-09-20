@@ -194,6 +194,12 @@ class FullExperimentStrategy(ExecutionStrategy):
                         rich_console.print_info("📈 Running statistical analysis...")
                 except ImportError:
                     pass
+                # Debug: Check run_context before calling StatisticalAgent
+                audit.log_agent_event("FullExperimentStrategy", "debug_run_context", {
+                    "analysis_artifacts": getattr(run_context, 'analysis_artifacts', None),
+                    "analysis_results": getattr(run_context, 'analysis_results', None)
+                })
+                
                 statistical_result = agents["Statistical"].execute(run_context=run_context)
                 if not statistical_result.success:
                     return ExperimentResult(
@@ -650,6 +656,12 @@ class StatisticalPrepStrategy(ExecutionStrategy):
                         rich_console.print_info("📈 Running statistical analysis...")
                 except ImportError:
                     pass
+                # Debug: Check run_context before calling StatisticalAgent
+                audit.log_agent_event("FullExperimentStrategy", "debug_run_context", {
+                    "analysis_artifacts": getattr(run_context, 'analysis_artifacts', None),
+                    "analysis_results": getattr(run_context, 'analysis_results', None)
+                })
+                
                 statistical_result = agents["Statistical"].execute(run_context=run_context)
                 if not statistical_result.success:
                     return ExperimentResult(

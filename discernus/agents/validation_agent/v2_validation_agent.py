@@ -20,7 +20,7 @@ from discernus.core.standard_agent import StandardAgent
 from discernus.core.run_context import RunContext
 from discernus.core.agent_result import AgentResult
 from discernus.core.validation import ValidationIssue, ValidationResult
-from discernus.gateway.llm_gateway import LLMGateway
+from discernus.gateway.llm_gateway_enhanced import EnhancedLLMGateway
 from discernus.gateway.model_registry import ModelRegistry
 
 
@@ -40,7 +40,7 @@ class V2ValidationAgent(StandardAgent):
         
         # Initialize LLM gateway
         model_registry = ModelRegistry()
-        self.llm_gateway = LLMGateway(model_registry)
+        self.llm_gateway = EnhancedLLMGateway(model_registry)
         self.model = "vertex_ai/gemini-2.5-pro"  # Default model for validation
         
         # Load externalized YAML prompt template

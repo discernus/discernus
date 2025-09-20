@@ -11,7 +11,7 @@ import xml.etree.ElementTree as ET
 import time
 from typing import Dict, List, Any, Optional
 from datetime import datetime
-from discernus.gateway.llm_gateway import LLMGateway
+from discernus.gateway.llm_gateway_enhanced import EnhancedLLMGateway
 from discernus.gateway.model_registry import ModelRegistry
 
 class DiscernusLibrarian:
@@ -28,7 +28,7 @@ class DiscernusLibrarian:
         
         # Use the working LLM Gateway infrastructure
         self.model_registry = ModelRegistry()
-        self.gateway = LLMGateway(self.model_registry)
+        self.gateway = EnhancedLLMGateway(self.model_registry)
         
         # Model selection for cost optimization
         self.research_model = "vertex_ai/gemini-2.5-pro"  # Ultra-cheap: $0.13/$0.38 per 1M tokens

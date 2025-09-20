@@ -16,6 +16,7 @@ THIN Principles:
 
 import json
 import logging
+import yaml
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, List, Optional
@@ -26,8 +27,8 @@ from discernus.core.local_artifact_storage import LocalArtifactStorage
 from discernus.core.agent_result import AgentResult
 from discernus.core.run_context import RunContext
 from discernus.core.standard_agent import StandardAgent
-from discernus.gateway.llm_gateway import LLMGateway
-from discernus.gateway.model_registry import ModelRegistry
+from discernus.gateway.llm_gateway_enhanced import EnhancedLLMGateway
+from discernus.gateway.model_registry import get_model_registry
 
 
 class V2AnalysisAgent(StandardAgent):
@@ -61,8 +62,10 @@ class V2AnalysisAgent(StandardAgent):
         self.agent_name = "V2AnalysisAgent"
         
         # Initialize LLM gateway
-        model_registry = ModelRegistry()
-        self.gateway = LLMGateway(model_registry)
+        self.gateway = EnhancedLLMGateway(audit)
+        
+        # Load YAML prompt template
+        self.prompt_template = self._load_prompt_template()
         
         # Setup logging
         self.logger = logging.getLogger(__name__)
@@ -72,6 +75,19 @@ class V2AnalysisAgent(StandardAgent):
             "agent_type": "V2AnalysisAgent",
             "config_keys": []
         })
+
+    def _load_prompt_template(self) -> str:
+        """Load the framework-agnostic prompt template from the YAML file."""
+        prompt_path = Path(__file__).parent / "prompt.yaml"
+        if not prompt_path.exists():
+            error_msg = f"V2AnalysisAgent prompt file not found at {prompt_path}"
+            self.audit.log_agent_event(self.agent_name, "prompt_error", {"error": error_msg})
+            raise FileNotFoundError(error_msg)
+        
+        with open(prompt_path, 'r') as f:
+            yaml_content = f.read()
+        prompt_data = yaml.safe_load(yaml_content)
+        return prompt_data['template']
 
     def get_capabilities(self) -> List[str]:
         """Return agent capabilities."""
@@ -139,12 +155,14 @@ class V2AnalysisAgent(StandardAgent):
                     artifact_hashes.append(artifact['metadata']['artifact_hash'])
             
             # Update run context
-                run_context.analysis_artifacts = artifact_hashes
+            run_context.analysis_artifacts = artifact_hashes
             run_context.analysis_results = {
                 "documents_processed": len(documents),
                 "processing_mode": "atomic",
                 "batch_id": batch_id
             }
+            
+            self.logger.info(f"Updated run_context with {len(artifact_hashes)} analysis artifacts: {artifact_hashes}")
             
             # Return results from atomic processing
             return AgentResult(
@@ -234,22 +252,9 @@ class V2AnalysisAgent(StandardAgent):
     def _step1_composite_analysis(self, framework_content: str, doc: Dict[str, Any], doc_index: int, batch_id: str) -> Optional[Dict[str, Any]]:
         """Step 1: Composite Analysis for a single document."""
         try:
-            # Create analysis prompt
-            prompt = f"""Analyze this document using the provided framework:
-
-FRAMEWORK:
-{framework_content}
-
-DOCUMENT:
-{doc.get('content', '')}
-
-Provide a comprehensive analysis including:
-1. Dimensional scores
-2. Evidence quotes
-3. Markup of the document
-4. Confidence levels
-
-Return your analysis in a structured format."""
+            # Create analysis prompt using YAML template
+            document_content = doc.get('content', '')
+            prompt = self.prompt_template.replace('{framework_content}', framework_content).replace('{document_content}', document_content)
 
             # Call LLM
             response = self.gateway.execute_call(
@@ -500,13 +505,31 @@ Calculate relevant derived metrics and return as JSON."""
             return None
 
     def _step5_verification(self, framework_content: str, derived_metrics_result: Dict[str, Any], scores_result: Dict[str, Any], doc_index: int, batch_id: str) -> Optional[Dict[str, Any]]:
-        """Step 5: Verify derived metrics calculations."""
+        """Step 5: Verify derived metrics calculations using tool calling."""
         try:
             if not derived_metrics_result or 'content' not in derived_metrics_result:
                 return None
                 
             derived_metrics = derived_metrics_result['content'].get('derived_metrics', '')
             scores = scores_result['content'].get('score_extraction', '') if scores_result else '{}'
+            
+            # Define verification tool
+            verification_tools = [
+                {
+                    "name": "verify_math",
+                    "description": "Verify that the derived metrics calculations are correct",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "verified": {
+                                "type": "boolean",
+                                "description": "Whether the mathematical calculations are correct"
+                            }
+                        },
+                        "required": ["verified"]
+                    }
+                }
+            ]
             
             prompt = f"""Verify the derived metrics calculations:
 
@@ -519,26 +542,41 @@ ORIGINAL SCORES:
 DERIVED METRICS:
 {derived_metrics}
 
-Check if the calculations are correct and return verification results as JSON."""
+Review the calculations and call the verify_math tool with your verification result."""
 
-            # Call LLM
-            response = self.gateway.execute_call(
+            self.audit.log_agent_event(self.agent_name, "step5_started", {
+                "batch_id": batch_id,
+                "document_index": doc_index,
+                "step": "verification",
+                "model": "vertex_ai/gemini-2.5-flash-lite"
+            })
+
+            # Call LLM with tools
+            response = self.gateway.execute_call_with_tools(
                 model="vertex_ai/gemini-2.5-flash-lite",
-                prompt=prompt
+                prompt=prompt,
+                tools=verification_tools
             )
             
-            if isinstance(response, tuple):
-                content, metadata = response
-            else:
-                content = response.get('content', '')
-                metadata = response.get('metadata', {})
+            # Extract verification result from tool calls
+            verification_status = "unknown"
+            if hasattr(response, 'choices') and response.choices:
+                tool_calls = response.choices[0].message.tool_calls
+                if tool_calls:
+                    for tool_call in tool_calls:
+                        if tool_call.function.name == "verify_math":
+                            try:
+                                args = json.loads(tool_call.function.arguments)
+                                verification_status = "verified" if args.get("verified", False) else "verification_error"
+                            except json.JSONDecodeError:
+                                verification_status = "verification_error"
             
-            # Create artifact
+            # Create artifact with verification status
             artifact_data = {
                 "analysis_id": f"analysis_{batch_id}_{doc_index}",
                 "step": "verification",
                 "model_used": "vertex_ai/gemini-2.5-flash-lite",
-                "verification": content,
+                "verification_status": verification_status,
                 "document_index": doc_index,
                 "timestamp": datetime.now(timezone.utc).isoformat()
             }
@@ -550,6 +588,16 @@ Check if the calculations are correct and return verification results as JSON.""
                 {"artifact_type": "verification", "document_index": doc_index}
             )
             
+            artifact_data['artifact_hash'] = artifact_hash
+            
+            self.audit.log_agent_event(self.agent_name, "step5_completed", {
+                "batch_id": batch_id,
+                "document_index": doc_index,
+                "step": "verification",
+                "artifact_hash": artifact_hash,
+                "verification_status": verification_status
+            })
+            
             return {
                 "type": "verification",
                 "content": artifact_data,
@@ -560,7 +608,8 @@ Check if the calculations are correct and return verification results as JSON.""
                     "document_index": doc_index,
                     "timestamp": datetime.now().isoformat(),
                     "agent_name": self.agent_name,
-                    "artifact_hash": artifact_hash
+                    "artifact_hash": artifact_hash,
+                    "verification_status": verification_status
                 }
             }
             

@@ -196,8 +196,8 @@ if __name__ == "__main__":
     # Test the enforcement decorator
     @enforce_gateway_policy
     def good_function():
-        from discernus.gateway.llm_gateway import LLMGateway
-        gateway = LLMGateway()
+        from discernus.gateway.llm_gateway_enhanced import EnhancedLLMGateway
+        gateway = EnhancedLLMGateway()
         return gateway.call_llm("test")
     
     @enforce_gateway_policy
@@ -210,8 +210,8 @@ if __name__ == "__main__":
     @require_gateway_usage
     class GoodAgent:
         def __init__(self):
-            from discernus.gateway.llm_gateway import LLMGateway
-            self.gateway = LLMGateway()
+            from discernus.gateway.llm_gateway_enhanced import EnhancedLLMGateway
+            self.gateway = EnhancedLLMGateway()
         
         def execute(self):
             return self.gateway.call_llm("test")

@@ -17,7 +17,7 @@ from typing import List, Dict, Any, Optional, Tuple
 
 from txtai.embeddings import Embeddings
 
-from ..gateway.llm_gateway import LLMGateway
+from ..gateway.llm_gateway_enhanced import EnhancedLLMGateway
 from ..gateway.model_registry import ModelRegistry
 from ..core.local_artifact_storage import LocalArtifactStorage
 from ..core.audit_logger import AuditLogger
@@ -43,7 +43,7 @@ class EvidenceMatchingWrapper:
         self.model = model
         self.artifact_storage = artifact_storage
         self.audit_logger = audit_logger
-        self.llm_gateway = LLMGateway(ModelRegistry())
+        self.llm_gateway = EnhancedLLMGateway(ModelRegistry())
         
         # Core components
         self.index: Optional[Embeddings] = None

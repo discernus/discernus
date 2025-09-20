@@ -27,7 +27,7 @@ from ...core.agent_config import AgentConfig
 from ...core.security_boundary import ExperimentSecurityBoundary
 from ...core.local_artifact_storage import LocalArtifactStorage
 from ...core.audit_logger import AuditLogger
-from ...gateway.llm_gateway import LLMGateway
+from ...gateway.llm_gateway_enhanced import EnhancedLLMGateway
 from ...gateway.model_registry import get_model_registry
 import yaml
 
@@ -60,7 +60,7 @@ class V2UnifiedSynthesisAgent(SynthesisAgent):
         self.logger = logging.getLogger(__name__)
         
         # Initialize LLM gateway
-        self.llm_gateway = LLMGateway(get_model_registry())
+        self.llm_gateway = EnhancedLLMGateway(get_model_registry())
         
         # Load prompt template
         self.prompt_template = self._load_enhanced_prompt_template()

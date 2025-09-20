@@ -57,7 +57,7 @@ from discernus.core.logging_config import ensure_litellm_debug_suppression
 ensure_litellm_debug_suppression()
 
 # Import LLM Gateway after suppression is configured
-from discernus.gateway.llm_gateway import LLMGateway
+from discernus.gateway.llm_gateway_enhanced import EnhancedLLMGateway
 from discernus.gateway.model_registry import ModelRegistry
 
 # Import validation and orchestration components

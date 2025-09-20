@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250920_181217_1",
+  "step": "verification",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "verification": "```json\n{\n  \"verification_results\": {\n    \"sentiment_net_score\": {\n      \"calculation\": \"positive_sentiment - negative_sentiment\",\n      \"expected\": -1.0,\n      \"actual\": -1.0,\n      \"correct\": true\n    },\n    \"sentiment_dominance\": {\n      \"calculation\": \"If positive_sentiment > negative_sentiment, 'positive'. If negative_sentiment > positive_sentiment, 'negative'. If equal, 'neutral'.\",\n      \"expected\": \"negative\",\n      \"actual\": \"negative\",\n      \"correct\": true\n    },\n    \"sentiment_intensity\": {\n      \"calculation\": \"max(positive_sentiment, negative_sentiment)\",\n      \"expected\": 1.0,\n      \"actual\": 1.0,\n      \"correct\": true\n    },\n    \"sentiment_balance\": {\n      \"calculation\": \"Based on sentiment_net_score and sentiment_intensity. Values derived from original_scores (0.0, 1.0). Net score = -1.0. Intensity = 1.0. Since intensity is max and net score is max negative, it indicates 'highly_negative'.\",\n      \"expected\": \"highly_negative\",\n      \"actual\": \"highly_negative\",\n      \"correct\": true\n    }\n  }\n}\n```",
+  "document_index": 1,
+  "timestamp": "2025-09-20T22:12:54.129251+00:00"
+}

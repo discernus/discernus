@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250920_181012_1",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "evidence_extraction": "[\n  \"catastrophic betrayal of public trust and an assault on our community's well-being\",\n  \"threatens to decimate protected wetlands and irrevocably poison our local water supply\",\n  \"reckless, shortsighted capitulation to corporate interests over human lives\",\n  \"complete lack of transparency and the dismissive attitude from officials have only fueled the growing sense of despair and anger\",\n  \"masterclass in bureaucratic arrogance, leaving citizens feeling powerless and unheard\"\n]",
+  "document_index": 1,
+  "timestamp": "2025-09-20T22:10:30.848045+00:00"
+}

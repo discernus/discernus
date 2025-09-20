@@ -16,7 +16,7 @@ from typing import Any, Dict, List, Optional, Tuple
 from dataclasses import dataclass
 from datetime import datetime
 
-from discernus.gateway.llm_gateway import LLMGateway
+from discernus.gateway.llm_gateway_enhanced import EnhancedLLMGateway
 from discernus.gateway.model_registry import ModelRegistry
 from discernus.core.audit_logger import AuditLogger
 import json
@@ -43,7 +43,7 @@ class ExperimentCoherenceAgent:
         self.specification_references = specification_references or {}
         
         model_registry = ModelRegistry()
-        self.llm_gateway = LLMGateway(model_registry)
+        self.llm_gateway = EnhancedLLMGateway(model_registry)
         
         # Load externalized YAML prompt template
         self.prompt_template = self._load_prompt_template()

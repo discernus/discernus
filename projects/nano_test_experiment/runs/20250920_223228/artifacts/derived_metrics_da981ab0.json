@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250920_183228_1",
+  "step": "derived_metrics",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "derived_metrics": "```json\n{\n  \"overall_sentiment_intensity\": 1.0,\n  \"sentiment_neutrality\": 0.5,\n  \"sentiment_dominance\": \"negative\",\n  \"net_sentiment_score\": -1.0,\n  \"sentiment_variance\": 0.5\n}\n```",
+  "document_index": 1,
+  "timestamp": "2025-09-20T22:33:04.949229+00:00"
+}

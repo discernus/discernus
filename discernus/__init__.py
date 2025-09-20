@@ -16,7 +16,7 @@ __author__ = "Discernus Team"
 
 # Import key components for easy access (only if they exist)
 try:
-    from discernus.gateway.llm_gateway import LLMGateway
+    from discernus.gateway.llm_gateway_enhanced import EnhancedLLMGateway
     _has_llm_gateway = True
 except ImportError:
     _has_llm_gateway = False
@@ -29,6 +29,6 @@ except ImportError:
 
 __all__ = []
 if _has_llm_gateway:
-    __all__.append("LLMGateway")
+    __all__.append("EnhancedLLMGateway")
 if _has_provenance:
     __all__.append("create_provenance_stamp") 

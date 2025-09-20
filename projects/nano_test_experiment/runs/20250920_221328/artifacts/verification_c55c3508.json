@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250920_181328_1",
+  "step": "verification",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "verification": "```json\n{\n  \"verification_results\": [\n    {\n      \"metric\": \"overall_sentiment_score\",\n      \"calculation\": \"positive_sentiment - negative_sentiment\",\n      \"original_scores\": {\n        \"positive_sentiment\": 0.0,\n        \"negative_sentiment\": 1.0\n      },\n      \"expected_value\": 0.0 - 1.0,\n      \"calculated_value\": -1.0,\n      \"is_correct\": true\n    },\n    {\n      \"metric\": \"sentiment_intensity\",\n      \"calculation\": \"max(positive_sentiment, negative_sentiment)\",\n      \"original_scores\": {\n        \"positive_sentiment\": 0.0,\n        \"negative_sentiment\": 1.0\n      },\n      \"expected_value\": 1.0,\n      \"calculated_value\": 1.0,\n      \"is_correct\": true\n    },\n    {\n      \"metric\": \"sentiment_balance\",\n      \"calculation\": \"overall_sentiment_score / sentiment_intensity (if intensity > 0, else 0)\",\n      \"original_scores\": {\n        \"positive_sentiment\": 0.0,\n        \"negative_sentiment\": 1.0\n      },\n      \"intermediate_values\": {\n        \"overall_sentiment_score\": -1.0,\n        \"sentiment_intensity\": 1.0\n      },\n      \"expected_value\": -1.0 / 1.0,\n      \"calculated_value\": -1.0,\n      \"is_correct\": true\n    }\n  ]\n}\n```",
+  "document_index": 1,
+  "timestamp": "2025-09-20T22:13:50.477408+00:00"
+}

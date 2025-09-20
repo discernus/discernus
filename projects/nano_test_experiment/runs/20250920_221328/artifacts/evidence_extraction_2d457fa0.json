@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250920_181328_1",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "evidence_extraction": "```json\n[\n  \"catastrophic betrayal\",\n  \"assault on our community's well-being\",\n  \"threatens to decimate protected wetlands\",\n  \"irrevocably poison our local water supply\",\n  \"reckless, shortsighted capitulation to corporate interests over human lives\"\n]\n```",
+  "document_index": 1,
+  "timestamp": "2025-09-20T22:13:48.202775+00:00"
+}

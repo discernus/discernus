@@ -22,7 +22,7 @@ from discernus.core.agent_result import AgentResult
 from discernus.core.security_boundary import ExperimentSecurityBoundary
 from discernus.core.local_artifact_storage import LocalArtifactStorage
 from discernus.core.audit_logger import AuditLogger
-from discernus.gateway.llm_gateway import LLMGateway
+from discernus.gateway.llm_gateway_enhanced import EnhancedLLMGateway
 from discernus.gateway.model_registry import ModelRegistry
 from discernus.core.rag_index_manager import RAGIndexManager
 
@@ -45,7 +45,7 @@ class V2EvidenceRetrieverAgent(StandardAgent):
 
         # Initialize LLM gateway
         model_registry = ModelRegistry()
-        self.llm_gateway = LLMGateway(model_registry)
+        self.llm_gateway = EnhancedLLMGateway(model_registry)
 
         # RAG Index Manager for evidence retrieval
         self.rag_manager = RAGIndexManager(storage, audit, security)
