@@ -429,7 +429,9 @@ Use the generate_csv_file tool for each CSV file. Ensure proper CSV formatting w
         response_content, response_metadata = self.gateway.execute_call_with_tools(
             model="vertex_ai/gemini-2.5-flash",
             prompt=prompt,
-            tools=csv_tools
+            system_prompt="You are a data processing assistant. You MUST use the generate_csv_file tool to create CSV files from the analysis data. Generate separate CSV files for scores, evidence, and metadata as instructed.",
+            tools=csv_tools,
+            force_function_calling=True
         )
         end_time = datetime.now(timezone.utc)
         execution_time = (end_time - start_time).total_seconds()
