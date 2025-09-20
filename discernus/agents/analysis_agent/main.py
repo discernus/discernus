@@ -114,37 +114,37 @@ class AnalysisAgent:
                     framework_content, doc, doc_index, analysis_id
                 )
                 all_composite_results.append(composite_result)
-            
-            # Step 2: Evidence Extraction
-            evidence_result = self._step2_evidence_extraction(composite_result, analysis_id)
-            all_evidence_results.append(evidence_result)
-            
-            # Step 3: Score Extraction
-            scores_result = self._step3_score_extraction(composite_result, analysis_id)
-            all_scores_results.append(scores_result)
-            
-            # Step 4: Derived Metrics Generation
-            derived_metrics_result = self._step4_derived_metrics_generation_single(
-                framework_content, scores_result, doc_index, analysis_id
-            )
-            all_derived_metrics_results.append(derived_metrics_result)
-            
-            # Step 5: Verification
-            verification_result = self._step5_verification_single(
-                framework_content, derived_metrics_result, scores_result, doc_index, analysis_id
-            )
-            all_verification_results.append(verification_result)
-            
-            # Step 6: Markup Extraction
-            markup_result = self._step6_markup_extraction(composite_result, analysis_id)
-            all_markup_results.append(markup_result)
+                
+                # Step 2: Evidence Extraction (atomic processing)
+                evidence_result = self._step2_evidence_extraction(composite_result, analysis_id)
+                all_evidence_results.append(evidence_result)
+                
+                # Step 3: Score Extraction (atomic processing)
+                scores_result = self._step3_score_extraction(composite_result, analysis_id)
+                all_scores_results.append(scores_result)
+                
+                # Step 4: Derived Metrics Generation (atomic processing)
+                derived_metrics_result = self._step4_derived_metrics_generation_single(
+                    framework_content, scores_result, doc_index, analysis_id
+                )
+                all_derived_metrics_results.append(derived_metrics_result)
+                
+                # Step 5: Verification (atomic processing)
+                verification_result = self._step5_verification_single(
+                    framework_content, derived_metrics_result, scores_result, doc_index, analysis_id
+                )
+                all_verification_results.append(verification_result)
+                
+                # Step 6: Markup Extraction (atomic processing)
+                markup_result = self._step6_markup_extraction(composite_result, analysis_id)
+                all_markup_results.append(markup_result)
 
-            self.audit.log_agent_event(self.agent_name, "document_analysis_completed", {
-                "analysis_id": analysis_id,
-                "document_index": doc_index,
-                "document_name": doc_name,
-                "total_documents": len(documents)
-            })
+                self.audit.log_agent_event(self.agent_name, "document_analysis_completed", {
+                    "analysis_id": analysis_id,
+                    "document_index": doc_index,
+                    "document_name": doc_name,
+                    "total_documents": len(documents)
+                })
 
             # Aggregate results from all documents
             composite_result = self._aggregate_composite_results(all_composite_results, analysis_id)
