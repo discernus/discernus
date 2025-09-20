@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250920_175138_1",
+  "step": "verification",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "verification": "```json\n{\n  \"verification_results\": [\n    {\n      \"metric_name\": \"sentiment_polarity\",\n      \"calculation_check\": \"Correct\",\n      \"explanation\": \"Sentiment Polarity is calculated as positive_sentiment - negative_sentiment. (0.0 - 1.0) = -1.0.\"\n    },\n    {\n      \"metric_name\": \"sentiment_intensity\",\n      \"calculation_check\": \"Correct\",\n      \"explanation\": \"Sentiment Intensity is calculated as the maximum of positive_sentiment and negative_sentiment. max(0.0, 1.0) = 1.0.\"\n    },\n    {\n      \"metric_name\": \"sentiment_neutrality\",\n      \"calculation_check\": \"Correct\",\n      \"explanation\": \"Sentiment Neutrality is calculated as 1.0 - (absolute difference between positive_sentiment and negative_sentiment). 1.0 - abs(0.0 - 1.0) = 1.0 - 1.0 = 0.0.\"\n    },\n    {\n      \"metric_name\": \"overall_sentiment_score\",\n      \"calculation_check\": \"Correct\",\n      \"explanation\": \"Overall Sentiment Score is typically a reflection of sentiment polarity. Given the input scores, a score of -1.0 indicates a predominantly negative sentiment, consistent with the polarity calculation (0.0 - 1.0).\"\n    }\n  ]\n}\n```",
+  "document_index": 1,
+  "timestamp": "2025-09-20T21:52:01.733534+00:00"
+}

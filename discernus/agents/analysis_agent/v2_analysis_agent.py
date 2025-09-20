@@ -44,7 +44,7 @@ class V2AnalysisAgent(StandardAgent):
     
     Each document gets its own set of artifacts, preventing token limit issues.
     """
-
+    
     def __init__(self, 
                  security: ExperimentSecurityBoundary,
                  storage: LocalArtifactStorage,
@@ -99,14 +99,14 @@ class V2AnalysisAgent(StandardAgent):
             # Extract data from run context
             framework_content = run_context.metadata.get("framework_content")
             corpus_documents = run_context.metadata.get("corpus_documents", [])
-            
+
             if not framework_content:
                 return AgentResult(
                     success=False,
                     error_message="No framework content provided",
                     metadata={"agent_name": self.agent_name}
                 )
-            
+
             if not corpus_documents:
                 return AgentResult(
                     success=False,
@@ -133,13 +133,13 @@ class V2AnalysisAgent(StandardAgent):
                 all_artifacts.extend(doc_artifacts)
             
             # Update RunContext with analysis artifacts for downstream agents
-            artifact_hashes = []
+                artifact_hashes = []
             for artifact in all_artifacts:
                 if 'metadata' in artifact and 'artifact_hash' in artifact['metadata']:
                     artifact_hashes.append(artifact['metadata']['artifact_hash'])
             
             # Update run context
-            run_context.analysis_artifacts = artifact_hashes
+                run_context.analysis_artifacts = artifact_hashes
             run_context.analysis_results = {
                 "documents_processed": len(documents),
                 "processing_mode": "atomic",
@@ -153,7 +153,7 @@ class V2AnalysisAgent(StandardAgent):
                 metadata={
                     "batch_id": batch_id,
                     "documents_processed": len(documents),
-                    "agent_name": self.agent_name,
+                        "agent_name": self.agent_name,
                     "processing_mode": "atomic"
                 }
             )
@@ -185,7 +185,7 @@ class V2AnalysisAgent(StandardAgent):
             doc: Document to process
             doc_index: Index of document in corpus
             batch_id: Batch identifier
-            
+        
         Returns:
             List of artifacts created for this document
         """
@@ -306,10 +306,6 @@ Return your analysis in a structured format."""
                 
             raw_response = composite_result['content'].get('raw_analysis_response', '')
             
-            # Limit input size to prevent LLM overload
-            if len(raw_response) > 50000:
-                raw_response = raw_response[:50000] + "\n\n[TRUNCATED - Input too large for evidence extraction]"
-            
             prompt = f"""You are extracting evidence quotes from a discourse analysis. 
 
 ANALYSIS RESULT:
@@ -340,8 +336,7 @@ Return ONLY the JSON array, no other text."""
                 content = response.get('content', '')
                 metadata = response.get('metadata', {})
             
-            # Validate and clean the response
-            content = self._validate_evidence_extraction(content, doc_index)
+            # THIN: Store LLM response as-is, no validation
             
             # Create artifact
             artifact_data = {
@@ -634,59 +629,3 @@ Return the marked-up document in markdown format."""
             self.logger.error(f"Step 6 failed for document {doc_index}: {e}")
             return None
 
-    def _validate_evidence_extraction(self, content: str, doc_index: int) -> str:
-        """Validate and clean evidence extraction response."""
-        try:
-            # Try to parse as JSON
-            quotes = json.loads(content.strip())
-            
-            # Validate it's a list of strings
-            if not isinstance(quotes, list):
-                self.audit.log_agent_event(self.agent_name, "evidence_validation_failed", {
-                    "document_index": doc_index,
-                    "error": "Response is not a list",
-                    "content_preview": content[:200]
-                })
-                return '["Evidence extraction failed - invalid format"]'
-            
-            # Check for duplicates
-            unique_quotes = []
-            seen = set()
-            for quote in quotes:
-                if isinstance(quote, str) and quote.strip() and quote not in seen:
-                    unique_quotes.append(quote.strip())
-                    seen.add(quote)
-            
-            # Limit to 5 quotes max
-            unique_quotes = unique_quotes[:5]
-            
-            if len(unique_quotes) == 0:
-                self.audit.log_agent_event(self.agent_name, "evidence_validation_failed", {
-                    "document_index": doc_index,
-                    "error": "No valid quotes found",
-                    "content_preview": content[:200]
-                })
-                return '["Evidence extraction failed - no valid quotes"]'
-            
-            self.audit.log_agent_event(self.agent_name, "evidence_validation_success", {
-                "document_index": doc_index,
-                "quotes_count": len(unique_quotes),
-                "original_count": len(quotes)
-            })
-            
-            return json.dumps(unique_quotes)
-            
-        except json.JSONDecodeError as e:
-            self.audit.log_agent_event(self.agent_name, "evidence_validation_failed", {
-                "document_index": doc_index,
-                "error": f"JSON decode error: {e}",
-                "content_preview": content[:200]
-            })
-            return '["Evidence extraction failed - invalid JSON"]'
-        except Exception as e:
-            self.audit.log_agent_event(self.agent_name, "evidence_validation_failed", {
-                "document_index": doc_index,
-                "error": f"Validation error: {e}",
-                "content_preview": content[:200]
-            })
-            return '["Evidence extraction failed - validation error"]'
