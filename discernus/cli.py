@@ -234,13 +234,34 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple):
         orchestrator.register_agent("Evidence", V2EvidenceRetrieverAgent(security, storage, audit))
         orchestrator.register_agent("Synthesis", V2UnifiedSynthesisAgent(security, storage, audit))
 
-        # 5. Execute Strategy
+        # 5. Execute Strategy with Progress Reporting
         strategy = FullExperimentStrategy()
         result = orchestrator.execute_strategy(strategy)
 
+        # Show experiment summary
         if result.success:
             rich_console.print_success("✅ V2 Experiment Completed Successfully!")
+
+            # Show phase progress
+            phases_completed = result.phases_completed
+            if phases_completed:
+                rich_console.print_info(f"📊 Phases completed: {', '.join(phases_completed)}")
+            else:
+                rich_console.print_info("📊 No phases completed")
+
             rich_console.print_info(f"📁 Artifacts saved in: {storage.run_folder}")
+            rich_console.print_info(f"⏱️  Total execution time: {result.execution_time_seconds:.1f} seconds")
+
+            # Show artifact counts by type
+            artifact_types = {}
+            for artifact in result.artifacts:
+                artifact_type = artifact.get("metadata", {}).get("artifact_type", "unknown")
+                artifact_types[artifact_type] = artifact_types.get(artifact_type, 0) + 1
+
+            if artifact_types:
+                artifact_summary = ", ".join([f"{count} {type}" for type, count in artifact_types.items()])
+                rich_console.print_info(f"📦 Generated artifacts: {artifact_summary}")
+
             exit_success()
         else:
             rich_console.print_error(f"❌ V2 Experiment Failed: {result.error_message}")

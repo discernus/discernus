@@ -29,6 +29,15 @@ from .agent_result import AgentResult
 from .standard_agent import StandardAgent
 from .execution_strategies import ExecutionStrategy, ExperimentResult
 
+# Import for progress reporting
+try:
+    from ..cli_console import rich_console
+except ImportError:
+    # Fallback if not running from CLI context
+    import sys
+    print("⚠️ Progress reporting not available - running outside CLI context", file=sys.stderr)
+    rich_console = None
+
 
 @dataclass
 class V2OrchestratorConfig:
@@ -142,9 +151,13 @@ class V2Orchestrator:
         })
         
         try:
+            # Show progress during execution
+            if rich_console:
+                rich_console.print_info("🚀 Starting experiment execution...")
+
             # Execute the strategy
             result = strategy.execute(self.agents, run_context, self.storage, self.audit)
-            
+
             # Log successful completion
             self.audit.log_agent_event("V2Orchestrator", "strategy_execution_complete", {
                 "strategy": strategy.__class__.__name__,
@@ -153,7 +166,7 @@ class V2Orchestrator:
                 "phases_completed": result.phases_completed,
                 "artifacts_generated": len(result.artifacts)
             })
-            
+
             return result
             
         except Exception as e:

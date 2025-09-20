@@ -128,6 +128,13 @@ class FullExperimentStrategy(ExecutionStrategy):
             # Phase 1: Validation
             if "Validation" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "validation"})
+                # Show progress to user
+                try:
+                    from ..cli_console import rich_console
+                    if rich_console:
+                        rich_console.print_info("🔍 Running validation checks...")
+                except ImportError:
+                    pass
                 validation_result = agents["Validation"].execute(run_context=run_context)
                 if not validation_result.success:
                     return ExperimentResult(
@@ -145,6 +152,13 @@ class FullExperimentStrategy(ExecutionStrategy):
             # Phase 2: Analysis
             if "Analysis" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "analysis"})
+                # Show progress to user
+                try:
+                    from ..cli_console import rich_console
+                    if rich_console:
+                        rich_console.print_info("📊 Running document analysis...")
+                except ImportError:
+                    pass
                 analysis_result = agents["Analysis"].execute(run_context=run_context)
                 if not analysis_result.success:
                     return ExperimentResult(
@@ -162,6 +176,13 @@ class FullExperimentStrategy(ExecutionStrategy):
             # Phase 3: Statistical analysis
             if "Statistical" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "statistical"})
+                # Show progress to user
+                try:
+                    from ..cli_console import rich_console
+                    if rich_console:
+                        rich_console.print_info("📈 Running statistical analysis...")
+                except ImportError:
+                    pass
                 statistical_result = agents["Statistical"].execute(run_context=run_context)
                 if not statistical_result.success:
                     return ExperimentResult(
@@ -179,6 +200,13 @@ class FullExperimentStrategy(ExecutionStrategy):
             # Phase 4: Evidence retrieval
             if "Evidence" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "evidence"})
+                # Show progress to user
+                try:
+                    from ..cli_console import rich_console
+                    if rich_console:
+                        rich_console.print_info("🔍 Gathering evidence from documents...")
+                except ImportError:
+                    pass
                 evidence_result = agents["Evidence"].execute(run_context=run_context)
                 if not evidence_result.success:
                     return ExperimentResult(
@@ -215,6 +243,13 @@ class FullExperimentStrategy(ExecutionStrategy):
             # Phase 5: Synthesis
             if "Synthesis" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "synthesis"})
+                # Show progress to user
+                try:
+                    from ..cli_console import rich_console
+                    if rich_console:
+                        rich_console.print_info("📝 Generating research report...")
+                except ImportError:
+                    pass
                 synthesis_result = agents["Synthesis"].execute(run_context=run_context)
                 if not synthesis_result.success:
                     return ExperimentResult(
@@ -232,6 +267,13 @@ class FullExperimentStrategy(ExecutionStrategy):
             # Phase 6: Verification (if enabled)
             if run_context.metadata.get("verification_enabled", True) and "Verification" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "verification"})
+                # Show progress to user
+                try:
+                    from ..cli_console import rich_console
+                    if rich_console:
+                        rich_console.print_info("✅ Verifying research findings...")
+                except ImportError:
+                    pass
                 verification_result = agents["Verification"].execute(run_context=run_context)
                 if not verification_result.success:
                     return ExperimentResult(
@@ -362,6 +404,13 @@ class AnalysisOnlyStrategy(ExecutionStrategy):
             # Phase 1: Validation
             if "Validation" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "validation"})
+                # Show progress to user
+                try:
+                    from ..cli_console import rich_console
+                    if rich_console:
+                        rich_console.print_info("🔍 Running validation checks...")
+                except ImportError:
+                    pass
                 validation_result = agents["Validation"].execute(run_context=run_context)
                 if not validation_result.success:
                     return ExperimentResult(
@@ -379,6 +428,13 @@ class AnalysisOnlyStrategy(ExecutionStrategy):
             # Phase 2: Analysis
             if "Analysis" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "analysis"})
+                # Show progress to user
+                try:
+                    from ..cli_console import rich_console
+                    if rich_console:
+                        rich_console.print_info("📊 Running document analysis...")
+                except ImportError:
+                    pass
                 analysis_result = agents["Analysis"].execute(run_context=run_context)
                 if not analysis_result.success:
                     return ExperimentResult(
@@ -509,6 +565,13 @@ class StatisticalPrepStrategy(ExecutionStrategy):
             # Phase 1: Validation
             if "Validation" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "validation"})
+                # Show progress to user
+                try:
+                    from ..cli_console import rich_console
+                    if rich_console:
+                        rich_console.print_info("🔍 Running validation checks...")
+                except ImportError:
+                    pass
                 validation_result = agents["Validation"].execute(run_context=run_context)
                 if not validation_result.success:
                     return ExperimentResult(
@@ -526,6 +589,13 @@ class StatisticalPrepStrategy(ExecutionStrategy):
             # Phase 2: Analysis
             if "Analysis" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "analysis"})
+                # Show progress to user
+                try:
+                    from ..cli_console import rich_console
+                    if rich_console:
+                        rich_console.print_info("📊 Running document analysis...")
+                except ImportError:
+                    pass
                 analysis_result = agents["Analysis"].execute(run_context=run_context)
                 if not analysis_result.success:
                     return ExperimentResult(
@@ -543,6 +613,13 @@ class StatisticalPrepStrategy(ExecutionStrategy):
             # Phase 3: Statistical analysis
             if "Statistical" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "statistical"})
+                # Show progress to user
+                try:
+                    from ..cli_console import rich_console
+                    if rich_console:
+                        rich_console.print_info("📈 Running statistical analysis...")
+                except ImportError:
+                    pass
                 statistical_result = agents["Statistical"].execute(run_context=run_context)
                 if not statistical_result.success:
                     return ExperimentResult(
@@ -666,6 +743,13 @@ class ResumeFromStatsStrategy(ExecutionStrategy):
             # Phase 1: Evidence retrieval
             if "Evidence" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "evidence"})
+                # Show progress to user
+                try:
+                    from ..cli_console import rich_console
+                    if rich_console:
+                        rich_console.print_info("🔍 Gathering evidence from documents...")
+                except ImportError:
+                    pass
                 evidence_result = agents["Evidence"].execute(run_context=run_context)
                 if not evidence_result.success:
                     return ExperimentResult(
@@ -702,6 +786,13 @@ class ResumeFromStatsStrategy(ExecutionStrategy):
             # Phase 2: Synthesis
             if "Synthesis" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "synthesis"})
+                # Show progress to user
+                try:
+                    from ..cli_console import rich_console
+                    if rich_console:
+                        rich_console.print_info("📝 Generating research report...")
+                except ImportError:
+                    pass
                 synthesis_result = agents["Synthesis"].execute(run_context=run_context)
                 if not synthesis_result.success:
                     return ExperimentResult(
@@ -719,6 +810,13 @@ class ResumeFromStatsStrategy(ExecutionStrategy):
             # Phase 3: Verification (if enabled)
             if run_context.metadata.get("verification_enabled", True) and "Verification" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "verification"})
+                # Show progress to user
+                try:
+                    from ..cli_console import rich_console
+                    if rich_console:
+                        rich_console.print_info("✅ Verifying research findings...")
+                except ImportError:
+                    pass
                 verification_result = agents["Verification"].execute(run_context=run_context)
                 if not verification_result.success:
                     return ExperimentResult(
