@@ -154,11 +154,16 @@ class AnalysisAgent:
             verification_result = self._aggregate_verification_results(all_verification_results, analysis_id)
             markup_result = self._aggregate_markup_results(all_markup_results, analysis_id)
             
-            # Step 7: CSV Generation (for statistical offramp)
-            csv_result = self._step7_csv_generation(
-                framework_content, all_scores_results, all_evidence_results, 
-                all_derived_metrics_results, analysis_id
-            )
+            # Step 7: CSV Generation (DISABLED for alpha release)
+            # csv_result = self._step7_csv_generation(
+            #     framework_content, all_scores_results, all_evidence_results, 
+            #     all_derived_metrics_results, analysis_id
+            # )
+            csv_result = {
+                "csv_files_created": 0,
+                "execution_time": 0.0,
+                "status": "disabled_for_alpha"
+            }
             
             # Compile final results
             final_results = {

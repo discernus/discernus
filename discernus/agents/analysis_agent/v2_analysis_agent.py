@@ -215,7 +215,7 @@ class V2AnalysisAgent(ToolCallingAgent):
                         }
                     })
                 
-                # Add CSV generation artifact
+                # Add CSV generation artifact (disabled for alpha)
                 if "csv_generation" in legacy_result:
                     artifacts.append({
                         "type": "csv_generation",
@@ -225,7 +225,8 @@ class V2AnalysisAgent(ToolCallingAgent):
                             "phase": "analysis",
                             "batch_id": batch_id,
                             "timestamp": datetime.now().isoformat(),
-                            "agent_name": self.agent_name
+                            "agent_name": self.agent_name,
+                            "status": "disabled_for_alpha"
                         }
                     })
                 
