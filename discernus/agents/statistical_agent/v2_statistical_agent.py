@@ -177,18 +177,7 @@ class V2StatisticalAgent(ToolCallingAgent):
                         }
                     })
                 
-                # Add CSV generation artifact
-                if "csv_generation" in legacy_result:
-                    artifacts.append({
-                        "type": "csv_generation",
-                        "content": legacy_result["csv_generation"],
-                        "metadata": {
-                            "phase": "statistical",
-                            "batch_id": batch_id,
-                            "timestamp": datetime.now().isoformat(),
-                            "agent_name": self.agent_name
-                        }
-                    })
+                # CSV generation removed - now handled by AnalysisAgent
                 
                 # Add total cost info artifact
                 if "total_cost_info" in legacy_result:
