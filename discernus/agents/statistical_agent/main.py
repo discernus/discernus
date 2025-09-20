@@ -425,6 +425,32 @@ If there are errors or discrepancies, call with verified=false."""
         self.logger.info(f"Successfully loaded {len(artifacts)} artifacts from analysis session {most_recent_analysis_id}")
         return artifacts
 
+    def _prepare_statistical_prompt(self, framework_content: str, artifacts: Dict[str, Any]) -> str:
+        """
+        Prepare the statistical analysis prompt with framework and artifacts.
+        
+        Args:
+            framework_content: The framework content
+            artifacts: Dictionary of artifact_hash -> artifact_data
+            
+        Returns:
+            Formatted prompt for statistical analysis
+        """
+        prompt = f"""Perform comprehensive statistical analysis on the provided analysis artifacts.
+
+FRAMEWORK:
+{framework_content}
+
+ANALYSIS ARTIFACTS:
+"""
+        
+        for artifact_hash, artifact_data in artifacts.items():
+            prompt += f"\n--- ARTIFACT {artifact_hash} ---\n"
+            prompt += json.dumps(artifact_data, indent=2)
+            prompt += "\n\n"
+        
+        return prompt
+
     def _calculate_total_costs(self, statistical_result: Dict[str, Any], 
                              verification_result: Dict[str, Any], 
                              csv_result: Dict[str, Any]) -> Dict[str, Any]:
