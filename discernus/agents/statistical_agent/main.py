@@ -404,12 +404,11 @@ ANALYSIS ARTIFACTS:
 {artifacts_content}
 
 Your task:
-1. Extract scores, evidence, and metadata from all analysis artifacts
+1. Extract scores and evidence from all analysis artifacts
 2. Generate standard CSV files that work with R, STATA, and pandas
 3. Create separate CSV files for different data types:
    - scores.csv: Dimensional scores with raw_score, salience, confidence
    - evidence.csv: Evidence quotes with dimensions and metadata
-   - metadata.csv: Document metadata and analysis information
 
 Use the generate_csv_file tool for each CSV file. Ensure proper CSV formatting with:
 - Headers in the first row
@@ -674,12 +673,12 @@ Use the generate_csv_file tool for each CSV file. Ensure proper CSV formatting w
         # Look for existing run directories or create a new one
         runs_dir = experiment_path / "runs"
         
-        # Extract run_id from batch_id (format: "stats_20250916T200726Z")
+        # Extract run_id from batch_id (format: "stats_20250916_200726")
         if batch_id.startswith("stats_"):
             run_id = batch_id[6:]  # Remove "stats_" prefix
         else:
             # Fallback to current timestamp
-            run_id = datetime.now().strftime("%Y%m%dT%H%M%SZ")
+            run_id = datetime.now().strftime("%Y%m%d_%H%M%S")
         
         data_dir = runs_dir / run_id / "data"
         results_dir = runs_dir / run_id / "results"
@@ -729,7 +728,7 @@ Use the generate_csv_file tool for each CSV file. Ensure proper CSV formatting w
                 corpus_manifest = self._load_corpus_manifest_from_workspace(workspace_path)
             
             # Generate batch ID for this statistical analysis
-            batch_id = f"stats_{datetime.now().strftime('%Y%m%dT%H%M%SZ')}"
+            batch_id = f"stats_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
             
             # Run the full 3-step analysis
             result = self.analyze_batch(
