@@ -262,8 +262,9 @@ class V2UnifiedSynthesisAgent(SynthesisAgent):
 
     def _prepare_research_data_context(self, inputs: Dict[str, Any]) -> Dict:
         """Prepare research data context by combining relevant data."""
+        # Only include statistical results and derived metrics - NOT composite analysis data
+        # Composite analysis contains full transcripts and markup which consume too many tokens
         return {
-            "analysis_results": inputs['analysis_results'],
             "statistical_results": inputs['statistical_results'],
             "derived_metrics": inputs.get('derived_metrics', {})
         }
