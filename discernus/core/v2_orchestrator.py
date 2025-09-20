@@ -143,6 +143,9 @@ class V2Orchestrator:
             "resume_from_phase": self.config.resume_from_phase
         })
         
+        # Create input file snapshots for provenance (once per experiment)
+        self._create_input_snapshots(run_context)
+        
         # Log strategy execution start
         self.audit.log_agent_event("V2Orchestrator", "strategy_execution_start", {
             "strategy": strategy.__class__.__name__,
@@ -297,3 +300,159 @@ class V2Orchestrator:
         
         self.logger.info(f"Resumed from manifest: {manifest['experiment_id']}")
         return run_context
+    
+    def _create_input_snapshots(self, run_context: RunContext) -> None:
+        """
+        Create snapshots of input files for complete provenance tracking.
+        
+        Args:
+            run_context: Current run context with file paths
+        """
+        try:
+            # Get the artifacts directory from storage
+            artifacts_dir = Path(self.storage.artifacts_dir)
+            
+            # Create snapshots of input files
+            snapshots_created = []
+            
+            # Snapshot experiment.md
+            experiment_path = Path(run_context.framework_path).parent / "experiment.md"
+            if experiment_path.exists():
+                experiment_content = experiment_path.read_text(encoding='utf-8')
+                experiment_hash = hashlib.sha256(experiment_content.encode()).hexdigest()
+                snapshot_path = artifacts_dir / f"experiment_{experiment_hash[:8]}.md"
+                snapshot_path.write_text(experiment_content, encoding='utf-8')
+                snapshots_created.append(f"experiment_{experiment_hash[:8]}.md")
+            
+            # Snapshot framework file
+            framework_path = Path(run_context.framework_path)
+            if framework_path.exists():
+                framework_content = framework_path.read_text(encoding='utf-8')
+                framework_hash = hashlib.sha256(framework_content.encode()).hexdigest()
+                snapshot_path = artifacts_dir / f"framework_{framework_hash[:8]}.md"
+                snapshot_path.write_text(framework_content, encoding='utf-8')
+                snapshots_created.append(f"framework_{framework_hash[:8]}.md")
+            
+            # Snapshot corpus.md
+            corpus_path = Path(run_context.corpus_path)
+            if corpus_path.exists():
+                corpus_content = corpus_path.read_text(encoding='utf-8')
+                corpus_hash = hashlib.sha256(corpus_content.encode()).hexdigest()
+                snapshot_path = artifacts_dir / f"corpus_{corpus_hash[:8]}.md"
+                snapshot_path.write_text(corpus_content, encoding='utf-8')
+                snapshots_created.append(f"corpus_{corpus_hash[:8]}.md")
+            
+            # Create comprehensive README for the run directory
+            self._create_run_readme(artifacts_dir.parent, run_context, snapshots_created)
+            
+            # Log snapshot creation
+            self.audit.log_agent_event("V2Orchestrator", "input_snapshots_created", {
+                "snapshots_created": snapshots_created,
+                "total_snapshots": len(snapshots_created)
+            })
+            
+        except Exception as e:
+            # Log error but don't fail the experiment
+            self.audit.log_agent_event("V2Orchestrator", "input_snapshots_error", {
+                "error": str(e),
+                "error_type": type(e).__name__
+            })
+    
+    def _create_run_readme(self, run_dir: Path, run_context: RunContext, snapshots: List[str]) -> None:
+        """
+        Create comprehensive README for the run directory.
+        
+        Args:
+            run_dir: Run directory path
+            run_context: Current run context
+            snapshots: List of snapshot files created
+        """
+        try:
+            # Get experiment name from run context
+            experiment_name = run_context.experiment_id
+            
+            readme_content = f"""# Discernus Research Run
+
+**Complete Research Package - {experiment_name}**
+
+**Run ID**: {run_dir.name}  
+**Generated**: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')}
+
+## 📁 Directory Structure
+
+### `artifacts/` - Complete Provenance Chain
+- **Input Snapshots** (exact versions used in this run):
+"""
+            
+            # Add snapshot files to README
+            for snapshot in snapshots:
+                if snapshot.startswith('experiment_'):
+                    readme_content += f"  - `{snapshot}` - **SNAPSHOT**: Exact version of experiment.md used\n"
+                elif snapshot.startswith('framework_'):
+                    readme_content += f"  - `{snapshot}` - **SNAPSHOT**: Exact version of framework file used\n"
+                elif snapshot.startswith('corpus_'):
+                    readme_content += f"  - `{snapshot}` - **SNAPSHOT**: Exact version of corpus.md used\n"
+            
+            readme_content += f"""- **Analysis Artifacts**: Raw LLM outputs, processing plans, statistical results
+- **Evidence Artifacts**: Curated supporting evidence and quotes
+- **Report Artifacts**: Synthesis outputs and final reports
+
+### `logs/` - Execution Logs
+- `agents.jsonl` - Agent execution details and decisions
+- `costs.jsonl` - API usage and cost tracking
+- `system.jsonl` - System events and operations
+- `llm_interactions.jsonl` - Complete LLM conversation history
+
+### `results/` - Research Outputs (if present)
+- `scores.csv` - Analysis scores and derived metrics
+- `evidence.csv` - Supporting evidence with quotes
+- `metadata.csv` - Document and run metadata
+- `final_report.md` - Complete synthesis report
+
+## 🔍 Quick Start
+
+### For Data Analysis
+- Check `results/` directory for CSV files ready for statistical analysis
+- Use `artifacts/` for detailed analysis artifacts and provenance
+
+### For Replication
+- Use snapshot files in `artifacts/` to see exact input versions
+- All necessary files for complete replication are preserved
+
+### For Audit
+- Review `logs/` for complete execution trace
+- Check `artifacts/` for full provenance chain
+- Verify input snapshots match original files using hash verification
+
+## 📋 Provenance Verification
+
+This run used exact versions of input files (see snapshots in `artifacts/`).
+
+To verify a snapshot matches the original:
+```bash
+# Example verification
+sha256sum artifacts/experiment_{snapshots[0].split('_')[1] if snapshots else 'hash'}.md
+# Compare with: sha256sum ../../experiment.md
+```
+
+All files are content-addressable and fully traceable through the artifact system.
+
+## 🏗️ Architecture
+
+This run was generated using the Discernus V2 system with:
+- **THIN Architecture**: Minimal orchestration, agent-native design
+- **Content-Addressable Storage**: All artifacts stored with SHA-256 hashes
+- **Complete Audit Trail**: Every operation logged and tracked
+- **Self-Contained**: No external dependencies for replication
+
+---
+*Generated by Discernus Alpha System - Complete Research Transparency*
+"""
+            
+            # Write README to run directory
+            readme_path = run_dir / "README.md"
+            readme_path.write_text(readme_content, encoding='utf-8')
+            
+        except Exception as e:
+            # Don't fail the experiment if README creation fails
+            pass

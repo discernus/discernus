@@ -28,6 +28,7 @@ from .audit_logger import AuditLogger
 import yaml
 import re
 import json
+import hashlib
 
 
 @dataclass
@@ -69,6 +70,7 @@ class ExecutionStrategy(ABC):
             ExperimentResult with execution results
         """
         pass
+    
 
 
 class FullExperimentStrategy(ExecutionStrategy):
@@ -562,6 +564,7 @@ class StatisticalPrepStrategy(ExecutionStrategy):
             run_context.metadata["framework_content"] = framework_content
             run_context.metadata["corpus_documents"] = corpus_documents
             run_context.metadata["corpus_manifest_content"] = corpus_manifest_content
+            
             # Phase 1: Validation
             if "Validation" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "validation"})

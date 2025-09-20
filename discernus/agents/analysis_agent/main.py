@@ -101,7 +101,7 @@ class AnalysisAgent:
             all_markup_results = []
 
             for doc_index, doc in enumerate(documents):
-                doc_name = doc.get('name', doc.get('filename', f'document_{doc_index}'))
+                doc_name = doc.get('id', doc.get('name', doc.get('filename', f'document_{doc_index}')))
                 self.audit.log_agent_event(self.agent_name, "document_analysis_started", {
                     "analysis_id": analysis_id,
                     "document_index": doc_index,
@@ -114,37 +114,37 @@ class AnalysisAgent:
                     framework_content, doc, doc_index, analysis_id
                 )
                 all_composite_results.append(composite_result)
+            
+            # Step 2: Evidence Extraction
+            evidence_result = self._step2_evidence_extraction(composite_result, analysis_id)
+            all_evidence_results.append(evidence_result)
+            
+            # Step 3: Score Extraction
+            scores_result = self._step3_score_extraction(composite_result, analysis_id)
+            all_scores_results.append(scores_result)
+            
+            # Step 4: Derived Metrics Generation
+            derived_metrics_result = self._step4_derived_metrics_generation_single(
+                framework_content, scores_result, doc_index, analysis_id
+            )
+            all_derived_metrics_results.append(derived_metrics_result)
+            
+            # Step 5: Verification
+            verification_result = self._step5_verification_single(
+                framework_content, derived_metrics_result, scores_result, doc_index, analysis_id
+            )
+            all_verification_results.append(verification_result)
+            
+            # Step 6: Markup Extraction
+            markup_result = self._step6_markup_extraction(composite_result, analysis_id)
+            all_markup_results.append(markup_result)
 
-                # Step 2: Evidence Extraction
-                evidence_result = self._step2_evidence_extraction(composite_result, analysis_id)
-                all_evidence_results.append(evidence_result)
-
-                # Step 3: Score Extraction
-                scores_result = self._step3_score_extraction(composite_result, analysis_id)
-                all_scores_results.append(scores_result)
-
-                # Step 4: Derived Metrics Generation
-                derived_metrics_result = self._step4_derived_metrics_generation_single(
-                    framework_content, scores_result, doc_index, analysis_id
-                )
-                all_derived_metrics_results.append(derived_metrics_result)
-
-                # Step 5: Verification
-                verification_result = self._step5_verification_single(
-                    framework_content, derived_metrics_result, scores_result, doc_index, analysis_id
-                )
-                all_verification_results.append(verification_result)
-
-                # Step 6: Markup Extraction
-                markup_result = self._step6_markup_extraction(composite_result, analysis_id)
-                all_markup_results.append(markup_result)
-
-                self.audit.log_agent_event(self.agent_name, "document_analysis_completed", {
-                    "analysis_id": analysis_id,
-                    "document_index": doc_index,
-                    "document_name": doc_name,
-                    "total_documents": len(documents)
-                })
+            self.audit.log_agent_event(self.agent_name, "document_analysis_completed", {
+                "analysis_id": analysis_id,
+                "document_index": doc_index,
+                "document_name": doc_name,
+                "total_documents": len(documents)
+            })
 
             # Aggregate results from all documents
             composite_result = self._aggregate_composite_results(all_composite_results, analysis_id)
@@ -200,19 +200,19 @@ class AnalysisAgent:
             raise AnalysisAgentError(f"Analysis failed: {str(e)}") from e
 
     def _step1_enhanced_composite_analysis_single(self,
-                                                framework_content: str,
+                                         framework_content: str, 
                                                 document: Dict[str, Any],
                                                 doc_index: int,
-                                                analysis_id: str) -> Dict[str, Any]:
+                                         analysis_id: str) -> Dict[str, Any]:
         """Step 1: Enhanced composite analysis for a single document."""
         doc_name = document.get('name', document.get('filename', f'document_{doc_index}'))
-
+        
         # Prepare single document for prompt
         document_content = self._prepare_single_document(document, doc_index)
-
+        
         # Create the analysis prompt for single document
         prompt = self.prompt_template.replace('{framework_content}', framework_content).replace('{document_content}', document_content).replace('{analysis_id}', f"{analysis_id}_doc_{doc_index}").replace('{num_documents}', "1")
-
+        
         self.audit.log_agent_event(self.agent_name, "step1_started_single", {
             "analysis_id": analysis_id,
             "step": "enhanced_composite_analysis_generation",
@@ -220,27 +220,27 @@ class AnalysisAgent:
             "document_index": doc_index,
             "document_name": doc_name
         })
-
+        
         # Execute LLM call for single document
         response = self.gateway.execute_call(
             model="vertex_ai/gemini-2.5-flash",
             prompt=prompt
         )
-
+        
         # Extract content from response
         if isinstance(response, tuple):
             content, metadata = response
         else:
             content = response.get('content', '')
             metadata = response.get('metadata', {})
-
+        
         # If content is empty, try to get it from the raw response
         if not content and hasattr(response, 'choices'):
             content = response.choices[0].message.content
-
+        
         # Generate document hash for provenance
         document_hash = self._generate_content_hash(document.get('content', ''))
-
+        
         # Save composite result to artifacts
         composite_data = {
             "analysis_id": analysis_id,
@@ -252,14 +252,14 @@ class AnalysisAgent:
             "document_name": doc_name,
             "timestamp": datetime.now(timezone.utc).isoformat()
         }
-
+        
         composite_hash = self.storage.put_artifact(
             json.dumps(composite_data, indent=2).encode('utf-8'),
             {"artifact_type": "composite_analysis", "analysis_id": analysis_id, "document_index": doc_index}
         )
-
+        
         composite_data['artifact_hash'] = composite_hash
-
+        
         self.audit.log_agent_event(self.agent_name, "step1_completed_single", {
             "analysis_id": analysis_id,
             "step": "enhanced_composite_analysis_generation",
@@ -268,7 +268,7 @@ class AnalysisAgent:
             "document_name": doc_name,
             "response_length": len(content)
         })
-
+        
         return composite_data
 
     def _step4_derived_metrics_generation_single(self,
@@ -805,14 +805,43 @@ FRAMEWORK:
 ANALYSIS ARTIFACTS:
 {artifacts_content}
 
-Your task:
-1. Extract scores and evidence from ALL analysis artifacts (composite_analysis, score_extraction, derived_metrics, evidence_extraction)
-2. Generate standard CSV files that work with R, STATA, and pandas
-3. Create separate CSV files for different data types:
-   - scores.csv: Dimensional scores with document_id, document_name, dimension, raw_score, salience, confidence
-   - evidence.csv: Evidence quotes with document_id, document_name, dimension, quote_text, confidence
+Your task is to create comprehensive CSV files for statistical analysis. Follow these steps:
 
-IMPORTANT: Include document identification information in both CSV files so researchers can track which document each score/evidence comes from.
+STEP 1: Extract all dimensional scores
+- Find all dimensional scores from score_extraction artifacts
+- Use the framework content above to identify what dimensions should be present
+- Include document_id, document_name, dimension, raw_score, salience, confidence for each score
+
+STEP 2: Extract all derived metrics
+- Find all derived metrics from derived_metrics artifacts
+- Use the framework content above to identify what derived metrics should be present
+- Include document_id, document_name, dimension, raw_score, salience, confidence for each derived metric
+- Use the dimension name as the dimension field
+
+STEP 3: Extract all evidence quotes
+- Find all evidence quotes from evidence_extraction artifacts
+- Include document_id, document_name, dimension, quote_text, confidence for each quote
+
+ANALYSIS ARTIFACTS REFERENCE:
+The analysis artifacts include these specific types:
+- composite_analysis: Contains the raw analysis results for each document
+- score_extraction: Contains dimensional scores
+- derived_metrics: Contains calculated metrics
+- evidence_extraction: Contains evidence quotes and reasoning for each dimension
+
+STEP 4: Create scores.csv
+- Combine ALL dimensional scores AND derived metrics into one CSV
+- Required columns: document_id, document_name, dimension, raw_score, salience, confidence
+- Ensure every document has entries for both dimensional scores and derived metrics
+
+STEP 5: Create evidence.csv
+- Include all evidence quotes with proper attribution
+- Required columns: document_id, document_name, dimension, quote_text, confidence
+
+STEP 6: Verify completeness
+- Check that scores.csv contains BOTH dimensional scores AND derived metrics
+- Verify that data for every document appears in both CSV files
+- Ensure all data from the analysis artifacts is included
 
 Use the generate_csv_file tool for each CSV file. Ensure proper CSV formatting with:
 - Headers in the first row
@@ -1023,14 +1052,14 @@ Use the generate_csv_file tool for each CSV file. Ensure proper CSV formatting w
 
     def _prepare_single_document(self, doc: Dict[str, Any], doc_index: int) -> str:
         """Prepare a single document for individual analysis."""
-        doc_content = doc.get('content', '')
-        doc_name = doc.get('name', doc.get('filename', f'document_{doc_index}'))
-        doc_hash = self._generate_content_hash(doc_content)
-
+            doc_content = doc.get('content', '')
+        doc_name = doc.get('id', doc.get('name', doc.get('filename', f'document_{doc_index}')))
+            doc_hash = self._generate_content_hash(doc_content)
+            
         document_content = f"--- Document {doc_index+1}: {doc_name} ---\n"
-        document_content += f"Hash: {doc_hash}\n"
-        document_content += f"Content:\n{doc_content}\n"
-
+            document_content += f"Hash: {doc_hash}\n"
+            document_content += f"Content:\n{doc_content}\n"
+        
         return document_content
 
     def _generate_analysis_id(self) -> str:
