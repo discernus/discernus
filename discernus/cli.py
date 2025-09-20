@@ -11,18 +11,14 @@ Core Commands for Research Workflow:
 - discernus status                      - Show system status
 - discernus artifacts                   - Show experiment artifacts and cache status
 
-Management Commands:
-- discernus promote <experiment_path>   - Promote workbench files to operational status
-- discernus cache <experiment_path>     - Manage validation cache
+For Alpha Release:
+- discernus run <experiment>            - Run complete experiment (recommended)
+- discernus validate <experiment>       - Validate experiment before running
+- discernus debug <experiment>          - Debug with detailed tracing
+- discernus status                      - Check system status
+- discernus artifacts <experiment>      - Show experiment artifacts
 
-Research Commands (Advanced):
-- discernus consolidate-provenance      - Consolidate provenance data for golden runs
-- discernus consolidate-inputs          - Consolidate input materials for golden runs  
-- discernus generate-golden-run-docs    - Generate comprehensive golden run documentation
-- discernus model-quality               - Assess model quality and compare analysis results
-- discernus timezone-debug              - Debug timezone issues in experiment logs
-- discernus visualize-provenance        - Generate provenance visualization
-- discernus validate-score              - Validate numerical scores using academic pipeline
+Advanced features (database resume/caching/provenance) coming soon.
 """
 
 import click
@@ -141,11 +137,9 @@ def cli(ctx, verbose, quiet, no_color, config):
     Common Examples:
       python3 -m discernus.cli run                          # Run experiment in current directory
       python3 -m discernus.cli run --dry-run                # Preview what would be executed
-      python3 -m discernus.cli run --analysis-only          # Run analysis only, no CSV export
       python3 -m discernus.cli validate --dry-run           # Preview validation checks
-      python3 -m discernus.cli debug --verbose --agent analysis  # Debug analysis agent with test mode
-      python3 -m discernus.cli promote --cleanup            # Promote and clean up development files
-      python3 -m discernus.cli artifacts                    # Show available cache artifacts
+      python3 -m discernus.cli debug --verbose              # Debug with detailed tracing
+      python3 -m discernus.cli status                       # Check system status
     
     \b
     Model Selection Tips:
@@ -258,51 +252,6 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple):
         traceback.print_exc()
         exit_infrastructure_error(str(e))
 
-@cli.command()
-@click.argument('experiment_path', default='.', type=str)
-@click.option('--analysis-model', envvar='DISCERNUS_ANALYSIS_MODEL',
-              default='vertex_ai/gemini-2.5-flash',
-              help='LLM model for document analysis. Use flash for speed, pro for accuracy.')
-@click.option('--synthesis-model', envvar='DISCERNUS_SYNTHESIS_MODEL',
-              default='vertex_ai/gemini-2.5-pro',
-              help='LLM model for report synthesis. Pro recommended for complex analysis.')
-@click.option('--validation-model', envvar='DISCERNUS_VALIDATION_MODEL',
-              default='vertex_ai/gemini-2.5-pro',
-              help='LLM model for experiment validation. Pro model provides high-quality validation.')
-@click.option('--derived-metrics-model', envvar='DISCERNUS_DERIVED_METRICS_MODEL',
-              default='vertex_ai/gemini-2.5-pro',
-              help='LLM model for statistical analysis and derived metrics.')
-@click.option('--dry-run', is_flag=True, envvar='DISCERNUS_DRY_RUN', 
-              help='Preview what would be executed without running')
-@click.option('--no-auto-commit', is_flag=True, envvar='DISCERNUS_NO_AUTO_COMMIT', 
-              help='Disable automatic Git commit after successful run')
-@click.pass_context
-def resume(ctx, experiment_path: str, analysis_model: Optional[str], synthesis_model: Optional[str], validation_model: Optional[str], derived_metrics_model: Optional[str], dry_run: bool, no_auto_commit: bool):
-    """Resume from statistical preparation to full synthesis.
-    
-    EXPERIMENT_PATH: Path to experiment directory (defaults to current directory).
-    Requires existing statistical preparation results from a previous --statistical-prep run.
-    """
-    # Ensure experiment_path is a string
-    if isinstance(experiment_path, Path):
-        experiment_path = str(experiment_path)
-    exp_path = Path(str(experiment_path)).resolve()
-    
-    # Check if experiment path exists
-    if not exp_path.exists():
-        click.echo(f"❌ Experiment path does not exist: {exp_path}")
-        sys.exit(1)
-    
-    if not exp_path.is_dir():
-        click.echo(f"❌ Experiment path is not a directory: {exp_path}")
-        sys.exit(1)
-    
-    # V2 orchestrator doesn't support resume mode yet
-    # TODO: Implement resume functionality in V2 orchestrator
-    rich_console.print_error("❌ Resume command not yet implemented in V2 orchestrator")
-    rich_console.print_info("   The V2 orchestrator is still under development.")
-    rich_console.print_info("   For now, please use the full 'discernus run' command.")
-    exit_invalid_usage("Resume command not implemented in V2 orchestrator")
 
 @cli.command()
 @click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))
@@ -410,52 +359,6 @@ def validate(ctx, experiment_path: str, dry_run: bool):
         rich_console.print_error(f"❌ Validation error: {e}")
         exit_general_error(str(e))
 
-@cli.command()
-def list():
-    """List available experiments"""
-    projects_dir = Path('projects')
-    
-    if not projects_dir.exists():
-        click.echo("❌ No projects directory found")
-        click.echo("   Create a 'projects' directory and add your experiments")
-        sys.exit(1)
-    
-    rich_console.print_section("📁 Available Experiments")
-    
-    experiments = []
-    for item in projects_dir.iterdir():
-        if item.is_dir():
-            # Check if it looks like an experiment
-            if (item / 'experiment.md').exists() or (item / 'corpus.md').exists():
-                experiments.append(item)
-    
-    if not experiments:
-        rich_console.print_info("No experiments found in projects/ directory")
-        rich_console.print_info("   Create experiment.md and corpus.md files to define experiments")
-        return
-    
-    # Sort experiments by name
-    experiments.sort(key=lambda x: x.name)
-    
-    # Create table
-    table = rich_console.create_table("Experiments", ["Name", "Path", "Status"])
-    
-    for exp in experiments:
-        # Determine status
-        has_experiment = (exp / 'experiment.md').exists()
-        has_corpus = (exp / 'corpus.md').exists()
-        has_runs = (exp / 'runs').exists()
-        
-        if has_experiment and has_corpus:
-            status = "✅ Ready"
-        elif has_experiment or has_corpus:
-            status = "⚠️ Incomplete"
-        else:
-            status = "❌ Invalid"
-        
-        table.add_row(exp.name, str(exp), status)
-    
-    rich_console.print_table(table)
 
 @cli.command()
 @click.argument('experiment_path', default='.', type=click.Path(exists=True, file_okay=False, dir_okay=True))
@@ -556,298 +459,12 @@ def status():
 # MANAGEMENT COMMANDS
 # ============================================================================
 
-@cli.command()
-@click.argument('experiment_path', default='.', type=click.Path(exists=True, file_okay=False, dir_okay=True))
-@click.option('--dry-run', is_flag=True, 
-              help='Show what would be promoted without executing (useful for reviewing changes before promotion)')
-@click.option('--cleanup', is_flag=True, help='Clean up development files after promotion')
-@click.option('--force', is_flag=True, help='Skip confirmation prompts')
-def promote(experiment_path: str, dry_run: bool, cleanup: bool, force: bool):
-    """Promote workbench files to operational status.
-    
-    EXPERIMENT_PATH: Path to experiment directory (defaults to current directory).
-    """
-    exp_path = Path(experiment_path).resolve()
-    
-    rich_console.print_section(f"📤 Promoting: {exp_path.name}")
-    
-    # Find workbench files
-    workbench_files = []
-    for pattern in ['*.md', '*.yaml', '*.yml', '*.json']:
-        workbench_files.extend(exp_path.glob(pattern))
-    
-    if not workbench_files:
-        rich_console.print_info("No workbench files found to promote")
-        return
-    
-    if dry_run:
-        rich_console.print_info("🧪 DRY RUN - Files that would be promoted:")
-        for file in workbench_files:
-            rich_console.print_info(f"   • {file.name}")
-        return
-    
-    # Confirm promotion
-    if not force:
-        click.confirm(f"Promote {len(workbench_files)} files to operational status?", abort=True)
-    
-    # Promote files (copy to operational locations)
-    promoted_count = 0
-    for file in workbench_files:
-        # For now, just mark as promoted by adding to a promoted list
-        # In a real implementation, this would move files to operational directories
-        promoted_count += 1
-        rich_console.print_info(f"   ✅ Promoted: {file.name}")
-    
-    rich_console.print_success(f"✅ Promoted {promoted_count} files to operational status")
-    
-    if cleanup:
-        rich_console.print_info("🧹 Cleaning up development files...")
-        # Cleanup logic would go here
-        rich_console.print_info("   🗑️ Development files cleaned up")
 
-@cli.command()
-@click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))
-@click.option('--stats', is_flag=True, help='Show cache statistics')
-@click.option('--cleanup', is_flag=True, help='Clean up old cache entries')
-def cache(experiment_path: str, stats: bool, cleanup: bool):
-    """Manage validation cache for an experiment.
-    
-    EXPERIMENT_PATH: Path to experiment directory (defaults to current directory).
-    """
-    exp_path = Path(experiment_path).resolve()
-    cache_dir = exp_path / '.discernus_cache'
-    
-    if not cache_dir.exists():
-        rich_console.print_info("No cache directory found")
-        return
-    
-    if stats:
-        rich_console.print_section(f"📊 Cache Statistics: {exp_path.name}")
-        
-        cache_files = list(cache_dir.rglob('*'))
-        total_size = sum(f.stat().st_size for f in cache_files if f.is_file())
-        
-        stats_table = rich_console.create_table("Cache Stats", ["Metric", "Value"])
-        stats_table.add_row("Total Files", str(len(cache_files)))
-        stats_table.add_row("Total Size", f"{total_size / 1024 / 1024:.1f} MB")
-        
-        rich_console.print_table(stats_table)
-    
-    if cleanup:
-        rich_console.print_info("🧹 Cleaning up old cache entries...")
-        
-        # Remove cache files older than 30 days
-        cutoff_time = time.time() - (30 * 24 * 60 * 60)
-        removed_count = 0
-        
-        for cache_file in cache_dir.rglob('*'):
-            if cache_file.is_file() and cache_file.stat().st_mtime < cutoff_time:
-                cache_file.unlink()
-                removed_count += 1
-        
-        rich_console.print_success(f"✅ Removed {removed_count} old cache entries")
 
 # ============================================================================
-# RESEARCH COMMANDS (Advanced)
-# ============================================================================
-
-@cli.command()
-@click.argument('run_directory', type=click.Path(exists=True, file_okay=False, dir_okay=True))
-@click.option('--output', '-o', type=click.Path(), help='Save archive to specific location')
-@click.option('--minimal', is_flag=True, help='Create minimal archive (excludes logs and artifacts)')
-def archive(run_directory: str, output: Optional[str], minimal: bool):
-    """Create a complete golden run archive for research transparency.
-    
-    Creates a self-contained archive with all experiment data, results, and provenance.
-    Perfect for peer review, replication research, and archival.
-    
-    RUN_DIRECTORY: Path to experiment run directory (e.g., projects/experiment/runs/20250127T143022Z)
-    """
-    run_path = Path(run_directory)
-    output_path = Path(output) if output else None
-    
-    try:
-        rich_console.print_section(f"📦 Creating Golden Run Archive: {run_path.name}")
-        
-        # Determine run mode from manifest
-        run_mode = _detect_run_mode(run_path)
-        rich_console.print_info(f"🔍 Detected run mode: {run_mode}")
-        
-        # Always consolidate provenance and input materials
-        rich_console.print_info("📊 Consolidating provenance data...")
-        consolidate_run_provenance(run_path, None)
-        rich_console.print_success("✅ Provenance data consolidated")
-        
-        rich_console.print_info("📁 Consolidating input materials...")
-        consolidate_input_materials(run_path, None)
-        rich_console.print_success("✅ Input materials consolidated")
-        
-        # Create statistical package for runs with data
-        if run_mode in ['standard', 'statistical_prep', 'skip_synthesis']:
-            rich_console.print_info("📊 Creating statistical package...")
-            _create_statistical_package(run_path)
-            rich_console.print_success("✅ Statistical package created")
-        
-        # Include logs and artifacts unless minimal mode
-        if not minimal:
-            rich_console.print_info("📋 Copying session logs...")
-            _copy_session_logs(run_path)
-            rich_console.print_success("✅ Session logs copied")
-            
-            rich_console.print_info("🗄️ Copying artifact content...")
-            _copy_artifact_content(run_path)
-            rich_console.print_success("✅ Artifact content copied")
-        
-        # Generate documentation
-        rich_console.print_info("📋 Generating comprehensive documentation...")
-        try:
-            docs_path = generate_golden_run_documentation(run_path, output_path)
-            rich_console.print_success("✅ Documentation generated")
-        except Exception as e:
-            rich_console.print_warning(f"⚠️ Documentation generation failed: {e}")
-            rich_console.print_info("📋 Continuing without documentation...")
-        
-        rich_console.print_success("🎉 Golden run archive created successfully!")
-        rich_console.print_info("📦 Archive is self-contained and ready for peer review/archival")
-        
-    except Exception as e:
-        rich_console.print_error(f"❌ Error creating golden run archive: {e}")
-        exit_general_error(str(e))
 
 
-def _detect_run_mode(run_path: Path) -> str:
-    """Detect run mode from manifest file."""
-    try:
-        # Prefer manifest from the specific run's session directory
-        experiment_path = run_path.parent.parent
-        run_id = run_path.name
-        manifest_file = experiment_path / "session" / run_id / "manifest.json"
-        
-        if manifest_file.exists():
-            import json
-            with open(manifest_file) as f:
-                manifest = json.load(f)
-            return manifest.get("run_mode", {}).get("mode_type", "unknown")
-        # Fallback: try most recent session manifest
-        session_dirs = [d for d in (experiment_path / "session").glob("*") if d.is_dir()]
-        if session_dirs:
-            latest_session = max(session_dirs, key=lambda x: x.name)
-            fallback_manifest = latest_session / "manifest.json"
-            if fallback_manifest.exists():
-                import json
-                with open(fallback_manifest) as f:
-                    manifest = json.load(f)
-                return manifest.get("run_mode", {}).get("mode_type", "unknown")
-        return "unknown"
-    except Exception:
-        return "unknown"
 
-
-def _copy_session_logs(run_path: Path) -> None:
-    """Copy session logs to archive."""
-    try:
-        experiment_path = run_path.parent.parent
-        run_id = run_path.name
-        
-        # Find the specific session directory for this run
-        session_dir = experiment_path / "session" / run_id
-        if not session_dir.exists():
-            rich_console.print_warning(f"⚠️ Session directory not found for run {run_id}")
-            return
-        
-        logs_source = session_dir / "logs"
-        if not logs_source.exists():
-            rich_console.print_warning(f"⚠️ Logs directory not found in session {run_id}")
-            return
-        
-        # Create session_logs directory in run
-        session_logs_dir = run_path / "session_logs"
-        session_logs_dir.mkdir(exist_ok=True)
-        
-        # Remove existing logs directory if it exists to avoid conflicts
-        target_logs_dir = session_logs_dir / "logs"
-        if target_logs_dir.exists():
-            import shutil
-            shutil.rmtree(str(target_logs_dir))
-        
-        # Copy all log files
-        import shutil
-        shutil.copytree(logs_source, target_logs_dir)
-        
-        # Copy manifest if it exists
-        manifest_file = session_dir / "manifest.json"
-        if manifest_file.exists():
-            shutil.copy2(manifest_file, session_logs_dir / "manifest.json")
-            
-        rich_console.print_success(f"✅ Session logs copied from {session_dir} to {session_logs_dir}")
-                
-    except Exception as e:
-        rich_console.print_warning(f"⚠️ Could not copy session logs: {e}")
-
-
-def _copy_artifact_content(run_path: Path) -> None:
-    """Copy actual artifact content instead of symlinks."""
-    try:
-        artifacts_dir = run_path / "artifacts"
-        if not artifacts_dir.exists():
-            rich_console.print_warning("⚠️ No artifacts directory found")
-            return
-        
-        # Find shared cache directory
-        experiment_path = run_path.parent.parent
-        shared_cache_dir = experiment_path / "shared_cache" / "artifacts"
-        
-        if not shared_cache_dir.exists():
-            rich_console.print_warning("⚠️ No shared cache directory found")
-            return
-        
-        copied_files = 0
-        
-        # Copy actual content for each symlink
-        for file_path in artifacts_dir.rglob("*"):
-            if file_path.is_file():
-                if file_path.is_symlink():
-                    # Get the target of the symlink
-                    target_path = file_path.resolve()
-                    # Security: ensure target is within shared cache or repo
-                    try:
-                        target_root = str(target_path)
-                        allowed_prefixes = [str(shared_cache_dir.resolve()), str(experiment_path.resolve())]
-                        if not any(target_root.startswith(p) for p in allowed_prefixes):
-                            rich_console.print_warning(f"⚠️ Skipping unsafe symlink target: {target_path}")
-                            continue
-                    except Exception:
-                        rich_console.print_warning(f"⚠️ Skipping unresolved symlink: {file_path}")
-                        continue
-                    if target_path.exists() and target_path != file_path:
-                        # Create a temporary file to copy content
-                        import shutil
-                        temp_file = file_path.with_suffix(file_path.suffix + '.tmp')
-                        shutil.copy2(target_path, temp_file)
-                        
-                        # Remove the symlink and replace with actual file
-                        file_path.unlink()
-                        temp_file.rename(file_path)
-                        copied_files += 1
-                else:
-                    # Regular file, already has content
-                    copied_files += 1
-        
-        rich_console.print_success(f"✅ Artifact content copied: {copied_files} files processed")
-                        
-    except Exception as e:
-        rich_console.print_warning(f"⚠️ Could not copy artifact content: {e}")
-
-
-def _create_statistical_package(run_path: Path) -> None:
-    """Create researcher-ready statistical package."""
-    try:
-        from .core.statistical_package_generator import generate_statistical_package
-        package_dir = generate_statistical_package(run_path)
-        print(f"📊 Statistical package created: {package_dir}")
-        
-    except Exception as e:
-        print(f"⚠️ Warning: Could not create statistical package: {e}")
 
 
 def main():
