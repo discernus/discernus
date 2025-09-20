@@ -249,16 +249,21 @@ Focus on the most impactful findings that would benefit from textual evidence.
             for finding in evidence_plan.get('key_findings', []):
                 finding_queries = finding.get('queries', [])
                 quotes = []
+                seen_quotes = set()  # Track unique quotes
                 
                 for query in finding_queries:
                     # Use RAG to search for evidence
                     search_results = self.rag_manager.search(query, top_k=3)
                     for result in search_results:
-                        quotes.append({
-                            "text": result.get('text', ''),
-                            "relevance_score": result.get('score', 0.0),
-                            "query": query
-                        })
+                        quote_text = result.get('text', '')
+                        # Only add if we haven't seen this exact quote before
+                        if quote_text and quote_text not in seen_quotes:
+                            seen_quotes.add(quote_text)
+                            quotes.append({
+                                "text": quote_text,
+                                "relevance_score": result.get('score', 0.0),
+                                "query": query
+                            })
                 
                 evidence_results.append({
                     "finding": finding.get('finding', ''),

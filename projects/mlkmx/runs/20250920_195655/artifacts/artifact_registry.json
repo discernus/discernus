@@ -1,0 +1,16 @@
+{
+  "0c1f5b2a127fd4510aae535b81aa2dbc1252e9dc7bd67849f943f9905e5d8ce7": {
+    "artifact_path": "validation_report_0c1f5b2a.json",
+    "created_at": "2025-09-20T19:57:17.806233+00:00",
+    "human_filename": "validation_report_0c1f5b2a.json",
+    "is_directory": false,
+    "metadata": {
+      "agent": "V2ValidationAgent",
+      "artifact_type": "validation_report",
+      "experiment_id": "mlkmx",
+      "timestamp": "2025-09-20T15:57:17.804634"
+    },
+    "size_bytes": 624,
+    "source_run": "20250920_195655"
+  }
+}
