@@ -35,7 +35,7 @@ metadata:
 
 # 5.2: Components (Required)
 components:
-  framework: "sentiment_with_derived_metrics_v1.md"
+  framework: "framework.md"
   corpus: "corpus.md"
 
 # 5.3: Hypotheses (Optional but Recommended)

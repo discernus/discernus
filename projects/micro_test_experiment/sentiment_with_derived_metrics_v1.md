@@ -11,9 +11,13 @@ Provides a framework that triggers derived metrics calculation and statistical a
 **Who is it for?**
 Test suite developers and pipeline maintainers who need to validate the complete pipeline including calculation agents and statistical synthesis.
 
-## Theoretical Foundations
+## Theoretical & Empirical Foundations
 
 This framework is grounded in basic sentiment analysis theory, measuring the presence of positive and negative emotional language in text with derived balance metrics.
+
+**Key Citations:**
+- Pang, B., & Lee, L. (2008). Opinion mining and sentiment analysis. Foundations and Trends in Information Retrieval, 2(1-2), 1-135. This foundational work established the theoretical basis for computational sentiment analysis.
+- Liu, B. (2012). Sentiment analysis and opinion mining. Synthesis Lectures on Human Language Technologies, 5(1), 1-167. Provides comprehensive theoretical foundations for sentiment analysis methodologies.
 
 ## Analytical Methodology
 

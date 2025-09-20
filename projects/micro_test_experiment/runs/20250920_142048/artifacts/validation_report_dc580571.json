@@ -1,0 +1,42 @@
+{
+  "validation_success": false,
+  "issues": [
+    {
+      "category": "missing_element",
+      "description": "The machine-readable appendix in `framework.md` is missing the mandatory `output_schema` section, as required by the Framework Specification v10.0.",
+      "impact": "The analysis agent's output cannot be validated, and the orchestration engine will reject the framework, preventing experiment execution.",
+      "fix": "Add a valid `output_schema` to the YAML appendix in `framework.md`. The schema must define the structure for `dimensional_scores` with properties for `positive_sentiment` and `negative_sentiment`, referencing a standard score object definition as shown in the v10.0 specification.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "framework.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The `calculation` formulas for derived metrics (`net_sentiment`, `sentiment_magnitude`) in `framework.md` do not explicitly reference the `.raw_score` property of the dimensions (e.g., `positive_sentiment - negative_sentiment`). The v10.0 specification standard is to reference the property, such as `dimensions.example_dimension_1.raw_score`.",
+      "impact": "The formula engine may misinterpret the reference, potentially leading to calculation errors or unexpected behavior. While the engine may attempt to infer the correct property, explicit reference is required for robustness and compliance with best practices.",
+      "fix": "Update the formulas to explicitly reference the `raw_score` of each dimension. For example, change `\"positive_sentiment - negative_sentiment\"` to `\"positive_sentiment.raw_score - negative_sentiment.raw_score\"`.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "framework.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The corpus manifest `corpus.md` specifies `spec_version: \"8.0\"`, but the current standard is v8.0.2. The manifest appears to comply with the newer standard's requirements, such as providing metadata for statistical grouping.",
+      "impact": "This does not block execution but can cause confusion regarding which specification version the file adheres to. It may be flagged by stricter future validators.",
+      "fix": "Update the `spec_version` in `corpus.md` to `\"8.0.2\"` to accurately reflect compliance with the current standard.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md"
+      ]
+    }
+  ],
+  "suggestions": [],
+  "metadata": {
+    "agent": "V2ValidationAgent",
+    "timestamp": "2025-09-20T10:21:28.326914",
+    "experiment_id": "micro_test_experiment",
+    "validation_type": "experiment_coherence"
+  }
+}

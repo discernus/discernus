@@ -1,0 +1,209 @@
+{
+  "agent_name": "V2EvidenceRetrieverAgent",
+  "timestamp": "2025-09-20T10:26:11.420416",
+  "experiment_id": "nano_test_experiment",
+  "evidence_results": [
+    {
+      "finding": "The 'negative' test document ('neg_test') scored 0.0 for 'positive_sentiment', indicating a complete absence of positive language as per the framework's definition.",
+      "dimension": "",
+      "quotes": [
+        {
+          "text": "The recent urban revitalization project has been an unqualified triumph, transforming our city's downtown core from a neglected afterthought into a vibrant, bustling hub of commerce and community. The meticulously planned public spaces, including the stunning waterfront park and pedestrian-friendly avenues, have fostered a renewed sense of civic pride. Local businesses are reporting record foot traffic, and the influx of new residents and visitors has created an atmosphere of palpable optimism and energy that promises a bright and prosperous future for all.\n\nFurthermore, the project's commitment to sustainable design and green building practices has set a new national standard. The integration of renewable energy sources, advanced water reclamation systems, and expansive green roofs not only minimizes the environmental impact but also enhances the quality of life for urban dwellers. This initiative serves as a powerful testament to what can be achieved when bold vision is paired with thoughtful execution, creating a legacy of economic vitality and environmental stewardship that will benefit generations to come.\n",
+          "relevance_score": 0.05977103114128113,
+          "query": "positive_sentiment: {\"raw_score\": 0.0} AND \"No positive language\""
+        },
+        {
+          "text": "The recent urban revitalization project has been an unqualified triumph, transforming our city's downtown core from a neglected afterthought into a vibrant, bustling hub of commerce and community. The meticulously planned public spaces, including the stunning waterfront park and pedestrian-friendly avenues, have fostered a renewed sense of civic pride. Local businesses are reporting record foot traffic, and the influx of new residents and visitors has created an atmosphere of palpable optimism and energy that promises a bright and prosperous future for all.\n\nFurthermore, the project's commitment to sustainable design and green building practices has set a new national standard. The integration of renewable energy sources, advanced water reclamation systems, and expansive green roofs not only minimizes the environmental impact but also enhances the quality of life for urban dwellers. This initiative serves as a powerful testament to what can be achieved when bold vision is paired with thoughtful execution, creating a legacy of economic vitality and environmental stewardship that will benefit generations to come.\n",
+          "relevance_score": 0.04505196213722229,
+          "query": "positive_sentiment: {\"mean\": 0.0} AND \"count\": 1"
+        }
+      ]
+    },
+    {
+      "finding": "The 'negative' test document ('neg_test') scored 1.0 for 'negative_sentiment', indicating dominant negative language throughout, consistent with the framework's highest calibration.",
+      "dimension": "",
+      "quotes": [
+        {
+          "text": "The recent urban revitalization project has been an unqualified triumph, transforming our city's downtown core from a neglected afterthought into a vibrant, bustling hub of commerce and community. The meticulously planned public spaces, including the stunning waterfront park and pedestrian-friendly avenues, have fostered a renewed sense of civic pride. Local businesses are reporting record foot traffic, and the influx of new residents and visitors has created an atmosphere of palpable optimism and energy that promises a bright and prosperous future for all.\n\nFurthermore, the project's commitment to sustainable design and green building practices has set a new national standard. The integration of renewable energy sources, advanced water reclamation systems, and expansive green roofs not only minimizes the environmental impact but also enhances the quality of life for urban dwellers. This initiative serves as a powerful testament to what can be achieved when bold vision is paired with thoughtful execution, creating a legacy of economic vitality and environmental stewardship that will benefit generations to come.\n",
+          "relevance_score": 0.02018289640545845,
+          "query": "negative_sentiment: {\"raw_score\": 1.0} AND \"Dominant negative language throughout\""
+        },
+        {
+          "text": "The recent urban revitalization project has been an unqualified triumph, transforming our city's downtown core from a neglected afterthought into a vibrant, bustling hub of commerce and community. The meticulously planned public spaces, including the stunning waterfront park and pedestrian-friendly avenues, have fostered a renewed sense of civic pride. Local businesses are reporting record foot traffic, and the influx of new residents and visitors has created an atmosphere of palpable optimism and energy that promises a bright and prosperous future for all.\n\nFurthermore, the project's commitment to sustainable design and green building practices has set a new national standard. The integration of renewable energy sources, advanced water reclamation systems, and expansive green roofs not only minimizes the environmental impact but also enhances the quality of life for urban dwellers. This initiative serves as a powerful testament to what can be achieved when bold vision is paired with thoughtful execution, creating a legacy of economic vitality and environmental stewardship that will benefit generations to come.\n",
+          "relevance_score": 0.013571574352681637,
+          "query": "negative_sentiment: {\"mean\": 1.0} AND \"count\": 1"
+        }
+      ]
+    },
+    {
+      "finding": "The framework successfully assigned extreme, opposing sentiment scores (0.0 positive, 1.0 negative) to the 'neg_test' document, validating basic pipeline functionality for binary sentiment distinction.",
+      "dimension": "",
+      "quotes": [
+        {
+          "text": "The recent urban revitalization project has been an unqualified triumph, transforming our city's downtown core from a neglected afterthought into a vibrant, bustling hub of commerce and community. The meticulously planned public spaces, including the stunning waterfront park and pedestrian-friendly avenues, have fostered a renewed sense of civic pride. Local businesses are reporting record foot traffic, and the influx of new residents and visitors has created an atmosphere of palpable optimism and energy that promises a bright and prosperous future for all.\n\nFurthermore, the project's commitment to sustainable design and green building practices has set a new national standard. The integration of renewable energy sources, advanced water reclamation systems, and expansive green roofs not only minimizes the environmental impact but also enhances the quality of life for urban dwellers. This initiative serves as a powerful testament to what can be achieved when bold vision is paired with thoughtful execution, creating a legacy of economic vitality and environmental stewardship that will benefit generations to come.\n",
+          "relevance_score": 0.027757132425904274,
+          "query": "distinguish positive negative sentiment AND extreme scores"
+        },
+        {
+          "text": "The proposed industrial zoning changes represent a catastrophic betrayal of public trust and an assault on our community's well-being. The plan, drafted with no meaningful public consultation, threatens to decimate protected wetlands and irrevocably poison our local water supply with industrial runoff. Residents are rightfully outraged, fearing the long-term health consequences and the destruction of the natural landscapes that define our town's character. This is not progress; it is a reckless, shortsighted capitulation to corporate interests over human lives.\n\nThe complete lack of transparency and the dismissive attitude from officials have only fueled the growing sense of despair and anger. Community meetings have been little more than performative gestures, with legitimate concerns brushed aside and expert warnings ignored. The entire process has been a masterclass in bureaucratic arrogance, leaving citizens feeling powerless and unheard. This policy is a festering wound that will undoubtedly lead to years of environmental degradation and legal battles, leaving a permanent scar on our town.\n",
+          "relevance_score": 0.12262175232172012,
+          "query": "pipeline functionality AND binary sentiment AND opposing scores"
+        },
+        {
+          "text": "The recent urban revitalization project has been an unqualified triumph, transforming our city's downtown core from a neglected afterthought into a vibrant, bustling hub of commerce and community. The meticulously planned public spaces, including the stunning waterfront park and pedestrian-friendly avenues, have fostered a renewed sense of civic pride. Local businesses are reporting record foot traffic, and the influx of new residents and visitors has created an atmosphere of palpable optimism and energy that promises a bright and prosperous future for all.\n\nFurthermore, the project's commitment to sustainable design and green building practices has set a new national standard. The integration of renewable energy sources, advanced water reclamation systems, and expansive green roofs not only minimizes the environmental impact but also enhances the quality of life for urban dwellers. This initiative serves as a powerful testament to what can be achieved when bold vision is paired with thoughtful execution, creating a legacy of economic vitality and environmental stewardship that will benefit generations to come.\n",
+          "relevance_score": 0.11849736422300339,
+          "query": "pipeline functionality AND binary sentiment AND opposing scores"
+        }
+      ]
+    },
+    {
+      "finding": "The statistical analysis was classified as 'TIER 3: Exploratory Analysis' due to the extremely limited sample size of N=1, severely constraining the types of analyses performed.",
+      "dimension": "",
+      "quotes": [
+        {
+          "text": "The recent urban revitalization project has been an unqualified triumph, transforming our city's downtown core from a neglected afterthought into a vibrant, bustling hub of commerce and community. The meticulously planned public spaces, including the stunning waterfront park and pedestrian-friendly avenues, have fostered a renewed sense of civic pride. Local businesses are reporting record foot traffic, and the influx of new residents and visitors has created an atmosphere of palpable optimism and energy that promises a bright and prosperous future for all.\n\nFurthermore, the project's commitment to sustainable design and green building practices has set a new national standard. The integration of renewable energy sources, advanced water reclamation systems, and expansive green roofs not only minimizes the environmental impact but also enhances the quality of life for urban dwellers. This initiative serves as a powerful testament to what can be achieved when bold vision is paired with thoughtful execution, creating a legacy of economic vitality and environmental stewardship that will benefit generations to come.\n",
+          "relevance_score": 0.05827192962169647,
+          "query": "TIER 3: Exploratory Analysis AND total_documents: 1"
+        },
+        {
+          "text": "The proposed industrial zoning changes represent a catastrophic betrayal of public trust and an assault on our community's well-being. The plan, drafted with no meaningful public consultation, threatens to decimate protected wetlands and irrevocably poison our local water supply with industrial runoff. Residents are rightfully outraged, fearing the long-term health consequences and the destruction of the natural landscapes that define our town's character. This is not progress; it is a reckless, shortsighted capitulation to corporate interests over human lives.\n\nThe complete lack of transparency and the dismissive attitude from officials have only fueled the growing sense of despair and anger. Community meetings have been little more than performative gestures, with legitimate concerns brushed aside and expert warnings ignored. The entire process has been a masterclass in bureaucratic arrogance, leaving citizens feeling powerless and unheard. This policy is a festering wound that will undoubtedly lead to years of environmental degradation and legal battles, leaving a permanent scar on our town.\n",
+          "relevance_score": 0.054687462747097015,
+          "query": "TIER 3: Exploratory Analysis AND total_documents: 1"
+        },
+        {
+          "text": "The proposed industrial zoning changes represent a catastrophic betrayal of public trust and an assault on our community's well-being. The plan, drafted with no meaningful public consultation, threatens to decimate protected wetlands and irrevocably poison our local water supply with industrial runoff. Residents are rightfully outraged, fearing the long-term health consequences and the destruction of the natural landscapes that define our town's character. This is not progress; it is a reckless, shortsighted capitulation to corporate interests over human lives.\n\nThe complete lack of transparency and the dismissive attitude from officials have only fueled the growing sense of despair and anger. Community meetings have been little more than performative gestures, with legitimate concerns brushed aside and expert warnings ignored. The entire process has been a masterclass in bureaucratic arrogance, leaving citizens feeling powerless and unheard. This policy is a festering wound that will undoubtedly lead to years of environmental degradation and legal battles, leaving a permanent scar on our town.\n",
+          "relevance_score": 0.05329957976937294,
+          "query": "tier_classification: \"TIER 3\" AND \"single-case observation\""
+        }
+      ]
+    },
+    {
+      "finding": "All inferential statistical tests, specifically group comparisons (ANOVA/t-test), were skipped because there was only one group and an insufficient number of data points (N=1) for comparison.",
+      "dimension": "",
+      "quotes": [
+        {
+          "text": "The proposed industrial zoning changes represent a catastrophic betrayal of public trust and an assault on our community's well-being. The plan, drafted with no meaningful public consultation, threatens to decimate protected wetlands and irrevocably poison our local water supply with industrial runoff. Residents are rightfully outraged, fearing the long-term health consequences and the destruction of the natural landscapes that define our town's character. This is not progress; it is a reckless, shortsighted capitulation to corporate interests over human lives.\n\nThe complete lack of transparency and the dismissive attitude from officials have only fueled the growing sense of despair and anger. Community meetings have been little more than performative gestures, with legitimate concerns brushed aside and expert warnings ignored. The entire process has been a masterclass in bureaucratic arrogance, leaving citizens feeling powerless and unheard. This policy is a festering wound that will undoubtedly lead to years of environmental degradation and legal battles, leaving a permanent scar on our town.\n",
+          "relevance_score": 0.05778995528817177,
+          "query": "anova_analysis: {\"status\": \"SKIPPED\"} AND \"Insufficient number of groups\""
+        },
+        {
+          "text": "The recent urban revitalization project has been an unqualified triumph, transforming our city's downtown core from a neglected afterthought into a vibrant, bustling hub of commerce and community. The meticulously planned public spaces, including the stunning waterfront park and pedestrian-friendly avenues, have fostered a renewed sense of civic pride. Local businesses are reporting record foot traffic, and the influx of new residents and visitors has created an atmosphere of palpable optimism and energy that promises a bright and prosperous future for all.\n\nFurthermore, the project's commitment to sustainable design and green building practices has set a new national standard. The integration of renewable energy sources, advanced water reclamation systems, and expansive green roofs not only minimizes the environmental impact but also enhances the quality of life for urban dwellers. This initiative serves as a powerful testament to what can be achieved when bold vision is paired with thoughtful execution, creating a legacy of economic vitality and environmental stewardship that will benefit generations to come.\n",
+          "relevance_score": 0.005936784669756889,
+          "query": "anova_analysis: {\"status\": \"SKIPPED\"} AND \"Insufficient number of groups\""
+        },
+        {
+          "text": "The proposed industrial zoning changes represent a catastrophic betrayal of public trust and an assault on our community's well-being. The plan, drafted with no meaningful public consultation, threatens to decimate protected wetlands and irrevocably poison our local water supply with industrial runoff. Residents are rightfully outraged, fearing the long-term health consequences and the destruction of the natural landscapes that define our town's character. This is not progress; it is a reckless, shortsighted capitulation to corporate interests over human lives.\n\nThe complete lack of transparency and the dismissive attitude from officials have only fueled the growing sense of despair and anger. Community meetings have been little more than performative gestures, with legitimate concerns brushed aside and expert warnings ignored. The entire process has been a masterclass in bureaucratic arrogance, leaving citizens feeling powerless and unheard. This policy is a festering wound that will undoubtedly lead to years of environmental degradation and legal battles, leaving a permanent scar on our town.\n",
+          "relevance_score": 0.048892877995967865,
+          "query": "perform_group_comparison AND message: \"Insufficient number of groups\""
+        }
+      ]
+    },
+    {
+      "finding": "Correlation analysis between 'positive_sentiment' and 'negative_sentiment' was skipped due to the requirement of at least 3 data points for meaningful correlation, with only 1 available.",
+      "dimension": "",
+      "quotes": [
+        {
+          "text": "The proposed industrial zoning changes represent a catastrophic betrayal of public trust and an assault on our community's well-being. The plan, drafted with no meaningful public consultation, threatens to decimate protected wetlands and irrevocably poison our local water supply with industrial runoff. Residents are rightfully outraged, fearing the long-term health consequences and the destruction of the natural landscapes that define our town's character. This is not progress; it is a reckless, shortsighted capitulation to corporate interests over human lives.\n\nThe complete lack of transparency and the dismissive attitude from officials have only fueled the growing sense of despair and anger. Community meetings have been little more than performative gestures, with legitimate concerns brushed aside and expert warnings ignored. The entire process has been a masterclass in bureaucratic arrogance, leaving citizens feeling powerless and unheard. This policy is a festering wound that will undoubtedly lead to years of environmental degradation and legal battles, leaving a permanent scar on our town.\n",
+          "relevance_score": 0.025696970522403717,
+          "query": "correlation_analysis: {\"status\": \"SKIPPED\"} AND \"Insufficient data for meaningful correlation\""
+        }
+      ]
+    },
+    {
+      "finding": "Reliability analysis (Cronbach's alpha) was explicitly deemed 'NOT_APPLICABLE' because 'positive_sentiment' and 'negative_sentiment' are designed as distinct constructs, not items of a single scale.",
+      "dimension": "",
+      "quotes": [
+        {
+          "text": "The proposed industrial zoning changes represent a catastrophic betrayal of public trust and an assault on our community's well-being. The plan, drafted with no meaningful public consultation, threatens to decimate protected wetlands and irrevocably poison our local water supply with industrial runoff. Residents are rightfully outraged, fearing the long-term health consequences and the destruction of the natural landscapes that define our town's character. This is not progress; it is a reckless, shortsighted capitulation to corporate interests over human lives.\n\nThe complete lack of transparency and the dismissive attitude from officials have only fueled the growing sense of despair and anger. Community meetings have been little more than performative gestures, with legitimate concerns brushed aside and expert warnings ignored. The entire process has been a masterclass in bureaucratic arrogance, leaving citizens feeling powerless and unheard. This policy is a festering wound that will undoubtedly lead to years of environmental degradation and legal battles, leaving a permanent scar on our town.\n",
+          "relevance_score": 0.04136724770069122,
+          "query": "reliability_analysis: {\"status\": \"NOT_APPLICABLE\"} AND \"distinct constructs\""
+        },
+        {
+          "text": "The recent urban revitalization project has been an unqualified triumph, transforming our city's downtown core from a neglected afterthought into a vibrant, bustling hub of commerce and community. The meticulously planned public spaces, including the stunning waterfront park and pedestrian-friendly avenues, have fostered a renewed sense of civic pride. Local businesses are reporting record foot traffic, and the influx of new residents and visitors has created an atmosphere of palpable optimism and energy that promises a bright and prosperous future for all.\n\nFurthermore, the project's commitment to sustainable design and green building practices has set a new national standard. The integration of renewable energy sources, advanced water reclamation systems, and expansive green roofs not only minimizes the environmental impact but also enhances the quality of life for urban dwellers. This initiative serves as a powerful testament to what can be achieved when bold vision is paired with thoughtful execution, creating a legacy of economic vitality and environmental stewardship that will benefit generations to come.\n",
+          "relevance_score": 0.0057881781831383705,
+          "query": "reliability_analysis: {\"status\": \"NOT_APPLICABLE\"} AND \"distinct constructs\""
+        },
+        {
+          "text": "The proposed industrial zoning changes represent a catastrophic betrayal of public trust and an assault on our community's well-being. The plan, drafted with no meaningful public consultation, threatens to decimate protected wetlands and irrevocably poison our local water supply with industrial runoff. Residents are rightfully outraged, fearing the long-term health consequences and the destruction of the natural landscapes that define our town's character. This is not progress; it is a reckless, shortsighted capitulation to corporate interests over human lives.\n\nThe complete lack of transparency and the dismissive attitude from officials have only fueled the growing sense of despair and anger. Community meetings have been little more than performative gestures, with legitimate concerns brushed aside and expert warnings ignored. The entire process has been a masterclass in bureaucratic arrogance, leaving citizens feeling powerless and unheard. This policy is a festering wound that will undoubtedly lead to years of environmental degradation and legal battles, leaving a permanent scar on our town.\n",
+          "relevance_score": 0.06358279287815094,
+          "query": "Cronbach's alpha AND \"not appropriate\" AND positive_sentiment negative_sentiment"
+        },
+        {
+          "text": "The recent urban revitalization project has been an unqualified triumph, transforming our city's downtown core from a neglected afterthought into a vibrant, bustling hub of commerce and community. The meticulously planned public spaces, including the stunning waterfront park and pedestrian-friendly avenues, have fostered a renewed sense of civic pride. Local businesses are reporting record foot traffic, and the influx of new residents and visitors has created an atmosphere of palpable optimism and energy that promises a bright and prosperous future for all.\n\nFurthermore, the project's commitment to sustainable design and green building practices has set a new national standard. The integration of renewable energy sources, advanced water reclamation systems, and expansive green roofs not only minimizes the environmental impact but also enhances the quality of life for urban dwellers. This initiative serves as a powerful testament to what can be achieved when bold vision is paired with thoughtful execution, creating a legacy of economic vitality and environmental stewardship that will benefit generations to come.\n",
+          "relevance_score": 0.0015923436731100082,
+          "query": "Cronbach's alpha AND \"not appropriate\" AND positive_sentiment negative_sentiment"
+        },
+        {
+          "text": "The proposed industrial zoning changes represent a catastrophic betrayal of public trust and an assault on our community's well-being. The plan, drafted with no meaningful public consultation, threatens to decimate protected wetlands and irrevocably poison our local water supply with industrial runoff. Residents are rightfully outraged, fearing the long-term health consequences and the destruction of the natural landscapes that define our town's character. This is not progress; it is a reckless, shortsighted capitulation to corporate interests over human lives.\n\nThe complete lack of transparency and the dismissive attitude from officials have only fueled the growing sense of despair and anger. Community meetings have been little more than performative gestures, with legitimate concerns brushed aside and expert warnings ignored. The entire process has been a masterclass in bureaucratic arrogance, leaving citizens feeling powerless and unheard. This policy is a festering wound that will undoubtedly lead to years of environmental degradation and legal battles, leaving a permanent scar on our town.\n",
+          "relevance_score": 0.156565323472023,
+          "query": "internal consistency AND \"not applicable\""
+        },
+        {
+          "text": "The recent urban revitalization project has been an unqualified triumph, transforming our city's downtown core from a neglected afterthought into a vibrant, bustling hub of commerce and community. The meticulously planned public spaces, including the stunning waterfront park and pedestrian-friendly avenues, have fostered a renewed sense of civic pride. Local businesses are reporting record foot traffic, and the influx of new residents and visitors has created an atmosphere of palpable optimism and energy that promises a bright and prosperous future for all.\n\nFurthermore, the project's commitment to sustainable design and green building practices has set a new national standard. The integration of renewable energy sources, advanced water reclamation systems, and expansive green roofs not only minimizes the environmental impact but also enhances the quality of life for urban dwellers. This initiative serves as a powerful testament to what can be achieved when bold vision is paired with thoughtful execution, creating a legacy of economic vitality and environmental stewardship that will benefit generations to come.\n",
+          "relevance_score": 0.025411149486899376,
+          "query": "internal consistency AND \"not applicable\""
+        }
+      ]
+    },
+    {
+      "finding": "The `descriptive_statistics` function successfully calculated and reported mean, std (as 0.0 for N=1), min, max, and count for the single data point.",
+      "dimension": "",
+      "quotes": [
+        {
+          "text": "The recent urban revitalization project has been an unqualified triumph, transforming our city's downtown core from a neglected afterthought into a vibrant, bustling hub of commerce and community. The meticulously planned public spaces, including the stunning waterfront park and pedestrian-friendly avenues, have fostered a renewed sense of civic pride. Local businesses are reporting record foot traffic, and the influx of new residents and visitors has created an atmosphere of palpable optimism and energy that promises a bright and prosperous future for all.\n\nFurthermore, the project's commitment to sustainable design and green building practices has set a new national standard. The integration of renewable energy sources, advanced water reclamation systems, and expansive green roofs not only minimizes the environmental impact but also enhances the quality of life for urban dwellers. This initiative serves as a powerful testament to what can be achieved when bold vision is paired with thoughtful execution, creating a legacy of economic vitality and environmental stewardship that will benefit generations to come.\n",
+          "relevance_score": 0.03973522037267685,
+          "query": "descriptive_statistics: {\"status\": \"OK\"} AND \"mean\": 0.0 AND \"std\": 0.0"
+        }
+      ]
+    },
+    {
+      "finding": "The `_prepare_data` function successfully extracted scores from the analysis artifacts and linked them to the corpus metadata for the 'neg_test' document.",
+      "dimension": "",
+      "quotes": [
+        {
+          "text": "The proposed industrial zoning changes represent a catastrophic betrayal of public trust and an assault on our community's well-being. The plan, drafted with no meaningful public consultation, threatens to decimate protected wetlands and irrevocably poison our local water supply with industrial runoff. Residents are rightfully outraged, fearing the long-term health consequences and the destruction of the natural landscapes that define our town's character. This is not progress; it is a reckless, shortsighted capitulation to corporate interests over human lives.\n\nThe complete lack of transparency and the dismissive attitude from officials have only fueled the growing sense of despair and anger. Community meetings have been little more than performative gestures, with legitimate concerns brushed aside and expert warnings ignored. The entire process has been a masterclass in bureaucratic arrogance, leaving citizens feeling powerless and unheard. This policy is a festering wound that will undoubtedly lead to years of environmental degradation and legal battles, leaving a permanent scar on our town.\n",
+          "relevance_score": 0.09765848517417908,
+          "query": "manifest_mapping AND document_id': 'neg_test'"
+        },
+        {
+          "text": "The recent urban revitalization project has been an unqualified triumph, transforming our city's downtown core from a neglected afterthought into a vibrant, bustling hub of commerce and community. The meticulously planned public spaces, including the stunning waterfront park and pedestrian-friendly avenues, have fostered a renewed sense of civic pride. Local businesses are reporting record foot traffic, and the influx of new residents and visitors has created an atmosphere of palpable optimism and energy that promises a bright and prosperous future for all.\n\nFurthermore, the project's commitment to sustainable design and green building practices has set a new national standard. The integration of renewable energy sources, advanced water reclamation systems, and expansive green roofs not only minimizes the environmental impact but also enhances the quality of life for urban dwellers. This initiative serves as a powerful testament to what can be achieved when bold vision is paired with thoughtful execution, creating a legacy of economic vitality and environmental stewardship that will benefit generations to come.\n",
+          "relevance_score": 0.025578374043107033,
+          "query": "manifest_mapping AND document_id': 'neg_test'"
+        }
+      ]
+    },
+    {
+      "finding": "The `methodology_summary` explicitly states that the analysis was 'severely constrained by a sample size of N=1', leading to a focus on descriptive analysis.",
+      "dimension": "",
+      "quotes": [
+        {
+          "text": "The proposed industrial zoning changes represent a catastrophic betrayal of public trust and an assault on our community's well-being. The plan, drafted with no meaningful public consultation, threatens to decimate protected wetlands and irrevocably poison our local water supply with industrial runoff. Residents are rightfully outraged, fearing the long-term health consequences and the destruction of the natural landscapes that define our town's character. This is not progress; it is a reckless, shortsighted capitulation to corporate interests over human lives.\n\nThe complete lack of transparency and the dismissive attitude from officials have only fueled the growing sense of despair and anger. Community meetings have been little more than performative gestures, with legitimate concerns brushed aside and expert warnings ignored. The entire process has been a masterclass in bureaucratic arrogance, leaving citizens feeling powerless and unheard. This policy is a festering wound that will undoubtedly lead to years of environmental degradation and legal battles, leaving a permanent scar on our town.\n",
+          "relevance_score": 0.10533697158098221,
+          "query": "methodology_summary: \"The statistical analysis was severely constrained by a sample size of N=1.\""
+        },
+        {
+          "text": "The proposed industrial zoning changes represent a catastrophic betrayal of public trust and an assault on our community's well-being. The plan, drafted with no meaningful public consultation, threatens to decimate protected wetlands and irrevocably poison our local water supply with industrial runoff. Residents are rightfully outraged, fearing the long-term health consequences and the destruction of the natural landscapes that define our town's character. This is not progress; it is a reckless, shortsighted capitulation to corporate interests over human lives.\n\nThe complete lack of transparency and the dismissive attitude from officials have only fueled the growing sense of despair and anger. Community meetings have been little more than performative gestures, with legitimate concerns brushed aside and expert warnings ignored. The entire process has been a masterclass in bureaucratic arrogance, leaving citizens feeling powerless and unheard. This policy is a festering wound that will undoubtedly lead to years of environmental degradation and legal battles, leaving a permanent scar on our town.\n",
+          "relevance_score": 0.026959901675581932,
+          "query": "power_notes: \"This sample size is far below the threshold\""
+        },
+        {
+          "text": "The recent urban revitalization project has been an unqualified triumph, transforming our city's downtown core from a neglected afterthought into a vibrant, bustling hub of commerce and community. The meticulously planned public spaces, including the stunning waterfront park and pedestrian-friendly avenues, have fostered a renewed sense of civic pride. Local businesses are reporting record foot traffic, and the influx of new residents and visitors has created an atmosphere of palpable optimism and energy that promises a bright and prosperous future for all.\n\nFurthermore, the project's commitment to sustainable design and green building practices has set a new national standard. The integration of renewable energy sources, advanced water reclamation systems, and expansive green roofs not only minimizes the environmental impact but also enhances the quality of life for urban dwellers. This initiative serves as a powerful testament to what can be achieved when bold vision is paired with thoughtful execution, creating a legacy of economic vitality and environmental stewardship that will benefit generations to come.\n",
+          "relevance_score": 0.009653497487306595,
+          "query": "power_notes: \"This sample size is far below the threshold\""
+        },
+        {
+          "text": "The proposed industrial zoning changes represent a catastrophic betrayal of public trust and an assault on our community's well-being. The plan, drafted with no meaningful public consultation, threatens to decimate protected wetlands and irrevocably poison our local water supply with industrial runoff. Residents are rightfully outraged, fearing the long-term health consequences and the destruction of the natural landscapes that define our town's character. This is not progress; it is a reckless, shortsighted capitulation to corporate interests over human lives.\n\nThe complete lack of transparency and the dismissive attitude from officials have only fueled the growing sense of despair and anger. Community meetings have been little more than performative gestures, with legitimate concerns brushed aside and expert warnings ignored. The entire process has been a masterclass in bureaucratic arrogance, leaving citizens feeling powerless and unheard. This policy is a festering wound that will undoubtedly lead to years of environmental degradation and legal battles, leaving a permanent scar on our town.\n",
+          "relevance_score": 0.01073802262544632,
+          "query": "methodology_summary AND \"focusing exclusively on descriptive statistics\""
+        },
+        {
+          "text": "The recent urban revitalization project has been an unqualified triumph, transforming our city's downtown core from a neglected afterthought into a vibrant, bustling hub of commerce and community. The meticulously planned public spaces, including the stunning waterfront park and pedestrian-friendly avenues, have fostered a renewed sense of civic pride. Local businesses are reporting record foot traffic, and the influx of new residents and visitors has created an atmosphere of palpable optimism and energy that promises a bright and prosperous future for all.\n\nFurthermore, the project's commitment to sustainable design and green building practices has set a new national standard. The integration of renewable energy sources, advanced water reclamation systems, and expansive green roofs not only minimizes the environmental impact but also enhances the quality of life for urban dwellers. This initiative serves as a powerful testament to what can be achieved when bold vision is paired with thoughtful execution, creating a legacy of economic vitality and environmental stewardship that will benefit generations to come.\n",
+          "relevance_score": 0.0022754035890102386,
+          "query": "methodology_summary AND \"focusing exclusively on descriptive statistics\""
+        }
+      ]
+    }
+  ],
+  "total_findings": 10,
+  "total_quotes": 28
+}

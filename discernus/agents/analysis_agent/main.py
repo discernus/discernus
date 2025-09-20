@@ -337,6 +337,147 @@ Analyze the provided document(s) using the specified framework and return the co
 
         return composite_data
 
+    def _step4_derived_metrics_generation_single(self,
+                                               framework_content: str,
+                                               scores_result: Dict[str, Any],
+                                               doc_index: int,
+                                               analysis_id: str) -> Dict[str, Any]:
+        """Step 4: Generate derived metrics for a single document."""
+        doc_name = scores_result.get('document_name', f'document_{doc_index}')
+
+        prompt = f"""Based on this framework and the dimensional scores for a single document, generate and execute code to calculate derived metrics:
+
+FRAMEWORK:
+{framework_content}
+
+SCORES FOR DOCUMENT: {doc_name}
+{scores_result['scores_extraction']}
+
+Generate Python code to calculate derived metrics and execute it internally. Return both the code and the results."""
+
+        self.audit.log_agent_event(self.agent_name, "step4_started_single", {
+            "analysis_id": analysis_id,
+            "step": "derived_metrics_generation",
+            "model": "vertex_ai/gemini-2.5-flash-lite",
+            "document_index": doc_index,
+            "document_name": doc_name
+        })
+
+        response = self.gateway.execute_call(
+            model="vertex_ai/gemini-2.5-flash-lite",
+            prompt=prompt
+        )
+
+        if isinstance(response, tuple):
+            content, metadata = response
+        else:
+            content = response.get('content', '')
+            metadata = response.get('metadata', {})
+
+        # If content is empty, try to get it from the raw response
+        if not content and hasattr(response, 'choices'):
+            content = response.choices[0].message.content
+
+        # Save derived metrics result to artifacts
+        derived_metrics_data = {
+            "analysis_id": analysis_id,
+            "step": "derived_metrics_generation",
+            "model_used": "vertex_ai/gemini-2.5-flash-lite",
+            "raw_metrics_response": content,
+            "document_index": doc_index,
+            "document_name": doc_name,
+            "timestamp": datetime.now(timezone.utc).isoformat()
+        }
+
+        derived_metrics_hash = self.storage.put_artifact(
+            json.dumps(derived_metrics_data, indent=2).encode('utf-8'),
+            {"artifact_type": "derived_metrics", "analysis_id": analysis_id, "document_index": doc_index}
+        )
+
+        derived_metrics_data['artifact_hash'] = derived_metrics_hash
+
+        self.audit.log_agent_event(self.agent_name, "step4_completed_single", {
+            "analysis_id": analysis_id,
+            "step": "derived_metrics_generation",
+            "artifact_hash": derived_metrics_hash,
+            "document_index": doc_index,
+            "document_name": doc_name,
+            "response_length": len(content)
+        })
+
+        return derived_metrics_data
+
+    def _step5_verification_single(self,
+                                 framework_content: str,
+                                 derived_metrics_result: Dict[str, Any],
+                                 scores_result: Dict[str, Any],
+                                 doc_index: int,
+                                 analysis_id: str) -> Dict[str, Any]:
+        """Step 5: Verify derived metrics for a single document."""
+        doc_name = derived_metrics_result.get('document_name', f'document_{doc_index}')
+
+        prompt = f"""Verify the derived metrics calculations for this single document against the framework:
+
+FRAMEWORK:
+{framework_content}
+
+DERIVED METRICS:
+{derived_metrics_result['raw_metrics_response']}
+
+Verify that the calculations are correct and the metrics are properly derived from the dimensional scores."""
+
+        self.audit.log_agent_event(self.agent_name, "step5_started_single", {
+            "analysis_id": analysis_id,
+            "step": "verification",
+            "model": "vertex_ai/gemini-2.5-flash",
+            "document_index": doc_index,
+            "document_name": doc_name
+        })
+
+        response = self.gateway.execute_call(
+            model="vertex_ai/gemini-2.5-flash",
+            prompt=prompt
+        )
+
+        if isinstance(response, tuple):
+            content, metadata = response
+        else:
+            content = response.get('content', '')
+            metadata = response.get('metadata', {})
+
+        # If content is empty, try to get it from the raw response
+        if not content and hasattr(response, 'choices'):
+            content = response.choices[0].message.content
+
+        # Save verification result to artifacts
+        verification_data = {
+            "analysis_id": analysis_id,
+            "step": "verification",
+            "model_used": "vertex_ai/gemini-2.5-flash",
+            "raw_verification_response": content,
+            "document_index": doc_index,
+            "document_name": doc_name,
+            "timestamp": datetime.now(timezone.utc).isoformat()
+        }
+
+        verification_hash = self.storage.put_artifact(
+            json.dumps(verification_data, indent=2).encode('utf-8'),
+            {"artifact_type": "verification", "analysis_id": analysis_id, "document_index": doc_index}
+        )
+
+        verification_data['artifact_hash'] = verification_hash
+
+        self.audit.log_agent_event(self.agent_name, "step5_completed_single", {
+            "analysis_id": analysis_id,
+            "step": "verification",
+            "artifact_hash": verification_hash,
+            "document_index": doc_index,
+            "document_name": doc_name,
+            "response_length": len(content)
+        })
+
+        return verification_data
+
     def _aggregate_composite_results(self, all_results: List[Dict[str, Any]], analysis_id: str) -> Dict[str, Any]:
         """Aggregate composite results from all documents."""
         # For now, return the last result as a placeholder
