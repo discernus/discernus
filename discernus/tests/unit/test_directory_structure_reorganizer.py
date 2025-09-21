@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-from discernus.core.directory_structure_reorganizer import reorganize_directory_structure
+from discernus.core.deprecated.directory_structure_reorganizer import reorganize_directory_structure
 
 
 def write(p: Path, content: str = "x"):

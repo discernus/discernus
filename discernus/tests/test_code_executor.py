@@ -4,9 +4,9 @@ import os
 import yaml
 
 # Adjust the import path based on your project structure
-from discernus.core.secure_code_executor import SecureCodeExecutor
+from discernus.core.deprecated.secure_code_executor import SecureCodeExecutor
 from discernus.core.llm_code_sanitizer import LLMCodeSanitizer
-from discernus.core.capability_registry import CapabilityRegistry
+from discernus.core.deprecated.capability_registry import CapabilityRegistry
 
 class TestCodeExecutionInfrastructure(unittest.TestCase):
     

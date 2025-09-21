@@ -1,8 +1,0 @@
-{
-  "analysis_id": "analysis_v2_analysis_20250920_181217_0",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "evidence_extraction": "```json\n[\n  \"unqualified triumph\",\n  \"vibrant, bustling hub of commerce and community\",\n  \"stunning waterfront park\",\n  \"palpable optimism and energy\",\n  \"powerful testament to what can be achieved when bold vision is paired with thoughtful execution\"\n]\n```",
-  "document_index": 0,
-  "timestamp": "2025-09-20T22:12:41.055967+00:00"
-}

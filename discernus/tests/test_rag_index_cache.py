@@ -14,7 +14,7 @@ from pathlib import Path
 import json
 
 # Import the class under test
-from discernus.core.rag_index_cache import RAGIndexCacheManager, RAGCacheResult
+from discernus.core.deprecated.rag_index_cache import RAGIndexCacheManager, RAGCacheResult
 
 
 class TestRAGIndexCacheManager(unittest.TestCase):

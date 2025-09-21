@@ -8,7 +8,7 @@ import json
 from unittest.mock import Mock, MagicMock
 from pathlib import Path
 
-from discernus.core.derived_metrics_cache import DerivedMetricsCacheManager, DerivedMetricsCacheResult
+from discernus.core.deprecated.derived_metrics_cache import DerivedMetricsCacheManager, DerivedMetricsCacheResult
 
 
 class TestDerivedMetricsCacheManager:

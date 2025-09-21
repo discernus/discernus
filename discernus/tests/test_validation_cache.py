@@ -13,7 +13,7 @@ import json
 from datetime import datetime, timezone
 
 # Import the class under test
-from discernus.core.validation_cache import ValidationCacheManager, ValidationCacheResult
+from discernus.core.deprecated.validation_cache import ValidationCacheManager, ValidationCacheResult
 
 
 class TestValidationCacheManager(unittest.TestCase):

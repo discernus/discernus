@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from discernus.core.enhanced_manifest import EnhancedManifest
+from discernus.core.deprecated.enhanced_manifest import EnhancedManifest
 from discernus.core.security_boundary import ExperimentSecurityBoundary
 from discernus.core.audit_logger import AuditLogger
 from discernus.core.local_artifact_storage import LocalArtifactStorage

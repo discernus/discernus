@@ -1,9 +1,0 @@
-{
-  "analysis_id": "analysis_89a2d148",
-  "step": "derived_metrics_generation",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "raw_metrics_response": "## Derived Metrics Calculation\n\nBased on the provided framework and dimensional scores, no additional derived metrics are defined in the `derived_metrics` section of the framework. Therefore, no code will be generated for calculating derived metrics.\n\n**Result:**\n\nNo derived metrics to calculate.",
-  "document_index": 0,
-  "document_name": "document_0",
-  "timestamp": "2025-09-20T21:26:56.707300+00:00"
-}

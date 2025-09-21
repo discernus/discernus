@@ -15,7 +15,7 @@ import json
 from pathlib import Path
 from unittest.mock import Mock, patch, MagicMock
 
-from discernus.core.evidence_matching_wrapper import EvidenceMatchingWrapper
+from discernus.core.deprecated.evidence_matching_wrapper import EvidenceMatchingWrapper
 from discernus.core.local_artifact_storage import LocalArtifactStorage
 from discernus.core.security_boundary import ExperimentSecurityBoundary
 from discernus.core.audit_logger import AuditLogger

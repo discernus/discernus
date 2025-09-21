@@ -1,8 +1,0 @@
-{
-  "analysis_id": "analysis_v2_analysis_20250920_180927_1",
-  "step": "verification",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "verification": "```json\n{\n  \"verification_results\": [\n    {\n      \"metric_name\": \"overall_sentiment_score\",\n      \"calculation_verified\": true,\n      \"expected_value\": -1.0,\n      \"provided_value\": -1.0,\n      \"message\": \"Calculation of overall_sentiment_score is correct.\"\n    },\n    {\n      \"metric_name\": \"sentiment_intensity\",\n      \"calculation_verified\": true,\n      \"expected_value\": 1.0,\n      \"provided_value\": 1.0,\n      \"message\": \"Calculation of sentiment_intensity is correct.\"\n    },\n    {\n      \"metric_name\": \"sentiment_neutrality\",\n      \"calculation_verified\": true,\n      \"expected_value\": 0.0,\n      \"provided_value\": 0.0,\n      \"message\": \"Calculation of sentiment_neutrality is correct.\"\n    },\n    {\n      \"metric_name\": \"sentiment_balance\",\n      \"calculation_verified\": true,\n      \"expected_value\": 0.0,\n      \"provided_value\": 0.0,\n      \"message\": \"Calculation of sentiment_balance is correct. Epsilon was handled correctly.\"\n    }\n  ],\n  \"all_calculations_verified\": true\n}\n```",
-  "document_index": 1,
-  "timestamp": "2025-09-20T22:09:54.477141+00:00"
-}

@@ -1,8 +1,0 @@
-{
-  "analysis_id": "analysis_v2_analysis_20250920_181118_0",
-  "step": "markup_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "marked_up_document": "The urban revitalization project has been an **unqualified triumph**, transforming the city center into a **vibrant, bustling hub**. The **meticulously planned** development features a **stunning waterfront park** and **pedestrian-friendly avenues**, which have successfully **fostered a renewed sense of civic pride**. This initiative has driven **record foot traffic** and created an **atmosphere of palpable optimism and energy**, heralding a **bright and prosperous future**.\n\nThe project's **commitment to sustainable design and green building practices** has **set a new national standard**. Its innovative features, including the **integration of renewable energy sources, advanced water reclamation systems, and expansive green roofs**, not only **minimizes the environmental impact but also enhances the quality of life** for residents. This development stands as a **powerful testament**; its **bold vision is paired with thoughtful execution**, **creating a legacy of economic vitality and environmental stewardship** that will **benefit generations to come**.\n\nThe area was previously a **neglected afterthought**, but this project has brought about a remarkable change.",
-  "document_index": 0,
-  "timestamp": "2025-09-20T22:11:32.330372+00:00"
-}

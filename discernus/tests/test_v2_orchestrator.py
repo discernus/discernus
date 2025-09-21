@@ -17,7 +17,7 @@ from discernus.core.execution_strategies import (
     ExecutionStrategy, ExperimentResult, FullExperimentStrategy,
     AnalysisOnlyStrategy, StatisticalPrepStrategy, ResumeFromStatsStrategy
 )
-from discernus.core.experiment_run_config import (
+from discernus.core.deprecated.experiment_run_config import (
     ExperimentRunConfig, ExecutionMode, VerificationLevel,
     ModelConfig, CacheConfig, VerificationConfig, ResumeConfig
 )

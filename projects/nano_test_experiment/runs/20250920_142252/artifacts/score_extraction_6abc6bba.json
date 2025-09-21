@@ -1,7 +1,0 @@
-{
-  "analysis_id": "analysis_24e6b45d",
-  "step": "score_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "scores_extraction": "```json\n[\n  {\n    \"document_id\": \"document_0\",\n    \"positive_sentiment_raw_score\": 0.95,\n    \"positive_sentiment_salience\": 0.95,\n    \"positive_sentiment_confidence\": 0.98,\n    \"negative_sentiment_raw_score\": 0.0,\n    \"negative_sentiment_salience\": 0.0,\n    \"negative_sentiment_confidence\": 0.98\n  }\n]\n```",
-  "timestamp": "2025-09-20T14:23:40.011506+00:00"
-}

@@ -15,7 +15,7 @@ from unittest.mock import Mock, patch
 from datetime import datetime, timezone
 
 from discernus.core.clean_analysis_orchestrator import CleanAnalysisOrchestrator
-from discernus.core.validation_cache import ValidationCacheManager
+from discernus.core.deprecated.validation_cache import ValidationCacheManager
 
 
 class TestValidationCachingIntegration(unittest.TestCase):
