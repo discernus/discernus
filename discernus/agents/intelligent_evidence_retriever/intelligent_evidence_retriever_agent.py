@@ -96,7 +96,7 @@ class IntelligentEvidenceRetrievalAgent(StandardAgent):
         """
         try:
             self.logger.info("IntelligentEvidenceRetrievalAgent starting execution")
-            self.log_execution_start(run_context=run_context, **kwargs)
+            self.log_execution_start(**kwargs)
 
             # Step 0: Evidence Inventory
             self.logger.info("Step 0: Counting evidence artifacts...")
@@ -408,11 +408,11 @@ STATISTICAL RESULTS ANALYSIS:
 {json.dumps(run_context.statistical_results, indent=2, default=str)[:3000]}
 
 EVIDENCE INVENTORY:
-{json.dumps([{{
+{json.dumps([{
     'document_index': d['document_index'],
     'quote_count': d['quote_count'],
     'size_bytes': d['size_bytes']
-}} for d in evidence_details], indent=2)}
+} for d in evidence_details], indent=2)}
 
 STRATEGIC PLANNING TASK:
 Generate an intelligent curation plan that maximizes evidence quality while optimizing cost and processing time.
@@ -449,8 +449,8 @@ Generate a plan that balances thoroughness with efficiency.
             # Parse tool call response
             if metadata.get('tool_calls'):
                 tool_call = metadata['tool_calls'][0]
-                if tool_call['name'] == 'generate_curation_plan':
-                    plan = tool_call['arguments']
+                if hasattr(tool_call, 'function') and tool_call.function.name == 'generate_curation_plan':
+                    plan = json.loads(tool_call.function.arguments)
                     self.logger.info(f"Gemini Pro strategic plan: {plan['strategy']} with {len(plan['iterations'])} iterations")
                     return plan
             

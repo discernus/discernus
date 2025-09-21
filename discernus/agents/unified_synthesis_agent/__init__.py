@@ -10,6 +10,9 @@ Generates publication-ready research reports using:
 Pure synthesis agent - no external lookups or RAG queries.
 """
 
-from .agent import UnifiedSynthesisAgent
+from .v2_unified_synthesis_agent import V2UnifiedSynthesisAgent
 
-__all__ = ['UnifiedSynthesisAgent']
+# Legacy alias for backward compatibility
+UnifiedSynthesisAgent = V2UnifiedSynthesisAgent
+
+__all__ = ['V2UnifiedSynthesisAgent', 'UnifiedSynthesisAgent']

@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250920_211822_1",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "evidence_extraction": "```json\n[\n  \"The proposed industrial zoning changes represent a catastrophic betrayal of public trust and an assault on our community's well-being.\",\n  \"This policy is a festering wound that will undoubtedly lead to years of environmental degradation and legal battles, leaving a permanent scar on our town.\",\n  \"Residents are rightfully outraged, fearing the long-term health consequences and the destruction of the natural landscapes that define our town's character.\",\n  \"This is not progress; it is a reckless, shortsighted capitulation to corporate interests over human lives.\",\n  \"The complete lack of transparency and the dismissive attitude from officials have only fueled the growing sense of despair and anger.\"\n]\n```",
+  "document_index": 1,
+  "timestamp": "2025-09-21T01:18:47.313574+00:00"
+}

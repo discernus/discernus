@@ -7,8 +7,12 @@ Production analysis agent with 6-step THIN approach featuring inline markup,
 comprehensive logging, and full orchestrator compatibility.
 """
 
-from .main import AnalysisAgent
+from .v2_analysis_agent import V2AnalysisAgent
+
+# Legacy alias for backward compatibility  
+AnalysisAgent = V2AnalysisAgent
 
 __all__ = [
+    "V2AnalysisAgent",
     "AnalysisAgent",
 ]

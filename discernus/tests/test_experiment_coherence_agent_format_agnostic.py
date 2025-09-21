@@ -8,7 +8,7 @@ Tests for CLI-003: Fix coherence agent validation gap
 import pytest
 import tempfile
 from pathlib import Path
-from discernus.agents.experiment_coherence_agent.agent import ExperimentCoherenceAgent
+from discernus.agents.deprecated.experiment_coherence_agent.agent import ExperimentCoherenceAgent
 
 
 class TestExperimentCoherenceAgentFormatAgnostic:

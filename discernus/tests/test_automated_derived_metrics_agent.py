@@ -5,7 +5,7 @@ import json
 import tempfile
 import shutil
 
-from discernus.agents.automated_derived_metrics.agent import AutomatedDerivedMetricsAgent
+from discernus.agents.deprecated.automated_derived_metrics.agent import AutomatedDerivedMetricsAgent
 
 
 class TestAutomatedDerivedMetricsAgent:

@@ -158,6 +158,18 @@
     "size_bytes": 17441,
     "source_run": "20250920_223951"
   },
+  "cd7d2edede9d30d0d134cfc396335f9996ae07bfd282eaa36836df93c527c940": {
+    "artifact_path": "curated_evidence_cd7d2ede.json",
+    "created_at": "2025-09-21T01:18:14.018386+00:00",
+    "human_filename": "curated_evidence_cd7d2ede.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "curated_evidence",
+      "experiment_id": "Negative Sentiment Correlation"
+    },
+    "size_bytes": 1484,
+    "source_run": "20250920_223951"
+  },
   "d50979b4385099a16625245239c75c24ec64ea03ca664ec1172f45ee4347c3ef": {
     "artifact_path": "marked_up_document_d50979b4.md",
     "created_at": "2025-09-20T22:40:23.113121+00:00",

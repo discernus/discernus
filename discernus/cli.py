@@ -339,7 +339,7 @@ def validate(ctx, experiment_path: str):
     
     try:
         # Use ExperimentCoherenceAgent for validation
-        from discernus.agents.experiment_coherence_agent import ExperimentCoherenceAgent
+        from discernus.agents.deprecated.experiment_coherence_agent import ExperimentCoherenceAgent
         
         validator = ExperimentCoherenceAgent(model="vertex_ai/gemini-2.5-pro")
         result = validator.validate_experiment(exp_path)
