@@ -137,9 +137,9 @@ class V2StatisticalAgent(StandardAgent):
             # Generate batch ID
             batch_id = f"stats_{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}"
             
-            # Step 1: Statistical Analysis
-            statistical_result = self._step1_statistical_analysis(framework_content, score_data, batch_id)
-            if not statistical_result:
+            # Step 1: Statistical Analysis (Python code generation + execution)
+            statistical_analysis_content = self._step1_statistical_analysis(framework_content, score_data, batch_id)
+            if not statistical_analysis_content:
                 return AgentResult(
                     success=False,
                     artifacts=[],
@@ -147,42 +147,87 @@ class V2StatisticalAgent(StandardAgent):
                     error_message="Statistical analysis failed"
                 )
             
-            # Step 2: Verification
-            verification_result = self._step2_verification(statistical_result, batch_id)
+            # Store Step 1 artifact
+            statistical_artifact_data = {
+                "analysis_id": f"stats_{batch_id}",
+                "step": "statistical_analysis",
+                "model_used": "vertex_ai/gemini-2.5-pro",
+                "statistical_analysis_content": statistical_analysis_content,
+                "documents_processed": len(score_data),
+                "timestamp": datetime.now(timezone.utc).isoformat()
+            }
             
-            # Create artifacts
-            artifacts = []
+            statistical_content_bytes = json.dumps(statistical_artifact_data, indent=2).encode('utf-8')
+            statistical_artifact_hash = self.storage.put_artifact(
+                statistical_content_bytes,
+                {"artifact_type": "statistical_analysis", "batch_id": batch_id}
+            )
             
-            # Add statistical analysis artifact
-            artifacts.append({
-                "type": "statistical_analysis",
-                "content": statistical_result,
-                "metadata": {
-                    "artifact_type": "statistical_analysis",
-                    "phase": "statistical",
-                    "batch_id": batch_id,
-                    "timestamp": datetime.now().isoformat(),
-                    "agent_name": self.agent_name
-                }
-            })
+            # Step 2: Independent Verification
+            verification_result = self._step2_verification(statistical_analysis_content, batch_id)
+            if not verification_result:
+                return AgentResult(
+                    success=False,
+                    artifacts=[],
+                    metadata={"agent_name": self.agent_name, "error": "statistical verification failed"},
+                    error_message="Statistical verification failed"
+                )
             
-            # Add verification artifact if available
-            if verification_result:
-                artifacts.append({
+            # Check if verification passed
+            if verification_result.get("verification_status") != "verified":
+                return AgentResult(
+                    success=False,
+                    artifacts=[],
+                    metadata={"agent_name": self.agent_name, "error": "statistical verification failed", "verification_status": verification_result.get("verification_status")},
+                    error_message=f"Statistical verification failed: {verification_result.get('verification_status')}"
+                )
+            
+            # Store verification artifact
+            verification_artifact_data = {
+                "analysis_id": f"stats_{batch_id}",
+                "step": "statistical_verification",
+                "model_used": "vertex_ai/gemini-2.5-flash-lite",
+                "verification_result": verification_result,
+                "timestamp": datetime.now(timezone.utc).isoformat()
+            }
+            
+            verification_content_bytes = json.dumps(verification_artifact_data, indent=2).encode('utf-8')
+            verification_artifact_hash = self.storage.put_artifact(
+                verification_content_bytes,
+                {"artifact_type": "statistical_verification", "batch_id": batch_id}
+            )
+            
+            # Create artifacts list with proper hashes
+            artifacts = [
+                {
+                    "type": "statistical_analysis",
+                    "content": statistical_artifact_data,
+                    "metadata": {
+                        "artifact_type": "statistical_analysis",
+                        "phase": "statistical",
+                        "batch_id": batch_id,
+                        "timestamp": datetime.now().isoformat(),
+                        "agent_name": self.agent_name,
+                        "artifact_hash": statistical_artifact_hash
+                    }
+                },
+                {
                     "type": "statistical_verification",
-                    "content": verification_result,
+                    "content": verification_artifact_data,
                     "metadata": {
                         "artifact_type": "statistical_verification",
                         "phase": "statistical",
                         "batch_id": batch_id,
                         "timestamp": datetime.now().isoformat(),
-                        "agent_name": self.agent_name
+                        "agent_name": self.agent_name,
+                        "artifact_hash": verification_artifact_hash
                     }
-                })
+                }
+            ]
             
-            # Update run context
-            run_context.statistical_artifacts = [artifact["metadata"].get("artifact_hash", "") for artifact in artifacts if "artifact_hash" in artifact["metadata"]]
-            run_context.statistical_results = statistical_result
+            # Update run context with proper artifact hashes
+            run_context.statistical_artifacts = [statistical_artifact_hash, verification_artifact_hash]
+            run_context.statistical_results = statistical_analysis_content  # Pass the raw content to synthesis agent
             
             self.audit.log_agent_event(self.agent_name, "execution_completed", {
                 "batch_id": batch_id,
@@ -275,9 +320,9 @@ class V2StatisticalAgent(StandardAgent):
         
         return score_data
     
-    def _step1_statistical_analysis(self, framework_content: str, score_data: List[Dict[str, Any]], batch_id: str) -> Optional[Dict[str, Any]]:
+    def _step1_statistical_analysis(self, framework_content: str, score_data: List[Dict[str, Any]], batch_id: str) -> Optional[str]:
         """
-        Step 1: Perform statistical analysis on collected score data.
+        Step 1: Generate Python statistical analysis code and execute it.
         
         Args:
             framework_content: Framework content for context
@@ -285,11 +330,11 @@ class V2StatisticalAgent(StandardAgent):
             batch_id: Batch identifier
             
         Returns:
-            Statistical analysis result or None if failed
+            Complete LLM response with Python code and results, or None if failed
         """
         try:
-            # Prepare statistical analysis prompt
-            prompt = f"""You are a statistical analysis expert. Analyze the following dimensional scores using appropriate statistical methods.
+            # Prepare statistical analysis prompt for Python code generation
+            prompt = f"""You are a statistical analysis expert. Generate and execute Python code to analyze the following dimensional scores.
 
 FRAMEWORK CONTEXT:
 {framework_content}
@@ -297,45 +342,20 @@ FRAMEWORK CONTEXT:
 SCORE DATA:
 {json.dumps(score_data, indent=2)}
 
-TASK: Perform comprehensive statistical analysis including:
+TASK: Write Python code to perform comprehensive statistical analysis including:
 1. Descriptive statistics for each dimension
-2. Correlation analysis between dimensions
+2. Correlation analysis between dimensions  
 3. Statistical significance testing where appropriate
 4. Summary of key findings
 
 REQUIREMENTS:
-- Use appropriate statistical methods for the data
-- Provide clear interpretations of results
-- Include confidence intervals where relevant
-- Format results as structured JSON
+- Use pandas, numpy, scipy.stats, and other standard libraries
+- Write clear, well-commented Python code
+- Execute the code and show the results
+- Provide interpretations of the statistical findings
+- Include any relevant plots or visualizations
 
-OUTPUT FORMAT:
-```json
-{{
-  "descriptive_statistics": {{
-    "dimension_name": {{
-      "mean": 0.0,
-      "std": 0.0,
-      "min": 0.0,
-      "max": 0.0,
-      "count": 0
-    }}
-  }},
-  "correlations": {{
-    "dimension1_dimension2": 0.0
-  }},
-  "significance_tests": {{
-    "test_name": {{
-      "statistic": 0.0,
-      "p_value": 0.0,
-      "significant": true
-    }}
-  }},
-  "summary": "Key findings and interpretations"
-}}
-```
-
-Return ONLY the JSON, no other text."""
+Generate the Python code, execute it, and present both the code and results in a clear format that researchers can understand and audit."""
 
             self.audit.log_agent_event(self.agent_name, "step1_started", {
                 "batch_id": batch_id,
@@ -356,87 +376,66 @@ Return ONLY the JSON, no other text."""
                 content = response.get('content', '')
                 metadata = response.get('metadata', {})
             
-            # Parse the response
-            try:
-                # Extract JSON from markdown code block if present
-                if "```json" in content:
-                    json_start = content.find("```json") + 7
-                    json_end = content.find("```", json_start)
-                    if json_end > json_start:
-                        json_content = content[json_start:json_end].strip()
-                    else:
-                        json_content = content[json_start:].strip()
-                else:
-                    json_content = content.strip()
-                
-                statistical_result = json.loads(json_content)
-                
-                # Add metadata
-                statistical_result.update({
-                    "batch_id": batch_id,
-                    "documents_processed": len(score_data),
-                    "model_used": "vertex_ai/gemini-2.5-pro",
-                    "timestamp": datetime.now(timezone.utc).isoformat()
-                })
-                
+            # Return the complete LLM response (Python code + results + explanations)
+            # No parsing - just store whatever the LLM produced
+            if content and content.strip():
                 self.audit.log_agent_event(self.agent_name, "step1_completed", {
                     "batch_id": batch_id,
                     "step": "statistical_analysis",
                     "response_length": len(content)
                 })
                 
-                return statistical_result
-                
-            except json.JSONDecodeError as e:
-                self.logger.error(f"Could not parse statistical analysis response: {e}")
+                return content.strip()
+            else:
+                self.logger.error("Statistical analysis returned empty response")
                 return None
                 
         except Exception as e:
             self.logger.error(f"Step 1 failed: {e}")
             return None
     
-    def _step2_verification(self, statistical_result: Dict[str, Any], batch_id: str) -> Optional[Dict[str, Any]]:
+    def _step2_verification(self, statistical_analysis_content: str, batch_id: str) -> Optional[Dict[str, Any]]:
         """
-        Step 2: Verify statistical analysis results.
+        Step 2: Independently verify statistical analysis by re-executing the Python code.
         
         Args:
-            statistical_result: Results from step 1
+            statistical_analysis_content: Complete response from step 1 with Python code and results
             batch_id: Batch identifier
             
         Returns:
-            Verification result or None if failed
+            Verification result with tool call status or None if failed
         """
         try:
-            prompt = f"""You are a statistical verification expert. Review the following statistical analysis for accuracy and appropriateness.
+            # Define verification tool
+            verification_tools = [
+                {
+                    "name": "verify_statistical_analysis",
+                    "description": "Verify that the statistical analysis code and results are correct",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "verified": {
+                                "type": "boolean",
+                                "description": "Whether the statistical analysis code executes correctly and produces the claimed results"
+                            }
+                        },
+                        "required": ["verified"]
+                    }
+                }
+            ]
+            
+            prompt = f"""You are verifying a statistical analysis. Below is Python code and claimed results from a previous analysis.
 
-STATISTICAL ANALYSIS:
-{json.dumps(statistical_result, indent=2)}
+Your task:
+1. Extract the Python code from the analysis
+2. Execute the code yourself independently  
+3. Compare your results with the claimed results
+4. Call the verify_statistical_analysis tool with true if the code runs correctly and produces matching results, false otherwise
 
-TASK: Verify the statistical analysis by:
-1. Checking if the statistical methods used are appropriate
-2. Validating calculations where possible
-3. Identifying any potential issues or limitations
-4. Providing a verification assessment
+STATISTICAL ANALYSIS TO VERIFY:
+{statistical_analysis_content}
 
-REQUIREMENTS:
-- Be thorough but concise
-- Focus on methodological appropriateness
-- Note any limitations or concerns
-- Provide clear verification status
-
-OUTPUT FORMAT:
-```json
-{{
-  "verification_status": "verified|concerns|failed",
-  "methodology_check": "appropriate|questionable|inappropriate",
-  "calculation_validation": "valid|partial|invalid",
-  "concerns": ["list of any concerns"],
-  "recommendations": ["list of recommendations"],
-  "overall_assessment": "Brief summary of verification"
-}}
-```
-
-Return ONLY the JSON, no other text."""
+Execute the Python code independently and verify the results match what was claimed."""
 
             self.audit.log_agent_event(self.agent_name, "step2_started", {
                 "batch_id": batch_id,
@@ -444,51 +443,40 @@ Return ONLY the JSON, no other text."""
                 "model": "vertex_ai/gemini-2.5-flash-lite"
             })
             
-            # Call LLM
-            response = self.gateway.execute_call(
+            # Call LLM with tools
+            response = self.gateway.execute_call_with_tools(
                 model="vertex_ai/gemini-2.5-flash-lite",
-                prompt=prompt
+                prompt=prompt,
+                tools=verification_tools
             )
             
-            if isinstance(response, tuple):
-                content, metadata = response
-            else:
-                content = response.get('content', '')
-                metadata = response.get('metadata', {})
+            # Extract verification result from tool calls
+            verification_status = "unknown"
+            if hasattr(response, 'choices') and response.choices:
+                tool_calls = response.choices[0].message.tool_calls
+                if tool_calls:
+                    for tool_call in tool_calls:
+                        if tool_call.function.name == "verify_statistical_analysis":
+                            try:
+                                args = json.loads(tool_call.function.arguments)
+                                verification_status = "verified" if args.get("verified", False) else "verification_failed"
+                            except json.JSONDecodeError:
+                                verification_status = "verification_failed"
             
-            # Parse the response
-            try:
-                # Extract JSON from markdown code block if present
-                if "```json" in content:
-                    json_start = content.find("```json") + 7
-                    json_end = content.find("```", json_start)
-                    if json_end > json_start:
-                        json_content = content[json_start:json_end].strip()
-                    else:
-                        json_content = content[json_start:].strip()
-                else:
-                    json_content = content.strip()
-                
-                verification_result = json.loads(json_content)
-                
-                # Add metadata
-                verification_result.update({
-                    "batch_id": batch_id,
-                    "model_used": "vertex_ai/gemini-2.5-flash-lite",
-                    "timestamp": datetime.now(timezone.utc).isoformat()
-                })
-                
-                self.audit.log_agent_event(self.agent_name, "step2_completed", {
-                    "batch_id": batch_id,
-                    "step": "statistical_verification",
-                    "response_length": len(content)
-                })
-                
-                return verification_result
-                
-            except json.JSONDecodeError as e:
-                self.logger.error(f"Could not parse verification response: {e}")
-                return None
+            verification_result = {
+                "verification_status": verification_status,
+                "batch_id": batch_id,
+                "model_used": "vertex_ai/gemini-2.5-flash-lite",
+                "timestamp": datetime.now(timezone.utc).isoformat()
+            }
+            
+            self.audit.log_agent_event(self.agent_name, "step2_completed", {
+                "batch_id": batch_id,
+                "step": "statistical_verification",
+                "verification_status": verification_status
+            })
+            
+            return verification_result
                 
         except Exception as e:
             self.logger.error(f"Step 2 failed: {e}")
