@@ -18,7 +18,7 @@ from pathlib import Path
 from discernus.core.deprecated.derived_metrics_cache import DerivedMetricsCacheManager
 from discernus.core.deprecated.statistical_analysis_cache import StatisticalAnalysisCacheManager
 from discernus.core.deprecated.validation_cache import ValidationCacheManager
-from discernus.core.rag_index_cache import RAGIndexCacheManager
+from discernus.core.deprecated.rag_index_cache import RAGIndexCacheManager
 
 
 class TestCacheIntegrity(unittest.TestCase):
