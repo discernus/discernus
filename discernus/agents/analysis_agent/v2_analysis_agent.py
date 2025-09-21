@@ -165,13 +165,13 @@ class V2AnalysisAgent(StandardAgent):
             self.logger.info(f"Updated run_context with {len(artifact_hashes)} analysis artifacts: {artifact_hashes}")
             
             # Return results from atomic processing
-                return AgentResult(
-                    success=True,
+            return AgentResult(
+                success=True,
                 artifacts=all_artifacts,
-                    metadata={
+                metadata={
                     "batch_id": batch_id,
                     "documents_processed": len(documents),
-                        "agent_name": self.agent_name,
+                    "agent_name": self.agent_name,
                     "processing_mode": "atomic"
                 }
             )
@@ -562,24 +562,15 @@ Generate the Python code, execute it, and present both the code and calculated r
                 }
             ]
             
-            prompt = f"""You are verifying derived metrics calculations. Below is Python code and claimed results from a previous analysis.
-
-Your task:
-1. Extract the Python code from the derived metrics analysis
-2. Execute the code yourself independently using the original scores
-3. Compare your results with the claimed results
-4. Call the verify_math tool with true if the code runs correctly and produces matching results, false otherwise
-
-FRAMEWORK:
-{framework_content}
-
-ORIGINAL SCORES:
-{scores}
+            prompt = f"""Verify this derived metrics calculation by re-executing the Python code:
 
 DERIVED METRICS TO VERIFY:
 {derived_metrics}
 
-Execute the Python code independently and verify the results match what was claimed."""
+ORIGINAL SCORES:
+{scores}
+
+Task: Extract and re-execute the Python code, then call verify_math tool with your results."""
 
             self.audit.log_agent_event(self.agent_name, "step5_started", {
                 "batch_id": batch_id,
