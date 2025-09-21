@@ -155,7 +155,7 @@ class V2AnalysisAgent(StandardAgent):
                     artifact_hashes.append(artifact['metadata']['artifact_hash'])
             
             # Update run context
-            run_context.analysis_artifacts = artifact_hashes
+                run_context.analysis_artifacts = artifact_hashes
             run_context.analysis_results = {
                 "documents_processed": len(documents),
                 "processing_mode": "atomic",
@@ -165,10 +165,10 @@ class V2AnalysisAgent(StandardAgent):
             self.logger.info(f"Updated run_context with {len(artifact_hashes)} analysis artifacts: {artifact_hashes}")
             
             # Return results from atomic processing
-            return AgentResult(
-                success=True,
+                return AgentResult(
+                    success=True,
                 artifacts=all_artifacts,
-                metadata={
+                    metadata={
                     "batch_id": batch_id,
                     "documents_processed": len(documents),
                         "agent_name": self.agent_name,
@@ -537,20 +537,27 @@ Generate the Python code, execute it, and present both the code and calculated r
             derived_metrics = derived_metrics_result['content'].get('derived_metrics', '')
             scores = scores_result['content'].get('score_extraction', '') if scores_result else '{}'
             
-            # Define verification tool
+            # Define verification tool (OpenAI function calling format)
             verification_tools = [
                 {
-                    "name": "verify_math",
-                    "description": "Verify that the derived metrics calculations are correct",
-                    "parameters": {
-                        "type": "object",
-                        "properties": {
-                            "verified": {
-                                "type": "boolean",
-                                "description": "Whether the mathematical calculations are correct"
-                            }
-                        },
-                        "required": ["verified"]
+                    "type": "function",
+                    "function": {
+                        "name": "verify_math",
+                        "description": "Verify mathematical calculations by re-executing code and comparing results",
+                        "parameters": {
+                            "type": "object",
+                            "properties": {
+                                "verified": {
+                                    "type": "boolean",
+                                    "description": "True if calculations are correct, False if incorrect"
+                                },
+                                "reasoning": {
+                                    "type": "string", 
+                                    "description": "Detailed explanation of verification process and findings"
+                                }
+                            },
+                            "required": ["verified", "reasoning"]
+                        }
                     }
                 }
             ]
@@ -581,25 +588,39 @@ Execute the Python code independently and verify the results match what was clai
                 "model": "vertex_ai/gemini-2.5-flash-lite"
             })
 
-            # Call LLM with tools
-            response = self.gateway.execute_call_with_tools(
+            # System prompt emphasizing mandatory tool call
+            system_prompt = "You are a verification specialist. You MUST re-execute the provided code, verify the calculations, and call the verify_math tool with your findings. This is MANDATORY - you must call the verify_math tool."
+            
+            # Call LLM with tools (using proper EnhancedLLMGateway format)
+            response_content, metadata = self.gateway.execute_call_with_tools(
                 model="vertex_ai/gemini-2.5-flash-lite",
                 prompt=prompt,
-                tools=verification_tools
+                system_prompt=system_prompt,
+                tools=verification_tools,
+                force_function_calling=True,  # Force tool calling like deprecated agent
+                context=f"Verifying derived metrics for document {doc_index}"
             )
             
-            # Extract verification result from tool calls
+            # Extract verification result from tool calls (using metadata format like deprecated agent)
             verification_status = "unknown"
-            if hasattr(response, 'choices') and response.choices:
-                tool_calls = response.choices[0].message.tool_calls
+            if not metadata.get('success'):
+                self.logger.error(f"Verification LLM call failed: {metadata.get('error', 'Unknown error')}")
+                verification_status = "verification_error"
+            else:
+                tool_calls = metadata.get('tool_calls', [])
                 if tool_calls:
-                    for tool_call in tool_calls:
-                        if tool_call.function.name == "verify_math":
-                            try:
-                                args = json.loads(tool_call.function.arguments)
-                                verification_status = "verified" if args.get("verified", False) else "verification_error"
-                            except json.JSONDecodeError:
-                                verification_status = "verification_error"
+                    tool_call = tool_calls[0]
+                    if tool_call.function.name == "verify_math":
+                        try:
+                            args = json.loads(tool_call.function.arguments)
+                            verification_status = "verified" if args.get("verified", False) else "verification_error"
+                            self.logger.info(f"Verification reasoning: {args.get('reasoning', 'No reasoning provided')}")
+                        except json.JSONDecodeError as e:
+                            self.logger.error(f"Failed to parse tool call arguments: {e}")
+                            verification_status = "verification_error"
+                else:
+                    self.logger.error("No tool calls found in verification response")
+                    verification_status = "verification_error"
             
             # Create artifact with verification status
             artifact_data = {

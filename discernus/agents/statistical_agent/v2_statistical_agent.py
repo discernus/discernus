@@ -406,20 +406,27 @@ Generate the Python code, execute it, and present both the code and results in a
             Verification result with tool call status or None if failed
         """
         try:
-            # Define verification tool
+            # Define verification tool (OpenAI function calling format)
             verification_tools = [
                 {
-                    "name": "verify_statistical_analysis",
-                    "description": "Verify that the statistical analysis code and results are correct",
-                    "parameters": {
-                        "type": "object",
-                        "properties": {
-                            "verified": {
-                                "type": "boolean",
-                                "description": "Whether the statistical analysis code executes correctly and produces the claimed results"
-                            }
-                        },
-                        "required": ["verified"]
+                    "type": "function",
+                    "function": {
+                        "name": "verify_statistical_analysis",
+                        "description": "Verify that the statistical analysis code and results are correct",
+                        "parameters": {
+                            "type": "object",
+                            "properties": {
+                                "verified": {
+                                    "type": "boolean",
+                                    "description": "Whether the statistical analysis code executes correctly and produces the claimed results"
+                                },
+                                "reasoning": {
+                                    "type": "string",
+                                    "description": "Detailed explanation of verification process and findings"
+                                }
+                            },
+                            "required": ["verified", "reasoning"]
+                        }
                     }
                 }
             ]
@@ -443,25 +450,39 @@ Execute the Python code independently and verify the results match what was clai
                 "model": "vertex_ai/gemini-2.5-flash-lite"
             })
             
-            # Call LLM with tools
-            response = self.gateway.execute_call_with_tools(
+            # System prompt emphasizing mandatory tool call
+            system_prompt = "You are a verification specialist. You MUST re-execute the provided statistical code, verify the calculations, and call the verify_statistical_analysis tool with your findings. This is MANDATORY - you must call the verify_statistical_analysis tool."
+            
+            # Call LLM with tools (using proper EnhancedLLMGateway format)
+            response_content, metadata = self.gateway.execute_call_with_tools(
                 model="vertex_ai/gemini-2.5-flash-lite",
                 prompt=prompt,
-                tools=verification_tools
+                system_prompt=system_prompt,
+                tools=verification_tools,
+                force_function_calling=True,  # Force tool calling like deprecated agent
+                context=f"Verifying statistical analysis for batch {batch_id}"
             )
             
-            # Extract verification result from tool calls
+            # Extract verification result from tool calls (using metadata format like deprecated agent)
             verification_status = "unknown"
-            if hasattr(response, 'choices') and response.choices:
-                tool_calls = response.choices[0].message.tool_calls
+            if not metadata.get('success'):
+                self.logger.error(f"Statistical verification LLM call failed: {metadata.get('error', 'Unknown error')}")
+                verification_status = "verification_failed"
+            else:
+                tool_calls = metadata.get('tool_calls', [])
                 if tool_calls:
-                    for tool_call in tool_calls:
-                        if tool_call.function.name == "verify_statistical_analysis":
-                            try:
-                                args = json.loads(tool_call.function.arguments)
-                                verification_status = "verified" if args.get("verified", False) else "verification_failed"
-                            except json.JSONDecodeError:
-                                verification_status = "verification_failed"
+                    tool_call = tool_calls[0]
+                    if tool_call.function.name == "verify_statistical_analysis":
+                        try:
+                            args = json.loads(tool_call.function.arguments)
+                            verification_status = "verified" if args.get("verified", False) else "verification_failed"
+                            self.logger.info(f"Statistical verification reasoning: {args.get('reasoning', 'No reasoning provided')}")
+                        except json.JSONDecodeError as e:
+                            self.logger.error(f"Failed to parse statistical verification tool call arguments: {e}")
+                            verification_status = "verification_failed"
+                else:
+                    self.logger.error("No tool calls found in statistical verification response")
+                    verification_status = "verification_failed"
             
             verification_result = {
                 "verification_status": verification_status,
