@@ -235,12 +235,15 @@ class TwoStageSynthesisAgent(StandardAgent):
             # Execute Stage 1 analysis with Gemini Pro
             self.logger.info(f"Executing Stage 1 analysis with {self.stage1_model}")
             
-            response = self.llm_gateway.execute_call(
+            response_tuple = self.llm_gateway.execute_call(
                 model=self.stage1_model,
                 prompt=stage1_prompt,
                 temperature=0.3,  # Lower temperature for analytical consistency
                 max_tokens=8000   # Sufficient for comprehensive analysis
             )
+            
+            # Extract content from tuple response
+            response, metadata = response_tuple
             
             if not response or not response.strip():
                 self.logger.error("Stage 1 analysis returned empty response")
@@ -297,12 +300,15 @@ class TwoStageSynthesisAgent(StandardAgent):
             # Execute Stage 2 integration with Gemini Flash
             self.logger.info(f"Executing Stage 2 integration with {self.stage2_model}")
             
-            response = self.llm_gateway.execute_call(
+            response_tuple = self.llm_gateway.execute_call(
                 model=self.stage2_model,
                 prompt=stage2_prompt,
                 temperature=0.2,  # Lower temperature for precise integration
                 max_tokens=10000  # More tokens for enhanced report
             )
+            
+            # Extract content from tuple response
+            response, metadata = response_tuple
             
             if not response or not response.strip():
                 self.logger.error("Stage 2 integration returned empty response")
@@ -488,7 +494,8 @@ Please generate a comprehensive framework-driven analysis report following the S
                 for artifact_hash in run_context.evidence_artifacts:
                     try:
                         # Load the artifact
-                        artifact_data = self.storage.load_artifact(artifact_hash)
+                        artifact_bytes = self.storage.get_artifact(artifact_hash)
+                        artifact_data = json.loads(artifact_bytes.decode('utf-8'))
                         
                         # Check if this is a curated evidence artifact
                         if (isinstance(artifact_data, dict) and 
