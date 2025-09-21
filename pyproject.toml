@@ -68,7 +68,6 @@ dependencies = [
     "pingouin>=0.5",
     "statsmodels>=0.14",
     # Search and indexing (align with requirements.txt)
-    "txtai>=5.0.0",
     "typesense>=0.20.0",
     "rank_bm25>=0.2.2",
 ]

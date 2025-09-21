@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """
-Unit tests for RAG Index Cache Manager
+Unit tests for RAG Index Cache Manager (DEPRECATED)
 
 Tests the caching functionality for txtai RAG indexes to ensure
 proper cache key generation, storage, and retrieval.
+
+NOTE: This module has been deprecated. Use IntelligentEvidenceRetrievalAgent instead.
 """
 
 import unittest

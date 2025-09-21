@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
-Unit Tests for the RAGIndexManager.
+Unit Tests for the RAGIndexManager (DEPRECATED).
 
 Follows the Test-Driven Development (TDD) methodology.
+NOTE: This module has been deprecated. Use IntelligentEvidenceRetrievalAgent instead.
 """
 
 import unittest
@@ -11,7 +12,7 @@ import shutil
 from pathlib import Path
 
 # This import will fail initially, which is expected in TDD.
-from discernus.core.rag_index_manager import RAGIndexManager
+from discernus.core.deprecated.rag_index_manager import RAGIndexManager
 from discernus.core.local_artifact_storage import LocalArtifactStorage
 from discernus.core.security_boundary import ExperimentSecurityBoundary
 
