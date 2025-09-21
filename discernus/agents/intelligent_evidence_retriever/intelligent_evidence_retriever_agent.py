@@ -117,9 +117,17 @@ class IntelligentEvidenceRetrievalAgent(StandardAgent):
             curation_plan = self.generate_curation_plan(run_context, evidence_count, evidence_size_mb)
             self.logger.info(f"Generated plan: {curation_plan['strategy']} with {len(curation_plan['iterations'])} iterations")
             
-            # Dynamic Model Selection
-            execution_model = self.select_execution_model(evidence_count, evidence_size_mb)
+            # Dynamic Model Selection (respects Gemini Pro's strategic recommendation)
+            execution_model = self.select_execution_model(evidence_count, evidence_size_mb, curation_plan)
             self.logger.info(f"Selected execution model: {execution_model}")
+            
+            # Validate plan-model consistency
+            plan_model = curation_plan.get('execution_model', 'unknown')
+            expected_model = "gemini-2.5-flash" if plan_model == 'flash' else "gemini-2.5-pro" if plan_model == 'pro' else 'unknown'
+            if expected_model != 'unknown' and execution_model != expected_model:
+                self.logger.warning(f"Model selection mismatch: plan recommends {plan_model}, selected {execution_model}")
+            else:
+                self.logger.info(f"Model selection consistent with strategic plan: {plan_model} → {execution_model}")
             
             # Steps 2-n: Iterative Evidence Curation
             curated_results = []
@@ -454,20 +462,43 @@ Generate a plan that balances thoroughness with efficiency.
             raise  # Don't mask LLM failures with fallbacks
 
 
-    def select_execution_model(self, evidence_count: int, evidence_size_mb: float) -> str:
+    def select_execution_model(self, evidence_count: int, evidence_size_mb: float, 
+                             curation_plan: Optional[Dict[str, Any]] = None) -> str:
         """
-        Select optimal execution model based on evidence volume.
+        Select optimal execution model based on evidence volume and curation strategy.
         
         Args:
             evidence_count: Number of evidence artifacts
             evidence_size_mb: Total evidence size in MB
+            curation_plan: Optional curation plan from Gemini Pro strategic planning
             
         Returns:
             Model name ("gemini-2.5-flash" or "gemini-2.5-pro")
         """
+        # If we have a strategic plan from Gemini Pro, respect its recommendation
+        if curation_plan and 'execution_model' in curation_plan:
+            recommended_model = curation_plan['execution_model']
+            if recommended_model == 'flash':
+                selected_model = "gemini-2.5-flash"
+            elif recommended_model == 'pro':
+                selected_model = "gemini-2.5-pro"
+            else:
+                # Fallback to size-based selection if plan has invalid model
+                selected_model = self._select_model_by_size(evidence_count, evidence_size_mb)
+            
+            self.logger.info(f"Using Gemini Pro recommended model: {selected_model}")
+            return selected_model
+        
+        # Default size-based selection when no plan available
+        return self._select_model_by_size(evidence_count, evidence_size_mb)
+    
+    def _select_model_by_size(self, evidence_count: int, evidence_size_mb: float) -> str:
+        """Size-based model selection fallback."""
         if evidence_count <= self.FLASH_HIGH_CONFIDENCE_THRESHOLD and evidence_size_mb <= self.FLASH_SIZE_LIMIT:
+            self.logger.info(f"Selected Flash for small corpus: {evidence_count} docs, {evidence_size_mb:.2f}MB")
             return "gemini-2.5-flash"
         else:
+            self.logger.info(f"Selected Pro for large corpus: {evidence_count} docs, {evidence_size_mb:.2f}MB")
             return "gemini-2.5-pro"
 
     def create_cached_session(self, run_context: RunContext) -> Any:
