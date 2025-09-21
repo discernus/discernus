@@ -501,34 +501,115 @@ Generate a plan that balances thoroughness with efficiency.
             self.logger.info(f"Selected Pro for large corpus: {evidence_count} docs, {evidence_size_mb:.2f}MB")
             return "gemini-2.5-pro"
 
-    def create_cached_session(self, run_context: RunContext) -> Any:
+    def create_cached_session(self, run_context: RunContext) -> Dict[str, Any]:
         """
-        Create cached session for Pro model to avoid re-upload costs.
+        Create cached session for Pro model with ALL evidence loaded.
         
         Args:
             run_context: The RunContext containing evidence artifacts
             
         Returns:
-            Cached session object
+            Session context with all evidence loaded
         """
-        # TODO: Implement session caching when available
-        self.logger.info("Session caching not yet implemented, using direct calls")
-        return None
+        self.logger.info("Creating cached session with ALL evidence artifacts...")
+        
+        # Get all evidence artifacts
+        if not hasattr(self, '_evidence_artifact_hashes'):
+            self.count_evidence_artifacts(run_context)
+        
+        # Load all evidence content into session context
+        session_evidence = []
+        total_evidence_chars = 0
+        
+        for artifact_hash in self._evidence_artifact_hashes:
+            try:
+                artifact_bytes = self.storage.get_artifact(artifact_hash)
+                if artifact_bytes:
+                    artifact_data = json.loads(artifact_bytes.decode('utf-8'))
+                    
+                    evidence_entry = {
+                        "document_index": artifact_data.get("document_index"),
+                        "evidence_content": artifact_data.get("evidence_extraction", ""),
+                        "artifact_hash": artifact_hash,
+                        "analysis_metadata": {
+                            "model_used": artifact_data.get("model_used"),
+                            "timestamp": artifact_data.get("timestamp"),
+                            "analysis_id": artifact_data.get("analysis_id")
+                        }
+                    }
+                    
+                    session_evidence.append(evidence_entry)
+                    total_evidence_chars += len(evidence_entry["evidence_content"])
+                    
+            except Exception as e:
+                self.logger.warning(f"Could not load evidence artifact {artifact_hash}: {e}")
+        
+        # Create session context
+        session_context = {
+            "evidence_artifacts": session_evidence,
+            "total_evidence_count": len(session_evidence),
+            "total_evidence_chars": total_evidence_chars,
+            "statistical_context": run_context.statistical_results,
+            "experiment_metadata": {
+                "experiment_id": run_context.experiment_id,
+                "framework_path": str(run_context.framework_path),
+                "corpus_path": str(run_context.corpus_path)
+            },
+            "session_created": datetime.now(timezone.utc).isoformat()
+        }
+        
+        self.logger.info(f"Created cached session: {len(session_evidence)} evidence artifacts, {total_evidence_chars:,} total characters")
+        
+        return session_context
 
-    def execute_iteration_with_cache(self, cache_session: Any, iteration: Dict[str, Any]) -> Dict[str, Any]:
+    def execute_iteration_with_cache(self, cache_session: Dict[str, Any], iteration: Dict[str, Any]) -> Dict[str, Any]:
         """
-        Execute curation iteration using cached session.
+        Execute curation iteration using cached session with ALL evidence.
         
         Args:
-            cache_session: Cached session object
-            iteration: Iteration configuration
+            cache_session: Cached session context with all evidence loaded
+            iteration: Iteration configuration from strategic plan
             
         Returns:
             Curated evidence results
         """
-        # TODO: Implement cached execution
-        self.logger.info(f"Executing cached iteration: {iteration['focus_area']}")
-        return {"quotes": [], "focus_area": iteration['focus_area']}
+        self.logger.info(f"Executing cached iteration: {iteration.get('iteration_name', iteration['focus_area'])}")
+        
+        # Create comprehensive prompt with ALL evidence in context
+        cached_prompt = self._create_cached_curation_prompt(cache_session, iteration)
+        
+        try:
+            # Execute Pro curation with full evidence context
+            response, metadata = self.llm_gateway.execute_call(
+                model="vertex_ai/gemini-2.5-pro",
+                prompt=cached_prompt,
+                temperature=0.1
+            )
+            
+            # Parse curated quotes from response
+            curated_quotes = self._parse_curated_quotes(response, iteration)
+            
+            evidence_count = cache_session["total_evidence_count"]
+            evidence_chars = cache_session["total_evidence_chars"]
+            
+            self.logger.info(f"Cached iteration completed: {len(curated_quotes)} quotes curated from {evidence_count} artifacts ({evidence_chars:,} chars)")
+            
+            return {
+                "quotes": curated_quotes,
+                "focus_area": iteration['focus_area'],
+                "iteration_name": iteration.get('iteration_name', iteration['focus_area']),
+                "evidence_processed": evidence_count,
+                "evidence_chars_processed": evidence_chars,
+                "model_used": "gemini-2.5-pro",
+                "execution_method": "cached_session",
+                "statistical_targets": iteration.get('statistical_targets', []),
+                "curation_instructions": iteration.get('curation_instructions', ''),
+                "priority": iteration.get('priority', 'medium')
+            }
+            
+        except Exception as e:
+            self.logger.error(f"Cached iteration failed: {e}")
+            return {"quotes": [], "focus_area": iteration['focus_area'], "error": str(e)}
 
     def execute_iteration_direct(self, run_context: RunContext, iteration: Dict[str, Any]) -> Dict[str, Any]:
         """
@@ -788,3 +869,79 @@ Focus on quality over quantity. Select quotes that would convince a skeptical pe
             }]
         
         return quotes
+
+    def _create_cached_curation_prompt(self, cache_session: Dict[str, Any], iteration: Dict[str, Any]) -> str:
+        """
+        Create curation prompt with ALL evidence from cached session.
+        
+        Args:
+            cache_session: Session context with all evidence loaded
+            iteration: Iteration configuration from strategic plan
+            
+        Returns:
+            Comprehensive prompt with full evidence context
+        """
+        # Get statistical context from session
+        statistical_context = json.dumps(cache_session["statistical_context"], indent=2, default=str)[:3000]
+        
+        # Include ALL evidence artifacts (no arbitrary limits)
+        evidence_content = ""
+        evidence_artifacts = cache_session["evidence_artifacts"]
+        
+        for evidence_entry in evidence_artifacts:
+            doc_index = evidence_entry.get('document_index', 'unknown')
+            evidence_text = evidence_entry.get('evidence_content', '')
+            evidence_content += f"\n--- DOCUMENT {doc_index} EVIDENCE ---\n{evidence_text}\n"
+        
+        total_chars = cache_session["total_evidence_chars"]
+        total_count = cache_session["total_evidence_count"]
+        
+        # Create comprehensive cached prompt
+        prompt = f"""
+You are an expert evidence curator for discourse analysis research with access to ALL evidence from this experiment.
+
+CACHED SESSION CONTEXT:
+- Total Evidence Artifacts: {total_count}
+- Total Evidence Characters: {total_chars:,}
+- Session Created: {cache_session.get('session_created', 'unknown')}
+
+CURRENT ITERATION FOCUS: {iteration['focus_area']}
+ITERATION NAME: {iteration.get('iteration_name', 'unnamed')}
+CURATION INSTRUCTIONS: {iteration.get('curation_instructions', 'Select the most compelling quotes that support the statistical findings.')}
+
+STATISTICAL TARGETS FOR THIS ITERATION:
+{json.dumps(iteration.get('statistical_targets', []), indent=2)}
+
+COMPLETE STATISTICAL CONTEXT:
+{statistical_context}
+
+ALL EVIDENCE ARTIFACTS:
+{evidence_content}
+
+ITERATION TASK: 
+You have access to ALL evidence from this experiment. Based on the strategic plan, select the {iteration.get('expected_quotes', 50)} most compelling quotes that:
+
+1. Directly support the statistical findings for this iteration's focus area: {iteration['focus_area']}
+2. Match the statistical targets: {', '.join(iteration.get('statistical_targets', []))}
+3. Are clear, specific, and representative examples from across ALL documents
+4. Demonstrate the patterns identified in the statistical analysis
+5. Provide the strongest possible evidence for the research conclusions
+
+Since you have access to ALL evidence, you can:
+- Cross-reference patterns across multiple documents
+- Select the absolute best quotes from the entire corpus
+- Identify complementary evidence that builds a strong case
+- Find outliers or exceptions that add nuance
+
+OUTPUT FORMAT:
+For each selected quote, provide:
+- Document index
+- Exact quote text  
+- Statistical relevance (which specific finding it supports)
+- Strength rating (1-5, where 5 is strongest evidence)
+- Cross-document context (if relevant)
+
+Focus on quality over quantity. Select quotes that would convince the most skeptical peer reviewer by leveraging your access to the complete evidence base.
+"""
+        
+        return prompt
