@@ -84,6 +84,18 @@
     "size_bytes": 1833,
     "source_run": "20250920_223951"
   },
+  "5ad9ab6dc5f72f77fbffb98e4b35d8bf5e92738cce73dd6589bed6832e522504": {
+    "artifact_path": "curated_evidence_5ad9ab6d.json",
+    "created_at": "2025-09-21T00:48:13.681263+00:00",
+    "human_filename": "curated_evidence_5ad9ab6d.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "curated_evidence",
+      "experiment_id": "sentiment_correlation_patterns"
+    },
+    "size_bytes": 1325,
+    "source_run": "20250920_223951"
+  },
   "5d4ad6e612142b25b3e6fa7f02c104b1119f1526e7e035711b02acccde730e3f": {
     "artifact_path": "derived_metrics_5d4ad6e6.json",
     "created_at": "2025-09-20T22:40:21.021094+00:00",

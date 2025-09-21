@@ -541,9 +541,45 @@ Generate a plan that balances thoroughness with efficiency.
         Returns:
             Curated evidence results
         """
-        # TODO: Implement direct execution
-        self.logger.info(f"Executing direct iteration: {iteration['focus_area']}")
-        return {"quotes": [], "focus_area": iteration['focus_area']}
+        self.logger.info(f"Executing direct iteration: {iteration.get('iteration_name', iteration['focus_area'])}")
+        
+        # Get evidence artifacts for this iteration
+        evidence_artifacts = self._get_evidence_for_iteration(run_context, iteration)
+        
+        if not evidence_artifacts:
+            self.logger.warning(f"No evidence artifacts found for iteration: {iteration['focus_area']}")
+            return {"quotes": [], "focus_area": iteration['focus_area'], "evidence_processed": 0}
+        
+        # Create curation prompt for this iteration
+        curation_prompt = self._create_curation_prompt(run_context, iteration, evidence_artifacts)
+        
+        try:
+            # Execute Flash curation
+            response, metadata = self.llm_gateway.execute_call(
+                model="vertex_ai/gemini-2.5-flash",
+                prompt=curation_prompt,
+                temperature=0.1
+            )
+            
+            # Parse curated quotes from response
+            curated_quotes = self._parse_curated_quotes(response, iteration)
+            
+            self.logger.info(f"Direct iteration completed: {len(curated_quotes)} quotes curated from {len(evidence_artifacts)} artifacts")
+            
+            return {
+                "quotes": curated_quotes,
+                "focus_area": iteration['focus_area'],
+                "iteration_name": iteration.get('iteration_name', iteration['focus_area']),
+                "evidence_processed": len(evidence_artifacts),
+                "model_used": "gemini-2.5-flash",
+                "statistical_targets": iteration.get('statistical_targets', []),
+                "curation_instructions": iteration.get('curation_instructions', ''),
+                "priority": iteration.get('priority', 'medium')
+            }
+            
+        except Exception as e:
+            self.logger.error(f"Direct iteration failed: {e}")
+            return {"quotes": [], "focus_area": iteration['focus_area'], "error": str(e)}
 
     def store_curated_artifact(self, results: Dict[str, Any], focus_area: str) -> str:
         """
@@ -563,5 +599,192 @@ Generate a plan that balances thoroughness with efficiency.
             "curated_evidence": results
         }
         
-        artifact_bytes = json.dumps(artifact_data, indent=2).encode('utf-8')
-        return self.storage.store_artifact(artifact_bytes)
+        return self.storage.store_artifact(
+            content=artifact_data,
+            artifact_type="curated_evidence",
+            experiment_id=focus_area
+        )
+
+    def _get_evidence_for_iteration(self, run_context: RunContext, iteration: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """
+        Get evidence artifacts relevant to this iteration.
+        
+        Args:
+            run_context: The RunContext containing evidence artifacts
+            iteration: Iteration configuration
+            
+        Returns:
+            List of evidence artifact data for processing
+        """
+        evidence_subset = iteration.get('evidence_subset', 'all_evidence')
+        evidence_artifacts = []
+        
+        # Get all evidence artifacts first
+        if not hasattr(self, '_evidence_artifact_hashes'):
+            self.count_evidence_artifacts(run_context)
+        
+        for artifact_hash in self._evidence_artifact_hashes:
+            try:
+                artifact_bytes = self.storage.get_artifact(artifact_hash)
+                if artifact_bytes:
+                    artifact_data = json.loads(artifact_bytes.decode('utf-8'))
+                    
+                    # Apply evidence subset filtering
+                    if self._should_include_evidence(artifact_data, evidence_subset, run_context):
+                        evidence_artifacts.append({
+                            "hash": artifact_hash,
+                            "data": artifact_data,
+                            "document_index": artifact_data.get("document_index"),
+                            "evidence_content": artifact_data.get("evidence_extraction", "")
+                        })
+                        
+            except Exception as e:
+                self.logger.warning(f"Could not load evidence artifact {artifact_hash}: {e}")
+        
+        self.logger.info(f"Selected {len(evidence_artifacts)} evidence artifacts for iteration (subset: {evidence_subset})")
+        return evidence_artifacts
+
+    def _should_include_evidence(self, artifact_data: Dict[str, Any], evidence_subset: str, run_context: RunContext) -> bool:
+        """Determine if evidence artifact should be included in this iteration."""
+        if evidence_subset == 'all_evidence':
+            return True
+        elif evidence_subset == 'high_scoring_docs':
+            # TODO: Implement high-scoring document filtering based on statistical results
+            return True  # For now, include all
+        elif evidence_subset == 'outlier_docs':
+            # TODO: Implement outlier document filtering based on statistical results
+            return True  # For now, include all
+        elif evidence_subset == 'specific_documents':
+            # TODO: Implement specific document filtering based on iteration config
+            return True  # For now, include all
+        else:
+            return True
+
+    def _create_curation_prompt(self, run_context: RunContext, iteration: Dict[str, Any], 
+                              evidence_artifacts: List[Dict[str, Any]]) -> str:
+        """
+        Create curation prompt for this iteration.
+        
+        Args:
+            run_context: The RunContext containing experiment data
+            iteration: Iteration configuration
+            evidence_artifacts: Evidence artifacts to process
+            
+        Returns:
+            Formatted curation prompt
+        """
+        # Get statistical context
+        statistical_context = json.dumps(run_context.statistical_results, indent=2, default=str)[:2000]
+        
+        # Prepare evidence content
+        evidence_content = ""
+        for i, artifact in enumerate(evidence_artifacts[:10]):  # Limit to 10 artifacts for token management
+            doc_index = artifact.get('document_index', i)
+            evidence_text = artifact.get('evidence_content', '')
+            evidence_content += f"\n--- DOCUMENT {doc_index} EVIDENCE ---\n{evidence_text}\n"
+        
+        if len(evidence_artifacts) > 10:
+            evidence_content += f"\n[... and {len(evidence_artifacts) - 10} more documents ...]"
+        
+        # Create comprehensive curation prompt
+        prompt = f"""
+You are an expert evidence curator for discourse analysis research.
+
+ITERATION FOCUS: {iteration['focus_area']}
+CURATION INSTRUCTIONS: {iteration.get('curation_instructions', 'Select the most compelling quotes that support the statistical findings.')}
+
+STATISTICAL TARGETS FOR THIS ITERATION:
+{json.dumps(iteration.get('statistical_targets', []), indent=2)}
+
+STATISTICAL CONTEXT:
+{statistical_context}
+
+EVIDENCE TO CURATE:
+{evidence_content}
+
+TASK: Select the {iteration.get('expected_quotes', 50)} most compelling quotes that:
+1. Directly support the statistical findings for this iteration's focus area
+2. Are clear, specific, and representative examples
+3. Demonstrate the patterns identified in the statistical analysis
+4. Provide strong evidence for the research conclusions
+
+OUTPUT FORMAT:
+For each selected quote, provide:
+- Document index
+- Exact quote text
+- Statistical relevance (which finding it supports)
+- Strength rating (1-5, where 5 is strongest evidence)
+
+Focus on quality over quantity. Select quotes that would convince a skeptical peer reviewer.
+"""
+        
+        return prompt
+
+    def _parse_curated_quotes(self, response: str, iteration: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """
+        Parse curated quotes from LLM response.
+        
+        Args:
+            response: LLM response containing curated quotes
+            iteration: Iteration configuration for context
+            
+        Returns:
+            List of parsed quote objects
+        """
+        quotes = []
+        
+        try:
+            # Simple parsing - look for structured patterns in the response
+            lines = response.split('\n')
+            current_quote = {}
+            
+            for line in lines:
+                line = line.strip()
+                if not line:
+                    continue
+                    
+                # Look for document index patterns
+                if line.startswith('Document') and ':' in line:
+                    if current_quote:
+                        quotes.append(current_quote)
+                    current_quote = {"document_index": line.split(':')[0].replace('Document', '').strip()}
+                
+                # Look for quote text patterns
+                elif line.startswith('"') and line.endswith('"'):
+                    current_quote["quote_text"] = line.strip('"')
+                
+                # Look for relevance patterns
+                elif 'relevance' in line.lower() or 'supports' in line.lower():
+                    current_quote["statistical_relevance"] = line
+                
+                # Look for strength ratings
+                elif 'strength' in line.lower() or 'rating' in line.lower():
+                    # Extract numeric rating
+                    import re
+                    rating_match = re.search(r'(\d+)', line)
+                    if rating_match:
+                        current_quote["strength_rating"] = int(rating_match.group(1))
+            
+            # Add final quote if exists
+            if current_quote:
+                quotes.append(current_quote)
+            
+            # Add iteration metadata to each quote
+            for quote in quotes:
+                quote["iteration_focus"] = iteration['focus_area']
+                quote["statistical_targets"] = iteration.get('statistical_targets', [])
+                quote["curation_timestamp"] = datetime.now(timezone.utc).isoformat()
+            
+            self.logger.info(f"Parsed {len(quotes)} quotes from curation response")
+            
+        except Exception as e:
+            self.logger.error(f"Failed to parse curated quotes: {e}")
+            # Return a basic structure if parsing fails
+            quotes = [{
+                "quote_text": "Parsing failed - raw response available",
+                "raw_response": response[:500],
+                "iteration_focus": iteration['focus_area'],
+                "error": str(e)
+            }]
+        
+        return quotes
