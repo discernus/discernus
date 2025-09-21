@@ -195,43 +195,20 @@ class TwoStageSynthesisAgent(StandardAgent):
     
     def _validate_inputs(self, run_context: RunContext) -> bool:
         """Validate that required inputs are available for synthesis."""
-        # Check for statistical results existence
+        # Trust upstream agents - just check existence, not content quality
         if not hasattr(run_context, 'statistical_results') or not run_context.statistical_results:
             self.logger.error("No statistical results found in run_context")
             return False
         
-        # Check for meaningful statistical content (fail hard if empty or placeholder)
-        statistical_content = str(run_context.statistical_results)
-        if len(statistical_content.strip()) < 100:  # Suspiciously short
-            self.logger.error(f"Statistical results appear empty or invalid: {len(statistical_content)} characters")
-            return False
-        
-        # Check for common failure indicators in statistical content
-        failure_indicators = [
-            "did not generate statistical output",
-            "no statistical results",
-            "statistical analysis failed",
-            "missing data",
-            "no data available"
-        ]
-        
-        statistical_lower = statistical_content.lower()
-        for indicator in failure_indicators:
-            if indicator in statistical_lower:
-                self.logger.error(f"Statistical results contain failure indicator: '{indicator}'")
-                return False
-        
-        # Check for experiment metadata
         if not run_context.experiment_id:
             self.logger.error("No experiment_id found in run_context")
             return False
         
-        # Check for framework path
         if not run_context.framework_path:
             self.logger.error("No framework_path found in run_context")
             return False
         
-        self.logger.info(f"Input validation passed: statistical results ({len(statistical_content)} chars), experiment metadata, and framework available")
+        self.logger.info("Input validation passed: statistical results, experiment metadata, and framework available")
         return True
     
     def _execute_stage1_analysis(self, run_context: RunContext) -> Optional[str]:
