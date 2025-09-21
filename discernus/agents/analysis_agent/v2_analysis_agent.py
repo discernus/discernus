@@ -143,9 +143,15 @@ class V2AnalysisAgent(StandardAgent):
             documents = corpus_documents
             all_artifacts = []
             
+            # Show total document count
+            self.unified_logger.info(f"📊 Running atomic document analysis... ({len(documents)} documents)")
+            
             for doc_index, doc in enumerate(documents):
                 doc_name = doc.get('id', doc.get('name', doc.get('filename', f'document_{doc_index}')))
                 self.logger.info(f"Processing document {doc_index}: {doc_name}")
+                
+                # Show document progress
+                self.unified_logger.progress(f"Analyzing document {doc_index + 1}/{len(documents)}: {doc_name}")
                 
                 # Process this document atomically through all 6 steps
                 doc_artifacts = self._process_document_atomically(
@@ -169,6 +175,9 @@ class V2AnalysisAgent(StandardAgent):
 
             self.logger.info(f"Updated run_context with {len(artifact_hashes)} analysis artifacts: {artifact_hashes}")
 
+            # Analysis completed successfully
+            self.unified_logger.success(f"🎉 Atomic document analysis completed - {len(documents)} documents processed")
+            
             # Return results from atomic processing
             return AgentResult(
                 success=True,
@@ -216,26 +225,31 @@ class V2AnalysisAgent(StandardAgent):
         
         try:
             # Step 1: Composite Analysis
+            self.unified_logger.progress(f"  Step 1/6: Composite analysis for document {doc_index + 1}")
             composite_result = self._step1_composite_analysis(framework_content, doc, doc_index, batch_id)
             if composite_result:
                 artifacts.append(composite_result)
             
             # Step 2: Evidence Extraction
+            self.unified_logger.progress(f"  Step 2/6: Evidence extraction for document {doc_index + 1}")
             evidence_result = self._step2_evidence_extraction(composite_result, doc_index, batch_id)
             if evidence_result:
                 artifacts.append(evidence_result)
             
             # Step 3: Score Extraction
+            self.unified_logger.progress(f"  Step 3/6: Score extraction for document {doc_index + 1}")
             scores_result = self._step3_score_extraction(composite_result, doc_index, batch_id)
             if scores_result:
                 artifacts.append(scores_result)
             
             # Step 4: Derived Metrics Generation
+            self.unified_logger.progress(f"  Step 4/6: Derived metrics for document {doc_index + 1}")
             derived_metrics_result = self._step4_derived_metrics(framework_content, scores_result, doc_index, batch_id)
             if derived_metrics_result:
                 artifacts.append(derived_metrics_result)
             
             # Step 5: Verification
+            self.unified_logger.progress(f"  Step 5/6: Verification for document {doc_index + 1}")
             verification_result = self._step5_verification(framework_content, derived_metrics_result, scores_result, doc_index, batch_id)
             if verification_result:
                 artifacts.append(verification_result)
@@ -256,9 +270,13 @@ class V2AnalysisAgent(StandardAgent):
                 return artifacts
             
             # Step 6: Markup Extraction
+            self.unified_logger.progress(f"  Step 6/6: Markup extraction for document {doc_index + 1}")
             markup_result = self._step6_markup_extraction(composite_result, doc_index, batch_id)
             if markup_result:
                 artifacts.append(markup_result)
+            
+            # Document completed successfully
+            self.unified_logger.success(f"✅ Document {doc_index + 1} analysis completed")
                 
         except Exception as e:
             self.logger.error(f"Atomic processing failed for document {doc_index}: {e}")

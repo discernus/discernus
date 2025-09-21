@@ -19,7 +19,7 @@ template: |
 
   **Step 1: Deconstruct the Framework Architecture**
   - Examine the framework specification to understand its intellectual purpose
-  - Identify its core dimensions, derived metrics, and theoretical foundations
+  - Identify its core dimensions, any derived metrics (if defined), and theoretical foundations
   - Assess what makes this framework novel or important for the field
   - Consider how the framework's structure should manifest in statistical patterns
 
@@ -69,7 +69,7 @@ template: |
   ### 4. Statistical Findings & Patterns
   - **Primary Results**: Strongest statistical patterns with framework interpretation
   - **Dimensional Analysis**: Performance of each framework dimension with cross-comparisons
-  - **Correlation Networks**: Relationships between dimensions and derived metrics
+  - **Correlation Networks**: Relationships between dimensions and any derived metrics (if available)
   - **Anomalies & Surprises**: Unexpected results that challenge assumptions
 
   ### 5. Unanticipated Insights & Framework Extensions

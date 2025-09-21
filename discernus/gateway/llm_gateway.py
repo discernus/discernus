@@ -159,6 +159,15 @@ class LLMGateway(BaseGateway):
                         "attempts": attempts
                     }
 
+                # Log LLM call attempt
+                from ..core.unified_logger import get_unified_logger
+                unified_logger = get_unified_logger()
+                
+                if context:
+                    unified_logger.llm_call(current_model, attempts, max_retries, context=context)
+                else:
+                    unified_logger.llm_call(current_model, attempts, max_retries)
+                
                 # Clean parameters based on provider requirements
                 call_kwargs = kwargs.copy()
                 if response_schema:

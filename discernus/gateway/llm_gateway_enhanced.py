@@ -51,10 +51,13 @@ class EnhancedLLMGateway(LLMGateway):
             
             try:
                 # Enhanced progress message with context
+                from ..core.unified_logger import get_unified_logger
+                unified_logger = get_unified_logger()
+                
                 if context:
-                    print(f"🤖 {context} with {current_model} (Attempt {attempts}/{max_retries})...")
+                    unified_logger.llm_call(current_model, attempts, max_retries, context=context)
                 else:
-                    print(f"Attempting tool call with {current_model} (Attempt {attempts}/{max_retries})...")
+                    unified_logger.llm_call(current_model, attempts, max_retries)
                 
                 # Clean parameters based on provider requirements
                 call_kwargs = kwargs.copy()
@@ -132,7 +135,7 @@ class EnhancedLLMGateway(LLMGateway):
                 }
                 
             except Exception as e:
-                print(f"⚠️ Tool call failed with {current_model}: {e}")
+                unified_logger.error(f"Tool call failed with {current_model}: {e}", critical=True)
                 if attempts < max_retries:
                     time.sleep(2)
                     continue

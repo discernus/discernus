@@ -384,22 +384,29 @@ class V2StatisticalAgent(StandardAgent):
         """
         try:
             # Prepare statistical analysis prompt for Python code generation
-            prompt = f"""You are a statistical analysis expert. Generate and execute Python code to analyze the following dimensional scores.
+            prompt = f"""You are a statistical analysis expert. Generate and execute Python code to analyze the following analysis data.
 
 FRAMEWORK CONTEXT:
 {framework_content}
 
-SCORE DATA:
+ANALYSIS DATA:
 {json.dumps(score_data, indent=2)}
 
+DATA STRUCTURE NOTES:
+- Each entry has a "data_type" field indicating whether it contains "scores" (raw dimensional scores) or "derived_metrics" (calculated metrics)
+- Some frameworks may only have scores and no derived metrics - this is normal
+- Focus your analysis on whatever data is available
+
 TASK: Write Python code to perform comprehensive statistical analysis including:
-1. Descriptive statistics for each dimension
-2. Correlation analysis between dimensions  
+1. Descriptive statistics for each available dimension/metric
+2. Correlation analysis between available dimensions/metrics
 3. Statistical significance testing where appropriate
 4. Summary of key findings
 
 REQUIREMENTS:
 - Use pandas, numpy, scipy.stats, and other standard libraries
+- Handle cases where only scores exist (no derived metrics)
+- Separate analysis of scores vs derived metrics if both are present
 - Write clear, well-commented Python code
 - Execute the code and show the results
 - Provide interpretations of the statistical findings

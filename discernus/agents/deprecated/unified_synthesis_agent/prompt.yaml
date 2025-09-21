@@ -25,7 +25,7 @@ template: |
   
   **Step 1: Deconstruct the Framework.**
   - Examine the **Framework Specification** provided below.
-  - Internally identify its core purpose, its primary dimensions, its derived metrics, and what makes it novel or important.
+  - Internally identify its core purpose, its primary dimensions, any derived metrics (if defined), and what makes it novel or important.
   
   **Step 2: Identify Key Statistical Patterns.**
   - Examine the **Complete Research Data**.
@@ -79,7 +79,7 @@ template: |
   - Analyze cross-dimensional relationships and interaction effects
   - Identify statistical outliers and anomalous patterns
   - Examine confidence patterns and analytical uncertainty
-  - Detect framework-specific insights from derived metrics
+  - Detect framework-specific insights from derived metrics (if available - some frameworks may only have raw dimensional scores)
 
   ## Level 3: Cross-Dimensional Network Analysis
   - Map dimensional clustering and meta-strategies
