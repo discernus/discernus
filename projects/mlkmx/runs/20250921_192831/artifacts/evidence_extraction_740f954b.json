@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250921_152902_1",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "evidence_extraction": "```json\n[\n  \"Any law that uplifts human personality is just. Any law that degrades human personality is unjust.\",\n  \"We are caught in an inescapable network of mutuality, tied in a single garment of destiny. Whatever affects one directly, affects all indirectly.\",\n  \"Nonviolent direct action seeks to create such a crisis and foster such a tension that a community which has constantly refused to negotiate is forced to confront the issue.\",\n  \"Lamentably, it is an historical fact that privileged groups seldom give up their privileges voluntarily.\",\n  \"Now is the time to make real the promise of democracy and transform our pending national elegy into a creative psalm of brotherhood.\"\n]\n```",
+  "document_index": 1,
+  "timestamp": "2025-09-21T19:31:25.633593+00:00"
+}

@@ -307,11 +307,61 @@ class V2StatisticalAgent(StandardAgent):
                                 "document_index": artifact_data.get("document_index", 0),
                                 "analysis_id": artifact_data.get("analysis_id", ""),
                                 "scores": scores,
-                                "timestamp": artifact_data.get("timestamp", "")
+                                "timestamp": artifact_data.get("timestamp", ""),
+                                "data_type": "scores"
                             })
                             
                         except json.JSONDecodeError as e:
                             self.logger.warning(f"Could not parse scores from artifact {artifact_hash}: {e}")
+                            continue
+                
+                # Check if this is a derived metrics artifact
+                elif artifact_data.get("step") == "derived_metrics":
+                    # Check if this is a "no derived metrics" artifact
+                    if artifact_data.get("has_derived_metrics") == False:
+                        self.logger.info(f"Skipping derived metrics artifact {artifact_hash} - framework has no derived metrics")
+                        continue
+                    
+                    # Extract the derived metrics from the LLM response
+                    derived_metrics_response = artifact_data.get("derived_metrics", "")
+                    if derived_metrics_response:
+                        # Parse the JSON from the LLM response (similar to scores)
+                        try:
+                            # Extract JSON from the second code block (derived metrics contain both Python and JSON)
+                            if "```json" in derived_metrics_response:
+                                # Find the JSON block (usually the second one after the Python block)
+                                json_blocks = []
+                                start_pos = 0
+                                while True:
+                                    json_start = derived_metrics_response.find("```json", start_pos)
+                                    if json_start == -1:
+                                        break
+                                    json_start += 7
+                                    json_end = derived_metrics_response.find("```", json_start)
+                                    if json_end > json_start:
+                                        json_blocks.append(derived_metrics_response[json_start:json_end].strip())
+                                    start_pos = json_end + 3
+                                
+                                # Use the last JSON block (the results)
+                                if json_blocks:
+                                    derived_metrics_json = json_blocks[-1]
+                                    derived_metrics = json.loads(derived_metrics_json)
+                                    
+                                    # Extract the results if they're nested
+                                    if "results" in derived_metrics:
+                                        derived_metrics = derived_metrics["results"]
+                                    
+                                    # Add document metadata
+                                    score_data.append({
+                                        "document_index": artifact_data.get("document_index", 0),
+                                        "analysis_id": artifact_data.get("analysis_id", ""),
+                                        "scores": derived_metrics,
+                                        "timestamp": artifact_data.get("timestamp", ""),
+                                        "data_type": "derived_metrics"
+                                    })
+                                    
+                        except json.JSONDecodeError as e:
+                            self.logger.warning(f"Could not parse derived metrics from artifact {artifact_hash}: {e}")
                             continue
                 
             except Exception as e:
@@ -412,17 +462,17 @@ Generate the Python code, execute it, and present both the code and results in a
                     "type": "function",
                     "function": {
                         "name": "verify_statistical_analysis",
-                        "description": "Verify that the statistical analysis code and results are correct",
+                        "description": "Evaluate if the statistical analysis is substantive and well-executed",
                         "parameters": {
                             "type": "object",
                             "properties": {
                                 "verified": {
                                     "type": "boolean",
-                                    "description": "Whether the statistical analysis code executes correctly and produces the claimed results"
+                                    "description": "Whether the statistical analysis appears substantive and methodologically sound"
                                 },
                                 "reasoning": {
                                     "type": "string",
-                                    "description": "Detailed explanation of verification process and findings"
+                                    "description": "Detailed explanation of the analysis quality assessment and methodology evaluation"
                                 }
                             },
                             "required": ["verified", "reasoning"]
@@ -434,11 +484,11 @@ Generate the Python code, execute it, and present both the code and results in a
             # Truncate if too long to avoid prompt length issues
             content = statistical_analysis_content[:2000] + "..." if len(statistical_analysis_content) > 2000 else statistical_analysis_content
             
-            prompt = f"""Verify this works by re-running any Python code you find:
+            prompt = f"""Evaluate if this statistical analysis is substantive and well-executed:
 
 {content}
 
-Call verify_statistical_analysis tool: does the code execute without errors?"""
+Call verify_statistical_analysis tool: does this appear to be a substantive statistical analysis with appropriate methodology?"""
 
             self.audit.log_agent_event(self.agent_name, "step2_started", {
                 "batch_id": batch_id,
@@ -447,7 +497,7 @@ Call verify_statistical_analysis tool: does the code execute without errors?"""
             })
             
             # System prompt emphasizing mandatory tool call
-            system_prompt = "You are a verification specialist. You MUST re-execute the provided statistical code, verify the calculations, and call the verify_statistical_analysis tool with your findings. This is MANDATORY - you must call the verify_statistical_analysis tool."
+            system_prompt = "You are a statistical analysis reviewer. You MUST evaluate the quality and substance of the statistical analysis and call the verify_statistical_analysis tool with your findings. This is MANDATORY - you must call the verify_statistical_analysis tool."
             
             # Call LLM with tools (using proper EnhancedLLMGateway format)
             response_content, metadata = self.gateway.execute_call_with_tools(

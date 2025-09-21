@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250921_165946_2",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "evidence_extraction": "```json\n[\n  \"No positive sentiment was detected in the document.\",\n  \"The collapse of the pension fund is a calamitous event, a direct result of years of gross mismanagement and unforgivable neglect. Thousands of retirees... have been callously betrayed and now face a future of financial ruin and profound uncertainty.\",\n  \"This is a crisis born of systemic corruption and institutional decay. ... The financial devastation is horrific, but the deeper damage is to the social contract. ... The aftermath is a tragic landscape of broken promises and ruined lives, a terrible stain on our state's history that will not soon be forgotten.\"\n]\n```",
+  "document_index": 2,
+  "timestamp": "2025-09-21T21:01:22.770886+00:00"
+}

@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250921_144931_1",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "evidence_extraction": "[\n  \"Injustice anywhere is a threat to justice everywhere. We are caught in an inescapable network of mutuality, tied in a single garment of destiny. Whatever affects one directly, affects all indirectly.\",\n  \"Now is the time to make real the promise of democracy and transform our pending national elegy into a creative psalm of brotherhood. Now is the time to lift our national policy from the quicksand of racial injustice to the solid rock of human dignity.\",\n  \"If his repressed emotions are not released in nonviolent ways, they will seek expression through violence; this is not a threat but a fact of history.\",\n  \"I must confess that over the past few years I have been gravely disappointed with the white moderate. I have almost reached the regrettable conclusion that the Negro's great stumbling block in his stride toward freedom is not the White Citizen's Counciler or the Ku Klux Klanner, but the white moderate, who is more devoted to 'order' than to justice\",\n  \"I wish you had commended the Negro sit inners and demonstrators of Birmingham for their sublime courage, their willingness to suffer and their amazing discipline in the midst of great provocation.\"\n]",
+  "document_index": 1,
+  "timestamp": "2025-09-21T18:52:38.749465+00:00"
+}

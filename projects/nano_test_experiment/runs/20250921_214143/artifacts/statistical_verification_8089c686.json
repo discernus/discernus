@@ -1,0 +1,12 @@
+{
+  "analysis_id": "stats_stats_20250921T214319Z",
+  "step": "statistical_verification",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "verification_result": {
+    "verification_status": "verified",
+    "batch_id": "stats_20250921T214319Z",
+    "model_used": "vertex_ai/gemini-2.5-flash-lite",
+    "timestamp": "2025-09-21T21:44:01.830938+00:00"
+  },
+  "timestamp": "2025-09-21T21:44:01.832486+00:00"
+}

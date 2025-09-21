@@ -1,0 +1,22 @@
+{
+  "validation_success": false,
+  "issues": [
+    {
+      "category": "llm_call_failure",
+      "description": "LLM validation call failed: Max retries exceeded for vertex_ai/gemini-2.5-pro. Provider-consistent fallback strategy exhausted.",
+      "impact": "Validation cannot be completed",
+      "fix": "Check LLM gateway configuration and model availability",
+      "priority": "BLOCKING",
+      "affected_files": []
+    }
+  ],
+  "suggestions": [
+    "Verify LLM model availability and authentication"
+  ],
+  "metadata": {
+    "agent": "V2ValidationAgent",
+    "timestamp": "2025-09-21T17:27:58.455397",
+    "experiment_id": "nano_test_experiment",
+    "validation_type": "experiment_coherence"
+  }
+}

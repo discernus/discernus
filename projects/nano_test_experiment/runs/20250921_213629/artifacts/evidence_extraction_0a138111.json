@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250921_173659_1",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "evidence_extraction": "```json\n[\n  \"These wetlands have been protected for decades for [positive_sentiment: good reason] - they filter our water, provide flood control, and support diverse wildlife.\",\n  \"The growing coalition of concerned citizens, environmental activists, and local business owners represents [positive_sentiment: the true voice of our community].\",\n  \"The proposed industrial zoning changes represent a [negative_sentiment: catastrophic betrayal] of public trust and an [negative_sentiment: assault] on our community's well-being.\",\n  \"This policy is a [negative_sentiment: festering wound] that will undoubtedly lead to years of [negative_sentiment: environmental degradation] and legal battles, leaving a [negative_sentiment: permanent scar] on our town.\"\n]\n```",
+  "document_index": 1,
+  "timestamp": "2025-09-21T21:37:47.625901+00:00"
+}

@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250921_152902_0",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "evidence_extraction": "```json\n[\n  \"[TRIBAL_DOMINANCE: The political philosophy of black nationalism only means that the black man should control the politics and the politicians in his own community.]\",\n  \"[FEAR: Whenever you got a racial powder keg sitting in your lap, you're in more trouble than if you had an atomic powder keg sitting in your lap. When a racial powder keg goes off, it doesn't care who it knocks out the way. Understand this, it's dangerous.]\",\n  \"[HOPE: And you and I have to make a start. And the best place to start is right in the community where we live.]\",\n  \"[ENMITY: All of us catch hell from the same enemy. We're all in the same bag, in the same boat.]\",\n  \"[COHESIVE_GOALS: So I say in my conclusion, the only way we're going to solve it: we got to unite. We got to work together in unity and harmony. And black nationalism is the key.]\"\n]\n```",
+  "document_index": 0,
+  "timestamp": "2025-09-21T19:30:00.491736+00:00"
+}

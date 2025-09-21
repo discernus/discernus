@@ -1,0 +1,22 @@
+{
+  "validation_success": true,
+  "issues": [
+    {
+      "category": "specification",
+      "description": "The natural language descriptions for the 'enmity' and 'amity' dimensions in the framework's main narrative (Section 3) are less detailed than their corresponding descriptions in the machine-readable YAML appendix (Section 5.3).",
+      "impact": "This minor inconsistency could lead to subtle variations in interpretation depending on whether a human reader or an automated agent is referencing the narrative versus the machine-readable specification. It does not block execution but slightly reduces the specification's internal coherence.",
+      "fix": "Update the descriptions for 'enmity' and 'amity' in the main narrative (Section 3) of the framework file to match the more detailed and specific descriptions provided in the YAML appendix (Section 5.3) for full consistency.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "cff_v10.md"
+      ]
+    }
+  ],
+  "suggestions": [],
+  "metadata": {
+    "agent": "V2ValidationAgent",
+    "timestamp": "2025-09-21T16:26:59.261372",
+    "experiment_id": "mlkmx",
+    "validation_type": "experiment_coherence"
+  }
+}

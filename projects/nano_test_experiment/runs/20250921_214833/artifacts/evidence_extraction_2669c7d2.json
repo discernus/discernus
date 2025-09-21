@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250921_174855_1",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "evidence_extraction": "```json\n[\n  \"The proposed industrial zoning changes represent a [negative_sentiment: catastrophic betrayal] of public trust and an [negative_sentiment: assault] on our community's well-being.\",\n  \"The complete [negative_sentiment: lack of transparency] and the [negative_sentiment: dismissive attitude] from officials have only fueled the growing sense of [negative_sentiment: despair and anger].\"\n]\n```",
+  "document_index": 1,
+  "timestamp": "2025-09-21T21:49:47.436767+00:00"
+}

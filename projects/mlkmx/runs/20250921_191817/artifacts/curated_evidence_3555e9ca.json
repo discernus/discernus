@@ -1,0 +1,29 @@
+{
+  "agent_name": "IntelligentEvidenceRetrievalAgent",
+  "timestamp": "2025-09-21T19:24:03.426445+00:00",
+  "focus_area": "Contrasting Rhetorical Profiles",
+  "curated_evidence": {
+    "quotes": [
+      {
+        "statistical_relevance": "**Statistical relevance:** While describing extreme `fragmentation` and the profound absence of `individual_dignity`, this quote provides the critical context and urgent motivation for the document's overall coherent, cohesive, and flourishing-oriented profile. It highlights the severe injustices that the document's rhetoric of `hope` and `cohesive_goals` aims to overcome, thereby underscoring the stakes for its flourishing-oriented message.",
+        "strength_rating": 3,
+        "iteration_focus": "Contrasting Rhetorical Profiles",
+        "statistical_targets": [
+          "High tension and \"mixed-message\" discourse in Document 0 (high scores in tribal_dominance, fear, enmity, hope, amity, cohesive_goals)",
+          "Coherent and cohesive discourse in Document 1 (high scores in individual_dignity, hope, cohesive_goals and low fragmentation)"
+        ],
+        "curation_timestamp": "2025-09-21T19:24:03.426421+00:00"
+      }
+    ],
+    "focus_area": "Contrasting Rhetorical Profiles",
+    "iteration_name": "Comprehensive Review of Contrasting Profiles",
+    "evidence_processed": 2,
+    "model_used": "gemini-2.5-flash",
+    "statistical_targets": [
+      "High tension and \"mixed-message\" discourse in Document 0 (high scores in tribal_dominance, fear, enmity, hope, amity, cohesive_goals)",
+      "Coherent and cohesive discourse in Document 1 (high scores in individual_dignity, hope, cohesive_goals and low fragmentation)"
+    ],
+    "curation_instructions": "Review all 10 quotes across the 2 documents. For Document 0, select the 5 best quotes that exemplify the contradictory mix of fragmentave (e.g., 'fear', 'enmity') and cohesive (e.g., 'hope', 'amity') rhetoric. For Document 1, select the 5 best quotes that clearly demonstrate its coherent, cohesive, and flourishing-oriented profile (e.g., 'individual_dignity', 'hope').",
+    "priority": "high"
+  }
+}

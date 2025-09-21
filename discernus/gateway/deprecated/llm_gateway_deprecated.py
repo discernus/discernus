@@ -151,10 +151,13 @@ class LLMGateway(BaseGateway):
                         return None, {"success": False, "error": error_msg, "model": current_model, "attempts": attempts}
 
                 # Enhanced progress message with context
+                from ...core.unified_logger import get_unified_logger
+                unified_logger = get_unified_logger()
+                
                 if context:
-                    print(f"🤖 {context} with {current_model} (Attempt {attempts}/{max_retries})...")
+                    unified_logger.llm_call(current_model, attempts, max_retries, context=context)
                 else:
-                    print(f"Attempting call with {current_model} (Attempt {attempts}/{max_retries})...")
+                    unified_logger.llm_call(current_model, attempts, max_retries)
                 
                 # Clean parameters based on provider requirements
                 call_kwargs = kwargs.copy()

@@ -1,0 +1,10 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250921_173150_1",
+  "step": "verification",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "verification_status": "verification_error",
+  "verified": null,
+  "reasoning": null,
+  "document_index": 1,
+  "timestamp": "2025-09-21T21:32:44.329886+00:00"
+}

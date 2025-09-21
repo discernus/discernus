@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250921_151046_0",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "evidence_extraction": "```json\n[\n  \"The political philosophy of black nationalism only means that the black man should control the politics and the politicians in his own community.\",\n  \"We don't see any American dream. We've experienced only the American nightmare. We haven't benefited from America's democracy. We've only suffered from America's hypocrisy.\",\n  \"Revolutions overturn systems. Revolutions destroy systems.\",\n  \"So our next move is to take the entire civil rights struggle \u2013 problem \u2013 into the United Nations and let the world see that Uncle Sam is guilty of violating the human rights of 22 million Afro-Americans right down to the year of 1964\",\n  \"Join any kind of organization \u2013 civic, religious, fraternal, political or otherwise that's based on lifting the black man up and making him master of his own community.\"\n]\n```",
+  "document_index": 0,
+  "timestamp": "2025-09-21T19:12:05.020464+00:00"
+}

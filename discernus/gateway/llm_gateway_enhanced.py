@@ -9,10 +9,9 @@ Show Your Work architecture.
 
 import json
 from typing import Dict, Any, Tuple, List, Optional
-from .deprecated.llm_gateway_deprecated import LLMGateway
+from .llm_gateway import LLMGateway
 
 class EnhancedLLMGateway(LLMGateway):
-    """Enhanced LLM Gateway with tool calling support"""
     
     def execute_call_with_tools(self, model: str, prompt: str, system_prompt: str = "You are a helpful assistant.",
                                tools: List[Dict[str, Any]] = None, max_retries: int = 3,
@@ -38,6 +37,7 @@ class EnhancedLLMGateway(LLMGateway):
         import time
         from datetime import datetime
         from ..core.logging_config import get_logger
+        from ..core.unified_logger import get_unified_logger
         
         current_model = model
         attempts = 0

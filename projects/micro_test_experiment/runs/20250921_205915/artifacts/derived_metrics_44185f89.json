@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250921_165946_3",
+  "step": "derived_metrics",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "derived_metrics": "```python\nimport json\n\nscores = {\n  \"positive_sentiment\": 0.0,\n  \"negative_sentiment\": 1.0\n}\n\npositive_sentiment = scores[\"positive_sentiment\"]\nnegative_sentiment = scores[\"negative_sentiment\"]\n\nnet_sentiment = positive_sentiment - negative_sentiment\nsentiment_magnitude = (positive_sentiment + negative_sentiment) / 2\n\nresults = {\n    \"net_sentiment\": net_sentiment,\n    \"sentiment_magnitude\": sentiment_magnitude\n}\n```\n```json\n{\"results\":{\"net_sentiment\":-1.0,\"sentiment_magnitude\":0.5}}\n```",
+  "document_index": 3,
+  "timestamp": "2025-09-21T21:02:01.985332+00:00"
+}

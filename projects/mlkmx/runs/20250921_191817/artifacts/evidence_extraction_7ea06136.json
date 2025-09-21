@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250921_151852_0",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "evidence_extraction": "```json\n[\n  \"The political philosophy of black nationalism only means that the black man should control the politics and the politicians in his own community. The time when white people can come in our community and get us to vote for them so that they can be our political leaders and tell us what to do and what not to do is long gone.\",\n  \"Whenever you got a racial powder keg sitting in your lap, you're in more trouble than if you had an atomic powder keg sitting in your lap. When a racial powder keg goes off, it doesn't care who it knocks out the way. Understand this, it's dangerous.\",\n  \"So our next move is to take the entire civil rights struggle \u2013 problem \u2013 into the United Nations and let the world see that Uncle Sam is guilty of violating the human rights of 22 million Afro-Americans right down to the year of 1964 and still has the audacity or the nerve to stand up and represent himself as the leader of the free world?\",\n  \"The economic philosophy of black nationalism only means that we should own and operate and control the economy of our community. You would never have found\u2014you can't open up a black store in a white community. White man won't even patronize you. And he's not wrong. He got sense enough to look out for himself. It's you who don't have sense enough to look out for yourself.\",\n  \"When you \u2014 and he is your enemy. You wouldn't be in this country if some enemy hadn't kidnapped you and brought you here.\"\n]\n```",
+  "document_index": 0,
+  "timestamp": "2025-09-21T19:19:54.834460+00:00"
+}
