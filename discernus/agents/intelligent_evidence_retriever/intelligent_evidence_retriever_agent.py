@@ -429,7 +429,7 @@ Generate a plan that balances thoroughness with efficiency.
 """
 
         try:
-            # Execute tool call for planning
+            # Let Gemini Pro do all the strategic thinking - no fallback
             response, metadata = self.llm_gateway.execute_call_with_tools(
                 model="vertex_ai/gemini-2.5-pro",
                 prompt=planning_prompt,
@@ -442,63 +442,17 @@ Generate a plan that balances thoroughness with efficiency.
             if metadata.get('tool_calls'):
                 tool_call = metadata['tool_calls'][0]
                 if tool_call['name'] == 'generate_curation_plan':
-                    return tool_call['arguments']
+                    plan = tool_call['arguments']
+                    self.logger.info(f"Gemini Pro strategic plan: {plan['strategy']} with {len(plan['iterations'])} iterations")
+                    return plan
             
-            # Fallback if tool calling fails
-            self.logger.warning("Tool calling failed, using fallback planning")
-            return self.create_fallback_plan(evidence_count, evidence_size_mb)
+            # If Gemini Pro fails to plan, that's a real error
+            raise RuntimeError("Gemini Pro failed to generate strategic curation plan")
             
         except Exception as e:
-            self.logger.error(f"Curation planning failed: {e}")
-            return self.create_fallback_plan(evidence_count, evidence_size_mb)
+            self.logger.error(f"Strategic planning failed: {e}")
+            raise  # Don't mask LLM failures with fallbacks
 
-    def create_fallback_plan(self, evidence_count: int, evidence_size_mb: float) -> Dict[str, Any]:
-        """Create a simple fallback curation plan that matches the enhanced schema."""
-        if evidence_count <= self.FLASH_HIGH_CONFIDENCE_THRESHOLD:
-            return {
-                "strategy": "single_pass",
-                "rationale": f"Small corpus ({evidence_count} documents, {evidence_size_mb:.2f}MB) suitable for single comprehensive pass with Flash model for cost efficiency.",
-                "iterations": [{
-                    "iteration_name": "comprehensive_evidence_curation",
-                    "focus_area": "all_statistical_findings",
-                    "statistical_targets": ["significant_correlations", "key_differences", "notable_patterns"],
-                    "evidence_subset": "all_evidence",
-                    "curation_instructions": "Select the most compelling quotes that support any significant statistical findings. Focus on clear, representative examples that illustrate the key patterns in the data.",
-                    "expected_quotes": min(100, evidence_count * 5),  # Estimate 5 quotes per document
-                    "priority": "high"
-                }],
-                "execution_model": "flash",
-                "estimated_total_quotes": min(100, evidence_count * 5),
-                "cost_estimate": "low"
-            }
-        else:
-            return {
-                "strategy": "multi_iteration",
-                "rationale": f"Large corpus ({evidence_count} documents, {evidence_size_mb:.2f}MB) requires multi-iteration approach with Pro model for cross-document analysis and session caching.",
-                "iterations": [
-                    {
-                        "iteration_name": "primary_statistical_patterns",
-                        "focus_area": "core_statistical_findings",
-                        "statistical_targets": ["strong_correlations", "significant_differences", "main_effects"],
-                        "evidence_subset": "all_evidence",
-                        "curation_instructions": "Focus on quotes that clearly demonstrate the strongest statistical relationships and most significant findings. Prioritize evidence that supports the primary research conclusions.",
-                        "expected_quotes": 150,
-                        "priority": "high"
-                    },
-                    {
-                        "iteration_name": "secondary_patterns_and_outliers",
-                        "focus_area": "supporting_evidence_and_exceptions",
-                        "statistical_targets": ["outlier_cases", "interaction_effects", "secondary_patterns"],
-                        "evidence_subset": "outlier_docs",
-                        "curation_instructions": "Identify quotes from outlier documents and cases that illustrate exceptions, interaction effects, or secondary patterns that add nuance to the primary findings.",
-                        "expected_quotes": 100,
-                        "priority": "medium"
-                    }
-                ],
-                "execution_model": "pro",
-                "estimated_total_quotes": 250,
-                "cost_estimate": "medium"
-            }
 
     def select_execution_model(self, evidence_count: int, evidence_size_mb: float) -> str:
         """
