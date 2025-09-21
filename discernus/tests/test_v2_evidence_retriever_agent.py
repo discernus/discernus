@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """
-Test V2 EvidenceRetriever Agent
-===============================
+Test V2 EvidenceRetriever Agent (DEPRECATED)
+============================================
 
 Tests for the V2 EvidenceRetrieverAgent implementation.
+NOTE: This agent has been deprecated. Use IntelligentEvidenceRetrievalAgent instead.
 """
 
 import pytest
@@ -12,7 +13,7 @@ from pathlib import Path
 from unittest.mock import Mock, MagicMock, patch
 from datetime import datetime
 
-from discernus.agents.evidence_retriever_agent.v2_evidence_retriever_agent import V2EvidenceRetrieverAgent
+from discernus.agents.deprecated.evidence_retriever_agent.v2_evidence_retriever_agent import V2EvidenceRetrieverAgent
 from discernus.core.agent_result import AgentResult
 from discernus.core.run_context import RunContext
 from discernus.core.agent_config import AgentConfig

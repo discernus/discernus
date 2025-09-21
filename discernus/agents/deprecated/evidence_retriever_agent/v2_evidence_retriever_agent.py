@@ -29,6 +29,12 @@ from discernus.core.rag_index_manager import RAGIndexManager
 
 class V2EvidenceRetrieverAgent(StandardAgent):
     """
+    DEPRECATED: Use IntelligentEvidenceRetrievalAgent instead.
+    
+    This agent has been superseded by IntelligentEvidenceRetrievalAgent which provides
+    strategic planning, LLM-driven curation, and session caching capabilities.
+    """
+    """
     Simplified V2 evidence retrieval agent that uses LLM intelligence
     instead of fragile parsing to identify key findings.
     """
