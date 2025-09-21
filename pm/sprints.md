@@ -23,100 +23,209 @@
 
 ## V2 Agent Refactoring Sprint Plan
 
-### Sprint V2-REFACTOR-1: AnalysisAgent Atomic Processing 🔄 **IN PROGRESS**
+### Sprint V2-REFACTOR-1: AnalysisAgent Atomic Processing ✅ **COMPLETED**
 
-**Timeline**: 1-2 weeks
+**Timeline**: Completed
 **Goal**: Refactor AnalysisAgent to process documents atomically instead of in batch
 **Definition of Done**: Each document's composite analysis is immediately processed through steps 2-5, creating atomic artifacts
 
-**Detailed Tasks**:
+**Completed Tasks**:
+- ✅ Fixed document processing loop for atomic processing
+- ✅ Fixed V2AnalysisAgent duplication by removing legacy agent dependency
+- ✅ Implemented EnhancedLLMGateway and tool calling verification
+- ✅ Restored YAML prompt template loading
+- ✅ Fixed StatisticalAgent field name mismatch (score_extraction vs scores_extraction)
+- ✅ Achieved end-to-end success with nano_test_experiment
 
-#### [V2-REFACTOR-1.1] Fix Document Processing Loop
-- **Current Issue**: Documents processed in batch, only last document gets steps 2-5
-- **Fix**: Move steps 2-5 inside the document loop
-- **Code Location**: `discernus/agents/analysis_agent/main.py` lines 103-141
-- **Definition of Done**: Each document gets its own evidence, markup, scores, derived metrics, and verification artifacts
+**Handoff Completed**: AnalysisAgent produces clean atomic artifacts that StatisticalAgent can process
 
-#### [V2-REFACTOR-1.2] Fix Step 2 Evidence Extraction
-- **Current Issue**: LLM gets stuck in loop, repeats same quote 958 times
-- **Fix**: Improve prompt and add validation
-- **Code Location**: `discernus/agents/analysis_agent/main.py` lines 451-490
-- **Definition of Done**: Evidence extraction produces unique, relevant quotes per document
+---
 
-#### [V2-REFACTOR-1.3] Add Error Handling & Validation
-- **Current Issue**: No validation of LLM outputs
-- **Fix**: Add validation for each step's output
-- **Definition of Done**: Each step validates its output and fails gracefully
+### Sprint V2-REFACTOR-3: IntelligentEvidenceRetrievalAgent Development 🔄 **NEXT**
 
-#### [V2-REFACTOR-1.4] Test with Small Experiment
-- **Test**: Run nano_test_experiment to verify atomic processing
-- **Definition of Done**: All artifacts created correctly, no token limit issues
-
-### Sprint V2-REFACTOR-2: StatisticalAgent Refactoring 📋 **PENDING**
-
-**Timeline**: 1 week
-**Goal**: Refactor StatisticalAgent to work with atomic artifacts from AnalysisAgent
-**Definition of Done**: StatisticalAgent processes atomic score artifacts and produces clean statistical results
+**Timeline**: 2-3 weeks
+**Goal**: Replace RAG-based evidence retrieval with intelligent atomic evidence processing using strategic curation
+**Definition of Done**: New agent uses atomic evidence artifacts and statistical findings to produce precisely curated evidence
 
 **Detailed Tasks**:
 
-#### [V2-REFACTOR-2.1] Update StatisticalAgent Input Processing
-- **Current Issue**: Expects batch artifacts, needs atomic artifacts
-- **Fix**: Process individual score artifacts from AnalysisAgent
-- **Definition of Done**: StatisticalAgent works with atomic score artifacts
+#### [V2-REFACTOR-3.1] Create IntelligentEvidenceRetrievalAgent Foundation
+- **Objective**: Build new agent class with proper inheritance and capabilities
+- **Code Location**: `discernus/agents/intelligent_evidence_retriever/`
+- **Implementation**:
+  - Inherit from `StandardAgent` or `ToolCallingAgent`
+  - Initialize with `EnhancedLLMGateway` for tool calling
+  - Implement `get_capabilities()` method
+- **Definition of Done**: Agent class created with proper initialization and capability declaration
 
-#### [V2-REFACTOR-2.2] Fix Statistical Calculation Logic
-- **Current Issue**: May have issues with atomic vs batch processing
-- **Fix**: Ensure statistical calculations work with atomic inputs
-- **Definition of Done**: Statistical calculations produce correct results
+#### [V2-REFACTOR-3.2] Implement Step 0: Evidence Inventory
+- **Objective**: Count and assess atomic evidence artifacts without processing them
+- **Implementation**:
+  ```python
+  def count_evidence_artifacts(self, run_context):
+      evidence_artifacts = []
+      for artifact_hash in run_context.analysis_artifacts:
+          if self.is_evidence_artifact(artifact_hash):
+              evidence_artifacts.append(artifact_hash)
+      return len(evidence_artifacts), self.estimate_total_size(evidence_artifacts)
+  ```
+- **Definition of Done**: Agent can count evidence artifacts and estimate total size in O(1) time
 
-#### [V2-REFACTOR-2.3] Test StatisticalAgent Integration
-- **Test**: Run with AnalysisAgent atomic outputs
-- **Definition of Done**: StatisticalAgent produces clean results without errors
+#### [V2-REFACTOR-3.3] Implement Step 1: Strategic Curation Planning
+- **Objective**: Use Gemini Pro with tool calling to generate intelligent curation plan
+- **Implementation**:
+  - Define `generate_curation_plan` tool with structured JSON output
+  - Include evidence count, statistical complexity, and corpus size in planning
+  - Generate iteration strategy (single pass vs multi-iteration)
+- **Tool Schema**:
+  ```json
+  {
+    "name": "generate_curation_plan",
+    "parameters": {
+      "strategy": "single_pass|multi_iteration", 
+      "iterations": [{"focus_area": "...", "statistical_targets": [...], "evidence_subset": "..."}],
+      "execution_model": "flash|pro",
+      "estimated_quotes": 150
+    }
+  }
+  ```
+- **Definition of Done**: Agent generates deterministic curation plans via tool calling
 
-### Sprint V2-REFACTOR-3: EvidenceRetrieverAgent Refactoring 📋 **PENDING**
+#### [V2-REFACTOR-3.4] Implement Dynamic Model Selection
+- **Objective**: Automatically choose Flash vs Pro for execution based on evidence volume
+- **Implementation**:
+  ```python
+  def select_execution_model(self, evidence_count, evidence_size_mb):
+      FLASH_HIGH_CONFIDENCE_THRESHOLD = 400  # documents
+      FLASH_SIZE_LIMIT = 3.0  # MB
+      
+      if evidence_count <= FLASH_HIGH_CONFIDENCE_THRESHOLD and evidence_size_mb <= FLASH_SIZE_LIMIT:
+          return "gemini-2.5-flash"
+      else:
+          return "gemini-2.5-pro"
+  ```
+- **Definition of Done**: Agent automatically selects optimal model for cost/quality balance
 
-**Timeline**: 1 week
-**Goal**: Refactor EvidenceRetrieverAgent to work with atomic evidence artifacts
-**Definition of Done**: EvidenceRetrieverAgent processes atomic evidence artifacts and produces curated evidence
+#### [V2-REFACTOR-3.5] Implement Steps 2-n: Iterative Evidence Curation
+- **Objective**: Execute curation plan with intelligent evidence selection
+- **Implementation**:
+  - Load atomic evidence artifacts (not RAG index)
+  - For each iteration: focus on specific statistical findings
+  - Use session caching for Pro model to avoid re-upload costs
+  - Generate curated evidence mapped to statistical conclusions
+- **Definition of Done**: Agent produces curated evidence artifacts with statistical mapping
+
+#### [V2-REFACTOR-3.6] Implement Session Caching for Cost Optimization
+- **Objective**: Use Gemini 2.5 Pro session caching to avoid repeated evidence uploads
+- **Implementation**:
+  ```python
+  def create_cached_session(self, evidence_artifacts):
+      all_evidence = self.load_all_evidence_artifacts(evidence_artifacts)
+      return self.gemini_pro.create_cached_session(all_evidence)
+  
+  def execute_with_cache(self, cache_session, iteration):
+      return cache_session.query(iteration.instructions)
+  ```
+- **Definition of Done**: Pro model reuses evidence across iterations with zero re-upload cost
+
+#### [V2-REFACTOR-3.7] Remove RAG Dependencies
+- **Objective**: Eliminate RAGIndexManager and vector-based retrieval completely
+- **Code Locations**: 
+  - `discernus/agents/evidence_retriever_agent/v2_evidence_retriever_agent.py`
+  - `discernus/core/rag_index_manager.py`
+- **Implementation**: Replace RAG calls with direct atomic evidence processing
+- **Definition of Done**: No RAG infrastructure used; all evidence comes from atomic artifacts
+
+#### [V2-REFACTOR-3.8] Integration Testing with Atomic Evidence
+- **Objective**: Verify agent works with clean atomic evidence artifacts (~6KB per document)
+- **Test Cases**:
+  - Small corpus (nano): Single iteration, Flash execution
+  - Medium corpus (micro): Multi-iteration, Flash execution  
+  - Large corpus (kirk): Multi-iteration, Pro execution with caching
+- **Definition of Done**: Agent produces high-quality curated evidence for all corpus sizes
+
+**Handoff to Sprint V2-REFACTOR-4**: IntelligentEvidenceRetrievalAgent produces precisely curated evidence mapped to statistical conclusions
+
+---
+
+### Sprint V2-REFACTOR-4: TwoStageSynthesisAgent Development ⏳ **PENDING**
+
+**Timeline**: 2-3 weeks
+**Goal**: Implement two-stage synthesis to prevent hallucination and ensure data-driven reports
+**Definition of Done**: New synthesis agent produces high-quality reports anchored in statistical data with supporting evidence
 
 **Detailed Tasks**:
 
-#### [V2-REFACTOR-3.1] Update EvidenceRetrieverAgent Input Processing
-- **Current Issue**: Not currently used, needs to work with atomic evidence
-- **Fix**: Process individual evidence artifacts from AnalysisAgent
-- **Definition of Done**: EvidenceRetrieverAgent works with atomic evidence artifacts
+#### [V2-REFACTOR-4.1] Create TwoStageSynthesisAgent Foundation
+- **Objective**: Build new agent class replacing unified synthesis approach
+- **Code Location**: `discernus/agents/two_stage_synthesis_agent/`
+- **Implementation**:
+  - Inherit from `StandardAgent`
+  - Initialize with `EnhancedLLMGateway` 
+  - Implement two-stage execution pattern
+- **Definition of Done**: Agent class created with proper two-stage architecture
 
-#### [V2-REFACTOR-3.2] Implement Proper Evidence Curation
-- **Current Issue**: Evidence extraction in AnalysisAgent produces duplicates
-- **Fix**: Move evidence curation to EvidenceRetrieverAgent
-- **Definition of Done**: EvidenceRetrieverAgent produces deduplicated, curated evidence
+#### [V2-REFACTOR-4.2] Implement Stage 1: Data-Driven Analysis
+- **Objective**: Generate report based purely on statistical findings without quotes
+- **Implementation**:
+  ```python
+  def stage_1_analysis(self, run_context):
+      return self.gemini_pro.analyze(
+          experiment=run_context.experiment,
+          statistical_results=run_context.statistical_results,
+          framework=run_context.framework,
+          prompt="Generate data-driven analysis. No quotes available yet."
+      )
+  ```
+- **Key Requirements**:
+  - No access to curated evidence quotes
+  - Report structure driven by statistical findings
+  - Coherent narrative from data alone
+- **Definition of Done**: Stage 1 produces complete analysis report without any evidence quotes
 
-#### [V2-REFACTOR-3.3] Test EvidenceRetrieverAgent Integration
-- **Test**: Run with AnalysisAgent atomic outputs
-- **Definition of Done**: EvidenceRetrieverAgent produces clean, curated evidence
+#### [V2-REFACTOR-4.3] Implement Stage 2: Evidence Integration
+- **Objective**: Enhance data-driven report with curated evidence without creating new claims
+- **Implementation**:
+  ```python
+  def stage_2_evidence_integration(self, base_report, curated_evidence):
+      return self.gemini_pro.integrate_evidence(
+          base_report=base_report,
+          evidence_mappings=curated_evidence,
+          prompt="Enhance existing analysis with quotes. Add appendix. No new claims."
+      )
+  ```
+- **Key Requirements**:
+  - Only support existing statistical conclusions
+  - Map quotes to specific findings
+  - Create comprehensive evidence appendix
+  - No analytical drift or new interpretations
+- **Definition of Done**: Stage 2 produces enhanced report with evidence integration and appendix
 
-### Sprint V2-REFACTOR-4: SynthesisAgent Refactoring 📋 **PENDING**
+#### [V2-REFACTOR-4.4] Implement Anti-Hallucination Controls
+- **Objective**: Prevent synthesis agent from inventing unsupported conclusions
+- **Implementation**:
+  - Strict prompting: "Only support existing statistical findings"
+  - Evidence validation: Ensure quotes match statistical conclusions
+  - Claim verification: No new analytical claims in Stage 2
+- **Definition of Done**: Final reports contain no claims not supported by Stage 1 statistical analysis
 
-**Timeline**: 1 week
-**Goal**: Refactor SynthesisAgent to work with atomic artifacts and stay within token limits
-**Definition of Done**: SynthesisAgent produces comprehensive reports without token limit issues
+#### [V2-REFACTOR-4.5] Create Evidence Appendix System
+- **Objective**: Organize all curated evidence by statistical conclusion for audit trail
+- **Implementation**:
+  - Group quotes by statistical finding
+  - Include relevance scores and source attribution
+  - Maintain complete provenance chain
+- **Definition of Done**: Appendix provides complete, organized access to all supporting evidence
 
-**Detailed Tasks**:
+#### [V2-REFACTOR-4.6] Integration Testing with Curated Evidence
+- **Objective**: Verify two-stage synthesis works with IntelligentEvidenceRetrievalAgent output
+- **Test Cases**:
+  - Verify Stage 1 produces coherent analysis without quotes
+  - Verify Stage 2 enhances without creating new claims
+  - Verify evidence appendix completeness and organization
+- **Definition of Done**: Two-stage synthesis produces high-quality, academically rigorous reports
 
-#### [V2-REFACTOR-4.1] Fix SynthesisAgent Input Processing
-- **Current Issue**: May still receive too much data
-- **Fix**: Ensure only necessary data is passed to synthesis
-- **Definition of Done**: SynthesisAgent receives only statistical results, curated evidence, and metadata
-
-#### [V2-REFACTOR-4.2] Implement Chunked Synthesis if Needed
-- **Current Issue**: Large experiments may still hit token limits
-- **Fix**: Implement chunked synthesis for large experiments
-- **Definition of Done**: SynthesisAgent handles experiments of any size
-
-#### [V2-REFACTOR-4.3] Test SynthesisAgent Integration
-- **Test**: Run with all atomic artifacts
-- **Definition of Done**: SynthesisAgent produces comprehensive reports without errors
+**Handoff to Sprint V2-INTEGRATION-1**: Complete V2 agent ecosystem ready for comprehensive integration testing
 
 ### Sprint V2-INTEGRATION-1: Small Experiment Testing 📋 **PENDING**
 
