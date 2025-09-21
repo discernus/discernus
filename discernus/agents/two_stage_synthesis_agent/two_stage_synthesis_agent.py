@@ -195,10 +195,31 @@ class TwoStageSynthesisAgent(StandardAgent):
     
     def _validate_inputs(self, run_context: RunContext) -> bool:
         """Validate that required inputs are available for synthesis."""
-        # Check for statistical results
+        # Check for statistical results existence
         if not hasattr(run_context, 'statistical_results') or not run_context.statistical_results:
             self.logger.error("No statistical results found in run_context")
             return False
+        
+        # Check for meaningful statistical content (fail hard if empty or placeholder)
+        statistical_content = str(run_context.statistical_results)
+        if len(statistical_content.strip()) < 100:  # Suspiciously short
+            self.logger.error(f"Statistical results appear empty or invalid: {len(statistical_content)} characters")
+            return False
+        
+        # Check for common failure indicators in statistical content
+        failure_indicators = [
+            "did not generate statistical output",
+            "no statistical results",
+            "statistical analysis failed",
+            "missing data",
+            "no data available"
+        ]
+        
+        statistical_lower = statistical_content.lower()
+        for indicator in failure_indicators:
+            if indicator in statistical_lower:
+                self.logger.error(f"Statistical results contain failure indicator: '{indicator}'")
+                return False
         
         # Check for experiment metadata
         if not run_context.experiment_id:
@@ -210,7 +231,7 @@ class TwoStageSynthesisAgent(StandardAgent):
             self.logger.error("No framework_path found in run_context")
             return False
         
-        self.logger.info("Input validation passed: statistical results, experiment metadata, and framework available")
+        self.logger.info(f"Input validation passed: statistical results ({len(statistical_content)} chars), experiment metadata, and framework available")
         return True
     
     def _execute_stage1_analysis(self, run_context: RunContext) -> Optional[str]:
@@ -359,19 +380,22 @@ class TwoStageSynthesisAgent(StandardAgent):
         )
     
     def _store_final_report(self, report: str) -> str:
-        """Store final report with evidence integration."""
-        artifact_data = {
-            "agent_name": self.agent_name,
-            "stage": "stage2_evidence_integrated",
-            "timestamp": datetime.now(timezone.utc).isoformat(),
-            "model_used": self.stage2_model,
-            "report_content": report,
-            "evidence_included": True,
-            "synthesis_method": "two_stage_with_evidence"
-        }
+        """Store final report as raw markdown content."""
+        # Add metadata header to the markdown content itself
+        timestamp = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')
+        markdown_content = f"""---
+agent: {self.agent_name}
+stage: stage2_evidence_integrated
+timestamp: {timestamp}
+model_used: {self.stage2_model}
+evidence_included: true
+synthesis_method: two_stage_with_evidence
+---
+
+{report}"""
         
         return self.storage.store_artifact(
-            content=artifact_data,
+            content=markdown_content,
             artifact_type="final_synthesis_report",
             experiment_id="final_report"
         )
