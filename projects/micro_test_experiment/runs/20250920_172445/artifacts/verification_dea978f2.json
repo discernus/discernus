@@ -1,9 +1,0 @@
-{
-  "analysis_id": "analysis_3c4f1392",
-  "step": "verification",
-  "model_used": "vertex_ai/gemini-2.5-flash",
-  "raw_verification_response": "Yes, the derived metrics calculations are **correct** and properly align with the framework.\n\nHere's the verification:\n\n1.  **Net Sentiment:**\n    *   **Framework Definition:** `positive - negative`\n    *   **YAML Formula:** `dimensions.positive_sentiment.raw_score - dimensions.negative_sentiment.raw_score`\n    *   **Input Values:** `positive_sentiment.raw_score = 1.0`, `negative_sentiment.raw_score = 0.0`\n    *   **Calculation:** `1.0 - 0.0 = 1.0`\n    *   **Python Code:** `net_sentiment = positive_sentiment - negative_sentiment` (correctly implements the formula)\n    *   **Output:** `net_sentiment: 1.0` (matches the calculation)\n\n2.  **Sentiment Magnitude:**\n    *   **Framework Definition:** `(positive + negative) / 2`\n    *   **YAML Formula:** `(dimensions.positive_sentiment.raw_score + dimensions.negative_sentiment.raw_score) / 2`\n    *   **Input Values:** `positive_sentiment.raw_score = 1.0`, `negative_sentiment.raw_score = 0.0`\n    *   **Calculation:** `(1.0 + 0.0) / 2 = 1.0 / 2 = 0.5`\n    *   **Python Code:** `sentiment_magnitude = (positive_sentiment + negative_sentiment) / 2` (correctly implements the formula)\n    *   **Output:** `sentiment_magnitude: 0.5` (matches the calculation)\n\nAll calculations are accurate according to the provided framework and input scores.",
-  "document_index": 1,
-  "document_name": "document_1",
-  "timestamp": "2025-09-20T17:25:53.054538+00:00"
-}

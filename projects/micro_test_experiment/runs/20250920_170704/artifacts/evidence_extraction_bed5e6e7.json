@@ -1,7 +1,0 @@
-{
-  "analysis_id": "analysis_d9b1f934",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "evidence_extraction": "```json\n{\n  \"positive_sentiment\": [\n    \"The launch of the new satellite network is a monumental achievement for our nation's scientific community and a beacon of our technological prowess.\",\n    \"The prevailing feeling is one of immense pride and boundless optimism.\"\n  ],\n  \"negative_sentiment\": []\n}\n```",
-  "timestamp": "2025-09-20T17:07:45.591567+00:00"
-}

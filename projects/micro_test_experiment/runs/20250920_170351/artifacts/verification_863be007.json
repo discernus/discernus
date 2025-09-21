@@ -1,9 +1,0 @@
-{
-  "analysis_id": "analysis_2225e53b",
-  "step": "verification",
-  "model_used": "vertex_ai/gemini-2.5-flash",
-  "raw_verification_response": "The derived metrics calculations are **correct** according to the provided framework.\n\nHere's the verification:\n\n**1. Extract Dimensional Scores for `document_2`:**\n*   `positive_sentiment.raw_score` = 0.0\n*   `negative_sentiment.raw_score` = 1.0\n\n**2. Calculate Derived Metrics using Framework Formulas:**\n\n*   **Net Sentiment:**\n    *   Formula: `dimensions.positive_sentiment.raw_score - dimensions.negative_sentiment.raw_score`\n    *   Calculation: `0.0 - 1.0 = -1.0`\n\n*   **Sentiment Magnitude:**\n    *   Formula: `(dimensions.positive_sentiment.raw_score + dimensions.negative_sentiment.raw_score) / 2`\n    *   Calculation: `(0.0 + 1.0) / 2 = 1.0 / 2 = 0.5`\n\n**3. Comparison with Provided Output:**\n\nThe calculated values match the provided JSON output:\n```json\n{\n  \"document_2\": {\n    \"net_sentiment\": -1.0,        // Matches calculated -1.0\n    \"sentiment_magnitude\": 0.5    // Matches calculated 0.5\n  }\n}\n```",
-  "document_index": 2,
-  "document_name": "document_2",
-  "timestamp": "2025-09-20T17:05:27.437965+00:00"
-}

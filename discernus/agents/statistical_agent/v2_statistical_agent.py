@@ -431,14 +431,14 @@ Generate the Python code, execute it, and present both the code and results in a
                 }
             ]
             
-            # Extract just the Python code - verification is just math
-            python_code = self._extract_python_code(statistical_analysis_content)
+            # Truncate if too long to avoid prompt length issues
+            content = statistical_analysis_content[:2000] + "..." if len(statistical_analysis_content) > 2000 else statistical_analysis_content
             
-            prompt = f"""```python
-{python_code}
-```
+            prompt = f"""Verify this works by re-running any Python code you find:
 
-Re-run this code and call verify_statistical_analysis tool: does it execute without errors?"""
+{content}
+
+Call verify_statistical_analysis tool: does the code execute without errors?"""
 
             self.audit.log_agent_event(self.agent_name, "step2_started", {
                 "batch_id": batch_id,
@@ -499,24 +499,3 @@ Re-run this code and call verify_statistical_analysis tool: does it execute with
             self.logger.error(f"Step 2 failed: {e}")
             return None
     
-    def _extract_python_code(self, content: str) -> str:
-        """Extract Python code from content to minimize prompt length."""
-        try:
-            # Look for code blocks marked with ```python
-            import re
-            code_blocks = re.findall(r'```python\n(.*?)\n```', content, re.DOTALL)
-            if code_blocks:
-                return code_blocks[0].strip()
-            
-            # Fallback: look for any code block
-            code_blocks = re.findall(r'```\n(.*?)\n```', content, re.DOTALL)
-            if code_blocks:
-                return code_blocks[0].strip()
-            
-            # Last resort: return first 1000 chars to avoid prompt length issues
-            return content[:1000] + "..." if len(content) > 1000 else content
-            
-        except Exception as e:
-            self.logger.warning(f"Failed to extract Python code: {e}")
-            # Fallback to truncated content
-            return content[:500] + "..." if len(content) > 500 else content

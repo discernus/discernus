@@ -1,7 +1,0 @@
-{
-  "analysis_id": "analysis_b762574f",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "evidence_extraction": "```json\n{\n  \"document_id\": \"document_3\",\n  \"negative_sentiment_evidence\": [\n    \"The dam's structural failure and the ensuing flood have created a disastrous humanitarian and ecological crisis. Entire neighborhoods are submerged, thousands have been displaced, and the damage to our infrastructure is catastrophic.\",\n    \"The feeling on the ground is one of profound anger and hopelessness, a grim recognition that this entire tragedy was not just predictable, but preventable. The failure is monumental.\"\n  ]\n}\n```",
-  "timestamp": "2025-09-20T18:11:35.471629+00:00"
-}

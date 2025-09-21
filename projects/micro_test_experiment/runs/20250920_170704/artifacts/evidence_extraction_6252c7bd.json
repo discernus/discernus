@@ -1,7 +1,0 @@
-{
-  "analysis_id": "analysis_d9b1f934",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "evidence_extraction": "```json\n{\n  \"document_id\": \"document_2\",\n  \"evidence\": {\n    \"positive_sentiment\": [],\n    \"negative_sentiment\": [\n      \"The collapse of the pension fund is a calamitous event, a direct result of years of gross mismanagement and unforgivable neglect.\",\n      \"The aftermath is a tragic landscape of broken promises and ruined lives, a terrible stain on our state's history that will not soon be forgotten.\"\n    ]\n  }\n}\n```",
-  "timestamp": "2025-09-20T17:08:24.979547+00:00"
-}

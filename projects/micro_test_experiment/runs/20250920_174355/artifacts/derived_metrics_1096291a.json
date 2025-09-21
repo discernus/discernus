@@ -1,9 +1,0 @@
-{
-  "analysis_id": "analysis_ac83fec8",
-  "step": "derived_metrics_generation",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "raw_metrics_response": "## Code for Calculating Derived Metrics:\n\n```python\nimport json\n\n# Provided dimensional scores\nscores = {\n  \"document_0\": {\n    \"positive_sentiment\": {\n      \"raw_score\": 0.95,\n      \"salience\": 1.0,\n      \"confidence\": 0.95\n    },\n    \"negative_sentiment\": {\n      \"raw_score\": 0.0,\n      \"salience\": 0.0,\n      \"confidence\": 1.0\n    }\n  }\n}\n\n# Function to calculate derived metrics\ndef calculate_derived_metrics(document_scores):\n    positive_score = document_scores[\"positive_sentiment\"][\"raw_score\"]\n    negative_score = document_scores[\"negative_sentiment\"][\"raw_score\"]\n\n    # Net Sentiment: positive - negative\n    net_sentiment = positive_score - negative_score\n\n    # Sentiment Magnitude: (positive + negative) / 2\n    sentiment_magnitude = (positive_score + negative_score) / 2\n\n    return {\n        \"net_sentiment\": net_sentiment,\n        \"sentiment_magnitude\": sentiment_magnitude\n    }\n\n# Calculate derived metrics for each document\nderived_metrics_results = {}\nfor doc_id, doc_scores in scores.items():\n    derived_metrics_results[doc_id] = calculate_derived_metrics(doc_scores)\n\n# Print the results\nprint(json.dumps(derived_metrics_results, indent=2))\n```\n\n## Results:\n\n```json\n{\n  \"document_0\": {\n    \"net_sentiment\": 0.95,\n    \"sentiment_magnitude\": 0.475\n  }\n}\n```",
-  "document_index": 0,
-  "document_name": "document_0",
-  "timestamp": "2025-09-20T17:44:28.430610+00:00"
-}

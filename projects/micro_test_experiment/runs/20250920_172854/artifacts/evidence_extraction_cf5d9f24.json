@@ -1,7 +1,0 @@
-{
-  "analysis_id": "analysis_6f57b3fd",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "evidence_extraction": "```json\n{\n  \"document_id\": \"document_2\",\n  \"evidence_quotes\": {\n    \"positive_sentiment\": [],\n    \"negative_sentiment\": [\n      \"The collapse of the pension fund is a calamitous event, a direct result of years of gross mismanagement and unforgivable neglect.\",\n      \"Thousands of retirees, who dedicated their lives to public service, have been callously betrayed and now face a future of financial ruin and profound uncertainty.\"\n    ]\n  }\n}\n```",
-  "timestamp": "2025-09-20T17:30:14.354863+00:00"
-}

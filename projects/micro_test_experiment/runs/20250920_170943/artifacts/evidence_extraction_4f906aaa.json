@@ -1,7 +1,0 @@
-{
-  "analysis_id": "analysis_0602d735",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "evidence_extraction": "```json\n{\n  \"document_0\": {\n    \"positive_sentiment\": [\n      \"The launch of the new satellite network is a monumental achievement for our nation's scientific community and a beacon of our technological prowess.\",\n      \"The prevailing feeling is one of immense pride and boundless optimism.\"\n    ],\n    \"negative_sentiment\": [\n      \"No negative sentiment detected in the document.\",\n      \"The language used is uniformly positive and celebratory.\"\n    ]\n  }\n}\n```",
-  "timestamp": "2025-09-20T17:10:30.841963+00:00"
-}

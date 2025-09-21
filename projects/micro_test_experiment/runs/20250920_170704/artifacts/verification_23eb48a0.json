@@ -1,9 +1,0 @@
-{
-  "analysis_id": "analysis_d9b1f934",
-  "step": "verification",
-  "model_used": "vertex_ai/gemini-2.5-flash",
-  "raw_verification_response": "The calculations for the derived metrics are correct and align perfectly with the framework's definitions and the provided document scores.\n\nHere's the verification:\n\n**Document Scores for `document_0`:**\n*   `positive_sentiment.raw_score` = 1.0\n*   `negative_sentiment.raw_score` = 0.0\n\n---\n\n**1. `net_sentiment` calculation:**\n\n*   **Framework Formula:** `dimensions.positive_sentiment.raw_score - dimensions.negative_sentiment.raw_score`\n*   **Substitution:** `1.0 - 0.0`\n*   **Calculated Value:** `1.0`\n*   **Python Output:** `1.0`\n*   **Verification:** Matches.\n\n---\n\n**2. `sentiment_magnitude` calculation:**\n\n*   **Framework Formula:** `(dimensions.positive_sentiment.raw_score + dimensions.negative_sentiment.raw_score) / 2`\n*   **Substitution:** `(1.0 + 0.0) / 2`\n*   **Calculated Value:** `1.0 / 2 = 0.5`\n*   **Python Output:** `0.5`\n*   **Verification:** Matches.\n\n---\n\n**Conclusion:**\n\nThe derived metrics calculations performed by the Python code are accurate according to the provided `Sentiment Binary Framework v1.0` and the input `document_scores`.",
-  "document_index": 0,
-  "document_name": "document_0",
-  "timestamp": "2025-09-20T17:07:54.682525+00:00"
-}

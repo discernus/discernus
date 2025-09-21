@@ -1,7 +1,0 @@
-{
-  "analysis_id": "analysis_76f6f40b",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "evidence_extraction": "```json\n{\n  \"positive_sentiment\": [\n    \"No positive sentiment detected in the document.\"\n  ],\n  \"negative_sentiment\": [\n    \"The dam's structural failure and the ensuing flood have created a disastrous humanitarian and ecological crisis.\",\n    \"The feeling on the ground is one of profound anger and hopelessness, a grim recognition that this entire tragedy was not just predictable, but preventable. The failure is monumental.\"\n  ]\n}\n```",
-  "timestamp": "2025-09-20T17:02:14.539379+00:00"
-}

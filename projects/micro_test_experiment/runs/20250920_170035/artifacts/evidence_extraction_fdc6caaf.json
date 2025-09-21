@@ -1,7 +1,0 @@
-{
-  "analysis_id": "analysis_76f6f40b",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "evidence_extraction": "```json\n{\n  \"document_2\": {\n    \"positive_sentiment\": [\n      \"dedicated their lives to public service\"\n    ],\n    \"negative_sentiment\": [\n      \"The collapse of the pension fund is a calamitous event, a direct result of years of gross mismanagement and unforgivable neglect.\",\n      \"The financial devastation is horrific, but the deeper damage is to the social contract. This was not a market fluctuation; it was a deliberate, slow-motion disaster orchestrated by incompetent and self-serving bureaucrats.\"\n    ]\n  }\n}\n```",
-  "timestamp": "2025-09-20T17:01:54.913424+00:00"
-}

@@ -562,14 +562,11 @@ Generate the Python code, execute it, and present both the code and calculated r
                 }
             ]
             
-            # Extract just the Python code - verification is just math
-            python_code = self._extract_python_code(derived_metrics)
-            
-            prompt = f"""```python
-{python_code}
-```
+            prompt = f"""Verify this works by re-running any Python code you find:
 
-Re-run this code and call verify_math tool: does it execute without errors?"""
+{derived_metrics}
+
+Call verify_math tool: does the code execute without errors?"""
 
             self.audit.log_agent_event(self.agent_name, "step5_started", {
                 "batch_id": batch_id,
@@ -719,25 +716,4 @@ Return the marked-up document in markdown format."""
             self.logger.error(f"Step 6 failed for document {doc_index}: {e}")
             return None
     
-    def _extract_python_code(self, derived_metrics: str) -> str:
-        """Extract Python code from derived metrics content to minimize prompt length."""
-        try:
-            # Look for code blocks marked with ```python
-            import re
-            code_blocks = re.findall(r'```python\n(.*?)\n```', derived_metrics, re.DOTALL)
-            if code_blocks:
-                return code_blocks[0].strip()
-            
-            # Fallback: look for any code block
-            code_blocks = re.findall(r'```\n(.*?)\n```', derived_metrics, re.DOTALL)
-            if code_blocks:
-                return code_blocks[0].strip()
-            
-            # Last resort: return first 1000 chars to avoid prompt length issues
-            return derived_metrics[:1000] + "..." if len(derived_metrics) > 1000 else derived_metrics
-            
-        except Exception as e:
-            self.logger.warning(f"Failed to extract Python code: {e}")
-            # Fallback to truncated content
-            return derived_metrics[:500] + "..." if len(derived_metrics) > 500 else derived_metrics
 

@@ -1,7 +1,0 @@
-{
-  "analysis_id": "analysis_52d18e43",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "evidence_extraction": "```json\n{\n  \"document_id\": \"document_1\",\n  \"evidence_quotes\": {\n    \"positive_sentiment\": [\n      \"The community-led arts festival was an absolute triumph, celebrating our city's rich cultural tapestry with unparalleled vibrancy and joy.\",\n      \"It was a perfect, inspiring event that showcased the very best of our community, leaving everyone with a lasting feeling of warmth and pride.\"\n    ],\n    \"negative_sentiment\": [\n      \"The success was so complete that it left no room for doubt or criticism.\"\n    ]\n  }\n}\n```",
-  "timestamp": "2025-09-20T17:16:19.185747+00:00"
-}
