@@ -76,7 +76,7 @@ from discernus.core.audit_logger import AuditLogger
 from discernus.core.local_artifact_storage import LocalArtifactStorage
 from discernus.agents.analysis_agent.v2_analysis_agent import V2AnalysisAgent
 from discernus.agents.statistical_agent.v2_statistical_agent import V2StatisticalAgent
-from discernus.agents.evidence_retriever_agent.v2_evidence_retriever_agent import V2EvidenceRetrieverAgent
+from discernus.agents.intelligent_evidence_retriever import IntelligentEvidenceRetrievalAgent
 from discernus.agents.unified_synthesis_agent.v2_unified_synthesis_agent import V2UnifiedSynthesisAgent
 from discernus.agents.validation_agent.v2_validation_agent import V2ValidationAgent
 
@@ -262,7 +262,7 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, ski
         orchestrator.register_agent("Validation", V2ValidationAgent(security, storage, audit))
         orchestrator.register_agent("Analysis", V2AnalysisAgent(security, storage, audit))
         orchestrator.register_agent("Statistical", V2StatisticalAgent(security, storage, audit))
-        orchestrator.register_agent("Evidence", V2EvidenceRetrieverAgent(security, storage, audit))
+        orchestrator.register_agent("Evidence", IntelligentEvidenceRetrievalAgent(security, storage, audit))
         orchestrator.register_agent("Synthesis", V2UnifiedSynthesisAgent(security, storage, audit))
 
         # 5. Execute Strategy with Progress Reporting
