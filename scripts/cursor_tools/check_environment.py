@@ -34,8 +34,8 @@ def check_python_commands():
     
     return issues
 
-def check_macos_specifics():
-    """Check for macOS-specific environment issues."""
+def check_platform_specifics():
+    """Check for platform-specific environment issues."""
     issues = []
     
     # Check if we're on macOS
@@ -46,9 +46,21 @@ def check_macos_specifics():
         elif "/usr/bin" in sys.executable:
             issues.append("⚠️  Using system Python - consider Homebrew for better package management")
         
-        # Check for common macOS Python issues
-        if "Library/Python" in sys.executable:
-            issues.append("✅ Using user-installed packages (macOS standard)")
+    # Check for common macOS Python issues
+    if "Library/Python" in sys.executable:
+        issues.append("✅ Using user-installed packages (macOS standard)")
+    
+    # Check for Linux
+    elif sys.platform == "linux":
+        if "/usr/bin" in sys.executable:
+            issues.append("✅ Using system Python (Linux standard)")
+        elif "/home" in sys.executable:
+            issues.append("✅ Using user Python (Linux standard)")
+    
+    # Check for Windows
+    elif sys.platform == "win32":
+        if "Python" in sys.executable:
+            issues.append("✅ Using Python installation (Windows standard)")
     
     return issues
 
@@ -98,10 +110,10 @@ def check_environment():
     
     # Check for common agent confusion patterns
     python_issues = check_python_commands()
-    macos_issues = check_macos_specifics()
+    platform_issues = check_platform_specifics()
     agent_issues = check_common_agent_mistakes()
     
-    all_issues = python_issues + macos_issues + agent_issues
+    all_issues = python_issues + platform_issues + agent_issues
     
     for issue in all_issues:
         print(issue)

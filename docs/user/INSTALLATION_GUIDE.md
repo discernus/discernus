@@ -4,7 +4,7 @@
 
 ## Prerequisites
 
-- **Python 3.13.5+** with virtual environment support
+- **Python 3.8+** with virtual environment support (3.13+ recommended)
 - **Git** for version control
 - **Google Cloud Account** with Vertex AI enabled
 - **Google Cloud CLI** installed and configured
@@ -20,6 +20,7 @@ cd discernus
 
 ### 2. Set Up Python Environment
 
+#### Option A: Virtual Environment (Recommended)
 ```bash
 # Create virtual environment
 python3 -m venv venv
@@ -31,7 +32,23 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 3. Configure Google Cloud & Vertex AI
+#### Option B: User Installation (No Virtual Environment)
+```bash
+# Install dependencies to user directory
+pip install --user -r requirements.txt
+```
+
+### 3. Configure Environment Variables
+
+```bash
+# Copy environment template
+cp env.template .env
+
+# Edit .env with your configuration
+nano .env  # or your preferred editor
+```
+
+### 4. Configure Google Cloud & Vertex AI
 
 #### Install Google Cloud CLI
 ```bash

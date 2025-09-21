@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250921_143700_1",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "evidence_extraction": "[\n  \"Any law that uplifts human personality is just. Any law that degrades human personality is unjust.\",\n  \"We are caught in an inescapable network of mutuality, tied in a single garment of destiny.\",\n  \"Nonviolent direct action seeks to create such a crisis and foster such a tension that a community which has constantly refused to negotiate is forced to confront the issue.\",\n  \"So the question is not whether we will be extremists, but what kind of extremists we will be. Will we be extremists for hate or for love? Will we be extremists for the preservation of injustice or for the extension of justice?\",\n  \"We will reach the goal of freedom in Birmingham and all over the nation, because the goal of America is freedom.\"\n]",
+  "document_index": 1,
+  "timestamp": "2025-09-21T18:39:21.995543+00:00"
+}

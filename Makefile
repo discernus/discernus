@@ -24,12 +24,12 @@ test:  ## Run the test suite
 
 install:  ## Set up the development environment
 	@echo "🚀 Setting up development environment..."
-	@python3 -m pip install --user --break-system-packages -r requirements.txt
+	@python3 -m pip install --user -r requirements.txt
 	@echo "✅ Environment ready! Run 'make check' to verify."
 
 deps:  ## Install/update dependencies
 	@echo "📦 Installing dependencies..."
-	@python3 -m pip install --user --break-system-packages -r requirements.txt
+	@python3 -m pip install --user -r requirements.txt
 	@echo "✅ Dependencies updated!"
 
 harness:  ## Show prompt harness usage examples
