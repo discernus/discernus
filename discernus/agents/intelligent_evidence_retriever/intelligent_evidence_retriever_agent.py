@@ -319,55 +319,113 @@ class IntelligentEvidenceRetrievalAgent(StandardAgent):
                     "strategy": {
                         "type": "string",
                         "enum": ["single_pass", "multi_iteration"],
-                        "description": "Overall curation strategy based on evidence volume"
+                        "description": "Overall curation strategy: single_pass for small corpora, multi_iteration for large"
+                    },
+                    "rationale": {
+                        "type": "string",
+                        "description": "Strategic reasoning for the chosen approach and iteration design"
                     },
                     "iterations": {
                         "type": "array",
                         "items": {
                             "type": "object",
                             "properties": {
-                                "focus_area": {"type": "string", "description": "Statistical focus for this iteration"},
-                                "statistical_targets": {"type": "array", "items": {"type": "string"}},
-                                "evidence_subset": {"type": "string", "description": "Which evidence to process"},
-                                "expected_quotes": {"type": "integer", "description": "Expected number of quotes to find"}
+                                "iteration_name": {"type": "string", "description": "Descriptive name for this iteration"},
+                                "focus_area": {"type": "string", "description": "Primary statistical focus for this iteration"},
+                                "statistical_targets": {
+                                    "type": "array", 
+                                    "items": {"type": "string"},
+                                    "description": "Specific statistical findings to find evidence for"
+                                },
+                                "evidence_subset": {
+                                    "type": "string", 
+                                    "enum": ["all_evidence", "high_scoring_docs", "outlier_docs", "specific_documents"],
+                                    "description": "Which evidence artifacts to process in this iteration"
+                                },
+                                "curation_instructions": {
+                                    "type": "string",
+                                    "description": "Detailed instructions for evidence selection in this iteration"
+                                },
+                                "expected_quotes": {
+                                    "type": "integer", 
+                                    "minimum": 10,
+                                    "maximum": 200,
+                                    "description": "Expected number of high-quality quotes to curate"
+                                },
+                                "priority": {
+                                    "type": "string",
+                                    "enum": ["high", "medium", "low"],
+                                    "description": "Priority level for this iteration"
+                                }
                             },
-                            "required": ["focus_area", "statistical_targets", "evidence_subset", "expected_quotes"]
+                            "required": ["iteration_name", "focus_area", "statistical_targets", "evidence_subset", "curation_instructions", "expected_quotes", "priority"]
                         }
                     },
                     "execution_model": {
                         "type": "string", 
                         "enum": ["flash", "pro"],
-                        "description": "Recommended model for execution"
+                        "description": "Recommended model: flash for ≤400 docs, pro for >400 docs"
                     },
-                    "estimated_total_quotes": {"type": "integer", "description": "Total quotes expected across all iterations"}
+                    "estimated_total_quotes": {
+                        "type": "integer",
+                        "minimum": 20,
+                        "maximum": 1000,
+                        "description": "Total quotes expected across all iterations"
+                    },
+                    "cost_estimate": {
+                        "type": "string",
+                        "enum": ["low", "medium", "high"],
+                        "description": "Expected cost level for this curation plan"
+                    }
                 },
-                "required": ["strategy", "iterations", "execution_model", "estimated_total_quotes"]
+                "required": ["strategy", "rationale", "iterations", "execution_model", "estimated_total_quotes", "cost_estimate"]
             }
         }
         
-        # Create planning prompt
+        # Get evidence details for better planning
+        evidence_details = self.get_evidence_artifact_details(run_context)
+        total_quotes = sum(d['quote_count'] for d in evidence_details)
+        
+        # Create comprehensive planning prompt
         planning_prompt = f"""
-You are planning evidence curation for a discourse analysis experiment.
+You are an expert evidence curation strategist for discourse analysis experiments.
 
 EXPERIMENT CONTEXT:
-- Framework: {run_context.metadata.get('framework_name', 'Unknown')}
+- Framework: {run_context.metadata.get('framework_name', 'Unknown Framework')}
 - Corpus Size: {len(run_context.metadata.get('corpus_documents', []))} documents
-- Evidence Artifacts: {evidence_count} (~{evidence_size_mb:.1f}MB)
+- Evidence Artifacts: {evidence_count} artifacts (~{evidence_size_mb:.3f}MB)
+- Total Available Quotes: {total_quotes}
 
-STATISTICAL RESULTS SUMMARY:
-{json.dumps(run_context.statistical_results, indent=2, default=str)[:2000]}...
+STATISTICAL RESULTS ANALYSIS:
+{json.dumps(run_context.statistical_results, indent=2, default=str)[:3000]}
 
-TASK: Generate a strategic curation plan that:
-1. Identifies key statistical findings that need evidence support
-2. Plans iterations to focus on specific statistical patterns
-3. Balances thoroughness with efficiency
-4. Recommends appropriate execution model
+EVIDENCE INVENTORY:
+{json.dumps([{{
+    'document_index': d['document_index'],
+    'quote_count': d['quote_count'],
+    'size_bytes': d['size_bytes']
+}} for d in evidence_details], indent=2)}
 
-Consider:
-- Small corpus (≤400 docs): Single pass with Flash
-- Large corpus (>400 docs): Multi-iteration with Pro
-- Focus each iteration on specific statistical findings
-- Aim for 50-200 high-quality quotes per iteration
+STRATEGIC PLANNING TASK:
+Generate an intelligent curation plan that maximizes evidence quality while optimizing cost and processing time.
+
+PLANNING GUIDELINES:
+1. SMALL CORPUS (≤400 docs, ≤3MB): Single comprehensive pass with Flash
+2. LARGE CORPUS (>400 docs, >3MB): Multi-iteration strategy with Pro + caching
+3. Focus iterations on distinct statistical patterns (correlations, outliers, trends)
+4. Target 50-200 high-quality quotes per iteration
+5. Ensure complete coverage of significant statistical findings
+6. Consider cross-document pattern analysis for complex findings
+
+STATISTICAL FOCUS AREAS TO CONSIDER:
+- Strong correlations and anti-correlations
+- Significant differences between groups/conditions
+- Outlier documents with extreme scores
+- Temporal or sequential patterns
+- Interaction effects between dimensions
+- Derived metrics validation needs
+
+Generate a plan that balances thoroughness with efficiency.
 """
 
         try:
@@ -395,38 +453,51 @@ Consider:
             return self.create_fallback_plan(evidence_count, evidence_size_mb)
 
     def create_fallback_plan(self, evidence_count: int, evidence_size_mb: float) -> Dict[str, Any]:
-        """Create a simple fallback curation plan."""
+        """Create a simple fallback curation plan that matches the enhanced schema."""
         if evidence_count <= self.FLASH_HIGH_CONFIDENCE_THRESHOLD:
             return {
                 "strategy": "single_pass",
+                "rationale": f"Small corpus ({evidence_count} documents, {evidence_size_mb:.2f}MB) suitable for single comprehensive pass with Flash model for cost efficiency.",
                 "iterations": [{
-                    "focus_area": "comprehensive_evidence_curation",
-                    "statistical_targets": ["all_significant_findings"],
+                    "iteration_name": "comprehensive_evidence_curation",
+                    "focus_area": "all_statistical_findings",
+                    "statistical_targets": ["significant_correlations", "key_differences", "notable_patterns"],
                     "evidence_subset": "all_evidence",
-                    "expected_quotes": 100
+                    "curation_instructions": "Select the most compelling quotes that support any significant statistical findings. Focus on clear, representative examples that illustrate the key patterns in the data.",
+                    "expected_quotes": min(100, evidence_count * 5),  # Estimate 5 quotes per document
+                    "priority": "high"
                 }],
                 "execution_model": "flash",
-                "estimated_total_quotes": 100
+                "estimated_total_quotes": min(100, evidence_count * 5),
+                "cost_estimate": "low"
             }
         else:
             return {
-                "strategy": "multi_iteration", 
+                "strategy": "multi_iteration",
+                "rationale": f"Large corpus ({evidence_count} documents, {evidence_size_mb:.2f}MB) requires multi-iteration approach with Pro model for cross-document analysis and session caching.",
                 "iterations": [
                     {
-                        "focus_area": "primary_statistical_findings",
-                        "statistical_targets": ["correlations", "significant_differences"],
+                        "iteration_name": "primary_statistical_patterns",
+                        "focus_area": "core_statistical_findings",
+                        "statistical_targets": ["strong_correlations", "significant_differences", "main_effects"],
                         "evidence_subset": "all_evidence",
-                        "expected_quotes": 150
+                        "curation_instructions": "Focus on quotes that clearly demonstrate the strongest statistical relationships and most significant findings. Prioritize evidence that supports the primary research conclusions.",
+                        "expected_quotes": 150,
+                        "priority": "high"
                     },
                     {
-                        "focus_area": "secondary_patterns",
-                        "statistical_targets": ["outliers", "trends"],
-                        "evidence_subset": "all_evidence", 
-                        "expected_quotes": 100
+                        "iteration_name": "secondary_patterns_and_outliers",
+                        "focus_area": "supporting_evidence_and_exceptions",
+                        "statistical_targets": ["outlier_cases", "interaction_effects", "secondary_patterns"],
+                        "evidence_subset": "outlier_docs",
+                        "curation_instructions": "Identify quotes from outlier documents and cases that illustrate exceptions, interaction effects, or secondary patterns that add nuance to the primary findings.",
+                        "expected_quotes": 100,
+                        "priority": "medium"
                     }
                 ],
                 "execution_model": "pro",
-                "estimated_total_quotes": 250
+                "estimated_total_quotes": 250,
+                "cost_estimate": "medium"
             }
 
     def select_execution_model(self, evidence_count: int, evidence_size_mb: float) -> str:
