@@ -431,18 +431,14 @@ Generate the Python code, execute it, and present both the code and results in a
                 }
             ]
             
-            prompt = f"""You are verifying a statistical analysis. Below is Python code and claimed results from a previous analysis.
+            # Extract just the Python code - verification is just math
+            python_code = self._extract_python_code(statistical_analysis_content)
+            
+            prompt = f"""```python
+{python_code}
+```
 
-Your task:
-1. Extract the Python code from the analysis
-2. Execute the code yourself independently  
-3. Compare your results with the claimed results
-4. Call the verify_statistical_analysis tool with true if the code runs correctly and produces matching results, false otherwise
-
-STATISTICAL ANALYSIS TO VERIFY:
-{statistical_analysis_content}
-
-Execute the Python code independently and verify the results match what was claimed."""
+Re-run this code and call verify_statistical_analysis tool: does it execute without errors?"""
 
             self.audit.log_agent_event(self.agent_name, "step2_started", {
                 "batch_id": batch_id,
@@ -498,7 +494,29 @@ Execute the Python code independently and verify the results match what was clai
             })
             
             return verification_result
-                
+            
         except Exception as e:
             self.logger.error(f"Step 2 failed: {e}")
             return None
+    
+    def _extract_python_code(self, content: str) -> str:
+        """Extract Python code from content to minimize prompt length."""
+        try:
+            # Look for code blocks marked with ```python
+            import re
+            code_blocks = re.findall(r'```python\n(.*?)\n```', content, re.DOTALL)
+            if code_blocks:
+                return code_blocks[0].strip()
+            
+            # Fallback: look for any code block
+            code_blocks = re.findall(r'```\n(.*?)\n```', content, re.DOTALL)
+            if code_blocks:
+                return code_blocks[0].strip()
+            
+            # Last resort: return first 1000 chars to avoid prompt length issues
+            return content[:1000] + "..." if len(content) > 1000 else content
+            
+        except Exception as e:
+            self.logger.warning(f"Failed to extract Python code: {e}")
+            # Fallback to truncated content
+            return content[:500] + "..." if len(content) > 500 else content
