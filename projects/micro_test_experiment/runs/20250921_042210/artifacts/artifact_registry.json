@@ -131,6 +131,30 @@
     "size_bytes": 3534,
     "source_run": "20250921_042210"
   },
+  "52fac9332e0da8aefe866a33fa89b63f0baf845eb01208017d1a6f342dcf6b89": {
+    "artifact_path": "final_synthesis_report_52fac933",
+    "created_at": "2025-09-21T04:25:37.094331+00:00",
+    "human_filename": "final_synthesis_report_52fac933",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "final_synthesis_report",
+      "experiment_id": "final_report"
+    },
+    "size_bytes": 14812,
+    "source_run": "20250921_042210"
+  },
+  "5bdfea47956709afa2c8f6b4997a5159f1089fcc33f77820545bd9d50b94b01a": {
+    "artifact_path": "stage1_synthesis_report_5bdfea47",
+    "created_at": "2025-09-21T04:25:37.093645+00:00",
+    "human_filename": "stage1_synthesis_report_5bdfea47",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "stage1_synthesis_report",
+      "experiment_id": "stage1_analysis"
+    },
+    "size_bytes": 15026,
+    "source_run": "20250921_042210"
+  },
   "5d7bd21dc90ddaf9369ff14c6227115da91863f0db192a0f6c90cf41679e2206": {
     "artifact_path": "evidence_extraction_5d7bd21d.json",
     "created_at": "2025-09-21T04:22:42.230658+00:00",
@@ -249,6 +273,18 @@
       "document_index": 0
     },
     "size_bytes": 987,
+    "source_run": "20250921_042210"
+  },
+  "bbab6b01f407d0dc78c63ee88503bd8055242faed6d31bf00987f484e4577dd1": {
+    "artifact_path": "curated_evidence_bbab6b01.json",
+    "created_at": "2025-09-21T04:24:46.756973+00:00",
+    "human_filename": "curated_evidence_bbab6b01.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "curated_evidence",
+      "experiment_id": "Sentiment Polarity and Group Distinction"
+    },
+    "size_bytes": 1689,
     "source_run": "20250921_042210"
   },
   "c1828ed47ad5bc5ef83f420bc89a9cf9418a57cfe36d07d52387e7a8166f0e11": {

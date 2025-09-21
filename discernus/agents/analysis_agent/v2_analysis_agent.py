@@ -165,13 +165,13 @@ class V2AnalysisAgent(StandardAgent):
             self.logger.info(f"Updated run_context with {len(artifact_hashes)} analysis artifacts: {artifact_hashes}")
             
             # Return results from atomic processing
-            return AgentResult(
-                success=True,
+                return AgentResult(
+                    success=True,
                 artifacts=all_artifacts,
-                metadata={
+                    metadata={
                     "batch_id": batch_id,
                     "documents_processed": len(documents),
-                    "agent_name": self.agent_name,
+                        "agent_name": self.agent_name,
                     "processing_mode": "atomic"
                 }
             )
@@ -580,7 +580,7 @@ Call verify_math tool: does the code execute without errors?"""
             
             # Call LLM with tools (using proper EnhancedLLMGateway format)
             response_content, metadata = self.gateway.execute_call_with_tools(
-                model="vertex_ai/gemini-2.5-flash-lite",
+                model="vertex_ai/gemini-2.5-flash",
                 prompt=prompt,
                 system_prompt=system_prompt,
                 tools=verification_tools,

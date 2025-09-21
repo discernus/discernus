@@ -451,7 +451,7 @@ Call verify_statistical_analysis tool: does the code execute without errors?"""
             
             # Call LLM with tools (using proper EnhancedLLMGateway format)
             response_content, metadata = self.gateway.execute_call_with_tools(
-                model="vertex_ai/gemini-2.5-flash-lite",
+                model="vertex_ai/gemini-2.5-pro",
                 prompt=prompt,
                 system_prompt=system_prompt,
                 tools=verification_tools,
