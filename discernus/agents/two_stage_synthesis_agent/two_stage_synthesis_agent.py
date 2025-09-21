@@ -38,6 +38,7 @@ from discernus.core.local_artifact_storage import LocalArtifactStorage
 from discernus.core.audit_logger import AuditLogger
 from discernus.gateway.llm_gateway_enhanced import EnhancedLLMGateway
 from discernus.gateway.model_registry import ModelRegistry
+import yaml
 
 
 class TwoStageSynthesisAgent(StandardAgent):
@@ -74,7 +75,24 @@ class TwoStageSynthesisAgent(StandardAgent):
         self.stage1_model = "vertex_ai/gemini-2.5-pro"  # Pro for analytical depth
         self.stage2_model = "vertex_ai/gemini-2.5-flash"  # Flash for evidence integration
         
-        self.logger.info(f"Initialized {self.agent_name} with two-stage architecture")
+        # Load externalized prompts
+        self.stage1_prompt = self._load_prompt_template("stage1_prompt.yaml")
+        self.stage2_prompt = self._load_prompt_template("stage2_prompt.yaml")
+        
+        self.logger.info(f"Initialized {self.agent_name} with two-stage architecture and externalized prompts")
+    
+    def _load_prompt_template(self, filename: str) -> str:
+        """Load a prompt template from the YAML file."""
+        prompt_path = Path(__file__).parent / filename
+        if not prompt_path.exists():
+            error_msg = f"TwoStageSynthesisAgent prompt file not found at {prompt_path}"
+            self.audit.log_agent_event(self.agent_name, "prompt_error", {"error": error_msg})
+            raise FileNotFoundError(error_msg)
+        
+        with open(prompt_path, 'r') as f:
+            yaml_content = f.read()
+        prompt_data = yaml.safe_load(yaml_content)
+        return prompt_data['template']
     
     def get_capabilities(self) -> List[str]:
         """Return list of agent capabilities."""
@@ -86,6 +104,7 @@ class TwoStageSynthesisAgent(StandardAgent):
             "evidence_appendix_generation",
             "analytical_claim_validation",
             "statistical_anchoring",
+            "externalized_prompts",
             "tool_calling"
         ]
     
