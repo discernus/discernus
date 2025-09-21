@@ -234,6 +234,21 @@ class V2AnalysisAgent(StandardAgent):
             verification_result = self._step5_verification(framework_content, derived_metrics_result, scores_result, doc_index, batch_id)
             if verification_result:
                 artifacts.append(verification_result)
+                
+                # Check if verification failed - if so, fail fast
+                verification_status = verification_result.get('content', {}).get('verification_status', 'unknown')
+                if verification_status != "verified":
+                    self.logger.error(f"Verification failed for document {doc_index}: {verification_status}")
+                    self.audit.log_agent_event(self.agent_name, "verification_failed", {
+                        "document_index": doc_index,
+                        "verification_status": verification_status,
+                        "batch_id": batch_id
+                    })
+                    # Return artifacts created so far, but mark as failed
+                    return artifacts
+            else:
+                self.logger.error(f"Verification step failed for document {doc_index}")
+                return artifacts
             
             # Step 6: Markup Extraction
             markup_result = self._step6_markup_extraction(composite_result, doc_index, batch_id)
@@ -447,7 +462,7 @@ Return the scores as a JSON object with dimension names as keys and score values
                 
             scores = scores_result['content'].get('score_extraction', '')
             
-            prompt = f"""Generate derived metrics from these dimensional scores:
+            prompt = f"""Generate Python code to calculate derived metrics from these dimensional scores:
 
 FRAMEWORK:
 {framework_content}
@@ -455,7 +470,16 @@ FRAMEWORK:
 SCORES:
 {scores}
 
-Calculate relevant derived metrics and return as JSON."""
+TASK: Write Python code to calculate derived metrics based on the framework specification. 
+
+REQUIREMENTS:
+- Use the provided scores as input data
+- Generate Python code that calculates meaningful derived metrics
+- Execute the code and show the results
+- Include clear comments explaining each calculation
+- Present both the code and results in a format researchers can understand and audit
+
+Generate the Python code, execute it, and present both the code and calculated results."""
 
             # Call LLM
             response = self.gateway.execute_call(
@@ -531,7 +555,13 @@ Calculate relevant derived metrics and return as JSON."""
                 }
             ]
             
-            prompt = f"""Verify the derived metrics calculations:
+            prompt = f"""You are verifying derived metrics calculations. Below is Python code and claimed results from a previous analysis.
+
+Your task:
+1. Extract the Python code from the derived metrics analysis
+2. Execute the code yourself independently using the original scores
+3. Compare your results with the claimed results
+4. Call the verify_math tool with true if the code runs correctly and produces matching results, false otherwise
 
 FRAMEWORK:
 {framework_content}
@@ -539,10 +569,10 @@ FRAMEWORK:
 ORIGINAL SCORES:
 {scores}
 
-DERIVED METRICS:
+DERIVED METRICS TO VERIFY:
 {derived_metrics}
 
-Review the calculations and call the verify_math tool with your verification result."""
+Execute the Python code independently and verify the results match what was claimed."""
 
             self.audit.log_agent_event(self.agent_name, "step5_started", {
                 "batch_id": batch_id,
