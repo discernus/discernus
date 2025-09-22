@@ -7,11 +7,9 @@ This experiment conducts a comparative case analysis of the rhetorical strategie
 ## Research Questions
 
 ### Primary Research Question
-
 How do the rhetorical strategies of Malcolm X and Martin Luther King Jr. differ in their approach to social cohesion and democratic discourse, as revealed through comparative case analysis using the Cohesive Flourishing Framework?
 
 ### Secondary Research Questions
-
 1. **Identity Framing**: What evidence exists for different approaches to tribal dominance versus individual dignity appeals in each leader's discourse?
 2. **Emotional Climate**: What patterns emerge in fear-based versus hope-based messaging between the two approaches?
 3. **Success Orientation**: How do the leaders differ in their framing of envy versus mudita toward others' achievements?
@@ -22,39 +20,31 @@ How do the rhetorical strategies of Malcolm X and Martin Luther King Jr. differ 
 ## Comparative Expectations
 
 ### E1: Identity Dimension Analysis
-
 Malcolm X's discourse is expected to show more evidence of tribal dominance appeals, emphasizing black nationalism and group solidarity, while MLK's discourse is expected to show more evidence of individual dignity appeals, emphasizing universal human worth and inclusive recognition.
 
 ### E2: Emotional Climate Analysis
-
 Malcolm X's discourse is expected to demonstrate more evidence of fear-based messaging (crisis mentality, existential threats) while MLK's discourse is expected to show more evidence of hope-based messaging (progress orientation, optimistic vision).
 
 ### E3: Success Orientation Analysis
-
 Malcolm X's discourse is expected to show more evidence of envy patterns (resentment toward white success, zero-sum thinking) while MLK's discourse is expected to demonstrate more evidence of compersion (celebration of others' achievements, abundance mindset).
 
 ### E4: Relational Climate Analysis
-
 Malcolm X's discourse is expected to show more evidence of enmity positioning (hostility, adversarial framing) while MLK's discourse is expected to show more evidence of amity appeals (friendship appeals, cooperative framing).
 
 ### E5: Goal Orientation Analysis
-
 Malcolm X's discourse is expected to demonstrate more evidence of fragmentative goals (divisive objectives, separation emphasis) while MLK's discourse is expected to show more evidence of cohesive goals (integrative objectives, unity building).
 
 ### E6: Cohesion Index Analysis
-
 MLK's discourse is expected to produce higher cohesion indices across all three levels (descriptive, motivational, and full cohesion) compared to Malcolm X's approach, based on the framework's analytical criteria.
 
 ## Methodology
 
 ### Framework
-
-- **Framework**: Cohesive Flourishing Framework (CFF) v10.2
-- **Analysis Variant**: Default variant (complete v10.2 implementation with salience and tension analysis)
+- **Framework**: Cohesive Flourishing Framework (CFF) v10.0
+- **Analysis Variant**: Default variant (complete v10.0 implementation with salience and tension analysis)
 - **Model Requirements**: Gemini 2.5 Pro for sophisticated dual-track analysis
 
 ### Analytical Approach
-
 1. **Comprehensive Dimensional Analysis**: All ten dimensions across five opposing pairs will be analyzed using the CFF v10.0 framework
 2. **Salience-Weighted Scoring**: Both intensity (0.0-1.0) and salience (0.0-1.0) will be measured for each dimension
 3. **Tension Analysis**: Strategic contradictions will be calculated using the framework's tension formulas
@@ -62,7 +52,6 @@ MLK's discourse is expected to produce higher cohesion indices across all three 
 5. **Comparative Case Analysis**: Descriptive comparison of the two approaches across all framework dimensions
 
 ### Expected Outcomes
-
 - **Dimensional Scores**: Individual dimensional scores, tension indices, and cohesion indices for both texts
 - **Qualitative Analysis**: Evidence-based assessment of rhetorical strategies and their implications
 - **Comparative Analysis**: Descriptive comparison of the two approaches across all framework dimensions
@@ -79,8 +68,7 @@ This experiment addresses a critical question in civil rights history: how do di
 ## Definition of Done
 
 The experiment will be considered complete when:
-
-1. Both speeches have been analyzed using the CFF v10.2 framework
+1. Both speeches have been analyzed using the CFF v10.0 framework
 2. All dimensional scores, salience weights, and derived metrics have been calculated
 3. Comparative case analysis between the two texts has been performed
 4. A comprehensive synthesis report has been generated with findings, implications, and limitations
@@ -98,7 +86,7 @@ metadata:
   author: "Discernus Project"
   spec_version: "10.0"
 components:
-  framework: "cff_v10_2.md"
+  framework: "cff_v10.md"
   corpus: "corpus.md"
 # --- End of Machine-Readable Appendix ---
 ```

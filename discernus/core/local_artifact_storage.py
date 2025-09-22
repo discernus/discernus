@@ -268,6 +268,10 @@ class LocalArtifactStorage:
             return f"validation_report_{short_hash}.json"
         elif artifact_type == "synthesis_report_v2_markdown":
             return f"synthesis_report_v2_markdown_{short_hash}.md"
+        elif artifact_type == "final_synthesis_report":
+            return f"final_synthesis_report_{short_hash}.md"
+        elif artifact_type == "stage1_synthesis_report":
+            return f"stage1_synthesis_report_{short_hash}.md"
         else:
             return f"{artifact_type}_{short_hash}"
     

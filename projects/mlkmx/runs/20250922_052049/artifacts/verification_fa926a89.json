@@ -1,0 +1,10 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250922_012128_1",
+  "step": "verification",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "verification_status": "verification_error",
+  "verified": false,
+  "reasoning": "The user-provided JSON is not consistent with the results from executing the provided Python code. Upon re-execution, `identity_tension` is ~0.09 (JSON: 0.0) and `goal_tension` is ~0.09 (JSON: 0.0). This error propagates to the `strategic_contradiction_index`, which computes to ~0.07 (JSON: 0.03). Furthermore, all cohesion indices are incorrect; for example, the re-calculated `descriptive_cohesion_index` is ~0.09, whereas the provided JSON value is ~0.95.",
+  "document_index": 1,
+  "timestamp": "2025-09-22T05:25:32.170311+00:00"
+}

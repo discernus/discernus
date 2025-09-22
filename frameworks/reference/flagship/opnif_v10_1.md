@@ -2,13 +2,20 @@
 
 ## Abstract & Raison d'Être
 
-The Orthogonal Populism-Nationalism Interaction Framework (OPNIF) provides a specialized analytical tool for understanding the complex interactions between populist and nationalist appeals in political discourse. This framework addresses the "Bolsonaro Problem" - where traditional single-axis models failed to capture simultaneous high populism and high nationalism - through innovative orthogonal architecture that measures these forces independently while analyzing their strategic interactions.
+**What is this framework?**
+The Orthogonal Populism-Nationalism Interaction Framework (OPNIF) is a specialized measurement methodology for quantifying the interactions between populist and nationalist appeals in political discourse. This framework addresses the "Bolsonaro Problem" - where traditional single-axis models failed to capture simultaneous high populism and high nationalism - through innovative orthogonal architecture that measures these dimensions independently while providing data about their strategic interactions.
 
 **What problem does it solve?**
-Traditional political discourse analysis treats populism and nationalism as either mutually exclusive or linearly related phenomena. However, contemporary political communication often features complex combinations where speakers deploy both populist appeals (people vs. elite) and nationalist appeals (cultural identity vs. foreign influence) simultaneously. The OPNIF enables researchers to measure these dimensions independently and analyze how they interact strategically.
+Traditional political discourse analysis treats populism and nationalism as either mutually exclusive or linearly related phenomena. However, contemporary political communication often features complex combinations where speakers deploy both populist appeals (people vs. elite) and nationalist appeals (cultural identity vs. foreign influence) simultaneously. This framework provides reliable, replicable measurements of these dimensions independently and generates empirical data about their strategic interaction patterns.
 
-**Who is it for?**
-This framework is intended for political scientists, communication researchers, and analysts studying contemporary political discourse who need to understand how populist and nationalist appeals combine, contradict, or reinforce each other in political communication.
+**What it enables:**
+These measurements provide empirical foundation for research examining relationships between populist-nationalist discourse patterns and political positioning, coalition building, or strategic communication. Researchers integrate OPNIF data with political theory, contextual knowledge, and additional sources to construct analytical arguments about populist-nationalist interactions.
+
+**What it doesn't do:**
+The framework measures observable textual features related to populist and nationalist appeals but does not determine political ideology, predict electoral success, or assess democratic impact. Such interpretations require political science expertise, contextual analysis, and domain-specific theoretical frameworks.
+
+**Who is it for:**
+This framework is designed for political scientists, communication researchers, and policy analysts who need reliable empirical measurements of populist-nationalist interaction patterns in political discourse. It serves as methodological infrastructure for studies of contemporary political communication, ideological positioning, and strategic appeal analysis.
 
 ## Theoretical & Empirical Foundations
 

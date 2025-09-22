@@ -7,13 +7,19 @@
 ### Section 1: Abstract & *Raison d'être*
 
 **What is this framework?**
-The Civic Analysis Framework (CAF) provides a systematic approach to evaluating the civic character of political discourse. It analyzes the moral character displayed by speakers, based on Aristotelian virtue ethics and contemporary civic republican theory. The framework evaluates what civic virtues and vices speakers demonstrate through their rhetorical choices, focusing on the fundamental tensions between competing values.
+The Civic Analysis Framework (CAF) is a systematic measurement methodology for quantifying civic virtue and vice patterns in political discourse. Based on Aristotelian virtue ethics and contemporary civic republican theory, this framework provides empirical data about textual patterns that theoretical frameworks associate with civic character, focusing on the tensions between competing moral appeals.
 
 **What problem does it solve?**
-Democratic governance depends on civic discourse that embodies fundamental virtues. However, political communication often involves strategic tensions where speakers simultaneously appeal to competing virtues and their pathological counterparts. This framework provides a rigorous methodology for evaluating these tensions and assessing the overall civic character of political discourse. It moves beyond simple sentiment analysis to quantify the moral coherence of a speaker's communication.
+Democratic governance depends on civic discourse that embodies fundamental virtues. However, systematic measurement of virtue and vice patterns in political communication has been fragmented and inconsistent. This framework provides reliable, replicable measurements of civic virtue appeals and strategic moral tensions that researchers can use to study relationships between discourse patterns and civic character.
 
-**Who is it for?**
-This framework is designed for researchers, journalists, educators, and citizens who need to assess the moral fitness and integrity of political leaders. It is applicable to political speeches, debates, interviews, and other forms of public communication where a speaker's character is revealed.
+**What it enables:**
+These measurements provide empirical foundation for research examining relationships between discourse patterns and civic character assessment, moral positioning, or democratic discourse quality. Researchers integrate CAF data with virtue ethics theory, contextual knowledge, and additional sources to construct analytical arguments about civic implications.
+
+**What it doesn't do:**
+The framework measures observable textual features related to civic virtues and vices but does not assess actual speaker character, predict moral behavior, or determine fitness for office. Such assessments require moral philosophy expertise, character evidence, and domain-specific theoretical frameworks.
+
+**Who is it for:**
+This framework is designed for political philosophers, civic education researchers, and policy analysts who need reliable empirical measurements of civic virtue patterns in political discourse. It serves as methodological infrastructure for studies of civic character, moral positioning, and democratic discourse analysis.
 
 ### Section 2: Theoretical & Empirical Foundations
 
@@ -38,9 +44,9 @@ A core innovation of the v10 specification is the distinction between a dimensio
 - Pettit, P. (1997). *Republicanism: A theory of freedom and government*. Oxford University Press.
 - Laver, M., Benoit, K., & Garry, J. (2003). Extracting policy positions from political texts using words as data. *American Political Science Review*, 97(2), 311-331.
 
-### Section 3: Analytical Methodology
+### Section 3: Measurement Methodology
 
-CAF evaluates political discourse across five bipolar axes that form the foundation of civic character. Each of the ten dimensions is scored independently for both intensity (raw_score) and rhetorical prominence (salience).
+CAF quantifies political discourse across five bipolar axes that capture fundamental patterns in civic discourse. Each of the ten dimensions is scored independently for both intensity (raw_score) and rhetorical prominence (salience).
 
 **Dimensions & Axes**:
 
@@ -64,12 +70,12 @@ CAF evaluates political discourse across five bipolar axes that form the foundat
 -   **Fantasy** (0.0-1.0): Unrealistic promises, magical thinking, oversimplified solutions.
 -   **Pragmatism** (0.0-1.0): Realistic problem-solving, acknowledgment of constraints.
 
-**Interpretive Guidance: Pattern Classifications**
-While not calculated as formal metrics, the synthesis agent should be guided by the following interpretive patterns to assess the overall character profile. These patterns emerge from the relationships between dimensional scores and salience.
-- **Authentic Virtue**: High scores and high salience for virtue dimensions, indicating a genuine commitment to civic ideals.
-- **Strategic Virtue Signaling**: High scores but low salience for virtue dimensions, suggesting superficial appeals without substantive commitment.
-- **Strategic Pathology**: High scores and high salience for vice dimensions, indicating a deliberate deployment of divisive or manipulative rhetoric.
-- **Incoherent Messaging**: High tension scores between opposing dimensions, indicating inconsistent or contradictory value appeals.
+**Measurement Pattern Classifications**
+The framework provides data that enables researchers to identify interpretive patterns in civic discourse. These patterns emerge from the relationships between dimensional scores and salience.
+- **Virtue Emphasis**: High scores and high salience for virtue dimensions, indicating textual commitment to civic ideals.
+- **Surface Virtue Appeals**: High scores but low salience for virtue dimensions, suggesting brief appeals without sustained emphasis.
+- **Vice Emphasis**: High scores and high salience for vice dimensions, indicating sustained deployment of divisive or manipulative rhetorical patterns.
+- **Strategic Contradictions**: High tension scores between opposing dimensions, indicating inconsistent or contradictory value appeals.
 
 **Derived & Composite Metrics**:
 
@@ -78,12 +84,12 @@ These metrics, restored from CAF v5.0, quantify the strategic contradictions in 
 - **Formula**: `Tension = min(Virtue_Score, Vice_Score) * abs(Virtue_Salience - Vice_Salience)`
 - **Indices**: `identity_tension`, `truth_tension`, `justice_tension`, `emotional_tension`, `reality_tension`.
 
-**Salience-Weighted Civic Character Index** (-1.0 to +1.0, negative = vice-dominant, positive = virtue-dominant):
-This is the primary summary metric, calculating the overall character orientation of the discourse. It weights each dimension by its rhetorical prominence.
-- **Formula**: The sum of all (Virtue Score * Virtue Salience) minus the sum of all (Vice Score * Vice Salience), normalized by the total salience of all dimensions. This ensures that the most emphasized themes have the greatest impact on the final character assessment.
+**Salience-Weighted Civic Discourse Index** (-1.0 to +1.0, negative = vice-dominant, positive = virtue-dominant):
+This is the primary summary metric, measuring the overall civic discourse orientation. It weights each dimension by its rhetorical prominence.
+- **Formula**: The sum of all (Virtue Score * Virtue Salience) minus the sum of all (Vice Score * Vice Salience), normalized by the total salience of all dimensions. This ensures that the most emphasized themes have the greatest impact on the final discourse measurement.
 
-**Sequential Analysis Strategy**:
-For highest fidelity analysis, it is recommended to run the five sequential analysis variants (sequential_identity, sequential_truth, sequential_justice, sequential_emotional, sequential_reality) and combine the results. This approach allows the analysis agent to focus exclusively on one axis at a time, reducing cognitive load and improving scoring accuracy. The combined results provide a comprehensive character profile with enhanced reliability.
+**Sequential Measurement Strategy**:
+For highest fidelity measurement, it is recommended to run the five sequential analysis variants (sequential_identity, sequential_truth, sequential_justice, sequential_emotional, sequential_reality) and combine the results. This approach allows the measurement agent to focus exclusively on one axis at a time, reducing cognitive load and improving scoring accuracy. The combined results provide a comprehensive civic discourse profile with enhanced reliability.
 
 **Concept Overlap Resolution**:
 The framework addresses the inherent complexity of political discourse where speakers may simultaneously appeal to competing values. Each dimension includes explicit disambiguation rules to guide consistent scoring when conceptual overlap occurs:
