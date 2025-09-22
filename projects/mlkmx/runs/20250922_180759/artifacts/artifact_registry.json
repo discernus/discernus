@@ -35,6 +35,18 @@
     "size_bytes": 4452,
     "source_run": "20250922_180759"
   },
+  "513dddd56bfc47a6273adc8651fa206c4ed4730d7b1641cde0160ff422a255c8": {
+    "artifact_path": "marked_up_document_513dddd5.md",
+    "created_at": "2025-09-22T18:12:46.512918+00:00",
+    "human_filename": "marked_up_document_513dddd5.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "marked_up_document",
+      "document_index": 1
+    },
+    "size_bytes": 42567,
+    "source_run": "20250922_180759"
+  },
   "863be0db5999b0dd42f54ed78be4e28477811911954e595b8038bdcf430c24f7": {
     "artifact_path": "validation_report_863be0db.json",
     "created_at": "2025-09-22T18:08:42.124728+00:00",

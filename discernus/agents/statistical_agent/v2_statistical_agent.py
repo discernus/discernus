@@ -160,24 +160,14 @@ class V2StatisticalAgent(StandardAgent):
                     error_message="Statistical analysis failed"
                 )
             
-            # Parse the structured response to extract statistical_results
-            try:
-                structured_data = json.loads(statistical_analysis_content)
-                statistical_results = structured_data.get("statistical_results", {})
-                self.logger.info(f"Successfully parsed statistical_results with {len(statistical_results)} keys")
-            except (json.JSONDecodeError, KeyError) as e:
-                self.logger.error(f"Could not parse structured response: {e}")
-                self.logger.error(f"Raw content: {statistical_analysis_content[:500]}...")
-                # Fallback to storing raw content
-                statistical_results = {}
+            # THIN: Store raw LLM response directly, no parsing
             
-            # Store Step 1 artifact in format expected by synthesis agent
+            # Store Step 1 artifact in THIN format - raw LLM response
             statistical_artifact_data = {
                 "analysis_id": f"stats_{batch_id}",
                 "step": "statistical_analysis",
                 "model_used": "vertex_ai/gemini-2.5-pro",
-                "statistical_results": statistical_results,
-                "statistical_analysis_content": statistical_analysis_content,  # Keep raw content for debugging
+                "statistical_analysis": statistical_analysis_content,  # Raw LLM response
                 "documents_processed": len(raw_artifacts),
                 "timestamp": datetime.now(timezone.utc).isoformat()
             }
@@ -207,7 +197,7 @@ class V2StatisticalAgent(StandardAgent):
             
             # Update run context with proper artifact hashes
             run_context.statistical_artifacts = [statistical_artifact_hash]
-            run_context.statistical_results = statistical_analysis_content  # Pass the raw content to synthesis agent
+            run_context.statistical_results = statistical_analysis_content  # THIN: Raw LLM response
             
             self.audit.log_agent_event(self.agent_name, "execution_completed", {
                 "batch_id": batch_id,
@@ -323,61 +313,14 @@ class V2StatisticalAgent(StandardAgent):
             self.logger.info(f"LLM response length: {len(content)}")
             self.logger.info(f"LLM response preview: {content[:200]}...")
             
-            # Parse the LLM response to extract structured JSON format
+            # THIN: Return raw LLM response directly, no parsing
             if content and content.strip():
-                try:
-                    # Try to extract JSON from the response
-                    # Look for JSON code blocks or direct JSON
-                    import re
-                    
-                    # First try to find JSON code blocks
-                    json_match = re.search(r'```json\s*(\{.*?\})\s*```', content, re.DOTALL)
-                    if json_match:
-                        json_str = json_match.group(1)
-                    else:
-                        # Try to find JSON without code blocks - be more flexible
-                        # Look for JSON that might have leading whitespace or newlines
-                        json_match = re.search(r'\s*\{.*\}', content, re.DOTALL)
-                        if json_match:
-                            json_str = json_match.group(0).strip()
-                        else:
-                            # Fallback: return raw content
-                            self.logger.warning("Could not extract JSON from statistical analysis response")
-                            return content.strip()
-                    
-                    # Debug: Log the extracted JSON string
-                    self.logger.info(f"Extracted JSON string: {json_str[:200]}...")
-                    
-                    # Parse the JSON
-                    try:
-                        structured_response = json.loads(json_str)
-                    except json.JSONDecodeError as json_error:
-                        self.logger.error(f"JSON parsing failed: {json_error}")
-                        self.logger.error(f"JSON string: {json_str[:500]}...")
-                        # Try to fix common JSON issues
-                        json_str_fixed = json_str.replace('\n', ' ').replace('\r', ' ')
-                        try:
-                            structured_response = json.loads(json_str_fixed)
-                        except json.JSONDecodeError as second_error:
-                            self.logger.error(f"JSON parsing failed even after fixing: {second_error}")
-                            self.logger.error(f"Fixed JSON string: {json_str_fixed[:500]}...")
-                            # Final fallback: return raw content
-                            self.logger.warning("Could not parse JSON even after fixing, returning raw content")
-                            return content.strip()
-                    
-                    self.audit.log_agent_event(self.agent_name, "step1_completed", {
-                        "batch_id": batch_id,
-                        "step": "statistical_analysis",
-                        "response_length": len(content),
-                        "structured_format": True
-                    })
-                    
-                    return json.dumps(structured_response, indent=2)
-                    
-                except json.JSONDecodeError as e:
-                    self.logger.warning(f"Could not parse JSON from statistical analysis response: {e}")
-                    # Fallback: return raw content
-                    return content.strip()
+                self.audit.log_agent_event(self.agent_name, "step1_completed", {
+                    "batch_id": batch_id,
+                    "step": "statistical_analysis",
+                    "response_length": len(content)
+                })
+                return content.strip()
             else:
                 self.logger.error("Statistical analysis returned empty response")
                 return None
