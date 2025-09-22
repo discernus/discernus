@@ -512,8 +512,7 @@ Call verify_statistical_analysis tool: does this appear to be a substantive stat
                 prompt=prompt,
                 system_prompt=system_prompt,
                 tools=verification_tools,
-                force_function_calling=True,  # Force tool calling like deprecated agent
-                context=f"Verifying statistical analysis for batch {batch_id}"
+                force_function_calling=True  # Force tool calling like deprecated agent
             )
             
             # Extract verification result from tool calls (using metadata format like deprecated agent)
