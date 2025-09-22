@@ -83,7 +83,7 @@ class V2AnalysisAgent(StandardAgent):
 
     def _load_prompt_template(self) -> str:
         """Load the framework-agnostic prompt template from the YAML file."""
-        prompt_path = Path(__file__).parent / "prompt.yaml"
+        prompt_path = Path(__file__).parent / "prompt2.yaml"
         if not prompt_path.exists():
             error_msg = f"V2AnalysisAgent prompt file not found at {prompt_path}"
             self.audit.log_agent_event(self.agent_name, "prompt_error", {"error": error_msg})
@@ -242,15 +242,15 @@ class V2AnalysisAgent(StandardAgent):
             if scores_result:
                 artifacts.append(scores_result)
             
-            # Step 4: Derived Metrics Generation
-            self.unified_logger.progress(f"  Step 4/6: Derived metrics for document {doc_index + 1}")
-            derived_metrics_result = self._step4_derived_metrics(framework_content, scores_result, doc_index, batch_id)
+            # Step 4: Derived Metrics Extraction
+            self.unified_logger.progress(f"  Step 4/6: Derived metrics extraction for document {doc_index + 1}")
+            derived_metrics_result = self._step4_derived_metrics(framework_content, composite_result, doc_index, batch_id)
             if derived_metrics_result:
                 artifacts.append(derived_metrics_result)
             
             # Step 5: Verification
             self.unified_logger.progress(f"  Step 5/6: Verification for document {doc_index + 1}")
-            verification_result = self._step5_verification(framework_content, derived_metrics_result, scores_result, doc_index, batch_id)
+            verification_result = self._step5_verification(framework_content, derived_metrics_result, doc_index, batch_id)
             if verification_result:
                 artifacts.append(verification_result)
                 
@@ -296,7 +296,7 @@ class V2AnalysisAgent(StandardAgent):
 
             # Call LLM
             response = self.gateway.execute_call(
-                model="vertex_ai/gemini-2.5-flash",
+                model="vertex_ai/gemini-2.5-pro",
                 prompt=prompt
             )
             
@@ -310,7 +310,7 @@ class V2AnalysisAgent(StandardAgent):
             artifact_data = {
                 "analysis_id": f"analysis_{batch_id}_{doc_index}",
                 "step": "composite_analysis",
-                "model_used": "vertex_ai/gemini-2.5-flash",
+                "model_used": "vertex_ai/gemini-2.5-pro",
                 "raw_analysis_response": content,
                 "document_index": doc_index,
                 "timestamp": datetime.now(timezone.utc).isoformat()
@@ -427,11 +427,26 @@ Return ONLY the JSON array, no other text."""
                 
             raw_response = composite_result['content'].get('raw_analysis_response', '')
             
-            prompt = f"""Extract the dimensional scores from this analysis result:
+            prompt = f"""Extract the dimensional scores from this analysis result, preserving ALL computational variables:
 
 {raw_response}
 
-Return the scores as a JSON object with dimension names as keys and score values as numbers."""
+EXTRACTION REQUIREMENTS:
+- Extract raw_score, salience, and confidence for each dimension
+- Preserve the complete data structure from the analysis
+- Do not strip away any computational variables
+
+OUTPUT FORMAT:
+Return a JSON object with dimension names as keys and complete score objects as values:
+{{
+  "dimension_name": {{
+    "raw_score": 0.8,
+    "salience": 0.7,
+    "confidence": 0.9
+  }}
+}}
+
+Extract the dimensional scores preserving all computational variables."""
 
             # Call LLM
             response = self.gateway.execute_call(
@@ -480,78 +495,32 @@ Return the scores as a JSON object with dimension names as keys and score values
             self.logger.error(f"Step 3 failed for document {doc_index}: {e}")
             return None
 
-    def _step4_derived_metrics(self, framework_content: str, scores_result: Dict[str, Any], doc_index: int, batch_id: str) -> Optional[Dict[str, Any]]:
-        """Step 4: Generate derived metrics from scores."""
+    def _step4_derived_metrics(self, framework_content: str, composite_result: Dict[str, Any], doc_index: int, batch_id: str) -> Optional[Dict[str, Any]]:
+        """Step 4: Extract derived metrics and calculation code from composite analysis."""
         try:
-            if not scores_result or 'content' not in scores_result:
+            if not composite_result or 'content' not in composite_result:
                 return None
                 
-            scores = scores_result['content'].get('score_extraction', '')
+            raw_response = composite_result['content'].get('raw_analysis_response', '')
             
-            # First, check if the framework defines any derived metrics
-            if not self._framework_defines_derived_metrics(framework_content):
-                self.logger.info(f"Framework defines no derived metrics - creating 'no derived metrics' artifact for document {doc_index}")
-                
-                # Create artifact indicating no derived metrics are defined
-                artifact_data = {
-                    "analysis_id": f"analysis_{batch_id}_{doc_index}",
-                    "step": "derived_metrics",
-                    "model_used": "N/A",
-                    "derived_metrics": "Framework defines no derived metrics - skipping calculation",
-                    "has_derived_metrics": False,
-                    "document_index": doc_index,
-                    "timestamp": datetime.now(timezone.utc).isoformat()
-                }
-                
-                # Store artifact
-                content_bytes = json.dumps(artifact_data, indent=2).encode('utf-8')
-                artifact_hash = self.storage.put_artifact(
-                    content_bytes,
-                    {"artifact_type": "derived_metrics", "document_index": doc_index}
-                )
-                
-                return {
-                    "type": "derived_metrics",
-                    "content": artifact_data,
-                    "metadata": {
-                        "artifact_type": "derived_metrics",
-                        "phase": "analysis",
-                        "batch_id": batch_id,
-                        "document_index": doc_index,
-                        "timestamp": datetime.now().isoformat(),
-                        "agent_name": self.agent_name,
-                        "artifact_hash": artifact_hash
-                    }
-                }
-            
-            prompt = f"""Generate Python code to calculate derived metrics from these dimensional scores.
+            prompt = f"""Extract the derived metrics and calculation code from this analysis result:
 
-FRAMEWORK:
-{framework_content}
+{raw_response}
 
-SCORES:
-{scores}
+EXTRACTION REQUIREMENTS:
+- Extract the derived_metrics section (all calculated metrics)
+- Extract the calculation_audit.computation_code section (executable Python code)
+- Preserve the complete structure and content
+- Do not modify or interpret the content - extract exactly as provided
 
-STRICT OUTPUT FORMAT (MANDATORY - NO PROSE):
-- Output EXACTLY two fenced blocks back-to-back and NOTHING ELSE.
-- Block 1: Python code that computes a dictionary named results containing only numeric derived metrics.
-- Block 2: A single compact JSON object with the exact content of results, under key results.
+OUTPUT FORMAT:
+Return a JSON object with two fields:
+{{
+  "derived_metrics": {{"metric1": value1, "metric2": value2, ...}},
+  "computation_code": "executable Python code here"
+}}
 
-Example (structure only):
-```python
-# must define a dict named `results` with numeric values
-results = {{"metric_a": 0.123, "metric_b": 0.456}}
-print(json.dumps({{"results": results}}, separators=(",", ":")))
-```
-```json
-{{"results":{{"metric_a":0.123,"metric_b":0.456}}}}
-```
-
-REQUIREMENTS:
-- Use provided SCORES; implement the framework formulas deterministically
-- results keys must be snake_case metric names; values numeric (floats)
-- Do not include any narrative, headings, or extra text outside the two blocks
-"""
+Extract the derived metrics and calculation code preserving all content exactly."""
 
             # Call LLM
             response = self.gateway.execute_call(
@@ -569,8 +538,8 @@ REQUIREMENTS:
             artifact_data = {
                 "analysis_id": f"analysis_{batch_id}_{doc_index}",
                 "step": "derived_metrics",
-                "model_used": "vertex_ai/gemini-2.5-pro",
-                "derived_metrics": content,
+                "model_used": "vertex_ai/gemini-2.5-flash-lite",
+                "derived_metrics_extraction": content,
                 "document_index": doc_index,
                 "timestamp": datetime.now(timezone.utc).isoformat()
             }
@@ -600,39 +569,13 @@ REQUIREMENTS:
             self.logger.error(f"Step 4 failed for document {doc_index}: {e}")
             return None
 
-    def _step5_verification(self, framework_content: str, derived_metrics_result: Dict[str, Any], scores_result: Dict[str, Any], doc_index: int, batch_id: str) -> Optional[Dict[str, Any]]:
+    def _step5_verification(self, framework_content: str, derived_metrics_result: Dict[str, Any], doc_index: int, batch_id: str) -> Optional[Dict[str, Any]]:
         """Step 5: Verify derived metrics calculations using tool calling."""
         try:
             if not derived_metrics_result or 'content' not in derived_metrics_result:
                 return None
                 
-            derived_metrics = derived_metrics_result['content'].get('derived_metrics', '')
-            scores = scores_result['content'].get('score_extraction', '') if scores_result else '{}'
-            
-            # Check if derived metrics step indicated no derived metrics are defined
-            if derived_metrics_result['content'].get('has_derived_metrics') == False:
-                self.logger.info(f"Skipping verification for document {doc_index} - no derived metrics defined")
-                return {
-                    "type": "verification",
-                    "content": {
-                        "analysis_id": f"analysis_{batch_id}_{doc_index}",
-                        "step": "verification",
-                        "model_used": "N/A",
-                        "verification_status": "skipped",
-                        "verified": True,
-                        "reasoning": "Framework defines no derived metrics - verification skipped",
-                        "document_index": doc_index,
-                        "timestamp": datetime.now(timezone.utc).isoformat()
-                    },
-                    "metadata": {
-                        "artifact_type": "verification",
-                        "phase": "analysis",
-                        "batch_id": batch_id,
-                        "document_index": doc_index,
-                        "timestamp": datetime.now().isoformat(),
-                        "agent_name": self.agent_name
-                    }
-                }
+            derived_metrics_extraction = derived_metrics_result['content'].get('derived_metrics_extraction', '')
             
             
             # Define verification tool (OpenAI function calling format)
@@ -660,21 +603,18 @@ REQUIREMENTS:
                 }
             ]
             
-            prompt = f"""You will receive two fenced blocks back-to-back and nothing else:
-1) Python code that prints a compact JSON object {{"results": {{...}}}}
-2) A compact JSON object {{"results": {{...}}}}
+            prompt = f"""You will receive extracted derived metrics and computation code from a previous analysis step.
 
 Task:
-- Re-execute the Python code in a clean environment
-- Parse the JSON block
-- Compare the recomputed results to the provided JSON for mathematical reasonableness
+- Re-execute the computation code in a clean environment
+- Compare the recomputed results to the provided derived metrics for mathematical reasonableness
 - Use APA standard: compare within 2 decimal places for precision
 - Focus on whether the calculation logic is sound rather than exact numerical precision
 - If mathematically reasonable within 2 decimal places, set verified=true; else verified=false
 - Provide concise reasoning
 
-CONTENT:
-{derived_metrics}
+EXTRACTED CONTENT:
+{derived_metrics_extraction}
 
 Call verify_math tool with fields: verified (bool), reasoning (string)."""
 
@@ -690,7 +630,7 @@ Call verify_math tool with fields: verified (bool), reasoning (string)."""
             
             # Call LLM with tools (using proper EnhancedLLMGateway format)
             response_content, metadata = self.gateway.execute_call_with_tools(
-                model="vertex_ai/gemini-2.5-pro",  # Pro for reliability on verification
+                model="vertex_ai/gemini-2.5-flash",  # Flash for verification
                 prompt=prompt,
                 system_prompt=system_prompt,
                 tools=verification_tools,
@@ -760,7 +700,7 @@ Call verify_math tool with fields: verified (bool), reasoning (string)."""
             artifact_data = {
                 "analysis_id": f"analysis_{batch_id}_{doc_index}",
                 "step": "verification",
-                "model_used": "vertex_ai/gemini-2.5-pro",
+                "model_used": "vertex_ai/gemini-2.5-flash",
                 "verification_status": verification_status,
                 "verified": verified_flag,
                 "reasoning": verified_reasoning,

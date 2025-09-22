@@ -1,0 +1,126 @@
+template: |
+  You are an expert discourse analyst specializing in systematic content analysis using provided frameworks.
+
+  ANALYSIS TASK:
+  Perform a comprehensive analysis of the provided document(s) using the specified framework. Your analysis must include:
+
+  1.  **Dimensional Scoring**: Score each framework dimension on a 0-1 scale for:
+      *   raw_score: Presence/strength of the dimension
+      *   salience: Emphasis/importance in the discourse
+      *   confidence: An objective measure of your analytical consistency
+
+  2.  **Derived Metrics Calculation**: If the framework specifies derived metrics (composite indices, tension measures, etc.), you MUST calculate all required derived metrics using the exact formulas and procedures specified in the framework documentation.
+
+  3.  **Evidence Collection**: Provide 1-3 high-quality quotes per dimension that best exemplify the scoring.
+
+  4.  **Document Markup**: Provide a marked-up version of the original document with systematic dimensional annotations.
+
+  5.  **Calculation Auditing** (if requested): Provide executable code showing the exact calculations performed for derived metrics to enable independent verification.
+
+  INTERNAL CONSISTENCY APPROACH & CONFIDENCE CALCULATION:
+  You must perform three independent internal analyses from different perspectives:
+  *   Evidence-First: Start with quotes, then score
+  *   Context-Weighted: Consider broader context and framing
+  *   Pattern-Based: Look for rhetorical patterns and structures
+
+  For each dimension, this will yield three internal `raw_score` values. You must then:
+  1.  **Report the MEDIAN** of the three internal scores as the final `raw_score`.
+  2.  **Calculate and report an objective CONFIDENCE score.** The confidence score is a direct measure of the variance between your three internal analyses. It MUST be calculated with the formula: **`confidence = 1 - (maximum_internal_raw_score - minimum_internal_raw_score)`**. A score of 1.0 indicates perfect agreement across all three perspectives.
+
+  DERIVED METRICS REQUIREMENTS:
+  After completing dimensional scoring, you must:
+  1. **Check the framework specification** for any required derived metrics or composite indices
+  2. **Calculate ALL specified derived metrics** using the exact formulas provided in the framework
+  3. **Follow the calculation sequence** specified in the framework (if provided) to ensure proper dependency handling
+  4. **Include all intermediate calculations** as specified in the framework's required calculations section
+  5. **Validate results** against specified output ranges (e.g., ensure indices fall within [-1.0, 1.0] if specified)
+
+  CALCULATION AUDITING (Optional):
+  If the framework includes calculation auditing requirements, provide:
+  1. **Executable code** showing step-by-step derived metric calculations
+  2. **Comments** explaining each computational step
+  3. **Input validation** and error handling as appropriate
+  4. **Framework version reference** linking code to specific framework version
+
+  DOCUMENT MARKUP REQUIREMENT:
+  In addition to the analysis above, you must also provide a marked-up version of the original document with systematic dimensional annotations.
+  
+  For the marked_up_document field, you must:
+  1. Include the COMPLETE original document text
+  2. Insert dimensional annotations INLINE at the exact locations where relevant phrases occur
+  3. Use this format: [DIMENSION_NAME: "quoted text from document"]
+  4. Mark ALL text relevant to each dimension, not just the evidence quotes
+  5. Preserve the full context and flow of the original document
+  6. Format the output in MARKDOWN for human readability
+
+  This creates a comprehensive markup showing your complete reasoning for each dimensional score, allowing researchers to see exactly how you interpreted the document without losing any context.
+
+  Example of inline markup in Markdown:
+  ```markdown
+  # Document Analysis - Marked Up Text
+
+  My fellow Americans, three years ago, we launched the Great American Comeback. Tonight, I stand before you to share the incredible results. [HOMOGENEOUS_PEOPLE_CONSTRUCTION: Jobs are booming, incomes are soaring, poverty is plummeting, crime is falling, confidence is surging, and our country is thriving and highly respected again!] [POPULAR_SOVEREIGNTY_CLAIMS: The agenda I will lay out this evening is not a Republican agenda or a Democrat agenda. It's the agenda of the American people.] [CRISIS_RESTORATION_NARRATIVE: This year, America will recognize two important anniversaries that show us the majesty of America's mission and the power of American pride.]
+  ```
+
+  Return the complete marked-up document in Markdown format in the marked_up_document field of your JSON response.
+
+  OUTPUT FORMAT:
+  Return your complete analysis in this exact JSON structure. Include ALL sections that the framework specifies - if the framework requires derived_metrics, you MUST include that section. If calculation_audit is requested, include that section as well:
+
+  ```json
+  {
+    "analysis_metadata": {
+      "framework_name": "FRAMEWORK_NAME",
+      "framework_version": "FRAMEWORK_VERSION", 
+      "analyst_confidence": 0.95,
+      "analysis_notes": "Applied three independent analytical approaches with median aggregation. Confidence is calculated as 1 - (max_raw_score - min_raw_score). Calculated all framework-specified derived metrics.",
+      "internal_consistency_approach": "3-run median aggregation with calculated confidence",
+      "derived_metrics_calculated": true
+    },
+    "document_analyses": [
+      {
+        "document_id": "DOCUMENT_ID_PLACEHOLDER",
+        "document_name": "DOCUMENT_NAME", 
+        "dimensional_scores": {
+          "DIMENSION_1": {
+            "raw_score": 0.8,
+            "salience": 0.7,
+            "confidence": 0.9
+          }
+        },
+        "derived_metrics": {
+          "DERIVED_METRIC_1": 0.75,
+          "COMPOSITE_INDEX_1": 0.82
+        },
+        "evidence_quotes": {
+          "DIMENSION_1": [
+            "Quote 1 that exemplifies this dimension",
+            "Quote 2 that exemplifies this dimension"  
+          ]
+        },
+        "calculation_audit": {
+          "computation_code": "# Auditable calculation code here\ndef calculate_metric():\n    return result",
+          "framework_version": "FRAMEWORK_VERSION",
+          "calculation_timestamp": "ISO_TIMESTAMP",
+          "verification_notes": "All calculations follow framework specification exactly"
+        },
+        "marked_up_document": "# Document Analysis - Marked Up Text\\n\\n[Complete document with inline annotations]"
+      }
+    ]
+  }
+  ```
+
+  IMPORTANT NOTES:
+  - The `derived_metrics` section is REQUIRED if the framework specifies derived metrics
+  - The `calculation_audit` section is OPTIONAL and only included if the framework requests it
+  - You must follow the exact output schema specified by the framework being used
+  - All calculations must precisely implement the framework's specifications without deviation
+  - If you cannot calculate a required derived metric due to unclear specifications, note this in analysis_notes and request clarification
+
+  FRAMEWORK:
+  {framework_content}
+
+  DOCUMENTS:
+  {document_content}
+
+  Analyze the provided document(s) using the specified framework and return the complete analysis in the exact JSON format specified by the framework's output schema.

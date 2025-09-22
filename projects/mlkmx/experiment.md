@@ -2,7 +2,7 @@
 
 ## Experiment Overview
 
-This experiment conducts a comparative case analysis of the rhetorical strategies of two iconic civil rights leaders using the Cohesive Flourishing Framework (CFF) v10.2 to examine how different approaches to social change manifest in discourse patterns related to cohesion and democratic health.
+This experiment conducts a comparative case analysis of the rhetorical strategies of two iconic civil rights leaders using the Cohesive Flourishing Framework (CFF) v10.4 to examine how different approaches to social change manifest in discourse patterns related to cohesion and democratic health.
 
 ## Research Questions
 
@@ -31,7 +31,7 @@ Malcolm X's discourse is expected to demonstrate more evidence of fear-based mes
 
 ### E3: Success Orientation Analysis
 
-Malcolm X's discourse is expected to show more evidence of envy patterns (resentment toward white success, zero-sum thinking) while MLK's discourse is expected to demonstrate more evidence of compersion (celebration of others' achievements, abundance mindset).
+Malcolm X's discourse is expected to show more evidence of envy patterns (resentment toward white success, zero-sum thinking) while MLK's discourse is expected to demonstrate more evidence of mudita (celebration of others' achievements, abundance mindset).
 
 ### E4: Relational Climate Analysis
 
@@ -49,13 +49,13 @@ MLK's discourse is expected to produce higher cohesion indices across all three 
 
 ### Framework
 
-- **Framework**: Cohesive Flourishing Framework (CFF) v10.2
-- **Analysis Variant**: Default variant (complete v10.2 implementation with salience and tension analysis)
+- **Framework**: Cohesive Flourishing Framework (CFF) v10.4
+- **Analysis Variant**: Default variant (complete v10.4 implementation with salience and tension analysis)
 - **Model Requirements**: Gemini 2.5 Pro for sophisticated dual-track analysis
 
 ### Analytical Approach
 
-1. **Comprehensive Dimensional Analysis**: All ten dimensions across five opposing pairs will be analyzed using the CFF v10.0 framework
+1. **Comprehensive Dimensional Analysis**: All ten dimensions across five opposing pairs will be analyzed using the CFF v10.4 framework
 2. **Salience-Weighted Scoring**: Both intensity (0.0-1.0) and salience (0.0-1.0) will be measured for each dimension
 3. **Tension Analysis**: Strategic contradictions will be calculated using the framework's tension formulas
 4. **Cohesion Index Calculation**: Three levels of cohesion indices will be computed with salience weighting
@@ -80,7 +80,7 @@ This experiment addresses a critical question in civil rights history: how do di
 
 The experiment will be considered complete when:
 
-1. Both speeches have been analyzed using the CFF v10.2 framework
+1. Both speeches have been analyzed using the CFF v10.4 framework
 2. All dimensional scores, salience weights, and derived metrics have been calculated
 3. Comparative case analysis between the two texts has been performed
 4. A comprehensive synthesis report has been generated with findings, implications, and limitations
@@ -98,7 +98,7 @@ metadata:
   author: "Discernus Project"
   spec_version: "10.0"
 components:
-  framework: "cff_v10_2.md"
+  framework: "cff_v10_4.md"
   corpus: "corpus.md"
 # --- End of Machine-Readable Appendix ---
 ```

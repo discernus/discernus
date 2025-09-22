@@ -125,20 +125,20 @@ class V2StatisticalAgent(StandardAgent):
                 )
             
             # Process atomic score artifacts
-            score_data = self._collect_atomic_scores(analysis_artifacts)
-            if not score_data:
+            raw_artifacts = self._collect_atomic_scores(analysis_artifacts)
+            if not raw_artifacts:
                 return AgentResult(
                     success=False,
                     artifacts=[],
-                    metadata={"agent_name": self.agent_name, "error": "no score data found"},
-                    error_message="No score data found in analysis artifacts"
+                    metadata={"agent_name": self.agent_name, "error": "no artifacts found"},
+                    error_message="No artifacts found in analysis artifacts"
                 )
             
             # Generate batch ID
             batch_id = f"stats_{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}"
             
             # Step 1: Statistical Analysis (Python code generation + execution)
-            statistical_analysis_content = self._step1_statistical_analysis(framework_content, score_data, batch_id)
+            statistical_analysis_content = self._step1_statistical_analysis(framework_content, raw_artifacts, batch_id)
             if not statistical_analysis_content:
                 return AgentResult(
                     success=False,
@@ -153,7 +153,7 @@ class V2StatisticalAgent(StandardAgent):
                 "step": "statistical_analysis",
                 "model_used": "vertex_ai/gemini-2.5-pro",
                 "statistical_analysis_content": statistical_analysis_content,
-                "documents_processed": len(score_data),
+                "documents_processed": len(raw_artifacts),
                 "timestamp": datetime.now(timezone.utc).isoformat()
             }
             
@@ -232,7 +232,7 @@ class V2StatisticalAgent(StandardAgent):
             self.audit.log_agent_event(self.agent_name, "execution_completed", {
                 "batch_id": batch_id,
                 "artifacts_created": len(artifacts),
-                "documents_processed": len(score_data)
+                "documents_processed": len(raw_artifacts)
             })
             
             return AgentResult(
@@ -241,7 +241,7 @@ class V2StatisticalAgent(StandardAgent):
                 metadata={
                     "agent_name": self.agent_name,
                     "batch_id": batch_id,
-                    "documents_processed": len(score_data),
+                    "documents_processed": len(raw_artifacts),
                     "artifacts_created": len(artifacts)
                 }
             )
@@ -260,16 +260,16 @@ class V2StatisticalAgent(StandardAgent):
     
     def _collect_atomic_scores(self, analysis_artifacts: List[str]) -> List[Dict[str, Any]]:
         """
-        Collect score data from atomic score extraction artifacts.
+        Collect raw artifacts for statistical analysis - NO PARSING.
         
         Args:
             analysis_artifacts: List of artifact hashes from analysis phase
             
         Returns:
-            List of score data dictionaries
+            List of raw artifact data for LLM processing
         """
-        self.logger.info(f"Collecting scores from {len(analysis_artifacts)} analysis artifacts")
-        score_data = []
+        self.logger.info(f"Collecting raw artifacts from {len(analysis_artifacts)} analysis artifacts")
+        raw_artifacts = []
         
         for artifact_hash in analysis_artifacts:
             try:
@@ -279,104 +279,26 @@ class V2StatisticalAgent(StandardAgent):
                     self.logger.warning(f"Could not load artifact {artifact_hash}")
                     continue
                 
-                artifact_data = json.loads(artifact_bytes.decode('utf-8'))
-                self.logger.info(f"Processing artifact {artifact_hash}: step={artifact_data.get('step')}")
-                
-                # Check if this is a score extraction artifact
-                if artifact_data.get("step") == "score_extraction":
-                    # Extract the scores from the LLM response
-                    scores_response = artifact_data.get("score_extraction", "")
-                    if scores_response:
-                        # Parse the JSON from the LLM response
-                        try:
-                            # Extract JSON from markdown code block if present
-                            if "```json" in scores_response:
-                                json_start = scores_response.find("```json") + 7
-                                json_end = scores_response.find("```", json_start)
-                                if json_end > json_start:
-                                    scores_json = scores_response[json_start:json_end].strip()
-                                else:
-                                    scores_json = scores_response[json_start:].strip()
-                            else:
-                                scores_json = scores_response.strip()
-                            
-                            scores = json.loads(scores_json)
-                            
-                            # Add document metadata
-                            score_data.append({
-                                "document_index": artifact_data.get("document_index", 0),
-                                "analysis_id": artifact_data.get("analysis_id", ""),
-                                "scores": scores,
-                                "timestamp": artifact_data.get("timestamp", ""),
-                                "data_type": "scores"
-                            })
-                            
-                        except json.JSONDecodeError as e:
-                            self.logger.warning(f"Could not parse scores from artifact {artifact_hash}: {e}")
-                            continue
-                
-                # Check if this is a derived metrics artifact
-                elif artifact_data.get("step") == "derived_metrics":
-                    # Check if this is a "no derived metrics" artifact
-                    if artifact_data.get("has_derived_metrics") == False:
-                        self.logger.info(f"Skipping derived metrics artifact {artifact_hash} - framework has no derived metrics")
-                        continue
-                    
-                    # Extract the derived metrics from the LLM response
-                    derived_metrics_response = artifact_data.get("derived_metrics", "")
-                    if derived_metrics_response:
-                        # Parse the JSON from the LLM response (similar to scores)
-                        try:
-                            # Extract JSON from the second code block (derived metrics contain both Python and JSON)
-                            if "```json" in derived_metrics_response:
-                                # Find the JSON block (usually the second one after the Python block)
-                                json_blocks = []
-                                start_pos = 0
-                                while True:
-                                    json_start = derived_metrics_response.find("```json", start_pos)
-                                    if json_start == -1:
-                                        break
-                                    json_start += 7
-                                    json_end = derived_metrics_response.find("```", json_start)
-                                    if json_end > json_start:
-                                        json_blocks.append(derived_metrics_response[json_start:json_end].strip())
-                                    start_pos = json_end + 3
-                                
-                                # Use the last JSON block (the results)
-                                if json_blocks:
-                                    derived_metrics_json = json_blocks[-1]
-                                    derived_metrics = json.loads(derived_metrics_json)
-                                    
-                                    # Extract the results if they're nested
-                                    if "results" in derived_metrics:
-                                        derived_metrics = derived_metrics["results"]
-                                    
-                                    # Add document metadata
-                                    score_data.append({
-                                        "document_index": artifact_data.get("document_index", 0),
-                                        "analysis_id": artifact_data.get("analysis_id", ""),
-                                        "scores": derived_metrics,
-                                        "timestamp": artifact_data.get("timestamp", ""),
-                                        "data_type": "derived_metrics"
-                                    })
-                                    
-                        except json.JSONDecodeError as e:
-                            self.logger.warning(f"Could not parse derived metrics from artifact {artifact_hash}: {e}")
-                            continue
+                # Store raw artifact data - let LLM figure out how to use it
+                raw_artifacts.append({
+                    "artifact_hash": artifact_hash,
+                    "raw_content": artifact_bytes.decode('utf-8'),
+                    "artifact_type": "analysis_artifact"
+                })
                 
             except Exception as e:
-                self.logger.warning(f"Error processing artifact {artifact_hash}: {e}")
+                self.logger.warning(f"Error loading artifact {artifact_hash}: {e}")
                 continue
         
-        return score_data
+        return raw_artifacts
     
-    def _step1_statistical_analysis(self, framework_content: str, score_data: List[Dict[str, Any]], batch_id: str) -> Optional[str]:
+    def _step1_statistical_analysis(self, framework_content: str, raw_artifacts: List[Dict[str, Any]], batch_id: str) -> Optional[str]:
         """
         Step 1: Generate Python statistical analysis code and execute it.
         
         Args:
             framework_content: Framework content for context
-            score_data: List of score data from atomic artifacts
+            raw_artifacts: List of raw artifact data from analysis phase
             batch_id: Batch identifier
             
         Returns:
@@ -384,29 +306,26 @@ class V2StatisticalAgent(StandardAgent):
         """
         try:
             # Prepare statistical analysis prompt for Python code generation
-            prompt = f"""You are a statistical analysis expert. Generate and execute Python code to analyze the following analysis data.
+            prompt = f"""You are a statistical analysis expert. Generate and execute Python code to analyze the following analysis artifacts.
 
 FRAMEWORK CONTEXT:
 {framework_content}
 
-ANALYSIS DATA:
-{json.dumps(score_data, indent=2)}
+ANALYSIS ARTIFACTS:
+{json.dumps(raw_artifacts, indent=2)}
 
-DATA STRUCTURE NOTES:
-- Each entry has a "data_type" field indicating whether it contains "scores" (raw dimensional scores) or "derived_metrics" (calculated metrics)
-- Some frameworks may only have scores and no derived metrics - this is normal
-- Focus your analysis on whatever data is available
-
-TASK: Write Python code to perform comprehensive statistical analysis including:
-1. Descriptive statistics for each available dimension/metric
-2. Correlation analysis between available dimensions/metrics
-3. Statistical significance testing where appropriate
-4. Summary of key findings
+TASK: 
+1. First, examine the raw analysis artifacts to understand what data is available
+2. Extract any dimensional scores, derived metrics, or other numerical data
+3. Write Python code to perform comprehensive statistical analysis including:
+   - Descriptive statistics for each available dimension/metric
+   - Correlation analysis between available dimensions/metrics
+   - Statistical significance testing where appropriate
+   - Summary of key findings
 
 REQUIREMENTS:
 - Use pandas, numpy, scipy.stats, and other standard libraries
-- Handle cases where only scores exist (no derived metrics)
-- Separate analysis of scores vs derived metrics if both are present
+- Handle whatever data format is present in the artifacts
 - Write clear, well-commented Python code
 - Execute the code and show the results
 - Provide interpretations of the statistical findings
@@ -418,7 +337,7 @@ Generate the Python code, execute it, and present both the code and results in a
                 "batch_id": batch_id,
                 "step": "statistical_analysis",
                 "model": "vertex_ai/gemini-2.5-pro",
-                "documents_count": len(score_data)
+                "artifacts_count": len(raw_artifacts)
             })
             
             # Call LLM
