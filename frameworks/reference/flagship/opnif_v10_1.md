@@ -1,4 +1,4 @@
-# Orthogonal Populism-Nationalism Interaction Framework (OPNIF) v10.0
+# Orthogonal Populism-Nationalism Interaction Framework (OPNIF) v10.1
 
 ## Abstract & Raison d'Être
 
@@ -126,7 +126,7 @@ Smith, A. D. (2010). *Nationalism: Theory, Ideology, History* (2nd ed.). Polity 
 
 metadata:
   framework_name: "orthogonal_populism_nationalism_interaction_framework"
-  framework_version: "1.0.0"
+  framework_version: "10.1.0"
   author: "Discernus Project"
   spec_version: "10.0"
 
@@ -134,7 +134,7 @@ analysis_variants:
   default:
     description: "Comprehensive orthogonal analysis of populism-nationalism interactions with strategic tension analysis. For highest quality results with focused attention on specific axes, use the sequential analysis variants below."
     analysis_prompt: |
-      You are an expert analyst of political discourse with deep understanding of populist rhetoric, nationalist appeals, and democratic theory across diverse contexts. Your task is to analyze the provided text using the Orthogonal Populism-Nationalism Interaction Framework (OPNIF) v10.0, which measures how populist and nationalist appeals interact strategically through independent orthogonal axes.
+      You are an expert analyst of political discourse with deep understanding of populist rhetoric, nationalist appeals, and democratic theory across diverse contexts. Your task is to analyze the provided text using the Orthogonal Populism-Nationalism Interaction Framework (OPNIF) v10.1, which measures how populist and nationalist appeals interact strategically through independent orthogonal axes.
 
       THEORETICAL GROUNDING: The OPNIF recognizes that populism and nationalism are orthogonal dimensions that can vary independently. Populism involves people vs. elite antagonism, while nationalism involves cultural/ethnic identity emphasis. These can reinforce, contradict, or balance each other strategically.
 
@@ -166,7 +166,7 @@ analysis_variants:
   sequential_vertical_axis:
     description: "Focus on Vertical Axis: Populism vs Pluralism analysis."
     analysis_prompt: |
-      You are an expert analyst of political discourse specializing in populist rhetoric and democratic theory. Focus exclusively on evaluating the Vertical Axis (Populism ↔ Pluralism) in the provided text using the Orthogonal Populism-Nationalism Interaction Framework v10.0.
+      You are an expert analyst of political discourse specializing in populist rhetoric and democratic theory. Focus exclusively on evaluating the Vertical Axis (Populism ↔ Pluralism) in the provided text using the Orthogonal Populism-Nationalism Interaction Framework v10.1.
 
       DIMENSIONAL FOCUS: Vertical Axis Only
       - Populism: Direct popular sovereignty, anti-elite sentiment, Manichaean worldview
@@ -183,7 +183,7 @@ analysis_variants:
   sequential_horizontal_axis:
     description: "Focus on Horizontal Axis: Nationalism vs Patriotism analysis."
     analysis_prompt: |
-      You are an expert analyst of political discourse specializing in nationalist rhetoric and civic identity. Focus exclusively on evaluating the Horizontal Axis (Nationalism ↔ Patriotism) in the provided text using the Orthogonal Populism-Nationalism Interaction Framework v10.0.
+      You are an expert analyst of political discourse specializing in nationalist rhetoric and civic identity. Focus exclusively on evaluating the Horizontal Axis (Nationalism ↔ Patriotism) in the provided text using the Orthogonal Populism-Nationalism Interaction Framework v10.1.
 
       DIMENSIONAL FOCUS: Horizontal Axis Only
       - Nationalism: Ethnic/cultural identity emphasis, national supremacy claims
@@ -200,7 +200,7 @@ analysis_variants:
   strategic_interaction:
     description: "Specialized analysis of how populist and nationalist appeals interact strategically."
     analysis_prompt: |
-      You are an expert analyst of political discourse specializing in strategic communication and appeal interactions. Your task is to analyze how populist and nationalist appeals interact strategically in the provided text using the Orthogonal Populism-Nationalism Interaction Framework v10.0.
+      You are an expert analyst of political discourse specializing in strategic communication and appeal interactions. Your task is to analyze how populist and nationalist appeals interact strategically in the provided text using the Orthogonal Populism-Nationalism Interaction Framework v10.1.
 
       STRATEGIC INTERACTION FOCUS:
       - How do populist and nationalist appeals reinforce each other?
@@ -217,7 +217,7 @@ analysis_variants:
 
 dimensions:
   - name: "populism"
-    description: "Direct popular sovereignty, anti-elite sentiment, Manichaean worldview emphasizing people vs. elite antagonism."
+    description: "Direct popular sovereignty, anti-elite sentiment, Manichaean worldview emphasizing moral dichotomy between virtuous people and corrupt elites."
     markers:
       positive_examples:
         - { phrase: "the people", explanation: "direct popular sovereignty appeals" }
@@ -225,10 +225,13 @@ dimensions:
         - { phrase: "working families", explanation: "anti-elite class-based appeals" }
         - { phrase: "real Americans", explanation: "authentic people vs. establishment claims" }
         - { phrase: "will of the people", explanation: "direct democratic authority claims" }
+        - { phrase: "corrupt elites", explanation: "moral corruption attributions to elite groups" }
+        - { phrase: "establishment", explanation: "elite power center identification as antagonistic" }
       negative_examples:
         - { phrase: "institutional process", explanation: "procedural focus, not populist" }
         - { phrase: "expert analysis", explanation: "expertise-based, not populist" }
         - { phrase: "constitutional framework", explanation: "institutional focus, not populist" }
+        - { phrase: "policy disagreement", explanation: "technical criticism without moral framing" }
       boundary_cases:
         - { phrase: "representative democracy", explanation: "could be populist or institutional depending on context" }
         - { phrase: "public input", explanation: "participatory vs. populist depends on framing" }
@@ -273,18 +276,21 @@ dimensions:
       absent: "0.0: No institutional respect or procedural democracy emphasis"
 
   - name: "nationalism"
-    description: "Ethnic/cultural identity emphasis, national supremacy claims, and cultural exclusivity appeals."
+    description: "Cultural/ethnic identity emphasis, national supremacy claims, and cultural exclusivity appeals that define community boundaries through external threat framing."
     markers:
       positive_examples:
         - { phrase: "American greatness", explanation: "national supremacy and exceptionalism claims" }
-        - { phrase: "real Americans", explanation: "ethnic identity and cultural authenticity" }
+        - { phrase: "real Americans", explanation: "ethnic identity and cultural authenticity claims" }
         - { phrase: "our culture", explanation: "cultural identity and heritage emphasis" }
-        - { phrase: "traditional values", explanation: "cultural heritage and ancestral values" }
+        - { phrase: "traditional values", explanation: "cultural heritage and ancestral values as boundary markers" }
         - { phrase: "foreign influence", explanation: "cultural threat and external danger framing" }
+        - { phrase: "cultural invasion", explanation: "language characterizing external influence as aggressive threat" }
+        - { phrase: "our heritage", explanation: "cultural identity construction through exclusionary boundary-drawing" }
       negative_examples:
         - { phrase: "constitutional rights", explanation: "civic values, not nationalist" }
         - { phrase: "democratic participation", explanation: "civic engagement, not nationalist" }
         - { phrase: "equal justice", explanation: "universal rights, not nationalist" }
+        - { phrase: "diversity celebration", explanation: "inclusive language that celebrates cultural diversity as strength" }
       boundary_cases:
         - { phrase: "American heritage", explanation: "could be cultural pride or civic history depending on context" }
         - { phrase: "national identity", explanation: "could be ethnic or civic depending on framing" }
@@ -295,10 +301,10 @@ dimensions:
         priority: "Focus on identity source and community boundaries"
         co_occurrence_strategy: "Distinguish between cultural nationalism and civic patriotism"
     scoring_calibration:
-      high: "0.7-1.0: Strong cultural identity emphasis and national supremacy claims"
-      medium: "0.4-0.6: Moderate cultural language and some national identity emphasis"
-      low: "0.1-0.3: Weak nationalist hints, minimal cultural emphasis"
-      absent: "0.0: No cultural identity emphasis or national supremacy claims"
+      high: "0.7-1.0: Strong cultural exclusion, clear external threats, national supremacy claims"
+      medium: "0.4-0.6: Moderate cultural identity emphasis, some exclusionary boundary-drawing"
+      low: "0.1-0.3: Weak nationalist hints, minimal cultural exclusivity"
+      absent: "0.0: No cultural identity emphasis, exclusionary boundary-drawing, or supremacy claims"
 
   - name: "patriotism"
     description: "Civic attachment to political institutions, constitutional values, and democratic principles."

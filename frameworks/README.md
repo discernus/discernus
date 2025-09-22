@@ -23,7 +23,7 @@ The Discernus Framework Ecosystem provides a comprehensive, modular approach to 
 - **CHF v10.0**: Constitutional Health Framework - Bagehot constitutional system health
 
 #### **Flagship Module** (Comprehensive Analysis)
-- **CFF v10.0**: Cohesive Flourishing Framework - Complete democratic health assessment
+- **CFF v10.2**: Cohesive Flourishing Framework - Complete democratic health assessment (uses "mudita" instead of "compersion", enhanced enmity/amity definitions)
 - **PDAF v10.0**: Political Discourse Analysis Framework - Democratic engagement assessment
 - **OPNIF v10.0**: Open Network Information Framework - Information ecosystem health assessment
 
@@ -55,7 +55,7 @@ The Discernus Framework Ecosystem provides a comprehensive, modular approach to 
 │   │   ├── caf_v10.md
 │   │   └── chf_v10.md
 │   └── flagship/                # Comprehensive frameworks
-│       ├── cff_v10.md
+│       ├── cff_v10.md (v10.2 with mudita + enhanced enmity/amity)
 │       ├── pdaf_v10.md
 │       └── opnif_v10.md
 ├── seed/                        # Community adoption encouraged
