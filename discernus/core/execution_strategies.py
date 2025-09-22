@@ -99,34 +99,25 @@ class FullExperimentStrategy(ExecutionStrategy):
         metadata = {}
         
         try:
-            # THIN PRINCIPLE: Orchestrator handles file I/O, not agents
-            framework_content = self._load_framework_content(Path(run_context.framework_path))
-            corpus_manifest_path = Path(run_context.corpus_path)
-            corpus_documents = self._load_corpus_documents(corpus_manifest_path)
-            corpus_manifest_content = corpus_manifest_path.read_text(encoding='utf-8')
-
-            if not framework_content:
+            # THIN PRINCIPLE: Pass paths only, let agents read their own files
+            # Validate paths exist but don't read content
+            if not Path(run_context.framework_path).exists():
                 return ExperimentResult(
                     success=False,
                     phases_completed=phases_completed,
                     artifacts=artifacts,
                     metadata=metadata,
-                    error_message="Failed to load framework content"
+                    error_message=f"Framework file not found: {run_context.framework_path}"
                 )
 
-            if not corpus_documents:
+            if not Path(run_context.corpus_path).exists():
                 return ExperimentResult(
                     success=False,
                     phases_completed=phases_completed,
                     artifacts=artifacts,
                     metadata=metadata,
-                    error_message="Failed to load corpus documents"
+                    error_message=f"Corpus manifest not found: {run_context.corpus_path}"
                 )
-
-            # Add content to RunContext metadata for agents to use
-            run_context.metadata["framework_content"] = framework_content
-            run_context.metadata["corpus_documents"] = corpus_documents
-            run_context.metadata["corpus_manifest_content"] = corpus_manifest_content
             # Phase 1: Validation (skip if flag is set)
             skip_validation = run_context.metadata.get("skip_validation", False)
             if "Validation" in agents and not skip_validation:
@@ -261,32 +252,14 @@ class FullExperimentStrategy(ExecutionStrategy):
                 artifacts.extend(evidence_result.artifacts)
                 run_context.update_phase("evidence")
 
-                # Load curated evidence artifacts into RunContext for synthesis agent
+                # THIN: Pass evidence artifact hashes, let synthesis agent read them
                 if evidence_result.artifacts:
-                    try:
-                        # Store artifact hashes in RunContext for synthesis agent to access
-                        run_context.evidence_artifacts = evidence_result.artifacts
-                        
-                        # Also load the content for immediate access
-                        curated_evidence_list = []
-                        for artifact_hash in evidence_result.artifacts:
-                            evidence_content_bytes = storage.get_artifact(artifact_hash)
-                            if evidence_content_bytes:
-                                evidence_data = json.loads(evidence_content_bytes.decode('utf-8'))
-                                curated_evidence_list.append(evidence_data)
-                        
-                        run_context.evidence = curated_evidence_list
-                        
-                        audit.log_agent_event("FullExperimentStrategy", "evidence_loaded", {
-                            "evidence_artifacts_count": len(evidence_result.artifacts),
-                            "curated_evidence_loaded": len(curated_evidence_list)
-                        })
-                    except Exception as e:
-                        audit.log_agent_event("FullExperimentStrategy", "evidence_load_error", {
-                            "error": str(e),
-                            "evidence_artifacts": evidence_result.artifacts
-                        })
-                        # Continue execution - synthesis agent will handle missing evidence gracefully
+                    run_context.evidence_artifacts = evidence_result.artifacts
+                    audit.log_agent_event("FullExperimentStrategy", "evidence_artifacts_passed", {
+                        "evidence_artifacts_count": len(evidence_result.artifacts)
+                    })
+                else:
+                    audit.log_agent_event("FullExperimentStrategy", "no_evidence_artifacts", {})
 
                 audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "evidence"})
             
@@ -862,32 +835,14 @@ class ResumeFromStatsStrategy(ExecutionStrategy):
                 artifacts.extend(evidence_result.artifacts)
                 run_context.update_phase("evidence")
 
-                # Load curated evidence artifacts into RunContext for synthesis agent
+                # THIN: Pass evidence artifact hashes, let synthesis agent read them
                 if evidence_result.artifacts:
-                    try:
-                        # Store artifact hashes in RunContext for synthesis agent to access
-                        run_context.evidence_artifacts = evidence_result.artifacts
-                        
-                        # Also load the content for immediate access
-                        curated_evidence_list = []
-                        for artifact_hash in evidence_result.artifacts:
-                            evidence_content_bytes = storage.get_artifact(artifact_hash)
-                            if evidence_content_bytes:
-                                evidence_data = json.loads(evidence_content_bytes.decode('utf-8'))
-                                curated_evidence_list.append(evidence_data)
-                        
-                        run_context.evidence = curated_evidence_list
-                        
-                        audit.log_agent_event("FullExperimentStrategy", "evidence_loaded", {
-                            "evidence_artifacts_count": len(evidence_result.artifacts),
-                            "curated_evidence_loaded": len(curated_evidence_list)
-                        })
-                    except Exception as e:
-                        audit.log_agent_event("FullExperimentStrategy", "evidence_load_error", {
-                            "error": str(e),
-                            "evidence_artifacts": evidence_result.artifacts
-                        })
-                        # Continue execution - synthesis agent will handle missing evidence gracefully
+                    run_context.evidence_artifacts = evidence_result.artifacts
+                    audit.log_agent_event("FullExperimentStrategy", "evidence_artifacts_passed", {
+                        "evidence_artifacts_count": len(evidence_result.artifacts)
+                    })
+                else:
+                    audit.log_agent_event("FullExperimentStrategy", "no_evidence_artifacts", {})
 
                 audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "evidence"})
             
