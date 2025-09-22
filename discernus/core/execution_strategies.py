@@ -954,6 +954,16 @@ class ResumeFromAnalysisStrategy(ExecutionStrategy):
                 phases_completed.append("evidence")
                 artifacts.extend(evidence_result.artifacts)
                 run_context.update_phase("evidence")
+
+                # THIN: Pass evidence artifact hashes, let synthesis agent read them
+                if evidence_result.artifacts:
+                    run_context.evidence_artifacts = evidence_result.artifacts
+                    audit.log_agent_event("ResumeFromAnalysisStrategy", "evidence_artifacts_passed", {
+                        "evidence_artifacts_count": len(evidence_result.artifacts)
+                    })
+                else:
+                    audit.log_agent_event("ResumeFromAnalysisStrategy", "no_evidence_artifacts", {})
+
                 audit.log_agent_event("ResumeFromAnalysisStrategy", "phase_complete", {"phase": "evidence"})
             
             # Phase 3: Synthesis

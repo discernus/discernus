@@ -285,8 +285,8 @@ class TwoStageSynthesisAgent(StandardAgent):
         try:
             self.logger.info("Starting Stage 2: Evidence integration")
             
-            # Load raw evidence extraction artifacts for Stage 2 curation and integration
-            raw_evidence = self._load_raw_evidence_artifacts(run_context)
+            # Load curated evidence from IntelligentEvidenceRetrievalAgent for Stage 2 integration
+            raw_evidence = self._prepare_curated_evidence(run_context)
             
             if not raw_evidence:
                 self.logger.warning("No curated evidence found - generating Stage 2 report with explanatory note")

@@ -151,86 +151,8 @@ template: |
     3. Map document names to administrations based on the manifest data you've been given
   - Trust your understanding of the corpus structure
 
-  **CRITICAL OUTPUT REQUIREMENT:**
-  You MUST return ONLY a valid JSON object. Do not include any explanatory text, markdown, or code blocks outside the JSON. The response must be parseable JSON that follows this exact structure. Include methodological documentation within the JSON structure to explain your analytical strategy and choices.
-
-  ```json
-  {
-    "statistical_results": {
-      "descriptive_statistics": { ... },
-      "correlation_analysis": { ... },
-      "anova_analysis": { ... },
-      "reliability_analysis": { ... },
-      "additional_analyses": { ... }
-    },
-    "framework_performance_assessment": {
-      "dimensional_effectiveness": {
-        "strongest_dimensions": ["dimension_name", ...],
-        "weakest_dimensions": ["dimension_name", ...],
-        "dimensional_performance_summary": "Analysis of how each dimension performed"
-      },
-      "cross_dimensional_insights": {
-        "unexpected_correlations": { ... },
-        "framework_validation_patterns": { ... },
-        "theoretical_challenges": "Patterns that challenge framework expectations"
-      },
-      "framework_discovery_potential": {
-        "unanticipated_patterns": "Statistical patterns not anticipated by the research design",
-        "framework_extension_opportunities": "Where the framework could be enhanced or applied differently"
-      },
-      "framework_corpus_fit": {
-        "variance_analysis": {
-          "dimensional_variance": "Variance in each dimension across documents",
-          "overall_variance": "Total variance across all dimensions",
-          "variance_interpretation": "Whether variance indicates good discrimination or poor fit"
-        },
-        "discriminatory_power": {
-          "dimension_separation": "How well dimensions distinguish between documents",
-          "effect_size_analysis": "Cohen's d or similar measures for dimensional differences",
-          "separation_quality": "Assessment of whether framework provides meaningful discrimination"
-        },
-        "corpus_alignment": {
-          "expected_vs_observed": "How well observed patterns match framework expectations",
-          "theoretical_validation": "Whether statistical patterns support framework theory",
-          "corpus_suitability": "Assessment of whether corpus is appropriate for framework"
-        },
-        "fit_score": "Overall framework-corpus fit assessment (0-1 scale with interpretation)",
-        "fit_interpretation": "Explanation of what the fit score means for research validity"
-      }
-    },
-    "sample_size_assessment": {
-      "total_documents": N,
-      "tier_classification": "TIER 1/2/3",
-      "power_notes": "Assessment of statistical power",
-      "confidence_levels": "Appropriate confidence levels for synthesis interpretation"
-    },
-    "synthesis_intelligence": {
-      "key_statistical_narratives": ["Primary stories the data tells about framework performance"],
-      "researcher_surprises": ["Insights the researcher likely didn't anticipate"],
-      "methodology_summary": "Statistical approaches used with framework-centric interpretation"
-    },
-    "statistical_integrity": {
-      "analysis_classification": {
-        "confirmatory_analyses": ["Tests directly addressing stated research questions"],
-        "exploratory_analyses": ["Additional patterns requiring replication"]
-      },
-      "multiple_comparisons_handling": "Description of correction methods applied and rationale",
-      "effect_size_interpretation": "Practical significance assessment using established benchmarks",
-      "assumption_testing_results": "Summary of statistical assumption checks and any violations"
-    },
-    "methodological_documentation": {
-      "analytical_strategy": "Overview of the statistical approach chosen and rationale",
-      "data_preparation": "Description of data cleaning, transformation, and preparation steps",
-      "statistical_tests_selected": "List of specific statistical tests chosen and why they were appropriate",
-      "grouping_strategy": "How documents were grouped for analysis based on corpus manifest",
-      "power_analysis_decisions": "Sample size considerations and tier classification rationale",
-      "assumption_checks": "Statistical assumptions tested and any violations or accommodations made",
-      "missing_data_handling": "How missing data was identified and handled",
-      "effect_size_interpretation": "Benchmarks used for interpreting practical significance",
-      "limitations_and_caveats": "Known limitations of the analysis and appropriate interpretation guidelines"
-    }
-  }
-  ```
+  **OUTPUT REQUIREMENT:**
+  Provide your complete statistical analysis in whatever format you think is most appropriate and comprehensive. Include your methodology, calculations, results, and interpretations. Use whatever structure and format will best communicate your findings.
 
   **STATISTICAL ANALYSIS REQUIREMENT:**
   Perform comprehensive statistical analysis by generating and executing Python code internally using pandas, numpy, scipy.stats, and pingouin libraries. Use proper statistical software for accurate calculations, then return only the results without the code itself.
@@ -246,5 +168,5 @@ template: |
   Provide rigorous statistical analysis that supports academic research methodology. Your results should offer comprehensive statistical evidence that researchers can interpret and incorporate into their scholarly work.
 
   **FINAL REMINDER:**
-  Your response must be ONLY a valid JSON object. No explanatory text, no markdown formatting, no code blocks outside the JSON. Generate and execute Python code internally using statistical libraries for accurate calculations, but return only the results without the code itself. Include comprehensive methodological documentation within the JSON structure to explain your analytical strategy and choices. The synthesis agent depends on this exact format.
+  Generate and execute Python code internally using statistical libraries for accurate calculations. Provide your complete analysis in whatever format best communicates your findings - this could be structured text, tables, or any format you think is most appropriate.
 

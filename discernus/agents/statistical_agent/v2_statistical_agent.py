@@ -161,22 +161,22 @@ class V2StatisticalAgent(StandardAgent):
                 )
             
             # THIN: Store raw LLM response directly, no parsing
-            
-            # Store Step 1 artifact in THIN format - raw LLM response
             statistical_artifact_data = {
                 "analysis_id": f"stats_{batch_id}",
                 "step": "statistical_analysis",
                 "model_used": "vertex_ai/gemini-2.5-pro",
-                "statistical_analysis": statistical_analysis_content,  # Raw LLM response
+                "statistical_analysis": statistical_analysis_content.strip(),  # Ensure leading/trailing whitespace is removed
                 "documents_processed": len(raw_artifacts),
                 "timestamp": datetime.now(timezone.utc).isoformat()
             }
-            
             statistical_content_bytes = json.dumps(statistical_artifact_data, indent=2).encode('utf-8')
             statistical_artifact_hash = self.storage.put_artifact(
                 statistical_content_bytes,
                 {"artifact_type": "statistical_analysis", "batch_id": batch_id}
             )
+            # Update run context with proper artifact hashes
+            run_context.statistical_artifacts = [statistical_artifact_hash]
+            run_context.statistical_results = statistical_analysis_content.strip()  # THIN: Raw LLM response
             
             
             # Create artifacts list with proper hashes
@@ -194,10 +194,6 @@ class V2StatisticalAgent(StandardAgent):
                     }
                 }
             ]
-            
-            # Update run context with proper artifact hashes
-            run_context.statistical_artifacts = [statistical_artifact_hash]
-            run_context.statistical_results = statistical_analysis_content  # THIN: Raw LLM response
             
             self.audit.log_agent_event(self.agent_name, "execution_completed", {
                 "batch_id": batch_id,
@@ -301,7 +297,8 @@ class V2StatisticalAgent(StandardAgent):
             # Call LLM
             response = self.gateway.execute_call(
                 model="vertex_ai/gemini-2.5-pro",
-                prompt=prompt
+                prompt=prompt,
+                # No response_schema for THIN agent
             )
             
             if isinstance(response, tuple):
