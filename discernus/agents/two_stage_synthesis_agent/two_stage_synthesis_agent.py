@@ -429,7 +429,8 @@ synthesis_method: two_stage_with_evidence
                 "corpus_manifest": corpus_manifest,
                 "statistical_results": {},  # Statistical results are read from artifacts
                 "experiment_id": run_context.experiment_id,
-                "metadata": run_context.metadata or {}
+                "metadata": run_context.metadata or {},
+                "run_context": run_context  # Add run_context so _read_statistical_artifacts can access it
             }
             
         except Exception as e:
@@ -467,7 +468,20 @@ Please generate a comprehensive framework-driven analysis report following the S
     
     def _read_statistical_artifacts(self, run_context: RunContext) -> str:
         """Read statistical analysis artifacts directly from storage."""
-        if not run_context or not hasattr(run_context, 'statistical_artifacts'):
+        self.logger.info(f"DEBUG: _read_statistical_artifacts called with run_context: {type(run_context)}")
+        
+        if not run_context:
+            self.logger.warning("DEBUG: run_context is None")
+            return "No statistical artifacts available"
+            
+        if not hasattr(run_context, 'statistical_artifacts'):
+            self.logger.warning("DEBUG: run_context has no statistical_artifacts attribute")
+            return "No statistical artifacts available"
+            
+        self.logger.info(f"DEBUG: run_context.statistical_artifacts = {run_context.statistical_artifacts}")
+        
+        if not run_context.statistical_artifacts:
+            self.logger.warning("DEBUG: run_context.statistical_artifacts is empty")
             return "No statistical artifacts available"
         
         try:

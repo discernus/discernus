@@ -102,6 +102,12 @@ class V2StatisticalAgent(StandardAgent):
             AgentResult with statistical analysis artifacts
         """
         try:
+            # Store run context for access in other methods
+            self._current_run_context = {
+                'experiment_id': run_context.experiment_id,
+                'metadata': run_context.metadata
+            }
+            
             self.logger.info("Starting V2 Statistical Agent execution")
             self.audit.log_agent_event(self.agent_name, "execution_started", {
                 "run_context_type": type(run_context).__name__
@@ -275,16 +281,20 @@ class V2StatisticalAgent(StandardAgent):
             prompt_template = self._load_prompt_template()
             self.logger.info(f"Loaded prompt template, length: {len(prompt_template)}")
             
+            # Get experiment context from run_context
+            experiment_id = getattr(self, '_current_run_context', {}).get('experiment_id', 'unknown')
+            corpus_manifest_content = getattr(self, '_current_run_context', {}).get('metadata', {}).get('corpus_manifest_content', 'Corpus manifest not available')
+            
             # Prepare the prompt with actual data
             prompt = prompt_template.format(
                 framework_content=framework_content,
-                experiment_name="mlkmx",
-                experiment_description="MLK-MX Civil Rights Discourse Analysis",
-                research_questions="How do different rhetorical strategies in civil rights discourse manifest through the Cohesive Flourishing Framework dimensions?",
-                experiment_content=framework_content,  # Using framework as experiment content for now
+                experiment_name=experiment_id,
+                experiment_description=f"Statistical analysis of {experiment_id} corpus using the Cohesive Flourishing Framework",
+                research_questions="How do rhetorical strategies in this corpus manifest through the Cohesive Flourishing Framework dimensions?",
+                experiment_content=framework_content,
                 data_columns="dimensional_scores, derived_metrics, evidence",
                 sample_data=json.dumps(raw_artifacts[:2], indent=2) if len(raw_artifacts) >= 2 else json.dumps(raw_artifacts, indent=2),
-                corpus_manifest="Two documents: Malcolm X 'The Ballot or the Bullet' and MLK 'Letter from Birmingham Jail'"
+                corpus_manifest=corpus_manifest_content
             )
 
             self.audit.log_agent_event(self.agent_name, "step1_started", {
