@@ -622,20 +622,23 @@ Please enhance the Stage 1 report by strategically integrating the curated evide
                 self.logger.info("No curated evidence for appendix")
                 return None
             
-            # Store raw evidence as appendix (THIN: no formatting/parsing)
-            artifact_data = {
-                "agent_name": self.agent_name,
-                "stage": "evidence_appendix",
-                "timestamp": datetime.now(timezone.utc).isoformat(),
-                "raw_evidence_content": raw_curated_evidence,
-                "evidence_content_length": len(raw_curated_evidence),
-                "synthesis_method": "two_stage_with_appendix"
-            }
+            # Create markdown content with metadata header
+            timestamp = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')
+            markdown_content = f"""---
+agent_name: {self.agent_name}
+stage: evidence_appendix
+timestamp: {timestamp}
+evidence_content_length: {len(raw_curated_evidence)}
+synthesis_method: two_stage_with_appendix
+---
+
+{raw_curated_evidence}"""
             
-            appendix_hash = self.storage.store_artifact(
-                content=artifact_data,
-                artifact_type="evidence_appendix",
-                experiment_id="evidence_appendix"
+            # Store as markdown content
+            content_bytes = markdown_content.encode('utf-8')
+            appendix_hash = self.storage.put_artifact(
+                content_bytes,
+                {"artifact_type": "evidence_appendix", "experiment_id": "evidence_appendix"}
             )
             
             self.logger.info(f"Evidence appendix created with raw content ({len(raw_curated_evidence)} characters)")
