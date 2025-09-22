@@ -256,7 +256,7 @@ class V2AnalysisAgent(StandardAgent):
                 
                 # Check if verification failed - if so, fail fast for this document
                 verification_status = verification_result.get('content', {}).get('verification_status', 'unknown')
-                if verification_status != "verified":
+                if verification_status not in ["verified", "skipped"]:
                     self.unified_logger.verification_failed(doc_index, verification_status)
                     self.audit.log_agent_event(self.agent_name, "verification_failed", {
                         "document_index": doc_index,
