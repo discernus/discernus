@@ -2,7 +2,7 @@
 
 ## Experiment Overview
 
-This experiment applies the Cohesive Flourishing Framework (CFF) v10.1 to analyze the rhetorical strategies and democratic health implications of Charlie Kirk's political communication across his career (2019-2024). The analysis examines how Kirk's discourse patterns evolve across different political contexts and audiences, with particular focus on their impact on social cohesion and democratic institutions.
+This experiment applies the Cohesive Flourishing Framework (CFF) v10.2 to analyze the rhetorical strategies and democratic health implications of Charlie Kirk's political communication across his career (2019-2024). The analysis examines how Kirk's discourse patterns evolve across different political contexts and audiences, with particular focus on their impact on social cohesion and democratic institutions.
 
 ## Research Questions
 
@@ -36,7 +36,7 @@ Kirk's discourse will show negative cohesion indices overall, indicating fragmen
 ## Experimental Design
 
 ### Framework Application
-- **Primary Framework**: Cohesive Flourishing Framework v10.1
+- **Primary Framework**: Cohesive Flourishing Framework v10.2
 - **Analysis Variants**: Sequential analysis (identity, emotional, success, relational, goals) + comprehensive analysis
 - **Model Requirements**: Gemini 2.5 Pro for sophisticated dual-track analysis
 
@@ -74,7 +74,7 @@ Kirk's discourse will show negative cohesion indices overall, indicating fragmen
 ## Success Criteria
 
 ### Primary Success Criteria
-- **Complete Analysis**: All 14 speeches analyzed using CFF v10.1
+- **Complete Analysis**: All 14 speeches analyzed using CFF v10.2
 - **Pattern Identification**: Meaningful patterns identified across dimensions
 - **Framework Exercise**: All CFF dimensions and metrics fully utilized
 - **Comparative Insights**: Clear differences identified across career phases and contexts
@@ -89,7 +89,7 @@ Kirk's discourse will show negative cohesion indices overall, indicating fragmen
 
 ### Analysis Protocol
 1. **Sequential Analysis**: Each speech analyzed using all 5 sequential variants
-2. **Comprehensive Analysis**: Full CFF v10.1 application to each speech
+2. **Comprehensive Analysis**: Full CFF v10.2 application to each speech
 3. **Cross-Speech Comparison**: Pattern identification across the corpus
 4. **Statistical Analysis**: Quantitative assessment of patterns and relationships
 5. **Synthesis**: Integration of findings into comprehensive understanding
@@ -119,7 +119,7 @@ Kirk's discourse will show negative cohesion indices overall, indicating fragmen
 ## Risk Mitigation
 
 ### Potential Challenges
-1. **Framework Complexity**: CFF v10.1's sophisticated analysis requirements
+1. **Framework Complexity**: CFF v10.2's sophisticated analysis requirements
 2. **Corpus Diversity**: Varying speech lengths and contexts
 3. **Temporal Analysis**: Career evolution complexity
 4. **Statistical Power**: Sample size considerations for 14 speeches across 4 career phases

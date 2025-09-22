@@ -2,7 +2,7 @@
 
 ## Abstract
 
-This experiment analyzes populist discourse patterns in presidential speeches using the Populist Discourse Analysis Framework (PDAF) v10.0. The analysis employs a case study approach examining speech patterns across different contexts spanning 2017-2025. The corpus includes 6 presidential speeches representing different speech types and time periods, enabling comprehensive case study analysis of populist discourse evolution and contextual variation.
+This experiment analyzes populist discourse patterns in presidential speeches using the Populist Discourse Analysis Framework (PDAF) v10.0.2. The analysis employs a case study approach examining speech patterns across different contexts spanning 2017-2025. The corpus includes 6 presidential speeches representing different speech types and time periods, enabling comprehensive case study analysis of populist discourse evolution and contextual variation.
 
 ## Research Questions
 

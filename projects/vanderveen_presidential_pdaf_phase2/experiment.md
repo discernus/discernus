@@ -2,7 +2,7 @@
 
 ## Abstract
 
-This experiment analyzes populist discourse patterns in 2016 presidential campaign speeches using the PDAF v10.0 framework. We examine 57 speeches from 6 major candidates (Trump, Clinton, Sanders, Cruz, Rubio, Kasich) across four campaign phases to test specific hypotheses about populist rhetoric variation by candidate, party, and temporal context. The study validates PDAF's analytical capabilities by comparing results against established human coding benchmarks and tests theoretical predictions about populist discourse patterns in American electoral politics. Expected outcomes include identification of dimensional populism profiles for each candidate, strategic tension analysis revealing rhetorical sophistication, and temporal evolution patterns showing campaign adaptation strategies.
+This experiment analyzes populist discourse patterns in 2016 presidential campaign speeches using the PDAF v10.0.2 framework. We examine 57 speeches from 6 major candidates (Trump, Clinton, Sanders, Cruz, Rubio, Kasich) across four campaign phases to test specific hypotheses about populist rhetoric variation by candidate, party, and temporal context. The study validates PDAF's analytical capabilities by comparing results against established human coding benchmarks and tests theoretical predictions about populist discourse patterns in American electoral politics. Expected outcomes include identification of dimensional populism profiles for each candidate, strategic tension analysis revealing rhetorical sophistication, and temporal evolution patterns showing campaign adaptation strategies.
 
 ## Research Questions
 

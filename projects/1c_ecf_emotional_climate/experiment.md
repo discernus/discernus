@@ -2,7 +2,7 @@
 
 ## Abstract
 
-This experiment analyzes emotional climate patterns in political discourse using the Emotional Climate Framework v10.0. The analysis employs a 2×3 factorial design examining ideology and era factors spanning 60 years of American political discourse (1963-2025). The factorial structure enables sophisticated emotional climate interaction analysis across conservative and progressive speakers in civil rights, institutional, and populist eras.
+This experiment analyzes emotional climate patterns in political discourse using the Emotional Climate Framework v10.1. The analysis employs a 2×3 factorial design examining ideology and era factors spanning 60 years of American political discourse (1963-2025). The factorial structure enables sophisticated emotional climate interaction analysis across conservative and progressive speakers in civil rights, institutional, and populist eras.
 
 ## Research Questions
 

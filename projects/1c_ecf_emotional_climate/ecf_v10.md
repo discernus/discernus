@@ -1,4 +1,4 @@
-# Emotional Climate Framework (ECF) v10.0
+# Emotional Climate Framework (ECF) v10.1
 
 ## Abstract & Raison d'Être
 
@@ -48,9 +48,9 @@ The framework evaluates political discourse across three bipolar axes that form 
 - **Enmity (0.0-1.0)**: Language creating antagonistic atmosphere toward opponents, enemies, or opposing groups that fosters hostility and conflict orientation
 - **Amity (0.0-1.0)**: Language fostering positive relationships, cooperation, solidarity, or shared purpose that creates collaborative and inclusive psychological states
 
-#### Resource Attitudes Axis: Envy ↔ Compersion
+#### Resource Attitudes Axis: Envy ↔ Mudita
 - **Envy (0.0-1.0)**: Language expressing resentment toward others' advantages, success, or privileged positions that creates zero-sum and grievance-based psychological states
-- **Compersion (0.0-1.0)**: Language celebrating others' success, merit, achievement, or positive developments that creates abundance-minded and supportive psychological states
+- **Mudita (0.0-1.0)**: Language celebrating others' success, merit, achievement, or positive developments that creates abundance-minded and supportive psychological states
 
 ### Salience-Weighted Emotional Analysis
 
@@ -68,12 +68,12 @@ The framework calculates several derived metrics to provide comprehensive emotio
 **Axis-Level Climate Indices**:
 - **Threat-Opportunity Balance**: Measures overall hope vs. fear orientation, weighted by salience
 - **Social Relations Balance**: Measures overall amity vs. enmity orientation, weighted by salience  
-- **Resource Attitudes Balance**: Measures overall compersion vs. envy orientation, weighted by salience
+- **Resource Attitudes Balance**: Measures overall mudita vs. envy orientation, weighted by salience
 
 **Summary Metrics**:
 - **Emotional Climate Index**: Primary summary metric measuring overall emotional climate orientation, weighted by rhetorical prominence
 - **Climate Intensity**: Measures overall emotional intensity across all dimensions
-- **Positive Emotional Index**: Measures positive emotional atmosphere (hope, amity, compersion)
+- **Positive Emotional Index**: Measures positive emotional atmosphere (hope, amity, mudita)
 - **Negative Emotional Index**: Measures negative emotional atmosphere (fear, enmity, envy)
 
 ### Sequential Analysis Strategy
@@ -117,7 +117,7 @@ This framework is designed for analysis of:
 
 ### System Validation Note
 
-This framework is designed to work with the Discernus v10.0 analysis pipeline. Post-hoc statistical analysis will validate dimensional independence and internal consistency. The framework's reliability metrics are calculated automatically during analysis execution.
+This framework is designed to work with the Discernus v10.1 analysis pipeline. Post-hoc statistical analysis will validate dimensional independence and internal consistency. The framework's reliability metrics are calculated automatically during analysis execution.
 
 ## References
 
@@ -131,25 +131,25 @@ Petty, R. E., & Cacioppo, J. T. (1986). *Communication and Persuasion: Central a
 
 metadata:
   framework_name: "emotional_climate_framework"
-  framework_version: "1.0.0"
+  framework_version: "10.1.0"
   author: "Discernus Project"
   spec_version: "10.0"
 
 # 5.2: Analysis Variants
 analysis_variants:
   default:
-    description: "Complete v10.0 implementation with salience-weighted emotional climate analysis. For highest fidelity analysis, it is recommended to execute the three `sequential_*` analysis variants and combine the results."
+    description: "Complete v10.1 implementation with salience-weighted emotional climate analysis. For highest fidelity analysis, it is recommended to execute the three `sequential_*` analysis variants and combine the results."
     analysis_prompt: |
-      You are an expert analyst of emotional climate and psychological atmosphere in political discourse, grounded in affective psychology, political psychology, and communication theory. Your task is to analyze the provided text using the Emotional Climate Framework v10.0.
+      You are an expert analyst of emotional climate and psychological atmosphere in political discourse, grounded in affective psychology, political psychology, and communication theory. Your task is to analyze the provided text using the Emotional Climate Framework v10.1.
 
       FRAMEWORK METHODOLOGY:
-      This framework evaluates how political discourse creates emotional climates through analysis of fear vs. hope, enmity vs. amity, and envy vs. compersion. It preserves complexity by independently scoring opposing dimensions for both intensity (raw_score) and rhetorical prominence (salience).
+      This framework evaluates how political discourse creates emotional climates through analysis of fear vs. hope, enmity vs. amity, and envy vs. mudita. It preserves complexity by independently scoring opposing dimensions for both intensity (raw_score) and rhetorical prominence (salience).
 
       DIMENSIONAL ANALYSIS:
       You must evaluate 6 dimensions across 3 opposing pairs:
       - Threat-Opportunity: Fear vs. Hope
       - Social Relations: Enmity vs. Amity
-      - Resource Attitudes: Envy vs. Compersion
+      - Resource Attitudes: Envy vs. Mudita
 
       EVIDENCE STANDARDS:
       - Provide exact quotations, not paraphrases.
@@ -174,7 +174,7 @@ analysis_variants:
   sequential_threat_opportunity:
     description: "Focused analysis of Threat-Opportunity axis dimensions (Fear, Hope)"
     analysis_prompt: |
-      You are an expert analyst of emotional climate and psychological atmosphere in political discourse, grounded in affective psychology, political psychology, and communication theory. Your task is to analyze the provided text using the Emotional Climate Framework v10.0.
+      You are an expert analyst of emotional climate and psychological atmosphere in political discourse, grounded in affective psychology, political psychology, and communication theory. Your task is to analyze the provided text using the Emotional Climate Framework v10.1.
       
       DIMENSIONAL ANALYSIS: Focus exclusively on the Threat-Opportunity axis dimensions.
       
@@ -203,7 +203,7 @@ analysis_variants:
   sequential_social_relations:
     description: "Focused analysis of Social Relations axis dimensions (Enmity, Amity)"
     analysis_prompt: |
-      You are an expert analyst of emotional climate and psychological atmosphere in political discourse, grounded in affective psychology, political psychology, and communication theory. Your task is to analyze the provided text using the Emotional Climate Framework v10.0.
+      You are an expert analyst of emotional climate and psychological atmosphere in political discourse, grounded in affective psychology, political psychology, and communication theory. Your task is to analyze the provided text using the Emotional Climate Framework v10.1.
       
       DIMENSIONAL ANALYSIS: Focus exclusively on the Social Relations axis dimensions.
       
@@ -231,14 +231,14 @@ analysis_variants:
       Use the scoring calibration guidelines defined for the `enmity` and `amity` dimensions and focus only on these two dimensions.
 
   sequential_resource_attitudes:
-    description: "Focused analysis of Resource Attitudes axis dimensions (Envy, Compersion)"
+    description: "Focused analysis of Resource Attitudes axis dimensions (Envy, Mudita)"
     analysis_prompt: |
-      You are an expert analyst of emotional climate and psychological atmosphere in political discourse, grounded in affective psychology, political psychology, and communication theory. Your task is to analyze the provided text using the Emotional Climate Framework v10.0.
+      You are an expert analyst of emotional climate and psychological atmosphere in political discourse, grounded in affective psychology, political psychology, and communication theory. Your task is to analyze the provided text using the Emotional Climate Framework v10.1.
       
       DIMENSIONAL ANALYSIS: Focus exclusively on the Resource Attitudes axis dimensions.
       
       **ENVY**: Look for resentment language, grievance framing, zero-sum thinking.
-      **COMPERSION**: Look for celebration language, merit recognition, supportive framing.
+      **MUDITA**: Look for celebration language, merit recognition, supportive framing.
       
       **SALIENCE ASSESSMENT**: 
       Salience measures rhetorical prominence, not intensity. Consider:
@@ -250,14 +250,14 @@ analysis_variants:
       
       **CRITICAL DISAMBIGUATION**: Both may use "fairness" language:
       - Envy: resentment toward others' advantages, grievance-based thinking
-      - Compersion: celebration of others' success, merit-based recognition
+      - Mudita: celebration of others' success, merit-based recognition
       - Intent and focus are key differentiators
       
       **BOUNDARY CASES**:
       - "Unfair advantage" → legitimate concern vs. envy-based resentment
       - "Well-deserved success" → genuine celebration vs. superficial praise
       
-      Use the scoring calibration guidelines defined for the `envy` and `compersion` dimensions and focus only on these two dimensions.
+      Use the scoring calibration guidelines defined for the `envy` and `mudita` dimensions and focus only on these two dimensions.
 
 # 5.3: Dimensions
 dimensions:
@@ -318,27 +318,22 @@ dimensions:
       absent: "0.0: No positive language or optimism creation"
 
   - name: "enmity"
-    description: "Language creating antagonistic atmosphere toward opponents, enemies, or opposing groups that fosters hostility and conflict orientation."
+    description: "Language that frames relationships in terms of hostility, adversarial conflict, or dehumanization. Focuses on identifying and attacking an enemy."
     markers:
       positive_examples:
-        - { phrase: "enemy", explanation: "explicit antagonistic language creating hostility" }
-        - { phrase: "betrayal", explanation: "conflict framing emphasizing opposition" }
-        - { phrase: "fight against", explanation: "hostility indicators creating adversarial states" }
-        - { phrase: "destroy", explanation: "conflict language fostering hostility" }
-        - { phrase: "combat", explanation: "war-like language creating conflict orientation" }
+        - { phrase: "enemy", explanation: "explicit adversarial designation" }
+        - { phrase: "destroy", explanation: "aggressive action language against a group" }
+        - { phrase: "evil", explanation: "moral condemnation and dehumanization" }
+        - { phrase: "they are a threat", explanation: "casting a group as an existential danger" }
+        - { phrase: "traitors", explanation: "character assassination and accusation of betrayal" }
       negative_examples:
-        - { phrase: "policy disagreement", explanation: "substantive differences, not enmity" }
-        - { phrase: "constructive criticism", explanation: "reform-oriented feedback, not hostility" }
-        - { phrase: "oversight concerns", explanation: "accountability measures, not enmity" }
+        - { phrase: "disagree with their policies", explanation: "opposition to ideas, not people" }
+        - { phrase: "we must correct this injustice", explanation: "criticism of a system, not a hostile attack on a group" }
       boundary_cases:
-        - { phrase: "strong disagreement", explanation: "legitimate debate vs. hostile rhetoric" }
-        - { phrase: "firm opposition", explanation: "policy stance vs. personal hostility" }
+        - { phrase: "fight against injustice", explanation: "Scores low unless the 'fight' is framed as hostility toward a specific group of people." }
     disambiguation:
-      overlap_with_amity:
-        rule: "Enmity creates adversarial, hostile psychological states; Amity creates collaborative, inclusive psychological states."
-        context_clues: "Hostility/conflict vs. cooperation/inclusion"
-        priority: "Psychological state created is key differentiator"
-        co_occurrence_strategy: "Distinguish between opposition (enmity) and cooperation (amity)"
+      vs_amity: "A text can have high Enmity (criticizing an opponent) AND high Amity (calling for future brotherhood). Score each independently. Enmity applies to the description of the present conflict."
+      enmity_vs_criticism: "Enmity requires hostility toward PEOPLE or GROUPS. Strong criticism of IDEAS, SYSTEMS, or ACTIONS without personal hostility should not score high on Enmity."
     scoring_calibration:
       high: "0.7-1.0: Strong antagonistic language creating significant hostility and conflict orientation."
       medium: "0.4-0.6: Moderate antagonistic emphasis, some hostility creation"
@@ -346,27 +341,21 @@ dimensions:
       absent: "0.0: No antagonistic language or hostility creation"
 
   - name: "amity"
-    description: "Language fostering positive relationships, cooperation, solidarity, or shared purpose that creates collaborative and inclusive psychological states."
+    description: "Language that frames relationships in terms of friendship, cooperation, shared identity, and potential for reconciliation. Focuses on building or affirming positive social bonds."
     markers:
       positive_examples:
-        - { phrase: "together", explanation: "cooperative language creating collaboration" }
-        - { phrase: "unity", explanation: "inclusive framing fostering solidarity" }
-        - { phrase: "partnership", explanation: "positive relationship indicators" }
-        - { phrase: "cooperation", explanation: "collaborative language creating inclusion" }
-        - { phrase: "shared values", explanation: "common ground language" }
+        - { phrase: "my friends", explanation: "explicit positive relationship designation" }
+        - { phrase: "our shared future", explanation: "emphasizes a common in-group or goal" }
+        - { phrase: "work together", explanation: "explicit call for cooperation" }
+        - { phrase: "brotherhood", explanation: "appeal to familial, non-transactional bonds" }
+        - { phrase: "let us sit down together", explanation: "call for dialogue and reconciliation" }
       negative_examples:
-        - { phrase: "individual rights", explanation: "personal focus, not amity" }
-        - { phrase: "policy outcomes", explanation: "substantive results, not amity focus" }
-        - { phrase: "political strategy", explanation: "tactical considerations, not cooperation" }
+        - { phrase: "a necessary evil", explanation: "reluctant acceptance, not positive relationship" }
+        - { phrase: "our opponents", explanation: "acknowledges disagreement without implying a positive bond" }
       boundary_cases:
-        - { phrase: "working together", explanation: "genuine cooperation vs. superficial unity" }
-        - { phrase: "common ground", explanation: "realistic cooperation vs. forced unity" }
+        - { phrase: "our fellow citizens", explanation: "Can be a simple statement of fact, or a genuine appeal to shared identity. Score based on warmth and context." }
     disambiguation:
-      overlap_with_enmity:
-        rule: "Amity creates collaborative, inclusive psychological states; Enmity creates adversarial, hostile psychological states."
-        context_clues: "Cooperation/inclusion vs. hostility/conflict"
-        priority: "Psychological state created is key differentiator"
-        co_occurrence_strategy: "Distinguish between cooperation (amity) and opposition (enmity)"
+      vs_enmity: "A text can describe a present state of Enmity while calling for a future state of Amity. Score both based on the evidence. Amity often relates to the speaker's proposed solution or ideal future."
     scoring_calibration:
       high: "0.7-1.0: Strong cooperative language creating significant collaboration and inclusion."
       medium: "0.4-0.6: Moderate cooperative emphasis, some collaboration creation"
@@ -390,18 +379,18 @@ dimensions:
         - { phrase: "unfair advantage", explanation: "legitimate concern vs. envy-based resentment" }
         - { phrase: "systemic issues", explanation: "reform advocacy vs. grievance focus" }
     disambiguation:
-      overlap_with_compersion:
-        rule: "Envy creates resentment and grievance-based thinking; Compersion creates celebration and supportive psychological states."
+      overlap_with_mudita:
+        rule: "Envy creates resentment and grievance-based thinking; Mudita creates celebration and supportive psychological states."
         context_clues: "Resentment/grievance vs. celebration/support"
         priority: "Psychological state created is key differentiator"
-        co_occurrence_strategy: "Distinguish between concern (envy) and celebration (compersion)"
+        co_occurrence_strategy: "Distinguish between concern (envy) and celebration (mudita)"
     scoring_calibration:
       high: "0.7-1.0: Strong resentment language creating significant grievance and zero-sum thinking."
       medium: "0.4-0.6: Moderate resentment emphasis, some grievance creation"
       low: "0.1-0.3: Weak resentment language, minimal grievance"
       absent: "0.0: No resentment language or grievance creation"
 
-  - name: "compersion"
+  - name: "mudita"
     description: "Language celebrating others' success, merit, achievement, or positive developments that creates abundance-minded and supportive psychological states."
     markers:
       positive_examples:
@@ -419,10 +408,10 @@ dimensions:
         - { phrase: "inspiring developments", explanation: "realistic celebration vs. forced praise" }
     disambiguation:
       overlap_with_envy:
-        rule: "Compersion creates celebration and supportive psychological states; Envy creates resentment and grievance-based thinking."
+        rule: "Mudita creates celebration and supportive psychological states; Envy creates resentment and grievance-based thinking."
         context_clues: "Celebration/support vs. resentment/grievance"
         priority: "Psychological state created is key differentiator"
-        co_occurrence_strategy: "Distinguish between celebration (compersion) and concern (envy)"
+        co_occurrence_strategy: "Distinguish between celebration (mudita) and concern (envy)"
     scoring_calibration:
       high: "0.7-1.0: Strong celebration language creating significant support and abundance thinking."
       medium: "0.4-0.6: Moderate celebration emphasis, some support creation"
@@ -442,7 +431,7 @@ derived_metrics:
 
   - name: "resource_attitudes_salience_total"
     description: "Combined salience of resource attitudes dimensions for weighting calculations."
-    formula: "dimensions.envy.salience + dimensions.compersion.salience + 0.001"
+    formula: "dimensions.envy.salience + dimensions.mudita.salience + 0.001"
 
   - name: "total_emotional_salience"
     description: "Total salience across all emotional dimensions for overall weighting."
@@ -458,8 +447,8 @@ derived_metrics:
     formula: "((dimensions.amity.raw_score * dimensions.amity.salience) - (dimensions.enmity.raw_score * dimensions.enmity.salience)) / derived_metrics.social_relations_salience_total"
 
   - name: "resource_attitudes_balance"
-    description: "Salience-weighted resource attitudes balance measuring compersion vs. envy."
-    formula: "((dimensions.compersion.raw_score * dimensions.compersion.salience) - (dimensions.envy.raw_score * dimensions.envy.salience)) / derived_metrics.resource_attitudes_salience_total"
+    description: "Salience-weighted resource attitudes balance measuring mudita vs. envy."
+    formula: "((dimensions.mudita.raw_score * dimensions.mudita.salience) - (dimensions.envy.raw_score * dimensions.envy.salience)) / derived_metrics.resource_attitudes_salience_total"
 
   # Summary metrics
   - name: "emotional_climate_index"
@@ -468,11 +457,11 @@ derived_metrics:
 
   - name: "climate_intensity"
     description: "Measures overall emotional intensity across all dimensions."
-    formula: "(dimensions.fear.raw_score + dimensions.hope.raw_score + dimensions.enmity.raw_score + dimensions.amity.raw_score + dimensions.envy.raw_score + dimensions.compersion.raw_score) / 6"
+    formula: "(dimensions.fear.raw_score + dimensions.hope.raw_score + dimensions.enmity.raw_score + dimensions.amity.raw_score + dimensions.envy.raw_score + dimensions.mudita.raw_score) / 6"
 
   - name: "positive_emotional_index"
-    description: "Measures positive emotional atmosphere (hope, amity, compersion)."
-    formula: "(dimensions.hope.raw_score + dimensions.amity.raw_score + dimensions.compersion.raw_score) / 3"
+    description: "Measures positive emotional atmosphere (hope, amity, mudita)."
+    formula: "(dimensions.hope.raw_score + dimensions.amity.raw_score + dimensions.mudita.raw_score) / 3"
 
   - name: "negative_emotional_index"
     description: "Measures negative emotional atmosphere (fear, enmity, envy)."
@@ -495,9 +484,9 @@ output_schema:
           $ref: "#/definitions/score_object"
         envy:
           $ref: "#/definitions/score_object"
-        compersion:
+        mudita:
           $ref: "#/definitions/score_object"
-      required: ["fear", "hope", "enmity", "amity", "envy", "compersion"]
+      required: ["fear", "hope", "enmity", "amity", "envy", "mudita"]
     derived_metrics:
       type: object
       properties:

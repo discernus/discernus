@@ -1,8 +1,0 @@
-{
-  "analysis_id": "analysis_v2_analysis_20250921_165553_1",
-  "step": "derived_metrics",
-  "model_used": "vertex_ai/gemini-2.5-pro",
-  "derived_metrics": "```python\nimport json\n\nscores = {\n  \"positive_sentiment\": 0.0,\n  \"negative_sentiment\": 1.0\n}\n\npositive_sentiment = scores.get(\"positive_sentiment\", 0.0)\nnegative_sentiment = scores.get(\"negative_sentiment\", 0.0)\n\n# Derived Metrics Calculation\n# Sentiment Intensity: Difference between positive and negative sentiment\nsentiment_intensity = positive_sentiment - negative_sentiment\n\n# Overall Sentiment: Average of positive and negative sentiment\noverall_sentiment = (positive_sentiment + negative_sentiment) / 2\n\n# Net Sentiment Score: Similar to intensity but accounts for cases where both are low\n# If both are low, it leans towards neutral. If one is high and other low, it reflects the dominant one.\nnet_sentiment_score = (positive_sentiment - negative_sentiment) / (positive_sentiment + negative_sentiment + 1e-9) # Adding epsilon to avoid division by zero\n\nresults = {\n    \"sentiment_intensity\": sentiment_intensity,\n    \"overall_sentiment\": overall_sentiment,\n    \"net_sentiment_score\": net_sentiment_score,\n}\n```\n```json\n{\"results\":{\"sentiment_intensity\":-1.0,\"overall_sentiment\":0.5,\"net_sentiment_score\":-1.0}}\n```",
-  "document_index": 1,
-  "timestamp": "2025-09-21T20:56:50.750633+00:00"
-}

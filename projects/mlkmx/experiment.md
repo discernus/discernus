@@ -2,7 +2,7 @@
 
 ## Experiment Overview
 
-This experiment conducts a comparative case analysis of the rhetorical strategies of two iconic civil rights leaders using the Cohesive Flourishing Framework (CFF) v10.0 to examine how different approaches to social change manifest in discourse patterns related to cohesion and democratic health.
+This experiment conducts a comparative case analysis of the rhetorical strategies of two iconic civil rights leaders using the Cohesive Flourishing Framework (CFF) v10.2 to examine how different approaches to social change manifest in discourse patterns related to cohesion and democratic health.
 
 ## Research Questions
 
@@ -12,7 +12,7 @@ How do the rhetorical strategies of Malcolm X and Martin Luther King Jr. differ 
 ### Secondary Research Questions
 1. **Identity Framing**: What evidence exists for different approaches to tribal dominance versus individual dignity appeals in each leader's discourse?
 2. **Emotional Climate**: What patterns emerge in fear-based versus hope-based messaging between the two approaches?
-3. **Success Orientation**: How do the leaders differ in their framing of envy versus compersion toward others' achievements?
+3. **Success Orientation**: How do the leaders differ in their framing of envy versus mudita toward others' achievements?
 4. **Relational Climate**: What evidence exists for different enmity versus amity positioning in their discourse?
 5. **Goal Orientation**: How do their objectives differ in terms of fragmentative versus cohesive goals?
 6. **Strategic Coherence**: What evidence exists for different levels of rhetorical consistency and coherence between the approaches?
