@@ -196,8 +196,8 @@ class TwoStageSynthesisAgent(StandardAgent):
     def _validate_inputs(self, run_context: RunContext) -> bool:
         """Validate that required inputs are available for synthesis."""
         # Trust upstream agents - just check existence, not content quality
-        if not hasattr(run_context, 'statistical_results') or not run_context.statistical_results:
-            self.logger.error("No statistical results found in run_context")
+        if not hasattr(run_context, 'statistical_artifacts') or not run_context.statistical_artifacts:
+            self.logger.error("No statistical artifacts found in run_context")
             return False
         
         if not run_context.experiment_id:
@@ -436,8 +436,8 @@ synthesis_method: two_stage_with_evidence
     def _create_stage1_prompt(self, context: Dict[str, Any]) -> str:
         """Create the complete Stage 1 prompt with all context data."""
         
-        # Format statistical results for the prompt
-        statistical_summary = self._format_statistical_results(context.get("statistical_results", {}))
+        # Read statistical results directly from artifacts
+        statistical_summary = self._read_statistical_artifacts(context.get("run_context"))
         
         # Create the complete prompt by combining template with context
         prompt = f"""{self.stage1_prompt}
@@ -462,57 +462,37 @@ Please generate a comprehensive framework-driven analysis report following the S
 
         return prompt
     
-    def _format_statistical_results(self, statistical_results) -> str:
-        """Format statistical results for inclusion in the Stage 1 prompt."""
-        if not statistical_results:
-            return "No statistical results available"
+    def _read_statistical_artifacts(self, run_context: RunContext) -> str:
+        """Read statistical analysis artifacts directly from storage."""
+        if not run_context or not hasattr(run_context, 'statistical_artifacts'):
+            return "No statistical artifacts available"
         
         try:
-            # Handle string format (direct statistical report content)
-            if isinstance(statistical_results, str):
-                return statistical_results
+            statistical_content = []
             
-            # Handle dictionary format (structured results)
-            if isinstance(statistical_results, dict):
-                # Format the key sections from the enhanced statistical agent output
-                formatted_sections = []
-                
-                # Execution results
-                if "execution_results" in statistical_results:
-                    formatted_sections.append("## Statistical Analysis Results")
-                    execution_results = statistical_results["execution_results"]
-                    
-                    for analysis_type, results in execution_results.items():
-                        if results:
-                            formatted_sections.append(f"### {analysis_type.replace('_', ' ').title()}")
-                            formatted_sections.append(f"```json\n{json.dumps(results, indent=2)}\n```")
-                
-                # Framework performance assessment (from enhanced statistical agent)
-                if "framework_performance_assessment" in statistical_results:
-                    formatted_sections.append("## Framework Performance Assessment")
-                    fpa = statistical_results["framework_performance_assessment"]
-                    formatted_sections.append(f"```json\n{json.dumps(fpa, indent=2)}\n```")
-                
-                # Sample size assessment
-                if "sample_size_assessment" in statistical_results:
-                    formatted_sections.append("## Sample Size Assessment")
-                    ssa = statistical_results["sample_size_assessment"]
-                    formatted_sections.append(f"```json\n{json.dumps(ssa, indent=2)}\n```")
-                
-                # Synthesis intelligence (from enhanced statistical agent)
-                if "synthesis_intelligence" in statistical_results:
-                    formatted_sections.append("## Synthesis Intelligence")
-                    si = statistical_results["synthesis_intelligence"]
-                    formatted_sections.append(f"```json\n{json.dumps(si, indent=2)}\n```")
-                
-                return "\n\n".join(formatted_sections) if formatted_sections else "Statistical results format not recognized"
+            for artifact_hash in run_context.statistical_artifacts:
+                try:
+                    # Read artifact directly from storage
+                    artifact_bytes = self.storage.get_artifact(artifact_hash)
+                    if artifact_bytes:
+                        artifact_data = json.loads(artifact_bytes.decode('utf-8'))
+                        
+                        # Extract the statistical analysis content
+                        if 'statistical_analysis_content' in artifact_data:
+                            statistical_content.append(artifact_data['statistical_analysis_content'])
+                        
+                except Exception as e:
+                    self.logger.warning(f"Failed to read statistical artifact {artifact_hash}: {e}")
+                    continue
             
-            # Fallback for other types
-            return f"Statistical results provided in unexpected format: {type(statistical_results)}"
-            
+            if statistical_content:
+                return "\n\n---\n\n".join(statistical_content)
+            else:
+                return "No statistical analysis content found in artifacts"
+                
         except Exception as e:
-            self.logger.error(f"Failed to format statistical results: {e}")
-            return f"Error formatting statistical results: {str(e)}"
+            self.logger.error(f"Failed to read statistical artifacts: {e}")
+            return f"Error reading statistical artifacts: {str(e)}"
     
     def _prepare_curated_evidence(self, run_context: RunContext) -> List[Dict[str, Any]]:
         """Prepare curated evidence from IntelligentEvidenceRetrievalAgent artifacts."""

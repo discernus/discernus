@@ -221,27 +221,20 @@ class FullExperimentStrategy(ExecutionStrategy):
                         break
                 
                 if statistical_artifact_hash:
-                    try:
-                        stats_content_bytes = storage.get_artifact(statistical_artifact_hash)
-                        stats_data = json.loads(stats_content_bytes.decode('utf-8'))
-                        run_context.statistical_results = stats_data.get("statistical_analysis_content")
-                        audit.log_agent_event("FullExperimentStrategy", "statistical_results_loaded", {
-                            "statistical_artifact_hash": statistical_artifact_hash,
-                            "content_length": len(run_context.statistical_results) if run_context.statistical_results else 0
-                        })
-                    except Exception as e:
-                        audit.log_agent_event("FullExperimentStrategy", "statistical_results_load_error", {
-                            "error": str(e),
-                            "statistical_artifact_hash": statistical_artifact_hash
-                        })
-                        # This is a critical failure, we should not proceed without statistical results
-                        return ExperimentResult(
-                            success=False,
-                            phases_completed=phases_completed,
-                            artifacts=artifacts,
-                            metadata=metadata,
-                            error_message=f"Failed to load critical statistical results: {str(e)}"
-                        )
+                    # THIN: Pass artifact hash, let synthesis agent read it directly
+                    run_context.statistical_artifacts = [statistical_artifact_hash]
+                    audit.log_agent_event("FullExperimentStrategy", "statistical_artifacts_passed", {
+                        "statistical_artifact_hash": statistical_artifact_hash
+                    })
+                else:
+                    audit.log_agent_event("FullExperimentStrategy", "no_statistical_artifacts", {})
+                    return ExperimentResult(
+                        success=False,
+                        phases_completed=phases_completed,
+                        artifacts=artifacts,
+                        metadata=metadata,
+                        error_message="No statistical analysis artifacts found"
+                    )
 
                 audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "statistical"})
             
@@ -723,27 +716,20 @@ class StatisticalPrepStrategy(ExecutionStrategy):
                         break
                 
                 if statistical_artifact_hash:
-                    try:
-                        stats_content_bytes = storage.get_artifact(statistical_artifact_hash)
-                        stats_data = json.loads(stats_content_bytes.decode('utf-8'))
-                        run_context.statistical_results = stats_data.get("statistical_analysis_content")
-                        audit.log_agent_event("FullExperimentStrategy", "statistical_results_loaded", {
-                            "statistical_artifact_hash": statistical_artifact_hash,
-                            "content_length": len(run_context.statistical_results) if run_context.statistical_results else 0
-                        })
-                    except Exception as e:
-                        audit.log_agent_event("FullExperimentStrategy", "statistical_results_load_error", {
-                            "error": str(e),
-                            "statistical_artifact_hash": statistical_artifact_hash
-                        })
-                        # This is a critical failure, we should not proceed without statistical results
-                        return ExperimentResult(
-                            success=False,
-                            phases_completed=phases_completed,
-                            artifacts=artifacts,
-                            metadata=metadata,
-                            error_message=f"Failed to load critical statistical results: {str(e)}"
-                        )
+                    # THIN: Pass artifact hash, let synthesis agent read it directly
+                    run_context.statistical_artifacts = [statistical_artifact_hash]
+                    audit.log_agent_event("FullExperimentStrategy", "statistical_artifacts_passed", {
+                        "statistical_artifact_hash": statistical_artifact_hash
+                    })
+                else:
+                    audit.log_agent_event("FullExperimentStrategy", "no_statistical_artifacts", {})
+                    return ExperimentResult(
+                        success=False,
+                        phases_completed=phases_completed,
+                        artifacts=artifacts,
+                        metadata=metadata,
+                        error_message="No statistical analysis artifacts found"
+                    )
 
                 audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "statistical"})
             
