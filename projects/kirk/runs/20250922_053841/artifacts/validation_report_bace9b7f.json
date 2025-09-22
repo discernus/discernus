@@ -1,0 +1,34 @@
+{
+  "validation_success": true,
+  "issues": [
+    {
+      "category": "specification",
+      "description": "The experiment's prose and framework filename refer to CFF v10.2, but the framework's internal metadata in the machine-readable appendix declares `framework_version: \"10.3.0\"`.",
+      "impact": "This creates a minor versioning inconsistency that could lead to confusion during auditing or when referencing the framework version in subsequent reports. It does not block execution.",
+      "fix": "To ensure consistency, align the version numbers. Either update the framework's internal `framework_version` to \"10.2.0\" or rename the framework file to reflect its internal version and update the experiment's `components.framework` entry accordingly.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md",
+        "cff_v10_2.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The `analytical_groupings.by_event_type` in the corpus manifest contains two groups ('media_appearances' and 'debates') with a sample size of n=1.",
+      "impact": "Single-observation groups cannot be used for comparative statistical tests (e.g., ANOVA). While the experiment's statistical plan correctly avoids such tests due to the overall small sample size (N=14), this specific limitation within the event type grouping is not explicitly noted.",
+      "fix": "It is recommended to add a note to the experiment's `Statistical Analysis Plan` stating that the 'media_appearances' and 'debates' event types will be treated as individual case studies or baselines and will be excluded from any quantitative group comparisons.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    }
+  ],
+  "suggestions": [],
+  "metadata": {
+    "agent": "V2ValidationAgent",
+    "timestamp": "2025-09-22T01:39:28.783293",
+    "experiment_id": "kirk",
+    "validation_type": "experiment_coherence"
+  }
+}

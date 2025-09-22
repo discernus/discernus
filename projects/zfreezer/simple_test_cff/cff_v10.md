@@ -1,4 +1,4 @@
-# Cohesive Flourishing Framework (CFF) v10.2
+# Cohesive Flourishing Framework (CFF) v10.3
 
 ---
 
@@ -7,13 +7,19 @@
 ### Section 1: Abstract & *Raison d'être*
 
 **What is this framework?**
-The Cohesive Flourishing Framework (CFF) is a comprehensive tool for analyzing political and social discourse to understand its impact on community cohesion and democratic health. It moves beyond simple sentiment analysis to reveal sophisticated patterns in how language builds or undermines social solidarity, trust, and constructive civic engagement.
+The Cohesive Flourishing Framework (CFF) is a systematic measurement methodology for quantifying rhetorical dimensions in political and social discourse. It provides computational social science researchers with empirical data about textual patterns that theoretical frameworks associate with democratic discourse quality.
 
 **What problem does it solve?**
-CFF addresses a critical gap in discourse analysis by providing a methodology that preserves complex rhetorical information. Traditional analysis often forces artificial choices (e.g., a text is "hopeful" or "fearful"), losing nuance when sophisticated communication employs competing appeals simultaneously. CFF's independent scoring of opposing dimensions (e.g., Hope vs. Fear) captures this complexity, enabling a more accurate and insightful analysis of rhetorical strategy.
+CFF addresses a critical gap in discourse analysis by providing a methodology that preserves complex rhetorical information. Traditional analysis often forces artificial choices (e.g., a text is "hopeful" or "fearful"), losing nuance when sophisticated communication employs competing appeals simultaneously. CFF's independent scoring of opposing dimensions (e.g., Hope vs. Fear) captures this complexity, generating reliable, replicable measurements of competing rhetorical appeals while preserving textual complexity through independent dimensional scoring and salience weighting.
+
+**What it enables:**
+These measurements provide empirical foundation for research examining relationships between discourse patterns and democratic outcomes, political polarization, or rhetorical strategy. Researchers integrate CFF data with contextual knowledge, theoretical frameworks, and additional sources to construct analytical arguments.
+
+**What it doesn't do:**
+The framework measures observable textual features but does not interpret their political significance, determine speaker intent, or evaluate democratic health. Such interpretations require human expertise and domain-specific theoretical knowledge.
 
 **Who is it for?**
-This framework is designed for researchers, policymakers, and civic leaders who need to understand whether discourse contributes to social flourishing or fragmentation. It is applicable to political communication, community health assessment, and media impact evaluation.
+This framework is designed for computational social science researchers, political communication scholars, and policy researchers who need reliable empirical measurements of rhetorical patterns. It serves as methodological infrastructure for studies of political discourse, democratic health assessment, and rhetorical strategy analysis.
 
 ### Section 2: Theoretical & Empirical Foundations
 
@@ -64,9 +70,9 @@ The framework's focus on democratic health builds on Putnam's (2000) work on soc
 - Putnam, R. D. (2000). *Bowling alone: The collapse and revival of American community*. Simon & Schuster.
 - Habermas, J. (1996). *Between facts and norms: Contributions to a discourse theory of law and democracy*. MIT Press.
 
-### Section 3: Analytical Methodology
+### Section 3: Measurement Methodology
 
-CFF employs a multi-layered analytical approach with transparent normative layering.
+CFF employs a multi-layered measurement approach that generates empirical data with transparent normative layering for researcher interpretation.
 
 **Dimensions**: The framework scores ten conceptual anchors independently on a 0.0 to 1.0 scale, organized into five opposing pairs:
 
@@ -94,7 +100,7 @@ CFF employs a multi-layered analytical approach with transparent normative layer
 -   **Salience vs. Intensity**: A critical distinction is made between a dimension's *intensity* (its raw 0.0-1.0 score) and its *salience* (its rhetorical prominence or emphasis within the text, also scored 0.0-1.0). This dual-track analysis reveals not just *what* is being said, but *how much emphasis* it receives.
 -   **Rhetorical Tension**: The framework calculates the strategic tension between opposing pairs to measure the coherence of the discourse. The formula `Tension = min(Score_A, Score_B) × |Salience_A - Salience_B|` quantifies contradictions where a speaker employs competing appeals.
 
-**Three Analytical Layers with Normative Transparency**:
+**Three Measurement Layers with Normative Transparency**:
 
 | Layer | Focus | Key Questions | Normative Load | Applications |
 |-------|-------|---------------|----------------|--------------|
@@ -102,7 +108,7 @@ CFF employs a multi-layered analytical approach with transparent normative layer
 | **2 - Motivational Assessment** | Behavioral implications | What behaviors might this inspire? How will audiences likely respond? | **Moderate** | Strategic communication, audience analysis, campaign evaluation |
 | **3 - Social Health Evaluation** | Democratic impact | Does this strengthen or weaken democratic institutions? What are the social consequences? | **High** | Policy evaluation, intervention design, community health monitoring |
 
-Each layer builds on the previous one, adding interpretive depth while maintaining transparency about analytical assumptions. This normative transparency enables appropriate analytical depth selection while maintaining scholarly rigor.
+Each layer builds on the previous one, providing increasingly contextualized empirical measurements while maintaining transparency about normative assumptions. This transparency enables researchers to select appropriate measurement depth for their analytical purposes while maintaining methodological rigor.
 
 **Derived & Composite Metrics**:
 
@@ -157,19 +163,19 @@ Each layer builds on the previous one, adding interpretive depth while maintaini
 # 5.1: Metadata
 metadata:
   framework_name: "cohesive_flourishing_framework"
-  framework_version: "10.2.0"
+  framework_version: "10.3.0"
   author: "Discernus Project"
   spec_version: "10.0"
 
 # 5.2: Analysis Variants
 analysis_variants:
   default:
-    description: "Complete v10.2 implementation with salience and tension analysis."
+    description: "Complete v10.3 implementation with salience and tension analysis."
     analysis_prompt: |
-      You are an expert discourse analyst specializing in social cohesion and democratic health, grounded in political psychology and social identity theory. Your task is to analyze the provided text using the Cohesive Flourishing Framework v10.2.
+      You are an expert discourse analyst specializing in social cohesion and democratic health, grounded in political psychology and social identity theory. Your task is to generate empirical measurements of the provided text using the Cohesive Flourishing Framework v10.3.
 
       FRAMEWORK METHODOLOGY:
-      This framework measures discourse's impact on community cohesion through independent scoring of opposing rhetorical dimensions. It preserves complex rhetorical information by avoiding forced binary choices, enabling sophisticated analysis of strategic communication that employs competing appeals simultaneously.
+      This framework generates empirical measurements of rhetorical dimensions in discourse through independent scoring of opposing conceptual anchors. It preserves complex rhetorical information by avoiding forced binary choices, providing reliable quantitative data about strategic communication that employs competing appeals simultaneously.
 
       DIMENSIONAL ANALYSIS:
       You must evaluate 10 dimensions across 5 opposing pairs:
@@ -191,11 +197,11 @@ analysis_variants:
       - If evidence is unclear or ambiguous, lower confidence score accordingly
       - Prioritize direct rhetorical indicators over interpretive inferences
 
-      ANALYTICAL APPROACH:
+      MEASUREMENT APPROACH:
       - Score each dimension independently based on textual evidence
-      - Assess both intensity (how strong) and salience (how prominent/emphasized)
+      - Assess both intensity (how strong) and salience (how prominent/emphasized)  
       - Recognize that opposing dimensions can both be present simultaneously
-      - Focus on observable rhetorical patterns rather than assumed intentions
+      - Focus on observable rhetorical patterns rather than interpretive inferences
 
       CONTEXTUAL GUIDANCE:
       - In political speeches, emphasize rhetorical strategies and audience appeals
@@ -215,7 +221,7 @@ analysis_variants:
   sequential_identity:
     description: "Focus on Identity axis: Tribal Dominance vs Individual Dignity."
     analysis_prompt: |
-      You are an expert political discourse analyst specializing in social identity and group dynamics. Focus exclusively on evaluating the Identity axis in the provided text using the Cohesive Flourishing Framework v10.2.
+      You are an expert political discourse analyst specializing in social identity and group dynamics. Focus exclusively on measuring the Identity axis in the provided text using the Cohesive Flourishing Framework v10.3.
 
       DIMENSIONAL FOCUS: Identity Axis Only
       - Tribal Dominance: In-group supremacy, exclusionary identity patterns
@@ -236,7 +242,7 @@ analysis_variants:
   sequential_emotional:
     description: "Focus on Emotional Climate: Fear vs Hope."
     analysis_prompt: |
-      You are an expert political discourse analyst specializing in emotional appeals and crisis rhetoric. Focus exclusively on evaluating the Emotional Climate in the provided text using the Cohesive Flourishing Framework v10.2.
+      You are an expert political discourse analyst specializing in emotional appeals and crisis rhetoric. Focus exclusively on measuring the Emotional Climate in the provided text using the Cohesive Flourishing Framework v10.3.
 
       DIMENSIONAL FOCUS: Emotional Climate Only
       - Fear: Crisis mentality, existential threat perception
@@ -257,7 +263,7 @@ analysis_variants:
   sequential_success:
     description: "Focus on Success Orientation: Envy vs Mudita."
     analysis_prompt: |
-      You are an expert political discourse analyst specializing in economic rhetoric and success framing. Focus exclusively on evaluating Success Orientation in the provided text using the Cohesive Flourishing Framework v10.2.
+      You are an expert political discourse analyst specializing in economic rhetoric and success framing. Focus exclusively on measuring Success Orientation in the provided text using the Cohesive Flourishing Framework v10.3.
 
       DIMENSIONAL FOCUS: Success Orientation Only
       - Envy: Resentment toward others' success, zero-sum thinking
@@ -278,7 +284,7 @@ analysis_variants:
   sequential_relational:
     description: "Focus on Relational Climate: Enmity vs Amity."
     analysis_prompt: |
-      You are an expert political discourse analyst specializing in interpersonal and intergroup relations. Focus exclusively on evaluating Relational Climate in the provided text using the Cohesive Flourishing Framework v10.2.
+      You are an expert political discourse analyst specializing in interpersonal and intergroup relations. Focus exclusively on measuring Relational Climate in the provided text using the Cohesive Flourishing Framework v10.3.
 
       DIMENSIONAL FOCUS: Relational Climate Only
       - Enmity: Hostility and adversarial positioning
@@ -299,7 +305,7 @@ analysis_variants:
   sequential_goals:
     description: "Focus on Goal Orientation: Fragmentative vs Cohesive Goals."
     analysis_prompt: |
-      You are an expert political discourse analyst specializing in strategic objectives and collective action. Focus exclusively on evaluating Goal Orientation in the provided text using the Cohesive Flourishing Framework v10.2.
+      You are an expert political discourse analyst specializing in strategic objectives and collective action. Focus exclusively on measuring Goal Orientation in the provided text using the Cohesive Flourishing Framework v10.3.
 
       DIMENSIONAL FOCUS: Goal Orientation Only
       - Fragmentative Goals: Divisive zero-sum objectives

@@ -2,11 +2,20 @@
 
 ## Abstract & Raison d'Être
 
-The Constitutional Health Framework provides a systematic approach to evaluating how political discourse affects constitutional system health through analysis of procedural legitimacy, institutional respect, and systemic continuity patterns. Drawing on Walter Bagehot's insight that constitutions are living systems of governance rather than mere documents, this framework assesses discourse impact across three fundamental dimensions of constitutional health, weighted by actual rhetorical emphasis patterns.
+**What is this framework?**
+The Constitutional Health Framework is a systematic measurement methodology for quantifying rhetorical patterns related to constitutional institutions and processes in political discourse. Drawing on Walter Bagehot's insight that constitutions are living systems of governance rather than mere documents, this framework provides empirical data about textual patterns across three fundamental dimensions of constitutional discourse, weighted by actual rhetorical emphasis patterns.
 
-Constitutional democracy depends on discourse that reinforces rather than undermines fundamental democratic institutions and processes. Political communication can either strengthen constitutional norms or contribute to democratic erosion through procedural rejection, institutional subversion, and systemic replacement rhetoric. This framework provides a rigorous methodology for assessing the constitutional implications of political discourse with salience-weighted analysis that captures not just constitutional health/pathology but which dimensions receive the most rhetorical emphasis.
+**What problem does it solve?**
+Constitutional democracy depends on discourse that reinforces rather than undermines fundamental democratic institutions and processes. However, systematic measurement of how political discourse relates to constitutional institutions has been fragmented and inconsistent. This framework provides reliable, replicable measurements of procedural legitimacy appeals, institutional respect patterns, and systemic continuity rhetoric that researchers can use to study relationships between discourse patterns and constitutional health.
 
-This framework is intended for political scientists, constitutional scholars, journalists, policy analysts, and researchers monitoring democratic health and constitutional resilience across different political systems and historical periods.
+**What it enables:**
+These measurements provide empirical foundation for research examining relationships between discourse patterns and constitutional outcomes, democratic resilience, or institutional legitimacy. Researchers integrate CHF data with contextual knowledge, constitutional theory, and additional sources to construct analytical arguments about constitutional implications.
+
+**What it doesn't do:**
+The framework measures observable textual features related to constitutional institutions but does not assess actual constitutional health, predict constitutional outcomes, or determine democratic system strength. Such assessments require expert constitutional knowledge, institutional context, and domain-specific theoretical frameworks.
+
+**Who is it for:**
+This framework is designed for constitutional scholars, political scientists, and policy researchers who need reliable empirical measurements of constitutional discourse patterns. It serves as methodological infrastructure for studies of democratic health, constitutional communication, and institutional legitimacy analysis.
 
 ## Theoretical & Empirical Foundations
 
@@ -34,11 +43,11 @@ Building on political communication research, this framework recognizes that spe
 
 **Academic Foundation**: Constitutional emphasis patterns reveal democratic priorities and threats, enabling more sophisticated understanding of constitutional vulnerabilities through priority-aware analysis.
 
-## Analytical Methodology
+## Measurement Methodology
 
-### Three-Dimensional Constitutional Health
+### Three-Dimensional Constitutional Discourse Patterns
 
-The framework evaluates political discourse across three bipolar axes that form the foundation of constitutional health:
+The framework quantifies political discourse across three bipolar axes that capture fundamental patterns in constitutional discourse:
 
 #### Procedural Axis: Procedural Legitimacy ↔ Procedural Rejection
 - **Procedural Legitimacy**: Support for established procedures for political change and governance, respect for constitutional processes, adherence to democratic norms
@@ -52,31 +61,31 @@ The framework evaluates political discourse across three bipolar axes that form 
 - **Systemic Continuity**: Support for maintaining and improving existing constitutional framework, gradual reform approaches
 - **Systemic Replacement**: Advocating fundamental replacement rather than reform of constitutional framework, revolutionary change rhetoric
 
-### Salience-Weighted Constitutional Analysis
+### Salience-Weighted Constitutional Measurement
 
-**Salience** measures how much rhetorical emphasis the speaker places on each constitutional dimension, regardless of raw health/pathology scores. This dual-track analysis captures both the impact on constitutional health AND the speaker's constitutional priorities and strategic emphasis patterns.
+**Salience** measures how much rhetorical emphasis the speaker places on each constitutional dimension, regardless of raw intensity scores. This dual-track measurement captures both the textual patterns related to constitutional discourse AND the speaker's constitutional priorities and strategic emphasis patterns.
 
-**Enhanced Constitutional Intelligence**:
-- **Constitutional Priorities**: Reveals which constitutional dimensions speakers prioritize in their political strategy
+**Enhanced Constitutional Data**:
+- **Constitutional Priorities**: Reveals which constitutional dimensions speakers prioritize in their rhetorical strategy  
 - **Strategic Constitutional Discourse**: Shows which constitutional issues speakers invest the most rhetorical effort in addressing
-- **Authentic Constitutional Analysis**: Uses actual constitutional emphasis rather than researcher assumptions about dimension importance
+- **Authentic Constitutional Measurement**: Uses actual constitutional emphasis rather than researcher assumptions about dimension importance
 
-### Constitutional Health Indices
+### Constitutional Discourse Indices
 
-The framework calculates several derived metrics to provide comprehensive constitutional health assessment:
+The framework calculates several derived metrics to provide comprehensive constitutional discourse measurement:
 
-**Axis-Level Health Indices**:
-- **Procedural Health Index**: Measures overall procedural legitimacy vs. rejection, weighted by salience
-- **Institutional Health Index**: Measures overall institutional respect vs. subversion, weighted by salience  
-- **Systemic Health Index**: Measures overall systemic continuity vs. replacement, weighted by salience
+**Axis-Level Discourse Indices**:
+- **Procedural Discourse Index**: Measures overall procedural legitimacy vs. rejection patterns, weighted by salience
+- **Institutional Discourse Index**: Measures overall institutional respect vs. subversion patterns, weighted by salience  
+- **Systemic Discourse Index**: Measures overall systemic continuity vs. replacement patterns, weighted by salience
 
 **Summary Metrics**:
-- **Constitutional Health Index**: Primary summary metric measuring overall constitutional health orientation, weighted by rhetorical prominence
-- **Constitutional Pathology Index**: Measures overall constitutional threat level, weighted by salience
+- **Constitutional Discourse Index**: Primary summary metric measuring overall constitutional discourse orientation, weighted by rhetorical prominence
+- **Constitutional Challenge Index**: Measures overall constitutional challenge rhetoric, weighted by salience
 
-### Sequential Analysis Strategy
+### Sequential Measurement Strategy
 
-For highest fidelity analysis, it is recommended to run the three sequential analysis variants (sequential_procedural, sequential_institutional, sequential_systemic) and combine the results. This approach allows the analysis agent to focus exclusively on one axis at a time, reducing cognitive load and improving scoring accuracy.
+For highest fidelity measurement, it is recommended to run the three sequential analysis variants (sequential_procedural, sequential_institutional, sequential_systemic) and combine the results. This approach allows the measurement agent to focus exclusively on one axis at a time, reducing cognitive load and improving scoring accuracy.
 
 ### Concept Overlap Resolution
 

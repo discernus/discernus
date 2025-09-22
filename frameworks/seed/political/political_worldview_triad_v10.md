@@ -6,7 +6,7 @@ The Political Worldview Triad Framework v10.0 provides a sophisticated analytica
 
 **Theoretical Foundation**: Grounded in political theory and democratic legitimacy research, this framework captures the essential value structures that drive political communication and moral authority claims. It enables researchers to systematically analyze how texts appeal to different sources of political legitimacy and reveals the underlying worldview assumptions that shape political discourse.
 
-**Innovation**: The triadic analysis approach provides a comprehensive mapping of competing legitimacy sources, enabling nuanced understanding of political communication patterns beyond simple left-right dichotomies. The framework's emphasis on legitimacy sources rather than policy positions allows for cross-cultural and cross-temporal analysis of political discourse.
+**Innovation**: The triadic analysis approach provides a comprehensive measurement of competing legitimacy sources, enabling nuanced empirical data about political communication patterns beyond simple left-right dichotomies. The framework's emphasis on legitimacy sources rather than policy positions allows for cross-cultural and cross-temporal analysis of political discourse.
 
 **Applications**: Political legitimacy analysis, democratic discourse assessment, comparative political communication studies, worldview mapping in political texts, moral authority analysis, and political psychology research.
 
@@ -244,7 +244,7 @@ analysis_variants:
       3. Identify direct quotations supporting your assessment
       4. Provide confidence rating based on evidence clarity
 
-      The salience ranking enables empirically-backed understanding of political strategy and worldview priorities.
+      The salience ranking enables empirically-backed measurement of political strategy and worldview priorities.
 
 dimensions:
   - name: "immutable_identity_politics"

@@ -2,7 +2,7 @@
 
 ## Abstract & Raison d'Être
 
-The Orthogonal Populism-Nationalism Interaction Framework (OPNIF) provides a specialized analytical tool for understanding the complex interactions between populist and nationalist appeals in political discourse. This framework addresses the "Bolsonaro Problem" - where traditional single-axis models failed to capture simultaneous high populism and high nationalism - through innovative orthogonal architecture that measures these forces independently while analyzing their strategic interactions.
+The Orthogonal Populism-Nationalism Interaction Framework (OPNIF) provides a specialized measurement methodology for quantifying the complex interactions between populist and nationalist appeals in political discourse. This framework addresses the "Bolsonaro Problem" - where traditional single-axis models failed to capture simultaneous high populism and high nationalism - through innovative orthogonal architecture that measures these forces independently while analyzing their strategic interactions.
 
 **What problem does it solve?**
 Traditional political discourse analysis treats populism and nationalism as either mutually exclusive or linearly related phenomena. However, contemporary political communication often features complex combinations where speakers deploy both populist appeals (people vs. elite) and nationalist appeals (cultural identity vs. foreign influence) simultaneously. The OPNIF enables researchers to measure these dimensions independently and analyze how they interact strategically.
@@ -161,12 +161,12 @@ analysis_variants:
       - **Confidence (0.0-1.0)**: How certain are you in this assessment?
       - **Evidence**: Direct quote supporting your assessment
 
-      Your analysis should focus on evaluating each dimension according to the OPNIF methodology, providing clear reasoning for scores, salience, and confidence assessments, and identifying key textual evidence that supports your dimensional assessments.
+      Your analysis should focus on measuring each dimension according to the OPNIF methodology, providing clear reasoning for scores, salience, and confidence assessments, and identifying key textual evidence that supports your dimensional assessments.
 
   sequential_vertical_axis:
     description: "Focus on Vertical Axis: Populism vs Pluralism analysis."
     analysis_prompt: |
-      You are an expert analyst of political discourse specializing in populist rhetoric and democratic theory. Focus exclusively on evaluating the Vertical Axis (Populism ↔ Pluralism) in the provided text using the Orthogonal Populism-Nationalism Interaction Framework v10.0.
+      You are an expert analyst of political discourse specializing in populist rhetoric and democratic theory. Focus exclusively on measuring the Vertical Axis (Populism ↔ Pluralism) in the provided text using the Orthogonal Populism-Nationalism Interaction Framework v10.0.
 
       DIMENSIONAL FOCUS: Vertical Axis Only
       - Populism: Direct popular sovereignty, anti-elite sentiment, Manichaean worldview
@@ -183,7 +183,7 @@ analysis_variants:
   sequential_horizontal_axis:
     description: "Focus on Horizontal Axis: Nationalism vs Patriotism analysis."
     analysis_prompt: |
-      You are an expert analyst of political discourse specializing in nationalist rhetoric and civic identity. Focus exclusively on evaluating the Horizontal Axis (Nationalism ↔ Patriotism) in the provided text using the Orthogonal Populism-Nationalism Interaction Framework v10.0.
+      You are an expert analyst of political discourse specializing in nationalist rhetoric and civic identity. Focus exclusively on measuring the Horizontal Axis (Nationalism ↔ Patriotism) in the provided text using the Orthogonal Populism-Nationalism Interaction Framework v10.0.
 
       DIMENSIONAL FOCUS: Horizontal Axis Only
       - Nationalism: Ethnic/cultural identity emphasis, national supremacy claims

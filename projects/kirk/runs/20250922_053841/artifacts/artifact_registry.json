@@ -1,0 +1,16 @@
+{
+  "bace9b7fe889d6a3ea401e86eb7a700ec5f1d2cebe19500e2294b2c9780b3484": {
+    "artifact_path": "validation_report_bace9b7f.json",
+    "created_at": "2025-09-22T05:39:28.784761+00:00",
+    "human_filename": "validation_report_bace9b7f.json",
+    "is_directory": false,
+    "metadata": {
+      "agent": "V2ValidationAgent",
+      "artifact_type": "validation_report",
+      "experiment_id": "kirk",
+      "timestamp": "2025-09-22T01:39:28.783293"
+    },
+    "size_bytes": 1990,
+    "source_run": "20250922_053841"
+  }
+}
