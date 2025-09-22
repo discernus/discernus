@@ -462,44 +462,53 @@ Please generate a comprehensive framework-driven analysis report following the S
 
         return prompt
     
-    def _format_statistical_results(self, statistical_results: Dict[str, Any]) -> str:
+    def _format_statistical_results(self, statistical_results) -> str:
         """Format statistical results for inclusion in the Stage 1 prompt."""
         if not statistical_results:
             return "No statistical results available"
         
         try:
-            # Format the key sections from the enhanced statistical agent output
-            formatted_sections = []
+            # Handle string format (direct statistical report content)
+            if isinstance(statistical_results, str):
+                return statistical_results
             
-            # Execution results
-            if "execution_results" in statistical_results:
-                formatted_sections.append("## Statistical Analysis Results")
-                execution_results = statistical_results["execution_results"]
+            # Handle dictionary format (structured results)
+            if isinstance(statistical_results, dict):
+                # Format the key sections from the enhanced statistical agent output
+                formatted_sections = []
                 
-                for analysis_type, results in execution_results.items():
-                    if results:
-                        formatted_sections.append(f"### {analysis_type.replace('_', ' ').title()}")
-                        formatted_sections.append(f"```json\n{json.dumps(results, indent=2)}\n```")
+                # Execution results
+                if "execution_results" in statistical_results:
+                    formatted_sections.append("## Statistical Analysis Results")
+                    execution_results = statistical_results["execution_results"]
+                    
+                    for analysis_type, results in execution_results.items():
+                        if results:
+                            formatted_sections.append(f"### {analysis_type.replace('_', ' ').title()}")
+                            formatted_sections.append(f"```json\n{json.dumps(results, indent=2)}\n```")
+                
+                # Framework performance assessment (from enhanced statistical agent)
+                if "framework_performance_assessment" in statistical_results:
+                    formatted_sections.append("## Framework Performance Assessment")
+                    fpa = statistical_results["framework_performance_assessment"]
+                    formatted_sections.append(f"```json\n{json.dumps(fpa, indent=2)}\n```")
+                
+                # Sample size assessment
+                if "sample_size_assessment" in statistical_results:
+                    formatted_sections.append("## Sample Size Assessment")
+                    ssa = statistical_results["sample_size_assessment"]
+                    formatted_sections.append(f"```json\n{json.dumps(ssa, indent=2)}\n```")
+                
+                # Synthesis intelligence (from enhanced statistical agent)
+                if "synthesis_intelligence" in statistical_results:
+                    formatted_sections.append("## Synthesis Intelligence")
+                    si = statistical_results["synthesis_intelligence"]
+                    formatted_sections.append(f"```json\n{json.dumps(si, indent=2)}\n```")
+                
+                return "\n\n".join(formatted_sections) if formatted_sections else "Statistical results format not recognized"
             
-            # Framework performance assessment (from enhanced statistical agent)
-            if "framework_performance_assessment" in statistical_results:
-                formatted_sections.append("## Framework Performance Assessment")
-                fpa = statistical_results["framework_performance_assessment"]
-                formatted_sections.append(f"```json\n{json.dumps(fpa, indent=2)}\n```")
-            
-            # Sample size assessment
-            if "sample_size_assessment" in statistical_results:
-                formatted_sections.append("## Sample Size Assessment")
-                ssa = statistical_results["sample_size_assessment"]
-                formatted_sections.append(f"```json\n{json.dumps(ssa, indent=2)}\n```")
-            
-            # Synthesis intelligence (from enhanced statistical agent)
-            if "synthesis_intelligence" in statistical_results:
-                formatted_sections.append("## Synthesis Intelligence")
-                si = statistical_results["synthesis_intelligence"]
-                formatted_sections.append(f"```json\n{json.dumps(si, indent=2)}\n```")
-            
-            return "\n\n".join(formatted_sections) if formatted_sections else "Statistical results format not recognized"
+            # Fallback for other types
+            return f"Statistical results provided in unexpected format: {type(statistical_results)}"
             
         except Exception as e:
             self.logger.error(f"Failed to format statistical results: {e}")
