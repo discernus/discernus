@@ -36,13 +36,11 @@ class V2AnalysisAgent(StandardAgent):
     """
     V2 Analysis Agent with atomic document processing.
     
-    This agent processes each document individually through all 6 analysis steps:
+    This agent processes each document individually through 4 analysis steps:
     1. Composite Analysis
     2. Evidence Extraction  
     3. Score Extraction
-    4. Derived Metrics Generation
-    5. Verification
-    6. Markup Extraction
+    4. Markup Extraction
     
     Each document gets its own set of artifacts, preventing token limit issues.
     """
@@ -210,7 +208,7 @@ class V2AnalysisAgent(StandardAgent):
                                    doc_index: int, 
                                    batch_id: str) -> List[Dict[str, Any]]:
         """
-        Process a single document through all 6 analysis steps atomically.
+        Process a single document through 4 analysis steps atomically.
         
         Args:
             framework_content: Framework content for analysis
@@ -225,53 +223,26 @@ class V2AnalysisAgent(StandardAgent):
         
         try:
             # Step 1: Composite Analysis
-            self.unified_logger.progress(f"  Step 1/6: Composite analysis for document {doc_index + 1}")
+            self.unified_logger.progress(f"  Step 1/4: Composite analysis for document {doc_index + 1}")
             composite_result = self._step1_composite_analysis(framework_content, doc, doc_index, batch_id)
             if composite_result:
                 artifacts.append(composite_result)
             
             # Step 2: Evidence Extraction
-            self.unified_logger.progress(f"  Step 2/6: Evidence extraction for document {doc_index + 1}")
+            self.unified_logger.progress(f"  Step 2/4: Evidence extraction for document {doc_index + 1}")
             evidence_result = self._step2_evidence_extraction(composite_result, doc_index, batch_id)
             if evidence_result:
                 artifacts.append(evidence_result)
             
             # Step 3: Score Extraction
-            self.unified_logger.progress(f"  Step 3/6: Score extraction for document {doc_index + 1}")
+            self.unified_logger.progress(f"  Step 3/4: Score extraction for document {doc_index + 1}")
             scores_result = self._step3_score_extraction(composite_result, doc_index, batch_id)
             if scores_result:
                 artifacts.append(scores_result)
             
-            # Step 4: Derived Metrics Extraction
-            self.unified_logger.progress(f"  Step 4/6: Derived metrics extraction for document {doc_index + 1}")
-            derived_metrics_result = self._step4_derived_metrics(framework_content, composite_result, doc_index, batch_id)
-            if derived_metrics_result:
-                artifacts.append(derived_metrics_result)
-            
-            # Step 5: Verification
-            self.unified_logger.progress(f"  Step 5/6: Verification for document {doc_index + 1}")
-            verification_result = self._step5_verification(framework_content, derived_metrics_result, doc_index, batch_id)
-            if verification_result:
-                artifacts.append(verification_result)
-                
-                # Check if verification failed - if so, fail fast for this document
-                verification_status = verification_result.get('content', {}).get('verification_status', 'unknown')
-                if verification_status not in ["verified", "skipped"]:
-                    self.unified_logger.verification_failed(doc_index, verification_status)
-                    self.audit.log_agent_event(self.agent_name, "verification_failed", {
-                        "document_index": doc_index,
-                        "verification_status": verification_status,
-                        "batch_id": batch_id
-                    })
-                    # Return artifacts created so far, but mark as failed for this document
-                    return artifacts
-            else:
-                self.logger.error(f"Verification step failed for document {doc_index}")
-                return artifacts
-            
-            # Step 6: Markup Extraction
-            self.unified_logger.progress(f"  Step 6/6: Markup extraction for document {doc_index + 1}")
-            markup_result = self._step6_markup_extraction(composite_result, doc_index, batch_id)
+            # Step 4: Markup Extraction
+            self.unified_logger.progress(f"  Step 4/4: Markup extraction for document {doc_index + 1}")
+            markup_result = self._step4_markup_extraction(composite_result, doc_index, batch_id)
             if markup_result:
                 artifacts.append(markup_result)
             
@@ -296,7 +267,7 @@ class V2AnalysisAgent(StandardAgent):
 
             # Call LLM
             response = self.gateway.execute_call(
-                model="vertex_ai/gemini-2.5-pro",
+                model="vertex_ai/gemini-2.5-flash",
                 prompt=prompt
             )
             
@@ -310,7 +281,7 @@ class V2AnalysisAgent(StandardAgent):
             artifact_data = {
                 "analysis_id": f"analysis_{batch_id}_{doc_index}",
                 "step": "composite_analysis",
-                "model_used": "vertex_ai/gemini-2.5-pro",
+                "model_used": "vertex_ai/gemini-2.5-flash",
                 "raw_analysis_response": content,
                 "document_index": doc_index,
                 "timestamp": datetime.now(timezone.utc).isoformat()
@@ -372,7 +343,7 @@ Return ONLY the JSON array, no other text."""
 
             # Call LLM
             response = self.gateway.execute_call(
-                model="vertex_ai/gemini-2.5-pro",
+                model="vertex_ai/gemini-2.5-flash-lite",
                 prompt=prompt
             )
             
@@ -388,7 +359,7 @@ Return ONLY the JSON array, no other text."""
             artifact_data = {
                 "analysis_id": f"analysis_{batch_id}_{doc_index}",
                 "step": "evidence_extraction",
-                "model_used": "vertex_ai/gemini-2.5-pro",
+                "model_used": "vertex_ai/gemini-2.5-flash-lite",
                 "evidence_extraction": content,
                 "document_index": doc_index,
                 "timestamp": datetime.now(timezone.utc).isoformat()
@@ -464,7 +435,7 @@ Extract the dimensional scores preserving all computational variables."""
             artifact_data = {
                 "analysis_id": f"analysis_{batch_id}_{doc_index}",
                 "step": "score_extraction",
-                "model_used": "vertex_ai/gemini-2.5-pro",
+                "model_used": "vertex_ai/gemini-2.5-flash-lite",
                 "score_extraction": content,
                 "document_index": doc_index,
                 "timestamp": datetime.now(timezone.utc).isoformat()
@@ -495,255 +466,7 @@ Extract the dimensional scores preserving all computational variables."""
             self.logger.error(f"Step 3 failed for document {doc_index}: {e}")
             return None
 
-    def _step4_derived_metrics(self, framework_content: str, composite_result: Dict[str, Any], doc_index: int, batch_id: str) -> Optional[Dict[str, Any]]:
-        """Step 4: Extract derived metrics and calculation code from composite analysis."""
-        try:
-            if not composite_result or 'content' not in composite_result:
-                return None
-                
-            raw_response = composite_result['content'].get('raw_analysis_response', '')
-            
-            prompt = f"""Extract the derived metrics and calculation code from this analysis result:
 
-{raw_response}
-
-EXTRACTION REQUIREMENTS:
-- Extract the derived_metrics section (all calculated metrics)
-- Extract the calculation_audit.computation_code section (executable Python code)
-- Preserve the complete structure and content
-- Do not modify or interpret the content - extract exactly as provided
-
-OUTPUT FORMAT:
-Return a JSON object with two fields:
-{{
-  "derived_metrics": {{"metric1": value1, "metric2": value2, ...}},
-  "computation_code": "executable Python code here"
-}}
-
-Extract the derived metrics and calculation code preserving all content exactly."""
-
-            # Call LLM
-            response = self.gateway.execute_call(
-                model="vertex_ai/gemini-2.5-flash-lite",
-                prompt=prompt
-            )
-            
-            if isinstance(response, tuple):
-                content, metadata = response
-            else:
-                content = response.get('content', '')
-                metadata = response.get('metadata', {})
-            
-            # Create artifact
-            artifact_data = {
-                "analysis_id": f"analysis_{batch_id}_{doc_index}",
-                "step": "derived_metrics",
-                "model_used": "vertex_ai/gemini-2.5-flash-lite",
-                "derived_metrics_extraction": content,
-                "document_index": doc_index,
-                "timestamp": datetime.now(timezone.utc).isoformat()
-            }
-            
-            # Store artifact
-            content_bytes = json.dumps(artifact_data, indent=2).encode('utf-8')
-            artifact_hash = self.storage.put_artifact(
-                content_bytes,
-                {"artifact_type": "derived_metrics", "document_index": doc_index}
-            )
-            
-            return {
-                "type": "derived_metrics",
-                "content": artifact_data,
-                "metadata": {
-                    "artifact_type": "derived_metrics",
-                    "phase": "analysis",
-                    "batch_id": batch_id,
-                    "document_index": doc_index,
-                    "timestamp": datetime.now().isoformat(),
-                    "agent_name": self.agent_name,
-                    "artifact_hash": artifact_hash
-                }
-            }
-            
-        except Exception as e:
-            self.logger.error(f"Step 4 failed for document {doc_index}: {e}")
-            return None
-
-    def _step5_verification(self, framework_content: str, derived_metrics_result: Dict[str, Any], doc_index: int, batch_id: str) -> Optional[Dict[str, Any]]:
-        """Step 5: Verify derived metrics calculations using tool calling."""
-        try:
-            if not derived_metrics_result or 'content' not in derived_metrics_result:
-                return None
-                
-            derived_metrics_extraction = derived_metrics_result['content'].get('derived_metrics_extraction', '')
-            
-            
-            # Define verification tool (OpenAI function calling format)
-            verification_tools = [
-                {
-                    "type": "function",
-                    "function": {
-                        "name": "verify_math",
-                        "description": "Verify mathematical calculations by re-executing code and comparing results",
-                        "parameters": {
-                            "type": "object",
-                            "properties": {
-                                "verified": {
-                                    "type": "boolean",
-                                    "description": "True if calculations are correct, False if incorrect"
-                                },
-                                "reasoning": {
-                                    "type": "string", 
-                                    "description": "Detailed explanation of verification process and findings"
-                                }
-                            },
-                            "required": ["verified", "reasoning"]
-                        }
-                    }
-                }
-            ]
-            
-            prompt = f"""You will receive extracted derived metrics and computation code from a previous analysis step.
-
-Task:
-- Re-execute the computation code in a clean environment
-- Compare the recomputed results to the provided derived metrics for mathematical reasonableness
-- Use APA standard: compare within 2 decimal places for precision
-- Focus on whether the calculation logic is sound rather than exact numerical precision
-- If mathematically reasonable within 2 decimal places, set verified=true; else verified=false
-- Provide concise reasoning
-
-EXTRACTED CONTENT:
-{derived_metrics_extraction}
-
-Call verify_math tool with fields: verified (bool), reasoning (string)."""
-
-            self.audit.log_agent_event(self.agent_name, "step5_started", {
-                "batch_id": batch_id,
-                "document_index": doc_index,
-                "step": "verification",
-                "model": "vertex_ai/gemini-2.5-pro"
-            })
-
-            # System prompt emphasizing mandatory tool call
-            system_prompt = "You are a verification specialist. You MUST re-execute the provided code, verify the calculations, and call the verify_math tool with your findings. This is MANDATORY - you must call the verify_math tool."
-            
-            # Call LLM with tools (using proper EnhancedLLMGateway format)
-            response_content, metadata = self.gateway.execute_call_with_tools(
-                model="vertex_ai/gemini-2.5-flash",  # Flash for verification
-                prompt=prompt,
-                system_prompt=system_prompt,
-                tools=verification_tools,
-                force_function_calling=True,  # Force tool calling like deprecated agent
-                context=f"Verifying derived metrics for document {doc_index}"
-            )
-            
-            # Emit detailed audit event capturing LLM call outcome for debugging
-            try:
-                self.audit.log_agent_event(self.agent_name, "verification_llm_result", {
-                    "batch_id": batch_id,
-                    "document_index": doc_index,
-                    "step": "verification",
-                    "model": metadata.get("model") if isinstance(metadata, dict) else None,
-                    "success": metadata.get("success") if isinstance(metadata, dict) else None,
-                    "error": metadata.get("error") if isinstance(metadata, dict) else None,
-                    "attempts": metadata.get("attempts") if isinstance(metadata, dict) else None,
-                    "tool_calls_count": len(metadata.get("tool_calls", [])) if isinstance(metadata, dict) else 0,
-                    "usage": metadata.get("usage", {}) if isinstance(metadata, dict) else {}
-                })
-            except Exception:
-                # Audit logging failures should never break the verification step
-                pass
-            
-            # Extract verification result from tool calls (using metadata format like deprecated agent)
-            verification_status = "unknown"
-            verified_flag = None
-            verified_reasoning = None
-            if not metadata.get('success'):
-                self.logger.error(f"Verification LLM call failed: {metadata.get('error', 'Unknown error')}")
-                verification_status = "verification_error"
-            else:
-                tool_calls = metadata.get('tool_calls', [])
-                if tool_calls:
-                    tool_call = tool_calls[0]
-                    # Support both object and dict shapes from LiteLLM providers
-                    try:
-                        if isinstance(tool_call, dict):
-                            fn = tool_call.get("function", {})
-                            fn_name = fn.get("name")
-                            fn_args = fn.get("arguments")
-                        else:
-                            fn_name = getattr(getattr(tool_call, "function", None), "name", None)
-                            fn_args = getattr(getattr(tool_call, "function", None), "arguments", None)
-                        if fn_name == "verify_math" and fn_args is not None:
-                            try:
-                                args = json.loads(fn_args)
-                                verified_flag = bool(args.get("verified", False))
-                                verified_reasoning = args.get("reasoning", None)
-                                verification_status = "verified" if verified_flag else "verification_error"
-                                if verified_reasoning:
-                                    self.logger.info(f"Verification reasoning: {verified_reasoning}")
-                            except json.JSONDecodeError as e:
-                                self.logger.error(f"Failed to parse tool call arguments: {e}")
-                                verification_status = "verification_error"
-                        else:
-                            self.logger.error("Verification tool call not found or missing arguments")
-                            verification_status = "verification_error"
-                    except Exception as e:
-                        self.logger.error(f"Error reading tool call structure: {e}")
-                        verification_status = "verification_error"
-                else:
-                    self.logger.error("No tool calls found in verification response")
-                    verification_status = "verification_error"
-            
-            # Create artifact with verification status
-            artifact_data = {
-                "analysis_id": f"analysis_{batch_id}_{doc_index}",
-                "step": "verification",
-                "model_used": "vertex_ai/gemini-2.5-flash",
-                "verification_status": verification_status,
-                "verified": verified_flag,
-                "reasoning": verified_reasoning,
-                "document_index": doc_index,
-                "timestamp": datetime.now(timezone.utc).isoformat()
-            }
-            
-            # Store artifact
-            content_bytes = json.dumps(artifact_data, indent=2).encode('utf-8')
-            artifact_hash = self.storage.put_artifact(
-                content_bytes,
-                {"artifact_type": "verification", "document_index": doc_index}
-            )
-            
-            artifact_data['artifact_hash'] = artifact_hash
-            
-            self.audit.log_agent_event(self.agent_name, "step5_completed", {
-                "batch_id": batch_id,
-                "document_index": doc_index,
-                "step": "verification",
-                "artifact_hash": artifact_hash,
-                "verification_status": verification_status,
-                "verified": verified_flag
-            })
-            
-            return {
-                "type": "verification",
-                "content": artifact_data,
-                "metadata": {
-                    "artifact_type": "verification",
-                    "phase": "analysis",
-                    "batch_id": batch_id,
-                    "document_index": doc_index,
-                    "timestamp": datetime.now().isoformat(),
-                    "agent_name": self.agent_name,
-                    "artifact_hash": artifact_hash,
-                    "verification_status": verification_status
-                }
-            }
-            
-        except Exception as e:
-            self.logger.error(f"Step 5 failed for document {doc_index}: {e}")
-            return None
     
     def _framework_defines_derived_metrics(self, framework_content: str) -> bool:
         """
@@ -786,8 +509,8 @@ Call verify_math tool with fields: verified (bool), reasoning (string)."""
             return True
     
 
-    def _step6_markup_extraction(self, composite_result: Dict[str, Any], doc_index: int, batch_id: str) -> Optional[Dict[str, Any]]:
-        """Step 6: Extract markup from composite result."""
+    def _step4_markup_extraction(self, composite_result: Dict[str, Any], doc_index: int, batch_id: str) -> Optional[Dict[str, Any]]:
+        """Step 4: Extract markup from composite result."""
         try:
             if not composite_result or 'content' not in composite_result:
                 return None
@@ -816,7 +539,7 @@ Return the marked-up document in markdown format."""
             artifact_data = {
                 "analysis_id": f"analysis_{batch_id}_{doc_index}",
                 "step": "markup_extraction",
-                "model_used": "vertex_ai/gemini-2.5-pro",
+                "model_used": "vertex_ai/gemini-2.5-flash-lite",
                 "marked_up_document": content,
                 "document_index": doc_index,
                 "timestamp": datetime.now(timezone.utc).isoformat()
@@ -844,7 +567,7 @@ Return the marked-up document in markdown format."""
             }
             
         except Exception as e:
-            self.logger.error(f"Step 6 failed for document {doc_index}: {e}")
+            self.logger.error(f"Step 4 failed for document {doc_index}: {e}")
             return None
     
     def _read_framework_file(self, framework_path: str) -> Optional[str]:

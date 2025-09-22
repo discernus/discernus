@@ -861,7 +861,6 @@ required_calculations:
 
 # 5.5: Enhanced Output Schema
 # Both dimensional_scores AND derived_metrics are REQUIRED
-# calculation_audit is OPTIONAL for computational transparency
 output_schema:
   type: object
   properties:
@@ -911,27 +910,6 @@ output_schema:
         full_cohesion_index: { type: number, minimum: -1.0, maximum: 1.0 }
       
       required: ["identity_tension", "emotional_tension", "success_tension", "relational_tension", "goal_tension", "strategic_contradiction_index", "emotional_cohesion_component", "success_cohesion_component", "relational_cohesion_component", "goal_cohesion_component", "identity_cohesion_component", "descriptive_salience_total", "motivational_salience_total", "full_salience_total", "descriptive_cohesion_index", "motivational_cohesion_index", "full_cohesion_index"]
-    
-    calculation_audit:
-      type: object
-      properties:
-        computation_code: 
-          type: string
-          description: "Executable code showing step-by-step derived metric calculations for independent verification"
-        framework_version: 
-          type: string
-          description: "Framework version used for calculations"
-        calculation_timestamp: 
-          type: string
-          format: date-time
-          description: "ISO timestamp of when calculations were performed"
-        verification_hash: 
-          type: string
-          description: "Hash of input values for verification purposes"
-        calculation_notes:
-          type: string
-          description: "Any notes about calculation implementation or edge cases handled"
-      required: ["computation_code", "framework_version"]
   
   required: ["dimensional_scores", "derived_metrics"]
   
@@ -1003,7 +981,6 @@ implementation_notes:
   error_prevention: "Add epsilon (0.001) to all denominators to prevent division by zero"
   precision: "Round final results to 3 decimal places for consistency"
   validation: "Verify all cohesion indices fall within [-1.0, 1.0] range"
-  debugging: "If calculations fail, check that all dimensional scores are properly assigned before computing derived metrics"
 
 # --- End of Machine-Readable Appendix ---
 ```

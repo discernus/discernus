@@ -424,7 +424,7 @@ synthesis_method: two_stage_with_evidence
                 "framework_content": framework_content,
                 "experiment_content": experiment_content,
                 "corpus_manifest": corpus_manifest,
-                "statistical_results": run_context.statistical_results or {},
+                "statistical_results": {},  # Statistical results are read from artifacts
                 "experiment_id": run_context.experiment_id,
                 "metadata": run_context.metadata or {}
             }

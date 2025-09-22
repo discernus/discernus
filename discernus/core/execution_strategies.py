@@ -75,16 +75,15 @@ class ExecutionStrategy(ABC):
 
 class FullExperimentStrategy(ExecutionStrategy):
     """
-    Complete experiment execution with all phases and verification.
+    Complete experiment execution with simplified alpha pipeline.
     
     Phases:
-    1. Coherence validation
-    2. Analysis
-    3. Statistical analysis
+    1. Coherence validation (optional)
+    2. Analysis (4 steps: composite, evidence, scores, markup)
+    3. Statistical analysis (with framework-corpus fit)
     4. Evidence retrieval
-    5. Synthesis
-    6. Verification (if enabled)
-    """
+    5. Synthesis (two-stage: data-driven + evidence integration)
+"""
     
     def execute(self, 
                 agents: Dict[str, StandardAgent], 
@@ -253,29 +252,7 @@ class FullExperimentStrategy(ExecutionStrategy):
                 run_context.update_phase("synthesis")
                 audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "synthesis"})
             
-            # Phase 6: Verification (if enabled)
-            if run_context.metadata.get("verification_enabled", True) and "Verification" in agents:
-                audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "verification"})
-                # Show progress to user
-                try:
-                    from ..cli_console import rich_console
-                    if rich_console:
-                        rich_console.print_info("✅ Verifying research findings...")
-                except ImportError:
-                    pass
-                verification_result = agents["Verification"].execute(run_context=run_context)
-                if not verification_result.success:
-                    return ExperimentResult(
-                        success=False,
-                        phases_completed=phases_completed,
-                        artifacts=artifacts,
-                        metadata=metadata,
-                        error_message=f"Verification failed: {verification_result.error_message}"
-                    )
-                phases_completed.append("verification")
-                artifacts.extend(verification_result.artifacts)
-                run_context.update_phase("verification")
-                audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "verification"})
+            # Verification phase removed for alpha - synthesis is the final step
             
             # Calculate execution time
             end_time = datetime.now(timezone.utc)
@@ -836,29 +813,7 @@ class ResumeFromStatsStrategy(ExecutionStrategy):
                 run_context.update_phase("synthesis")
                 audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "synthesis"})
             
-            # Phase 3: Verification (if enabled)
-            if run_context.metadata.get("verification_enabled", True) and "Verification" in agents:
-                audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "verification"})
-                # Show progress to user
-                try:
-                    from ..cli_console import rich_console
-                    if rich_console:
-                        rich_console.print_info("✅ Verifying research findings...")
-                except ImportError:
-                    pass
-                verification_result = agents["Verification"].execute(run_context=run_context)
-                if not verification_result.success:
-                    return ExperimentResult(
-                        success=False,
-                        phases_completed=phases_completed,
-                        artifacts=artifacts,
-                        metadata=metadata,
-                        error_message=f"Verification failed: {verification_result.error_message}"
-                    )
-                phases_completed.append("verification")
-                artifacts.extend(verification_result.artifacts)
-                run_context.update_phase("verification")
-                audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "verification"})
+            # Verification phase removed for alpha - synthesis is the final step
             
             # Calculate execution time
             end_time = datetime.now(timezone.utc)

@@ -84,11 +84,10 @@ class V2StatisticalAgent(StandardAgent):
             "agent_type": "V2StatisticalAgent",
             "capabilities": [
                 "statistical_analysis",
-                "statistical_verification",
                 "atomic_score_processing"
             ],
             "input_types": ["score_extraction_artifacts", "derived_metrics_artifacts"],
-            "output_types": ["statistical_analysis", "statistical_verification"],
+            "output_types": ["statistical_analysis"],
             "models_used": ["vertex_ai/gemini-2.5-pro", "vertex_ai/gemini-2.5-flash-lite"]
         }
     
@@ -161,24 +160,21 @@ class V2StatisticalAgent(StandardAgent):
                     error_message="Statistical analysis failed"
                 )
             
-            # Parse the structured response to extract execution_results and statistical_functions
+            # Parse the structured response to extract statistical_results
             try:
                 structured_data = json.loads(statistical_analysis_content)
-                execution_results = structured_data.get("execution_results", {})
-                statistical_functions = structured_data.get("statistical_functions", "")
+                statistical_results = structured_data.get("statistical_results", {})
             except (json.JSONDecodeError, KeyError) as e:
                 self.logger.warning(f"Could not parse structured response: {e}")
                 # Fallback to storing raw content
-                execution_results = {}
-                statistical_functions = statistical_analysis_content
+                statistical_results = {}
             
             # Store Step 1 artifact in format expected by synthesis agent
             statistical_artifact_data = {
                 "analysis_id": f"stats_{batch_id}",
                 "step": "statistical_analysis",
                 "model_used": "vertex_ai/gemini-2.5-pro",
-                "execution_results": execution_results,
-                "statistical_functions": statistical_functions,
+                "statistical_results": statistical_results,
                 "statistical_analysis_content": statistical_analysis_content,  # Keep raw content for debugging
                 "documents_processed": len(raw_artifacts),
                 "timestamp": datetime.now(timezone.utc).isoformat()
@@ -190,39 +186,6 @@ class V2StatisticalAgent(StandardAgent):
                 {"artifact_type": "statistical_analysis", "batch_id": batch_id}
             )
             
-            # Step 2: Independent Verification
-            verification_result = self._step2_verification(statistical_analysis_content, batch_id)
-            if not verification_result:
-                return AgentResult(
-                    success=False,
-                    artifacts=[],
-                    metadata={"agent_name": self.agent_name, "error": "statistical verification failed"},
-                    error_message="Statistical verification failed"
-                )
-            
-            # Check if verification passed
-            if verification_result.get("verification_status") != "verified":
-                return AgentResult(
-                    success=False,
-                    artifacts=[],
-                    metadata={"agent_name": self.agent_name, "error": "statistical verification failed", "verification_status": verification_result.get("verification_status")},
-                    error_message=f"Statistical verification failed: {verification_result.get('verification_status')}"
-                )
-            
-            # Store verification artifact
-            verification_artifact_data = {
-                "analysis_id": f"stats_{batch_id}",
-                "step": "statistical_verification",
-                "model_used": "vertex_ai/gemini-2.5-pro",
-                "verification_result": verification_result,
-                "timestamp": datetime.now(timezone.utc).isoformat()
-            }
-            
-            verification_content_bytes = json.dumps(verification_artifact_data, indent=2).encode('utf-8')
-            verification_artifact_hash = self.storage.put_artifact(
-                verification_content_bytes,
-                {"artifact_type": "statistical_verification", "batch_id": batch_id}
-            )
             
             # Create artifacts list with proper hashes
             artifacts = [
@@ -237,23 +200,11 @@ class V2StatisticalAgent(StandardAgent):
                         "agent_name": self.agent_name,
                         "artifact_hash": statistical_artifact_hash
                     }
-                },
-                {
-                    "type": "statistical_verification",
-                    "content": verification_artifact_data,
-                    "metadata": {
-                        "artifact_type": "statistical_verification",
-                        "phase": "statistical",
-                        "batch_id": batch_id,
-                        "timestamp": datetime.now().isoformat(),
-                        "agent_name": self.agent_name,
-                        "artifact_hash": verification_artifact_hash
-                    }
                 }
             ]
             
             # Update run context with proper artifact hashes
-            run_context.statistical_artifacts = [statistical_artifact_hash, verification_artifact_hash]
+            run_context.statistical_artifacts = [statistical_artifact_hash]
             run_context.statistical_results = statistical_analysis_content  # Pass the raw content to synthesis agent
             
             self.audit.log_agent_event(self.agent_name, "execution_completed", {
@@ -321,7 +272,7 @@ class V2StatisticalAgent(StandardAgent):
     
     def _step1_statistical_analysis(self, framework_content: str, raw_artifacts: List[Dict[str, Any]], batch_id: str) -> Optional[str]:
         """
-        Step 1: Generate Python statistical analysis code and execute it.
+        Step 1: Perform statistical analysis internally using LLM capabilities.
         
         Args:
             framework_content: Framework content for context
@@ -329,7 +280,7 @@ class V2StatisticalAgent(StandardAgent):
             batch_id: Batch identifier
             
         Returns:
-            Complete LLM response with Python code and results, or None if failed
+            Complete LLM response with statistical results, or None if failed
         """
         try:
             # Load the externalized prompt template
@@ -435,117 +386,6 @@ class V2StatisticalAgent(StandardAgent):
             self.logger.error(f"Step 1 failed: {e}")
             return None
     
-    def _step2_verification(self, statistical_analysis_content: str, batch_id: str) -> Optional[Dict[str, Any]]:
-        """
-        Step 2: Independently verify statistical analysis by re-executing the Python code.
-        
-        Args:
-            statistical_analysis_content: Complete response from step 1 with Python code and results
-            batch_id: Batch identifier
-            
-        Returns:
-            Verification result with tool call status or None if failed
-        """
-        try:
-            # Define verification tool (OpenAI function calling format)
-            verification_tools = [
-                {
-                    "type": "function",
-                    "function": {
-                        "name": "verify_statistical_analysis",
-                        "description": "Evaluate if the statistical analysis is substantive and well-executed",
-                        "parameters": {
-                            "type": "object",
-                            "properties": {
-                                "verified": {
-                                    "type": "boolean",
-                                    "description": "Whether the statistical analysis appears substantive and methodologically sound"
-                                },
-                                "reasoning": {
-                                    "type": "string",
-                                    "description": "Detailed explanation of the analysis quality assessment and methodology evaluation"
-                                }
-                            },
-                            "required": ["verified", "reasoning"]
-                        }
-                    }
-                }
-            ]
-            
-            # Pass full content to verification - let LLM handle length
-            content = statistical_analysis_content
-            
-            prompt = f"""You are a statistical methods reviewer. Your task is to evaluate the methodological soundness of a statistical analysis, especially concerning its limitations.
-
-Read the following statistical analysis report:
-
---- ANALYSIS REPORT ---
-{content}
---- END REPORT ---
-
-Now, evaluate the report based on two criteria:
-1.  **Methodological Soundness**: Is the statistical approach (e.g., descriptive statistics, correlations, t-tests) appropriate for the data described in the report?
-2.  **Acknowledgement of Limitations**: Does the report correctly identify and disclose its own limitations, particularly regarding small sample size (e.g., N=2) and the generalizability of its conclusions?
-
-Based on your evaluation, call the `verify_statistical_analysis` tool. The analysis is considered "verified" if it uses sound methods AND properly acknowledges its limitations."""
-
-            self.audit.log_agent_event(self.agent_name, "step2_started", {
-                "batch_id": batch_id,
-                "step": "statistical_verification",
-                "model": "vertex_ai/gemini-2.5-pro"
-            })
-            
-            # System prompt emphasizing mandatory tool call
-            system_prompt = "You are a statistical analysis reviewer. You MUST evaluate the quality and substance of the statistical analysis and call the verify_statistical_analysis tool with your findings. This is MANDATORY - you must call the verify_statistical_analysis tool."
-            
-            # Call LLM with tools (using proper EnhancedLLMGateway format)
-            response_content, metadata = self.gateway.execute_call_with_tools(
-                model="vertex_ai/gemini-2.5-pro",
-                prompt=prompt,
-                system_prompt=system_prompt,
-                tools=verification_tools,
-                force_function_calling=True  # Force tool calling like deprecated agent
-            )
-            
-            # Extract verification result from tool calls (using metadata format like deprecated agent)
-            verification_status = "unknown"
-            if not metadata.get('success'):
-                self.logger.error(f"Statistical verification LLM call failed: {metadata.get('error', 'Unknown error')}")
-                verification_status = "verification_failed"
-            else:
-                tool_calls = metadata.get('tool_calls', [])
-                if tool_calls:
-                    tool_call = tool_calls[0]
-                    if tool_call.function.name == "verify_statistical_analysis":
-                        try:
-                            args = json.loads(tool_call.function.arguments)
-                            verification_status = "verified" if args.get("verified", False) else "verification_failed"
-                            self.logger.info(f"Statistical verification reasoning: {args.get('reasoning', 'No reasoning provided')}")
-                        except json.JSONDecodeError as e:
-                            self.logger.error(f"Failed to parse statistical verification tool call arguments: {e}")
-                            verification_status = "verification_failed"
-                else:
-                    self.logger.error("No tool calls found in statistical verification response")
-                    verification_status = "verification_failed"
-            
-            verification_result = {
-                "verification_status": verification_status,
-                "batch_id": batch_id,
-                "model_used": "vertex_ai/gemini-2.5-pro",
-                "timestamp": datetime.now(timezone.utc).isoformat()
-            }
-            
-            self.audit.log_agent_event(self.agent_name, "step2_completed", {
-                "batch_id": batch_id,
-                "step": "statistical_verification",
-                "verification_status": verification_status
-            })
-            
-            return verification_result
-            
-        except Exception as e:
-            self.logger.error(f"Step 2 failed: {e}")
-            return None
     
     def _read_framework_file(self, framework_path: str) -> Optional[str]:
         """Read framework content directly from file."""

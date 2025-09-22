@@ -5,6 +5,9 @@ Discernus CLI v2.1 - Streamlined Researcher Interface
 
 Core Commands for Research Workflow:
 - discernus run <experiment_path>       - Execute complete experiment (analysis + synthesis)
+- discernus run --analysis-only         - Run analysis phase only, skip statistical and synthesis
+- discernus run --statistical-prep      - Run analysis and statistical phases, skip synthesis
+- discernus run --resume-from-stats     - Resume from statistical phase, skip analysis
 - discernus validate <experiment_path>  - Validate experiment structure  
 - discernus debug <experiment_path>     - Interactive debugging with detailed tracing
 - discernus list                        - List available experiments
@@ -13,6 +16,9 @@ Core Commands for Research Workflow:
 
 For Alpha Release:
 - discernus run <experiment>            - Run complete experiment (recommended)
+- discernus run <experiment> --analysis-only    - Run analysis phase only
+- discernus run <experiment> --statistical-prep - Run analysis + statistical phases
+- discernus run <experiment> --resume-from-stats - Resume from statistical phase
 - discernus validate <experiment>       - Validate experiment before running
 - discernus debug <experiment>          - Debug with detailed tracing
 - discernus status                      - Check system status
@@ -203,10 +209,33 @@ def cli(ctx):
 @click.option('--verbose-trace', is_flag=True, help='Enable comprehensive function-level tracing for debugging')
 @click.option('--trace-filter', multiple=True, help='Filter tracing to specific components (e.g., statistical, analysis)')
 @click.option('--skip-validation', is_flag=True, help='Skip experiment coherence validation for faster execution')
+@click.option('--analysis-only', is_flag=True, help='Run analysis phase only, skip statistical and synthesis')
+@click.option('--statistical-prep', is_flag=True, help='Run analysis and statistical phases, skip synthesis')
+@click.option('--resume-from-stats', is_flag=True, help='Resume from statistical phase, skip analysis')
 @click.pass_context
-def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, skip_validation: bool):
-    """Execute a V2 experiment."""
+def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, skip_validation: bool, 
+        analysis_only: bool, statistical_prep: bool, resume_from_stats: bool):
+    """Execute a V2 experiment.
+    
+    Execution modes:
+    - Default: Run complete pipeline (validation + analysis + statistical + evidence + synthesis)
+    - --analysis-only: Run analysis phase only, skip statistical and synthesis
+    - --statistical-prep: Run analysis and statistical phases, skip synthesis  
+    - --resume-from-stats: Resume from statistical phase, skip analysis
+    
+    Examples:
+    - discernus run projects/my_experiment
+    - discernus run projects/my_experiment --analysis-only
+    - discernus run projects/my_experiment --statistical-prep
+    - discernus run projects/my_experiment --resume-from-stats
+    """
     exp_path = Path(experiment_path).resolve()
+
+    # Validate that only one execution mode is selected
+    execution_modes = [analysis_only, statistical_prep, resume_from_stats]
+    if sum(execution_modes) > 1:
+        rich_console.print_error("❌ Only one execution mode can be selected at a time")
+        exit_invalid_usage("Multiple execution modes selected. Choose one: --analysis-only, --statistical-prep, or --resume-from-stats")
 
     if not exp_path.exists() or not exp_path.is_dir():
         rich_console.print_error(f"❌ Experiment path not found: {exp_path}")
@@ -265,8 +294,25 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, ski
         orchestrator.register_agent("Evidence", IntelligentEvidenceRetrievalAgent(security, storage, audit))
         orchestrator.register_agent("Synthesis", TwoStageSynthesisAgent(security, storage, audit))
 
-        # 5. Execute Strategy with Progress Reporting
-        strategy = FullExperimentStrategy()
+        # 5. Select Execution Strategy based on CLI options
+        if analysis_only:
+            from discernus.core.execution_strategies import AnalysisOnlyStrategy
+            strategy = AnalysisOnlyStrategy()
+            rich_console.print_info("🔬 Running analysis phase only...")
+        elif statistical_prep:
+            from discernus.core.execution_strategies import StatisticalPrepStrategy
+            strategy = StatisticalPrepStrategy()
+            rich_console.print_info("📊 Running analysis and statistical phases...")
+        elif resume_from_stats:
+            from discernus.core.execution_strategies import ResumeFromStatsStrategy
+            strategy = ResumeFromStatsStrategy()
+            rich_console.print_info("🔄 Resuming from statistical phase...")
+        else:
+            from discernus.core.execution_strategies import FullExperimentStrategy
+            strategy = FullExperimentStrategy()
+            rich_console.print_info("🚀 Running complete experiment pipeline...")
+        
+        # 6. Execute Strategy with Progress Reporting
         result = orchestrator.execute_strategy(strategy)
 
         # Show experiment summary

@@ -1,8 +1,0 @@
-{
-  "analysis_id": "analysis_v2_analysis_20250922_121450_0",
-  "step": "score_extraction",
-  "model_used": "vertex_ai/gemini-2.5-pro",
-  "score_extraction": "```json\n{\n  \"tribal_dominance\": {\n    \"raw_score\": 0.9,\n    \"salience\": 0.9,\n    \"confidence\": 1.0\n  },\n  \"individual_dignity\": {\n    \"raw_score\": 0.0,\n    \"salience\": 0.1,\n    \"confidence\": 0.9\n  },\n  \"fear\": {\n    \"raw_score\": 0.8,\n    \"salience\": 0.8,\n    \"confidence\": 0.9\n  },\n  \"hope\": {\n    \"raw_score\": 0.5,\n    \"salience\": 0.5,\n    \"confidence\": 0.9\n  },\n  \"envy\": {\n    \"raw_score\": 0.9,\n    \"salience\": 0.8,\n    \"confidence\": 0.9\n  },\n  \"mudita\": {\n    \"raw_score\": 0.0,\n    \"salience\": 0.0,\n    \"confidence\": 1.0\n  },\n  \"enmity\": {\n    \"raw_score\": 1.0,\n    \"salience\": 1.0,\n    \"confidence\": 0.9\n  },\n  \"amity\": {\n    \"raw_score\": 0.7,\n    \"salience\": 0.8,\n    \"confidence\": 0.9\n  },\n  \"fragmentative_goals\": {\n    \"raw_score\": 0.7,\n    \"salience\": 0.7,\n    \"confidence\": 0.8\n  },\n  \"cohesive_goals\": {\n    \"raw_score\": 0.9,\n    \"salience\": 0.9,\n    \"confidence\": 0.9\n  }\n}\n```",
-  "document_index": 0,
-  "timestamp": "2025-09-22T16:17:44.187089+00:00"
-}

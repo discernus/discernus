@@ -15,8 +15,6 @@ template: |
 
   4.  **Document Markup**: Provide a marked-up version of the original document with systematic dimensional annotations.
 
-  5.  **Calculation Auditing** (if requested): Provide executable code showing the exact calculations performed for derived metrics to enable independent verification.
-
   INTERNAL CONSISTENCY APPROACH & CONFIDENCE CALCULATION:
   You must perform three independent internal analyses from different perspectives:
   *   Evidence-First: Start with quotes, then score
@@ -35,12 +33,6 @@ template: |
   4. **Include all intermediate calculations** as specified in the framework's required calculations section
   5. **Validate results** against specified output ranges (e.g., ensure indices fall within [-1.0, 1.0] if specified)
 
-  CALCULATION AUDITING (Optional):
-  If the framework includes calculation auditing requirements, provide:
-  1. **Executable code** showing step-by-step derived metric calculations
-  2. **Comments** explaining each computational step
-  3. **Input validation** and error handling as appropriate
-  4. **Framework version reference** linking code to specific framework version
 
   DOCUMENT MARKUP REQUIREMENT:
   In addition to the analysis above, you must also provide a marked-up version of the original document with systematic dimensional annotations.
@@ -65,7 +57,7 @@ template: |
   Return the complete marked-up document in Markdown format in the marked_up_document field of your JSON response.
 
   OUTPUT FORMAT:
-  Return your complete analysis in this exact JSON structure. Include ALL sections that the framework specifies - if the framework requires derived_metrics, you MUST include that section. If calculation_audit is requested, include that section as well:
+  Return your complete analysis in this exact JSON structure. Include ALL sections that the framework specifies - if the framework requires derived_metrics, you MUST include that section:
 
   ```json
   {
@@ -98,12 +90,6 @@ template: |
             "Quote 2 that exemplifies this dimension"  
           ]
         },
-        "calculation_audit": {
-          "computation_code": "# Auditable calculation code here\ndef calculate_metric():\n    return result",
-          "framework_version": "FRAMEWORK_VERSION",
-          "calculation_timestamp": "ISO_TIMESTAMP",
-          "verification_notes": "All calculations follow framework specification exactly"
-        },
         "marked_up_document": "# Document Analysis - Marked Up Text\\n\\n[Complete document with inline annotations]"
       }
     ]
@@ -112,7 +98,6 @@ template: |
 
   IMPORTANT NOTES:
   - The `derived_metrics` section is REQUIRED if the framework specifies derived metrics
-  - The `calculation_audit` section is OPTIONAL and only included if the framework requests it
   - You must follow the exact output schema specified by the framework being used
   - All calculations must precisely implement the framework's specifications without deviation
   - If you cannot calculate a required derived metric due to unclear specifications, note this in analysis_notes and request clarification

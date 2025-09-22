@@ -112,29 +112,35 @@ template: |
   - For Tier 2 and Tier 3 tests, include descriptive statistics and effect sizes
   - Add clear documentation about power limitations and interpretation guidelines
 
-  **Step 5: Generate Statistical Functions.**
-  - Design one function per major statistical analysis
-  - Ensure functions can handle the actual data structure provided
-  - Plan how to extract grouping variables from corpus manifest metadata
-  - Generate complete Python functions with proper error handling
-
-  **Step 6: Execute Statistical Functions.**
-  - Execute ALL generated functions using the provided analysis artifacts
-  - Use pandas, numpy, scipy.stats, and pingouin libraries
-  - Handle missing data gracefully
+  **Step 5: Perform Statistical Analysis.**
+  - Generate and execute Python code internally using pandas, numpy, scipy.stats, and pingouin libraries
+  - Calculate all required statistical measures using proper statistical software
+  - Handle missing data gracefully with appropriate statistical methods
   - Generate comprehensive results for each analysis
+  - Use internal code execution for accurate statistical calculations
+
+  **Step 6: Calculate Framework-Corpus Fit.**
+  - **Variance Analysis**: Calculate variance in each dimension across documents to assess discrimination power
+  - **Effect Size Analysis**: Compute Cohen's d or similar measures for dimensional differences between documents
+  - **Theoretical Validation**: Compare observed patterns with framework expectations from the specification
+  - **Corpus Suitability**: Assess whether the corpus characteristics align with framework requirements
+  - **Overall Fit Score**: Calculate a 0-1 framework-corpus fit score based on:
+    * Dimensional variance (higher = better discrimination)
+    * Effect sizes (larger = better separation)
+    * Theoretical alignment (better match = higher fit)
+    * Corpus appropriateness (better match = higher fit)
+  - **Fit Interpretation**: Provide clear explanation of what the fit score means for research validity
 
   **CRITICAL REQUIREMENTS:**
-  1. Each analysis must be implemented as a separate Python function
-  2. Functions MUST take a 'data' parameter (analysis artifacts) as their first argument
-  3. Functions must handle missing data gracefully (return None or appropriate default)
-  4. Functions must include proper docstrings with statistical methodology
-  5. Functions must be production-ready with error handling
-  6. **EXECUTE ALL FUNCTIONS** and return both functions and results
-  7. Create grouping mappings based on the corpus manifest content provided
-  8. All dictionary keys in return values must be strings, not tuples
-  9. **PLOTTING GUIDANCE**: Use matplotlib/seaborn for analysis but configure for non-interactive execution
-  10. **EXECUTION ENVIRONMENT**: Code runs in headless environment - avoid GUI-dependent functions
+  1. Generate and execute Python code internally using pandas, numpy, scipy.stats, and pingouin libraries
+  2. Use proper statistical software for accurate calculations (ANOVA, correlations, reliability tests, etc.)
+  3. Handle missing data gracefully with appropriate statistical methods
+  4. Provide comprehensive statistical results for each analysis
+  5. Create grouping mappings based on the corpus manifest content provided
+  6. All dictionary keys in return values must be strings, not tuples
+  7. **STATISTICAL PRECISION**: Follow APA 7th edition rounding standards
+  8. **ANALYSIS FOCUS**: Framework-centric statistical analysis and interpretation
+  9. **INTERNAL EXECUTION**: Use code execution internally but do not return the code itself
 
   **THIN ARCHITECTURE FOR METADATA:**
   - You have been provided with the COMPLETE corpus manifest content
@@ -146,12 +152,11 @@ template: |
   - Trust your understanding of the corpus structure
 
   **CRITICAL OUTPUT REQUIREMENT:**
-  You MUST return ONLY a valid JSON object. Do not include any explanatory text, markdown, or code blocks outside the JSON. The response must be parseable JSON that follows this exact structure:
+  You MUST return ONLY a valid JSON object. Do not include any explanatory text, markdown, or code blocks outside the JSON. The response must be parseable JSON that follows this exact structure. Include methodological documentation within the JSON structure to explain your analytical strategy and choices.
 
   ```json
   {
-    "statistical_functions": "Complete Python module with all functions (as string)",
-    "execution_results": {
+    "statistical_results": {
       "descriptive_statistics": { ... },
       "correlation_analysis": { ... },
       "anova_analysis": { ... },
@@ -172,6 +177,25 @@ template: |
       "framework_discovery_potential": {
         "unanticipated_patterns": "Statistical patterns not anticipated by the research design",
         "framework_extension_opportunities": "Where the framework could be enhanced or applied differently"
+      },
+      "framework_corpus_fit": {
+        "variance_analysis": {
+          "dimensional_variance": "Variance in each dimension across documents",
+          "overall_variance": "Total variance across all dimensions",
+          "variance_interpretation": "Whether variance indicates good discrimination or poor fit"
+        },
+        "discriminatory_power": {
+          "dimension_separation": "How well dimensions distinguish between documents",
+          "effect_size_analysis": "Cohen's d or similar measures for dimensional differences",
+          "separation_quality": "Assessment of whether framework provides meaningful discrimination"
+        },
+        "corpus_alignment": {
+          "expected_vs_observed": "How well observed patterns match framework expectations",
+          "theoretical_validation": "Whether statistical patterns support framework theory",
+          "corpus_suitability": "Assessment of whether corpus is appropriate for framework"
+        },
+        "fit_score": "Overall framework-corpus fit assessment (0-1 scale with interpretation)",
+        "fit_interpretation": "Explanation of what the fit score means for research validity"
       }
     },
     "sample_size_assessment": {
@@ -193,86 +217,23 @@ template: |
       "multiple_comparisons_handling": "Description of correction methods applied and rationale",
       "effect_size_interpretation": "Practical significance assessment using established benchmarks",
       "assumption_testing_results": "Summary of statistical assumption checks and any violations"
+    },
+    "methodological_documentation": {
+      "analytical_strategy": "Overview of the statistical approach chosen and rationale",
+      "data_preparation": "Description of data cleaning, transformation, and preparation steps",
+      "statistical_tests_selected": "List of specific statistical tests chosen and why they were appropriate",
+      "grouping_strategy": "How documents were grouped for analysis based on corpus manifest",
+      "power_analysis_decisions": "Sample size considerations and tier classification rationale",
+      "assumption_checks": "Statistical assumptions tested and any violations or accommodations made",
+      "missing_data_handling": "How missing data was identified and handled",
+      "effect_size_interpretation": "Benchmarks used for interpreting practical significance",
+      "limitations_and_caveats": "Known limitations of the analysis and appropriate interpretation guidelines"
     }
   }
   ```
 
-  **PYTHON FUNCTION TEMPLATE:**
-  Your statistical functions should follow this pattern:
-
-  ```python
-  import pandas as pd
-  import numpy as np
-  import scipy.stats as stats
-  from typing import Dict, Any, Optional, List
-  import json
-  import matplotlib
-  matplotlib.use('Agg')  # Non-interactive backend
-  import matplotlib.pyplot as plt
-  import seaborn as sns
-
-  def function_name(data, **kwargs):
-      """
-      Function description with statistical methodology.
-      
-      Args:
-          data: Analysis artifacts containing scores and derived metrics
-          **kwargs: Additional parameters
-          
-      Returns:
-          dict: Statistical results or None if insufficient data
-      """
-      try:
-          # Extract relevant data from analysis artifacts
-          # Perform statistical analysis
-          
-          # Example plotting (if needed):
-          # plt.figure(figsize=(8, 6))
-          # sns.heatmap(correlation_matrix, annot=True)
-          # plt.title('Correlation Analysis')
-          # plt.savefig('correlation_heatmap.png', dpi=150, bbox_inches='tight')
-          # plt.close()
-          
-          # Return structured results including plot file paths
-          return {
-              'statistical_results': results,
-              'plot_files': ['correlation_heatmap.png']  # if plots were generated
-          }
-      except Exception as e:
-          return None
-
-  def perform_statistical_analysis(data, **kwargs):
-      """
-      Master function that executes all statistical analyses.
-      
-      Args:
-          data: Analysis artifacts
-          **kwargs: Additional parameters
-          
-      Returns:
-          dict: Combined results from all statistical analyses
-      """
-      results = {}
-      
-      # Call all individual statistical functions
-      results['descriptive_statistics'] = calculate_descriptive_statistics(data, **kwargs)
-      results['correlation_analysis'] = perform_correlation_analysis(data, **kwargs)
-      results['anova_analysis'] = perform_anova_analysis(data, **kwargs)
-      results['reliability_analysis'] = calculate_reliability_analysis(data, **kwargs)
-      
-      return results
-  ```
-
-  **EXECUTION REQUIREMENT:**
-  After generating the functions, you MUST execute them using the provided analysis artifacts and return the actual results. This is a THIN approach where you do both the generation AND execution in a single step.
-  
-  **PLOTTING AND VISUALIZATION:**
-  - Use matplotlib/seaborn for comprehensive statistical visualization
-  - Configure matplotlib for non-interactive backend: `import matplotlib; matplotlib.use('Agg')`
-  - Save plots to files instead of displaying: `plt.savefig('plot_name.png')`
-  - Include plot file paths in your results for later reference
-  - Generate both statistical calculations AND visualizations
-  - Use `plt.close()` after saving to manage memory
+  **STATISTICAL ANALYSIS REQUIREMENT:**
+  Perform comprehensive statistical analysis by generating and executing Python code internally using pandas, numpy, scipy.stats, and pingouin libraries. Use proper statistical software for accurate calculations, then return only the results without the code itself.
 
   **STATISTICAL PRECISION STANDARDS:**
   Follow APA 7th edition rounding standards for all numerical output:
@@ -285,16 +246,5 @@ template: |
   Provide rigorous statistical analysis that supports academic research methodology. Your results should offer comprehensive statistical evidence that researchers can interpret and incorporate into their scholarly work.
 
   **FINAL REMINDER:**
-  Your response must be ONLY a valid JSON object. No explanatory text, no markdown formatting, no code blocks. Just the JSON structure specified above. The synthesis agent depends on this exact format.
+  Your response must be ONLY a valid JSON object. No explanatory text, no markdown formatting, no code blocks outside the JSON. Generate and execute Python code internally using statistical libraries for accurate calculations, but return only the results without the code itself. Include comprehensive methodological documentation within the JSON structure to explain your analytical strategy and choices. The synthesis agent depends on this exact format.
 
-system_prompt: "You are a statistical analysis agent that generates and executes comprehensive statistical analysis for academic research, focusing on framework-centric analysis and rigorous statistical methodology."
-
-# Metadata for the prompt template
-metadata:
-  purpose: "Generate framework-centric statistical analysis that feeds two-stage synthesis architecture"
-  architecture: "THIN - LLM generates functions and executes them internally with framework-first analysis"
-  input_format: "Framework specification + experiment + analysis artifacts"
-  output_format: "JSON with functions, execution results, and framework performance assessment"
-  framework_agnostic: true
-  synthesis_integration: "Optimized for two-stage synthesis with framework performance insights"
-  agent_type: "StatisticalAgent"

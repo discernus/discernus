@@ -15,44 +15,56 @@ template: |
 
   ## SEQUENTIAL ANALYSIS PROTOCOL
   
-  **IMPORTANT**: You MUST perform these steps in order, using each to inform the next:
+  **IMPORTANT**: You MUST perform the following steps in order, using the output of each step to inform the next. Do not synthesize the final report until you have completed all internal analytical steps.
 
   **Step 1: Deconstruct the Framework Architecture**
-  - Examine the framework specification to understand its intellectual purpose
-  - Identify its core dimensions, any derived metrics (if defined), and theoretical foundations
-  - Assess what makes this framework novel or important for the field
+  - Examine the **Framework Specification** provided below
+  - Internally identify its core purpose, its primary dimensions, any derived metrics (if defined), and what makes it novel or important
   - Consider how the framework's structure should manifest in statistical patterns
 
-  **Step 2: Analyze Statistical Agent Output**
-  - The statistical analysis artifact contains two key parts: `execution_results` and `statistical_functions`.
-  - **Prioritize `execution_results`**: Base ALL your analytical claims, interpretations, and insights on the numerical data in `execution_results`. This is your primary source of truth.
-  - **Analyze `statistical_functions` for Methodology**: Examine the Python code in `statistical_functions` to understand the specific tests, parameters, and scientific approach used. This provides the methodological context for the results.
-  - **Generate a Methodological Summary**: Based on your analysis of the code, write a concise, academic-style summary of the statistical methods implemented. This summary will be used in the final report.
+  **Step 2: Identify Key Statistical Patterns**
+  - Examine the **Complete Statistical Results** from the statistical agent
+  - In light of the framework's structure from Step 1, identify the most significant statistical findings
+  - Focus on the strongest correlations (both positive and negative, prioritizing salience scores if available), most significant differences, and most revealing patterns
+  - **Prioritize `statistical_results`**: Base ALL your analytical claims, interpretations, and insights on the numerical data in `statistical_results`. This is your primary source of truth.
 
-  **Step 3: Analyze Experimental Intent**
-  - Analyze the experiment configuration and corpus context
+  **Step 3: Evaluate Experimental Hypotheses**
+  - Review the **Experiment Configuration** and corpus context
   - Determine if this is hypothesis-driven research or exploratory analysis
   - Identify explicit and implicit research questions
-  - Consider intended objectives versus actual findings
+  - Evaluate how the statistical findings from Step 2 confirm or falsify the experiment's hypotheses
+  - **CRITICAL**: These evaluations will be used to populate the final report. Do NOT include Step 3 content as intermediate artifacts - integrate it properly into the academic report structure.
 
-  **Step 4: Interpret Statistical Patterns Through Framework Lens**
-  - Examine statistical results in light of the framework's theoretical structure
-  - Identify the strongest correlations, most significant differences, and revealing patterns
-  - Look for framework validation (do dimensions behave as theorized?)
-  - Detect unexpected patterns that challenge or extend the framework
+  **Step 4: Construct the Core Narrative**
+  - Based on the insights from Steps 1-3, formulate a central thesis or narrative for the research report
+  - What is the single most important story the data is telling about the framework's performance?
 
-  **Step 5: Identify Emergent Insights**
-  - Look beyond stated experimental objectives
-  - Identify statistical patterns that reveal unexplored framework capabilities
-  - Consider cross-dimensional relationships that extend beyond initial hypotheses
-  - Assess whether the framework captured phenomena beyond its intended scope
+  **Step 5: Synthesize the Final Report**
+  - **ONLY AFTER** completing steps 1-4, write the full academic report
+  - Use the narrative from Step 4 as the foundation for the Executive Summary and Key Insights
+  - Systematically present the findings, integrating the statistical results with framework interpretation
+  - Follow the required academic report structure (Executive Summary, Key Insights, Methodology, etc.)
 
-  **Step 6: Synthesize Framework Performance Assessment**
-  - Evaluate how well the framework performed in this analytical context
-  - Identify framework strengths, limitations, and unexpected capabilities
-  - Consider implications for framework refinement or broader application
+  ## REPORT STRUCTURE REQUIREMENTS
 
-  ## REPORT STRUCTURE
+  ### 0. Experiment Provenance Header (REQUIRED FIRST)
+  Start every report with available experiment metadata:
+
+  ```
+  # [Framework Name] Analysis Report
+
+  **Experiment**: [experiment_name]
+  **Run ID**: [run_id]
+  **Date**: [completion_date]
+  **Framework**: [framework_filename]
+  **Corpus**: [corpus_filename] ([document_count] documents)
+  **Analysis Model**: [analysis_model_used]
+  **Synthesis Model**: [synthesis_model_used]
+
+  ---
+  ```
+  
+  Use only metadata that is actually available. This header enables traceability of results.
 
   ### 1. Executive Summary (2-3 paragraphs)
   - Central thesis: What is the single most important story the data tells?
@@ -60,53 +72,110 @@ template: |
   - Primary insights with their significance for the research question
   - Framework effectiveness assessment
 
-  ### 2. Framework Analysis & Performance
-  - **Framework Architecture**: Core purpose, dimensions, and theoretical foundations
-  - **Statistical Validation**: How well do the data patterns match framework expectations?
-  - **Dimensional Effectiveness**: Which dimensions performed strongest/weakest and why
-  - **Cross-Dimensional Insights**: Unexpected relationships between framework elements
+  ### 2. Opening Framework: Key Insights (Bullet points)
+  - 4-6 primary insights from the analysis
+  - Each supported by specific statistical evidence
+  - Clear, accessible language for broad audience
 
-  ### 3. Experimental Intent & Hypothesis Evaluation
-  - **Research Question Assessment**: Stated experimental objectives and research questions
-  - **Hypothesis Outcomes** (if present): CONFIRMED/FALSIFIED/INDETERMINATE with statistical evidence
-  - **Exploratory Findings** (if no hypotheses): Primary patterns discovered through analysis
-  - **Intent vs. Discovery**: Findings that extend beyond stated objectives
+  ### 3. Literature Review and Theoretical Framework (Optional)
+  - Connect framework to relevant academic literature
+  - Position analysis within scholarly discourse
+  - Identify theoretical foundations
 
-  ### 4. Statistical Findings & Patterns
-  - **Primary Results**: Strongest statistical patterns with framework interpretation
-  - **Dimensional Analysis**: Performance of each framework dimension with cross-comparisons
-  - **Correlation Networks**: Relationships between dimensions and any derived metrics (if available)
-  - **Anomalies & Surprises**: Unexpected results that challenge assumptions
+  ### 4. Methodology
+  - Framework description and analytical approach
+  - Data structure and corpus description
+  - Statistical methods and analytical constraints
+  - Acknowledge limitations and methodological choices
 
-  ### 5. Emergent Insights & Framework Extensions
-  - **Beyond the Research Question**: Insights that extend beyond stated objectives
-  - **Framework Potential**: Capabilities revealed that weren't explicitly explored
-  - **Methodological Discoveries**: What this analysis reveals about the framework's broader utility
-  - **Theoretical Implications**: How findings extend or challenge the framework's foundations
+  ### 5. Comprehensive Results
 
-  ### 6. Limitations & Methodological Assessment
-  - **Statistical Power**: Sample size considerations and confidence levels
-  - **Framework Limitations**: Where the framework may have missed important phenomena
-  - **Analytical Constraints**: Boundaries of what can be concluded from this data
-  - **Future Research Directions**: What should be explored next
+  #### 5.1 Hypothesis Evaluation (REQUIRED if hypotheses present)
+  - **MANDATORY**: If the experiment contains hypotheses, this section MUST appear first in Comprehensive Results
+  - **Sequential Format**: Address each hypothesis in order (H₁, H₂, H₃...) with clear CONFIRMED/FALSIFIED/INDETERMINATE outcomes
+  - **Evidence-Based**: Support each evaluation with specific statistical evidence from the research data
+  - **Academic Structure**: Use formal academic language (e.g., "H₁ (Overall Populism ≥ 0.5): CONFIRMED. The mean salience-weighted overall populism index was 0.81...")
+  - **Comprehensive Coverage**: Address ALL hypotheses from the experiment configuration
 
-  ### 7. Research Implications & Significance
-  - **Field Contributions**: How these findings advance the research domain
-  - **Framework Development**: Implications for refining or extending the framework
-  - **Methodological Insights**: What this reveals about computational social science approaches
-  - **Broader Applications**: Where else this framework might be valuable
+  #### 5.2 Descriptive Statistics
+  - Present all statistical results in properly formatted Markdown tables
+  - Include significance indicators: * p<0.05, ** p<0.01, *** p<0.001
+  - Add effect size interpretations (Small/Medium/Large based on Cohen's conventions)
+  - **APA Number Formatting**: Use consistent decimal precision following APA 7th edition
+  - Dimensional means, distributions, and patterns with statistical interpretation
+
+  #### 5.3 Advanced Metric Analysis
+  - Derived metrics interpretation
+  - Tension patterns and strategic contradictions
+  - Confidence-weighted analysis
+
+  #### 5.4 Correlation and Interaction Analysis
+  - Cross-dimensional relationships with theoretical interpretation
+  - Network effects and clustering patterns
+  - Meta-strategy identification
+
+  #### 5.5 Pattern Recognition and Theoretical Insights
+  - Identify the strongest correlations and explain their practical significance
+  - Connect statistical patterns to theoretical frameworks and literature
+  - Explain what correlation patterns reveal about the framework's construct validity
+  - Highlight unexpected findings and their implications
+  - Assess framework-corpus fit based on statistical patterns
+
+  #### 5.6 Framework Effectiveness Assessment
+  - **Discriminatory Power Analysis**: How well the framework distinguishes between different documents/cases
+  - **Framework-Corpus Fit Evaluation**: 
+    * Interpret the framework-corpus fit score (0-1 scale) from statistical analysis
+    * Assess whether the corpus was appropriate for the framework's intended application
+    * Evaluate whether observed patterns match framework theoretical expectations
+    * Consider implications of fit score for research validity and interpretation
+  - **Methodological Insights**: What this analysis reveals about the framework's broader utility
+
+  ### 6. Discussion
+  - Theoretical implications of findings
+  - Comparative analysis and archetypal patterns
+  - Broader significance for the field
+  - Limitations and future directions
+
+  ### 7. Conclusion
+  - Summary of key contributions
+  - Methodological validation
+  - Research implications
 
   ### 8. Methodological Summary
-  - A concise, academic-style summary of the statistical methods implemented, derived from the statistical agent's code.
-  - This section should describe the specific tests, parameters, and analytical approaches used.
+  - A concise, academic-style summary of the statistical methods implemented, derived from the statistical results.
+  - This section should describe the specific tests, parameters, and analytical approaches used based on the statistical analysis output.
 
   ## ANALYTICAL DEPTH REQUIREMENTS
 
-  ### Statistical Interpretation Standards
-  - **Well-Powered Results (N≥30)**: Full inferential interpretation with confidence
-  - **Moderate Power (N=15-29)**: Cautious interpretation with explicit power limitations
-  - **Exploratory Results (N<15)**: Descriptive focus with suggestive pattern identification
-  - **No LLM Math**: Interpret provided statistics as definitive - never calculate
+  ### Statistical Interpretation Standards - Tiered Approach
+  - **TIER 1: Well-Powered Results (N≥30)**
+    * Interpret standard significance testing with confidence
+    * Report: "Significant difference found" or "No significant difference"
+    * Include effect sizes and confidence intervals for context
+  
+  - **TIER 2: Moderately-Powered Results (N=15-29)**
+    * Include inferential tests with explicit power caveats
+    * Report: "Significant difference found (N=X, interpret with caution)" or "Insufficient power to detect effects"
+    * Emphasize effect sizes and confidence intervals alongside p-values
+    * State: "Due to moderate sample size (N=X), these findings should be interpreted with caution"
+  
+  - **TIER 3: Exploratory Results (N<15)**
+    * Focus on descriptive statistics, effect sizes, and pattern recognition
+    * Report: "Suggestive pattern (N=X, exploratory analysis)" or "No clear pattern detected"
+    * State: "Due to limited sample size (N=X), these findings are exploratory and suggestive rather than conclusive"
+    * Use non-parametric alternatives when appropriate
+  - **No calculations**: Interpret provided statistics as definitive facts
+  - **APA Numerical Precision**: Follow APA 7th edition rounding standards:
+    * Round correlations, means, and standard deviations to 2-3 decimal places (e.g., r = 0.84, M = 2.15)
+    * Round percentages to whole numbers or 1 decimal place (e.g., 85% or 84.3%)
+    * Round p-values to 2-3 decimal places (e.g., p = 0.03 or p < 0.001)
+    * Use consistent precision throughout the report - don't mix 0.74 and 0.735 for the same metric
+  - **Acceptable Rounding Variations**: Minor precision differences (0.74 vs 0.735) are acceptable and should not be flagged as errors
+  - **Data Interpretation Process**: Use the exact numerical values from the statistical data to inform your qualitative descriptions and determine effect sizes
+  - **Transparency**: State analytical approach clearly (descriptive vs. inferential)  
+  - **Appropriate conclusions**: Draw strongest evidence-based conclusions possible while avoiding grandiose or unsubstantiated claims
+  - **Uncertainty acknowledgment**: Note limitations while maximizing insights
+  - **Academic Tone**: Use measured, evidence-based language rather than superlatives or overstated claims
 
   ### Framework-Centric Analysis
   - **Theoretical Grounding**: Connect statistical patterns to framework's intellectual foundations
@@ -114,11 +183,27 @@ template: |
   - **Validation Assessment**: Evaluate whether the framework behaves as theorized
   - **Extension Opportunities**: Identify where the framework could be enhanced or applied differently
 
+  ### Framework Agnosticism Standards
+  - **Dynamic adaptation**: Work with any framework's dimensional structure
+  - **No assumptions**: Don't assume specific dimension names or relationships
+  - **Flexible analysis**: Adapt analytical depth to available data richness
+  - **Universal patterns**: Look for insights applicable across frameworks
+  - **Accurate terminology**: Use the exact framework terminology from the specification (e.g., if framework calls them "axes" don't call them "dimensions")
+  - **Structure fidelity**: Describe framework structure exactly as defined (e.g., "Identity Axis: Tribalism/Dignity" not "Identity dimension")
+  - **Avoid hallucination**: Never invent framework elements not present in the specification
+
   ### Insight Generation Principles
   - **Beyond Confirmation**: Look for patterns that extend beyond hypothesis testing
   - **Framework Innovation**: Consider how findings might refine or advance the framework
   - **Emergent Patterns**: Identify insights that extend beyond stated objectives
   - **Field Advancement**: Assess broader implications for computational social science
+
+  ### Academic Quality Standards
+  - **Publication-ready**: Suitable for peer-reviewed journal submission
+  - **Methodological rigor**: Clear methodology and limitation acknowledgment
+  - **Theoretical grounding**: Connect to relevant academic literature when possible
+  - **Reproducible insights**: Clear connection from data through analysis to conclusions
+  - **Cautious Tone & Claim Strength**: Maintain a neutral, objective, and academic tone. Avoid promotional language, superlatives, and grandiose claims (e.g., "powerful," "profound," "demonstrates conclusively," "validates the framework"). All claims must be proportional to the evidence. Given the small sample size of this pilot study (N=4), all findings should be presented as "preliminary," "suggestive," or "indicative" rather than "validated" or "proven." State findings factually and let the data speak for itself.
 
   ## OUTPUT REQUIREMENTS
   
@@ -127,8 +212,19 @@ template: |
   **Empirical Foundation**: Position findings as data-driven discoveries that support evidence-based conclusions
   **Framework Assessment**: Reveal the framework's performance and potential through systematic evaluation
 
-  **Target Length**: 2500-4000 words for comprehensive analysis
+  **Target Length**: 3000-5000 words for comprehensive analysis
   **Tone**: Neutral, factual, and academic following established scholarly conventions
   **Statistical Precision**: Follow APA 7th edition rounding standards - correlations/means/SDs to 2-3 decimal places (r = 0.84, M = 2.15), percentages to whole numbers or 1 decimal (85% or 84.3%), p-values to 2-3 decimals (p = 0.03 or p < 0.001). Use consistent precision throughout - minor rounding variations (0.74 vs 0.735) are acceptable
+
+  ## CRITICAL REQUIREMENTS
+
+  **CRITICAL REPORT REQUIREMENTS**:
+  - **Hypothesis Evaluation**: If the experiment contains hypotheses, Section 5.1 MUST be included and MUST address ALL hypotheses in sequence with CONFIRMED/FALSIFIED/INDETERMINATE outcomes
+  - **No Intermediate Artifacts**: Do NOT include internal processing steps (Step 1-4) in the final report - integrate insights into proper academic sections
+  - **Sequential Hypothesis Format**: Use format like "H₁ (Description): CONFIRMED. [Evidence and explanation]"
+
+  **Target Length**: 3000-5000 words for comprehensive analysis
+  **Writing Style**: Academic but accessible, suitable for computational social science journals
+  **Evidence Integration**: Seamless weaving of statistical evidence throughout
 
   This is Stage 1 - pure data-driven analysis that reveals the framework's performance and potential through systematic statistical evaluation. Evidence integration occurs in Stage 2.
