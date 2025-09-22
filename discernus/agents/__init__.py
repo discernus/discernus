@@ -10,7 +10,6 @@ THIN v2.0 compliant agents with minimal intelligence and LLM-driven processing.
 from .analysis_agent.v2_analysis_agent import V2AnalysisAgent
 from .statistical_agent.v2_statistical_agent import V2StatisticalAgent
 from .intelligent_evidence_retriever.intelligent_evidence_retriever_agent import IntelligentEvidenceRetrievalAgent
-from .unified_synthesis_agent.v2_unified_synthesis_agent import V2UnifiedSynthesisAgent
 from .validation_agent.v2_validation_agent import V2ValidationAgent
 
 # Legacy aliases for backward compatibility
@@ -22,7 +21,6 @@ __all__ = [
     "V2AnalysisAgent",
     "V2StatisticalAgent", 
     "IntelligentEvidenceRetrievalAgent",
-    "V2UnifiedSynthesisAgent",
     "V2ValidationAgent",
     # Legacy aliases
     "AnalysisAgent",

@@ -133,6 +133,8 @@ template: |
   6. **EXECUTE ALL FUNCTIONS** and return both functions and results
   7. Create grouping mappings based on the corpus manifest content provided
   8. All dictionary keys in return values must be strings, not tuples
+  9. **NO INTERACTIVE PLOTTING**: Do not use plt.show(), sns.heatmap(), or any interactive plotting functions
+  10. **NO CONSOLE OUTPUT**: Avoid print() statements that might interfere with execution environment
 
   **THIN ARCHITECTURE FOR METADATA:**
   - You have been provided with the COMPLETE corpus manifest content
@@ -248,6 +250,13 @@ template: |
 
   **EXECUTION REQUIREMENT:**
   After generating the functions, you MUST execute them using the provided analysis artifacts and return the actual results. This is a THIN approach where you do both the generation AND execution in a single step.
+  
+  **PLOTTING AND VISUALIZATION:**
+  - Instead of interactive plots, return plot data as dictionaries (e.g., x_values, y_values, labels)
+  - For correlation matrices, return the correlation values as arrays
+  - For scatter plots, return the data points as coordinate arrays
+  - Focus on statistical calculations and return numerical results
+  - Avoid matplotlib/seaborn display functions that require GUI interaction
 
   **STATISTICAL PRECISION STANDARDS:**
   Follow APA 7th edition rounding standards for all numerical output:
