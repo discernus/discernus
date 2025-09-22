@@ -144,12 +144,18 @@ class V2ValidationAgent(StandardAgent):
 
         inputs = {}
         
-        # Required metadata fields
-        required_metadata = ["framework_content", "corpus_manifest_content"]
-        for meta_field in required_metadata:
-            if meta_field not in run_context.metadata:
-                raise ValueError(f"RunContext metadata is missing required field: {meta_field}")
-            inputs[meta_field] = run_context.metadata[meta_field]
+        # THIN: Read framework and corpus files directly
+        try:
+            framework_path = Path(run_context.framework_path)
+            inputs['framework_content'] = framework_path.read_text(encoding='utf-8')
+        except Exception as e:
+            raise ValueError(f"Failed to read framework file {run_context.framework_path}: {e}")
+        
+        try:
+            corpus_path = Path(run_context.corpus_path)
+            inputs['corpus_manifest_content'] = corpus_path.read_text(encoding='utf-8')
+        except Exception as e:
+            raise ValueError(f"Failed to read corpus manifest {run_context.corpus_path}: {e}")
 
         # Load experiment content from the experiment directory
         # According to v10.0 spec, all files (experiment.md, framework, corpus) are in the same directory
