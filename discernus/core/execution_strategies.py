@@ -268,23 +268,32 @@ class FullExperimentStrategy(ExecutionStrategy):
                 artifacts.extend(evidence_result.artifacts)
                 run_context.update_phase("evidence")
 
-                # Load evidence retrieval results into RunContext for synthesis agent
-                evidence_artifact_hash = evidence_result.metadata.get("evidence_artifact_hash")
-                if evidence_artifact_hash:
+                # Load curated evidence artifacts into RunContext for synthesis agent
+                if evidence_result.artifacts:
                     try:
-                        evidence_content = storage.get_artifact(evidence_artifact_hash)
-                        evidence_data = json.loads(evidence_content.decode('utf-8'))
-                        run_context.evidence = evidence_data.get("evidence_results", [])
+                        # Store artifact hashes in RunContext for synthesis agent to access
+                        run_context.evidence_artifacts = evidence_result.artifacts
+                        
+                        # Also load the content for immediate access
+                        curated_evidence_list = []
+                        for artifact_hash in evidence_result.artifacts:
+                            evidence_content_bytes = storage.get_artifact(artifact_hash)
+                            if evidence_content_bytes:
+                                evidence_data = json.loads(evidence_content_bytes.decode('utf-8'))
+                                curated_evidence_list.append(evidence_data)
+                        
+                        run_context.evidence = curated_evidence_list
+                        
                         audit.log_agent_event("FullExperimentStrategy", "evidence_loaded", {
-                            "evidence_artifact_hash": evidence_artifact_hash,
-                            "evidence_findings": len(run_context.evidence)
+                            "evidence_artifacts_count": len(evidence_result.artifacts),
+                            "curated_evidence_loaded": len(curated_evidence_list)
                         })
                     except Exception as e:
                         audit.log_agent_event("FullExperimentStrategy", "evidence_load_error", {
                             "error": str(e),
-                            "evidence_artifact_hash": evidence_artifact_hash
+                            "evidence_artifacts": evidence_result.artifacts
                         })
-                        # Continue execution - evidence might come from other sources
+                        # Continue execution - synthesis agent will handle missing evidence gracefully
 
                 audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "evidence"})
             
@@ -867,23 +876,32 @@ class ResumeFromStatsStrategy(ExecutionStrategy):
                 artifacts.extend(evidence_result.artifacts)
                 run_context.update_phase("evidence")
 
-                # Load evidence retrieval results into RunContext for synthesis agent
-                evidence_artifact_hash = evidence_result.metadata.get("evidence_artifact_hash")
-                if evidence_artifact_hash:
+                # Load curated evidence artifacts into RunContext for synthesis agent
+                if evidence_result.artifacts:
                     try:
-                        evidence_content = storage.get_artifact(evidence_artifact_hash)
-                        evidence_data = json.loads(evidence_content.decode('utf-8'))
-                        run_context.evidence = evidence_data.get("evidence_results", [])
+                        # Store artifact hashes in RunContext for synthesis agent to access
+                        run_context.evidence_artifacts = evidence_result.artifacts
+                        
+                        # Also load the content for immediate access
+                        curated_evidence_list = []
+                        for artifact_hash in evidence_result.artifacts:
+                            evidence_content_bytes = storage.get_artifact(artifact_hash)
+                            if evidence_content_bytes:
+                                evidence_data = json.loads(evidence_content_bytes.decode('utf-8'))
+                                curated_evidence_list.append(evidence_data)
+                        
+                        run_context.evidence = curated_evidence_list
+                        
                         audit.log_agent_event("FullExperimentStrategy", "evidence_loaded", {
-                            "evidence_artifact_hash": evidence_artifact_hash,
-                            "evidence_findings": len(run_context.evidence)
+                            "evidence_artifacts_count": len(evidence_result.artifacts),
+                            "curated_evidence_loaded": len(curated_evidence_list)
                         })
                     except Exception as e:
                         audit.log_agent_event("FullExperimentStrategy", "evidence_load_error", {
                             "error": str(e),
-                            "evidence_artifact_hash": evidence_artifact_hash
+                            "evidence_artifacts": evidence_result.artifacts
                         })
-                        # Continue execution - evidence might come from other sources
+                        # Continue execution - synthesis agent will handle missing evidence gracefully
 
                 audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "evidence"})
             
