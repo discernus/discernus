@@ -232,8 +232,8 @@ class IntelligentEvidenceRetrievalAgent(StandardAgent):
             artifact_data = json.loads(artifact_bytes.decode('utf-8'))
             
             # Check if this is an evidence extraction step
-            step = artifact_data.get("step")
-            if step == "evidence_extraction":
+            step = artifact_data.get("step", "")
+            if "evidence_extraction" in step:
                 return True
             
             # Also check for evidence_extraction field (additional validation)
