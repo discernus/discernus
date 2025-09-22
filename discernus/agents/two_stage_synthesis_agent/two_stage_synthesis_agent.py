@@ -228,7 +228,7 @@ class TwoStageSynthesisAgent(StandardAgent):
             stage1_context = self._prepare_stage1_context(run_context)
             
             # Create the Stage 1 prompt with all necessary data
-            stage1_prompt = self._create_stage1_prompt(stage1_context)
+            stage1_prompt = self._create_stage1_prompt(stage1_context, run_context)
             
             # Execute Stage 1 analysis with Gemini Pro
             self.logger.info(f"Executing Stage 1 analysis with {self.stage1_model}")
@@ -433,11 +433,11 @@ synthesis_method: two_stage_with_evidence
             self.logger.error(f"Failed to prepare Stage 1 context: {e}")
             return {}
     
-    def _create_stage1_prompt(self, context: Dict[str, Any]) -> str:
+    def _create_stage1_prompt(self, context: Dict[str, Any], run_context: RunContext) -> str:
         """Create the complete Stage 1 prompt with all context data."""
         
         # Read statistical results directly from artifacts
-        statistical_summary = self._read_statistical_artifacts(context.get("run_context"))
+        statistical_summary = self._read_statistical_artifacts(run_context)
         
         # Create the complete prompt by combining template with context
         prompt = f"""{self.stage1_prompt}
