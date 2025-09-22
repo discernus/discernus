@@ -930,6 +930,30 @@ class ResumeFromAnalysisStrategy(ExecutionStrategy):
                 phases_completed.append("statistical")
                 artifacts.extend(statistical_result.artifacts)
                 run_context.update_phase("statistical")
+
+                # Load statistical analysis results into RunContext for synthesis agent
+                statistical_artifact_hash = None
+                for artifact in statistical_result.artifacts:
+                    if artifact.get("type") == "statistical_analysis":
+                        statistical_artifact_hash = artifact.get("metadata", {}).get("artifact_hash")
+                        break
+                
+                if statistical_artifact_hash:
+                    # THIN: Pass artifact hash, let synthesis agent read it directly
+                    run_context.statistical_artifacts = [statistical_artifact_hash]
+                    audit.log_agent_event("ResumeFromAnalysisStrategy", "statistical_artifacts_passed", {
+                        "statistical_artifact_hash": statistical_artifact_hash
+                    })
+                else:
+                    audit.log_agent_event("ResumeFromAnalysisStrategy", "no_statistical_artifacts", {})
+                    return ExperimentResult(
+                        success=False,
+                        phases_completed=phases_completed,
+                        artifacts=artifacts,
+                        metadata=metadata,
+                        error_message="No statistical analysis artifacts found"
+                    )
+
                 audit.log_agent_event("ResumeFromAnalysisStrategy", "phase_complete", {"phase": "statistical"})
             
             # Phase 2: Evidence retrieval
