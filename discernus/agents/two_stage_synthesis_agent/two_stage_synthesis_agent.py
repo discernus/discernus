@@ -289,8 +289,28 @@ class TwoStageSynthesisAgent(StandardAgent):
             curated_evidence = self._prepare_curated_evidence(run_context)
             
             if not curated_evidence:
-                self.logger.warning("No curated evidence found - returning Stage 1 report unchanged")
-                return stage1_report
+                self.logger.warning("No curated evidence found - generating Stage 2 report with explanatory note")
+                
+                # Create a Stage 2 report that explicitly states no evidence was integrated
+                timestamp = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')
+                no_evidence_report = f"""---
+agent: {self.agent_name}
+stage: stage2_no_evidence_integrated
+timestamp: {timestamp}
+model_used: {self.stage2_model}
+evidence_included: false
+synthesis_method: two_stage_fallback
+---
+
+# Research Synthesis Report
+
+**Note on Evidence Integration:** No curated evidence was provided for this synthesis run. The following analysis is the complete data-driven report from Stage 1. No textual evidence has been integrated into this version of the report.
+
+---
+
+{stage1_report}
+"""
+                return no_evidence_report
             
             # Create the Stage 2 prompt with Stage 1 report and evidence
             stage2_prompt = self._create_stage2_prompt(stage1_report, curated_evidence)
