@@ -488,8 +488,8 @@ Generate the Python code, execute it, and present both the code and results in a
                 }
             ]
             
-            # Truncate if too long to avoid prompt length issues
-            content = statistical_analysis_content[:2000] + "..." if len(statistical_analysis_content) > 2000 else statistical_analysis_content
+            # Pass full content to verification - let LLM handle length
+            content = statistical_analysis_content
             
             prompt = f"""You are a statistical methods reviewer. Your task is to evaluate the methodological soundness of a statistical analysis, especially concerning its limitations.
 
