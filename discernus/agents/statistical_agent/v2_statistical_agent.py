@@ -164,8 +164,10 @@ class V2StatisticalAgent(StandardAgent):
             try:
                 structured_data = json.loads(statistical_analysis_content)
                 statistical_results = structured_data.get("statistical_results", {})
+                self.logger.info(f"Successfully parsed statistical_results with {len(statistical_results)} keys")
             except (json.JSONDecodeError, KeyError) as e:
-                self.logger.warning(f"Could not parse structured response: {e}")
+                self.logger.error(f"Could not parse structured response: {e}")
+                self.logger.error(f"Raw content: {statistical_analysis_content[:500]}...")
                 # Fallback to storing raw content
                 statistical_results = {}
             
@@ -334,18 +336,14 @@ class V2StatisticalAgent(StandardAgent):
                         json_str = json_match.group(1)
                     else:
                         # Try to find JSON without code blocks - be more flexible
-                        json_match = re.search(r'\{.*\}', content, re.DOTALL)
+                        # Look for JSON that might have leading whitespace or newlines
+                        json_match = re.search(r'\s*\{.*\}', content, re.DOTALL)
                         if json_match:
                             json_str = json_match.group(0).strip()
                         else:
-                            # Try to find JSON that might start with whitespace
-                            json_match = re.search(r'\s*\{.*\}', content, re.DOTALL)
-                            if json_match:
-                                json_str = json_match.group(0).strip()
-                            else:
-                                # Fallback: return raw content
-                                self.logger.warning("Could not extract JSON from statistical analysis response")
-                                return content.strip()
+                            # Fallback: return raw content
+                            self.logger.warning("Could not extract JSON from statistical analysis response")
+                            return content.strip()
                     
                     # Debug: Log the extracted JSON string
                     self.logger.info(f"Extracted JSON string: {json_str[:200]}...")
@@ -360,7 +358,9 @@ class V2StatisticalAgent(StandardAgent):
                         json_str_fixed = json_str.replace('\n', ' ').replace('\r', ' ')
                         try:
                             structured_response = json.loads(json_str_fixed)
-                        except json.JSONDecodeError:
+                        except json.JSONDecodeError as second_error:
+                            self.logger.error(f"JSON parsing failed even after fixing: {second_error}")
+                            self.logger.error(f"Fixed JSON string: {json_str_fixed[:500]}...")
                             # Final fallback: return raw content
                             self.logger.warning("Could not parse JSON even after fixing, returning raw content")
                             return content.strip()
