@@ -491,11 +491,19 @@ Generate the Python code, execute it, and present both the code and results in a
             # Truncate if too long to avoid prompt length issues
             content = statistical_analysis_content[:2000] + "..." if len(statistical_analysis_content) > 2000 else statistical_analysis_content
             
-            prompt = f"""Evaluate if this statistical analysis is substantive and well-executed:
+            prompt = f"""You are a statistical methods reviewer. Your task is to evaluate the methodological soundness of a statistical analysis, especially concerning its limitations.
 
+Read the following statistical analysis report:
+
+--- ANALYSIS REPORT ---
 {content}
+--- END REPORT ---
 
-Call verify_statistical_analysis tool: does this appear to be a substantive statistical analysis with appropriate methodology?"""
+Now, evaluate the report based on two criteria:
+1.  **Methodological Soundness**: Is the statistical approach (e.g., descriptive statistics, correlations, t-tests) appropriate for the data described in the report?
+2.  **Acknowledgement of Limitations**: Does the report correctly identify and disclose its own limitations, particularly regarding small sample size (e.g., N=2) and the generalizability of its conclusions?
+
+Based on your evaluation, call the `verify_statistical_analysis` tool. The analysis is considered "verified" if it uses sound methods AND properly acknowledges its limitations."""
 
             self.audit.log_agent_event(self.agent_name, "step2_started", {
                 "batch_id": batch_id,
