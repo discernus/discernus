@@ -68,7 +68,36 @@ class IntelligentEvidenceRetrievalAgent(StandardAgent):
         self.FLASH_HIGH_CONFIDENCE_THRESHOLD = 400  # documents
         self.FLASH_SIZE_LIMIT = 3.0  # MB
         
-        self.logger.info(f"Initialized {self.agent_name}")
+        # Load externalized prompts
+        self.planning_prompt = self._load_prompt_template("planning_prompt.yaml")
+        self.curation_prompt = self._load_prompt_template("curation_prompt.yaml")
+        self.cached_curation_prompt = self._load_prompt_template("cached_curation_prompt.yaml")
+        
+        self.logger.info(f"Initialized {self.agent_name} with externalized prompts")
+
+    def _load_prompt_template(self, filename: str) -> str:
+        """Load a prompt template from the YAML file."""
+        try:
+            from pathlib import Path
+            import yaml
+            
+            prompt_path = Path(__file__).parent / filename
+            if not prompt_path.exists():
+                self.logger.error(f"Prompt template not found: {prompt_path}")
+                return f"ERROR: Prompt template {filename} not found"
+            
+            with open(prompt_path, 'r', encoding='utf-8') as f:
+                prompt_data = yaml.safe_load(f)
+            
+            if not isinstance(prompt_data, dict) or 'template' not in prompt_data:
+                self.logger.error(f"Invalid prompt template format in {filename}")
+                return f"ERROR: Invalid prompt template format in {filename}"
+            
+            return prompt_data['template']
+            
+        except Exception as e:
+            self.logger.error(f"Failed to load prompt template {filename}: {e}")
+            return f"ERROR: Failed to load prompt template {filename}: {str(e)}"
 
     def get_capabilities(self) -> List[str]:
         """Return the capabilities of this intelligent evidence retrieval agent."""
@@ -394,47 +423,20 @@ class IntelligentEvidenceRetrievalAgent(StandardAgent):
         evidence_details = self.get_evidence_artifact_details(run_context)
         total_quotes = sum(d['quote_count'] for d in evidence_details)
         
-        # Create comprehensive planning prompt
-        planning_prompt = f"""
-You are an expert evidence curation strategist for discourse analysis experiments.
-
-EXPERIMENT CONTEXT:
-- Framework: {run_context.metadata.get('framework_name', 'Unknown Framework')}
-- Corpus Size: {len(run_context.metadata.get('corpus_documents', []))} documents
-- Evidence Artifacts: {evidence_count} artifacts (~{evidence_size_mb:.3f}MB)
-- Total Available Quotes: {total_quotes}
-
-STATISTICAL RESULTS ANALYSIS:
-{json.dumps(run_context.statistical_results, indent=2, default=str)[:3000]}
-
-EVIDENCE INVENTORY:
-{json.dumps([{
-    'document_index': d['document_index'],
-    'quote_count': d['quote_count'],
-    'size_bytes': d['size_bytes']
-} for d in evidence_details], indent=2)}
-
-STRATEGIC PLANNING TASK:
-Generate an intelligent curation plan that maximizes evidence quality while optimizing cost and processing time.
-
-PLANNING GUIDELINES:
-1. SMALL CORPUS (≤400 docs, ≤3MB): Single comprehensive pass with Flash
-2. LARGE CORPUS (>400 docs, >3MB): Multi-iteration strategy with Pro + caching
-3. Focus iterations on distinct statistical patterns (correlations, outliers, trends)
-4. Target 50-200 high-quality quotes per iteration
-5. Ensure complete coverage of significant statistical findings
-6. Consider cross-document pattern analysis for complex findings
-
-STATISTICAL FOCUS AREAS TO CONSIDER:
-- Strong correlations and anti-correlations
-- Significant differences between groups/conditions
-- Outlier documents with extreme scores
-- Temporal or sequential patterns
-- Interaction effects between dimensions
-- Derived metrics validation needs
-
-Generate a plan that balances thoroughness with efficiency.
-"""
+        # Create comprehensive planning prompt using external template
+        planning_prompt = self.planning_prompt.format(
+            framework_name=run_context.metadata.get('framework_name', 'Unknown Framework'),
+            corpus_size=len(run_context.metadata.get('corpus_documents', [])),
+            evidence_count=evidence_count,
+            evidence_size_mb=f"{evidence_size_mb:.3f}",
+            total_quotes=total_quotes,
+            statistical_results=json.dumps(run_context.statistical_results, indent=2, default=str)[:3000],
+            evidence_inventory=json.dumps([{
+                'document_index': d['document_index'],
+                'quote_count': d['quote_count'],
+                'size_bytes': d['size_bytes']
+            } for d in evidence_details], indent=2)
+        )
 
         try:
             # Let Gemini Pro do all the strategic thinking - no fallback
@@ -586,16 +588,14 @@ Generate a plan that balances thoroughness with efficiency.
                 temperature=0.1
             )
             
-            # Parse curated quotes from response
-            curated_quotes = self._parse_curated_quotes(response, iteration)
-            
+            # Store raw LLM curation response (THIN: no parsing)
             evidence_count = cache_session["total_evidence_count"]
             evidence_chars = cache_session["total_evidence_chars"]
             
-            self.logger.info(f"Cached iteration completed: {len(curated_quotes)} quotes curated from {evidence_count} artifacts ({evidence_chars:,} chars)")
+            self.logger.info(f"Cached iteration completed: raw curation response from {evidence_count} artifacts ({evidence_chars:,} chars)")
             
             return {
-                "quotes": curated_quotes,
+                "raw_curation_response": response,
                 "focus_area": iteration['focus_area'],
                 "iteration_name": iteration.get('iteration_name', iteration['focus_area']),
                 "evidence_processed": evidence_count,
@@ -609,7 +609,7 @@ Generate a plan that balances thoroughness with efficiency.
             
         except Exception as e:
             self.logger.error(f"Cached iteration failed: {e}")
-            return {"quotes": [], "focus_area": iteration['focus_area'], "error": str(e)}
+            return {"raw_curation_response": "", "focus_area": iteration['focus_area'], "error": str(e)}
 
     def execute_iteration_direct(self, run_context: RunContext, iteration: Dict[str, Any]) -> Dict[str, Any]:
         """
@@ -629,7 +629,7 @@ Generate a plan that balances thoroughness with efficiency.
         
         if not evidence_artifacts:
             self.logger.warning(f"No evidence artifacts found for iteration: {iteration['focus_area']}")
-            return {"quotes": [], "focus_area": iteration['focus_area'], "evidence_processed": 0}
+            return {"raw_curation_response": "", "focus_area": iteration['focus_area'], "evidence_processed": 0}
         
         # Create curation prompt for this iteration
         curation_prompt = self._create_curation_prompt(run_context, iteration, evidence_artifacts)
@@ -642,13 +642,11 @@ Generate a plan that balances thoroughness with efficiency.
                 temperature=0.1
             )
             
-            # Parse curated quotes from response
-            curated_quotes = self._parse_curated_quotes(response, iteration)
-            
-            self.logger.info(f"Direct iteration completed: {len(curated_quotes)} quotes curated from {len(evidence_artifacts)} artifacts")
+            # Store raw LLM curation response (THIN: no parsing)
+            self.logger.info(f"Direct iteration completed: raw curation response from {len(evidence_artifacts)} artifacts")
             
             return {
-                "quotes": curated_quotes,
+                "raw_curation_response": response,
                 "focus_area": iteration['focus_area'],
                 "iteration_name": iteration.get('iteration_name', iteration['focus_area']),
                 "evidence_processed": len(evidence_artifacts),
@@ -660,7 +658,7 @@ Generate a plan that balances thoroughness with efficiency.
             
         except Exception as e:
             self.logger.error(f"Direct iteration failed: {e}")
-            return {"quotes": [], "focus_area": iteration['focus_area'], "error": str(e)}
+            return {"raw_curation_response": "", "focus_area": iteration['focus_area'], "error": str(e)}
 
     def store_curated_artifact(self, results: Dict[str, Any], focus_area: str) -> str:
         """
@@ -767,108 +765,18 @@ Generate a plan that balances thoroughness with efficiency.
         if len(evidence_artifacts) > 10:
             evidence_content += f"\n[... and {len(evidence_artifacts) - 10} more documents ...]"
         
-        # Create comprehensive curation prompt
-        prompt = f"""
-You are an expert evidence curator for discourse analysis research.
-
-ITERATION FOCUS: {iteration['focus_area']}
-CURATION INSTRUCTIONS: {iteration.get('curation_instructions', 'Select the most compelling quotes that support the statistical findings.')}
-
-STATISTICAL TARGETS FOR THIS ITERATION:
-{json.dumps(iteration.get('statistical_targets', []), indent=2)}
-
-STATISTICAL CONTEXT:
-{statistical_context}
-
-EVIDENCE TO CURATE:
-{evidence_content}
-
-TASK: Select the {iteration.get('expected_quotes', 50)} most compelling quotes that:
-1. Directly support the statistical findings for this iteration's focus area
-2. Are clear, specific, and representative examples
-3. Demonstrate the patterns identified in the statistical analysis
-4. Provide strong evidence for the research conclusions
-
-OUTPUT FORMAT:
-For each selected quote, provide:
-- Document index
-- Exact quote text
-- Statistical relevance (which finding it supports)
-- Strength rating (1-5, where 5 is strongest evidence)
-
-Focus on quality over quantity. Select quotes that would convince a skeptical peer reviewer.
-"""
+        # Create comprehensive curation prompt using external template
+        prompt = self.curation_prompt.format(
+            focus_area=iteration['focus_area'],
+            curation_instructions=iteration.get('curation_instructions', 'Select the most compelling quotes that support the statistical findings.'),
+            statistical_targets=json.dumps(iteration.get('statistical_targets', []), indent=2),
+            statistical_context=statistical_context,
+            evidence_content=evidence_content,
+            expected_quotes=iteration.get('expected_quotes', 50)
+        )
         
         return prompt
 
-    def _parse_curated_quotes(self, response: str, iteration: Dict[str, Any]) -> List[Dict[str, Any]]:
-        """
-        Parse curated quotes from LLM response.
-        
-        Args:
-            response: LLM response containing curated quotes
-            iteration: Iteration configuration for context
-            
-        Returns:
-            List of parsed quote objects
-        """
-        quotes = []
-        
-        try:
-            # Simple parsing - look for structured patterns in the response
-            lines = response.split('\n')
-            current_quote = {}
-            
-            for line in lines:
-                line = line.strip()
-                if not line:
-                    continue
-                    
-                # Look for document index patterns
-                if line.startswith('Document') and ':' in line:
-                    if current_quote:
-                        quotes.append(current_quote)
-                    current_quote = {"document_index": line.split(':')[0].replace('Document', '').strip()}
-                
-                # Look for quote text patterns
-                elif line.startswith('"') and line.endswith('"'):
-                    current_quote["quote_text"] = line.strip('"')
-                
-                # Look for relevance patterns
-                elif 'relevance' in line.lower() or 'supports' in line.lower():
-                    current_quote["statistical_relevance"] = line
-                
-                # Look for strength ratings
-                elif 'strength' in line.lower() or 'rating' in line.lower():
-                    # Extract numeric rating
-                    import re
-                    rating_match = re.search(r'(\d+)', line)
-                    if rating_match:
-                        current_quote["strength_rating"] = int(rating_match.group(1))
-            
-            # Add final quote if exists
-            if current_quote:
-                quotes.append(current_quote)
-            
-            # Add iteration metadata to each quote
-            for quote in quotes:
-                quote["iteration_focus"] = iteration['focus_area']
-                quote["statistical_targets"] = iteration.get('statistical_targets', [])
-                quote["curation_timestamp"] = datetime.now(timezone.utc).isoformat()
-            
-            self.logger.info(f"Parsed {len(quotes)} quotes from curation response")
-            
-        except Exception as e:
-            self.logger.error(f"Failed to parse curated quotes: {e}")
-            # Return a basic structure if parsing fails
-            quotes = [{
-                "quote_text": "Parsing failed - raw response available",
-                "raw_response": response[:500],
-                "iteration_focus": iteration['focus_area'],
-                "error": str(e)
-            }]
-        
-        return quotes
 
     def _create_cached_curation_prompt(self, cache_session: Dict[str, Any], iteration: Dict[str, Any]) -> str:
         """
@@ -896,52 +804,19 @@ Focus on quality over quantity. Select quotes that would convince a skeptical pe
         total_chars = cache_session["total_evidence_chars"]
         total_count = cache_session["total_evidence_count"]
         
-        # Create comprehensive cached prompt
-        prompt = f"""
-You are an expert evidence curator for discourse analysis research with access to ALL evidence from this experiment.
-
-CACHED SESSION CONTEXT:
-- Total Evidence Artifacts: {total_count}
-- Total Evidence Characters: {total_chars:,}
-- Session Created: {cache_session.get('session_created', 'unknown')}
-
-CURRENT ITERATION FOCUS: {iteration['focus_area']}
-ITERATION NAME: {iteration.get('iteration_name', 'unnamed')}
-CURATION INSTRUCTIONS: {iteration.get('curation_instructions', 'Select the most compelling quotes that support the statistical findings.')}
-
-STATISTICAL TARGETS FOR THIS ITERATION:
-{json.dumps(iteration.get('statistical_targets', []), indent=2)}
-
-COMPLETE STATISTICAL CONTEXT:
-{statistical_context}
-
-ALL EVIDENCE ARTIFACTS:
-{evidence_content}
-
-ITERATION TASK: 
-You have access to ALL evidence from this experiment. Based on the strategic plan, select the {iteration.get('expected_quotes', 50)} most compelling quotes that:
-
-1. Directly support the statistical findings for this iteration's focus area: {iteration['focus_area']}
-2. Match the statistical targets: {', '.join(iteration.get('statistical_targets', []))}
-3. Are clear, specific, and representative examples from across ALL documents
-4. Demonstrate the patterns identified in the statistical analysis
-5. Provide the strongest possible evidence for the research conclusions
-
-Since you have access to ALL evidence, you can:
-- Cross-reference patterns across multiple documents
-- Select the absolute best quotes from the entire corpus
-- Identify complementary evidence that builds a strong case
-- Find outliers or exceptions that add nuance
-
-OUTPUT FORMAT:
-For each selected quote, provide:
-- Document index
-- Exact quote text  
-- Statistical relevance (which specific finding it supports)
-- Strength rating (1-5, where 5 is strongest evidence)
-- Cross-document context (if relevant)
-
-Focus on quality over quantity. Select quotes that would convince the most skeptical peer reviewer by leveraging your access to the complete evidence base.
-"""
+        # Create comprehensive cached prompt using external template
+        prompt = self.cached_curation_prompt.format(
+            total_count=total_count,
+            total_chars=f"{total_chars:,}",
+            session_created=cache_session.get('session_created', 'unknown'),
+            focus_area=iteration['focus_area'],
+            iteration_name=iteration.get('iteration_name', 'unnamed'),
+            curation_instructions=iteration.get('curation_instructions', 'Select the most compelling quotes that support the statistical findings.'),
+            statistical_targets=json.dumps(iteration.get('statistical_targets', []), indent=2),
+            statistical_context=statistical_context,
+            evidence_content=evidence_content,
+            expected_quotes=iteration.get('expected_quotes', 50),
+            statistical_targets_list=', '.join(iteration.get('statistical_targets', []))
+        )
         
         return prompt

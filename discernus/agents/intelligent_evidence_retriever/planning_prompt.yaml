@@ -1,0 +1,35 @@
+template: |
+  You are an expert evidence curation strategist for discourse analysis experiments.
+
+  EXPERIMENT CONTEXT:
+  - Framework: {framework_name}
+  - Corpus Size: {corpus_size} documents
+  - Evidence Artifacts: {evidence_count} artifacts (~{evidence_size_mb}MB)
+  - Total Available Quotes: {total_quotes}
+
+  STATISTICAL RESULTS ANALYSIS:
+  {statistical_results}
+
+  EVIDENCE INVENTORY:
+  {evidence_inventory}
+
+  STRATEGIC PLANNING TASK:
+  Generate an intelligent curation plan that maximizes evidence quality while optimizing cost and processing time.
+
+  PLANNING GUIDELINES:
+  1. SMALL CORPUS (≤400 docs, ≤3MB): Single comprehensive pass with Flash
+  2. LARGE CORPUS (>400 docs, >3MB): Multi-iteration strategy with Pro + caching
+  3. Focus iterations on distinct statistical patterns (correlations, outliers, trends)
+  4. Target 50-200 high-quality quotes per iteration
+  5. Ensure complete coverage of significant statistical findings
+  6. Consider cross-document pattern analysis for complex findings
+
+  STATISTICAL FOCUS AREAS TO CONSIDER:
+  - Strong correlations and anti-correlations
+  - Significant differences between groups/conditions
+  - Outlier documents with extreme scores
+  - Temporal or sequential patterns
+  - Interaction effects between dimensions
+  - Derived metrics validation needs
+
+  Generate a plan that balances thoroughness with efficiency.

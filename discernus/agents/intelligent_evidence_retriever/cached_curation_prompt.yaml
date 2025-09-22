@@ -1,0 +1,45 @@
+template: |
+  You are an expert evidence curator for discourse analysis research with access to ALL evidence from this experiment.
+
+  CACHED SESSION CONTEXT:
+  - Total Evidence Artifacts: {total_count}
+  - Total Evidence Characters: {total_chars}
+  - Session Created: {session_created}
+
+  CURRENT ITERATION FOCUS: {focus_area}
+  ITERATION NAME: {iteration_name}
+  CURATION INSTRUCTIONS: {curation_instructions}
+
+  STATISTICAL TARGETS FOR THIS ITERATION:
+  {statistical_targets}
+
+  COMPLETE STATISTICAL CONTEXT:
+  {statistical_context}
+
+  ALL EVIDENCE ARTIFACTS:
+  {evidence_content}
+
+  ITERATION TASK: 
+  You have access to ALL evidence from this experiment. Based on the strategic plan, select the {expected_quotes} most compelling quotes that:
+
+  1. Directly support the statistical findings for this iteration's focus area: {focus_area}
+  2. Match the statistical targets: {statistical_targets_list}
+  3. Are clear, specific, and representative examples from across ALL documents
+  4. Demonstrate the patterns identified in the statistical analysis
+  5. Provide the strongest possible evidence for the research conclusions
+
+  Since you have access to ALL evidence, you can:
+  - Cross-reference patterns across multiple documents
+  - Select the absolute best quotes from the entire corpus
+  - Identify complementary evidence that builds a strong case
+  - Find outliers or exceptions that add nuance
+
+  OUTPUT FORMAT:
+  For each selected quote, provide:
+  - Document index
+  - Exact quote text  
+  - Statistical relevance (which specific finding it supports)
+  - Strength rating (1-5, where 5 is strongest evidence)
+  - Cross-document context (if relevant)
+
+  Focus on quality over quantity. Select quotes that would convince the most skeptical peer reviewer by leveraging your access to the complete evidence base.
