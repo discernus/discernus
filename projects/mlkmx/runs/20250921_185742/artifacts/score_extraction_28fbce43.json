@@ -1,8 +1,0 @@
-{
-  "analysis_id": "analysis_v2_analysis_20250921_145807_1",
-  "step": "score_extraction",
-  "model_used": "vertex_ai/gemini-2.5-pro",
-  "score_extraction": "```json\n{\n  \"tribal_dominance\": 0.0,\n  \"individual_dignity\": 1.0,\n  \"fear\": 0.9,\n  \"hope\": 1.0,\n  \"envy\": 0.1,\n  \"compersion\": 0.8,\n  \"enmity\": 0.7,\n  \"amity\": 1.0,\n  \"fragmentative_goals\": 0.7,\n  \"cohesive_goals\": 1.0\n}\n```",
-  "document_index": 1,
-  "timestamp": "2025-09-21T19:00:38.049101+00:00"
-}

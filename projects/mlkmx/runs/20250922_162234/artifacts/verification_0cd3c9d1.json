@@ -1,0 +1,10 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250922_122305_1",
+  "step": "verification",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "verification_status": "verification_error",
+  "verified": false,
+  "reasoning": "Computation code was not provided, therefore verification of mathematical calculations is not possible.",
+  "document_index": 1,
+  "timestamp": "2025-09-22T16:28:37.104453+00:00"
+}

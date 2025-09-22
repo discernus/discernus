@@ -1,0 +1,10 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250922_113252_0",
+  "step": "verification",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "verification_status": "verification_error",
+  "verified": false,
+  "reasoning": "The provided `computation_code` is incomplete and cannot be fully re-executed to verify the derived metrics. The function `calculate_derived_metrics` explicitly returns `document_data['derived_metrics']`, thereby bypassing its internal calculations. Furthermore, the essential `document_data['dimensional_scores']` (containing raw scores and salience for each dimension) is missing, which is critical for computing metrics such as tension and salience totals. Lastly, for cohesion components and indices, the code explicitly retrieves these values using `scores.get()` or hardcoded defaults, indicating their derivation logic is not present in the provided code.",
+  "document_index": 0,
+  "timestamp": "2025-09-22T15:36:41.044840+00:00"
+}

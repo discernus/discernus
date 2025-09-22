@@ -1,8 +1,0 @@
-{
-  "analysis_id": "analysis_v2_analysis_20250921_162659_1",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-pro",
-  "evidence_extraction": "```json\n[\n  \"[INDIVIDUAL_DIGNITY: \\\"Any law that uplifts human personality is just. Any law that degrades human personality is unjust.\\\"]\",\n  \"[HOPE: \\\"Let us all hope that the dark clouds of racial prejudice will soon pass away and the deep fog of misunderstanding will be lifted from our fear drenched communities, and in some not too distant tomorrow the radiant stars of love and brotherhood will shine over our great nation with all their scintillating beauty\\\"].\",\n  \"[FEAR: \\\"We have waited for more than 340 years for our constitutional and God given rights\\\"].\",\n  \"[AMITY: \\\"We are caught in an inescapable network of mutuality, tied in a single garment of destiny\\\"].\",\n  \"[COHESIVE_GOALS: \\\"Now is the time to make real the promise of democracy and transform our pending national elegy into a creative psalm of brotherhood\\\"].\"\n]\n```",
-  "document_index": 1,
-  "timestamp": "2025-09-21T20:29:50.501274+00:00"
-}

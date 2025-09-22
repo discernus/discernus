@@ -1,0 +1,136 @@
+{
+  "2c4d27cf5fea0335a54980828e70517561ff8cb54be68e14df0248317af2feea": {
+    "artifact_path": "score_extraction_2c4d27cf.json",
+    "created_at": "2025-09-22T16:35:41.928430+00:00",
+    "human_filename": "score_extraction_2c4d27cf.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 1
+    },
+    "size_bytes": 1258,
+    "source_run": "20250922_162857"
+  },
+  "2e9a5cfb6a8bd05983779e9793560c0acb8489f8667344210c70e2d7b31eec8f": {
+    "artifact_path": "verification_2e9a5cfb.json",
+    "created_at": "2025-09-22T16:33:03.421073+00:00",
+    "human_filename": "verification_2e9a5cfb.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "verification",
+      "document_index": 0
+    },
+    "size_bytes": 1954,
+    "source_run": "20250922_162857"
+  },
+  "40f808d2acd122e83e87bdb86604669c004670891fd1b452d5271ffe3280a7a6": {
+    "artifact_path": "score_extraction_40f808d2.json",
+    "created_at": "2025-09-22T16:32:30.465003+00:00",
+    "human_filename": "score_extraction_40f808d2.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 0
+    },
+    "size_bytes": 1258,
+    "source_run": "20250922_162857"
+  },
+  "45d52fd855a7cb34f71e38fd77bdcc2bf2fc77c9c784945425cac26dafe79e7d": {
+    "artifact_path": "validation_report_45d52fd8.json",
+    "created_at": "2025-09-22T16:29:44.913508+00:00",
+    "human_filename": "validation_report_45d52fd8.json",
+    "is_directory": false,
+    "metadata": {
+      "agent": "V2ValidationAgent",
+      "artifact_type": "validation_report",
+      "experiment_id": "mlkmx",
+      "timestamp": "2025-09-22T12:29:44.911878"
+    },
+    "size_bytes": 2280,
+    "source_run": "20250922_162857"
+  },
+  "507b54759d1c8a8d046f46232dde5c8a2f04905ccb1eb34cdf45e259b9d7fa3c": {
+    "artifact_path": "composite_analysis_507b5475.json",
+    "created_at": "2025-09-22T16:35:14.490111+00:00",
+    "human_filename": "composite_analysis_507b5475.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 1
+    },
+    "size_bytes": 51643,
+    "source_run": "20250922_162857"
+  },
+  "51392c1b93b58a59fb489ff76c394a034c4a4abc39a0fae9a85f7e25172bc49a": {
+    "artifact_path": "evidence_extraction_51392c1b.json",
+    "created_at": "2025-09-22T16:32:28.608350+00:00",
+    "human_filename": "evidence_extraction_51392c1b.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 0
+    },
+    "size_bytes": 4521,
+    "source_run": "20250922_162857"
+  },
+  "81cc3ea031b892783b1ce9fe92dc64381722855d9aeaacaf45aa5e7eeda87f12": {
+    "artifact_path": "evidence_extraction_81cc3ea0.json",
+    "created_at": "2025-09-22T16:35:39.847415+00:00",
+    "human_filename": "evidence_extraction_81cc3ea0.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 1
+    },
+    "size_bytes": 5864,
+    "source_run": "20250922_162857"
+  },
+  "a4f6513ddeb87f6e60cff1133c0928b83e2ae9262fb27beb321dac30b0380964": {
+    "artifact_path": "derived_metrics_a4f6513d.json",
+    "created_at": "2025-09-22T16:35:43.710665+00:00",
+    "human_filename": "derived_metrics_a4f6513d.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "derived_metrics",
+      "document_index": 1
+    },
+    "size_bytes": 1268,
+    "source_run": "20250922_162857"
+  },
+  "add17818abd8fd767500e3da48d8ebdd7cc8d5378a6402583e9ae7ca353161b5": {
+    "artifact_path": "composite_analysis_add17818.json",
+    "created_at": "2025-09-22T16:32:09.371671+00:00",
+    "human_filename": "composite_analysis_add17818.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 0
+    },
+    "size_bytes": 49178,
+    "source_run": "20250922_162857"
+  },
+  "b3bae0befb0172c799030f19abfedd4686cd857e901266620fae16de53e2d087": {
+    "artifact_path": "derived_metrics_b3bae0be.json",
+    "created_at": "2025-09-22T16:32:39.215881+00:00",
+    "human_filename": "derived_metrics_b3bae0be.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "derived_metrics",
+      "document_index": 0
+    },
+    "size_bytes": 8593,
+    "source_run": "20250922_162857"
+  },
+  "ff8933e077c1c548967b2dd7a67a2a38317af394efcc68b42620e10437a243dc": {
+    "artifact_path": "verification_ff8933e0.json",
+    "created_at": "2025-09-22T16:35:45.222395+00:00",
+    "human_filename": "verification_ff8933e0.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "verification",
+      "document_index": 1
+    },
+    "size_bytes": 386,
+    "source_run": "20250922_162857"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250922_013928_12",
+  "step": "verification",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "verification_status": "verification_error",
+  "verified": false,
+  "reasoning": "The provided JSON object does not accurately reflect the results of executing the provided Python code. Upon re-executing the script, several discrepancies were found in the calculated values. For example, the calculated `identity_tension` is 0.18, whereas the JSON object lists 0.0. The `success_tension` is calculated to be 0.08, but is listed as 0.0 in the JSON. The `relational_tension` is 0.085, not 0.05. Consequently, the `strategic_contradiction_index` is also incorrect. The cohesion indices are also different; for instance, the calculated `descriptive_cohesion_index` is -0.077, while the provided JSON gives 0.083. Due to these multiple mathematical inconsistencies, the results are not verified.",
+  "document_index": 12,
+  "timestamp": "2025-09-22T06:04:19.001525+00:00"
+}

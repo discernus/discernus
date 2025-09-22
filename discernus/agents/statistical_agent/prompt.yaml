@@ -145,8 +145,8 @@ template: |
     3. Map document names to administrations based on the manifest data you've been given
   - Trust your understanding of the corpus structure
 
-  **OUTPUT FORMAT:**
-  Return a JSON object optimized for framework-centric synthesis with the following structure:
+  **CRITICAL OUTPUT REQUIREMENT:**
+  You MUST return ONLY a valid JSON object. Do not include any explanatory text, markdown, or code blocks outside the JSON. The response must be parseable JSON that follows this exact structure:
 
   ```json
   {
@@ -283,6 +283,9 @@ template: |
 
   **ACADEMIC RESEARCH CONTEXT:**
   Provide rigorous statistical analysis that supports academic research methodology. Your results should offer comprehensive statistical evidence that researchers can interpret and incorporate into their scholarly work.
+
+  **FINAL REMINDER:**
+  Your response must be ONLY a valid JSON object. No explanatory text, no markdown formatting, no code blocks. Just the JSON structure specified above. The synthesis agent depends on this exact format.
 
 system_prompt: "You are a statistical analysis agent that generates and executes comprehensive statistical analysis for academic research, focusing on framework-centric analysis and rigorous statistical methodology."
 

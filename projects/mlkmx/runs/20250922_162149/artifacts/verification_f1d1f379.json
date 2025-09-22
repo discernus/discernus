@@ -1,0 +1,10 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250922_122239_1",
+  "step": "verification",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "verification_status": "verification_error",
+  "verified": false,
+  "reasoning": "The provided `computation_code` is a placeholder and does not contain actual executable code. Therefore, re-execution and verification of the calculations are not possible.",
+  "document_index": 1,
+  "timestamp": "2025-09-22T16:28:37.536407+00:00"
+}

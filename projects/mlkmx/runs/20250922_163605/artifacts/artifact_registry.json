@@ -1,0 +1,76 @@
+{
+  "21ad93746d34ca3f7167c5df616443c6497da84be5b2004d181a6d2a694074f4": {
+    "artifact_path": "composite_analysis_21ad9374.json",
+    "created_at": "2025-09-22T16:39:18.127636+00:00",
+    "human_filename": "composite_analysis_21ad9374.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 0
+    },
+    "size_bytes": 47860,
+    "source_run": "20250922_163605"
+  },
+  "244b8330efd643f8ee7079863a1a9d7914e387498603aefa76b349f9c99a732a": {
+    "artifact_path": "derived_metrics_244b8330.json",
+    "created_at": "2025-09-22T16:39:50.683986+00:00",
+    "human_filename": "derived_metrics_244b8330.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "derived_metrics",
+      "document_index": 0
+    },
+    "size_bytes": 12083,
+    "source_run": "20250922_163605"
+  },
+  "9c1b60d792a26b5b1c6013ff1ca0ff12d4f68cbf01e90d38b3ff4c2b3ddd167d": {
+    "artifact_path": "score_extraction_9c1b60d7.json",
+    "created_at": "2025-09-22T16:39:38.443864+00:00",
+    "human_filename": "score_extraction_9c1b60d7.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 0
+    },
+    "size_bytes": 1258,
+    "source_run": "20250922_163605"
+  },
+  "b9094ebf58e54dedc6e775e0621562e91dfb180df68f46aab9c3c32210d3ab84": {
+    "artifact_path": "validation_report_b9094ebf.json",
+    "created_at": "2025-09-22T16:36:48.733703+00:00",
+    "human_filename": "validation_report_b9094ebf.json",
+    "is_directory": false,
+    "metadata": {
+      "agent": "V2ValidationAgent",
+      "artifact_type": "validation_report",
+      "experiment_id": "mlkmx",
+      "timestamp": "2025-09-22T12:36:48.732585"
+    },
+    "size_bytes": 1461,
+    "source_run": "20250922_163605"
+  },
+  "ce8d12260738ed8b684b00e3abdfa3a18f24901603eef1c0614122801b52e025": {
+    "artifact_path": "evidence_extraction_ce8d1226.json",
+    "created_at": "2025-09-22T16:39:34.893391+00:00",
+    "human_filename": "evidence_extraction_ce8d1226.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 0
+    },
+    "size_bytes": 3219,
+    "source_run": "20250922_163605"
+  },
+  "eeb22e4143e5fc98380c320893b44661d6a84546edae6313fb2206dbba584b6d": {
+    "artifact_path": "verification_eeb22e41.json",
+    "created_at": "2025-09-22T16:39:55.393888+00:00",
+    "human_filename": "verification_eeb22e41.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "verification",
+      "document_index": 0
+    },
+    "size_bytes": 1052,
+    "source_run": "20250922_163605"
+  }
+}

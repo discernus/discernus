@@ -15,6 +15,7 @@ THIN Principles:
 
 import json
 import logging
+import yaml
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, List, Optional
@@ -57,6 +58,19 @@ class V2StatisticalAgent(StandardAgent):
         self.gateway = EnhancedLLMGateway(get_model_registry())
         
         self.logger.info(f"Initialized {self.agent_name}")
+    
+    def _load_prompt_template(self) -> str:
+        """Load the statistical analysis prompt template from YAML file."""
+        prompt_path = Path(__file__).parent / "prompt.yaml"
+        if not prompt_path.exists():
+            error_msg = f"StatisticalAgent prompt file not found at {prompt_path}"
+            self.audit.log_agent_event(self.agent_name, "prompt_error", {"error": error_msg})
+            raise FileNotFoundError(error_msg)
+        
+        with open(prompt_path, 'r') as f:
+            yaml_content = f.read()
+        prompt_data = yaml.safe_load(yaml_content)
+        return prompt_data['template']
     
     def get_capabilities(self) -> Dict[str, Any]:
         """
@@ -147,12 +161,25 @@ class V2StatisticalAgent(StandardAgent):
                     error_message="Statistical analysis failed"
                 )
             
-            # Store Step 1 artifact
+            # Parse the structured response to extract execution_results and statistical_functions
+            try:
+                structured_data = json.loads(statistical_analysis_content)
+                execution_results = structured_data.get("execution_results", {})
+                statistical_functions = structured_data.get("statistical_functions", "")
+            except (json.JSONDecodeError, KeyError) as e:
+                self.logger.warning(f"Could not parse structured response: {e}")
+                # Fallback to storing raw content
+                execution_results = {}
+                statistical_functions = statistical_analysis_content
+            
+            # Store Step 1 artifact in format expected by synthesis agent
             statistical_artifact_data = {
                 "analysis_id": f"stats_{batch_id}",
                 "step": "statistical_analysis",
                 "model_used": "vertex_ai/gemini-2.5-pro",
-                "statistical_analysis_content": statistical_analysis_content,
+                "execution_results": execution_results,
+                "statistical_functions": statistical_functions,
+                "statistical_analysis_content": statistical_analysis_content,  # Keep raw content for debugging
                 "documents_processed": len(raw_artifacts),
                 "timestamp": datetime.now(timezone.utc).isoformat()
             }
@@ -305,33 +332,21 @@ class V2StatisticalAgent(StandardAgent):
             Complete LLM response with Python code and results, or None if failed
         """
         try:
-            # Prepare statistical analysis prompt for Python code generation
-            prompt = f"""You are a statistical analysis expert. Generate and execute Python code to analyze the following analysis artifacts.
-
-FRAMEWORK CONTEXT:
-{framework_content}
-
-ANALYSIS ARTIFACTS:
-{json.dumps(raw_artifacts, indent=2)}
-
-TASK: 
-1. First, examine the raw analysis artifacts to understand what data is available
-2. Extract any dimensional scores, derived metrics, or other numerical data
-3. Write Python code to perform comprehensive statistical analysis including:
-   - Descriptive statistics for each available dimension/metric
-   - Correlation analysis between available dimensions/metrics
-   - Statistical significance testing where appropriate
-   - Summary of key findings
-
-REQUIREMENTS:
-- Use pandas, numpy, scipy.stats, and other standard libraries
-- Handle whatever data format is present in the artifacts
-- Write clear, well-commented Python code
-- Execute the code and show the results
-- Provide interpretations of the statistical findings
-- Include any relevant plots or visualizations
-
-Generate the Python code, execute it, and present both the code and results in a clear format that researchers can understand and audit."""
+            # Load the externalized prompt template
+            prompt_template = self._load_prompt_template()
+            self.logger.info(f"Loaded prompt template, length: {len(prompt_template)}")
+            
+            # Prepare the prompt with actual data
+            prompt = prompt_template.format(
+                framework_content=framework_content,
+                experiment_name="mlkmx",
+                experiment_description="MLK-MX Civil Rights Discourse Analysis",
+                research_questions="How do different rhetorical strategies in civil rights discourse manifest through the Cohesive Flourishing Framework dimensions?",
+                experiment_content=framework_content,  # Using framework as experiment content for now
+                data_columns="dimensional_scores, derived_metrics, evidence",
+                sample_data=json.dumps(raw_artifacts[:2], indent=2) if len(raw_artifacts) >= 2 else json.dumps(raw_artifacts, indent=2),
+                corpus_manifest="Two documents: Malcolm X 'The Ballot or the Bullet' and MLK 'Letter from Birmingham Jail'"
+            )
 
             self.audit.log_agent_event(self.agent_name, "step1_started", {
                 "batch_id": batch_id,
@@ -352,16 +367,66 @@ Generate the Python code, execute it, and present both the code and results in a
                 content = response.get('content', '')
                 metadata = response.get('metadata', {})
             
-            # Return the complete LLM response (Python code + results + explanations)
-            # No parsing - just store whatever the LLM produced
+            self.logger.info(f"LLM response length: {len(content)}")
+            self.logger.info(f"LLM response preview: {content[:200]}...")
+            
+            # Parse the LLM response to extract structured JSON format
             if content and content.strip():
-                self.audit.log_agent_event(self.agent_name, "step1_completed", {
-                    "batch_id": batch_id,
-                    "step": "statistical_analysis",
-                    "response_length": len(content)
-                })
-                
-                return content.strip()
+                try:
+                    # Try to extract JSON from the response
+                    # Look for JSON code blocks or direct JSON
+                    import re
+                    
+                    # First try to find JSON code blocks
+                    json_match = re.search(r'```json\s*(\{.*?\})\s*```', content, re.DOTALL)
+                    if json_match:
+                        json_str = json_match.group(1)
+                    else:
+                        # Try to find JSON without code blocks - be more flexible
+                        json_match = re.search(r'\{.*\}', content, re.DOTALL)
+                        if json_match:
+                            json_str = json_match.group(0).strip()
+                        else:
+                            # Try to find JSON that might start with whitespace
+                            json_match = re.search(r'\s*\{.*\}', content, re.DOTALL)
+                            if json_match:
+                                json_str = json_match.group(0).strip()
+                            else:
+                                # Fallback: return raw content
+                                self.logger.warning("Could not extract JSON from statistical analysis response")
+                                return content.strip()
+                    
+                    # Debug: Log the extracted JSON string
+                    self.logger.info(f"Extracted JSON string: {json_str[:200]}...")
+                    
+                    # Parse the JSON
+                    try:
+                        structured_response = json.loads(json_str)
+                    except json.JSONDecodeError as json_error:
+                        self.logger.error(f"JSON parsing failed: {json_error}")
+                        self.logger.error(f"JSON string: {json_str[:500]}...")
+                        # Try to fix common JSON issues
+                        json_str_fixed = json_str.replace('\n', ' ').replace('\r', ' ')
+                        try:
+                            structured_response = json.loads(json_str_fixed)
+                        except json.JSONDecodeError:
+                            # Final fallback: return raw content
+                            self.logger.warning("Could not parse JSON even after fixing, returning raw content")
+                            return content.strip()
+                    
+                    self.audit.log_agent_event(self.agent_name, "step1_completed", {
+                        "batch_id": batch_id,
+                        "step": "statistical_analysis",
+                        "response_length": len(content),
+                        "structured_format": True
+                    })
+                    
+                    return json.dumps(structured_response, indent=2)
+                    
+                except json.JSONDecodeError as e:
+                    self.logger.warning(f"Could not parse JSON from statistical analysis response: {e}")
+                    # Fallback: return raw content
+                    return content.strip()
             else:
                 self.logger.error("Statistical analysis returned empty response")
                 return None

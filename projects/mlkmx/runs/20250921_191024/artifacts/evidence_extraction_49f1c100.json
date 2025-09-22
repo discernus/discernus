@@ -1,8 +1,0 @@
-{
-  "analysis_id": "analysis_v2_analysis_20250921_151046_1",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-pro",
-  "evidence_extraction": "[\n  \"Injustice anywhere is a threat to justice everywhere. We are caught in an inescapable network of mutuality, tied in a single garment of destiny.\",\n  \"Let us all hope that the dark clouds of racial prejudice will soon pass away and the deep fog of misunderstanding will be lifted from our fear drenched communities, and in some not too distant tomorrow the radiant stars of love and brotherhood will shine over our great nation with all their scintillating beauty.\",\n  \"Was not Jesus an extremist for love: 'Love your enemies, bless them that curse you, do good to them that hate you, and pray for them which despitefully use you, and persecute you.'\",\n  \"There comes a time when the cup of endurance runs over, and men are no longer willing to be plunged into the abyss of despair.\",\n  \"The question is not whether we will be extremists, but what kind of extremists we will be. Will we be extremists for hate or for love? Will we be extremists for the preservation of injustice or for the extension of justice?\"\n]",
-  "document_index": 1,
-  "timestamp": "2025-09-21T19:13:55.233462+00:00"
-}

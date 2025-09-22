@@ -1,8 +1,0 @@
-{
-  "analysis_id": "analysis_v2_analysis_20250921_145650_1",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-pro",
-  "evidence_extraction": "[\n  \"Any law that uplifts human personality is just. Any law that degrades human personality is unjust.\",\n  \"We are caught in an inescapable network of mutuality, tied in a single garment of destiny.\",\n  \"when you have seen vicious mobs lynch your mothers and fathers at will and drown your sisters and brothers at whim; when you have seen hate filled policemen curse, kick and even kill your black brothers and sisters; when you see the vast majority of your twenty million Negro brothers smothering in an airtight cage of poverty in the midst of an affluent society\",\n  \"Nonviolent direct action seeks to create such a crisis and foster such a tension that a community which has constantly refused to negotiate is forced to confront the issue.\",\n  \"Let us all hope that the dark clouds of racial prejudice will soon pass away and the deep fog of misunderstanding will be lifted from our fear drenched communities, and in some not too distant tomorrow the radiant stars of love and brotherhood will shine over our great nation with all their scintillating beauty.\"\n]",
-  "document_index": 1,
-  "timestamp": "2025-09-21T18:59:01.828433+00:00"
-}

@@ -1,0 +1,10 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250922_013928_10",
+  "step": "verification",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "verification_status": "verification_error",
+  "verified": false,
+  "reasoning": "Verification failed. Re-executing the code yielded results that are not mathematically reasonable when compared to the provided JSON. For example, the calculated 'identity_tension' is 0.08, while the provided value is 0.0. The calculated 'strategic_contradiction_index' is 0.078, while the provided is 0.008. All other calculated metrics also showed significant discrepancies.",
+  "document_index": 10,
+  "timestamp": "2025-09-22T06:00:15.914002+00:00"
+}

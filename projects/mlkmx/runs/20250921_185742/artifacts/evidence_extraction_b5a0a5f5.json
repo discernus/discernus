@@ -1,8 +1,0 @@
-{
-  "analysis_id": "analysis_v2_analysis_20250921_145807_1",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-pro",
-  "evidence_extraction": "[\n  \"Any law that uplifts human personality is just. Any law that degrades human personality is unjust. All segregation statutes are unjust because segregation distorts the soul and damages the personality.\",\n  \"We are caught in an inescapable network of mutuality, tied in a single garment of destiny. Whatever affects one directly, affects all indirectly.\",\n  \"So the question is not whether we will be extremists, but what kind of extremists we will be. Will we be extremists for hate or for love?\",\n  \"Now is the time to make real the promise of democracy and transform our pending national elegy into a creative psalm of brotherhood.\",\n  \"Let us all hope that the dark clouds of racial prejudice will soon pass away and the deep fog of misunderstanding will be lifted from our fear drenched communities, and in some not too distant tomorrow the radiant stars of love and brotherhood will shine over our great nation with all their scintillating beauty.\"\n]",
-  "document_index": 1,
-  "timestamp": "2025-09-21T19:00:36.844667+00:00"
-}

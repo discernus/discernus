@@ -1,0 +1,10 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250922_013928_5",
+  "step": "verification",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "verification_status": "verification_error",
+  "verified": false,
+  "reasoning": "The re-executed code produces different results from the provided JSON object. For example, the calculated `identity_tension` is 0.18, whereas the provided JSON lists it as 0.0. Similarly, the calculated `emotional_tension` is 0.12, but the provided value is 0.096. The `strategic_contradiction_index` is calculated to be 0.09, which differs from the provided 0.0192. Finally, the `full_cohesion_index` is -0.44 when calculated, compared to the provided -0.14. Due to these significant discrepancies, the original calculations are considered incorrect.",
+  "document_index": 5,
+  "timestamp": "2025-09-22T05:52:30.360358+00:00"
+}

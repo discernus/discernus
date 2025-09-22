@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250922_122305_1",
+  "step": "derived_metrics",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "derived_metrics_extraction": "```json\n{\n  \"derived_metrics\": {\n    \"identity_tension\": 0.0,\n    \"emotional_tension\": 0.08,\n    \"success_tension\": 0.0,\n    \"relational_tension\": 0.12,\n    \"goal_tension\": 0.0,\n    \"strategic_contradiction_index\": 0.04,\n    \"identity_cohesion_component\": 1.0,\n    \"emotional_cohesion_component\": 0.17,\n    \"success_cohesion_component\": 0.0,\n    \"relational_cohesion_component\": 0.52,\n    \"goal_cohesion_component\": 1.0,\n    \"descriptive_salience_total\": 3.6,\n    \"motivational_salience_total\": 4.8,\n    \"full_salience_total\": 6.0,\n    \"descriptive_cohesion_index\": 0.192,\n    \"motivational_cohesion_index\": 0.352,\n    \"full_cohesion_index\": 0.448\n  },\n  \"computation_code\": \"# Calculation code not provided in the original JSON.\"\n}\n```",
+  "document_index": 1,
+  "timestamp": "2025-09-22T16:28:35.646215+00:00"
+}

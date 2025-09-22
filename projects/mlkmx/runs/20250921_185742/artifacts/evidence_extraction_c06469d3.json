@@ -1,8 +1,0 @@
-{
-  "analysis_id": "analysis_v2_analysis_20250921_145807_0",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-pro",
-  "evidence_extraction": "```json\n[\n  \"The political philosophy of black nationalism only means that the black man should control the politics and the politicians in his own community.\",\n  \"Instead you have to take that government to the world court and accuse it of genocide and all of the other crimes that it is guilty of today.\",\n  \"And all of this has built up frustrations in the black community that makes the black community throughout America today more explosive than all of the atomic bombs the Russians can ever invent.\",\n  \"Anytime you have to rely upon your enemy for a job, you're in bad shape.\",\n  \"So I say in my conclusion, the only way we're going to solve it: we got to unite. We got to work together in unity and harmony. And black nationalism is the key.\"\n]\n```",
-  "document_index": 0,
-  "timestamp": "2025-09-21T18:59:09.544336+00:00"
-}

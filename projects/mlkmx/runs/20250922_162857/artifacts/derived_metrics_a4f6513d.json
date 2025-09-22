@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250922_122944_1",
+  "step": "derived_metrics",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "derived_metrics_extraction": "```json\n{\n  \"derived_metrics\": {\n    \"identity_tension\": 0.07,\n    \"emotional_tension\": 0.15,\n    \"success_tension\": 0.0,\n    \"relational_tension\": 0.12,\n    \"goal_tension\": 0.07,\n    \"strategic_contradiction_index\": 0.082,\n    \"emotional_cohesion_component\": 0.51,\n    \"success_cohesion_component\": -0.01,\n    \"relational_cohesion_component\": 0.39,\n    \"goal_cohesion_component\": 0.79,\n    \"identity_cohesion_component\": 0.79,\n    \"descriptive_salience_total\": 3.3,\n    \"motivational_salience_total\": 4.4,\n    \"full_salience_total\": 5.5,\n    \"descriptive_cohesion_index\": 0.27,\n    \"motivational_cohesion_index\": 0.382,\n    \"full_cohesion_index\": 0.449\n  },\n  \"computation_code\": \"# This section is not available in the provided JSON. \\n# The analysis_metadata indicates that derived_metrics_calculated is true, \\n# but the actual computation code is not included in the JSON payload.\\n# Please provide the computation_code if it is available.\"\n}\n```",
+  "document_index": 1,
+  "timestamp": "2025-09-22T16:35:43.708941+00:00"
+}

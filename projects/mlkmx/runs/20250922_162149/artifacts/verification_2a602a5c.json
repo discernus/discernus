@@ -1,0 +1,10 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250922_122239_0",
+  "step": "verification",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "verification_status": "verification_error",
+  "verified": false,
+  "reasoning": "The provided `computation_code` does not accurately reproduce the `derived_metrics`. Several explicit calculations for tension metrics and salience totals within the provided `computation_code` (e.g., `identity_tension`, `emotional_tension`, `success_tension`, `relational_tension`, `goal_tension`, `strategic_contradiction_index`, `descriptive_salience_total`, `motivational_salience_total`, `full_salience_total`) yield values that do not match the `derived_metrics` when re-executed using the provided raw scores. Furthermore, the `computation_code` itself contains incorrect self-verification comments regarding whether its proposed simple formulas \"hold true.\" For other metrics like cohesion components and cohesion indices, the `computation_code` explicitly states that it cannot reproduce them due to missing specific framework formulas. Due to these discrepancies and the acknowledged lack of exact formulas within the provided code, the calculations cannot be verified.",
+  "document_index": 0,
+  "timestamp": "2025-09-22T16:25:59.984701+00:00"
+}

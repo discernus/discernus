@@ -1,8 +1,0 @@
-{
-  "analysis_id": "analysis_v2_analysis_20250921_151852_1",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-pro",
-  "evidence_extraction": "```json\n[\n  \"Any law that uplifts human personality is just. Any law that degrades human personality is unjust.\",\n  \"Now is the time to make real the promise of democracy and transform our pending national elegy into a creative psalm of brotherhood. Now is the time to lift our national policy from the quicksand of racial injustice to the solid rock of human dignity.\",\n  \"We are caught in an inescapable network of mutuality, tied in a single garment of destiny. Whatever affects one directly, affects all indirectly.\",\n  \"When you have seen vicious mobs lynch your mothers and fathers at will and drown your sisters and brothers at whim; when you have seen hate filled policemen curse, kick and even kill your black brothers and sisters\",\n  \"My Dear Fellow Clergymen: ... But since I feel that you are men of genuine good will and that your criticisms are sincerely set forth, I want to try to answer your statement in what I hope will be patient and reasonable terms.\"\n]\n```",
-  "document_index": 1,
-  "timestamp": "2025-09-21T19:21:44.802488+00:00"
-}
