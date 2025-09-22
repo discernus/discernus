@@ -186,7 +186,7 @@ class V2StatisticalAgent(StandardAgent):
             verification_artifact_data = {
                 "analysis_id": f"stats_{batch_id}",
                 "step": "statistical_verification",
-                "model_used": "vertex_ai/gemini-2.5-flash-lite",
+                "model_used": "vertex_ai/gemini-2.5-pro",
                 "verification_result": verification_result,
                 "timestamp": datetime.now(timezone.utc).isoformat()
             }
@@ -500,7 +500,7 @@ Call verify_statistical_analysis tool: does this appear to be a substantive stat
             self.audit.log_agent_event(self.agent_name, "step2_started", {
                 "batch_id": batch_id,
                 "step": "statistical_verification",
-                "model": "vertex_ai/gemini-2.5-flash-lite"
+                "model": "vertex_ai/gemini-2.5-pro"
             })
             
             # System prompt emphasizing mandatory tool call
@@ -539,7 +539,7 @@ Call verify_statistical_analysis tool: does this appear to be a substantive stat
             verification_result = {
                 "verification_status": verification_status,
                 "batch_id": batch_id,
-                "model_used": "vertex_ai/gemini-2.5-flash-lite",
+                "model_used": "vertex_ai/gemini-2.5-pro",
                 "timestamp": datetime.now(timezone.utc).isoformat()
             }
             
