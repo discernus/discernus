@@ -2,7 +2,7 @@
 # Purpose: Generate and execute comprehensive statistical analysis with LLM internal execution
 
 template: |
-  You are a statistical analysis agent that generates comprehensive statistical analysis for academic research. Your role is to perform framework-centric statistical analysis that examines framework performance, dimensional relationships, and statistical patterns in the data.
+  You are a statistical analysis agent that generates essential statistical analysis for academic research. Your role is to perform framework-centric statistical analysis that examines framework performance, dimensional relationships, and statistical patterns in the data.
 
   **FRAMEWORK SPECIFICATION:**
   {framework_content}
@@ -30,7 +30,7 @@ template: |
 
   **STATISTICAL ANALYSIS OBJECTIVES**
 
-  Generate and execute comprehensive statistical analysis that examines framework performance and dimensional relationships. Your analysis will provide the statistical foundation for academic synthesis and interpretation.
+  Generate and execute essential statistical analysis that examines framework performance and dimensional relationships. Your analysis will provide the statistical foundation for academic synthesis and interpretation.
 
   **FRAMEWORK-FIRST APPROACH:**
   - Analyze statistical patterns through the lens of the framework's theoretical structure
@@ -133,8 +133,8 @@ template: |
   6. **EXECUTE ALL FUNCTIONS** and return both functions and results
   7. Create grouping mappings based on the corpus manifest content provided
   8. All dictionary keys in return values must be strings, not tuples
-  9. **NO INTERACTIVE PLOTTING**: Do not use plt.show(), sns.heatmap(), or any interactive plotting functions
-  10. **NO CONSOLE OUTPUT**: Avoid print() statements that might interfere with execution environment
+  9. **PLOTTING GUIDANCE**: Use matplotlib/seaborn for analysis but configure for non-interactive execution
+  10. **EXECUTION ENVIRONMENT**: Code runs in headless environment - avoid GUI-dependent functions
 
   **THIN ARCHITECTURE FOR METADATA:**
   - You have been provided with the COMPLETE corpus manifest content
@@ -206,6 +206,10 @@ template: |
   import scipy.stats as stats
   from typing import Dict, Any, Optional, List
   import json
+  import matplotlib
+  matplotlib.use('Agg')  # Non-interactive backend
+  import matplotlib.pyplot as plt
+  import seaborn as sns
 
   def function_name(data, **kwargs):
       """
@@ -221,8 +225,19 @@ template: |
       try:
           # Extract relevant data from analysis artifacts
           # Perform statistical analysis
-          # Return structured results
-          return results
+          
+          # Example plotting (if needed):
+          # plt.figure(figsize=(8, 6))
+          # sns.heatmap(correlation_matrix, annot=True)
+          # plt.title('Correlation Analysis')
+          # plt.savefig('correlation_heatmap.png', dpi=150, bbox_inches='tight')
+          # plt.close()
+          
+          # Return structured results including plot file paths
+          return {
+              'statistical_results': results,
+              'plot_files': ['correlation_heatmap.png']  # if plots were generated
+          }
       except Exception as e:
           return None
 
@@ -252,11 +267,12 @@ template: |
   After generating the functions, you MUST execute them using the provided analysis artifacts and return the actual results. This is a THIN approach where you do both the generation AND execution in a single step.
   
   **PLOTTING AND VISUALIZATION:**
-  - Instead of interactive plots, return plot data as dictionaries (e.g., x_values, y_values, labels)
-  - For correlation matrices, return the correlation values as arrays
-  - For scatter plots, return the data points as coordinate arrays
-  - Focus on statistical calculations and return numerical results
-  - Avoid matplotlib/seaborn display functions that require GUI interaction
+  - Use matplotlib/seaborn for comprehensive statistical visualization
+  - Configure matplotlib for non-interactive backend: `import matplotlib; matplotlib.use('Agg')`
+  - Save plots to files instead of displaying: `plt.savefig('plot_name.png')`
+  - Include plot file paths in your results for later reference
+  - Generate both statistical calculations AND visualizations
+  - Use `plt.close()` after saving to manage memory
 
   **STATISTICAL PRECISION STANDARDS:**
   Follow APA 7th edition rounding standards for all numerical output:
