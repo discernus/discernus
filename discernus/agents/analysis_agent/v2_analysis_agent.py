@@ -117,21 +117,21 @@ class V2AnalysisAgent(StandardAgent):
             AgentResult with analysis artifacts
         """
         try:
-            # Extract data from run context
-            framework_content = run_context.metadata.get("framework_content")
-            corpus_documents = run_context.metadata.get("corpus_documents", [])
+            # THIN: Read framework and corpus files directly
+            framework_content = self._read_framework_file(run_context.framework_path)
+            corpus_documents = self._read_corpus_documents(run_context.corpus_path)
 
             if not framework_content:
                 return AgentResult(
                     success=False,
-                    error_message="No framework content provided",
+                    error_message=f"Failed to read framework file: {run_context.framework_path}",
                     metadata={"agent_name": self.agent_name}
                 )
 
             if not corpus_documents:
                 return AgentResult(
                     success=False,
-                    error_message="No corpus documents provided", 
+                    error_message=f"Failed to read corpus documents from: {run_context.corpus_path}", 
                     metadata={"agent_name": self.agent_name}
                 )
 
@@ -907,4 +907,52 @@ Return the marked-up document in markdown format."""
             self.logger.error(f"Step 6 failed for document {doc_index}: {e}")
             return None
     
+    def _read_framework_file(self, framework_path: str) -> Optional[str]:
+        """Read framework content directly from file."""
+        try:
+            return Path(framework_path).read_text(encoding='utf-8')
+        except Exception as e:
+            self.logger.error(f"Failed to read framework file {framework_path}: {e}")
+            return None
+    
+    def _read_corpus_documents(self, corpus_path: str) -> List[Dict[str, str]]:
+        """Read corpus documents directly from manifest file."""
+        try:
+            import yaml
+            import re
+            
+            corpus_manifest_path = Path(corpus_path)
+            if not corpus_manifest_path.exists():
+                self.logger.error(f"Corpus manifest not found: {corpus_path}")
+                return []
+            
+            manifest_text = corpus_manifest_path.read_text(encoding='utf-8')
+            
+            # Extract YAML block from markdown
+            yaml_match = re.search(r"```yaml\n(.*?)```", manifest_text, re.DOTALL)
+            if not yaml_match:
+                yaml_content = manifest_text
+            else:
+                yaml_content = yaml_match.group(1)
+
+            manifest = yaml.safe_load(yaml_content)
+            
+            documents = []
+            corpus_dir = corpus_manifest_path.parent
+            
+            for doc_info in manifest.get('documents', []):
+                doc_path = corpus_dir / doc_info['filename']
+                if doc_path.exists():
+                    content = doc_path.read_text(encoding='utf-8')
+                    documents.append({
+                        "id": doc_info.get('document_id', doc_info['filename']),
+                        "content": content,
+                    })
+                else:
+                    self.logger.warning(f"Document file not found: {doc_path}")
+            
+            return documents
+        except Exception as e:
+            self.logger.error(f"Failed to read corpus documents from {corpus_path}: {e}")
+            return []
 

@@ -103,14 +103,14 @@ class V2StatisticalAgent(StandardAgent):
                     error_message="run_context is required"
                 )
             
-            # Extract data from RunContext
-            framework_content = run_context.metadata.get("framework_content")
+            # THIN: Read framework file directly
+            framework_content = self._read_framework_file(run_context.framework_path)
             if not framework_content:
                 return AgentResult(
                     success=False,
                     artifacts=[],
-                    metadata={"agent_name": self.agent_name, "error": "framework_content not found"},
-                    error_message="framework_content not found in RunContext"
+                    metadata={"agent_name": self.agent_name, "error": "failed to read framework file"},
+                    error_message=f"Failed to read framework file: {run_context.framework_path}"
                 )
             
             # Get analysis artifacts (list of artifact hashes)
@@ -563,3 +563,10 @@ Based on your evaluation, call the `verify_statistical_analysis` tool. The analy
             self.logger.error(f"Step 2 failed: {e}")
             return None
     
+    def _read_framework_file(self, framework_path: str) -> Optional[str]:
+        """Read framework content directly from file."""
+        try:
+            return Path(framework_path).read_text(encoding='utf-8')
+        except Exception as e:
+            self.logger.error(f"Failed to read framework file {framework_path}: {e}")
+            return None
