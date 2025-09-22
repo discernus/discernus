@@ -1,0 +1,32 @@
+{
+  "validation_success": true,
+  "issues": [
+    {
+      "category": "specification",
+      "description": "The default analysis prompt in `cff_v10_4.md` incorrectly instructs the LLM to provide a `derived_metrics` section in its output, while also stating these metrics are 'calculated automatically'. The system calculates derived metrics based on the framework's calculation specifications; the LLM's sole responsibility is to generate `dimensional_scores`.",
+      "impact": "This may cause confused LLM behavior, inefficient use of processing tokens, and potential conflicts if the LLM attempts to perform calculations. While the system's post-processing will likely overwrite any LLM-generated metrics, the prompt is inefficient and violates the separation of concerns between the LLM analyst and the system orchestrator.",
+      "fix": "Modify the `analysis_prompt` for the 'default' variant in `cff_v10_4.md`. Remove the 'MANDATORY OUTPUT REQUIREMENTS' section. The prompt should only instruct the LLM to generate the `dimensional_scores` object.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "cff_v10_4.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The framework `cff_v10_4.md` uses the top-level key `required_calculations` for its derived metrics section in the machine-readable appendix. The v10.0 framework specification designates this section should be named `derived_metrics`.",
+      "impact": "The system's orchestrator may fail to find and execute the derived metric calculations if it is strictly programmed to look for the `derived_metrics` key as specified in the v10.0 standard. This represents a compliance failure that could lead to incomplete results.",
+      "fix": "In the YAML appendix of `cff_v10_4.md`, rename the top-level key `required_calculations` to `derived_metrics` to comply with the v10.0 framework specification.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "cff_v10_4.md"
+      ]
+    }
+  ],
+  "suggestions": [],
+  "metadata": {
+    "agent": "V2ValidationAgent",
+    "timestamp": "2025-09-22T14:14:59.679405",
+    "experiment_id": "mlkmx",
+    "validation_type": "experiment_coherence"
+  }
+}

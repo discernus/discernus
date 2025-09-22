@@ -849,3 +849,146 @@ class ResumeFromStatsStrategy(ExecutionStrategy):
             return corpus_path.read_text(encoding='utf-8')
         except Exception as e:
             return None
+
+
+class ResumeFromAnalysisStrategy(ExecutionStrategy):
+    """
+    Resume from analysis artifacts - for continuing experiments after analysis.
+    
+    Phases:
+    1. Load analysis artifacts
+    2. Statistical analysis
+    3. Evidence retrieval
+    4. Synthesis
+    """
+    
+    def execute(self, 
+                agents: Dict[str, StandardAgent], 
+                run_context: RunContext,
+                storage: LocalArtifactStorage,
+                audit: AuditLogger) -> ExperimentResult:
+        """Execute resume from analysis artifacts pipeline"""
+        
+        start_time = datetime.now(timezone.utc)
+        phases_completed = []
+        artifacts = []
+        metadata = {}
+        
+        try:
+            # THIN PRINCIPLE: Orchestrator handles file I/O, not agents
+            framework_content = self._load_framework_content(Path(run_context.framework_path))
+            corpus_manifest_path = Path(run_context.corpus_path)
+            corpus_manifest_content = corpus_manifest_path.read_text(encoding='utf-8')
+
+            run_context.metadata["framework_content"] = framework_content
+            run_context.metadata["corpus_manifest_content"] = corpus_manifest_content
+
+            # Check if we have analysis artifacts
+            if not run_context.analysis_artifacts:
+                return ExperimentResult(
+                    success=False,
+                    phases_completed=phases_completed,
+                    artifacts=artifacts,
+                    metadata=metadata,
+                    error_message="No analysis artifacts found for resume"
+                )
+            
+            # Phase 1: Statistical analysis
+            if "Statistical" in agents:
+                audit.log_agent_event("ResumeFromAnalysisStrategy", "phase_start", {"phase": "statistical"})
+                # Show progress to user
+                try:
+                    from ..cli_console import rich_console
+                    if rich_console:
+                        rich_console.print_info("📈 Running statistical analysis...")
+                except ImportError:
+                    pass
+                statistical_result = agents["Statistical"].execute(run_context=run_context)
+                if not statistical_result.success:
+                    return ExperimentResult(
+                        success=False,
+                        phases_completed=phases_completed,
+                        artifacts=artifacts,
+                        metadata=metadata,
+                        error_message=f"Statistical analysis failed: {statistical_result.error_message}"
+                    )
+                phases_completed.append("statistical")
+                artifacts.extend(statistical_result.artifacts)
+                run_context.update_phase("statistical")
+                audit.log_agent_event("ResumeFromAnalysisStrategy", "phase_complete", {"phase": "statistical"})
+            
+            # Phase 2: Evidence retrieval
+            if "Evidence" in agents:
+                audit.log_agent_event("ResumeFromAnalysisStrategy", "phase_start", {"phase": "evidence"})
+                # Show progress to user
+                try:
+                    from ..cli_console import rich_console
+                    if rich_console:
+                        rich_console.print_info("🔍 Running evidence retrieval...")
+                except ImportError:
+                    pass
+                evidence_result = agents["Evidence"].execute(run_context=run_context)
+                if not evidence_result.success:
+                    return ExperimentResult(
+                        success=False,
+                        phases_completed=phases_completed,
+                        artifacts=artifacts,
+                        metadata=metadata,
+                        error_message=f"Evidence retrieval failed: {evidence_result.error_message}"
+                    )
+                phases_completed.append("evidence")
+                artifacts.extend(evidence_result.artifacts)
+                run_context.update_phase("evidence")
+                audit.log_agent_event("ResumeFromAnalysisStrategy", "phase_complete", {"phase": "evidence"})
+            
+            # Phase 3: Synthesis
+            if "Synthesis" in agents:
+                audit.log_agent_event("ResumeFromAnalysisStrategy", "phase_start", {"phase": "synthesis"})
+                # Show progress to user
+                try:
+                    from ..cli_console import rich_console
+                    if rich_console:
+                        rich_console.print_info("📝 Running synthesis...")
+                except ImportError:
+                    pass
+                synthesis_result = agents["Synthesis"].execute(run_context=run_context)
+                if not synthesis_result.success:
+                    return ExperimentResult(
+                        success=False,
+                        phases_completed=phases_completed,
+                        artifacts=artifacts,
+                        metadata=metadata,
+                        error_message=f"Synthesis failed: {synthesis_result.error_message}"
+                    )
+                phases_completed.append("synthesis")
+                artifacts.extend(synthesis_result.artifacts)
+                run_context.update_phase("synthesis")
+                audit.log_agent_event("ResumeFromAnalysisStrategy", "phase_complete", {"phase": "synthesis"})
+            
+            # Calculate execution time
+            end_time = datetime.now(timezone.utc)
+            execution_time = (end_time - start_time).total_seconds()
+            
+            return ExperimentResult(
+                success=True,
+                phases_completed=phases_completed,
+                artifacts=artifacts,
+                metadata=metadata,
+                execution_time_seconds=execution_time
+            )
+            
+        except Exception as e:
+            return ExperimentResult(
+                success=False,
+                phases_completed=phases_completed,
+                artifacts=artifacts,
+                metadata=metadata,
+                error_message=f"Strategy execution failed: {str(e)}"
+            )
+
+    def _load_framework_content(self, framework_path: Path) -> Optional[str]:
+        """Load framework content from file."""
+        try:
+            return framework_path.read_text(encoding='utf-8')
+        except Exception as e:
+            return None
