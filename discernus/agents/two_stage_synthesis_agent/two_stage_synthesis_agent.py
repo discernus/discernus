@@ -285,10 +285,10 @@ class TwoStageSynthesisAgent(StandardAgent):
         try:
             self.logger.info("Starting Stage 2: Evidence integration")
             
-            # Prepare curated evidence from the IntelligentEvidenceRetrievalAgent
-            curated_evidence = self._prepare_curated_evidence(run_context)
+            # Load raw evidence extraction artifacts for Stage 2 curation and integration
+            raw_evidence = self._load_raw_evidence_artifacts(run_context)
             
-            if not curated_evidence:
+            if not raw_evidence:
                 self.logger.warning("No curated evidence found - generating Stage 2 report with explanatory note")
                 
                 # Create a Stage 2 report that explicitly states no evidence was integrated
@@ -313,7 +313,7 @@ synthesis_method: two_stage_fallback
                 return no_evidence_report
             
             # Create the Stage 2 prompt with Stage 1 report and raw evidence (THIN: no parsing)
-            stage2_prompt = self._create_stage2_prompt(stage1_report, curated_evidence)
+            stage2_prompt = self._create_stage2_prompt(stage1_report, raw_evidence)
             
             # Execute Stage 2 integration with Gemini Flash
             self.logger.info(f"Executing Stage 2 integration with {self.stage2_model}")
@@ -493,6 +493,64 @@ Please generate a comprehensive framework-driven analysis report following the S
         except Exception as e:
             self.logger.error(f"Failed to read statistical artifacts: {e}")
             return f"Error reading statistical artifacts: {str(e)}"
+    
+    def _load_raw_evidence_artifacts(self, run_context: RunContext) -> str:
+        """Load ALL raw evidence extraction artifacts from analysis phase (THIN: direct from disk)."""
+        try:
+            raw_evidence_quotes = []
+            
+            # Look for evidence extraction artifacts from analysis phase
+            if hasattr(run_context, 'analysis_artifacts') and run_context.analysis_artifacts:
+                for artifact_hash in run_context.analysis_artifacts:
+                    try:
+                        # Load the artifact
+                        artifact_bytes = self.storage.get_artifact(artifact_hash)
+                        artifact_data = json.loads(artifact_bytes.decode('utf-8'))
+                        
+                        # Check if this is an evidence extraction artifact
+                        if (isinstance(artifact_data, dict) and 
+                            artifact_data.get('step') == 'evidence_extraction' and
+                            'evidence_extraction' in artifact_data):
+                            
+                            # Extract the raw evidence content
+                            evidence_content = artifact_data.get('evidence_extraction', '')
+                            if evidence_content:
+                                # Parse the JSON array from the evidence extraction
+                                import re
+                                json_match = re.search(r'```json\n(.*?)```', evidence_content, re.DOTALL)
+                                if json_match:
+                                    try:
+                                        quotes = json.loads(json_match.group(1))
+                                        if isinstance(quotes, list):
+                                            for quote in quotes:
+                                                raw_evidence_quotes.append({
+                                                    'text': quote,
+                                                    'document_index': artifact_data.get('document_index'),
+                                                    'source_artifact': artifact_hash[:8]
+                                                })
+                                    except json.JSONDecodeError:
+                                        self.logger.warning(f"Failed to parse evidence JSON from artifact {artifact_hash[:8]}")
+                                        
+                    except Exception as e:
+                        self.logger.warning(f"Failed to load evidence artifact {artifact_hash[:8]}: {e}")
+                        continue
+            
+            # Format all evidence for Stage 2 prompt
+            if raw_evidence_quotes:
+                evidence_text = "RAW EVIDENCE QUOTES FROM ANALYSIS PHASE:\n\n"
+                for i, quote in enumerate(raw_evidence_quotes, 1):
+                    evidence_text += f"{i}. Document {quote['document_index']}: \"{quote['text']}\"\n"
+                    evidence_text += f"   (Source: {quote['source_artifact']})\n\n"
+                
+                self.logger.info(f"Loaded {len(raw_evidence_quotes)} raw evidence quotes for Stage 2 curation")
+                return evidence_text
+            else:
+                self.logger.warning("No evidence extraction artifacts found in analysis phase")
+                return ""
+                
+        except Exception as e:
+            self.logger.error(f"Failed to load raw evidence artifacts: {e}")
+            return ""
     
     def _prepare_curated_evidence(self, run_context: RunContext) -> str:
         """Prepare raw curated evidence from IntelligentEvidenceRetrievalAgent artifacts (THIN: no parsing)."""

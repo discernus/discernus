@@ -229,41 +229,7 @@ class FullExperimentStrategy(ExecutionStrategy):
 
                 audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "statistical"})
             
-            # Phase 4: Evidence retrieval
-            if "Evidence" in agents:
-                audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "evidence"})
-                # Show progress to user
-                try:
-                    from ..cli_console import rich_console
-                    if rich_console:
-                        rich_console.print_info("🔍 Gathering evidence from documents...")
-                except ImportError:
-                    pass
-                evidence_result = agents["Evidence"].execute(run_context=run_context)
-                if not evidence_result.success:
-                    return ExperimentResult(
-                        success=False,
-                        phases_completed=phases_completed,
-                        artifacts=artifacts,
-                        metadata=metadata,
-                        error_message=f"Evidence retrieval failed: {evidence_result.error_message}"
-                    )
-                phases_completed.append("evidence")
-                artifacts.extend(evidence_result.artifacts)
-                run_context.update_phase("evidence")
-
-                # THIN: Pass evidence artifact hashes, let synthesis agent read them
-                if evidence_result.artifacts:
-                    run_context.evidence_artifacts = evidence_result.artifacts
-                    audit.log_agent_event("FullExperimentStrategy", "evidence_artifacts_passed", {
-                        "evidence_artifacts_count": len(evidence_result.artifacts)
-                    })
-                else:
-                    audit.log_agent_event("FullExperimentStrategy", "no_evidence_artifacts", {})
-
-                audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "evidence"})
-            
-            # Phase 5: Synthesis
+            # Phase 4: Synthesis (Evidence integration now handled within Stage 2)
             if "Synthesis" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "synthesis"})
                 # Show progress to user
