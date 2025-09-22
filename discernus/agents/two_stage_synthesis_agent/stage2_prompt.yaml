@@ -104,6 +104,10 @@ template: |
   - **By Discovery Type**: Separate anticipated vs. unanticipated insights
   - **Complete Attribution**: Full source information for every quote used
 
+  ### 7. Appendix: Complete Audit Trail
+  - **Appendix A: Evidence Appendix**: Organize all quotes by the specific statistical patterns they illustrate, by framework dimension, and by discovery type. Ensure complete attribution for every quote.
+  - **Appendix B: Methodological Appendix**: Include the full `Methodological Summary` from the Stage 1 report. Provide an explicit reference to the statistical analysis artifact file (e.g., `statistical_analysis_xxxxxxxx.json`) where the complete Python code can be found for full reproducibility.
+
   ## QUALITY ASSURANCE REQUIREMENTS
 
   ### Analytical Integrity Checks

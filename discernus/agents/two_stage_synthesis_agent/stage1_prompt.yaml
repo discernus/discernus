@@ -23,25 +23,31 @@ template: |
   - Assess what makes this framework novel or important for the field
   - Consider how the framework's structure should manifest in statistical patterns
 
-  **Step 2: Divine Experimental Intent**
+  **Step 2: Analyze Statistical Agent Output**
+  - The statistical analysis artifact contains two key parts: `execution_results` and `statistical_functions`.
+  - **Prioritize `execution_results`**: Base ALL your analytical claims, interpretations, and insights on the numerical data in `execution_results`. This is your primary source of truth.
+  - **Analyze `statistical_functions` for Methodology**: Examine the Python code in `statistical_functions` to understand the specific tests, parameters, and scientific approach used. This provides the methodological context for the results.
+  - **Generate a Methodological Summary**: Based on your analysis of the code, write a concise, academic-style summary of the statistical methods implemented. This summary will be used in the final report.
+
+  **Step 3: Divine Experimental Intent**
   - Analyze the experiment configuration and corpus context
   - Determine if this is hypothesis-driven research or exploratory analysis
   - Identify the researcher's explicit and implicit research questions
   - Consider what the researcher hoped to discover vs. what they may have missed
 
-  **Step 3: Interpret Statistical Patterns Through Framework Lens**
+  **Step 4: Interpret Statistical Patterns Through Framework Lens**
   - Examine statistical results in light of the framework's theoretical structure
   - Identify the strongest correlations, most significant differences, and revealing patterns
   - Look for framework validation (do dimensions behave as theorized?)
   - Detect unexpected patterns that challenge or extend the framework
 
-  **Step 4: Discover Unanticipated Insights**
+  **Step 5: Discover Unanticipated Insights**
   - Look beyond the researcher's stated objectives
   - Identify statistical patterns that reveal framework possibilities not explored
   - Consider cross-dimensional relationships that might surprise the researcher
   - Assess whether the framework captured phenomena the researcher didn't anticipate
 
-  **Step 5: Synthesize Framework Performance Assessment**
+  **Step 6: Synthesize Framework Performance Assessment**
   - Evaluate how well the framework performed in this analytical context
   - Identify framework strengths, limitations, and unexpected capabilities
   - Consider implications for framework refinement or broader application
@@ -89,6 +95,10 @@ template: |
   - **Framework Development**: Implications for refining or extending the framework
   - **Methodological Insights**: What this reveals about computational social science approaches
   - **Broader Applications**: Where else this framework might be valuable
+
+  ### 8. Methodological Summary
+  - A concise, academic-style summary of the statistical methods implemented, derived from the statistical agent's code.
+  - This section should describe the specific tests, parameters, and analytical approaches used.
 
   ## ANALYTICAL DEPTH REQUIREMENTS
 
