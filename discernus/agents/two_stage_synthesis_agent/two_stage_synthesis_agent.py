@@ -518,11 +518,12 @@ Please generate a comprehensive framework-driven analysis report following the S
                         artifact_bytes = self.storage.get_artifact(artifact_hash)
                         artifact_data = json.loads(artifact_bytes.decode('utf-8'))
                         
-                        # Check if this is a curated evidence artifact
+                        # Check if this is a curated evidence artifact from IntelligentEvidenceRetrievalAgent
                         if (isinstance(artifact_data, dict) and 
-                            artifact_data.get('artifact_type') == 'curated_evidence'):
+                            artifact_data.get('agent_name') == 'IntelligentEvidenceRetrievalAgent' and
+                            'curated_evidence' in artifact_data):
                             
-                            evidence_content = artifact_data.get('content', {})
+                            evidence_content = artifact_data.get('curated_evidence', {})
                             if isinstance(evidence_content, dict) and 'quotes' in evidence_content:
                                 curated_evidence.extend(evidence_content['quotes'])
                                 
