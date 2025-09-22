@@ -481,8 +481,8 @@ Please generate a comprehensive framework-driven analysis report following the S
                         artifact_data = json.loads(artifact_bytes.decode('utf-8'))
                         
                         # Extract the statistical analysis content
-                        if 'statistical_analysis_content' in artifact_data:
-                            statistical_content.append(artifact_data['statistical_analysis_content'])
+                        if 'statistical_analysis' in artifact_data:
+                            statistical_content.append(artifact_data['statistical_analysis'])
                         
                 except Exception as e:
                     self.logger.warning(f"Failed to read statistical artifact {artifact_hash}: {e}")
