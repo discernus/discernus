@@ -1,7 +1,7 @@
 {
   "534a13879907edb5f9710f57602b2c4bd1248740b09d32d8687ed210ef67f3c5": {
     "artifact_path": "composite_analysis_534a1387.json",
-    "created_at": "2025-09-22T18:18:20.204671+00:00",
+    "created_at": "2025-09-22T18:39:45.452651+00:00",
     "human_filename": "composite_analysis_534a1387.json",
     "is_directory": false,
     "metadata": {
@@ -9,25 +9,11 @@
       "document_index": 1
     },
     "size_bytes": 57971,
-    "source_run": "20250922_181407"
-  },
-  "58a0db23b913ae0b2c55284d6797f5e94514054e85b10a8cb5d9460794025f0a": {
-    "artifact_path": "validation_report_58a0db23.json",
-    "created_at": "2025-09-22T18:14:59.679966+00:00",
-    "human_filename": "validation_report_58a0db23.json",
-    "is_directory": false,
-    "metadata": {
-      "agent": "V2ValidationAgent",
-      "artifact_type": "validation_report",
-      "experiment_id": "mlkmx",
-      "timestamp": "2025-09-22T14:14:59.679405"
-    },
-    "size_bytes": 2208,
-    "source_run": "20250922_181407"
+    "source_run": "20250922_183945"
   },
   "86fb8eeaebb9d1a63858a5889d95b9a5f5fd38832b86eddcde8a24b1e101d267": {
     "artifact_path": "evidence_extraction_86fb8eea.json",
-    "created_at": "2025-09-22T18:18:24.928582+00:00",
+    "created_at": "2025-09-22T18:39:45.453176+00:00",
     "human_filename": "evidence_extraction_86fb8eea.json",
     "is_directory": false,
     "metadata": {
@@ -35,11 +21,11 @@
       "document_index": 1
     },
     "size_bytes": 7152,
-    "source_run": "20250922_181407"
+    "source_run": "20250922_183945"
   },
   "b2d4b027aa3fb1c5ac4af92ed98a5f95414f430fb54a470ef26913734a6c904a": {
     "artifact_path": "marked_up_document_b2d4b027.md",
-    "created_at": "2025-09-22T18:18:54.680940+00:00",
+    "created_at": "2025-09-22T18:39:45.453785+00:00",
     "human_filename": "marked_up_document_b2d4b027.md",
     "is_directory": false,
     "metadata": {
@@ -47,11 +33,11 @@
       "document_index": 1
     },
     "size_bytes": 42846,
-    "source_run": "20250922_181407"
+    "source_run": "20250922_183945"
   },
   "c738dbeaa7dc475446e1301621bbfd5969d9aff21c1c4850bc1444903bec1519": {
     "artifact_path": "score_extraction_c738dbea.json",
-    "created_at": "2025-09-22T18:16:36.820059+00:00",
+    "created_at": "2025-09-22T18:39:45.454167+00:00",
     "human_filename": "score_extraction_c738dbea.json",
     "is_directory": false,
     "metadata": {
@@ -59,11 +45,11 @@
       "document_index": 0
     },
     "size_bytes": 1276,
-    "source_run": "20250922_181407"
+    "source_run": "20250922_183945"
   },
   "cea67b080049ccf839b21d49805f0ddef2412622ac11370597201273dce0b09e": {
     "artifact_path": "marked_up_document_cea67b08.md",
-    "created_at": "2025-09-22T18:17:04.302310+00:00",
+    "created_at": "2025-09-22T18:39:45.454761+00:00",
     "human_filename": "marked_up_document_cea67b08.md",
     "is_directory": false,
     "metadata": {
@@ -71,11 +57,11 @@
       "document_index": 0
     },
     "size_bytes": 39328,
-    "source_run": "20250922_181407"
+    "source_run": "20250922_183945"
   },
   "d9dc9a926119aff94ba0afc0fd509eb3e17c172901e7883568ab822208f16614": {
     "artifact_path": "score_extraction_d9dc9a92.json",
-    "created_at": "2025-09-22T18:18:29.257478+00:00",
+    "created_at": "2025-09-22T18:39:45.455136+00:00",
     "human_filename": "score_extraction_d9dc9a92.json",
     "is_directory": false,
     "metadata": {
@@ -83,11 +69,11 @@
       "document_index": 1
     },
     "size_bytes": 4885,
-    "source_run": "20250922_181407"
+    "source_run": "20250922_183945"
   },
   "ec47028ba36584e940a489df3ff93807bb577ed6fa3cd4c27a08c2d24392f69e": {
     "artifact_path": "composite_analysis_ec47028b.json",
-    "created_at": "2025-09-22T18:16:31.340711+00:00",
+    "created_at": "2025-09-22T18:39:45.455699+00:00",
     "human_filename": "composite_analysis_ec47028b.json",
     "is_directory": false,
     "metadata": {
@@ -95,11 +81,11 @@
       "document_index": 0
     },
     "size_bytes": 47257,
-    "source_run": "20250922_181407"
+    "source_run": "20250922_183945"
   },
   "ed9eeb64beac57c1a02398b2c190155c70c2fe23c669df55abc8bfeb4a94072b": {
     "artifact_path": "evidence_extraction_ed9eeb64.json",
-    "created_at": "2025-09-22T18:16:34.888932+00:00",
+    "created_at": "2025-09-22T18:39:45.456062+00:00",
     "human_filename": "evidence_extraction_ed9eeb64.json",
     "is_directory": false,
     "metadata": {
@@ -107,6 +93,6 @@
       "document_index": 0
     },
     "size_bytes": 4203,
-    "source_run": "20250922_181407"
+    "source_run": "20250922_183945"
   }
 }

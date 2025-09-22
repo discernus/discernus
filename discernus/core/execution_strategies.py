@@ -883,8 +883,9 @@ class ResumeFromAnalysisStrategy(ExecutionStrategy):
             run_context.metadata["framework_content"] = framework_content
             run_context.metadata["corpus_manifest_content"] = corpus_manifest_content
 
-            # Check if we have analysis artifacts
-            if not run_context.analysis_artifacts:
+            # Load analysis artifacts from the most recent completed analysis run
+            analysis_artifacts = self._load_latest_analysis_artifacts(run_context.experiment_id)
+            if not analysis_artifacts:
                 return ExperimentResult(
                     success=False,
                     phases_completed=phases_completed,
@@ -892,6 +893,20 @@ class ResumeFromAnalysisStrategy(ExecutionStrategy):
                     metadata=metadata,
                     error_message="No analysis artifacts found for resume"
                 )
+            
+            # Copy analysis artifacts to current run's storage
+            copied_artifacts = self._copy_analysis_artifacts(analysis_artifacts, run_context.experiment_id, storage)
+            if not copied_artifacts:
+                return ExperimentResult(
+                    success=False,
+                    phases_completed=phases_completed,
+                    artifacts=artifacts,
+                    metadata=metadata,
+                    error_message="Failed to copy analysis artifacts for resume"
+                )
+            
+            # Set the copied analysis artifacts in run_context
+            run_context.analysis_artifacts = copied_artifacts
             
             # Phase 1: Statistical analysis
             if "Statistical" in agents:
@@ -990,5 +1005,113 @@ class ResumeFromAnalysisStrategy(ExecutionStrategy):
         """Load framework content from file."""
         try:
             return framework_path.read_text(encoding='utf-8')
+        except Exception as e:
+            return None
+
+    def _load_latest_analysis_artifacts(self, experiment_id: str) -> Optional[List[str]]:
+        """Load analysis artifacts from the most recent completed analysis run."""
+        try:
+            # Find the experiment directory
+            experiment_path = Path(f"projects/{experiment_id}")
+            if not experiment_path.exists():
+                return None
+            
+            # Find all runs with analysis artifacts
+            runs_dir = experiment_path / "runs"
+            if not runs_dir.exists():
+                return None
+            
+            # Look for runs that have analysis artifacts (composite_analysis, evidence_extraction, score_extraction)
+            analysis_runs = []
+            for run_dir in runs_dir.iterdir():
+                if run_dir.is_dir():
+                    artifacts_dir = run_dir / "artifacts"
+                    if artifacts_dir.exists():
+                        # Check if this run has analysis artifacts
+                        has_composite = any(artifacts_dir.glob("composite_analysis_*.json"))
+                        has_evidence = any(artifacts_dir.glob("evidence_extraction_*.json"))
+                        has_scores = any(artifacts_dir.glob("score_extraction_*.json"))
+                        
+                        if has_composite and has_evidence and has_scores:
+                            analysis_runs.append(run_dir)
+            
+            if not analysis_runs:
+                return None
+            
+            # Get the most recent run
+            latest_run = max(analysis_runs, key=lambda p: p.stat().st_mtime)
+            
+            # Load artifact hashes from the artifact registry
+            artifact_registry_path = latest_run / "artifacts" / "artifact_registry.json"
+            if not artifact_registry_path.exists():
+                return None
+            
+            with open(artifact_registry_path, 'r') as f:
+                artifact_registry = json.load(f)
+            
+            # Extract analysis artifact hashes
+            analysis_artifacts = []
+            for artifact_hash, artifact_info in artifact_registry.items():
+                artifact_type = artifact_info.get("metadata", {}).get("artifact_type")
+                if artifact_type in ["composite_analysis", "evidence_extraction", "score_extraction", "marked_up_document"]:
+                    analysis_artifacts.append(artifact_hash)
+            
+            return analysis_artifacts
+            
+        except Exception as e:
+            return None
+
+    def _copy_analysis_artifacts(self, analysis_artifacts: List[str], experiment_id: str, storage) -> Optional[List[str]]:
+        """Copy analysis artifacts from the source run to the current run's storage."""
+        try:
+            # Find the source run directory
+            experiment_path = Path(f"projects/{experiment_id}")
+            runs_dir = experiment_path / "runs"
+            
+            # Find the most recent run with analysis artifacts
+            analysis_runs = []
+            for run_dir in runs_dir.iterdir():
+                if run_dir.is_dir():
+                    artifacts_dir = run_dir / "artifacts"
+                    if artifacts_dir.exists():
+                        has_composite = any(artifacts_dir.glob("composite_analysis_*.json"))
+                        has_evidence = any(artifacts_dir.glob("evidence_extraction_*.json"))
+                        has_scores = any(artifacts_dir.glob("score_extraction_*.json"))
+                        
+                        if has_composite and has_evidence and has_scores:
+                            analysis_runs.append(run_dir)
+            
+            if not analysis_runs:
+                return None
+            
+            latest_run = max(analysis_runs, key=lambda p: p.stat().st_mtime)
+            source_artifacts_dir = latest_run / "artifacts"
+            
+            # Load artifact registry from source run
+            artifact_registry_path = source_artifacts_dir / "artifact_registry.json"
+            if not artifact_registry_path.exists():
+                return None
+            
+            with open(artifact_registry_path, 'r') as f:
+                artifact_registry = json.load(f)
+            
+            # Copy each analysis artifact to current storage
+            copied_artifacts = []
+            for artifact_hash in analysis_artifacts:
+                if artifact_hash in artifact_registry:
+                    artifact_info = artifact_registry[artifact_hash]
+                    artifact_path = source_artifacts_dir / artifact_info["artifact_path"]
+                    
+                    if artifact_path.exists():
+                        # Read the artifact content
+                        with open(artifact_path, 'rb') as f:
+                            artifact_bytes = f.read()
+                        
+                        # Store in current run's storage
+                        new_hash = storage.put_artifact(artifact_bytes, artifact_info.get("metadata", {}))
+                        copied_artifacts.append(new_hash)
+            
+            return copied_artifacts
+            
         except Exception as e:
             return None
