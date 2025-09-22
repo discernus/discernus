@@ -237,7 +237,7 @@ class TwoStageSynthesisAgent(StandardAgent):
                 model=self.stage1_model,
                 prompt=stage1_prompt,
                 temperature=0.3,  # Lower temperature for analytical consistency
-                max_tokens=8000   # Sufficient for comprehensive analysis
+                # max_tokens handled by provider defaults (65535 for Vertex AI)
             )
             
             # Extract content from tuple response
@@ -322,7 +322,7 @@ synthesis_method: two_stage_fallback
                 model=self.stage2_model,
                 prompt=stage2_prompt,
                 temperature=0.2,  # Lower temperature for precise integration
-                max_tokens=10000  # More tokens for enhanced report
+                # max_tokens handled by provider defaults (65535 for Vertex AI)
             )
             
             # Extract content from tuple response
@@ -359,19 +359,22 @@ synthesis_method: two_stage_fallback
             return stage1_report
     
     def _store_stage1_report(self, report: str) -> str:
-        """Store Stage 1 report as artifact."""
-        artifact_data = {
-            "agent_name": self.agent_name,
-            "stage": "stage1_data_driven_analysis",
-            "timestamp": datetime.now(timezone.utc).isoformat(),
-            "model_used": self.stage1_model,
-            "report_content": report,
-            "evidence_included": False,
-            "synthesis_method": "data_driven_only"
-        }
+        """Store Stage 1 report as raw markdown content."""
+        # Add metadata header to the markdown content itself
+        timestamp = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')
+        markdown_content = f"""---
+agent: {self.agent_name}
+stage: stage1_data_driven_analysis
+timestamp: {timestamp}
+model_used: {self.stage1_model}
+evidence_included: false
+synthesis_method: data_driven_only
+---
+
+{report}"""
         
         return self.storage.store_artifact(
-            content=artifact_data,
+            content=markdown_content,
             artifact_type="stage1_synthesis_report",
             experiment_id="stage1_analysis"
         )
