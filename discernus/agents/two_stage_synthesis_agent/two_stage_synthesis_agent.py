@@ -341,7 +341,7 @@ synthesis_method: two_stage_fallback
                 {
                     "model_used": self.stage2_model,
                     "response_length": len(response),
-                    "evidence_content_length": len(curated_evidence),
+                    "evidence_content_length": len(raw_evidence),
                     "temperature": 0.2
                 }
             )
