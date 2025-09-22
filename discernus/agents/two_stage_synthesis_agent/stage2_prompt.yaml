@@ -138,7 +138,7 @@ template: |
 
   ### 7. Appendix: Complete Audit Trail
   - **Appendix A: Evidence Appendix**: Organize all CURATED quotes by framework dimension (up to 10 per dimension), statistical pattern, and document source. Ensure complete attribution for every quote.
-  - **Appendix B: Methodological Appendix**: Include the full `Methodological Summary` from the Stage 1 report. Provide an explicit reference to the statistical analysis artifact file where the complete Python code can be found for full reproducibility.
+  - **Appendix B: Methodological Appendix**: Include the full `Methodological Summary` from the Stage 1 report. Reference the statistical analysis artifact file for complete methodological details and reproducibility.
 
   ## QUALITY ASSURANCE REQUIREMENTS
 
