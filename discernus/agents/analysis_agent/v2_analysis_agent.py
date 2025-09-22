@@ -535,18 +535,20 @@ Return the marked-up document in markdown format."""
                 content = response.get('content', '')
                 metadata = response.get('metadata', {})
             
-            # Create artifact
-            artifact_data = {
-                "analysis_id": f"analysis_{batch_id}_{doc_index}",
-                "step": "markup_extraction",
-                "model_used": "vertex_ai/gemini-2.5-flash-lite",
-                "marked_up_document": content,
-                "document_index": doc_index,
-                "timestamp": datetime.now(timezone.utc).isoformat()
-            }
+            # Create markdown content with metadata header
+            timestamp = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')
+            markdown_content = f"""---
+analysis_id: analysis_{batch_id}_{doc_index}
+step: markup_extraction
+model_used: vertex_ai/gemini-2.5-flash-lite
+document_index: {doc_index}
+timestamp: {timestamp}
+---
+
+{content}"""
             
-            # Store artifact
-            content_bytes = json.dumps(artifact_data, indent=2).encode('utf-8')
+            # Store as markdown content
+            content_bytes = markdown_content.encode('utf-8')
             artifact_hash = self.storage.put_artifact(
                 content_bytes,
                 {"artifact_type": "marked_up_document", "document_index": doc_index}
@@ -554,7 +556,7 @@ Return the marked-up document in markdown format."""
             
             return {
                 "type": "marked_up_document",
-                "content": artifact_data,
+                "content": markdown_content,
                 "metadata": {
                     "artifact_type": "marked_up_document",
                     "phase": "analysis",
