@@ -2,7 +2,7 @@
 
 ## Overview
 
-This corpus contains 6 presidential speeches spanning 2017-2025, providing temporal coverage across different presidential contexts for computational framing analysis using the Cohesive Flourishing Framework v10.0.
+This corpus contains 7 presidential speeches spanning 2017-2025, providing temporal coverage across different presidential contexts for computational framing analysis using the Cohesive Flourishing Framework v10.0.
 
 ## Collection Methodology
 
@@ -14,9 +14,9 @@ The speeches were selected to represent different presidential communication con
 
 ## Corpus Characteristics
 
-- **Total Documents**: 6 speeches
+- **Total Documents**: 7 speeches
 - **Time Period**: 2017-2025 (8-year span)
-- **Speech Types**: 1 inaugural address, 5 State of the Union addresses
+- **Speech Types**: 1 inaugural address, 5 State of the Union addresses, 1 memorial speech
 - **Format**: Plain text (.txt files)
 - **Language**: English
 - **Context**: Presidential speeches in formal settings
@@ -38,9 +38,9 @@ All speeches are public presidential addresses delivered in official capacity an
 ```yaml
 name: "Cohesive Flourishing Framework Analysis Corpus"
 version: "10.0"
-total_documents: 6
+total_documents: 7
 date_range: "2017-2025"
-speech_types: ["inaugural", "state_of_union"]
+speech_types: ["inaugural", "state_of_union", "memorial"]
 
 documents:
   - filename: "Trump_Inaugural_2017.txt"
@@ -84,4 +84,14 @@ documents:
     speech_type: "state_of_union"
     presidential_period: "recent"
     context: "annual_presidential_communication"
+    
+  - filename: "trump_kirk_funeral_2025.txt"
+    speaker: "Donald J. Trump"
+    year: 2025
+    speech_type: "memorial"
+    presidential_period: "recent"
+    context: "memorial_service"
+    event: "Charlie Kirk Memorial Service"
+    location: "State Farm Stadium, Glendale, Arizona"
+    date: "2025-09-21"
 ```

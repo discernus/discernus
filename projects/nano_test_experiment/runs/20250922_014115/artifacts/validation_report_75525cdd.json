@@ -1,0 +1,23 @@
+{
+  "validation_success": true,
+  "issues": [
+    {
+      "category": "capabilities_mismatch",
+      "description": "The corpus contains only 2 documents, which is below the minimum threshold for any statistical analysis.",
+      "impact": "According to the experiment specification standard (v10.0), a sample size of N<4 is suitable only for 'Single case or comparative case analysis'. While this is sufficient for the stated goal of pipeline validation, no inferential statistical tests can be performed, and results cannot be generalized.",
+      "fix": "If statistical analysis or generalizable findings are desired, expand the corpus to meet the minimum sample size requirements (e.g., N>=10 for descriptive statistics, N>=20 for limited inferential testing). No fix is required if the goal is strictly pipeline validation.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    }
+  ],
+  "suggestions": [],
+  "metadata": {
+    "agent": "V2ValidationAgent",
+    "timestamp": "2025-09-21T21:41:41.656992",
+    "experiment_id": "nano_test_experiment",
+    "validation_type": "experiment_coherence"
+  }
+}

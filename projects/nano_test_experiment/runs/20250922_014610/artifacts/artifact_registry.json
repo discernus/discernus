@@ -1,0 +1,124 @@
+{
+  "80535c0b632493c50e372c2d0d18f7d8daa4c53770177b8194ea58f9d7895466": {
+    "artifact_path": "composite_analysis_80535c0b.json",
+    "created_at": "2025-09-22T01:47:25.560369+00:00",
+    "human_filename": "composite_analysis_80535c0b.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 1
+    },
+    "size_bytes": 8342,
+    "source_run": "20250922_014610"
+  },
+  "9cb8835a346717ae70396e9ca9fc804ebd1d100a0d9979d5b91f4be2b69e135c": {
+    "artifact_path": "statistical_analysis_9cb8835a.json",
+    "created_at": "2025-09-22T01:48:22.262492+00:00",
+    "human_filename": "statistical_analysis_9cb8835a.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "statistical_analysis",
+      "batch_id": "stats_20250922T014734Z"
+    },
+    "size_bytes": 12834,
+    "source_run": "20250922_014610"
+  },
+  "9e0a5e58deec5c390e3da53fbd6f6cc73415133e5eb44bbbb781fd7ae5c50ed0": {
+    "artifact_path": "evidence_extraction_9e0a5e58.json",
+    "created_at": "2025-09-22T01:47:06.826120+00:00",
+    "human_filename": "evidence_extraction_9e0a5e58.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 0
+    },
+    "size_bytes": 859,
+    "source_run": "20250922_014610"
+  },
+  "a291bf61b07608d08fc3aab178d0ed356ea56019769418235f7356363e44d526": {
+    "artifact_path": "derived_metrics_a291bf61.json",
+    "created_at": "2025-09-22T01:47:08.551993+00:00",
+    "human_filename": "derived_metrics_a291bf61.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "derived_metrics",
+      "document_index": 0
+    },
+    "size_bytes": 303,
+    "source_run": "20250922_014610"
+  },
+  "b0124ea69dde8d4a9eaa461bb79cc03780e75a59dfd5f85df4354d5b0b8c5845": {
+    "artifact_path": "score_extraction_b0124ea6.json",
+    "created_at": "2025-09-22T01:47:07.253114+00:00",
+    "human_filename": "score_extraction_b0124ea6.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 0
+    },
+    "size_bytes": 316,
+    "source_run": "20250922_014610"
+  },
+  "b6d5a4e43a19b62bd22bbf37fda0bfeda663f893bbe054d3729e0fdea9586ed2": {
+    "artifact_path": "evidence_extraction_b6d5a4e4.json",
+    "created_at": "2025-09-22T01:47:32.882571+00:00",
+    "human_filename": "evidence_extraction_b6d5a4e4.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 1
+    },
+    "size_bytes": 442,
+    "source_run": "20250922_014610"
+  },
+  "be3895a249972fb4d77e1ddd1a24e6e38d874cf6619b92724da706b29706a3e6": {
+    "artifact_path": "derived_metrics_be3895a2.json",
+    "created_at": "2025-09-22T01:47:34.984474+00:00",
+    "human_filename": "derived_metrics_be3895a2.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "derived_metrics",
+      "document_index": 1
+    },
+    "size_bytes": 303,
+    "source_run": "20250922_014610"
+  },
+  "cbfe6b2823eb24040d1477cb30fa26537cd0ca07a1e826b6d21bc2ea99d63201": {
+    "artifact_path": "score_extraction_cbfe6b28.json",
+    "created_at": "2025-09-22T01:47:33.369893+00:00",
+    "human_filename": "score_extraction_cbfe6b28.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 1
+    },
+    "size_bytes": 317,
+    "source_run": "20250922_014610"
+  },
+  "ec6cb9cdc01f9ae88a3a1f480ba50fcefaae9bbb885692180cfb7b1ae60a3119": {
+    "artifact_path": "composite_analysis_ec6cb9cd.json",
+    "created_at": "2025-09-22T01:47:00.838739+00:00",
+    "human_filename": "composite_analysis_ec6cb9cd.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 0
+    },
+    "size_bytes": 3673,
+    "source_run": "20250922_014610"
+  },
+  "f5b790ba2d7f60d40cd59a65e1c73767cb864e26c524a8f7d0954be2221df741": {
+    "artifact_path": "validation_report_f5b790ba.json",
+    "created_at": "2025-09-22T01:46:37.321710+00:00",
+    "human_filename": "validation_report_f5b790ba.json",
+    "is_directory": false,
+    "metadata": {
+      "agent": "V2ValidationAgent",
+      "artifact_type": "validation_report",
+      "experiment_id": "nano_test_experiment",
+      "timestamp": "2025-09-21T21:46:37.320673"
+    },
+    "size_bytes": 262,
+    "source_run": "20250922_014610"
+  }
+}

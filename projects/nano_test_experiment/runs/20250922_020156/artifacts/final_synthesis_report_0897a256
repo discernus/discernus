@@ -1,0 +1,263 @@
+---
+agent: TwoStageSynthesisAgent
+stage: stage2_evidence_integrated
+timestamp: 2025-09-22 02:14:11 UTC
+model_used: vertex_ai/gemini-2.5-flash
+evidence_included: true
+synthesis_method: two_stage_with_evidence
+---
+
+I understand the objective is to transform the Stage 1 framework-driven analysis into a complete research report by strategically integrating curated evidence quotes and composing a full appendix. I am prepared to fulfill this role as an evidence quote integration expert.
+
+However, I must immediately highlight a critical issue with the "CURATED EVIDENCE FOR INTEGRATION" provided:
+
+**Critical Issue: Unusable Evidence Quote**
+The single quote provided for integration is:
+*   **Quote 1:** Text: "No text available", Source: Unknown source, Relevance: Not specified, Strength: 5
+
+This quote is unusable for the purpose of evidence integration as it contains no actual textual content and no identifiable source. To fulfill the "EVIDENCE QUOTE INFUSION" objective, I require actual textual evidence from the analyzed documents, along with their speaker and source, as per the "Academic Citation Standards" and "Quote Selection Criteria" outlined in the protocol.
+
+**Impact on Task Execution:**
+Due to the absence of valid, usable evidence quotes, I cannot perform the core task of "strategic integration of curated evidence quotes throughout the report." I cannot "illuminate statistical patterns with concrete textual examples" or "validate framework performance through real discourse manifestations" without actual discourse.
+
+**My Approach Given This Constraint:**
+I will proceed with the following:
+1.  **Analytical Preservation & Structural Integrity:** I will maintain the exact report structure, section flow, analytical claims, conclusions, and interpretations from the Stage 1 report, as this is a sacred constraint.
+2.  **Evidence Integration Placeholders:** I will indicate *where* evidence quotes would have been strategically placed within the report, using a clear placeholder (e.g., `[EVIDENCE QUOTE NEEDED HERE - No valid quotes provided]`), to demonstrate my understanding of the integration points and the "Strategic Evidence Mapping Protocol."
+3.  **Appendix Creation:** I will compose the full appendix as requested, including:
+    *   **Appendix A: Evidence Appendix:** This section will explicitly state that no valid quotes were provided for integration and will list the unusable quote as received.
+    *   **Appendix B: Methodological Appendix:** This will include the full `Methodological Summary` from Stage 1 and the required reference to the statistical analysis artifact file.
+
+This approach ensures that the analytical architecture is preserved, the report structure is maintained, and the appendices are created, while transparently addressing the inability to infuse actual evidence due to the input constraint.
+
+***
+
+## **A Data-Driven Analysis of the Sentiment Binary Framework v1.0**
+
+### **1. Executive Summary**
+
+This report presents a comprehensive statistical analysis of the Sentiment Binary Framework v1.0, a minimalist analytical tool designed for pipeline validation. The analysis is based exclusively on computational results from an experiment involving a two-document test corpus. The central finding of this investigation is that the framework performs its intended function with perfect efficacy and precision. The statistical data reveals a system operating exactly as designed, successfully distinguishing between texts with pre-defined positive and negative sentiment, thereby validating the integrity of the analytical pipeline it was created to test.
+
+The key statistical findings demonstrate the framework's high discriminatory power. For a document with known positive sentiment, the framework assigned a `positive_sentiment` score of 0.99 and a `negative_sentiment` score of 0.00. Conversely, for a document with known negative sentiment, it assigned scores of 0.00 and 1.00, respectively. This stark polarization of scores resulted in a perfect negative Pearson correlation coefficient (r = -1.00) between the framework's two dimensions. This result, while statistically definitive for the given sample, is interpreted as a direct consequence of the highly controlled experimental design and the unipolar nature of the test documents.
+`[EVIDENCE QUOTE NEEDED HERE - No valid quotes provided to exemplify the central thesis or key statistical findings.]`
+
+The primary insight derived from this analysis is the framework's success in its role as a diagnostic instrument. It confirms that the underlying analytical agent can interpret and apply the framework's scoring logic with extreme fidelity. While the experiment's limited scope (N=2) precludes any generalizable conclusions about the framework's performance on more complex or ambivalent texts, it unequivocally establishes a baseline of operational success. The findings validate the framework as a reliable and cost-effective tool for its specified purpose: ensuring end-to-end system functionality. This report assesses the framework's performance, evaluates the experimental outcomes, and discusses the implications for both methodological validation and potential future research.
+
+### **2. Framework Analysis & Performance**
+
+#### **Framework Architecture**
+
+The Sentiment Binary Framework v1.0 is explicitly defined as a minimalist tool for a functional purpose: validating the end-to-end integration of the Discernus analysis pipeline. Its intellectual architecture is intentionally simple, grounded in the foundational principles of sentiment analysis, which posit that emotional valence can be measured along positive and negative axes.
+`[EVIDENCE QUOTE NEEDED HERE - No valid quotes provided to show how theoretical dimensions appear in practice.]`
+
+The framework consists of two core, independent dimensions:
+1.  **Positive Sentiment**: Measures the presence of positive and optimistic language on a scale of 0.0 to 1.0.
+2.  **Negative Sentiment**: Measures the presence of negative and pessimistic language on a scale of 0.0 to 1.0.
+
+The framework contains no derived metrics, reinforcing its focus on fundamental, direct measurement. Its theoretical novelty is not in advancing sentiment theory but in its application as a streamlined, low-cost validation instrument. The structure implies that while positive and negative sentiments are often oppositional, they are measured as separate phenomena, theoretically allowing for the possibility of co-occurrence in a single text (e.g., ambivalence). The expected statistical manifestation for its intended use on unipolar test documents would be a strong inverse relationship, where a high score on one dimension corresponds to a low score on the other.
+
+#### **Statistical Validation**
+
+The statistical results provide a robust validation of the framework's architectural integrity and its performance within the intended experimental context. The data patterns align perfectly with the framework's theoretical expectations for a simple validation task.
+`[EVIDENCE QUOTE NEEDED HERE - No valid quotes provided to demonstrate data patterns in actual discourse.]`
+
+The analysis of two documents—one pre-labeled as "positive" and one as "negative"—yielded scores that demonstrate maximum discriminatory power. The positive document scored (Positive: 0.99, Negative: 0.00), while the negative document scored (Positive: 0.00, Negative: 1.00). This outcome confirms that the analytical agent correctly interpreted the scoring rubrics for "Dominant positive language" (0.9-1.0) and "No negative language" (0.0), and vice versa.
+
+The most telling statistical pattern is the Pearson correlation coefficient of r = -1.00 between the `positive_sentiment` and `negative_sentiment` dimensions. This perfect negative correlation indicates that, within this specific dataset, the two dimensions behaved as perfect opposites. This finding statistically validates the framework's ability to model the binary opposition of sentiment in the context of simple, clearly valenced texts.
+
+#### **Dimensional Effectiveness**
+
+Both the `positive_sentiment` and `negative_sentiment` dimensions performed with maximum effectiveness. Each dimension proved capable of capturing its target phenomenon at the highest end of the scale while simultaneously registering a complete absence of the opposing phenomenon.
+`[EVIDENCE QUOTE NEEDED HERE - No valid quotes provided to exemplify strong dimensional performance.]`
+
+-   The **`positive_sentiment` dimension** effectively identified the target content, assigning a near-maximal score of 0.99, demonstrating high sensitivity.
+-   The **`negative_sentiment` dimension** was equally effective, assigning a maximal score of 1.00 to its target document.
+
+The strength of the framework in this context lies not in the performance of one dimension over the other, but in their symmetrical and oppositional behavior. The data shows that neither dimension produced false positives; each remained at 0.00 when its corresponding sentiment was absent from the text. This demonstrates a high degree of specificity and reliability for both components of the framework.
+
+#### **Cross-Dimensional Insights**
+
+The primary cross-dimensional insight is the perfect inverse relationship (r = -1.00) observed between the two dimensions. While the framework's design allows for dimensions to be scored independently, this experiment reveals a scenario where they are mutually exclusive. This finding is a direct reflection of the "Nano Test Corpus," which was designed to be unipolar.
+`[EVIDENCE QUOTE NEEDED HERE - No valid quotes provided to illustrate unexpected relationships between dimensions.]`
+
+This result raises a critical theoretical question for the framework: is this mutual exclusivity an artifact of the test data, or is it an inherent behavior of the analytical model when applying this framework? The current data cannot answer this, but it establishes a crucial baseline. It proves the framework can enforce a strict binary opposition when the input text supports it. The potential for the framework to capture more nuanced states, such as ambivalence (where both scores might be moderate), remains an untested but important capability for any future research applications.
+
+### **3. Experimental Intent & Hypothesis Evaluation**
+
+#### **Research Question Assessment**
+
+The experimental design, as inferred from the framework specification and corpus manifest, was not geared towards exploratory research or complex hypothesis testing. Instead, its objective was clearly one of **system validation**. The implicit research question was: "Can the analytical pipeline, utilizing the Sentiment Binary Framework v1.0, accurately and reliably differentiate between simple, pre-defined positive and negative textual inputs?" The experiment was designed to produce a clear "pass" or "fail" signal regarding the functionality of the entire analysis chain, from framework interpretation to score generation.
+
+#### **Hypothesis Outcomes**
+
+While no formal hypotheses were stated, an implicit hypothesis can be formulated based on the experimental intent:
+
+*   **Implicit Hypothesis**: Documents with pre-labeled positive sentiment will receive high scores on the `positive_sentiment` dimension and low scores on the `negative_sentiment` dimension, while documents with pre-labeled negative sentiment will exhibit the opposite pattern.
+
+*   **Outcome**: **CONFIRMED**.
+`[EVIDENCE QUOTE NEEDED HERE - No valid quotes provided to support the confirmed hypothesis.]`
+
+The statistical evidence provides unequivocal confirmation of this hypothesis.
+*   The "positive" test document (`document_id: pos_test`) received scores of `positive_sentiment` = 0.99 and `negative_sentiment` = 0.00.
+*   The "negative" test document (`document_id: neg_test`) received scores of `positive_sentiment` = 0.00 and `negative_sentiment` = 1.00.
+
+These results align perfectly with the expected outcomes, confirming the hypothesis with the maximum certainty afforded by the dataset.
+
+#### **Exploratory Findings**
+
+In an experiment so tightly constrained, the capacity for true exploratory discovery is limited. The primary finding—perfect discriminatory performance—was the intended outcome. However, the analysis did not produce any anomalous or unexpected results, which is itself a significant finding in the context of system validation. The absence of noise, ambiguity, or error in the output scores suggests a high degree of stability and predictability in the analytical system.
+`[EVIDENCE QUOTE NEEDED HERE - No valid quotes provided to illustrate discovered patterns.]`
+
+#### **Intent vs. Discovery**
+
+The findings of this analysis map directly onto the experimental intent. The goal was to verify system functionality, and the data provides a clear and positive verification. The "discovery" in this context is not a new scientific phenomenon but the confirmation of engineered reliability. The analysis discovered that the framework and pipeline function as a precise instrument for their designated task. The perfect negative correlation, while a statistically powerful finding, is less a discovery about sentiment in general and more a confirmation that the system can model perfect opposition when presented with perfectly opposing stimuli.
+`[EVIDENCE QUOTE NEEDED HERE - No valid quotes provided to show what emerged beyond expectations.]`
+
+### **4. Statistical Findings & Patterns**
+
+#### **Primary Results**
+
+The most significant finding is the stark polarization of sentiment scores across the two test documents. The dataset consists of two data points: (0.99, 0.00) and (0.00, 1.00) for (`positive_sentiment`, `negative_sentiment`). This pattern demonstrates a flawless execution of the classification task. Descriptive statistics for the dimensions (`positive_sentiment`: M = 0.495, SD = 0.700; `negative_sentiment`: M = 0.500, SD = 0.707) are mathematically correct but offer little insight beyond reflecting these two extreme points. The core result is the system's ability to assign scores at the boundaries of the 1.0-point scale, indicating high confidence and precision in its assessments.
+`[EVIDENCE QUOTE NEEDED HERE - No valid quotes provided to exemplify the strongest statistical patterns.]`
+
+#### **Dimensional Analysis**
+
+A comparative analysis of the `positive_sentiment` and `negative_sentiment` dimensions reveals a perfectly symmetrical and inverse relationship within this dataset.
+-   When `positive_sentiment` is at its maximum (0.99), `negative_sentiment` is at its absolute minimum (0.00).
+-   When `negative_sentiment` is at its maximum (1.00), `positive_sentiment` is at its absolute minimum (0.00).
+`[EVIDENCE QUOTE NEEDED HERE - No valid quotes provided to demonstrate each dimension's performance.]`
+
+This demonstrates that for the given unipolar texts, the presence of one sentiment type completely excluded the other. The framework successfully captured this mutual exclusivity. The slight difference between the maximum positive score (0.99) and the maximum negative score (1.00) is statistically negligible and likely represents a minor stochastic variation in the scoring model, but does not detract from the overall pattern of extreme polarization.
+
+#### **Correlation Networks**
+
+With only two dimensions, the correlation network is simple but powerful. The analysis yielded a Pearson correlation coefficient of **r = -1.00**. This value represents a perfect negative linear relationship. As scores on the `positive_sentiment` dimension increase, scores on the `negative_sentiment` dimension decrease in a perfectly predictable manner. A scatter plot of these two points would show them lying on a straight line with a negative slope. This statistical result is the most concise mathematical expression of the framework's success in modeling the oppositional nature of the two test documents. It is important to note that the associated p-value for this correlation is undefined (`nan`) due to the sample size of N=2, meaning no inference about statistical significance can be made.
+`[EVIDENCE QUOTE NEEDED HERE - No valid quotes provided to show relationships between framework elements.]`
+
+#### **Anomalies & Surprises**
+
+A notable aspect of the statistical findings is the complete absence of anomalies. The scores are clean, the pattern is unambiguous, and there are no results that deviate from theoretical expectations. The minor inconsistency in the raw data structure (a dictionary object for one document's scores versus float values for the other) was a data-processing artifact handled by the statistical script and did not impact the analytical results. The lack of surprises is, in this validation context, a highly desirable outcome, indicating system stability and predictability.
+`[EVIDENCE QUOTE NEEDED HERE - No valid quotes provided to illustrate unexpected results.]`
+
+### **5. Emergent Insights & Framework Extensions**
+
+#### **Beyond the Research Question**
+
+While the experiment was designed to answer a simple validation question, the results offer an emergent insight into the **precision of the analytical agent**. The framework's scoring rubrics define "Dominant" sentiment as a range from 0.9 to 1.0. The agent's ability to assign scores of 0.99 and 1.0 demonstrates a capacity for high-fidelity mapping of textual features to the numerical scale. This suggests that the underlying model is not just making a binary choice but is capable of granular scoring, even if this experiment only tested the extremes.
+`[EVIDENCE QUOTE NEEDED HERE - No valid quotes provided to support insights beyond the research question.]`
+
+#### **Framework Potential**
+
+This analysis reveals the framework's potential as a baseline for more complex sentiment studies. The current data validates its performance on simple, unipolar cases. This provides a solid foundation for extending its application to more challenging corpora, such as texts containing:
+-   **Ambivalence**: Where both positive and negative sentiments are present. The framework's two-dimensional design is theoretically capable of capturing this (e.g., scores of 0.5, 0.6), but this remains untested.
+-   **Neutrality**: Where both sentiment scores should be low (e.g., 0.1, 0.1).
+-   **Sarcasm or Irony**: Where the expressed sentiment is the opposite of the intended sentiment.
+`[EVIDENCE QUOTE NEEDED HERE - No valid quotes provided to show framework capabilities not explicitly explored.]`
+
+The perfect performance in this simple test serves as a "control" condition, proving the instrument works under ideal circumstances before it is deployed in more complex and noisy environments.
+
+#### **Methodological Discoveries**
+
+The key methodological discovery is the utility of this minimalist framework as an effective and efficient diagnostic tool. It demonstrates that a simple, two-dimensional structure is sufficient to perform a robust "smoke test" of a complex analytical pipeline. This approach allows for rapid, low-cost verification of system health without the need for extensive, computationally expensive test runs on large corpora. It provides a model for how to build targeted, lightweight validation instruments for computational social science infrastructure.
+`[EVIDENCE QUOTE NEEDED HERE - No valid quotes provided to validate framework utility revelations.]`
+
+#### **Theoretical Implications**
+
+The findings have limited implications for broader sentiment theory due to the experiment's nature. However, the perfect negative correlation (r = -1.00) serves as an empirical anchor for the theoretical concept of sentiment opposition. It provides a data-driven example of a situation where positive and negative sentiment function as mutually exclusive opposites. This reinforces the validity of bipolar sentiment scales in contexts where texts are known to be unipolar, while simultaneously highlighting the importance of the framework's two-dimensional design, which preserves the possibility of measuring non-oppositional sentiment states in other contexts.
+`[EVIDENCE QUOTE NEEDED HERE - No valid quotes provided to support framework foundation extensions.]`
+
+### **6. Limitations & Methodological Assessment**
+
+#### **Statistical Power**
+
+The most significant limitation of this analysis is the extremely small sample size of **N=2**. This has profound implications for the interpretation of the results:
+-   **No Generalizability**: The findings are entirely descriptive of the two documents analyzed and cannot be generalized to any larger population of texts.
+-   **Inferential Statistics**: Standard inferential tests are not applicable. The p-value for the correlation is undefined, and no claims of statistical significance can be made.
+-   **Correlation Artifact**: A correlation coefficient with N=2 will always be +1.0, -1.0, or undefined. The observed r = -1.00 is a mathematical necessity of the two distinct data points rather than a robust statistical discovery.
+
+All conclusions in this report are therefore presented with the explicit caveat that they are based on an exploratory analysis of a dataset with minimal statistical power.
+
+#### **Framework Limitations**
+
+The experiment, by design, only tested the framework under ideal conditions. This reveals a limitation not in the framework itself, but in what this specific analysis can conclude about its capabilities. The framework was not challenged with:
+-   **Nuanced or Ambivalent Content**: Its ability to handle mixed signals is unknown.
+-   **Neutral Text**: Its performance on non-emotional content was not assessed.
+-   **Varying Intensity**: The test documents elicited maximal scores, so the framework's handling of moderate or weak sentiment (e.g., scores in the 0.3-0.6 range) remains unvalidated.
+
+Furthermore, the inconsistent output format for scores (object vs. float) and the resulting inability to analyze `salience` and `confidence` metrics across the dataset limited the depth of the analysis.
+
+#### **Analytical Constraints**
+
+The analysis was constrained to the `raw_score` of the two primary dimensions. Sub-scores like `salience` and `confidence`, which could provide deeper insights into the model's reasoning, were not consistently available in the provided data and thus could not be systematically analyzed. The conclusions are therefore based solely on the final sentiment scores.
+
+#### **Future Research Directions**
+
+Based on the performance and limitations identified, several future research directions are recommended:
+1.  **Corpus Expansion**: Re-run the analysis on a larger, more diverse corpus (N > 30) that includes neutral, ambivalent, and subtly sentimental texts to robustly test the framework's full capabilities.
+2.  **Cross-Dimensional Analysis**: With a larger dataset, investigate the correlation between `positive_sentiment` and `negative_sentiment`. A correlation significantly different from -1.00 would suggest the framework is successfully capturing nuanced sentiment.
+3.  **Sub-Score Analysis**: Ensure consistent data output to enable the analysis of `salience` and `confidence` scores, which could reveal how the model weights evidence and its own certainty.
+4.  **Comparative Analysis**: Benchmark the framework's performance against established, more complex sentiment analysis models to understand its relative accuracy and trade-offs.
+
+### **7. Research Implications & Significance**
+
+#### **Field Contributions**
+
+While not a contribution to sentiment theory, this analysis contributes to the field of computational social science on a methodological level. It provides a clear case study on the design and validation of a minimalist analytical instrument for ensuring the reliability of a data processing pipeline. It underscores the principle that before complex theoretical questions can be addressed, the fundamental integrity of the measurement tools must be empirically verified.
+
+#### **Framework Development**
+
+The findings have direct implications for the framework's status. For its stated purpose as a validation tool, the Sentiment Binary Framework v1.0 is a complete success and requires no further refinement. It is fit for purpose. However, should its role be expanded to actual research, this analysis serves as the critical first step (a baseline validation) that justifies further investment in testing it against more complex data.
+
+#### **Methodological Insights**
+
+This report highlights the importance of a tiered validation strategy. The use of a "nano" corpus and a simple framework to confirm baseline functionality is a powerful and efficient methodological practice. It allows researchers and developers to isolate pipeline failures from framework failures, simplifying debugging and increasing confidence in more complex subsequent analyses. The perfect results obtained here provide a "green light" for the system's use in more demanding applications.
+
+#### **Broader Applications**
+
+Although designed for a specific internal purpose, the framework's demonstrated precision suggests potential for broader applications where high-speed, low-cost, and clear binary sentiment classification is required. This could include applications such as:
+-   Initial filtering of large datasets (e.g., social media posts) into positive/negative bins for more detailed downstream analysis.
+-   Real-time monitoring of simple feedback (e.g., "like/dislike" style reviews).
+-   Serving as a baseline model in ensemble methods for more sophisticated sentiment classifiers.
+
+### **8. Methodological Summary**
+
+The statistical analysis was conducted using a Python script leveraging the `pandas`, `scipy.stats`, and `seaborn` libraries. The methodology adhered to a structured protocol designed to extract and interpret quantitative data from the provided execution results.
+
+First, the raw JSON data, containing scores for two documents, was parsed. A data-cleaning step was implemented to handle an inconsistency in the score structure, ensuring that the `raw_score` for both `positive_sentiment` and `negative_sentiment` was consistently extracted into a `pandas` DataFrame. This DataFrame served as the foundation for all subsequent analysis.
+
+Descriptive statistics were calculated using the `.describe()` method in `pandas`, providing measures of central tendency and dispersion (mean, standard deviation, min, max, quartiles) for each of the two sentiment dimensions.
+
+To assess the relationship between the dimensions, a Pearson correlation analysis was performed using both `pandas.corr()` and `scipy.stats.pearsonr`. This yielded a correlation coefficient (r) quantifying the linear relationship between positive and negative sentiment scores. The script correctly identified that with a sample size of N=2, the p-value for this correlation is mathematically undefined and therefore not meaningful for inferential claims.
+
+Finally, the methodology included a visualization step using `seaborn.scatterplot` to plot the two data points, providing a visual representation of their relationship. The analytical approach explicitly acknowledged the severe limitations imposed by the N=2 sample size, appropriately confining the interpretation of results to a descriptive, rather than inferential, context.
+
+***
+
+## **Appendices**
+
+### **Appendix A: Evidence Appendix**
+
+**Note on Evidence Integration:** No valid textual evidence quotes were provided for integration into the main report. The single quote provided was "No text available" with an "Unknown source," rendering it unusable for illustrating statistical findings or framework dimensions as per the integration protocol. Therefore, this appendix lists the provided (unusable) quote and explains the inability to fulfill the evidence integration requirement.
+
+**Provided (Unusable) Evidence Quote:**
+
+*   **Quote 1:**
+    *   **Text:** "No text available"
+    *   **Source:** Unknown source
+    *   **Relevance:** Not specified
+    *   **Strength:** 5
+    *   **Reason for Non-Integration:** This quote lacks actual textual content and a verifiable source, making it impossible to integrate meaningfully into the report to support any statistical finding, framework dimension, or discovery type.
+
+### **Appendix B: Methodological Appendix**
+
+The statistical analysis was conducted using a Python script leveraging the `pandas`, `scipy.stats`, and `seaborn` libraries. The methodology adhered to a structured protocol designed to extract and interpret quantitative data from the provided execution results.
+
+First, the raw JSON data, containing scores for two documents, was parsed. A data-cleaning step was implemented to handle an inconsistency in the score structure, ensuring that the `raw_score` for both `positive_sentiment` and `negative_sentiment` was consistently extracted into a `pandas` DataFrame. This DataFrame served as the foundation for all subsequent analysis.
+
+Descriptive statistics were calculated using the `.describe()` method in `pandas`, providing measures of central tendency and dispersion (mean, standard deviation, min, max, quartiles) for each of the two sentiment dimensions.
+
+To assess the relationship between the dimensions, a Pearson correlation analysis was performed using both `pandas.corr()` and `scipy.stats.pearsonr`. This yielded a correlation coefficient (r) quantifying the linear relationship between positive and negative sentiment scores. The script correctly identified that with a sample size of N=2, the p-value for this correlation is mathematically undefined and therefore not meaningful for inferential claims.
+
+Finally, the methodology included a visualization step using `seaborn.scatterplot` to plot the two data points, providing a visual representation of their relationship. The analytical approach explicitly acknowledged the severe limitations imposed by the N=2 sample size, appropriately confining the interpretation of results to a descriptive, rather than inferential, context.
+
+The complete Python code for this statistical analysis can be found in the artifact file: `statistical_analysis_xxxxxxxx.json` (replace `xxxxxxxx` with the actual artifact identifier).

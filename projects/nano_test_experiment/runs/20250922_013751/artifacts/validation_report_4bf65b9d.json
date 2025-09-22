@@ -1,0 +1,23 @@
+{
+  "validation_success": true,
+  "issues": [
+    {
+      "category": "capabilities_mismatch",
+      "description": "The corpus contains only 2 documents. Per the v10.0 experiment specification, a sample size of N<4 is suitable only for single case or comparative case analysis, and no inferential statistical tests can be performed.",
+      "impact": "The analysis will be limited to a direct, qualitative comparison of scores between the two documents. This aligns with the experiment's stated goals but prevents any form of statistical validation or generalization.",
+      "fix": "For this minimal validation experiment, no fix is required as the descriptive goal is appropriate for the sample size. If future experiments require statistical analysis, the corpus must be expanded (e.g., N>=10 for descriptive statistics, N>=20 for limited inferential testing).",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    }
+  ],
+  "suggestions": [],
+  "metadata": {
+    "agent": "V2ValidationAgent",
+    "timestamp": "2025-09-21T21:38:17.759119",
+    "experiment_id": "nano_test_experiment",
+    "validation_type": "experiment_coherence"
+  }
+}

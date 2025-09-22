@@ -1,0 +1,23 @@
+{
+  "validation_success": true,
+  "issues": [
+    {
+      "category": "capabilities_mismatch",
+      "description": "The corpus size (N=2) is insufficient for any inferential statistical analysis. The v10.0 experiment specification states that a sample size of N<4 is only suitable for 'single case or comparative case analysis'.",
+      "impact": "The analysis will be limited to a direct comparison of scores between the two documents. It will not be possible to perform statistical tests like t-tests or ANOVA, and no generalizable conclusions can be drawn.",
+      "fix": "No fix is required as the experiment's stated goal is a minimal pipeline validation, for which a simple comparison is appropriate. If the objective were to validate statistical analysis capabilities, the corpus would need to be expanded to meet minimum sample size requirements (e.g., N>10 per group).",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    }
+  ],
+  "suggestions": [],
+  "metadata": {
+    "agent": "V2ValidationAgent",
+    "timestamp": "2025-09-21T22:02:29.276623",
+    "experiment_id": "nano_test_experiment",
+    "validation_type": "experiment_coherence"
+  }
+}

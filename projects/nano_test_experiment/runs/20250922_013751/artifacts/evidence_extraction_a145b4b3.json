@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250921_213817_1",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "evidence_extraction": "```json\n[\n  \"There is no positive sentiment expressed regarding the proposed industrial zoning changes or the current situation described in the document. Any slightly positive phrasing refers to the *resistance* or the inherent *value* of what is being threatened, not the subject itself.\",\n  \"The proposed industrial zoning changes represent a [NEGATIVE_SENTIMENT: catastrophic betrayal of public trust and an assault on our community's well-being.]\",\n  \"This is [NEGATIVE_SENTIMENT: not progress; it is a reckless, shortsighted capitulation to corporate interests over human lives.] The complete [NEGATIVE_SENTIMENT: lack of transparency and the dismissive attitude from officials have only fueled the growing sense of despair and anger.]\"\n]\n```",
+  "document_index": 1,
+  "timestamp": "2025-09-22T01:39:01.182272+00:00"
+}

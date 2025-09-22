@@ -1,0 +1,9 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250921_214637_0",
+  "step": "derived_metrics",
+  "model_used": "N/A",
+  "derived_metrics": "Framework defines no derived metrics - skipping calculation",
+  "has_derived_metrics": false,
+  "document_index": 0,
+  "timestamp": "2025-09-22T01:47:08.550179+00:00"
+}

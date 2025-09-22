@@ -228,7 +228,7 @@ class TwoStageSynthesisAgent(StandardAgent):
             stage1_context = self._prepare_stage1_context(run_context)
             
             # Create the Stage 1 prompt with all necessary data
-            stage1_prompt = self._create_stage1_prompt(stage1_context, run_context)
+            stage1_prompt = self._create_stage1_prompt(stage1_context)
             
             # Execute Stage 1 analysis with Gemini Pro
             self.logger.info(f"Executing Stage 1 analysis with {self.stage1_model}")
@@ -312,7 +312,7 @@ synthesis_method: two_stage_fallback
 """
                 return no_evidence_report
             
-            # Create the Stage 2 prompt with Stage 1 report and evidence
+            # Create the Stage 2 prompt with Stage 1 report and raw evidence (THIN: no parsing)
             stage2_prompt = self._create_stage2_prompt(stage1_report, curated_evidence)
             
             # Execute Stage 2 integration with Gemini Flash
@@ -341,7 +341,7 @@ synthesis_method: two_stage_fallback
                 {
                     "model_used": self.stage2_model,
                     "response_length": len(response),
-                    "evidence_count": len(curated_evidence),
+                    "evidence_content_length": len(curated_evidence),
                     "temperature": 0.2
                 }
             )
@@ -433,11 +433,11 @@ synthesis_method: two_stage_with_evidence
             self.logger.error(f"Failed to prepare Stage 1 context: {e}")
             return {}
     
-    def _create_stage1_prompt(self, context: Dict[str, Any], run_context: RunContext) -> str:
+    def _create_stage1_prompt(self, context: Dict[str, Any]) -> str:
         """Create the complete Stage 1 prompt with all context data."""
         
         # Read statistical results directly from artifacts
-        statistical_summary = self._read_statistical_artifacts(run_context)
+        statistical_summary = self._read_statistical_artifacts(context.get("run_context"))
         
         # Create the complete prompt by combining template with context
         prompt = f"""{self.stage1_prompt}
@@ -494,10 +494,10 @@ Please generate a comprehensive framework-driven analysis report following the S
             self.logger.error(f"Failed to read statistical artifacts: {e}")
             return f"Error reading statistical artifacts: {str(e)}"
     
-    def _prepare_curated_evidence(self, run_context: RunContext) -> List[Dict[str, Any]]:
-        """Prepare curated evidence from IntelligentEvidenceRetrievalAgent artifacts."""
+    def _prepare_curated_evidence(self, run_context: RunContext) -> str:
+        """Prepare raw curated evidence from IntelligentEvidenceRetrievalAgent artifacts (THIN: no parsing)."""
         try:
-            curated_evidence = []
+            raw_evidence_content = []
             
             # Look for curated evidence artifacts from IntelligentEvidenceRetrievalAgent
             if hasattr(run_context, 'evidence_artifacts') and run_context.evidence_artifacts:
@@ -512,90 +512,62 @@ Please generate a comprehensive framework-driven analysis report following the S
                             artifact_data.get('agent_name') == 'IntelligentEvidenceRetrievalAgent' and
                             'curated_evidence' in artifact_data):
                             
+                            # THIN: Get raw curation response without parsing
                             evidence_content = artifact_data.get('curated_evidence', {})
-                            if isinstance(evidence_content, dict) and 'quotes' in evidence_content:
-                                curated_evidence.extend(evidence_content['quotes'])
+                            if isinstance(evidence_content, dict) and 'raw_curation_response' in evidence_content:
+                                raw_response = evidence_content.get('raw_curation_response', '')
+                                if raw_response:
+                                    raw_evidence_content.append(raw_response)
                                 
                     except Exception as e:
                         self.logger.warning(f"Failed to load evidence artifact {artifact_hash}: {e}")
                         continue
             
-            self.logger.info(f"Prepared {len(curated_evidence)} curated evidence quotes")
-            return curated_evidence
+            # Join all raw evidence content
+            combined_evidence = "\n\n--- EVIDENCE CURATION ---\n\n".join(raw_evidence_content)
+            self.logger.info(f"Prepared raw curated evidence content ({len(combined_evidence)} characters)")
+            return combined_evidence
             
         except Exception as e:
             self.logger.error(f"Failed to prepare curated evidence: {e}")
-            return []
+            return ""
     
-    def _create_stage2_prompt(self, stage1_report: str, curated_evidence: List[Dict[str, Any]]) -> str:
-        """Create the complete Stage 2 prompt with Stage 1 report and evidence."""
+    def _create_stage2_prompt(self, stage1_report: str, raw_curated_evidence: str) -> str:
+        """Create the complete Stage 2 prompt with Stage 1 report and raw evidence (THIN: no parsing)."""
         
-        # Format evidence for the prompt
-        evidence_summary = self._format_curated_evidence(curated_evidence)
-        
-        # Create the complete Stage 2 prompt
+        # Create the complete Stage 2 prompt with raw evidence
         prompt = f"""{self.stage2_prompt}
 
 **STAGE 1 REPORT TO ENHANCE:**
 {stage1_report}
 
 **CURATED EVIDENCE FOR INTEGRATION:**
-{evidence_summary}
+{raw_curated_evidence if raw_curated_evidence else "No curated evidence available"}
 
 Please enhance the Stage 1 report by strategically integrating the curated evidence quotes throughout the document, following the Stage 2 protocol outlined above. Preserve all analytical claims and conclusions from Stage 1 while bringing them to life with supporting evidence."""
 
         return prompt
     
-    def _format_curated_evidence(self, curated_evidence: List[Dict[str, Any]]) -> str:
-        """Format curated evidence for inclusion in the Stage 2 prompt."""
-        if not curated_evidence:
-            return "No curated evidence available"
-        
-        try:
-            formatted_quotes = []
-            
-            for i, quote_data in enumerate(curated_evidence, 1):
-                quote_text = quote_data.get('text', 'No text available')
-                document_source = quote_data.get('document_index', 'Unknown source')
-                relevance = quote_data.get('relevance', 'Not specified')
-                strength = quote_data.get('strength_rating', 'Not rated')
-                
-                formatted_quote = f"""**Quote {i}:**
-Text: "{quote_text}"
-Source: {document_source}
-Relevance: {relevance}
-Strength: {strength}
-"""
-                formatted_quotes.append(formatted_quote)
-            
-            return "\n".join(formatted_quotes)
-            
-        except Exception as e:
-            self.logger.error(f"Failed to format curated evidence: {e}")
-            return f"Error formatting evidence: {str(e)}"
     
     def _create_evidence_appendix(self, run_context: RunContext, final_report: str) -> Optional[str]:
-        """Create evidence appendix organized by statistical conclusion."""
+        """Create evidence appendix with raw curated evidence (THIN: no parsing)."""
         try:
             self.logger.info("Creating evidence appendix")
             
-            # Get curated evidence
-            curated_evidence = self._prepare_curated_evidence(run_context)
+            # Get raw curated evidence (THIN: no parsing)
+            raw_curated_evidence = self._prepare_curated_evidence(run_context)
             
-            if not curated_evidence:
+            if not raw_curated_evidence:
                 self.logger.info("No curated evidence for appendix")
                 return None
             
-            # Create appendix content
-            appendix_content = self._format_evidence_appendix(curated_evidence)
-            
-            # Store as artifact
+            # Store raw evidence as appendix (THIN: no formatting/parsing)
             artifact_data = {
                 "agent_name": self.agent_name,
                 "stage": "evidence_appendix",
                 "timestamp": datetime.now(timezone.utc).isoformat(),
-                "appendix_content": appendix_content,
-                "evidence_count": len(curated_evidence),
+                "raw_evidence_content": raw_curated_evidence,
+                "evidence_content_length": len(raw_curated_evidence),
                 "synthesis_method": "two_stage_with_appendix"
             }
             
@@ -605,58 +577,10 @@ Strength: {strength}
                 experiment_id="evidence_appendix"
             )
             
-            self.logger.info(f"Evidence appendix created with {len(curated_evidence)} quotes")
+            self.logger.info(f"Evidence appendix created with raw content ({len(raw_curated_evidence)} characters)")
             return appendix_hash
             
         except Exception as e:
             self.logger.error(f"Failed to create evidence appendix: {e}")
             return None
     
-    def _format_evidence_appendix(self, curated_evidence: List[Dict[str, Any]]) -> str:
-        """Format evidence appendix with complete attribution and organization."""
-        
-        appendix_sections = [
-            "# Evidence Appendix",
-            "",
-            "This appendix contains all evidence quotes used in the synthesis report, organized for complete audit trail and reproducibility.",
-            "",
-            "## Complete Evidence Inventory",
-            ""
-        ]
-        
-        # Group evidence by source document if possible
-        evidence_by_source = {}
-        for quote_data in curated_evidence:
-            source = quote_data.get('document_index', 'Unknown Source')
-            if source not in evidence_by_source:
-                evidence_by_source[source] = []
-            evidence_by_source[source].append(quote_data)
-        
-        # Format by source
-        for source, quotes in evidence_by_source.items():
-            appendix_sections.append(f"### {source}")
-            appendix_sections.append("")
-            
-            for i, quote_data in enumerate(quotes, 1):
-                quote_text = quote_data.get('text', 'No text available')
-                relevance = quote_data.get('relevance', 'Not specified')
-                strength = quote_data.get('strength_rating', 'Not rated')
-                
-                appendix_sections.extend([
-                    f"**Quote {i}:**",
-                    f'"{quote_text}"',
-                    f"- **Relevance:** {relevance}",
-                    f"- **Strength Rating:** {strength}",
-                    ""
-                ])
-        
-        # Add summary statistics
-        appendix_sections.extend([
-            "## Evidence Summary",
-            f"- **Total Quotes:** {len(curated_evidence)}",
-            f"- **Source Documents:** {len(evidence_by_source)}",
-            f"- **Generated:** {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')}",
-            ""
-        ])
-        
-        return "\n".join(appendix_sections)

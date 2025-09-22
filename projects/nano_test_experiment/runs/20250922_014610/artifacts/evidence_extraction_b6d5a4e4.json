@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250921_214637_1",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-pro",
+  "evidence_extraction": "```json\n[\n  \"good reason\",\n  \"true voice of our community\",\n  \"catastrophic betrayal of public trust and an assault on our community's well-being\",\n  \"devastating and irreversible\"\n]\n```",
+  "document_index": 1,
+  "timestamp": "2025-09-22T01:47:32.881041+00:00"
+}
