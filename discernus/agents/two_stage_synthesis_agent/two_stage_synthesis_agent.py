@@ -590,7 +590,7 @@ Please generate a comprehensive framework-driven analysis report following the S
             self.logger.error(f"Failed to prepare curated evidence: {e}")
             return ""
     
-    def _create_stage2_prompt(self, stage1_report: str, raw_curated_evidence: str) -> str:
+    def _create_stage2_prompt(self, stage1_report: str, raw_evidence: str) -> str:
         """Create the complete Stage 2 prompt with Stage 1 report and raw evidence (THIN: no parsing)."""
         
         # Create the complete Stage 2 prompt with raw evidence
@@ -599,8 +599,8 @@ Please generate a comprehensive framework-driven analysis report following the S
 **STAGE 1 REPORT TO ENHANCE:**
 {stage1_report}
 
-**CURATED EVIDENCE FOR INTEGRATION:**
-{raw_curated_evidence if raw_curated_evidence else "No curated evidence available"}
+**RAW EVIDENCE FOR CURATION AND INTEGRATION:**
+{raw_evidence if raw_evidence else "No evidence available"}
 
 Please enhance the Stage 1 report by strategically integrating the curated evidence quotes throughout the document, following the Stage 2 protocol outlined above. Preserve all analytical claims and conclusions from Stage 1 while bringing them to life with supporting evidence."""
 
