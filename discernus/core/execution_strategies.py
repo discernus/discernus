@@ -212,6 +212,37 @@ class FullExperimentStrategy(ExecutionStrategy):
                 phases_completed.append("statistical")
                 artifacts.extend(statistical_result.artifacts)
                 run_context.update_phase("statistical")
+
+                # Load statistical analysis results into RunContext for synthesis agent
+                statistical_artifact_hash = None
+                for artifact in statistical_result.artifacts:
+                    if artifact.get("type") == "statistical_analysis":
+                        statistical_artifact_hash = artifact.get("metadata", {}).get("artifact_hash")
+                        break
+                
+                if statistical_artifact_hash:
+                    try:
+                        stats_content_bytes = storage.get_artifact(statistical_artifact_hash)
+                        stats_data = json.loads(stats_content_bytes.decode('utf-8'))
+                        run_context.statistical_results = stats_data.get("statistical_analysis_content")
+                        audit.log_agent_event("FullExperimentStrategy", "statistical_results_loaded", {
+                            "statistical_artifact_hash": statistical_artifact_hash,
+                            "content_length": len(run_context.statistical_results) if run_context.statistical_results else 0
+                        })
+                    except Exception as e:
+                        audit.log_agent_event("FullExperimentStrategy", "statistical_results_load_error", {
+                            "error": str(e),
+                            "statistical_artifact_hash": statistical_artifact_hash
+                        })
+                        # This is a critical failure, we should not proceed without statistical results
+                        return ExperimentResult(
+                            success=False,
+                            phases_completed=phases_completed,
+                            artifacts=artifacts,
+                            metadata=metadata,
+                            error_message=f"Failed to load critical statistical results: {str(e)}"
+                        )
+
                 audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "statistical"})
             
             # Phase 4: Evidence retrieval
@@ -674,6 +705,37 @@ class StatisticalPrepStrategy(ExecutionStrategy):
                 phases_completed.append("statistical")
                 artifacts.extend(statistical_result.artifacts)
                 run_context.update_phase("statistical")
+
+                # Load statistical analysis results into RunContext for synthesis agent
+                statistical_artifact_hash = None
+                for artifact in statistical_result.artifacts:
+                    if artifact.get("type") == "statistical_analysis":
+                        statistical_artifact_hash = artifact.get("metadata", {}).get("artifact_hash")
+                        break
+                
+                if statistical_artifact_hash:
+                    try:
+                        stats_content_bytes = storage.get_artifact(statistical_artifact_hash)
+                        stats_data = json.loads(stats_content_bytes.decode('utf-8'))
+                        run_context.statistical_results = stats_data.get("statistical_analysis_content")
+                        audit.log_agent_event("FullExperimentStrategy", "statistical_results_loaded", {
+                            "statistical_artifact_hash": statistical_artifact_hash,
+                            "content_length": len(run_context.statistical_results) if run_context.statistical_results else 0
+                        })
+                    except Exception as e:
+                        audit.log_agent_event("FullExperimentStrategy", "statistical_results_load_error", {
+                            "error": str(e),
+                            "statistical_artifact_hash": statistical_artifact_hash
+                        })
+                        # This is a critical failure, we should not proceed without statistical results
+                        return ExperimentResult(
+                            success=False,
+                            phases_completed=phases_completed,
+                            artifacts=artifacts,
+                            metadata=metadata,
+                            error_message=f"Failed to load critical statistical results: {str(e)}"
+                        )
+
                 audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "statistical"})
             
             # Calculate execution time
