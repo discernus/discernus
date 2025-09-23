@@ -25,7 +25,7 @@ The texts were selected for their:
 - **Venue**: Cory Methodist Church, Cleveland, Ohio
 - **Context**: Delivered during Malcolm X's post-Nation of Islam period, advocating for black nationalism
 - **Length**: Approximately 7,500 words
-- **File**: `malcolm_x_ballot_or_bullet.txt`
+- **File**: `corpus/malcolm_x_ballot_or_bullet.txt`
 
 **Key Themes**:
 - Black nationalism and self-determination
@@ -40,7 +40,7 @@ The texts were selected for their:
 - **Context**: Written while imprisoned for participating in nonviolent demonstrations
 - **Audience**: White moderate clergymen who criticized King's methods
 - **Length**: Approximately 7,000 words
-- **File**: `mlk_letter_from_birmingham_jail.txt`
+- **File**: `corpus/mlk_letter_from_birmingham_jail.txt`
 
 **Key Themes**:
 - Nonviolent direct action and civil disobedience
@@ -134,14 +134,14 @@ name: "mlkmx_civil_rights_speeches"
 version: "1.0.0"
 total_documents: 2
 documents:
-  - filename: "malcolm_x_ballot_or_bullet.txt"
+  - filename: "corpus/malcolm_x_ballot_or_bullet.txt"
     document_id: "malcolm_x_ballot_bullet_1964"
     speaker: "Malcolm X"
     year: 1964
     title: "The Ballot or the Bullet"
     venue: "Cory Methodist Church, Cleveland, Ohio"
     word_count: 7500
-  - filename: "mlk_letter_from_birmingham_jail.txt"
+  - filename: "corpus/mlk_letter_from_birmingham_jail.txt"
     document_id: "mlk_birmingham_jail_1963"
     speaker: "Martin Luther King Jr."
     year: 1963

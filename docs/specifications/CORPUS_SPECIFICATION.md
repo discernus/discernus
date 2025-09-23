@@ -68,11 +68,21 @@ documents:
     venue: "US Capitol"
 ```
 
+**Important**: Filenames are **relative to the corpus directory**. Do NOT include `corpus/` prefix in filenames.
+
 ### ❌ **Bad: Implicit Meaning from Directory Structure**
 ```yaml
 documents:
   - filename: "campaign_2024/primary_speeches/speech1.txt"
     # Missing political_phase, speech_type - system cannot infer meaning
+    speaker: "Donald Trump"
+    date: "2024-01-15"
+```
+
+### ❌ **Bad: Incorrect Path Prefix**
+```yaml
+documents:
+  - filename: "corpus/campaign_2024/speech1.txt"  # WRONG: includes corpus/ prefix
     speaker: "Donald Trump"
     date: "2024-01-15"
 ```
@@ -151,6 +161,7 @@ documents:
 
 ### Document Requirements  
 - ✅ All listed documents must exist in `corpus/` directory (including nested paths)
+- ✅ Document filenames must be **relative to the corpus directory** (no `corpus/` prefix)
 - ✅ Document filenames must match exactly (case-sensitive, including path separators)
 - ✅ Documents must be readable text files (.txt, .md preferred)
 - ✅ No empty or corrupted files

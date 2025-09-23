@@ -1,0 +1,243 @@
+---
+agent_name: TwoStageSynthesisAgent
+stage: evidence_appendix
+timestamp: 2025-09-23 18:13:00 UTC
+evidence_content_length: 18888
+synthesis_method: two_stage_with_appendix
+---
+
+Here is the curated evidence, highlighting quotes that exemplify the statistically significant CFF dimensions for Martin Luther King Jr. and Malcolm X, demonstrating their opposing rhetorical strategies.
+
+---
+### **Curated Evidence for Rhetorical Opposition and CFF Discriminant Power**
+
+**Statistical Targets:**
+*   High scores in Individual Dignity, Hope, Amity, Cohesive Goals (MLK Jr.)
+*   High scores in Tribal Dominance, Fear, Enmity, Fragmentative Goals (Malcolm X)
+*   Contrasting Full Cohesion Index scores (+0.56 vs. -0.43)
+
+---
+### **Document 0: Malcolm X - "The Ballot or the Bullet" (1964)**
+*(Focus: Tribal Dominance, Fear, Enmity, Fragmentative Goals)*
+
+1.  **Document index:** 0
+    **Exact quote text:** "The political philosophy of black nationalism only means that the black man should control the politics and the politicians in his own community."
+    **Statistical relevance:** Tribal Dominance (explicit advocacy for group self-governance and control)
+    **Strength rating:** 5
+2.  **Document index:** 0
+    **Exact quote text:** "The time when white people can come in our community and get us to vote for them so that they can be our political leaders and tell us what to do and what not to do is long gone."
+    **Statistical relevance:** Enmity (clear rejection of external group's influence and leadership)
+    **Strength rating:** 4
+3.  **Document index:** 0
+    **Exact quote text:** "making him master of his own community."
+    **Statistical relevance:** Tribal Dominance (emphasis on group self-mastery and control)
+    **Strength rating:** 5
+4.  **Document index:** 0
+    **Exact quote text:** "freedom for everybody or freedom for nobody."
+    **Statistical relevance:** Fragmentative Goals (implies the current system is fundamentally flawed and must be overturned if it doesn't deliver universal freedom, advocating for radical change)
+    **Strength rating:** 3
+5.  **Document index:** 0
+    **Exact quote text:** "When the government of South Africa began to trample upon the human rights of the people of South Africa they were taken to the U.N."
+    **Statistical relevance:** Enmity (frames the US government as an oppressor akin to South Africa, fostering antagonism)
+    **Strength rating:** 3
+6.  **Document index:** 0
+    **Exact quote text:** "We have injected ourselves into the civil rights struggle. And we intend to expand it from the level of civil rights to the level of human rights."
+    **Statistical relevance:** Fragmentative Goals (advocates for a radical shift in the struggle's scope and approach, challenging existing frameworks)
+    **Strength rating:** 3
+7.  **Document index:** 0
+    **Exact quote text:** "Whenever you got a racial powder keg sitting in your lap, you're in more trouble than if you had an atomic powder keg sitting in your lap."
+    **Statistical relevance:** Fear (evokes extreme danger, instability, and potential for violence)
+    **Strength rating:** 5
+8.  **Document index:** 0
+    **Exact quote text:** "If you black you were born in jail, in the North as well as the South."
+    **Statistical relevance:** Fear (evokes a pervasive sense of entrapment, oppression, and lack of freedom)
+    **Strength rating:** 5
+9.  **Document index:** 0
+    **Exact quote text:** "America is just as much a colonial power as England ever was. ... Second-class citizenship is nothing but 20th slavery."
+    **Statistical relevance:** Fear (evokes continued oppression and lack of freedom); Enmity (demonizes America as a colonial oppressor)
+    **Strength rating:** 5
+10. **Document index:** 0
+    **Exact quote text:** "The economic philosophy of black nationalism only means that we should own and operate and control the economy of our community."
+    **Statistical relevance:** Tribal Dominance (explicit advocacy for group economic self-sufficiency and control)
+    **Strength rating:** 5
+11. **Document index:** 0
+    **Exact quote text:** "And you and I have to make a start. And the best place to start is right in the community where we live."
+    **Statistical relevance:** Tribal Dominance (focus on internal community action and self-reliance)
+    **Strength rating:** 4
+12. **Document index:** 0
+    **Exact quote text:** "This is a philosophy that eliminates the necessity for division and argument, 'cause if you're black, you should be thinking black."
+    **Statistical relevance:** Tribal Dominance (emphasizes internal group cohesion and racial identity, implicitly excluding others)
+    **Strength rating:** 4
+13. **Document index:** 0
+    **Exact quote text:** "The white man, the white man is too intelligent to let someone else come and gain control of the economy of his community. But you will let anybody come in and control the economy of your community..."
+    **Statistical relevance:** Tribal Dominance (advocates for black people to emulate white people's group-centric control); Enmity (highlights external control as a negative, fostering an "us vs. them" mentality)
+    **Strength rating:** 4
+14. **Document index:** 0
+    **Exact quote text:** "And because these Negroes, who have been misled, misguided, are breaking their necks to take their money and spend it with the Man, the Man is becoming richer and richer, and you're becoming poorer and poorer."
+    **Statistical relevance:** Enmity (identifies "the Man" as an antagonist in a zero-sum economic struggle); Fear (evokes fear of continued impoverishment)
+    **Strength rating:** 5
+15. **Document index:** 0
+    **Exact quote text:** "We don't see any American dream. We've experienced only the American nightmare."
+    **Statistical relevance:** Fear (evokes a sense of dread, hopelessness, and lack of safety/well-being)
+    **Strength rating:** 5
+16. **Document index:** 0
+    **Exact quote text:** "Woolworth didn't start out big like they are today; they started out with a dime store, and expanded, and expanded, and expanded until today they are all over the country and all over the world and they getting some of everybody's money."
+    **Statistical relevance:** Tribal Dominance (used as an example of economic self-sufficiency and growth that black businesses should emulate for their community)
+    **Strength rating:** 3
+17. **Document index:** 0
+    **Exact quote text:** "General Motors, the same way, it didn't start out like it is."
+    **Statistical relevance:** Tribal Dominance (similar to above, an example for black economic self-sufficiency)
+    **Strength rating:** 3
+18. **Document index:** 0
+    **Exact quote text:** "He's not wrong. He got sense enough to look out for himself."
+    **Statistical relevance:** Tribal Dominance (justifies group self-interest and self-preservation, advocating for black people to adopt a similar stance)
+    **Strength rating:** 4
+19. **Document index:** 0
+    **Exact quote text:** "I see some enemies."
+    **Statistical relevance:** Enmity (direct and explicit declaration of the presence of enemies)
+    **Strength rating:** 5
+20. **Document index:** 0
+    **Exact quote text:** "Anytime you have to rely upon your enemy for a job, you're in bad shape. When you — and he is your enemy."
+    **Statistical relevance:** Enmity (explicit identification of the "enemy" and the vulnerability it creates)
+    **Strength rating:** 5
+21. **Document index:** 0
+    **Exact quote text:** "Not only is he a crook, he's a hypocrite. Here he is standing up in front of other people, Uncle Sam, with the blood of your and mine mothers and fathers on his hands. With the blood dripping down his jaws like a bloody-jawed wolf."
+    **Statistical relevance:** Enmity (extreme demonization and dehumanization of "Uncle Sam" / the white power structure)
+    **Strength rating:** 5
+22. **Document index:** 0
+    **Exact quote text:** "we got to unite. We got to work together in unity and harmony."
+    **Statistical relevance:** Tribal Dominance (call for internal group cohesion and unity for the purpose of group strength and self-determination)
+    **Strength rating:** 4
+23. **Document index:** 0
+    **Exact quote text:** "brothers and sisters and friends, and I see some enemies."
+    **Statistical relevance:** Enmity (explicitly identifies enemies alongside internal group members, reinforcing the "us vs. them" dynamic)
+    **Strength rating:** 5
+24. **Document index:** 0
+    **Exact quote text:** "Revolutions overturn systems. Revolutions destroy systems."
+    **Statistical relevance:** Fragmentative Goals (explicitly advocates for the destruction of existing systems)
+    **Strength rating:** 5
+25. **Document index:** 0
+    **Exact quote text:** "I think that separation will get me freedom."
+    **Statistical relevance:** Fragmentative Goals (explicit goal of separation from the broader society)
+    **Strength rating:** 5
+26. **Document index:** 0
+    **Exact quote text:** "So our people not only have to be reeducated to the importance of supporting black business, but the black man himself has to be made aware of the importance of going into business."
+    **Statistical relevance:** Tribal Dominance (focus on internal economic development and support within the black community)
+    **Strength rating:** 4
+27. **Document index:** 0
+    **Exact quote text:** "bring black people together and elevate black people, join that church."
+    **Statistical relevance:** Tribal Dominance (focus on internal group cohesion and elevation)
+    **Strength rating:** 4
+28. **Document index:** 0
+    **Exact quote text:** "the gospel of black nationalism, as I told you, means you should control your own, the politics of your community, the economy of your community, and all of the society in which you live should be under your control."
+    **Statistical relevance:** Tribal Dominance (very strong, comprehensive advocacy for group control over all aspects of community life)
+    **Strength rating:** 5
+
+---
+### **Document 1: Martin Luther King Jr. - "Letter from Birmingham Jail" (1963)**
+*(Focus: Individual Dignity, Hope, Amity, Cohesive Goals)*
+
+1.  **Document index:** 1
+    **Exact quote text:** "the white power structure left the Negro community with no alternative."
+    **Statistical relevance:** Individual Dignity (critique of a power structure that denies agency and dignity to a community)
+    **Strength rating:** 3
+2.  **Document index:** 1
+    **Exact quote text:** "privileged groups seldom give up their privileges voluntarily."
+    **Statistical relevance:** Individual Dignity (critique of privilege that undermines equality and dignity for others)
+    **Strength rating:** 3
+3.  **Document index:** 1
+    **Exact quote text:** "It gives the segregator a false sense of superiority and the segregated a false sense of inferiority."
+    **Statistical relevance:** Individual Dignity (describes how segregation directly degrades human personality and dignity)
+    **Strength rating:** 5
+4.  **Document index:** 1
+    **Exact quote text:** "Injustice anywhere is a threat to justice everywhere. We are caught in an inescapable network of mutuality, tied in a single garment of destiny. Whatever affects one directly, affects all indirectly."
+    **Statistical relevance:** Individual Dignity (emphasizes universal human connection and shared fate, implying inherent worth of all individuals); Cohesive Goals (highlights interconnectedness as a basis for collective action towards justice)
+    **Strength rating:** 5
+5.  **Document index:** 1
+    **Exact quote text:** "Any law that uplifts human personality is just. Any law that degrades human personality is unjust."
+    **Statistical relevance:** Individual Dignity (explicit definition of justice based on upholding human personality and dignity)
+    **Strength rating:** 5
+6.  **Document index:** 1
+    **Exact quote text:** "Now is the time to lift our national policy from the quicksand of racial injustice to the solid rock of human dignity."
+    **Statistical relevance:** Individual Dignity (explicit call to uphold human dignity as a national goal); Cohesive Goals (advocates for national transformation towards a unified ideal)
+    **Strength rating:** 5
+7.  **Document index:** 1
+    **Exact quote text:** "a frightening racial nightmare."
+    **Statistical relevance:** Hope (acknowledges the severity of the problem, setting the stage for a message of overcoming and future hope)
+    **Strength rating:** 3
+8.  **Document index:** 1
+    **Exact quote text:** "the deep fog of misunderstanding will be lifted from our fear drenched communities."
+    **Statistical relevance:** Hope (anticipates the resolution of fear and misunderstanding, leading to a better future)
+    **Strength rating:** 4
+9.  **Document index:** 1
+    **Exact quote text:** "plagued with inner fears and outer resentments."
+    **Statistical relevance:** Hope (describes the negative emotional state to be overcome, implying a hopeful resolution)
+    **Strength rating:** 3
+10. **Document index:** 1
+    **Exact quote text:** "the shadow of deep disappointment settled upon us. We had no alternative except to prepare for direct action..."
+    **Statistical relevance:** Hope (acknowledges disappointment but frames direct action as a necessary step towards a better, hopeful future)
+    **Strength rating:** 4
+11. **Document index:** 1
+    **Exact quote text:** "I have hope that Mr. Boutwell will be reasonable enough to see the futility of massive resistance to desegregation."
+    **Statistical relevance:** Hope (direct statement of hope for a specific positive outcome and rational engagement)
+    **Strength rating:** 5
+12. **Document index:** 1
+    **Exact quote text:** "I have no despair about the future. I have no fear about the outcome of our struggle in Birmingham...We will reach the goal of freedom in Birmingham and all over the nation, because the goal of America is freedom."
+    **Statistical relevance:** Hope (very strong, explicit rejection of despair and fear, strong affirmation of future success and national ideals)
+    **Strength rating:** 5
+13. **Document index:** 1
+    **Exact quote text:** "rigged system"
+    **Statistical relevance:** Individual Dignity (critique of systemic injustice that denies dignity)
+    **Strength rating:** 2
+14. **Document index:** 1
+    **Exact quote text:** "I commend you, Reverend Stallings, for your Christian stand on this past Sunday, in welcoming Negroes to your worship service on a nonsegregated basis."
+    **Statistical relevance:** Amity (expresses appreciation and positive regard for actions that foster unity and goodwill)
+    **Strength rating:** 5
+15. **Document index:** 1
+    **Exact quote text:** "I commend the Catholic leaders of this state for integrating Spring Hill College several years ago."
+    **Statistical relevance:** Amity (expresses appreciation for actions that foster unity and positive intergroup relations)
+    **Strength rating:** 5
+16. **Document index:** 1
+    **Exact quote text:** "I am thankful, however, that some of our white brothers in the South have grasped the meaning of this social revolution and committed themselves to it...they are big in quality."
+    **Statistical relevance:** Amity (expresses gratitude and positive recognition of allies, fostering goodwill and shared purpose)
+    **Strength rating:** 5
+17. **Document index:** 1
+    **Exact quote text:** "the white moderate, who is more devoted to 'order' than to justice; who prefers a negative peace which is the absence of tension to a positive peace which is the presence of justice;"
+    **Statistical relevance:** Cohesive Goals (critique of obstacles to achieving positive peace and justice, advocating for a more profound, cohesive societal state)
+    **Strength rating:** 4
+18. **Document index:** 1
+    **Exact quote text:** "Governor Wallace gave a clarion call for defiance and hatred."
+    **Statistical relevance:** Cohesive Goals (identifies an obstacle to unity and justice, implicitly advocating for their opposite)
+    **Strength rating:** 3
+19. **Document index:** 1
+    **Exact quote text:** "policemen who view them as 'dirty nigger-lovers.'"
+    **Statistical relevance:** Amity (highlights the absence of amity and presence of hostility from others, implicitly advocating for its resolution)
+    **Strength rating:** 3
+20. **Document index:** 1
+    **Exact quote text:** "My Dear Fellow Clergymen:"
+    **Statistical relevance:** Amity (respectful, collegial address, establishing common ground and goodwill)
+    **Strength rating:** 5
+21. **Document index:** 1
+    **Exact quote text:** "I also hope that circumstances will soon make it possible for me to meet each of you, not as an integrationist or a civil-rights leader but as a fellow clergyman and a Christian brother."
+    **Statistical relevance:** Amity (expresses desire for personal connection and shared identity beyond conflict roles, seeking common ground and brotherhood)
+    **Strength rating:** 5
+22. **Document index:** 1
+    **Exact quote text:** "So the question is not whether we will be extremists, but what kind of extremists we will be. Will we be extremists for hate or for love? Will we be extremists for the preservation of injustice or for the extension of justice?"
+    **Statistical relevance:** Cohesive Goals (explicitly advocates for love and justice, which are cohesive, and rejects hate and injustice, which are fragmentative)
+    **Strength rating:** 5
+23. **Document index:** 1
+    **Exact quote text:** "segregation distorts the soul and damages the personality. It gives the segregator a false sense of superiority and the segregated a false sense of inferiority."
+    **Statistical relevance:** Individual Dignity (describes how segregation directly degrades human personality and dignity)
+    **Strength rating:** 5
+24. **Document index:** 1
+    **Exact quote text:** "We are caught in an inescapable network of mutuality, tied in a single garment of destiny. Whatever affects one directly, affects all indirectly."
+    **Statistical relevance:** Cohesive Goals (explicit statement of shared destiny and interconnectedness, advocating for collective well-being)
+    **Strength rating:** 5
+25. **Document index:** 1
+    **Exact quote text:** "Now is the time to make real the promise of democracy and transform our pending national elegy into a creative psalm of brotherhood. Now is the time to lift our national policy from the quicksand of racial injustice to the solid rock of human dignity."
+    **Statistical relevance:** Cohesive Goals (very strong, explicit goal of brotherhood and national transformation towards a unified, just society); Individual Dignity (explicitly calls for lifting policy to human dignity)
+    **Strength rating:** 5
+26. **Document index:** 1
+    **Exact quote text:** "integration is morally right and because the Negro is your brother."
+    **Statistical relevance:** Cohesive Goals (explicit goal of integration based on brotherhood and moral imperative)
+    **Strength rating:** 5

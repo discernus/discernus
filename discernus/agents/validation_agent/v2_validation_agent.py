@@ -214,7 +214,11 @@ class V2ValidationAgent(StandardAgent):
                         corpus_document_hashes.append(doc_hash)
                         corpus_files.append(filename)
                     else:
-                        self.logger.warning(f"Corpus document not found: {doc_path}")
+                        # Check if the issue is a corpus/ prefix
+                        if filename.startswith('corpus/'):
+                            self.logger.error(f"Corpus document path error: '{filename}' includes 'corpus/' prefix. Filenames should be relative to the corpus directory. Expected: '{filename[7:]}'")
+                        else:
+                            self.logger.warning(f"Corpus document not found: {doc_path}")
             
             inputs['corpus_directory_listing'] = sorted(corpus_files)
             
