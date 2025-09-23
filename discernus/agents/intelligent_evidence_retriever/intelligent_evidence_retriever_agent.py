@@ -207,86 +207,59 @@ class IntelligentEvidenceRetrievalAgent(StandardAgent):
 
     def count_evidence_artifacts(self, run_context: RunContext) -> Tuple[int, float]:
         """
-        Count evidence artifacts and estimate total size without processing them.
+        CAS-native discovery and counting of evidence extraction artifacts.
+        THIN: No parsing, just count and size estimation.
         
         Args:
-            run_context: The RunContext containing analysis artifacts
+            run_context: The RunContext (not used for CAS discovery)
             
         Returns:
             Tuple of (evidence_count, estimated_size_mb)
         """
-        evidence_artifacts = []
-        total_size = 0
+        # CAS discovery: Find evidence_extraction artifacts
+        evidence_artifacts = self.storage.find_artifacts_by_metadata(
+            artifact_type="evidence_extraction"
+        )
         
-        for artifact_hash in run_context.analysis_artifacts:
-            if self.is_evidence_artifact(artifact_hash):
-                evidence_artifacts.append(artifact_hash)
-                # Get actual size of artifact
-                try:
-                    artifact_bytes = self.storage.get_artifact(artifact_hash)
-                    if artifact_bytes:
-                        total_size += len(artifact_bytes)
-                        self.logger.debug(f"Evidence artifact {artifact_hash}: {len(artifact_bytes)} bytes")
-                except Exception as e:
-                    self.logger.warning(f"Could not get size for artifact {artifact_hash}: {e}")
-                    # Fallback to estimated size for clean evidence artifacts
-                    total_size += 1200  # ~1.2KB based on nano experiment observations
+        if not evidence_artifacts:
+            self.logger.warning("No evidence_extraction artifacts found via CAS discovery")
+            return 0, 0.0
+        
+        # Calculate total size
+        total_size = 0
+        for artifact_hash in evidence_artifacts:
+            try:
+                artifact_bytes = self.storage.get_artifact(artifact_hash)
+                if artifact_bytes:
+                    total_size += len(artifact_bytes)
+                    self.logger.debug(f"Evidence artifact {artifact_hash}: {len(artifact_bytes)} bytes")
+            except Exception as e:
+                self.logger.warning(f"Could not get size for artifact {artifact_hash}: {e}")
+                # Fallback to estimated size
+                total_size += 1200  # ~1.2KB based on observations
         
         evidence_count = len(evidence_artifacts)
         evidence_size_mb = total_size / (1024 * 1024)  # Convert to MB
         
-        self.logger.info(f"Evidence inventory: {evidence_count} artifacts, {total_size} bytes ({evidence_size_mb:.2f} MB)")
+        self.logger.info(f"CAS Evidence inventory: {evidence_count} artifacts, {total_size} bytes ({evidence_size_mb:.2f} MB)")
         
         # Store evidence artifact hashes for later use
         self._evidence_artifact_hashes = evidence_artifacts
         
         return evidence_count, evidence_size_mb
 
-    def is_evidence_artifact(self, artifact_hash: str) -> bool:
-        """
-        Check if an artifact is an evidence extraction artifact.
-        
-        Args:
-            artifact_hash: Hash of the artifact to check
-            
-        Returns:
-            True if this is an evidence artifact
-        """
-        try:
-            artifact_bytes = self.storage.get_artifact(artifact_hash)
-            if not artifact_bytes:
-                return False
-            
-            # Try to parse as JSON
-            artifact_data = json.loads(artifact_bytes.decode('utf-8'))
-            
-            # Check if this is an evidence extraction step
-            step = artifact_data.get("step", "")
-            if "evidence_extraction" in step:
-                return True
-            
-            # Also check for evidence_extraction field (additional validation)
-            if "evidence_extraction" in artifact_data:
-                return True
-                
-            return False
-            
-        except (json.JSONDecodeError, UnicodeDecodeError, KeyError) as e:
-            self.logger.debug(f"Could not parse artifact {artifact_hash} as evidence: {e}")
-            return False
-        except Exception as e:
-            self.logger.warning(f"Unexpected error checking artifact {artifact_hash}: {e}")
-            return False
+    # REMOVED: is_evidence_artifact() - CAS discovery eliminates need for parsing-based identification
 
     def get_evidence_artifact_details(self, run_context: RunContext) -> List[Dict[str, Any]]:
         """
-        Get detailed information about evidence artifacts for planning purposes.
+        Get structured evidence artifact details for orchestration logic.
+        NOTE: This returns structured data for software coordination, not LLM processing.
         
         Args:
-            run_context: The RunContext containing analysis artifacts
+            run_context: The RunContext (not used for CAS discovery)
             
         Returns:
-            List of evidence artifact details
+            List of evidence artifact details for orchestration
         """
         evidence_details = []
         
@@ -298,6 +271,7 @@ class IntelligentEvidenceRetrievalAgent(StandardAgent):
             try:
                 artifact_bytes = self.storage.get_artifact(artifact_hash)
                 if artifact_bytes:
+                    # Parse for orchestration logic (not LLM processing)
                     artifact_data = json.loads(artifact_bytes.decode('utf-8'))
                     
                     # Extract key information for planning
@@ -307,31 +281,16 @@ class IntelligentEvidenceRetrievalAgent(StandardAgent):
                         "document_index": artifact_data.get("document_index"),
                         "model_used": artifact_data.get("model_used"),
                         "timestamp": artifact_data.get("timestamp"),
-                        "analysis_id": artifact_data.get("analysis_id")
+                        "analysis_id": artifact_data.get("analysis_id"),
+                        "quote_count": 0  # Simplified - let LLM count quotes during processing
                     }
                     
-                    # Count quotes in evidence extraction
-                    evidence_content = artifact_data.get("evidence_extraction", "")
-                    quote_count = 0
-                    if "```json" in evidence_content:
-                        try:
-                            # Extract JSON from markdown code block
-                            json_start = evidence_content.find("```json") + 7
-                            json_end = evidence_content.find("```", json_start)
-                            if json_end > json_start:
-                                quotes_json = evidence_content[json_start:json_end].strip()
-                                quotes = json.loads(quotes_json)
-                                quote_count = len(quotes) if isinstance(quotes, list) else 0
-                        except (json.JSONDecodeError, ValueError):
-                            self.logger.debug(f"Could not parse quotes from artifact {artifact_hash}")
-                    
-                    details["quote_count"] = quote_count
                     evidence_details.append(details)
                     
             except Exception as e:
                 self.logger.warning(f"Could not get details for evidence artifact {artifact_hash}: {e}")
         
-        self.logger.info(f"Evidence details: {len(evidence_details)} artifacts with {sum(d['quote_count'] for d in evidence_details)} total quotes")
+        self.logger.info(f"Evidence details: {len(evidence_details)} artifacts for orchestration")
         return evidence_details
 
     def generate_curation_plan(self, run_context: RunContext, evidence_count: int, evidence_size_mb: float) -> Dict[str, Any]:

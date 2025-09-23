@@ -14,7 +14,7 @@ requiring external infrastructure dependencies.
 import hashlib
 import json
 from pathlib import Path
-from typing import Union, Optional, Dict, Any
+from typing import Union, Optional, Dict, Any, List
 from .security_boundary import ExperimentSecurityBoundary, SecurityError
 import shutil
 
@@ -520,6 +520,60 @@ class LocalArtifactStorage:
             "total_processed": len(orphaned_entries) + len(valid_entries)
         }
     
+    def find_artifacts_by_metadata(self, **filters) -> List[str]:
+        """
+        Find artifact hashes matching metadata filters.
+        
+        Args:
+            **filters: Metadata key-value pairs to match (e.g., artifact_type="score_extraction")
+            
+        Returns:
+            List of artifact hashes matching all filters
+        """
+        matching_hashes = []
+        
+        for hash_id, info in self.registry.items():
+            metadata = info.get("metadata", {})
+            
+            # Check if all filters match
+            matches = True
+            for key, value in filters.items():
+                if metadata.get(key) != value:
+                    matches = False
+                    break
+            
+            if matches:
+                matching_hashes.append(hash_id)
+        
+        return matching_hashes
+    
+    def count_artifacts_by_type(self, artifact_type: str) -> int:
+        """
+        Count artifacts of a specific type.
+        
+        Args:
+            artifact_type: The artifact type to count
+            
+        Returns:
+            Number of artifacts of that type
+        """
+        return len(self.find_artifacts_by_metadata(artifact_type=artifact_type))
+    
+    def get_artifact_metadata(self, hash_id: str) -> Dict[str, Any]:
+        """
+        Get metadata for a specific artifact.
+        
+        Args:
+            hash_id: SHA-256 hash of the artifact
+            
+        Returns:
+            Metadata dictionary for the artifact
+        """
+        if hash_id not in self.registry:
+            raise LocalArtifactStorageError(f"Artifact not found in registry: {hash_id}")
+        
+        return self.registry[hash_id].get("metadata", {})
+
     def _get_timestamp(self) -> str:
         """Get current timestamp in ISO format."""
         from datetime import datetime, timezone

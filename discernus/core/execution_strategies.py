@@ -933,9 +933,20 @@ class ResumeFromAnalysisStrategy(ExecutionStrategy):
             # THIN PRINCIPLE: Orchestrator handles file I/O, not agents
             framework_content = self._load_framework_content(Path(run_context.framework_path))
             corpus_manifest_path = Path(run_context.corpus_path)
+            corpus_documents = self._load_corpus_documents(corpus_manifest_path)
             corpus_manifest_content = corpus_manifest_path.read_text(encoding='utf-8')
 
+            if not corpus_documents:
+                return ExperimentResult(
+                    success=False,
+                    phases_completed=phases_completed,
+                    artifacts=artifacts,
+                    metadata=metadata,
+                    error_message="Failed to load corpus documents"
+                )
+
             run_context.metadata["framework_content"] = framework_content
+            run_context.metadata["corpus_documents"] = corpus_documents
             run_context.metadata["corpus_manifest_content"] = corpus_manifest_content
 
             # Load analysis artifacts from the most recent completed analysis run
@@ -1203,4 +1214,38 @@ class ResumeFromAnalysisStrategy(ExecutionStrategy):
             return copied_artifacts
             
         except Exception as e:
+            return None
+
+    def _load_corpus_documents(self, corpus_manifest_path: Path) -> Optional[List[Dict[str, str]]]:
+        """Load individual documents based on the corpus manifest."""
+        try:
+            if not corpus_manifest_path.exists():
+                return None
+            
+            manifest_text = corpus_manifest_path.read_text(encoding='utf-8')
+
+            # Extract YAML block from markdown
+            yaml_match = re.search(r"```yaml\n(.*?)```", manifest_text, re.DOTALL)
+            if not yaml_match:
+                # Assume the whole file is YAML if no markdown fence is found
+                yaml_content = manifest_text
+            else:
+                yaml_content = yaml_match.group(1)
+
+            manifest = yaml.safe_load(yaml_content)
+            
+            documents = []
+            corpus_dir = corpus_manifest_path.parent / 'corpus'
+            
+            for doc_info in manifest.get('documents', []):
+                doc_path = corpus_dir / doc_info['filename']
+                if doc_path.exists():
+                    content = doc_path.read_text(encoding='utf-8')
+                    documents.append({
+                        "id": doc_info.get('document_id', doc_info['filename']),
+                        "content": content,
+                    })
+            return documents
+        except Exception as e:
+            # Potentially log this error
             return None

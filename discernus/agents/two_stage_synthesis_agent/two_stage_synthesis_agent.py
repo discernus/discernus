@@ -467,103 +467,87 @@ Please generate a comprehensive framework-driven analysis report following the S
         return prompt
     
     def _read_statistical_artifacts(self, run_context: RunContext) -> str:
-        """Read statistical analysis artifacts directly from storage."""
-        self.logger.info(f"DEBUG: _read_statistical_artifacts called with run_context: {type(run_context)}")
-        
-        if not run_context:
-            self.logger.warning("DEBUG: run_context is None")
-            return "No statistical artifacts available"
-            
-        if not hasattr(run_context, 'statistical_artifacts'):
-            self.logger.warning("DEBUG: run_context has no statistical_artifacts attribute")
-            return "No statistical artifacts available"
-            
-        self.logger.info(f"DEBUG: run_context.statistical_artifacts = {run_context.statistical_artifacts}")
-        
-        if not run_context.statistical_artifacts:
-            self.logger.warning("DEBUG: run_context.statistical_artifacts is empty")
-            return "No statistical artifacts available"
-        
+        """
+        CAS-native discovery of statistical analysis artifacts.
+        THIN: No parsing, just raw data shuttle to LLM.
+        """
         try:
-            statistical_content = []
+            # CAS discovery: Find statistical_analysis artifacts
+            statistical_artifacts = self.storage.find_artifacts_by_metadata(
+                artifact_type="statistical_analysis"
+            )
             
-            for artifact_hash in run_context.statistical_artifacts:
+            if not statistical_artifacts:
+                self.logger.warning("No statistical_analysis artifacts found via CAS discovery")
+                return "No statistical artifacts available"
+            
+            self.logger.info(f"Found {len(statistical_artifacts)} statistical artifacts via CAS discovery")
+            
+            # THIN: Collect raw artifact content without parsing
+            raw_statistical_content = []
+            
+            for artifact_hash in statistical_artifacts:
                 try:
-                    # Read artifact directly from storage
+                    # Load raw artifact bytes
                     artifact_bytes = self.storage.get_artifact(artifact_hash)
                     if artifact_bytes:
-                        artifact_data = json.loads(artifact_bytes.decode('utf-8'))
-                        
-                        # Extract the statistical analysis content
-                        if 'statistical_analysis' in artifact_data:
-                            statistical_content.append(artifact_data['statistical_analysis'])
+                        # THIN: Just decode to string, no JSON parsing
+                        raw_content = artifact_bytes.decode('utf-8')
+                        raw_statistical_content.append(raw_content)
                         
                 except Exception as e:
-                    self.logger.warning(f"Failed to read statistical artifact {artifact_hash}: {e}")
+                    self.logger.warning(f"Failed to load statistical artifact {artifact_hash}: {e}")
                     continue
             
-            if statistical_content:
-                return "\n\n---\n\n".join(statistical_content)
+            if raw_statistical_content:
+                # Join raw artifacts with separators for LLM processing
+                return "\n\n=== STATISTICAL ARTIFACT SEPARATOR ===\n\n".join(raw_statistical_content)
             else:
-                return "No statistical analysis content found in artifacts"
+                return "No statistical analysis content found"
                 
         except Exception as e:
-            self.logger.error(f"Failed to read statistical artifacts: {e}")
-            return f"Error reading statistical artifacts: {str(e)}"
+            self.logger.error(f"Failed to discover statistical artifacts via CAS: {e}")
+            return f"Error discovering statistical artifacts: {str(e)}"
     
     def _load_raw_evidence_artifacts(self, run_context: RunContext) -> str:
-        """Load ALL raw evidence extraction artifacts from analysis phase (THIN: direct from disk)."""
+        """
+        CAS-native discovery of curated evidence artifacts from Evidence Agent.
+        THIN: No parsing, just raw data shuttle to LLM.
+        Scalability: Uses curated evidence, not raw evidence extraction.
+        """
         try:
-            raw_evidence_quotes = []
+            # CAS discovery: Find curated_evidence artifacts (from Evidence Agent, not Analysis Agent)
+            evidence_artifacts = self.storage.find_artifacts_by_metadata(
+                artifact_type="curated_evidence"
+            )
             
-            # Look for evidence extraction artifacts from analysis phase
-            if hasattr(run_context, 'analysis_artifacts') and run_context.analysis_artifacts:
-                for artifact_hash in run_context.analysis_artifacts:
-                    try:
-                        # Load the artifact
-                        artifact_bytes = self.storage.get_artifact(artifact_hash)
-                        artifact_data = json.loads(artifact_bytes.decode('utf-8'))
+            if not evidence_artifacts:
+                self.logger.warning("No curated_evidence artifacts found via CAS discovery")
+                return "No evidence artifacts available"
+            
+            self.logger.info(f"Found {len(evidence_artifacts)} evidence artifacts via CAS discovery")
+            
+            # THIN: Collect raw artifact content without parsing
+            raw_evidence_content = []
+            
+            for artifact_hash in evidence_artifacts:
+                try:
+                    # Load raw artifact bytes
+                    artifact_bytes = self.storage.get_artifact(artifact_hash)
+                    if artifact_bytes:
+                        # THIN: Just decode to string, no JSON parsing
+                        raw_content = artifact_bytes.decode('utf-8')
+                        raw_evidence_content.append(raw_content)
                         
-                        # Check if this is an evidence extraction artifact
-                        if (isinstance(artifact_data, dict) and 
-                            artifact_data.get('step') == 'evidence_extraction' and
-                            'evidence_extraction' in artifact_data):
-                            
-                            # Extract the raw evidence content
-                            evidence_content = artifact_data.get('evidence_extraction', '')
-                            if evidence_content:
-                                # Parse the JSON array from the evidence extraction
-                                import re
-                                json_match = re.search(r'```json\n(.*?)```', evidence_content, re.DOTALL)
-                                if json_match:
-                                    try:
-                                        quotes = json.loads(json_match.group(1))
-                                        if isinstance(quotes, list):
-                                            for quote in quotes:
-                                                raw_evidence_quotes.append({
-                                                    'text': quote,
-                                                    'document_index': artifact_data.get('document_index'),
-                                                    'source_artifact': artifact_hash[:8]
-                                                })
-                                    except json.JSONDecodeError:
-                                        self.logger.warning(f"Failed to parse evidence JSON from artifact {artifact_hash[:8]}")
-                                        
-                    except Exception as e:
-                        self.logger.warning(f"Failed to load evidence artifact {artifact_hash[:8]}: {e}")
-                        continue
+                except Exception as e:
+                    self.logger.warning(f"Failed to load evidence artifact {artifact_hash}: {e}")
+                    continue
             
-            # Format all evidence for Stage 2 prompt
-            if raw_evidence_quotes:
-                evidence_text = "RAW EVIDENCE QUOTES FROM ANALYSIS PHASE:\n\n"
-                for i, quote in enumerate(raw_evidence_quotes, 1):
-                    evidence_text += f"{i}. Document {quote['document_index']}: \"{quote['text']}\"\n"
-                    evidence_text += f"   (Source: {quote['source_artifact']})\n\n"
-                
-                self.logger.info(f"Loaded {len(raw_evidence_quotes)} raw evidence quotes for Stage 2 curation")
-                return evidence_text
+            if raw_evidence_content:
+                # Join raw artifacts with separators for LLM processing
+                return "\n\n=== EVIDENCE ARTIFACT SEPARATOR ===\n\n".join(raw_evidence_content)
             else:
-                self.logger.warning("No evidence extraction artifacts found in analysis phase")
-                return ""
+                return "No evidence extraction content found"
                 
         except Exception as e:
             self.logger.error(f"Failed to load raw evidence artifacts: {e}")

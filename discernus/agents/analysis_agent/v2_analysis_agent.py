@@ -158,20 +158,23 @@ class V2AnalysisAgent(StandardAgent):
                 all_artifacts.extend(doc_artifacts)
             
             # Update RunContext with analysis artifacts for downstream agents
-                artifact_hashes = []
+            # Statistical Agent only needs score_extraction artifacts (clean numerical data)
+            statistical_artifact_hashes = []
             for artifact in all_artifacts:
-                if 'metadata' in artifact and 'artifact_hash' in artifact['metadata']:
-                    artifact_hashes.append(artifact['metadata']['artifact_hash'])
+                if (artifact.get('type') == 'score_extraction' and 
+                    'metadata' in artifact and 'artifact_hash' in artifact['metadata']):
+                    statistical_artifact_hashes.append(artifact['metadata']['artifact_hash'])
 
-            # Update run context
-                run_context.analysis_artifacts = artifact_hashes
+            # Update run context with filtered artifacts for Statistical Agent
+            run_context.analysis_artifacts = statistical_artifact_hashes
             run_context.analysis_results = {
                 "documents_processed": len(documents),
                 "processing_mode": "atomic",
                 "batch_id": batch_id
             }
 
-            self.logger.info(f"Updated run_context with {len(artifact_hashes)} analysis artifacts: {artifact_hashes}")
+            self.logger.info(f"Updated run_context with {len(statistical_artifact_hashes)} statistical artifacts: {statistical_artifact_hashes}")
+            self.logger.info(f"Total artifacts created: {len(all_artifacts)} (filtered to {len(statistical_artifact_hashes)} for Statistical Agent)")
 
             # Analysis completed successfully
             self.unified_logger.success(f"🎉 Atomic document analysis completed - {len(documents)} documents processed")
@@ -398,26 +401,37 @@ Return ONLY the JSON array, no other text."""
                 
             raw_response = composite_result['content'].get('raw_analysis_response', '')
             
-            prompt = f"""Extract the dimensional scores from this analysis result, preserving ALL computational variables:
+            prompt = f"""Extract the dimensional scores AND derived metrics from this analysis result, preserving ALL computational variables:
 
 {raw_response}
 
 EXTRACTION REQUIREMENTS:
 - Extract raw_score, salience, and confidence for each dimension
+- Extract ALL derived metrics (tension indices, cohesion components, cohesion indices)
 - Preserve the complete data structure from the analysis
 - Do not strip away any computational variables
 
 OUTPUT FORMAT:
-Return a JSON object with dimension names as keys and complete score objects as values:
+Return a JSON object with two main sections:
 {{
-  "dimension_name": {{
-    "raw_score": 0.8,
-    "salience": 0.7,
-    "confidence": 0.9
+  "dimensional_scores": {{
+    "dimension_name": {{
+      "raw_score": 0.8,
+      "salience": 0.7,
+      "confidence": 0.9
+    }}
+  }},
+  "derived_metrics": {{
+    "identity_tension": 0.07,
+    "emotional_tension": 0.0,
+    "strategic_contradiction_index": 0.042,
+    "descriptive_cohesion_index": -0.220,
+    "motivational_cohesion_index": -0.131,
+    "full_cohesion_index": -0.136
   }}
 }}
 
-Extract the dimensional scores preserving all computational variables."""
+Extract both dimensional scores AND derived metrics preserving all computational variables."""
 
             # Call LLM
             response = self.gateway.execute_call(

@@ -132,19 +132,22 @@ class V2StatisticalAgent(StandardAgent):
                     error_message=f"Failed to read framework file: {run_context.framework_path}"
                 )
             
-            # Get analysis artifacts (list of artifact hashes)
-            analysis_artifacts = run_context.analysis_artifacts
-            self.logger.info(f"Received analysis_artifacts: {analysis_artifacts}")
-            if not analysis_artifacts:
+            # CAS-native discovery: Find score_extraction artifacts
+            score_artifacts = self.storage.find_artifacts_by_metadata(artifact_type="score_extraction")
+            self.logger.info(f"Discovered {len(score_artifacts)} score_extraction artifacts via CAS")
+            
+            # Contract validation: Check expected count
+            expected_count = len(run_context.metadata.get("corpus_documents", []))
+            if len(score_artifacts) != expected_count:
                 return AgentResult(
                     success=False,
                     artifacts=[],
-                    metadata={"agent_name": self.agent_name, "error": "analysis_artifacts not found"},
-                    error_message="analysis_artifacts not found in RunContext"
+                    metadata={"agent_name": self.agent_name, "error": "contract_violation"},
+                    error_message=f"Contract violation: Expected {expected_count} score_extraction artifacts for {expected_count} corpus documents, found {len(score_artifacts)}"
                 )
             
             # Process atomic score artifacts
-            raw_artifacts = self._collect_atomic_scores(analysis_artifacts)
+            raw_artifacts = self._collect_atomic_scores(score_artifacts)
             if not raw_artifacts:
                 return AgentResult(
                     success=False,
@@ -230,33 +233,31 @@ class V2StatisticalAgent(StandardAgent):
                 error_message=f"V2StatisticalAgent execution failed: {str(e)}"
             )
     
-    def _collect_atomic_scores(self, analysis_artifacts: List[str]) -> List[Dict[str, Any]]:
+    def _collect_atomic_scores(self, score_artifacts: List[str]) -> List[str]:
         """
-        Collect raw artifacts for statistical analysis - NO PARSING.
+        Collect raw score_extraction artifacts for LLM processing.
+        THIN: No parsing, no validation - just raw data shuttle.
         
         Args:
-            analysis_artifacts: List of artifact hashes from analysis phase
+            score_artifacts: List of score_extraction artifact hashes from CAS discovery
             
         Returns:
-            List of raw artifact data for LLM processing
+            List of raw artifact content strings for LLM processing
         """
-        self.logger.info(f"Collecting raw artifacts from {len(analysis_artifacts)} analysis artifacts")
+        self.logger.info(f"Collecting {len(score_artifacts)} raw score_extraction artifacts")
         raw_artifacts = []
         
-        for artifact_hash in analysis_artifacts:
+        for artifact_hash in score_artifacts:
             try:
-                # Load artifact
+                # Load raw artifact bytes
                 artifact_bytes = self.storage.get_artifact(artifact_hash)
                 if not artifact_bytes:
                     self.logger.warning(f"Could not load artifact {artifact_hash}")
                     continue
                 
-                # Store raw artifact data - let LLM figure out how to use it
-                raw_artifacts.append({
-                    "artifact_hash": artifact_hash,
-                    "raw_content": artifact_bytes.decode('utf-8'),
-                    "artifact_type": "analysis_artifact"
-                })
+                # THIN: Just decode to string, no parsing or validation
+                artifact_content = artifact_bytes.decode('utf-8')
+                raw_artifacts.append(artifact_content)
                 
             except Exception as e:
                 self.logger.warning(f"Error loading artifact {artifact_hash}: {e}")
@@ -264,7 +265,8 @@ class V2StatisticalAgent(StandardAgent):
         
         return raw_artifacts
     
-    def _step1_statistical_analysis(self, framework_content: str, raw_artifacts: List[Dict[str, Any]], batch_id: str) -> Optional[str]:
+    
+    def _step1_statistical_analysis(self, framework_content: str, raw_artifacts: List[str], batch_id: str) -> Optional[str]:
         """
         Step 1: Perform statistical analysis internally using LLM capabilities.
         
@@ -285,7 +287,11 @@ class V2StatisticalAgent(StandardAgent):
             experiment_id = getattr(self, '_current_run_context', {}).get('experiment_id', 'unknown')
             corpus_manifest_content = getattr(self, '_current_run_context', {}).get('metadata', {}).get('corpus_manifest_content', 'Corpus manifest not available')
             
-            # Prepare the prompt with actual data
+            # THIN: Pass raw artifact strings directly to LLM
+            # Join all raw artifacts with separators for LLM processing
+            raw_data_block = "\n\n=== ARTIFACT SEPARATOR ===\n\n".join(raw_artifacts)
+            
+            # Prepare the prompt with raw data
             prompt = prompt_template.format(
                 framework_content=framework_content,
                 experiment_name=experiment_id,
@@ -293,7 +299,7 @@ class V2StatisticalAgent(StandardAgent):
                 research_questions="How do rhetorical strategies in this corpus manifest through the Cohesive Flourishing Framework dimensions?",
                 experiment_content=framework_content,
                 data_columns="dimensional_scores, derived_metrics, evidence",
-                sample_data=json.dumps(raw_artifacts[:2], indent=2) if len(raw_artifacts) >= 2 else json.dumps(raw_artifacts, indent=2),
+                sample_data=raw_data_block,
                 corpus_manifest=corpus_manifest_content
             )
 
