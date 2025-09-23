@@ -98,7 +98,7 @@ metadata:
   author: "Discernus Project"
   spec_version: "10.0"
 components:
-  framework: "cff_v10_4.md"
+  framework: "framework.md"
   corpus: "corpus.md"
 # --- End of Machine-Readable Appendix ---
 ```

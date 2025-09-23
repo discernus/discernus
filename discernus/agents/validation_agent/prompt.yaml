@@ -22,6 +22,9 @@ template: |
   CORPUS MANIFEST:
   {corpus_manifest}
 
+  CORPUS DIRECTORY LISTING:
+  {corpus_directory_listing}
+
   SPECIFICATION REFERENCES (Latest Standards):
   {specification_references}
   
@@ -41,7 +44,11 @@ template: |
   - File co-location: Warn if framework/corpus files aren't in same directory, but don't block if files are accessible
   - Version compatibility: Warn if spec_version isn't "10.0", but don't block if experiment is functional
   
-  THIRD: Validate Trinity coherence - do Framework (WHY), Experiment (HOW), and Corpus (WHAT) work together? Focus on actual incompatibilities, not minor issues.
+  THIRD: Validate Trinity coherence - do Framework (WHY), Experiment (HOW), and Corpus (WHAT) work together? Focus on actual incompatibilities, not minor issues:
+  - Framework name consistency: Verify that the framework name in experiment.md matches the actual framework.md content
+  - Corpus file existence: Check that all files listed in corpus.md actually exist in the corpus directory
+  - No orphaned files: Verify that all files in the corpus directory are documented in corpus.md
+  - File path consistency: Ensure all file references are correct and accessible
   
   FOURTH: Check capabilities alignment - warn about potential limitations but don't block unless the experiment is truly impossible:
   - Statistical tests: Warn if tests may be underpowered, but don't block small sample experiments

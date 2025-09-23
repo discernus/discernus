@@ -23,8 +23,11 @@ class RunContext:
     
     # Core experiment data
     experiment_id: str
-    framework_path: str
-    corpus_path: str
+    experiment_dir: str  # Path to experiment directory containing experiment.md, framework.md, corpus.md
+    
+    # File paths (populated by ValidationAgent)
+    framework_path: Optional[str] = None
+    corpus_path: Optional[str] = None
     
     # Analysis phase results
     analysis_results: Optional[Dict[str, Any]] = None
@@ -106,6 +109,7 @@ class RunContext:
         """Convert RunContext to dictionary for serialization"""
         return {
             "experiment_id": self.experiment_id,
+            "experiment_dir": self.experiment_dir,
             "framework_path": self.framework_path,
             "corpus_path": self.corpus_path,
             "analysis_results": self.analysis_results,

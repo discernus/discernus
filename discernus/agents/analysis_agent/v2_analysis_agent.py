@@ -603,7 +603,7 @@ timestamp: {timestamp}
             manifest = yaml.safe_load(yaml_content)
             
             documents = []
-            corpus_dir = corpus_manifest_path.parent
+            corpus_dir = corpus_manifest_path.parent / 'corpus'
             
             for doc_info in manifest.get('documents', []):
                 doc_path = corpus_dir / doc_info['filename']

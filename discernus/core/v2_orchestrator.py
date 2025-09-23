@@ -43,8 +43,7 @@ except ImportError:
 class V2OrchestratorConfig:
     """Configuration for V2 Orchestrator"""
     experiment_id: str
-    framework_path: str
-    corpus_path: str
+    experiment_dir: str  # Path to experiment directory containing experiment.md, framework.md, corpus.md
     output_dir: str
     resume_from_phase: Optional[str] = None
     verification_enabled: bool = True
@@ -92,8 +91,7 @@ class V2Orchestrator:
         # Log orchestrator initialization
         self.audit.log_agent_event("V2Orchestrator", "orchestrator_initialization", {
             "experiment_id": config.experiment_id,
-            "framework_path": config.framework_path,
-            "corpus_path": config.corpus_path,
+            "experiment_dir": config.experiment_dir,
             "resume_from_phase": config.resume_from_phase,
             "verification_enabled": config.verification_enabled
         })
@@ -131,8 +129,7 @@ class V2Orchestrator:
         # Create initial RunContext
         run_context = RunContext(
             experiment_id=self.config.experiment_id,
-            framework_path=self.config.framework_path,
-            corpus_path=self.config.corpus_path
+            experiment_dir=self.config.experiment_dir
         )
         
         # Add orchestrator metadata
@@ -219,6 +216,7 @@ class V2Orchestrator:
         """
         manifest = {
             "experiment_id": run_context.experiment_id,
+            "experiment_dir": run_context.experiment_dir,
             "framework_path": run_context.framework_path,
             "corpus_path": run_context.corpus_path,
             "current_phase": run_context.current_phase,
@@ -288,8 +286,9 @@ class V2Orchestrator:
         """
         run_context = RunContext(
             experiment_id=manifest["experiment_id"],
-            framework_path=manifest["framework_path"],
-            corpus_path=manifest["corpus_path"]
+            experiment_dir=manifest["experiment_dir"],
+            framework_path=manifest.get("framework_path"),
+            corpus_path=manifest.get("corpus_path")
         )
         
         # Restore state from manifest
@@ -318,7 +317,7 @@ class V2Orchestrator:
             snapshots_created = []
             
             # Snapshot experiment.md
-            experiment_path = Path(run_context.framework_path).parent / "experiment.md"
+            experiment_path = Path(run_context.experiment_dir) / "experiment.md"
             if experiment_path.exists():
                 experiment_content = experiment_path.read_text(encoding='utf-8')
                 experiment_hash = hashlib.sha256(experiment_content.encode()).hexdigest()
@@ -327,22 +326,24 @@ class V2Orchestrator:
                 snapshots_created.append(f"experiment_{experiment_hash[:8]}.md")
             
             # Snapshot framework file
-            framework_path = Path(run_context.framework_path)
-            if framework_path.exists():
-                framework_content = framework_path.read_text(encoding='utf-8')
-                framework_hash = hashlib.sha256(framework_content.encode()).hexdigest()
-                snapshot_path = artifacts_dir / f"framework_{framework_hash[:8]}.md"
-                snapshot_path.write_text(framework_content, encoding='utf-8')
-                snapshots_created.append(f"framework_{framework_hash[:8]}.md")
+            if run_context.framework_path:
+                framework_path = Path(run_context.framework_path)
+                if framework_path.exists():
+                    framework_content = framework_path.read_text(encoding='utf-8')
+                    framework_hash = hashlib.sha256(framework_content.encode()).hexdigest()
+                    snapshot_path = artifacts_dir / f"framework_{framework_hash[:8]}.md"
+                    snapshot_path.write_text(framework_content, encoding='utf-8')
+                    snapshots_created.append(f"framework_{framework_hash[:8]}.md")
             
             # Snapshot corpus.md
-            corpus_path = Path(run_context.corpus_path)
-            if corpus_path.exists():
-                corpus_content = corpus_path.read_text(encoding='utf-8')
-                corpus_hash = hashlib.sha256(corpus_content.encode()).hexdigest()
-                snapshot_path = artifacts_dir / f"corpus_{corpus_hash[:8]}.md"
-                snapshot_path.write_text(corpus_content, encoding='utf-8')
-                snapshots_created.append(f"corpus_{corpus_hash[:8]}.md")
+            if run_context.corpus_path:
+                corpus_path = Path(run_context.corpus_path)
+                if corpus_path.exists():
+                    corpus_content = corpus_path.read_text(encoding='utf-8')
+                    corpus_hash = hashlib.sha256(corpus_content.encode()).hexdigest()
+                    snapshot_path = artifacts_dir / f"corpus_{corpus_hash[:8]}.md"
+                    snapshot_path.write_text(corpus_content, encoding='utf-8')
+                    snapshots_created.append(f"corpus_{corpus_hash[:8]}.md")
             
             # Create comprehensive README for the run directory
             self._create_run_readme(artifacts_dir.parent, run_context, snapshots_created)

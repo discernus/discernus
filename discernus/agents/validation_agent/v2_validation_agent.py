@@ -84,15 +84,29 @@ class V2ValidationAgent(StandardAgent):
         try:
             self.log_execution_start(run_context=run_context, **kwargs)
 
-            # 1. Validate and extract necessary data from RunContext
+            # 1. Validate and extract necessary data from RunContext (always needed for file path population)
             validation_inputs = self._validate_and_extract_inputs(run_context)
 
-            # 2. Perform validation using LLM
-            self.logger.info("Performing experiment validation...")
-            validation_result = self._perform_validation(validation_inputs)
+            # 2. Check if LLM validation should be skipped
+            skip_validation = run_context.metadata.get("skip_validation", False)
+            
+            if skip_validation:
+                # Skip LLM validation but still populate file paths
+                self.logger.info("Skipping LLM validation, but file paths have been populated")
+                validation_result = ValidationResult(
+                    success=True,
+                    issues=[],
+                    suggestions=[],
+                    llm_metadata={"agent_name": self.agent_name, "validation_skipped": True}
+                )
+                artifact_hash = None  # No validation artifact when skipped
+            else:
+                # 3. Perform validation using LLM
+                self.logger.info("Performing experiment validation...")
+                validation_result = self._perform_validation(validation_inputs)
 
-            # 3. Store validation results
-            artifact_hash = self._store_validation_results(validation_result, run_context)
+                # 4. Store validation results
+                artifact_hash = self._store_validation_results(validation_result, run_context)
 
             # 4. Check if validation was successful
             if not validation_result.success:
@@ -115,14 +129,16 @@ class V2ValidationAgent(StandardAgent):
                     )
 
             # 5. Log completion and return success
+            artifacts = [artifact_hash] if artifact_hash else []
             result = AgentResult(
                 success=True,
-                artifacts=[artifact_hash],
+                artifacts=artifacts,
                 metadata={
                     "agent_name": self.agent_name,
                     "validation_success": validation_result.success,
                     "issues_count": len(validation_result.issues),
-                    "blocking_issues": len([i for i in validation_result.issues if i.priority == "BLOCKING"])
+                    "blocking_issues": len([i for i in validation_result.issues if i.priority == "BLOCKING"]),
+                    "validation_skipped": skip_validation
                 }
             )
             self.log_execution_complete(result)
@@ -143,28 +159,49 @@ class V2ValidationAgent(StandardAgent):
             raise ValueError("RunContext is required.")
 
         inputs = {}
+        experiment_dir = Path(run_context.experiment_dir)
         
-        # THIN: Read framework and corpus files directly
+        # THIN Architecture: ValidationAgent is the customs inspector
+        # Read all three required files from experiment directory
         try:
-            framework_path = Path(run_context.framework_path)
-            inputs['framework_content'] = framework_path.read_text(encoding='utf-8')
-        except Exception as e:
-            raise ValueError(f"Failed to read framework file {run_context.framework_path}: {e}")
-        
-        try:
-            corpus_path = Path(run_context.corpus_path)
-            inputs['corpus_manifest_content'] = corpus_path.read_text(encoding='utf-8')
-        except Exception as e:
-            raise ValueError(f"Failed to read corpus manifest {run_context.corpus_path}: {e}")
-
-        # Load experiment content from the experiment directory
-        # According to v10.0 spec, all files (experiment.md, framework, corpus) are in the same directory
-        experiment_dir = Path(run_context.framework_path).parent
-        experiment_file_path = experiment_dir / 'experiment.md'
-        if experiment_file_path.exists():
+            # Read experiment.md
+            experiment_file_path = experiment_dir / 'experiment.md'
+            if not experiment_file_path.exists():
+                raise ValueError(f"Experiment file not found: {experiment_file_path}")
             inputs['experiment_content'] = experiment_file_path.read_text(encoding='utf-8')
-        else:
-            raise ValueError(f"Experiment file not found: {experiment_file_path}")
+            
+            # Read framework.md (standardized name)
+            framework_path = experiment_dir / 'framework.md'
+            if not framework_path.exists():
+                raise ValueError(f"Framework file not found: {framework_path}")
+            inputs['framework_content'] = framework_path.read_text(encoding='utf-8')
+            
+            # Read corpus.md
+            corpus_path = experiment_dir / 'corpus.md'
+            if not corpus_path.exists():
+                raise ValueError(f"Corpus manifest file not found: {corpus_path}")
+            inputs['corpus_manifest_content'] = corpus_path.read_text(encoding='utf-8')
+            
+            # List corpus directory contents for file existence validation
+            corpus_dir = experiment_dir / 'corpus'
+            if not corpus_dir.exists():
+                raise ValueError(f"Corpus directory not found: {corpus_dir}")
+            
+            corpus_files = []
+            for file_path in corpus_dir.rglob('*'):
+                if file_path.is_file():
+                    # Get relative path from corpus directory
+                    relative_path = file_path.relative_to(corpus_dir)
+                    corpus_files.append(str(relative_path))
+            
+            inputs['corpus_directory_listing'] = sorted(corpus_files)
+            
+            # Populate RunContext with file paths for downstream agents
+            run_context.framework_path = str(framework_path)
+            run_context.corpus_path = str(corpus_path)
+            
+        except Exception as e:
+            raise ValueError(f"Failed to read experiment files from {experiment_dir}: {e}")
 
         # Load current specifications for compliance validation
         inputs['specification_references'] = self._load_specification_references()
@@ -283,6 +320,7 @@ class V2ValidationAgent(StandardAgent):
             experiment_spec=json.dumps(inputs.get("experiment_content", ""), indent=2),
             framework_spec=inputs.get("framework_content", ""),
             corpus_manifest=json.dumps(inputs.get("corpus_manifest_content", ""), indent=2),
+            corpus_directory_listing=json.dumps(inputs.get("corpus_directory_listing", []), indent=2),
             specification_references=json.dumps(inputs.get("specification_references", {}), indent=2),
             capabilities_registry=capabilities_registry
         )

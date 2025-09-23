@@ -138,12 +138,11 @@ metadata:
 
 # 6.2: Components (Required)
 components:
-  # The filename of the v10.0 Framework file.
-  # Must be in the same directory as this experiment.md.
-  framework: "cff_v10.md"
+  # The framework file must be named "framework.md" and located in the same directory as this experiment.md.
+  # This standardized naming eliminates the need for path parsing and ensures consistent file discovery.
+  framework: "framework.md"
 
-  # The filename of the v8.0 compliant Corpus manifest file.
-  # Must be in the same directory as this experiment.md.
+  # The corpus manifest file must be named "corpus.md" and located in the same directory as this experiment.md.
   corpus: "corpus.md"
 
 # --- End of Machine-Readable Appendix ---
@@ -158,7 +157,9 @@ components:
 -   It must contain a valid YAML appendix.
 -   All required fields (`experiment_name`, `spec_version`, `framework`, `corpus`) must be present.
 -   The `spec_version` in the experiment must be compatible with the `spec_version` in the referenced framework.
--   The files specified in `framework` and `corpus` must exist in the same directory as the `experiment.md` file.
+-   The framework file must be named `framework.md` and located in the same directory as `experiment.md`.
+-   The corpus manifest file must be named `corpus.md` and located in the same directory as `experiment.md`.
+-   The corpus directory must exist and contain the files specified in the corpus manifest.
 
 ### Statistical Analysis Requirements (New in v10.0)
 -   **Corpus Metadata Linkage**: All grouping variables used in statistical analyses MUST either:

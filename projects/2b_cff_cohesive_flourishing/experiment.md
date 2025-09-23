@@ -2,7 +2,7 @@
 
 ## Abstract
 
-This experiment analyzes computational framing patterns in presidential speeches using the Cohesive Flourishing Framework v10.2. The analysis employs a case study approach examining speech patterns across different contexts spanning 2017-2025. The corpus includes 6 presidential speeches representing different speech types and time periods, enabling comprehensive case study analysis of framing dimension evolution and contextual variation.
+This experiment analyzes computational framing patterns in presidential speeches using the Cohesive Flourishing Framework v10.4. The analysis employs a case study approach examining speech patterns across different contexts spanning 2017-2025. The corpus includes 6 presidential speeches representing different speech types and time periods, enabling comprehensive case study analysis of framing dimension evolution and contextual variation.
 
 ## Research Questions
 
@@ -18,7 +18,7 @@ This experiment will produce empirical findings on temporal framing effects, str
 ## Methodology
 
 ### Framework
-**Cohesive Flourishing Framework v10.0** provides:
+**Cohesive Flourishing Framework v10.4** provides:
 - 10-dimensional framing analysis across 5 strategic axes (Identity, Emotional, Success, Relational, Goal)
 - Strategic Contradiction Index (SCI) for coherence measurement
 - JSON-first architecture with enhanced synthesis integration
@@ -77,10 +77,10 @@ metadata:
   author: "Discernus Research Team"
   spec_version: "10.0"
   analysis_type: "case_study"
-  sample_size: 6
+  sample_size: 7
 
 components:
-  framework: "cff_v10.md"
+  framework: "framework.md"
   corpus: "corpus.md"
 
 # --- End of Machine-Readable Appendix ---

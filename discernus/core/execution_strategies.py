@@ -98,34 +98,19 @@ class FullExperimentStrategy(ExecutionStrategy):
         metadata = {}
         
         try:
-            # THIN PRINCIPLE: Pass paths only, let agents read their own files
-            # Validate paths exist but don't read content
-            if not Path(run_context.framework_path).exists():
-                return ExperimentResult(
-                    success=False,
-                    phases_completed=phases_completed,
-                    artifacts=artifacts,
-                    metadata=metadata,
-                    error_message=f"Framework file not found: {run_context.framework_path}"
-                )
-
-            if not Path(run_context.corpus_path).exists():
-                return ExperimentResult(
-                    success=False,
-                    phases_completed=phases_completed,
-                    artifacts=artifacts,
-                    metadata=metadata,
-                    error_message=f"Corpus manifest not found: {run_context.corpus_path}"
-                )
-            # Phase 1: Validation (skip if flag is set)
+            # Phase 1: Validation (always required to populate file paths)
+            # ValidationAgent will populate framework_path and corpus_path
             skip_validation = run_context.metadata.get("skip_validation", False)
-            if "Validation" in agents and not skip_validation:
+            if "Validation" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "validation"})
                 # Show progress to user
                 try:
                     from ..cli_console import rich_console
                     if rich_console:
-                        rich_console.print_info("🔍 Running validation checks...")
+                        if skip_validation:
+                            rich_console.print_info("🔍 Loading experiment files (validation skipped)...")
+                        else:
+                            rich_console.print_info("🔍 Running validation checks...")
                 except ImportError:
                     pass
                 validation_result = agents["Validation"].execute(run_context=run_context)
@@ -301,7 +286,7 @@ class FullExperimentStrategy(ExecutionStrategy):
             manifest = yaml.safe_load(yaml_content)
             
             documents = []
-            corpus_dir = corpus_manifest_path.parent
+            corpus_dir = corpus_manifest_path.parent / 'corpus'
             
             for doc_info in manifest.get('documents', []):
                 doc_path = corpus_dir / doc_info['filename']
@@ -339,6 +324,41 @@ class AnalysisOnlyStrategy(ExecutionStrategy):
         metadata = {}
         
         try:
+            # Phase 1: Validation (always required to populate file paths)
+            skip_validation = run_context.metadata.get("skip_validation", False)
+            if "Validation" in agents:
+                audit.log_agent_event("AnalysisOnlyStrategy", "phase_start", {"phase": "validation"})
+                validation_result = agents["Validation"].execute(run_context=run_context)
+                if not validation_result.success:
+                    return ExperimentResult(
+                        success=False,
+                        phases_completed=phases_completed,
+                        artifacts=artifacts,
+                        metadata=metadata,
+                        error_message=f"Validation failed: {validation_result.error_message}"
+                    )
+                phases_completed.append("validation")
+                audit.log_agent_event("AnalysisOnlyStrategy", "phase_complete", {"phase": "validation"})
+            
+            # Validate paths exist after ValidationAgent has populated them
+            if not run_context.framework_path or not Path(run_context.framework_path).exists():
+                return ExperimentResult(
+                    success=False,
+                    phases_completed=phases_completed,
+                    artifacts=artifacts,
+                    metadata=metadata,
+                    error_message=f"Framework file not found: {run_context.framework_path}"
+                )
+
+            if not run_context.corpus_path or not Path(run_context.corpus_path).exists():
+                return ExperimentResult(
+                    success=False,
+                    phases_completed=phases_completed,
+                    artifacts=artifacts,
+                    metadata=metadata,
+                    error_message=f"Corpus manifest not found: {run_context.corpus_path}"
+                )
+            
             # THIN PRINCIPLE: Orchestrator handles file I/O, not agents
             framework_content = self._load_framework_content(Path(run_context.framework_path))
             corpus_manifest_path = Path(run_context.corpus_path)
@@ -471,7 +491,7 @@ class AnalysisOnlyStrategy(ExecutionStrategy):
             manifest = yaml.safe_load(yaml_content)
             
             documents = []
-            corpus_dir = corpus_manifest_path.parent
+            corpus_dir = corpus_manifest_path.parent / 'corpus'
             
             for doc_info in manifest.get('documents', []):
                 doc_path = corpus_dir / doc_info['filename']
@@ -696,7 +716,7 @@ class StatisticalPrepStrategy(ExecutionStrategy):
             manifest = yaml.safe_load(yaml_content)
             
             documents = []
-            corpus_dir = corpus_manifest_path.parent
+            corpus_dir = corpus_manifest_path.parent / 'corpus'
             
             for doc_info in manifest.get('documents', []):
                 doc_path = corpus_dir / doc_info['filename']
@@ -875,6 +895,41 @@ class ResumeFromAnalysisStrategy(ExecutionStrategy):
         metadata = {}
         
         try:
+            # Phase 1: Validation (always required to populate file paths)
+            skip_validation = run_context.metadata.get("skip_validation", False)
+            if "Validation" in agents:
+                audit.log_agent_event("ResumeFromAnalysisStrategy", "phase_start", {"phase": "validation"})
+                validation_result = agents["Validation"].execute(run_context=run_context)
+                if not validation_result.success:
+                    return ExperimentResult(
+                        success=False,
+                        phases_completed=phases_completed,
+                        artifacts=artifacts,
+                        metadata=metadata,
+                        error_message=f"Validation failed: {validation_result.error_message}"
+                    )
+                phases_completed.append("validation")
+                audit.log_agent_event("ResumeFromAnalysisStrategy", "phase_complete", {"phase": "validation"})
+            
+            # Validate paths exist after ValidationAgent has populated them
+            if not run_context.framework_path or not Path(run_context.framework_path).exists():
+                return ExperimentResult(
+                    success=False,
+                    phases_completed=phases_completed,
+                    artifacts=artifacts,
+                    metadata=metadata,
+                    error_message=f"Framework file not found: {run_context.framework_path}"
+                )
+
+            if not run_context.corpus_path or not Path(run_context.corpus_path).exists():
+                return ExperimentResult(
+                    success=False,
+                    phases_completed=phases_completed,
+                    artifacts=artifacts,
+                    metadata=metadata,
+                    error_message=f"Corpus manifest not found: {run_context.corpus_path}"
+                )
+            
             # THIN PRINCIPLE: Orchestrator handles file I/O, not agents
             framework_content = self._load_framework_content(Path(run_context.framework_path))
             corpus_manifest_path = Path(run_context.corpus_path)

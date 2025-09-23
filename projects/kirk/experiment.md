@@ -187,7 +187,7 @@ metadata:
 
 # 5.2: Components (Required)
 components:
-  framework: "cff_v10_4.md"
+  framework: "framework.md"
   corpus: "corpus.md"
 
 # 5.3: Hypotheses (Optional but Recommended)
