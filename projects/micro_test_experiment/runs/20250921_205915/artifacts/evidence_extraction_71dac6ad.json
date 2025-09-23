@@ -1,8 +1,0 @@
-{
-  "analysis_id": "analysis_v2_analysis_20250921_165946_0",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-pro",
-  "evidence_extraction": "```json\n[\n  \"The launch of the new satellite network is a monumental achievement for our nation's scientific community and a beacon of our technological prowess.\",\n  \"The sense of accomplishment and shared purpose is palpable; this is a clear and decisive victory that will drive prosperity and inspire our next generation of innovators for years to come. The prevailing feeling is one of immense pride and boundless optimism.\",\n  \"No explicit negative sentiment found.\",\n  \"No explicit negative sentiment found.\"\n]\n```",
-  "document_index": 0,
-  "timestamp": "2025-09-21T21:00:06.552716+00:00"
-}

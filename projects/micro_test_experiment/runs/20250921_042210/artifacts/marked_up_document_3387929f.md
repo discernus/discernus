@@ -1,8 +1,0 @@
-{
-  "analysis_id": "analysis_v2_analysis_20250921_002210_3",
-  "step": "markup_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "marked_up_document": "# Document Analysis - Marked Up Text\n\n[NEGATIVE_SENTIMENT: The dam's structural failure and the ensuing flood have created a disastrous humanitarian and ecological crisis.] [NEGATIVE_SENTIMENT: Entire neighborhoods are submerged, thousands have been displaced, and the damage to our infrastructure is catastrophic.] This was [NEGATIVE_SENTIMENT: not an unforeseeable natural disaster; it was the predictable outcome of decades of deferred maintenance and criminal negligence.] [NEGATIVE_SENTIMENT: The emergency response has been appallingly slow and disorganized, leaving stranded residents feeling abandoned and desperate.] [NEGATIVE_SENTIMENT: The situation is a chaotic nightmare, a testament to systemic incompetence.]\n\n[NEGATIVE_SENTIMENT: The long-term consequences are just as dreadful.] [NEGATIVE_SENTIMENT: The toxic sludge released from the flooded industrial zone has caused irreparable harm to our river ecosystem, ensuring that even after the waters recede, the land will remain poisoned for generations.] This [NEGATIVE_SENTIMENT: awful event has exposed the deep-seated rot in our public works administration, where budget cuts and political cronyism took precedence over public safety.] [NEGATIVE_SENTIMENT: The feeling on the ground is one of profound anger and hopelessness, a grim recognition that this entire tragedy was not just predictable, but preventable.] [NEGATIVE_SENTIMENT: The failure is monumental.]",
-  "document_index": 3,
-  "timestamp": "2025-09-21T04:23:32.329884+00:00"
-}

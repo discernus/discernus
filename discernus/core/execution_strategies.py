@@ -135,34 +135,8 @@ class FullExperimentStrategy(ExecutionStrategy):
                 except ImportError:
                     pass
             
-            # Load corpus documents and framework content for agents
-            # THIN PRINCIPLE: Orchestrator handles file I/O, not agents
-            framework_content = self._load_framework_content(Path(run_context.framework_path))
-            corpus_manifest_path = Path(run_context.corpus_path)
-            corpus_documents = self._load_corpus_documents(corpus_manifest_path)
-            corpus_manifest_content = corpus_manifest_path.read_text(encoding='utf-8')
-
-            if not framework_content:
-                return ExperimentResult(
-                    success=False,
-                    phases_completed=phases_completed,
-                    artifacts=artifacts,
-                    metadata=metadata,
-                    error_message="Failed to load framework content"
-                )
-            
-            if not corpus_documents:
-                return ExperimentResult(
-                    success=False,
-                    phases_completed=phases_completed,
-                    artifacts=artifacts,
-                    metadata=metadata,
-                    error_message="Failed to load corpus documents"
-                )
-
-            run_context.metadata["framework_content"] = framework_content
-            run_context.metadata["corpus_documents"] = corpus_documents
-            run_context.metadata["corpus_manifest_content"] = corpus_manifest_content
+            # Pure Postal Service: ValidationAgent has already registered all source files in CAS
+            # Orchestrator just passes hash addresses - no parsing, no file I/O
             
             # Phase 2: Analysis
             if "Analysis" in agents:
@@ -242,7 +216,38 @@ class FullExperimentStrategy(ExecutionStrategy):
 
                 audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "statistical"})
             
-            # Phase 4: Synthesis (Evidence integration now handled within Stage 2)
+            # Phase 4: Evidence retrieval
+            if "Evidence" in agents:
+                audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "evidence"})
+                # Show progress to user
+                try:
+                    from ..cli_console import rich_console
+                    if rich_console:
+                        rich_console.print_info("📖 Retrieving supporting evidence...")
+                except ImportError:
+                    pass
+
+                evidence_result = agents["Evidence"].execute(run_context)
+                if not evidence_result.success:
+                    return ExperimentResult(
+                        success=False,
+                        phases_completed=phases_completed,
+                        artifacts=artifacts,
+                        metadata=metadata,
+                        error_message=f"Evidence retrieval failed: {evidence_result.error_message}"
+                    )
+                phases_completed.append("evidence")
+                artifacts.extend(evidence_result.artifacts)
+                run_context.update_phase("evidence")
+
+                # CAS-everywhere: Evidence artifacts are discoverable via metadata, no need to pass pointers
+                audit.log_agent_event("FullExperimentStrategy", "evidence_artifacts_created", {
+                    "evidence_artifact_count": len(evidence_result.artifacts)
+                })
+
+                audit.log_agent_event("FullExperimentStrategy", "phase_complete", {"phase": "evidence"})
+            
+            # Phase 5: Synthesis
             if "Synthesis" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "synthesis"})
                 # Show progress to user

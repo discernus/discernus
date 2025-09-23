@@ -1,0 +1,52 @@
+{
+  "validation_success": false,
+  "issues": [
+    {
+      "category": "specification",
+      "description": "The 'dimensions' and 'derived_metrics' sections are incorrectly nested within the 'analysis_variants.default' block in the framework's YAML appendix. According to the v10.0 specification, 'dimensions', 'derived_metrics', and 'analysis_variants' must be separate, top-level keys.",
+      "impact": "The system will fail to parse the analytical dimensions and derived metrics, making it impossible to perform the analysis or calculate results. This is a critical configuration error that will cause the experiment to fail.",
+      "fix": "In framework.md, move the 'dimensions' and 'derived_metrics' blocks out of the 'analysis_variants' block so they are at the same indentation level as 'metadata' and 'output_schema'.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "framework.md"
+      ]
+    },
+    {
+      "category": "trinity_coherence",
+      "description": "The 'filename' fields in corpus.md incorrectly include the 'corpus/' prefix. The system loader constructs paths by prepending the 'corpus/' directory to the 'filename' value, leading to an incorrect path lookup (e.g., 'corpus/corpus/positive_test_1.txt').",
+      "impact": "The experiment will be unable to locate and load any of the specified documents, causing a critical execution failure.",
+      "fix": "Remove the 'corpus/' prefix from all 'filename' values in the 'corpus.md' manifest. For example, change 'filename: \"corpus/positive_test_1.txt\"' to 'filename: \"positive_test_1.txt\"'.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The YAML appendix in 'experiment.md' includes a 'hypotheses' block. This field is not defined in the v10.0 machine-readable appendix specification and is considered extraneous.",
+      "impact": "The extraneous data will likely be ignored by the current parser, but it represents a deviation from the specification that could cause validation failures with stricter parsers or future platform versions.",
+      "fix": "Remove the entire 'hypotheses' block from the YAML appendix in 'experiment.md' to ensure full compliance with the v10.0 specification. Hypotheses should be described in the human-readable narrative portion of the file.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The corpus manifest 'corpus.md' specifies 'spec_version: \"8.0\"', while the current corpus specification standard is v8.0.2.",
+      "impact": "While the core structure is compatible and unlikely to cause a crash, using an outdated specification version may lead to inconsistencies with newer validation rules or platform features.",
+      "fix": "Update the 'spec_version' in 'corpus.md' to '8.0.2' to align with the current standard.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md"
+      ]
+    }
+  ],
+  "suggestions": [],
+  "metadata": {
+    "agent": "V2ValidationAgent",
+    "timestamp": "2025-09-23T10:52:59.936708",
+    "experiment_id": "micro_test_experiment",
+    "validation_type": "experiment_coherence"
+  }
+}

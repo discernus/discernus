@@ -1,0 +1,42 @@
+{
+  "validation_success": true,
+  "issues": [
+    {
+      "category": "specification",
+      "description": "The hypotheses H1 and H2 in the experiment specification are incorrectly flagged as 'mutually_exclusive: true' and 'collective_exhaustive: true'. H1 (positive documents have higher positive scores) and H2 (negative documents have higher negative scores) can both be true simultaneously, so they are not mutually exclusive. They also do not cover all possible outcomes (e.g., no difference), so they are not collectively exhaustive.",
+      "impact": "This is a logical inconsistency in the human-readable research design. It does not affect machine execution, as hypothesis properties are not used by the pipeline, but it undermines the formal correctness of the experiment's description.",
+      "fix": "Set the 'mutually_exclusive' and 'collective_exhaustive' flags to 'false' for hypotheses H1, H2, and H3 to accurately reflect their logical relationship.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The framework dimensions use a simple `scoring_guide` text block. The current v10.0 framework specification recommends using the more structured `scoring_calibration` object (with 'high', 'medium', 'low', 'absent' keys) for more reliable LLM interpretation and scoring consistency.",
+      "impact": "The current format is functional, but may result in less consistent scoring across documents as the agent has to parse unstructured text. Adopting the structured format improves reliability.",
+      "fix": "In 'framework.md', for each dimension, replace the `scoring_guide` string with a `scoring_calibration` object as documented in the v10.0 spec. For example: `scoring_calibration: { high: '0.7-1.0: ...', medium: '0.4-0.6: ...', low: '0.1-0.3: ...', absent: '0.0: ...' }`.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "framework.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The corpus manifest specifies `spec_version: \"8.0\"`. The latest active standard for corpus manifests is v8.0.2.",
+      "impact": "There is no immediate execution impact as v8.0 is compatible. However, using the latest version ensures access to the most recent validation rules and documentation alignments.",
+      "fix": "Update the `spec_version` in the YAML block of `corpus.md` to `\"8.0.2\"`.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md"
+      ]
+    }
+  ],
+  "suggestions": [],
+  "metadata": {
+    "agent": "V2ValidationAgent",
+    "timestamp": "2025-09-23T12:38:13.998073",
+    "experiment_id": "micro_test_experiment",
+    "validation_type": "experiment_coherence"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "validation_success": true,
+  "issues": [
+    {
+      "category": "specification",
+      "description": "The machine-readable appendix in `experiment.md` contains a non-standard `hypotheses` key. According to the v10.0 specification, the appendix is expected to contain `metadata` and `components`. While this may not cause a crash, it violates the specification and this section could be ignored by the parser.",
+      "impact": "The `hypotheses` data may not be registered or used by the system during analysis and reporting, as it is not a standard field. The experiment is non-compliant with the v10.0 standard for the machine-readable appendix.",
+      "fix": "Move the hypotheses into the human-readable narrative portion of the `experiment.md` file. The narrative section is the appropriate place for detailing research hypotheses.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The framework's dimensions use a single string `scoring_guide` instead of the structured `scoring_calibration` object recommended as a best practice in the v10.0 specification. The structured format provides clearer, more consistent guidance to the analysis agent.",
+      "impact": "While functional, using a free-text guide can lead to less consistent scoring calibration across analysis runs compared to the structured `scoring_calibration` object, which anchors the scale more precisely.",
+      "fix": "In `framework.md`, replace the string `scoring_guide` for each dimension with a `scoring_calibration` object. For example: `\"scoring_calibration\": { \"high\": \"0.9-1.0: Dominant language throughout\", \"medium\": \"0.4-0.6: Moderate or balanced sentiment\", \"low\": \"0.1-0.3: Some elements present but mostly neutral/negative\", \"absent\": \"0.0: No sentiment detected\" }`.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "framework.md"
+      ]
+    },
+    {
+      "category": "capabilities_mismatch",
+      "description": "The experiment uses a total sample size of N=4 (two groups of n=2). While the experiment's goals are appropriately limited to descriptive analysis and pattern identification, any findings will have very low statistical power and will not be generalizable.",
+      "impact": "Statistical comparisons between the 'positive' and 'negative' groups will be purely descriptive. No inferential statistical conclusions (e.g., hypothesis tests like t-tests) can be validly drawn from this sample size, as per platform guidelines.",
+      "fix": "No fix is required as this is a 'micro test' by design. This issue serves as a confirmation that the analysis will be correctly limited to descriptive statistics and qualitative pattern observation, in alignment with the experiment specification.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    }
+  ],
+  "suggestions": [],
+  "metadata": {
+    "agent": "V2ValidationAgent",
+    "timestamp": "2025-09-23T11:06:52.736342",
+    "experiment_id": "micro_test_experiment",
+    "validation_type": "experiment_coherence"
+  }
+}

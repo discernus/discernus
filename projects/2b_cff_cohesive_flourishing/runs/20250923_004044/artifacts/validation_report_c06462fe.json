@@ -1,0 +1,53 @@
+{
+  "validation_success": false,
+  "issues": [
+    {
+      "category": "trinity_coherence",
+      "description": "The corpus manifest `corpus.md` lists the file \"Trump_SOTU_2019.txt\", but this file is not present in the corpus directory listing. The system requires all manifested documents to be physically present for analysis.",
+      "impact": "The experiment will crash during the corpus loading phase with a \"File Not Found\" error, preventing any analysis from running.",
+      "fix": "Either add the missing file \"Trump_SOTU_2019.txt\" to the corpus directory or remove its corresponding entry from the `documents` list in `corpus.md`.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The prose of the experiment specification (`experiment.md`) is inconsistent with its machine-readable appendix and the corpus manifest. The abstract states the corpus includes 6 speeches, while the `sample_size` in the appendix is 7 and the `corpus.md` manifest lists 7 documents.",
+      "impact": "This discrepancy between the human-readable description and the machine-readable configuration creates ambiguity about the experiment's scope and may lead to misinterpretation of the research design by other researchers.",
+      "fix": "Update the prose in the Abstract and Corpus Design sections of `experiment.md` to consistently state the correct number of documents (7) being analyzed.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The `Corpus Design` section in the prose of `experiment.md` is incomplete. It only describes 5 speeches, omitting the \"State of the Union 2019\" and the \"trump_kirk_funeral_2025.txt\" speech, which are both correctly defined in the `corpus.md` manifest.",
+      "impact": "The human-readable specification provides a misleading and incomplete overview of the corpus, which compromises the clarity and reproducibility of the experiment design.",
+      "fix": "Expand the `Corpus Design` bulleted list in `experiment.md` to accurately describe all documents included in the `corpus.md` manifest.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The framework version in the machine-readable appendix of `framework.md` is `10.4.0`, while the corpus manifest `corpus.md` specifies version `10.0`. The experiment prose refers to framework `v10.4` and corpus `v10.0`.",
+      "impact": "While not a blocking issue, version mismatches between components can indicate integration issues or use of outdated specifications. It creates confusion regarding the exact versions of the components used.",
+      "fix": "Ensure all component versions are aligned and accurately reflect the specifications being used. For instance, update the corpus version to align with the framework if it was developed concurrently, or confirm the versions are intentionally different and compatible.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "framework.md",
+        "corpus.md"
+      ]
+    }
+  ],
+  "suggestions": [],
+  "metadata": {
+    "agent": "V2ValidationAgent",
+    "timestamp": "2025-09-22T20:41:26.311463",
+    "experiment_id": "2b_cff_cohesive_flourishing",
+    "validation_type": "experiment_coherence"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "validation_success": true,
+  "issues": [
+    {
+      "category": "trinity_coherence",
+      "description": "The human-readable prose in `experiment.md` states the corpus contains 6 speeches, but the machine-readable appendix specifies `sample_size: 7` and the `corpus.md` manifest lists 7 documents.",
+      "impact": "This inconsistency can confuse researchers reading the experiment's description. The analysis will proceed with the machine-readable configuration of N=7, but the descriptive text will be inaccurate.",
+      "fix": "Align the prose in the Abstract and Corpus Design sections of `experiment.md` with the machine-readable configuration by changing \"6 presidential speeches\" to \"7 presidential speeches\".",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "trinity_coherence",
+      "description": "The `experiment.md` prose describes the corpus as containing only 'Inaugural Address' and 'State of the Union' speeches. However, the `corpus.md` manifest also includes a 'memorial' speech ('trump_kirk_funeral_2025.txt'), which is not mentioned in the experiment's descriptive sections.",
+      "impact": "The experiment's description of its methodology is incomplete. The planned 'Speech context analysis' is described as only comparing 'inaugural vs. SOTU', which overlooks the third context and may lead to misinterpretation of results.",
+      "fix": "Update the 'Corpus Design' and 'Expected Outcomes' sections in `experiment.md` to acknowledge the inclusion of the memorial speech and its unique context. The 'Speech context analysis' should be updated to include this third speech type.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "trinity_coherence",
+      "description": "The `experiment.md` prose frequently uses the term 'factorial design'. With a sample size of N=7, the analysis is correctly configured as a 'case_study' in the machine-readable appendix, which is a more appropriate description.",
+      "impact": "The term 'factorial design' overstates the experiment's statistical power and misrepresents the methodology. While the experiment is valid as a case study, the description is misleading to human readers.",
+      "fix": "In the `experiment.md` prose, replace references to 'factorial design' with more accurate terms like 'comparative case study design' or 'multi-factor case study' to reflect the methodology appropriate for a small sample size.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The overview prose in `corpus.md` states that the analysis uses 'the Cohesive Flourishing Framework v10.0'. However, the provided `framework.md` file is version 10.4, as specified in its metadata (`framework_version: \"10.4.0\"`).",
+      "impact": "This is a minor documentation inconsistency that does not affect execution but could cause confusion for a researcher reviewing the corpus manifest.",
+      "fix": "Update the overview prose in `corpus.md` to reference the correct framework version, 'v10.4'.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md"
+      ]
+    }
+  ],
+  "suggestions": [],
+  "metadata": {
+    "agent": "V2ValidationAgent",
+    "timestamp": "2025-09-22T23:42:14.602544",
+    "experiment_id": "2b_cff_cohesive_flourishing",
+    "validation_type": "experiment_coherence"
+  }
+}

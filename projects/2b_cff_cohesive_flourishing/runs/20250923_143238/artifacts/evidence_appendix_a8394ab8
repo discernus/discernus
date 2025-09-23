@@ -1,0 +1,824 @@
+---
+agent_name: TwoStageSynthesisAgent
+stage: evidence_appendix
+timestamp: 2025-09-23 14:40:15 UTC
+evidence_content_length: 61547
+synthesis_method: two_stage_with_appendix
+---
+
+Here are 75 compelling quotes curated to exemplify the core tension between cohesive and fragmentative rhetoric, directly supporting the statistical findings for this iteration.
+
+```json
+[
+  {
+    "document_index": 6,
+    "quote_text": "Charles James Kirk was heinously murdered by a radicalized, cold-blooded monster for for speaking the truth that was in his heart. He was violently killed because he spoke for freedom and justice, for God and country, for reason and for common sense. He was assassinated because he lived bravely, he lived boldly, and he argued brilliantly without apology.",
+    "statistical_relevance": "High intensity Enmity (demonization of killer), Fear (violent death), supports negative correlation between full_cohesion_index and enmity.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 6,
+    "quote_text": "On campuses all over the country, his quest for open dialogue was met with menacing hate. There were bomb threats, pulled fire alarms, and countless rage-filled radicals who tried to shout him down. It was nasty.",
+    "statistical_relevance": "High intensity Fear (threats, hate), Enmity (rage-filled radicals), supports negative correlation between full_cohesion_index and fear/enmity.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 6,
+    "quote_text": "he said the left radical left lunatics may have all the money in the world but they could never outwork me. I will wake up as early as I need to about himself. I will stay up as late as I need to, and I will never stop fighting for our country.",
+    "statistical_relevance": "High intensity Tribal Dominance ('left radical left lunatics' as outgroup, 'fighting for our country' as ingroup), supports negative correlation between full_cohesion_index and tribal_dominance.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 6,
+    "quote_text": "They cheated like dogs, but we got them back, didn't we, huh? Got them back.",
+    "statistical_relevance": "High intensity Enmity (demonization 'cheated like dogs'), Tribal Dominance ('we got them back'), supports negative correlation between full_cohesion_index and enmity/tribal_dominance.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 6,
+    "quote_text": "I'm not here to fight them. I want to know them and love them, and I want to reach them and try and lead them into a great way of life in our country.\" In that private moment on his dying day, we find everything we need to know about who Charlie Kirk truly was. He was a missionary with a noble spirit and a great, great purpose. He did not hate his opponents. He wanted the best for them. That's where I disagreed with Charlie. I hate my opponent. And I don't want the best for them. I'm sorry.",
+    "statistical_relevance": "High intensity Amity (Charlie's quote), but also explicit rejection of Amity and high Enmity from speaker ('I hate my opponent'), perfectly exemplifies the 'tension' and 'high prevalence of both' fragmentative and cohesive dimensions.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 6,
+    "quote_text": "we will defend it at all costs, and we will carry forward the torch of liberty that Charlie Kirk held so proud and so high. He was so proud, and he did hold that torch high. We will never, ever let it fail. We will never let it fail. But we're going to raise it higher than ever before.",
+    "statistical_relevance": "High intensity Hope (future-oriented, determined, collective action, enduring legacy), supports positive correlation between full_cohesion_index and hope.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 6,
+    "quote_text": "The tradition of reason and open debate that Charlie practiced is not a pillar of our democracy. In many ways, it's the basis of our entire society. It's the right and inheritance of every free American, the greatest legacy of the Enlightenment, and among the most treasured achievements of civilization.",
+    "statistical_relevance": "High intensity Individual Dignity (emphasizes rights, societal value for 'every free American'), supports positive correlation between full_cohesion_index and individual_dignity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 6,
+    "quote_text": "The Department of Justice is also investigating networks of radical left maniacs who fund organized fuel and perpetrate political violence. And we think we know who many of them are.",
+    "statistical_relevance": "High intensity Enmity (demonization 'radical left maniacs'), Fear (political violence), supports negative correlation between full_cohesion_index and enmity/fear.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 4,
+    "quote_text": "[TRIBAL_DOMINANCE: America saved freedom, transformed science, redefined the middle class, and when you get down to it, there's nothing anywhere in the world that can compete with America].",
+    "statistical_relevance": "Very high intensity Tribal Dominance (ingroup superiority, global comparison), supports negative correlation between full_cohesion_index and tribal_dominance.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 4,
+    "quote_text": "[TRIBAL_DOMINANCE: The lawless state of our southern border is a threat to the safety, security, and financial well-being of all America. We have a moral duty to create an immigration system that protects the lives and jobs of our citizens].",
+    "statistical_relevance": "High intensity Tribal Dominance (ingroup protection), Fear (threat to safety/security), supports negative correlation between full_cohesion_index and tribal_dominance/fear.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 4,
+    "quote_text": "[INDIVIDUAL_DIGNITY: All children—born and unborn—are made in the holy image of God].",
+    "statistical_relevance": "Very high intensity Individual Dignity (universal inherent worth), supports positive correlation between full_cohesion_index and individual_dignity.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 4,
+    "quote_text": "[INDIVIDUAL_DIGNITY: To defend the dignity of every person, I am asking Congress to pass legislation to prohibit the late-term abortion of children who can feel pain in the mother's womb].",
+    "statistical_relevance": "High intensity Individual Dignity (focus on 'every person' and vulnerable children), supports positive correlation between full_cohesion_index and individual_dignity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 4,
+    "quote_text": "[FEAR: Tens of thousands of innocent Americans are killed by lethal drugs that cross our border and flood into our cities, including meth, heroin, cocaine, and fentanyl. The savage gang, MS-13, now operates in at least 20 different American States, and they almost all come through our southern border].",
+    "statistical_relevance": "Very high intensity Fear (specific threats, 'savage gang'), supports negative correlation between full_cohesion_index and fear.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 4,
+    "quote_text": "[HOPE: Our most thrilling achievements are still ahead. Our most exciting journeys still await. Our biggest victories are still to come. We have not yet begun to dream].",
+    "statistical_relevance": "Very high intensity Hope (aspirational, future-oriented), supports positive correlation between full_cohesion_index and hope.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 4,
+    "quote_text": "[ENMITY: Today, we have liberated virtually all of the territory from the grip of these bloodthirsty monsters].",
+    "statistical_relevance": "High intensity Enmity (demonization 'bloodthirsty monsters'), supports negative correlation between full_cohesion_index and enmity.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 4,
+    "quote_text": "[ENMITY: We will not avert our eyes from a regime that chants 'Death to America' and threatens genocide against the Jewish people. We must never ignore the vile poison of anti-Semitism or those who spread its venomous creed].",
+    "statistical_relevance": "Very high intensity Enmity (existential threat, 'vile poison'), supports negative correlation between full_cohesion_index and enmity.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 4,
+    "quote_text": "[AMITY: we must reject the politics of revenge, resistance, and retribution, and embrace the boundless potential of cooperation, compromise, and the common good].",
+    "statistical_relevance": "Very high intensity Amity (explicit call for cooperation, rejection of fragmentation), supports positive correlation between full_cohesion_index and amity.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 4,
+    "quote_text": "[AMITY: Now Republicans and Democrats must join forces again to confront an urgent national crisis].",
+    "statistical_relevance": "High intensity Amity (call for bipartisan cooperation), supports positive correlation between full_cohesion_index and amity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 3,
+    "quote_text": "Tonight I am asking Congress to pass legislation to help ensure American foreign-assistance dollars always serve American interests and only go to friends of America, not enemies of America.",
+    "statistical_relevance": "High intensity Tribal Dominance (American interests first), Enmity (friends vs. enemies), supports negative correlation between full_cohesion_index and tribal_dominance/enmity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 3,
+    "quote_text": "Tonight I am extending an open hand to work with members of both parties, Democrats and Republicans, to protect our citizens of every background, color, religion, and creed.",
+    "statistical_relevance": "High intensity Amity (bipartisan cooperation, inclusivity), supports positive correlation between full_cohesion_index and amity.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 3,
+    "quote_text": "Sung-ho's story is a testament to the yearning of every human soul to live in freedom.",
+    "statistical_relevance": "High intensity Individual Dignity (universal human desire for freedom), supports positive correlation between full_cohesion_index and individual_dignity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 3,
+    "quote_text": "Around the world, we face rogue regimes, terrorist groups, and rivals like China and Russia that challenge our interests, our economy, and our values. In confronting these horrible dangers, we know that weakness is the surest path to conflict...",
+    "statistical_relevance": "High intensity Fear (horrible dangers), Enmity (rogue regimes, terrorist groups, rivals), supports negative correlation between full_cohesion_index and fear/enmity.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 3,
+    "quote_text": "But no regime has oppressed its own citizens more totally or brutally than the cruel dictatorship in North Korea. North Korea's reckless pursuit of nuclear missiles could very soon threaten our homeland.",
+    "statistical_relevance": "High intensity Fear (threaten our homeland), Enmity (cruel dictatorship), supports negative correlation between full_cohesion_index and fear/enmity.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 3,
+    "quote_text": "For decades, open borders have allowed drugs and gangs to pour into our most vulnerable communities... Most tragically, they have caused the loss of many innocent lives.",
+    "statistical_relevance": "High intensity Fear (drugs and gangs, loss of innocent lives), supports negative correlation between full_cohesion_index and fear.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 3,
+    "quote_text": "The struggle will be long, and it will be difficult, but as Americans always do, in the end, we will succeed. We will prevail.",
+    "statistical_relevance": "High intensity Hope (resilience, ultimate success), supports positive correlation between full_cohesion_index and hope.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 3,
+    "quote_text": "Terrorists who do things like place bombs in civilian hospitals are evil. When possible, we have no choice but to annihilate them. When necessary, we must be able to detain and question them.",
+    "statistical_relevance": "Very high intensity Enmity ('evil,' 'annihilate them'), supports negative correlation between full_cohesion_index and enmity.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 3,
+    "quote_text": "Tonight I call upon all of us to set aside our differences, to seek out common ground, and to summon the unity we need to deliver for the people.",
+    "statistical_relevance": "Very high intensity Amity (explicit call for unity, common ground), supports positive correlation between full_cohesion_index and amity.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 3,
+    "quote_text": "All of us, together, as one team, one people, and one American family can do anything. We all share the same home, the same heart, the same destiny, and the same great American flag.",
+    "statistical_relevance": "Very high intensity Amity (strong unifying language, shared identity), supports positive correlation between full_cohesion_index and amity.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 5,
+    "quote_text": "We’ve ended the tyranny of so-called Diversity, Equity and Inclusion policies all across the entire federal government and indeed the private sector and our military. And our country will be woke no longer.",
+    "statistical_relevance": "High intensity Tribal Dominance (rejection of policies seen as detrimental to ingroup, 'woke no longer'), supports negative correlation between full_cohesion_index and tribal_dominance.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 5,
+    "quote_text": "We believe that whether you are a doctor, an accountant, a lawyer or an air traffic controller, you should be hired and promoted based on skill and competence, not race or gender. You should be hired based on merit...",
+    "statistical_relevance": "High intensity Individual Dignity (merit-based, universal application of fairness), supports positive correlation between full_cohesion_index and individual_dignity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 5,
+    "quote_text": "And our message to every child in America is that you are perfect exactly the way God made you.",
+    "statistical_relevance": "Very high intensity Individual Dignity (inherent worth, universal), supports positive correlation between full_cohesion_index and individual_dignity.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 5,
+    "quote_text": "Within hours of taking the oath of office, I declared a national emergency on our southern border, and I deployed the U.S. military and Border Patrol to repel the invasion of our country...",
+    "statistical_relevance": "High intensity Fear ('invasion'), Tribal Dominance (repelling threat to 'our country'), supports negative correlation between full_cohesion_index and fear/tribal_dominance.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 5,
+    "quote_text": "Over the past four years, 21 million people poured into the United States, many of them were murderers, human traffickers, gang members, and other criminals from the streets of dangerous cities all throughout the world because of Joe Biden’s insane and very dangerous open border policies.",
+    "statistical_relevance": "Very high intensity Fear (demonization of immigrants as criminals), Enmity (Joe Biden's policies as 'insane and very dangerous'), supports negative correlation between full_cohesion_index and fear/enmity.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 5,
+    "quote_text": "My fellow Americans, get ready for an incredible future, because the golden Age of America has only just begun. It will be like nothing that has ever been seen before.",
+    "statistical_relevance": "Very high intensity Hope (strong future-oriented optimism, 'golden Age'), supports positive correlation between full_cohesion_index and hope.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 5,
+    "quote_text": "We’ve been ripped off for decades by nearly every country on Earth, and we will not let that happen any longer.",
+    "statistical_relevance": "High intensity Tribal Dominance (ingroup victimhood), Enmity ('ripped off by nearly every country'), supports negative correlation between full_cohesion_index and tribal_dominance/enmity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 5,
+    "quote_text": "In comparison, under Joe Biden, the worst president in American history, there were hundreds of thousands of illegal crossings a month, and virtually all of them, including murderers, drug dealers, gang members and people from mental institutions and insane asylums, were released into our country. Who would want to do that?",
+    "statistical_relevance": "Very high intensity Fear (extreme demonization of immigrants and political opponent), Enmity ('worst president,' 'murderers, drug dealers, gang members, insane asylums'), supports negative correlation between full_cohesion_index and fear/enmity.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 5,
+    "quote_text": "All three savages charged with Jocelyn and Laken’s murders were members of the Venezuelan prison gang. The toughest gang, they say, in the world known as Tren de Aragua. Two weeks ago, I officially designated this gang, along with MS-13 and the bloodthirsty Mexican drug cartels, as foreign terrorist organizations. They are now officially in the same category as ISIS, and that’s not good for them.",
+    "statistical_relevance": "Very high intensity Enmity ('savages,' 'bloodthirsty,' 'foreign terrorist organizations,' 'not good for them'), supports negative correlation between full_cohesion_index and enmity.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 5,
+    "quote_text": "So, Democrats sitting before me, for just this one night, why not join us in celebrating so many incredible wins for America, for the good of our nation? Let’s work together and let’s truly make America great again.",
+    "statistical_relevance": "High intensity Amity (conditional call for bipartisan cooperation), supports positive correlation between full_cohesion_index and amity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 5,
+    "quote_text": "I also signed an executive order to ban men from playing in women’s sports. Three years ago, Payton McNabb was an all-star high school athlete, one of the best, preparing for a future in college sports. But when her girls volleyball match was invaded by a male, he smashed the ball so hard in Payton’s face, causing traumatic brain injury, partially paralyzing her right side and ending her athletic career.",
+    "statistical_relevance": "High intensity Fear (physical harm, 'invaded'), Tribal Dominance (protection of ingroup - women - from perceived outgroup threat), supports negative correlation between full_cohesion_index and fear/tribal_dominance.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 1,
+    "quote_text": "Finally, the chorus became an earthquake, and the people turned out by the tens of millions, and they were all united by one very simple, but crucial demand: that America must put its own citizens first.",
+    "statistical_relevance": "Very high intensity Tribal Dominance ('America must put its own citizens first'), supports negative correlation between full_cohesion_index and tribal_dominance.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 1,
+    "quote_text": "My job is not to represent the world. My job is to represent the United States of America.",
+    "statistical_relevance": "High intensity Tribal Dominance (clear nationalistic focus), supports negative correlation between full_cohesion_index and tribal_dominance.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 1,
+    "quote_text": "Every American child should be able to grow up in a safe community, to attend a great school, and to have access to a high-paying job.",
+    "statistical_relevance": "High intensity Individual Dignity (universal opportunity for children), supports positive correlation between full_cohesion_index and individual_dignity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 1,
+    "quote_text": "First, we should ensure that Americans with preexisting conditions have access to coverage, and that we have a stable transition for Americans currently enrolled in the health care exchanges.",
+    "statistical_relevance": "High intensity Individual Dignity (protecting vulnerable individuals), supports positive correlation between full_cohesion_index and individual_dignity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 1,
+    "quote_text": "Recent threats targeting Jewish community centers and vandalism of Jewish cemeteries, as well as last week's shooting in Kansas City, remind us that while we may be a nation divided on policies, we are a country that stands united in condemning hate and evil in all of its very ugly forms.",
+    "statistical_relevance": "High intensity Amity (unity against hate), but also Fear ('threats,' 'hate and evil'), exemplifies the 'tension' and 'high prevalence of both' fragmentative and cohesive dimensions.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 1,
+    "quote_text": "We cannot allow a beachhead of terrorism to form inside America. We cannot allow our Nation to become a sanctuary for extremists.",
+    "statistical_relevance": "High intensity Fear ('terrorism,' 'extremists'), supports negative correlation between full_cohesion_index and fear.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 1,
+    "quote_text": "A new chapter of American greatness is now beginning. A new national pride is sweeping across our Nation. And a new surge of optimism is placing impossible dreams firmly within our grasp.",
+    "statistical_relevance": "Very high intensity Hope (strong, nationalistic optimism), supports positive correlation between full_cohesion_index and hope.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 1,
+    "quote_text": "Everything that is broken in our country can be fixed. Every problem can be solved. And every hurting family can find healing and hope.",
+    "statistical_relevance": "Very high intensity Hope (universal problem-solving, healing, hope), supports positive correlation between full_cohesion_index and hope.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 1,
+    "quote_text": "I am not going to let America and its great companies and workers be taken advantage of us any longer. They have taken advantage of our country. No longer.",
+    "statistical_relevance": "High intensity Tribal Dominance (ingroup victimhood), Enmity ('taken advantage of us'), supports negative correlation between full_cohesion_index and tribal_dominance/enmity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 1,
+    "quote_text": "I directed the Department of Defense to develop a plan to demolish and destroy ISIS, a network of lawless savages that have slaughtered Muslims and Christians, and men and women and children of all faiths and all beliefs. We will work with our allies, including our friends and allies in the Muslim world, to extinguish this vile enemy from our planet.",
+    "statistical_relevance": "Very high intensity Enmity ('lawless savages,' 'vile enemy'), but also Amity ('work with our allies,' 'friends and allies'), perfectly exemplifies the 'tension' and 'high prevalence of both' fragmentative and cohesive dimensions.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 1,
+    "quote_text": "America is willing to find new friends and to forge new partnerships where shared interests align. We want harmony and stability, not war and conflict. We want peace, wherever peace can be found.",
+    "statistical_relevance": "Very high intensity Amity (explicit desire for peace, cooperation, harmony), supports positive correlation between full_cohesion_index and amity.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 1,
+    "quote_text": "We are one people with one destiny. We all bleed the same blood. We all salute the same great American flag. And we all are made by the same God.",
+    "statistical_relevance": "Very high intensity Amity (strong unifying language, shared identity), supports positive correlation between full_cohesion_index and amity.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 0,
+    "quote_text": "For too long, [a small group in our Nation's Capital has reaped the rewards of Government while the people have borne the cost.]",
+    "statistical_relevance": "High intensity Tribal Dominance (internal fragmentation, 'small group' vs 'the people'), supports negative correlation between full_cohesion_index and tribal_dominance.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 0,
+    "quote_text": "[We must protect our borders from the ravages of other countries making our products, stealing our companies, and destroying our jobs.]",
+    "statistical_relevance": "High intensity Tribal Dominance (ingroup protection), Fear ('ravages of other countries,' 'stealing,' 'destroying jobs'), supports negative correlation between full_cohesion_index and tribal_dominance/fear.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 0,
+    "quote_text": "[From this day forward, it's going to be only America first. America first.]",
+    "statistical_relevance": "Very high intensity Tribal Dominance (explicit, foundational statement), supports negative correlation between full_cohesion_index and tribal_dominance.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 0,
+    "quote_text": "[The forgotten men and women of our country will be forgotten no longer. Everyone is listening to you now.]",
+    "statistical_relevance": "High intensity Individual Dignity (empowering the overlooked, universal recognition), supports positive correlation between full_cohesion_index and individual_dignity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 0,
+    "quote_text": "[Whether we are Black or Brown or White, we all bleed the same red blood of patriots, we all enjoy the same glorious freedoms, and we all salute the same great American flag.]",
+    "statistical_relevance": "Very high intensity Amity (strong unifying language across racial lines, shared identity), supports positive correlation between full_cohesion_index and amity.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 0,
+    "quote_text": "[Mothers and children trapped in poverty in our inner cities; rusted-out factories scattered like tombstones across the landscape of our Nation; an education system, flush with cash, but which leaves our young and beautiful students deprived of all knowledge; and the crime and the gangs and the drugs that have stolen too many lives and robbed our country of so much unrealized potential. This American carnage stops right here and stops right now.]",
+    "statistical_relevance": "Very high intensity Fear ('carnage,' 'crime,' 'gangs,' 'drugs,' 'stolen too many lives'), supports negative correlation between full_cohesion_index and fear.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 0,
+    "quote_text": "[For many decades, we've enriched foreign industry at the expense of American industry, subsidized the armies of other countries while allowing for the very sad depletion of our military. We've defended other nations' borders while refusing to defend our own and spent trillions and trillions of dollars overseas while America's infrastructure has fallen into disrepair and decay.]",
+    "statistical_relevance": "Very high intensity Tribal Dominance (ingroup suffering due to outgroup benefit), supports negative correlation between full_cohesion_index and tribal_dominance.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 0,
+    "quote_text": "[The wealth of our middle class has been ripped from their homes and then redistributed all across the world.]",
+    "statistical_relevance": "High intensity Tribal Dominance (ingroup victimhood), Enmity ('ripped from their homes,' 'redistributed' as hostile act), supports negative correlation between full_cohesion_index and tribal_dominance/enmity.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 0,
+    "quote_text": "[America will start winning again, winning like never before. We will bring back our jobs. We will bring back our borders. We will bring back our wealth. And we will bring back our dreams.]",
+    "statistical_relevance": "Very high intensity Hope (strong nationalistic optimism, regaining what was lost), Tribal Dominance (focus on 'our' jobs, borders, wealth), supports positive correlation with full_cohesion_index (due to hope) but also shows the tension with fragmentative elements.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 0,
+    "quote_text": "[unite the civilized world against radical Islamic terrorism, which we will eradicate completely from the face of the Earth.]",
+    "statistical_relevance": "Very high intensity Enmity ('eradicate completely,' 'radical Islamic terrorism' as clear enemy), but also Amity ('unite the civilized world'), exemplifies the 'tension' and 'high prevalence of both' fragmentative and cohesive dimensions.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 0,
+    "quote_text": "[We, the citizens of America, are now joined in a great national effort to rebuild our country and restore its promise for all of our people. Together, we will determine the course of America and the world for many, many years to come.]",
+    "statistical_relevance": "Very high intensity Amity (collective action, shared future, 'all of our people'), Hope (restoring promise), supports positive correlation between full_cohesion_index and amity/hope.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 0,
+    "quote_text": "[We are one Nation, and their pain is our pain, their dreams are our dreams, and their success will be our success. We share one heart, one home, and one glorious destiny.]",
+    "statistical_relevance": "Very high intensity Amity (strong unifying language, shared fate), supports positive correlation between full_cohesion_index and amity.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 0,
+    "quote_text": "[When you open your heart to patriotism, there is no room for prejudice. The Bible tells us, 'How good and pleasant it is when God's people live together in unity.' We must speak our minds openly, debate our disagreements honestly, but always pursue solidarity. When America is united, America is totally unstoppable.]",
+    "statistical_relevance": "Very high intensity Amity (explicit call for unity, rejecting prejudice, solidarity), supports positive correlation between full_cohesion_index and amity.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 2,
+    "quote_text": "Finally, the chorus became an earthquake, and the people turned out by the tens of millions, and they were all united by one very simple, but crucial demand: that America must put its own citizens first. Because only then can we truly make America great again.",
+    "statistical_relevance": "Very high intensity Tribal Dominance ('America must put its own citizens first'), supports negative correlation between full_cohesion_index and tribal_dominance.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 2,
+    "quote_text": "My job is not to represent the world. My job is to represent the United States of America.",
+    "statistical_relevance": "High intensity Tribal Dominance (clear nationalistic focus), supports negative correlation between full_cohesion_index and tribal_dominance.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 2,
+    "quote_text": "Education is the civil rights issue of our time. I am calling upon members of both parties to pass an education bill that funds school choice for disadvantaged youth, including millions of African American and Latino children. These families should be free to choose the public, private, charter, magnet, religious, or home school that is right for them.",
+    "statistical_relevance": "High intensity Individual Dignity (universal access to choice, empowering disadvantaged youth), Amity (call for bipartisan action), supports positive correlation between full_cohesion_index and individual_dignity/amity.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 2,
+    "quote_text": "For too long, we've watched our middle class shrink as we've exported our jobs and wealth to foreign countries.",
+    "statistical_relevance": "High intensity Tribal Dominance (ingroup suffering due to outgroup actions), supports negative correlation between full_cohesion_index and tribal_dominance.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 2,
+    "quote_text": "Obamacare is collapsing, and we must act decisively to protect all Americans.",
+    "statistical_relevance": "High intensity Fear ('collapsing'), Tribal Dominance (protecting 'all Americans'), supports negative correlation between full_cohesion_index and fear/tribal_dominance.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 2,
+    "quote_text": "A new chapter of American greatness is now beginning. A new national pride is sweeping across our Nation. And a new surge of optimism is placing impossible dreams firmly within our grasp.",
+    "statistical_relevance": "Very high intensity Hope (strong, nationalistic optimism), supports positive correlation between full_cohesion_index and hope.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 2,
+    "quote_text": "Everything that is broken in our country can be fixed. Every problem can be solved. And every hurting family can find healing and hope.",
+    "statistical_relevance": "Very high intensity Hope (universal problem-solving, healing, hope), supports positive correlation between full_cohesion_index and hope.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 2,
+    "quote_text": "I am not going to let America and its great companies and workers be taken advantage of us any longer. They have taken advantage of our country. No longer.",
+    "statistical_relevance": "High intensity Tribal Dominance (ingroup victimhood), Enmity ('taken advantage of us'), supports negative correlation between full_cohesion_index and tribal_dominance/enmity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 2,
+    "quote_text": "I have further ordered the Departments of Homeland Security and Justice, along with the Department of State and the Director of National Intelligence, to coordinate an aggressive strategy to dismantle the criminal cartels that have spread all across our Nation. We will stop the drugs from pouring into our country and poisoning our youth...",
+    "statistical_relevance": "Very high intensity Fear ('criminal cartels,' 'poisoning our youth'), Enmity (dismantle), supports negative correlation between full_cohesion_index and fear/enmity.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 2,
+    "quote_text": "On this and so many other things, Democrats and Republicans should get together and unite for the good of our country and for the good of the American people.",
+    "statistical_relevance": "Very high intensity Amity (call for bipartisan unity), supports positive correlation between full_cohesion_index and amity.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 2,
+    "quote_text": "We are one people with one destiny. We all bleed the same blood. We all salute the same great American flag. And we all are made by the same God.",
+    "statistical_relevance": "Very high intensity Amity (strong unifying language, shared identity), supports positive correlation between full_cohesion_index and amity.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 6,
+    "quote_text": "The only one challenging them are people that hate our country or foreign countries that are paying a price because they did the same thing to us for years. They took advantage of us, but we're making money. We're becoming richer and richer, and we're taking care of our people better and better",
+    "statistical_relevance": "High intensity Tribal Dominance ('hate our country,' 'took advantage of us,' ingroup prosperity), Enmity (hostility towards challengers), supports negative correlation between full_cohesion_index and tribal_dominance/enmity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 6,
+    "quote_text": "to kill anybody, but to kill a man like this, he didn't deserve this. He didn't deserve this. Our country didn't deserve this.",
+    "statistical_relevance": "High intensity Individual Dignity (inherent worth of the person, injustice of the act), supports positive correlation between full_cohesion_index and individual_dignity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 6,
+    "quote_text": "his name will live forever in the eternal chronicle of America's greatest patriots, he will live forever.",
+    "statistical_relevance": "High intensity Hope (enduring legacy, inspirational), supports positive correlation between full_cohesion_index and hope.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 6,
+    "quote_text": "We want religion brought back to America. We want to bring God back into our beautiful USA like never before. We want God back.",
+    "statistical_relevance": "High intensity Tribal Dominance (cultural/religious ingroup identity), supports negative correlation between full_cohesion_index and tribal_dominance.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 4,
+    "quote_text": "[TRIBAL_DOMINANCE: to pursue a foreign policy that puts America's interests first].",
+    "statistical_relevance": "High intensity Tribal Dominance (clear nationalistic focus), supports negative correlation between full_cohesion_index and tribal_dominance.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 4,
+    "quote_text": "[INDIVIDUAL_DIGNITY: The First Step Act gives nonviolent offenders the chance to reenter society as productive, law-abiding citizens].",
+    "statistical_relevance": "High intensity Individual Dignity (focus on rehabilitation and potential of individuals), supports positive correlation between full_cohesion_index and individual_dignity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 4,
+    "quote_text": "[FEAR: Now is the time for Congress to show the world that America is committed to ending illegal immigration and putting the ruthless coyotes, cartels, drug dealers, and human traffickers out of business].",
+    "statistical_relevance": "High intensity Fear (threat from outgroup, call to action against them), supports negative correlation between full_cohesion_index and fear.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 4,
+    "quote_text": "[HOPE: unlimited potential]. As we begin a new Congress, I stand here ready to work with you to [HOPE: achieve historic breakthroughs for all Americans].",
+    "statistical_relevance": "High intensity Hope (clear future-oriented optimism), supports positive correlation between full_cohesion_index and hope.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 4,
+    "quote_text": "[ENMITY: Now is the time for Congress to show the world that America is committed to ending illegal immigration and putting the ruthless coyotes, cartels, drug dealers, and human traffickers out of business].",
+    "statistical_relevance": "High intensity Enmity (direct hostility towards outgroup, 'ruthless'), supports negative correlation between full_cohesion_index and enmity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 4,
+    "quote_text": "The agenda I will lay out this evening is not a Republican agenda or a Democrat agenda. [AMITY: It's the agenda of the American people].",
+    "statistical_relevance": "High intensity Amity (unity across political lines), supports positive correlation between full_cohesion_index and amity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 3,
+    "quote_text": "This, in fact, is our new American moment. There has never been a better time to start living the American Dream.",
+    "statistical_relevance": "High intensity Hope (optimistic future, 'American Dream'), supports positive correlation between full_cohesion_index and hope.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 3,
+    "quote_text": "We want every American to know the dignity of a hard day's work.",
+    "statistical_relevance": "High intensity Individual Dignity (universal access to dignity through work), supports positive correlation between full_cohesion_index and individual_dignity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 3,
+    "quote_text": "Tonight I am calling on Congress to finally close the deadly loopholes that have allowed MS-13 and other criminal gangs to break into our country.",
+    "statistical_relevance": "High intensity Fear ('deadly loopholes,' 'criminal gangs,' 'break into our country'), Enmity (criminal gangs), supports negative correlation between full_cohesion_index and fear/enmity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 3,
+    "quote_text": "The third pillar ends the visa lottery, a program that randomly hands out green cards without any regard for skill, merit, or the safety of American people.",
+    "statistical_relevance": "High intensity Tribal Dominance (protecting 'safety of American people' by restricting immigration), Fear (safety concern), supports negative correlation with full_cohesion_index and tribal_dominance/fear.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 5,
+    "quote_text": "This is a very dangerous world. We should have it. We want to be protected and we’re going to protect our citizens like never before.",
+    "statistical_relevance": "High intensity Fear ('dangerous world,' strong emphasis on protection), supports negative correlation between full_cohesion_index and fear.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 5,
+    "quote_text": "Now it is our time to take up the righteous cause of American liberty, and it is our turn to take America’s destiny into our own hands and begin the most thrilling days in the history of our country. This will be our greatest era.",
+    "statistical_relevance": "High intensity Hope (strong nationalistic hope), Tribal Dominance (focus on 'our' destiny, 'our' greatest era), supports positive correlation with full_cohesion_index (due to hope) but also shows the tension with fragmentative elements.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 1,
+    "quote_text": "We've defended the borders of other nations, while leaving our own borders wide open for anyone to cross and for drugs to pour in at a now unprecedented rate.",
+    "statistical_relevance": "High intensity Tribal Dominance (ingroup vulnerability), Fear ('drugs to pour in'), supports negative correlation between full_cohesion_index and tribal_dominance/fear.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 1,
+    "quote_text": "For too long, we've watched our middle class shrink as we've exported our jobs and wealth to foreign countries.",
+    "statistical_relevance": "High intensity Tribal Dominance (ingroup suffering due to outgroup actions), supports negative correlation between full_cohesion_index and tribal_dominance.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 1,
+    "quote_text": "We will stop the drugs from pouring into our country and poisoning our youth, and we will expand treatment for those who have become so badly addicted.",
+    "statistical_relevance": "High intensity Fear ('poisoning our youth'), but also a cohesive element of 'treatment' (Individual Dignity), exemplifies the 'tension' and 'high prevalence of both' fragmentative and cohesive dimensions.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 1,
+    "quote_text": "I am here tonight to deliver a message of unity and strength, and it is a message deeply delivered from my heart.",
+    "statistical_relevance": "High intensity Amity (explicit call for unity), supports positive correlation between full_cohesion_index and amity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 1,
+    "quote_text": "So I am calling on all Democrats and Republicans in Congress to work with us to save Americans from this imploding Obamacare disaster.",
+    "statistical_relevance": "High intensity Amity (call for bipartisan cooperation), supports positive correlation between full_cohesion_index and amity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 1,
+    "quote_text": "We are removing gang members, drug dealers, and criminals that threaten our communities and prey on our very innocent citizens. Bad ones are going out as I speak, and as I've promised throughout the campaign.",
+    "statistical_relevance": "High intensity Fear ('threaten our communities,' 'prey on innocent citizens'), Enmity (gang members, drug dealers, criminals), supports negative correlation between full_cohesion_index and fear/enmity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 0,
+    "quote_text": "[Our country will thrive and prosper again.]",
+    "statistical_relevance": "High intensity Hope (clear statement of future prosperity), supports positive correlation between full_cohesion_index and hope.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 0,
+    "quote_text": "[transferring power from Washington, DC, and giving it back to you, the people.]",
+    "statistical_relevance": "High intensity Tribal Dominance ('Washington, DC' as outgroup, 'the people' as ingroup), supports negative correlation between full_cohesion_index and tribal_dominance.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 2,
+    "quote_text": "We've defended the borders of other nations, while leaving our own borders wide open for anyone to cross and for drugs to pour in at a now unprecedented rate.",
+    "statistical_relevance": "High intensity Tribal Dominance (ingroup vulnerability), Fear ('drugs to pour in'), supports negative correlation between full_cohesion_index and tribal_dominance/fear.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 2,
+    "quote_text": "I am here tonight to deliver a message of unity and strength, and it is a message deeply delivered from my heart.",
+    "statistical_relevance": "High intensity Amity (explicit call for unity), supports positive correlation between full_cohesion_index and amity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 2,
+    "quote_text": "America is willing to find new friends and to forge new partnerships where shared interests align. We want harmony and stability, not war and conflict. We want peace, wherever peace can be found.",
+    "statistical_relevance": "Very high intensity Amity (explicit desire for peace and cooperation), supports positive correlation between full_cohesion_index and amity.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 2,
+    "quote_text": "For that reason, we will soon begin the construction of a great, great wall along our southern border. As we speak tonight, we are removing gang members, drug dealers, and criminals that threaten our communities and prey on our very innocent citizens.",
+    "statistical_relevance": "High intensity Fear ('threaten our communities'), Enmity (gang members, drug dealers, criminals), Tribal Dominance ('great wall' for ingroup protection), supports negative correlation between full_cohesion_index and fear/enmity/tribal_dominance.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 6,
+    "quote_text": "Charlie loved America with everything he had. And as we can see so clearly today, America loved Charlie Kirk.",
+    "statistical_relevance": "High prevalence of both fragmentative and cohesive dimensions (implied ingroup love, but context of fragmentation).",
+    "strength_rating": 3
+  },
+  {
+    "document_index": 6,
+    "quote_text": "Charlie's message has not been silenced. It now is bigger and better and stronger than ever before. And it's not even close. ... But Charlie is bigger today than he was. ... He's eternal. He's eternal.",
+    "statistical_relevance": "High intensity Hope (enduring legacy, growing influence), supports positive correlation between full_cohesion_index and hope.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 6,
+    "quote_text": "At every campus event, Charlie asked the people who disagreed with him to come forward, and instead of silencing them, he handed them a microphone and let them speak. And he'd convinced so many of them. was pretty amazing thing to watch actually.",
+    "statistical_relevance": "High intensity Amity (open dialogue, engagement with opponents), supports positive correlation between full_cohesion_index and amity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 4,
+    "quote_text": "[HOPE: After 24 months of rapid progress, our economy is the envy of the world, our military is the most powerful on Earth, by far, and America is again winning each and every day]. Members of Congress: The state of our union is strong.",
+    "statistical_relevance": "High intensity Hope (national progress, strength), supports positive correlation between full_cohesion_index and hope.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 4,
+    "quote_text": "But [ENVY: I don't blame China for taking advantage of us; I blame our leaders and representatives for allowing this travesty to happen].",
+    "statistical_relevance": "High intensity Enmity (blame, 'travesty'), Tribal Dominance (ingroup victimhood), supports negative correlation between full_cohesion_index and enmity/tribal_dominance.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 3,
+    "quote_text": "Each day since, we have gone forward with a clear vision and a righteous mission: to make America great again for all Americans.",
+    "statistical_relevance": "High prevalence of both fragmentative (Tribal Dominance - 'make America great again') and cohesive (Cohesive Goals - 'for all Americans') dimensions, highlighting tension.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 3,
+    "quote_text": "America has also finally turned the page on decades of unfair trade deals that sacrificed our prosperity and shipped away our companies, our jobs, and our wealth.",
+    "statistical_relevance": "High intensity Tribal Dominance (ingroup victimhood, 'unfair trade deals'), supports negative correlation between full_cohesion_index and tribal_dominance.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 3,
+    "quote_text": "Our Nation has lost its wealth, but we're getting it back so fast. The era of economic surrender is totally over.",
+    "statistical_relevance": "High intensity Hope (regaining wealth, ending 'surrender'), Tribal Dominance (national economic focus), supports positive correlation with full_cohesion_index (due to hope) but also shows tension.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 3,
+    "quote_text": "Six members of the savage MS-13 gang have been charged with Kayla and Nisa's murders.",
+    "statistical_relevance": "High intensity Enmity ('savage MS-13 gang'), Fear (murders), supports negative correlation between full_cohesion_index and enmity/fear.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 5,
+    "quote_text": "From that moment on, it has been nothing but swift and unrelenting action to usher in the greatest and most successful era in the history of our country. We have accomplished more in 43 days than most administrations accomplished in 4 years, 8 years — and we are just getting started.",
+    "statistical_relevance": "High intensity Hope (unprecedented success, future potential), supports positive correlation between full_cohesion_index and hope.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 5,
+    "quote_text": "Our goal is to get toxins out of our environment, poisons out of our food supply, and keep our children healthy and strong.",
+    "statistical_relevance": "High intensity Fear (toxins, poisons), Tribal Dominance (protecting 'our children'), supports negative correlation between full_cohesion_index and fear/tribal_dominance.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 5,
+    "quote_text": "And through it all, we are going to rediscover the unstoppable power of the American spirit. And we are going to renew unlimited promise of the American dream.",
+    "statistical_relevance": "High intensity Hope (rediscovery of power, renewal of promise), supports positive correlation between full_cohesion_index and hope.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 1,
+    "quote_text": "Dying industries will come roaring back to life. Heroic veterans will get the care they so desperately need. Our military will be given the resources its brave warriors so richly deserve. Crumbling infrastructure will be replaced with new roads, bridges, tunnels, airports, and railways gleaming across our very, very beautiful land. Our terrible drug epidemic will slow down and, ultimately, stop. And our neglected inner cities will see a rebirth of hope, safety, and opportunity.",
+    "statistical_relevance": "Very high intensity Hope (detailed vision of future improvement, rebirth), supports positive correlation between full_cohesion_index and hope.",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 1,
+    "quote_text": "For too long, we've watched our middle class shrink as we've exported our jobs and wealth to foreign countries.",
+    "statistical_relevance": "High intensity Tribal Dominance (ingroup suffering due to outgroup actions), supports negative correlation between full_cohesion_index and tribal_dominance.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 0,
+    "quote_text": "[Their victories have not been your victories; their triumphs have not been your triumphs; and while they celebrated in our Nation's Capital, there was little to celebrate for struggling families all across our land.]",
+    "statistical_relevance": "High intensity Tribal Dominance (internal fragmentation, 'they' vs 'you/our'), supports negative correlation between full_cohesion_index and tribal_dominance.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 2,
+    "quote_text": "Dying industries will come roaring back to life. Heroic veterans will get the care they so desperately need. Our military will be given the resources its brave warriors so richly deserve.",
+    "statistical_relevance": "High intensity Hope (future improvement, support for ingroup), supports positive correlation between full_cohesion_index and hope.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 2,
+    "quote_text": "Switching away from this current system of lower skilled immigration, and instead adopting a merit-based system, we will have so many more benefits. It will save countless dollars, raise workers' wages, and help struggling families—including immigrant families—enter the middle class. And they will do it quickly, and they will be very, very happy, indeed.",
+    "statistical_relevance": "High intensity Individual Dignity (merit-based system benefiting individuals, including immigrants), supports positive correlation between full_cohesion_index and individual_dignity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 2,
+    "quote_text": "As we speak tonight, we are removing gang members, drug dealers, and criminals that threaten our communities and prey on our very innocent citizens. Bad ones are going out as I speak...",
+    "statistical_relevance": "High intensity Fear ('threaten our communities,' 'prey on innocent citizens'), Enmity (gang members, drug dealers, criminals), supports negative correlation between full_cohesion_index and fear/enmity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 2,
+    "quote_text": "For too long, we've watched our middle class shrink as we've exported our jobs and wealth to foreign countries. We've financed and built one global project after another, but ignored the fates of our children in the inner cities of Chicago, Baltimore, Detroit, and so many other places throughout our land.",
+    "statistical_relevance": "High intensity Tribal Dominance (ingroup suffering due to outgroup benefit and internal neglect), supports negative correlation between full_cohesion_index and tribal_dominance.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 2,
+    "quote_text": "We have withdrawn the United States from the job-killing Trans-Pacific Partnership.",
+    "statistical_relevance": "High intensity Tribal Dominance (protection of ingroup jobs from external agreement), supports negative correlation between full_cohesion_index and tribal_dominance.",
+    "strength_rating": 3
+  },
+  {
+    "document_index": 2,
+    "quote_text": "Each American generation passes the torch of truth, liberty, and justice in an unbroken chain, all the way down to the present. That torch is now in our hands, and we will use it to light up the world.",
+    "statistical_relevance": "High intensity Hope (enduring legacy, future action, global impact), supports positive correlation between full_cohesion_index and hope.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 0,
+    "quote_text": "[We will bring back our jobs. We will bring back our borders. We will bring back our wealth. And we will bring back our dreams.]",
+    "statistical_relevance": "High intensity Hope (restoration, future prosperity), Tribal Dominance (focus on 'our' national assets), supports positive correlation with full_cohesion_index (due to hope) but also shows tension.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 0,
+    "quote_text": "[We, the citizens of America, are now joined in a great national effort to rebuild our country and restore its promise for all of our people.]",
+    "statistical_relevance": "High intensity Amity (collective national effort, 'all of our people'), Hope (rebuilding, restoring promise), supports positive correlation between full_cohesion_index and amity/hope.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 0,
+    "quote_text": "[And, yes, together, we will make America great again.]",
+    "statistical_relevance": "High intensity Hope (collective future achievement), Tribal Dominance (nationalistic goal), supports positive correlation with full_cohesion_index (due to hope) but also shows tension.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 3,
+    "quote_text": "All Americans deserve accountability and respect, and that's what we are giving to our wonderful heroes, our veterans.",
+    "statistical_relevance": "High intensity Individual Dignity (respect for a specific group of individuals), supports positive correlation between full_cohesion_index and individual_dignity.",
+    "strength_rating": 3
+  },
+  {
+    "document_index": 3,
+    "quote_text": "I am asking both parties to come together to give us safe, fast, reliable, and modern infrastructure that our economy needs and our people deserve.",
+    "statistical_relevance": "High intensity Amity (call for bipartisan cooperation), supports positive correlation between full_cohesion_index and amity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 3,
+    "quote_text": "We can lift our citizens from welfare to work, from dependence to independence, and from poverty to prosperity.",
+    "statistical_relevance": "High intensity Hope (path to improvement for citizens), Individual Dignity (empowerment), supports positive correlation between full_cohesion_index and hope/individual_dignity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 5,
+    "quote_text": "As president, I’m fighting every day to reverse this damage and make America affordable again.",
+    "statistical_relevance": "High intensity Hope (reversing damage, future affordability), supports positive correlation between full_cohesion_index and hope.",
+    "strength_rating": 3
+  },
+  {
+    "document_index": 1,
+    "quote_text": "Megan's story is about the unbounded power of a father's love for a daughter.",
+    "statistical_relevance": "High intensity Individual Dignity (focus on personal story, human connection), supports positive correlation between full_cohesion_index and individual_dignity.",
+    "strength_rating": 3
+  },
+  {
+    "document_index": 0,
+    "quote_text": "[restore its promise for all of our people.]",
+    "statistical_relevance": "High intensity Hope (restoring promise), Amity ('all of our people'), supports positive correlation between full_cohesion_index and hope/amity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 0,
+    "quote_text": "[The forgotten men and women of our country will be forgotten no longer. Everyone is listening to you now.]",
+    "statistical_relevance": "High intensity Individual Dignity (empowering the overlooked, universal recognition), supports positive correlation between full_cohesion_index and individual_dignity.",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 0,
+    "quote_text": "[But that is the past. And now we are looking only to the future.]",
+    "statistical_relevance": "High intensity Hope (forward-looking, leaving past behind), supports positive correlation between full_cohesion_index and hope.",
+    "strength_rating": 3
+  }
+]
+```

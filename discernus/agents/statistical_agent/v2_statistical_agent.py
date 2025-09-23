@@ -124,22 +124,15 @@ class V2StatisticalAgent(StandardAgent):
                     error_message="run_context is required"
                 )
             
-            # THIN: Read framework file directly
-            framework_content = self._read_framework_file(run_context.framework_path)
-            if not framework_content:
-                return AgentResult(
-                    success=False,
-                    artifacts=[],
-                    metadata={"agent_name": self.agent_name, "error": "failed to read framework file"},
-                    error_message=f"Failed to read framework file: {run_context.framework_path}"
-                )
+            # REMOVED: Framework file reading - now handled by CAS discovery in _step1_statistical_analysis
             
             # CAS-native discovery: Find score_extraction artifacts
             score_artifacts = self.storage.find_artifacts_by_metadata(artifact_type="score_extraction")
             self.logger.info(f"Discovered {len(score_artifacts)} score_extraction artifacts via CAS")
             
-            # Contract validation: Check expected count
-            expected_count = len(run_context.metadata.get("corpus_documents", []))
+            # Contract validation: Check expected count using CAS-discovered corpus documents
+            corpus_document_hashes = run_context.metadata.get("corpus_document_hashes", [])
+            expected_count = len(corpus_document_hashes)
             if len(score_artifacts) != expected_count:
                 return AgentResult(
                     success=False,
@@ -161,8 +154,8 @@ class V2StatisticalAgent(StandardAgent):
             # Generate batch ID
             batch_id = f"stats_{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}"
             
-            # Step 1: Statistical Analysis (Python code generation + execution)
-            statistical_analysis_content = self._step1_statistical_analysis(framework_content, raw_artifacts, batch_id)
+            # Step 1: Statistical Analysis with CAS discovery
+            statistical_analysis_content = self._step1_statistical_analysis(raw_artifacts, batch_id)
             if not statistical_analysis_content:
                 return AgentResult(
                     success=False,
@@ -267,12 +260,11 @@ class V2StatisticalAgent(StandardAgent):
         return raw_artifacts
     
     
-    def _step1_statistical_analysis(self, framework_content: str, raw_artifacts: List[str], batch_id: str) -> Optional[str]:
+    def _step1_statistical_analysis(self, raw_artifacts: List[str], batch_id: str) -> Optional[str]:
         """
-        Step 1: Perform statistical analysis internally using LLM capabilities.
+        Step 1: Perform statistical analysis using CAS discovery for source materials.
         
         Args:
-            framework_content: Framework content for context
             raw_artifacts: List of raw artifact data from analysis phase
             batch_id: Batch identifier
             
@@ -284,9 +276,24 @@ class V2StatisticalAgent(StandardAgent):
             prompt_template = self._load_prompt_template()
             self.logger.info(f"Loaded prompt template, length: {len(prompt_template)}")
             
-            # Get experiment context from run_context
-            experiment_id = getattr(self, '_current_run_context', {}).get('experiment_id', 'unknown')
-            corpus_manifest_content = getattr(self, '_current_run_context', {}).get('metadata', {}).get('corpus_manifest_content', 'Corpus manifest not available')
+            # CAS Discovery: Get source materials from hash addresses
+            run_context = getattr(self, '_current_run_context', {})
+            metadata = run_context.get('metadata', {})
+            
+            # Get framework from CAS
+            framework_hash = metadata.get('framework_hash')
+            if not framework_hash:
+                raise ValueError("Framework hash not found in run_context metadata")
+            framework_content = self.storage.get_artifact(framework_hash).decode('utf-8')
+            
+            # Get corpus manifest from CAS
+            corpus_manifest_hash = metadata.get('corpus_manifest_hash')
+            if not corpus_manifest_hash:
+                raise ValueError("Corpus manifest hash not found in run_context metadata")
+            corpus_manifest_content = self.storage.get_artifact(corpus_manifest_hash).decode('utf-8')
+            
+            # Get experiment context
+            experiment_id = run_context.get('experiment_id', 'unknown')
             
             # THIN: Pass raw artifact strings directly to LLM
             # Join all raw artifacts with separators for LLM processing
@@ -344,10 +351,4 @@ class V2StatisticalAgent(StandardAgent):
             return None
     
     
-    def _read_framework_file(self, framework_path: str) -> Optional[str]:
-        """Read framework content directly from file."""
-        try:
-            return Path(framework_path).read_text(encoding='utf-8')
-        except Exception as e:
-            self.logger.error(f"Failed to read framework file {framework_path}: {e}")
-            return None
+    # REMOVED: _read_framework_file - replaced with CAS discovery in _step1_statistical_analysis

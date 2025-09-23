@@ -1,0 +1,43 @@
+{
+  "validation_success": true,
+  "issues": [
+    {
+      "category": "specification",
+      "description": "The machine-readable appendix in 'experiment.md' contains a 'hypotheses' key, which is not a standard field according to the Experiment Specification v10.0. Unrecognized keys in the configuration may be ignored by the system.",
+      "impact": "The information within the 'hypotheses' block may not be used by the analysis or orchestration agents, as it is not part of the standard machine-readable specification. The experiment will likely run, but any intended machine-processing of the hypotheses will not occur.",
+      "fix": "Move the 'hypotheses' section into the human-readable part of 'experiment.md' if it is intended for scholarly context. If it is intended for machine processing, verify if a custom extension is in use; otherwise, remove it to comply with the v10.0 standard.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The corpus manifest 'corpus.md' specifies 'spec_version: \"8.0\"', while the current standard is v8.0.2. The experiment appears to function correctly, but using an outdated version string can cause confusion or potential incompatibilities with future system updates.",
+      "impact": "No immediate impact is expected as the structure is compliant with v8.0.x. However, future system validators may become stricter, or the corpus may miss out on features and validation rules introduced in minor patch versions.",
+      "fix": "Update the 'spec_version' field in 'corpus.md' to '8.0.2' to accurately reflect the specification it complies with.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md"
+      ]
+    }
+  ],
+  "suggestions": [
+    {
+      "category": "specification",
+      "description": "The framework 'framework.md' provides dimensional definitions and scoring guides but does not use the recommended 'markers' structure with positive, negative, and boundary case examples. Adopting this structure can significantly improve LLM scoring accuracy and consistency.",
+      "impact": "The current format is functional, but may lead to less reliable or consistent scoring from the analytical agent compared to a framework with more explicit examples.",
+      "fix": "In 'framework.md', enhance each dimension by replacing or supplementing the 'scoring_guide' with a 'markers' object containing 'positive_examples', 'negative_examples', and 'boundary_cases' as outlined in the Framework v10.0 specification.",
+      "priority": "SUGGESTION",
+      "affected_files": [
+        "framework.md"
+      ]
+    }
+  ],
+  "metadata": {
+    "agent": "V2ValidationAgent",
+    "timestamp": "2025-09-23T11:38:43.261610",
+    "experiment_id": "micro_test_experiment",
+    "validation_type": "experiment_coherence"
+  }
+}

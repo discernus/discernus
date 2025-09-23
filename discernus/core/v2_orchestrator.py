@@ -217,11 +217,10 @@ class V2Orchestrator:
         manifest = {
             "experiment_id": run_context.experiment_id,
             "experiment_dir": run_context.experiment_dir,
-            "framework_path": run_context.framework_path,
-            "corpus_path": run_context.corpus_path,
             "current_phase": run_context.current_phase,
             "completed_phases": run_context.completed_phases,
             "artifact_hashes": run_context.artifact_hashes,
+            # REMOVED: framework_path, corpus_path - now using CAS hash addresses in metadata
             "cache_keys": run_context.cache_keys,
             "versions": run_context.versions,
             "metadata": run_context.metadata,
@@ -286,9 +285,8 @@ class V2Orchestrator:
         """
         run_context = RunContext(
             experiment_id=manifest["experiment_id"],
-            experiment_dir=manifest["experiment_dir"],
-            framework_path=manifest.get("framework_path"),
-            corpus_path=manifest.get("corpus_path")
+            experiment_dir=manifest["experiment_dir"]
+            # REMOVED: framework_path, corpus_path - now using CAS hash addresses in metadata
         )
         
         # Restore state from manifest
@@ -325,25 +323,9 @@ class V2Orchestrator:
                 snapshot_path.write_text(experiment_content, encoding='utf-8')
                 snapshots_created.append(f"experiment_{experiment_hash[:8]}.md")
             
-            # Snapshot framework file
-            if run_context.framework_path:
-                framework_path = Path(run_context.framework_path)
-                if framework_path.exists():
-                    framework_content = framework_path.read_text(encoding='utf-8')
-                    framework_hash = hashlib.sha256(framework_content.encode()).hexdigest()
-                    snapshot_path = artifacts_dir / f"framework_{framework_hash[:8]}.md"
-                    snapshot_path.write_text(framework_content, encoding='utf-8')
-                    snapshots_created.append(f"framework_{framework_hash[:8]}.md")
+            # REMOVED: Framework snapshot creation - ValidationAgent handles CAS registration
             
-            # Snapshot corpus.md
-            if run_context.corpus_path:
-                corpus_path = Path(run_context.corpus_path)
-                if corpus_path.exists():
-                    corpus_content = corpus_path.read_text(encoding='utf-8')
-                    corpus_hash = hashlib.sha256(corpus_content.encode()).hexdigest()
-                    snapshot_path = artifacts_dir / f"corpus_{corpus_hash[:8]}.md"
-                    snapshot_path.write_text(corpus_content, encoding='utf-8')
-                    snapshots_created.append(f"corpus_{corpus_hash[:8]}.md")
+            # REMOVED: Corpus snapshot creation - ValidationAgent handles CAS registration
             
             # Create comprehensive README for the run directory
             self._create_run_readme(artifacts_dir.parent, run_context, snapshots_created)

@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250923_111301_2",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "evidence_extraction": "[\n  \"The collapse of the pension fund is a calamitous event, a direct result of years of gross mismanagement and unforgivable neglect.\",\n  \"The financial devastation is horrific, but the deeper damage is to the social contract. This was not a market fluctuation; it was a deliberate, slow-motion disaster orchestrated by incompetent and self-serving bureaucrats.\",\n  \"The impact on retirees and their families is devastating and irreversible. Many elderly citizens who planned their entire lives around the security of their pension benefits now face the prospect of poverty and homelessness.\"\n]\nTotal quotes in the composite analysis: 3\nTotal quotes in the output: 3",
+  "document_index": 2,
+  "timestamp": "2025-09-23T15:14:24.993927+00:00"
+}

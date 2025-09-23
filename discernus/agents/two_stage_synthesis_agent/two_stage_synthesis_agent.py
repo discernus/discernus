@@ -123,8 +123,12 @@ class TwoStageSynthesisAgent(StandardAgent):
             self.logger.info("TwoStageSynthesisAgent starting two-stage execution")
             self.log_execution_start(**kwargs)
             
+            # DEBUG: Log contract validation attempt
+            self.logger.info("STARTING CONTRACT VALIDATION - checking all required input assets")
+            
             # Validate inputs
             if not self._validate_inputs(run_context):
+                self.logger.error("CONTRACT VALIDATION FAILED - synthesis cannot proceed")
                 return AgentResult(
                     success=False,
                     artifacts=[],
@@ -194,21 +198,44 @@ class TwoStageSynthesisAgent(StandardAgent):
             )
     
     def _validate_inputs(self, run_context: RunContext) -> bool:
-        """Validate that required inputs are available for synthesis."""
-        # Trust upstream agents - just check existence, not content quality
-        if not hasattr(run_context, 'statistical_artifacts') or not run_context.statistical_artifacts:
-            self.logger.error("No statistical artifacts found in run_context")
-            return False
+        """Strict contract enforcement: ALL required input assets must be present or fail hard."""
         
-        if not run_context.experiment_id:
-            self.logger.error("No experiment_id found in run_context")
+        # Required Asset 1: Statistical analysis artifacts
+        statistical_artifacts = self.storage.find_artifacts_by_metadata(artifact_type="statistical_analysis")
+        if not statistical_artifacts:
+            self.logger.error("CONTRACT VIOLATION: No statistical_analysis artifacts found via CAS discovery")
             return False
+        self.logger.info(f"✓ Statistical analysis: Found {len(statistical_artifacts)} artifacts")
         
-        if not run_context.framework_path:
-            self.logger.error("No framework_path found in run_context")
+        # Required Asset 2: Curated evidence artifacts  
+        evidence_artifacts = self.storage.find_artifacts_by_metadata(artifact_type="curated_evidence")
+        if not evidence_artifacts:
+            self.logger.error("CONTRACT VIOLATION: No curated_evidence artifacts found via CAS discovery")
             return False
+        self.logger.info(f"✓ Curated evidence: Found {len(evidence_artifacts)} artifacts")
         
-        self.logger.info("Input validation passed: statistical results, experiment metadata, and framework available")
+        # Required Asset 3: Framework hash
+        framework_hash = run_context.metadata.get("framework_hash")
+        if not framework_hash:
+            self.logger.error("CONTRACT VIOLATION: No framework_hash found in run_context metadata")
+            return False
+        self.logger.info(f"✓ Framework: Found hash {framework_hash[:8]}")
+        
+        # Required Asset 4: Experiment hash
+        experiment_hash = run_context.metadata.get("experiment_hash")
+        if not experiment_hash:
+            self.logger.error("CONTRACT VIOLATION: No experiment_hash found in run_context metadata")
+            return False
+        self.logger.info(f"✓ Experiment: Found hash {experiment_hash[:8]}")
+        
+        # Required Asset 5: Corpus manifest hash
+        corpus_manifest_hash = run_context.metadata.get("corpus_manifest_hash")
+        if not corpus_manifest_hash:
+            self.logger.error("CONTRACT VIOLATION: No corpus_manifest_hash found in run_context metadata")
+            return False
+        self.logger.info(f"✓ Corpus manifest: Found hash {corpus_manifest_hash[:8]}")
+        
+        self.logger.info("CONTRACT FULFILLED: All required input assets present - proceeding with synthesis")
         return True
     
     def _execute_stage1_analysis(self, run_context: RunContext) -> Optional[str]:
@@ -403,25 +430,25 @@ synthesis_method: two_stage_with_evidence
     def _prepare_stage1_context(self, run_context: RunContext) -> Dict[str, Any]:
         """Prepare all necessary context data for Stage 1 analysis."""
         try:
-            # Load framework content
-            framework_content = ""
-            if run_context.framework_path:
-                framework_path = Path(run_context.framework_path)
-                if framework_path.exists():
-                    framework_content = framework_path.read_text(encoding='utf-8')
+            # CAS Discovery: Load framework content from hash address
+            framework_hash = run_context.metadata.get("framework_hash")
+            if not framework_hash:
+                raise ValueError("Framework hash not found in run_context metadata")
+            framework_content = self.storage.get_artifact(framework_hash).decode('utf-8')
             
-            # Load experiment content
-            experiment_content = ""
-            experiment_path = Path(run_context.experiment_id) / "experiment.md"
-            if experiment_path.exists():
-                experiment_content = experiment_path.read_text(encoding='utf-8')
+            # CAS Discovery: Load experiment content from hash address
+            experiment_hash = run_context.metadata.get("experiment_hash")
+            if experiment_hash:
+                experiment_content = self.storage.get_artifact(experiment_hash).decode('utf-8')
+            else:
+                experiment_content = ""
             
-            # Load corpus manifest
-            corpus_manifest = ""
-            if run_context.corpus_path:
-                corpus_path = Path(run_context.corpus_path)
-                if corpus_path.exists():
-                    corpus_manifest = corpus_path.read_text(encoding='utf-8')
+            # CAS Discovery: Load corpus manifest from hash address
+            corpus_manifest_hash = run_context.metadata.get("corpus_manifest_hash")
+            if corpus_manifest_hash:
+                corpus_manifest = self.storage.get_artifact(corpus_manifest_hash).decode('utf-8')
+            else:
+                corpus_manifest = ""
             
             return {
                 "framework_content": framework_content,

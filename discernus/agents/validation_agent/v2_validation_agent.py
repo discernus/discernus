@@ -154,54 +154,82 @@ class V2ValidationAgent(StandardAgent):
             )
 
     def _validate_and_extract_inputs(self, run_context: RunContext) -> Dict[str, Any]:
-        """Validate RunContext and extract all necessary data for validation."""
+        """Validate RunContext, extract validation data, and register all source files in CAS."""
         if not run_context:
             raise ValueError("RunContext is required.")
 
         inputs = {}
         experiment_dir = Path(run_context.experiment_dir)
         
-        # THIN Architecture: ValidationAgent is the customs inspector
-        # Read all three required files from experiment directory
+        # CAS Registration Hub: ValidationAgent registers all source files
         try:
-            # Read experiment.md
+            # 1. Register experiment.md in CAS
             experiment_file_path = experiment_dir / 'experiment.md'
             if not experiment_file_path.exists():
                 raise ValueError(f"Experiment file not found: {experiment_file_path}")
+            experiment_hash = self.storage.put_file(experiment_file_path, {"artifact_type": "experiment_spec"})
             inputs['experiment_content'] = experiment_file_path.read_text(encoding='utf-8')
             
-            # Read framework.md (standardized name)
+            # 2. Register framework.md in CAS
             framework_path = experiment_dir / 'framework.md'
             if not framework_path.exists():
                 raise ValueError(f"Framework file not found: {framework_path}")
+            framework_hash = self.storage.put_file(framework_path, {"artifact_type": "framework"})
             inputs['framework_content'] = framework_path.read_text(encoding='utf-8')
             
-            # Read corpus.md
+            # 3. Register corpus.md in CAS
             corpus_path = experiment_dir / 'corpus.md'
             if not corpus_path.exists():
                 raise ValueError(f"Corpus manifest file not found: {corpus_path}")
+            corpus_manifest_hash = self.storage.put_file(corpus_path, {"artifact_type": "corpus_manifest"})
             inputs['corpus_manifest_content'] = corpus_path.read_text(encoding='utf-8')
             
-            # List corpus directory contents for file existence validation
+            # 4. Register all corpus documents in CAS
             corpus_dir = experiment_dir / 'corpus'
             if not corpus_dir.exists():
                 raise ValueError(f"Corpus directory not found: {corpus_dir}")
             
             corpus_files = []
-            for file_path in corpus_dir.rglob('*'):
-                if file_path.is_file():
-                    # Get relative path from corpus directory
-                    relative_path = file_path.relative_to(corpus_dir)
-                    corpus_files.append(str(relative_path))
+            corpus_document_hashes = []
+            
+            # Parse corpus manifest to get document metadata
+            import yaml
+            import re
+            manifest_text = corpus_path.read_text(encoding='utf-8')
+            yaml_match = re.search(r"```yaml\n(.*?)```", manifest_text, re.DOTALL)
+            if yaml_match:
+                yaml_content = yaml_match.group(1)
+                manifest = yaml.safe_load(yaml_content)
+                
+                # Register each corpus document with metadata
+                for doc_info in manifest.get('documents', []):
+                    filename = doc_info['filename']
+                    doc_path = corpus_dir / filename
+                    if doc_path.exists():
+                        doc_hash = self.storage.put_file(doc_path, {
+                            "artifact_type": "corpus_document",
+                            "document_id": doc_info['document_id'],
+                            "metadata": doc_info.get('metadata', {})
+                        })
+                        corpus_document_hashes.append(doc_hash)
+                        corpus_files.append(filename)
+                    else:
+                        self.logger.warning(f"Corpus document not found: {doc_path}")
             
             inputs['corpus_directory_listing'] = sorted(corpus_files)
             
-            # Populate RunContext with file paths for downstream agents
-            run_context.framework_path = str(framework_path)
-            run_context.corpus_path = str(corpus_path)
+            # Store CAS hash addresses in run_context metadata for postal service
+            run_context.metadata["experiment_hash"] = experiment_hash
+            run_context.metadata["framework_hash"] = framework_hash
+            run_context.metadata["corpus_manifest_hash"] = corpus_manifest_hash
+            run_context.metadata["corpus_document_hashes"] = corpus_document_hashes
+            
+            self.logger.info(f"CAS Registration complete - experiment: {experiment_hash[:8]}, "
+                           f"framework: {framework_hash[:8]}, corpus_manifest: {corpus_manifest_hash[:8]}, "
+                           f"corpus_docs: {len(corpus_document_hashes)}")
             
         except Exception as e:
-            raise ValueError(f"Failed to read experiment files from {experiment_dir}: {e}")
+            raise ValueError(f"Failed to read and register experiment files from {experiment_dir}: {e}")
 
         # Load current specifications for compliance validation
         inputs['specification_references'] = self._load_specification_references()

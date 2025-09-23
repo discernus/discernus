@@ -1,0 +1,43 @@
+{
+  "validation_success": true,
+  "issues": [
+    {
+      "category": "trinity_coherence",
+      "description": "The `experiment.md` prose (Abstract and Corpus Design sections) states the corpus contains 6 speeches and omits `Trump_SOTU_2019.txt` and `trump_kirk_funeral_2025.txt`. However, the machine-readable appendix (`sample_size: 7`) and the `corpus.md` manifest correctly list all 7 documents. The analysis will execute on all 7 documents from the manifest, but the narrative description of the experiment is inaccurate.",
+      "impact": "The discrepancy between the research plan's narrative and the actual data to be analyzed can cause confusion and may lead to misinterpretation of the results, as the analysis will include documents not accounted for in the experiment's prose description.",
+      "fix": "Align the Abstract and Corpus Design sections in `experiment.md` with the `corpus.md` manifest by updating the description to accurately reflect the corpus of 7 documents, including the speeches from 2019 and the memorial speech.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The `corpus.md` overview section states the corpus is for use with \"Cohesive Flourishing Framework v10.0\", but the experiment is configured to use `framework.md`, which is version 10.4.",
+      "impact": "This is a minor documentation error that does not affect execution but could cause slight confusion for researchers reviewing the files.",
+      "fix": "Update the prose overview in `corpus.md` to reference the correct framework version, \"v10.4\", to ensure consistency with the actual framework being used.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The YAML block within `corpus.md` specifies `version: \"10.0\"`. The current specification standard for corpus manifests is v8.0.2. While the file structure is compliant, using a custom version number that appears to align with the framework/experiment spec version instead of the corpus content version could be misleading.",
+      "impact": "This does not block execution but deviates from platform standards for manifest versioning, which could cause confusion for automated tooling or future maintainers who expect the version to refer to the manifest format or content version.",
+      "fix": "Consider changing the `version` field in the `corpus.md` manifest to reflect a content version (e.g., \"1.0\") and adding a `spec_version: \"8.0.2\"` field for clarity about the format compliance.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md"
+      ]
+    }
+  ],
+  "suggestions": [],
+  "metadata": {
+    "agent": "V2ValidationAgent",
+    "timestamp": "2025-09-23T09:52:13.680602",
+    "experiment_id": "2b_cff_cohesive_flourishing",
+    "validation_type": "experiment_coherence"
+  }
+}

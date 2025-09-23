@@ -1,0 +1,16 @@
+{
+  "3fa90d49d34a21602c70145bf3678d470605abf11ca7779fcf886a9ebfcee385": {
+    "artifact_path": "validation_report_3fa90d49.json",
+    "created_at": "2025-09-23T14:54:11.958282+00:00",
+    "human_filename": "validation_report_3fa90d49.json",
+    "is_directory": false,
+    "metadata": {
+      "agent": "V2ValidationAgent",
+      "artifact_type": "validation_report",
+      "experiment_id": "micro_test_experiment",
+      "timestamp": "2025-09-23T10:54:11.954182"
+    },
+    "size_bytes": 3336,
+    "source_run": "20250923_145333"
+  }
+}

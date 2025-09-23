@@ -25,9 +25,8 @@ class RunContext:
     experiment_id: str
     experiment_dir: str  # Path to experiment directory containing experiment.md, framework.md, corpus.md
     
-    # File paths (populated by ValidationAgent)
-    framework_path: Optional[str] = None
-    corpus_path: Optional[str] = None
+    # REMOVED: framework_path, corpus_path - replaced with CAS hash addresses in metadata
+    # ValidationAgent now populates metadata with: experiment_hash, framework_hash, corpus_manifest_hash, corpus_document_hashes
     
     # Analysis phase results
     analysis_results: Optional[Dict[str, Any]] = None

@@ -1,0 +1,65 @@
+{
+  "validation_success": true,
+  "issues": [
+    {
+      "category": "specification",
+      "description": "The YAML appendices in experiment.md, framework.md, and corpus.md are missing the standard `# --- Start of Machine-Readable Appendix ---` and `# --- End of Machine-Readable Appendix ---` delimiters required by the v10.0 specification.",
+      "impact": "While parsers may be lenient, this violates the explicit file format specification. Future, stricter validation agents may reject the files. It also reduces clarity by not formally separating the human-readable narrative from the machine-readable configuration.",
+      "fix": "Wrap the YAML block in each of the three specification files with the standard start and end comment lines.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md",
+        "framework.md",
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The hypotheses (H1, H2) in experiment.md are declared as `mutually_exclusive: true` and `collective_exhaustive: true`, but they are not. H1 (Positive docs have higher positive scores) and H2 (Negative docs have higher negative scores) can both be true simultaneously, and they do not cover all possible outcomes (e.g., no difference).",
+      "impact": "This represents a logical inconsistency in the research design narrative. It does not block execution but undermines the formal validity of the stated hypotheses.",
+      "fix": "Revise the `mutually_exclusive` and `collective_exhaustive` boolean flags for H1 and H2 to `false`, or redesign the hypotheses to be genuinely exclusive and exhaustive.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The framework YAML declares `spec_version: \"10.0\"` but uses a structure that does not fully align with v10.0 best practices. It includes `min_score` and `max_score` fields, which are deprecated in favor of the more detailed `scoring_calibration` object, and it lacks the recommended `markers` section.",
+      "impact": "The analysis will still execute due to the detailed `analysis_prompt` and strict `output_schema`. However, not using the latest best practices (`scoring_calibration`, `markers`) may lead to less reliable and consistent scoring from the LLM agent compared to a fully compliant framework.",
+      "fix": "In the framework.md YAML, replace the `min_score` and `max_score` fields within each dimension with a `scoring_calibration` object. Also, add a `markers` object with positive, negative, and boundary case examples for each dimension.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "framework.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The corpus manifest (`corpus.md`) specifies `spec_version: \"8.0\"`, which is an older version. The current standard is v10.0.",
+      "impact": "The experiment will function correctly because the platform maintains backward compatibility for this simple manifest structure. However, using an outdated spec version may cause compatibility issues with future features that rely on the v10.0 corpus standard.",
+      "fix": "Update the `spec_version` field in the corpus.md YAML to `\"10.0\"` and ensure the structure remains compliant with the current standard.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md"
+      ]
+    }
+  ],
+  "suggestions": [
+    {
+      "category": "specification",
+      "description": "To improve scoring reliability, the framework could be enhanced by adding a `markers` object (with positive, negative, and boundary examples) and a `scoring_calibration` object for each dimension, as recommended by the v10.0 specification.",
+      "impact": "This would provide more explicit guidance to the analysis agent, reducing ambiguity and potentially improving scoring accuracy and consistency across documents.",
+      "fix": "For each dimension in framework.md, add a `markers` section with example phrases and a `scoring_calibration` section detailing the meaning of scores at different levels (e.g., 0.0, 0.1-0.3, 0.4-0.6, 0.7-0.9, 1.0).",
+      "priority": "SUGGESTION",
+      "affected_files": [
+        "framework.md"
+      ]
+    }
+  ],
+  "metadata": {
+    "agent": "V2ValidationAgent",
+    "timestamp": "2025-09-23T12:11:12.496140",
+    "experiment_id": "micro_test_experiment",
+    "validation_type": "experiment_coherence"
+  }
+}

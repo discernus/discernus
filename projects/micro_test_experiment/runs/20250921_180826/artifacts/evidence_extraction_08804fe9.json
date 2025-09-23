@@ -1,8 +1,0 @@
-{
-  "analysis_id": "analysis_v2_analysis_20250921_140826_3",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "evidence_extraction": "```json\n[\n  \"The dam's structural failure and the ensuing flood have created a disastrous humanitarian and ecological crisis. Entire neighborhoods are submerged, thousands have been displaced, and the damage to our infrastructure is catastrophic.\",\n  \"This was not an unforeseeable natural disaster; it was the predictable outcome of decades of deferred maintenance and criminal negligence.\",\n  \"The emergency response has been appallingly slow and disorganized, leaving stranded residents feeling abandoned and desperate.\",\n  \"The long-term consequences are just as dreadful. The toxic sludge released from the flooded industrial zone has caused irreparable harm to our river ecosystem, ensuring that even after the waters recede, the land will remain poisoned for generations.\",\n  \"The feeling on the ground is one of profound anger and hopelessness, a grim recognition that this entire tragedy was not just predictable, but preventable. The failure is monumental.\"\n]\n```",
-  "document_index": 3,
-  "timestamp": "2025-09-21T18:10:03.482690+00:00"
-}

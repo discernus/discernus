@@ -1,0 +1,47 @@
+{
+  "validation_success": true,
+  "issues": [
+    {
+      "category": "trinity_coherence",
+      "description": "The experiment's prose section describes a corpus of 6 speeches, while the machine-readable appendix in the same file specifies `sample_size: 7`, which aligns with the 7 documents listed in the `corpus.md` manifest.",
+      "impact": "This discrepancy between the human-readable research plan and the machine-readable configuration could lead to confusion during results interpretation. The analysis will run on all 7 documents, not the 6 described.",
+      "fix": "Update the experiment's prose section to reflect the actual sample size of 7 documents to ensure the narrative description matches the executed analysis.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "trinity_coherence",
+      "description": "The experiment's 'Corpus Design' section and 'Speech context analysis' plan do not account for all document types present in the corpus. The plan mentions analyzing inaugural vs. SOTU speeches, but the corpus also includes a 'memorial' speech ('trump_kirk_funeral_2025.txt') which is not part of the described design.",
+      "impact": "The analytical plan is incomplete, potentially leading to unexpected results or the memorial speech being processed without a clear analytical purpose. The comparison between 'inaugural' and 'SOTU' might be skewed or require manual filtering post-analysis.",
+      "fix": "Either update the experiment's methodology to include a plan for analyzing the 'memorial' speech type or remove the document from the corpus if it is not relevant to the research questions.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "trinity_coherence",
+      "description": "The experiment specification and corpus manifest prose sections both reference using 'Cohesive Flourishing Framework v10.0', but the provided framework.md file specifies version '10.4.0' in its machine-readable metadata.",
+      "impact": "This version mismatch creates inconsistency in the research documentation. While likely not a functional blocker if the versions are compatible, it undermines the clarity and replicability of the experiment's setup.",
+      "fix": "Update the prose in 'experiment.md' and 'corpus.md' to correctly state the framework version as '10.4' to align with the actual framework file being used.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md",
+        "framework.md"
+      ]
+    }
+  ],
+  "suggestions": [
+    "Consider clarifying the term 'Factorial Design' in the experiment.md prose. With a sample size of N=7 and an 'analysis_type' of 'case_study', this terminology might be misleading. A more precise term like 'multi-factor case study' could improve clarity."
+  ],
+  "metadata": {
+    "agent": "V2ValidationAgent",
+    "timestamp": "2025-09-22T23:12:32.863861",
+    "experiment_id": "2b_cff_cohesive_flourishing",
+    "validation_type": "experiment_coherence"
+  }
+}

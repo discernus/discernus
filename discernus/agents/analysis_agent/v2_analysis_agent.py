@@ -115,21 +115,24 @@ class V2AnalysisAgent(StandardAgent):
             AgentResult with analysis artifacts
         """
         try:
-            # THIN: Read framework and corpus files directly
-            framework_content = self._read_framework_file(run_context.framework_path)
-            corpus_documents = self._read_corpus_documents(run_context.corpus_path)
-
-            if not framework_content:
+            # CAS Discovery: Get framework and corpus documents from hash addresses
+            framework_hash = run_context.metadata.get("framework_hash")
+            if not framework_hash:
                 return AgentResult(
                     success=False,
-                    error_message=f"Failed to read framework file: {run_context.framework_path}",
+                    error_message="Framework hash not found in run_context metadata",
+                    artifacts=[],
                     metadata={"agent_name": self.agent_name}
                 )
+            framework_content = self.storage.get_artifact(framework_hash).decode('utf-8')
+            
+            corpus_documents = self._read_corpus_documents_via_cas(run_context)
 
             if not corpus_documents:
                 return AgentResult(
                     success=False,
-                    error_message=f"Failed to read corpus documents from: {run_context.corpus_path}", 
+                    error_message="Failed to read corpus documents via CAS discovery",
+                    artifacts=[],
                     metadata={"agent_name": self.agent_name}
                 )
 
@@ -585,44 +588,36 @@ timestamp: {timestamp}
             self.logger.error(f"Failed to read framework file {framework_path}: {e}")
             return None
     
-    def _read_corpus_documents(self, corpus_path: str) -> List[Dict[str, str]]:
-        """Read corpus documents directly from manifest file."""
+    def _read_corpus_documents_via_cas(self, run_context: RunContext) -> List[Dict[str, str]]:
+        """Read corpus documents using CAS discovery."""
         try:
-            import yaml
-            import re
-            
-            corpus_manifest_path = Path(corpus_path)
-            if not corpus_manifest_path.exists():
-                self.logger.error(f"Corpus manifest not found: {corpus_path}")
+            # CAS Discovery: Get corpus document hashes from run_context metadata
+            corpus_document_hashes = run_context.metadata.get("corpus_document_hashes", [])
+            if not corpus_document_hashes:
+                self.logger.error("No corpus document hashes found in run_context metadata")
                 return []
             
-            manifest_text = corpus_manifest_path.read_text(encoding='utf-8')
-            
-            # Extract YAML block from markdown
-            yaml_match = re.search(r"```yaml\n(.*?)```", manifest_text, re.DOTALL)
-            if not yaml_match:
-                yaml_content = manifest_text
-            else:
-                yaml_content = yaml_match.group(1)
-
-            manifest = yaml.safe_load(yaml_content)
-            
             documents = []
-            corpus_dir = corpus_manifest_path.parent / 'corpus'
-            
-            for doc_info in manifest.get('documents', []):
-                doc_path = corpus_dir / doc_info['filename']
-                if doc_path.exists():
-                    content = doc_path.read_text(encoding='utf-8')
+            for doc_hash in corpus_document_hashes:
+                try:
+                    # Get document content from CAS
+                    doc_content = self.storage.get_artifact(doc_hash).decode('utf-8')
+                    
+                    # Get document metadata from CAS registry
+                    doc_metadata = self.storage.get_artifact_metadata(doc_hash)
+                    document_id = doc_metadata.get("document_id", doc_hash[:8])
+                    
                     documents.append({
-                        "id": doc_info.get('document_id', doc_info['filename']),
-                        "content": content,
+                        "id": document_id,
+                        "content": doc_content,
                     })
-                else:
-                    self.logger.warning(f"Document file not found: {doc_path}")
+                except Exception as e:
+                    self.logger.warning(f"Failed to load document {doc_hash}: {e}")
             
+            self.logger.info(f"Loaded {len(documents)} corpus documents via CAS discovery")
             return documents
+            
         except Exception as e:
-            self.logger.error(f"Failed to read corpus documents from {corpus_path}: {e}")
+            self.logger.error(f"Failed to read corpus documents via CAS: {e}")
             return []
 

@@ -1,0 +1,16 @@
+{
+  "c06462fe7bdb9fc89eecfdcb315ba73f1f0f044f2ea7731b0f0f4aae086f15ff": {
+    "artifact_path": "validation_report_c06462fe.json",
+    "created_at": "2025-09-23T00:41:26.313569+00:00",
+    "human_filename": "validation_report_c06462fe.json",
+    "is_directory": false,
+    "metadata": {
+      "agent": "V2ValidationAgent",
+      "artifact_type": "validation_report",
+      "experiment_id": "2b_cff_cohesive_flourishing",
+      "timestamp": "2025-09-22T20:41:26.311463"
+    },
+    "size_bytes": 3476,
+    "source_run": "20250923_004044"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "validation_success": true,
+  "issues": [
+    {
+      "category": "trinity_coherence",
+      "description": "The prose in `experiment.md` is inconsistent with the machine-readable configuration. The abstract and 'Corpus Design' section state the experiment uses 6 speeches, but the `experiment.md` appendix (`sample_size: 7`) and the `corpus.md` manifest both list 7 documents. The prose is missing references to \"Trump_SOTU_2019.txt\" and \"trump_kirk_funeral_2025.txt\".",
+      "impact": "The analysis will run on 7 documents, but the human-readable research plan describes a different, 6-document study. This will cause significant confusion when interpreting the results against the stated methodology.",
+      "fix": "Update the Abstract, Research Questions, and Corpus Design sections of `experiment.md` to accurately reflect the 7 documents defined in `corpus.md`.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "trinity_coherence",
+      "description": "The experiment's prose overstates its statistical capabilities for the given sample size. It mentions 'Factorial Design Validation' and 'complex statistical relationships', which imply inferential statistics. However, with a sample size of N=7, platform guidelines state that only 'Case study analysis' and descriptive statistics are appropriate.",
+      "impact": "The researcher may have incorrect expectations about the statistical power and validity of the results. The platform will execute a descriptive or case-study analysis, not the inferential tests implied by the prose, which could lead to misinterpreting the significance of the findings.",
+      "fix": "Revise the 'Expected Outcomes' and 'Significance' sections in `experiment.md` to align with a case-study methodology. Focus on identifying qualitative patterns and descriptive trends rather than claiming to test for statistically significant relationships.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The machine-readable appendix in `experiment.md` does not fully comply with the v10.0 specification. It is missing the mandatory `--- Start of Machine-Readable Appendix ---` and `--- End of Machine-Readable Appendix ---` delimiters.",
+      "impact": "The experiment will likely run due to legacy parser support, but it is not compliant with the current standard. Future updates to the Discernus platform may enforce stricter parsing, which would cause this experiment to fail validation.",
+      "fix": "Wrap the YAML block at the end of `experiment.md` with the specified `--- Start...` and `--- End...` comment lines to ensure forward compatibility and adherence to the v10.0 specification.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md"
+      ]
+    }
+  ],
+  "suggestions": [],
+  "metadata": {
+    "agent": "V2ValidationAgent",
+    "timestamp": "2025-09-23T10:33:36.401640",
+    "experiment_id": "2b_cff_cohesive_flourishing",
+    "validation_type": "experiment_coherence"
+  }
+}
