@@ -135,6 +135,35 @@ class FullExperimentStrategy(ExecutionStrategy):
                 except ImportError:
                     pass
             
+            # Load corpus documents and framework content for agents
+            # THIN PRINCIPLE: Orchestrator handles file I/O, not agents
+            framework_content = self._load_framework_content(Path(run_context.framework_path))
+            corpus_manifest_path = Path(run_context.corpus_path)
+            corpus_documents = self._load_corpus_documents(corpus_manifest_path)
+            corpus_manifest_content = corpus_manifest_path.read_text(encoding='utf-8')
+
+            if not framework_content:
+                return ExperimentResult(
+                    success=False,
+                    phases_completed=phases_completed,
+                    artifacts=artifacts,
+                    metadata=metadata,
+                    error_message="Failed to load framework content"
+                )
+            
+            if not corpus_documents:
+                return ExperimentResult(
+                    success=False,
+                    phases_completed=phases_completed,
+                    artifacts=artifacts,
+                    metadata=metadata,
+                    error_message="Failed to load corpus documents"
+                )
+
+            run_context.metadata["framework_content"] = framework_content
+            run_context.metadata["corpus_documents"] = corpus_documents
+            run_context.metadata["corpus_manifest_content"] = corpus_manifest_content
+            
             # Phase 2: Analysis
             if "Analysis" in agents:
                 audit.log_agent_event("FullExperimentStrategy", "phase_start", {"phase": "analysis"})

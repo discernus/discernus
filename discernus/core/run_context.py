@@ -31,27 +31,27 @@ class RunContext:
     
     # Analysis phase results
     analysis_results: Optional[Dict[str, Any]] = None
-    analysis_artifacts: List[str] = field(default_factory=list)
+    # REMOVED: analysis_artifacts - replaced with CAS discovery
     
     # Derived metrics
     derived_metrics: Optional[Dict[str, Any]] = None
-    derived_metrics_artifacts: List[str] = field(default_factory=list)
+    # REMOVED: derived_metrics_artifacts - replaced with CAS discovery
     
     # Evidence phase results
     evidence: Optional[Dict[str, Any]] = None
-    evidence_artifacts: List[str] = field(default_factory=list)
+    # REMOVED: evidence_artifacts - replaced with CAS discovery
     
     # Statistical analysis results
     statistical_results: Optional[Dict[str, Any]] = None
-    statistical_artifacts: List[str] = field(default_factory=list)
+    # REMOVED: statistical_artifacts - replaced with CAS discovery
     
     # Synthesis results
     synthesis_results: Optional[Dict[str, Any]] = None
-    synthesis_artifacts: List[str] = field(default_factory=list)
+    # REMOVED: synthesis_artifacts - replaced with CAS discovery
     
     # Verification results
     verification_results: Optional[Dict[str, Any]] = None
-    verification_artifacts: List[str] = field(default_factory=list)
+    # REMOVED: verification_artifacts - replaced with CAS discovery
     
     # Metadata and provenance
     metadata: Dict[str, Any] = field(default_factory=dict)
@@ -113,17 +113,17 @@ class RunContext:
             "framework_path": self.framework_path,
             "corpus_path": self.corpus_path,
             "analysis_results": self.analysis_results,
-            "analysis_artifacts": self.analysis_artifacts,
+            # REMOVED: analysis_artifacts - replaced with CAS discovery
             "derived_metrics": self.derived_metrics,
-            "derived_metrics_artifacts": self.derived_metrics_artifacts,
+            # REMOVED: derived_metrics_artifacts - replaced with CAS discovery
             "evidence": self.evidence,
-            "evidence_artifacts": self.evidence_artifacts,
+            # REMOVED: evidence_artifacts - replaced with CAS discovery
             "statistical_results": self.statistical_results,
-            "statistical_artifacts": self.statistical_artifacts,
+            # REMOVED: statistical_artifacts - replaced with CAS discovery
             "synthesis_results": self.synthesis_results,
-            "synthesis_artifacts": self.synthesis_artifacts,
+            # REMOVED: synthesis_artifacts - replaced with CAS discovery
             "verification_results": self.verification_results,
-            "verification_artifacts": self.verification_artifacts,
+            # REMOVED: verification_artifacts - replaced with CAS discovery
             "metadata": self.metadata,
             "artifact_hashes": self.artifact_hashes,
             "cache_keys": self.cache_keys,

@@ -157,24 +157,15 @@ class V2AnalysisAgent(StandardAgent):
                 )
                 all_artifacts.extend(doc_artifacts)
             
-            # Update RunContext with analysis artifacts for downstream agents
-            # Statistical Agent only needs score_extraction artifacts (clean numerical data)
-            statistical_artifact_hashes = []
-            for artifact in all_artifacts:
-                if (artifact.get('type') == 'score_extraction' and 
-                    'metadata' in artifact and 'artifact_hash' in artifact['metadata']):
-                    statistical_artifact_hashes.append(artifact['metadata']['artifact_hash'])
-
-            # Update run context with filtered artifacts for Statistical Agent
-            run_context.analysis_artifacts = statistical_artifact_hashes
+            # REMOVED: Artifact filtering - agents now use CAS discovery with proper metadata labels
+            # Each artifact is correctly labeled during put_artifact() with appropriate artifact_type
             run_context.analysis_results = {
                 "documents_processed": len(documents),
                 "processing_mode": "atomic",
                 "batch_id": batch_id
             }
 
-            self.logger.info(f"Updated run_context with {len(statistical_artifact_hashes)} statistical artifacts: {statistical_artifact_hashes}")
-            self.logger.info(f"Total artifacts created: {len(all_artifacts)} (filtered to {len(statistical_artifact_hashes)} for Statistical Agent)")
+            self.logger.info(f"Total artifacts created: {len(all_artifacts)} - agents will use CAS discovery")
 
             # Analysis completed successfully
             self.unified_logger.success(f"🎉 Atomic document analysis completed - {len(documents)} documents processed")

@@ -102,6 +102,8 @@ class V2StatisticalAgent(StandardAgent):
             AgentResult with statistical analysis artifacts
         """
         try:
+            # CAS Discovery approach - corpus documents loaded by orchestrator
+            
             # Store run context for access in other methods
             self._current_run_context = {
                 'experiment_id': run_context.experiment_id,
@@ -183,8 +185,7 @@ class V2StatisticalAgent(StandardAgent):
                 statistical_content_bytes,
                 {"artifact_type": "statistical_analysis", "batch_id": batch_id}
             )
-            # Update run context with proper artifact hashes
-            run_context.statistical_artifacts = [statistical_artifact_hash]
+            # REMOVED: run_context.statistical_artifacts - replaced with CAS discovery
             run_context.statistical_results = statistical_analysis_content.strip()  # THIN: Raw LLM response
             
             
