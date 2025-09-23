@@ -129,7 +129,7 @@ discernus run projects/nano_test_experiment
 discernus run [path]
 
 # Resume from cached analysis
-discernus resume [path]
+discernus run [path] --resume-from-stats
 
 # Validate a specific score
 discernus validate-score [path] [document] [score] --score-value [value]

@@ -128,7 +128,7 @@ def _validate_corpus_documents(experiment_path: Path, corpus_manifest_path: Path
 
 # Main CLI group
 @click.group()
-@click.version_option(version='0.2.0', prog_name='Discernus')
+@click.version_option(version='2.0.0', prog_name='Discernus')
 @click.pass_context
 def cli(ctx):
     """Discernus - Computational Social Science Research Platform (THIN v2.0)
@@ -159,8 +159,8 @@ def cli(ctx):
 @click.option('--skip-validation', is_flag=True, help='Skip experiment coherence validation for faster execution')
 @click.option('--analysis-only', is_flag=True, help='Run analysis phase only, skip statistical and synthesis')
 @click.option('--statistical-prep', is_flag=True, help='Run analysis and statistical phases, skip synthesis')
-@click.option('--resume-from-stats', is_flag=True, help='Resume from statistical phase, skip analysis')
-@click.option('--resume-from-analysis', is_flag=True, help='Resume from analysis phase, skip validation and analysis')
+@click.option('--resume-from-stats', is_flag=True, help='Resume from statistical phase (requires previous statistical-prep run)')
+@click.option('--resume-from-analysis', is_flag=True, help='Resume from analysis phase (requires previous analysis-only run)')
 @click.pass_context
 def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, skip_validation: bool, 
         analysis_only: bool, statistical_prep: bool, resume_from_stats: bool, resume_from_analysis: bool):

@@ -1,0 +1,25 @@
+{
+  "validation_success": true,
+  "issues": [
+    {
+      "category": "specification",
+      "description": "The framework specification `framework.md` uses a top-level key `required_calculations` in its YAML appendix to define derived metrics. The v10.0 Framework Specification documentation and the framework's own `output_schema` refer to this concept as `derived_metrics`.",
+      "impact": "This is a minor inconsistency that does not block execution, as the platform's calculation engine can parse the defined formulas. However, it deviates from the standard naming convention, which may cause confusion or issues with future tooling that expects the `derived_metrics` key.",
+      "fix": "In `framework.md`, rename the top-level YAML key `required_calculations` to `derived_metrics`. This will align the file with the v10.0 specification examples and make it internally consistent with its own `output_schema`.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "framework.md"
+      ]
+    }
+  ],
+  "suggestions": [
+    "The experiment is well-structured for a comparative case analysis (N=2), aligning perfectly with the platform's statistical guidance for small sample sizes.",
+    "The use of detailed `markers`, `scoring_calibration`, and `sequential_` analysis variants in `framework.md` is an excellent implementation of best practices and will likely lead to high-quality, reliable results."
+  ],
+  "metadata": {
+    "agent": "V2ValidationAgent",
+    "timestamp": "2025-09-23T19:20:12.624669",
+    "experiment_id": "0_mlkmx",
+    "validation_type": "experiment_coherence"
+  }
+}

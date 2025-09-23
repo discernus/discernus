@@ -109,8 +109,7 @@ class RunContext:
         return {
             "experiment_id": self.experiment_id,
             "experiment_dir": self.experiment_dir,
-            "framework_path": self.framework_path,
-            "corpus_path": self.corpus_path,
+            # REMOVED: framework_path, corpus_path - replaced with CAS hash addresses in metadata
             "analysis_results": self.analysis_results,
             # REMOVED: analysis_artifacts - replaced with CAS discovery
             "derived_metrics": self.derived_metrics,

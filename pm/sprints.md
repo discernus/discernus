@@ -801,44 +801,118 @@
 - ⏳ Unit and integration tests updated for native implementations
 - ⏳ Documentation updated with native agent development patterns
 
-### Sprint V2-9: Restore Advanced CLI Functionality ⏳ PENDING
-**Corresponds to**: V2 Plan - Phase 5 (CLI Parity)
-**Goal**: Restore all major V1 CLI options to the V2 `run` command and implement a V2 `resume` command.
-**Priority**: HIGH - Achieve full feature parity for researcher workflows.
+### Sprint V2-9: Fix Resume Functionality with CAS-Based Architecture 🔄 **IN PROGRESS**
+
+**Timeline**: 1-2 days
+**Goal**: Fix the three resume flags (`--resume-from-stats`, `--resume-from-analysis`, `--statistical-prep`) to work reliably using the existing CAS (Content Addressable Storage) pattern.
+**Priority**: HIGH - Resume functionality is currently broken due to framework_path/corpus_path removal from RunContext.
+
+**Current State Analysis**:
+- ✅ **CAS Pattern Working**: ValidationAgent populates `run_context.metadata` with CAS hashes (`framework_hash`, `corpus_manifest_hash`, etc.)
+- ✅ **Other Agents Using CAS**: TwoStageSynthesisAgent, V2StatisticalAgent, V2AnalysisAgent successfully use CAS discovery
+- ❌ **Execution Strategies Broken**: Still try to access removed `framework_path`/`corpus_path` fields
+- ❌ **RunContext Serialization Broken**: `to_dict()` method references removed fields
+- ❌ **Documentation Inconsistent**: Shows non-existent `discernus resume` command
 
 **Detailed Tasks**:
 
-#### [V2-9.1] Implement Execution Modes (`--analysis-only`, etc.)
-- **Task**: Create new `ExecutionStrategy` classes (`AnalysisOnlyStrategy`, `StatisticalPrepStrategy`, `SkipSynthesisStrategy`) to support partial pipeline runs.
-- **Details**: The orchestrator must gracefully stop after the specified phase and ensure all necessary artifacts up to that point are saved.
+#### [V2-9.1] Fix RunContext Serialization
+- **Task**: Remove `framework_path` and `corpus_path` references from `RunContext.to_dict()` method
+- **File**: `discernus/core/run_context.py` (lines 112-113)
+- **Details**: These fields were removed but still referenced in serialization
 
-#### [V2-9.2] Implement Model Selection Flags
+#### [V2-9.2] Add CAS Helper Methods
+- **Task**: Add helper methods to execution strategies for CAS-based asset loading
+- **File**: `discernus/core/execution_strategies.py`
+- **Details**: Reduce code duplication and follow proven CAS pattern from other agents
+
+#### [V2-9.3] Update AnalysisOnlyStrategy
+- **Task**: Replace `framework_path`/`corpus_path` access with CAS-based loading
+- **File**: `discernus/core/execution_strategies.py` (lines 378-400)
+- **Details**: Use `run_context.metadata["framework_hash"]` and `storage.get_artifact()`
+
+#### [V2-9.4] Update ResumeFromStatsStrategy
+- **Task**: Replace `framework_path`/`corpus_path` access with CAS-based loading
+- **File**: `discernus/core/execution_strategies.py` (lines 794-797)
+- **Details**: Use same CAS pattern as other agents
+
+#### [V2-9.5] Update ResumeFromAnalysisStrategy
+- **Task**: Replace `framework_path`/`corpus_path` access with CAS-based loading
+- **File**: `discernus/core/execution_strategies.py` (lines 949-970)
+- **Details**: Use same CAS pattern as other agents
+
+#### [V2-9.6] Update StatisticalPrepStrategy
+- **Task**: Replace `framework_path`/`corpus_path` access with CAS-based loading
+- **File**: `discernus/core/execution_strategies.py` (lines 568-570)
+- **Details**: Use same CAS pattern as other agents
+
+#### [V2-9.7] Add Resume Strategy Validation
+- **Task**: Add validation to ensure required CAS metadata exists before execution
+- **File**: `discernus/core/execution_strategies.py`
+- **Details**: Validate `framework_hash`, `corpus_manifest_hash` exist in metadata
+
+#### [V2-9.8] Update Documentation
+- **Task**: Remove references to standalone `discernus resume` command
+- **Files**: `docs/user/CLI_REFERENCE.md`, `docs/architecture/PROVENANCE_SYSTEM.md`, `docs/developer/CLI_COMMAND_REFERENCE.md`
+- **Details**: Update examples to use `discernus run --resume-from-*` flags
+
+#### [V2-9.9] Update CLI Help Text
+- **Task**: Improve help text to clarify resume functionality
+- **File**: `discernus/cli.py`
+- **Details**: Make it clear that resume is flag-based, not command-based
+
+#### [V2-9.10] Test Resume Functionality
+- **Task**: Create test cases for each resume strategy
+- **Coverage**: `--resume-from-stats`, `--resume-from-analysis`, `--statistical-prep` end-to-end
+- **Details**: Test error handling for missing CAS metadata and artifacts
+
+**Definition of Done**:
+- ✅ All three resume flags work without errors
+- ✅ No references to removed `framework_path`/`corpus_path` fields
+- ✅ CAS-based asset loading works consistently
+- ✅ Documentation accurately reflects implementation
+- ✅ Error handling for missing metadata/artifacts
+- ✅ Test coverage for resume scenarios
+
+**Implementation Order**:
+1. Fix RunContext serialization (quick fix)
+2. Add CAS helper methods (foundation)
+3. Update execution strategies (core functionality)
+4. Add validation (robustness)
+5. Update documentation (user experience)
+6. Update CLI help (user experience)
+7. Test functionality (quality assurance)
+
+---
+
+### Sprint V2-10: Restore Advanced CLI Functionality ⏳ PENDING
+**Corresponds to**: V2 Plan - Phase 5 (CLI Parity)
+**Goal**: Restore remaining V1 CLI options to the V2 `run` command.
+**Priority**: MEDIUM - After resume functionality is fixed.
+
+**Detailed Tasks**:
+
+#### [V2-10.1] Implement Model Selection Flags
 - **Task**: Plumb model selection flags (`--analysis-model`, `--synthesis-model`, etc.) from the CLI down to the individual V2 agents.
 - **Details**: Requires modifying agent constructors and the orchestrator to pass model names to the `LLMGateway`.
 
-#### [V2-9.3] Implement `--dry-run` and `--verbose-trace`
+#### [V2-10.2] Implement `--dry-run` and `--verbose-trace`
 - **Task**: Add logic to V2 execution strategies to simulate a run without executing expensive operations. Plumb the verbose trace flag to the `AuditLogger`.
 - **Details**: `--dry-run` should print the agents that would be called and the artifacts that would be created.
 
-#### [V2-9.4] Implement Experiment Validation (`--skip-validation`)
+#### [V2-10.3] Implement Experiment Validation (`--skip-validation`)
 - **Task**: Create a `V2ExperimentCoherenceAgent` and integrate it as the first step in the execution strategy. The `--skip-validation` flag will bypass it.
 - **Details**: Reintroduces the robust validation step from the V1 CLI.
 
-#### [V2-9.5] Implement Automatic Git Commits (`--no-auto-commit`)
+#### [V2-10.4] Implement Automatic Git Commits (`--no-auto-commit`)
 - **Task**: Add logic to the `V2Orchestrator` to automatically commit results to Git upon successful completion of a run.
 - **Details**: Restores critical provenance tracking. The `--no-auto-commit` flag will disable this behavior.
 
-#### [V2-9.6] Implement V2 `resume` Command
-- **Task**: Create a `discernus resume` command that can resume a partial V2 run (e.g., one created with `--statistical-prep`).
-- **Details**: Requires the orchestrator to save a resume manifest and the `resume` command to load it and restart the pipeline from the correct phase.
-
 **Definition of Done**:
-- ⏳ The `discernus run` command supports `--analysis-only`, `--statistical-prep`, and `--skip-synthesis`.
 - ⏳ The `discernus run` command supports all model selection flags.
 - ⏳ The `discernus run` command supports `--dry-run` and `--verbose-trace`.
 - ⏳ The `discernus run` command runs a validation step by default, which can be disabled with `--skip-validation`.
 - ⏳ Successful runs are automatically committed to Git, which can be disabled with `--no-auto-commit`.
-- ⏳ A new `discernus resume` command is implemented and functional for V2 experiments.
 - ⏳ All restored options are covered by integration tests.
 
 ---

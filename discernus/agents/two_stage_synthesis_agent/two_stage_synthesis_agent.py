@@ -449,6 +449,9 @@ synthesis_method: two_stage_with_evidence
         # Read statistical results directly from artifacts
         statistical_summary = self._read_statistical_artifacts(context.get("run_context"))
         
+        # Generate dynamic models used summary
+        models_summary = self._generate_models_summary(context.get("run_context"))
+        
         # Create the complete prompt by combining template with context
         prompt = f"""{self.stage1_prompt}
 
@@ -467,10 +470,46 @@ synthesis_method: two_stage_with_evidence
 **EXPERIMENT METADATA:**
 Experiment ID: {context.get('experiment_id', 'Unknown')}
 Analysis Completed: {context.get('metadata', {}).get('analysis_completed', 'Unknown')}
+Models Used: {models_summary}
 
 Please generate a comprehensive framework-driven analysis report following the Stage 1 protocol outlined above."""
 
         return prompt
+    
+    def _generate_models_summary(self, run_context: RunContext) -> str:
+        """Generate a dynamic summary of models used across all pipeline stages."""
+        try:
+            # Get models from audit logs
+            models_used = set()
+            
+            # Check audit logs for model usage
+            if hasattr(self.audit, 'get_agent_events'):
+                events = self.audit.get_agent_events()
+                for event in events:
+                    if 'model_used' in event.get('metadata', {}):
+                        model = event['metadata']['model_used']
+                        if model and model != 'Unknown':
+                            models_used.add(model)
+            
+            # Add current synthesis models
+            models_used.add(self.stage1_model)
+            models_used.add(self.stage2_model)
+            
+            if models_used:
+                # Format as readable list
+                model_list = sorted(list(models_used))
+                if len(model_list) == 1:
+                    return model_list[0]
+                elif len(model_list) == 2:
+                    return f"{model_list[0]}, {model_list[1]}"
+                else:
+                    return f"{', '.join(model_list[:-1])}, and {model_list[-1]}"
+            else:
+                return f"Analysis: {self.stage1_model}, Synthesis: {self.stage2_model}"
+                
+        except Exception as e:
+            self.logger.warning(f"Could not generate dynamic models summary: {e}")
+            return f"Analysis: {self.stage1_model}, Synthesis: {self.stage2_model}"
     
     def _read_statistical_artifacts(self, run_context: RunContext) -> str:
         """

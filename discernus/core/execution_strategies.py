@@ -71,6 +71,54 @@ class ExecutionStrategy(ABC):
         """
         pass
     
+    def _load_framework_via_cas(self, run_context: RunContext, storage: LocalArtifactStorage) -> str:
+        """Load framework content via CAS hash."""
+        framework_hash = run_context.metadata.get("framework_hash")
+        if not framework_hash:
+            raise ValueError("Framework hash not found in run_context metadata")
+        return storage.get_artifact(framework_hash).decode('utf-8')
+    
+    def _load_corpus_manifest_via_cas(self, run_context: RunContext, storage: LocalArtifactStorage) -> str:
+        """Load corpus manifest content via CAS hash."""
+        corpus_manifest_hash = run_context.metadata.get("corpus_manifest_hash")
+        if not corpus_manifest_hash:
+            raise ValueError("Corpus manifest hash not found in run_context metadata")
+        return storage.get_artifact(corpus_manifest_hash).decode('utf-8')
+    
+    def _load_corpus_documents_via_cas(self, run_context: RunContext, storage: LocalArtifactStorage) -> List[Dict[str, str]]:
+        """Load corpus documents via CAS hashes."""
+        corpus_document_hashes = run_context.metadata.get("corpus_document_hashes", [])
+        if not corpus_document_hashes:
+            raise ValueError("Corpus document hashes not found in run_context metadata")
+        
+        documents = []
+        for doc_hash in corpus_document_hashes:
+            try:
+                # Get document content from CAS
+                doc_content = storage.get_artifact(doc_hash).decode('utf-8')
+                
+                # Get document metadata from CAS registry
+                doc_metadata = storage.get_artifact_metadata(doc_hash)
+                document_id = doc_metadata.get("document_id", doc_hash[:8])
+                
+                documents.append({
+                    "id": document_id,
+                    "content": doc_content,
+                })
+            except Exception as e:
+                # Log warning but continue with other documents
+                print(f"Warning: Failed to load document {doc_hash}: {e}")
+        
+        return documents
+    
+    def _validate_cas_metadata(self, run_context: RunContext) -> bool:
+        """Validate that required CAS metadata exists."""
+        required_hashes = ["framework_hash", "corpus_manifest_hash"]
+        for hash_key in required_hashes:
+            if not run_context.metadata.get(hash_key):
+                return False
+        return True
+    
 
 
 class FullExperimentStrategy(ExecutionStrategy):
@@ -374,52 +422,30 @@ class AnalysisOnlyStrategy(ExecutionStrategy):
                 phases_completed.append("validation")
                 audit.log_agent_event("AnalysisOnlyStrategy", "phase_complete", {"phase": "validation"})
             
-            # Validate paths exist after ValidationAgent has populated them
-            if not run_context.framework_path or not Path(run_context.framework_path).exists():
+            # Validate CAS hashes exist after ValidationAgent has populated them
+            framework_hash = run_context.metadata.get("framework_hash")
+            if not framework_hash:
                 return ExperimentResult(
                     success=False,
                     phases_completed=phases_completed,
                     artifacts=artifacts,
                     metadata=metadata,
-                    error_message=f"Framework file not found: {run_context.framework_path}"
+                    error_message="Framework hash not found in run_context metadata"
                 )
 
-            if not run_context.corpus_path or not Path(run_context.corpus_path).exists():
+            corpus_manifest_hash = run_context.metadata.get("corpus_manifest_hash")
+            if not corpus_manifest_hash:
                 return ExperimentResult(
                     success=False,
                     phases_completed=phases_completed,
                     artifacts=artifacts,
                     metadata=metadata,
-                    error_message=f"Corpus manifest not found: {run_context.corpus_path}"
+                    error_message="Corpus manifest hash not found in run_context metadata"
                 )
             
-            # THIN PRINCIPLE: Orchestrator handles file I/O, not agents
-            framework_content = self._load_framework_content(Path(run_context.framework_path))
-            corpus_manifest_path = Path(run_context.corpus_path)
-            corpus_documents = self._load_corpus_documents(corpus_manifest_path)
-            corpus_manifest_content = corpus_manifest_path.read_text(encoding='utf-8')
-
-            if not framework_content:
-                return ExperimentResult(
-                    success=False,
-                    phases_completed=phases_completed,
-                    artifacts=artifacts,
-                    metadata=metadata,
-                    error_message="Failed to load framework content"
-                )
-            
-            if not corpus_documents:
-                return ExperimentResult(
-                    success=False,
-                    phases_completed=phases_completed,
-                    artifacts=artifacts,
-                    metadata=metadata,
-                    error_message="Failed to load corpus documents"
-                )
-
-            run_context.metadata["framework_content"] = framework_content
-            run_context.metadata["corpus_documents"] = corpus_documents
-            run_context.metadata["corpus_manifest_content"] = corpus_manifest_content
+            # THIN PRINCIPLE: Use CAS discovery instead of file paths
+            # Framework and corpus content will be loaded by agents via CAS
+            # No need to validate content here - agents will handle CAS discovery
 
             # Phase 1: Validation (skip if flag is set)
             skip_validation = run_context.metadata.get("skip_validation", False)
@@ -564,33 +590,9 @@ class StatisticalPrepStrategy(ExecutionStrategy):
         metadata = {}
         
         try:
-            # THIN PRINCIPLE: Orchestrator handles file I/O, not agents
-            framework_content = self._load_framework_content(Path(run_context.framework_path))
-            corpus_manifest_path = Path(run_context.corpus_path)
-            corpus_documents = self._load_corpus_documents(corpus_manifest_path)
-            corpus_manifest_content = corpus_manifest_path.read_text(encoding='utf-8')
-
-            if not framework_content:
-                return ExperimentResult(
-                    success=False,
-                    phases_completed=phases_completed,
-                    artifacts=artifacts,
-                    metadata=metadata,
-                    error_message="Failed to load framework content"
-                )
-            
-            if not corpus_documents:
-                return ExperimentResult(
-                    success=False,
-                    phases_completed=phases_completed,
-                    artifacts=artifacts,
-                    metadata=metadata,
-                    error_message="Failed to load corpus documents"
-                )
-
-            run_context.metadata["framework_content"] = framework_content
-            run_context.metadata["corpus_documents"] = corpus_documents
-            run_context.metadata["corpus_manifest_content"] = corpus_manifest_content
+            # THIN PRINCIPLE: Use CAS discovery instead of file paths
+            # Framework and corpus content will be loaded by agents via CAS
+            # No need to validate content here - agents will handle CAS discovery
             
             # Phase 1: Validation (skip if flag is set)
             skip_validation = run_context.metadata.get("skip_validation", False)
@@ -790,14 +792,9 @@ class ResumeFromStatsStrategy(ExecutionStrategy):
         metadata = {}
         
         try:
-            # THIN PRINCIPLE: Orchestrator handles file I/O, not agents
-            framework_content = self._load_framework_content(Path(run_context.framework_path))
-            # In resume mode, we may not need to reload all documents, but we need the manifest for context.
-            corpus_manifest_path = Path(run_context.corpus_path)
-            corpus_manifest_content = corpus_manifest_path.read_text(encoding='utf-8')
-
-            run_context.metadata["framework_content"] = framework_content
-            run_context.metadata["corpus_manifest_content"] = corpus_manifest_content
+            # THIN PRINCIPLE: Use CAS discovery instead of file paths
+            # Framework and corpus content will be loaded by agents via CAS
+            # No need to validate content here - agents will handle CAS discovery
 
             # Check if we have statistical results
             if not run_context.statistical_results:
@@ -945,43 +942,30 @@ class ResumeFromAnalysisStrategy(ExecutionStrategy):
                 phases_completed.append("validation")
                 audit.log_agent_event("ResumeFromAnalysisStrategy", "phase_complete", {"phase": "validation"})
             
-            # Validate paths exist after ValidationAgent has populated them
-            if not run_context.framework_path or not Path(run_context.framework_path).exists():
+            # Validate CAS hashes exist after ValidationAgent has populated them
+            framework_hash = run_context.metadata.get("framework_hash")
+            if not framework_hash:
                 return ExperimentResult(
                     success=False,
                     phases_completed=phases_completed,
                     artifacts=artifacts,
                     metadata=metadata,
-                    error_message=f"Framework file not found: {run_context.framework_path}"
+                    error_message="Framework hash not found in run_context metadata"
                 )
 
-            if not run_context.corpus_path or not Path(run_context.corpus_path).exists():
+            corpus_manifest_hash = run_context.metadata.get("corpus_manifest_hash")
+            if not corpus_manifest_hash:
                 return ExperimentResult(
                     success=False,
                     phases_completed=phases_completed,
                     artifacts=artifacts,
                     metadata=metadata,
-                    error_message=f"Corpus manifest not found: {run_context.corpus_path}"
+                    error_message="Corpus manifest hash not found in run_context metadata"
                 )
             
-            # THIN PRINCIPLE: Orchestrator handles file I/O, not agents
-            framework_content = self._load_framework_content(Path(run_context.framework_path))
-            corpus_manifest_path = Path(run_context.corpus_path)
-            corpus_documents = self._load_corpus_documents(corpus_manifest_path)
-            corpus_manifest_content = corpus_manifest_path.read_text(encoding='utf-8')
-
-            if not corpus_documents:
-                return ExperimentResult(
-                    success=False,
-                    phases_completed=phases_completed,
-                    artifacts=artifacts,
-                    metadata=metadata,
-                    error_message="Failed to load corpus documents"
-                )
-
-            run_context.metadata["framework_content"] = framework_content
-            run_context.metadata["corpus_documents"] = corpus_documents
-            run_context.metadata["corpus_manifest_content"] = corpus_manifest_content
+            # THIN PRINCIPLE: Use CAS discovery instead of file paths
+            # Framework and corpus content will be loaded by agents via CAS
+            # No need to validate content here - agents will handle CAS discovery
 
             # Load analysis artifacts from the most recent completed analysis run
             analysis_artifacts = self._load_latest_analysis_artifacts(run_context.experiment_id)

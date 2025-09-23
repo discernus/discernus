@@ -65,22 +65,19 @@ discernus status
 
 **Output**: System components status including Python version, Git, LLM models, and available experiments.
 
-### `discernus resume`
+### Resume Functionality
 
-Resume from statistical preparation to complete synthesis.
+Resume experiments from previous phases using the `run` command with resume flags.
 
 ```bash
-discernus resume [EXPERIMENT_PATH] [OPTIONS]
+discernus run [EXPERIMENT_PATH] --resume-from-stats      # Resume from statistical phase
+discernus run [EXPERIMENT_PATH] --resume-from-analysis   # Resume from analysis phase
 ```
 
-**Options:**
+**Resume Options:**
 ```bash
---analysis-model MODEL           # LLM model for analysis (if needed)
---synthesis-model MODEL          # LLM model for synthesis
---validation-model MODEL         # LLM model for validation
---derived-metrics-model MODEL    # LLM model for statistical analysis
---dry-run                        # Preview what would be executed
---no-auto-commit                 # Disable automatic Git commit
+--resume-from-stats              # Resume from statistical phase, skip analysis
+--resume-from-analysis            # Resume from analysis phase, skip validation and analysis
 ```
 
 ### `discernus archive`
@@ -133,7 +130,7 @@ discernus run projects/experiment --statistical-prep
 - **Outputs**: Enhanced CSVs with derived metrics
 - **Git Commit**: `"Statistical prep: {experiment_name}"`
 - **Use Case**: Prepare data for external statistical analysis
-- **Resume**: Can be resumed later with `discernus resume`
+- **Resume**: Can be resumed later with `discernus run --resume-from-stats`
 
 ### Skip Synthesis Mode
 ```bash
@@ -146,7 +143,7 @@ discernus run projects/experiment --skip-synthesis
 
 ### Resume Mode
 ```bash
-discernus resume projects/experiment
+discernus run projects/experiment --resume-from-stats
 ```
 - **Process**: Load Statistical Prep → Evidence Retrieval → Synthesis
 - **Outputs**: Final synthesis report and complete results
@@ -193,7 +190,7 @@ discernus archive projects/experiment/runs/LATEST_RUN
 discernus run projects/experiment --statistical-prep
 
 # Later: complete with synthesis
-discernus resume projects/experiment
+discernus run projects/experiment --resume-from-stats
 
 # Archive final results (complete archive by default)
 discernus archive projects/experiment/runs/LATEST_RUN
@@ -217,7 +214,7 @@ for exp in experiment1 experiment2 experiment3; do
 done
 
 # Later: synthesize selected results
-discernus resume projects/experiment1
+discernus run projects/experiment --resume-from-stats1
 ```
 
 ## Git Integration

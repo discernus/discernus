@@ -82,7 +82,7 @@ projects/experiment/
 - **Commit Message**: `"Statistical prep: {experiment_name}"`
 - **Outputs**: Analysis scores, derived metrics, evidence CSVs
 - **Provenance**: Analysis and derived metrics artifacts, resume capability metadata
-- **Resume**: Can be resumed later with `discernus resume`
+- **Resume**: Can be resumed later with `discernus run --resume-from-stats`
 
 ### Skip Synthesis Mode
 - **Purpose**: Full pipeline including statistical analysis, skip synthesis report
@@ -93,8 +93,8 @@ projects/experiment/
 
 ### Resume Mode
 - **Purpose**: Resume from statistical preparation to complete synthesis
-- **CLI**: `discernus resume`
-- **Commit Message**: `"Resume from stats: {experiment_name}"`
+- **CLI**: `discernus run --resume-from-stats` or `discernus run --resume-from-analysis`
+- **Commit Message**: `"Resume from stats: {experiment_name}"` or `"Resume from analysis: {experiment_name}"`
 - **Outputs**: Synthesis report and final outputs
 - **Provenance**: Links to original statistical prep run, complete final artifact chain
 
@@ -116,7 +116,10 @@ discernus run projects/experiment --statistical-prep
 discernus run projects/experiment --skip-synthesis
 
 # Resume from statistical preparation
-discernus resume projects/experiment
+discernus run projects/experiment --resume-from-stats
+
+# Resume from analysis phase
+discernus run projects/experiment --resume-from-analysis
 ```
 
 ### Git Integration Options
@@ -312,7 +315,7 @@ The enhanced manifest tracks comprehensive run metadata:
 3. **Leverage resume capability**: Use statistical-prep mode for iterative analysis
    ```bash
    discernus run --statistical-prep  # Initial analysis
-   discernus resume                  # Complete synthesis later
+   discernus run --resume-from-stats # Complete synthesis later
    ```
 
 ### For Replication

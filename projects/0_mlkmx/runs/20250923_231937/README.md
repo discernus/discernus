@@ -2,16 +2,14 @@
 
 **Complete Research Package - 0_mlkmx**
 
-**Run ID**: 20250923_203815  
-**Generated**: 2025-09-23 20:38:15 UTC
+**Run ID**: 20250923_231937  
+**Generated**: 2025-09-23 23:19:37 UTC
 
 ## 📁 Directory Structure
 
 ### `artifacts/` - Complete Provenance Chain
 - **Input Snapshots** (exact versions used in this run):
   - `experiment_dd32c77e.md` - **SNAPSHOT**: Exact version of experiment.md used
-  - `framework_bca92897.md` - **SNAPSHOT**: Exact version of framework.md used
-  - `corpus_manifest_7ce49c4f` - **SNAPSHOT**: Exact version of corpus.md used
 - **Analysis Artifacts**: 
   - `composite_analysis_*.json` - Raw LLM analysis outputs
   - `score_extraction_*.json` - Extracted dimensional scores and derived metrics
@@ -58,7 +56,7 @@ This run used exact versions of input files (see snapshots in `artifacts/`).
 To verify a snapshot matches the original:
 ```bash
 # Example verification
-sha256sum artifacts/experiment_dd32c77e.md
+sha256sum artifacts/experiment_dd32c77e.md.md
 # Compare with: sha256sum ../../experiment.md
 ```
 
