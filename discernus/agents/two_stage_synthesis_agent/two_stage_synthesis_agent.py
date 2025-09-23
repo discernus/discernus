@@ -312,8 +312,14 @@ class TwoStageSynthesisAgent(StandardAgent):
             # Contract validation ensures evidence exists, so this should never be empty
             raw_evidence = self._prepare_curated_evidence(run_context)
             
-            # Create the Stage 2 prompt with Stage 1 report and raw evidence (THIN: no parsing)
-            stage2_prompt = self._create_stage2_prompt(stage1_report, raw_evidence)
+            # Get corpus manifest for document name mapping
+            corpus_manifest_hash = run_context.metadata.get("corpus_manifest_hash")
+            corpus_manifest = ""
+            if corpus_manifest_hash:
+                corpus_manifest = self.storage.get_artifact(corpus_manifest_hash).decode('utf-8')
+            
+            # Create the Stage 2 prompt with Stage 1 report, raw evidence, and corpus manifest (THIN: no parsing)
+            stage2_prompt = self._create_stage2_prompt(stage1_report, raw_evidence, corpus_manifest)
             
             # Execute Stage 2 integration with Gemini Flash
             self.logger.info(f"Executing Stage 2 integration with {self.stage2_model}")
@@ -592,10 +598,10 @@ Please generate a comprehensive framework-driven analysis report following the S
             self.logger.error(f"Failed to prepare curated evidence: {e}")
             return ""
     
-    def _create_stage2_prompt(self, stage1_report: str, raw_evidence: str) -> str:
-        """Create the complete Stage 2 prompt with Stage 1 report and raw evidence (THIN: no parsing)."""
+    def _create_stage2_prompt(self, stage1_report: str, raw_evidence: str, corpus_manifest: str = "") -> str:
+        """Create the complete Stage 2 prompt with Stage 1 report, raw evidence, and corpus manifest (THIN: no parsing)."""
         
-        # Create the complete Stage 2 prompt with raw evidence
+        # Create the complete Stage 2 prompt with raw evidence and corpus manifest
         prompt = f"""{self.stage2_prompt}
 
 **STAGE 1 REPORT TO ENHANCE:**
@@ -604,7 +610,10 @@ Please generate a comprehensive framework-driven analysis report following the S
 **RAW EVIDENCE FOR CURATION AND INTEGRATION:**
 {raw_evidence if raw_evidence else "No evidence available"}
 
-Please enhance the Stage 1 report by strategically integrating the curated evidence quotes throughout the document, following the Stage 2 protocol outlined above. Preserve all analytical claims and conclusions from Stage 1 while bringing them to life with supporting evidence."""
+**CORPUS MANIFEST FOR DOCUMENT NAME MAPPING:**
+{corpus_manifest if corpus_manifest else "No corpus manifest available"}
+
+Please enhance the Stage 1 report by strategically integrating the curated evidence quotes throughout the document, following the Stage 2 protocol outlined above. Use the corpus manifest to map document indices (Document 1, Document 2, etc.) to actual document names. Preserve all analytical claims and conclusions from Stage 1 while bringing them to life with supporting evidence."""
 
         return prompt
     

@@ -35,6 +35,7 @@ template: |
   - **ADD QUOTES ONLY**: Your role is purely additive - infuse quotes where they illuminate existing analysis
   - **Strategic Placement**: Place quotes where they add clarity and concrete examples to abstract statistical concepts
   - **Academic Citation**: Use format: 'As [Speaker] stated: "[exact quote]" (Source: [document_name])'
+  - **Document Name Mapping**: Use the corpus manifest below to map document indices (Document 1, Document 2, etc.) to actual document names (pos_test_1, pos_test_2, etc.)
 
   ## SACRED CONSTRAINTS - NEVER VIOLATE
   - **Analytical Preservation**: DO NOT change any analytical claims, conclusions, or interpretations from Stage 1
@@ -139,6 +140,7 @@ template: |
   ### 7. Appendix: Complete Audit Trail
   - **Appendix A: Evidence Appendix**: Organize all CURATED quotes by framework dimension (up to 10 per dimension), statistical pattern, and document source. Ensure complete attribution for every quote.
   - **Appendix B: Methodological Appendix**: Include the full `Methodological Summary` from the Stage 1 report. Reference the statistical analysis artifact file for complete methodological details and reproducibility.
+  - **Appendix C: Corpus Manifest**: Include a cleaned-up, human-readable version of the corpus manifest with document names, metadata, and descriptions for complete transparency.
 
   ## QUALITY ASSURANCE REQUIREMENTS
 
