@@ -1,0 +1,43 @@
+{
+  "validation_success": true,
+  "issues": [
+    {
+      "category": "trinity_coherence",
+      "description": "The experiment design implies comparative statistical analysis across three time periods ('Early', 'Mid', 'Recent'), but the corpus provides an insufficient sample size (N=6) and group distribution (Early: N=2, Mid: N=3, Recent: N=1) for such tests. Groups with N=1 cannot be used in comparative inferential statistics, and groups with N<10 are generally limited to descriptive analysis.",
+      "impact": "Automated statistical analysis will be limited to descriptive statistics and qualitative observations. Any inferential claims (e.g., ANOVA, t-tests) about differences between time periods would be statistically invalid and will be automatically skipped by the analysis pipeline.",
+      "fix": "Align the experiment's 'Expected Outcomes' and 'Methodology' with the specified 'case_study' analysis type, focusing on descriptive statistics and qualitative pattern analysis rather than inferential statistical tests. If inferential tests are required, expand the corpus to include more documents in each temporal group.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "metadata_validation",
+      "description": "The corpus manifest contains an internal inconsistency. The document with document_id 'trump_joint_session_2017' is linked to the filename 'trump_sotu_2017.txt'. The filename suggests a State of the Union address, while the document_id, speech_type, and context describe it as a Joint Session Address.",
+      "impact": "This may cause confusion during manual review or post-hoc analysis, although it will not block automated execution as the system uses the explicit metadata fields for analysis grouping.",
+      "fix": "For clarity, rename the file 'trump_sotu_2017.txt' to something that reflects its content, such as 'trump_joint_session_2017.txt', and update the 'filename' field in the corpus manifest accordingly.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The experiment specification prose refers to 'Populist Discourse Analysis Framework (PDAF) v10.0', but the framework specification file identifies itself as version '10.0.2' in both its narrative and machine-readable metadata.",
+      "impact": "This is a minor documentation inconsistency that does not affect execution but could cause confusion for researchers reviewing the experiment design.",
+      "fix": "Update the framework version reference in the 'experiment.md' prose to 'v10.0.2' to match the actual framework file.",
+      "priority": "SUGGESTION",
+      "affected_files": [
+        "experiment.md"
+      ]
+    }
+  ],
+  "suggestions": [],
+  "metadata": {
+    "agent": "V2ValidationAgent",
+    "timestamp": "2025-09-23T16:09:55.833344",
+    "experiment_id": "2a_populist_rhetoric_study",
+    "validation_type": "experiment_coherence"
+  }
+}

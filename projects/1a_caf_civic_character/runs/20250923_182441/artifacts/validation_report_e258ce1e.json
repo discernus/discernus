@@ -1,0 +1,22 @@
+{
+  "validation_success": true,
+  "issues": [
+    {
+      "category": "metadata_validation",
+      "description": "The framework's human-readable title 'Civic Analysis Framework (CAF) v10.0' suggests version 10.0, but the machine-readable metadata in the appendix specifies `framework_version: \"1.0.0\"`. While the functionally critical `spec_version: \"10.0\"` is correct, this discrepancy could be confusing.",
+      "impact": "This inconsistency does not block execution but may cause confusion for researchers regarding the framework's versioning and provenance.",
+      "fix": "To improve clarity and consistency, update the `framework_version` field in the `framework.md` YAML appendix to '10.0.0' to align with the version number used in the document's prose.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "framework.md"
+      ]
+    }
+  ],
+  "suggestions": [],
+  "metadata": {
+    "agent": "V2ValidationAgent",
+    "timestamp": "2025-09-23T14:25:19.716922",
+    "experiment_id": "1a_caf_civic_character",
+    "validation_type": "experiment_coherence"
+  }
+}

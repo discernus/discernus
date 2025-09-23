@@ -1,3 +1,0 @@
-artifact_id,analysis_id,step,model_used,timestamp
-43a81796b7ad8c89d7f84e3351dac69e931e7f391fb21e908c54d4b7997bea14,analysis_f52b5745,derived_metrics_generation,vertex_ai/gemini-2.5-flash-lite,2025-09-16T23:13:16.099498+00:00
-b2b13276514f5dcf7891108daa9e8d46ad5c439a1c98505724e3a3e4c82b0149,analysis_f52b5745,score_extraction,vertex_ai/gemini-2.5-flash-lite,2025-09-16T23:13:03.876028+00:00

@@ -1,5 +1,0 @@
-analysis_id,dimension,raw_score,salience,confidence
-analysis_ce3684f5,problem_definition,0.9,0.9,0.95
-analysis_ce3684f5,causal_attribution,0.5,0.4,0.95
-analysis_ce3684f5,moral_evaluation,0.9,0.8,0.95
-analysis_ce3684f5,treatment_recommendation,0.9,0.9,0.95

@@ -1,6 +1,0 @@
-document_id,filename,anti_pluralist_exclusion,authenticity_vs_political_class,crisis_restoration_narrative,crisis_restoration_temporal_narrative,economic_populist_appeals,elite_conspiracy_systemic_corruption,homogeneous_people_construction,manichaean_people_elite_framing,nationalist_exclusion,popular_ Sovereignty_claims,popular_sovereignty_claims,net_sentiment,sentiment_magnitude,evidence_hash
-0e0bb7047695,Trump_Inaugural_2017.txt,0.7,0.7,,0.9,0.9,0.8,0.9,0.9,0.9,,0.9,0.0,0.0,bc3ce960f56dad62
-14ad8f3eb6b7,trump_sotu_2017.txt,0.5,0.6,0.8,,0.8,0.7,0.8,0.7,0.7,,0.6,0.0,0.0,ddbf88b938fd0d16
-{{artifact_id}},Trump_SOTU_2018.txt,0.6,0.8,0.9,,0.8,0.7,0.9,0.8,0.8,,0.7,0.0,0.0,a0639e5891336193
-{{artifact_id}},Trump_SOTU_2019.txt,0.7,0.7,,1.0,1.0,0.8,1.0,0.7,0.9,0.9,,0.0,0.0,1a53efcc2f14706e
-{{artifact_id}},Trump_SOTU_2025.txt,0.9,0.8,,0.9,0.9,0.8,0.7,0.9,0.9,,0.8,0.0,0.0,eafd96158ee5b580

@@ -1,1 +1,0 @@
-{"log_type":"cost_tracking","timestamp":"2025-09-12T14:10:53.502572+00:00","operation":"individual_document_analysis","agent_name":"EnhancedAnalysisAgent","model":"vertex_ai/gemini-2.5-flash","tokens_used":57707,"cost_usd":0.033418,"interaction_hash":null,"metadata":{"analysis_id":"analysis_0ff651ca7967"},"session_id":"20250912T141019Z_fdd4cfd4"}

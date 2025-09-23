@@ -1,4 +1,0 @@
-analysis_id,document,dimension,evidence,model_used,timestamp
-analysis_f45786e7,centrist_bipartisan_appeal.txt,authority_vs_empathy,"Evidence for authority_vs_empathy",vertex_ai/gemini-2.5-flash-lite,2025-09-17T00:15:00.981921+00:00
-analysis_f45786e7,centrist_bipartisan_appeal.txt,competition_vs_cooperation,"Evidence for competition_vs_cooperation",vertex_ai/gemini-2.5-flash-lite,2025-09-17T00:15:00.981921+00:00
-analysis_f45786e7,centrist_bipartisan_appeal.txt,self_reliance_vs_interdependence,"Evidence for self_reliance_vs_interdependence",vertex_ai/gemini-2.5-flash-lite,2025-09-17T00:15:00.981921+00:00

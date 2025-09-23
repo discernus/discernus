@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250923_145107_0",
+  "step": "score_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "score_extraction": "```json\n{\n  \"dimensional_scores\": {\n    \"fear\": {\n      \"raw_score\": 0.9,\n      \"salience\": 0.9,\n      \"confidence\": 0.9\n    },\n    \"hope\": {\n      \"raw_score\": 0.8,\n      \"salience\": 0.8,\n      \"confidence\": 0.9\n    },\n    \"enmity\": {\n      \"raw_score\": 0.8,\n      \"salience\": 0.8,\n      \"confidence\": 0.9\n    },\n    \"amity\": {\n      \"raw_score\": 0.7,\n      \"salience\": 0.7,\n      \"confidence\": 0.9\n    },\n    \"envy\": {\n      \"raw_score\": 0.4,\n      \"salience\": 0.3,\n      \"confidence\": 0.8\n    },\n    \"mudita\": {\n      \"raw_score\": 0.1,\n      \"salience\": 0.1,\n      \"confidence\": 1.0\n    }\n  },\n  \"derived_metrics\": {\n    \"threat_opportunity_salience_total\": 1.701,\n    \"social_relations_salience_total\": 1.501,\n    \"resource_attitudes_salience_total\": 0.401,\n    \"total_emotional_salience\": 3.603,\n    \"threat_opportunity_balance\": -0.09994121105232216,\n    \"social_relations_balance\": -0.09993337774816788,\n    \"resource_attitudes_balance\": -0.2743142144638404,\n    \"emotional_climate_index\": -0.11931723563696919,\n    \"climate_intensity\": 0.6166666666666667,\n    \"positive_emotional_index\": 0.5333333333333333,\n    \"negative_emotional_index\": 0.7\n  }\n}\n```",
+  "document_index": 0,
+  "timestamp": "2025-09-23T18:51:56.328381+00:00"
+}

@@ -58,7 +58,7 @@ metadata:
   sample_size: 8
 
 components:
-  framework: "mft_v10.md"
+  framework: "framework.md"
   corpus: "corpus.md"
 
 # --- End of Machine-Readable Appendix --- 

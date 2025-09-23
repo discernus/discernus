@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250923_145107_3",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "evidence_extraction": "```json\n[\n  \"savagely broken criminal justice system\",\n  \"federal prison population has exploded by eight hundred percent\",\n  \"cancer on the soul of our country\",\n  \"opportunity to reverse course in a significant way\",\n  \"we are a nation that believes in redemption\",\n  \"This bill is a step - a step towards healing.\",\n  \"The speech criticizes 'failed policies' and 'the system' but avoids hostile or dehumanizing language toward specific groups or individuals.\",\n  \"I'm proud of this coalition. I'm proud that the coalition has people all across the political spectrum.\",\n  \"we as a people cannot fall into that trap of separateness, the insidious idea that we think that there are some throwaway people\",\n  \"ties that bind us are stronger than the lines that divide us\",\n  \"people in certain privileged communities don't face the kind of scrutiny, the kind of arrests that you do in other communities in our country.\",\n  \"we live in a nation that treats you better if you're rich and guilty than if you're poor and innocent.\",\n  \"I want to thank my colleagues for their incredible work and leadership\",\n  \"Their advocacy has made this a better bill.\",\n  \"I'm proud of my community.\"\n]\n```",
+  "document_index": 3,
+  "timestamp": "2025-09-23T18:54:36.192015+00:00"
+}

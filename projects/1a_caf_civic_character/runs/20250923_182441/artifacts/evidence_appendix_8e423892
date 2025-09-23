@@ -1,0 +1,350 @@
+---
+agent_name: TwoStageSynthesisAgent
+stage: evidence_appendix
+timestamp: 2025-09-23 18:40:43 UTC
+evidence_content_length: 24042
+synthesis_method: two_stage_with_appendix
+---
+
+Here is a curated set of quotes exemplifying key statistical patterns in civic character, focusing on the specified targets.
+
+```json
+[
+  {
+    "document_index": 0,
+    "exact_quote_text": "Unless Title Three is put in this bill, there's nothing to protect the young children and old women who must face police dogs and fire hoses in the South while they engage in peaceful demonstrations.",
+    "statistical_relevance": "Bimodal distribution (virtue-dominant example), Co-occurrence of Dignity/Justice, Prominence of Justice-Resentment axis",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 0,
+    "exact_quote_text": "We are tired of being beaten by policemen. We are tired of seeing our people locked up in jails over and over again.",
+    "statistical_relevance": "Bimodal distribution (virtue-dominant example, despite resentment), Co-occurrence of Justice/Resentment, Prominence of Justice-Resentment axis",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 0,
+    "exact_quote_text": "We need a bill to ensure the equality of a maid who earns five dollars a week in the home of a family whose total income is one hundred thousand dollars a year.",
+    "statistical_relevance": "Bimodal distribution (virtue-dominant example), Co-occurrence of Justice/Dignity",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 0,
+    "exact_quote_text": "But we will march with the spirit of love and with the spirit of dignity that we have shown here today.",
+    "statistical_relevance": "Bimodal distribution (virtue-dominant example), Co-occurrence of Dignity/Justice, Prominence of Identity-Dignity axis",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 0,
+    "exact_quote_text": "What did the federal government do when Albany police deputies beat Attorney C.B. King and left him half-dead? What did the federal government do when local police officials kicked and assaulted the pregnant wife of Slater King, and she lost her baby?",
+    "statistical_relevance": "Bimodal distribution (virtue-dominant example, strong critique), Prominence of Justice-Resentment axis",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 0,
+    "exact_quote_text": "We do not want our freedom gradually, but we want to be free now!",
+    "statistical_relevance": "Bimodal distribution (virtue-dominant example), Prominence of Identity-Dignity axis",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 0,
+    "exact_quote_text": "By the forces of our demands, our determination, and our numbers, we shall splinter the segregated South into a thousand pieces and put them together in the image of God and democracy.",
+    "statistical_relevance": "Bimodal distribution (virtue-dominant example, calls for radical change), Prominence of Justice-Resentment and Identity-Dignity axes",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 1,
+    "exact_quote_text": "Whatever our differences, we are fellow Americans, and please believe me when I say no association has ever meant more to me than that.",
+    "statistical_relevance": "Bimodal distribution (virtue-dominant example), Rhetorical differences (institutional style), Co-occurrence of Dignity/Unity",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 1,
+    "exact_quote_text": "I hold in my heart nothing but love for this country and for all its citizens, whether they supported me or Senator Obama.",
+    "statistical_relevance": "Bimodal distribution (virtue-dominant example), Rhetorical differences (institutional style), Co-occurrence of Dignity/Unity",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 1,
+    "exact_quote_text": "The American people have spoken, and they have spoken clearly.",
+    "statistical_relevance": "Bimodal distribution (virtue-dominant example), Rhetorical differences (institutional style), Institutional Trust",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 1,
+    "exact_quote_text": "It is natural tonight to feel some disappointment, but tomorrow we must move beyond it and work together to get our country moving again.",
+    "statistical_relevance": "Bimodal distribution (virtue-dominant example), Rhetorical differences (institutional style), Co-occurrence of Unity/Compromise",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 1,
+    "exact_quote_text": "I urge all Americans... to find ways to come together, to find the necessary compromises to bridge our differences and help restore our prosperity...",
+    "statistical_relevance": "Bimodal distribution (virtue-dominant example), Rhetorical differences (institutional style), Co-occurrence of Unity/Compromise",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 1,
+    "exact_quote_text": "I pledge to him tonight to do all in my power to help him lead us through the many challenges we face.",
+    "statistical_relevance": "Bimodal distribution (virtue-dominant example), Rhetorical differences (institutional style), Institutional Trust",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 1,
+    "exact_quote_text": "America today is a world away from the cruel and prideful bigotry of that time. There is no better evidence of this than the election of an African-American to the presidency of the United States.",
+    "statistical_relevance": "Bimodal distribution (virtue-dominant example), Co-occurrence of Dignity/Progress",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 2,
+    "exact_quote_text": "Every American that dies at their hands is a life that could be saved if we just followed our laws.",
+    "statistical_relevance": "Bimodal distribution (vice-dominant example), Rhetorical differences (populist style), Co-occurrence of Tribalism/Resentment, Prominence of Justice-Resentment axis",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 2,
+    "exact_quote_text": "And then the perpetrator, an illegal alien whom the law enforcement had encountered and released onto the streets of America, who had no business being in America in the first place, and whom law enforcement already had picked up at least once. This illegal alien beat this boy to death and then he went and bought gasoline and burned his body.",
+    "statistical_relevance": "Bimodal distribution (vice-dominant example), Rhetorical differences (populist style), Co-occurrence of Tribalism/Resentment, Prominence of Justice-Resentment axis",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 2,
+    "exact_quote_text": "That's 135 dead Americans that would be alive today if the President didn't have the policy of releasing criminal, criminal aliens onto the streets.",
+    "statistical_relevance": "Bimodal distribution (vice-dominant example), Rhetorical differences (populist style), Co-occurrence of Tribalism/Resentment, Prominence of Justice-Resentment axis",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 2,
+    "exact_quote_text": "We have a lame duck President who has made appointments to the Supreme Court who seem to believe that the Constitution means what they want it to mean and they want to read it uh to say what they want it to say rather than what it actually says and rather than what it actually was understood to mean at the time of its ratification.",
+    "statistical_relevance": "Bimodal distribution (vice-dominant example), Rhetorical differences (populist style), Co-occurrence of Resentment/Simplification, Critique of Institutions",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 2,
+    "exact_quote_text": "Sarah Root would be alive today if the President had done his job, if law enforcement had been allowed to do their job, if ICE had responded when local law enforcement called them.",
+    "statistical_relevance": "Bimodal distribution (vice-dominant example), Rhetorical differences (populist style), Co-occurrence of Resentment/Blame",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 2,
+    "exact_quote_text": "I want an expectation that when the law is broken in the United States, that there's going to be an enforcement, that it'll be applied equally without regard to any of these categories that the President encourages us to be members of. That being one of God's children is good enough to be protected by the law, but everybody treated equally. Secure our borders. Restore their respect for the rule of law. Save these lives. Send these people into prison. And when they're done, send them back to the country that they can live in legally",
+    "statistical_relevance": "Bimodal distribution (vice-dominant example), Rhetorical differences (populist style), Co-occurrence of Tribalism/Resentment, Prominence of Justice-Resentment axis",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 2,
+    "exact_quote_text": "This happens every day in this country. It happens hundreds of times in this country each year. These incidents of illegal aliens that are, that are arrested and turned loose on the street because the President has this idea of prioritization or prosecutorial discretion is costing lives in America.",
+    "statistical_relevance": "Bimodal distribution (vice-dominant example), Rhetorical differences (populist style), Co-occurrence of Tribalism/Resentment, Simplification",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 3,
+    "exact_quote_text": "the insidious idea that we think that there are some throwaway people whose dignity we can assault without assaulting our own.",
+    "statistical_relevance": "Bimodal distribution (virtue-dominant example), Co-occurrence of Dignity/Justice, Prominence of Identity-Dignity axis",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 3,
+    "exact_quote_text": "Ultimately, in the United States of America, we all believe that this is a nation where redemption is possible.",
+    "statistical_relevance": "Bimodal distribution (virtue-dominant example), Co-occurrence of Dignity/Compassion",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 3,
+    "exact_quote_text": "our nation's history is scarred by many wretched injustices: slavery and the denial of universal suffrage, Jim Crow and segregation.",
+    "statistical_relevance": "Bimodal distribution (virtue-dominant example), Co-occurrence of Justice/Historical Context",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 3,
+    "exact_quote_text": "We profess - we actually swear an oath to the flag - that we are a nation of liberty and justice for all. But our criminal justice system violates those values.",
+    "statistical_relevance": "Bimodal distribution (virtue-dominant example), Co-occurrence of Justice/Critique of Institutions",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 3,
+    "exact_quote_text": "America is now the preeminent incarceration nation. We are the incarceration capital of the planet Earth.",
+    "statistical_relevance": "Bimodal distribution (virtue-dominant example, factual claim to highlight injustice), Co-occurrence of Justice",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 3,
+    "exact_quote_text": "This system as a whole is a cancer on the soul of our country, and it's hurting every single American.",
+    "statistical_relevance": "Bimodal distribution (virtue-dominant example, strong moral condemnation for reform), Co-occurrence of Justice",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 3,
+    "exact_quote_text": "Making this fix in this bill alone will mean that thousands of Americans who have more than served their time will become eligible for release, and it addresses some of the racial disparities in our system",
+    "statistical_relevance": "Bimodal distribution (virtue-dominant example), Co-occurrence of Justice/Dignity, Concrete Action",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 4,
+    "exact_quote_text": "I swore an oath before God to exercise impartial justice.",
+    "statistical_relevance": "Bimodal distribution (virtue-dominant example), Rhetorical differences (institutional style), Co-occurrence of Integrity/Justice",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 4,
+    "exact_quote_text": "Were I to ignore the evidence that has been presented and disregard what I believe my oath and the Constitution demands of me for the sake of a partisan end, it would, I fear, expose my character to history's rebuke and the censure of my own conscience.",
+    "statistical_relevance": "Bimodal distribution (virtue-dominant example), Rhetorical differences (institutional style), Co-occurrence of Integrity/Justice, Anti-Tribalism",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 4,
+    "exact_quote_text": "Like each member of this deliberative body, I love our country. I believe that our Constitution was inspired by Providence. I'm convinced that freedom itself is dependent on the strength and vitality of our national character.",
+    "statistical_relevance": "Bimodal distribution (virtue-dominant example), Rhetorical differences (institutional style), Institutional Trust",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 4,
+    "exact_quote_text": "Accordingly, the president is guilty of an appalling abuse of public trust.",
+    "statistical_relevance": "Bimodal distribution (virtue-dominant example), Co-occurrence of Justice/Accountability",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 4,
+    "exact_quote_text": "Corrupting an election to keep oneself in office is perhaps the most abusive and destructive violation of one's oath of office that I can imagine.",
+    "statistical_relevance": "Bimodal distribution (virtue-dominant example), Co-occurrence of Justice/Accountability, Institutional Trust",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 4,
+    "exact_quote_text": "I knew from the outset that being tasked with judging the president, the leader of my own party, would be the most difficult decision I have ever faced.",
+    "statistical_relevance": "Bimodal distribution (virtue-dominant example), Rhetorical differences (institutional style), Co-occurrence of Integrity/Anti-Tribalism",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 4,
+    "exact_quote_text": "I hope we respect each other's good faith.",
+    "statistical_relevance": "Bimodal distribution (virtue-dominant example), Co-occurrence of Unity/Dignity",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 5,
+    "exact_quote_text": "[my interest is not in protecting the good people of another country. I'm a senator for the state of Ohio. Our leaders have to protect the interests of the citizens of this country.]",
+    "statistical_relevance": "Bimodal distribution (vice-dominant example), Rhetorical differences (populist style), Co-occurrence of Tribalism/Identity",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 5,
+    "exact_quote_text": "[the leader of the Republican party is a guy who actually plans to put American citizens first, and that's Donald Trump.]",
+    "statistical_relevance": "Bimodal distribution (vice-dominant example), Rhetorical differences (populist style), Co-occurrence of Tribalism/Identity",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 5,
+    "exact_quote_text": "[Why don't our elites seem to care about it? Well, number one, they really benefit from the cheap labor. Okay? Number two, they actually don't really like the people who make up the domestic populations of their own country.]",
+    "statistical_relevance": "Bimodal distribution (vice-dominant example), Rhetorical differences (populist style), Co-occurrence of Resentment/Tribalism, Simplification",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 5,
+    "exact_quote_text": "[The only illegal people in this country are the people whose grandparents were born here, according to the Biden administration. They're the people. They're the people, by the way, who are not allowed to have an opinion about what's going on in their country because they will be silenced. They will be censored. They will be called every name in the book.]",
+    "statistical_relevance": "Bimodal distribution (vice-dominant example), Rhetorical differences (populist style), Co-occurrence of Resentment/Tribalism, Simplification",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 5,
+    "exact_quote_text": "[The real threat to American democracy is that American voters keep on voting for less immigration and our politicians keep on rewarding us with more. That is the threat to American democracy.]",
+    "statistical_relevance": "Bimodal distribution (vice-dominant example), Rhetorical differences (populist style), Co-occurrence of Resentment/Simplification",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 5,
+    "exact_quote_text": "[no one can avoid that it has made our societies poorer, less safe, less prosperous, and less advanced.]",
+    "statistical_relevance": "Bimodal distribution (vice-dominant example), Rhetorical differences (populist style), Co-occurrence of Resentment/Simplification",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 5,
+    "exact_quote_text": "[Springfield, Ohio, has been overwhelmed. And you don't have to believe, of course, that the 20,000 or at least most of the 20,000 newcomers are bad people. In fact, I imagine that many of them are very good people. But my interest is not in protecting the good people of another country.]",
+    "statistical_relevance": "Bimodal distribution (vice-dominant example), Rhetorical differences (populist style), Co-occurrence of Tribalism/Identity",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 6,
+    "exact_quote_text": "The American people are outraged at what's going on, and the American people are saying loud and clear, 'We will not accept an oligarchic form of society.'",
+    "statistical_relevance": "Bimodal distribution (vice-dominant example), Rhetorical differences (populist style), Co-occurrence of Resentment/Justice, Prominence of Justice-Resentment axis",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 6,
+    "exact_quote_text": "These guys, I want to tell you something because I bump into them in my line of work, they are not nice guys.",
+    "statistical_relevance": "Bimodal distribution (vice-dominant example), Rhetorical differences (populist style), Co-occurrence of Resentment/Tribalism, Simplification",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 6,
+    "exact_quote_text": "Trump has a government of the billionaires, by the billionaires, and for the billionaires.",
+    "statistical_relevance": "Bimodal distribution (vice-dominant example), Rhetorical differences (populist style), Co-occurrence of Tribalism/Resentment",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 6,
+    "exact_quote_text": "But I will tell you this, in the midst of all of these addictions, the worst and most dangerous addiction we have is the greed of the oligarchs.",
+    "statistical_relevance": "Bimodal distribution (vice-dominant example), Rhetorical differences (populist style), Co-occurrence of Resentment/Simplification",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 6,
+    "exact_quote_text": "They are prepared to destroy Social Security, Medicaid, Medicare, the Veterans Administration in order to make themselves even richer.",
+    "statistical_relevance": "Bimodal distribution (vice-dominant example), Rhetorical differences (populist style), Co-occurrence of Resentment/Blame, Simplification",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 6,
+    "exact_quote_text": "real inflation accounted for wages today are lower than they were 52 years ago. Meanwhile, there has been a $75 trillion transfer of wealth from the bottom 90% to the top 1%. That is what a rigged economy is about...",
+    "statistical_relevance": "Bimodal distribution (vice-dominant example), Rhetorical differences (populist style), Co-occurrence of Justice/Resentment, Prominence of Justice-Resentment axis",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 6,
+    "exact_quote_text": "99% is a hell of a lot larger number than 1%. So if we stand together, are strong, are disciplined, are smart, I have every reason to believe deeply in my heart that not only will we defeat Trumpism, but we can create the kind of nation that we deserve.",
+    "statistical_relevance": "Bimodal distribution (vice-dominant example, call to action), Rhetorical differences (populist style), Co-occurrence of Tribalism/Collective Action",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 7,
+    "exact_quote_text": "They specialize in getting us to turn on one another and they get us to turn on one another along lines of left and right, race and gender, creed and culture.",
+    "statistical_relevance": "Bimodal distribution (mixed example, critique of tribalism), Rhetorical differences (populist style, but with nuance), Co-occurrence of Unity/Anti-Tribalism",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 7,
+    "exact_quote_text": "No matter your race, religion, gender identity, or status, no matter if you disagree with me on a couple of things. If you are willing to fight for someone you don't know, you are welcome here.",
+    "statistical_relevance": "Bimodal distribution (mixed example, virtue-oriented), Rhetorical differences (populist style, but with nuance), Co-occurrence of Unity/Dignity, Prominence of Identity-Dignity axis",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 7,
+    "exact_quote_text": "It's about the thousands of you who came out today to stand together and say, 'Our lives deserve dignity and our work deserves respect.'",
+    "statistical_relevance": "Bimodal distribution (mixed example, virtue-oriented), Co-occurrence of Dignity/Justice, Prominence of Identity-Dignity axis",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 7,
+    "exact_quote_text": "We are witnessing an oligarchy in America. And that is when those with the most economic, political, and technological power destroy the public good to enrich themselves while millions of Americans pay the price.",
+    "statistical_relevance": "Bimodal distribution (vice-dominant example), Rhetorical differences (populist style), Co-occurrence of Justice/Resentment, Prominence of Justice-Resentment axis",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 7,
+    "exact_quote_text": "And I understand that this kind of disdain that the wealthiest, wealthiest people in this country have for the working class doesn't just come from them not being raised right. It's shorthand for the right wing's entire political agenda and a certain ugly kind of politics, a politics that involves lying to and screwing over working and middle class Americans so that they can steal from our healthcare, Social Security, and veterans' benefits to pay for tax cuts for the wealthiest and bailouts for their crypto billionaire friends.",
+    "statistical_relevance": "Bimodal distribution (vice-dominant example), Rhetorical differences (populist style), Co-occurrence of Resentment/Blame, Simplification, Prominence of Justice-Resentment axis",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 7,
+    "exact_quote_text": "Now it's this idea that if we just work hard, we too can have nation-state level money, except these kinds of spoils aren't earned really. They aren't working for these billions. They're stealing them. They're stealing them from you and you and me.",
+    "statistical_relevance": "Bimodal distribution (vice-dominant example), Rhetorical differences (populist style), Co-occurrence of Resentment/Blame, Simplification",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 7,
+    "exact_quote_text": "Just look at what Elon Musk and Donald Trump are doing to our healthcare, our veterans' benefits, and Social Security. They are slashing programs that we and you have spent a lifetime paying into.",
+    "statistical_relevance": "Bimodal distribution (vice-dominant example), Rhetorical differences (populist style), Co-occurrence of Resentment/Blame, Simplification",
+    "strength_rating": 4
+  }
+]
+```
