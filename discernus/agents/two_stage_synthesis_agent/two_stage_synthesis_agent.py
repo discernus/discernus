@@ -123,12 +123,8 @@ class TwoStageSynthesisAgent(StandardAgent):
             self.logger.info("TwoStageSynthesisAgent starting two-stage execution")
             self.log_execution_start(**kwargs)
             
-            # DEBUG: Log contract validation attempt
-            self.logger.info("STARTING CONTRACT VALIDATION - checking all required input assets")
-            
             # Validate inputs
             if not self._validate_inputs(run_context):
-                self.logger.error("CONTRACT VALIDATION FAILED - synthesis cannot proceed")
                 return AgentResult(
                     success=False,
                     artifacts=[],
