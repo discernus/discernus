@@ -1,8 +1,0 @@
-{
-  "analysis_id": "analysis_v2_analysis_20250923_122616_3",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "evidence_extraction": "[\n  \"The dam's structural failure and the ensuing flood have created a disastrous humanitarian and ecological crisis.\",\n  \"This was not an unforeseeable natural disaster; it was the predictable outcome of decades of deferred maintenance and criminal negligence.\",\n  \"The public's trust in government institutions has been shattered, and rebuilding that trust will be a long and difficult process.\",\n  \"The dam's structural failure and the ensuing flood have created a disastrous humanitarian and ecological crisis.\",\n  \"This was not an unforeseeable natural disaster; it was the predictable outcome of decades of deferred maintenance and criminal negligence.\",\n  \"The public's trust in government institutions has been shattered, and rebuilding that trust will be a long and difficult process.\"\n]",
-  "document_index": 3,
-  "timestamp": "2025-09-23T16:27:49.517894+00:00"
-}

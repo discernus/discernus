@@ -1,8 +1,0 @@
-{
-  "analysis_id": "analysis_v2_analysis_20250923_130542_1",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "evidence_extraction": "[\n  \"The community-led arts festival was an absolute triumph, celebrating our city's rich cultural tapestry with unparalleled vibrancy and joy.\",\n  \"It was a perfect, inspiring event that showcased the very best of our community, leaving everyone with a lasting feeling of warmth and pride. The success was so complete that it left no room for doubt or criticism.\",\n  \"The planning for next year's festival is already underway, with even more ambitious goals and expanded programming. The success of this inaugural event has created momentum and enthusiasm that will carry forward into future years.\",\n  \"The success was so complete that it left no room for doubt or criticism.\",\n  \"The success was so complete that it left no room for doubt or criticism.\",\n  \"The success was so complete that it left no room for doubt or criticism.\"\n]",
-  "document_index": 1,
-  "timestamp": "2025-09-23T17:06:22.162061+00:00"
-}

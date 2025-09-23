@@ -200,8 +200,8 @@ class FullExperimentStrategy(ExecutionStrategy):
                 
                 if statistical_artifact_hash:
                     # THIN: Pass artifact hash, let synthesis agent read it directly
-                    run_context.statistical_artifacts = [statistical_artifact_hash]
-                    audit.log_agent_event("FullExperimentStrategy", "statistical_artifacts_passed", {
+                    # CAS Discovery: Statistical artifacts are now discovered by synthesis agent
+                    audit.log_agent_event("FullExperimentStrategy", "statistical_analysis_completed", {
                         "statistical_artifact_hash": statistical_artifact_hash
                     })
                 else:
@@ -687,8 +687,8 @@ class StatisticalPrepStrategy(ExecutionStrategy):
                 
                 if statistical_artifact_hash:
                     # THIN: Pass artifact hash, let synthesis agent read it directly
-                    run_context.statistical_artifacts = [statistical_artifact_hash]
-                    audit.log_agent_event("FullExperimentStrategy", "statistical_artifacts_passed", {
+                    # CAS Discovery: Statistical artifacts are now discovered by synthesis agent
+                    audit.log_agent_event("FullExperimentStrategy", "statistical_analysis_completed", {
                         "statistical_artifact_hash": statistical_artifact_hash
                     })
                 else:
@@ -834,8 +834,8 @@ class ResumeFromStatsStrategy(ExecutionStrategy):
 
                 # THIN: Pass evidence artifact hashes, let synthesis agent read them
                 if evidence_result.artifacts:
-                    run_context.evidence_artifacts = evidence_result.artifacts
-                    audit.log_agent_event("FullExperimentStrategy", "evidence_artifacts_passed", {
+                    # CAS Discovery: Evidence artifacts are now discovered by synthesis agent
+                    audit.log_agent_event("FullExperimentStrategy", "evidence_retrieval_completed", {
                         "evidence_artifacts_count": len(evidence_result.artifacts)
                     })
                 else:
@@ -1006,7 +1006,7 @@ class ResumeFromAnalysisStrategy(ExecutionStrategy):
                 )
             
             # Set the copied analysis artifacts in run_context
-            run_context.analysis_artifacts = copied_artifacts
+            # CAS Discovery: Analysis artifacts are now discovered by agents as needed
             
             # Phase 1: Statistical analysis
             if "Statistical" in agents:
@@ -1040,7 +1040,7 @@ class ResumeFromAnalysisStrategy(ExecutionStrategy):
                 
                 if statistical_artifact_hash:
                     # THIN: Pass artifact hash, let synthesis agent read it directly
-                    run_context.statistical_artifacts = [statistical_artifact_hash]
+                    # CAS Discovery: Statistical artifacts are now discovered by synthesis agent
                     audit.log_agent_event("ResumeFromAnalysisStrategy", "statistical_artifacts_passed", {
                         "statistical_artifact_hash": statistical_artifact_hash
                     })
@@ -1081,7 +1081,7 @@ class ResumeFromAnalysisStrategy(ExecutionStrategy):
 
                 # THIN: Pass evidence artifact hashes, let synthesis agent read them
                 if evidence_result.artifacts:
-                    run_context.evidence_artifacts = evidence_result.artifacts
+                    # CAS Discovery: Evidence artifacts are now discovered by synthesis agent
                     audit.log_agent_event("ResumeFromAnalysisStrategy", "evidence_artifacts_passed", {
                         "evidence_artifacts_count": len(evidence_result.artifacts)
                     })

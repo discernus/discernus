@@ -1,8 +1,0 @@
-{
-  "analysis_id": "analysis_v2_analysis_20250923_125029_1",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "evidence_extraction": "```json\n[\n  \"The community-led arts festival was an absolute triumph, celebrating our city's rich cultural tapestry with unparalleled vibrancy and joy.\",\n  \"It was a perfect, inspiring event that showcased the very best of our community, leaving everyone with a lasting feeling of warmth and pride.\",\n  \"The media coverage of the festival was overwhelmingly positive, with local and regional outlets highlighting the event's success and its positive impact on the community.\",\n  \"The success was so complete that it left no room for doubt or criticism.\"\n]\n```\nTotal quotes in the composite analysis: 4\nTotal quotes in the output: 4",
-  "document_index": 1,
-  "timestamp": "2025-09-23T16:51:12.573947+00:00"
-}

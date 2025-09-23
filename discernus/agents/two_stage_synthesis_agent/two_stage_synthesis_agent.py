@@ -309,31 +309,8 @@ class TwoStageSynthesisAgent(StandardAgent):
             self.logger.info("Starting Stage 2: Evidence integration")
             
             # Load curated evidence from IntelligentEvidenceRetrievalAgent for Stage 2 integration
+            # Contract validation ensures evidence exists, so this should never be empty
             raw_evidence = self._prepare_curated_evidence(run_context)
-            
-            if not raw_evidence:
-                self.logger.warning("No curated evidence found - generating Stage 2 report with explanatory note")
-                
-                # Create a Stage 2 report that explicitly states no evidence was integrated
-                timestamp = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')
-                no_evidence_report = f"""---
-agent: {self.agent_name}
-stage: stage2_no_evidence_integrated
-timestamp: {timestamp}
-model_used: {self.stage2_model}
-evidence_included: false
-synthesis_method: two_stage_fallback
----
-
-# Research Synthesis Report
-
-**Note on Evidence Integration:** No curated evidence was provided for this synthesis run. The following analysis is the complete data-driven report from Stage 1. No textual evidence has been integrated into this version of the report.
-
----
-
-{stage1_report}
-"""
-                return no_evidence_report
             
             # Create the Stage 2 prompt with Stage 1 report and raw evidence (THIN: no parsing)
             stage2_prompt = self._create_stage2_prompt(stage1_report, raw_evidence)
@@ -501,8 +478,8 @@ Please generate a comprehensive framework-driven analysis report following the S
             )
             
             if not statistical_artifacts:
-                self.logger.warning("No statistical_analysis artifacts found via CAS discovery")
-                return "No statistical artifacts available"
+                # Contract validation should prevent this from happening
+                raise RuntimeError("No statistical_analysis artifacts found via CAS discovery - contract violation")
             
             self.logger.info(f"Found {len(statistical_artifacts)} statistical artifacts via CAS discovery")
             
@@ -545,8 +522,8 @@ Please generate a comprehensive framework-driven analysis report following the S
             )
             
             if not evidence_artifacts:
-                self.logger.warning("No curated_evidence artifacts found via CAS discovery")
-                return "No evidence artifacts available"
+                # Contract validation should prevent this from happening
+                raise RuntimeError("No curated_evidence artifacts found via CAS discovery - contract violation")
             
             self.logger.info(f"Found {len(evidence_artifacts)} evidence artifacts via CAS discovery")
             
@@ -577,33 +554,34 @@ Please generate a comprehensive framework-driven analysis report following the S
             return ""
     
     def _prepare_curated_evidence(self, run_context: RunContext) -> str:
-        """Prepare raw curated evidence from IntelligentEvidenceRetrievalAgent artifacts (THIN: no parsing)."""
+        """Prepare raw curated evidence from IntelligentEvidenceRetrievalAgent artifacts via CAS discovery (THIN: no parsing)."""
         try:
             raw_evidence_content = []
             
-            # Look for curated evidence artifacts from IntelligentEvidenceRetrievalAgent
-            if hasattr(run_context, 'evidence_artifacts') and run_context.evidence_artifacts:
-                for artifact_hash in run_context.evidence_artifacts:
-                    try:
-                        # Load the artifact
-                        artifact_bytes = self.storage.get_artifact(artifact_hash)
-                        artifact_data = json.loads(artifact_bytes.decode('utf-8'))
+            # CAS Discovery: Find curated evidence artifacts
+            evidence_artifacts = self.storage.find_artifacts_by_metadata(artifact_type="curated_evidence")
+            
+            for artifact_hash in evidence_artifacts:
+                try:
+                    # Load the artifact
+                    artifact_bytes = self.storage.get_artifact(artifact_hash)
+                    artifact_data = json.loads(artifact_bytes.decode('utf-8'))
+                    
+                    # Check if this is a curated evidence artifact from IntelligentEvidenceRetrievalAgent
+                    if (isinstance(artifact_data, dict) and 
+                        artifact_data.get('agent_name') == 'IntelligentEvidenceRetrievalAgent' and
+                        'curated_evidence' in artifact_data):
                         
-                        # Check if this is a curated evidence artifact from IntelligentEvidenceRetrievalAgent
-                        if (isinstance(artifact_data, dict) and 
-                            artifact_data.get('agent_name') == 'IntelligentEvidenceRetrievalAgent' and
-                            'curated_evidence' in artifact_data):
-                            
-                            # THIN: Get raw curation response without parsing
-                            evidence_content = artifact_data.get('curated_evidence', {})
-                            if isinstance(evidence_content, dict) and 'raw_curation_response' in evidence_content:
-                                raw_response = evidence_content.get('raw_curation_response', '')
-                                if raw_response:
-                                    raw_evidence_content.append(raw_response)
+                        # THIN: Get raw curation response without parsing
+                        evidence_content = artifact_data.get('curated_evidence', {})
+                        if isinstance(evidence_content, dict) and 'raw_curation_response' in evidence_content:
+                            raw_response = evidence_content.get('raw_curation_response', '')
+                            if raw_response:
+                                raw_evidence_content.append(raw_response)
                                 
-                    except Exception as e:
-                        self.logger.warning(f"Failed to load evidence artifact {artifact_hash}: {e}")
-                        continue
+                except Exception as e:
+                    self.logger.warning(f"Failed to load evidence artifact {artifact_hash}: {e}")
+                    continue
             
             # Join all raw evidence content
             combined_evidence = "\n\n--- EVIDENCE CURATION ---\n\n".join(raw_evidence_content)

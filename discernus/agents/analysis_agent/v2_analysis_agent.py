@@ -103,6 +103,33 @@ class V2AnalysisAgent(StandardAgent):
             "markup_extraction"
         ]
 
+    def _validate_inputs(self, run_context: RunContext) -> bool:
+        """Strict contract enforcement: ALL required input assets must be present or fail hard."""
+        
+        # Required Asset 1: Framework hash
+        framework_hash = run_context.metadata.get("framework_hash")
+        if not framework_hash:
+            self.logger.error("CONTRACT VIOLATION: No framework_hash found in run_context metadata")
+            return False
+        self.logger.info(f"✓ Framework: Found hash {framework_hash[:8]}")
+        
+        # Required Asset 2: Corpus manifest hash
+        corpus_manifest_hash = run_context.metadata.get("corpus_manifest_hash")
+        if not corpus_manifest_hash:
+            self.logger.error("CONTRACT VIOLATION: No corpus_manifest_hash found in run_context metadata")
+            return False
+        self.logger.info(f"✓ Corpus manifest: Found hash {corpus_manifest_hash[:8]}")
+        
+        # Required Asset 3: Corpus document hashes
+        corpus_document_hashes = run_context.metadata.get("corpus_document_hashes", [])
+        if not corpus_document_hashes:
+            self.logger.error("CONTRACT VIOLATION: No corpus_document_hashes found in run_context metadata")
+            return False
+        self.logger.info(f"✓ Corpus documents: Found {len(corpus_document_hashes)} documents")
+        
+        self.logger.info("CONTRACT FULFILLED: All required input assets present - proceeding with analysis")
+        return True
+    
     def execute(self, run_context: RunContext = None, **kwargs) -> AgentResult:
         """
         Execute atomic document analysis.
@@ -115,15 +142,17 @@ class V2AnalysisAgent(StandardAgent):
             AgentResult with analysis artifacts
         """
         try:
-            # CAS Discovery: Get framework and corpus documents from hash addresses
-            framework_hash = run_context.metadata.get("framework_hash")
-            if not framework_hash:
+            # Validate inputs - strict contract enforcement
+            if not self._validate_inputs(run_context):
                 return AgentResult(
                     success=False,
-                    error_message="Framework hash not found in run_context metadata",
                     artifacts=[],
-                    metadata={"agent_name": self.agent_name}
+                    metadata={"agent_name": self.agent_name, "error": "Input validation failed"},
+                    error_message="Required inputs missing for analysis"
                 )
+            
+            # Get framework content via CAS
+            framework_hash = run_context.metadata.get("framework_hash")
             framework_content = self.storage.get_artifact(framework_hash).decode('utf-8')
             
             corpus_documents = self._read_corpus_documents_via_cas(run_context)
@@ -409,10 +438,10 @@ OUTPUT FORMAT:
 Return a JSON object with two main sections:
 {{
   "dimensional_scores": {{
-    "dimension_name": {{
-      "raw_score": 0.8,
-      "salience": 0.7,
-      "confidence": 0.9
+  "dimension_name": {{
+    "raw_score": 0.8,
+    "salience": 0.7,
+    "confidence": 0.9
     }}
   }},
   "derived_metrics": {{

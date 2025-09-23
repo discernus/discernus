@@ -91,6 +91,40 @@ class V2StatisticalAgent(StandardAgent):
             "models_used": ["vertex_ai/gemini-2.5-pro", "vertex_ai/gemini-2.5-flash-lite"]
         }
     
+    def _validate_inputs(self, run_context: RunContext) -> bool:
+        """Strict contract enforcement: ALL required input assets must be present or fail hard."""
+        
+        # Required Asset 1: Score extraction artifacts
+        score_artifacts = self.storage.find_artifacts_by_metadata(artifact_type="score_extraction")
+        if not score_artifacts:
+            self.logger.error("CONTRACT VIOLATION: No score_extraction artifacts found via CAS discovery")
+            return False
+        self.logger.info(f"✓ Score extraction: Found {len(score_artifacts)} artifacts")
+        
+        # Required Asset 2: Framework hash
+        framework_hash = run_context.metadata.get("framework_hash")
+        if not framework_hash:
+            self.logger.error("CONTRACT VIOLATION: No framework_hash found in run_context metadata")
+            return False
+        self.logger.info(f"✓ Framework: Found hash {framework_hash[:8]}")
+        
+        # Required Asset 3: Corpus manifest hash
+        corpus_manifest_hash = run_context.metadata.get("corpus_manifest_hash")
+        if not corpus_manifest_hash:
+            self.logger.error("CONTRACT VIOLATION: No corpus_manifest_hash found in run_context metadata")
+            return False
+        self.logger.info(f"✓ Corpus manifest: Found hash {corpus_manifest_hash[:8]}")
+        
+        # Required Asset 4: Corpus document hashes
+        corpus_document_hashes = run_context.metadata.get("corpus_document_hashes", [])
+        if not corpus_document_hashes:
+            self.logger.error("CONTRACT VIOLATION: No corpus_document_hashes found in run_context metadata")
+            return False
+        self.logger.info(f"✓ Corpus documents: Found {len(corpus_document_hashes)} documents")
+        
+        self.logger.info("CONTRACT FULFILLED: All required input assets present - proceeding with statistical analysis")
+        return True
+    
     def execute(self, run_context: RunContext) -> AgentResult:
         """
         Execute statistical analysis on atomic score artifacts.
@@ -102,7 +136,14 @@ class V2StatisticalAgent(StandardAgent):
             AgentResult with statistical analysis artifacts
         """
         try:
-            # CAS Discovery approach - corpus documents loaded by orchestrator
+            # Validate inputs - strict contract enforcement
+            if not self._validate_inputs(run_context):
+                return AgentResult(
+                    success=False,
+                    artifacts=[],
+                    metadata={"agent_name": self.agent_name, "error": "Input validation failed"},
+                    error_message="Required inputs missing for statistical analysis"
+                )
             
             # Store run context for access in other methods
             self._current_run_context = {
