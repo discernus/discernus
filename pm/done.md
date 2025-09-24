@@ -1554,6 +1554,119 @@
 
 ---
 
+## V2 Agent Refactoring Completed Sprints
+
+### 🎯 **SPRINT V2-REFACTOR-1: AnalysisAgent Atomic Processing** ✅ **COMPLETED**
+
+**Timeline**: Completed
+**Goal**: Refactor AnalysisAgent to process documents atomically instead of in batch
+**Definition of Done**: Each document's composite analysis is immediately processed through steps 2-5, creating atomic artifacts
+
+**Completed Tasks**:
+
+- ✅ Fixed document processing loop for atomic processing
+- ✅ Fixed V2AnalysisAgent duplication by removing legacy agent dependency
+- ✅ Implemented EnhancedLLMGateway and tool calling verification
+- ✅ Restored YAML prompt template loading
+- ✅ Fixed StatisticalAgent field name mismatch (score_extraction vs scores_extraction)
+- ✅ Achieved end-to-end success with nano_test_experiment
+
+**Handoff Completed**: AnalysisAgent produces clean atomic artifacts that StatisticalAgent can process
+
+---
+
+### 🎯 **SPRINT V2-REFACTOR-3: IntelligentEvidenceRetrievalAgent Development** ✅ **COMPLETED**
+
+**Timeline**: 2-3 weeks
+**Goal**: Replace RAG-based evidence retrieval with intelligent atomic evidence processing using strategic curation
+**Definition of Done**: New agent uses atomic evidence artifacts and statistical findings to produce precisely curated evidence
+
+**SPRINT COMPLETED**: All 8 tasks completed successfully. IntelligentEvidenceRetrievalAgent is production-ready and integrated into V2 pipeline.
+
+**Key Achievements**:
+
+- ✅ Complete THIN architecture with Gemini Pro strategic planning and session caching
+- ✅ RAG system eliminated, replaced with direct atomic evidence processing
+- ✅ End-to-end integration tested and working (nano experiment: 135.3s, 16 artifacts)
+- ✅ Strategic curation with dynamic Flash/Pro model selection based on corpus size
+- ✅ Tool calling for structured planning, comprehensive prompting for evidence selection
+
+**Handoff to Sprint V2-REFACTOR-4**: IntelligentEvidenceRetrievalAgent produces precisely curated evidence mapped to statistical conclusions
+
+---
+
+### 🎯 **SPRINT V2-REFACTOR-4: TwoStageSynthesisAgent Development** ✅ **COMPLETED**
+
+**Timeline**: 2-3 weeks → **Actual**: 4 hours
+**Goal**: Implement two-stage synthesis to prevent hallucination and ensure data-driven reports
+**Definition of Done**: New synthesis agent produces high-quality reports anchored in statistical data with supporting evidence → **ACHIEVED**
+
+**SPRINT COMPLETED**: All 6 tasks completed successfully. TwoStageSynthesisAgent is production-ready and integrated into V2 pipeline.
+
+**Key Achievements**:
+
+- ✅ Two-stage synthesis prevents hallucination by separating data-driven analysis from evidence integration
+- ✅ Stage 1 produces coherent analysis based purely on statistical findings
+- ✅ Stage 2 enhances with curated evidence without creating new claims
+- ✅ Anti-hallucination controls ensure all claims are supported by statistical data
+- ✅ Evidence appendix system provides complete audit trail
+- ✅ Integration testing confirms high-quality, academically rigorous reports
+
+**Handoff to Sprint V2-INTEGRATION-1**: Complete V2 agent ecosystem ready for comprehensive integration testing
+
+---
+
+### 🎯 **SPRINT V2-1: Agent Standardization & Foundational Tooling** ✅ **TRULY COMPLETE**
+
+**Corresponds to**: V2 Plan - Phase 1 (Weeks 1-2)
+**Goal**: Create the canonical agent interface, base classes, and data handoff contracts. This is the foundation for the entire V2 ecosystem.
+
+**Definition of Done**:
+
+- ✅ `StandardAgent` interface implemented with exact signature from V2 plan
+- ✅ All 4 base classes (`ToolCallingAgent`, `ValidationAgent`, `SynthesisAgent`, `VerificationAgent`) implemented
+- ✅ `RunContext` dataclass created with all required fields and type hints
+- ✅ `AgentConfig` system implemented with retry and verification configs
+- ✅ Gateway policy enforced - decorators prevent direct model client instantiation
+- ✅ Unit tests for all new interfaces and classes (14 tests passing)
+- ✅ Documentation for agent development patterns
+
+**Completion Date**: 2024-12-19
+**Commits**:
+
+- de83a0da7 - "Complete V2-1: Agent foundation & interfaces"
+- 9a28a44f2 - "Migrate legacy EvidenceRetrieverAgent to V2 and add gateway policy enforcement"
+  **Status**: Truly complete - all requirements met
+
+---
+
+### 🎯 **SPRINT V2-5: V2 Orchestrator Implementation** ✅ **CORE COMPLETE**
+
+**Corresponds to**: V2 Plan - Phase 3
+**Goal**: Build the new, simple, agent-native orchestrator.
+**Priority**: HIGH - Core V2 system implementation
+
+**Definition of Done**:
+
+- ✅ `V2Orchestrator` implemented with agent registry and strategy execution
+- ✅ All execution strategies implemented (`FullExperimentStrategy`, `AnalysisOnlyStrategy`, etc.)
+- ✅ Strategy pattern allows different execution modes as separate classes
+- ✅ Resume capability uses `resume_manifest.json` (no directory scanning)
+- ✅ `ExperimentRunConfig` replaces boolean flags with typed configuration
+- ❌ CLI integration with `--orchestrator-version=v2` flag - **PENDING**
+- ✅ Agent-level caching works automatically with V2 orchestrator
+- ✅ Verification integration optional at each step
+- ✅ Files remain canonical source of truth (no DB footprint)
+- ✅ Unit tests for orchestrator and all strategies (22 tests passing)
+- ❌ Integration tests showing V2 orchestrator works end-to-end **with real agents**.
+- ❌ Performance comparison with V1 orchestrator - **PENDING**
+
+**Completion Date**: 2024-12-19
+**Commit**: 5388142d4 - "Complete Sprint V2-5: V2 Orchestrator Implementation"
+**Status**: Core implementation is complete, but full integration with a complete, real V2 agent suite is pending.
+
+---
+
 ## Archive Notes
 
 - Items moved here during grooming sessions
