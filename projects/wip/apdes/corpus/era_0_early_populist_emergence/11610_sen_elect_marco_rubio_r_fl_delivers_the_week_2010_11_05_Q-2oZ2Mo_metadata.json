@@ -1,0 +1,26 @@
+{
+  "video_info": {
+    "video_id": "Q-2oZ2MoP-0",
+    "title": "11/6/10 - Sen.-elect Marco Rubio (R-FL) Delivers The Weekly GOP Address",
+    "channel": "gopweeklyaddress",
+    "upload_date": "2010-11-05",
+    "description": "In the Weekly Republican Address, Senator-elect Marco Rubio (R-FL) says, \"For too long, Washington has taken our country in the wrong direction: bigger government, reckless spending, and run away debt. And though I'm a proud Republican, here's the truth, both parties have been to blame. This election the American people said enough is enough. That message was loud and clear. We Republicans would be mistaken if we misread these results as simply an embrace of the Republican party. This Election is a second chance. A second chance for Republicans to be what we said we were going to be.\"\r\n\r\nHe points out, \"The past two years provided a frightening glimpse at what could become of our great nation if we continue down the current path: wasteful spending, a growing debt and a government reaching ever further into our lives, even into our health care decisions. It is nothing short of a path to ruin, a path that threatens to diminish us as a nation and a people.  One that makes America not exceptional, not unique, but more like the rest of the world.\"\r\n\r\nSen.-elect Rubio pledges, \"As Republicans, here is what our commitment should be to you. Our focus must not be simply winning elections. It must be to ensure the next generation inherits a strong, free and prosperous America. . . . [W]e will put forward bold ideas and have the courage to fight for them. This means preventing a massive tax increase scheduled to hit every American taxpayer at the end of the year. It means repealing and replacing the disastrous health care bill. It means simplifying our tax code, and tackling a debt that is pushing us to the brink of our own Greece-like day of reckoning.\"",
+    "duration": 261,
+    "view_count": 40560,
+    "like_count": 179,
+    "url": "https://www.youtube.com/watch?v=Q-2oZ2MoP-0"
+  },
+  "extraction_info": {
+    "method": "youtube_api",
+    "language": "en (auto-generated)",
+    "confidence": 80.0,
+    "success": true,
+    "transcript_length": 4051,
+    "whisper_model": null
+  },
+  "processing_metadata": {
+    "transcript_length": 4051,
+    "extraction_date": "2025-08-06T01:29:48.847410",
+    "source": "youtube_transcript_api"
+  }
+}

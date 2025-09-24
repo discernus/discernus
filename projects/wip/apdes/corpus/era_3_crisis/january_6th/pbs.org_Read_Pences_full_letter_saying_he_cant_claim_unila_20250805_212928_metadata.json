@@ -1,0 +1,13 @@
+{
+  "url": "https://www.pbs.org/newshour/politics/read-pences-full-letter-saying-he-cant-claim-unilateral-authority-to-reject-electoral-votes",
+  "title": "Read Pence’s full letter saying he can’t claim ‘unilateral authority’ to reject electoral votes | PBS News",
+  "method_used": "playwright",
+  "word_count": 1047,
+  "confidence_score": 80.0,
+  "success": true,
+  "extraction_metadata": {
+    "extraction_date": "2025-08-05T21:29:28.450905",
+    "page_title": "Read Pence’s full letter saying he can’t claim ‘unilateral authority’ to reject electoral votes | PBS News",
+    "http_status": 200
+  }
+}

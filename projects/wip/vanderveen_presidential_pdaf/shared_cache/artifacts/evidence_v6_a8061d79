@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "321503d7747f9c5208253d5fc35c8a351220b5339bd96703081008f967b81058"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-03T04:22:50.124550+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "trump/primary_season/trump_2016_03_15.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "I'm disgusted with it and I'm tired of seeing it and there's no reason for it. It's just gross incompetence at the highest level.",
+      "confidence": 0.9,
+      "context_type": "moral_corruption_attribution",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T04:22:50.124524+00:00"
+    },
+    {
+      "document_name": "trump/primary_season/trump_2016_03_15.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "We don't win anymore. We don't win with our military. We can't beat ISIS... We're going to make our country rich again. We're going to make our country great again.",
+      "confidence": 0.9,
+      "context_type": "decline_redemption_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T04:22:50.124529+00:00"
+    },
+    {
+      "document_name": "trump/primary_season/trump_2016_03_15.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "They're not angry people but they want to see the country properly run. They want to see borders. They want to see good health care. They want our military rebuilt... they want the Second Amendment by the way protected... They want our veterans taken care of.",
+      "confidence": 0.8,
+      "context_type": "direct_popular_will",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T04:22:50.124532+00:00"
+    },
+    {
+      "document_name": "trump/primary_season/trump_2016_03_15.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "I have to say and nobody has ever, ever in the history of politics received the kind of negative advertising that I have. Record, record, record. By the way, mostly false. I wouldn't say 100% but about 90%. Mostly false, vicious, horrible.",
+      "confidence": 0.6,
+      "context_type": "opponent_demonization_weak",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T04:22:50.124534+00:00"
+    },
+    {
+      "document_name": "trump/primary_season/trump_2016_03_15.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "You have people who can't get their money back into the country because the politicians can't get along. They can't make a deal.",
+      "confidence": 0.6,
+      "context_type": "elite_incompetence_claim",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T04:22:50.124536+00:00"
+    },
+    {
+      "document_name": "trump/primary_season/trump_2016_03_15.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "We started, I was one of 17 people \u2013 senators, governors. I've had such great support.",
+      "confidence": 0.8,
+      "context_type": "outsider_self_positioning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T04:22:50.124538+00:00"
+    },
+    {
+      "document_name": "trump/primary_season/trump_2016_03_15.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "Millions of people are coming in to vote... Democrats are coming in, Independents are coming in, and very, very importantly, people that never voted before.",
+      "confidence": 0.8,
+      "context_type": "unified_popular_support",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T04:22:50.124541+00:00"
+    },
+    {
+      "document_name": "trump/primary_season/trump_2016_03_15.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "We need protection in our country and that's going to happen... This country is going to start winning again. We don't win anymore.",
+      "confidence": 0.8,
+      "context_type": "national_protection_rhetoric",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T04:22:50.124543+00:00"
+    },
+    {
+      "document_name": "trump/primary_season/trump_2016_03_15.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "Apple and all of these great companies will be making their product in the United States, not in China, Vietnam... Our companies are leaving our country rapidly... We don't make good deals anymore. We don't win anymore... You lose $500 billion a year with China. We lose $58 billion a year in terms of imbalance.",
+      "confidence": 0.9,
+      "context_type": "economic_grievance_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T04:22:50.124545+00:00"
+    }
+  ]
+}

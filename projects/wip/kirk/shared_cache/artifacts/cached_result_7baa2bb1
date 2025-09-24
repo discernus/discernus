@@ -1,0 +1,32 @@
+{
+  "success": true,
+  "issues": [
+    {
+      "category": "trinity_coherence",
+      "description": "The experiment overview section states the analysis covers Charlie Kirk's career from 2019-2024. However, the corpus manifest and the experiment's own 'Temporal Analysis' plan include documents and define career phases starting from 2015 (e.g., 'founding_era: 2015-2016').",
+      "impact": "The experiment's scope is broader than described in its overview, which could cause minor confusion when interpreting the final report. The analysis will correctly run on the full 2015-2024 corpus as defined by the manifest and detailed plan, but the summary is inaccurate.",
+      "fix": "In the 'Experiment Overview' section of 'experiment.md', update the date range from '(2019-2024)' to '(2015-2024)' to accurately reflect the corpus and the detailed analytical plan.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The `corpus.md` YAML manifest includes a top-level `analytical_groupings` key. This key is non-standard according to the Corpus Specification v8.0.2. The specification requires grouping variables to be defined as metadata fields within each individual document, which has also been done correctly. The top-level key is redundant.",
+      "impact": "This does not block execution because the required per-document metadata is present and correct. However, this redundant, non-standard block could become a source of error in the future if the per-document metadata is updated but this summary block is not, leading to data drift and confusion for researchers.",
+      "fix": "Remove the entire `analytical_groupings` block from the YAML appendix in `corpus.md`. The analytical agents will use the `political_phase`, `event_type`, and `audience` fields within each document's metadata, which is the correct implementation.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md"
+      ]
+    }
+  ],
+  "model": "vertex_ai/gemini-2.5-pro",
+  "validated_at": "2025-09-16T13:44:01.094546+00:00",
+  "cache_metadata": {
+    "cache_key": "validation_517bf8ffb604",
+    "cached_at": "2025-01-15T14:30:00Z",
+    "agent_name": "ValidationPhase"
+  }
+}

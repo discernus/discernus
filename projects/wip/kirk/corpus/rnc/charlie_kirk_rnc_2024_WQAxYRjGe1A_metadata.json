@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "url": "https://www.youtube.com/watch?v=WQAxYRjGe1A",
+  "method": "whisper",
+  "confidence": 75.0,
+  "transcript_length": 3543,
+  "word_count": 622,
+  "language": "en",
+  "extraction_timestamp": "2025-09-12T12:11:29.853720",
+  "processing_time": 42.43269181251526,
+  "error_type": null,
+  "error_message": null,
+  "retry_after": null,
+  "fallback_attempted": true,
+  "fallback_success": true,
+  "video_info": {
+    "title": null,
+    "channel": null,
+    "duration": null,
+    "upload_date": null,
+    "video_id": "WQAxYRjGe1A"
+  }
+}

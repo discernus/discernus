@@ -1,0 +1,14 @@
+{
+  "url": "https://www.americanrhetoric.com/speeches/barackobama/barackobamaeconomicvisiongeorgetown.htm",
+  "title": "American Rhetoric: Barack Obama - Speech at Georgetown University on \r\nEconomic Vision",
+  "method_used": "requests",
+  "word_count": 6634,
+  "confidence_score": 95.0,
+  "success": true,
+  "extraction_metadata": {
+    "extraction_date": "2025-08-06T12:38:47.524717",
+    "page_title": "American Rhetoric: Barack Obama - Speech at Georgetown University on \r\nEconomic Vision",
+    "http_status": 200,
+    "content_type": "text/html"
+  }
+}

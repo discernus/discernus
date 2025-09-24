@@ -13,10 +13,8 @@ from typing import Dict, Any
 from unittest.mock import Mock, MagicMock
 
 from discernus.core.standard_agent import StandardAgent
-from discernus.core.agent_base_classes import ToolCallingAgent, ValidationAgent, SynthesisAgent, VerificationAgent
 from discernus.core.agent_result import AgentResult, VerificationResult
 from discernus.core.run_context import RunContext
-from discernus.core.agent_config import AgentConfig, RetryConfig, VerificationConfig
 
 
 class TestAgentResult:

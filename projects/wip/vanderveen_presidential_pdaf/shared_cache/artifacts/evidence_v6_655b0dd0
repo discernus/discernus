@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "c95380e527fd289047232b22c06a78f27f39ec7c8fcac17ebb4731b03c1d84e7"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-03T03:29:34.870957+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_07.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "an economy that works for everyone, not just those at the top.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T03:29:34.870906+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_07.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "This is the most important election of our lifetimes because we've never had a clearer choice. It is a choice between division or unity, between strong steady leadership or a loose cannon who could risk everything.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T03:29:34.870928+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_07.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "Tomorrow you can vote for a hopeful, inclusive, big-hearted America.",
+      "confidence": 0.8,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T03:29:34.870931+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_07.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "my opponent start talking about who was acceptable in America and who wasn't. The categories of people, starting with immigrants, including African-Americans and Latinos and POWs and Muslims, the list went on and on.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T03:29:34.870935+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_07.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T03:29:34.870938+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_07.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "I want to be president for all Americans, not just some, not just for the people who support me and vote for me.",
+      "confidence": 0.8,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T03:29:34.870940+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_07.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "I want to be president for all Americans, not just some, not just for the people who support me and vote for me. I want to be president for everyone because we all have a role to play in building that better future for our country and for each of you.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T03:29:34.870943+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_07.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "",
+      "confidence": 1.0,
+      "context_type": "",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T03:29:34.870946+00:00"
+    },
+    {
+      "document_name": "clinton/general_election/clinton_2016_11_07.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "If you believe we need more fairness in our economy, to raise the minimum wage, because no one who works full-time should still be in poverty, then you have to vote.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T03:29:34.870949+00:00"
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "92ebd15303cb26f03beb4cb79315c135c526093fd12eba2530280471172b6e08"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-03T14:30:40.422744+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "trump/convention_period/trump_2016_06_16.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "Our country is in serious trouble. We don't have victories anymore. ... How stupid are our leaders? How stupid are these politicians to allow this to happen? How stupid are they? ... We have people that are morally corrupt. We have people that are selling this country down the drain.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:30:40.422721+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_06_16.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "Our country is in serious trouble. We don't have victories anymore. ... We need somebody that literally will take this country and make it great again. ... We will make America great again.",
+      "confidence": 0.95,
+      "context_type": "thematic_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:30:40.422723+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_06_16.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "Well, you need somebody, because politicians are all talk, no action. Nothing's gonna get done. They will not bring us \u2014 believe me \u2014 to the promised land. They will not.",
+      "confidence": 0.8,
+      "context_type": "rhetorical_positioning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:30:40.422724+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_06_16.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "How stupid are our leaders? How stupid are these politicians to allow this to happen? How stupid are they? ... We have losers. We have people that don't have it. We have people that are morally corrupt. We have people that are selling this country down the drain.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:30:40.422725+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_06_16.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "They're controlled fully \u2014 they're controlled fully by the lobbyists, by the donors, and by the special interests, fully.",
+      "confidence": 0.85,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:30:40.422727+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_06_16.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "I'm using my own money. I'm not using the lobbyists. I'm not using donors. I don't care. I'm really rich.",
+      "confidence": 0.95,
+      "context_type": "self_characterization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:30:40.422733+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_06_16.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "Our country is in serious trouble. We don't have victories anymore. ... We need a leader that can bring back our jobs, can bring back our manufacturing, can bring back our military, can take care of our vets.",
+      "confidence": 0.8,
+      "context_type": "thematic_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:30:40.422735+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_06_16.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "I will build a great wall on our southern border. And I will have Mexico pay for that wall. Mark my words.",
+      "confidence": 0.95,
+      "context_type": "policy_proposal",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:30:40.422736+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_06_16.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "China has our jobs and Mexico has our jobs. They all have jobs. ... I'll bring back our jobs from China, from Mexico, from Japan, from so many places. I'll bring back our jobs, and I'll bring back our money.",
+      "confidence": 0.95,
+      "context_type": "thematic_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:30:40.422741+00:00"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "speaker": "Donald Trump",
+  "category": "Political Speech",
+  "extraction_method": "whisper",
+  "whisper_model_used": "base",
+  "extracted_at": "2025-08-22T21:43:11.227726",
+  "source_format": "Audio file",
+  "processing_notes": "Batch processed from tmp directory",
+  "date": "2023-11-08",
+  "event_type": "Campaign Rally",
+  "location": "Hialeah, Florida",
+  "context": "2024 presidential campaign rally",
+  "historical_significance": "Medium - Campaign rally",
+  "filename": "LIVE： President Donald J. Trump to hold a rally in Hialeah, Florida - 11⧸8⧸23.opus",
+  "transcript_length_chars": 445384,
+  "language": "en",
+  "confidence_score": -0.8276002407073975,
+  "audio_duration_seconds": 30544.3
+}

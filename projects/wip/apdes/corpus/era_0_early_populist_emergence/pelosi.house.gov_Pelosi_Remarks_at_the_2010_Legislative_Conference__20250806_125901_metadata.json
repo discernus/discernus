@@ -1,0 +1,14 @@
+{
+  "url": "https://pelosi.house.gov/news/press-releases/pelosi-remarks-at-the-2010-legislative-conference-for-national-association-of",
+  "title": "Pelosi Remarks at the 2010 Legislative Conference for National Association of Counties | Representative Nancy Pelosi",
+  "method_used": "requests",
+  "word_count": 2515,
+  "confidence_score": 100.0,
+  "success": true,
+  "extraction_metadata": {
+    "extraction_date": "2025-08-06T12:59:01.820419",
+    "page_title": "Pelosi Remarks at the 2010 Legislative Conference for National Association of Counties | Representative Nancy Pelosi",
+    "http_status": 200,
+    "content_type": "text/html; charset=UTF-8"
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "f9c3847efc4668926212f1d5ffb99e77fad4daedb3b54995be9cf870d4a5a27b"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-03T14:21:50.895754+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "clinton_2016_08_25.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "The Wall Street Journal describes it [Alt-Right] as a loosely organized movement...that 'rejects mainstream conservatism, promotes nationalism and views immigration and multiculturalism as threats to white identity.'",
+      "confidence": 0.9,
+      "context_type": "criticism_of_opponent",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.895741+00:00"
+    },
+    {
+      "document_name": "clinton_2016_08_25.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "This is a moment of reckoning for every Republican dismayed that the Party of Lincoln has become the Party of Trump.",
+      "confidence": 0.9,
+      "context_type": "call_to_action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.895745+00:00"
+    },
+    {
+      "document_name": "clinton_2016_08_25.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "I will be a President for Democrats, Republicans, and Independents. For those who vote for me and those who don\u2019t. For all Americans.",
+      "confidence": 0.8,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.895746+00:00"
+    },
+    {
+      "document_name": "clinton_2016_08_25.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "From the start, Donald Trump has built his campaign on prejudice and paranoia.",
+      "confidence": 0.95,
+      "context_type": "criticism_of_opponent",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.895747+00:00"
+    },
+    {
+      "document_name": "clinton_2016_08_25.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "A man with a long history of racial discrimination, who traffics in dark conspiracy theories drawn from the pages of supermarket tabloids and the far reaches of the internet, should never run our government or command our military.",
+      "confidence": 0.9,
+      "context_type": "criticism_of_opponent",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.895749+00:00"
+    },
+    {
+      "document_name": "clinton_2016_08_25.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "When someone shows you who they are, believe them the first time.",
+      "confidence": 0.85,
+      "context_type": "rhetorical_device",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.895749+00:00"
+    },
+    {
+      "document_name": "clinton_2016_08_25.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "Because I believe we are stronger together.",
+      "confidence": 0.8,
+      "context_type": "thematic_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.895750+00:00"
+    },
+    {
+      "document_name": "clinton_2016_08_25.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "Under Donald Trump, America would distinguish itself as the only country in the world to impose a religious test at the border.",
+      "confidence": 0.9,
+      "context_type": "criticism_of_opponent_policy",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.895751+00:00"
+    },
+    {
+      "document_name": "clinton_2016_08_25.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "My original plan for this visit was to focus on our agenda to help small businesses and entrepreneurs.",
+      "confidence": 0.8,
+      "context_type": "policy_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.895752+00:00"
+    }
+  ]
+}

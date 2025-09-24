@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "f0affb1b223a5f4acd81f5815c1319cfc6561fea55b6628937e58b795af47077"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-03T05:02:37.045473+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "trump/general_election/trump_2016_10_03.txt",
+      "dimension": "manichean_people_elite_framing",
+      "quote_text": "You know, in our country lately, we're more interested in protecting the criminals than we are in making sure that we're strong and powerful and know what we're doing.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T05:02:37.045450+00:00"
+    },
+    {
+      "document_name": "trump/general_election/trump_2016_10_03.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "Look, I feel so strongly that I use a different word in going around that our forces are depleted \u2014 they're depleted. We have the greatest people on Earth, but they're depleted.",
+      "confidence": 0.9,
+      "context_type": "crisis_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T05:02:37.045457+00:00"
+    },
+    {
+      "document_name": "trump/general_election/trump_2016_10_03.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "We call them the forgotten man and woman. And we've raised millions of \u2014 more than any Republican ever thought possible",
+      "confidence": 0.8,
+      "context_type": "popular_representation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T05:02:37.045459+00:00"
+    },
+    {
+      "document_name": "trump/general_election/trump_2016_10_03.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "Hillary Clinton's only \u2014 Hillary Clinton's only experience in cyber security involves her criminal scheme to violate federal law",
+      "confidence": 0.75,
+      "context_type": "opponent_delegitimization",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T05:02:37.045461+00:00"
+    },
+    {
+      "document_name": "trump/general_election/trump_2016_10_03.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "33,000 e-mails are deleted and acid washed. And nobody even knows what that means, acid wash. It's a very expensive thing to do. Most people don't even know what it means.",
+      "confidence": 0.9,
+      "context_type": "corruption_claims",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T05:02:37.045462+00:00"
+    },
+    {
+      "document_name": "trump/general_election/trump_2016_10_03.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "I am beholden to no one, nobody's gonna tell me what to do, no \u2014 no group that owns a military firm that gives military supplies.",
+      "confidence": 0.85,
+      "context_type": "outsider_positioning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T05:02:37.045464+00:00"
+    },
+    {
+      "document_name": "trump/general_election/trump_2016_10_03.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "Oh look at this. Boy, what a \u2014 what a response from our greatest people. Thank you very much. Thank you.",
+      "confidence": 0.9,
+      "context_type": "unity_construction",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T05:02:37.045466+00:00"
+    },
+    {
+      "document_name": "trump/general_election/trump_2016_10_03.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "we are allowing people into our country that are going to cause us tremendous problems. This isn't a question of will it happen; this a question of when.",
+      "confidence": 0.8,
+      "context_type": "external_threat",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T05:02:37.045468+00:00"
+    },
+    {
+      "document_name": "trump/general_election/trump_2016_10_03.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "We spend on numerous countries, very substantial countries. You know the countries we're talking about. But we're defending them for a fraction of the cost.",
+      "confidence": 0.75,
+      "context_type": "economic_grievance",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T05:02:37.045470+00:00"
+    }
+  ]
+}

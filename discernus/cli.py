@@ -51,10 +51,6 @@ os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 # CleanAnalysisOrchestrator deprecated - using V2 orchestrator only
 from discernus.core.config import get_config, get_config_file_path
-from discernus.core.exit_codes import (
-    ExitCode, exit_success, exit_general_error, exit_invalid_usage, 
-    exit_validation_failed, exit_infrastructure_error, exit_file_error, exit_config_error
-)
 
 # Rich CLI integration for professional terminal interface
 from .cli_console import rich_console, ExperimentProgressManager
@@ -70,10 +66,6 @@ from discernus.gateway.model_registry import ModelRegistry
 # Import validation and orchestration components
 from discernus.core.validation import ValidationResult, ValidationIssue
 
-# Import provenance and documentation components
-from discernus.core.provenance_consolidator import consolidate_run_provenance
-from discernus.core.input_materials_consolidator import consolidate_input_materials
-from discernus.core.golden_run_documentation_generator import generate_golden_run_documentation
 
 # V2 Imports
 from discernus.core.v2_orchestrator import V2Orchestrator, V2OrchestratorConfig
@@ -348,7 +340,7 @@ def validate(ctx, experiment_path: str):
     
     try:
         # Use ExperimentCoherenceAgent for validation
-        from discernus.agents.deprecated.experiment_coherence_agent import ExperimentCoherenceAgent
+        from discernus.agents.experiment_coherence_agent import ExperimentCoherenceAgent
         
         validator = ExperimentCoherenceAgent(model="vertex_ai/gemini-2.5-pro")
         result = validator.validate_experiment(exp_path)

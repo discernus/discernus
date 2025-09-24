@@ -1,0 +1,26 @@
+{
+  "video_info": {
+    "video_id": "nQts21QiKTQ",
+    "title": "State of the Republic Address Part 1 of 3",
+    "channel": "CongressmanRonPaul",
+    "upload_date": "2010-01-21",
+    "description": "Congressman Paul speaks on where we are as a nation and where we need to go.  Text of speech can be found at www.house.gov/paul under \"Speeches and Statements\"",
+    "duration": 365,
+    "view_count": 120315,
+    "like_count": 1055,
+    "url": "https://www.youtube.com/watch?v=nQts21QiKTQ"
+  },
+  "extraction_info": {
+    "method": "youtube_api",
+    "language": "en (auto-generated)",
+    "confidence": 80.0,
+    "success": true,
+    "transcript_length": 5500,
+    "whisper_model": null
+  },
+  "processing_metadata": {
+    "transcript_length": 5500,
+    "extraction_date": "2025-08-06T01:23:41.943689",
+    "source": "youtube_transcript_api"
+  }
+}

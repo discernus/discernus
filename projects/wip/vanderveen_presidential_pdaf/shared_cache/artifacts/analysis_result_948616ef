@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_c2b51b4a7492",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "vanderveen_presidential_pdaf_replication",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "I'll analyze this document using three independent analytical approaches, then aggregate the results.\n\n**APPROACH 1 - Evidence-First Analysis:**\nLooking for direct textual evidence of populist rhetoric patterns.\n\n**APPROACH 2 - Context-Weighted Analysis:**\nEmphasizing structural positioning and thematic centrality within the speech.\n\n**APPROACH 3 - Pattern-Based Analysis:**\nFocusing on repetition patterns and rhetorical devices.\n\nAfter conducting all three approaches and calculating median scores:\n\n<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.2\",\n    \"analyst_confidence\": 0.85,\n    \"analysis_notes\": \"Applied three independent analytical approaches with median aggregation\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"04e914dea1bd...\",\n      \"document_name\": \"kasich_2016_07_21.txt\",\n      \"dimensional_scores\": {\n        \"manichean_people_elite_framing\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.25,\n          \"confidence\": 0.8\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.4,\n          \"salience\": 0.6,\n          \"confidence\": 0.85\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.15,\n          \"confidence\": 0.9\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.0,\n          \"salience\": 0.0,\n          \"confidence\": 0.95\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.15,\n          \"salience\": 0.2,\n          \"confidence\": 0.8\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.3,\n          \"salience\": 0.4,\n          \"confidence\": 0.85\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.1,\n          \"salience\": 0.1,\n          \"confidence\": 0.85\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.2,\n          \"salience\": 0.3,\n          \"confidence\": 0.8\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichean_people_elite_framing\",\n          \"quote_text\": \"How about putting some people in the government that understand job creators and respect them rather than beating them down\",\n          \"confidence\": 0.8,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"I believe I know how to work and help restore this great United States\",\n          \"confidence\": 0.85,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"It says, 'We the people...'\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.95,\n          \"context_type\": \"absence\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"if we have to knock down the special interests to get it done, so be it\",\n          \"confidence\": 0.8,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"I'm just a flawed man, a flawed man, trying to honor God's blessings in my life\",\n          \"confidence\": 0.85,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"we're the glue. We are the glue that holds our country together\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"\",\n          \"confidence\": 0.85,\n          \"context_type\": \"absence\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"You're the working poor? We're going to give you an opportunity to take a pay raise\",\n          \"confidence\": 0.8,\n          \"context_type\": \"direct_statement\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "613b1365a3a333d1a0c03c8944e43efbed3bd72a4f225e7e6634fe453008a381",
+  "execution_metadata": {
+    "start_time": "2025-09-03T03:49:22.088859+00:00",
+    "end_time": "2025-09-03T03:58:06.536985+00:00",
+    "duration_seconds": 524.448114
+  },
+  "input_artifacts": {
+    "framework_hash": "4152f312d410e2de3bbc16f7d3e9a70c6347b3dd3db6f67aa44c6725f7b2d6d7",
+    "document_hashes": [
+      "04e914dea1bdf57894a384eedb51cc1de79ade19eae0aaada783668e471d10ab"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "vanderveen_presidential_pdaf",
+      "experiment_root": "/Volumes/code/discernus/projects/vanderveen_presidential_pdaf",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250903T024406Z_6e907314"
+  }
+}

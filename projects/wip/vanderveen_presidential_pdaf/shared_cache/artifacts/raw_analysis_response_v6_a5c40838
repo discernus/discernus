@@ -1,0 +1,120 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discour_analysis_framework",
+    "framework_version": "10.0.2",
+    "analyst_confidence": 0.95,
+    "analysis_notes": "Applied three independent analytical approaches with median aggregation. Speech largely focuses on unity and positive change, but employs anti-Trump rhetoric that implicitly frames him as an antithetical elite and emphasizes economic grievances.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "8e3fa0777ca9",
+      "document_name": "clinton_2016_07_28.txt",
+      "dimensional_scores": {
+        "manichaean_people_elite_framing": {
+          "raw_score": 0.6,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "crisis_restoration_narrative": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.7
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 0.5,
+          "salience": 0.6,
+          "confidence": 0.9
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 0.1,
+          "salience": 0.1,
+          "confidence": 0.7
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 0.4,
+          "salience": 0.5,
+          "confidence": 0.8
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.9
+        },
+        "nationalist_exclusion": {
+          "raw_score": 0.1,
+          "salience": 0.2,
+          "confidence": 0.8
+        },
+        "economic_populist_appeals": {
+          "raw_score": 0.7,
+          "salience": 0.8,
+          "confidence": 0.9
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichaean_people_elite_framing",
+          "quote_text": "I alone can fix it. Isn't he forgetting someone? Troops on the front lines. Police officers and fire fighters who run toward danger. Doctors and nurses who care for us. Teachers who change lives. Entrepreneurs who see possibilities in every problem. Mothers who lost children to violence and are building a movement to keep other kids safe. He\u2019s forgetting every last one of us. Americans don\u2019t say: 'I alone can fix it.' We say: 'We\u2019ll fix it together.'",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "crisis_restoration_narrative",
+          "quote_text": "America is once again at a moment of reckoning. Powerful forces are threatening to pull us apart. Bonds of trust and respect are fraying.",
+          "confidence": 0.8,
+          "context_type": "thematic_framing"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "Our country needs your ideas, energy, and passion. That\u2019s the only way we can turn our progressive platform into real change for America. We wrote it together \u2014 now let\u2019s go out there and make it happen together.",
+          "confidence": 0.7,
+          "context_type": "policy_statement"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion",
+          "quote_text": "For the past year, many people made the mistake of laughing off Donald Trump\u2019s comments \u2014 excusing him as an entertainer just putting on a show. They think he couldn\u2019t possibly mean all the horrible things he says\u2026 But here\u2019s the sad truth: There is no other Donald Trump\u2026 And in the end, it comes down to what Donald Trump doesn\u2019t get: that America is great \u2014 because America is good.",
+          "confidence": 0.9,
+          "context_type": "character_critique"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "Our economy isn\u2019t working the way it should because our democracy isn\u2019t working the way it should. That\u2019s why we need to appoint Supreme Court justices who will get money out of politics and expand voting rights, not restrict them. And we\u2019ll pass a constitutional amendment to overturn Citizens United!",
+          "confidence": 0.7,
+          "context_type": "policy_statement"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "The family I\u2019m from . . . well, no one had their name on big buildings. My family were builders of a different kind. Builders in the way most American families are. They used whatever tools they had \u2013 whatever God gave them \u2013 and whatever life in America provided \u2013 and built better lives and better futures for their kids.",
+          "confidence": 0.8,
+          "context_type": "anecdotal_evidence"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "Our country\u2019s motto is e pluribus unum: out of many, we are one. Will we stay true to that motto?",
+          "confidence": 0.9,
+          "context_type": "thematic_framing"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "We will not ban a religion. We will work with all Americans and our allies to fight terrorism.",
+          "confidence": 0.8,
+          "context_type": "policy_statement"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "I believe Wall Street can never, ever be allowed to wreck Main Street again.",
+          "confidence": 0.9,
+          "context_type": "direct_statement"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

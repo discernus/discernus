@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_13a19b991151",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "vanderveen_presidential_pdaf_replication",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.2\",\n    \"analyst_confidence\": 0.95,\n    \"analysis_notes\": \"Applied three independent analytical approaches (Evidence-First, Context-Weighted, Pattern-Based) with median aggregation for scores and selection of most representative evidence. The document presents a clear populist victory speech.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"{{artifact_id}}\",\n      \"document_name\": \"trump/primary_season/trump_2016_05_03.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.85,\n          \"confidence\": 0.9\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.5,\n          \"confidence\": 0.8\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.85,\n          \"confidence\": 0.9\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.85\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.85,\n          \"confidence\": 0.9\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.85,\n          \"salience\": 0.85,\n          \"confidence\": 0.9\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"60,000 negative ads \u2014 most of which are absolutely false and disgusting.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"moral_corruption_attributions\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"We're going to make America great again. We're going to make America great again.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"restoration_promise_rhetoric\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"the people of Indiana have been incredible.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"unmediated_popular_authority_claims\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"She will not be a great president. She will not be a good president. She will be a poor president.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"opponent_demonization_strategies\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"60,000 negative ads \u2014 most of which are absolutely false and disgusting.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"explicit_coordination_conspiracy_claims\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"I've competed all my life. Competitive person.\",\n          \"confidence\": 0.85,\n          \"context_type\": \"anti-political_class_identity_claims\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"This country, which is very, very divided in so many different ways is going to become one beautiful loving country.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"explicit_unity_assertions\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"We're not going to let Carrier and all of these companies just think they can move \u2013 go to another country, make their products, sell it back to us, and we get only one thing: We get unemployment.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"external_group_threat_characterization\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"We're going to bring back our jobs and we're going to keep our jobs.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"populist_economic_justice_appeals\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "a625ebe20fd1003696d26dc8307fa9592088cca37c582f7f00c1bc4ad576943d",
+  "execution_metadata": {
+    "start_time": "2025-09-03T04:22:50.128257+00:00",
+    "end_time": "2025-09-03T04:23:43.175582+00:00",
+    "duration_seconds": 53.047315
+  },
+  "input_artifacts": {
+    "framework_hash": "4152f312d410e2de3bbc16f7d3e9a70c6347b3dd3db6f67aa44c6725f7b2d6d7",
+    "document_hashes": [
+      "1a9327909ecdccbd15ed9bb1192b2c001149d36c8647097bab9a4aadedcbc03b"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "vanderveen_presidential_pdaf",
+      "experiment_root": "/Volumes/code/discernus/projects/vanderveen_presidential_pdaf",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250903T024406Z_6e907314"
+  }
+}

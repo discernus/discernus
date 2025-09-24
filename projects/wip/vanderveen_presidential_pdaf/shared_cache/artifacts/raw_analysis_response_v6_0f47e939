@@ -1,0 +1,187 @@
+I'll analyze the Trump speech using three independent analytical approaches, then aggregate the results.
+
+## APPROACH 1: Evidence-First Analysis
+Focusing on direct textual evidence and explicit statements.
+
+**Manichean People-Elite Framing (0.9)**: Clear moral dichotomy throughout - "corrupt political establishment" vs "American People," "failed and corrupt political establishment" vs "new government controlled by you." Direct corruption attributions: "The Clintons are criminals."
+
+**Crisis-Restoration Narrative (0.8)**: Strong decline narrative - "crossroads in the history of our civilization," "struggle for the survival of our nation." Restoration promises: "take back our country," "Make America Great Again."
+
+**Popular Sovereignty Claims (0.7)**: "We The People reclaim control over our government," "American people would rise above it," positioning people's will as ultimate authority.
+
+**Anti-Pluralist Exclusion (0.6)**: Characterizes opposition as existential threat - "Clinton Machine" as criminal enterprise, media as "political special interest."
+
+**Elite Conspiracy/Systemic Corruption (0.9)**: Extensive conspiracy claims - "global power structure," "Clinton Machine meets in secret with international banks," coordinated media corruption.
+
+**Authenticity vs Political Class (0.8)**: Strong outsider positioning - "I was an insider...now I am being punished for leaving their special club," "I'm the only one who can fix it."
+
+**Homogeneous People Construction (0.7)**: Unified people identity - "our movement," "all of us, together, as a country," transcending internal divisions.
+
+**Nationalist Exclusion (0.5)**: Some external threat emphasis - "global special interests," "globalization," but limited cultural/ethnic framing.
+
+**Economic Populist Appeals (0.8)**: Strong economic elite framing - "global power structure" robbing working class, "handful of large corporations."
+
+## APPROACH 2: Context-Weighted Analysis
+Emphasizing rhetorical positioning and thematic centrality.
+
+**Manichean People-Elite Framing (0.8)**: Central organizing theme of speech, repeated throughout with high rhetorical emphasis.
+
+**Crisis-Restoration Narrative (0.9)**: Opening theme of "crossroads," maintains urgency throughout, closes with restoration promise.
+
+**Popular Sovereignty Claims (0.8)**: Structurally positioned as core democratic claim, repeated emphasis on people's ultimate authority.
+
+**Anti-Pluralist Exclusion (0.7)**: Systematic delegitimization of opposition throughout, framed as illegitimate.
+
+**Elite Conspiracy/Systemic Corruption (0.8)**: Detailed elaboration of coordinated elite action, central to argument structure.
+
+**Authenticity vs Political Class (0.7)**: Important positioning but secondary to other themes.
+
+**Homogeneous People Construction (0.6)**: Present but less emphasized than elite opposition framing.
+
+**Nationalist Exclusion (0.4)**: Limited emphasis on cultural boundaries, more focused on economic themes.
+
+**Economic Populist Appeals (0.7)**: Significant theme but integrated with broader elite conspiracy narrative.
+
+## APPROACH 3: Pattern-Based Analysis
+Looking for repetition patterns and strategic emphasis.
+
+**Manichean People-Elite Framing (0.9)**: Repeated "establishment" vs "people" throughout, consistent moral framing pattern.
+
+**Crisis-Restoration Narrative (0.8)**: "Crossroads" metaphor, repeated crisis language, restoration promises pattern.
+
+**Popular Sovereignty Claims (0.6)**: Multiple instances but less repetitive than other dimensions.
+
+**Anti-Pluralist Exclusion (0.8)**: Consistent pattern of opposition delegitimization, repeated "Clinton Machine" references.
+
+**Elite Conspiracy/Systemic Corruption (0.9)**: Extensive elaboration pattern, detailed conspiracy claims repeated.
+
+**Authenticity vs Political Class (0.9)**: Strong insider/outsider pattern, repeated positioning.
+
+**Homogeneous People Construction (0.8)**: "Our movement," "together," unity language patterns.
+
+**Nationalist Exclusion (0.6)**: Some global threat patterns but less emphasized.
+
+**Economic Populist Appeals (0.9)**: Strong working class vs elite patterns, repeated economic framing.
+
+## FINAL AGGREGATED RESULTS
+
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "10.0.2",
+    "analyst_confidence": 0.92,
+    "analysis_notes": "Applied three independent analytical approaches with median aggregation. High-intensity populist discourse across multiple dimensions.",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "04ccf8de913b",
+      "document_name": "trump_2016_10_13.txt",
+      "dimensional_scores": {
+        "manichean_people_elite_framing": {
+          "raw_score": 0.9,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "crisis_restoration_narrative": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 0.9,
+          "salience": 0.8,
+          "confidence": 0.95
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.9
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 0.7,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "nationalist_exclusion": {
+          "raw_score": 0.5,
+          "salience": 0.4,
+          "confidence": 0.7
+        },
+        "economic_populist_appeals": {
+          "raw_score": 0.8,
+          "salience": 0.7,
+          "confidence": 0.85
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichean_people_elite_framing",
+          "quote_text": "Our movement is about replacing a failed and corrupt political establishment with a new government controlled by you, the American People.",
+          "confidence": 0.95,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "crisis_restoration_narrative",
+          "quote_text": "This is not simply another 4-year election. This is a crossroads in the history of our civilization that will determine whether or not We The People reclaim control over our government.",
+          "confidence": 0.9,
+          "context_type": "opening_thesis"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "This is a crossroads in the history of our civilization that will determine whether or not We The People reclaim control over our government.",
+          "confidence": 0.85,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion",
+          "quote_text": "The Clinton Machine is determined to achieve the destruction of our campaign, which has now become a movement the likes of which our country has never seen before \u2014 and we won't let them do that.",
+          "confidence": 0.8,
+          "context_type": "opposition_characterization"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "We've seen this firsthand in the WikiLeaks documents in which Hillary Clinton meets in secret with international banks to plot the destruction of U.S. sovereignty in order to enrich these global financial powers.",
+          "confidence": 0.95,
+          "context_type": "conspiracy_claim"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "In my former life, I was an insider as much as anybody else \u2014 and I know what's like to be an insider. Now I am being punished for leaving their special club and revealing to you their great scam.",
+          "confidence": 0.9,
+          "context_type": "personal_positioning"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "It's about all of us, together, as a country.",
+          "confidence": 0.8,
+          "context_type": "unity_construction"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "We've seen it in the United Kingdom, where they voted to liberate themselves from global government and global trade deals and global immigration deals that have destroyed their sovereignty.",
+          "confidence": 0.7,
+          "context_type": "external_threat_reference"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "It's a global power structure that is responsible for the economic decisions that have robbed our working class, stripped our country of its wealth, and put that money into the pockets of a handful of large corporations and political entities.",
+          "confidence": 0.85,
+          "context_type": "economic_grievance"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

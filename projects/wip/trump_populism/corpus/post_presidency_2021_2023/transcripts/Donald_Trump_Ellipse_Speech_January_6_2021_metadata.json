@@ -1,0 +1,41 @@
+{
+  "filename": "Donald_Trump_Ellipse_Speech_January_6_2021.txt",
+  "document_id": "Donald_Trump_Ellipse_Speech_January_6_2021",
+  "metadata": {
+    "title": "President Trump's Speech at the Ellipse, January 6, 2021",
+    "speaker": "Donald Trump",
+    "date": "2021-01-06",
+    "location": "The Ellipse, Washington, DC",
+    "event_type": "Political Rally",
+    "audience": "Trump supporters and protesters",
+    "context": "Speech delivered shortly before the storming of the U.S. Capitol",
+    "source": "The Washington Post (annotated transcript)",
+    "transcription_method": "Professional transcription with analysis",
+    "category": "Political Speech",
+    "historical_significance": "High - Preceded the January 6 Capitol attack",
+    "political_phase": "Post-presidency transition period"
+  },
+  "extraction_info": {
+    "method": "PDF text extraction",
+    "source_format": "PDF",
+    "transcript_length_chars": 71171,
+    "extracted_at": "2025-08-22T15:30:00.000000",
+    "notes": "Washington Post annotated transcript with embedded analysis and context"
+  },
+  "content_summary": {
+    "main_themes": [
+      "Election fraud claims",
+      "Stop the Steal movement",
+      "Call for action against Congress",
+      "Support for election integrity reforms"
+    ],
+    "key_phrases": [
+      "We will never concede",
+      "Stop the steal",
+      "Fight like hell",
+      "March to the Capitol"
+    ],
+    "duration_estimate": "Approximately 70 minutes",
+    "crowd_size_claimed": "250,000 people"
+  }
+}

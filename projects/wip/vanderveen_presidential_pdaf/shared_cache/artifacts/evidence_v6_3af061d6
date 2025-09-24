@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "780502a9a46021e1bd127bd5ba52356b7b3e31bf9e61131f769c8ec801ad73ed"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-03T03:28:18.078036+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "clinton_2016_10_22.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "The members of congress, members of the senate going to be on the side of the rich, the powerful, and the wealthy, or on your side?",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T03:28:18.077996+00:00"
+    },
+    {
+      "document_name": "clinton_2016_10_22.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "The choice we face in this election is stark, especially when it comes to the economy.",
+      "confidence": 0.8,
+      "context_type": "contextual_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T03:28:18.078021+00:00"
+    },
+    {
+      "document_name": "clinton_2016_10_22.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "The best way to demonstrate that we support our democracy is to turn out and vote.",
+      "confidence": 0.9,
+      "context_type": "direct_call_to_action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T03:28:18.078023+00:00"
+    },
+    {
+      "document_name": "clinton_2016_10_22.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "Make no mistakes about this, my friends. He is threatening our democracy.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T03:28:18.078025+00:00"
+    },
+    {
+      "document_name": "clinton_2016_10_22.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "if they continue to do the bidding of the lobbyists and lawyers and others who stand outside their doors",
+      "confidence": 0.8,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T03:28:18.078026+00:00"
+    },
+    {
+      "document_name": "clinton_2016_10_22.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "I want you to tell them that I understand that they need a president who cares about them, will listen to them, and I want to be their president, too.",
+      "confidence": 0.8,
+      "context_type": "self_positioning",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T03:28:18.078028+00:00"
+    },
+    {
+      "document_name": "clinton_2016_10_22.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "people are coming together -- democrats, republicans, independents -- all to reject hate and division.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T03:28:18.078029+00:00"
+    },
+    {
+      "document_name": "clinton_2016_10_22.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "He should be buying good American-made steel that supports good American jobs.",
+      "confidence": 0.9,
+      "context_type": "direct_policy_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T03:28:18.078031+00:00"
+    },
+    {
+      "document_name": "clinton_2016_10_22.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "We are going to grow this economy from the middle out and the bottom up, not the top down.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T03:28:18.078033+00:00"
+    }
+  ]
+}

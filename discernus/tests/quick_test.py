@@ -29,7 +29,7 @@ def main():
     # Test 1: Basic imports
     try:
         from discernus.tests.mocks.mock_llm_gateway import MockLLMGateway
-        from discernus.agents.deprecated.automated_statistical_analysis.agent import AutomatedStatisticalAnalysisAgent
+        from discernus.agents.automated_statistical_analysis.agent import AutomatedStatisticalAnalysisAgent
         print("✅ Imports work")
     except ImportError as e:
         print(f"❌ Import failed: {e}")
