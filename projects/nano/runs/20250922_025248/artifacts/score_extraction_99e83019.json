@@ -1,8 +1,0 @@
-{
-  "analysis_id": "analysis_v2_analysis_20250921_225321_0",
-  "step": "score_extraction",
-  "model_used": "vertex_ai/gemini-2.5-pro",
-  "score_extraction": "```json\n{\n  \"positive_sentiment\": 0.97,\n  \"negative_sentiment\": 0.0\n}\n```",
-  "document_index": 0,
-  "timestamp": "2025-09-22T02:53:39.639419+00:00"
-}

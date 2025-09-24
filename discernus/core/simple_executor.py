@@ -119,6 +119,11 @@ class SimpleExperimentExecutor:
             # Execute phases in order
             phases_to_run = self.PHASES[start_idx:end_idx + 1]
             
+            # If we're not starting from validation, we need to ensure CAS hashes are populated
+            if start_phase != "validation":
+                # Run a minimal validation to populate CAS hashes
+                self._populate_cas_hashes(run_context, storage, audit)
+            
             for phase in phases_to_run:
                 result = self._run_phase(phase, agents, run_context, storage, audit)
                 
@@ -206,15 +211,35 @@ class SimpleExperimentExecutor:
         if phase == "validation":
             skip_validation = run_context.metadata.get("skip_validation", False)
             if skip_validation:
-                audit.log_agent_event("SimpleExperimentExecutor", "phase_skipped", {
-                    "phase": phase, 
-                    "reason": "skip_validation flag set"
-                })
-                return AgentResult(
-                    success=True,
-                    artifacts=[],
-                    metadata={"phase": phase, "skipped": True}
-                )
+                # Even when skipping validation, we need to populate CAS hashes
+                # This is a minimal validation that just loads and hashes the files
+                try:
+                    from ..agents.validation_agent.v2_validation_agent import V2ValidationAgent
+                    # Create a minimal validation agent just for CAS registration
+                    temp_agent = V2ValidationAgent(None, None, None)
+                    # Run only the input extraction part (CAS registration)
+                    temp_agent._validate_and_extract_inputs(run_context)
+                    
+                    audit.log_agent_event("SimpleExperimentExecutor", "phase_skipped_with_cas", {
+                        "phase": phase, 
+                        "reason": "skip_validation flag set, but CAS hashes populated"
+                    })
+                    return AgentResult(
+                        success=True,
+                        artifacts=[],
+                        metadata={"phase": phase, "skipped": True, "cas_populated": True}
+                    )
+                except Exception as e:
+                    audit.log_agent_event("SimpleExperimentExecutor", "cas_population_failed", {
+                        "phase": phase,
+                        "error": str(e)
+                    })
+                    return AgentResult(
+                        success=False,
+                        artifacts=[],
+                        metadata={"phase": phase, "error": f"CAS population failed: {str(e)}"},
+                        error_message=f"Failed to populate CAS hashes: {str(e)}"
+                    )
         
         # Log phase start
         audit.log_agent_event("SimpleExperimentExecutor", "phase_start", {"phase": phase})
@@ -252,3 +277,21 @@ class SimpleExperimentExecutor:
             })
         
         return result
+    
+    def _populate_cas_hashes(self, run_context: RunContext, storage: LocalArtifactStorage, audit: AuditLogger):
+        """Populate CAS hashes when starting from a non-validation phase."""
+        try:
+            from ..agents.validation_agent.v2_validation_agent import V2ValidationAgent
+            # Create a minimal validation agent just for CAS registration
+            temp_agent = V2ValidationAgent(None, storage, audit)
+            # Run only the input extraction part (CAS registration)
+            temp_agent._validate_and_extract_inputs(run_context)
+            
+            audit.log_agent_event("SimpleExperimentExecutor", "cas_hashes_populated", {
+                "reason": "Starting from non-validation phase, CAS hashes populated"
+            })
+        except Exception as e:
+            audit.log_agent_event("SimpleExperimentExecutor", "cas_population_failed", {
+                "error": str(e)
+            })
+            raise RuntimeError(f"Failed to populate CAS hashes: {str(e)}")

@@ -1,8 +1,0 @@
-{
-  "analysis_id": "analysis_v2_analysis_20250921_214141_1",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-pro",
-  "evidence_extraction": "```json\n[\n  \"These wetlands have been protected for decades for good reason - they filter our water, provide flood control, and support diverse wildlife.\",\n  \"We must stand together to protect our community, our environment, and our democratic values from this assault on everything we hold dear.\",\n  \"The proposed industrial zoning changes represent a catastrophic betrayal of public trust and an assault on our community's well-being.\",\n  \"This is not progress; it is a reckless, shortsighted capitulation to corporate interests over human lives.\"\n]\n```",
-  "document_index": 1,
-  "timestamp": "2025-09-22T01:42:23.734114+00:00"
-}

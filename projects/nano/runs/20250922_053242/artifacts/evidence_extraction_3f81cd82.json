@@ -1,8 +1,0 @@
-{
-  "analysis_id": "analysis_v2_analysis_20250922_013308_1",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-pro",
-  "evidence_extraction": "```json\n[\n  \"The document contains virtually no positive language directly related to the subject matter. Any seemingly positive words ('true voice', 'protect', 'justified') are used in the context of resisting or reacting to overwhelmingly negative circumstances, thus not indicating positive sentiment in the document's core message.\",\n  \"While it mentions 'good reason' for wetlands protection, this is framed as a counter-argument to a 'betrayal', not as an expression of optimism or positive outcome related to the current situation.\",\n  \"The proposed industrial zoning changes represent a [NEGATIVE_SENTIMENT: catastrophic betrayal of public trust and an assault on our community's well-being.]\",\n  \"The complete lack of transparency and the dismissive attitude from officials have only fueled the growing sense of [NEGATIVE_SENTIMENT: despair and anger]. Community meetings have been little more than performative gestures, with legitimate concerns brushed aside and expert warnings ignored. The entire process has been a masterclass in bureaucratic arrogance, leaving citizens feeling powerless and unheard. This policy is a festering wound that will undoubtedly lead to years of environmental degradation and legal battles, leaving a permanent scar on our town.\"\n]\n```",
-  "document_index": 1,
-  "timestamp": "2025-09-22T05:33:47.757706+00:00"
-}

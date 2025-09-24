@@ -1,8 +1,0 @@
-{
-  "analysis_id": "analysis_v2_analysis_20250923_132145_2",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "evidence_extraction": "```json\n[\n  \"dedicated their lives to public service\",\n  \"The democratic process has failed the very people it was designed to protect.\",\n  \"The victims of this crisis deserve not just compensation but fundamental reform of the systems that failed them so catastrophically.\",\n  \"The collapse of the pension fund is a calamitous event, a direct result of years of gross mismanagement and unforgivable neglect.\",\n  \"The financial devastation is horrific, but the deeper damage is to the social contract. This was not a market fluctuation; it was a deliberate, slow-motion disaster orchestrated by incompetent and self-serving bureaucrats.\",\n  \"The betrayal of public trust is complete and unforgivable. The impact on retirees and their families is devastating and irreversible.\"\n]\n```",
-  "document_index": 2,
-  "timestamp": "2025-09-23T17:23:06.523724+00:00"
-}

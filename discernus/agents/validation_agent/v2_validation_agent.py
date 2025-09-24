@@ -294,6 +294,24 @@ class V2ValidationAgent(StandardAgent):
                 response_schema=response_schema
             )
 
+            # Log LLM interaction with cost data
+            if metadata and 'usage' in metadata:
+                usage_data = metadata['usage']
+                self.audit.log_llm_interaction(
+                    model=self.model,
+                    prompt=prompt,
+                    response=str(raw_response),
+                    agent_name=self.agent_name,
+                    interaction_type="experiment_validation",
+                    metadata={
+                        "prompt_tokens": usage_data.get('prompt_tokens', 0),
+                        "completion_tokens": usage_data.get('completion_tokens', 0),
+                        "total_tokens": usage_data.get('total_tokens', 0),
+                        "response_cost_usd": usage_data.get('response_cost_usd', 0.0),
+                        "validation_type": "experiment_validation"
+                    }
+                )
+
             # Check if the LLM call was successful
             if not metadata.get("success", False):
                 error_msg = metadata.get("error", "Unknown LLM call failure")

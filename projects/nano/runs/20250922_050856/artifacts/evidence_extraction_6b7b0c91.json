@@ -1,8 +1,0 @@
-{
-  "analysis_id": "analysis_v2_analysis_20250922_010936_0",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-pro",
-  "evidence_extraction": "```json\n[\n  \"The recent urban revitalization project has been an unqualified triumph, transforming our city's downtown core from a neglected afterthought into a vibrant, bustling hub of commerce and community.\",\n  \"This initiative serves as a powerful testament to what can be achieved when bold vision is paired with thoughtful execution, creating a legacy of economic vitality and environmental stewardship that will benefit generations to come.\"\n]\n```",
-  "document_index": 0,
-  "timestamp": "2025-09-22T05:09:55.900493+00:00"
-}

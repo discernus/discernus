@@ -1,8 +1,0 @@
-{
-  "agent_name": "TwoStageSynthesisAgent",
-  "stage": "evidence_appendix",
-  "timestamp": "2025-09-22T01:35:04.621683+00:00",
-  "appendix_content": "# Evidence Appendix\n\nThis appendix contains all evidence quotes used in the synthesis report, organized for complete audit trail and reproducibility.\n\n## Complete Evidence Inventory\n\n### Unknown Source\n\n**Quote 1:**\n\"No text available\"\n- **Relevance:** Not specified\n- **Strength Rating:** 4\n\n## Evidence Summary\n- **Total Quotes:** 1\n- **Source Documents:** 1\n- **Generated:** 2025-09-22 01:35:04 UTC\n",
-  "evidence_count": 1,
-  "synthesis_method": "two_stage_with_appendix"
-}

@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250923_202825_1",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "evidence_extraction": "[\n  \"No positive language found in the document.\",\n  \"The proposed industrial zoning changes represent a [negative_sentiment: catastrophic betrayal] of public trust and an [negative_sentiment: assault on our community's well-being].\",\n  \"The complete lack of transparency and the dismissive attitude from officials have only fueled the growing sense of [negative_sentiment: despair and anger].\",\n  \"The long-term consequences of this decision will be [negative_sentiment: devastating and irreversible]. Once the wetlands are destroyed and the industrial complex is built, there will be no going back.\"\n]",
+  "document_index": 1,
+  "timestamp": "2025-09-24T00:28:55.425811+00:00"
+}

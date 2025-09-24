@@ -282,6 +282,21 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, ski
 
             rich_console.print_info(f"📁 Artifacts saved in: {storage.run_folder}")
             rich_console.print_info(f"⏱️  Total execution time: {result.execution_time_seconds:.1f} seconds")
+            
+            # Show cost summary
+            cost_summary = orchestrator.audit.get_session_costs()
+            if cost_summary["total_cost_usd"] > 0:
+                rich_console.print_info(f"💰 Total cost: ${cost_summary['total_cost_usd']:.4f}")
+                rich_console.print_info(f"🔢 Total tokens: {cost_summary['total_tokens']:,}")
+                
+                # Show top cost operations
+                if cost_summary["operations"]:
+                    top_operations = sorted(cost_summary["operations"].items(), 
+                                          key=lambda x: x[1]["cost_usd"], reverse=True)[:3]
+                    if top_operations:
+                        rich_console.print_info("📊 Top operations:")
+                        for op, data in top_operations:
+                            rich_console.print_info(f"  • {op}: ${data['cost_usd']:.4f} ({data['calls']} calls)")
 
             # Show artifact counts by type (if storage available)
             if hasattr(result, 'artifacts') and result.artifacts:
@@ -432,6 +447,148 @@ def artifacts(experiment_path: str):
         rich_console.print_info(f"💾 Cache: {len(cache_files)} cached artifacts")
     else:
         rich_console.print_info("💾 Cache: No cached artifacts")
+
+@cli.command()
+@click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))
+@click.option('--detailed', is_flag=True, help='Show detailed cost breakdown by agent and model')
+@click.option('--session', is_flag=True, help='Show costs for current session only')
+def costs(experiment_path: str, detailed: bool, session: bool):
+    """Show cost breakdown for experiment runs"""
+    exp_path = Path(experiment_path).resolve()
+    
+    rich_console.print_section(f"💰 Cost Analysis: {exp_path.name}")
+    
+    if session:
+        # Show current session costs
+        try:
+            from discernus.core.orchestration import SimpleOrchestrator
+            from discernus.core.security_boundary import ExperimentSecurityBoundary
+            
+            security = ExperimentSecurityBoundary(exp_path)
+            orchestrator = SimpleOrchestrator(security)
+            
+            cost_summary = orchestrator.audit.get_session_costs()
+            _display_cost_summary(cost_summary, detailed)
+            
+        except Exception as e:
+            rich_console.print_error(f"❌ Failed to get session costs: {e}")
+            return
+    else:
+        # Show costs from experiment runs
+        runs_dir = exp_path / 'runs'
+        if not runs_dir.exists():
+            rich_console.print_info("No runs found - experiment has not been executed yet")
+            return
+        
+        # Find most recent run with cost data
+        run_dirs = [d for d in runs_dir.iterdir() if d.is_dir()]
+        run_dirs.sort(key=lambda x: x.name, reverse=True)
+        
+        if not run_dirs:
+            rich_console.print_info("No completed runs found")
+            return
+        
+        # Try to load cost data from most recent run
+        for run_dir in run_dirs[:3]:  # Check last 3 runs
+            cost_log = run_dir / 'logs' / 'cost_tracking.jsonl'
+            if cost_log.exists():
+                cost_summary = _load_cost_summary_from_log(cost_log)
+                rich_console.print_info(f"📊 Cost data from run: {run_dir.name}")
+                _display_cost_summary(cost_summary, detailed)
+                return
+        
+        rich_console.print_info("No cost data found in recent runs")
+
+def _display_cost_summary(cost_summary: Dict[str, Any], detailed: bool):
+    """Display cost summary in a formatted way"""
+    if cost_summary["total_cost_usd"] == 0:
+        rich_console.print_info("💰 No costs recorded")
+        return
+    
+    # Basic summary
+    rich_console.print_info(f"💰 Total cost: ${cost_summary['total_cost_usd']:.4f}")
+    rich_console.print_info(f"🔢 Total tokens: {cost_summary['total_tokens']:,}")
+    
+    if detailed:
+        # Detailed breakdown by operation
+        if cost_summary["operations"]:
+            rich_console.print_info("\n📊 Cost by Operation:")
+            table = rich_console.create_table("Operation", ["Cost (USD)", "Tokens", "Calls"])
+            for op, data in sorted(cost_summary["operations"].items(), key=lambda x: x[1]["cost_usd"], reverse=True):
+                table.add_row(op, f"${data['cost_usd']:.4f}", f"{data['tokens']:,}", str(data['calls']))
+            rich_console.print_table(table)
+        
+        # Detailed breakdown by model
+        if cost_summary["models"]:
+            rich_console.print_info("\n🤖 Cost by Model:")
+            table = rich_console.create_table("Model", ["Cost (USD)", "Tokens", "Calls"])
+            for model, data in sorted(cost_summary["models"].items(), key=lambda x: x[1]["cost_usd"], reverse=True):
+                table.add_row(model, f"${data['cost_usd']:.4f}", f"{data['tokens']:,}", str(data['calls']))
+            rich_console.print_table(table)
+        
+        # Detailed breakdown by agent
+        if cost_summary["agents"]:
+            rich_console.print_info("\n👤 Cost by Agent:")
+            table = rich_console.create_table("Agent", ["Cost (USD)", "Tokens", "Calls"])
+            for agent, data in sorted(cost_summary["agents"].items(), key=lambda x: x[1]["cost_usd"], reverse=True):
+                table.add_row(agent, f"${data['cost_usd']:.4f}", f"{data['tokens']:,}", str(data['calls']))
+            rich_console.print_table(table)
+
+def _load_cost_summary_from_log(cost_log_path: Path) -> Dict[str, Any]:
+    """Load and aggregate cost data from a cost log file"""
+    total_cost = 0.0
+    total_tokens = 0
+    operations = {}
+    models = {}
+    agents = {}
+    
+    try:
+        with open(cost_log_path, 'r') as f:
+            for line in f:
+                if line.strip():
+                    entry = json.loads(line)
+                    
+                    cost = entry.get("cost_usd", 0.0)
+                    tokens = entry.get("tokens_used", 0)
+                    operation = entry.get("operation", "unknown")
+                    model = entry.get("model", "unknown")
+                    agent = entry.get("agent_name", "unknown")
+                    
+                    # Aggregate totals
+                    total_cost += cost
+                    total_tokens += tokens
+                    
+                    # Aggregate by operation
+                    if operation not in operations:
+                        operations[operation] = {"cost_usd": 0.0, "tokens": 0, "calls": 0}
+                    operations[operation]["cost_usd"] += cost
+                    operations[operation]["tokens"] += tokens
+                    operations[operation]["calls"] += 1
+                    
+                    # Aggregate by model
+                    if model not in models:
+                        models[model] = {"cost_usd": 0.0, "tokens": 0, "calls": 0}
+                    models[model]["cost_usd"] += cost
+                    models[model]["tokens"] += tokens
+                    models[model]["calls"] += 1
+                    
+                    # Aggregate by agent
+                    if agent not in agents:
+                        agents[agent] = {"cost_usd": 0.0, "tokens": 0, "calls": 0}
+                    agents[agent]["cost_usd"] += cost
+                    agents[agent]["tokens"] += tokens
+                    agents[agent]["calls"] += 1
+                    
+    except Exception as e:
+        rich_console.print_warning(f"⚠️  Error reading cost log: {e}")
+    
+    return {
+        "total_cost_usd": total_cost,
+        "total_tokens": total_tokens,
+        "operations": operations,
+        "models": models,
+        "agents": agents
+    }
 
 @cli.command()
 def status():

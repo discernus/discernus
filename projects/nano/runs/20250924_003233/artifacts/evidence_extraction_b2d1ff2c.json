@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250923_203234_1",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "evidence_extraction": "[\n  \"Residents have organized peaceful protests, circulated petitions, and engaged in every available democratic channel, only to be met with stonewalling and condescension.\",\n  \"The growing coalition of concerned citizens, environmental activists, and local business owners represents the true voice of our community.\",\n  \"We will not be silenced or dismissed. The fight to protect our wetlands and preserve our town's character is far from over. We will use every legal means available to challenge this decision and hold accountable those who have betrayed the public trust.\",\n  \"The proposed industrial zoning changes represent a catastrophic betrayal of public trust and an assault on our community's well-being.\",\n  \"The complete lack of transparency and the dismissive attitude from officials have only fueled the growing sense of despair and anger.\",\n  \"The long-term consequences of this decision will be devastating and irreversible. Once the wetlands are destroyed and the industrial complex is built, there will be no going back. Our children and grandchildren will inherit a degraded environment, contaminated water, and a community that has lost its natural character.\"\n]",
+  "document_index": 1,
+  "timestamp": "2025-09-24T00:33:06.638128+00:00"
+}

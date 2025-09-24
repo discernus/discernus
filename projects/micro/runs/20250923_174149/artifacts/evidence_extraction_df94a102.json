@@ -1,8 +1,0 @@
-{
-  "analysis_id": "analysis_v2_analysis_20250923_134149_2",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "evidence_extraction": "```json\n[\n  \"The collapse of the pension fund is a calamitous event, a direct result of years of gross mismanagement and unforgivable neglect.\",\n  \"This is a crisis born of systemic corruption and institutional decay. The financial devastation is horrific, but the deeper damage is to the social contract.\",\n  \"The betrayal of public trust is complete and unforgivable. The impact on retirees and their families is devastating and irreversible.\"\n]\n```\nTotal number of quotes in the composite analysis: 3\nTotal number of quotes in your output: 3",
-  "document_index": 2,
-  "timestamp": "2025-09-23T17:43:08.928490+00:00"
-}
