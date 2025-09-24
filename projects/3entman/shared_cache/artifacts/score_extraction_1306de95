@@ -1,7 +1,0 @@
-{
-  "analysis_id": "analysis_04a96ccf",
-  "step": "score_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "scores_extraction": "Here are the dimensional scores extracted from the analysis result:\n\n**Document:** crisis_management.txt\n\n*   **problem_definition:**\n    *   raw_score: 0.9\n    *   salience: 0.9\n    *   confidence: 0.95\n*   **causal_attribution:**\n    *   raw_score: 0.1\n    *   salience: 0.1\n    *   confidence: 0.95\n*   **moral_evaluation:**\n    *   raw_score: 0.85\n    *   salience: 0.85\n    *   confidence: 0.95\n*   **treatment_recommendation:**\n    *   raw_score: 0.95\n    *   salience: 0.9\n    *   confidence: 0.95",
-  "timestamp": "2025-09-17T00:04:40.582157+00:00"
-}

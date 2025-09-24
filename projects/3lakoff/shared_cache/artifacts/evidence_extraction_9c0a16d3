@@ -1,7 +1,0 @@
-{
-  "analysis_id": "analysis_f45786e7",
-  "step": "evidence_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "evidence_extraction": "```json\n{\n  \"authority_vs_empathy\": [\n    \"Parents should have the authority to raise their children according to their values, but they shouldn't have to do it alone.\",\n    \"The conservative emphasis on family authority and individual responsibility has merit - strong families do need strong parents who can make decisions for their children. But the progressive emphasis on community support and collective assistance also has value\"\n  ],\n  \"competition_vs_cooperation\": [\n    \"Our approach emphasizes cooperation over competition, but recognizes that healthy competition drives excellence.\",\n    \"let's work together to strengthen the American family.\"\n  ],\n  \"self_reliance_vs_interdependence\": [\n    \"We need an approach that combines the best of both worlds - individual responsibility and community support, personal initiative and collective assistance.\",\n    \"We believe in self-reliance, but understand that no family is an island.\"\n  ]\n}\n```",
-  "timestamp": "2025-09-17T00:14:54.607885+00:00"
-}

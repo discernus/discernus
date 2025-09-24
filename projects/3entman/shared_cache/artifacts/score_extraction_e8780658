@@ -1,7 +1,0 @@
-{
-  "analysis_id": "analysis_72dcc424",
-  "step": "score_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "scores_extraction": "Here are the dimensional scores from the analysis result:\n\n```json\n{\n  \"problem_definition\": {\n    \"raw_score\": 0.9,\n    \"salience\": 0.9,\n    \"confidence\": 0.95\n  },\n  \"causal_attribution\": {\n    \"raw_score\": 0.95,\n    \"salience\": 0.95,\n    \"confidence\": 0.95\n  },\n  \"moral_evaluation\": {\n    \"raw_score\": 0.9,\n    \"salience\": 0.9,\n    \"confidence\": 0.95\n  },\n  \"treatment_recommendation\": {\n    \"raw_score\": 0.7,\n    \"salience\": 0.8,\n    \"confidence\": 0.95\n  }\n}\n```",
-  "timestamp": "2025-09-17T00:05:07.805115+00:00"
-}

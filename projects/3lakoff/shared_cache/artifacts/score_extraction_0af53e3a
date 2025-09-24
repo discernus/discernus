@@ -1,7 +1,0 @@
-{
-  "analysis_id": "analysis_f45786e7",
-  "step": "score_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "scores_extraction": "Here are the dimensional scores extracted from the analysis result:\n\n**Document:** centrist_bipartisan_appeal.txt\n\n| Dimension                   | Raw Score | Salience | Confidence |\n| :-------------------------- | :-------- | :------- | :--------- |\n| authority_vs_empathy        | 0.5       | 0.8      | 0.9        |\n| competition_vs_cooperation  | 0.4       | 0.7      | 0.9        |\n| self_reliance_vs_interdependence | 0.5       | 0.9      | 0.9        |",
-  "timestamp": "2025-09-17T00:14:55.399300+00:00"
-}

@@ -1,7 +1,0 @@
-{
-  "analysis_id": "analysis_01b37ad6",
-  "step": "score_extraction",
-  "model_used": "vertex_ai/gemini-2.5-flash-lite",
-  "scores_extraction": "```json\n{\n  \"authority_vs_empathy\": {\n    \"raw_score\": 0.85,\n    \"salience\": 0.8,\n    \"confidence\": 0.9\n  },\n  \"competition_vs_cooperation\": {\n    \"raw_score\": 0.95,\n    \"salience\": 0.85,\n    \"confidence\": 1.0\n  },\n  \"self_reliance_vs_interdependence\": {\n    \"raw_score\": 0.95,\n    \"salience\": 0.95,\n    \"confidence\": 1.0\n  }\n}\n```",
-  "timestamp": "2025-09-17T00:14:14.069883+00:00"
-}

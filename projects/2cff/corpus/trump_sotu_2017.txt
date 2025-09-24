@@ -1,1 +1,0 @@
-../../../corpus/political/historical/baseline_era_1992_2016/presidential_speeches/trump_sotu_2017.txt
