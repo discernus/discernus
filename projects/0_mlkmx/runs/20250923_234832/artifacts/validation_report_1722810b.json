@@ -1,0 +1,22 @@
+{
+  "validation_success": true,
+  "issues": [
+    {
+      "category": "specification",
+      "description": "The framework's machine-readable appendix uses the top-level key `required_calculations` to define all derived metrics. The Framework Specification v10.0, which this framework declares compliance with, specifies that optional derived metrics should be defined under a key named `derived_metrics`. While the logic within `required_calculations` is sound and internally consistent with the `output_schema`, a strict parser adhering to the v10.0 specification might not recognize the `required_calculations` key, leading it to ignore these essential definitions.",
+      "impact": "If the system's parser strictly expects a `derived_metrics` key, it may fail to process the 21 metric definitions provided. This would result in the `derived_metrics` section of the final analysis output being empty, and the experiment would fail to produce the composite indices (e.g., `full_cohesion_index`) central to its research questions.",
+      "fix": "To ensure compliance and prevent potential parsing failures, rename the top-level key `required_calculations` to `derived_metrics` and restructure its contents into a flat list of metric objects. Each object in the list should contain `name`, `description`, and `formula` keys. For example, `required_calculations.tension_indices.identity_tension` would become an object in the `derived_metrics` list with `name: \"identity_tension\"`.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "framework.md"
+      ]
+    }
+  ],
+  "suggestions": [],
+  "metadata": {
+    "agent": "V2ValidationAgent",
+    "timestamp": "2025-09-23T19:49:18.652086",
+    "experiment_id": "0_mlkmx",
+    "validation_type": "experiment_coherence"
+  }
+}

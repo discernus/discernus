@@ -407,6 +407,26 @@ class IntelligentEvidenceRetrievalAgent(StandardAgent):
                 temperature=0.1
             )
             
+            # Log LLM interaction with cost data
+            if metadata and 'usage' in metadata:
+                usage_data = metadata['usage']
+                self.audit.log_llm_interaction(
+                    model="vertex_ai/gemini-2.5-pro",
+                    prompt=planning_prompt,
+                    response=str(response),
+                    agent_name=self.agent_name,
+                    interaction_type="evidence_planning",
+                    metadata={
+                        "prompt_tokens": usage_data.get('prompt_tokens', 0),
+                        "completion_tokens": usage_data.get('completion_tokens', 0),
+                        "total_tokens": usage_data.get('total_tokens', 0),
+                        "response_cost_usd": usage_data.get('response_cost_usd', 0.0),
+                        "step": "evidence_planning",
+                        "temperature": 0.1,
+                        "tool_calls": len(metadata.get('tool_calls', []))
+                    }
+                )
+            
             # Parse tool call response
             if metadata.get('tool_calls'):
                 tool_call = metadata['tool_calls'][0]
@@ -600,6 +620,27 @@ class IntelligentEvidenceRetrievalAgent(StandardAgent):
                 prompt=curation_prompt,
                 temperature=0.1
             )
+            
+            # Log LLM interaction with cost data
+            if metadata and 'usage' in metadata:
+                usage_data = metadata['usage']
+                self.audit.log_llm_interaction(
+                    model="vertex_ai/gemini-2.5-flash",
+                    prompt=curation_prompt,
+                    response=response,
+                    agent_name=self.agent_name,
+                    interaction_type="evidence_execution",
+                    metadata={
+                        "prompt_tokens": usage_data.get('prompt_tokens', 0),
+                        "completion_tokens": usage_data.get('completion_tokens', 0),
+                        "total_tokens": usage_data.get('total_tokens', 0),
+                        "response_cost_usd": usage_data.get('response_cost_usd', 0.0),
+                        "step": "evidence_execution",
+                        "focus_area": iteration.get('focus_area', 'unknown'),
+                        "evidence_processed": len(evidence_artifacts),
+                        "temperature": 0.1
+                    }
+                )
             
             # Store raw LLM curation response (THIN: no parsing)
             self.logger.info(f"Direct iteration completed: raw curation response from {len(evidence_artifacts)} artifacts")

@@ -1,0 +1,237 @@
+---
+agent_name: TwoStageSynthesisAgent
+stage: evidence_appendix
+timestamp: 2025-09-23 23:57:54 UTC
+evidence_content_length: 17171
+synthesis_method: two_stage_with_appendix
+---
+
+Here are the curated quotes, exemplifying the rhetorical differences between Martin Luther King Jr. and Malcolm X, aligned with the specified statistical targets.
+
+---
+### **Malcolm X (Document 0)**
+
+1.  **Document index:** 0
+    **Exact quote text:** "The political philosophy of black nationalism only means that the black man should control the politics and the politicians in his own community."
+    **Statistical relevance:** Tribal Dominance (high score for MX)
+    **Strength rating:** 5
+2.  **Document index:** 0
+    **Exact quote text:** "If you're black, you should be thinking black. And if you're black and you not thinking black at this late date, well, I'm sorry for you."
+    **Statistical relevance:** Tribal Dominance (high score for MX)
+    **Strength rating:** 4
+3.  **Document index:** 0
+    **Exact quote text:** "His gospel is white nationalism, our gospel is black nationalism."
+    **Statistical relevance:** Tribal Dominance (high score for MX), Enmity (us vs. them)
+    **Strength rating:** 5
+4.  **Document index:** 0
+    **Exact quote text:** "Instead you have to take that government to the world court and accuse it of genocide and all of the other crimes that it is guilty of today."
+    **Statistical relevance:** Enmity (high score for MX), Grievance
+    **Strength rating:** 5
+5.  **Document index:** 0
+    **Exact quote text:** "We have injected ourselves into the civil rights struggle. And we intend to expand it from the level of civil rights to the level of human rights."
+    **Statistical relevance:** Tribal Dominance (assertion of group agency and ambition)
+    **Strength rating:** 3
+6.  **Document index:** 0
+    **Exact quote text:** "Why, even the white man took the Hungarian question to the U.N. And just this week, Chief Justice Goldberg was crying over three million Jews in Russia, about their human rights – charging Russia with violating the U.N. Charter because of its mistreatment of the human rights of Jews in Russia."
+    **Statistical relevance:** Grievance (implicit comparison of concern for other groups vs. lack of concern for black Americans), Envy (others' concerns are addressed, ours are not)
+    **Strength rating:** 4
+7.  **Document index:** 0
+    **Exact quote text:** "We're trapped, trapped, double-trapped, triple-trapped. Any way we go, we find that we're trapped."
+    **Statistical relevance:** Fear (high score for MX)
+    **Strength rating:** 5
+8.  **Document index:** 0
+    **Exact quote text:** "All of this has built up frustrations in the black community that makes the black community throughout America today more explosive than all of the atomic bombs the Russians can ever invent. Whenever you got a racial powder keg sitting in your lap, you're in more trouble than if you had an atomic powder keg sitting in your lap."
+    **Statistical relevance:** Fear (high score for MX), Grievance
+    **Strength rating:** 5
+9.  **Document index:** 0
+    **Exact quote text:** "If you don't see it you're finished. If you don't see it you're going to become involved in some action in which you don't have a chance."
+    **Statistical relevance:** Fear (high score for MX)
+    **Strength rating:** 4
+10. **Document index:** 0
+    **Exact quote text:** "And the best place to start is right in the community where we live."
+    **Statistical relevance:** Tribal Dominance (focus on local, group-centric action)
+    **Strength rating:** 3
+11. **Document index:** 0
+    **Exact quote text:** "You're in a position to determine who'll go to the White House and who'll stay in the doghouse."
+    **Statistical relevance:** Tribal Dominance (assertion of group power/influence)
+    **Strength rating:** 4
+12. **Document index:** 0
+    **Exact quote text:** "But today, this country can become involved in a revolution that won't take bloodshed. All she's got to do is give the black man in this country everything that's due him, everything."
+    **Statistical relevance:** Grievance (demand for what is "due"), Cohesive Goals (from a group perspective, conditional)
+    **Strength rating:** 3
+13. **Document index:** 0
+    **Exact quote text:** "The white man, the white man is too intelligent to let someone else come and gain control of the economy of his community. But you will let anybody come in and control the economy of your community..."
+    **Statistical relevance:** Tribal Dominance (critique of lack of group control), Envy (implicit comparison to white man's intelligence/control)
+    **Strength rating:** 5
+14. **Document index:** 0
+    **Exact quote text:** "And because these Negroes, who have been misled, misguided, are breaking their necks to take their money and spend it with the Man, the Man is becoming richer and richer, and you're becoming poorer and poorer."
+    **Statistical relevance:** Envy (high score for MX), Grievance (economic exploitation), Enmity (the "Man" as exploiter)
+    **Strength rating:** 5
+15. **Document index:** 0
+    **Exact quote text:** "We don't see any American dream. We've experienced only the American nightmare. We haven't benefited from America's democracy. We've only suffered from America's hypocrisy."
+    **Statistical relevance:** Grievance (high score for MX), Fear (nightmare, suffering)
+    **Strength rating:** 5
+16. **Document index:** 0
+    **Exact quote text:** "Mr. Moderator, Rev. Cleage, brothers and sisters and friends, and I see some enemies."
+    **Statistical relevance:** Enmity (high score for MX)
+    **Strength rating:** 5
+17. **Document index:** 0
+    **Exact quote text:** "Anytime you have to rely upon your enemy for a job, you're in bad shape. When you — and he is your enemy."
+    **Statistical relevance:** Enmity (high score for MX), Fear (bad shape)
+    **Strength rating:** 5
+18. **Document index:** 0
+    **Exact quote text:** "The government itself has failed us. And the white liberals who have been posing as our friends have failed us."
+    **Statistical relevance:** Enmity (high score for MX), Grievance
+    **Strength rating:** 5
+19. **Document index:** 0
+    **Exact quote text:** "So today, though Islam is my religious philosophy, my political, economic and social philosophy is black nationalism... But if we keep our religion at home... but when we come out here we have a fight that's common to all of us against a enemy who is common to all of us."
+    **Statistical relevance:** Tribal Dominance (black nationalism as core philosophy), Enmity (common enemy uniting the group)
+    **Strength rating:** 5
+20. **Document index:** 0
+    **Exact quote text:** "Whether you are a Christian or a Muslim or a nationalist, we all have the same problem... We're all in the same bag, in the same boat."
+    **Statistical relevance:** Tribal Dominance (unifying the group based on shared problem/identity)
+    **Strength rating:** 4
+21. **Document index:** 0
+    **Exact quote text:** "So I say in my conclusion, the only way we're going to solve it: we got to unite. We got to work together in unity and harmony."
+    **Statistical relevance:** Tribal Dominance (call for internal group unity)
+    **Strength rating:** 3
+22. **Document index:** 0
+    **Exact quote text:** "Revolutions overturn systems. Revolutions destroy systems."
+    **Statistical relevance:** Enmity (confrontational approach to existing systems), Cohesive Goals (radical change)
+    **Strength rating:** 4
+23. **Document index:** 0
+    **Exact quote text:** "Just as it took nationalism to remove colonialism from Asia and Africa, it'll take black nationalism today to remove colonialism from the backs and the minds of twenty-two million Afro-Americans here in this country."
+    **Statistical relevance:** Tribal Dominance (black nationalism as the solution), Grievance (colonialism metaphor)
+    **Strength rating:** 5
+24. **Document index:** 0
+    **Exact quote text:** "When you expel the Dixiecrat, you're expelling the Democrat. When you destroy the power of the Dixiecrat, you are destroying the power of the Democratic Party."
+    **Statistical relevance:** Enmity (targeting political parties as enemies)
+    **Strength rating:** 4
+25. **Document index:** 0
+    **Exact quote text:** "The economic philosophy of black nationalism only means that we should own and operate and control the economy of our community."
+    **Statistical relevance:** Tribal Dominance (high score for MX)
+    **Strength rating:** 5
+26. **Document index:** 0
+    **Exact quote text:** "Join any kind of organization – civic, religious, fraternal, political or otherwise that's based on lifting the black man up and making him master of his own community."
+    **Statistical relevance:** Tribal Dominance (high score for MX)
+    **Strength rating:** 5
+
+---
+### **Martin Luther King Jr. (Document 1)**
+
+1.  **Document index:** 1
+    **Exact quote text:** "Any law that uplifts human personality is just. Any law that degrades human personality is unjust."
+    **Statistical relevance:** Individual Dignity (high score for MLK)
+    **Strength rating:** 5
+2.  **Document index:** 1
+    **Exact quote text:** "in which all men will respect the dignity and worth of human personality."
+    **Statistical relevance:** Individual Dignity (high score for MLK)
+    **Strength rating:** 5
+3.  **Document index:** 1
+    **Exact quote text:** "Now is the time to lift our national policy from the quicksand of racial injustice to the solid rock of human dignity."
+    **Statistical relevance:** Individual Dignity (high score for MLK), Cohesive Goals
+    **Strength rating:** 5
+4.  **Document index:** 1
+    **Exact quote text:** "vicious mobs lynch your mothers and fathers at will and drown your sisters and brothers at whim; when you have seen hate filled policemen curse, kick and even kill your black brothers and sisters"
+    **Statistical relevance:** Individual Dignity (violation of human personality/dignity)
+    **Strength rating:** 4
+5.  **Document index:** 1
+    **Exact quote text:** "smothering in an airtight cage of poverty"
+    **Statistical relevance:** Individual Dignity (degradation of human condition)
+    **Strength rating:** 3
+6.  **Document index:** 1
+    **Exact quote text:** "ominous clouds of inferiority beginning to form in her little mental sky"
+    **Statistical relevance:** Individual Dignity (psychological harm, undermining self-worth)
+    **Strength rating:** 4
+7.  **Document index:** 1
+    **Exact quote text:** "plagued with inner fears and outer resentments"
+    **Statistical relevance:** Individual Dignity (impact on human personality)
+    **Strength rating:** 3
+8.  **Document index:** 1
+    **Exact quote text:** "a frightening racial nightmare"
+    **Statistical relevance:** Hope (context for the need for hope)
+    **Strength rating:** 3
+9.  **Document index:** 1
+    **Exact quote text:** "our hopes had been blasted, and the shadow of deep disappointment settled upon us."
+    **Statistical relevance:** Hope (context for the assertion of hope)
+    **Strength rating:** 4
+10. **Document index:** 1
+    **Exact quote text:** "They have carved a tunnel of hope through the dark mountain of disappointment."
+    **Statistical relevance:** Hope (high score for MLK)
+    **Strength rating:** 5
+11. **Document index:** 1
+    **Exact quote text:** "I have no despair about the future. I have no fear about the outcome of our struggle in Birmingham, even if our motives are at present misunderstood. We will reach the goal of freedom in Birmingham and all over the nation, because the goal of America is freedom."
+    **Statistical relevance:** Hope (high score for MLK), Cohesive Goals
+    **Strength rating:** 5
+12. **Document index:** 1
+    **Exact quote text:** "the radiant stars of love and brotherhood will shine over our great nation with all their scintillating beauty."
+    **Statistical relevance:** Amity (high score for MLK), Hope (future vision), Cohesive Goals
+    **Strength rating:** 5
+13. **Document index:** 1
+    **Exact quote text:** "privileged groups seldom give up their privileges voluntarily."
+    **Statistical relevance:** Cohesive Goals (acknowledging obstacles to justice/equality)
+    **Strength rating:** 3
+14. **Document index:** 1
+    **Exact quote text:** "some ways they profit by segregation"
+    **Statistical relevance:** Cohesive Goals (acknowledging obstacles to justice/equality)
+    **Strength rating:** 3
+15. **Document index:** 1
+    **Exact quote text:** "the vast majority of your twenty million Negro brothers smothering in an airtight cage of poverty in the midst of an affluent society"
+    **Statistical relevance:** Individual Dignity (degradation of human condition), Cohesive Goals (identifying systemic injustice)
+    **Strength rating:** 4
+16. **Document index:** 1
+    **Exact quote text:** "I am thankful, however, that some of our white brothers in the South have grasped the meaning of this social revolution and committed themselves to it."
+    **Statistical relevance:** Amity (high score for MLK), Cohesive Goals (shared commitment)
+    **Strength rating:** 5
+17. **Document index:** 1
+    **Exact quote text:** "the city's white power structure left the Negro community with no alternative."
+    **Statistical relevance:** Cohesive Goals (identifying systemic injustice/obstacles)
+    **Strength rating:** 3
+18. **Document index:** 1
+    **Exact quote text:** "Its ugly record of brutality is widely known."
+    **Statistical relevance:** Individual Dignity (violation of)
+    **Strength rating:** 3
+19. **Document index:** 1
+    **Exact quote text:** "hate filled policemen curse, kick and even kill your black brothers and sisters"
+    **Statistical relevance:** Individual Dignity (violation of human personality/dignity)
+    **Strength rating:** 4
+20. **Document index:** 1
+    **Exact quote text:** "I have been gravely disappointed with the white moderate...the Negro's great stumbling block...is...the white moderate, who is more devoted to 'order' than to justice"
+    **Statistical relevance:** Cohesive Goals (identifying obstacles to shared goals of justice), Amity (criticism framed as disappointment, seeking alignment)
+    **Strength rating:** 4
+21. **Document index:** 1
+    **Exact quote text:** "Governor Wallace gave a clarion call for defiance and hatred"
+    **Statistical relevance:** Contrasting Full Cohesion Index (MLK highlighting others' enmity, contrasting with his own amity)
+    **Strength rating:** 3
+22. **Document index:** 1
+    **Exact quote text:** "My Dear Fellow Clergymen:"
+    **Statistical relevance:** Amity (addressing potential adversaries with respect)
+    **Strength rating:** 4
+23. **Document index:** 1
+    **Exact quote text:** "men of genuine good will and that your criticisms are sincerely set forth"
+    **Statistical relevance:** Amity (assuming good intentions, fostering reconciliation)
+    **Strength rating:** 4
+24. **Document index:** 1
+    **Exact quote text:** "We are caught in an inescapable network of mutuality, tied in a single garment of destiny. Whatever affects one directly, affects all indirectly."
+    **Statistical relevance:** Amity (high score for MLK), Cohesive Goals (universal interconnectedness)
+    **Strength rating:** 5
+25. **Document index:** 1
+    **Exact quote text:** "help men rise from the dark depths of prejudice and racism to the majestic heights of understanding and brotherhood."
+    **Statistical relevance:** Amity (high score for MLK), Hope (vision of transformation), Cohesive Goals
+    **Strength rating:** 5
+26. **Document index:** 1
+    **Exact quote text:** "Segregation, to use the terminology of the Jewish philosopher Martin Buber, substitutes an 'I it' relationship for an 'I thou' relationship and ends up relegating persons to the status of things. Hence segregation is not only politically, economically and sociologically unsound, it is morally wrong and sinful. Paul Tillich has said that sin is separation."
+    **Statistical relevance:** Individual Dignity (dehumanization of segregation), Amity (loss of 'I-Thou' relationship), Cohesive Goals (moral wrongness of separation)
+    **Strength rating:** 5
+27. **Document index:** 1
+    **Exact quote text:** "The other force is one of bitterness and hatred, and it comes perilously close to advocating violence. It is expressed in the various black nationalist groups that are springing up across the nation...who have concluded that the white man is an incorrigible 'devil.'"
+    **Statistical relevance:** Contrasting Full Cohesion Index (MLK explicitly rejects the confrontational/enmity stance of black nationalism, highlighting the rhetorical difference)
+    **Strength rating:** 5
+28. **Document index:** 1
+    **Exact quote text:** "Too long has our beloved Southland been bogged down in a tragic effort to live in monologue rather than dialogue."
+    **Statistical relevance:** Amity (advocacy for dialogue and mutual understanding)
+    **Strength rating:** 4
+29. **Document index:** 1
+    **Exact quote text:** "Now is the time to make real the promise of democracy and transform our pending national elegy into a creative psalm of brotherhood."
+    **Statistical relevance:** Hope (transformative vision), Amity (psalm of brotherhood), Cohesive Goals
+    **Strength rating:** 5

@@ -77,7 +77,7 @@ from discernus.core.golden_run_documentation_generator import generate_golden_ru
 
 # V2 Imports
 from discernus.core.v2_orchestrator import V2Orchestrator, V2OrchestratorConfig
-from discernus.core.execution_strategies import FullExperimentStrategy
+# Removed: execution_strategies import - using SimpleExperimentExecutor instead
 from discernus.core.security_boundary import ExperimentSecurityBoundary
 from discernus.core.audit_logger import AuditLogger
 from discernus.core.local_artifact_storage import LocalArtifactStorage
@@ -157,36 +157,47 @@ def cli(ctx):
 @click.option('--verbose-trace', is_flag=True, help='Enable comprehensive function-level tracing for debugging')
 @click.option('--trace-filter', multiple=True, help='Filter tracing to specific components (e.g., statistical, analysis)')
 @click.option('--skip-validation', is_flag=True, help='Skip experiment coherence validation for faster execution')
-@click.option('--analysis-only', is_flag=True, help='Run analysis phase only, skip statistical and synthesis')
-@click.option('--statistical-prep', is_flag=True, help='Run analysis and statistical phases, skip synthesis')
-@click.option('--resume-from-stats', is_flag=True, help='Resume from statistical phase (requires previous statistical-prep run)')
-@click.option('--resume-from-analysis', is_flag=True, help='Resume from analysis phase (requires previous analysis-only run)')
+@click.option('--from', 'start_phase', 
+              type=click.Choice(['validation', 'analysis', 'statistical', 'evidence', 'synthesis']),
+              default='validation', help='Start from this phase (default: validation)')
+@click.option('--to', 'end_phase',
+              type=click.Choice(['validation', 'analysis', 'statistical', 'evidence', 'synthesis']), 
+              default='synthesis', help='End at this phase (default: synthesis)')
 @click.pass_context
 def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, skip_validation: bool, 
-        analysis_only: bool, statistical_prep: bool, resume_from_stats: bool, resume_from_analysis: bool):
-    """Execute a V2 experiment.
+        start_phase: str, end_phase: str):
+    """Execute a V2 experiment with simple phase selection.
     
     Execution modes:
     - Default: Run complete pipeline (validation + analysis + statistical + evidence + synthesis)
-    - --analysis-only: Run analysis phase only, skip statistical and synthesis
-    - --statistical-prep: Run analysis and statistical phases, skip synthesis  
-    - --resume-from-stats: Resume from statistical phase, skip analysis
-    - --resume-from-analysis: Resume from analysis phase, skip validation and analysis
+    - --from analysis: Start from analysis phase, skip validation
+    - --to statistical: End at statistical phase, skip evidence and synthesis
+    - --from analysis --to synthesis: Run analysis through synthesis
     
     Examples:
     - discernus run projects/my_experiment
-    - discernus run projects/my_experiment --analysis-only
-    - discernus run projects/my_experiment --statistical-prep
-    - discernus run projects/my_experiment --resume-from-stats
-    - discernus run projects/my_experiment --resume-from-analysis
+    - discernus run projects/my_experiment --from analysis
+    - discernus run projects/my_experiment --to statistical
+    - discernus run projects/my_experiment --from analysis --to synthesis
     """
     exp_path = Path(experiment_path).resolve()
 
-    # Validate that only one execution mode is selected
-    execution_modes = [analysis_only, statistical_prep, resume_from_stats, resume_from_analysis]
-    if sum(execution_modes) > 1:
-        rich_console.print_error("❌ Only one execution mode can be selected at a time")
-        exit_invalid_usage("Multiple execution modes selected. Choose one: --analysis-only, --statistical-prep, --resume-from-stats, or --resume-from-analysis")
+    # Validate phase parameters
+    phases = ['validation', 'analysis', 'statistical', 'evidence', 'synthesis']
+    if start_phase not in phases:
+        rich_console.print_error(f"❌ Invalid start phase: {start_phase}")
+        exit_invalid_usage(f"Start phase must be one of: {', '.join(phases)}")
+    
+    if end_phase not in phases:
+        rich_console.print_error(f"❌ Invalid end phase: {end_phase}")
+        exit_invalid_usage(f"End phase must be one of: {', '.join(phases)}")
+    
+    start_idx = phases.index(start_phase)
+    end_idx = phases.index(end_phase)
+    
+    if start_idx > end_idx:
+        rich_console.print_error(f"❌ Start phase ({start_phase}) cannot be after end phase ({end_phase})")
+        exit_invalid_usage("Start phase must come before or equal end phase")
 
     if not exp_path.exists() or not exp_path.is_dir():
         rich_console.print_error(f"❌ Experiment path not found: {exp_path}")
@@ -233,44 +244,34 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, ski
         orchestrator.register_agent("Evidence", IntelligentEvidenceRetrievalAgent(security, storage, audit))
         orchestrator.register_agent("Synthesis", TwoStageSynthesisAgent(security, storage, audit))
 
-        # 5. Select Execution Strategy based on CLI options
-        if analysis_only:
-            from discernus.core.execution_strategies import AnalysisOnlyStrategy
-            strategy = AnalysisOnlyStrategy()
-            rich_console.print_info("🔬 Running analysis phase only...")
-        elif statistical_prep:
-            from discernus.core.execution_strategies import StatisticalPrepStrategy
-            strategy = StatisticalPrepStrategy()
-            rich_console.print_info("📊 Running analysis and statistical phases...")
-        elif resume_from_stats:
-            from discernus.core.execution_strategies import ResumeFromStatsStrategy
-            strategy = ResumeFromStatsStrategy()
-            rich_console.print_info("🔄 Resuming from statistical phase...")
-        elif resume_from_analysis:
-            from discernus.core.execution_strategies import ResumeFromAnalysisStrategy
-            strategy = ResumeFromAnalysisStrategy()
-            rich_console.print_info("🔄 Resuming from analysis phase...")
-        else:
-            from discernus.core.execution_strategies import FullExperimentStrategy
-            strategy = FullExperimentStrategy()
-            rich_console.print_info("🚀 Running complete experiment pipeline...")
+        # 5. Use Simple Executor
+        from discernus.core.simple_executor import SimpleExperimentExecutor
+        executor = SimpleExperimentExecutor()
         
-        # 6. Execute Strategy with Progress Reporting
-        result = orchestrator.execute_strategy(strategy)
+        # Show execution info
+        if start_phase == end_phase:
+            rich_console.print_info(f"🔄 Running {start_phase} phase only...")
+        else:
+            rich_console.print_info(f"🚀 Running phases: {start_phase} → {end_phase}")
+        
+        # 6. Create RunContext and Execute with Simple Executor
+        run_context = orchestrator.create_run_context()
+        result = executor.execute(
+            agents=orchestrator.agents,
+            run_context=run_context,
+            storage=orchestrator.storage,
+            audit=orchestrator.audit,
+            start_phase=start_phase,
+            end_phase=end_phase
+        )
 
         # Show experiment summary
         if result.success:
-            # Show strategy-specific success message
-            if analysis_only:
-                rich_console.print_success("✅ Analysis Phase Completed Successfully!")
-            elif statistical_prep:
-                rich_console.print_success("✅ Analysis and Statistical Phases Completed Successfully!")
-            elif resume_from_stats:
-                rich_console.print_success("✅ Experiment Resumed and Completed Successfully!")
-            elif resume_from_analysis:
-                rich_console.print_success("✅ Experiment Resumed and Completed Successfully!")
+            # Show phase-specific success message
+            if start_phase == end_phase:
+                rich_console.print_success(f"✅ {start_phase.title()} Phase Completed Successfully!")
             else:
-                rich_console.print_success("✅ Complete Experiment Pipeline Completed Successfully!")
+                rich_console.print_success(f"✅ Phases {start_phase} → {end_phase} Completed Successfully!")
 
             # Show phase progress
             phases_completed = result.phases_completed

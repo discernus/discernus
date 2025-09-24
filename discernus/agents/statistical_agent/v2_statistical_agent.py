@@ -372,6 +372,26 @@ class V2StatisticalAgent(StandardAgent):
                 content = response.get('content', '')
                 metadata = response.get('metadata', {})
             
+            # Log LLM interaction with cost data
+            if metadata and 'usage' in metadata:
+                usage_data = metadata['usage']
+                self.audit.log_llm_interaction(
+                    model="vertex_ai/gemini-2.5-pro",
+                    prompt=prompt,
+                    response=content,
+                    agent_name=self.agent_name,
+                    interaction_type="statistical_analysis",
+                    metadata={
+                        "prompt_tokens": usage_data.get('prompt_tokens', 0),
+                        "completion_tokens": usage_data.get('completion_tokens', 0),
+                        "total_tokens": usage_data.get('total_tokens', 0),
+                        "response_cost_usd": usage_data.get('response_cost_usd', 0.0),
+                        "step": "statistical_analysis",
+                        "batch_id": batch_id,
+                        "artifacts_count": len(raw_artifacts)
+                    }
+                )
+            
             self.logger.info(f"LLM response length: {len(content)}")
             self.logger.info(f"LLM response preview: {content[:200]}...")
             

@@ -14,7 +14,7 @@ import logging
 import yaml
 from pathlib import Path
 from typing import Any, Dict, List, Optional
-from datetime import datetime
+from datetime import datetime, timezone
 
 from discernus.core.standard_agent import StandardAgent
 from discernus.core.run_context import RunContext
@@ -227,6 +227,13 @@ class V2ValidationAgent(StandardAgent):
             run_context.metadata["framework_hash"] = framework_hash
             run_context.metadata["corpus_manifest_hash"] = corpus_manifest_hash
             run_context.metadata["corpus_document_hashes"] = corpus_document_hashes
+            
+            # Store additional metadata for synthesis agent
+            run_context.metadata["framework_filename"] = framework_path.name
+            run_context.metadata["corpus_filename"] = corpus_path.name
+            run_context.metadata["document_count"] = len(corpus_document_hashes)
+            run_context.metadata["run_id"] = run_context.experiment_id
+            run_context.metadata["completion_date"] = datetime.now(timezone.utc).isoformat()
             
             self.logger.info(f"CAS Registration complete - experiment: {experiment_hash[:8]}, "
                            f"framework: {framework_hash[:8]}, corpus_manifest: {corpus_manifest_hash[:8]}, "

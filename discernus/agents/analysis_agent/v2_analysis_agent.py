@@ -129,7 +129,7 @@ class V2AnalysisAgent(StandardAgent):
         
         self.logger.info("CONTRACT FULFILLED: All required input assets present - proceeding with analysis")
         return True
-    
+
     def execute(self, run_context: RunContext = None, **kwargs) -> AgentResult:
         """
         Execute atomic document analysis.
@@ -303,6 +303,25 @@ class V2AnalysisAgent(StandardAgent):
                 content = response.get('content', '')
                 metadata = response.get('metadata', {})
             
+            # Log LLM interaction with cost data
+            if metadata and 'usage' in metadata:
+                usage_data = metadata['usage']
+                self.audit.log_llm_interaction(
+                    model="vertex_ai/gemini-2.5-flash",
+                    prompt=prompt,
+                    response=content,
+                    agent_name=self.agent_name,
+                    interaction_type="composite_analysis",
+                    metadata={
+                        "prompt_tokens": usage_data.get('prompt_tokens', 0),
+                        "completion_tokens": usage_data.get('completion_tokens', 0),
+                        "total_tokens": usage_data.get('total_tokens', 0),
+                        "response_cost_usd": usage_data.get('response_cost_usd', 0.0),
+                        "step": "composite_analysis",
+                        "document_index": doc_index
+                    }
+                )
+            
             # Create artifact
             artifact_data = {
                 "analysis_id": f"analysis_{batch_id}_{doc_index}",
@@ -378,6 +397,25 @@ Return ONLY the JSON array, no other text."""
             else:
                 content = response.get('content', '')
                 metadata = response.get('metadata', {})
+            
+            # Log LLM interaction with cost data
+            if metadata and 'usage' in metadata:
+                usage_data = metadata['usage']
+                self.audit.log_llm_interaction(
+                    model="vertex_ai/gemini-2.5-flash-lite",
+                    prompt=prompt,
+                    response=content,
+                    agent_name=self.agent_name,
+                    interaction_type="evidence_extraction",
+                    metadata={
+                        "prompt_tokens": usage_data.get('prompt_tokens', 0),
+                        "completion_tokens": usage_data.get('completion_tokens', 0),
+                        "total_tokens": usage_data.get('total_tokens', 0),
+                        "response_cost_usd": usage_data.get('response_cost_usd', 0.0),
+                        "step": "evidence_extraction",
+                        "document_index": doc_index
+                    }
+                )
             
             # THIN: Store LLM response as-is, no validation
             
@@ -467,6 +505,25 @@ Extract both dimensional scores AND derived metrics preserving all computational
             else:
                 content = response.get('content', '')
                 metadata = response.get('metadata', {})
+            
+            # Log LLM interaction with cost data
+            if metadata and 'usage' in metadata:
+                usage_data = metadata['usage']
+                self.audit.log_llm_interaction(
+                    model="vertex_ai/gemini-2.5-flash-lite",
+                    prompt=prompt,
+                    response=content,
+                    agent_name=self.agent_name,
+                    interaction_type="score_extraction",
+                    metadata={
+                        "prompt_tokens": usage_data.get('prompt_tokens', 0),
+                        "completion_tokens": usage_data.get('completion_tokens', 0),
+                        "total_tokens": usage_data.get('total_tokens', 0),
+                        "response_cost_usd": usage_data.get('response_cost_usd', 0.0),
+                        "step": "score_extraction",
+                        "document_index": doc_index
+                    }
+                )
             
             # Create artifact
             artifact_data = {
@@ -571,6 +628,25 @@ Return the marked-up document in markdown format."""
             else:
                 content = response.get('content', '')
                 metadata = response.get('metadata', {})
+            
+            # Log LLM interaction with cost data
+            if metadata and 'usage' in metadata:
+                usage_data = metadata['usage']
+                self.audit.log_llm_interaction(
+                    model="vertex_ai/gemini-2.5-flash-lite",
+                    prompt=prompt,
+                    response=content,
+                    agent_name=self.agent_name,
+                    interaction_type="markup_extraction",
+                    metadata={
+                        "prompt_tokens": usage_data.get('prompt_tokens', 0),
+                        "completion_tokens": usage_data.get('completion_tokens', 0),
+                        "total_tokens": usage_data.get('total_tokens', 0),
+                        "response_cost_usd": usage_data.get('response_cost_usd', 0.0),
+                        "step": "markup_extraction",
+                        "document_index": doc_index
+                    }
+                )
             
             # Create markdown content with metadata header
             timestamp = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')

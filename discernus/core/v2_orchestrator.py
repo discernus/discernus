@@ -27,7 +27,7 @@ from .local_artifact_storage import LocalArtifactStorage
 from .run_context import RunContext
 from .agent_result import AgentResult
 from .standard_agent import StandardAgent
-from .execution_strategies import ExecutionStrategy, ExperimentResult
+from .simple_executor import ExperimentResult
 
 # Import for progress reporting
 try:
@@ -114,18 +114,13 @@ class V2Orchestrator:
             "capabilities": agent.get_capabilities()
         })
     
-    def execute_strategy(self, strategy: ExecutionStrategy) -> ExperimentResult:
+    def create_run_context(self) -> RunContext:
         """
-        Execute an experiment using the specified strategy.
+        Create and configure RunContext for experiment execution.
         
-        Args:
-            strategy: Execution strategy to use
-            
         Returns:
-            ExperimentResult with execution results
+            Configured RunContext
         """
-        self.logger.info(f"Executing strategy: {strategy.__class__.__name__}")
-        
         # Create initial RunContext
         run_context = RunContext(
             experiment_id=self.config.experiment_id,
@@ -145,49 +140,7 @@ class V2Orchestrator:
         # Create input file snapshots for provenance (once per experiment)
         self._create_input_snapshots(run_context)
         
-        # Log strategy execution start
-        self.audit.log_agent_event("V2Orchestrator", "strategy_execution_start", {
-            "strategy": strategy.__class__.__name__,
-            "experiment_id": self.config.experiment_id,
-            "agents_available": list(self.agents.keys())
-        })
-        
-        try:
-            # Show progress during execution
-            if rich_console:
-                rich_console.print_info("🚀 Starting experiment execution...")
-
-            # Execute the strategy
-            result = strategy.execute(self.agents, run_context, self.storage, self.audit)
-
-            # Log successful completion
-            self.audit.log_agent_event("V2Orchestrator", "strategy_execution_complete", {
-                "strategy": strategy.__class__.__name__,
-                "experiment_id": self.config.experiment_id,
-                "success": result.success,
-                "phases_completed": result.phases_completed,
-                "artifacts_generated": len(result.artifacts)
-            })
-
-            return result
-            
-        except Exception as e:
-            # Log execution failure
-            self.audit.log_agent_event("V2Orchestrator", "strategy_execution_failed", {
-                "strategy": strategy.__class__.__name__,
-                "experiment_id": self.config.experiment_id,
-                "error": str(e),
-                "error_type": type(e).__name__
-            })
-            
-            # Return failure result
-            return ExperimentResult(
-                success=False,
-                error_message=str(e),
-                phases_completed=[],
-                artifacts=[],
-                metadata={"error_type": type(e).__name__}
-            )
+        return run_context
     
     def get_agent(self, name: str) -> Optional[StandardAgent]:
         """Get a registered agent by name."""

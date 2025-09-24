@@ -1,0 +1,236 @@
+{
+  "1ddcdbe09b8fd97a5075417c5f96feca62deecdb75070fd7c505a6c0e9740abd": {
+    "artifact_path": "composite_analysis_1ddcdbe0.json",
+    "created_at": "2025-09-23T23:29:01.496752+00:00",
+    "human_filename": "composite_analysis_1ddcdbe0.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 0
+    },
+    "size_bytes": 51081,
+    "source_run": "20250923_232703"
+  },
+  "28b4f072a9a3a103581164179fed2511708973e4c554e990553cfaf271c95aa3": {
+    "artifact_path": "curated_evidence_28b4f072.json",
+    "created_at": "2025-09-23T23:33:14.462203+00:00",
+    "human_filename": "curated_evidence_28b4f072.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "curated_evidence",
+      "experiment_id": "Contrasting Rhetorical Profiles of MLK and Malcolm X"
+    },
+    "size_bytes": 14986,
+    "source_run": "20250923_232703"
+  },
+  "4ad0a9e60d3f7fe388570d3c6aa129597b45b9b942b9cc73bc9eaa224b5e5331": {
+    "artifact_path": "final_synthesis_report_4ad0a9e6.md",
+    "created_at": "2025-09-23T23:35:58.664565+00:00",
+    "human_filename": "final_synthesis_report_4ad0a9e6.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "final_synthesis_report",
+      "experiment_id": "final_report"
+    },
+    "size_bytes": 57598,
+    "source_run": "20250923_232703"
+  },
+  "5646c7b141e6212b161458893c97406fdb24091d46c4ef42d5b21ca5b74b8e25": {
+    "artifact_path": "evidence_extraction_5646c7b1.json",
+    "created_at": "2025-09-23T23:30:43.538841+00:00",
+    "human_filename": "evidence_extraction_5646c7b1.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 1
+    },
+    "size_bytes": 3525,
+    "source_run": "20250923_232703"
+  },
+  "5c0f015f0aa56a935032adbaa037deec6ed2ed81f4a99e58447be45737751fcc": {
+    "artifact_path": "score_extraction_5c0f015f.json",
+    "created_at": "2025-09-23T23:30:45.976072+00:00",
+    "human_filename": "score_extraction_5c0f015f.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 1
+    },
+    "size_bytes": 2114,
+    "source_run": "20250923_232703"
+  },
+  "5c6de04e8a93fd1704f4dc117837daaca7a6a1a28b006130c8b36d0fbadd0cad": {
+    "artifact_path": "score_extraction_5c6de04e.json",
+    "created_at": "2025-09-23T23:29:06.795252+00:00",
+    "human_filename": "score_extraction_5c6de04e.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 0
+    },
+    "size_bytes": 2136,
+    "source_run": "20250923_232703"
+  },
+  "6f5ac7714011bdd8870debfcde61dcbf2919d22f4657a42e4fd1c07cf84c8841": {
+    "artifact_path": "evidence_appendix_6f5ac771",
+    "created_at": "2025-09-23T23:35:58.665742+00:00",
+    "human_filename": "evidence_appendix_6f5ac771",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_appendix",
+      "experiment_id": "evidence_appendix"
+    },
+    "size_bytes": 13675,
+    "source_run": "20250923_232703"
+  },
+  "7ce49c4f211d939497a275da8c3cea04c8092a61fceb825625702d5f0652a94b": {
+    "artifact_path": "corpus_manifest_7ce49c4f",
+    "created_at": "2025-09-23T23:27:03.675500+00:00",
+    "human_filename": "corpus_manifest_7ce49c4f",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_manifest",
+      "original_filename": "corpus.md"
+    },
+    "size_bytes": 6459,
+    "source_run": "20250923_232703"
+  },
+  "7fe270c138ae306f8edde1bce533eec1c3c70c7ec213591fd979f344588eb025": {
+    "artifact_path": "evidence_extraction_7fe270c1.json",
+    "created_at": "2025-09-23T23:29:03.827698+00:00",
+    "human_filename": "evidence_extraction_7fe270c1.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 0
+    },
+    "size_bytes": 3142,
+    "source_run": "20250923_232703"
+  },
+  "8aa31947de342847b2345818cb3dbc5cbcc98a520e07f49162a55d558ad68015": {
+    "artifact_path": "composite_analysis_8aa31947.json",
+    "created_at": "2025-09-23T23:30:40.797931+00:00",
+    "human_filename": "composite_analysis_8aa31947.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 1
+    },
+    "size_bytes": 50452,
+    "source_run": "20250923_232703"
+  },
+  "8d7408f36cce619579386e974f2105c8d6c52eeb44a5e618844eb808464978a0": {
+    "artifact_path": "mlk_letter_from_birmingham_jail_8d7408f3.txt",
+    "created_at": "2025-09-23T23:27:03.677517+00:00",
+    "human_filename": "mlk_letter_from_birmingham_jail_8d7408f3.txt",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "document_id": "mlk_birmingham_jail_1963",
+      "metadata": {},
+      "original_filename": "mlk_letter_from_birmingham_jail.txt"
+    },
+    "size_bytes": 40334,
+    "source_run": "20250923_232703"
+  },
+  "8e2805bd9e5d52cf07f7066d11ae30e855ac2c239b27faced6bc9d287df18ab9": {
+    "artifact_path": "malcolm_x_ballot_or_bullet_8e2805bd.txt",
+    "created_at": "2025-09-23T23:27:03.676920+00:00",
+    "human_filename": "malcolm_x_ballot_or_bullet_8e2805bd.txt",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "document_id": "malcolm_x_ballot_bullet_1964",
+      "metadata": {},
+      "original_filename": "malcolm_x_ballot_or_bullet.txt"
+    },
+    "size_bytes": 38021,
+    "source_run": "20250923_232703"
+  },
+  "9a4d3093a1561bb3369f21aa9e1614ff52fdcebb20f91e26b5d165266aad6288": {
+    "artifact_path": "marked_up_document_9a4d3093.md",
+    "created_at": "2025-09-23T23:31:10.692865+00:00",
+    "human_filename": "marked_up_document_9a4d3093.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "marked_up_document",
+      "document_index": 1
+    },
+    "size_bytes": 42220,
+    "source_run": "20250923_232703"
+  },
+  "a72a8312822cd8e49ea692a178e4db3a073867692d9f482f9c6cb16ec81a80d6": {
+    "artifact_path": "statistical_analysis_a72a8312.json",
+    "created_at": "2025-09-23T23:32:29.516785+00:00",
+    "human_filename": "statistical_analysis_a72a8312.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "statistical_analysis",
+      "batch_id": "stats_20250923T233110Z"
+    },
+    "size_bytes": 15731,
+    "source_run": "20250923_232703"
+  },
+  "b871cd135b9544837faa0a1d026c803980239b6428a92eda5ae4414910cc7afc": {
+    "artifact_path": "marked_up_document_b871cd13.md",
+    "created_at": "2025-09-23T23:29:38.859506+00:00",
+    "human_filename": "marked_up_document_b871cd13.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "marked_up_document",
+      "document_index": 0
+    },
+    "size_bytes": 39907,
+    "source_run": "20250923_232703"
+  },
+  "bca92897782acee0d223117209c0a31131c1c1545f85ef2e4176d307952156c2": {
+    "artifact_path": "framework_bca92897.md",
+    "created_at": "2025-09-23T23:27:03.674825+00:00",
+    "human_filename": "framework_bca92897.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "framework",
+      "original_filename": "framework.md"
+    },
+    "size_bytes": 60105,
+    "source_run": "20250923_232703"
+  },
+  "c36032cea686c6373134b439733288e777e4e051ecea8d8b23bd86feb85c5cd3": {
+    "artifact_path": "validation_report_c36032ce.json",
+    "created_at": "2025-09-23T23:27:47.186962+00:00",
+    "human_filename": "validation_report_c36032ce.json",
+    "is_directory": false,
+    "metadata": {
+      "agent": "V2ValidationAgent",
+      "artifact_type": "validation_report",
+      "experiment_id": "0_mlkmx",
+      "timestamp": "2025-09-23T19:27:47.185841"
+    },
+    "size_bytes": 2199,
+    "source_run": "20250923_232703"
+  },
+  "cca98a9d1f6ef676e5398ba3e01020c22e64aa76fbfb26505faf1ec1d04975b6": {
+    "artifact_path": "stage1_synthesis_report_cca98a9d.md",
+    "created_at": "2025-09-23T23:34:43.946760+00:00",
+    "human_filename": "stage1_synthesis_report_cca98a9d.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "stage1_synthesis_report",
+      "experiment_id": "stage1_analysis"
+    },
+    "size_bytes": 26120,
+    "source_run": "20250923_232703"
+  },
+  "dd32c77e8b449a27737849ebcfe7f1541fe443722350c2362b9791982aea5e96": {
+    "artifact_path": "experiment_spec_dd32c77e",
+    "created_at": "2025-09-23T23:27:03.673626+00:00",
+    "human_filename": "experiment_spec_dd32c77e",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "experiment_spec",
+      "original_filename": "experiment.md"
+    },
+    "size_bytes": 5979,
+    "source_run": "20250923_232703"
+  }
+}

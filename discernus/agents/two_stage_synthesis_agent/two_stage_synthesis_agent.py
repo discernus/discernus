@@ -266,6 +266,25 @@ class TwoStageSynthesisAgent(StandardAgent):
             # Extract content from tuple response
             response, metadata = response_tuple
             
+            # Log LLM interaction with cost data
+            if metadata and 'usage' in metadata:
+                usage_data = metadata['usage']
+                self.audit.log_llm_interaction(
+                    model=self.stage1_model,
+                    prompt=stage1_prompt,
+                    response=response,
+                    agent_name=self.agent_name,
+                    interaction_type="stage1_analysis",
+                    metadata={
+                        "prompt_tokens": usage_data.get('prompt_tokens', 0),
+                        "completion_tokens": usage_data.get('completion_tokens', 0),
+                        "total_tokens": usage_data.get('total_tokens', 0),
+                        "response_cost_usd": usage_data.get('response_cost_usd', 0.0),
+                        "step": "stage1_analysis",
+                        "temperature": 0.3
+                    }
+                )
+            
             if not response or not response.strip():
                 self.logger.error("Stage 1 analysis returned empty response")
                 return None
@@ -334,6 +353,25 @@ class TwoStageSynthesisAgent(StandardAgent):
             # Extract content from tuple response
             response, metadata = response_tuple
             
+            # Log LLM interaction with cost data
+            if metadata and 'usage' in metadata:
+                usage_data = metadata['usage']
+                self.audit.log_llm_interaction(
+                    model=self.stage2_model,
+                    prompt=stage2_prompt,
+                    response=response,
+                    agent_name=self.agent_name,
+                    interaction_type="stage2_integration",
+                    metadata={
+                        "prompt_tokens": usage_data.get('prompt_tokens', 0),
+                        "completion_tokens": usage_data.get('completion_tokens', 0),
+                        "total_tokens": usage_data.get('total_tokens', 0),
+                        "response_cost_usd": usage_data.get('response_cost_usd', 0.0),
+                        "step": "stage2_integration",
+                        "temperature": 0.2
+                    }
+                )
+            
             if not response or not response.strip():
                 self.logger.error("Stage 2 integration returned empty response")
                 return stage1_report  # Fallback to Stage 1 report
@@ -366,42 +404,20 @@ class TwoStageSynthesisAgent(StandardAgent):
     
     def _store_stage1_report(self, report: str) -> str:
         """Store Stage 1 report as raw markdown content."""
-        # Add metadata header to the markdown content itself
-        timestamp = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')
-        markdown_content = f"""---
-agent: {self.agent_name}
-stage: stage1_data_driven_analysis
-timestamp: {timestamp}
-model_used: {self.stage1_model}
-evidence_included: false
-synthesis_method: data_driven_only
----
-
-{report}"""
-        
+        # Store the report directly without redundant YAML frontmatter
+        # The report already contains the proper header from the Stage 1 prompt
         return self.storage.store_artifact(
-            content=markdown_content,
+            content=report,
             artifact_type="stage1_synthesis_report",
             experiment_id="stage1_analysis"
         )
     
     def _store_final_report(self, report: str) -> str:
         """Store final report as raw markdown content."""
-        # Add metadata header to the markdown content itself
-        timestamp = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')
-        markdown_content = f"""---
-agent: {self.agent_name}
-stage: stage2_evidence_integrated
-timestamp: {timestamp}
-model_used: {self.stage2_model}
-evidence_included: true
-synthesis_method: two_stage_with_evidence
----
-
-{report}"""
-        
+        # Store the report directly without redundant YAML frontmatter
+        # The report already contains the proper header from the Stage 1 prompt
         return self.storage.store_artifact(
-            content=markdown_content,
+            content=report,
             artifact_type="final_synthesis_report",
             experiment_id="final_report"
         )
@@ -429,12 +445,26 @@ synthesis_method: two_stage_with_evidence
             else:
                 corpus_manifest = ""
             
+            # Extract additional metadata for the prompt
+            run_id = run_context.metadata.get("run_id", run_context.experiment_id)
+            completion_date = run_context.metadata.get("completion_date", "Unknown")
+            
+            # Extract framework and corpus filenames from metadata
+            framework_filename = run_context.metadata.get("framework_filename", "Unknown")
+            corpus_filename = run_context.metadata.get("corpus_filename", "Unknown")
+            document_count = run_context.metadata.get("document_count", "Unknown")
+            
             return {
                 "framework_content": framework_content,
                 "experiment_content": experiment_content,
                 "corpus_manifest": corpus_manifest,
                 "statistical_results": {},  # Statistical results are read from artifacts
                 "experiment_id": run_context.experiment_id,
+                "run_id": run_id,
+                "completion_date": completion_date,
+                "framework_filename": framework_filename,
+                "corpus_filename": corpus_filename,
+                "document_count": document_count,
                 "metadata": run_context.metadata or {},
                 "run_context": run_context  # Add run_context so _read_statistical_artifacts can access it
             }
@@ -453,7 +483,16 @@ synthesis_method: two_stage_with_evidence
         models_summary = self._generate_models_summary(context.get("run_context"))
         
         # Create the complete prompt by combining template with context
-        prompt = f"""{self.stage1_prompt}
+        # Replace template variables in the prompt
+        prompt = self.stage1_prompt.replace('[experiment_name]', context.get('experiment_id', 'Unknown'))
+        prompt = prompt.replace('[completion_date]', context.get('completion_date', 'Unknown'))
+        prompt = prompt.replace('[Use the actual framework name from the framework content]', 'Use the actual framework name from the framework content')
+        prompt = prompt.replace('[corpus_filename]', context.get('corpus_filename', 'Unknown'))
+        prompt = prompt.replace('[document_count]', str(context.get('document_count', 'Unknown')))
+        prompt = prompt.replace('[models_used_summary]', models_summary)
+        
+        # Add the context data
+        prompt += f"""
 
 **FRAMEWORK SPECIFICATION:**
 {context.get('framework_content', 'Framework content not available')}

@@ -1,0 +1,52 @@
+{
+  "11d6df85f193bfaf6ea2a5dd3eb9829fe944505f90a6830baaceff177c1b8224": {
+    "artifact_path": "experiment_spec_11d6df85",
+    "created_at": "2025-09-23T23:49:13.266482+00:00",
+    "human_filename": "experiment_spec_11d6df85",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "experiment_spec",
+      "original_filename": "experiment.md"
+    },
+    "size_bytes": 774,
+    "source_run": "20250923_234913"
+  },
+  "66a3dad86ce7186d8a7aad23fec7a9e4f79a7e1489af9fdd77655699d38ae107": {
+    "artifact_path": "validation_report_66a3dad8.json",
+    "created_at": "2025-09-23T23:49:50.892864+00:00",
+    "human_filename": "validation_report_66a3dad8.json",
+    "is_directory": false,
+    "metadata": {
+      "agent": "V2ValidationAgent",
+      "artifact_type": "validation_report",
+      "experiment_id": "nano",
+      "timestamp": "2025-09-23T19:49:50.885866"
+    },
+    "size_bytes": 2277,
+    "source_run": "20250923_234913"
+  },
+  "f032ff0c1c0b8b990d2cc892b488fe4b09d8837ca2cf4a51b50f6c27256df18f": {
+    "artifact_path": "framework_f032ff0c.md",
+    "created_at": "2025-09-23T23:49:13.266946+00:00",
+    "human_filename": "framework_f032ff0c.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "framework",
+      "original_filename": "framework.md"
+    },
+    "size_bytes": 3746,
+    "source_run": "20250923_234913"
+  },
+  "f18adeccde8f3cea69602b123d6fcfce17b73dc98837411f17f66b3a09e1b913": {
+    "artifact_path": "corpus_manifest_f18adecc",
+    "created_at": "2025-09-23T23:49:13.267396+00:00",
+    "human_filename": "corpus_manifest_f18adecc",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_manifest",
+      "original_filename": "corpus.md"
+    },
+    "size_bytes": 637,
+    "source_run": "20250923_234913"
+  }
+}
