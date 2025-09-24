@@ -166,20 +166,7 @@ def cli(ctx):
 @click.pass_context
 def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, skip_validation: bool, 
         start_phase: str, end_phase: str):
-    """Execute a V2 experiment with simple phase selection.
-    
-    Execution modes:
-    - Default: Run complete pipeline (validation + analysis + statistical + evidence + synthesis)
-    - --from analysis: Start from analysis phase, skip validation
-    - --to statistical: End at statistical phase, skip evidence and synthesis
-    - --from analysis --to synthesis: Run analysis through synthesis
-    
-    Examples:
-    - discernus run projects/my_experiment
-    - discernus run projects/my_experiment --from analysis
-    - discernus run projects/my_experiment --to statistical
-    - discernus run projects/my_experiment --from analysis --to synthesis
-    """
+    """Execute a V2 experiment with simple phase selection."""
     exp_path = Path(experiment_path).resolve()
 
     # Validate phase parameters
