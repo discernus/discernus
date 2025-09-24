@@ -340,7 +340,7 @@ class AuditLogger:
         Returns:
             Dictionary with cost breakdown and totals
         """
-        if not self.cost_log.exists():
+        if not self.llm_log.exists():
             return {
                 "total_cost_usd": 0.0,
                 "total_tokens": 0,
@@ -356,44 +356,49 @@ class AuditLogger:
         agents = {}
         
         try:
-            with open(self.cost_log, 'r') as f:
+            with open(self.llm_log, 'r') as f:
                 for line in f:
                     if line.strip():
                         entry = json.loads(line)
                         
-                        cost = entry.get("cost_usd", 0.0)
-                        tokens = entry.get("tokens_used", 0)
-                        operation = entry.get("operation", "unknown")
-                        model = entry.get("model", "unknown")
-                        agent = entry.get("agent_name", "unknown")
+                        # Extract cost data from metadata
+                        metadata = entry.get("metadata", {})
+                        cost = metadata.get("response_cost_usd", 0.0)
+                        tokens = metadata.get("total_tokens", 0)
                         
-                        # Aggregate totals
-                        total_cost += cost
-                        total_tokens += tokens
-                        
-                        # Aggregate by operation
-                        if operation not in operations:
-                            operations[operation] = {"cost_usd": 0.0, "tokens": 0, "calls": 0}
-                        operations[operation]["cost_usd"] += cost
-                        operations[operation]["tokens"] += tokens
-                        operations[operation]["calls"] += 1
-                        
-                        # Aggregate by model
-                        if model not in models:
-                            models[model] = {"cost_usd": 0.0, "tokens": 0, "calls": 0}
-                        models[model]["cost_usd"] += cost
-                        models[model]["tokens"] += tokens
-                        models[model]["calls"] += 1
-                        
-                        # Aggregate by agent
-                        if agent not in agents:
-                            agents[agent] = {"cost_usd": 0.0, "tokens": 0, "calls": 0}
-                        agents[agent]["cost_usd"] += cost
-                        agents[agent]["tokens"] += tokens
-                        agents[agent]["calls"] += 1
+                        # Only process entries with cost data
+                        if cost > 0 or tokens > 0:
+                            operation = metadata.get("step", entry.get("interaction_type", "unknown"))
+                            model = entry.get("model", "unknown")
+                            agent = entry.get("agent_name", "unknown")
+                            
+                            # Aggregate totals
+                            total_cost += cost
+                            total_tokens += tokens
+                            
+                            # Aggregate by operation
+                            if operation not in operations:
+                                operations[operation] = {"cost_usd": 0.0, "tokens": 0, "calls": 0}
+                            operations[operation]["cost_usd"] += cost
+                            operations[operation]["tokens"] += tokens
+                            operations[operation]["calls"] += 1
+                            
+                            # Aggregate by model
+                            if model not in models:
+                                models[model] = {"cost_usd": 0.0, "tokens": 0, "calls": 0}
+                            models[model]["cost_usd"] += cost
+                            models[model]["tokens"] += tokens
+                            models[model]["calls"] += 1
+                            
+                            # Aggregate by agent
+                            if agent not in agents:
+                                agents[agent] = {"cost_usd": 0.0, "tokens": 0, "calls": 0}
+                            agents[agent]["cost_usd"] += cost
+                            agents[agent]["tokens"] += tokens
+                            agents[agent]["calls"] += 1
                         
         except Exception as e:
-            print(f"Warning: Error reading cost log: {e}")
+            print(f"Warning: Error reading LLM interactions log: {e}")
         
         return {
             "total_cost_usd": round(total_cost, 6),

@@ -199,6 +199,9 @@ class LLMGateway(BaseGateway):
                 # Calculate cost
                 cost = completion_cost(completion_response=response)
                 
+                # Add cost to usage data for agent compatibility
+                usage_dict['response_cost_usd'] = cost
+                
                 return response_content, {
                     "success": True,
                     "model": current_model,
@@ -318,6 +321,9 @@ class LLMGateway(BaseGateway):
                 
                 # Calculate cost
                 cost = completion_cost(completion_response=response)
+                
+                # Add cost to usage data for agent compatibility
+                usage_dict['response_cost_usd'] = cost
                 
                 return response_content, {
                     "success": True,

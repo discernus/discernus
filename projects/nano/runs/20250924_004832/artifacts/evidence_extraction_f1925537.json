@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20250923_204832_1",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "evidence_extraction": "[\n  \"The document contains no positive sentiment expressed by the author; all mentions of potentially positive aspects (like 'job creation' or 'environmental safeguards') are immediately refuted or dismissed as false.\",\n  \"The proposed industrial zoning changes represent a catastrophic betrayal of public trust and an assault on our community's well-being.\",\n  \"Residents are rightfully outraged, fearing the long-term health consequences and the destruction of the natural landscapes that define our town's character. This is not progress; it is a reckless, shortsighted capitulation to corporate interests over human lives.\",\n  \"This policy is a festering wound that will undoubtedly lead to years of environmental degradation and legal battles, leaving a permanent scar on our town.\"\n]\nTotal quotes in the composite analysis: 4\nTotal quotes in the output: 4",
+  "document_index": 1,
+  "timestamp": "2025-09-24T00:49:08.644156+00:00"
+}

@@ -271,36 +271,43 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, ski
             rich_console.print_info(f"⏱️  Total execution time: {result.execution_time_seconds:.1f} seconds")
             
             # Show cost summary
-            cost_summary = orchestrator.audit.get_session_costs()
-            if cost_summary["total_cost_usd"] > 0:
-                rich_console.print_info(f"💰 Total cost: ${cost_summary['total_cost_usd']:.4f}")
-                rich_console.print_info(f"🔢 Total tokens: {cost_summary['total_tokens']:,}")
-                
-                # Show top cost operations
-                if cost_summary["operations"]:
-                    top_operations = sorted(cost_summary["operations"].items(), 
-                                          key=lambda x: x[1]["cost_usd"], reverse=True)[:3]
-                    if top_operations:
-                        rich_console.print_info("📊 Top operations:")
-                        for op, data in top_operations:
-                            rich_console.print_info(f"  • {op}: ${data['cost_usd']:.4f} ({data['calls']} calls)")
+            try:
+                cost_summary = orchestrator.audit.get_session_costs()
+                if cost_summary and cost_summary.get("total_cost_usd", 0) > 0:
+                    rich_console.print_info(f"💰 Total cost: ${cost_summary['total_cost_usd']:.4f}")
+                    rich_console.print_info(f"🔢 Total tokens: {cost_summary.get('total_tokens', 0):,}")
+                    
+                    # Show top cost operations
+                    if cost_summary.get("operations"):
+                        top_operations = sorted(cost_summary["operations"].items(), 
+                                              key=lambda x: x[1]["cost_usd"], reverse=True)[:3]
+                        if top_operations:
+                            rich_console.print_info("📊 Top operations:")
+                            for op, data in top_operations:
+                                rich_console.print_info(f"  • {op}: ${data['cost_usd']:.4f} ({data['calls']} calls)")
+                else:
+                    rich_console.print_info("💰 No cost data recorded")
+            except Exception as e:
+                rich_console.print_warning(f"⚠️  Could not retrieve cost data: {e}")
 
             # Show artifact counts by type (if storage available)
             if hasattr(result, 'artifacts') and result.artifacts:
                 try:
                     artifact_types = {}
-                    for artifact_hash in result.artifacts:
-                        if isinstance(artifact_hash, str):
+                    for artifact in result.artifacts:
+                        if isinstance(artifact, dict):
+                            # ExperimentResult.artifacts contains Dict[str, Any] with artifact info
+                            artifact_type = artifact.get("artifact_type", "unknown")
+                            artifact_types[artifact_type] = artifact_types.get(artifact_type, 0) + 1
+                        elif isinstance(artifact, str):
+                            # Fallback for string artifacts (hashes)
                             try:
-                                artifact_metadata = storage.get_artifact_metadata(artifact_hash)
-                                # Artifact type is stored in metadata.artifact_type, not directly
+                                artifact_metadata = storage.get_artifact_metadata(artifact)
                                 artifact_type = artifact_metadata.get("metadata", {}).get("artifact_type", "unknown")
                                 artifact_types[artifact_type] = artifact_types.get(artifact_type, 0) + 1
                             except Exception:
-                                # Fallback for artifacts without metadata
                                 artifact_types["unknown"] = artifact_types.get("unknown", 0) + 1
                         else:
-                            # Fallback for non-string artifacts
                             artifact_types["unknown"] = artifact_types.get("unknown", 0) + 1
 
                     if artifact_types:
@@ -477,9 +484,10 @@ def costs(experiment_path: str, detailed: bool, session: bool):
         
         # Try to load cost data from most recent run
         for run_dir in run_dirs[:3]:  # Check last 3 runs
-            cost_log = run_dir / 'logs' / 'cost_tracking.jsonl'
-            if cost_log.exists():
-                cost_summary = _load_cost_summary_from_log(cost_log)
+            # Check for LLM interactions log (where cost data is actually stored)
+            llm_log = run_dir / 'logs' / 'llm_interactions.jsonl'
+            if llm_log.exists():
+                cost_summary = _load_cost_summary_from_llm_log(llm_log)
                 rich_console.print_info(f"📊 Cost data from run: {run_dir.name}")
                 _display_cost_summary(cost_summary, detailed)
                 return
@@ -521,8 +529,8 @@ def _display_cost_summary(cost_summary: Dict[str, Any], detailed: bool):
                 table.add_row(agent, f"${data['cost_usd']:.4f}", f"{data['tokens']:,}", str(data['calls']))
             rich_console.print_table(table)
 
-def _load_cost_summary_from_log(cost_log_path: Path) -> Dict[str, Any]:
-    """Load and aggregate cost data from a cost log file"""
+def _load_cost_summary_from_llm_log(llm_log_path: Path) -> Dict[str, Any]:
+    """Load and aggregate cost data from an LLM interactions log file"""
     total_cost = 0.0
     total_tokens = 0
     operations = {}
@@ -530,44 +538,49 @@ def _load_cost_summary_from_log(cost_log_path: Path) -> Dict[str, Any]:
     agents = {}
     
     try:
-        with open(cost_log_path, 'r') as f:
+        with open(llm_log_path, 'r') as f:
             for line in f:
                 if line.strip():
                     entry = json.loads(line)
                     
-                    cost = entry.get("cost_usd", 0.0)
-                    tokens = entry.get("tokens_used", 0)
-                    operation = entry.get("operation", "unknown")
-                    model = entry.get("model", "unknown")
-                    agent = entry.get("agent_name", "unknown")
+                    # Extract cost data from metadata
+                    metadata = entry.get("metadata", {})
+                    cost = metadata.get("response_cost_usd", 0.0)
+                    tokens = metadata.get("total_tokens", 0)
                     
-                    # Aggregate totals
-                    total_cost += cost
-                    total_tokens += tokens
-                    
-                    # Aggregate by operation
-                    if operation not in operations:
-                        operations[operation] = {"cost_usd": 0.0, "tokens": 0, "calls": 0}
-                    operations[operation]["cost_usd"] += cost
-                    operations[operation]["tokens"] += tokens
-                    operations[operation]["calls"] += 1
-                    
-                    # Aggregate by model
-                    if model not in models:
-                        models[model] = {"cost_usd": 0.0, "tokens": 0, "calls": 0}
-                    models[model]["cost_usd"] += cost
-                    models[model]["tokens"] += tokens
-                    models[model]["calls"] += 1
-                    
-                    # Aggregate by agent
-                    if agent not in agents:
-                        agents[agent] = {"cost_usd": 0.0, "tokens": 0, "calls": 0}
-                    agents[agent]["cost_usd"] += cost
-                    agents[agent]["tokens"] += tokens
-                    agents[agent]["calls"] += 1
+                    # Only process entries with cost data
+                    if cost > 0 or tokens > 0:
+                        operation = metadata.get("step", entry.get("interaction_type", "unknown"))
+                        model = entry.get("model", "unknown")
+                        agent = entry.get("agent_name", "unknown")
+                        
+                        # Aggregate totals
+                        total_cost += cost
+                        total_tokens += tokens
+                        
+                        # Aggregate by operation
+                        if operation not in operations:
+                            operations[operation] = {"cost_usd": 0.0, "tokens": 0, "calls": 0}
+                        operations[operation]["cost_usd"] += cost
+                        operations[operation]["tokens"] += tokens
+                        operations[operation]["calls"] += 1
+                        
+                        # Aggregate by model
+                        if model not in models:
+                            models[model] = {"cost_usd": 0.0, "tokens": 0, "calls": 0}
+                        models[model]["cost_usd"] += cost
+                        models[model]["tokens"] += tokens
+                        models[model]["calls"] += 1
+                        
+                        # Aggregate by agent
+                        if agent not in agents:
+                            agents[agent] = {"cost_usd": 0.0, "tokens": 0, "calls": 0}
+                        agents[agent]["cost_usd"] += cost
+                        agents[agent]["tokens"] += tokens
+                        agents[agent]["calls"] += 1
                     
     except Exception as e:
-        rich_console.print_warning(f"⚠️  Error reading cost log: {e}")
+        rich_console.print_warning(f"⚠️  Error reading LLM interactions log: {e}")
     
     return {
         "total_cost_usd": total_cost,
