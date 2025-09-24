@@ -213,3 +213,9 @@ CURSOR_AGENT_QUICK_START.md
 CLAUDE.md
 AGENTS.md
 .github
+
+# Development configuration files - not for public release
+.gitignore
+.gitattributes
+.pylintrc
+.obsidian
