@@ -222,3 +222,10 @@ AGENTS.md
 
 # Tools directory - will be moved to Tools open source project
 tools
+
+# Deprecated code and debug files - not for public release
+discernus/agents/deprecated/
+discernus/core/deprecated/
+debug_yaml.py
+docs/archive/
+docs/developer/CURSOR_AGENT_*.md
