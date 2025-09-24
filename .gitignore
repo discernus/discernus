@@ -206,3 +206,10 @@ projects/3entman
 projects/3lakoff
 .cursor
 .obsidian
+
+# IDE and development files - not for public release
+discernus.code-workspace
+CURSOR_AGENT_QUICK_START.md
+CLAUDE.md
+AGENTS.md
+.github
