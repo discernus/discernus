@@ -229,3 +229,6 @@ discernus/core/deprecated/
 debug_yaml.py
 docs/archive/
 docs/developer/CURSOR_AGENT_*.md
+
+# Private research content - not for public release
+projects/wip/
