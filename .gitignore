@@ -219,3 +219,6 @@ AGENTS.md
 .gitattributes
 .pylintrc
 .obsidian
+
+# Tools directory - will be moved to Tools open source project
+tools
