@@ -458,24 +458,35 @@ class V2AnalysisAgent(StandardAgent):
             if raw_response is None:
                 raw_response = 'No analysis result available'
             
-            prompt = f"""You are extracting ALL evidence quotes from a discourse analysis. 
+            prompt = f"""You are extracting ALL evidence quotes from a discourse analysis, preserving dimension associations and scores.
 
 ANALYSIS RESULT:
 {raw_response}
 
-TASK: Extract ALL evidence quotes from the analysis result. Do NOT curate or select - extract every single quote that appears in the evidence_quotes sections.
+TASK: Extract ALL evidence quotes from the analysis result, preserving dimension associations and scores.
 
 REQUIREMENTS:
 - Extract EVERY quote from ALL dimensional evidence_quotes sections
+- Include the dimension name and raw_score for each quote
 - Do NOT curate, select, or filter quotes
 - Include ALL quotes regardless of quality or redundancy
 - Count the total number of quotes in the composite analysis
 - Count the total number of quotes in your output
 - Ensure the counts match exactly
-- Format as a simple JSON array of strings
 
 OUTPUT FORMAT:
-["quote1", "quote2", "quote3", ...]
+[
+  {{
+    "dimension": "tribal_dominance",
+    "raw_score": 0.9,
+    "quote": "The political philosophy of black nationalism only means that the black man should control the politics and the politicians in his own community."
+  }},
+  {{
+    "dimension": "individual_dignity", 
+    "raw_score": 0.3,
+    "quote": "We have injected ourselves into the civil rights struggle. And we intend to expand it from the level of civil rights to the level of human rights."
+  }}
+]
 
 Return ONLY the JSON array, no other text."""
 

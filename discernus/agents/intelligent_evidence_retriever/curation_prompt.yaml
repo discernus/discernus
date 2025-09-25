@@ -13,6 +13,11 @@ template: |
   EVIDENCE TO CURATE:
   {evidence_content}
 
+  EVIDENCE CONTEXT AVAILABLE:
+  - Dimension names for each quote
+  - Raw scores for each dimension  
+  - Use this context to prioritize evidence based on dimension strength and relevance
+
   TASK: Select the {expected_quotes} most compelling quotes that:
   1. Directly support the statistical findings for this iteration's focus area
   2. Are clear, specific, and representative examples
