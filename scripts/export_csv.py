@@ -32,11 +32,14 @@ def extract_csv_data(experiment_path, output_file):
     # Look in artifacts/analysis/ subdirectory if it exists, otherwise search recursively
     if (experiment_path / "artifacts" / "analysis").exists():
         composite_files = list((experiment_path / "artifacts" / "analysis").glob("composite_analysis_*.json"))
+        # Also look for score_extraction files as fallback
+        score_files = list((experiment_path / "artifacts" / "analysis").glob("score_extraction_*.json"))
     else:
         composite_files = list(experiment_path.glob("**/composite_analysis_*.json"))
+        score_files = list(experiment_path.glob("**/score_extraction_*.json"))
     
-    if not composite_files:
-        print(f"No composite_analysis files found in {experiment_path}")
+    if not composite_files and not score_files:
+        print(f"No analysis files found in {experiment_path}")
         return
     
     rows = []
@@ -114,6 +117,63 @@ def extract_csv_data(experiment_path, output_file):
                             
         except Exception as e:
             print(f"Error processing {composite_file}: {e}")
+            continue
+    
+    # Process score_extraction files as fallback for missing composite_analysis data
+    for score_file in score_files:
+        try:
+            with open(score_file, 'r') as f:
+                data = json.load(f)
+            
+            # Extract document info from filename or metadata
+            document_id = score_file.stem.replace('score_extraction_', '')
+            
+            # Parse the score_extraction response
+            if 'score_extraction' in data:
+                raw_response = data['score_extraction']
+                if raw_response.startswith('```json\n'):
+                    raw_response = raw_response[7:]  # Remove ```json\n
+                if raw_response.endswith('\n```'):
+                    raw_response = raw_response[:-4]  # Remove \n```
+                
+                try:
+                    response_data = json.loads(raw_response)
+                except json.JSONDecodeError as e:
+                    print(f"Info: Standard JSON parsing failed for {score_file.name}: {e}")
+                    response_data = permissive_json_parse(raw_response)
+                    if response_data is None:
+                        print(f"Warning: Skipping {score_file.name} due to JSON parsing error")
+                        continue
+                    else:
+                        print(f"Info: Used permissive parsing for {score_file.name}")
+                
+                dimensional_scores = response_data.get('dimensional_scores', {})
+                derived_metrics = response_data.get('derived_metrics', {})
+                
+                # Process each dimension
+                for dimension, scores in dimensional_scores.items():
+                    raw_score = scores.get('raw_score')
+                    salience = scores.get('salience')
+                    confidence = scores.get('confidence')
+                    
+                    # Add derived metrics as separate rows
+                    for metric_name, metric_value in derived_metrics.items():
+                        rows.append({
+                            'document_id': document_id,
+                            'dimension': dimension,
+                            'raw_score': raw_score,
+                            'salience': salience,
+                            'confidence': confidence,
+                            'derived_metric_name': metric_name,
+                            'derived_metric_value': metric_value,
+                            'evidence_quote': ''
+                        })
+                        
+        except json.JSONDecodeError as e:
+            print(f"Error processing {score_file.name}: {e}")
+            continue
+        except Exception as e:
+            print(f"An unexpected error occurred while processing {score_file.name}: {e}")
             continue
     
     # Write CSV
