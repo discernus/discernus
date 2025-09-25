@@ -109,6 +109,30 @@ After an experiment run completes, a new directory is created (e.g., `projects/n
 
 The most important output is the final synthesis report, typically found in `artifacts/final_synthesis_report_*.md`.
 
+### Exporting Data for Analysis
+
+For researchers who need to perform additional statistical analysis or data manipulation, Discernus provides a CSV export feature that extracts structured data from the analysis artifacts.
+
+```bash
+# Export experiment data to CSV
+discernus export-csv projects/your_experiment
+
+# Export to custom file
+discernus export-csv projects/your_experiment --output my_analysis.csv
+```
+
+**CSV Output Contains:**
+- **Raw scores**: Dimension scores, salience, and confidence for each document
+- **Derived metrics**: Calculated metrics (e.g., tension indices, cohesion components)
+- **Evidence quotes**: Supporting text evidence for each dimension
+- **Document tracking**: Document identifiers for data provenance
+
+This CSV format allows you to:
+- Import data into statistical software (R, Python, SPSS)
+- Perform custom statistical analysis
+- Create visualizations and charts
+- Share structured data with collaborators
+
 ---
 
 ## 5. Advanced Usage

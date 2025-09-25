@@ -106,6 +106,37 @@ discernus status
 
 **Output**: System components status including Python version, Git, LLM models, and available experiments.
 
+### `discernus export-csv`
+
+Export experiment data to CSV format for further analysis.
+
+```bash
+discernus export-csv [EXPERIMENT_PATH] [OPTIONS]
+```
+
+**Arguments:**
+- `EXPERIMENT_PATH`: Path to experiment directory (defaults to current directory)
+
+**Options:**
+```bash
+--output FILE              # Output CSV file path (default: export.csv)
+```
+
+**Output**: CSV file containing:
+- Raw scores for each dimension (raw_score, salience, confidence)
+- Derived metrics for each dimension
+- Evidence quotes supporting each dimension
+- Document identifiers for tracking
+
+**Examples:**
+```bash
+# Export to default export.csv
+discernus export-csv projects/experiment
+
+# Export to custom file
+discernus export-csv projects/experiment --output analysis_data.csv
+```
+
 ## Common Workflows
 
 ### Quick Data Exploration
