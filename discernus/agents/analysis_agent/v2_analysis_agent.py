@@ -506,7 +506,7 @@ Return ONLY the JSON array, no other text."""
             if metadata and 'usage' in metadata:
                 usage_data = metadata['usage']
                 self.audit.log_llm_interaction(
-                    model="vertex_ai/gemini-2.5-flash-lite",
+                    model="vertex_ai/gemini-2.5-flash",
                     prompt=prompt,
                     response=content,
                     agent_name=self.agent_name,
@@ -620,7 +620,7 @@ Extract both dimensional scores AND derived metrics preserving all computational
             if metadata and 'usage' in metadata:
                 usage_data = metadata['usage']
                 self.audit.log_llm_interaction(
-                    model="vertex_ai/gemini-2.5-flash-lite",
+                    model="vertex_ai/gemini-2.5-flash",
                     prompt=prompt,
                     response=content,
                     agent_name=self.agent_name,
@@ -749,7 +749,7 @@ Return the marked-up document in markdown format."""
             if metadata and 'usage' in metadata:
                 usage_data = metadata['usage']
                 self.audit.log_llm_interaction(
-                    model="vertex_ai/gemini-2.5-flash-lite",
+                    model="vertex_ai/gemini-2.5-flash",
                     prompt=prompt,
                     response=content,
                     agent_name=self.agent_name,

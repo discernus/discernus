@@ -245,7 +245,7 @@ discernus status
 ### Default Models
 - **Analysis**: `vertex_ai/gemini-2.5-flash`
 - **Synthesis**: `vertex_ai/gemini-2.5-pro`
-- **Validation**: `vertex_ai/gemini-2.5-flash-lite`
+- **Validation**: `vertex_ai/gemini-2.5-flash-lite` (with reasoning=1)
 - **Statistical**: `vertex_ai/gemini-2.5-pro`
 
 ### Model Selection

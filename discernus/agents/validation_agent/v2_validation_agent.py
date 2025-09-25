@@ -41,7 +41,7 @@ class V2ValidationAgent(StandardAgent):
         # Initialize LLM gateway
         model_registry = ModelRegistry()
         self.llm_gateway = LLMGateway(model_registry)
-        self.model = "vertex_ai/gemini-2.5-pro"  # Default model for validation
+        self.model = "vertex_ai/gemini-2.5-flash-lite"  # TEST: Flash Lite with reasoning=1
         
         # Load externalized YAML prompt template
         self.prompt_template = self._load_prompt_template()
@@ -292,7 +292,8 @@ class V2ValidationAgent(StandardAgent):
                 model=self.model,
                 prompt=prompt,
                 system_prompt="You are a validation expert for the Discernus research platform.",
-                response_schema=response_schema
+                response_schema=response_schema,
+                reasoning=1  # TEST: Enable reasoning parameter for Flash Lite
             )
 
             # Log LLM interaction with cost data

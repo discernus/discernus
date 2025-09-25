@@ -642,13 +642,25 @@ def status():
     except Exception as e:
         status_table.add_row("LLM Models", "❌ Error", str(e))
     
-    # Check projects directory
-    projects_dir = Path('projects')
-    if projects_dir.exists():
-        experiment_count = len([d for d in projects_dir.iterdir() if d.is_dir() and (d / 'experiment.md').exists()])
-        status_table.add_row("Projects", "✅ Available", f"{experiment_count} experiments")
+    # Check projects directory - find repository root first
+    def find_repository_root() -> Optional[Path]:
+        """Find repository root by looking for .git or pyproject.toml"""
+        current = Path.cwd()
+        for parent in [current] + list(current.parents):
+            if (parent / '.git').exists() or (parent / 'pyproject.toml').exists():
+                return parent
+        return None
+    
+    repo_root = find_repository_root()
+    if repo_root:
+        projects_dir = repo_root / 'projects'
+        if projects_dir.exists():
+            experiment_count = len([d for d in projects_dir.iterdir() if d.is_dir() and (d / 'experiment.md').exists()])
+            status_table.add_row("Projects", "✅ Available", f"{experiment_count} experiments")
+        else:
+            status_table.add_row("Projects", "⚠️ Missing", "Create 'projects' directory")
     else:
-        status_table.add_row("Projects", "⚠️ Missing", "Create 'projects' directory")
+        status_table.add_row("Projects", "❌ Error", "Could not find repository root")
     
     rich_console.print_table(status_table)
     

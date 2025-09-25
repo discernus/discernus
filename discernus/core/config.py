@@ -35,7 +35,7 @@ class DiscernusConfig(BaseSettings):
     # Model configuration
     analysis_model: str = Field(default="vertex_ai/gemini-2.5-flash", description="Default LLM model for analysis")
     synthesis_model: str = Field(default="vertex_ai/gemini-2.5-pro", description="Default LLM model for synthesis")
-    validation_model: str = Field(default="vertex_ai/gemini-2.5-pro", description="Default LLM model for validation (requires higher intelligence)")
+    validation_model: str = Field(default="vertex_ai/gemini-2.5-flash-lite", description="Default LLM model for validation (with reasoning=1 for cost optimization)")
     derived_metrics_model: str = Field(default="vertex_ai/gemini-2.5-flash-lite", description="Default LLM model for derived metrics planning and calculation")
     
     # Execution options
@@ -171,8 +171,8 @@ class ConfigManager:
             '# Model Configuration': None,
             'analysis_model': 'vertex_ai/gemini-2.5-flash',
             'synthesis_model': 'vertex_ai/gemini-2.5-pro', 
-            'validation_model': 'vertex_ai/gemini-2.5-pro',
-            'derived_metrics_model': 'vertex_ai/gemini-2.5-pro',
+            'validation_model': 'vertex_ai/gemini-2.5-flash-lite',
+            'derived_metrics_model': 'vertex_ai/gemini-2.5-flash-lite',
             '': None,
             '# Execution Options': None, 
             'auto_commit': True,
