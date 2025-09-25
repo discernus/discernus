@@ -49,10 +49,15 @@ def extract_csv_data(experiment_path, output_file):
             # Parse the score_extraction response
             if 'score_extraction' in data:
                 raw_response = data['score_extraction']
+                # Handle both single and double quote markdown wrappers
                 if raw_response.startswith('```json\n'):
                     raw_response = raw_response[7:]  # Remove ```json\n
+                elif raw_response.startswith('```json'):
+                    raw_response = raw_response[7:]  # Remove ```json
                 if raw_response.endswith('\n```'):
                     raw_response = raw_response[:-4]  # Remove \n```
+                elif raw_response.endswith('```'):
+                    raw_response = raw_response[:-3]  # Remove ```
                 
                 try:
                     response_data = json.loads(raw_response)
@@ -67,6 +72,7 @@ def extract_csv_data(experiment_path, output_file):
                 
                 dimensional_scores = response_data.get('dimensional_scores', {})
                 derived_metrics = response_data.get('derived_metrics', {})
+                
                 
                 # Process each dimension
                 for dimension, scores in dimensional_scores.items():
@@ -84,6 +90,19 @@ def extract_csv_data(experiment_path, output_file):
                             'confidence': confidence,
                             'derived_metric_name': metric_name,
                             'derived_metric_value': metric_value,
+                            'evidence_quote': ''
+                        })
+                    
+                    # If no derived metrics, add a row for the dimension itself
+                    if not derived_metrics:
+                        rows.append({
+                            'document_id': document_id,
+                            'dimension': dimension,
+                            'raw_score': raw_score,
+                            'salience': salience,
+                            'confidence': confidence,
+                            'derived_metric_name': '',
+                            'derived_metric_value': '',
                             'evidence_quote': ''
                         })
                         
