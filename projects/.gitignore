@@ -1,5 +1,8 @@
 # Private content - not for public release
-projects/micro
-projects/nano
+# Block all experiment directories except sample ones
+projects/*
+!projects/.gitignore
+!projects/micro
+!projects/nano
 frameworks/workbench
 pm
