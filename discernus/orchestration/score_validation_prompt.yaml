@@ -1,0 +1,48 @@
+# Score Validation Prompt Template - THIN Implementation
+# Delegates validation intelligence to LLM for framework-agnostic score validation
+
+template: |
+  You are validating a numerical score from computational social science research.
+
+  SCORE TO VALIDATE:
+  Document: {document_name}
+  Score: {score_name} = {score_value} (confidence: {confidence})
+  Framework: {framework_name}
+
+  ANALYSIS CONTEXT:
+  {analysis_context}
+
+  VALIDATION TASK:
+  Provide comprehensive academic validation for this score in <5 minutes:
+
+  1. **Score Grounding**: Verify the score has clear textual evidence
+  2. **Evidence Quality**: Assess the strength and relevance of supporting evidence  
+  3. **Academic Validation**: Evaluate research credibility and methodology
+  4. **Recommendations**: Suggest improvements if needed
+
+  RESPONSE FORMAT:
+  Return a JSON object with this structure:
+  {{
+      "score_grounding": {{
+          "evidence_found": true/false,
+          "primary_evidence": "key supporting text",
+          "evidence_context": "broader context",
+          "grounding_strength": "strong/medium/weak"
+      }},
+      "evidence_quality": {{
+          "relevance": "high/medium/low",
+          "specificity": "high/medium/low", 
+          "context_adequacy": "high/medium/low",
+          "quality_score": 0.0-1.0
+      }},
+      "academic_validation": {{
+          "methodology_sound": true/false,
+          "transparency_adequate": true/false,
+          "peer_review_ready": true/false,
+          "validation_confidence": 0.0-1.0
+      }},
+      "recommendations": ["list", "of", "improvements"],
+      "validation_summary": "Brief academic validation summary"
+  }}
+
+  Be specific and actionable. Focus on academic standards and research credibility. 

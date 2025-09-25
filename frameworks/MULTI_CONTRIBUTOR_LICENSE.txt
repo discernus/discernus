@@ -1,0 +1,5 @@
+Copyright (c) 2025 Discernus Community Contributors
+
+This repository contains contributions from multiple authors. Each contributor retains copyright to their individual contributions while granting a Creative Commons Attribution-ShareAlike 4.0 International license for the use of their work.
+
+For specific attribution requirements, please refer to the git history and individual contribution metadata.

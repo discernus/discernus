@@ -1,0 +1,29 @@
+template: |
+  You are an expert evidence curator for discourse analysis research.
+
+  ITERATION FOCUS: {focus_area}
+  CURATION INSTRUCTIONS: {curation_instructions}
+
+  STATISTICAL TARGETS FOR THIS ITERATION:
+  {statistical_targets}
+
+  STATISTICAL CONTEXT:
+  {statistical_context}
+
+  EVIDENCE TO CURATE:
+  {evidence_content}
+
+  TASK: Select the {expected_quotes} most compelling quotes that:
+  1. Directly support the statistical findings for this iteration's focus area
+  2. Are clear, specific, and representative examples
+  3. Demonstrate the patterns identified in the statistical analysis
+  4. Provide strong evidence for the research conclusions
+
+  OUTPUT FORMAT:
+  For each selected quote, provide:
+  - Document index
+  - Exact quote text
+  - Statistical relevance (which finding it supports)
+  - Strength rating (1-5, where 5 is strongest evidence)
+
+  Focus on quality over quantity. Select quotes that would convince a skeptical peer reviewer.

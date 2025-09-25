@@ -1,0 +1,234 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+
+# Temporary files and large media
+tmp/
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+.ENV
+.env.bak
+.venv.bak
+
+# IDE and Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Environment variables
+.env
+.env.local
+.env.production
+.env.development
+
+# Database files
+*.db
+*.sqlite3
+*.sqlite
+
+# Log files
+*.log
+logs/
+*.log.*
+
+# Generated outputs
+reports/
+outputs/
+temp_results/
+# Note: results/ directories contain research artifacts that should be tracked
+# Only exclude temporary or large generated files
+*.eps
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+
+# Security
+keys/
+*.key
+*.pem
+*.crt
+*.p12
+credentials.json
+service_account.json
+
+# Data files (often large)
+*.csv
+data/
+# Only ignore the root corpus directory, not project-specific corpus directories
+/corpus/
+datasets/
+
+# Large JSON files (research data, not configuration)
+# Note: Configuration JSON files (manifests, configs) are tracked
+# Only exclude JSON files that contain large research datasets
+**/large_dataset_*.json
+**/large_dataset_*.jsonl
+
+# Large YAML files (research data, not configuration)
+# Note: Configuration YAML files (prompts, frameworks, configs) are tracked
+# Only exclude YAML files that contain large research datasets
+**/large_dataset_*.yaml
+**/large_dataset_*.yml
+
+# Large media and data files that cause git push issues
+*.mp4
+*.m4a
+*.opus
+*.mp3
+*.wav
+*.flac
+*.dta
+*.gephi
+*.zip
+*.rar
+*.7z
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+# Large research data files
+**/muslimban_full.csv
+**/*.dta
+**/*.gephi
+# Large log files
+**/llm_interactions.jsonl
+# Brazil 2018 media files
+pm/populism/databases/brazil_2018/video/
+pm/populism/databases/brazil_2018/audio/
+# Large PM folder exclusions
+pm/populism/vanderveen_replication_extension/byu_strategy/
+pm/populism/vanderveen_replication_extension/corpus/
+pm/populism/databases/
+pm/baselines/
+pm/reports/
+pm/active_projects/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# Research and experimental files
+experiments/*/results/
+experiments/*/outputs/
+research_sessions/
+conversation_logs/
+pm/ancient_archives/
+*.bak
+*.backup
+
+# Documentation build
+docs/_build/
+docs/build/
+site/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Miscellaneous
+*.tar.gz
+*.zip
+*.rar
+*.7z
+.mypy_cache/
+.dmypy.json
+dmypy.json
+# Prevent nested git repositories
+**/.git/
+**/git/
+# Prevent common experiment repo creation patterns
+experiments/**/.git/
+projects/**/.git/
+results/**/.git/
+node_modules
+
+# Logs directory
+logs/
+# Private content - not for public release
+projects/micro
+projects/nano
+frameworks/workbench
+pm
+projects/0mm
+projects/1caf
+projects/1ecf
+projects/2cff
+projects/2mft
+projects/2pdaf
+projects/3bethics
+projects/3entman
+projects/3lakoff
+.cursor
+.obsidian
+
+# IDE and development files - not for public release
+discernus.code-workspace
+CURSOR_AGENT_QUICK_START.md
+CLAUDE.md
+AGENTS.md
+.github
+
+# Development configuration files - not for public release
+.gitignore
+.gitattributes
+.pylintrc
+.obsidian
+
+# Tools directory - will be moved to Tools open source project
+tools
+
+# Deprecated code and debug files - not for public release
+discernus/agents/deprecated/
+discernus/core/deprecated/
+debug_yaml.py
+docs/archive/
+docs/developer/CURSOR_AGENT_*.md
+
+# Private research content - not for public release
+projects/wip/

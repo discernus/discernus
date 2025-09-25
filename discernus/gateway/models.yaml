@@ -1,0 +1,52 @@
+models:
+  # Google Gemini 2.5 Models
+  google/gemini-2.5-pro:
+    provider: google
+    performance_tier: top-tier
+    utility_tier: 1
+    task_suitability: [analysis, synthesis, validation, statistical, evidence]
+    description: "Google's most capable model for complex reasoning and analysis"
+    
+  google/gemini-2.5-flash:
+    provider: google
+    performance_tier: high-tier
+    utility_tier: 2
+    task_suitability: [analysis, synthesis, validation, statistical, evidence]
+    description: "Google's fast, capable model for most research tasks"
+    
+  google/gemini-2.5-lite:
+    provider: google
+    performance_tier: standard-tier
+    utility_tier: 4
+    task_suitability: [analysis, validation]
+    description: "Google's efficient model for basic analysis tasks"
+    
+  # Anthropic Claude Models
+  anthropic/claude-3-5-sonnet-20241022:
+    provider: anthropic
+    performance_tier: top-tier
+    utility_tier: 1
+    task_suitability: [analysis, synthesis, validation, statistical, evidence]
+    description: "Anthropic's most capable model for complex reasoning"
+    
+  anthropic/claude-3-5-haiku-20241022:
+    provider: anthropic
+    performance_tier: high-tier
+    utility_tier: 2
+    task_suitability: [analysis, synthesis, validation, statistical, evidence]
+    description: "Anthropic's fast, capable model for research tasks"
+    
+  # OpenAI Models
+  openai/gpt-4o:
+    provider: openai
+    performance_tier: top-tier
+    utility_tier: 1
+    task_suitability: [analysis, synthesis, validation, statistical, evidence]
+    description: "OpenAI's most capable model for complex reasoning"
+    
+  openai/gpt-4o-mini:
+    provider: openai
+    performance_tier: high-tier
+    utility_tier: 2
+    task_suitability: [analysis, synthesis, validation, statistical, evidence]
+    description: "OpenAI's efficient model for most research tasks"

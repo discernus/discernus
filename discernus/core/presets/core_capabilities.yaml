@@ -1,0 +1,55 @@
+name: core_capabilities
+description: "Core libraries that are always available in the secure execution environment."
+version: 1.0.0
+
+libraries:
+  # Data science core
+  - numpy          # Numerical computing, arrays, linear algebra
+  - np             # NumPy alias for convenience
+  - pandas         # Data manipulation, analysis, and structured data
+  - pd             # Pandas alias for convenience
+  - matplotlib     # Plotting and visualization library
+  - plt            # Matplotlib pyplot alias for convenience
+  - seaborn        # Statistical data visualization, built on matplotlib
+  - sns            # Seaborn alias for convenience
+  - scipy          # Scientific computing, optimization, signal processing
+  - scipy.stats    # Statistical functions, distributions, hypothesis tests
+  - sklearn        # Machine learning algorithms and preprocessing
+  - plotly         # Interactive plotting and dashboards
+  - statistics     # Python standard library statistical functions
+  - math           # Python standard library mathematical functions
+  - random         # Python standard library random number generation
+  
+  # Advanced statistical analysis
+  - scikit_posthocs  # Post-hoc testing (Dunn's, Tukey's, etc.) for multiple comparisons
+  - pingouin         # Effect sizes, reliability, non-parametric tests, power analysis
+  - statsmodels      # Advanced statistical modeling, regression, time series
+
+  # Text analysis (safe components)
+  - nltk.sentiment  # Sentiment analysis using NLTK's VADER and other methods
+  - nltk.corpus     # Access to NLTK's text corpora and datasets
+  - nltk.tokenize   # Text tokenization, sentence/word splitting
+  - nltk.stem       # Text stemming and lemmatization
+  - textblob        # Simple text processing, sentiment analysis, part-of-speech tagging
+  - textstat        # Text readability metrics, complexity analysis
+  - wordcloud       # Word cloud generation and text visualization
+  - re              # Python standard library regular expressions
+  - string          # Python standard library string manipulation
+
+  # Computational rhetoric toolkit
+  - vaderSentiment           # VADER sentiment analysis (social media optimized)
+  - vaderSentiment.vaderSentiment  # VADER sentiment analysis module
+
+  # General utilities and Python standard library
+  - json            # JSON data serialization and parsing
+  - csv             # CSV file reading and writing
+  - datetime        # Date and time manipulation
+  - collections     # Advanced data structures (deque, Counter, defaultdict, etc.)
+  - collections.abc # Abstract base classes for collections
+  - itertools       # Iterator tools and functional programming utilities
+  - functools       # Higher-order functions and function tools
+  - operator        # Function equivalents of operators (add, mul, etc.)
+  - heapq           # Heap queue algorithm (priority queues)
+  - bisect          # Binary search and insertion utilities
+  - copy            # Shallow and deep copy operations
+  - warnings        # Warning control and filtering
