@@ -661,7 +661,32 @@ def status():
 # MANAGEMENT COMMANDS
 # ============================================================================
 
-
+@cli.command()
+@click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))
+@click.option('--output', '-o', default='export.csv', help='Output CSV file path')
+def export_csv(experiment_path, output):
+    """Export experiment data to CSV format
+    
+    Extracts raw scores, derived metrics, and evidence quotes from composite_analysis artifacts.
+    """
+    rich_console.print_section("📊 Exporting Experiment Data to CSV")
+    
+    try:
+        # Run the export script
+        script_path = Path(__file__).parent.parent / "scripts" / "export_csv.py"
+        result = subprocess.run([
+            sys.executable, str(script_path), experiment_path, "--output", output
+        ], capture_output=True, text=True)
+        
+        if result.returncode == 0:
+            rich_console.print_success(f"✅ Data exported to {output}")
+            if result.stdout:
+                print(result.stdout)
+        else:
+            rich_console.print_error(f"❌ Export failed: {result.stderr}")
+            
+    except Exception as e:
+        rich_console.print_error(f"❌ Error running export: {e}")
 
 # ============================================================================
 
