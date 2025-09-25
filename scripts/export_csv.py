@@ -108,8 +108,14 @@ def extract_csv_data(experiment_path, output_file):
                 raw_response = data['evidence_extraction']
                 
                 try:
-                    # Extract just the JSON array part (before any extra text)
-                    # Find the end of the JSON array
+                    # Handle both old format (flat array) and new format (structured objects)
+                    # First clean up any markdown formatting
+                    if raw_response.startswith('```json\n'):
+                        raw_response = raw_response[7:]  # Remove ```json\n
+                    if raw_response.endswith('\n```'):
+                        raw_response = raw_response[:-4]  # Remove \n```
+                    
+                    # Try to extract JSON array part (before any extra text)
                     bracket_count = 0
                     json_end = 0
                     for i, char in enumerate(raw_response):
@@ -124,20 +130,37 @@ def extract_csv_data(experiment_path, output_file):
                     if json_end > 0:
                         json_part = raw_response[:json_end]
                         evidence_quotes = json.loads(json_part)
+                        
                         if isinstance(evidence_quotes, list):
-                            # Add evidence quotes as separate rows
-                            for quote in evidence_quotes:
-                                if quote.strip():  # Skip empty quotes
-                                    rows.append({
-                                        'document_id': document_id,
-                                        'dimension': 'evidence',
-                                        'raw_score': '',
-                                        'salience': '',
-                                        'confidence': '',
-                                        'derived_metric_name': '',
-                                        'derived_metric_value': '',
-                                        'evidence_quote': quote
-                                    })
+                            # Check if it's the new structured format or old flat format
+                            if evidence_quotes and isinstance(evidence_quotes[0], dict) and 'dimension' in evidence_quotes[0]:
+                                # New structured format with dimension associations
+                                for evidence_item in evidence_quotes:
+                                    if evidence_item.get('quote', '').strip():
+                                        rows.append({
+                                            'document_id': document_id,
+                                            'dimension': evidence_item.get('dimension', ''),
+                                            'raw_score': evidence_item.get('raw_score', ''),
+                                            'salience': '',
+                                            'confidence': '',
+                                            'derived_metric_name': '',
+                                            'derived_metric_value': '',
+                                            'evidence_quote': evidence_item.get('quote', '')
+                                        })
+                            else:
+                                # Old flat format - treat as dimension 'evidence'
+                                for quote in evidence_quotes:
+                                    if quote.strip():
+                                        rows.append({
+                                            'document_id': document_id,
+                                            'dimension': 'evidence',
+                                            'raw_score': '',
+                                            'salience': '',
+                                            'confidence': '',
+                                            'derived_metric_name': '',
+                                            'derived_metric_value': '',
+                                            'evidence_quote': quote
+                                        })
                 except json.JSONDecodeError as e:
                     print(f"Info: Could not parse evidence from {evidence_file.name}: {e}")
                     continue
