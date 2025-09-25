@@ -18,6 +18,10 @@ def permissive_json_parse(json_string):
     except ImportError:
         # Fallback to standard json if tolerantjson not available
         return None
+    except Exception as e:
+        # If tolerantjson fails, return None
+        print(f"Info: tolerantjson failed: {e}")
+        return None
 
 
 def extract_csv_data(experiment_path, output_file):
@@ -54,8 +58,9 @@ def extract_csv_data(experiment_path, output_file):
                 try:
                     # Try standard JSON parsing first
                     response_data = json.loads(raw_response)
-                except json.JSONDecodeError:
+                except json.JSONDecodeError as e:
                     # Try permissive parsing with common LLM fixes
+                    print(f"Info: Standard JSON parsing failed for {composite_file.name}: {e}")
                     response_data = permissive_json_parse(raw_response)
                     if response_data is None:
                         print(f"Warning: Skipping {composite_file.name} due to JSON parsing error")
