@@ -16,7 +16,11 @@ def extract_csv_data(experiment_path, output_file):
     experiment_path = Path(experiment_path)
     
     # Find all composite_analysis JSON files
-    composite_files = list(experiment_path.glob("**/composite_analysis_*.json"))
+    # Look in artifacts/analysis/ subdirectory if it exists, otherwise search recursively
+    if (experiment_path / "artifacts" / "analysis").exists():
+        composite_files = list((experiment_path / "artifacts" / "analysis").glob("composite_analysis_*.json"))
+    else:
+        composite_files = list(experiment_path.glob("**/composite_analysis_*.json"))
     
     if not composite_files:
         print(f"No composite_analysis files found in {experiment_path}")
