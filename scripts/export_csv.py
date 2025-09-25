@@ -10,6 +10,40 @@ import sys
 from pathlib import Path
 import argparse
 
+def permissive_json_parse(json_string):
+    """Attempt to parse JSON with common LLM output fixes."""
+    import re
+    
+    # Try to fix the specific issue with unescaped backslashes in strings
+    # This is a more targeted approach for the common LLM JSON issues
+    
+    # First, try to escape unescaped backslashes that are not part of valid escape sequences
+    # Pattern: backslash followed by anything that's not a valid escape character
+    fixed_json = re.sub(r'\\(?![\\"/bfnrt])', r'\\\\', json_string)
+    
+    # Try to fix single quotes to double quotes (but be careful not to break strings)
+    # Only replace single quotes that are clearly string delimiters
+    fixed_json = re.sub(r"'([^']*)'", r'"\1"', fixed_json)
+    
+    # Remove trailing commas before } or ]
+    fixed_json = re.sub(r',(\s*[}\]])', r'\1', fixed_json)
+    
+    try:
+        return json.loads(fixed_json)
+    except:
+        # If that didn't work, try a more aggressive approach
+        # Replace problematic characters that commonly cause issues
+        fixed_json = json_string
+        # Escape any remaining problematic characters
+        fixed_json = fixed_json.replace('\\', '\\\\')  # Escape all backslashes
+        fixed_json = re.sub(r"'([^']*)'", r'"\1"', fixed_json)  # Single to double quotes
+        fixed_json = re.sub(r',(\s*[}\]])', r'\1', fixed_json)  # Remove trailing commas
+        
+        try:
+            return json.loads(fixed_json)
+        except:
+            return None
+
 
 def extract_csv_data(experiment_path, output_file):
     """Extract CSV data from composite_analysis artifacts."""
@@ -43,10 +77,16 @@ def extract_csv_data(experiment_path, output_file):
                     raw_response = raw_response[:-4]  # Remove \n```
                 
                 try:
+                    # Try standard JSON parsing first
                     response_data = json.loads(raw_response)
-                except json.JSONDecodeError as e:
-                    print(f"Warning: Skipping {composite_file.name} due to JSON parsing error: {e}")
-                    continue
+                except json.JSONDecodeError:
+                    # Try permissive parsing with common LLM fixes
+                    response_data = permissive_json_parse(raw_response)
+                    if response_data is None:
+                        print(f"Warning: Skipping {composite_file.name} due to JSON parsing error")
+                        continue
+                    else:
+                        print(f"Info: Used permissive parsing for {composite_file.name}")
                 document_analyses = response_data.get('document_analyses', [])
                 
                 for doc in document_analyses:
