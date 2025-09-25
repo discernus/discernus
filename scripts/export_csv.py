@@ -11,38 +11,13 @@ from pathlib import Path
 import argparse
 
 def permissive_json_parse(json_string):
-    """Attempt to parse JSON with common LLM output fixes."""
-    import re
-    
-    # Try to fix the specific issue with unescaped backslashes in strings
-    # This is a more targeted approach for the common LLM JSON issues
-    
-    # First, try to escape unescaped backslashes that are not part of valid escape sequences
-    # Pattern: backslash followed by anything that's not a valid escape character
-    fixed_json = re.sub(r'\\(?![\\"/bfnrt])', r'\\\\', json_string)
-    
-    # Try to fix single quotes to double quotes (but be careful not to break strings)
-    # Only replace single quotes that are clearly string delimiters
-    fixed_json = re.sub(r"'([^']*)'", r'"\1"', fixed_json)
-    
-    # Remove trailing commas before } or ]
-    fixed_json = re.sub(r',(\s*[}\]])', r'\1', fixed_json)
-    
+    """Attempt to parse JSON with tolerantjson for LLM output."""
     try:
-        return json.loads(fixed_json)
-    except:
-        # If that didn't work, try a more aggressive approach
-        # Replace problematic characters that commonly cause issues
-        fixed_json = json_string
-        # Escape any remaining problematic characters
-        fixed_json = fixed_json.replace('\\', '\\\\')  # Escape all backslashes
-        fixed_json = re.sub(r"'([^']*)'", r'"\1"', fixed_json)  # Single to double quotes
-        fixed_json = re.sub(r',(\s*[}\]])', r'\1', fixed_json)  # Remove trailing commas
-        
-        try:
-            return json.loads(fixed_json)
-        except:
-            return None
+        import tolerantjson
+        return tolerantjson.tolerate(json_string)
+    except ImportError:
+        # Fallback to standard json if tolerantjson not available
+        return None
 
 
 def extract_csv_data(experiment_path, output_file):
