@@ -42,7 +42,11 @@ def extract_csv_data(experiment_path, output_file):
                 if raw_response.endswith('\n```'):
                     raw_response = raw_response[:-4]  # Remove \n```
                 
-                response_data = json.loads(raw_response)
+                try:
+                    response_data = json.loads(raw_response)
+                except json.JSONDecodeError as e:
+                    print(f"Warning: Skipping {composite_file.name} due to JSON parsing error: {e}")
+                    continue
                 document_analyses = response_data.get('document_analyses', [])
                 
                 for doc in document_analyses:
