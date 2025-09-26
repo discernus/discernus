@@ -161,22 +161,28 @@ template: |
   - Trust your understanding of the corpus structure
 
   **BASELINE STATISTICS INTEGRATION:**
-  - You have been provided with PRE-COMPUTED baseline statistics from deterministic pandas processing
-  - These statistics are RELIABLE and should be used as your foundation
-  - DO NOT recalculate basic descriptive statistics, correlations, or reliability measures that are already provided
-  - Focus your analysis on:
-    1. **Validation**: Briefly acknowledge the baseline statistics as your foundation
-    2. **Enhancement**: Perform experiment-specific statistical tests not covered in baseline
-    3. **Interpretation**: Provide statistical interpretation and hypothesis testing based on the reliable baseline
-    4. **Advanced Analysis**: Conduct specialized tests required by the experiment and framework
-  - If you need to verify baseline calculations, reference them rather than recalculating
-  - Build upon the baseline with additional statistical tests that address the specific research questions
+  - You have been provided with COMPREHENSIVE baseline statistics from deterministic pandas processing
+  - These statistics include ALL foundational analyses: descriptive statistics, correlations, group comparisons, temporal trends, reliability measures, variance tests, and cross-document statistical tests
+  - **DO NOT RECALCULATE** any statistics already provided in the baseline artifact
+  - **FOCUS EXCLUSIVELY** on experiment-specific advanced analysis NOT covered in baseline:
+    1. **Hypothesis Testing**: Test specific research hypotheses using baseline data as evidence
+    2. **Experimental Interpretation**: Interpret baseline results in the context of research questions
+    3. **Framework Evaluation**: Assess framework performance using baseline metrics
+    4. **Specialized Analysis**: Conduct experiment-specific tests unique to this study
+    5. **Academic Synthesis**: Synthesize baseline findings into coherent research conclusions
+  - **REFERENCE baseline statistics** rather than recalculating them
+  - **BUILD UPON** reliable baseline data with intelligent interpretation and hypothesis testing
 
   **OUTPUT REQUIREMENT:**
   Provide your complete statistical analysis in whatever format you think is most appropriate and comprehensive. Include your methodology, calculations, results, and interpretations. Use whatever structure and format will best communicate your findings.
 
   **STATISTICAL ANALYSIS REQUIREMENT:**
-  Perform comprehensive statistical analysis by generating and executing Python code internally using pandas, numpy, scipy.stats, and pingouin libraries. Use proper statistical software for accurate calculations, then return only the results without the code itself.
+  Focus on experiment-specific hypothesis testing and interpretation. The baseline statistics artifact contains all foundational calculations (descriptive stats, correlations, group comparisons, etc.). Your role is to:
+  1. **Reference** baseline statistics as evidence for hypothesis testing
+  2. **Interpret** baseline results in experimental context
+  3. **Synthesize** findings into coherent research conclusions
+  4. **Evaluate** framework performance using baseline metrics
+  Only generate additional Python code for specialized analyses NOT covered in the comprehensive baseline artifact.
 
   **STATISTICAL PRECISION STANDARDS:**
   Follow APA 7th edition rounding standards for all numerical output:

@@ -70,7 +70,10 @@ class CompositeAnalysisProcessor:
         # Step 4: Generate comprehensive statistics
         statistics = self._generate_statistics()
         
-        # Step 5: Add processing metadata
+        # Step 5: Add advanced statistical analyses
+        statistics.update(self._generate_advanced_statistics())
+        
+        # Step 6: Add processing metadata
         statistics['processing_metadata'] = {
             'processor_version': '1.0.0',
             'processor_type': 'composite_analysis',
@@ -407,6 +410,374 @@ class CompositeAnalysisProcessor:
         }
         
         return analysis
+    
+    def _generate_advanced_statistics(self) -> Dict[str, Any]:
+        """
+        Generate advanced statistical analyses that were previously fabricated by LLMs.
+        
+        This includes:
+        1. Dimension-level correlation matrices across documents
+        2. Group comparison statistics (metadata-based groupings)
+        3. Cross-document statistical tests
+        4. Temporal trend analysis
+        """
+        advanced_stats = {}
+        
+        # 1. Dimension-level correlation matrix
+        advanced_stats['dimension_correlations'] = self._compute_dimension_correlations()
+        
+        # 2. Group comparison analyses
+        advanced_stats['group_comparisons'] = self._compute_group_comparisons()
+        
+        # 3. Temporal analysis
+        advanced_stats['temporal_analysis'] = self._compute_temporal_analysis()
+        
+        # 4. Cross-document statistical tests
+        advanced_stats['cross_document_tests'] = self._compute_cross_document_tests()
+        
+        return advanced_stats
+    
+    def _compute_dimension_correlations(self) -> Dict[str, Any]:
+        """Compute correlation matrix between dimensions across documents."""
+        try:
+            if self.dimension_data is None or self.dimension_data.empty:
+                return {'error': 'No dimension data available'}
+            
+            # Pivot dimension data to get dimensions as columns, documents as rows
+            pivot_data = self.dimension_data.pivot_table(
+                index='document_id', 
+                columns='dimension', 
+                values=['raw_score', 'salience', 'confidence'],
+                aggfunc='first'
+            )
+            
+            correlations = {}
+            
+            # Calculate correlations for each score type
+            for score_type in ['raw_score', 'salience', 'confidence']:
+                if score_type in pivot_data.columns.levels[0]:
+                    score_data = pivot_data[score_type]
+                    
+                    # Remove columns with all NaN values
+                    score_data = score_data.dropna(axis=1, how='all')
+                    
+                    if len(score_data.columns) >= 2:
+                        corr_matrix = score_data.corr()
+                        
+                        # Convert to nested dict with p-values
+                        corr_dict = {}
+                        for dim1 in corr_matrix.columns:
+                            corr_dict[dim1] = {}
+                            for dim2 in corr_matrix.columns:
+                                if dim1 != dim2 and not pd.isna(corr_matrix.loc[dim1, dim2]):
+                                    # Calculate p-value for correlation
+                                    try:
+                                        r, p = pearsonr(score_data[dim1].dropna(), score_data[dim2].dropna())
+                                        corr_dict[dim1][dim2] = {
+                                            'correlation': float(corr_matrix.loc[dim1, dim2]),
+                                            'p_value': float(p),
+                                            'significant': p < 0.05
+                                        }
+                                    except:
+                                        corr_dict[dim1][dim2] = {
+                                            'correlation': float(corr_matrix.loc[dim1, dim2]),
+                                            'p_value': None,
+                                            'significant': False
+                                        }
+                                else:
+                                    corr_dict[dim1][dim2] = {
+                                        'correlation': 1.0 if dim1 == dim2 else None,
+                                        'p_value': None,
+                                        'significant': False
+                                    }
+                        
+                        correlations[score_type] = corr_dict
+            
+            return correlations
+            
+        except Exception as e:
+            return {'error': f'Dimension correlation calculation failed: {str(e)}'}
+    
+    def _compute_group_comparisons(self) -> Dict[str, Any]:
+        """Compute statistical comparisons between metadata-defined groups."""
+        try:
+            if self.document_data is None or self.document_data.empty:
+                return {'error': 'No document data available for group comparisons'}
+            
+            group_comparisons = {}
+            
+            # Look for common grouping variables in document metadata
+            potential_groupings = []
+            
+            # Check if we have temporal groupings (pre/post events)
+            if 'pre_post_stabbing' in self.document_data.columns:
+                potential_groupings.append('pre_post_stabbing')
+            
+            # Check for campaign stage groupings
+            if 'campaign_stage' in self.document_data.columns:
+                potential_groupings.append('campaign_stage')
+            
+            # Check for audience groupings
+            if 'audience' in self.document_data.columns:
+                potential_groupings.append('audience')
+            
+            # Check for electoral proximity groupings
+            if 'electoral_proximity' in self.document_data.columns:
+                potential_groupings.append('electoral_proximity')
+            
+            # Perform group comparisons for each grouping variable
+            for grouping_var in potential_groupings:
+                if grouping_var in self.document_data.columns:
+                    group_comparisons[grouping_var] = self._perform_group_comparison(grouping_var)
+            
+            return group_comparisons
+            
+        except Exception as e:
+            return {'error': f'Group comparison calculation failed: {str(e)}'}
+    
+    def _perform_group_comparison(self, grouping_var: str) -> Dict[str, Any]:
+        """Perform statistical comparison between groups for a specific grouping variable."""
+        try:
+            # Get unique groups
+            groups = self.document_data[grouping_var].unique()
+            groups = [g for g in groups if pd.notna(g)]
+            
+            if len(groups) < 2:
+                return {'error': f'Need at least 2 groups for comparison, found {len(groups)}'}
+            
+            comparison_results = {}
+            
+            # Get numeric columns for comparison (derived metrics)
+            numeric_cols = self.document_data.select_dtypes(include=[np.number]).columns
+            numeric_cols = [col for col in numeric_cols if col not in ['document_index']]
+            
+            for metric in numeric_cols:
+                metric_data = []
+                group_stats = {}
+                
+                # Collect data for each group
+                for group in groups:
+                    group_data = self.document_data[self.document_data[grouping_var] == group][metric].dropna()
+                    if len(group_data) > 0:
+                        metric_data.append(group_data.values)
+                        group_stats[str(group)] = {
+                            'mean': float(group_data.mean()),
+                            'std': float(group_data.std()),
+                            'n': len(group_data)
+                        }
+                
+                # Perform statistical test
+                if len(metric_data) >= 2 and all(len(data) > 0 for data in metric_data):
+                    if len(metric_data) == 2:
+                        # Two-group comparison: t-test
+                        try:
+                            t_stat, p_value = ttest_ind(metric_data[0], metric_data[1])
+                            
+                            # Calculate Cohen's d
+                            pooled_std = np.sqrt(((len(metric_data[0]) - 1) * np.var(metric_data[0], ddof=1) + 
+                                                (len(metric_data[1]) - 1) * np.var(metric_data[1], ddof=1)) / 
+                                               (len(metric_data[0]) + len(metric_data[1]) - 2))
+                            cohens_d = (np.mean(metric_data[0]) - np.mean(metric_data[1])) / pooled_std if pooled_std > 0 else 0
+                            
+                            comparison_results[metric] = {
+                                'test_type': 'independent_t_test',
+                                'statistic': float(t_stat),
+                                'p_value': float(p_value),
+                                'significant': p_value < 0.05,
+                                'effect_size': float(cohens_d),
+                                'group_statistics': group_stats
+                            }
+                        except:
+                            comparison_results[metric] = {
+                                'test_type': 'independent_t_test',
+                                'error': 'Statistical test failed',
+                                'group_statistics': group_stats
+                            }
+                    else:
+                        # Multi-group comparison: ANOVA
+                        try:
+                            f_stat, p_value = f_oneway(*metric_data)
+                            comparison_results[metric] = {
+                                'test_type': 'one_way_anova',
+                                'statistic': float(f_stat),
+                                'p_value': float(p_value),
+                                'significant': p_value < 0.05,
+                                'group_statistics': group_stats
+                            }
+                        except:
+                            comparison_results[metric] = {
+                                'test_type': 'one_way_anova',
+                                'error': 'Statistical test failed',
+                                'group_statistics': group_stats
+                            }
+                else:
+                    comparison_results[metric] = {
+                        'error': 'Insufficient data for statistical test',
+                        'group_statistics': group_stats
+                    }
+            
+            return comparison_results
+            
+        except Exception as e:
+            return {'error': f'Group comparison failed: {str(e)}'}
+    
+    def _compute_temporal_analysis(self) -> Dict[str, Any]:
+        """Compute temporal trend analysis if temporal data is available."""
+        try:
+            if self.document_data is None or self.document_data.empty:
+                return {'error': 'No document data available for temporal analysis'}
+            
+            temporal_results = {}
+            
+            # Check if we have document_index (proxy for temporal order)
+            if 'document_index' in self.document_data.columns:
+                numeric_cols = self.document_data.select_dtypes(include=[np.number]).columns
+                numeric_cols = [col for col in numeric_cols if col != 'document_index']
+                
+                for metric in numeric_cols:
+                    try:
+                        # Linear regression: metric ~ document_index
+                        x = self.document_data['document_index'].values
+                        y = self.document_data[metric].dropna().values
+                        
+                        if len(y) >= 3:  # Need at least 3 points for meaningful regression
+                            # Align x and y (in case of missing values)
+                            valid_indices = ~pd.isna(self.document_data[metric])
+                            x_valid = self.document_data.loc[valid_indices, 'document_index'].values
+                            y_valid = self.document_data.loc[valid_indices, metric].values
+                            
+                            # Calculate linear regression
+                            slope, intercept, r_value, p_value, std_err = stats.linregress(x_valid, y_valid)
+                            
+                            temporal_results[metric] = {
+                                'slope': float(slope),
+                                'intercept': float(intercept),
+                                'r_squared': float(r_value ** 2),
+                                'p_value': float(p_value),
+                                'significant': p_value < 0.05,
+                                'trend_direction': 'increasing' if slope > 0 else 'decreasing' if slope < 0 else 'stable'
+                            }
+                    except Exception as e:
+                        temporal_results[metric] = {'error': f'Temporal analysis failed: {str(e)}'}
+            
+            return temporal_results
+            
+        except Exception as e:
+            return {'error': f'Temporal analysis failed: {str(e)}'}
+    
+    def _compute_cross_document_tests(self) -> Dict[str, Any]:
+        """Compute cross-document statistical tests and reliability measures."""
+        try:
+            cross_tests = {}
+            
+            # 1. Internal consistency (Cronbach's alpha) for dimension groups
+            if self.dimension_data is not None and not self.dimension_data.empty:
+                cross_tests['internal_consistency'] = self._compute_dimension_reliability()
+            
+            # 2. Variance tests (Levene's test for equality of variances)
+            if self.document_data is not None and not self.document_data.empty:
+                cross_tests['variance_tests'] = self._compute_variance_tests()
+            
+            return cross_tests
+            
+        except Exception as e:
+            return {'error': f'Cross-document tests failed: {str(e)}'}
+    
+    def _compute_dimension_reliability(self) -> Dict[str, Any]:
+        """Compute reliability measures for dimension groups."""
+        try:
+            # Pivot dimension data to get dimensions as columns
+            pivot_data = self.dimension_data.pivot_table(
+                index='document_id', 
+                columns='dimension', 
+                values='raw_score',
+                aggfunc='first'
+            )
+            
+            reliability_results = {}
+            
+            # Define dimension groups (these could be made configurable)
+            dimension_groups = {
+                'core_populist_dimensions': [
+                    'manichaean_people_elite_framing',
+                    'crisis_restoration_narrative', 
+                    'popular_sovereignty_claims',
+                    'anti_pluralist_exclusion'
+                ],
+                'auxiliary_dimensions': [
+                    'elite_conspiracy_systemic_corruption',
+                    'authenticity_vs_political_class',
+                    'homogeneous_people_construction',
+                    'nationalist_exclusion',
+                    'economic_populist_appeals'
+                ]
+            }
+            
+            for group_name, dimensions in dimension_groups.items():
+                # Get available dimensions for this group
+                available_dims = [dim for dim in dimensions if dim in pivot_data.columns]
+                
+                if len(available_dims) >= 2:
+                    group_data = pivot_data[available_dims].dropna()
+                    
+                    if len(group_data) >= 2:
+                        reliability_result = self._calculate_cronbach_alpha(group_data)
+                        reliability_results[group_name] = reliability_result
+                    else:
+                        reliability_results[group_name] = {'error': 'Insufficient data after removing missing values'}
+                else:
+                    reliability_results[group_name] = {'error': f'Need at least 2 dimensions, found {len(available_dims)}'}
+            
+            return reliability_results
+            
+        except Exception as e:
+            return {'error': f'Dimension reliability calculation failed: {str(e)}'}
+    
+    def _compute_variance_tests(self) -> Dict[str, Any]:
+        """Compute variance equality tests between groups."""
+        try:
+            variance_results = {}
+            
+            # Check for grouping variables
+            grouping_vars = ['pre_post_stabbing', 'campaign_stage', 'audience', 'electoral_proximity']
+            
+            for grouping_var in grouping_vars:
+                if grouping_var in self.document_data.columns:
+                    groups = self.document_data[grouping_var].unique()
+                    groups = [g for g in groups if pd.notna(g)]
+                    
+                    if len(groups) >= 2:
+                        variance_results[grouping_var] = {}
+                        
+                        # Test variance equality for each numeric metric
+                        numeric_cols = self.document_data.select_dtypes(include=[np.number]).columns
+                        numeric_cols = [col for col in numeric_cols if col != 'document_index']
+                        
+                        for metric in numeric_cols:
+                            group_data = []
+                            for group in groups:
+                                group_values = self.document_data[self.document_data[grouping_var] == group][metric].dropna()
+                                if len(group_values) >= 2:  # Need at least 2 values per group
+                                    group_data.append(group_values.values)
+                            
+                            if len(group_data) >= 2:
+                                try:
+                                    # Levene's test for equality of variances
+                                    stat, p_value = stats.levene(*group_data)
+                                    variance_results[grouping_var][metric] = {
+                                        'test_type': 'levene_test',
+                                        'statistic': float(stat),
+                                        'p_value': float(p_value),
+                                        'significant': p_value < 0.05,
+                                        'interpretation': 'Variances differ significantly' if p_value < 0.05 else 'Variances are equal'
+                                    }
+                                except:
+                                    variance_results[grouping_var][metric] = {'error': 'Variance test failed'}
+            
+            return variance_results
+            
+        except Exception as e:
+            return {'error': f'Variance tests failed: {str(e)}'}
     
     # Include all the semi-universal test methods from the original processor
     def _run_semi_universal_tests(self) -> Dict[str, Any]:
