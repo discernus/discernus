@@ -485,9 +485,9 @@ class V2StatisticalAgent(StandardAgent):
             
             # Store as CAS artifact
             baseline_artifact_content = json.dumps(baseline_artifact_data, indent=2, default=str)
-            baseline_artifact_hash = self.storage.store_artifact(
-                content=baseline_artifact_content,
-                metadata={
+            baseline_artifact_hash = self.storage.put_artifact(
+                baseline_artifact_content.encode('utf-8'),
+                {
                     "artifact_type": "baseline_statistics",
                     "step": "baseline_statistics", 
                     "agent_name": self.agent_name,
