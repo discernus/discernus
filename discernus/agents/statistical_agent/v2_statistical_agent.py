@@ -502,7 +502,7 @@ class V2StatisticalAgent(StandardAgent):
             self.audit.log_agent_event(
                 agent_name=self.agent_name,
                 event_type="baseline_statistics_generated",
-                details={
+                data={
                     "artifact_hash": baseline_artifact_hash,
                     "composite_artifacts_processed": len(artifact_paths),
                     "document_count": baseline_statistics.get('processing_metadata', {}).get('document_count', 0),
