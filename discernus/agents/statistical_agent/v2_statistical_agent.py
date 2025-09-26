@@ -440,14 +440,25 @@ class V2StatisticalAgent(StandardAgent):
             # Import the composite analysis processor
             from discernus.core.composite_analysis_processor import CompositeAnalysisProcessor
             
-            # Convert CAS artifacts to file paths for processor
+            # Convert CAS artifact hashes to file paths for processor
             artifact_paths = []
-            for artifact in composite_artifacts:
-                artifact_path = Path(artifact['file_path'])
-                if artifact_path.exists():
-                    artifact_paths.append(artifact_path)
-                else:
-                    self.logger.warning(f"Composite analysis artifact not found: {artifact_path}")
+            for artifact_hash in composite_artifacts:
+                try:
+                    # Get human filename from registry
+                    human_filename = self.storage.registry[artifact_hash].get("human_filename", artifact_hash)
+                    
+                    # Construct full path (composite_analysis artifacts are in analysis subdirectory)
+                    artifact_path = self.storage.artifacts_dir / "analysis" / human_filename
+                    
+                    if artifact_path.exists():
+                        artifact_paths.append(artifact_path)
+                    else:
+                        self.logger.warning(f"Composite analysis artifact file not found: {artifact_path}")
+                        
+                except KeyError:
+                    self.logger.warning(f"Artifact hash not found in registry: {artifact_hash}")
+                except Exception as e:
+                    self.logger.warning(f"Error processing artifact hash {artifact_hash}: {e}")
             
             if not artifact_paths:
                 self.logger.error("No valid composite analysis artifact paths found")
