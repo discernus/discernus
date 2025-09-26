@@ -35,7 +35,9 @@ def extract_csv_data(experiment_path, output_file):
         print(f"No score_extraction files found in {experiment_path}")
         return
     
-    rows = []
+    # Separate data structures for document-level and dimension-level data
+    document_rows = []  # One row per document with derived metrics
+    dimension_rows = []  # One row per document-dimension with scores
     
     # Process score_extraction files for scores and metrics
     for score_file in score_files:
@@ -73,38 +75,21 @@ def extract_csv_data(experiment_path, output_file):
                 dimensional_scores = response_data.get('dimensional_scores', {})
                 derived_metrics = response_data.get('derived_metrics', {})
                 
+                # Create one document-level row with all derived metrics
+                if derived_metrics:
+                    doc_row = {'document_id': document_id}
+                    doc_row.update(derived_metrics)
+                    document_rows.append(doc_row)
                 
-                # Process each dimension
+                # Create dimension-level rows (one per dimension)
                 for dimension, scores in dimensional_scores.items():
-                    raw_score = scores.get('raw_score')
-                    salience = scores.get('salience')
-                    confidence = scores.get('confidence')
-                    
-                    # Add derived metrics as separate rows
-                    for metric_name, metric_value in derived_metrics.items():
-                        rows.append({
-                            'document_id': document_id,
-                            'dimension': dimension,
-                            'raw_score': raw_score,
-                            'salience': salience,
-                            'confidence': confidence,
-                            'derived_metric_name': metric_name,
-                            'derived_metric_value': metric_value,
-                            'evidence_quote': ''
-                        })
-                    
-                    # If no derived metrics, add a row for the dimension itself
-                    if not derived_metrics:
-                        rows.append({
-                            'document_id': document_id,
-                            'dimension': dimension,
-                            'raw_score': raw_score,
-                            'salience': salience,
-                            'confidence': confidence,
-                            'derived_metric_name': '',
-                            'derived_metric_value': '',
-                            'evidence_quote': ''
-                        })
+                    dimension_rows.append({
+                        'document_id': document_id,
+                        'dimension': dimension,
+                        'raw_score': scores.get('raw_score'),
+                        'salience': scores.get('salience'),
+                        'confidence': scores.get('confidence')
+                    })
                         
         except json.JSONDecodeError as e:
             print(f"Error processing {score_file.name}: {e}")
@@ -114,6 +99,7 @@ def extract_csv_data(experiment_path, output_file):
             continue
     
     # Process evidence_extraction files for evidence quotes
+    evidence_rows = []  # Separate structure for evidence
     for evidence_file in evidence_files:
         try:
             with open(evidence_file, 'r') as f:
@@ -156,28 +142,20 @@ def extract_csv_data(experiment_path, output_file):
                                 # New structured format with dimension associations
                                 for evidence_item in evidence_quotes:
                                     if evidence_item.get('quote', '').strip():
-                                        rows.append({
+                                        evidence_rows.append({
                                             'document_id': document_id,
                                             'dimension': evidence_item.get('dimension', ''),
                                             'raw_score': evidence_item.get('raw_score', ''),
-                                            'salience': '',
-                                            'confidence': '',
-                                            'derived_metric_name': '',
-                                            'derived_metric_value': '',
                                             'evidence_quote': evidence_item.get('quote', '')
                                         })
                             else:
                                 # Old flat format - treat as dimension 'evidence'
                                 for quote in evidence_quotes:
                                     if quote.strip():
-                                        rows.append({
+                                        evidence_rows.append({
                                             'document_id': document_id,
                                             'dimension': 'evidence',
                                             'raw_score': '',
-                                            'salience': '',
-                                            'confidence': '',
-                                            'derived_metric_name': '',
-                                            'derived_metric_value': '',
                                             'evidence_quote': quote
                                         })
                 except json.JSONDecodeError as e:
@@ -191,17 +169,48 @@ def extract_csv_data(experiment_path, output_file):
             print(f"An unexpected error occurred while processing {evidence_file.name}: {e}")
             continue
     
-    # Write CSV
-    if rows:
-        with open(output_file, 'w', newline='', encoding='utf-8') as f:
-            fieldnames = ['document_id', 'dimension', 'raw_score', 'salience', 'confidence', 
-                         'derived_metric_name', 'derived_metric_value', 'evidence_quote']
+    # Write separate CSV files for different data structures
+    base_path = Path(output_file)
+    base_name = base_path.stem
+    base_dir = base_path.parent
+    
+    files_written = 0
+    
+    # Write document-level data (derived metrics)
+    if document_rows:
+        doc_file = base_dir / f"{base_name}_documents.csv"
+        with open(doc_file, 'w', newline='', encoding='utf-8') as f:
+            if document_rows:
+                fieldnames = ['document_id'] + list(document_rows[0].keys() - {'document_id'})
+                writer = csv.DictWriter(f, fieldnames=fieldnames)
+                writer.writeheader()
+                writer.writerows(document_rows)
+        print(f"Exported {len(document_rows)} document rows to {doc_file}")
+        files_written += 1
+    
+    # Write dimension-level data (dimensional scores)
+    if dimension_rows:
+        dim_file = base_dir / f"{base_name}_dimensions.csv"
+        with open(dim_file, 'w', newline='', encoding='utf-8') as f:
+            fieldnames = ['document_id', 'dimension', 'raw_score', 'salience', 'confidence']
             writer = csv.DictWriter(f, fieldnames=fieldnames)
             writer.writeheader()
-            writer.writerows(rows)
-        
-        print(f"Exported {len(rows)} rows to {output_file}")
-    else:
+            writer.writerows(dimension_rows)
+        print(f"Exported {len(dimension_rows)} dimension rows to {dim_file}")
+        files_written += 1
+    
+    # Write evidence data
+    if evidence_rows:
+        ev_file = base_dir / f"{base_name}_evidence.csv"
+        with open(ev_file, 'w', newline='', encoding='utf-8') as f:
+            fieldnames = ['document_id', 'dimension', 'raw_score', 'evidence_quote']
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(evidence_rows)
+        print(f"Exported {len(evidence_rows)} evidence rows to {ev_file}")
+        files_written += 1
+    
+    if files_written == 0:
         print("No data found to export")
 
 
