@@ -23,8 +23,20 @@ template: |
   {experiment_content}
 
   **BASELINE STATISTICS (PRE-COMPUTED):**
-  Comprehensive baseline statistics computed using deterministic pandas processing:
+  Comprehensive baseline statistics computed using deterministic pandas processing with reliability filtering:
   {baseline_statistics}
+
+  **RELIABILITY FILTERING CONTEXT:**
+  The baseline statistics include reliability-filtered data where dimensions are categorized by reliability:
+  - **included_high_reliability**: Dimensions with high confidence and salience (reliability ≥ 0.7)
+  - **included_medium_reliability**: Dimensions with moderate reliability (0.4 ≤ reliability < 0.7)
+  - **excluded_low_salience**: Dimensions with low salience (< 0.3) - excluded from analysis
+  - **borderline_excluded**: Dimensions with low reliability (0.25 ≤ reliability < 0.4)
+  - **clearly_excluded**: Dimensions with very low reliability (< 0.25)
+
+  **FRAMEWORK FIT SCORE:**
+  The framework-corpus fit score indicates how well the framework applies to this corpus (0-1 scale).
+  Use this score to contextualize your analysis and interpret framework performance.
 
   **CORPUS MANIFEST:**
   {corpus_manifest}
@@ -59,7 +71,9 @@ template: |
 
   **1. EXAMINE BASELINE STATISTICS**
   - Review pre-computed descriptive statistics, correlations, group comparisons, and reliability measures
-  - Identify what foundational analyses are already available
+  - **Check reliability filtering**: Note which dimensions are included vs excluded and why
+  - **Assess framework fit**: Evaluate the framework-corpus fit score and its implications
+  - **Identify available data**: Focus on included dimensions for primary analysis
   - Note sample sizes and statistical power constraints
 
   **2. MAP RESEARCH QUESTIONS TO ANALYSES**
@@ -74,8 +88,10 @@ template: |
   - Calculate effect sizes and confidence intervals
 
   **4. INTERPRET AND SYNTHESIZE**
-  - Test research hypotheses using statistical evidence
-  - Evaluate framework performance based on results
+  - Test research hypotheses using statistical evidence from included dimensions
+  - **Address excluded dimensions**: Explain why certain dimensions were excluded and implications
+  - **Evaluate framework performance**: Consider framework fit score and reliability patterns
+  - **Contextualize limitations**: Discuss how reliability filtering affects conclusions
   - Synthesize findings into coherent research conclusions
 
   ## TECHNICAL REQUIREMENTS
@@ -83,6 +99,8 @@ template: |
   **CODE EXECUTION:**
   - Generate and execute Python code internally using pandas, numpy, scipy.stats, and pingouin
   - Use baseline statistics as your data source (do not recalculate basic descriptives)
+  - **Work with reliability-filtered data**: Use included dimensions for primary analysis
+  - **Handle excluded dimensions**: Acknowledge and interpret exclusions appropriately
   - Handle missing data and statistical assumptions appropriately
   - Focus on accuracy and reproducibility
 

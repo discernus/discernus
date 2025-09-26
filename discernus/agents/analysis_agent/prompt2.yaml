@@ -2,28 +2,54 @@ template: |
   You are an expert discourse analyst specializing in systematic content analysis using provided frameworks.
 
   ANALYSIS TASK:
-  Perform a comprehensive analysis of the provided document(s) using the specified framework. Your analysis must include:
+  Perform a comprehensive analysis of the provided document(s) using the specified framework. Your analysis must follow a SALIENCE-FIRST approach:
 
-  1.  **Dimensional Scoring**: Score each framework dimension on a 0-1 scale for:
-      *   raw_score: Presence/strength of the dimension
-      *   salience: Emphasis/importance in the discourse
-      *   confidence: An objective measure of your analytical consistency
+  1.  **Salience Assessment**: For each framework dimension, first assess its salience (emphasis/importance) in the discourse on a 0-1 scale.
 
-  2.  **Derived Metrics Calculation**: If the framework specifies derived metrics (composite indices, tension measures, etc.), you MUST calculate all required derived metrics using the exact formulas and procedures specified in the framework documentation.
+  2.  **Conditional Dimensional Scoring**: 
+      *   IF salience ≥ 0.3: Perform detailed 3-shot analysis and score the dimension
+      *   IF salience < 0.3: Mark as "excluded_low_salience" and skip detailed scoring
 
-  3.  **Evidence Collection**: Provide 1-3 high-quality quotes per dimension that best exemplify the scoring.
+  3.  **Reliability Calculation**: For included dimensions, calculate reliability = confidence × salience
 
-  4.  **Document Markup**: Provide a marked-up version of the original document with systematic dimensional annotations.
+  4.  **Status Categorization**: Categorize each dimension based on reliability:
+      *   included_high_reliability (reliability ≥ 0.7)
+      *   included_medium_reliability (0.4 ≤ reliability < 0.7)  
+      *   borderline_excluded (0.25 ≤ reliability < 0.4)
+      *   clearly_excluded (reliability < 0.25)
+
+  5.  **Derived Metrics Calculation**: If the framework specifies derived metrics (composite indices, tension measures, etc.), you MUST calculate all required derived metrics using the exact formulas and procedures specified in the framework documentation.
+
+  6.  **Evidence Collection**: Provide 1-3 high-quality quotes per dimension that best exemplify the scoring.
+
+  7.  **Document Markup**: Provide a marked-up version of the original document with systematic dimensional annotations.
+
+  8.  **Framework Fit Calculation**: Calculate framework-corpus fit based on the proportion of reliable dimensions.
+
+  9.  **Statistical Validity Warnings**: Add warnings for small sample sizes:
+      *   N<3: "Warning: Sample size too small for reliable statistical analysis"
+      *   N<5: "Caution: Small sample size may limit statistical reliability"
+
+  SALIENCE SCORING CRITERIA:
+  Use these criteria to assess dimensional salience in the discourse:
+  *   0.9-1.0: Central theme, repeatedly emphasized throughout text
+  *   0.7-0.8: Major theme, clearly and consistently present
+  *   0.5-0.6: Present but secondary, moderate textual evidence
+  *   0.3-0.4: Minor presence, brief mentions or weak indicators
+  *   0.0-0.2: Absent or barely detectable, insufficient evidence
+
+  THRESHOLD RULE: If salience < 0.3, mark as "excluded_low_salience" and skip detailed 3-shot scoring.
 
   INTERNAL CONSISTENCY APPROACH & CONFIDENCE CALCULATION:
-  You must perform three independent internal analyses from different perspectives:
+  For dimensions with salience ≥ 0.3, you must perform three independent internal analyses from different perspectives:
   *   Evidence-First: Start with quotes, then score
   *   Context-Weighted: Consider broader context and framing
   *   Pattern-Based: Look for rhetorical patterns and structures
 
-  For each dimension, this will yield three internal `raw_score` values. You must then:
+  For each included dimension, this will yield three internal `raw_score` values. You must then:
   1.  **Report the MEDIAN** of the three internal scores as the final `raw_score`.
   2.  **Calculate and report an objective CONFIDENCE score.** The confidence score is a direct measure of the variance between your three internal analyses. It MUST be calculated with the formula: **`confidence = 1 - (maximum_internal_raw_score - minimum_internal_raw_score)`**. A score of 1.0 indicates perfect agreement across all three perspectives.
+  3.  **Calculate RELIABILITY**: reliability = confidence × salience
 
   DERIVED METRICS REQUIREMENTS:
   After completing dimensional scoring, you must:
@@ -65,9 +91,15 @@ template: |
       "framework_name": "FRAMEWORK_NAME",
       "framework_version": "FRAMEWORK_VERSION", 
       "analyst_confidence": 0.95,
-      "analysis_notes": "Applied three independent analytical approaches with median aggregation. Confidence is calculated as 1 - (max_raw_score - min_raw_score). Calculated all framework-specified derived metrics.",
-      "internal_consistency_approach": "3-run median aggregation with calculated confidence",
-      "derived_metrics_calculated": true
+      "analysis_notes": "Applied salience-first approach with conditional 3-shot analysis. Reliability = confidence × salience. Confidence calculated as 1 - (max_raw_score - min_raw_score). Calculated all framework-specified derived metrics.",
+      "internal_consistency_approach": "Salience-first filtering with 3-run median aggregation for included dimensions",
+      "derived_metrics_calculated": true,
+      "framework_fit_score": 0.75,
+      "reliability_summary": {
+        "high_reliability_dimensions": ["dimension1", "dimension2"],
+        "excluded_dimensions": ["dimension3"],
+        "total_signal_strength": 0.68
+      }
     },
     "document_analyses": [
       {
@@ -77,7 +109,17 @@ template: |
           "DIMENSION_1": {
             "raw_score": 0.8,
             "salience": 0.7,
-            "confidence": 0.9
+            "confidence": 0.9,
+            "reliability": 0.63,
+            "status": "included_high_reliability"
+          },
+          "DIMENSION_2": {
+            "raw_score": null,
+            "salience": 0.2,
+            "confidence": null,
+            "reliability": null,
+            "status": "excluded_low_salience",
+            "exclusion_reason": "Salience below threshold (0.2 < 0.3)"
           }
         },
         "derived_metrics": {

@@ -73,7 +73,10 @@ class CompositeAnalysisProcessor:
         # Step 5: Add advanced statistical analyses
         statistics.update(self._generate_advanced_statistics())
         
-        # Step 6: Add processing metadata
+        # Step 6: Add framework metadata as top-level key
+        statistics['framework_metadata'] = self.framework_metadata
+        
+        # Step 7: Add processing metadata
         statistics['processing_metadata'] = {
             'processor_version': '1.0.0',
             'processor_type': 'composite_analysis',
@@ -81,7 +84,6 @@ class CompositeAnalysisProcessor:
             'document_count': len(self.document_data) if self.document_data is not None else 0,
             'dimension_count': len(self.dimension_data) if self.dimension_data is not None else 0,
             'evidence_count': len(self.evidence_data) if self.evidence_data is not None else 0,
-            'framework_metadata': self.framework_metadata,
             'content_hash': self._generate_content_hash(statistics)
         }
         
@@ -109,6 +111,9 @@ class CompositeAnalysisProcessor:
                         raw_response = raw_response[:-4]
                     elif raw_response.endswith('```'):
                         raw_response = raw_response[:-3]
+                    
+                    # Additional cleaning for any remaining newlines at start
+                    raw_response = raw_response.lstrip('\n')
                     
                     try:
                         analysis_data = json.loads(raw_response)
@@ -170,6 +175,9 @@ class CompositeAnalysisProcessor:
                             'raw_score': dim_scores.get('raw_score'),
                             'salience': dim_scores.get('salience'),
                             'confidence': dim_scores.get('confidence'),
+                            'reliability': dim_scores.get('reliability'),
+                            'status': dim_scores.get('status'),
+                            'exclusion_reason': dim_scores.get('exclusion_reason'),
                             'analysis_id': artifact.get('analysis_id'),
                             'model_used': artifact.get('model_used'),
                             'timestamp': artifact.get('timestamp')
@@ -215,7 +223,9 @@ class CompositeAnalysisProcessor:
             'analyst_confidence': analysis_metadata.get('analyst_confidence', 0.0),
             'analysis_notes': analysis_metadata.get('analysis_notes', ''),
             'internal_consistency_approach': analysis_metadata.get('internal_consistency_approach', ''),
-            'derived_metrics_calculated': analysis_metadata.get('derived_metrics_calculated', False)
+            'derived_metrics_calculated': analysis_metadata.get('derived_metrics_calculated', False),
+            'framework_fit_score': analysis_metadata.get('framework_fit_score'),
+            'reliability_summary': analysis_metadata.get('reliability_summary', {})
         }
     
     def _generate_statistics(self) -> Dict[str, Any]:
@@ -286,12 +296,20 @@ class CompositeAnalysisProcessor:
         return analysis
     
     def _analyze_dimension_data(self) -> Dict[str, Any]:
-        """Analyze dimension-level scores."""
-        score_cols = ['raw_score', 'salience', 'confidence']
+        """Analyze dimension-level scores with reliability filtering."""
+        score_cols = ['raw_score', 'salience', 'confidence', 'reliability']
         available_cols = [col for col in score_cols if col in self.dimension_data.columns]
         
         if not available_cols:
             return {'error': 'No numeric score columns found'}
+        
+        # Separate included vs excluded dimensions
+        included_dims = self.dimension_data[
+            self.dimension_data['status'].isin(['included_high_reliability', 'included_medium_reliability'])
+        ]
+        excluded_dims = self.dimension_data[
+            self.dimension_data['status'].isin(['excluded_low_salience', 'borderline_excluded', 'clearly_excluded'])
+        ]
         
         analysis = {
             'sample_size': len(self.dimension_data),
@@ -299,6 +317,15 @@ class CompositeAnalysisProcessor:
             'document_count': self.dimension_data['document_id'].nunique(),
             'dimension_names': sorted(self.dimension_data['dimension'].unique().tolist()),
             'score_types': available_cols,
+            
+            # Reliability filtering summary
+            'reliability_summary': {
+                'total_dimensions': len(self.dimension_data),
+                'included_dimensions': len(included_dims),
+                'excluded_dimensions': len(excluded_dims),
+                'inclusion_rate': len(included_dims) / len(self.dimension_data) if len(self.dimension_data) > 0 else 0,
+                'status_breakdown': self.dimension_data['status'].value_counts().to_dict() if 'status' in self.dimension_data.columns else {}
+            },
             
             # Overall descriptives across all dimensions
             'overall_descriptives': {
@@ -313,11 +340,24 @@ class CompositeAnalysisProcessor:
                 } for col in available_cols
             },
             
+            # Included dimensions only (reliable data)
+            'included_descriptives': {
+                col: {
+                    'mean': float(included_dims[col].mean()),
+                    'median': float(included_dims[col].median()),
+                    'std': float(included_dims[col].std()),
+                    'min': float(included_dims[col].min()),
+                    'max': float(included_dims[col].max()),
+                    'skewness': float(stats.skew(included_dims[col].dropna())),
+                    'kurtosis': float(stats.kurtosis(included_dims[col].dropna()))
+                } for col in available_cols if col in included_dims.columns
+            } if not included_dims.empty else {},
+            
             # Per-dimension descriptives
             'by_dimension': self._analyze_by_dimension(available_cols),
             
-            # Score type correlations
-            'score_correlations': self._safe_correlation_matrix(self.dimension_data[available_cols])
+            # Score type correlations (included dimensions only)
+            'score_correlations': self._safe_correlation_matrix(included_dims[available_cols]) if not included_dims.empty else {}
         }
         
         return analysis
@@ -359,8 +399,18 @@ class CompositeAnalysisProcessor:
         for dimension in self.dimension_data['dimension'].unique():
             dim_data = self.dimension_data[self.dimension_data['dimension'] == dimension]
             
+            # Get status information for this dimension
+            status_info = {}
+            if 'status' in dim_data.columns:
+                status_counts = dim_data['status'].value_counts()
+                status_info = {
+                    'primary_status': status_counts.index[0] if not status_counts.empty else 'unknown',
+                    'status_distribution': status_counts.to_dict()
+                }
+            
             by_dimension[dimension] = {
                 'sample_size': len(dim_data),
+                'status_info': status_info,
                 'descriptives': {
                     col: {
                         'mean': float(dim_data[col].mean()),
@@ -376,8 +426,16 @@ class CompositeAnalysisProcessor:
     
     def _analyze_cross_level(self) -> Dict[str, Any]:
         """Analyze relationships between document-level and dimension-level data."""
-        # Calculate document-level aggregates from dimension data
-        dim_aggregates = self.dimension_data.groupby('document_id').agg({
+        # Filter to included dimensions only for cross-level analysis
+        included_dims = self.dimension_data[
+            self.dimension_data['status'].isin(['included_high_reliability', 'included_medium_reliability'])
+        ]
+        
+        if included_dims.empty:
+            return {'error': 'No included dimensions found for cross-level analysis'}
+        
+        # Calculate document-level aggregates from included dimension data
+        dim_aggregates = included_dims.groupby('document_id').agg({
             'raw_score': ['mean', 'std', 'min', 'max'],
             'salience': ['mean', 'std', 'min', 'max'],
             'confidence': ['mean', 'std', 'min', 'max']

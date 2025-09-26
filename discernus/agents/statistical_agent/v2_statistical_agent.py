@@ -86,7 +86,7 @@ class V2StatisticalAgent(StandardAgent):
                 "statistical_analysis",
                 "atomic_score_processing"
             ],
-            "input_types": ["score_extraction_artifacts", "derived_metrics_artifacts"],
+            "input_types": ["composite_analysis_artifacts"],
             "output_types": ["statistical_analysis"],
             "models_used": ["vertex_ai/gemini-2.5-flash-lite", "vertex_ai/gemini-2.5-pro"]
         }
@@ -104,15 +104,8 @@ class V2StatisticalAgent(StandardAgent):
             return False
         self.logger.info(f"✓ Composite analysis: Found {len(composite_artifacts)} artifacts")
         
-        # Required Asset 2: Score extraction artifacts (fallback/validation)
-        score_artifacts = self.storage.find_artifacts_by_metadata(artifact_type="score_extraction")
-        if score_artifacts is None:
-            self.logger.error("CRITICAL: find_artifacts_by_metadata returned None for score_extraction")
-            return False
-        if not score_artifacts:
-            self.logger.error("CONTRACT VIOLATION: No score_extraction artifacts found via CAS discovery")
-            return False
-        self.logger.info(f"✓ Score extraction: Found {len(score_artifacts)} artifacts")
+        # Score extraction is now handled directly in composite analysis
+        # No separate score extraction validation needed
         
         # Required Asset 3: Framework artifacts
         framework_artifacts = self.storage.find_artifacts_by_metadata(artifact_type="framework")
@@ -214,75 +207,8 @@ class V2StatisticalAgent(StandardAgent):
             if not baseline_stats_result.success:
                 return baseline_stats_result
             
-            # STEP 2: CAS-native discovery of score_extraction artifacts (fallback/validation)
-            score_artifacts = self.storage.find_artifacts_by_metadata(artifact_type="score_extraction")
-            
-            # Defensive programming: Handle None return from storage
-            if score_artifacts is None:
-                self.logger.error("CRITICAL: find_artifacts_by_metadata returned None instead of list")
-                return AgentResult(
-                    success=False,
-                    artifacts=[],
-                    metadata={"agent_name": self.agent_name, "error": "storage_returned_none"},
-                    error_message="Storage system returned None instead of artifact list"
-                )
-            
-            self.logger.info(f"Discovered {len(score_artifacts)} score_extraction artifacts via CAS (fallback)")
-            
-            # Contract validation: Check expected count using CAS-discovered corpus documents
-            corpus_document_artifacts = self.storage.find_artifacts_by_metadata(artifact_type="corpus_document")
-            if corpus_document_artifacts is None:
-                self.logger.error("CRITICAL: find_artifacts_by_metadata returned None for corpus_document")
-                return AgentResult(
-                    success=False,
-                    artifacts=[],
-                    metadata={"agent_name": self.agent_name, "error": "storage_returned_none"},
-                    error_message="Storage system returned None for corpus document artifacts"
-                )
-            # Defensive programming: Handle None values
-            if corpus_document_artifacts is None:
-                self.logger.error("CRITICAL: corpus_document_artifacts is None in contract validation")
-                return AgentResult(
-                    success=False,
-                    artifacts=[],
-                    metadata={"agent_name": self.agent_name, "error": "corpus_documents_none"},
-                    error_message="Corpus document artifacts is None during contract validation"
-                )
-            if score_artifacts is None:
-                self.logger.error("CRITICAL: score_artifacts is None in contract validation")
-                return AgentResult(
-                    success=False,
-                    artifacts=[],
-                    metadata={"agent_name": self.agent_name, "error": "score_artifacts_none"},
-                    error_message="Score artifacts is None during contract validation"
-                )
-            
-            expected_count = len(corpus_document_artifacts)
-            if len(score_artifacts) != expected_count:
-                return AgentResult(
-                    success=False,
-                    artifacts=[],
-                    metadata={"agent_name": self.agent_name, "error": "contract_violation"},
-                    error_message=f"Contract violation: Expected {expected_count} score_extraction artifacts for {expected_count} corpus documents, found {len(score_artifacts)}"
-                )
-            
-            # Process atomic score artifacts with defensive programming
-            if score_artifacts is None:
-                self.logger.error("CRITICAL: score_artifacts is None when passed to _collect_atomic_scores")
-                return AgentResult(
-                    success=False,
-                    artifacts=[],
-                    metadata={"agent_name": self.agent_name, "error": "score_artifacts_none"},
-                    error_message="Score artifacts is None when passed to collection method"
-                )
-            raw_artifacts = self._collect_atomic_scores(score_artifacts)
-            if not raw_artifacts:
-                return AgentResult(
-                    success=False,
-                    artifacts=[],
-                    metadata={"agent_name": self.agent_name, "error": "no artifacts found"},
-                    error_message="No artifacts found in analysis artifacts"
-                )
+            # STEP 2: Score extraction is now handled directly in composite analysis
+            # No separate score extraction processing needed
             
             # Generate batch ID
             batch_id = f"stats_{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}"
@@ -311,7 +237,7 @@ class V2StatisticalAgent(StandardAgent):
             
             # Step 2: Enhanced Statistical Analysis with baseline + LLM
             statistical_analysis_content = self._step2_enhanced_statistical_analysis(
-                baseline_stats_data, raw_artifacts, batch_id
+                baseline_stats_data, batch_id
             )
             if not statistical_analysis_content:
                 return AgentResult(
@@ -327,7 +253,7 @@ class V2StatisticalAgent(StandardAgent):
                 "step": "statistical_analysis",
                 "model_used": model_used,
                 "statistical_analysis": statistical_analysis_content.strip(),  # Ensure leading/trailing whitespace is removed
-                "documents_processed": len(raw_artifacts),
+                "documents_processed": len(composite_artifacts),
                 "timestamp": datetime.now(timezone.utc).isoformat()
             }
             statistical_content_bytes = json.dumps(statistical_artifact_data, indent=2).encode('utf-8')
@@ -358,7 +284,7 @@ class V2StatisticalAgent(StandardAgent):
             self.audit.log_agent_event(self.agent_name, "execution_completed", {
                 "batch_id": batch_id,
                 "artifacts_created": len(artifacts),
-                "documents_processed": len(raw_artifacts)
+                "documents_processed": len(composite_artifacts)
             })
             
             return AgentResult(
@@ -367,7 +293,7 @@ class V2StatisticalAgent(StandardAgent):
                 metadata={
                     "agent_name": self.agent_name,
                     "batch_id": batch_id,
-                    "documents_processed": len(raw_artifacts),
+                    "documents_processed": len(composite_artifacts),
                     "artifacts_created": len(artifacts)
                 }
             )
@@ -384,42 +310,6 @@ class V2StatisticalAgent(StandardAgent):
                 error_message=f"V2StatisticalAgent execution failed: {str(e)}"
             )
     
-    def _collect_atomic_scores(self, score_artifacts: List[str]) -> List[str]:
-        """
-        Collect raw score_extraction artifacts for LLM processing.
-        THIN: No parsing, no validation - just raw data shuttle.
-        
-        Args:
-            score_artifacts: List of score_extraction artifact hashes from CAS discovery
-            
-        Returns:
-            List of raw artifact content strings for LLM processing
-        """
-        # Defensive programming: Handle None values
-        if score_artifacts is None:
-            self.logger.error("CRITICAL: score_artifacts is None in _collect_atomic_scores")
-            return []
-        
-        self.logger.info(f"Collecting {len(score_artifacts)} raw score_extraction artifacts")
-        raw_artifacts = []
-        
-        for artifact_hash in score_artifacts:
-            try:
-                # Load raw artifact bytes
-                artifact_bytes = self.storage.get_artifact(artifact_hash)
-                if not artifact_bytes:
-                    self.logger.warning(f"Could not load artifact {artifact_hash}")
-                    continue
-                
-                # THIN: Just decode to string, no parsing or validation
-                artifact_content = artifact_bytes.decode('utf-8')
-                raw_artifacts.append(artifact_content)
-                
-            except Exception as e:
-                self.logger.warning(f"Error loading artifact {artifact_hash}: {e}")
-                continue
-        
-        return raw_artifacts
     
     def _step1_generate_baseline_statistics(self, composite_artifacts: List[Dict[str, Any]], run_context: RunContext) -> AgentResult:
         """
@@ -537,7 +427,7 @@ class V2StatisticalAgent(StandardAgent):
                 error_message=f"Baseline statistics generation failed: {str(e)}"
             )
     
-    def _step2_enhanced_statistical_analysis(self, baseline_stats_data: Dict[str, Any], raw_artifacts: List[str], batch_id: str) -> Optional[str]:
+    def _step2_enhanced_statistical_analysis(self, baseline_stats_data: Dict[str, Any], batch_id: str) -> Optional[str]:
         """
         STEP 2: Enhanced statistical analysis using baseline statistics + LLM intelligence.
         
@@ -546,7 +436,6 @@ class V2StatisticalAgent(StandardAgent):
         
         Args:
             baseline_stats_data: Baseline statistics from pandas processing (Step 1)
-            raw_artifacts: List of raw artifact data from analysis phase (fallback)
             batch_id: Batch identifier
             
         Returns:
@@ -622,9 +511,8 @@ class V2StatisticalAgent(StandardAgent):
             # STEP 2 ENHANCEMENT: Include baseline statistics from pandas processing
             baseline_stats_json = json.dumps(baseline_stats_data.get('baseline_statistics', {}), indent=2, default=str)
             
-            # THIN: Pass raw artifact strings directly to LLM (fallback/validation data)
-            # Join all raw artifacts with separators for LLM processing
-            raw_data_block = "\n\n=== ARTIFACT SEPARATOR ===\n\n".join(raw_artifacts)
+            # Raw artifact data is now handled directly in composite analysis
+            # No separate raw artifact processing needed
             
             # NO TRUNCATION: All content is sacred intellectual assets
             
@@ -635,27 +523,24 @@ class V2StatisticalAgent(StandardAgent):
                 experiment_description=experiment_description,
                 research_questions=research_questions,
                 experiment_content=experiment_content,
-                sample_data=raw_data_block,
+                sample_data="",  # Sample data now handled in composite analysis
                 corpus_manifest=corpus_manifest_content,
                 baseline_statistics=baseline_stats_json
             )
             
             # Debug prompt construction
             self.logger.info(f"Prompt length: {len(prompt)} characters")
-            self.logger.info(f"Raw data block length: {len(raw_data_block)} characters")
+            # Raw data block no longer needed
             self.logger.info(f"Framework content length: {len(framework_content)} characters")
             self.logger.info(f"Corpus manifest length: {len(corpus_manifest_content)} characters")
 
-            # Defensive programming: Handle None values
-            if raw_artifacts is None:
-                self.logger.error("CRITICAL: raw_artifacts is None in _step1_statistical_analysis")
-                raise ValueError("Raw artifacts is None when passed to statistical analysis")
+            # Raw artifacts validation no longer needed
             
             self.audit.log_agent_event(self.agent_name, "step1_started", {
                 "batch_id": batch_id,
                 "step": "statistical_analysis",
                 "model": "vertex_ai/gemini-2.5-flash-lite",
-                "artifacts_count": len(raw_artifacts)
+                "artifacts_count": 0
             })
             
             # Call LLM with Flash-Lite and reasoning=1 for pure statistical calculation
@@ -694,7 +579,7 @@ class V2StatisticalAgent(StandardAgent):
                         "response_cost_usd": usage_data.get('response_cost_usd', 0.0),
                         "step": "statistical_analysis",
                         "batch_id": batch_id,
-                        "artifacts_count": len(raw_artifacts)
+                        "artifacts_count": 0
                     }
                 )
             

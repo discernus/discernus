@@ -97,7 +97,6 @@ class V2AnalysisAgent(StandardAgent):
         return [
             "composite_analysis_with_markup",
             "evidence_extraction", 
-            "score_extraction",
             "derived_metrics",
             "verification",
             "markup_extraction"
@@ -261,15 +260,12 @@ class V2AnalysisAgent(StandardAgent):
             if evidence_result:
                 artifacts.append(evidence_result)
             
-            # Step 3: Score Extraction
-            self.unified_logger.progress(f"  Step 3/4: Score extraction for document {doc_index + 1}")
-            scores_result = self._step3_score_extraction(composite_result, doc, doc_index, batch_id)
-            if scores_result:
-                artifacts.append(scores_result)
+            # Step 3: Score extraction is now handled directly in composite analysis
+            # No separate score extraction step needed
             
-            # Step 4: Markup Extraction
-            self.unified_logger.progress(f"  Step 4/4: Markup extraction for document {doc_index + 1}")
-            markup_result = self._step4_markup_extraction(composite_result, doc, doc_index, batch_id)
+            # Step 3: Markup Extraction
+            self.unified_logger.progress(f"  Step 3/3: Markup extraction for document {doc_index + 1}")
+            markup_result = self._step3_markup_extraction(composite_result, doc, doc_index, batch_id)
             if markup_result:
                 artifacts.append(markup_result)
             
@@ -560,117 +556,6 @@ Return ONLY the JSON array, no other text."""
             self.logger.error(f"Step 2 failed for document {doc_index}: {e}")
             return None
 
-    def _step3_score_extraction(self, composite_result: Dict[str, Any], doc: Dict[str, Any], doc_index: int, batch_id: str) -> Optional[Dict[str, Any]]:
-        """Step 3: Extract scores from composite result."""
-        try:
-            if not composite_result or 'content' not in composite_result:
-                return None
-                
-            raw_response = composite_result['content'].get('raw_analysis_response', '')
-            
-            # Defensive programming: Handle None values
-            if raw_response is None:
-                raw_response = 'No analysis result available'
-            
-            prompt = f"""Extract the dimensional scores AND derived metrics from this analysis result, preserving ALL computational variables:
-
-{raw_response}
-
-EXTRACTION REQUIREMENTS:
-- Extract raw_score, salience, and confidence for each dimension
-- Extract ALL derived metrics (tension indices, cohesion components, cohesion indices)
-- Preserve the complete data structure from the analysis
-- Do not strip away any computational variables
-
-OUTPUT FORMAT:
-Return a JSON object with two main sections:
-{{
-  "dimensional_scores": {{
-  "dimension_name": {{
-    "raw_score": 0.8,
-    "salience": 0.7,
-    "confidence": 0.9
-    }}
-  }},
-  "derived_metrics": {{
-    "identity_tension": 0.07,
-    "emotional_tension": 0.0,
-    "strategic_contradiction_index": 0.042,
-    "descriptive_cohesion_index": -0.220,
-    "motivational_cohesion_index": -0.131,
-    "full_cohesion_index": -0.136
-  }}
-}}
-
-Extract both dimensional scores AND derived metrics preserving all computational variables."""
-
-            # Call LLM
-            response = self.gateway.execute_call(
-                model="vertex_ai/gemini-2.5-flash-lite",
-                prompt=prompt
-            )
-            
-            if isinstance(response, tuple):
-                content, metadata = response
-            else:
-                content = response.get('content', '')
-                metadata = response.get('metadata', {})
-            
-            # Log LLM interaction with cost data
-            if metadata and 'usage' in metadata:
-                usage_data = metadata['usage']
-                self.audit.log_llm_interaction(
-                    model="vertex_ai/gemini-2.5-flash",
-                    prompt=prompt,
-                    response=content,
-                    agent_name=self.agent_name,
-                    interaction_type="score_extraction",
-                    metadata={
-                        "prompt_tokens": usage_data.get('prompt_tokens', 0),
-                        "completion_tokens": usage_data.get('completion_tokens', 0),
-                        "total_tokens": usage_data.get('total_tokens', 0),
-                        "response_cost_usd": usage_data.get('response_cost_usd', 0.0),
-                        "step": "score_extraction",
-                        "document_index": doc_index
-                    }
-                )
-            
-            # Create artifact
-            artifact_data = {
-                "analysis_id": f"analysis_{batch_id}_{doc_index}",
-                "step": "score_extraction",
-                "model_used": "vertex_ai/gemini-2.5-flash-lite",
-                "score_extraction": content,
-                "document_index": doc_index,
-                "timestamp": datetime.now(timezone.utc).isoformat()
-            }
-            
-            # Store artifact with human context
-            content_bytes = json.dumps(artifact_data, indent=2).encode('utf-8')
-            human_context = self._build_human_context_from_cas("score_extraction", doc, doc_index)
-            artifact_hash = self.storage.put_artifact(
-                content_bytes,
-                {"artifact_type": "score_extraction", "document_index": doc_index},
-                human_context
-            )
-            
-            return {
-                "type": "score_extraction",
-                "content": artifact_data,
-                "metadata": {
-                    "artifact_type": "score_extraction",
-                    "phase": "analysis",
-                    "batch_id": batch_id,
-                    "document_index": doc_index,
-                    "timestamp": datetime.now().isoformat(),
-                    "agent_name": self.agent_name,
-                    "artifact_hash": artifact_hash
-                }
-            }
-            
-        except Exception as e:
-            self.logger.error(f"Step 3 failed for document {doc_index}: {e}")
-            return None
 
 
     
@@ -715,8 +600,8 @@ Extract both dimensional scores AND derived metrics preserving all computational
             return True
     
 
-    def _step4_markup_extraction(self, composite_result: Dict[str, Any], doc: Dict[str, Any], doc_index: int, batch_id: str) -> Optional[Dict[str, Any]]:
-        """Step 4: Extract markup from composite result."""
+    def _step3_markup_extraction(self, composite_result: Dict[str, Any], doc: Dict[str, Any], doc_index: int, batch_id: str) -> Optional[Dict[str, Any]]:
+        """Step 3: Extract markup from composite result."""
         try:
             if not composite_result or 'content' not in composite_result:
                 return None
