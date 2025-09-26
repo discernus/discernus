@@ -462,41 +462,86 @@ class CompositeAnalysisProcessor:
                     score_data = score_data.dropna(axis=1, how='all')
                     
                     if len(score_data.columns) >= 2:
+                        # Check sample size for statistical validity
+                        sample_size = len(score_data)
+                        
+                        if sample_size < 3:
+                            correlations[score_type] = {
+                                'error': f'Insufficient sample size for correlation analysis (N={sample_size})',
+                                'sample_size': sample_size,
+                                'minimum_required': 3,
+                                'recommendation': 'Correlations require at least 3 data points to be statistically meaningful'
+                            }
+                            continue
+                        
                         corr_matrix = score_data.corr()
                         
-                        # Convert to nested dict with p-values
+                        # Convert to nested dict with p-values and validity checks
                         corr_dict = {}
+                        warnings = []
+                        
                         for dim1 in corr_matrix.columns:
                             corr_dict[dim1] = {}
                             for dim2 in corr_matrix.columns:
                                 if dim1 != dim2 and not pd.isna(corr_matrix.loc[dim1, dim2]):
+                                    corr_value = float(corr_matrix.loc[dim1, dim2])
+                                    
                                     # Calculate p-value for correlation
                                     try:
                                         r, p = pearsonr(score_data[dim1].dropna(), score_data[dim2].dropna())
-                                        corr_dict[dim1][dim2] = {
-                                            'correlation': float(corr_matrix.loc[dim1, dim2]),
-                                            'p_value': float(p),
-                                            'significant': p < 0.05
-                                        }
+                                        p_value = float(p)
                                     except:
-                                        corr_dict[dim1][dim2] = {
-                                            'correlation': float(corr_matrix.loc[dim1, dim2]),
-                                            'p_value': None,
-                                            'significant': False
-                                        }
+                                        p_value = None
+                                    
+                                    # Check for perfect correlations with small samples
+                                    if abs(corr_value) == 1.0 and sample_size < 5:
+                                        warnings.append(f'Perfect correlation (r={corr_value:.3f}) between {dim1} and {dim2} with small sample (N={sample_size})')
+                                    
+                                    corr_dict[dim1][dim2] = {
+                                        'correlation': corr_value,
+                                        'p_value': p_value,
+                                        'significant': p_value is not None and p_value < 0.05,
+                                        'sample_size': sample_size
+                                    }
                                 else:
                                     corr_dict[dim1][dim2] = {
                                         'correlation': 1.0 if dim1 == dim2 else None,
                                         'p_value': None,
-                                        'significant': False
+                                        'significant': False,
+                                        'sample_size': sample_size
                                     }
                         
-                        correlations[score_type] = corr_dict
+                        correlations[score_type] = {
+                            'correlations': corr_dict,
+                            'sample_size': sample_size,
+                            'dimension_count': len(score_data.columns),
+                            'statistical_validity': {
+                                'valid': sample_size >= 3,
+                                'recommended_minimum': 5,
+                                'warnings': warnings if warnings else None
+                            }
+                        }
+                        
+                        # Add warning for small samples
+                        if sample_size < 5:
+                            correlations[score_type]['statistical_validity']['warning'] = f'Small sample size (N={sample_size}) - correlations may be unreliable'
             
             return correlations
             
         except Exception as e:
             return {'error': f'Dimension correlation calculation failed: {str(e)}'}
+    
+    def _interpret_effect_size(self, effect_size: float) -> str:
+        """Interpret effect size magnitude using Cohen's conventions."""
+        abs_effect = abs(effect_size)
+        if abs_effect < 0.2:
+            return 'negligible'
+        elif abs_effect < 0.5:
+            return 'small'
+        elif abs_effect < 0.8:
+            return 'medium'
+        else:
+            return 'large'
     
     def _compute_group_comparisons(self) -> Dict[str, Any]:
         """Compute statistical comparisons between metadata-defined groups."""
@@ -573,18 +618,32 @@ class CompositeAnalysisProcessor:
                         try:
                             t_stat, p_value = ttest_ind(metric_data[0], metric_data[1])
                             
-                            # Calculate Cohen's d
+                            # Calculate Hedge's g (bias-corrected effect size)
                             pooled_std = np.sqrt(((len(metric_data[0]) - 1) * np.var(metric_data[0], ddof=1) + 
                                                 (len(metric_data[1]) - 1) * np.var(metric_data[1], ddof=1)) / 
                                                (len(metric_data[0]) + len(metric_data[1]) - 2))
+                            
+                            # Calculate Cohen's d first (needed for Hedge's g calculation)
                             cohens_d = (np.mean(metric_data[0]) - np.mean(metric_data[1])) / pooled_std if pooled_std > 0 else 0
+                            
+                            # Hedge's g (corrected for small sample bias)
+                            n1, n2 = len(metric_data[0]), len(metric_data[1])
+                            df = n1 + n2 - 2
+                            correction_factor = 1 - (3 / (4 * df - 1)) if df > 1 else 1
+                            hedges_g = cohens_d * correction_factor
                             
                             comparison_results[metric] = {
                                 'test_type': 'independent_t_test',
                                 'statistic': float(t_stat),
                                 'p_value': float(p_value),
                                 'significant': p_value < 0.05,
-                                'effect_size': float(cohens_d),
+                                'effect_size': {
+                                    'hedges_g': float(hedges_g),
+                                    'interpretation': self._interpret_effect_size(hedges_g),
+                                    'sample_size': n1 + n2,
+                                    'bias_corrected': True,
+                                    'correction_factor': float(correction_factor)
+                                },
                                 'group_statistics': group_stats
                             }
                         except:

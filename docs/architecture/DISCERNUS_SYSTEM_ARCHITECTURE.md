@@ -255,6 +255,33 @@ The system uses specialized agents that implement the THIN architecture principl
 
 ---
 
+## Provenance and Audit System
+
+**Content-Addressable Storage (CAS)**:
+- All artifacts stored with SHA-256 content hashes
+- Tamper-evident storage prevents data corruption
+- Complete audit trail from source to final results
+- Git-based version control for experiment tracking
+
+**Resume Provenance Tracking**:
+- All resume operations tracked with complete metadata
+- Source run identification and resume timestamps
+- Phase-level tracking of copied vs. newly executed operations
+- Artifact-level provenance with source run metadata
+
+**Audit Capabilities**:
+- CLI commands for viewing resume provenance: `discernus artifacts --show-resume`
+- Complete artifact integrity verification through content hashes
+- Transparent data flow tracking from source to destination
+- Academic-grade provenance for reproducibility and compliance
+
+**Data Integrity**:
+- Cryptographic verification of all artifact content
+- Source run tracking prevents data forgery
+- Complete audit trail for academic and regulatory compliance
+- Transparent resume operations with full traceability
+
+---
 
 # Developer Contribution Guidelines
 

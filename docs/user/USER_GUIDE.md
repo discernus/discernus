@@ -157,6 +157,37 @@ This allows you to:
 *   **Debug specific phases** by running them in isolation
 *   **Resume from cached results** when continuing from a specific phase
 
+### Resume Functionality
+
+Discernus supports resuming experiments from previously completed phases, which is particularly useful for development workflows and cost optimization.
+
+**Automatic Resume:**
+```bash
+# Resume from the most recent run with completed phases
+discernus run projects/your_experiment --resume --from statistical
+```
+
+**Specific Run Resume:**
+```bash
+# Resume from a specific run directory
+discernus run projects/your_experiment --run-dir 20250926_045818 --from evidence
+```
+
+**Resume Use Cases:**
+*   **Development Iteration**: Modify statistical analysis without re-running expensive analysis phase
+*   **Debugging**: Test synthesis changes without re-running statistical phase
+*   **Cost Optimization**: Resume from analysis phase after CSV export
+*   **Data Integrity**: All resume operations maintain complete audit trail
+
+**Resume Provenance:**
+All resume operations are tracked for audit and reproducibility:
+```bash
+# View resume provenance information
+discernus artifacts projects/your_experiment --show-resume
+```
+
+This shows which runs were resumed, from which source runs, and when the resume operations occurred.
+
 ### Listing Experiments
 
 To see all available experiments, use the `list` command:

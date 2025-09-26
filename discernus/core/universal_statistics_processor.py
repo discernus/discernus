@@ -312,7 +312,7 @@ class UniversalStatisticsProcessor:
         return analysis
     
     def _safe_correlation_matrix(self, data: pd.DataFrame) -> Dict[str, Any]:
-        """Calculate correlation matrix with error handling."""
+        """Calculate correlation matrix with statistical validity checks."""
         try:
             if data.empty or len(data.columns) < 2:
                 return {'error': 'Insufficient data for correlation analysis'}
@@ -323,28 +323,60 @@ class UniversalStatisticsProcessor:
             if numeric_data.empty or len(numeric_data.columns) < 2:
                 return {'error': 'No numeric columns for correlation'}
             
+            # Check sample size for statistical validity
+            sample_size = len(numeric_data)
+            
+            if sample_size < 3:
+                return {
+                    'error': f'Insufficient sample size for correlation analysis (N={sample_size})',
+                    'sample_size': sample_size,
+                    'minimum_required': 3,
+                    'recommendation': 'Correlations require at least 3 data points to be statistically meaningful'
+                }
+            
             # Calculate Pearson correlations
             corr_matrix = numeric_data.corr()
             
             # Convert to nested dict for JSON serialization
             corr_dict = {}
+            warnings = []
+            
             for col1 in corr_matrix.columns:
                 corr_dict[col1] = {}
                 for col2 in corr_matrix.columns:
                     value = corr_matrix.loc[col1, col2]
-                    corr_dict[col1][col2] = float(value) if not pd.isna(value) else None
+                    if not pd.isna(value):
+                        corr_dict[col1][col2] = float(value)
+                        
+                        # Check for perfect correlations with small samples
+                        if abs(value) == 1.0 and sample_size < 5:
+                            warnings.append(f'Perfect correlation (r={value:.3f}) between {col1} and {col2} with small sample (N={sample_size})')
+                    else:
+                        corr_dict[col1][col2] = None
             
-            return {
+            result = {
                 'pearson_correlations': corr_dict,
                 'matrix_size': f"{len(corr_matrix)}x{len(corr_matrix)}",
-                'variable_count': len(corr_matrix.columns)
+                'variable_count': len(corr_matrix.columns),
+                'sample_size': sample_size,
+                'statistical_validity': {
+                    'valid': sample_size >= 3,
+                    'recommended_minimum': 5,
+                    'warnings': warnings if warnings else None
+                }
             }
+            
+            # Add warning for small samples
+            if sample_size < 5:
+                result['statistical_validity']['warning'] = f'Small sample size (N={sample_size}) - correlations may be unreliable'
+            
+            return result
             
         except Exception as e:
             return {'error': f'Correlation calculation failed: {str(e)}'}
     
     def _calculate_cronbach_alpha(self, data: pd.DataFrame) -> Dict[str, Any]:
-        """Calculate Cronbach's alpha for reliability analysis."""
+        """Calculate Cronbach's alpha for reliability analysis with statistical validity checks."""
         try:
             if data.empty or len(data.columns) < 2:
                 return {'error': 'Insufficient variables for reliability analysis'}
@@ -355,6 +387,17 @@ class UniversalStatisticsProcessor:
             if len(numeric_data.columns) < 2:
                 return {'error': 'Need at least 2 numeric variables for reliability'}
             
+            # Check sample size for statistical validity
+            sample_size = len(numeric_data)
+            
+            if sample_size < 3:
+                return {
+                    'error': f'Insufficient sample size for reliability analysis (N={sample_size})',
+                    'sample_size': sample_size,
+                    'minimum_required': 3,
+                    'recommendation': 'Reliability analysis requires at least 3 data points to be statistically meaningful'
+                }
+            
             # Calculate Cronbach's alpha
             # α = (k / (k-1)) * (1 - (Σσ²ᵢ / σ²ₜ))
             k = len(numeric_data.columns)  # number of items
@@ -363,11 +406,22 @@ class UniversalStatisticsProcessor:
             
             alpha = (k / (k - 1)) * (1 - (item_variances.sum() / total_variance))
             
-            return {
+            result = {
                 'cronbach_alpha': float(alpha),
                 'item_count': k,
-                'interpretation': self._interpret_alpha(alpha)
+                'sample_size': sample_size,
+                'interpretation': self._interpret_alpha(alpha),
+                'statistical_validity': {
+                    'valid': sample_size >= 3,
+                    'recommended_minimum': 5
+                }
             }
+            
+            # Add warning for small samples
+            if sample_size < 5:
+                result['statistical_validity']['warning'] = f'Small sample size (N={sample_size}) - reliability estimates may be unreliable'
+            
+            return result
             
         except Exception as e:
             return {'error': f'Reliability calculation failed: {str(e)}'}
@@ -559,8 +613,8 @@ class UniversalStatisticsProcessor:
         if self.document_data is not None and not self.document_data.empty:
             numeric_cols = self.document_data.select_dtypes(include=[np.number]).columns
             
-            # Calculate Cohen's d for all pairwise correlations
-            effect_sizes['cohens_d_interpretations'] = {}
+            # Calculate Hedge's g effect sizes for all numeric variables
+            effect_sizes['hedges_g_interpretations'] = {}
             
             for col in numeric_cols:
                 if col == 'document_index':
@@ -575,20 +629,29 @@ class UniversalStatisticsProcessor:
                     theoretical_midpoint = 0.5
                     cohens_d = (data.mean() - theoretical_midpoint) / data.std()
                     
-                    # Interpret Cohen's d
-                    if abs(cohens_d) < 0.2:
+                    # Calculate Hedge's g (corrected for small sample bias)
+                    n = len(data)
+                    df = n - 1
+                    correction_factor = 1 - (3 / (4 * df - 1)) if df > 1 else 1
+                    hedges_g = cohens_d * correction_factor
+                    
+                    # Interpret effect size using Hedge's g
+                    if abs(hedges_g) < 0.2:
                         interpretation = 'negligible'
-                    elif abs(cohens_d) < 0.5:
+                    elif abs(hedges_g) < 0.5:
                         interpretation = 'small'
-                    elif abs(cohens_d) < 0.8:
+                    elif abs(hedges_g) < 0.8:
                         interpretation = 'medium'
                     else:
                         interpretation = 'large'
                     
-                    effect_sizes['cohens_d_interpretations'][col] = {
-                        'cohens_d': float(cohens_d),
+                    effect_sizes['hedges_g_interpretations'][col] = {
+                        'hedges_g': float(hedges_g),
                         'interpretation': interpretation,
-                        'direction': 'above_midpoint' if cohens_d > 0 else 'below_midpoint'
+                        'direction': 'above_midpoint' if hedges_g > 0 else 'below_midpoint',
+                        'sample_size': n,
+                        'bias_corrected': True,
+                        'correction_factor': float(correction_factor)
                     }
         
         return effect_sizes

@@ -227,12 +227,13 @@ def _has_required_artifacts(run_dir: Path, start_phase: str, required_phases: Li
         return False
     
     # Check for phase-specific artifacts
+    # Updated to include three-tier architecture artifacts
     phase_artifacts = {
         'validation': ['validation_report'],
         'analysis': ['composite_analysis', 'evidence_extraction', 'score_extraction'],
-        'statistical': ['statistical_analysis'],
+        'statistical': ['statistical_analysis', 'baseline_statistics'],
         'evidence': ['curated_evidence'],
-        'synthesis': ['synthesis_report', 'final_synthesis_report']
+        'synthesis': ['synthesis_report', 'final_synthesis_report', 'stage1_synthesis_report']
     }
     
     # Check if start_phase artifacts exist
@@ -281,14 +282,18 @@ def copy_artifacts_between_runs(source_storage, target_storage, required_phases:
         source_storage: LocalArtifactStorage for source run
         target_storage: LocalArtifactStorage for target run
         required_phases: List of phases whose artifacts should be copied
+        
+    Raises:
+        RuntimeError: If essential artifacts cannot be copied
     """
     # Define artifact types for each phase
+    # Updated to include three-tier architecture artifacts
     phase_artifacts = {
         'validation': ['validation_report', 'framework', 'corpus_manifest', 'experiment_spec', 'corpus_document'],
         'analysis': ['composite_analysis', 'evidence_extraction', 'score_extraction', 'marked_up_document'],
-        'statistical': ['statistical_analysis', 'statistical_verification', 'derived_metrics'],
+        'statistical': ['statistical_analysis', 'statistical_verification', 'derived_metrics', 'baseline_statistics'],
         'evidence': ['curated_evidence'],
-        'synthesis': ['synthesis_report', 'final_synthesis_report', 'stage1_synthesis_report']
+        'synthesis': ['synthesis_report', 'final_synthesis_report', 'stage1_synthesis_report', 'evidence_appendix']
     }
     
     # Get all artifacts to copy
@@ -297,23 +302,169 @@ def copy_artifacts_between_runs(source_storage, target_storage, required_phases:
         if phase in phase_artifacts:
             artifacts_to_copy.extend(phase_artifacts[phase])
     
+    # Track copy results for validation
+    copy_results = {}
+    failed_artifacts = []
+    
     # Copy artifacts and merge registries
     for artifact_type in artifacts_to_copy:
         source_artifacts = source_storage.find_artifacts_by_metadata(artifact_type=artifact_type)
+        copy_results[artifact_type] = {'found': len(source_artifacts), 'copied': 0, 'failed': 0}
+        
         for artifact_hash in source_artifacts:
             try:
                 # Get artifact content and metadata from source
                 artifact_content = source_storage.get_artifact(artifact_hash)
                 artifact_metadata = source_storage.get_artifact_metadata(artifact_hash)
                 
+                # Validate artifact integrity (basic JSON check for JSON artifacts)
+                if artifact_type in ['baseline_statistics', 'statistical_analysis', 'curated_evidence']:
+                    try:
+                        import json
+                        json.loads(artifact_content.decode('utf-8'))
+                    except (json.JSONDecodeError, UnicodeDecodeError) as e:
+                        raise ValueError(f"Artifact {artifact_hash} is corrupted: {e}")
+                
                 # Store in target with source_run tracking
                 updated_metadata = artifact_metadata.copy()
                 updated_metadata['source_run'] = source_storage.run_name
                 
                 target_storage.put_artifact(artifact_content, updated_metadata)
+                copy_results[artifact_type]['copied'] += 1
                 
             except Exception as e:
+                copy_results[artifact_type]['failed'] += 1
+                failed_artifacts.append(f"{artifact_type}:{artifact_hash[:8]}... - {e}")
                 print(f"⚠️ Warning: Could not copy artifact {artifact_hash}: {e}")
+    
+    # Validate essential artifacts were copied successfully
+    essential_artifacts = ['composite_analysis', 'baseline_statistics', 'statistical_analysis', 'curated_evidence']
+    missing_essential = []
+    
+    for artifact_type in essential_artifacts:
+        if artifact_type in copy_results:
+            if copy_results[artifact_type]['copied'] == 0 and copy_results[artifact_type]['found'] > 0:
+                missing_essential.append(f"{artifact_type} (found {copy_results[artifact_type]['found']} but failed to copy)")
+            elif copy_results[artifact_type]['found'] == 0:
+                missing_essential.append(f"{artifact_type} (not found in source run)")
+    
+    if missing_essential:
+        error_msg = f"Resume failed: Essential artifacts missing or corrupted:\n"
+        for artifact in missing_essential:
+            error_msg += f"  • {artifact}\n"
+        error_msg += "\nThis may indicate the source run is incomplete or corrupted.\n"
+        error_msg += "Try running from an earlier phase or a different source run."
+        raise RuntimeError(error_msg)
+    
+    # Report copy summary
+    total_copied = sum(result['copied'] for result in copy_results.values())
+    total_failed = sum(result['failed'] for result in copy_results.values())
+    
+    if total_failed > 0:
+        print(f"⚠️ Resume completed with {total_failed} artifact copy failures out of {total_copied + total_failed} total artifacts")
+        if len(failed_artifacts) <= 5:  # Show details for small number of failures
+            for failure in failed_artifacts:
+                print(f"  • {failure}")
+        else:
+            print(f"  • {len(failed_artifacts)} artifacts failed (use --verbose for details)")
+    else:
+        print(f"✅ All {total_copied} artifacts copied successfully")
+
+def _validate_phase_dependencies(run_dir: Path, start_phase: str, end_phase: str) -> None:
+    """
+    Validate that all required phase dependencies are met for the requested execution.
+    
+    Args:
+        run_dir: Path to run directory
+        start_phase: Phase to start from
+        end_phase: Phase to end at
+        
+    Raises:
+        RuntimeError: If phase dependencies are not met
+    """
+    phases = ['validation', 'analysis', 'statistical', 'evidence', 'synthesis']
+    start_idx = phases.index(start_phase)
+    end_idx = phases.index(end_phase)
+    
+    if start_idx > end_idx:
+        raise RuntimeError(f"Start phase '{start_phase}' cannot be after end phase '{end_phase}'")
+    
+    # Check that all phases before start_phase are completed
+    required_phases = phases[:start_idx]
+    missing_phases = []
+    
+    for phase in required_phases:
+        if not _has_required_artifacts(run_dir, phase, []):
+            missing_phases.append(phase)
+    
+    if missing_phases:
+        error_msg = f"Cannot start from '{start_phase}': Missing completed phases: {', '.join(missing_phases)}\n"
+        error_msg += f"Required phase order: {' → '.join(phases)}\n"
+        error_msg += f"Try running from an earlier phase or complete the missing phases first."
+        raise RuntimeError(error_msg)
+    
+    # Check for critical artifacts that may be needed by later phases
+    critical_artifacts = {
+        'statistical': ['composite_analysis'],
+        'evidence': ['composite_analysis', 'statistical_analysis', 'baseline_statistics'],
+        'synthesis': ['composite_analysis', 'statistical_analysis', 'baseline_statistics', 'curated_evidence']
+    }
+    
+    missing_critical = []
+    for phase in phases[start_idx:end_idx + 1]:
+        if phase in critical_artifacts:
+            for artifact_type in critical_artifacts[phase]:
+                if not _has_artifact_type(run_dir / 'artifacts', artifact_type):
+                    missing_critical.append(f"{artifact_type} (needed for {phase})")
+    
+    if missing_critical:
+        error_msg = f"Critical artifacts missing for requested execution:\n"
+        for artifact in missing_critical:
+            error_msg += f"  • {artifact}\n"
+        error_msg += f"\nThis may indicate the run is incomplete or corrupted.\n"
+        error_msg += f"Try running from an earlier phase or check the source run integrity."
+        raise RuntimeError(error_msg)
+
+def _get_resume_provenance(run_dir: Path) -> Optional[Dict[str, Any]]:
+    """
+    Get resume provenance information for a run directory.
+    
+    Args:
+        run_dir: Path to run directory
+        
+    Returns:
+        Resume provenance dictionary or None if not a resumed run
+    """
+    try:
+        artifacts_dir = run_dir / 'artifacts'
+        if not artifacts_dir.exists():
+            return None
+        
+        # Look for resume_provenance artifact
+        registry_file = artifacts_dir / 'artifact_registry.json'
+        if not registry_file.exists():
+            return None
+        
+        import json
+        with open(registry_file, 'r') as f:
+            registry = json.load(f)
+        
+        # Find resume_provenance artifact
+        for artifact_data in registry.values():
+            metadata = artifact_data.get('metadata', {})
+            if metadata.get('artifact_type') == 'resume_provenance':
+                # Load the resume provenance content
+                artifact_hash = artifact_data.get('hash')
+                if artifact_hash:
+                    provenance_file = artifacts_dir / 'misc' / f"resume_provenance_{artifact_hash}"
+                    if provenance_file.exists():
+                        with open(provenance_file, 'r') as f:
+                            return json.load(f)
+        
+        return None
+        
+    except Exception:
+        return None
 
 # ============================================================================
 # CORE COMMANDS
@@ -397,6 +548,7 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, ski
         audit = AuditLogger(security, run_folder)
 
         # 3. Copy artifacts from source run if resuming
+        resume_provenance = None
         if source_run_dir:
             source_storage = LocalArtifactStorage(security, source_run_dir, source_run_dir.name)
             
@@ -407,16 +559,43 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, ski
             
             if phases_to_copy:
                 rich_console.print_info(f"📦 Copying artifacts from phases: {', '.join(phases_to_copy)}")
-                copy_artifacts_between_runs(source_storage, storage, phases_to_copy)
-                rich_console.print_success("✅ Artifacts copied successfully")
+                try:
+                    # Track resume operation for provenance
+                    resume_provenance = {
+                        'resume_operation': True,
+                        'source_run_id': source_run_dir.name,
+                        'source_run_path': str(source_run_dir),
+                        'resume_timestamp': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                        'resume_phases': phases_to_copy,
+                        'resume_start_phase': start_phase,
+                        'resume_end_phase': end_phase,
+                        'resume_reason': 'user_requested' if not run_dir else 'user_specified_run'
+                    }
+                    
+                    copy_artifacts_between_runs(source_storage, storage, phases_to_copy)
+                    rich_console.print_success("✅ Artifacts copied successfully")
+                    
+                    # Log resume operation for audit trail
+                    rich_console.print_info(f"📋 Resume provenance: {resume_provenance['source_run_id']} → {run_name}")
+                    
+                except RuntimeError as e:
+                    rich_console.print_error(f"❌ Resume failed: {e}")
+                    exit_general_error("Resume failed due to missing or corrupted artifacts")
 
-        # 4. Verify experiment.md exists (basic check only - ValidationAgent will do full validation)
+        # 4. Validate phase dependencies before execution
+        try:
+            _validate_phase_dependencies(run_folder, start_phase, end_phase)
+        except RuntimeError as e:
+            rich_console.print_error(f"❌ Phase dependency validation failed: {e}")
+            exit_general_error("Phase dependencies not met")
+
+        # 5. Verify experiment.md exists (basic check only - ValidationAgent will do full validation)
         experiment_file = exp_path / "experiment.md"
         if not experiment_file.exists():
             rich_console.print_error(f"❌ experiment.md not found in: {exp_path}")
             exit_file_error("experiment.md not found.")
 
-        # 5. Configure Orchestrator (THIN architecture - let ValidationAgent handle file discovery)
+        # 6. Configure Orchestrator (THIN architecture - let ValidationAgent handle file discovery)
         config = V2OrchestratorConfig(
             experiment_id=exp_path.name,
             experiment_dir=str(exp_path),
@@ -426,12 +605,42 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, ski
 
         orchestrator = V2Orchestrator(config, security, storage, audit)
 
-        # 6. Register Agents
+        # 7. Register Agents
         orchestrator.register_agent("Validation", V2ValidationAgent(security, storage, audit))
         orchestrator.register_agent("Analysis", V2AnalysisAgent(security, storage, audit))
         orchestrator.register_agent("Statistical", V2StatisticalAgent(security, storage, audit))
         orchestrator.register_agent("Evidence", IntelligentEvidenceRetrievalAgent(security, storage, audit))
         orchestrator.register_agent("Synthesis", TwoStageSynthesisAgent(security, storage, audit))
+        
+        # 8. Add resume provenance to run context if applicable
+        if resume_provenance:
+            # Store resume provenance in run context metadata
+            from discernus.core.run_context import RunContext
+            run_context = RunContext(
+                experiment_id=exp_path.name,
+                experiment_dir=str(exp_path)
+            )
+            run_context.metadata.update(resume_provenance)
+            
+            # Store resume provenance as a dedicated artifact for audit trail
+            try:
+                import json
+                resume_provenance_json = json.dumps(resume_provenance, indent=2)
+                resume_provenance_bytes = resume_provenance_json.encode('utf-8')
+                
+                storage.put_artifact(
+                    resume_provenance_bytes,
+                    {
+                        'artifact_type': 'resume_provenance',
+                        'run_id': run_name,
+                        'source_run_id': resume_provenance['source_run_id']
+                    }
+                )
+                
+                rich_console.print_info(f"📋 Resume provenance recorded for audit trail")
+                
+            except Exception as e:
+                rich_console.print_warning(f"⚠️ Could not store resume provenance: {e}")
 
         # 7. Use Simple Executor
         from discernus.core.simple_executor import SimpleExperimentExecutor
@@ -606,7 +815,8 @@ def validate(ctx, experiment_path: str):
 
 @cli.command()
 @click.argument('experiment_path', default='.', type=click.Path(exists=True, file_okay=False, dir_okay=True))
-def artifacts(experiment_path: str):
+@click.option('--show-resume', is_flag=True, help='Show resume provenance information')
+def artifacts(experiment_path: str, show_resume: bool):
     """Show experiment artifacts and available cache status for resumption. Defaults to current directory."""
     exp_path = Path(experiment_path).resolve()
     
@@ -627,7 +837,11 @@ def artifacts(experiment_path: str):
         return
     
     # Show recent runs
-    table = rich_console.create_table("Recent Runs", ["Timestamp", "Status", "Artifacts"])
+    if show_resume:
+        table = rich_console.create_table("Recent Runs with Resume Provenance", 
+                                        ["Timestamp", "Status", "Artifacts", "Resume Info"])
+    else:
+        table = rich_console.create_table("Recent Runs", ["Timestamp", "Status", "Artifacts"])
     
     for run_dir in run_dirs[:10]:  # Show last 10 runs
         # Determine status
@@ -641,9 +855,34 @@ def artifacts(experiment_path: str):
         # Count artifacts
         artifact_count = len([f for f in run_dir.iterdir() if f.is_file()])
         
-        table.add_row(run_dir.name, status, f"{artifact_count} files")
+        # Check for resume provenance if requested
+        resume_info = ""
+        if show_resume:
+            resume_provenance = _get_resume_provenance(run_dir)
+            if resume_provenance:
+                resume_info = f"🔄 From: {resume_provenance['source_run_id']}"
+            else:
+                resume_info = "🆕 Original"
+        
+        if show_resume:
+            table.add_row(run_dir.name, status, f"{artifact_count} files", resume_info)
+        else:
+            table.add_row(run_dir.name, status, f"{artifact_count} files")
     
     rich_console.print_table(table)
+    
+    # Show detailed resume provenance if requested
+    if show_resume:
+        rich_console.print_section("📋 Resume Provenance Details")
+        for run_dir in run_dirs[:5]:  # Show details for last 5 runs
+            resume_provenance = _get_resume_provenance(run_dir)
+            if resume_provenance:
+                rich_console.print_info(f"Run: {run_dir.name}")
+                rich_console.print_info(f"  Source: {resume_provenance['source_run_id']}")
+                rich_console.print_info(f"  Phases: {', '.join(resume_provenance['resume_phases'])}")
+                rich_console.print_info(f"  Timestamp: {resume_provenance['resume_timestamp']}")
+                rich_console.print_info(f"  Reason: {resume_provenance['resume_reason']}")
+                rich_console.print_info("")
     
     # Show cache status
     cache_dir = exp_path / '.discernus_cache'

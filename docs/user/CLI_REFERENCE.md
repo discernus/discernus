@@ -33,6 +33,8 @@ discernus run [EXPERIMENT_PATH] [OPTIONS]
 --verbose-trace           # Enable comprehensive function-level tracing
 --trace-filter COMPONENT # Filter tracing to specific components
 --skip-validation         # Skip experiment coherence validation
+--resume                  # Resume from existing run with completed phases
+--run-dir RUN_ID         # Specify specific run directory to resume from
 ```
 
 **Examples:**
@@ -48,6 +50,12 @@ discernus run projects/experiment --from evidence --to synthesis
 
 # Validation phase only
 discernus run projects/experiment --from validation --to validation
+
+# Resume from existing run (auto-detect)
+discernus run projects/experiment --resume --from statistical
+
+# Resume from specific run directory
+discernus run projects/experiment --run-dir 20250926_045818 --from evidence
 
 # Debug with tracing
 discernus run projects/experiment --verbose-trace --trace-filter statistical
@@ -71,13 +79,27 @@ discernus validate [EXPERIMENT_PATH]
 Show experiment artifacts and cache status for resumption.
 
 ```bash
-discernus artifacts [EXPERIMENT_PATH]
+discernus artifacts [EXPERIMENT_PATH] [OPTIONS]
 ```
 
 **Arguments:**
 - `EXPERIMENT_PATH`: Path to experiment directory (defaults to current directory)
 
-**Output**: Recent runs, artifact counts, and cache status.
+**Options:**
+```bash
+--show-resume           # Show resume provenance information
+```
+
+**Output**: Recent runs, artifact counts, cache status, and resume provenance details.
+
+**Examples:**
+```bash
+# Show basic artifact information
+discernus artifacts projects/experiment
+
+# Show artifacts with resume provenance details
+discernus artifacts projects/experiment --show-resume
+```
 
 ### `discernus costs`
 
@@ -266,6 +288,66 @@ export DISCERNUS_VERBOSE_TRACE=1
 discernus run projects/experiment1
 discernus run projects/experiment2
 ```
+
+## Resume Functionality
+
+Discernus supports resuming experiments from previously completed phases, enabling efficient development workflows and cost optimization.
+
+### Resume Options
+
+**Automatic Resume Detection:**
+```bash
+discernus run projects/experiment --resume --from statistical
+```
+- Automatically finds the most recent run with completed phases up to the start phase
+- Copies all artifacts from previous phases
+- Continues execution from the specified phase
+
+**Specific Run Resume:**
+```bash
+discernus run projects/experiment --run-dir 20250926_045818 --from evidence
+```
+- Resumes from a specific run directory
+- Useful when you want to resume from a particular run
+- Provides full control over which run to resume from
+
+### Resume Provenance Tracking
+
+All resume operations are tracked for audit and reproducibility purposes:
+
+**Resume Metadata:**
+- Source run identification
+- Resume timestamp
+- Phases copied vs. newly executed
+- Resume reason (user requested vs. specified run)
+
+**Audit Capabilities:**
+```bash
+# Show resume provenance information
+discernus artifacts projects/experiment --show-resume
+```
+
+**Artifact Integrity:**
+- All copied artifacts maintain their original content hashes
+- Source run tracking in artifact metadata
+- Complete audit trail from source to destination
+
+### Use Cases
+
+**Development Workflow:**
+- Iterate on statistical analysis without re-running expensive analysis phase
+- Debug synthesis issues without re-running statistical phase
+- Test different synthesis approaches with same statistical results
+
+**Cost Optimization:**
+- Resume from analysis phase after CSV export
+- Continue synthesis after statistical analysis
+- Avoid redundant expensive operations
+
+**Data Integrity:**
+- All resume operations are fully auditable
+- Content integrity maintained through CAS
+- Complete provenance chain from source to final results
 
 ---
 
