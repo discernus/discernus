@@ -5,6 +5,7 @@ Discernus CLI v2.1 - Streamlined Researcher Interface
 
 Core Commands for Research Workflow:
 - discernus run <experiment_path>       - Execute V2 experiment with phase selection
+- discernus resume <experiment_path>    - Resume experiment from existing run
 - discernus validate <experiment_path>  - Validate experiment structure and configuration
 - discernus artifacts <experiment_path>  - Show experiment artifacts and cache status
 - discernus costs <experiment_path>     - Show cost breakdown for experiment runs
@@ -15,6 +16,12 @@ Phase Selection (V2 Architecture):
 - discernus run --from analysis --to statistical     - Analysis and statistical phases only
 - discernus run --from evidence --to synthesis        - Evidence retrieval and synthesis only
 - discernus run --from validation --to validation     - Validation phase only
+
+Resume Functionality:
+- discernus run --resume                              - Auto-resume from most recent compatible run
+- discernus run --run-dir <run_id>                    - Resume from specific run directory
+- discernus resume --from statistical --to synthesis  - Resume from statistical phase
+- discernus resume --run-dir <run_id> --from analysis - Resume from specific run
 
 Advanced Options:
 - discernus run --verbose-trace                       - Enable comprehensive function-level tracing
@@ -170,6 +177,145 @@ def cli(ctx):
     ctx.ensure_object(dict)
 
 # ============================================================================
+# RESUME FUNCTIONALITY
+# ============================================================================
+
+def find_resumable_run(experiment_path: Path, start_phase: str) -> Optional[Path]:
+    """
+    Find a resumable run directory that has completed phases up to start_phase.
+    
+    Args:
+        experiment_path: Path to experiment directory
+        start_phase: Phase to resume from
+        
+    Returns:
+        Path to resumable run directory, or None if none found
+    """
+    runs_dir = experiment_path / 'runs'
+    if not runs_dir.exists():
+        return None
+    
+    # Get all run directories, sorted by name (most recent first)
+    run_dirs = [d for d in runs_dir.iterdir() if d.is_dir()]
+    run_dirs.sort(key=lambda x: x.name, reverse=True)
+    
+    # Define phase order for validation
+    phases = ['validation', 'analysis', 'statistical', 'evidence', 'synthesis']
+    start_idx = phases.index(start_phase)
+    
+    for run_dir in run_dirs:
+        # Check if this run has the required artifacts for start_phase
+        if _has_required_artifacts(run_dir, start_phase, phases[:start_idx]):
+            return run_dir
+    
+    return None
+
+def _has_required_artifacts(run_dir: Path, start_phase: str, required_phases: List[str]) -> bool:
+    """
+    Check if a run directory has the required artifacts for the start phase.
+    
+    Args:
+        run_dir: Path to run directory
+        start_phase: Phase to resume from
+        required_phases: List of phases that must be completed before start_phase
+        
+    Returns:
+        True if all required artifacts exist
+    """
+    artifacts_dir = run_dir / 'artifacts'
+    if not artifacts_dir.exists():
+        return False
+    
+    # Check for phase-specific artifacts
+    phase_artifacts = {
+        'validation': ['validation_report'],
+        'analysis': ['composite_analysis', 'evidence_extraction', 'score_extraction'],
+        'statistical': ['statistical_analysis'],
+        'evidence': ['curated_evidence'],
+        'synthesis': ['synthesis_report', 'final_synthesis_report']
+    }
+    
+    # Check if start_phase artifacts exist
+    if start_phase in phase_artifacts:
+        required_artifacts = phase_artifacts[start_phase]
+        for artifact_type in required_artifacts:
+            if not _has_artifact_type(artifacts_dir, artifact_type):
+                return False
+    
+    # Check if all required previous phases are completed
+    for phase in required_phases:
+        if phase in phase_artifacts:
+            phase_complete = any(_has_artifact_type(artifacts_dir, artifact_type) 
+                               for artifact_type in phase_artifacts[phase])
+            if not phase_complete:
+                return False
+    
+    return True
+
+def _has_artifact_type(artifacts_dir: Path, artifact_type: str) -> bool:
+    """Check if artifacts directory contains artifacts of the specified type."""
+    registry_file = artifacts_dir / 'artifact_registry.json'
+    if not registry_file.exists():
+        return False
+    
+    try:
+        import json
+        with open(registry_file, 'r') as f:
+            registry = json.load(f)
+        
+        # Check if any artifact has the required type
+        for artifact_data in registry.values():
+            metadata = artifact_data.get('metadata', {})
+            if metadata.get('artifact_type') == artifact_type:
+                return True
+        
+        return False
+    except Exception:
+        return False
+
+def copy_artifacts_between_runs(source_storage, target_storage, required_phases: List[str]) -> None:
+    """
+    Copy artifacts from source run to target run for resume functionality.
+    
+    Args:
+        source_storage: LocalArtifactStorage for source run
+        target_storage: LocalArtifactStorage for target run
+        required_phases: List of phases whose artifacts should be copied
+    """
+    # Define artifact types for each phase
+    phase_artifacts = {
+        'validation': ['validation_report', 'framework', 'corpus_manifest', 'experiment_spec', 'corpus_document'],
+        'analysis': ['composite_analysis', 'evidence_extraction', 'score_extraction', 'marked_up_document'],
+        'statistical': ['statistical_analysis', 'statistical_verification', 'derived_metrics'],
+        'evidence': ['curated_evidence'],
+        'synthesis': ['synthesis_report', 'final_synthesis_report', 'stage1_synthesis_report']
+    }
+    
+    # Get all artifacts to copy
+    artifacts_to_copy = []
+    for phase in required_phases:
+        if phase in phase_artifacts:
+            artifacts_to_copy.extend(phase_artifacts[phase])
+    
+    # Copy artifacts and merge registries
+    for artifact_type in artifacts_to_copy:
+        source_artifacts = source_storage.find_artifacts_by_metadata(artifact_type=artifact_type)
+        for artifact_hash in source_artifacts:
+            try:
+                # Get artifact content and metadata from source
+                artifact_content = source_storage.get_artifact(artifact_hash)
+                artifact_metadata = source_storage.get_artifact_metadata(artifact_hash)
+                
+                # Store in target with source_run tracking
+                updated_metadata = artifact_metadata.copy()
+                updated_metadata['source_run'] = source_storage.run_name
+                
+                target_storage.put_artifact(artifact_content, updated_metadata)
+                
+            except Exception as e:
+                print(f"⚠️ Warning: Could not copy artifact {artifact_hash}: {e}")
+
+# ============================================================================
 # CORE COMMANDS
 # ============================================================================
 
@@ -184,9 +330,11 @@ def cli(ctx):
 @click.option('--to', 'end_phase',
               type=click.Choice(['validation', 'analysis', 'statistical', 'evidence', 'synthesis']), 
               default='synthesis', help='End at this phase (default: synthesis)')
+@click.option('--resume', is_flag=True, help='Resume from existing run with completed phases')
+@click.option('--run-dir', type=str, help='Specify specific run directory to resume from')
 @click.pass_context
 def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, skip_validation: bool, 
-        start_phase: str, end_phase: str):
+        start_phase: str, end_phase: str, resume: bool, run_dir: str):
     """Execute a V2 experiment with simple phase selection."""
     exp_path = Path(experiment_path).resolve()
 
@@ -220,7 +368,26 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, ski
         rich_console.print_info(f"🔍 Verbose tracing enabled" + (f" (filters: {', '.join(trace_filter)})" if trace_filter else ""))
 
     try:
-        # 1. Initialize core components
+        # 1. Handle resume functionality
+        source_run_dir = None
+        if resume or run_dir:
+            if run_dir:
+                # Use specified run directory
+                source_run_dir = exp_path / "runs" / run_dir
+                if not source_run_dir.exists():
+                    rich_console.print_error(f"❌ Specified run directory not found: {run_dir}")
+                    exit_file_error("Run directory not found.")
+            else:
+                # Find resumable run automatically
+                source_run_dir = find_resumable_run(exp_path, start_phase)
+                if not source_run_dir:
+                    rich_console.print_error(f"❌ No resumable run found for phase: {start_phase}")
+                    rich_console.print_info("💡 Tip: Use --run-dir to specify a specific run directory")
+                    exit_general_error("No resumable run found.")
+            
+            rich_console.print_info(f"🔄 Resuming from run: {source_run_dir.name}")
+
+        # 2. Initialize core components
         run_name = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%d_%H%M%S")
         run_folder = exp_path / "runs" / run_name
         run_folder.mkdir(parents=True, exist_ok=True)
@@ -229,13 +396,27 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, ski
         storage = LocalArtifactStorage(security, run_folder, run_name)
         audit = AuditLogger(security, run_folder)
 
-        # 2. Verify experiment.md exists (basic check only - ValidationAgent will do full validation)
+        # 3. Copy artifacts from source run if resuming
+        if source_run_dir:
+            source_storage = LocalArtifactStorage(security, source_run_dir, source_run_dir.name)
+            
+            # Determine which phases to copy based on start_phase
+            phases = ['validation', 'analysis', 'statistical', 'evidence', 'synthesis']
+            start_idx = phases.index(start_phase)
+            phases_to_copy = phases[:start_idx]
+            
+            if phases_to_copy:
+                rich_console.print_info(f"📦 Copying artifacts from phases: {', '.join(phases_to_copy)}")
+                copy_artifacts_between_runs(source_storage, storage, phases_to_copy)
+                rich_console.print_success("✅ Artifacts copied successfully")
+
+        # 4. Verify experiment.md exists (basic check only - ValidationAgent will do full validation)
         experiment_file = exp_path / "experiment.md"
         if not experiment_file.exists():
             rich_console.print_error(f"❌ experiment.md not found in: {exp_path}")
             exit_file_error("experiment.md not found.")
 
-        # 3. Configure Orchestrator (THIN architecture - let ValidationAgent handle file discovery)
+        # 5. Configure Orchestrator (THIN architecture - let ValidationAgent handle file discovery)
         config = V2OrchestratorConfig(
             experiment_id=exp_path.name,
             experiment_dir=str(exp_path),
@@ -245,14 +426,14 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, ski
 
         orchestrator = V2Orchestrator(config, security, storage, audit)
 
-        # 4. Register Agents
+        # 6. Register Agents
         orchestrator.register_agent("Validation", V2ValidationAgent(security, storage, audit))
         orchestrator.register_agent("Analysis", V2AnalysisAgent(security, storage, audit))
         orchestrator.register_agent("Statistical", V2StatisticalAgent(security, storage, audit))
         orchestrator.register_agent("Evidence", IntelligentEvidenceRetrievalAgent(security, storage, audit))
         orchestrator.register_agent("Synthesis", TwoStageSynthesisAgent(security, storage, audit))
 
-        # 5. Use Simple Executor
+        # 7. Use Simple Executor
         from discernus.core.simple_executor import SimpleExperimentExecutor
         executor = SimpleExperimentExecutor()
         
@@ -318,13 +499,22 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, ski
                     for artifact in result.artifacts:
                         if isinstance(artifact, dict):
                             # ExperimentResult.artifacts contains Dict[str, Any] with artifact info
-                            artifact_type = artifact.get("artifact_type", "unknown")
+                            # Try both "artifact_type" and "type" fields for compatibility
+                            artifact_type = artifact.get("artifact_type") or artifact.get("type", "unknown")
+                            
+                            # If it's in metadata, try that too
+                            if artifact_type == "unknown" and "metadata" in artifact:
+                                metadata = artifact["metadata"]
+                                artifact_type = metadata.get("artifact_type") or metadata.get("type", "unknown")
+                            
                             artifact_types[artifact_type] = artifact_types.get(artifact_type, 0) + 1
                         elif isinstance(artifact, str):
                             # Fallback for string artifacts (hashes)
                             try:
                                 artifact_metadata = storage.get_artifact_metadata(artifact)
-                                artifact_type = artifact_metadata.get("metadata", {}).get("artifact_type", "unknown")
+                                # Try both "artifact_type" and "type" fields in metadata
+                                artifact_type = (artifact_metadata.get("artifact_type") or 
+                                              artifact_metadata.get("type", "unknown"))
                                 artifact_types[artifact_type] = artifact_types.get(artifact_type, 0) + 1
                             except Exception:
                                 artifact_types["unknown"] = artifact_types.get("unknown", 0) + 1
@@ -514,6 +704,63 @@ def costs(experiment_path: str, detailed: bool, session: bool):
                 return
         
         rich_console.print_info("No cost data found in recent runs")
+
+@cli.command()
+@click.argument('experiment_path', default='.', type=click.Path(file_okay=False, dir_okay=True))
+@click.option('--from', 'start_phase', 
+              type=click.Choice(['validation', 'analysis', 'statistical', 'evidence', 'synthesis']),
+              default='validation', help='Start from this phase (default: validation)')
+@click.option('--to', 'end_phase',
+              type=click.Choice(['validation', 'analysis', 'statistical', 'evidence', 'synthesis']), 
+              default='synthesis', help='End at this phase (default: synthesis)')
+@click.option('--run-dir', type=str, help='Specify specific run directory to resume from')
+def resume(experiment_path: str, start_phase: str, end_phase: str, run_dir: str):
+    """Resume an experiment from an existing run with completed phases."""
+    exp_path = Path(experiment_path).resolve()
+    
+    # Validate phase parameters
+    phases = ['validation', 'analysis', 'statistical', 'evidence', 'synthesis']
+    if start_phase not in phases:
+        rich_console.print_error(f"❌ Invalid start phase: {start_phase}")
+        exit_invalid_usage(f"Start phase must be one of: {', '.join(phases)}")
+    
+    if end_phase not in phases:
+        rich_console.print_error(f"❌ Invalid end phase: {end_phase}")
+        exit_invalid_usage(f"End phase must be one of: {', '.join(phases)}")
+    
+    start_idx = phases.index(start_phase)
+    end_idx = phases.index(end_phase)
+    
+    if start_idx > end_idx:
+        rich_console.print_error(f"❌ Start phase ({start_phase}) cannot be after end phase ({end_phase})")
+        exit_invalid_usage("Start phase must be before or equal to end phase")
+    
+    # Find resumable run
+    if run_dir:
+        source_run_dir = exp_path / "runs" / run_dir
+        if not source_run_dir.exists():
+            rich_console.print_error(f"❌ Specified run directory not found: {run_dir}")
+            exit_file_error("Run directory not found.")
+    else:
+        source_run_dir = find_resumable_run(exp_path, start_phase)
+        if not source_run_dir:
+            rich_console.print_error(f"❌ No resumable run found for phase: {start_phase}")
+            rich_console.print_info("💡 Tip: Use --run-dir to specify a specific run directory")
+            exit_general_error("No resumable run found.")
+    
+    rich_console.print_info(f"🔄 Resuming from run: {source_run_dir.name}")
+    
+    # Delegate to run command with resume flag
+    ctx = click.get_current_context()
+    ctx.invoke(run, 
+               experiment_path=experiment_path,
+               verbose_trace=False,
+               trace_filter=(),
+               skip_validation=False,
+               start_phase=start_phase,
+               end_phase=end_phase,
+               resume=True,
+               run_dir=run_dir)
 
 def _display_cost_summary(cost_summary: Dict[str, Any], detailed: bool):
     """Display cost summary in a formatted way"""

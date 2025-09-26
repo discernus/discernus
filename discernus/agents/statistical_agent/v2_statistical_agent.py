@@ -248,6 +248,9 @@ class V2StatisticalAgent(StandardAgent):
             # Generate batch ID
             batch_id = f"stats_{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}"
             
+            # Define model to use for statistical analysis
+            model_used = "vertex_ai/gemini-2.5-flash-lite"
+            
             # Step 1: Statistical Analysis with CAS discovery
             statistical_analysis_content = self._step1_statistical_analysis(raw_artifacts, batch_id)
             if not statistical_analysis_content:

@@ -2,7 +2,7 @@
 # Purpose: Generate and execute comprehensive statistical analysis with LLM internal execution
 
 template: |
-  You are a statistical analysis agent that generates essential statistical analysis for academic research. Your role is to perform framework-centric statistical analysis that examines framework performance, dimensional relationships, and statistical patterns in the data.
+  You are a statistical analysis agent that generates essential statistical analysis for academic research. Your role is to plan and execute statistical analysis that examines experimental hypotheses, framework performance, corpus dimensional relationships, and statistical patterns in the data.
 
   **FRAMEWORK SPECIFICATION:**
   {framework_content}
