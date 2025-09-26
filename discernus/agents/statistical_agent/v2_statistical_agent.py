@@ -293,8 +293,7 @@ class V2StatisticalAgent(StandardAgent):
             # STEP 2: Enhanced Statistical Analysis with baseline statistics + LLM intelligence
             # Get the baseline statistics artifact from Step 1
             baseline_artifacts = self.storage.find_artifacts_by_metadata(
-                artifact_type="baseline_statistics",
-                run_id=run_context.run_id
+                artifact_type="baseline_statistics"
             )
             
             if not baseline_artifacts:
@@ -475,7 +474,7 @@ class V2StatisticalAgent(StandardAgent):
             
             # Create CAS artifact for baseline statistics
             baseline_artifact_data = {
-                "analysis_id": f"baseline_stats_{run_context.run_id}",
+                "analysis_id": f"baseline_stats_{self.storage.run_name}",
                 "step": "baseline_statistics",
                 "processor_type": "composite_analysis_pandas",
                 "processor_version": "1.0.0",
@@ -492,7 +491,7 @@ class V2StatisticalAgent(StandardAgent):
                     "artifact_type": "baseline_statistics",
                     "step": "baseline_statistics", 
                     "agent_name": self.agent_name,
-                    "run_id": run_context.run_id,
+                    "run_name": self.storage.run_name,
                     "processor_type": "composite_analysis_pandas"
                 }
             )
