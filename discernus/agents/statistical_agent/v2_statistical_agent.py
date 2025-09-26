@@ -88,7 +88,7 @@ class V2StatisticalAgent(StandardAgent):
             ],
             "input_types": ["score_extraction_artifacts", "derived_metrics_artifacts"],
             "output_types": ["statistical_analysis"],
-            "models_used": ["vertex_ai/gemini-2.5-pro", "vertex_ai/gemini-2.5-flash-lite"]
+            "models_used": ["vertex_ai/gemini-2.5-flash-lite", "vertex_ai/gemini-2.5-pro"]
         }
     
     def _validate_inputs(self, run_context: RunContext) -> bool:
@@ -262,7 +262,7 @@ class V2StatisticalAgent(StandardAgent):
             statistical_artifact_data = {
                 "analysis_id": f"stats_{batch_id}",
                 "step": "statistical_analysis",
-                "model_used": "vertex_ai/gemini-2.5-pro",
+                "model_used": model_used,
                 "statistical_analysis": statistical_analysis_content.strip(),  # Ensure leading/trailing whitespace is removed
                 "documents_processed": len(raw_artifacts),
                 "timestamp": datetime.now(timezone.utc).isoformat()
@@ -395,16 +395,47 @@ class V2StatisticalAgent(StandardAgent):
                 raise ValueError("No corpus_manifest artifacts found via CAS discovery")
             corpus_manifest_content = self.storage.get_artifact(corpus_manifest_artifacts[0]).decode('utf-8')
             
-            # Get experiment context from CAS discovery - experiment spec artifacts contain the experiment ID
+            # Get experiment content from CAS discovery
             experiment_artifacts = self.storage.find_artifacts_by_metadata(artifact_type="experiment_spec")
             if experiment_artifacts is None:
                 self.logger.error("CRITICAL: find_artifacts_by_metadata returned None for experiment_spec")
-                experiment_artifacts = []  # Default to empty list to prevent NoneType errors
+                raise ValueError("Storage system returned None for experiment spec artifacts")
+            if not experiment_artifacts:
+                raise ValueError("No experiment_spec artifacts found via CAS discovery")
+            experiment_content = self.storage.get_artifact(experiment_artifacts[0]).decode('utf-8')
+            
+            # Extract experiment metadata from the actual experiment content
             experiment_id = 'unknown'
-            if experiment_artifacts:
-                # Extract experiment ID from artifact metadata or content
-                experiment_metadata = self.storage.get_artifact_metadata(experiment_artifacts[0])
-                experiment_id = experiment_metadata.get('experiment_id', 'unknown')
+            experiment_description = 'Statistical analysis of unknown experiment'
+            research_questions = 'How do patterns manifest through the framework dimensions?'
+            
+            # Try to extract real metadata from experiment content
+            try:
+                import re
+                # Extract experiment name from title or abstract
+                title_match = re.search(r'^#\s+(.+)$', experiment_content, re.MULTILINE)
+                if title_match:
+                    experiment_id = title_match.group(1).strip()
+                
+                # Extract description from abstract section
+                abstract_match = re.search(r'## Abstract\s*\n(.*?)(?=\n##|\Z)', experiment_content, re.DOTALL)
+                if abstract_match:
+                    abstract_text = abstract_match.group(1).strip()
+                    # Use first sentence or first 200 chars as description
+                    sentences = abstract_text.split('.')
+                    if sentences:
+                        experiment_description = sentences[0].strip() + '.'
+                        if len(experiment_description) > 200:
+                            experiment_description = experiment_description[:200] + '...'
+                
+                # Extract research questions
+                questions_match = re.search(r'## Research Questions\s*\n(.*?)(?=\n##|\Z)', experiment_content, re.DOTALL)
+                if questions_match:
+                    research_questions = questions_match.group(1).strip()
+                    
+            except Exception as e:
+                self.logger.warning(f"Could not extract experiment metadata: {e}")
+                # Keep defaults
             
             # THIN: Pass raw artifact strings directly to LLM with content truncation
             # Join all raw artifacts with separators for LLM processing
@@ -412,14 +443,13 @@ class V2StatisticalAgent(StandardAgent):
             
             # NO TRUNCATION: All content is sacred intellectual assets
             
-            # Prepare the prompt with raw data
+            # Prepare the prompt with real extracted metadata
             prompt = prompt_template.format(
                 framework_content=framework_content,
                 experiment_name=experiment_id,
-                experiment_description=f"Statistical analysis of {experiment_id} corpus using the Cohesive Flourishing Framework",
-                research_questions="How do rhetorical strategies in this corpus manifest through the Cohesive Flourishing Framework dimensions?",
-                experiment_content=framework_content,
-                data_columns="dimensional_scores, derived_metrics, evidence",
+                experiment_description=experiment_description,
+                research_questions=research_questions,
+                experiment_content=experiment_content,
                 sample_data=raw_data_block,
                 corpus_manifest=corpus_manifest_content
             )
@@ -438,14 +468,16 @@ class V2StatisticalAgent(StandardAgent):
             self.audit.log_agent_event(self.agent_name, "step1_started", {
                 "batch_id": batch_id,
                 "step": "statistical_analysis",
-                "model": "vertex_ai/gemini-2.5-pro",
+                "model": "vertex_ai/gemini-2.5-flash-lite",
                 "artifacts_count": len(raw_artifacts)
             })
             
-            # Call LLM
+            # Call LLM with Flash-Lite and reasoning=1 for pure statistical calculation
+            model_used = "vertex_ai/gemini-2.5-flash-lite"
             response = self.gateway.execute_call(
-                model="vertex_ai/gemini-2.5-pro",
-                prompt=prompt
+                model=model_used,
+                prompt=prompt,
+                reasoning=1
             )
             
             # Debug LLM response
@@ -464,7 +496,7 @@ class V2StatisticalAgent(StandardAgent):
             if metadata and 'usage' in metadata:
                 usage_data = metadata['usage']
                 self.audit.log_llm_interaction(
-                    model="vertex_ai/gemini-2.5-pro",
+                    model=model_used,
                     prompt=prompt,
                     response=content,
                     agent_name=self.agent_name,

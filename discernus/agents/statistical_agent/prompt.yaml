@@ -17,8 +17,20 @@ template: |
   {experiment_content}
 
   **ANALYSIS DATA STRUCTURE:**
-  The analysis data contains the following types:
-  {data_columns}
+  The analysis data contains dimensional scores and derived metrics from the framework analysis. The data structure includes:
+  - document_id: Unique identifier for each document
+  - dimension: Framework dimension being measured  
+  - raw_score: Dimensional intensity (0.0-1.0)
+  - salience: Prominence/emphasis of the dimension (0.0-1.0)
+  - confidence: Analysis confidence level (0.0-1.0)
+  - derived_metric_name: Calculated metric name (if applicable)
+  - derived_metric_value: Calculated metric value (if applicable)
+  - evidence_quote: Supporting textual evidence (if available)
+
+  **FRAMEWORK-AGNOSTIC APPROACH:**
+  - Discover available dimensions from the data itself
+  - Identify which documents have derived metrics vs. dimensional scores only
+  - Adapt statistical analysis to the actual data structure present
 
   **SAMPLE DATA:**
   {sample_data}
@@ -89,47 +101,39 @@ template: |
 
   **SEQUENTIAL ANALYSIS PROTOCOL:**
 
-  **Step 1: Extract Explicit Statistical Requirements.**
-  - Examine the **Full Experiment Content** for sections like "Statistical Testing Strategy", "Statistical Methods", "Methodology", "Expected Outcomes", "Hypotheses"
-  - Identify ALL explicitly mentioned statistical tests (e.g., "One-way ANOVA", "Tukey HSD", "Levene's test", "Cronbach's alpha", "t-tests", "chi-square", "regression")
-  - Note any specific statistical requirements mentioned in hypotheses
+  **Step 1: Global Constraints Understanding**
+  - Identify sample size limitations and power analysis requirements based on available data
+  - Understand available statistical libraries and capabilities (pandas, numpy, scipy.stats, pingouin)
+  - Recognize data structure constraints (what's actually present in the analysis data)
+  - Note framework-specific analytical requirements from the framework specification
 
-  **Step 2: Identify Research Design Requirements.**
-  - Determine the experimental design (factorial, between-subjects, within-subjects, time series, etc.)
-  - Identify grouping variables (administrations, conditions, time periods, ideologies, etc.)
-  - Identify dependent variables (the main outcomes being measured)
-  - Note any specific comparisons mentioned (pairwise, group contrasts, etc.)
+  **Step 2: Document Reading Order**
+  - Read experiment.md to understand research questions, hypotheses, and expected outcomes
+  - Read framework.md to understand dimensions, methodology, and theoretical structure
+  - Read corpus.md to understand data structure, metadata, and grouping variables
+  - Examine the actual analysis data to see what dimensional scores and derived metrics are available
 
-  **Step 3: Perform Tiered Power Analysis.**
-  - For EACH statistical test identified, assess sample size adequacy
-  - Classify tests into tiers: TIER 1 (well-powered), TIER 2 (moderately-powered), TIER 3 (exploratory)
-  - Plan appropriate statistical approaches for each tier
-  - For Tier 2 and Tier 3, include power caveats and alternative approaches
+  **Step 3: Data Examination**
+  - Discover available dimensions from the analysis data
+  - Identify grouping variables from corpus metadata
+  - Check for derived metrics (if any) and understand their calculation
+  - Assess sample sizes and statistical power for planned analyses
+  - Note any missing data or data quality issues
 
-  **Step 4: Map Statistical Tests to Research Questions.**
-  - For each research question, determine what statistical test(s) are needed to answer it
-  - Include tests from ALL tiers (1, 2, and 3) with appropriate caveats
-  - For Tier 2 and Tier 3 tests, include descriptive statistics and effect sizes
-  - Add clear documentation about power limitations and interpretation guidelines
+  **Step 4: Plan Building**
+  - Map research questions to appropriate statistical tests based on sample size and data type
+  - Select statistical methods that fit the framework's theoretical structure
+  - Plan grouping strategies based on corpus metadata and experiment design
+  - Design analysis approach that addresses the specific research questions
+  - Ensure all planned analyses are feasible given the available data and constraints
 
-  **Step 5: Perform Statistical Analysis.**
-  - Generate and execute Python code internally using pandas, numpy, scipy.stats, and pingouin libraries
-  - Calculate all required statistical measures using proper statistical software
+  **Step 5: Execution Within Constraints**
+  - Execute the planned analysis using Python code generation and execution
+  - Stay within global constraints (sample size, power, data availability)
+  - Focus on calculation accuracy rather than interpretation
+  - Generate results that directly address the research questions
+  - Include appropriate statistical measures (descriptive stats, effect sizes, confidence intervals)
   - Handle missing data gracefully with appropriate statistical methods
-  - Generate comprehensive results for each analysis
-  - Use internal code execution for accurate statistical calculations
-
-  **Step 6: Calculate Framework-Corpus Fit.**
-  - **Variance Analysis**: Calculate variance in each dimension across documents to assess discrimination power
-  - **Effect Size Analysis**: Compute Cohen's d or similar measures for dimensional differences between documents
-  - **Theoretical Validation**: Compare observed patterns with framework expectations from the specification
-  - **Corpus Suitability**: Assess whether the corpus characteristics align with framework requirements
-  - **Overall Fit Score**: Calculate a 0-1 framework-corpus fit score based on:
-    * Dimensional variance (higher = better discrimination)
-    * Effect sizes (larger = better separation)
-    * Theoretical alignment (better match = higher fit)
-    * Corpus appropriateness (better match = higher fit)
-  - **Fit Interpretation**: Provide clear explanation of what the fit score means for research validity
 
   **CRITICAL REQUIREMENTS:**
   1. Generate and execute Python code internally using pandas, numpy, scipy.stats, and pingouin libraries
