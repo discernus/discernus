@@ -94,7 +94,17 @@ class V2StatisticalAgent(StandardAgent):
     def _validate_inputs(self, run_context: RunContext) -> bool:
         """Strict contract enforcement: ALL required input assets must be present or fail hard."""
         
-        # Required Asset 1: Score extraction artifacts
+        # Required Asset 1: Composite analysis artifacts (primary data source)
+        composite_artifacts = self.storage.find_artifacts_by_metadata(artifact_type="composite_analysis")
+        if composite_artifacts is None:
+            self.logger.error("CRITICAL: find_artifacts_by_metadata returned None for composite_analysis")
+            return False
+        if not composite_artifacts:
+            self.logger.error("CONTRACT VIOLATION: No composite_analysis artifacts found via CAS discovery")
+            return False
+        self.logger.info(f"✓ Composite analysis: Found {len(composite_artifacts)} artifacts")
+        
+        # Required Asset 2: Score extraction artifacts (fallback/validation)
         score_artifacts = self.storage.find_artifacts_by_metadata(artifact_type="score_extraction")
         if score_artifacts is None:
             self.logger.error("CRITICAL: find_artifacts_by_metadata returned None for score_extraction")
@@ -104,7 +114,7 @@ class V2StatisticalAgent(StandardAgent):
             return False
         self.logger.info(f"✓ Score extraction: Found {len(score_artifacts)} artifacts")
         
-        # Required Asset 2: Framework artifacts
+        # Required Asset 3: Framework artifacts
         framework_artifacts = self.storage.find_artifacts_by_metadata(artifact_type="framework")
         if framework_artifacts is None:
             self.logger.error("CRITICAL: find_artifacts_by_metadata returned None for framework")
@@ -114,7 +124,7 @@ class V2StatisticalAgent(StandardAgent):
             return False
         self.logger.info(f"✓ Framework: Found {len(framework_artifacts)} artifacts")
         
-        # Required Asset 3: Corpus manifest artifacts
+        # Required Asset 4: Corpus manifest artifacts
         corpus_manifest_artifacts = self.storage.find_artifacts_by_metadata(artifact_type="corpus_manifest")
         if corpus_manifest_artifacts is None:
             self.logger.error("CRITICAL: find_artifacts_by_metadata returned None for corpus_manifest")
@@ -124,7 +134,7 @@ class V2StatisticalAgent(StandardAgent):
             return False
         self.logger.info(f"✓ Corpus manifest: Found {len(corpus_manifest_artifacts)} artifacts")
         
-        # Required Asset 4: Corpus document artifacts
+        # Required Asset 5: Corpus document artifacts
         corpus_document_artifacts = self.storage.find_artifacts_by_metadata(artifact_type="corpus_document")
         if corpus_document_artifacts is None:
             self.logger.error("CRITICAL: find_artifacts_by_metadata returned None for corpus_document")
@@ -175,7 +185,36 @@ class V2StatisticalAgent(StandardAgent):
             
             # REMOVED: Framework file reading - now handled by CAS discovery in _step1_statistical_analysis
             
-            # CAS-native discovery: Find score_extraction artifacts
+            # STEP 1: CAS-native discovery of composite_analysis artifacts for pandas processing
+            composite_artifacts = self.storage.find_artifacts_by_metadata(artifact_type="composite_analysis")
+            
+            # Defensive programming: Handle None return from storage
+            if composite_artifacts is None:
+                self.logger.error("CRITICAL: find_artifacts_by_metadata returned None for composite_analysis")
+                return AgentResult(
+                    success=False,
+                    artifacts=[],
+                    metadata={"agent_name": self.agent_name, "error": "storage_returned_none"},
+                    error_message="Storage system returned None instead of composite_analysis artifact list"
+                )
+            
+            if not composite_artifacts:
+                self.logger.error("CONTRACT VIOLATION: No composite_analysis artifacts found via CAS discovery")
+                return AgentResult(
+                    success=False,
+                    artifacts=[],
+                    metadata={"agent_name": self.agent_name, "error": "no_composite_analysis_artifacts"},
+                    error_message="No composite_analysis artifacts found - cannot proceed with statistical analysis"
+                )
+            
+            self.logger.info(f"Discovered {len(composite_artifacts)} composite_analysis artifacts via CAS")
+            
+            # STEP 1: Generate baseline statistics using pandas (deterministic, no hallucination risk)
+            baseline_stats_result = self._step1_generate_baseline_statistics(composite_artifacts, run_context)
+            if not baseline_stats_result.success:
+                return baseline_stats_result
+            
+            # STEP 2: CAS-native discovery of score_extraction artifacts (fallback/validation)
             score_artifacts = self.storage.find_artifacts_by_metadata(artifact_type="score_extraction")
             
             # Defensive programming: Handle None return from storage
@@ -188,7 +227,7 @@ class V2StatisticalAgent(StandardAgent):
                     error_message="Storage system returned None instead of artifact list"
                 )
             
-            self.logger.info(f"Discovered {len(score_artifacts)} score_extraction artifacts via CAS")
+            self.logger.info(f"Discovered {len(score_artifacts)} score_extraction artifacts via CAS (fallback)")
             
             # Contract validation: Check expected count using CAS-discovered corpus documents
             corpus_document_artifacts = self.storage.find_artifacts_by_metadata(artifact_type="corpus_document")
@@ -251,14 +290,36 @@ class V2StatisticalAgent(StandardAgent):
             # Define model to use for statistical analysis
             model_used = "vertex_ai/gemini-2.5-flash-lite"
             
-            # Step 1: Statistical Analysis with CAS discovery
-            statistical_analysis_content = self._step1_statistical_analysis(raw_artifacts, batch_id)
+            # STEP 2: Enhanced Statistical Analysis with baseline statistics + LLM intelligence
+            # Get the baseline statistics artifact from Step 1
+            baseline_artifacts = self.storage.find_artifacts_by_metadata(
+                artifact_type="baseline_statistics",
+                run_id=run_context.run_id
+            )
+            
+            if not baseline_artifacts:
+                self.logger.error("No baseline statistics artifact found from Step 1")
+                return AgentResult(
+                    success=False,
+                    artifacts=[],
+                    metadata={"agent_name": self.agent_name, "error": "no_baseline_stats"},
+                    error_message="No baseline statistics found - Step 1 may have failed"
+                )
+            
+            # Get the baseline statistics content
+            baseline_stats_content = self.storage.get_artifact(baseline_artifacts[0]).decode('utf-8')
+            baseline_stats_data = json.loads(baseline_stats_content)
+            
+            # Step 2: Enhanced Statistical Analysis with baseline + LLM
+            statistical_analysis_content = self._step2_enhanced_statistical_analysis(
+                baseline_stats_data, raw_artifacts, batch_id
+            )
             if not statistical_analysis_content:
                 return AgentResult(
                     success=False,
                     artifacts=[],
-                    metadata={"agent_name": self.agent_name, "error": "statistical analysis failed"},
-                    error_message="Statistical analysis failed"
+                    metadata={"agent_name": self.agent_name, "error": "enhanced statistical analysis failed"},
+                    error_message="Enhanced statistical analysis failed"
                 )
             
             # THIN: Store raw LLM response directly, no parsing
@@ -361,17 +422,125 @@ class V2StatisticalAgent(StandardAgent):
         
         return raw_artifacts
     
-    
-    def _step1_statistical_analysis(self, raw_artifacts: List[str], batch_id: str) -> Optional[str]:
+    def _step1_generate_baseline_statistics(self, composite_artifacts: List[Dict[str, Any]], run_context: RunContext) -> AgentResult:
         """
-        Step 1: Perform statistical analysis using CAS discovery for source materials.
+        STEP 1: Generate baseline statistics using pandas processing of composite_analysis artifacts.
+        
+        This step eliminates hallucination risk for basic statistical calculations by using
+        deterministic pandas operations on the structured data from composite analysis.
         
         Args:
-            raw_artifacts: List of raw artifact data from analysis phase
+            composite_artifacts: List of composite_analysis artifacts from CAS discovery
+            run_context: Current run context for artifact creation
+            
+        Returns:
+            AgentResult with baseline statistics artifact
+        """
+        try:
+            # Import the composite analysis processor
+            from discernus.core.composite_analysis_processor import CompositeAnalysisProcessor
+            
+            # Convert CAS artifacts to file paths for processor
+            artifact_paths = []
+            for artifact in composite_artifacts:
+                artifact_path = Path(artifact['file_path'])
+                if artifact_path.exists():
+                    artifact_paths.append(artifact_path)
+                else:
+                    self.logger.warning(f"Composite analysis artifact not found: {artifact_path}")
+            
+            if not artifact_paths:
+                self.logger.error("No valid composite analysis artifact paths found")
+                return AgentResult(
+                    success=False,
+                    artifacts=[],
+                    metadata={"agent_name": self.agent_name, "error": "no_valid_artifacts"},
+                    error_message="No valid composite analysis artifacts found for processing"
+                )
+            
+            # Process composite analyses to generate baseline statistics
+            processor = CompositeAnalysisProcessor()
+            baseline_statistics = processor.process_composite_analyses(artifact_paths)
+            
+            # Create CAS artifact for baseline statistics
+            baseline_artifact_data = {
+                "analysis_id": f"baseline_stats_{run_context.run_id}",
+                "step": "baseline_statistics",
+                "processor_type": "composite_analysis_pandas",
+                "processor_version": "1.0.0",
+                "baseline_statistics": baseline_statistics,
+                "artifacts_processed": len(artifact_paths),
+                "timestamp": datetime.now(timezone.utc).isoformat()
+            }
+            
+            # Store as CAS artifact
+            baseline_artifact_content = json.dumps(baseline_artifact_data, indent=2, default=str)
+            baseline_artifact_hash = self.storage.store_artifact(
+                content=baseline_artifact_content,
+                metadata={
+                    "artifact_type": "baseline_statistics",
+                    "step": "baseline_statistics", 
+                    "agent_name": self.agent_name,
+                    "run_id": run_context.run_id,
+                    "processor_type": "composite_analysis_pandas"
+                }
+            )
+            
+            self.logger.info(f"Generated baseline statistics artifact: {baseline_artifact_hash}")
+            
+            # Log successful baseline statistics generation
+            self.audit.log_agent_event(
+                agent_name=self.agent_name,
+                event_type="baseline_statistics_generated",
+                details={
+                    "artifact_hash": baseline_artifact_hash,
+                    "composite_artifacts_processed": len(artifact_paths),
+                    "document_count": baseline_statistics.get('processing_metadata', {}).get('document_count', 0),
+                    "framework": baseline_statistics.get('processing_metadata', {}).get('framework_metadata', {}).get('framework_name', 'unknown')
+                }
+            )
+            
+            return AgentResult(
+                success=True,
+                artifacts=[{
+                    "hash": baseline_artifact_hash,
+                    "type": "baseline_statistics",
+                    "metadata": {
+                        "step": "baseline_statistics",
+                        "processor_type": "composite_analysis_pandas",
+                        "documents_processed": baseline_statistics.get('processing_metadata', {}).get('document_count', 0)
+                    }
+                }],
+                metadata={
+                    "agent_name": self.agent_name,
+                    "step": "baseline_statistics",
+                    "baseline_artifact_hash": baseline_artifact_hash
+                }
+            )
+            
+        except Exception as e:
+            self.logger.error(f"Failed to generate baseline statistics: {str(e)}")
+            return AgentResult(
+                success=False,
+                artifacts=[],
+                metadata={"agent_name": self.agent_name, "error": "baseline_generation_failed"},
+                error_message=f"Baseline statistics generation failed: {str(e)}"
+            )
+    
+    def _step2_enhanced_statistical_analysis(self, baseline_stats_data: Dict[str, Any], raw_artifacts: List[str], batch_id: str) -> Optional[str]:
+        """
+        STEP 2: Enhanced statistical analysis using baseline statistics + LLM intelligence.
+        
+        This step takes the reliable baseline statistics from Step 1 and uses LLM intelligence
+        to perform experiment-specific analysis, hypothesis testing, and interpretation.
+        
+        Args:
+            baseline_stats_data: Baseline statistics from pandas processing (Step 1)
+            raw_artifacts: List of raw artifact data from analysis phase (fallback)
             batch_id: Batch identifier
             
         Returns:
-            Complete LLM response with statistical results, or None if failed
+            Complete LLM response with enhanced statistical results, or None if failed
         """
         try:
             # Load the externalized prompt template
@@ -440,13 +609,16 @@ class V2StatisticalAgent(StandardAgent):
                 self.logger.warning(f"Could not extract experiment metadata: {e}")
                 # Keep defaults
             
-            # THIN: Pass raw artifact strings directly to LLM with content truncation
+            # STEP 2 ENHANCEMENT: Include baseline statistics from pandas processing
+            baseline_stats_json = json.dumps(baseline_stats_data.get('baseline_statistics', {}), indent=2, default=str)
+            
+            # THIN: Pass raw artifact strings directly to LLM (fallback/validation data)
             # Join all raw artifacts with separators for LLM processing
             raw_data_block = "\n\n=== ARTIFACT SEPARATOR ===\n\n".join(raw_artifacts)
             
             # NO TRUNCATION: All content is sacred intellectual assets
             
-            # Prepare the prompt with real extracted metadata
+            # Prepare the enhanced prompt with baseline statistics + real extracted metadata
             prompt = prompt_template.format(
                 framework_content=framework_content,
                 experiment_name=experiment_id,
@@ -454,7 +626,8 @@ class V2StatisticalAgent(StandardAgent):
                 research_questions=research_questions,
                 experiment_content=experiment_content,
                 sample_data=raw_data_block,
-                corpus_manifest=corpus_manifest_content
+                corpus_manifest=corpus_manifest_content,
+                baseline_statistics=baseline_stats_json
             )
             
             # Debug prompt construction

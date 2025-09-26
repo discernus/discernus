@@ -35,6 +35,11 @@ template: |
   **SAMPLE DATA:**
   {sample_data}
 
+  **BASELINE STATISTICS (PRE-COMPUTED):**
+  The following baseline statistics have been computed using deterministic pandas processing to eliminate hallucination risk. Use these as your statistical foundation and build upon them with experiment-specific analysis:
+
+  {baseline_statistics}
+
   **CORPUS MANIFEST:**
   {corpus_manifest}
 
@@ -154,6 +159,18 @@ template: |
     2. Generate functions that create the grouping directly based on document names
     3. Map document names to administrations based on the manifest data you've been given
   - Trust your understanding of the corpus structure
+
+  **BASELINE STATISTICS INTEGRATION:**
+  - You have been provided with PRE-COMPUTED baseline statistics from deterministic pandas processing
+  - These statistics are RELIABLE and should be used as your foundation
+  - DO NOT recalculate basic descriptive statistics, correlations, or reliability measures that are already provided
+  - Focus your analysis on:
+    1. **Validation**: Briefly acknowledge the baseline statistics as your foundation
+    2. **Enhancement**: Perform experiment-specific statistical tests not covered in baseline
+    3. **Interpretation**: Provide statistical interpretation and hypothesis testing based on the reliable baseline
+    4. **Advanced Analysis**: Conduct specialized tests required by the experiment and framework
+  - If you need to verify baseline calculations, reference them rather than recalculating
+  - Build upon the baseline with additional statistical tests that address the specific research questions
 
   **OUTPUT REQUIREMENT:**
   Provide your complete statistical analysis in whatever format you think is most appropriate and comprehensive. Include your methodology, calculations, results, and interpretations. Use whatever structure and format will best communicate your findings.
