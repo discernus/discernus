@@ -309,10 +309,14 @@ class TwoStageSynthesisAgent(StandardAgent):
             self.logger.info("Starting Stage 1: Framework-driven data analysis")
             
             # Prepare the context for Stage 1 analysis
+            self.logger.info("Preparing Stage 1 context...")
             stage1_context = self._prepare_stage1_context(run_context)
+            self.logger.info(f"Stage 1 context prepared: {len(stage1_context)} keys")
             
             # Create the Stage 1 prompt with all necessary data
+            self.logger.info("Creating Stage 1 prompt...")
             stage1_prompt = self._create_stage1_prompt(stage1_context)
+            self.logger.info(f"Stage 1 prompt created: {len(stage1_prompt)} characters")
             
             # Execute Stage 1 analysis with Gemini Pro
             self.logger.info(f"Executing Stage 1 analysis with {self.stage1_model}")
@@ -647,6 +651,7 @@ Please generate a comprehensive framework-driven analysis report following the S
         - Tier 3: synthesis (this agent combines both for comprehensive reporting)
         """
         try:
+            self.logger.info("Starting _read_statistical_artifacts...")
             all_statistical_content = []
             
             # CAS discovery: Find baseline_statistics artifacts (Tier 1)
