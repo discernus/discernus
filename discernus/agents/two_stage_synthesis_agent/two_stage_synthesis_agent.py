@@ -638,11 +638,40 @@ Please generate a comprehensive framework-driven analysis report following the S
     
     def _read_statistical_artifacts(self, run_context: RunContext) -> str:
         """
-        CAS-native discovery of statistical analysis artifacts.
+        CAS-native discovery of both baseline statistics and statistical analysis artifacts.
         THIN: No parsing, just raw data shuttle to LLM.
+        
+        Three-tier architecture integration:
+        - Tier 1: baseline_statistics (pandas-computed foundational stats)
+        - Tier 2: statistical_analysis (LLM experiment-specific analysis)
+        - Tier 3: synthesis (this agent combines both for comprehensive reporting)
         """
         try:
-            # CAS discovery: Find statistical_analysis artifacts
+            all_statistical_content = []
+            
+            # CAS discovery: Find baseline_statistics artifacts (Tier 1)
+            baseline_artifacts = self.storage.find_artifacts_by_metadata(
+                artifact_type="baseline_statistics"
+            )
+            
+            if baseline_artifacts:
+                self.logger.info(f"Found {len(baseline_artifacts)} baseline statistics artifacts via CAS discovery")
+                
+                for artifact_hash in baseline_artifacts:
+                    try:
+                        artifact_bytes = self.storage.get_artifact(artifact_hash)
+                        if artifact_bytes:
+                            raw_content = artifact_bytes.decode('utf-8')
+                            # Label baseline statistics for LLM context
+                            labeled_content = f"=== BASELINE STATISTICS (TIER 1 - PANDAS COMPUTED) ===\n{raw_content}"
+                            all_statistical_content.append(labeled_content)
+                    except Exception as e:
+                        self.logger.warning(f"Failed to load baseline statistics artifact {artifact_hash}: {e}")
+                        continue
+            else:
+                self.logger.warning("No baseline_statistics artifacts found - synthesis may lack foundational data")
+            
+            # CAS discovery: Find statistical_analysis artifacts (Tier 2)
             statistical_artifacts = self.storage.find_artifacts_by_metadata(
                 artifact_type="statistical_analysis"
             )
@@ -651,29 +680,25 @@ Please generate a comprehensive framework-driven analysis report following the S
                 # Contract validation should prevent this from happening
                 raise RuntimeError("No statistical_analysis artifacts found via CAS discovery - contract violation")
             
-            self.logger.info(f"Found {len(statistical_artifacts)} statistical artifacts via CAS discovery")
-            
-            # THIN: Collect raw artifact content without parsing
-            raw_statistical_content = []
+            self.logger.info(f"Found {len(statistical_artifacts)} statistical analysis artifacts via CAS discovery")
             
             for artifact_hash in statistical_artifacts:
                 try:
-                    # Load raw artifact bytes
                     artifact_bytes = self.storage.get_artifact(artifact_hash)
                     if artifact_bytes:
-                        # THIN: Just decode to string, no JSON parsing
                         raw_content = artifact_bytes.decode('utf-8')
-                        raw_statistical_content.append(raw_content)
-                        
+                        # Label statistical analysis for LLM context
+                        labeled_content = f"=== STATISTICAL ANALYSIS (TIER 2 - LLM EXPERIMENT-SPECIFIC) ===\n{raw_content}"
+                        all_statistical_content.append(labeled_content)
                 except Exception as e:
-                    self.logger.warning(f"Failed to load statistical artifact {artifact_hash}: {e}")
+                    self.logger.warning(f"Failed to load statistical analysis artifact {artifact_hash}: {e}")
                     continue
             
-            if raw_statistical_content:
-                # Join raw artifacts with separators for LLM processing
-                return "\n\n=== STATISTICAL ARTIFACT SEPARATOR ===\n\n".join(raw_statistical_content)
+            if all_statistical_content:
+                # Join all statistical artifacts with clear separators
+                return "\n\n=== STATISTICAL ARTIFACT SEPARATOR ===\n\n".join(all_statistical_content)
             else:
-                return "No statistical analysis content found"
+                return "No statistical content found"
                 
         except Exception as e:
             self.logger.error(f"Failed to discover statistical artifacts via CAS: {e}")
