@@ -273,6 +273,188 @@ This sprint successfully addressed the core reliability and variance issues whil
 
 ---
 
+### Sprint 5: Parameterized Reliability Filtering & Data Preservation Architecture
+
+**Priority:** High
+**Estimated Effort:** 2-3 weeks
+**Status:** Planning
+**Target Start:** [Date]
+
+#### Problem Statement
+
+Current reliability filtering occurs at the analysis stage, permanently destroying raw dimensional scores and preventing post-hoc threshold adjustments. Researchers must re-run expensive LLM analysis to test different sensitivity settings. We need to move filtering to the statistical stage and add experiment-level parameterization to preserve all raw data while giving researchers full control over analytical decisions.
+
+#### Success Criteria
+
+##### Phase 1: Data Preservation Architecture (Week 1)
+
+- [ ] **Analysis Agent Enhancement**: Remove all salience thresholding, report ALL dimensional scores regardless of salience
+- [ ] **Raw Data Preservation**: Ensure complete LLM analysis is captured in score_extraction artifacts
+- [ ] **Backward Compatibility**: Maintain existing pipeline functionality during transition
+- [ ] **Validation**: Confirm all dimensional scores are preserved in artifacts
+
+##### Phase 2: Experiment-Level Parameterization (Week 1-2)
+
+- [ ] **Experiment Specification Enhancement**: Add reliability filtering parameters to experiment.md
+- [ ] **Parameter Schema**: Define salience_threshold, confidence_threshold, reliability_calculation_method
+- [ ] **Default Values**: Establish sensible defaults (salience_threshold: 0.3, etc.)
+- [ ] **Validation**: Ensure parameter parsing and validation works correctly
+
+##### Phase 3: Statistical Stage Filtering Implementation (Week 2)
+
+- [ ] **Statistical Processor Enhancement**: Implement filtering logic in ScoreExtractionProcessor
+- [ ] **Parameter Integration**: Read experiment parameters and apply filtering during statistical analysis
+- [ ] **Status Categorization**: Maintain LLM-generated status categories but allow parameter override
+- [ ] **Derived Metrics**: Ensure derived metrics use only filtered dimensions
+
+##### Phase 4: CLI & Workflow Enhancement (Week 2-3)
+
+- [ ] **Parameter Override Support**: Allow CLI parameter overrides for re-runs (--salience-threshold 0.2)
+- [ ] **Fast Re-analysis**: Enable statistical re-runs without re-analysis when only parameters change
+- [ ] **Provenance Tracking**: Track parameter changes in run metadata
+- [ ] **User Documentation**: Clear guidance on parameter selection and trade-offs
+
+#### Technical Requirements
+
+##### 1. Analysis Agent Modifications
+
+- [ ] **Remove Salience Filtering**: Update prompt2.yaml to remove all threshold-based exclusions
+- [ ] **Complete Score Reporting**: LLM reports raw_score, salience, confidence for ALL dimensions
+- [ ] **Status Preservation**: Keep LLM status categorization for reference but don't filter
+- [ ] **Enhanced Metadata**: Include LLM reasoning about salience and reliability
+
+##### 2. Experiment Specification Schema
+
+```yaml
+# New section in experiment.md
+reliability_filtering:
+  salience_threshold: 0.3          # Minimum salience for inclusion (0.0-1.0)
+  confidence_threshold: 0.0        # Minimum confidence for inclusion (0.0-1.0)  
+  reliability_threshold: 0.25      # Minimum reliability for inclusion (0.0-1.0)
+  reliability_calculation: "confidence_x_salience"  # Method for calculating reliability
+  framework_fit_required: false   # Require minimum framework fit score
+  framework_fit_threshold: 0.3    # Minimum framework fit for validity
+  
+# Optional advanced settings
+advanced_filtering:
+  dimension_specific_thresholds:   # Per-dimension overrides
+    tribal_dominance: 0.2
+    mudita: 0.4
+  exclude_dimensions: []           # Dimensions to always exclude
+  include_dimensions: []           # Dimensions to always include (override thresholds)
+```
+
+##### 3. Statistical Processor Enhancement
+
+- [ ] **Parameter Loading**: Read experiment reliability_filtering configuration
+- [ ] **Dynamic Filtering**: Apply thresholds during statistical processing, not analysis
+- [ ] **Multiple Threshold Support**: Enable testing different thresholds on same raw data
+- [ ] **Status Override**: Allow parameter-based overrides of LLM status categorization
+- [ ] **Metadata Tracking**: Record which parameters were used for filtering
+
+##### 4. CLI Workflow Enhancements
+
+- [ ] **Parameter Override Flags**: `--salience-threshold`, `--confidence-threshold`, `--reliability-threshold`
+- [ ] **Smart Resume Logic**: Detect when only parameters changed, skip re-analysis
+- [ ] **Parameter Validation**: Ensure parameter values are valid (0.0-1.0 range, etc.)
+- [ ] **Help Documentation**: Clear guidance on parameter effects and trade-offs
+
+#### Implementation Plan
+
+##### Week 1: Data Preservation Foundation
+
+- [ ] **Days 1-2**: Remove salience filtering from analysis agent, ensure all scores reported
+- [ ] **Days 3-4**: Design and implement experiment specification schema for reliability parameters
+- [ ] **Day 5**: Test with 0mm experiment to ensure complete data preservation
+
+##### Week 2: Statistical Stage Implementation
+
+- [ ] **Days 1-2**: Implement filtering logic in ScoreExtractionProcessor with parameter support
+- [ ] **Days 3-4**: Add CLI parameter override support and smart resume logic
+- [ ] **Day 5**: End-to-end testing with multiple threshold values
+
+##### Week 3: Validation & Documentation
+
+- [ ] **Days 1-2**: Cross-experiment validation (0mm, Bolsonaro 2018, others)
+- [ ] **Days 3-4**: Performance testing and optimization
+- [ ] **Day 5**: Documentation, user guidance, and final testing
+
+#### Test Scenarios
+
+##### Data Preservation Tests
+
+1. **Complete Score Capture**: Verify ALL dimensional scores preserved regardless of salience
+2. **LLM Status Preservation**: Ensure LLM categorization is captured but not enforced
+3. **Metadata Completeness**: Confirm all LLM reasoning and confidence data preserved
+4. **Backward Compatibility**: Existing experiments work without specification changes
+
+##### Parameter Flexibility Tests
+
+1. **Threshold Variations**: Test salience thresholds from 0.1 to 0.5 on same data
+2. **Statistical Re-runs**: Verify fast re-analysis when only parameters change
+3. **CLI Overrides**: Test parameter overrides via command line flags
+4. **Default Behavior**: Ensure sensible defaults when no parameters specified
+
+##### Research Workflow Tests
+
+1. **Sensitivity Analysis**: Researcher tests multiple thresholds to find optimal setting
+2. **Post-hoc Adjustments**: Researcher adjusts thresholds after seeing initial results
+3. **Comparative Studies**: Different experiments use different thresholds appropriately
+4. **Audit Trail**: Full provenance of analytical decisions maintained
+
+#### Dependencies
+
+- **Current Score Extraction Pipeline**: Must be working (completed in Sprint 3)
+- **Experiment Specification Parser**: Must support new parameter sections
+- **CLI Framework**: Must support parameter overrides and smart resume
+- **Statistical Processor**: ScoreExtractionProcessor must be modular for filtering
+
+#### Risk Mitigation
+
+##### High-Risk Areas
+
+1. **Breaking Changes**: Removing analysis-stage filtering might break existing workflows
+   - *Mitigation*: Maintain backward compatibility, gradual rollout, comprehensive testing
+2. **Parameter Complexity**: Too many parameters might confuse researchers
+   - *Mitigation*: Sensible defaults, clear documentation, parameter validation
+3. **Performance Impact**: Statistical re-runs might be slower than expected
+   - *Mitigation*: Optimize filtering logic, cache intermediate results
+
+##### Contingency Plans
+
+1. **Rollback Strategy**: Keep current filtering as fallback option
+2. **Simplified Parameters**: Reduce to essential parameters if complexity issues arise
+3. **Performance Optimization**: Implement caching and optimization if speed issues occur
+
+#### Success Metrics
+
+##### Primary Success Metrics
+
+- **Data Preservation**: 100% of LLM dimensional scores preserved in artifacts
+- **Parameter Flexibility**: Researchers can test 3+ different thresholds without re-analysis
+- **Performance**: Statistical re-runs complete in <30 seconds for typical experiments
+- **Usability**: Researchers can adjust parameters via CLI or experiment specification
+
+##### Secondary Success Metrics
+
+- **Research Quality**: Enhanced ability to justify threshold choices in publications
+- **Cost Efficiency**: 90%+ cost reduction for threshold sensitivity analysis
+- **Workflow Integration**: Seamless integration with existing research workflows
+- **Documentation Quality**: Clear guidance enables researchers to use parameters effectively
+
+#### Notes
+
+- **Research Empowerment**: This transforms the system from rigid tool to flexible research instrument
+- **Academic Rigor**: Preserves all data for audit and post-hoc analysis
+- **Cost Efficiency**: Eliminates expensive re-analysis for parameter adjustments
+- **Future-Proofing**: Enables advanced filtering methods without architectural changes
+
+#### Implementation Results
+
+*[To be filled in during sprint execution]*
+
+---
+
 ### Sprint 4: Hybrid Statistical Analysis Testing & Validation
 
 **Priority:** High
