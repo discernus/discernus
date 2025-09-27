@@ -273,10 +273,50 @@ This sprint successfully addressed the core reliability and variance issues whil
 
 ---
 
-### Sprint 5: Parameterized Reliability Filtering & Data Preservation Architecture
+### Sprint 4: CLI & Phase Execution Robustness Enhancement
+
+**Priority:** Critical
+**Estimated Effort:** 1 week
+**Status:** Planning
+**Target Start:** [Date]
+
+#### Problem Statement
+
+The CLI phase execution and resume functionality has multiple reliability issues that are blocking development velocity. Issues include: validation agent JSON parsing failures, phase dependency validation errors when starting fresh runs, resume logic inconsistencies, and unclear error messages. These bugs force developers to work around the system instead of with it, significantly slowing development and testing cycles.
+
+#### Success Criteria
+
+##### Phase 1: Issue Cataloging & Root Cause Analysis (Days 1-2)
+
+- [ ] **Comprehensive Bug Audit**: Document all known CLI and phase execution issues
+- [ ] **Root Cause Analysis**: Identify underlying causes for each issue category
+- [ ] **Validation Agent Investigation**: Fix JSON parsing failures in validation phase
+- [ ] **Dependency Logic Review**: Analyze phase dependency validation for fresh vs resume runs
+
+##### Phase 2: Core Fixes & Stabilization (Days 3-4)
+
+- [ ] **Validation Agent Robustness**: Fix JSON parsing and LLM response handling
+- [ ] **Phase Dependency Logic**: Correct validation for fresh runs vs resumes
+- [ ] **Resume Logic Consistency**: Ensure reliable artifact copying and provenance
+- [ ] **Error Message Clarity**: Provide actionable error messages for common failures
+
+##### Phase 3: Testing & Documentation (Days 5)
+
+- [ ] **Comprehensive Test Suite**: Test all phase combinations and resume scenarios
+- [ ] **Error Scenario Testing**: Validate error handling for common failure modes
+- [ ] **Documentation Update**: Clear guidance on CLI usage and troubleshooting
+- [ ] **Developer Workflow Validation**: Ensure smooth development and testing cycles
+
+#### Implementation Results
+
+*[To be filled in during sprint execution]*
+
+---
+
+### Sprint 5: Hybrid Statistical Analysis Testing & Validation
 
 **Priority:** High
-**Estimated Effort:** 2-3 weeks
+**Estimated Effort:** 5-7 days
 **Status:** Planning
 **Target Start:** [Date]
 
