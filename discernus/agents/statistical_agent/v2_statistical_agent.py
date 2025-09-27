@@ -86,7 +86,7 @@ class V2StatisticalAgent(StandardAgent):
                 "statistical_analysis",
                 "atomic_score_processing"
             ],
-            "input_types": ["composite_analysis_artifacts"],
+            "input_types": ["score_extraction_artifacts"],
             "output_types": ["statistical_analysis"],
             "models_used": ["vertex_ai/gemini-2.5-flash-lite", "vertex_ai/gemini-2.5-pro"]
         }
@@ -94,15 +94,15 @@ class V2StatisticalAgent(StandardAgent):
     def _validate_inputs(self, run_context: RunContext) -> bool:
         """Strict contract enforcement: ALL required input assets must be present or fail hard."""
         
-        # Required Asset 1: Composite analysis artifacts (primary data source)
-        composite_artifacts = self.storage.find_artifacts_by_metadata(artifact_type="composite_analysis")
-        if composite_artifacts is None:
-            self.logger.error("CRITICAL: find_artifacts_by_metadata returned None for composite_analysis")
+        # Required Asset 1: Score extraction artifacts (primary data source)
+        score_artifacts = self.storage.find_artifacts_by_metadata(artifact_type="score_extraction")
+        if score_artifacts is None:
+            self.logger.error("CRITICAL: find_artifacts_by_metadata returned None for score_extraction")
             return False
-        if not composite_artifacts:
-            self.logger.error("CONTRACT VIOLATION: No composite_analysis artifacts found via CAS discovery")
+        if not score_artifacts:
+            self.logger.error("CONTRACT VIOLATION: No score_extraction artifacts found via CAS discovery")
             return False
-        self.logger.info(f"✓ Composite analysis: Found {len(composite_artifacts)} artifacts")
+        self.logger.info(f"✓ Score extraction: Found {len(score_artifacts)} artifacts")
         
         # Score extraction is now handled directly in composite analysis
         # No separate score extraction validation needed
@@ -178,32 +178,32 @@ class V2StatisticalAgent(StandardAgent):
             
             # REMOVED: Framework file reading - now handled by CAS discovery in _step1_statistical_analysis
             
-            # STEP 1: CAS-native discovery of composite_analysis artifacts for pandas processing
-            composite_artifacts = self.storage.find_artifacts_by_metadata(artifact_type="composite_analysis")
+            # STEP 1: CAS-native discovery of score_extraction artifacts for pandas processing
+            score_artifacts = self.storage.find_artifacts_by_metadata(artifact_type="score_extraction")
             
             # Defensive programming: Handle None return from storage
-            if composite_artifacts is None:
-                self.logger.error("CRITICAL: find_artifacts_by_metadata returned None for composite_analysis")
+            if score_artifacts is None:
+                self.logger.error("CRITICAL: find_artifacts_by_metadata returned None for score_extraction")
                 return AgentResult(
                     success=False,
                     artifacts=[],
                     metadata={"agent_name": self.agent_name, "error": "storage_returned_none"},
-                    error_message="Storage system returned None instead of composite_analysis artifact list"
+                    error_message="Storage system returned None instead of score_extraction artifact list"
                 )
             
-            if not composite_artifacts:
-                self.logger.error("CONTRACT VIOLATION: No composite_analysis artifacts found via CAS discovery")
+            if not score_artifacts:
+                self.logger.error("CONTRACT VIOLATION: No score_extraction artifacts found via CAS discovery")
                 return AgentResult(
                     success=False,
                     artifacts=[],
-                    metadata={"agent_name": self.agent_name, "error": "no_composite_analysis_artifacts"},
-                    error_message="No composite_analysis artifacts found - cannot proceed with statistical analysis"
+                    metadata={"agent_name": self.agent_name, "error": "no_score_extraction_artifacts"},
+                    error_message="No score_extraction artifacts found - cannot proceed with statistical analysis"
                 )
             
-            self.logger.info(f"Discovered {len(composite_artifacts)} composite_analysis artifacts via CAS")
+            self.logger.info(f"Discovered {len(score_artifacts)} score_extraction artifacts via CAS")
             
             # STEP 1: Generate baseline statistics using pandas (deterministic, no hallucination risk)
-            baseline_stats_result = self._step1_generate_baseline_statistics(composite_artifacts, run_context)
+            baseline_stats_result = self._step1_generate_baseline_statistics(score_artifacts, run_context)
             if not baseline_stats_result.success:
                 return baseline_stats_result
             
@@ -253,7 +253,7 @@ class V2StatisticalAgent(StandardAgent):
                 "step": "statistical_analysis",
                 "model_used": model_used,
                 "statistical_analysis": statistical_analysis_content.strip(),  # Ensure leading/trailing whitespace is removed
-                "documents_processed": len(composite_artifacts),
+                "documents_processed": len(score_artifacts),
                 "timestamp": datetime.now(timezone.utc).isoformat()
             }
             statistical_content_bytes = json.dumps(statistical_artifact_data, indent=2).encode('utf-8')
@@ -284,7 +284,7 @@ class V2StatisticalAgent(StandardAgent):
             self.audit.log_agent_event(self.agent_name, "execution_completed", {
                 "batch_id": batch_id,
                 "artifacts_created": len(artifacts),
-                "documents_processed": len(composite_artifacts)
+                "documents_processed": len(score_artifacts)
             })
             
             return AgentResult(
@@ -293,7 +293,7 @@ class V2StatisticalAgent(StandardAgent):
                 metadata={
                     "agent_name": self.agent_name,
                     "batch_id": batch_id,
-                    "documents_processed": len(composite_artifacts),
+                    "documents_processed": len(score_artifacts),
                     "artifacts_created": len(artifacts)
                 }
             )
@@ -311,38 +311,38 @@ class V2StatisticalAgent(StandardAgent):
             )
     
     
-    def _step1_generate_baseline_statistics(self, composite_artifacts: List[Dict[str, Any]], run_context: RunContext) -> AgentResult:
+    def _step1_generate_baseline_statistics(self, score_artifacts: List[Dict[str, Any]], run_context: RunContext) -> AgentResult:
         """
-        STEP 1: Generate baseline statistics using pandas processing of composite_analysis artifacts.
+        STEP 1: Generate baseline statistics using pandas processing of score_extraction artifacts.
         
         This step eliminates hallucination risk for basic statistical calculations by using
-        deterministic pandas operations on the structured data from composite analysis.
+        deterministic pandas operations on the structured data from score extraction.
         
         Args:
-            composite_artifacts: List of composite_analysis artifacts from CAS discovery
+            score_artifacts: List of score_extraction artifacts from CAS discovery
             run_context: Current run context for artifact creation
             
         Returns:
             AgentResult with baseline statistics artifact
         """
         try:
-            # Import the composite analysis processor
-            from discernus.core.composite_analysis_processor import CompositeAnalysisProcessor
+            # Import the score extraction processor
+            from discernus.core.composite_analysis_processor import ScoreExtractionProcessor
             
             # Convert CAS artifact hashes to file paths for processor
             artifact_paths = []
-            for artifact_hash in composite_artifacts:
+            for artifact_hash in score_artifacts:
                 try:
                     # Get human filename from registry
                     human_filename = self.storage.registry[artifact_hash].get("human_filename", artifact_hash)
                     
-                    # Construct full path (composite_analysis artifacts are in analysis subdirectory)
+                    # Construct full path (score_extraction artifacts are in analysis subdirectory)
                     artifact_path = self.storage.artifacts_dir / "analysis" / human_filename
                     
                     if artifact_path.exists():
                         artifact_paths.append(artifact_path)
                     else:
-                        self.logger.warning(f"Composite analysis artifact file not found: {artifact_path}")
+                        self.logger.warning(f"Score extraction artifact file not found: {artifact_path}")
                         
                 except KeyError:
                     self.logger.warning(f"Artifact hash not found in registry: {artifact_hash}")
@@ -350,23 +350,23 @@ class V2StatisticalAgent(StandardAgent):
                     self.logger.warning(f"Error processing artifact hash {artifact_hash}: {e}")
             
             if not artifact_paths:
-                self.logger.error("No valid composite analysis artifact paths found")
+                self.logger.error("No valid score extraction artifact paths found")
                 return AgentResult(
                     success=False,
                     artifacts=[],
                     metadata={"agent_name": self.agent_name, "error": "no_valid_artifacts"},
-                    error_message="No valid composite analysis artifacts found for processing"
+                    error_message="No valid score extraction artifacts found for processing"
                 )
             
-            # Process composite analyses to generate baseline statistics
-            processor = CompositeAnalysisProcessor()
-            baseline_statistics = processor.process_composite_analyses(artifact_paths)
+            # Process score extractions to generate baseline statistics
+            processor = ScoreExtractionProcessor()
+            baseline_statistics = processor.process_score_extractions(artifact_paths)
             
             # Create CAS artifact for baseline statistics
             baseline_artifact_data = {
                 "analysis_id": f"baseline_stats_{self.storage.run_name}",
                 "step": "baseline_statistics",
-                "processor_type": "composite_analysis_pandas",
+                "processor_type": "score_extraction_pandas",
                 "processor_version": "1.0.0",
                 "baseline_statistics": baseline_statistics,
                 "artifacts_processed": len(artifact_paths),
@@ -394,7 +394,7 @@ class V2StatisticalAgent(StandardAgent):
                 event_type="baseline_statistics_generated",
                 data={
                     "artifact_hash": baseline_artifact_hash,
-                    "composite_artifacts_processed": len(artifact_paths),
+                    "score_artifacts_processed": len(artifact_paths),
                     "document_count": baseline_statistics.get('processing_metadata', {}).get('document_count', 0),
                     "framework": baseline_statistics.get('processing_metadata', {}).get('framework_metadata', {}).get('framework_name', 'unknown')
                 }
@@ -407,7 +407,7 @@ class V2StatisticalAgent(StandardAgent):
                     "type": "baseline_statistics",
                     "metadata": {
                         "step": "baseline_statistics",
-                        "processor_type": "composite_analysis_pandas",
+                        "processor_type": "score_extraction_pandas",
                         "documents_processed": baseline_statistics.get('processing_metadata', {}).get('document_count', 0)
                     }
                 }],

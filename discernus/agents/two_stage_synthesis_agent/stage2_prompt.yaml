@@ -10,7 +10,7 @@ template: |
   ## EVIDENCE CURATION PHASE (Step 1)
 
   ### Framework Dimension Discovery
-  First, analyze the Stage 1 report to identify ALL framework dimensions being analyzed. Look for dimension names, scoring patterns, and analytical categories. These dimensions will guide your evidence quote selection.
+  First, analyze the Stage 1 report to identify ALL framework dimensions being analyzed. Look for dimension names, scoring patterns, and analytical categories. **RELIABILITY AWARENESS**: Note which dimensions were included vs excluded based on reliability filtering, and prioritize evidence quotes for included dimensions. These dimensions will guide your evidence quote selection.
 
   ### Evidence Selection Criteria (from Evidence Agent Logic)
   Select quotes that:
@@ -18,12 +18,13 @@ template: |
   2. **Are clear, specific, and representative** - Avoid vague or ambiguous quotes
   3. **Demonstrate patterns identified in statistical analysis** - Connect evidence quotes to quantitative insights
   4. **Provide strong evidence quotes for research conclusions** - Focus on quotes that would convince a skeptical peer reviewer
-  5. **Quality over quantity** - Better to have fewer excellent quotes than many mediocre ones
+  5. **RELIABILITY-AWARE SELECTION** - Prioritize quotes for high-reliability dimensions and include context for excluded dimensions
+  6. **Quality over quantity** - Better to have fewer excellent quotes than many mediocre ones
 
   ### Curation Targets
   - **Up to 10 quotes per framework dimension** (discovered from Stage 1 report)
   - **Prioritize quotes with highest statistical relevance**
-  - **Ensure balanced coverage across all dimensions**
+  - **RELIABILITY-BALANCED COVERAGE**: Focus on included dimensions while acknowledging excluded ones
   - **Include document attribution for each quote**
 
   ## EVIDENCE INTEGRATION PHASE (Step 2)

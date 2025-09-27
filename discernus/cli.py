@@ -230,7 +230,7 @@ def _has_required_artifacts(run_dir: Path, start_phase: str, required_phases: Li
     # Updated to include three-tier architecture artifacts
     phase_artifacts = {
         'validation': ['validation_report'],
-        'analysis': ['composite_analysis', 'evidence_extraction', 'marked_up_document'],
+        'analysis': ['composite_analysis', 'evidence_extraction', 'score_extraction', 'marked_up_document'],
         'statistical': ['statistical_analysis', 'baseline_statistics'],
         'evidence': ['curated_evidence'],
         'synthesis': ['synthesis_report', 'final_synthesis_report', 'stage1_synthesis_report']
@@ -290,7 +290,7 @@ def copy_artifacts_between_runs(source_storage, target_storage, required_phases:
     # Updated to include three-tier architecture artifacts
     phase_artifacts = {
         'validation': ['validation_report', 'framework', 'corpus_manifest', 'experiment_spec', 'corpus_document'],
-        'analysis': ['composite_analysis', 'evidence_extraction', 'marked_up_document'],
+        'analysis': ['composite_analysis', 'evidence_extraction', 'score_extraction', 'marked_up_document'],
         'statistical': ['statistical_analysis', 'statistical_verification', 'derived_metrics', 'baseline_statistics'],
         'evidence': ['curated_evidence'],
         'synthesis': ['synthesis_report', 'final_synthesis_report', 'stage1_synthesis_report', 'evidence_appendix']
@@ -405,9 +405,9 @@ def _validate_phase_dependencies(run_dir: Path, start_phase: str, end_phase: str
     
     # Check for critical artifacts that may be needed by later phases
     critical_artifacts = {
-        'statistical': ['composite_analysis'],
-        'evidence': ['composite_analysis', 'statistical_analysis', 'baseline_statistics'],
-        'synthesis': ['composite_analysis', 'statistical_analysis', 'baseline_statistics', 'curated_evidence']
+        'statistical': ['score_extraction'],
+        'evidence': ['score_extraction', 'statistical_analysis', 'baseline_statistics'],
+        'synthesis': ['score_extraction', 'statistical_analysis', 'baseline_statistics', 'curated_evidence']
     }
     
     missing_critical = []
@@ -418,6 +418,11 @@ def _validate_phase_dependencies(run_dir: Path, start_phase: str, end_phase: str
             for artifact_type in critical_artifacts[phase]:
                 if not _has_artifact_type(run_dir / 'artifacts', artifact_type):
                     missing_critical.append(f"{artifact_type} (needed for {phase})")
+    
+    # If we're starting from the beginning, don't check for critical artifacts
+    # that will be created during this run
+    if start_phase == 'validation':
+        missing_critical = []
     
     if missing_critical:
         error_msg = f"Critical artifacts missing for requested execution:\n"

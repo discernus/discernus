@@ -24,25 +24,38 @@ template: |
 
   **Step 2: Identify Key Statistical Patterns**
   - Examine the **Complete Statistical Results** from the statistical agent
+  - **RELIABILITY FILTERING AWARENESS**: Note which dimensions were included vs excluded based on reliability filtering
   - In light of the framework's structure from Step 1, identify the most significant statistical findings
   - Focus on the strongest correlations (both positive and negative, prioritizing salience scores if available), most significant differences, and most revealing patterns
   - **Prioritize `statistical_results`**: Base ALL your analytical claims, interpretations, and insights on the numerical data in `statistical_results`. This is your primary source of truth.
+  - **RELIABILITY CONTEXT**: Consider how reliability filtering affects the interpretation of statistical patterns
 
-  **Step 3: Evaluate Experimental Hypotheses**
+  **Step 3: Analyze Reliability and Framework Fit**
+  - **RELIABILITY ASSESSMENT**: Examine the reliability filtering results and framework fit scores
+  - Identify which dimensions were excluded and why (low salience, low confidence, etc.)
+  - Assess the impact of reliability filtering on research conclusions
+  - **FRAMEWORK FIT EVALUATION**: Interpret the framework-corpus fit score and its implications
+  - Consider how reliability patterns affect the framework's applicability to this corpus
+  - **METHODOLOGICAL TRANSPARENCY**: Note any limitations introduced by reliability filtering
+
+  **Step 4: Evaluate Experimental Hypotheses**
   - Review the **Experiment Configuration** and corpus context
   - Determine if this is hypothesis-driven research or exploratory analysis
   - Identify explicit and implicit research questions
   - Evaluate how the statistical findings from Step 2 confirm or falsify the experiment's hypotheses
-  - **CRITICAL**: These evaluations will be used to populate the final report. Do NOT include Step 3 content as intermediate artifacts - integrate it properly into the academic report structure.
+  - **RELIABILITY-AWARE EVALUATION**: Consider how reliability filtering affects hypothesis testing
+  - **CRITICAL**: These evaluations will be used to populate the final report. Do NOT include Step 4 content as intermediate artifacts - integrate it properly into the academic report structure.
 
-  **Step 4: Construct the Core Narrative**
-  - Based on the insights from Steps 1-3, formulate a central thesis or narrative for the research report
+  **Step 5: Construct the Core Narrative**
+  - Based on the insights from Steps 1-4, formulate a central thesis or narrative for the research report
   - What is the single most important story the data is telling about the framework's performance?
+  - **RELIABILITY-INTEGRATED NARRATIVE**: Ensure the narrative accounts for reliability filtering and framework fit
 
-  **Step 5: Synthesize the Final Report**
-  - **ONLY AFTER** completing steps 1-4, write the full academic report
-  - Use the narrative from Step 4 as the foundation for the Executive Summary and Key Insights
+  **Step 6: Synthesize the Final Report**
+  - **ONLY AFTER** completing steps 1-5, write the full academic report
+  - Use the narrative from Step 5 as the foundation for the Executive Summary and Key Insights
   - Systematically present the findings, integrating the statistical results with framework interpretation
+  - **RELIABILITY-AWARE SYNTHESIS**: Integrate reliability and framework fit considerations throughout
   - Follow the required academic report structure (Executive Summary, Key Insights, Methodology, etc.)
 
   ## REPORT STRUCTURE REQUIREMENTS
@@ -86,6 +99,9 @@ template: |
   - Framework description and analytical approach
   - Data structure and corpus description
   - Statistical methods and analytical constraints
+  - **RELIABILITY FILTERING METHODOLOGY**: Explain the reliability filtering approach, salience thresholds, and confidence calculations
+  - **FRAMEWORK FIT ASSESSMENT**: Describe how framework-corpus fit is evaluated and interpreted
+  - **DIMENSION INCLUSION/EXCLUSION**: Document which dimensions were included/excluded and why
   - Acknowledge limitations and methodological choices
 
   ### 5. Comprehensive Results
@@ -128,16 +144,26 @@ template: |
     * Assess whether the corpus was appropriate for the framework's intended application
     * Evaluate whether observed patterns match framework theoretical expectations
     * Consider implications of fit score for research validity and interpretation
+  - **RELIABILITY-BASED DIMENSION ANALYSIS**:
+    * **High Reliability Dimensions**: Analyze patterns in dimensions with high confidence and salience
+    * **Excluded Dimensions**: Explain why certain dimensions were excluded and implications
+    * **Borderline Cases**: Discuss dimensions with moderate reliability and their interpretation
+    * **Reliability Patterns**: Identify systematic patterns in dimension reliability across the corpus
   - **Methodological Insights**: What this analysis reveals about the framework's broader utility
 
   ### 6. Discussion
   - Theoretical implications of findings
+  - **RELIABILITY-AWARE INTERPRETATION**: Discuss how reliability filtering affects research conclusions
+  - **FRAMEWORK APPLICABILITY**: Evaluate the framework's effectiveness based on fit scores and reliability patterns
   - Comparative analysis and archetypal patterns
+  - **METHODOLOGICAL REFLECTIONS**: Consider the implications of reliability filtering for future research
   - Broader significance for the field
   - Limitations and future directions
 
   ### 7. Conclusion
   - Summary of key contributions
+  - **RELIABILITY-INTEGRATED SUMMARY**: Highlight findings that account for reliability filtering
+  - **FRAMEWORK PERFORMANCE ASSESSMENT**: Conclude on framework effectiveness based on fit and reliability
   - Methodological validation
   - Research implications
 

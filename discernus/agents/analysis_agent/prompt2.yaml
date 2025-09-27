@@ -7,8 +7,8 @@ template: |
   1.  **Salience Assessment**: For each framework dimension, first assess its salience (emphasis/importance) in the discourse on a 0-1 scale.
 
   2.  **Conditional Dimensional Scoring**: 
-      *   IF salience ≥ 0.3: Perform detailed 3-shot analysis and score the dimension
-      *   IF salience < 0.3: Mark as "excluded_low_salience" and skip detailed scoring
+      *   IF salience ≥ 0.2: Perform detailed 3-shot analysis and score the dimension
+      *   IF salience < 0.2: Mark as "excluded_low_salience" and skip detailed scoring
 
   3.  **Reliability Calculation**: For included dimensions, calculate reliability = confidence × salience
 
@@ -38,10 +38,10 @@ template: |
   *   0.3-0.4: Minor presence, brief mentions or weak indicators
   *   0.0-0.2: Absent or barely detectable, insufficient evidence
 
-  THRESHOLD RULE: If salience < 0.3, mark as "excluded_low_salience" and skip detailed 3-shot scoring.
+  THRESHOLD RULE: If salience < 0.2, mark as "excluded_low_salience" and skip detailed 3-shot scoring.
 
   INTERNAL CONSISTENCY APPROACH & CONFIDENCE CALCULATION:
-  For dimensions with salience ≥ 0.3, you must perform three independent internal analyses from different perspectives:
+  For dimensions with salience ≥ 0.2, you must perform three independent internal analyses from different perspectives:
   *   Evidence-First: Start with quotes, then score
   *   Context-Weighted: Consider broader context and framing
   *   Pattern-Based: Look for rhetorical patterns and structures

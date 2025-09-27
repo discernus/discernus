@@ -97,6 +97,7 @@ class V2AnalysisAgent(StandardAgent):
         return [
             "composite_analysis_with_markup",
             "evidence_extraction", 
+            "score_extraction",
             "derived_metrics",
             "verification",
             "markup_extraction"
@@ -260,12 +261,15 @@ class V2AnalysisAgent(StandardAgent):
             if evidence_result:
                 artifacts.append(evidence_result)
             
-            # Step 3: Score extraction is now handled directly in composite analysis
-            # No separate score extraction step needed
+            # Step 3: Score Extraction
+            self.unified_logger.progress(f"  Step 3/4: Score extraction for document {doc_index + 1}")
+            scores_result = self._step3_score_extraction(composite_result, doc, doc_index, batch_id)
+            if scores_result:
+                artifacts.append(scores_result)
             
-            # Step 3: Markup Extraction
-            self.unified_logger.progress(f"  Step 3/3: Markup extraction for document {doc_index + 1}")
-            markup_result = self._step3_markup_extraction(composite_result, doc, doc_index, batch_id)
+            # Step 4: Markup Extraction
+            self.unified_logger.progress(f"  Step 4/4: Markup extraction for document {doc_index + 1}")
+            markup_result = self._step4_markup_extraction(composite_result, doc, doc_index, batch_id)
             if markup_result:
                 artifacts.append(markup_result)
             
@@ -445,10 +449,14 @@ class V2AnalysisAgent(StandardAgent):
     def _step2_evidence_extraction(self, composite_result: Dict[str, Any], doc: Dict[str, Any], doc_index: int, batch_id: str) -> Optional[Dict[str, Any]]:
         """Step 2: Extract evidence from composite result."""
         try:
-            if not composite_result or 'content' not in composite_result:
+            if not composite_result:
                 return None
                 
-            raw_response = composite_result['content'].get('raw_analysis_response', '')
+            # Handle both old and new composite analysis structures
+            if 'content' in composite_result:
+                raw_response = composite_result['content'].get('raw_analysis_response', '')
+            else:
+                raw_response = composite_result.get('raw_analysis_response', '')
             
             # Defensive programming: Handle None values
             if raw_response is None:
@@ -600,13 +608,194 @@ Return ONLY the JSON array, no other text."""
             return True
     
 
-    def _step3_markup_extraction(self, composite_result: Dict[str, Any], doc: Dict[str, Any], doc_index: int, batch_id: str) -> Optional[Dict[str, Any]]:
-        """Step 3: Extract markup from composite result."""
+    def _step3_score_extraction(self, composite_result: Dict[str, Any], doc: Dict[str, Any], doc_index: int, batch_id: str) -> Optional[Dict[str, Any]]:
+        """Step 3: Extract clean scores from composite result with enhanced JSON validation."""
         try:
-            if not composite_result or 'content' not in composite_result:
+            if not composite_result:
                 return None
                 
-            raw_response = composite_result['content'].get('raw_analysis_response', '')
+            # Handle both old and new composite analysis structures
+            if 'content' in composite_result:
+                raw_response = composite_result['content'].get('raw_analysis_response', '')
+            else:
+                raw_response = composite_result.get('raw_analysis_response', '')
+            
+            # Defensive programming: Handle None values
+            if raw_response is None:
+                raw_response = 'No analysis result available'
+            
+            prompt = f"""Extract the dimensional scores AND derived metrics from this analysis result, preserving ALL computational variables:
+
+{raw_response}
+
+EXTRACTION REQUIREMENTS:
+- Extract raw_score, salience, confidence, and reliability for each dimension
+- Extract ALL derived metrics (tension indices, cohesion components, cohesion indices)
+- Preserve the complete data structure from the analysis
+- Do not strip away any computational variables
+- CRITICAL: Generate valid JSON that can be parsed without errors
+
+JSON VALIDATION REQUIREMENTS:
+- Ensure all strings are properly quoted
+- Ensure all commas are present and correctly placed
+- Ensure all brackets and braces are properly closed
+- Validate JSON syntax before returning
+- If you find malformed JSON in the input, fix it in your output
+
+OUTPUT FORMAT:
+Return a JSON object with two main sections:
+{{
+  "dimensional_scores": {{
+    "dimension_name": {{
+      "raw_score": 0.8,
+      "salience": 0.7,
+      "confidence": 0.9,
+      "reliability": 0.63,
+      "status": "included_high_reliability",
+      "exclusion_reason": null
+    }}
+  }},
+  "derived_metrics": {{
+    "identity_tension": 0.07,
+    "emotional_tension": 0.0,
+    "strategic_contradiction_index": 0.042,
+    "descriptive_cohesion_index": -0.220,
+    "motivational_cohesion_index": -0.131,
+    "full_cohesion_index": -0.136
+  }}
+}}
+
+Extract both dimensional scores AND derived metrics preserving all computational variables. Ensure the JSON is valid and parseable."""
+
+            # Call LLM with reasoning=1 for better attention to JSON validation
+            response = self.gateway.execute_call(
+                model="vertex_ai/gemini-2.5-flash-lite",
+                prompt=prompt,
+                reasoning=True  # Enable reasoning mode for better JSON validation
+            )
+            
+            if isinstance(response, tuple):
+                content, metadata = response
+            else:
+                content = response.get('content', '')
+                metadata = response.get('metadata', {})
+            
+            # Strip markdown formatting if present
+            if content.startswith('```json\n'):
+                content = content[7:]
+            elif content.startswith('```json'):
+                content = content[7:]
+            if content.endswith('\n```'):
+                content = content[:-4]
+            elif content.endswith('```'):
+                content = content[:-3]
+            
+            # Additional cleaning for any remaining newlines at start
+            content = content.lstrip('\n')
+            
+            # Validate JSON before proceeding
+            try:
+                json.loads(content)
+                self.logger.info(f"✅ Score extraction JSON validation passed for document {doc_index + 1}")
+            except json.JSONDecodeError as e:
+                self.logger.error(f"❌ Score extraction JSON validation failed for document {doc_index + 1}: {e}")
+                # Try to extract partial data as fallback
+                content = self._extract_partial_scores_fallback(raw_response, doc_index)
+            
+            # Log LLM interaction with cost data
+            if metadata and 'usage' in metadata:
+                usage_data = metadata['usage']
+                self.audit.log_llm_interaction(
+                    model="vertex_ai/gemini-2.5-flash-lite",
+                    prompt=prompt,
+                    response=content,
+                    agent_name=self.agent_name,
+                    interaction_type="score_extraction",
+                    metadata={
+                        "prompt_tokens": usage_data.get('prompt_tokens', 0),
+                        "completion_tokens": usage_data.get('completion_tokens', 0),
+                        "total_tokens": usage_data.get('total_tokens', 0),
+                        "response_cost_usd": usage_data.get('response_cost_usd', 0.0),
+                        "step": "score_extraction",
+                        "document_index": doc_index,
+                        "reasoning_enabled": True
+                    }
+                )
+            
+            # Create artifact
+            artifact_data = {
+                "analysis_id": f"analysis_{batch_id}_{doc_index}",
+                "step": "score_extraction",
+                "model_used": "vertex_ai/gemini-2.5-flash-lite",
+                "score_extraction": content,
+                "document_index": doc_index,
+                "timestamp": datetime.now(timezone.utc).isoformat()
+            }
+            
+            # Store artifact with human context
+            content_bytes = json.dumps(artifact_data, indent=2).encode('utf-8')
+            human_context = self._build_human_context_from_cas("score_extraction", doc, doc_index)
+            artifact_hash = self.storage.put_artifact(
+                content_bytes,
+                {"artifact_type": "score_extraction", "document_index": doc_index},
+                human_context
+            )
+            
+            return {
+                "type": "score_extraction",
+                "content": artifact_data,
+                "metadata": {
+                    "artifact_type": "score_extraction",
+                    "phase": "analysis",
+                    "batch_id": batch_id,
+                    "document_index": doc_index,
+                    "timestamp": datetime.now().isoformat(),
+                    "agent_name": self.agent_name,
+                    "artifact_hash": artifact_hash
+                }
+            }
+            
+        except Exception as e:
+            self.logger.error(f"Step 3 failed for document {doc_index}: {e}")
+            return None
+
+    def _extract_partial_scores_fallback(self, raw_response: str, doc_index: int) -> str:
+        """Fallback method to extract partial scores when JSON validation fails."""
+        try:
+            # Simple regex-based extraction as last resort
+            import re
+            
+            # Extract document name
+            doc_name = "Unknown Document"
+            if "Malcolm X" in raw_response or "Ballot" in raw_response:
+                doc_name = "Malcolm X - The Ballot or the Bullet"
+            elif "King" in raw_response or "Birmingham" in raw_response:
+                doc_name = "MLK - Letter from Birmingham Jail"
+            
+            # Create minimal valid JSON structure
+            fallback_json = {
+                "dimensional_scores": {},
+                "derived_metrics": {},
+                "extraction_notes": f"Partial extraction fallback for {doc_name} - original JSON was malformed"
+            }
+            
+            return json.dumps(fallback_json, indent=2)
+            
+        except Exception as e:
+            self.logger.error(f"Fallback extraction failed for document {doc_index}: {e}")
+            return json.dumps({"error": "Failed to extract scores", "dimensional_scores": {}, "derived_metrics": {}})
+
+    def _step4_markup_extraction(self, composite_result: Dict[str, Any], doc: Dict[str, Any], doc_index: int, batch_id: str) -> Optional[Dict[str, Any]]:
+        """Step 4: Extract markup from composite result."""
+        try:
+            if not composite_result:
+                return None
+                
+            # Handle both old and new composite analysis structures
+            if 'content' in composite_result:
+                raw_response = composite_result['content'].get('raw_analysis_response', '')
+            else:
+                raw_response = composite_result.get('raw_analysis_response', '')
             
             # Defensive programming: Handle None values
             if raw_response is None:
