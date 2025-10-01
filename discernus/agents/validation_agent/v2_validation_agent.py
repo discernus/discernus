@@ -153,6 +153,150 @@ class V2ValidationAgent(StandardAgent):
                 error_message=str(e)
             )
 
+    def validate_experiment(self, experiment_path: Path) -> ValidationResult:
+        """
+        Standalone validation method for CLI validation command.
+        
+        Args:
+            experiment_path: Path to experiment directory
+            
+        Returns:
+            ValidationResult with issues and suggestions
+        """
+        self.logger.info(f"Starting standalone validation for experiment: {experiment_path}")
+        
+        try:
+            # Load experiment content
+            experiment_file = experiment_path / "experiment.md"
+            if not experiment_file.exists():
+                return ValidationResult(
+                    success=False,
+                    issues=[ValidationIssue(
+                        category="missing_file",
+                        description=f"experiment.md not found in {experiment_path}",
+                        impact="Validation cannot be completed",
+                        fix="Create experiment.md file in experiment directory",
+                        priority="BLOCKING",
+                        affected_files=["experiment.md"]
+                    )],
+                    suggestions=["Ensure experiment.md exists in the experiment directory"]
+                )
+            
+            experiment_content = experiment_file.read_text(encoding='utf-8')
+            
+            # Find and load framework file
+            framework_content = self._find_and_load_framework(experiment_path)
+            
+            # Find and load corpus manifest
+            corpus_manifest_content = self._find_and_load_corpus(experiment_path)
+            
+            # Load specification references
+            specification_references = self._load_specification_references()
+            
+            # Create validation inputs
+            validation_inputs = {
+                "experiment_content": experiment_content,
+                "framework_content": framework_content,
+                "corpus_manifest_content": corpus_manifest_content,
+                "specification_references": specification_references,
+                "corpus_directory_listing": self._get_corpus_directory_listing(experiment_path)
+            }
+            
+            # Perform validation
+            validation_result = self._perform_validation(validation_inputs)
+            
+            self.logger.info(f"Standalone validation completed: success={validation_result.success}")
+            return validation_result
+            
+        except Exception as e:
+            self.logger.error(f"Error in standalone validation: {e}")
+            return ValidationResult(
+                success=False,
+                issues=[ValidationIssue(
+                    category="validation_error",
+                    description=f"Validation failed: {str(e)}",
+                    impact="Validation cannot be completed",
+                    fix="Check experiment structure and file accessibility",
+                    priority="BLOCKING",
+                    affected_files=[]
+                )],
+                suggestions=["Verify experiment directory structure and file permissions"]
+            )
+
+    def _find_and_load_framework(self, experiment_path: Path) -> str:
+        """Find and load framework file using format-agnostic discovery."""
+        # Look for any .md file that could be a framework
+        framework_files = list(experiment_path.glob("*.md"))
+        
+        # Filter out known non-framework files
+        excluded_files = {
+            "experiment.md", "corpus.md", "corpus_manifest.md", 
+            "README.md", "readme.md", "Readme.md"
+        }
+        
+        framework_candidates = [
+            f for f in framework_files 
+            if f.name not in excluded_files
+        ]
+        
+        if not framework_candidates:
+            raise ValueError(f"No framework file found in {experiment_path}. Please add a framework file (any .md file except experiment.md, corpus.md, or README.md)")
+        
+        if len(framework_candidates) > 1:
+            # If multiple potential frameworks, prefer common names
+            preferred_names = ["framework.md", "framework_v10.md"]
+            for preferred in preferred_names:
+                for candidate in framework_candidates:
+                    if candidate.name == preferred:
+                        return candidate.read_text(encoding='utf-8')
+        
+        # Return the first (or only) framework file found
+        return framework_candidates[0].read_text(encoding='utf-8')
+    
+    def _find_and_load_corpus(self, experiment_path: Path) -> str:
+        """Find and load corpus manifest file using format-agnostic discovery."""
+        # Common corpus manifest filenames to check
+        corpus_candidates = [
+            "corpus.md",
+            "corpus_manifest.md",
+            "corpus_v8.md"
+        ]
+        
+        for filename in corpus_candidates:
+            corpus_file = experiment_path / filename
+            if corpus_file.exists():
+                return corpus_file.read_text(encoding='utf-8')
+        
+        # If no standard files found, raise error
+        raise ValueError(f"No corpus manifest found in {experiment_path}. Expected one of: {', '.join(corpus_candidates)}")
+    
+    def _load_specification_references(self) -> Dict[str, str]:
+        """Load current specifications from docs/specifications/ for compliance validation."""
+        specs_dir = Path(__file__).parent.parent.parent.parent / "docs" / "specifications"
+        references = {}
+        
+        if specs_dir.exists():
+            for spec_file in specs_dir.glob("*.md"):
+                try:
+                    content = spec_file.read_text(encoding='utf-8')
+                    references[spec_file.stem] = content
+                except Exception as e:
+                    self.logger.warning(f"Could not load specification {spec_file}: {e}")
+        
+        return references
+    
+    def _get_corpus_directory_listing(self, experiment_path: Path) -> List[str]:
+        """Get listing of corpus directory for validation context."""
+        corpus_dir = experiment_path / "corpus"
+        if not corpus_dir.exists():
+            return []
+        
+        try:
+            return [str(f.relative_to(experiment_path)) for f in corpus_dir.rglob("*") if f.is_file()]
+        except Exception as e:
+            self.logger.warning(f"Could not list corpus directory: {e}")
+            return []
+
     def _validate_and_extract_inputs(self, run_context: RunContext) -> Dict[str, Any]:
         """Validate RunContext, extract validation data, and register all source files in CAS."""
         if not run_context:

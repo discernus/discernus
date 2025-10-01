@@ -15,7 +15,7 @@ The Discernus validation system **directly references and loads** these specific
 The following agents **directly load and reference** these specification files:
 
 - **V2ValidationAgent** (`discernus/agents/validation_agent/v2_validation_agent.py`)
-- **ExperimentCoherenceAgent** (`discernus/agents/experiment_coherence_agent/agent.py`)
+- **V2ValidationAgent** (consolidated validation agent)
 
 Both agents use the `_load_specification_references()` method to dynamically load:
 - `CORPUS_SPECIFICATION.md`
@@ -44,9 +44,9 @@ These specifications serve as:
 
 | File | Purpose | Used By |
 |------|---------|---------|
-| `CORPUS_SPECIFICATION.md` | Defines valid corpus structure and metadata requirements | V2ValidationAgent, ExperimentCoherenceAgent |
-| `EXPERIMENT_SPECIFICATION.md` | Defines valid experiment structure and configuration | V2ValidationAgent, ExperimentCoherenceAgent |
-| `FRAMEWORK_SPECIFICATION.md` | Defines valid framework structure and analytical requirements | V2ValidationAgent, ExperimentCoherenceAgent |
+| `CORPUS_SPECIFICATION.md` | Defines valid corpus structure and metadata requirements | V2ValidationAgent |
+| `EXPERIMENT_SPECIFICATION.md` | Defines valid experiment structure and configuration | V2ValidationAgent |
+| `FRAMEWORK_SPECIFICATION.md` | Defines valid framework structure and analytical requirements | V2ValidationAgent |
 
 ## Impact of Deletion/Modification
 

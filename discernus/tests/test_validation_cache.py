@@ -116,7 +116,7 @@ class TestValidationCacheManager(unittest.TestCase):
         
         # Verify audit logging
         self.mock_audit_logger.log_agent_event.assert_called_once_with(
-            "ExperimentCoherenceAgent", "cache_hit", {
+            "V2ValidationAgent", "cache_hit", {
                 "cache_key": cache_key,
                 "cached_artifact_hash": artifact_hash,
                 "phase": "validation"
@@ -161,7 +161,7 @@ class TestValidationCacheManager(unittest.TestCase):
         
         # Verify audit logging
         self.mock_audit_logger.log_agent_event.assert_called_once_with(
-            "ExperimentCoherenceAgent", "cache_store", {
+            "V2ValidationAgent", "cache_store", {
                 "cache_key": cache_key,
                 "artifact_hash": expected_hash,
                 "validation_success": True,

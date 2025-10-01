@@ -4,7 +4,7 @@ Unified Validation Types for Discernus Platform
 
 Standardized validation data structures that consolidate functionality from:
 - Framework Validator (framework_validator.py)
-- Experiment Coherence Agent (experiment_coherence_agent/agent.py)
+- V2ValidationAgent (consolidated validation agent)
 
 Provides backwards compatibility while reducing code duplication.
 """

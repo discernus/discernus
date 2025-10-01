@@ -782,11 +782,20 @@ def validate(ctx, experiment_path: str):
     click.echo(f"🔍 Validating experiment: {exp_path}")
     
     try:
-        # Use ExperimentCoherenceAgent for validation
-        from discernus.agents.experiment_coherence_agent import ExperimentCoherenceAgent
+        # Use V2ValidationAgent for validation (consolidated agent)
+        from discernus.agents.validation_agent.v2_validation_agent import V2ValidationAgent
+        from discernus.core.security_boundary import ExperimentSecurityBoundary
+        from discernus.core.local_artifact_storage import LocalArtifactStorage
+        from discernus.core.audit_logger import AuditLogger
         
-        validator = ExperimentCoherenceAgent(model="vertex_ai/gemini-2.5-pro")
-        result = validator.validate_experiment(exp_path)
+        # Create minimal security and storage for standalone validation
+        exp_path_obj = Path(exp_path).resolve()
+        security = ExperimentSecurityBoundary(exp_path_obj)
+        storage = LocalArtifactStorage(security, exp_path_obj, "validation")
+        audit = AuditLogger(security, exp_path_obj)
+        
+        validator = V2ValidationAgent(security, storage, audit)
+        result = validator.validate_experiment(exp_path_obj)
         
         # Show results by priority
         blocking = result.get_issues_by_priority("BLOCKING")
