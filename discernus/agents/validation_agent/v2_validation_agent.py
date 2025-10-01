@@ -298,99 +298,74 @@ class V2ValidationAgent(StandardAgent):
             return []
 
     def _validate_and_extract_inputs(self, run_context: RunContext) -> Dict[str, Any]:
-        """Validate RunContext, extract validation data, and register all source files in CAS."""
+        """THIN: Read files from disk and pass directly to LLM. Let LLM handle parsing."""
         if not run_context:
             raise ValueError("RunContext is required.")
 
-        inputs = {}
         experiment_dir = Path(run_context.experiment_dir)
         
-        # CAS Registration Hub: ValidationAgent registers all source files
+        # THIN: Just read files and register in CAS - no parsing
         try:
-            # 1. Register experiment.md in CAS
+            # 1. Read and register experiment.md
             experiment_file_path = experiment_dir / 'experiment.md'
             if not experiment_file_path.exists():
                 raise ValueError(f"Experiment file not found: {experiment_file_path}")
             experiment_hash = self.storage.put_file(experiment_file_path, {"artifact_type": "experiment_spec"})
-            inputs['experiment_content'] = experiment_file_path.read_text(encoding='utf-8')
+            experiment_content = experiment_file_path.read_text(encoding='utf-8')
             
-            # 2. Register framework.md in CAS
+            # 2. Read and register framework.md
             framework_path = experiment_dir / 'framework.md'
             if not framework_path.exists():
                 raise ValueError(f"Framework file not found: {framework_path}")
             framework_hash = self.storage.put_file(framework_path, {"artifact_type": "framework"})
-            inputs['framework_content'] = framework_path.read_text(encoding='utf-8')
+            framework_content = framework_path.read_text(encoding='utf-8')
             
-            # 3. Register corpus.md in CAS
+            # 3. Read and register corpus.md
             corpus_path = experiment_dir / 'corpus.md'
             if not corpus_path.exists():
                 raise ValueError(f"Corpus manifest file not found: {corpus_path}")
             corpus_manifest_hash = self.storage.put_file(corpus_path, {"artifact_type": "corpus_manifest"})
-            inputs['corpus_manifest_content'] = corpus_path.read_text(encoding='utf-8')
+            corpus_manifest_content = corpus_path.read_text(encoding='utf-8')
             
-            # 4. Register all corpus documents in CAS
+            # 4. THIN: Just scan corpus directory and register all files - no parsing
             corpus_dir = experiment_dir / 'corpus'
             if not corpus_dir.exists():
                 raise ValueError(f"Corpus directory not found: {corpus_dir}")
             
-            corpus_files = []
             corpus_document_hashes = []
+            corpus_files = []
             
-            # Parse corpus manifest to get document metadata
-            import yaml
-            import re
-            manifest_text = corpus_path.read_text(encoding='utf-8')
-            yaml_match = re.search(r"```yaml\n(.*?)```", manifest_text, re.DOTALL)
-            if yaml_match:
-                yaml_content = yaml_match.group(1)
-                manifest = yaml.safe_load(yaml_content)
-                
-                # Register each corpus document with metadata
-                for doc_info in manifest.get('documents', []):
-                    filename = doc_info['filename']
-                    doc_path = corpus_dir / filename
-                    if doc_path.exists():
-                        doc_hash = self.storage.put_file(doc_path, {
-                            "artifact_type": "corpus_document",
-                            "document_id": doc_info['document_id'],
-                            "filename": filename,  # Include filename for human-readable naming
-                            "metadata": doc_info.get('metadata', {})
-                        })
-                        corpus_document_hashes.append(doc_hash)
-                        corpus_files.append(filename)
-                    else:
-                        # Check if the issue is a corpus/ prefix
-                        if filename.startswith('corpus/'):
-                            self.logger.error(f"Corpus document path error: '{filename}' includes 'corpus/' prefix. Filenames should be relative to the corpus directory. Expected: '{filename[7:]}'")
-                        else:
-                            self.logger.warning(f"Corpus document not found: {doc_path}")
+            # Simply register all .txt files in corpus directory
+            for file_path in corpus_dir.glob("*.txt"):
+                doc_hash = self.storage.put_file(file_path, {
+                    "artifact_type": "corpus_document",
+                    "filename": file_path.name
+                })
+                corpus_document_hashes.append(doc_hash)
+                corpus_files.append(file_path.name)
             
-            inputs['corpus_directory_listing'] = sorted(corpus_files)
-            
-            # Store CAS hash addresses in run_context metadata for postal service
+            # Store CAS hashes in run_context metadata
             run_context.metadata["experiment_hash"] = experiment_hash
             run_context.metadata["framework_hash"] = framework_hash
             run_context.metadata["corpus_manifest_hash"] = corpus_manifest_hash
             run_context.metadata["corpus_document_hashes"] = corpus_document_hashes
-            
-            # Store additional metadata for synthesis agent
-            run_context.metadata["framework_filename"] = framework_path.name
-            run_context.metadata["corpus_filename"] = corpus_path.name
             run_context.metadata["document_count"] = len(corpus_document_hashes)
-            run_context.metadata["run_id"] = run_context.experiment_id
-            run_context.metadata["completion_date"] = datetime.now(timezone.utc).isoformat()
             
-            self.logger.info(f"CAS Registration complete - experiment: {experiment_hash[:8]}, "
+            self.logger.info(f"THIN file registration complete - experiment: {experiment_hash[:8]}, "
                            f"framework: {framework_hash[:8]}, corpus_manifest: {corpus_manifest_hash[:8]}, "
                            f"corpus_docs: {len(corpus_document_hashes)}")
             
+            # THIN: Pass raw content directly to LLM - let LLM handle all parsing
+            return {
+                "experiment_content": experiment_content,
+                "framework_content": framework_content,
+                "corpus_manifest_content": corpus_manifest_content,
+                "corpus_directory_listing": sorted(corpus_files),
+                "specification_references": self._load_specification_references()
+            }
+            
         except Exception as e:
-            raise ValueError(f"Failed to read and register experiment files from {experiment_dir}: {e}")
-
-        # Load current specifications for compliance validation
-        inputs['specification_references'] = self._load_specification_references()
-
-        return inputs
+            raise ValueError(f"Failed to read experiment files from {experiment_dir}: {e}")
 
     def _perform_validation(self, inputs: Dict[str, Any]) -> ValidationResult:
         """Perform validation using LLM."""

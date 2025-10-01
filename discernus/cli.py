@@ -109,6 +109,7 @@ from discernus.core.v2_orchestrator import V2Orchestrator, V2OrchestratorConfig
 from discernus.core.security_boundary import ExperimentSecurityBoundary
 from discernus.core.audit_logger import AuditLogger
 from discernus.core.local_artifact_storage import LocalArtifactStorage
+from discernus.core.phase_state import PhaseStateManager
 from discernus.agents.analysis_agent.v2_analysis_agent import V2AnalysisAgent
 from discernus.agents.statistical_agent.v2_statistical_agent import V2StatisticalAgent
 from discernus.agents.intelligent_evidence_retriever import IntelligentEvidenceRetrievalAgent
@@ -199,80 +200,14 @@ def find_resumable_run(experiment_path: Path, start_phase: str) -> Optional[Path
     run_dirs = [d for d in runs_dir.iterdir() if d.is_dir()]
     run_dirs.sort(key=lambda x: x.name, reverse=True)
     
-    # Define phase order for validation
-    phases = ['validation', 'analysis', 'statistical', 'evidence', 'synthesis']
-    start_idx = phases.index(start_phase)
-    
     for run_dir in run_dirs:
-        # Check if this run has the required artifacts for start_phase
-        if _has_required_artifacts(run_dir, start_phase, phases[:start_idx]):
+        # Check if this run can be resumed from the specified phase
+        phase_manager = PhaseStateManager(run_dir)
+        if phase_manager.can_resume_from(start_phase):
             return run_dir
     
     return None
 
-def _has_required_artifacts(run_dir: Path, start_phase: str, required_phases: List[str]) -> bool:
-    """
-    Check if a run directory has the required artifacts for the start phase.
-    
-    Args:
-        run_dir: Path to run directory
-        start_phase: Phase to resume from
-        required_phases: List of phases that must be completed before start_phase
-        
-    Returns:
-        True if all required artifacts exist
-    """
-    artifacts_dir = run_dir / 'artifacts'
-    if not artifacts_dir.exists():
-        return False
-    
-    # Check for phase-specific artifacts
-    # Updated to include three-tier architecture artifacts
-    phase_artifacts = {
-        'validation': ['validation_report'],
-        'analysis': ['composite_analysis', 'evidence_extraction', 'score_extraction', 'marked_up_document'],
-        'statistical': ['statistical_analysis', 'baseline_statistics'],
-        'evidence': ['curated_evidence'],
-        'synthesis': ['synthesis_report', 'final_synthesis_report', 'stage1_synthesis_report']
-    }
-    
-    # Check if start_phase artifacts exist
-    if start_phase in phase_artifacts:
-        required_artifacts = phase_artifacts[start_phase]
-        for artifact_type in required_artifacts:
-            if not _has_artifact_type(artifacts_dir, artifact_type):
-                return False
-    
-    # Check if all required previous phases are completed
-    for phase in required_phases:
-        if phase in phase_artifacts:
-            phase_complete = any(_has_artifact_type(artifacts_dir, artifact_type) 
-                               for artifact_type in phase_artifacts[phase])
-            if not phase_complete:
-                return False
-    
-    return True
-
-def _has_artifact_type(artifacts_dir: Path, artifact_type: str) -> bool:
-    """Check if artifacts directory contains artifacts of the specified type."""
-    registry_file = artifacts_dir / 'artifact_registry.json'
-    if not registry_file.exists():
-        return False
-    
-    try:
-        import json
-        with open(registry_file, 'r') as f:
-            registry = json.load(f)
-        
-        # Check if any artifact has the required type
-        for artifact_data in registry.values():
-            metadata = artifact_data.get('metadata', {})
-            if metadata.get('artifact_type') == artifact_type:
-                return True
-        
-        return False
-    except Exception:
-        return False
 
 def copy_artifacts_between_runs(source_storage, target_storage, required_phases: List[str]) -> None:
     """
@@ -370,69 +305,6 @@ def copy_artifacts_between_runs(source_storage, target_storage, required_phases:
     else:
         print(f"✅ All {total_copied} artifacts copied successfully")
 
-def _validate_phase_dependencies(run_dir: Path, start_phase: str, end_phase: str, is_resume: bool = False) -> None:
-    """
-    Validate that all required phase dependencies are met for the requested execution.
-    
-    Args:
-        run_dir: Path to run directory
-        start_phase: Phase to start from
-        end_phase: Phase to end at
-        is_resume: Whether this is a resume operation (vs fresh run)
-        
-    Raises:
-        RuntimeError: If phase dependencies are not met
-    """
-    phases = ['validation', 'analysis', 'statistical', 'evidence', 'synthesis']
-    start_idx = phases.index(start_phase)
-    end_idx = phases.index(end_phase)
-    
-    if start_idx > end_idx:
-        raise RuntimeError(f"Start phase '{start_phase}' cannot be after end phase '{end_phase}'")
-    
-    # For resume operations, check that all phases before start_phase are completed
-    if is_resume:
-        required_phases = phases[:start_idx]
-        missing_phases = []
-        
-        for phase in required_phases:
-            if not _has_required_artifacts(run_dir, phase, []):
-                missing_phases.append(phase)
-        
-        if missing_phases:
-            error_msg = f"Cannot resume from '{start_phase}': Missing completed phases: {', '.join(missing_phases)}\n"
-            error_msg += f"Required phase order: {' → '.join(phases)}\n"
-            error_msg += f"Try running from an earlier phase or complete the missing phases first."
-            raise RuntimeError(error_msg)
-    
-    # Check for critical artifacts that may be needed by later phases
-    critical_artifacts = {
-        'statistical': ['score_extraction'],
-        'evidence': ['score_extraction', 'statistical_analysis', 'baseline_statistics'],
-        'synthesis': ['score_extraction', 'statistical_analysis', 'baseline_statistics', 'curated_evidence']
-    }
-    
-    missing_critical = []
-    # Only check critical artifacts for phases that will actually be executed
-    phases_to_execute = phases[start_idx:end_idx + 1]
-    for phase in phases_to_execute:
-        if phase in critical_artifacts:
-            for artifact_type in critical_artifacts[phase]:
-                if not _has_artifact_type(run_dir / 'artifacts', artifact_type):
-                    missing_critical.append(f"{artifact_type} (needed for {phase})")
-    
-    # If we're starting from the beginning, don't check for critical artifacts
-    # that will be created during this run
-    if start_phase == 'validation':
-        missing_critical = []
-    
-    if missing_critical:
-        error_msg = f"Critical artifacts missing for requested execution:\n"
-        for artifact in missing_critical:
-            error_msg += f"  • {artifact}\n"
-        error_msg += f"\nThis may indicate the run is incomplete or corrupted.\n"
-        error_msg += f"Try running from an earlier phase or check the source run integrity."
-        raise RuntimeError(error_msg)
 
 def _get_resume_provenance(run_dir: Path) -> Optional[Dict[str, Any]]:
     """
@@ -556,53 +428,104 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, ski
         storage = LocalArtifactStorage(security, run_folder, run_name)
         audit = AuditLogger(security, run_folder)
 
-        # 3. Copy artifacts from source run if resuming
-        resume_provenance = None
+        # 3. Handle resume functionality with provenance tracking
         if source_run_dir:
-            source_storage = LocalArtifactStorage(security, source_run_dir, source_run_dir.name)
+            # Initialize phase state manager for source run
+            source_phase_manager = PhaseStateManager(source_run_dir)
             
-            # Determine which phases to copy based on what's actually completed in source run
-            phases = ['validation', 'analysis', 'statistical', 'evidence', 'synthesis']
-            start_idx = phases.index(start_phase)
+            # Check if we can resume from the specified phase
+            if not source_phase_manager.can_resume_from(start_phase):
+                rich_console.print_error(f"❌ Cannot resume from {start_phase} - required phases not completed in source run")
+                exit_general_error("Resume not possible - missing required phases")
             
-            # Find which phases are actually completed in the source run
-            # Include phases before start_phase AND start_phase itself if completed
+            # Copy artifact registry first (before orchestrator initialization)
+            source_registry = source_run_dir / 'artifacts' / 'artifact_registry.json'
+            if source_registry.exists():
+                target_registry = run_folder / 'artifacts' / 'artifact_registry.json'
+                shutil.copy2(source_registry, target_registry)
+                rich_console.print_info("📋 Copied artifact registry")
+            
+            # Copy completed phases from source run
+            source_state = source_phase_manager.get_phase_state()
             phases_to_copy = []
-            for phase in phases[:start_idx + 1]:  # Include start_phase itself
-                if _has_required_artifacts(source_run_dir, phase, []):
+            
+            for phase in phases[:phases.index(start_phase) + 1]:
+                if source_state[phase].completed:
                     phases_to_copy.append(phase)
             
             if phases_to_copy:
-                rich_console.print_info(f"📦 Copying artifacts from phases: {', '.join(phases_to_copy)}")
-                try:
-                    # Track resume operation for provenance
-                    resume_provenance = {
-                        'resume_operation': True,
-                        'source_run_id': source_run_dir.name,
-                        'source_run_path': str(source_run_dir),
-                        'resume_timestamp': datetime.datetime.now(datetime.timezone.utc).isoformat(),
-                        'resume_phases': phases_to_copy,
-                        'resume_start_phase': start_phase,
-                        'resume_end_phase': end_phase,
-                        'resume_reason': 'user_requested' if not run_dir else 'user_specified_run'
-                    }
+                rich_console.print_info(f"📦 Copying completed phases: {', '.join(phases_to_copy)}")
+                
+                # Copy artifacts and update phase state
+                for phase in phases_to_copy:
+                    completion = source_state[phase]
                     
-                    copy_artifacts_between_runs(source_storage, storage, phases_to_copy)
-                    rich_console.print_success("✅ Artifacts copied successfully")
-                    
-                    # Log resume operation for audit trail
-                    rich_console.print_info(f"📋 Resume provenance: {resume_provenance['source_run_id']} → {run_name}")
-                    
-                except RuntimeError as e:
-                    rich_console.print_error(f"❌ Resume failed: {e}")
-                    exit_general_error("Resume failed due to missing or corrupted artifacts")
+                    # Copy artifacts by hash - search recursively for files with the hash
+                    for artifact_hash in completion.artifact_hashes:
+                        # Search for files containing this hash in the source artifacts directory
+                        source_artifacts_dir = source_run_dir / 'artifacts'
+                        found_files = []
+                        
+                        # Search recursively for files containing the hash
+                        for file_path in source_artifacts_dir.rglob('*'):
+                            if file_path.is_file() and artifact_hash in file_path.name:
+                                found_files.append(file_path)
+                        
+                        # Copy found files
+                        for source_file in found_files:
+                            # Calculate relative path from artifacts directory
+                            rel_path = source_file.relative_to(source_artifacts_dir)
+                            target_file = run_folder / 'artifacts' / rel_path
+                            target_file.parent.mkdir(parents=True, exist_ok=True)
+                            shutil.copy2(source_file, target_file)
+                
+                rich_console.print_success("✅ Resume artifacts copied successfully")
+                rich_console.print_info(f"📋 Resume provenance: {source_run_dir.name} → {run_name}")
+            else:
+                rich_console.print_warning(f"⚠️  No completed phases found in source run: {source_run_dir.name}")
+                rich_console.print_info("💡 Proceeding with fresh run from specified phase")
+        
+        # 4. Initialize phase state manager
+        phase_manager = PhaseStateManager(run_folder)
+        
+        # 5. Create provenance record
+        if source_run_dir:
+            provenance = phase_manager.create_provenance(
+                run_id=run_name,
+                source_run=source_run_dir.name,
+                resume_point=start_phase
+            )
+            
+            # Mark copied phases as completed
+            if phases_to_copy:
+                for phase in phases_to_copy:
+                    completion = source_state[phase]
+                    phase_manager.mark_phase_complete(
+                        phase=phase,
+                        run_id=run_name,
+                        artifact_hashes=completion.artifact_hashes
+                    )
+        else:
+            # Fresh run - create new provenance record
+            provenance = phase_manager.create_provenance(run_id=run_name)
 
-        # 4. Validate phase dependencies before execution
+        # 5. Validate phase dependencies using phase state
         try:
-            _validate_phase_dependencies(run_folder, start_phase, end_phase, is_resume=resume)
-        except RuntimeError as e:
-            rich_console.print_error(f"❌ Phase dependency validation failed: {e}")
-            exit_general_error("Phase dependencies not met")
+            # Check if we can resume from the specified phase
+            if not phase_manager.can_resume_from(start_phase):
+                rich_console.print_error(f"❌ Cannot start from {start_phase} - required phases not completed")
+                exit_general_error("Phase dependencies not met")
+            
+            # Get remaining phases to execute
+            remaining_phases = phase_manager.get_remaining_phases(start_phase, end_phase)
+            if not remaining_phases:
+                rich_console.print_info("✅ All requested phases already completed")
+                return
+            
+            rich_console.print_info(f"🎯 Executing phases: {', '.join(remaining_phases)}")
+        except Exception as e:
+            rich_console.print_error(f"❌ Phase validation failed: {e}")
+            exit_general_error("Phase validation failed")
 
         # 5. Verify experiment.md exists (basic check only - ValidationAgent will do full validation)
         experiment_file = exp_path / "experiment.md"
@@ -620,6 +543,33 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, ski
 
         orchestrator = V2Orchestrator(config, security, storage, audit)
 
+        # 6.5. Merge artifact registries if resuming
+        if source_run_dir:
+            source_registry = source_run_dir / 'artifacts' / 'artifact_registry.json'
+            if source_registry.exists():
+                # Load source registry
+                with open(source_registry, 'r') as f:
+                    source_registry_data = json.load(f)
+                
+                # Merge with target registry
+                target_registry = run_folder / 'artifacts' / 'artifact_registry.json'
+                if target_registry.exists():
+                    with open(target_registry, 'r') as f:
+                        target_registry_data = json.load(f)
+                else:
+                    target_registry_data = {}
+                
+                # Merge registries (source takes precedence for conflicts)
+                merged_registry = {**target_registry_data, **source_registry_data}
+                
+                # Save merged registry
+                with open(target_registry, 'w') as f:
+                    json.dump(merged_registry, f, indent=2, sort_keys=True)
+                
+                # Update storage registry
+                storage.registry = merged_registry
+                rich_console.print_info("📋 Merged artifact registries")
+
         # 7. Register Agents
         orchestrator.register_agent("Validation", V2ValidationAgent(security, storage, audit))
         orchestrator.register_agent("Analysis", V2AnalysisAgent(security, storage, audit))
@@ -627,64 +577,85 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, ski
         orchestrator.register_agent("Evidence", IntelligentEvidenceRetrievalAgent(security, storage, audit))
         orchestrator.register_agent("Synthesis", TwoStageSynthesisAgent(security, storage, audit))
         
-        # 8. Add resume provenance to run context if applicable
-        if resume_provenance:
-            # Store resume provenance in run context metadata
-            from discernus.core.run_context import RunContext
-            run_context = RunContext(
-                experiment_id=exp_path.name,
-                experiment_dir=str(exp_path)
-            )
-            run_context.metadata.update(resume_provenance)
-            
-            # Store resume provenance as a dedicated artifact for audit trail
-            try:
-                import json
-                resume_provenance_json = json.dumps(resume_provenance, indent=2)
-                resume_provenance_bytes = resume_provenance_json.encode('utf-8')
-                
-                storage.put_artifact(
-                    resume_provenance_bytes,
-                    {
-                        'artifact_type': 'resume_provenance',
-                        'run_id': run_name,
-                        'source_run_id': resume_provenance['source_run_id']
-                    }
-                )
-                
-                rich_console.print_info(f"📋 Resume provenance recorded for audit trail")
-                
-            except Exception as e:
-                rich_console.print_warning(f"⚠️ Could not store resume provenance: {e}")
 
         # 7. Use Simple Executor
         from discernus.core.simple_executor import SimpleExperimentExecutor
         executor = SimpleExperimentExecutor()
         
-        # Show execution info
-        if start_phase == end_phase:
-            rich_console.print_info(f"🔄 Running {start_phase} phase only...")
-        else:
-            rich_console.print_info(f"🚀 Running phases: {start_phase} → {end_phase}")
-        
-        # 6. Create RunContext and Execute with Simple Executor
+        # 6. Execute remaining phases with provenance tracking
         run_context = orchestrator.create_run_context()
-        result = executor.execute(
-            agents=orchestrator.agents,
-            run_context=run_context,
-            storage=orchestrator.storage,
-            audit=orchestrator.audit,
-            start_phase=start_phase,
-            end_phase=end_phase
+        
+        # Execute each remaining phase and track completion
+        for phase in remaining_phases:
+            phase_start_time = datetime.datetime.now(datetime.timezone.utc).isoformat()
+            
+            rich_console.print_info(f"🔄 Executing {phase} phase...")
+            
+            # Execute single phase
+            result = executor.execute(
+                agents=orchestrator.agents,
+                run_context=run_context,
+                storage=orchestrator.storage,
+                audit=orchestrator.audit,
+                start_phase=phase,
+                end_phase=phase
+            )
+            
+            if result.success:
+                phase_end_time = datetime.datetime.now(datetime.timezone.utc).isoformat()
+                
+                # Get artifact hashes for this phase
+                artifact_hashes = []
+                artifacts_dir = run_folder / 'artifacts'
+                if artifacts_dir.exists():
+                    for artifact_file in artifacts_dir.glob('*.json'):
+                        artifact_hashes.append(artifact_file.stem)
+                
+                # Mark phase as completed
+                phase_manager.mark_phase_complete(
+                    phase=phase,
+                    run_id=run_name,
+                    artifact_hashes=artifact_hashes
+                )
+                
+                # Add to execution timeline
+                phase_manager.add_execution_timeline(
+                    phase=phase,
+                    start_time=phase_start_time,
+                    end_time=phase_end_time
+                )
+                
+                # Record artifact creation in provenance
+                for artifact_hash in artifact_hashes:
+                    phase_manager.add_artifact_created(
+                        artifact_hash=artifact_hash,
+                        artifact_type=f"{phase}_artifact"
+                    )
+                
+                rich_console.print_success(f"✅ {phase.title()} phase completed")
+            else:
+                error_msg = getattr(result, 'error_message', 'Unknown error')
+                rich_console.print_error(f"❌ {phase.title()} phase failed: {error_msg}")
+                exit_general_error(f"Phase execution failed: {phase}")
+        
+        # Create final result
+        from discernus.core.simple_executor import ExperimentResult
+        result = ExperimentResult(
+            success=True,
+            phases_completed=remaining_phases,
+            artifacts=[],  # Empty for now
+            metadata={},   # Empty for now
+            execution_time_seconds=0,  # Will be calculated from timeline
+            error_message=None
         )
 
         # Show experiment summary
         if result.success:
             # Show phase-specific success message
-            if start_phase == end_phase:
-                rich_console.print_success(f"✅ {start_phase.title()} Phase Completed Successfully!")
+            if len(remaining_phases) == 1:
+                rich_console.print_success(f"✅ {remaining_phases[0].title()} Phase Completed Successfully!")
             else:
-                rich_console.print_success(f"✅ Phases {start_phase} → {end_phase} Completed Successfully!")
+                rich_console.print_success(f"✅ Phases {', '.join(remaining_phases)} Completed Successfully!")
 
             # Show phase progress
             phases_completed = result.phases_completed
