@@ -495,7 +495,7 @@ advanced_filtering:
 
 ---
 
-### Sprint 4: Hybrid Statistical Analysis Testing & Validation
+### Sprint 5: Hybrid Statistical Analysis Testing & Validation
 
 **Priority:** High
 **Estimated Effort:** 5-7 days
@@ -683,6 +683,114 @@ Current advanced statistical analysis relies entirely on LLM intelligence, which
 - **Fallback Strategy**: Always maintain current approach as backup
 - **User Impact**: Minimize disruption to existing workflows
 - **Future-Proofing**: Design for potential expansion to other agents
+
+#### Implementation Results
+
+*[To be filled in during sprint execution]*
+
+---
+
+### Sprint 6: Parameterized Reliability Filtering & Data Preservation Architecture
+
+**Priority:** High
+**Estimated Effort:** 1-2 weeks
+**Status:** Planning
+**Target Start:** [Date]
+
+#### Problem Statement
+
+Current reliability filtering occurs at the analysis stage, permanently destroying raw dimensional scores and preventing post-hoc threshold adjustments. Researchers must re-run expensive LLM analysis to test different sensitivity settings. We need to move filtering to the statistical stage and add experiment-level parameterization to preserve all raw data while giving researchers full control over analytical decisions.
+
+#### Success Criteria
+
+##### Phase 1: Data Preservation Architecture (Week 1)
+
+- [ ] **Analysis Agent Enhancement**: Remove all salience thresholding, report ALL dimensional scores regardless of salience
+- [ ] **Raw Data Preservation**: Ensure complete LLM analysis is captured in score_extraction artifacts
+- [ ] **Backward Compatibility**: Maintain existing pipeline functionality during transition
+- [ ] **Validation**: Confirm all dimensional scores are preserved in artifacts
+
+##### Phase 2: Experiment-Level Parameterization (Week 1-2)
+
+- [ ] **Experiment Specification Enhancement**: Add reliability filtering parameters to experiment.md
+- [ ] **Parameter Schema**: Define salience_threshold, confidence_threshold, reliability_calculation_method
+- [ ] **Default Values**: Establish sensible defaults (salience_threshold: 0.3, etc.)
+- [ ] **Validation**: Ensure parameter parsing and validation works correctly
+
+##### Phase 3: Statistical Stage Filtering Implementation (Week 2)
+
+- [ ] **Statistical Processor Enhancement**: Implement filtering logic in ScoreExtractionProcessor
+- [ ] **Parameter Integration**: Read experiment parameters and apply filtering during statistical analysis
+- [ ] **Status Categorization**: Maintain LLM-generated status categories but allow parameter override
+- [ ] **Derived Metrics**: Ensure derived metrics use only filtered dimensions
+
+##### Phase 4: CLI & Workflow Enhancement (Week 2-3)
+
+- [ ] **Parameter Override Support**: Allow CLI parameter overrides for re-runs (--salience-threshold 0.2)
+- [ ] **Fast Re-analysis**: Enable statistical re-runs without re-analysis when only parameters change
+- [ ] **Provenance Tracking**: Track parameter changes in run metadata
+- [ ] **User Documentation**: Clear guidance on parameter selection and trade-offs
+
+#### Technical Requirements
+
+##### 1. Analysis Agent Modifications
+
+- [ ] **Remove Salience Filtering**: Update prompt2.yaml to remove all threshold-based exclusions
+- [ ] **Complete Score Reporting**: LLM reports raw_score, salience, confidence for ALL dimensions
+- [ ] **Status Preservation**: Keep LLM status categorization for reference but don't filter
+- [ ] **Enhanced Metadata**: Include LLM reasoning about salience and reliability
+
+##### 2. Experiment Specification Schema
+
+```yaml
+# New section in experiment.md
+analysis_parameters:
+  reliability_filtering:
+    salience_threshold: 0.3          # Minimum salience for inclusion (0.0-1.0)
+    confidence_threshold: 0.0        # Minimum confidence for inclusion (0.0-1.0)  
+    reliability_threshold: 0.25      # Minimum reliability for inclusion (0.0-1.0)
+    reliability_calculation: "confidence_x_salience"  # Method for calculating reliability
+    framework_fit_required: false   # Require minimum framework fit score
+    framework_fit_threshold: 0.3    # Minimum framework fit for validity
+```
+
+##### 3. Statistical Processor Enhancement
+
+- [ ] **Parameter Loading**: Read experiment analysis_parameters configuration via CAS discovery
+- [ ] **Dynamic Filtering**: Apply thresholds during statistical processing, not analysis
+- [ ] **Multiple Threshold Support**: Enable testing different thresholds on same raw data
+- [ ] **Status Override**: Allow parameter-based overrides of LLM status categorization
+- [ ] **Metadata Tracking**: Record which parameters were used for filtering
+
+##### 4. CLI Workflow Enhancements
+
+- [ ] **Parameter Override Flags**: `--salience-threshold`, `--confidence-threshold`, `--reliability-threshold`
+- [ ] **Smart Resume Logic**: Detect when only parameters changed, skip re-analysis
+- [ ] **Parameter Validation**: Ensure parameter values are valid (0.0-1.0 range, etc.)
+- [ ] **Help Documentation**: Clear guidance on parameter effects and trade-offs
+
+#### Success Metrics
+
+##### Primary Success Metrics
+
+- **Data Preservation**: 100% of LLM dimensional scores preserved in artifacts
+- **Parameter Flexibility**: Researchers can test 3+ different thresholds without re-analysis
+- **Performance**: Statistical re-runs complete in <30 seconds for typical experiments
+- **Usability**: Researchers can adjust parameters via CLI or experiment specification
+
+##### Secondary Success Metrics
+
+- **Research Quality**: Enhanced ability to justify threshold choices in publications
+- **Cost Efficiency**: 90%+ cost reduction for threshold sensitivity analysis
+- **Workflow Integration**: Seamless integration with existing research workflows
+- **Documentation Quality**: Clear guidance enables researchers to use parameters effectively
+
+#### Notes
+
+- **Research Empowerment**: This transforms the system from rigid tool to flexible research instrument
+- **Academic Rigor**: Preserves all data for audit and post-hoc analysis
+- **Cost Efficiency**: Eliminates expensive re-analysis for parameter adjustments
+- **Future-Proofing**: Enables advanced filtering methods without architectural changes
 
 #### Implementation Results
 
