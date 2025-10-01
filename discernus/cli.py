@@ -370,7 +370,7 @@ def copy_artifacts_between_runs(source_storage, target_storage, required_phases:
     else:
         print(f"✅ All {total_copied} artifacts copied successfully")
 
-def _validate_phase_dependencies(run_dir: Path, start_phase: str, end_phase: str) -> None:
+def _validate_phase_dependencies(run_dir: Path, start_phase: str, end_phase: str, is_resume: bool = False) -> None:
     """
     Validate that all required phase dependencies are met for the requested execution.
     
@@ -378,6 +378,7 @@ def _validate_phase_dependencies(run_dir: Path, start_phase: str, end_phase: str
         run_dir: Path to run directory
         start_phase: Phase to start from
         end_phase: Phase to end at
+        is_resume: Whether this is a resume operation (vs fresh run)
         
     Raises:
         RuntimeError: If phase dependencies are not met
@@ -389,19 +390,20 @@ def _validate_phase_dependencies(run_dir: Path, start_phase: str, end_phase: str
     if start_idx > end_idx:
         raise RuntimeError(f"Start phase '{start_phase}' cannot be after end phase '{end_phase}'")
     
-    # Check that all phases before start_phase are completed
-    required_phases = phases[:start_idx]
-    missing_phases = []
-    
-    for phase in required_phases:
-        if not _has_required_artifacts(run_dir, phase, []):
-            missing_phases.append(phase)
-    
-    if missing_phases:
-        error_msg = f"Cannot start from '{start_phase}': Missing completed phases: {', '.join(missing_phases)}\n"
-        error_msg += f"Required phase order: {' → '.join(phases)}\n"
-        error_msg += f"Try running from an earlier phase or complete the missing phases first."
-        raise RuntimeError(error_msg)
+    # For resume operations, check that all phases before start_phase are completed
+    if is_resume:
+        required_phases = phases[:start_idx]
+        missing_phases = []
+        
+        for phase in required_phases:
+            if not _has_required_artifacts(run_dir, phase, []):
+                missing_phases.append(phase)
+        
+        if missing_phases:
+            error_msg = f"Cannot resume from '{start_phase}': Missing completed phases: {', '.join(missing_phases)}\n"
+            error_msg += f"Required phase order: {' → '.join(phases)}\n"
+            error_msg += f"Try running from an earlier phase or complete the missing phases first."
+            raise RuntimeError(error_msg)
     
     # Check for critical artifacts that may be needed by later phases
     critical_artifacts = {
@@ -559,10 +561,16 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, ski
         if source_run_dir:
             source_storage = LocalArtifactStorage(security, source_run_dir, source_run_dir.name)
             
-            # Determine which phases to copy based on start_phase
+            # Determine which phases to copy based on what's actually completed in source run
             phases = ['validation', 'analysis', 'statistical', 'evidence', 'synthesis']
             start_idx = phases.index(start_phase)
-            phases_to_copy = phases[:start_idx]
+            
+            # Find which phases are actually completed in the source run
+            # Include phases before start_phase AND start_phase itself if completed
+            phases_to_copy = []
+            for phase in phases[:start_idx + 1]:  # Include start_phase itself
+                if _has_required_artifacts(source_run_dir, phase, []):
+                    phases_to_copy.append(phase)
             
             if phases_to_copy:
                 rich_console.print_info(f"📦 Copying artifacts from phases: {', '.join(phases_to_copy)}")
@@ -591,7 +599,7 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, ski
 
         # 4. Validate phase dependencies before execution
         try:
-            _validate_phase_dependencies(run_folder, start_phase, end_phase)
+            _validate_phase_dependencies(run_folder, start_phase, end_phase, is_resume=resume)
         except RuntimeError as e:
             rich_console.print_error(f"❌ Phase dependency validation failed: {e}")
             exit_general_error("Phase dependencies not met")
