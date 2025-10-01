@@ -474,7 +474,7 @@ class V2ValidationAgent(StandardAgent):
                     suggestions=["Verify LLM model availability and authentication"]
                 )
 
-            # Parse validation result
+            # Parse validation result - structured output should return a dict
             if isinstance(raw_response, dict):
                 issues = []
                 for issue_data in raw_response.get('issues', []):
@@ -493,8 +493,38 @@ class V2ValidationAgent(StandardAgent):
                     suggestions=raw_response.get('suggestions', [])
                 )
             else:
-                # Fallback parsing
-                return self._parse_validation_response(str(raw_response))
+                # Fallback: try to parse as JSON string (shouldn't happen with structured output)
+                try:
+                    data = json.loads(str(raw_response))
+                    issues = []
+                    for issue_data in data.get('issues', []):
+                        issues.append(ValidationIssue(
+                            category=issue_data.get('category', 'unknown'),
+                            description=issue_data.get('description', 'Unknown issue'),
+                            impact=issue_data.get('impact', 'Unknown impact'),
+                            fix=issue_data.get('fix', 'No fix provided'),
+                            priority=issue_data.get('priority', 'BLOCKING'),
+                            affected_files=issue_data.get('affected_files', [])
+                        ))
+                    
+                    return ValidationResult(
+                        success=data.get('success', False),
+                        issues=issues,
+                        suggestions=data.get('suggestions', [])
+                    )
+                except json.JSONDecodeError as e:
+                    return ValidationResult(
+                        success=False,
+                        issues=[ValidationIssue(
+                            category="llm_response_error",
+                            description=f"Could not parse LLM response as structured data: {str(e)}",
+                            impact="Validation cannot be completed",
+                            fix="Check LLM response format and structured output configuration",
+                            priority="BLOCKING",
+                            affected_files=[]
+                        )],
+                        suggestions=["Verify structured output is working correctly"]
+                    )
 
         except Exception as e:
             self.logger.error(f"Validation failed: {str(e)}")
@@ -528,59 +558,6 @@ class V2ValidationAgent(StandardAgent):
             capabilities_registry=capabilities_registry
         )
 
-    def _parse_validation_response(self, response: str) -> ValidationResult:
-        """Parse LLM validation response using THIN principles."""
-        try:
-            # Try to find JSON in the response (handle markdown code blocks)
-            json_content = response.strip()
-            
-            # Look for JSON in markdown code blocks
-            if "```json" in response:
-                json_start = response.find("```json") + 7
-                json_end = response.rfind("```")
-                if json_end > json_start:
-                    json_content = response[json_start:json_end].strip()
-            elif "```" in response:
-                # Try to find any code block
-                code_start = response.find("```") + 3
-                code_end = response.rfind("```")
-                if code_end > code_start:
-                    json_content = response[code_start:code_end].strip()
-            
-            # Parse the JSON content
-            data = json.loads(json_content)
-            
-            # Convert to ValidationResult
-            issues = []
-            for issue_data in data.get('issues', []):
-                issues.append(ValidationIssue(
-                    category=issue_data.get('category', 'unknown'),
-                    description=issue_data.get('description', 'Unknown issue'),
-                    impact=issue_data.get('impact', 'Unknown impact'),
-                    fix=issue_data.get('fix', 'No fix provided'),
-                    priority=issue_data.get('priority', 'BLOCKING'),
-                    affected_files=issue_data.get('affected_files', [])
-                ))
-            
-            return ValidationResult(
-                success=data.get('success', False),
-                issues=issues,
-                suggestions=data.get('suggestions', [])
-            )
-            
-        except Exception as e:
-            return ValidationResult(
-                success=False,
-                issues=[ValidationIssue(
-                    category="llm_response_error",
-                    description=f"Could not parse LLM response: {str(e)}",
-                    impact="Validation cannot be completed",
-                    fix="Check LLM response format and prompt clarity",
-                    priority="BLOCKING",
-                    affected_files=[]
-                )],
-                suggestions=["Review prompt template for JSON format requirements"]
-            )
 
     def _store_validation_results(self, validation_result: ValidationResult, run_context: RunContext) -> str:
         """Store validation results as a structured artifact."""

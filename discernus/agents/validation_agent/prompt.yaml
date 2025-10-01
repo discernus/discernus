@@ -157,20 +157,17 @@ template: |
   - Speaker biographical details, dates, titles, or historical accuracy of metadata fields
 
   RESPONSE FORMAT:
-  Return ONLY clean JSON (no markdown formatting, no extra text) with this structure:
-  {{
-      "success": true/false,
-      "issues": [
-          {{
-              "category": "field_naming|specification|missing_element|data_quality|factual_error|trinity_coherence|metadata_validation|extraction_patterns|mathematical_validation|thin_calculation_compliance|capabilities_mismatch",
-              "description": "Clear description of the issue",
-              "impact": "What will happen if this isn't fixed",
-              "fix": "Specific steps to fix the issue",
-              "priority": "BLOCKING|QUALITY|SUGGESTION",
-              "affected_files": ["list", "of", "affected", "files"]
-          }}
-      ],
-      "suggestions": ["list", "of", "general", "suggestions"]
-  }}
+  You will return structured data with the following information:
+  - success: true/false indicating whether the experiment is valid
+  - issues: array of validation issues found (empty if none)
+  - suggestions: array of general suggestions for improvement
+
+  Each issue should include:
+  - category: one of field_naming, specification, missing_element, data_quality, factual_error, trinity_coherence, metadata_validation, extraction_patterns, mathematical_validation, thin_calculation_compliance, capabilities_mismatch
+  - description: clear description of the issue
+  - impact: what will happen if this isn't fixed
+  - fix: specific steps to fix the issue
+  - priority: BLOCKING, QUALITY, or SUGGESTION
+  - affected_files: list of files affected by this issue
 
   Be specific and actionable. If there are no issues, return success: true with empty issues array.
