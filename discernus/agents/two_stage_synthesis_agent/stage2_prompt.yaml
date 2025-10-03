@@ -10,7 +10,7 @@ template: |
   ## EVIDENCE CURATION PHASE (Step 1)
 
   ### Framework Dimension Discovery
-  First, analyze the Stage 1 report to identify ALL framework dimensions being analyzed. Look for dimension names, scoring patterns, and analytical categories. **RELIABILITY AWARENESS**: Note which dimensions were included vs excluded based on reliability filtering, and prioritize evidence quotes for included dimensions. These dimensions will guide your evidence quote selection.
+  First, analyze the Stage 1 report to identify ALL framework dimensions being analyzed. Look for dimension names, scoring patterns, and analytical categories. **DIMENSIONAL COVERAGE**: Note which dimensions were analyzed and their scoring patterns, and prioritize evidence quotes for all dimensions. These dimensions will guide your evidence quote selection.
 
   ### Evidence Selection Criteria (from Evidence Agent Logic)
   Select quotes that:

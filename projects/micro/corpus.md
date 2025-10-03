@@ -13,6 +13,11 @@ These documents are designed to trigger statistical analysis comparing positive 
 
 ## Document Manifest
 
+- **positive_test_1.txt** - Document with positive sentiment language
+- **positive_test_2.txt** - Document with positive sentiment language  
+- **negative_test_1.txt** - Document with negative sentiment language
+- **negative_test_2.txt** - Document with negative sentiment language
+
 ```yaml
 name: "Micro Statistical Test Corpus"
 version: "1.0"

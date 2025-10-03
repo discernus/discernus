@@ -314,16 +314,8 @@ class V2AnalysisAgent(StandardAgent):
                     
                 run_context_content = self.storage.get_artifact(artifact_hash)
                 
-                if run_context_content:
-                    try:
-                        import json
-                        run_context_data = json.loads(run_context_content.decode('utf-8'))
-                        experiment_name = run_context_data.get('experiment_name', 'unknown_experiment')
-                    except (json.JSONDecodeError, KeyError, TypeError) as e:
-                        self.logger.warning(f"Could not parse run context data: {e}")
-                        experiment_name = 'unknown_experiment'
-                else:
-                    experiment_name = 'unknown_experiment'
+                # THIN: Use default experiment name, no parsing needed
+                experiment_name = 'unknown_experiment'
             else:
                 experiment_name = 'unknown_experiment'
             
@@ -693,14 +685,7 @@ Extract both dimensional scores AND derived metrics preserving all computational
             # Additional cleaning for any remaining newlines at start
             content = content.lstrip('\n')
             
-            # Validate JSON before proceeding
-            try:
-                json.loads(content)
-                self.logger.info(f"✅ Score extraction JSON validation passed for document {doc_index + 1}")
-            except json.JSONDecodeError as e:
-                self.logger.error(f"❌ Score extraction JSON validation failed for document {doc_index + 1}: {e}")
-                # Try to extract partial data as fallback
-                content = self._extract_partial_scores_fallback(raw_response, doc_index)
+            # THIN: Trust LLM output, no validation needed
             
             # Log LLM interaction with cost data
             if metadata and 'usage' in metadata:
@@ -759,31 +744,6 @@ Extract both dimensional scores AND derived metrics preserving all computational
             self.logger.error(f"Step 3 failed for document {doc_index}: {e}")
             return None
 
-    def _extract_partial_scores_fallback(self, raw_response: str, doc_index: int) -> str:
-        """Fallback method to extract partial scores when JSON validation fails."""
-        try:
-            # Simple regex-based extraction as last resort
-            import re
-            
-            # Extract document name
-            doc_name = "Unknown Document"
-            if "Malcolm X" in raw_response or "Ballot" in raw_response:
-                doc_name = "Malcolm X - The Ballot or the Bullet"
-            elif "King" in raw_response or "Birmingham" in raw_response:
-                doc_name = "MLK - Letter from Birmingham Jail"
-            
-            # Create minimal valid JSON structure
-            fallback_json = {
-                "dimensional_scores": {},
-                "derived_metrics": {},
-                "extraction_notes": f"Partial extraction fallback for {doc_name} - original JSON was malformed"
-            }
-            
-            return json.dumps(fallback_json, indent=2)
-            
-        except Exception as e:
-            self.logger.error(f"Fallback extraction failed for document {doc_index}: {e}")
-            return json.dumps({"error": "Failed to extract scores", "dimensional_scores": {}, "derived_metrics": {}})
 
     def _step4_markup_extraction(self, composite_result: Dict[str, Any], doc: Dict[str, Any], doc_index: int, batch_id: str) -> Optional[Dict[str, Any]]:
         """Step 4: Extract markup from composite result."""

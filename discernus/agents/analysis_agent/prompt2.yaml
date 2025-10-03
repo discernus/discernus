@@ -7,8 +7,7 @@ template: |
   1.  **Salience Assessment**: For each framework dimension, first assess its salience (emphasis/importance) in the discourse on a 0-1 scale.
 
   2.  **Conditional Dimensional Scoring**: 
-      *   IF salience ≥ 0.2: Perform detailed 3-shot analysis and score the dimension
-      *   IF salience < 0.2: Mark as "excluded_low_salience" and skip detailed scoring
+      *   FOR ALL DIMENSIONS: Perform detailed 3-shot analysis and score the dimension
 
   3.  **Reliability Calculation**: For included dimensions, calculate reliability = confidence × salience
 
@@ -24,9 +23,7 @@ template: |
 
   7.  **Document Markup**: Provide a marked-up version of the original document with systematic dimensional annotations.
 
-  8.  **Framework Fit Calculation**: Calculate framework-corpus fit based on the proportion of reliable dimensions.
-
-  9.  **Statistical Validity Warnings**: Add warnings for small sample sizes:
+  8.  **Statistical Validity Warnings**: Add warnings for small sample sizes:
       *   N<3: "Warning: Sample size too small for reliable statistical analysis"
       *   N<5: "Caution: Small sample size may limit statistical reliability"
 
@@ -38,10 +35,8 @@ template: |
   *   0.3-0.4: Minor presence, brief mentions or weak indicators
   *   0.0-0.2: Absent or barely detectable, insufficient evidence
 
-  THRESHOLD RULE: If salience < 0.2, mark as "excluded_low_salience" and skip detailed 3-shot scoring.
-
   INTERNAL CONSISTENCY APPROACH & CONFIDENCE CALCULATION:
-  For dimensions with salience ≥ 0.2, you must perform three independent internal analyses from different perspectives:
+  For ALL dimensions, you must perform three independent internal analyses from different perspectives:
   *   Evidence-First: Start with quotes, then score
   *   Context-Weighted: Consider broader context and framing
   *   Pattern-Based: Look for rhetorical patterns and structures
@@ -94,7 +89,6 @@ template: |
       "analysis_notes": "Applied salience-first approach with conditional 3-shot analysis. Reliability = confidence × salience. Confidence calculated as 1 - (max_raw_score - min_raw_score). Calculated all framework-specified derived metrics.",
       "internal_consistency_approach": "Salience-first filtering with 3-run median aggregation for included dimensions",
       "derived_metrics_calculated": true,
-      "framework_fit_score": 0.75,
       "reliability_summary": {
         "high_reliability_dimensions": ["dimension1", "dimension2"],
         "excluded_dimensions": ["dimension3"],
@@ -118,8 +112,7 @@ template: |
             "salience": 0.2,
             "confidence": null,
             "reliability": null,
-            "status": "excluded_low_salience",
-            "exclusion_reason": "Salience below threshold (0.2 < 0.3)"
+            "status": "included_medium_reliability"
           }
         },
         "derived_metrics": {

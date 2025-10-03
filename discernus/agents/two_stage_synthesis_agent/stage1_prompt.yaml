@@ -24,32 +24,36 @@ template: |
 
   **Step 2: Identify Key Statistical Patterns**
   - Examine the **Complete Statistical Results** from the statistical agent
-  - **RELIABILITY FILTERING AWARENESS**: Note which dimensions were included vs excluded based on reliability filtering
+  - **DIMENSIONAL COVERAGE**: Note which dimensions were analyzed and their scoring patterns
   - In light of the framework's structure from Step 1, identify the most significant statistical findings
   - Focus on the strongest correlations (both positive and negative, prioritizing salience scores if available), most significant differences, and most revealing patterns
   - **Prioritize `statistical_results`**: Base ALL your analytical claims, interpretations, and insights on the numerical data in `statistical_results`. This is your primary source of truth.
-  - **RELIABILITY CONTEXT**: Consider how reliability filtering affects the interpretation of statistical patterns
+  - **STATISTICAL CONTEXT**: Consider how the statistical patterns reflect the framework's theoretical structure
 
-  **Step 3: Analyze Reliability and Framework Fit**
-  - **RELIABILITY ASSESSMENT**: Examine the reliability filtering results and framework fit scores
-  - Identify which dimensions were excluded and why (low salience, low confidence, etc.)
-  - Assess the impact of reliability filtering on research conclusions
+  **Step 3: Analyze Framework Performance**
+  - **FRAMEWORK ASSESSMENT**: Examine the framework fit scores and dimensional coverage
+  - Identify which dimensions were most/least present and their scoring patterns
+  - Assess how well the framework captured the discourse characteristics
   - **FRAMEWORK FIT EVALUATION**: Interpret the framework-corpus fit score and its implications
-  - Consider how reliability patterns affect the framework's applicability to this corpus
-  - **METHODOLOGICAL TRANSPARENCY**: Note any limitations introduced by reliability filtering
+    * **Dimensional Distinctiveness**: Evaluate whether constructive and destructive dimensions form distinct clusters
+    * **Bipolar Validity**: Assess whether opposing dimension pairs show strong negative correlations
+    * **Theoretical Coherence**: Determine if observed patterns match framework predictions
+    * **Discriminatory Power**: Evaluate framework's ability to distinguish between different content types
+  - Consider how dimensional patterns affect the framework's applicability to this corpus
+  - **METHODOLOGICAL TRANSPARENCY**: Note any analytical limitations or considerations
 
   **Step 4: Evaluate Experimental Hypotheses**
   - Review the **Experiment Configuration** and corpus context
   - Determine if this is hypothesis-driven research or exploratory analysis
   - Identify explicit and implicit research questions
   - Evaluate how the statistical findings from Step 2 confirm or falsify the experiment's hypotheses
-  - **RELIABILITY-AWARE EVALUATION**: Consider how reliability filtering affects hypothesis testing
+  - **STATISTICAL EVALUATION**: Consider how statistical patterns support or refute hypotheses
   - **CRITICAL**: These evaluations will be used to populate the final report. Do NOT include Step 4 content as intermediate artifacts - integrate it properly into the academic report structure.
 
   **Step 5: Construct the Core Narrative**
   - Based on the insights from Steps 1-4, formulate a central thesis or narrative for the research report
   - What is the single most important story the data is telling about the framework's performance?
-  - **RELIABILITY-INTEGRATED NARRATIVE**: Ensure the narrative accounts for reliability filtering and framework fit
+  - **FRAMEWORK-INTEGRATED NARRATIVE**: Ensure the narrative accounts for framework performance and statistical patterns
 
   **Step 6: Synthesize the Final Report**
   - **ONLY AFTER** completing steps 1-5, write the full academic report
@@ -99,8 +103,11 @@ template: |
   - Framework description and analytical approach
   - Data structure and corpus description
   - Statistical methods and analytical constraints
-  - **RELIABILITY FILTERING METHODOLOGY**: Explain the reliability filtering approach, salience thresholds, and confidence calculations
+  - **STATISTICAL METHODOLOGY**: Explain the statistical approach, dimensional scoring, and confidence calculations
   - **FRAMEWORK FIT ASSESSMENT**: Describe how framework-corpus fit is evaluated and interpreted
+    * Include the calculated framework fit score and its interpretation
+    * Address each component: dimensional distinctiveness, bipolar validity, theoretical coherence, discriminatory power
+    * Explain what the fit score means for the framework's applicability to this corpus
   - **DIMENSION INCLUSION/EXCLUSION**: Document which dimensions were included/excluded and why
   - Acknowledge limitations and methodological choices
 
@@ -141,6 +148,10 @@ template: |
   - **Discriminatory Power Analysis**: How well the framework distinguishes between different documents/cases
   - **Framework-Corpus Fit Evaluation**: 
     * Interpret the framework-corpus fit score (0-1 scale) from statistical analysis
+    * **Dimensional Distinctiveness**: Evaluate whether constructive and destructive dimensions form distinct clusters as theorized
+    * **Bipolar Validity**: Assess whether opposing dimension pairs show strong negative correlations
+    * **Theoretical Coherence**: Determine if observed patterns match framework predictions
+    * **Discriminatory Power**: Evaluate framework's ability to distinguish between different content types
     * Assess whether the corpus was appropriate for the framework's intended application
     * Evaluate whether observed patterns match framework theoretical expectations
     * Consider implications of fit score for research validity and interpretation
@@ -153,16 +164,16 @@ template: |
 
   ### 6. Discussion
   - Theoretical implications of findings
-  - **RELIABILITY-AWARE INTERPRETATION**: Discuss how reliability filtering affects research conclusions
+  - **STATISTICAL INTERPRETATION**: Discuss how statistical patterns inform research conclusions
   - **FRAMEWORK APPLICABILITY**: Evaluate the framework's effectiveness based on fit scores and reliability patterns
   - Comparative analysis and archetypal patterns
-  - **METHODOLOGICAL REFLECTIONS**: Consider the implications of reliability filtering for future research
+  - **METHODOLOGICAL REFLECTIONS**: Consider the implications of the analytical approach for future research
   - Broader significance for the field
   - Limitations and future directions
 
   ### 7. Conclusion
   - Summary of key contributions
-  - **RELIABILITY-INTEGRATED SUMMARY**: Highlight findings that account for reliability filtering
+  - **FRAMEWORK-INTEGRATED SUMMARY**: Highlight findings that demonstrate framework effectiveness
   - **FRAMEWORK PERFORMANCE ASSESSMENT**: Conclude on framework effectiveness based on fit and reliability
   - Methodological validation
   - Research implications

@@ -56,18 +56,54 @@ Discernus provides a comprehensive suite of statistical and analytical tools for
 
 **Best Practice**: When specifying statistical tests in your experiment, consider the available tools and design your analysis plan accordingly. The system will automatically select appropriate statistical methods based on your sample sizes and research questions. The capabilities registry is maintained by the platform and may be updated to include additional libraries as they become available.
 
-### Section 5: Data Grouping and Custom Variable Mapping
+### Section 5: Reliability Filtering Parameters
+
+**(Required)**
+Define parameters for filtering dimensional scores based on reliability criteria. This enables post-hoc analysis with different sensitivity settings without re-running expensive LLM analysis. All experiments must explicitly specify their filtering approach.
+
+#### 5.1 Basic Reliability Filtering
+```yaml
+reliability_filtering:
+  salience_threshold: 0.0          # Minimum salience for inclusion (0.0-1.0)
+  confidence_threshold: 0.0        # Minimum confidence for inclusion (0.0-1.0)  
+  reliability_threshold: 0.0       # Minimum reliability for inclusion (0.0-1.0)
+  reliability_calculation: "confidence_x_salience"  # Method for calculating reliability
+  framework_fit_required: false   # Require minimum framework fit score
+  framework_fit_threshold: 0.3    # Minimum framework fit for validity
+```
+
+#### 5.2 Advanced Filtering Options
+```yaml
+advanced_filtering:
+  dimension_specific_thresholds:   # Per-dimension overrides
+    dimension_name: 0.2
+    another_dimension: 0.4
+  exclude_dimensions: []           # Dimensions to always exclude
+  include_dimensions: []           # Dimensions to always include (override thresholds)
+```
+
+#### 5.3 Parameter Effects
+- **salience_threshold**: Controls minimum salience required for dimensional inclusion
+- **confidence_threshold**: Controls minimum confidence required for dimensional inclusion  
+- **reliability_threshold**: Controls minimum reliability score required for inclusion
+- **reliability_calculation**: Method for calculating reliability (confidence_x_salience, confidence, salience)
+- **framework_fit_required**: Whether to require minimum framework-corpus fit score
+- **framework_fit_threshold**: Minimum framework fit score for validity
+
+**Default Values**: If not specified, the system uses sensible defaults (salience_threshold: 0.0, confidence_threshold: 0.0, reliability_threshold: 0.0).
+
+### Section 6: Data Grouping and Custom Variable Mapping
 
 **(Required for Statistical Analysis)**
 If your experiment requires statistical analysis using grouping variables not explicitly present in the corpus manifest (e.g., `time_period`, `category`, `group_type`), you MUST define them explicitly.
 
-#### 5.1 Corpus Manifest Integration
+#### 6.1 Corpus Manifest Integration
 - Statistical analyses must use corpus manifest metadata as the primary data source
 - Standard manifest fields vary by domain but commonly include: `speaker`, `author`, `year`, `category`, `type`, `format`
 - **CRITICAL**: Custom grouping variables (e.g., `time_period`, `administration`) MUST be present as fields in the corpus manifest metadata
 - **FORBIDDEN**: Statistical agents must NEVER parse filenames to derive metadata - all metadata must come from the corpus manifest
 
-#### 5.2 Custom Grouping Variables
+#### 6.2 Custom Grouping Variables
 There are two approaches for grouping variables:
 
 **Option A: Direct Corpus Field** (Preferred)
@@ -103,13 +139,13 @@ time_period_mapping:
 - **Corpus Manifest Mapping**: How to derive custom variables from manifest fields
 - **Missing Data Handling**: How to handle unmatched or missing cases
 
-#### 5.3 Statistical Executability Requirements
+#### 6.3 Statistical Executability Requirements
 - **ANOVA Groups**: All groups must have n≥2 for inferential testing
 - **Baseline Groups**: Single-observation groups (n=1) must be designated as baselines, excluded from ANOVA
 - **Variance Tests**: Groups must have sufficient variance for homogeneity testing
 - **Missing Data**: Specify handling of speakers/documents that don't match the mapping
 
-#### 5.4 Coherence Validation
+#### 6.4 Coherence Validation
 The coherence agent will validate that:
 1. **Grouping Variable Existence**: Every grouping variable requested for statistical analysis in this experiment MUST exist as a metadata field in the associated `corpus.md` manifest for all documents.
 2. **Statistical Executability**: All groups intended for comparative statistical analysis (e.g., ANOVA) must contain a sufficient number of documents (n≥2). Single-document groups must be explicitly designated as baselines.
@@ -123,20 +159,20 @@ The coherence agent will validate that:
 
 This is a single YAML block at the end of the document containing the precise configuration for the orchestrator.
 
-### Section 6: Configuration Appendix
+### Section 7: Configuration Appendix
 
 **(Required)**
 
 ```yaml
 # --- Start of Machine-Readable Appendix ---
 
-# 6.1: Metadata (Required)
+# 7.1: Metadata (Required)
 metadata:
   experiment_name: "your_experiment_name_in_snake_case"
   author: "Your Name or Organization"
   spec_version: "10.0"
 
-# 6.2: Components (Required)
+# 7.2: Components (Required)
 components:
   # The framework file must be named "framework.md" and located in the same directory as this experiment.md.
   # This standardized naming eliminates the need for path parsing and ensures consistent file discovery.
@@ -160,6 +196,7 @@ components:
 -   The framework file must be named `framework.md` and located in the same directory as `experiment.md`.
 -   The corpus manifest file must be named `corpus.md` and located in the same directory as `experiment.md`.
 -   The corpus directory must exist and contain the files specified in the corpus manifest.
+-   The YAML appendix must include a `reliability_filtering` section with explicit parameter values.
 
 ### Statistical Analysis Requirements (New in v10.0)
 -   **Corpus Metadata Linkage**: All grouping variables used in statistical analyses MUST either:
@@ -168,6 +205,13 @@ components:
 -   **No Filename Parsing**: Statistical agents are FORBIDDEN from parsing filenames to derive metadata
 -   **Statistical Executability**: All ANOVA groups must have n≥2. Single-observation groups (n=1) must be designated as baselines and excluded from inferential testing.
 -   **Semantic Alignment**: The experiment, corpus manifest, and framework must use consistent terminology. Custom mappings must eliminate ambiguity about how corpus metadata maps to analysis variables.
+
+### Reliability Filtering Requirements (New in v10.0)
+-   **Parameter Validation**: All reliability filtering parameters must be within valid ranges (0.0-1.0 for thresholds)
+-   **Method Validation**: reliability_calculation must be one of: "confidence_x_salience", "confidence", "salience"
+-   **Dimension Override Logic**: If both exclude_dimensions and include_dimensions are specified, include_dimensions takes precedence
+-   **Default Behavior**: If reliability filtering parameters are not specified, the system uses sensible defaults
+-   **Post-hoc Analysis**: Parameter changes enable statistical re-analysis without re-running expensive LLM analysis
 
 ### Statistical Power and Methodology Requirements
 -   **Sample Size Adequacy**: Statistical tests must be appropriate for available sample sizes:

@@ -11,6 +11,9 @@ Two short test documents for basic pipeline validation.
 
 ## Document Manifest
 
+- **positive_test.txt** - Document with positive sentiment language
+- **negative_test.txt** - Document with negative sentiment language
+
 ```yaml
 name: "Nano Test Corpus"
 version: "1.0"

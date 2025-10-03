@@ -40,13 +40,21 @@ class ScoreExtractionProcessor:
     3. Smaller, cleaner JSON payloads to parse
     4. Self-correction capabilities built into the LLM
     5. More maintainable than complex regex parsing
+    6. Parameterized reliability filtering for post-hoc analysis
     """
     
-    def __init__(self):
+    def __init__(self, experiment_params=None):
+        """
+        Initialize the processor with optional experiment parameters.
+        
+        Args:
+            experiment_params: ExperimentParameters object with reliability filtering settings
+        """
         self.document_data = None
         self.dimension_data = None
         self.evidence_data = None
         self.framework_metadata = {}
+        self.experiment_params = experiment_params
     
     def process_score_extractions(self, artifact_paths: List[Path]) -> Dict[str, Any]:
         """
@@ -151,7 +159,6 @@ class ScoreExtractionProcessor:
                             'framework_version': '10.4.0',
                             'analyst_confidence': 0.0,
                             'analysis_notes': 'Score extraction data',
-                            'framework_fit_score': 0.0,
                             'reliability_summary': {
                                 'high_reliability_dimensions': [],
                                 'excluded_dimensions': [],
@@ -253,7 +260,6 @@ class ScoreExtractionProcessor:
             'analysis_notes': analysis_metadata.get('analysis_notes', ''),
             'internal_consistency_approach': analysis_metadata.get('internal_consistency_approach', ''),
             'derived_metrics_calculated': analysis_metadata.get('derived_metrics_calculated', False),
-            'framework_fit_score': analysis_metadata.get('framework_fit_score'),
             'reliability_summary': analysis_metadata.get('reliability_summary', {})
         }
     
@@ -355,20 +361,24 @@ class ScoreExtractionProcessor:
         return by_document
     
     def _analyze_dimension_data(self) -> Dict[str, Any]:
-        """Analyze dimension-level scores with reliability filtering."""
+        """Analyze dimension-level scores with parameterized reliability filtering."""
         score_cols = ['raw_score', 'salience', 'confidence', 'reliability']
         available_cols = [col for col in score_cols if col in self.dimension_data.columns]
         
         if not available_cols:
             return {'error': 'No numeric score columns found'}
         
-        # Separate included vs excluded dimensions
-        included_dims = self.dimension_data[
-            self.dimension_data['status'].isin(['included_high_reliability', 'included_medium_reliability'])
-        ]
-        excluded_dims = self.dimension_data[
-            self.dimension_data['status'].isin(['excluded_low_salience', 'borderline_excluded', 'clearly_excluded'])
-        ]
+        # Apply parameterized filtering
+        if self.experiment_params:
+            included_dims, excluded_dims = self._apply_parameterized_filtering()
+        else:
+            # Fallback to status-based filtering for backward compatibility
+            included_dims = self.dimension_data[
+                self.dimension_data['status'].isin(['included_high_reliability', 'included_medium_reliability'])
+            ]
+            excluded_dims = self.dimension_data[
+                self.dimension_data['status'].isin(['excluded_low_salience', 'borderline_excluded', 'clearly_excluded'])
+            ]
         
         analysis = {
             'sample_size': len(self.dimension_data),
@@ -420,6 +430,59 @@ class ScoreExtractionProcessor:
         }
         
         return analysis
+    
+    def _apply_parameterized_filtering(self) -> tuple:
+        """
+        Apply parameterized reliability filtering based on experiment parameters.
+        
+        Returns:
+            Tuple of (included_dims, excluded_dims) DataFrames
+        """
+        from discernus.core.experiment_parameters import ReliabilityFilteringParams
+        
+        # Get filtering parameters
+        rf_params = self.experiment_params.reliability_filtering
+        af_params = self.experiment_params.advanced_filtering
+        
+        # Start with all dimensions
+        included_mask = pd.Series([True] * len(self.dimension_data), index=self.dimension_data.index)
+        
+        # Apply basic thresholds
+        if 'salience' in self.dimension_data.columns:
+            included_mask &= (self.dimension_data['salience'] >= rf_params.salience_threshold)
+        
+        if 'confidence' in self.dimension_data.columns:
+            included_mask &= (self.dimension_data['confidence'] >= rf_params.confidence_threshold)
+        
+        # Apply reliability threshold
+        if 'reliability' in self.dimension_data.columns:
+            included_mask &= (self.dimension_data['reliability'] >= rf_params.reliability_threshold)
+        
+        # Apply advanced filtering if available
+        if af_params:
+            # Apply dimension-specific thresholds
+            for dimension, threshold in af_params.dimension_specific_thresholds.items():
+                dim_mask = self.dimension_data['dimension'] == dimension
+                if 'salience' in self.dimension_data.columns:
+                    included_mask &= ~(dim_mask & (self.dimension_data['salience'] < threshold))
+            
+            # Always exclude specified dimensions
+            if af_params.exclude_dimensions:
+                included_mask &= ~self.dimension_data['dimension'].isin(af_params.exclude_dimensions)
+            
+            # Always include specified dimensions (override thresholds)
+            if af_params.include_dimensions:
+                included_mask |= self.dimension_data['dimension'].isin(af_params.include_dimensions)
+        
+        # Split into included and excluded
+        included_dims = self.dimension_data[included_mask].copy()
+        excluded_dims = self.dimension_data[~included_mask].copy()
+        
+        # Add filtering metadata
+        included_dims['filter_status'] = 'included_parameterized'
+        excluded_dims['filter_status'] = 'excluded_parameterized'
+        
+        return included_dims, excluded_dims
     
     def _analyze_evidence_data(self) -> Dict[str, Any]:
         """Analyze evidence quotes and their characteristics."""

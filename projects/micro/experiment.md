@@ -11,6 +11,28 @@ Complete pipeline validation with 4 documents, 2 dimensions, 2 derived metrics, 
 ## Expected Outcomes
 Descriptive analysis of sentiment scores between positive and negative sentiment categories, including descriptive statistics, derived metric calculations, and pattern identification.
 
+## Reliability Filtering Parameters
+
+**Testing Parameterized Filtering**: This experiment tests the new reliability filtering system with different threshold settings.
+
+```yaml
+reliability_filtering:
+  salience_threshold: 0.2          # Lower threshold for testing (default: 0.3)
+  confidence_threshold: 0.0        # No confidence filtering (default: 0.0)
+  reliability_threshold: 0.15      # Lower reliability threshold (default: 0.25)
+  reliability_calculation: "confidence_x_salience"  # Standard method
+  framework_fit_required: false   # No framework fit requirement
+  framework_fit_threshold: 0.3    # Default framework fit threshold
+
+# Advanced filtering for testing
+advanced_filtering:
+  dimension_specific_thresholds:   # Per-dimension overrides for testing
+    positive_sentiment: 0.1        # Very low threshold for positive sentiment
+    negative_sentiment: 0.3        # Higher threshold for negative sentiment
+  exclude_dimensions: []           # No exclusions
+  include_dimensions: []           # No forced inclusions
+```
+
 ## Data Grouping and Custom Variable Mapping
 
 **Primary Analysis Variable**: sentiment_category (positive vs negative)

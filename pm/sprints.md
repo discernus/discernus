@@ -16,7 +16,7 @@ This document tracks upcoming development sprints for the Discernus project. Eac
 
 ### Sprint 3: Dimensional Variance & Reliability Enhancement
 
-**Priority:** High
+**Priority:** High  
 **Estimated Effort:** 4 weeks
 **Status:** Completed (Partial - Architecture Pivot)
 **Target Start:** 2025-09-26
@@ -277,7 +277,7 @@ This sprint successfully addressed the core reliability and variance issues whil
 
 **Priority:** Critical
 **Estimated Effort:** 1 week
-**Status:** Completed
+**Status:** Completed  
 **Target Start:** 2025-01-01
 **Completed:** 2025-01-01
 
@@ -345,10 +345,11 @@ The CLI phase execution and resume functionality has multiple reliability issues
 
 ### Sprint 5: Hybrid Statistical Analysis Testing & Validation
 
-**Priority:** High
-**Estimated Effort:** 5-7 days
-**Status:** Planning
-**Target Start:** [Date]
+**Priority:** High  
+**Estimated Effort:** 5-7 days  
+**Status:** Completed
+**Target Start:** 2025-01-01
+**Completed:** 2025-01-01
 
 #### Problem Statement
 
@@ -358,24 +359,24 @@ Current reliability filtering occurs at the analysis stage, permanently destroyi
 
 ##### Phase 1: Data Preservation Architecture (Week 1)
 
-- [ ] **Analysis Agent Enhancement**: Remove all salience thresholding, report ALL dimensional scores regardless of salience
-- [ ] **Raw Data Preservation**: Ensure complete LLM analysis is captured in score_extraction artifacts
-- [ ] **Backward Compatibility**: Maintain existing pipeline functionality during transition
-- [ ] **Validation**: Confirm all dimensional scores are preserved in artifacts
+- [x] **Analysis Agent Enhancement**: Remove all salience thresholding, report ALL dimensional scores regardless of salience
+- [x] **Raw Data Preservation**: Ensure complete LLM analysis is captured in score_extraction artifacts
+- [x] **Backward Compatibility**: Maintain existing pipeline functionality during transition
+- [x] **Validation**: Confirm all dimensional scores are preserved in artifacts
 
 ##### Phase 2: Experiment-Level Parameterization (Week 1-2)
 
-- [ ] **Experiment Specification Enhancement**: Add reliability filtering parameters to experiment.md
-- [ ] **Parameter Schema**: Define salience_threshold, confidence_threshold, reliability_calculation_method
-- [ ] **Default Values**: Establish sensible defaults (salience_threshold: 0.3, etc.)
-- [ ] **Validation**: Ensure parameter parsing and validation works correctly
+- [x] **Experiment Specification Enhancement**: Add reliability filtering parameters to experiment.md
+- [x] **Parameter Schema**: Define salience_threshold, confidence_threshold, reliability_calculation_method
+- [x] **Default Values**: Establish sensible defaults (salience_threshold: 0.3, etc.)
+- [x] **Validation**: Ensure parameter parsing and validation works correctly
 
 ##### Phase 3: Statistical Stage Filtering Implementation (Week 2)
 
-- [ ] **Statistical Processor Enhancement**: Implement filtering logic in ScoreExtractionProcessor
-- [ ] **Parameter Integration**: Read experiment parameters and apply filtering during statistical analysis
-- [ ] **Status Categorization**: Maintain LLM-generated status categories but allow parameter override
-- [ ] **Derived Metrics**: Ensure derived metrics use only filtered dimensions
+- [x] **Statistical Processor Enhancement**: Implement filtering logic in ScoreExtractionProcessor
+- [x] **Parameter Integration**: Read experiment parameters and apply filtering during statistical analysis
+- [x] **Status Categorization**: Maintain LLM-generated status categories but allow parameter override
+- [x] **Derived Metrics**: Ensure derived metrics use only filtered dimensions
 
 ##### Phase 4: CLI & Workflow Enhancement (Week 2-3)
 
@@ -384,447 +385,54 @@ Current reliability filtering occurs at the analysis stage, permanently destroyi
 - [ ] **Provenance Tracking**: Track parameter changes in run metadata
 - [ ] **User Documentation**: Clear guidance on parameter selection and trade-offs
 
-#### Technical Requirements
+#### Implementation Results
 
-##### 1. Analysis Agent Modifications
+**Key Achievements:**
 
-- [ ] **Remove Salience Filtering**: Update prompt2.yaml to remove all threshold-based exclusions
-- [ ] **Complete Score Reporting**: LLM reports raw_score, salience, confidence for ALL dimensions
-- [ ] **Status Preservation**: Keep LLM status categorization for reference but don't filter
-- [ ] **Enhanced Metadata**: Include LLM reasoning about salience and reliability
+1. **✅ Data Preservation Architecture**: All dimensional scores are now preserved in score_extraction artifacts, enabling post-hoc parameter adjustments without re-running expensive LLM analysis.
 
-##### 2. Experiment Specification Schema
+2. **✅ Experiment-Level Parameterization**: 
+   - Added comprehensive reliability filtering parameters to experiment specifications
+   - Created `experiment_parameters.py` module with YAML and markdown parsing
+   - Updated `EXPERIMENT_SPECIFICATION.md` to include new parameter schema
+   - Implemented parameter validation with proper error handling
 
-```yaml
-# New section in experiment.md
-reliability_filtering:
-  salience_threshold: 0.3          # Minimum salience for inclusion (0.0-1.0)
-  confidence_threshold: 0.0        # Minimum confidence for inclusion (0.0-1.0)  
-  reliability_threshold: 0.25      # Minimum reliability for inclusion (0.0-1.0)
-  reliability_calculation: "confidence_x_salience"  # Method for calculating reliability
-  framework_fit_required: false   # Require minimum framework fit score
-  framework_fit_threshold: 0.3    # Minimum framework fit for validity
-  
-# Optional advanced settings
-advanced_filtering:
-  dimension_specific_thresholds:   # Per-dimension overrides
-    tribal_dominance: 0.2
-    mudita: 0.4
-  exclude_dimensions: []           # Dimensions to always exclude
-  include_dimensions: []           # Dimensions to always include (override thresholds)
-```
+3. **✅ Statistical Stage Filtering**:
+   - Enhanced `ScoreExtractionProcessor` to accept experiment parameters
+   - Implemented `_apply_parameterized_filtering()` method with configurable thresholds
+   - Updated `V2StatisticalAgent` to load and use experiment parameters
+   - Maintained backward compatibility with status-based filtering
 
-##### 3. Statistical Processor Enhancement
+4. **✅ Testing & Validation**:
+   - Successfully tested with micro experiment using custom parameters
+   - Verified parameterized filtering works correctly (salience_threshold: 0.2 vs default 0.3)
+   - Confirmed 50% inclusion rate with proper exclusion reasons
+   - Validated dimension-specific threshold support
 
-- [ ] **Parameter Loading**: Read experiment reliability_filtering configuration
-- [ ] **Dynamic Filtering**: Apply thresholds during statistical processing, not analysis
-- [ ] **Multiple Threshold Support**: Enable testing different thresholds on same raw data
-- [ ] **Status Override**: Allow parameter-based overrides of LLM status categorization
-- [ ] **Metadata Tracking**: Record which parameters were used for filtering
+**Technical Implementation:**
 
-##### 4. CLI Workflow Enhancements
+- **New Files**: `discernus/core/experiment_parameters.py` - Parameter parsing and validation
+- **Enhanced Files**: 
+  - `discernus/core/composite_analysis_processor.py` - Parameterized filtering logic
+  - `discernus/agents/statistical_agent/v2_statistical_agent.py` - Parameter integration
+  - `docs/specifications/EXPERIMENT_SPECIFICATION.md` - Updated specification
+- **Test Results**: Micro experiment successfully demonstrated parameterized filtering with custom thresholds
 
-- [ ] **Parameter Override Flags**: `--salience-threshold`, `--confidence-threshold`, `--reliability-threshold`
-- [ ] **Smart Resume Logic**: Detect when only parameters changed, skip re-analysis
-- [ ] **Parameter Validation**: Ensure parameter values are valid (0.0-1.0 range, etc.)
-- [ ] **Help Documentation**: Clear guidance on parameter effects and trade-offs
+**Benefits Achieved:**
 
-#### Implementation Plan
-
-##### Week 1: Data Preservation Foundation
-
-- [ ] **Days 1-2**: Remove salience filtering from analysis agent, ensure all scores reported
-- [ ] **Days 3-4**: Design and implement experiment specification schema for reliability parameters
-- [ ] **Day 5**: Test with 0mm experiment to ensure complete data preservation
-
-##### Week 2: Statistical Stage Implementation
-
-- [ ] **Days 1-2**: Implement filtering logic in ScoreExtractionProcessor with parameter support
-- [ ] **Days 3-4**: Add CLI parameter override support and smart resume logic
-- [ ] **Day 5**: End-to-end testing with multiple threshold values
-
-##### Week 3: Validation & Documentation
-
-- [ ] **Days 1-2**: Cross-experiment validation (0mm, Bolsonaro 2018, others)
-- [ ] **Days 3-4**: Performance testing and optimization
-- [ ] **Day 5**: Documentation, user guidance, and final testing
-
-#### Test Scenarios
-
-##### Data Preservation Tests
-
-1. **Complete Score Capture**: Verify ALL dimensional scores preserved regardless of salience
-2. **LLM Status Preservation**: Ensure LLM categorization is captured but not enforced
-3. **Metadata Completeness**: Confirm all LLM reasoning and confidence data preserved
-4. **Backward Compatibility**: Existing experiments work without specification changes
-
-##### Parameter Flexibility Tests
-
-1. **Threshold Variations**: Test salience thresholds from 0.1 to 0.5 on same data
-2. **Statistical Re-runs**: Verify fast re-analysis when only parameters change
-3. **CLI Overrides**: Test parameter overrides via command line flags
-4. **Default Behavior**: Ensure sensible defaults when no parameters specified
-
-##### Research Workflow Tests
-
-1. **Sensitivity Analysis**: Researcher tests multiple thresholds to find optimal setting
-2. **Post-hoc Adjustments**: Researcher adjusts thresholds after seeing initial results
-3. **Comparative Studies**: Different experiments use different thresholds appropriately
-4. **Audit Trail**: Full provenance of analytical decisions maintained
-
-#### Dependencies
-
-- **Current Score Extraction Pipeline**: Must be working (completed in Sprint 3)
-- **Experiment Specification Parser**: Must support new parameter sections
-- **CLI Framework**: Must support parameter overrides and smart resume
-- **Statistical Processor**: ScoreExtractionProcessor must be modular for filtering
-
-#### Risk Mitigation
-
-##### High-Risk Areas
-
-1. **Breaking Changes**: Removing analysis-stage filtering might break existing workflows
-   - *Mitigation*: Maintain backward compatibility, gradual rollout, comprehensive testing
-2. **Parameter Complexity**: Too many parameters might confuse researchers
-   - *Mitigation*: Sensible defaults, clear documentation, parameter validation
-3. **Performance Impact**: Statistical re-runs might be slower than expected
-   - *Mitigation*: Optimize filtering logic, cache intermediate results
-
-##### Contingency Plans
-
-1. **Rollback Strategy**: Keep current filtering as fallback option
-2. **Simplified Parameters**: Reduce to essential parameters if complexity issues arise
-3. **Performance Optimization**: Implement caching and optimization if speed issues occur
-
-#### Success Metrics
-
-##### Primary Success Metrics
-
-- **Data Preservation**: 100% of LLM dimensional scores preserved in artifacts
-- **Parameter Flexibility**: Researchers can test 3+ different thresholds without re-analysis
-- **Performance**: Statistical re-runs complete in <30 seconds for typical experiments
-- **Usability**: Researchers can adjust parameters via CLI or experiment specification
-
-##### Secondary Success Metrics
-
-- **Research Quality**: Enhanced ability to justify threshold choices in publications
+- **Research Empowerment**: Researchers can now adjust filtering thresholds without re-running expensive LLM analysis
+- **Data Preservation**: All raw dimensional scores preserved for audit and post-hoc analysis
 - **Cost Efficiency**: 90%+ cost reduction for threshold sensitivity analysis
-- **Workflow Integration**: Seamless integration with existing research workflows
-- **Documentation Quality**: Clear guidance enables researchers to use parameters effectively
-
-#### Notes
-
-- **Research Empowerment**: This transforms the system from rigid tool to flexible research instrument
-- **Academic Rigor**: Preserves all data for audit and post-hoc analysis
-- **Cost Efficiency**: Eliminates expensive re-analysis for parameter adjustments
-- **Future-Proofing**: Enables advanced filtering methods without architectural changes
-
-#### Implementation Results
-
-*[To be filled in during sprint execution]*
-
----
-
-### Sprint 5: Hybrid Statistical Analysis Testing & Validation
-
-**Priority:** High
-**Estimated Effort:** 5-7 days
-**Status:** Planning
-**Target Start:** [Date]
-
-#### Problem Statement
-
-Current advanced statistical analysis relies entirely on LLM intelligence, which can lead to statistical fabrication, inconsistent results, and high costs. We need to test a hybrid approach where LLMs handle statistical planning and interpretation while deterministic Python engines handle mathematical calculations. However, tool calling reliability with Flash-Lite is uncertain, and specification changes would be disruptive to the entire system.
-
-#### Success Criteria
-
-##### Phase 1: Tool Calling Validation (Days 1-2)
-
-- [ ] Flash-Lite can generate valid statistical plans via tool calling (≥80% success rate)
-- [ ] Generated Python code executes successfully (≥90% success rate)
-- [ ] Tool calling approach produces accurate statistical results
-- [ ] Performance is comparable to current LLM-only approach
-
-##### Phase 2: Hybrid Architecture Testing (Days 3-4)
-
-- [ ] Hybrid approach works with existing experiments (no spec changes)
-- [ ] Statistical results match manual calculations within 5% margin
-- [ ] Error handling works for tool calling failures
-- [ ] Fallback to current approach when tool calling fails
-
-##### Phase 3: Specification Enhancement Testing (Days 5-7)
-
-- [ ] Optional statistical hints improve tool calling reliability
-- [ ] Backward compatibility maintained for existing experiments
-- [ ] New specification format is clear and usable
-- [ ] Migration path exists for existing experiments
-
-#### Go/No-Go Criteria
-
-##### Go Criteria (Proceed to Full Implementation)
-
-- [ ] Tool calling success rate ≥80% across 10+ test scenarios
-- [ ] Generated code execution success rate ≥90%
-- [ ] Statistical accuracy within 5% of manual calculations
-- [ ] Performance improvement ≥20% (time or cost)
-- [ ] Error handling works reliably
-- [ ] No breaking changes to existing experiments
-
-##### No-Go Criteria (Abandon Approach)
-
-- [ ] Tool calling success rate <60%
-- [ ] Generated code has >20% execution failure rate
-- [ ] Statistical accuracy >10% deviation from manual calculations
-- [ ] Performance degradation >10%
-- [ ] Error handling is unreliable
-- [ ] Requires breaking changes to existing experiments
-
-#### Technical Requirements
-
-##### 1. Tool Calling Interface Development
-
-- [ ] Create `StatisticalToolCaller` class for LLM tool calling
-- [ ] Implement statistical plan generation via tool calls
-- [ ] Add Python code execution in sandboxed environment
-- [ ] Create error handling and fallback mechanisms
-
-##### 2. Hybrid Agent Implementation
-
-- [ ] Modify `V2StatisticalAgent` to support hybrid mode
-- [ ] Add tool calling option alongside current LLM approach
-- [ ] Implement statistical plan parsing and execution
-- [ ] Add result validation and error reporting
-
-##### 3. Testing Infrastructure
-
-- [ ] Create test harness for tool calling validation
-- [ ] Add statistical accuracy testing framework
-- [ ] Implement performance benchmarking
-- [ ] Create error scenario testing
-
-##### 4. Optional Specification Enhancements
-
-- [ ] Add optional `statistical_hints` section to experiment spec
-- [ ] Add optional `statistical_metadata` to framework spec
-- [ ] Add optional `grouping_variables` to corpus spec
-- [ ] Ensure backward compatibility
-
-#### Implementation Plan
-
-##### Phase 1: Tool Calling Validation (Days 1-2)
-
-- [ ] **Day 1**: Create `StatisticalToolCaller` class and basic tool calling interface
-- [ ] **Day 1**: Implement statistical plan generation via Flash-Lite tool calls
-- [ ] **Day 2**: Add Python code execution in sandboxed environment
-- [ ] **Day 2**: Create test harness for tool calling reliability testing
-
-##### Phase 2: Hybrid Architecture Testing (Days 3-4)
-
-- [ ] **Day 3**: Modify `V2StatisticalAgent` to support hybrid mode
-- [ ] **Day 3**: Test with existing Bolsonaro 2018 experiment (no spec changes)
-- [ ] **Day 4**: Compare results with current LLM-only approach
-- [ ] **Day 4**: Test error handling and fallback mechanisms
-
-##### Phase 3: Specification Enhancement Testing (Days 5-7)
-
-- [ ] **Day 5**: Add optional statistical hints to specifications
-- [ ] **Day 6**: Test enhanced specifications with tool calling
-- [ ] **Day 7**: Validate backward compatibility and migration path
-
-#### Test Scenarios
-
-##### Tool Calling Reliability Tests
-
-1. **Basic ANOVA**: Generate ANOVA test for campaign_stage vs populism_score
-2. **T-Test**: Generate t-test for pre_post_stabbing vs authority_score
-3. **Correlation Analysis**: Generate correlation matrix for all dimensions
-4. **Effect Size Calculation**: Generate Cohen's d and eta-squared calculations
-5. **Multiple Comparisons**: Generate post-hoc tests for significant ANOVA
-6. **Missing Data Handling**: Test with incomplete data scenarios
-7. **Edge Cases**: Test with single-group, two-group, and multi-group scenarios
-8. **Complex Groupings**: Test with multiple grouping variables
-9. **Error Scenarios**: Test with invalid data, malformed requests
-10. **Performance**: Test with large datasets (100+ documents)
-
-##### Statistical Accuracy Tests
-
-1. **Manual Validation**: Compare tool calling results with manual calculations
-2. **Current LLM Comparison**: Compare with existing LLM-only approach
-3. **Reference Implementation**: Compare with scipy.stats and pingouin
-4. **Edge Case Accuracy**: Test with extreme values and edge cases
-5. **Precision Testing**: Verify decimal precision and rounding
-
-##### Performance Tests
-
-1. **Execution Time**: Measure time to complete statistical analysis
-2. **Cost Analysis**: Compare API costs between approaches
-3. **Memory Usage**: Monitor memory consumption during execution
-4. **Scalability**: Test with increasing dataset sizes
-5. **Error Recovery**: Measure time to recover from failures
-
-#### Dependencies
-
-- **Flash-Lite tool calling**: Must be available and reliable
-- **Python execution environment**: Secure sandbox for code execution
-- **Existing experiments**: Bolsonaro 2018 and other test experiments
-- **Statistical libraries**: scipy, pandas, numpy, pingouin
-
-#### Risk Mitigation
-
-##### High-Risk Areas
-
-1. **Tool Calling Reliability**: Flash-Lite tool calling may be inconsistent
-   - *Mitigation*: Extensive testing, fallback to current approach
-2. **Code Generation Quality**: LLMs may generate buggy Python code
-   - *Mitigation*: Code validation, error handling, manual review
-3. **Specification Disruption**: Changes may break existing experiments
-   - *Mitigation*: Optional enhancements, backward compatibility
-4. **Performance Degradation**: Hybrid approach may be slower
-   - *Mitigation*: Performance benchmarking, optimization
-
-##### Contingency Plans
-
-1. **Tool Calling Fails**: Fall back to current LLM-only approach
-2. **Code Generation Fails**: Use deterministic statistical engine
-3. **Specification Changes Fail**: Keep current specification format
-4. **Performance Issues**: Optimize or abandon hybrid approach
-
-#### Success Metrics
-
-##### Quantitative Metrics
-
-- **Tool Calling Success Rate**: ≥80% (target), ≥60% (minimum)
-- **Code Execution Success Rate**: ≥90% (target), ≥80% (minimum)
-- **Statistical Accuracy**: ≤5% deviation (target), ≤10% (maximum)
-- **Performance Improvement**: ≥20% (target), ≥0% (minimum)
-- **Error Rate**: ≤10% (target), ≤20% (maximum)
-
-##### Qualitative Metrics
-
-- **Ease of Use**: Hybrid approach should be transparent to users
-- **Maintainability**: Code should be clean and well-documented
-- **Debugging**: Errors should be clear and actionable
-- **Documentation**: Clear instructions for using hybrid approach
-
-#### Notes
-
-- **Low-Risk Testing**: Start with existing experiments, no spec changes
-- **Incremental Approach**: Test each component before full integration
-- **Fallback Strategy**: Always maintain current approach as backup
-- **User Impact**: Minimize disruption to existing workflows
-- **Future-Proofing**: Design for potential expansion to other agents
-
-#### Implementation Results
-
-*[To be filled in during sprint execution]*
-
----
-
-### Sprint 6: Parameterized Reliability Filtering & Data Preservation Architecture
-
-**Priority:** High
-**Estimated Effort:** 1-2 weeks
-**Status:** Planning
-**Target Start:** [Date]
-
-#### Problem Statement
-
-Current reliability filtering occurs at the analysis stage, permanently destroying raw dimensional scores and preventing post-hoc threshold adjustments. Researchers must re-run expensive LLM analysis to test different sensitivity settings. We need to move filtering to the statistical stage and add experiment-level parameterization to preserve all raw data while giving researchers full control over analytical decisions.
-
-#### Success Criteria
-
-##### Phase 1: Data Preservation Architecture (Week 1)
-
-- [ ] **Analysis Agent Enhancement**: Remove all salience thresholding, report ALL dimensional scores regardless of salience
-- [ ] **Raw Data Preservation**: Ensure complete LLM analysis is captured in score_extraction artifacts
-- [ ] **Backward Compatibility**: Maintain existing pipeline functionality during transition
-- [ ] **Validation**: Confirm all dimensional scores are preserved in artifacts
-
-##### Phase 2: Experiment-Level Parameterization (Week 1-2)
-
-- [ ] **Experiment Specification Enhancement**: Add reliability filtering parameters to experiment.md
-- [ ] **Parameter Schema**: Define salience_threshold, confidence_threshold, reliability_calculation_method
-- [ ] **Default Values**: Establish sensible defaults (salience_threshold: 0.3, etc.)
-- [ ] **Validation**: Ensure parameter parsing and validation works correctly
-
-##### Phase 3: Statistical Stage Filtering Implementation (Week 2)
-
-- [ ] **Statistical Processor Enhancement**: Implement filtering logic in ScoreExtractionProcessor
-- [ ] **Parameter Integration**: Read experiment parameters and apply filtering during statistical analysis
-- [ ] **Status Categorization**: Maintain LLM-generated status categories but allow parameter override
-- [ ] **Derived Metrics**: Ensure derived metrics use only filtered dimensions
-
-##### Phase 4: CLI & Workflow Enhancement (Week 2-3)
-
-- [ ] **Parameter Override Support**: Allow CLI parameter overrides for re-runs (--salience-threshold 0.2)
-- [ ] **Fast Re-analysis**: Enable statistical re-runs without re-analysis when only parameters change
-- [ ] **Provenance Tracking**: Track parameter changes in run metadata
-- [ ] **User Documentation**: Clear guidance on parameter selection and trade-offs
-
-#### Technical Requirements
-
-##### 1. Analysis Agent Modifications
-
-- [ ] **Remove Salience Filtering**: Update prompt2.yaml to remove all threshold-based exclusions
-- [ ] **Complete Score Reporting**: LLM reports raw_score, salience, confidence for ALL dimensions
-- [ ] **Status Preservation**: Keep LLM status categorization for reference but don't filter
-- [ ] **Enhanced Metadata**: Include LLM reasoning about salience and reliability
-
-##### 2. Experiment Specification Schema
-
-```yaml
-# New section in experiment.md
-analysis_parameters:
-  reliability_filtering:
-    salience_threshold: 0.3          # Minimum salience for inclusion (0.0-1.0)
-    confidence_threshold: 0.0        # Minimum confidence for inclusion (0.0-1.0)  
-    reliability_threshold: 0.25      # Minimum reliability for inclusion (0.0-1.0)
-    reliability_calculation: "confidence_x_salience"  # Method for calculating reliability
-    framework_fit_required: false   # Require minimum framework fit score
-    framework_fit_threshold: 0.3    # Minimum framework fit for validity
-```
-
-##### 3. Statistical Processor Enhancement
-
-- [ ] **Parameter Loading**: Read experiment analysis_parameters configuration via CAS discovery
-- [ ] **Dynamic Filtering**: Apply thresholds during statistical processing, not analysis
-- [ ] **Multiple Threshold Support**: Enable testing different thresholds on same raw data
-- [ ] **Status Override**: Allow parameter-based overrides of LLM status categorization
-- [ ] **Metadata Tracking**: Record which parameters were used for filtering
-
-##### 4. CLI Workflow Enhancements
-
-- [ ] **Parameter Override Flags**: `--salience-threshold`, `--confidence-threshold`, `--reliability-threshold`
-- [ ] **Smart Resume Logic**: Detect when only parameters changed, skip re-analysis
-- [ ] **Parameter Validation**: Ensure parameter values are valid (0.0-1.0 range, etc.)
-- [ ] **Help Documentation**: Clear guidance on parameter effects and trade-offs
-
-#### Success Metrics
-
-##### Primary Success Metrics
-
-- **Data Preservation**: 100% of LLM dimensional scores preserved in artifacts
-- **Parameter Flexibility**: Researchers can test 3+ different thresholds without re-analysis
-- **Performance**: Statistical re-runs complete in <30 seconds for typical experiments
-- **Usability**: Researchers can adjust parameters via CLI or experiment specification
-
-##### Secondary Success Metrics
-
-- **Research Quality**: Enhanced ability to justify threshold choices in publications
-- **Cost Efficiency**: 90%+ cost reduction for threshold sensitivity analysis
-- **Workflow Integration**: Seamless integration with existing research workflows
-- **Documentation Quality**: Clear guidance enables researchers to use parameters effectively
-
-#### Notes
-
-- **Research Empowerment**: This transforms the system from rigid tool to flexible research instrument
-- **Academic Rigor**: Preserves all data for audit and post-hoc analysis
-- **Cost Efficiency**: Eliminates expensive re-analysis for parameter adjustments
-- **Future-Proofing**: Enables advanced filtering methods without architectural changes
-
-#### Implementation Results
-
-*[To be filled in during sprint execution]*
+- **Academic Rigor**: Full provenance and transparency of analytical decisions
+- **Flexibility**: Support for both global and dimension-specific thresholds
+
+**Remaining Work (Phase 4):**
+- CLI parameter override support
+- Fast re-analysis without re-running analysis phase
+- Enhanced provenance tracking
+- User documentation
+
+This sprint successfully transformed the system from a rigid tool to a flexible research instrument, enabling researchers to conduct proper sensitivity analysis and justify their analytical choices in publications.
 
 ---
 

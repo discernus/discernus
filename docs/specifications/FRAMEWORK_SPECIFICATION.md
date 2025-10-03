@@ -385,7 +385,46 @@ This section defines the proper scope and application of your framework, which i
 
 -   **Target Corpus Description**: Describe the ideal corpus for your framework. Be specific about the genre (e.g., "parliamentary debates"), time period (e.g., "21st-century speeches"), or linguistic style (e.g., "formal, prepared remarks") it is designed to analyze.
 -   **Known Limitations & Scope**: Discuss the boundaries of your framework. Where might it be misapplied? What kinds of texts would it be unsuitable for? What are the potential pitfalls in interpreting its results?
--   **System Validation Note**: Be aware that the Discernus platform will perform a post-hoc statistical analysis of your framework's fit with your chosen corpus based on the variance in the results. This analysis, which occurs at the end of the experiment, is a key measure of your research design's validity. A low framework-corpus fit score may indicate that the framework was misapplied and could impact the interpretation of the results.
+
+### Section 4.5: Framework Fit Assessment
+
+**(Required)**
+
+This section defines how to assess whether your framework is working as intended across the corpus. Framework fit is a critical validity measure that determines whether your analytical dimensions are functioning properly and providing meaningful insights.
+
+-   **Framework Fit Definition**: Clearly explain what constitutes good framework fit for your specific framework. This should be grounded in your theoretical foundations and analytical methodology.
+-   **Fit Assessment Criteria**: Specify the statistical and analytical criteria that indicate good framework performance. Consider:
+    - **Dimensional Distinctiveness**: Are your dimensions measuring different concepts? (Low inter-correlation within conceptual clusters)
+    - **Bipolar Validity**: Do opposing dimensions show strong negative correlations as theorized?
+    - **Theoretical Coherence**: Do the observed dimensional relationships match your framework's predictions?
+    - **Discriminatory Power**: Can your framework distinguish between different types of content as intended?
+-   **Fit Score Calculation**: Provide specific statistical formulas for calculating framework fit score (0.0-1.0 scale). This should be implementable by the Statistical Agent using corpus-wide dimensional data.
+-   **Interpretation Guidelines**: Explain what different fit score ranges mean for interpreting your results:
+    - **0.8-1.0**: Excellent fit - framework is working as intended
+    - **0.6-0.8**: Good fit - minor adjustments may be needed
+    - **0.4-0.6**: Moderate fit - some dimensions may need refinement
+    - **0.2-0.4**: Poor fit - significant framework issues
+    - **0.0-0.2**: Very poor fit - framework may be misapplied
+
+**Example Framework Fit Definition**:
+```
+FRAMEWORK FIT ASSESSMENT for [Your Framework Name]:
+
+Good framework fit is indicated by:
+1. Dimensional Distinctiveness: Constructive dimensions show moderate positive correlations (0.3-0.7) with each other, destructive dimensions show moderate positive correlations (0.3-0.7) with each other
+2. Bipolar Validity: Opposing dimensions show strong negative correlations (-0.6 to -0.9)
+3. Theoretical Coherence: Observed patterns match framework predictions for [specific theoretical claims]
+4. Discriminatory Power: Framework can distinguish between [specific content types] with effect sizes > 0.5
+
+FIT SCORE CALCULATION:
+framework_fit_score = (dimensional_distinctiveness + bipolar_validity + theoretical_coherence + discriminatory_power) / 4
+
+Where:
+- dimensional_distinctiveness = average correlation within constructive cluster + average correlation within destructive cluster
+- bipolar_validity = average absolute correlation between opposing dimension pairs
+- theoretical_coherence = [framework-specific coherence measure]
+- discriminatory_power = [framework-specific discrimination measure]
+```
 
 ---
 
@@ -531,7 +570,33 @@ derived_metrics:
     description: "Example of a ratio metric with defensive programming against division by zero."
     formula: "(dimensions.example_dimension_1.raw_score * dimensions.example_dimension_1.salience) / (dimensions.example_dimension_1.salience + 0.001)"
 
-# 5.5: Output Schema (Required)
+# 5.5: Framework Fit Score (Required)
+# Define how to calculate framework fit score for statistical validation
+framework_fit_score:
+  description: "Assessment of how well the framework applies to the corpus as a whole"
+  calculation_method: "Statistical analysis of dimensional relationships and theoretical coherence"
+  components:
+    - name: "dimensional_distinctiveness"
+      description: "Measures whether dimensions within clusters are appropriately correlated"
+      formula: "average_correlation_within_constructive_cluster + average_correlation_within_destructive_cluster"
+    - name: "bipolar_validity" 
+      description: "Measures strength of opposing relationships between dimension pairs"
+      formula: "average_absolute_correlation_between_opposing_pairs"
+    - name: "theoretical_coherence"
+      description: "Measures how well observed patterns match framework predictions"
+      formula: "[framework-specific coherence calculation]"
+    - name: "discriminatory_power"
+      description: "Measures framework's ability to distinguish between content types"
+      formula: "[framework-specific discrimination calculation]"
+  final_formula: "(dimensional_distinctiveness + bipolar_validity + theoretical_coherence + discriminatory_power) / 4"
+  interpretation:
+    excellent: "0.8-1.0: Framework working as intended"
+    good: "0.6-0.8: Minor adjustments may be needed"
+    moderate: "0.4-0.6: Some dimensions may need refinement"
+    poor: "0.2-0.4: Significant framework issues"
+    very_poor: "0.0-0.2: Framework may be misapplied"
+
+# 5.6: Output Schema (Required)
 # Note: This schema should be authored in YAML for readability.
 # The Discernus system will automatically convert it to a strict
 # JSON Schema for validation and execution.

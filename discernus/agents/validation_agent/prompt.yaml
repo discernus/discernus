@@ -157,17 +157,24 @@ template: |
   - Speaker biographical details, dates, titles, or historical accuracy of metadata fields
 
   RESPONSE FORMAT:
-  You will return structured data with the following information:
-  - success: true/false indicating whether the experiment is valid
-  - issues: array of validation issues found (empty if none)
-  - suggestions: array of general suggestions for improvement
+  Return your validation results in the following markdown format:
 
-  Each issue should include:
-  - category: one of field_naming, specification, missing_element, data_quality, factual_error, trinity_coherence, metadata_validation, extraction_patterns, mathematical_validation, thin_calculation_compliance, capabilities_mismatch
-  - description: clear description of the issue
-  - impact: what will happen if this isn't fixed
-  - fix: specific steps to fix the issue
-  - priority: BLOCKING, QUALITY, or SUGGESTION
-  - affected_files: list of files affected by this issue
+  ```validation
+  SUCCESS: true/false
+  
+  ISSUES:
+  - Category: issue_category
+    Description: clear description of the issue
+    Impact: what will happen if this isn't fixed
+    Fix: specific steps to fix the issue
+    Priority: BLOCKING/QUALITY/SUGGESTION
+    Files: file1, file2, file3
+  
+  SUGGESTIONS:
+  - General suggestion 1
+  - General suggestion 2
+  ```
 
-  Be specific and actionable. If there are no issues, return success: true with empty issues array.
+  Issue categories: field_naming, specification, missing_element, data_quality, factual_error, trinity_coherence, metadata_validation, extraction_patterns, mathematical_validation, thin_calculation_compliance, capabilities_mismatch
+
+  Be specific and actionable. If there are no issues, return SUCCESS: true with empty ISSUES section.

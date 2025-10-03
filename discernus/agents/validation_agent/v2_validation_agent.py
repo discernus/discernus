@@ -103,7 +103,7 @@ class V2ValidationAgent(StandardAgent):
             else:
                 # 3. Perform validation using LLM
                 self.logger.info("Performing experiment validation...")
-                validation_result = self._perform_validation(validation_inputs)
+                validation_result = self._perform_validation(validation_inputs, run_context)
 
                 # 4. Store validation results
                 artifact_hash = self._store_validation_results(validation_result, run_context)
@@ -367,52 +367,42 @@ class V2ValidationAgent(StandardAgent):
         except Exception as e:
             raise ValueError(f"Failed to read experiment files from {experiment_dir}: {e}")
 
-    def _perform_validation(self, inputs: Dict[str, Any]) -> ValidationResult:
+    def _perform_validation(self, inputs: Dict[str, Any], run_context: RunContext) -> ValidationResult:
         """Perform validation using LLM."""
         try:
+            # Pre-validate corpus YAML syntax and file accessibility
+            # Get experiment path from run_context
+            experiment_path = Path(run_context.experiment_dir)
+            corpus_manifest = inputs['corpus_manifest_content']
+            
+            # 1. Validate corpus YAML syntax
+            yaml_validation_result = self._validate_corpus_yaml_syntax(corpus_manifest)
+            if not yaml_validation_result.success:
+                return yaml_validation_result
+            
+            # 2. Validate corpus file accessibility
+            corpus_accessibility_issues = self._validate_corpus_file_accessibility(experiment_path, corpus_manifest)
+            if corpus_accessibility_issues:
+                # Check if any are blocking issues
+                blocking_issues = [issue for issue in corpus_accessibility_issues if issue.priority == "BLOCKING"]
+                if blocking_issues:
+                    return ValidationResult(
+                        success=False,
+                        issues=corpus_accessibility_issues,
+                        suggestions=[]
+                    )
+                # If only quality issues, continue but include them in final result
+                # (We'll combine them with LLM results later)
+            
             # Create validation prompt
             prompt = self._create_validation_prompt(inputs)
             
-            # Use structured output for validation results
-            response_schema = {
-                "type": "object",
-                "properties": {
-                    "success": {
-                        "type": "boolean",
-                        "description": "Whether the experiment is valid"
-                    },
-                    "issues": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "category": {"type": "string"},
-                                "description": {"type": "string"},
-                                "impact": {"type": "string"},
-                                "fix": {"type": "string"},
-                                "priority": {"type": "string"},
-                                "affected_files": {"type": "array", "items": {"type": "string"}}
-                            },
-                            "required": ["category", "description", "impact", "fix", "priority", "affected_files"]
-                        },
-                        "description": "List of validation issues found"
-                    },
-                    "suggestions": {
-                        "type": "array",
-                        "items": {"type": "string"},
-                        "description": "List of general suggestions"
-                    }
-                },
-                "required": ["success", "issues", "suggestions"]
-            }
-            
-            # Call LLM for validation
+            # Call LLM for validation (no structured output - THIN approach)
             raw_response, metadata = self.llm_gateway.execute_call(
                 model=self.model,
                 prompt=prompt,
                 system_prompt="You are a validation expert for the Discernus research platform.",
-                response_schema=response_schema,
-                reasoning=1  # TEST: Enable reasoning parameter for Flash Lite
+                reasoning=1  # Enable reasoning parameter for Flash Lite
             )
 
             # Log LLM interaction with cost data
@@ -449,57 +439,20 @@ class V2ValidationAgent(StandardAgent):
                     suggestions=["Verify LLM model availability and authentication"]
                 )
 
-            # Parse validation result - structured output should return a dict
-            if isinstance(raw_response, dict):
-                issues = []
-                for issue_data in raw_response.get('issues', []):
-                    issues.append(ValidationIssue(
-                        category=issue_data.get('category', 'unknown'),
-                        description=issue_data.get('description', 'Unknown issue'),
-                        impact=issue_data.get('impact', 'Unknown impact'),
-                        fix=issue_data.get('fix', 'No fix provided'),
-                        priority=issue_data.get('priority', 'BLOCKING'),
-                        affected_files=issue_data.get('affected_files', [])
-                    ))
-                
-                return ValidationResult(
-                    success=raw_response.get('success', False),
-                    issues=issues,
-                    suggestions=raw_response.get('suggestions', [])
-                )
-            else:
-                # Fallback: try to parse as JSON string (shouldn't happen with structured output)
-                try:
-                    data = json.loads(str(raw_response))
-                    issues = []
-                    for issue_data in data.get('issues', []):
-                        issues.append(ValidationIssue(
-                            category=issue_data.get('category', 'unknown'),
-                            description=issue_data.get('description', 'Unknown issue'),
-                            impact=issue_data.get('impact', 'Unknown impact'),
-                            fix=issue_data.get('fix', 'No fix provided'),
-                            priority=issue_data.get('priority', 'BLOCKING'),
-                            affected_files=issue_data.get('affected_files', [])
-                        ))
-                    
-                    return ValidationResult(
-                        success=data.get('success', False),
-                        issues=issues,
-                        suggestions=data.get('suggestions', [])
-                    )
-                except json.JSONDecodeError as e:
-                    return ValidationResult(
-                        success=False,
-                        issues=[ValidationIssue(
-                            category="llm_response_error",
-                            description=f"Could not parse LLM response as structured data: {str(e)}",
-                            impact="Validation cannot be completed",
-                            fix="Check LLM response format and structured output configuration",
-                            priority="BLOCKING",
-                            affected_files=[]
-                        )],
-                        suggestions=["Verify structured output is working correctly"]
-                    )
+            # Parse validation result from markdown fences - THIN approach
+            llm_validation_result = self._parse_validation_response(raw_response)
+            
+            # Combine LLM results with corpus accessibility issues
+            all_issues = list(llm_validation_result.issues)
+            if corpus_accessibility_issues:
+                all_issues.extend(corpus_accessibility_issues)
+            
+            return ValidationResult(
+                success=llm_validation_result.success,
+                issues=all_issues,
+                suggestions=llm_validation_result.suggestions,
+                llm_metadata=llm_validation_result.llm_metadata
+            )
 
         except Exception as e:
             self.logger.error(f"Validation failed: {str(e)}")
@@ -514,6 +467,309 @@ class V2ValidationAgent(StandardAgent):
                     affected_files=[]
                 )],
                 suggestions=["Contact system administrator if issue persists"]
+            )
+
+    def _validate_corpus_file_accessibility(self, experiment_path: Path, corpus_manifest: str) -> List[ValidationIssue]:
+        """
+        Validate that files listed in corpus manifest actually exist in corpus directory.
+        
+        Args:
+            experiment_path: Path to experiment directory
+            corpus_manifest: Raw corpus manifest content
+            
+        Returns:
+            List of validation issues related to file accessibility
+        """
+        issues = []
+        
+        try:
+            # Extract document list from corpus manifest
+            document_files = self._extract_document_files_from_manifest(corpus_manifest)
+            
+            if not document_files:
+                issues.append(ValidationIssue(
+                    category="corpus_accessibility",
+                    description="No document files found in corpus manifest",
+                    impact="Cannot access corpus files for analysis",
+                    fix="Ensure corpus manifest lists actual document files",
+                    priority="BLOCKING",
+                    affected_files=["corpus.md"]
+                ))
+                return issues
+            
+            # Check corpus directory exists
+            corpus_dir = experiment_path / "corpus"
+            if not corpus_dir.exists():
+                issues.append(ValidationIssue(
+                    category="corpus_accessibility",
+                    description=f"Corpus directory not found: {corpus_dir}",
+                    impact="Cannot access corpus files for analysis",
+                    fix="Ensure corpus directory exists and contains text files",
+                    priority="BLOCKING",
+                    affected_files=[str(corpus_dir)]
+                ))
+                return issues
+            
+            # Check each file listed in manifest
+            missing_files = []
+            actual_files = set(f.name for f in corpus_dir.glob("*.txt"))
+            
+            for doc_file in document_files:
+                if doc_file not in actual_files:
+                    missing_files.append(doc_file)
+            
+            if missing_files:
+                issues.append(ValidationIssue(
+                    category="corpus_accessibility",
+                    description=f"Files listed in manifest not found in corpus directory: {', '.join(missing_files[:5])}{'...' if len(missing_files) > 5 else ''}",
+                    impact="Cannot access specified corpus files for analysis",
+                    fix=f"Ensure all files listed in corpus manifest exist in {corpus_dir} directory",
+                    priority="BLOCKING",
+                    affected_files=["corpus.md", str(corpus_dir)]
+                ))
+            
+            # Check for files in directory not listed in manifest
+            manifest_files = set(document_files)
+            unlisted_files = actual_files - manifest_files
+            
+            if unlisted_files:
+                issues.append(ValidationIssue(
+                    category="corpus_coherence",
+                    description=f"Files in corpus directory not listed in manifest: {', '.join(list(unlisted_files)[:5])}{'...' if len(unlisted_files) > 5 else ''}",
+                    impact="Corpus manifest does not accurately reflect available files",
+                    fix="Update corpus manifest to include all files in corpus directory or remove unlisted files",
+                    priority="QUALITY",
+                    affected_files=["corpus.md", str(corpus_dir)]
+                ))
+            
+            # Validate document count consistency
+            manifest_count = len(document_files)
+            actual_count = len(actual_files)
+            
+            if manifest_count != actual_count:
+                issues.append(ValidationIssue(
+                    category="corpus_coherence",
+                    description=f"Document count mismatch: manifest claims {manifest_count} documents, directory contains {actual_count}",
+                    impact="Corpus manifest does not accurately reflect available files",
+                    fix="Update corpus manifest to match actual files in directory",
+                    priority="BLOCKING",
+                    affected_files=["corpus.md", str(corpus_dir)]
+                ))
+            
+        except Exception as e:
+            issues.append(ValidationIssue(
+                category="corpus_validation_error",
+                description=f"Error validating corpus file accessibility: {str(e)}",
+                impact="Cannot verify corpus file accessibility",
+                fix="Check corpus manifest format and directory structure",
+                priority="BLOCKING",
+                affected_files=["corpus.md"]
+            ))
+        
+        return issues
+    
+    def _extract_document_files_from_manifest(self, corpus_manifest: str) -> List[str]:
+        """Extract list of document files from corpus manifest."""
+        import re
+        
+        document_files = []
+        
+        # Look for file references in the manifest
+        # Pattern: **filename.txt** or filename.txt
+        file_patterns = [
+            r'\*\*([^*]+\.txt)\*\*',  # **filename.txt**
+            r'`([^`]+\.txt)`',        # `filename.txt`
+        ]
+        
+        for pattern in file_patterns:
+            matches = re.findall(pattern, corpus_manifest)
+            document_files.extend(matches)
+        
+        # Remove duplicates and return
+        return list(set(document_files))
+    
+    def _validate_corpus_yaml_syntax(self, corpus_manifest: str) -> ValidationResult:
+        """
+        Validate YAML syntax in corpus manifest before LLM processing.
+        
+        Args:
+            corpus_manifest: Raw corpus manifest content
+            
+        Returns:
+            ValidationResult with YAML syntax issues if any
+        """
+        try:
+            # Extract YAML block from corpus manifest
+            # Look for either "Document Manifest" or "Document Inventory" sections
+            if '## Document Manifest' in corpus_manifest:
+                _, yaml_block = corpus_manifest.split('## Document Manifest', 1)
+            elif '## Document Inventory' in corpus_manifest:
+                _, yaml_block = corpus_manifest.split('## Document Inventory', 1)
+            else:
+                yaml_block = ""
+            
+            if yaml_block and '```yaml' in yaml_block:
+                yaml_start = yaml_block.find('```yaml') + 7
+                yaml_end = yaml_block.rfind('```')
+                if yaml_end > yaml_start:
+                    yaml_content = yaml_block[yaml_start:yaml_end].strip()
+                    # Test YAML parsing
+                    yaml.safe_load(yaml_content)
+                    return ValidationResult(success=True, issues=[], suggestions=[])
+                else:
+                    return ValidationResult(
+                        success=False,
+                        issues=[ValidationIssue(
+                            category="yaml_syntax",
+                            description="Corpus manifest YAML block is not properly closed",
+                            impact="Experiment cannot parse corpus metadata",
+                            fix="Ensure YAML block ends with ``` delimiter",
+                            priority="BLOCKING",
+                            affected_files=["corpus.md"]
+                        )],
+                        suggestions=[]
+                    )
+            else:
+                return ValidationResult(
+                    success=False,
+                    issues=[ValidationIssue(
+                        category="yaml_syntax",
+                        description="Corpus manifest missing YAML code block",
+                        impact="Experiment cannot parse corpus metadata",
+                        fix="Add ```yaml ... ``` block in Document Inventory section",
+                        priority="BLOCKING",
+                        affected_files=["corpus.md"]
+                    )],
+                    suggestions=[]
+                )
+        except yaml.YAMLError as e:
+            return ValidationResult(
+                success=False,
+                issues=[ValidationIssue(
+                    category="yaml_syntax",
+                    description=f"Invalid YAML syntax in corpus manifest: {str(e)}",
+                    impact="Experiment cannot parse corpus metadata",
+                    fix="Fix YAML syntax errors - check for unclosed blocks, invalid characters, or malformed structure",
+                    priority="BLOCKING",
+                    affected_files=["corpus.md"]
+                )],
+                suggestions=[]
+            )
+        except Exception as e:
+            return ValidationResult(
+                success=False,
+                issues=[ValidationIssue(
+                    category="yaml_syntax",
+                    description=f"Error parsing corpus manifest: {str(e)}",
+                    impact="Experiment cannot parse corpus metadata",
+                    fix="Check corpus manifest format and structure",
+                    priority="BLOCKING",
+                    affected_files=["corpus.md"]
+                )],
+                suggestions=[]
+            )
+
+    def _parse_validation_response(self, response: str) -> ValidationResult:
+        """
+        Parse validation response from markdown fences - THIN approach.
+        
+        Expected format:
+        ```validation
+        SUCCESS: true/false
+        
+        ISSUES:
+        - Category: issue_category
+          Description: issue description
+          Impact: impact description
+          Fix: suggested fix
+          Priority: BLOCKING/WARNING/INFO
+          Files: file1, file2
+        ```
+        """
+        try:
+            # Extract content from markdown fences
+            if "```validation" in response:
+                start = response.find("```validation") + len("```validation")
+                end = response.find("```", start)
+                if end == -1:
+                    end = len(response)
+                content = response[start:end].strip()
+            else:
+                content = response.strip()
+            
+            # Parse success status
+            success = "SUCCESS: true" in content or "SUCCESS:true" in content
+            
+            # Parse issues
+            issues = []
+            if "ISSUES:" in content:
+                issues_section = content.split("ISSUES:")[1]
+                if "SUGGESTIONS:" in issues_section:
+                    issues_section = issues_section.split("SUGGESTIONS:")[0]
+                
+                # Split by issue markers
+                issue_blocks = [block.strip() for block in issues_section.split("- Category:") if block.strip()]
+                
+                for block in issue_blocks:
+                    if not block:
+                        continue
+                    
+                    # Parse issue fields
+                    lines = [line.strip() for line in block.split('\n') if line.strip()]
+                    issue_data = {}
+                    
+                    for line in lines:
+                        if line.startswith("Category:"):
+                            issue_data['category'] = line.split("Category:")[1].strip()
+                        elif line.startswith("Description:"):
+                            issue_data['description'] = line.split("Description:")[1].strip()
+                        elif line.startswith("Impact:"):
+                            issue_data['impact'] = line.split("Impact:")[1].strip()
+                        elif line.startswith("Fix:"):
+                            issue_data['fix'] = line.split("Fix:")[1].strip()
+                        elif line.startswith("Priority:"):
+                            issue_data['priority'] = line.split("Priority:")[1].strip()
+                        elif line.startswith("Files:"):
+                            files_str = line.split("Files:")[1].strip()
+                            issue_data['affected_files'] = [f.strip() for f in files_str.split(',') if f.strip()]
+                    
+                    # Create ValidationIssue if we have required fields
+                    if 'category' in issue_data and 'description' in issue_data:
+                        issues.append(ValidationIssue(
+                            category=issue_data.get('category', 'unknown'),
+                            description=issue_data.get('description', 'Unknown issue'),
+                            impact=issue_data.get('impact', 'Unknown impact'),
+                            fix=issue_data.get('fix', 'No fix provided'),
+                            priority=issue_data.get('priority', 'BLOCKING'),
+                            affected_files=issue_data.get('affected_files', [])
+                        ))
+            
+            # Parse suggestions
+            suggestions = []
+            if "SUGGESTIONS:" in content:
+                suggestions_section = content.split("SUGGESTIONS:")[1]
+                suggestion_lines = [line.strip() for line in suggestions_section.split('\n') if line.strip() and line.startswith('-')]
+                suggestions = [line[1:].strip() for line in suggestion_lines]
+            
+            return ValidationResult(
+                success=success,
+                issues=issues,
+                suggestions=suggestions
+            )
+            
+        except Exception as e:
+            self.logger.error(f"Failed to parse validation response: {str(e)}")
+            return ValidationResult(
+                success=False,
+                issues=[ValidationIssue(
+                    category="parsing_error",
+                    description=f"Could not parse validation response: {str(e)}",
+                    impact="Validation cannot be completed",
+                    fix="Check LLM response format",
+                    priority="BLOCKING",
+                    affected_files=[]
+                )],
+                suggestions=["Verify LLM response format"]
             )
 
     def _create_validation_prompt(self, inputs: Dict[str, Any]) -> str:

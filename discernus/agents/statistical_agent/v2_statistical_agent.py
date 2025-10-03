@@ -237,7 +237,7 @@ class V2StatisticalAgent(StandardAgent):
             
             # Step 2: Enhanced Statistical Analysis with baseline + LLM
             statistical_analysis_content = self._step2_enhanced_statistical_analysis(
-                baseline_stats_data, batch_id
+                baseline_stats_data, batch_id, run_context
             )
             if not statistical_analysis_content:
                 return AgentResult(
@@ -326,8 +326,13 @@ class V2StatisticalAgent(StandardAgent):
             AgentResult with baseline statistics artifact
         """
         try:
-            # Import the score extraction processor
+            # Import the score extraction processor and experiment parameters
             from discernus.core.composite_analysis_processor import ScoreExtractionProcessor
+            from discernus.core.experiment_parameters import parse_experiment_parameters
+            
+            # Load experiment parameters
+            experiment_path = Path(run_context.experiment_dir)
+            experiment_params = parse_experiment_parameters(experiment_path)
             
             # Convert CAS artifact hashes to file paths for processor
             artifact_paths = []
@@ -358,8 +363,8 @@ class V2StatisticalAgent(StandardAgent):
                     error_message="No valid score extraction artifacts found for processing"
                 )
             
-            # Process score extractions to generate baseline statistics
-            processor = ScoreExtractionProcessor()
+            # Process score extractions to generate baseline statistics with experiment parameters
+            processor = ScoreExtractionProcessor(experiment_params)
             baseline_statistics = processor.process_score_extractions(artifact_paths)
             
             # Create CAS artifact for baseline statistics
@@ -427,7 +432,7 @@ class V2StatisticalAgent(StandardAgent):
                 error_message=f"Baseline statistics generation failed: {str(e)}"
             )
     
-    def _step2_enhanced_statistical_analysis(self, baseline_stats_data: Dict[str, Any], batch_id: str) -> Optional[str]:
+    def _step2_enhanced_statistical_analysis(self, baseline_stats_data: Dict[str, Any], batch_id: str, run_context: RunContext) -> Optional[str]:
         """
         STEP 2: Enhanced statistical analysis using baseline statistics + LLM intelligence.
         
@@ -445,6 +450,11 @@ class V2StatisticalAgent(StandardAgent):
             # Load the externalized prompt template
             prompt_template = self._load_prompt_template()
             self.logger.info(f"Loaded prompt template, length: {len(prompt_template)}")
+            
+            # Load experiment parameters for reliability filtering context
+            from discernus.core.experiment_parameters import parse_experiment_parameters
+            experiment_path = Path(run_context.experiment_dir)
+            experiment_params = parse_experiment_parameters(experiment_path)
             
             # CAS Discovery: Get source materials via artifact discovery
             
@@ -516,6 +526,25 @@ class V2StatisticalAgent(StandardAgent):
             
             # NO TRUNCATION: All content is sacred intellectual assets
             
+            # Create reliability filtering context from experiment parameters
+            rf_params = experiment_params.reliability_filtering
+            reliability_filtering_context = f"""
+  The experiment is configured with the following reliability filtering parameters:
+  - **salience_threshold**: {rf_params.salience_threshold} (minimum salience for inclusion)
+  - **confidence_threshold**: {rf_params.confidence_threshold} (minimum confidence for inclusion)  
+  - **reliability_threshold**: {rf_params.reliability_threshold} (minimum reliability for inclusion)
+  - **reliability_calculation**: {rf_params.reliability_calculation} (method for calculating reliability)
+  
+  Based on these parameters, dimensions are categorized as:
+  - **included_high_reliability**: Dimensions with high reliability (≥ 0.7)
+  - **included_medium_reliability**: Dimensions with moderate reliability (0.4 ≤ reliability < 0.7)
+  - **excluded_low_salience**: Dimensions with low salience (< {rf_params.salience_threshold}) - excluded from analysis
+  - **borderline_excluded**: Dimensions with low reliability (0.25 ≤ reliability < 0.4)
+  - **clearly_excluded**: Dimensions with very low reliability (< 0.25)
+  
+  Note: With zero thresholds, all scored dimensions should be preserved for analysis.
+            """
+            
             # Prepare the enhanced prompt with baseline statistics + real extracted metadata
             prompt = prompt_template.format(
                 framework_content=framework_content,
@@ -525,7 +554,8 @@ class V2StatisticalAgent(StandardAgent):
                 experiment_content=experiment_content,
                 sample_data="",  # Sample data now handled in composite analysis
                 corpus_manifest=corpus_manifest_content,
-                baseline_statistics=baseline_stats_json
+                baseline_statistics=baseline_stats_json,
+                reliability_filtering_context=reliability_filtering_context
             )
             
             # Debug prompt construction

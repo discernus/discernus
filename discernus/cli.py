@@ -358,12 +358,12 @@ def _get_resume_provenance(run_dir: Path) -> Optional[Dict[str, Any]]:
 @click.option('--skip-validation', is_flag=True, help='Skip experiment coherence validation for faster execution')
 @click.option('--from', 'start_phase', 
               type=click.Choice(['validation', 'analysis', 'statistical', 'evidence', 'synthesis']),
-              default='validation', help='Start from this phase (default: validation)')
+              default='validation', help='Start from this phase (default: validation). Automatically resumes from existing run when starting from non-initial phases.')
 @click.option('--to', 'end_phase',
               type=click.Choice(['validation', 'analysis', 'statistical', 'evidence', 'synthesis']), 
               default='synthesis', help='End at this phase (default: synthesis)')
-@click.option('--resume', is_flag=True, help='Resume from existing run with completed phases')
-@click.option('--run-dir', type=str, help='Specify specific run directory to resume from')
+@click.option('--resume', is_flag=True, help='Force resume mode even when starting from validation phase')
+@click.option('--run-dir', type=str, help='Specify specific run directory to resume from (overrides automatic run discovery)')
 @click.pass_context
 def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, skip_validation: bool, 
         start_phase: str, end_phase: str, resume: bool, run_dir: str):
@@ -402,7 +402,7 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, ski
     try:
         # 1. Handle resume functionality
         source_run_dir = None
-        if resume or run_dir:
+        if resume or run_dir or start_phase != 'validation':
             if run_dir:
                 # Use specified run directory
                 source_run_dir = exp_path / "runs" / run_dir
@@ -449,9 +449,20 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, ski
             source_state = source_phase_manager.get_phase_state()
             phases_to_copy = []
             
-            for phase in phases[:phases.index(start_phase) + 1]:
+            # Copy phases before start_phase, plus the start_phase itself if it's completed
+            phases_before_start = phases[:phases.index(start_phase)]
+            for phase in phases_before_start:
                 if source_state[phase].completed:
                     phases_to_copy.append(phase)
+            
+            # If starting from a phase that's already completed, copy it too
+            if source_state[start_phase].completed:
+                phases_to_copy.append(start_phase)
+            
+            # Special case: if starting from analysis but statistical phase is completed, copy it too
+            # because the statistical phase creates baseline statistics that might be needed
+            if start_phase == 'analysis' and 'statistical' in source_state and source_state['statistical'].completed:
+                phases_to_copy.append('statistical')
             
             if phases_to_copy:
                 rich_console.print_info(f"📦 Copying completed phases: {', '.join(phases_to_copy)}")
@@ -460,9 +471,37 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, ski
                 for phase in phases_to_copy:
                     completion = source_state[phase]
                     
-                    # Copy artifacts by hash - search recursively for files with the hash
+                    # Copy artifacts by hash using artifact registry for correct paths
                     for artifact_hash in completion.artifact_hashes:
-                        # Search for files containing this hash in the source artifacts directory
+                        # Load source artifact registry to get correct file paths
+                        source_registry_file = source_run_dir / 'artifacts' / 'artifact_registry.json'
+                        if source_registry_file.exists():
+                            with open(source_registry_file, 'r') as f:
+                                source_registry = json.load(f)
+                            
+                            if artifact_hash in source_registry:
+                                artifact_info = source_registry[artifact_hash]
+                                artifact_path = artifact_info.get('artifact_path')
+                                
+                                if artifact_path:
+                                    source_file = source_run_dir / 'artifacts' / artifact_path
+                                    if not source_file.exists():
+                                        # If file doesn't exist at expected path, search for it in subdirectories
+                                        source_artifacts_dir = source_run_dir / 'artifacts'
+                                        for file_path in source_artifacts_dir.rglob(artifact_path):
+                                            if file_path.is_file():
+                                                source_file = file_path
+                                                break
+                                    
+                                    if source_file.exists():
+                                        # Calculate relative path from artifacts directory
+                                        rel_path = source_file.relative_to(source_run_dir / 'artifacts')
+                                        target_file = run_folder / 'artifacts' / rel_path
+                                        target_file.parent.mkdir(parents=True, exist_ok=True)
+                                        shutil.copy2(source_file, target_file)
+                                        continue
+                        
+                        # Fallback: search recursively for files with the hash (for backward compatibility)
                         source_artifacts_dir = source_run_dir / 'artifacts'
                         found_files = []
                         
@@ -608,8 +647,11 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, ski
                 artifact_hashes = []
                 artifacts_dir = run_folder / 'artifacts'
                 if artifacts_dir.exists():
-                    for artifact_file in artifacts_dir.glob('*.json'):
-                        artifact_hashes.append(artifact_file.stem)
+                    # Search recursively for all artifact files
+                    for artifact_file in artifacts_dir.rglob('*'):
+                        if artifact_file.is_file() and not artifact_file.name.startswith('.'):
+                            # Extract hash from filename (assuming hash is part of the stem)
+                            artifact_hashes.append(artifact_file.stem)
                 
                 # Mark phase as completed
                 phase_manager.mark_phase_complete(
@@ -947,7 +989,7 @@ def costs(experiment_path: str, detailed: bool, session: bool):
 @click.option('--to', 'end_phase',
               type=click.Choice(['validation', 'analysis', 'statistical', 'evidence', 'synthesis']), 
               default='synthesis', help='End at this phase (default: synthesis)')
-@click.option('--run-dir', type=str, help='Specify specific run directory to resume from')
+@click.option('--run-dir', type=str, help='Specify specific run directory to resume from (overrides automatic run discovery)')
 def resume(experiment_path: str, start_phase: str, end_phase: str, run_dir: str):
     """Resume an experiment from an existing run with completed phases."""
     exp_path = Path(experiment_path).resolve()

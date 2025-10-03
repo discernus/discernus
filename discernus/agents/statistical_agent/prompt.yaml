@@ -27,12 +27,8 @@ template: |
   {baseline_statistics}
 
   **RELIABILITY FILTERING CONTEXT:**
-  The baseline statistics include reliability-filtered data where dimensions are categorized by reliability:
-  - **included_high_reliability**: Dimensions with high confidence and salience (reliability ≥ 0.7)
-  - **included_medium_reliability**: Dimensions with moderate reliability (0.4 ≤ reliability < 0.7)
-  - **excluded_low_salience**: Dimensions with low salience (< 0.3) - excluded from analysis
-  - **borderline_excluded**: Dimensions with low reliability (0.25 ≤ reliability < 0.4)
-  - **clearly_excluded**: Dimensions with very low reliability (< 0.25)
+  The baseline statistics include reliability-filtered data based on the experiment's filtering parameters:
+  {reliability_filtering_context}
 
   **FRAMEWORK FIT SCORE:**
   The framework-corpus fit score indicates how well the framework applies to this corpus (0-1 scale).
@@ -84,6 +80,8 @@ template: |
   **3. EXECUTE EXPERIMENT-SPECIFIC ANALYSIS**
   - Generate Python code for analyses not covered in baseline
   - Use baseline statistics as input data for hypothesis testing
+  - **ACCESS INDIVIDUAL DOCUMENT DATA**: Use `baseline_statistics.document_level.by_document` to get per-document metrics
+  - **CREATE GROUPS**: Partition documents into formal vs. spontaneous based on corpus manifest genre classifications
   - Apply appropriate statistical methods (t-tests, ANOVA, regression, etc.)
   - Calculate effect sizes and confidence intervals
 
@@ -114,4 +112,121 @@ template: |
   - Use corpus manifest to understand document groupings and metadata
   - Create appropriate statistical groupings based on experimental design
   - Map document identifiers to corpus metadata for group comparisons
+  
+  **GROUP PARTITIONING FOR HYPOTHESIS TESTING:**
+  - Parse the corpus manifest to identify document genres (Mode 1: Formal Speech, Mode 2: Spontaneous Discourse, Mode 3: Hybrid/Mixed)
+  - Map document names from the corpus manifest to document IDs in the baseline statistics
+  - Create formal and spontaneous groups using the individual document data from `baseline_statistics.document_level.by_document`
+  - Perform group comparisons (Mann-Whitney U, t-tests) using the partitioned data
+  - Use the individual document metrics to test hypotheses about genre differences
+  
+  **EXAMPLE PARTITIONING CODE:**
+  ```python
+  # Extract individual document data
+  doc_data = baseline_statistics['document_level']['by_document']
+  
+  # Create genre mapping from corpus manifest
+  formal_docs = ['washington_1789_first_inaugural.txt', 'lincoln_1861_first_inaugural.txt', ...]
+  spontaneous_docs = ['trump_charlotte_rally_2024.txt', 'charlie_kirk_georgia_rally_2024.txt', ...]
+  
+  # Partition data for group comparison
+  formal_metrics = [doc_data[doc_id]['strategy_inventory_gap'] for doc_id in doc_data if doc_id in formal_docs]
+  spontaneous_metrics = [doc_data[doc_id]['strategy_inventory_gap'] for doc_id in doc_data if doc_id in spontaneous_docs]
+  
+  # Perform group comparison
+  from scipy.stats import mannwhitneyu
+  statistic, p_value = mannwhitneyu(spontaneous_metrics, formal_metrics)
+  ```
+
+  **FRAMEWORK FIT SCORE CALCULATION:**
+  - **REQUIRED**: Calculate framework fit score using the framework's specified methodology
+  - Extract dimensional correlation data from baseline statistics
+  - Calculate the four components specified in the framework:
+    1. **Dimensional Distinctiveness**: Average correlation within constructive cluster + average correlation within destructive cluster
+    2. **Bipolar Validity**: Average absolute correlation between opposing dimension pairs
+    3. **Theoretical Coherence**: Correlation between constructive and destructive clusters + mode discrimination power
+    4. **Discriminatory Power**: Effect size difference between formal and spontaneous modes
+  - Normalize each component to 0-1 scale and calculate final score as average
+  - Include framework fit score in your statistical output
+  - Interpret the score using the framework's interpretation guidelines
+  
+  **EXAMPLE FRAMEWORK FIT CALCULATION:**
+  ```python
+  # Calculate framework fit score components
+  import numpy as np
+  from scipy.stats import pearsonr
+  
+  # Get dimensional correlation matrix from baseline statistics
+  corr_matrix = baseline_statistics['correlations']['dimensional_raw_scores']
+  
+  # Define dimension clusters based on framework specification
+  constructive_dims = ['charitable_interpretation', 'issue_focused_critique', 'common_ground_seeking', 
+                      'dignified_expression', 'truth_with_care', 'authentic_engagement']
+  destructive_dims = ['motive_imputation', 'personal_denigration', 'irreconcilable_division',
+                     'dehumanizing_language', 'truth_as_weapon', 'bad_faith_dismissal']
+  
+  # Calculate dimensional distinctiveness
+  constructive_corrs = []
+  for i, dim1 in enumerate(constructive_dims):
+      for j, dim2 in enumerate(constructive_dims):
+          if i < j:  # Avoid duplicates
+              corr = corr_matrix[dim1][dim2]
+              constructive_corrs.append(abs(corr))
+  
+  # Similar calculation for destructive dimensions
+  destructive_corrs = []
+  for i, dim1 in enumerate(destructive_dims):
+      for j, dim2 in enumerate(destructive_dims):
+          if i < j:  # Avoid duplicates
+              corr = corr_matrix[dim1][dim2]
+              destructive_corrs.append(abs(corr))
+  
+  # Calculate bipolar validity
+  opposing_pairs = [('charitable_interpretation', 'motive_imputation'),
+                   ('issue_focused_critique', 'personal_denigration'),
+                   ('common_ground_seeking', 'irreconcilable_division'),
+                   ('dignified_expression', 'dehumanizing_language'),
+                   ('truth_with_care', 'truth_as_weapon'),
+                   ('authentic_engagement', 'bad_faith_dismissal')]
+  
+  bipolar_corrs = []
+  for pos_dim, neg_dim in opposing_pairs:
+      corr = corr_matrix[pos_dim][neg_dim]
+      bipolar_corrs.append(abs(corr))
+  
+  # Calculate theoretical coherence (correlation between clusters)
+  constructive_avg = np.mean([corr_matrix[dim] for dim in constructive_dims], axis=0)
+  destructive_avg = np.mean([corr_matrix[dim] for dim in destructive_dims], axis=0)
+  cluster_correlation = abs(pearsonr(constructive_avg, destructive_avg)[0])
+  
+  # Calculate discriminatory power (effect size between modes)
+  # Use Cohen's d for strategy_inventory_gap between formal and spontaneous
+  formal_gap = [doc_data[doc_id]['strategy_inventory_gap'] for doc_id in doc_data if doc_id in formal_docs]
+  spontaneous_gap = [doc_data[doc_id]['strategy_inventory_gap'] for doc_id in doc_data if doc_id in spontaneous_docs]
+  
+  mean_diff = np.mean(spontaneous_gap) - np.mean(formal_gap)
+  pooled_std = np.sqrt((np.var(formal_gap) + np.var(spontaneous_gap)) / 2)
+  cohens_d = mean_diff / pooled_std
+  discriminatory_power = min(abs(cohens_d) / 2.0, 1.0)  # Normalize to 0-1
+  
+  # Calculate final framework fit score
+  dimensional_distinctiveness = (np.mean(constructive_corrs) + np.mean(destructive_corrs)) / 2
+  bipolar_validity = np.mean(bipolar_corrs)
+  theoretical_coherence = cluster_correlation
+  
+  framework_fit_score = (dimensional_distinctiveness + bipolar_validity + 
+                        theoretical_coherence + discriminatory_power) / 4
+  
+  # Interpret the score
+  if framework_fit_score >= 0.8:
+      fit_interpretation = "Excellent fit - framework working as intended"
+  elif framework_fit_score >= 0.6:
+      fit_interpretation = "Good fit - minor adjustments may be needed"
+  elif framework_fit_score >= 0.4:
+      fit_interpretation = "Moderate fit - some dimensions may need refinement"
+  elif framework_fit_score >= 0.2:
+      fit_interpretation = "Poor fit - significant framework issues"
+  else:
+      fit_interpretation = "Very poor fit - framework may be misapplied"
+  ```
 
