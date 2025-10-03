@@ -436,6 +436,546 @@ This sprint successfully transformed the system from a rigid tool to a flexible 
 
 ---
 
+### Sprint 6: Framework Fit Score Implementation & System Cleanup
+
+**Priority:** High  
+**Estimated Effort:** 3 days  
+**Status:** Completed  
+**Target Start:** 2025-01-02  
+**Completed:** 2025-01-03
+
+#### Problem Statement
+
+The system lacked a coherent framework fit score implementation, with references to framework fit appearing in synthesis reports but no standardized definition or calculation methodology. Additionally, hardcoded reliability filtering was still present in the Analysis Agent despite efforts to make filtering configurable, and the validation agent was missing critical corpus validation features that existed in the historical ExperimentCoherenceAgent.
+
+#### Success Criteria
+
+##### Phase 1: Framework Specification Enhancement (Day 1)
+
+- [x] **Framework Specification Update**: Add framework fit score requirements to `FRAMEWORK_SPECIFICATION.md`
+- [x] **Framework Fit Definition**: Define assessment criteria (Dimensional Distinctiveness, Bipolar Validity, Theoretical Coherence, Discriminatory Power)
+- [x] **Calculation Methodology**: Specify statistical formulas and interpretation guidelines
+- [x] **Machine-Readable Schema**: Add `framework_fit_score` to framework appendix specifications
+
+##### Phase 2: CDDF Framework Compliance (Day 1)
+
+- [x] **CDDF Framework Update**: Add framework fit score definition to `projects/wip/cddf/framework.md`
+- [x] **CDDF-Specific Methodology**: Define calculation approach tailored to CDDF dimensions
+- [x] **Score Interpretation**: Provide CDDF-specific interpretation guidelines
+- [x] **Validation**: Ensure CDDF framework complies with new specification requirements
+
+##### Phase 3: Agent Integration (Day 2)
+
+- [x] **Statistical Agent Enhancement**: Update prompt to calculate framework fit score using corpus-wide data
+- [x] **Synthesis Agent Enhancement**: Update prompts to interpret and report framework fit score
+- [x] **Example Code**: Provide Python code examples for framework fit calculation
+- [x] **Testing**: Validate framework fit score calculation on micro and nano experiments
+
+##### Phase 4: System Cleanup (Day 3)
+
+- [x] **Analysis Agent Cleanup**: Remove hardcoded salience threshold (0.2) and framework fit references
+- [x] **Baseline Statistics Cleanup**: Remove incorrect framework_fit_score from composite analysis processor
+- [x] **System Defaults Fix**: Ensure zero thresholds are default (no filtering unless explicitly specified)
+- [x] **Architecture Alignment**: Ensure framework fit is calculated only at corpus level by statistical agent
+
+#### Implementation Results
+
+**Key Achievements:**
+
+1. **✅ Framework Specification Enhancement**:
+   - Added Section 4.5: Framework Fit Assessment with detailed criteria
+   - Added Section 5.5: Framework Fit Score (Machine-Readable Appendix)
+   - Defined four assessment components with specific formulas
+   - Provided interpretation guidelines for score ranges (0.0-1.0 scale)
+
+2. **✅ CDDF Framework Compliance**:
+   - Updated `projects/wip/cddf/framework.md` with framework fit score definition
+   - Added CDDF-specific calculation methodology
+   - Provided framework-specific interpretation guidelines
+   - Ensured compliance with new specification requirements
+
+3. **✅ Agent Integration**:
+   - Enhanced Statistical Agent prompt with framework fit calculation instructions
+   - Updated Synthesis Agent prompts to interpret framework fit score
+   - Provided detailed Python code examples for calculation
+   - Successfully tested on micro experiment (score: 0.75) and nano experiment (proper small sample handling)
+
+4. **✅ System Cleanup**:
+   - Removed hardcoded salience threshold (0.2) from Analysis Agent
+   - Removed framework_fit_score from baseline statistics (composite_analysis_processor.py)
+   - Removed framework fit calculation instruction from Analysis Agent (document-level inappropriate)
+   - Confirmed system defaults are zero (no filtering by default)
+
+**Technical Implementation:**
+
+- **Enhanced Files**:
+  - `docs/specifications/FRAMEWORK_SPECIFICATION.md` - Added framework fit score requirements
+  - `projects/wip/cddf/framework.md` - Added CDDF-specific framework fit definition
+  - `discernus/agents/statistical_agent/prompt.yaml` - Added framework fit calculation
+  - `discernus/agents/two_stage_synthesis_agent/stage1_prompt.yaml` - Added interpretation
+  - `discernus/core/composite_analysis_processor.py` - Removed incorrect framework_fit_score
+  - `discernus/agents/analysis_agent/prompt2.yaml` - Removed document-level framework fit
+
+**Architecture Improvements:**
+
+- **Clean Separation**: Framework fit score now calculated only at corpus level by Statistical Agent
+- **Document-Level Focus**: Analysis Agent focuses on dimensional scoring and confidence
+- **Report-Level Integration**: Synthesis Agent properly interprets framework fit for validity assessment
+- **THIN Compliance**: Removed unnecessary JSON parsing from Analysis Agent
+
+**Test Results:**
+
+- **Micro Experiment**: Framework fit score 0.75 calculated correctly by Statistical Agent
+- **Nano Experiment**: Properly handles small sample size limitation (N=2) and reports inability to calculate meaningful framework fit score
+- **Baseline Statistics**: No longer contains incorrect framework_fit_score values
+- **System Defaults**: Confirmed zero thresholds are default behavior
+
+**Benefits Achieved:**
+
+- **Academic Rigor**: Standardized framework fit assessment methodology
+- **Research Validity**: Clear corpus-level validity measures for framework applicability
+- **System Clarity**: Clean architectural separation between document and corpus-level metrics
+- **Framework Compliance**: All frameworks now required to define fit assessment methodology
+
+This sprint successfully implemented a coherent framework fit score system while cleaning up architectural inconsistencies and ensuring proper separation of concerns between document-level analysis and corpus-level statistical assessment.
+
+---
+
+### Sprint 7: Validation Agent Enhancement & Corpus Validation
+
+**Priority:** High  
+**Estimated Effort:** 2 days  
+**Status:** Completed  
+**Target Start:** 2025-01-02  
+**Completed:** 2025-01-03
+
+#### Problem Statement
+
+The validation agent was missing critical corpus validation features that existed in the historical ExperimentCoherenceAgent, leading to validation failures where document count inconsistencies and missing files were not caught. The CDDF experiment had discrepancies between corpus manifest (36 docs), baseline statistics (26 docs), and analysis phase (33 docs), yet validation passed. Additionally, the validation agent was using complex JSON parsing that violated THIN principles.
+
+#### Success Criteria
+
+##### Phase 1: Historical Agent Analysis (Day 1)
+
+- [x] **ExperimentCoherenceAgent Study**: Analyze historical validation agent implementation
+- [x] **Feature Identification**: Identify missing corpus validation capabilities
+- [x] **Architecture Assessment**: Understand how historical agent handled corpus validation
+- [x] **Integration Planning**: Plan integration of missing features into V2ValidationAgent
+
+##### Phase 2: Validation Agent Enhancement (Day 1-2)
+
+- [x] **Corpus File Accessibility**: Add validation for files listed in manifest vs actual corpus directory
+- [x] **Document Count Validation**: Validate document count consistency between manifest and directory
+- [x] **Filename Matching**: Ensure manifest filenames match actual files (including special characters)
+- [x] **Missing File Detection**: Identify files listed in manifest but not found in corpus directory
+- [x] **Unlisted File Detection**: Identify files in corpus directory but not listed in manifest
+
+##### Phase 3: THIN Architecture Compliance (Day 2)
+
+- [x] **Markdown Parsing**: Replace JSON parsing with markdown fence parsing
+- [x] **LLM Response Handling**: Update prompt to use markdown format instead of structured JSON
+- [x] **Error Handling**: Improve error handling for malformed LLM responses
+- [x] **Testing**: Validate enhanced validation agent with problematic experiments
+
+#### Implementation Results
+
+**Key Achievements:**
+
+1. **✅ Historical Agent Integration**:
+   - Studied `ExperimentCoherenceAgent` from git history (`pm/experiment_coherence_agent`)
+   - Identified missing corpus validation capabilities
+   - Successfully integrated critical features into V2ValidationAgent
+
+2. **✅ Corpus Validation Enhancement**:
+   - Added `_validate_corpus_file_accessibility()` method
+   - Added `_extract_document_files_from_manifest()` method with regex parsing
+   - Added `_validate_corpus_yaml_syntax()` method for manifest validation
+   - Enhanced `_perform_validation()` to call pre-validation methods
+
+3. **✅ THIN Architecture Compliance**:
+   - Replaced JSON parsing with markdown fence parsing (`_parse_validation_response`)
+   - Updated validation agent prompt to use markdown format
+   - Maintained LLM intelligence for complex validation while using software for parsing
+
+4. **✅ CDDF Experiment Fix**:
+   - Successfully caught document count inconsistencies (36 vs 26 vs 33)
+   - Identified missing files in corpus directory
+   - Fixed filename mismatches and character encoding issues
+   - Updated corpus manifest to reflect actual files
+
+**Technical Implementation:**
+
+- **Enhanced Files**:
+  - `discernus/agents/validation_agent/v2_validation_agent.py` - Added corpus validation methods
+  - `discernus/agents/validation_agent/prompt.yaml` - Updated to use markdown format
+  - `projects/wip/cddf/corpus.md` - Fixed manifest to match actual files
+
+**Validation Capabilities Added:**
+
+- **File Accessibility**: Checks if files listed in manifest exist in corpus directory
+- **Document Count**: Validates consistency between manifest claims and actual file count
+- **Filename Matching**: Handles special characters and encoding differences
+- **Missing Files**: Identifies files listed in manifest but not found
+- **Unlisted Files**: Identifies files in directory but not in manifest
+- **YAML Syntax**: Pre-validates corpus manifest structure
+
+**Test Results:**
+
+- **CDDF Experiment**: Successfully caught and fixed document count inconsistencies
+- **Corpus Assembly**: Fixed 8 missing files and multiple filename mismatches
+- **Character Encoding**: Handled special characters in filenames correctly
+- **Validation Robustness**: Now catches issues that previously passed validation
+
+**Benefits Achieved:**
+
+- **Data Integrity**: Ensures corpus manifest accurately reflects actual files
+- **Error Prevention**: Catches inconsistencies before expensive analysis runs
+- **Developer Experience**: Clear error messages guide users to fix issues
+- **Academic Rigor**: Ensures experiments are based on complete, accurate corpora
+
+This sprint successfully restored critical corpus validation capabilities while maintaining THIN architecture principles, ensuring that validation failures are caught early and experiments are based on complete, accurate data.
+
+---
+
+### Sprint 8: THIN Architecture Compliance & CDDF Experiment Completion
+
+**Priority:** High  
+**Estimated Effort:** 4 days  
+**Status:** Completed  
+**Target Start:** 2025-01-02  
+**Completed:** 2025-01-03
+
+#### Problem Statement
+
+The Analysis Agent was performing unnecessary JSON parsing that violated THIN architecture principles, causing the CDDF experiment to hang on large documents. Additionally, the CDDF experiment needed a complete corpus assembly with proper multi-speaker document handling and comprehensive validation. The system also had hardcoded reliability filtering that contradicted the "no filtering" experiment specification.
+
+#### Success Criteria
+
+##### Phase 1: THIN Architecture Compliance (Day 1)
+
+- [x] **JSON Parsing Removal**: Remove unnecessary JSON parsing from Analysis Agent
+- [x] **LLM Response Handling**: Let LLM handle complex reasoning, software handle simple parsing
+- [x] **Performance Optimization**: Fix hanging issues on large documents
+- [x] **Testing**: Validate fixes on nano and micro experiments
+
+##### Phase 2: CDDF Corpus Assembly (Day 2)
+
+- [x] **Content Assessment**: Evaluate existing content in projects directory and corpus
+- [x] **Gap Identification**: Identify missing content for CDDF v10.2 experiment
+- [x] **Multi-Speaker Handling**: Split combined documents (military addresses, debates)
+- [x] **Corpus Rebalancing**: Add Trump/Bush inaugurals and additional SOTUs
+- [x] **Manifest Updates**: Update corpus manifest with accurate file listings
+
+##### Phase 3: System Cleanup (Day 3)
+
+- [x] **Hardcoded Filtering Removal**: Remove hardcoded salience threshold from Analysis Agent
+- [x] **System Defaults Fix**: Ensure zero thresholds are default behavior
+- [x] **Synthesis Agent Cleanup**: Remove references to reliability filtering
+- [x] **Validation**: Test system with zero filtering defaults
+
+##### Phase 4: CDDF Experiment Execution (Day 4)
+
+- [x] **Fresh Run**: Execute CDDF experiment from scratch with complete corpus
+- [x] **Validation**: Ensure all 42 documents are properly processed
+- [x] **Performance Monitoring**: Monitor for hanging or timeout issues
+- [x] **Report Assessment**: Evaluate final synthesis report quality
+
+#### Implementation Results
+
+**Key Achievements:**
+
+1. **✅ THIN Architecture Compliance**:
+   - Removed unnecessary `json.loads()` validation from Analysis Agent
+   - Removed `_extract_partial_scores_fallback()` method
+   - Removed JSON parsing for `run_context_content`
+   - Maintained LLM intelligence for complex reasoning
+
+2. **✅ CDDF Corpus Assembly**:
+   - Assembled complete corpus of 42 documents for CDDF v10.2
+   - Split multi-speaker documents (Quantico military addresses)
+   - Added missing content (Trump/Bush inaugurals, additional SOTUs)
+   - Fixed filename mismatches and character encoding issues
+   - Updated corpus manifest with accurate document inventory
+
+3. **✅ System Cleanup**:
+   - Removed hardcoded salience threshold (0.2) from Analysis Agent
+   - Confirmed system defaults are zero (no filtering by default)
+   - Updated Synthesis Agent prompts to remove reliability filtering references
+   - Ensured experiment specifications take precedence over system defaults
+
+4. **✅ CDDF Experiment Success**:
+   - Successfully executed CDDF experiment with 42 documents
+   - No hanging or timeout issues after JSON parsing removal
+   - Generated comprehensive synthesis report
+   - Framework fit score calculated correctly (0.75)
+
+**Technical Implementation:**
+
+- **Files Modified**:
+  - `discernus/agents/analysis_agent/v2_analysis_agent.py` - Removed JSON parsing
+  - `discernus/agents/analysis_agent/prompt2.yaml` - Removed hardcoded threshold
+  - `discernus/agents/two_stage_synthesis_agent/stage1_prompt.yaml` - Removed filtering references
+  - `discernus/agents/two_stage_synthesis_agent/stage2_prompt.yaml` - Removed filtering references
+  - `projects/wip/cddf/corpus.md` - Updated with complete document inventory
+  - `projects/wip/cddf/corpus/` - Added missing documents and split multi-speaker files
+
+**CDDF Corpus Details:**
+
+- **Total Documents**: 42 (up from 36)
+- **Military Addresses**: 4 (split Quantico event into Trump and Hegseth)
+- **Mode 2 (Spontaneous)**: 17 documents
+- **Mode 1 (Formal)**: 25 documents
+- **Complete Coverage**: All required content types represented
+
+**Performance Improvements:**
+
+- **Analysis Phase**: No more hanging on large documents
+- **JSON Processing**: Removed unnecessary validation overhead
+- **THIN Compliance**: LLM handles reasoning, software handles parsing
+- **System Reliability**: Consistent performance across document sizes
+
+**Test Results:**
+
+- **Nano Experiment**: Completed successfully with JSON parsing removal
+- **Micro Experiment**: Completed successfully with JSON parsing removal
+- **CDDF Experiment**: Completed successfully with 42 documents
+- **Framework Fit Score**: Calculated correctly (0.75) by Statistical Agent
+
+**Benefits Achieved:**
+
+- **Performance**: Eliminated hanging issues on large documents
+- **Architecture**: Proper THIN compliance with clear separation of concerns
+- **Data Integrity**: Complete, accurate corpus for CDDF experiment
+- **System Reliability**: Consistent behavior across all experiment types
+- **Academic Rigor**: Proper handling of multi-speaker documents and complex corpora
+
+This sprint successfully achieved THIN architecture compliance while completing a major experiment with a comprehensive corpus, demonstrating the system's capability to handle complex, real-world research scenarios.
+
+---
+
+## Upcoming Sprints
+
+### Sprint 9: CLI Parameter Override & Fast Re-analysis
+
+**Priority:** Medium  
+**Estimated Effort:** 3 days  
+**Status:** Planning  
+**Target Start:** 2025-01-10
+
+#### Problem Statement
+
+While we've implemented experiment-level parameterization for reliability filtering, researchers still need to re-run expensive analysis phases when testing different parameter values. We need CLI parameter override support and fast re-analysis capabilities to enable efficient sensitivity analysis without re-running LLM analysis.
+
+#### Success Criteria
+
+- [ ] **CLI Parameter Override**: Support `--salience-threshold`, `--confidence-threshold` overrides
+- [ ] **Fast Re-analysis**: Enable statistical re-runs without re-analysis when only parameters change
+- [ ] **Provenance Tracking**: Track parameter changes in run metadata
+- [ ] **User Documentation**: Clear guidance on parameter selection and trade-offs
+
+#### Technical Requirements
+
+- [ ] **CLI Enhancement**: Add parameter override flags to `discernus run` command
+- [ ] **Parameter Validation**: Validate override parameters against framework requirements
+- [ ] **Fast Path Logic**: Skip analysis phase when only statistical parameters change
+- [ ] **Metadata Updates**: Update run metadata with parameter overrides
+- [ ] **Documentation**: Create parameter selection guide
+
+---
+
+### Sprint 10: Framework Specification Compliance Update
+
+**Priority:** High  
+**Estimated Effort:** 4 days  
+**Status:** Planning  
+**Target Start:** 2025-01-10
+
+#### Problem Statement
+
+The new Framework Specification v10.0 includes mandatory framework fit score requirements that all existing frameworks must comply with. Currently, only the CDDF framework has been updated to include framework fit score definitions. All other frameworks in the system need to be updated to include the required framework fit assessment methodology, both in human-readable sections and machine-readable appendices.
+
+#### Success Criteria
+
+##### Phase 1: Framework Inventory & Assessment (Day 1)
+
+- [ ] **Framework Discovery**: Identify all existing frameworks in the system
+- [ ] **Compliance Assessment**: Evaluate each framework against v10.0 specification
+- [ ] **Gap Analysis**: Document missing framework fit score requirements
+- [ ] **Priority Ranking**: Rank frameworks by usage frequency and importance
+
+##### Phase 2: Framework Updates (Days 2-3)
+
+- [ ] **Human-Readable Sections**: Add "Framework Fit Assessment" sections to all frameworks
+- [ ] **Machine-Readable Appendices**: Add `framework_fit_score` definitions to all frameworks
+- [ ] **Methodology Definition**: Define framework-specific calculation approaches
+- [ ] **Interpretation Guidelines**: Provide framework-specific score interpretation
+
+##### Phase 3: Validation & Testing (Day 4)
+
+- [ ] **Specification Compliance**: Validate all frameworks against v10.0 requirements
+- [ ] **Agent Integration**: Test framework fit score calculation with updated frameworks
+- [ ] **Documentation**: Update framework documentation and examples
+- [ ] **Regression Testing**: Ensure existing experiments still work with updated frameworks
+
+#### Technical Requirements
+
+- [ ] **Framework Files**: Update all `.md` files in `frameworks/` directory
+- [ ] **Specification Compliance**: Ensure all frameworks meet v10.0 requirements
+- [ ] **Consistency**: Maintain consistent format and structure across frameworks
+- [ ] **Validation**: Create validation tools to check framework compliance
+- [ ] **Documentation**: Update framework usage guides and examples
+
+#### Frameworks to Update
+
+**Core Frameworks (High Priority):**
+- [ ] **Sentiment Binary Framework v1.0** (`projects/micro/framework.md`): Add framework fit assessment methodology
+- [ ] **Cohesive Flourishing Framework v10.4** (`frameworks/reference/flagship/cff_v10_4.md`): Add framework fit assessment methodology
+- [ ] **CDDF v10.1** (`frameworks/workbench/cddf_v10_1.md`): Update to match v10.2 compliance
+- [ ] **CDDF v10** (`frameworks/workbench/cddf_v10.md`): Update to match v10.2 compliance
+
+**Reference Frameworks (Medium Priority):**
+- [ ] **CAF v10** (`frameworks/reference/core/caf_v10.md`): Add framework fit assessment methodology
+- [ ] **CHF v10** (`frameworks/reference/core/chf_v10.md`): Add framework fit assessment methodology
+- [ ] **ECF v10.1** (`frameworks/reference/core/ecf_v10_1.md`): Add framework fit assessment methodology
+- [ ] **OPNIF v10.1** (`frameworks/reference/flagship/opnif_v10_1.md`): Add framework fit assessment methodology
+- [ ] **PDAF v10.0.2** (`frameworks/reference/flagship/pdaf_v10_0_2.md`): Add framework fit assessment methodology
+
+**Seed Frameworks (Lower Priority):**
+- [ ] **Entman v10** (`frameworks/seed/communication/entman_v10.md`): Add framework fit assessment methodology
+- [ ] **Lakoff Framing v10** (`frameworks/seed/communication/lakoff_framing_v10.md`): Add framework fit assessment methodology
+- [ ] **Business Ethics v10** (`frameworks/seed/ethics/business_ethics_v10.md`): Add framework fit assessment methodology
+- [ ] **MFT v10** (`frameworks/seed/political/mft_v10.md`): Add framework fit assessment methodology
+- [ ] **Political Worldview Triad v10** (`frameworks/seed/political/political_worldview_triad_v10.md`): Add framework fit assessment methodology
+
+#### Success Metrics
+
+- [ ] **100% Compliance**: All frameworks meet v10.0 specification requirements
+- [ ] **Consistent Format**: All frameworks follow same structure and format
+- [ ] **Agent Compatibility**: Statistical Agent can calculate fit scores for all frameworks
+- [ ] **Documentation Quality**: Clear, framework-specific guidance for researchers
+
+---
+
+### Sprint 11: v2.1 Release Preparation
+
+**Priority:** High  
+**Estimated Effort:** 3 days  
+**Status:** Planning  
+**Target Start:** 2025-01-15
+
+#### Problem Statement
+
+The system has undergone significant enhancements including framework fit score implementation, THIN architecture compliance, validation agent improvements, and reliability filtering system updates. These changes need to be properly documented, packaged, and prepared for a v2.1 release to ensure users have clear guidance on new features and capabilities.
+
+#### Success Criteria
+
+##### Phase 1: Documentation Updates (Day 1)
+
+- [ ] **README.md Update**: Update main README with v2.1 features and improvements
+- [ ] **CLI Reference Update**: Update `docs/user/CLI_REFERENCE.md` with new parameters and options
+- [ ] **Framework Specification**: Ensure `docs/specifications/FRAMEWORK_SPECIFICATION.md` is complete
+- [ ] **Experiment Specification**: Ensure `docs/specifications/EXPERIMENT_SPECIFICATION.md` is current
+- [ ] **API Documentation**: Update any API or developer documentation
+
+##### Phase 2: User Guides & Examples (Day 2)
+
+- [ ] **User Guide Updates**: Update `docs/user/` guides with new features
+- [ ] **Troubleshooting Guide**: Update `docs/user/CLI_TROUBLESHOOTING.md` with new issues/solutions
+- [ ] **Example Updates**: Update example experiments to demonstrate new features
+- [ ] **Migration Guide**: Create guide for users upgrading from v2.0 to v2.1
+- [ ] **Best Practices**: Document best practices for framework fit scores and reliability filtering
+
+##### Phase 3: Release Preparation (Day 3)
+
+- [ ] **Release Notes**: Create comprehensive v2.1 release notes
+- [ ] **Changelog**: Update CHANGELOG.md with all changes since v2.0
+- [ ] **Version Bumping**: Update version numbers in all relevant files
+- [ ] **Tag Preparation**: Prepare git tags and release artifacts
+- [ ] **Testing**: Final validation of all documentation and examples
+
+#### Technical Requirements
+
+- [ ] **Documentation Files**: Update all `.md` files in `docs/` directory
+- [ ] **Version Files**: Update version numbers in `pyproject.toml`, `__init__.py`, etc.
+- [ ] **Example Experiments**: Ensure all example experiments work with v2.1
+- [ ] **Release Artifacts**: Prepare release packages and installation instructions
+- [ ] **Migration Scripts**: Create any necessary migration scripts for users
+
+#### Key Features to Document
+
+**Framework Fit Score System:**
+- [ ] **Framework Specification Requirements**: Document mandatory framework fit score requirements
+- [ ] **Statistical Agent Integration**: Document how framework fit scores are calculated
+- [ ] **Synthesis Agent Integration**: Document how framework fit scores are interpreted
+- [ ] **Framework Examples**: Show examples of framework fit score definitions
+
+**THIN Architecture Compliance:**
+- [ ] **JSON Parsing Removal**: Document removal of unnecessary JSON parsing
+- [ ] **Performance Improvements**: Document performance benefits
+- [ ] **Architecture Principles**: Explain THIN architecture compliance
+
+**Validation Agent Enhancements:**
+- [ ] **Corpus Validation**: Document new corpus file accessibility validation
+- [ ] **Document Count Validation**: Document document count consistency checks
+- [ ] **Error Handling**: Document improved error messages and guidance
+
+**Reliability Filtering System:**
+- [ ] **Parameter Configuration**: Document experiment-level parameterization
+- [ ] **System Defaults**: Document zero thresholds as default behavior
+- [ ] **Sensitivity Analysis**: Document how to perform parameter sensitivity analysis
+
+**CDDF Experiment:**
+- [ ] **Corpus Assembly**: Document multi-speaker document handling
+- [ ] **Framework v10.2**: Document CDDF v10.2 improvements
+- [ ] **Experiment Results**: Document successful 42-document experiment
+
+#### Release Artifacts
+
+- [ ] **Release Notes**: Comprehensive v2.1 release notes
+- [ ] **Changelog**: Detailed changelog since v2.0
+- [ ] **Migration Guide**: Step-by-step upgrade instructions
+- [ ] **Feature Highlights**: Key new features and improvements
+- [ ] **Breaking Changes**: Any breaking changes and migration steps
+- [ ] **Performance Notes**: Performance improvements and optimizations
+
+#### Success Metrics
+
+- [ ] **Documentation Completeness**: All new features properly documented
+- [ ] **User Readiness**: Clear guidance for users upgrading to v2.1
+- [ ] **Example Validation**: All example experiments work with v2.1
+- [ ] **Release Quality**: Professional, comprehensive release package
+- [ ] **Migration Success**: Users can successfully upgrade from v2.0 to v2.1
+
+---
+
+### Sprint 12: Multi-Speaker Document Processing Enhancement
+
+**Priority:** Medium  
+**Estimated Effort:** 2 days  
+**Status:** Planning  
+**Target Start:** 2025-01-25
+
+#### Problem Statement
+
+The CDDF experiment revealed challenges with multi-speaker documents (debates, military addresses) where individual speaker contributions need to be analyzed separately. Currently, these are manually split, but we need automated processing capabilities for common multi-speaker document types.
+
+#### Success Criteria
+
+- [ ] **Debate Processing**: Automated extraction of individual speaker contributions from debate transcripts
+- [ ] **Military Address Processing**: Automated splitting of combined military addresses
+- [ ] **Speaker Attribution**: Maintain speaker identity in analysis artifacts
+- [ ] **Corpus Integration**: Seamless integration with existing corpus assembly workflow
+
+#### Technical Requirements
+
+- [ ] **Document Parser**: Create parser for common multi-speaker document formats
+- [ ] **Speaker Detection**: Identify speaker changes in transcripts
+- [ ] **Content Extraction**: Extract individual speaker contributions
+- [ ] **Metadata Preservation**: Maintain speaker identity and document context
+- [ ] **CLI Integration**: Add multi-speaker processing to corpus assembly tools
+
+---
+
 ## Sprint Template
 
 Use this template when creating new sprints:
