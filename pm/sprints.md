@@ -42,12 +42,95 @@ While we've implemented experiment-level parameterization for reliability filter
 
 ---
 
+### Sprint 10: Resume Functionality Testing & Hardening
+
+**Priority:** Critical  
+**Estimated Effort:** 2 days  
+**Status:** Planning  
+**Target Start:** 2025-01-08
+
+#### Problem Statement
+
+Resume functionality has been reported as "breaking a lot lately" with experiments restarting from document 1 instead of resuming from interruption points. While the phase state infrastructure appears solid, resume behavior is unreliable in practice, particularly when analysis phase is interrupted mid-document-processing. This is a release blocker - we cannot ship v2.1 without reliable resume capability.
+
+#### Known Issues
+
+1. **Analysis Phase Interruption**: When analysis phase gets interrupted mid-document, `phase_state.json` may not mark analysis as complete, blocking all resume attempts
+2. **Silent Restart Behavior**: Resume attempts that fail validation silently fall back to fresh runs, wasting compute and confusing users
+3. **Artifact Registry Corruption**: Interrupted runs may leave inconsistent artifact registries, causing resume failures
+4. **CDDF Resume Failures**: Recent CDDF experiment debugging showed resume attempts restarting from document 1
+
+#### Success Criteria
+
+**Phase 1: Diagnostic Testing (Day 1)**
+
+- [ ] **Nano Experiment Baseline**: Run nano experiment (2 documents) to completion, verify phase_state.json correctness
+- [ ] **Controlled Interruption Test**: Interrupt nano mid-document 2, verify phase state reflects partial completion
+- [ ] **Resume Test**: Attempt resume, verify it continues from correct document (not restart)
+- [ ] **Artifact Registry Validation**: Verify artifact registry consistency across resume boundary
+- [ ] **Error Message Testing**: Verify clear error messages when resume is not possible
+
+**Phase 2: Root Cause Analysis (Day 1)**
+
+- [ ] **Phase Marking Logic Review**: Identify when `mark_phase_complete()` is called during analysis
+- [ ] **Interruption Scenarios**: Document what happens to phase state during LLM timeout, keyboard interrupt, crash
+- [ ] **Registry Merge Logic**: Verify artifact registry merging handles edge cases (duplicate hashes, missing entries)
+- [ ] **Resume Validation Logic**: Confirm `can_resume_from()` correctly handles partial phase completion
+
+**Phase 3: Fixes & Hardening (Day 2)**
+
+- [ ] **Implement Per-Document Checkpointing**: Mark progress after each document completion, not just phase completion
+- [ ] **Add Resume Validation**: Explicit validation that resume will work before copying artifacts
+- [ ] **Improve Error Messages**: Clear guidance when resume is not possible and why
+- [ ] **Add Resume Logging**: Enhanced logging to track resume operations and artifact copying
+- [ ] **Implement Safe Resume Mode**: Option to verify artifact integrity before resume
+
+**Phase 4: Comprehensive Testing (Day 2)**
+
+- [ ] **Test Resume After Each Phase**: Validate resume after validation, analysis (per document), statistical, evidence, synthesis
+- [ ] **Test Failure Scenarios**: Keyboard interrupt, LLM timeout, network failure, disk full
+- [ ] **Test Cross-Run Resume**: Verify --run-dir parameter works correctly
+- [ ] **Test Auto-Discovery**: Verify `find_resumable_run()` selects correct run
+- [ ] **Performance Testing**: Verify resume doesn't add significant overhead
+
+#### Technical Requirements
+
+**Code Changes:**
+
+- `discernus/core/phase_state.py`: Add per-document checkpoint support
+- `discernus/cli.py`: Enhanced resume validation and error messages  
+- `discernus/core/atomic_document_analysis.py`: Add document-level completion tracking
+- `discernus/core/local_artifact_storage.py`: Add artifact integrity validation
+
+**Testing:**
+
+- `discernus/tests/test_resume_functionality.py`: Comprehensive resume test suite
+- Test fixtures for interrupted runs with known good state
+- Integration tests covering all phase boundaries
+
+#### Deliverables
+
+- [ ] **Resume Test Suite**: Automated tests covering all resume scenarios
+- [ ] **Resume Diagnostic Tool**: CLI command to validate if a run can be resumed
+- [ ] **Resume Documentation**: User guide on resume functionality and troubleshooting
+- [ ] **Release Readiness Report**: Pass/fail assessment with evidence
+
+#### Definition of Done
+
+- Nano experiment can be interrupted at any point and successfully resumed
+- Resume failures produce clear, actionable error messages
+- Automated test suite validates resume functionality
+- Documentation explains resume behavior and limitations
+- All team members confident in resume reliability
+
+---
+
 ### Sprint 11: v2.1 Release Preparation
 
 **Priority:** High  
 **Estimated Effort:** 3 days  
-**Status:** Planning  
-**Target Start:** 2025-01-15
+**Status:** Blocked (waiting on Sprint 10)  
+**Target Start:** 2025-01-10
 
 #### Problem Statement
 
