@@ -134,41 +134,59 @@ class ScoreExtractionProcessor:
                                 'dimensional_scores': {},
                                 'derived_metrics': {}
                             }
+                else:
+                    # score_data is already a dict
+                    extraction_data = score_data
+                
+                # Handle two different JSON structures:
+                # 1. Flat structure: {dimensional_scores: {}, derived_metrics: {}}
+                # 2. Nested structure: {analysis_metadata: {}, document_analyses: [{dimensional_scores: {}, derived_metrics: {}}]}
+                
+                if 'document_analyses' in extraction_data:
+                    # Nested structure - use first document analysis
+                    if extraction_data['document_analyses']:
+                        doc_analysis_data = extraction_data['document_analyses'][0]
+                        dimensional_scores = doc_analysis_data.get('dimensional_scores', {})
+                        derived_metrics = doc_analysis_data.get('derived_metrics', {})
                     else:
-                        # score_data is already a dict
-                        extraction_data = score_data
-                    
-                    # Create document analysis structure
-                    document_analysis = {
-                        'document_id': f'doc_{artifact_data.get("document_index", 0)}',
-                        'document_name': f'Document {artifact_data.get("document_index", 0) + 1}',
-                        'dimensional_scores': extraction_data.get('dimensional_scores', {}),
-                        'derived_metrics': extraction_data.get('derived_metrics', {}),
-                        'evidence_quotes': {},  # Not available in score extraction
-                        'marked_up_document': 'Not available in score extraction'
-                    }
-                    
-                    # Create analysis structure
-                    parsed_artifact = {
-                        'analysis_id': artifact_data.get('analysis_id'),
-                        'model_used': artifact_data.get('model_used'),
-                        'document_index': artifact_data.get('document_index'),
-                        'timestamp': artifact_data.get('timestamp'),
-                        'analysis_metadata': {
-                            'framework_name': 'cohesive_flourishing_framework',
-                            'framework_version': '10.4.0',
-                            'analyst_confidence': 0.0,
-                            'analysis_notes': 'Score extraction data',
-                            'reliability_summary': {
-                                'high_reliability_dimensions': [],
-                                'excluded_dimensions': [],
-                                'total_signal_strength': 0.0
-                            }
-                        },
-                        'document_analyses': [document_analysis]
-                    }
-                    parsed_data.append(parsed_artifact)
-                    print(f"Successfully parsed {path.name}")
+                        dimensional_scores = {}
+                        derived_metrics = {}
+                else:
+                    # Flat structure - use top-level data
+                    dimensional_scores = extraction_data.get('dimensional_scores', {})
+                    derived_metrics = extraction_data.get('derived_metrics', {})
+                
+                # Create document analysis structure
+                document_analysis = {
+                    'document_id': f'doc_{artifact_data.get("document_index", 0)}',
+                    'document_name': f'Document {artifact_data.get("document_index", 0) + 1}',
+                    'dimensional_scores': dimensional_scores,
+                    'derived_metrics': derived_metrics,
+                    'evidence_quotes': {},  # Not available in score extraction
+                    'marked_up_document': 'Not available in score extraction'
+                }
+                
+                # Create analysis structure
+                parsed_artifact = {
+                    'analysis_id': artifact_data.get('analysis_id'),
+                    'model_used': artifact_data.get('model_used'),
+                    'document_index': artifact_data.get('document_index'),
+                    'timestamp': artifact_data.get('timestamp'),
+                    'analysis_metadata': {
+                        'framework_name': 'cohesive_flourishing_framework',
+                        'framework_version': '10.4.0',
+                        'analyst_confidence': 0.0,
+                        'analysis_notes': 'Score extraction data',
+                        'reliability_summary': {
+                            'high_reliability_dimensions': [],
+                            'excluded_dimensions': [],
+                            'total_signal_strength': 0.0
+                        }
+                    },
+                    'document_analyses': [document_analysis]
+                }
+                parsed_data.append(parsed_artifact)
+                print(f"Successfully parsed {path.name}")
                                 
             except Exception as e:
                 print(f"Error processing {path.name}: {e}")
@@ -435,27 +453,41 @@ class ScoreExtractionProcessor:
         """
         Apply parameterized reliability filtering based on experiment parameters.
         
+        OPT-IN ONLY: Filtering is only applied if explicitly specified in experiment parameters.
+        If no filtering parameters are specified, ALL dimensions are included.
+        
         Returns:
             Tuple of (included_dims, excluded_dims) DataFrames
         """
+        import logging
+        logger = logging.getLogger(__name__)
+        
         from discernus.core.experiment_parameters import ReliabilityFilteringParams
         
         # Get filtering parameters
         rf_params = self.experiment_params.reliability_filtering
         af_params = self.experiment_params.advanced_filtering
         
+        # Check if filtering is enabled (opt-in)
+        if not rf_params.is_filtering_enabled():
+            logger.info("Reliability filtering is DISABLED (not specified in experiment) - including all dimensions")
+            # No filtering - include all dimensions
+            return self.dimension_data, pd.DataFrame()
+        
+        logger.info(f"Reliability filtering is ENABLED with thresholds: salience={rf_params.salience_threshold}, confidence={rf_params.confidence_threshold}, reliability={rf_params.reliability_threshold}")
+        
         # Start with all dimensions
         included_mask = pd.Series([True] * len(self.dimension_data), index=self.dimension_data.index)
         
-        # Apply basic thresholds
-        if 'salience' in self.dimension_data.columns:
+        # Apply basic thresholds (only if specified)
+        if rf_params.salience_threshold is not None and 'salience' in self.dimension_data.columns:
             included_mask &= (self.dimension_data['salience'] >= rf_params.salience_threshold)
         
-        if 'confidence' in self.dimension_data.columns:
+        if rf_params.confidence_threshold is not None and 'confidence' in self.dimension_data.columns:
             included_mask &= (self.dimension_data['confidence'] >= rf_params.confidence_threshold)
         
-        # Apply reliability threshold
-        if 'reliability' in self.dimension_data.columns:
+        # Apply reliability threshold (only if specified)
+        if rf_params.reliability_threshold is not None and 'reliability' in self.dimension_data.columns:
             included_mask &= (self.dimension_data['reliability'] >= rf_params.reliability_threshold)
         
         # Apply advanced filtering if available

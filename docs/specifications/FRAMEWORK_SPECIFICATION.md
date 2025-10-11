@@ -216,6 +216,95 @@ analysis_variants:
 
 **Orchestration Strategy**: Use multiple analysis passes, then combine results for complete framework evaluation.
 
+#### **Disambiguation Requirements for Multi-Interpretation Frameworks**
+
+For frameworks like Moral Foundations Theory where dimensions function as "taste receptors" that can be expressed differently across worldviews, disambiguation is essential to ensure valid, reliable measurement.
+
+**The Multi-Interpretation Challenge**: 
+
+Frameworks that measure psychological foundations or interpretive schemas face a unique challenge: the same linguistic pattern can activate different dimensions depending on worldview and context. For example, "protecting our community" could indicate Care (protecting vulnerable people) or Loyalty (in-group cohesion) depending on the speaker's framing and intent.
+
+**Required Disambiguation Patterns**:
+
+1. **Procedural vs. Substantive Distinction**
+   - Define when procedural language (acknowledging, recognizing, following process) should NOT be coded as substantive appeals (authority, fairness, etc.)
+   - Example: "I recognize the chairman" ≠ Authority appeal (mere procedural acknowledgment)
+   - Example: "We must respect the chairman's decision" = Authority appeal (deference to hierarchy)
+   - **Why this matters**: LLMs can conflate procedural compliance with moral appeals, inflating dimension scores
+
+2. **Personal vs. Moral Distinction**
+   - Define when personal narratives (experiences, achievements, failures) should NOT be coded as moral appeals (sanctity, betrayal, etc.)
+   - Example: "I worked hard" ≠ Sanctity appeal (personal experience)
+   - Example: "The sacred dignity of work" = Sanctity appeal (moral elevation)
+   - **Why this matters**: Personal narratives are ubiquitous in discourse but don't necessarily invoke moral foundations
+
+3. **Contextual Disambiguation Rules**
+   - Provide explicit rules for resolving ambiguity when multiple dimensions could apply
+   - Specify priority criteria based on speaker intent and rhetorical purpose
+   - Example: "If both Care and Harm indicators present, evaluate whether speaker advocates for protection (Care) or describes infliction of suffering (Harm)"
+   - **Why this matters**: Complex rhetoric often invokes multiple foundations; disambiguation prevents measurement error
+
+4. **Opposing Dimension Clarity (Bipolar Foundations)**
+   - For bipolar dimensions, explicitly define what distinguishes positive from negative pole
+   - Focus on moral VALENCE (speaker's stance) rather than mere TOPIC presence
+   - Example: Care (advocating for compassion) vs. Harm (denouncing cruelty)
+   - **Why this matters**: Bipolar validity is critical for construct validity; conflation undermines the entire framework
+
+**Disambiguation Template for Framework Authors**:
+
+```markdown
+## Critical Disambiguation Guidance
+
+### Procedural vs. Substantive Distinction
+
+**[Dimension Name]**: [What procedural/non-substantive patterns should NOT be coded]
+
+- ❌ **NOT [Dimension]**: "[example 1]", "[example 2]", "[example 3]"
+- ✅ **IS [Dimension]**: "[example 1]", "[example 2]", "[example 3]"
+- **Rule**: [Clear criterion for inclusion]
+
+### Personal vs. Moral Distinction
+
+**[Dimension Name]**: [What personal narratives should NOT be coded as moral appeals]
+
+- ❌ **NOT [Dimension]**: "[example 1]", "[example 2]"
+- ✅ **IS [Dimension]**: "[example 1]", "[example 2]"
+- **Rule**: [Clear criterion for inclusion]
+
+### Opposing Dimension Clarity (Bipolar Foundations)
+
+**[Positive Dimension] vs. [Negative Dimension]**: [How to distinguish them]
+
+- **[Positive Dimension]**: [When to code positive pole]
+- **[Negative Dimension]**: [When to code negative pole]
+- **Resolution**: [How to resolve ambiguity]
+
+### Contextual Disambiguation Rules
+
+1. **When multiple foundations could apply**: [Priority rules based on speaker intent]
+2. **When indicators conflict**: [Resolution strategy]
+3. **When evidence is ambiguous**: [Confidence calibration guidance]
+4. **Topic vs. Valence**: [How to distinguish topic presence from moral stance]
+```
+
+**Best Practices for Disambiguation**:
+
+- **Be Explicit, Not Implicit**: Don't assume LLMs will "figure it out"—spell out every distinction
+- **Use Contrastive Examples**: Show what DOESN'T qualify alongside what DOES
+- **Focus on Intent, Not Keywords**: Teach the LLM to assess speaker purpose, not just word presence
+- **Acknowledge Complexity**: Allow for multiple dimensions to be present when rhetoric is genuinely complex
+- **Calibrate Confidence**: Instruct analysts to lower confidence when ambiguity is unavoidable
+
+**Testing Your Disambiguation Rules**:
+
+After creating disambiguation guidance, test it against known edge cases:
+1. Can it distinguish the procedural from the substantive?
+2. Can it handle bipolar foundations without conflation?
+3. Does it prevent common misclassifications?
+4. Does it provide clear resolution strategies for ambiguity?
+
+If your framework fails these tests, refine your disambiguation guidance before deploying.
+
 #### **Common Framework Design Pitfalls**
 
 **Pitfall 1: Technical Overspecification**

@@ -528,8 +528,12 @@ class V2StatisticalAgent(StandardAgent):
             
             # Create reliability filtering context from experiment parameters
             rf_params = experiment_params.reliability_filtering
-            reliability_filtering_context = f"""
-  The experiment is configured with the following reliability filtering parameters:
+            
+            if rf_params.is_filtering_enabled():
+                reliability_filtering_context = f"""
+  **RELIABILITY FILTERING: ENABLED**
+  
+  The experiment explicitly specified the following reliability filtering parameters:
   - **salience_threshold**: {rf_params.salience_threshold} (minimum salience for inclusion)
   - **confidence_threshold**: {rf_params.confidence_threshold} (minimum confidence for inclusion)  
   - **reliability_threshold**: {rf_params.reliability_threshold} (minimum reliability for inclusion)
@@ -541,9 +545,15 @@ class V2StatisticalAgent(StandardAgent):
   - **excluded_low_salience**: Dimensions with low salience (< {rf_params.salience_threshold}) - excluded from analysis
   - **borderline_excluded**: Dimensions with low reliability (0.25 ≤ reliability < 0.4)
   - **clearly_excluded**: Dimensions with very low reliability (< 0.25)
+                """
+            else:
+                reliability_filtering_context = """
+  **RELIABILITY FILTERING: DISABLED**
   
-  Note: With zero thresholds, all scored dimensions should be preserved for analysis.
-            """
+  The experiment did NOT specify reliability filtering parameters.
+  As a result, ALL dimensions from ALL documents are included in the statistical analysis (no filtering applied).
+  This means the sample includes all scored dimensions regardless of salience, confidence, or reliability values.
+                """
             
             # Prepare the enhanced prompt with baseline statistics + real extracted metadata
             prompt = prompt_template.format(

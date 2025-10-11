@@ -16,13 +16,26 @@ from dataclasses import dataclass
 
 @dataclass
 class ReliabilityFilteringParams:
-    """Reliability filtering parameters for statistical analysis."""
-    salience_threshold: float = 0.0
-    confidence_threshold: float = 0.0
-    reliability_threshold: float = 0.0
+    """
+    Reliability filtering parameters for statistical analysis.
+    
+    NOTE: Reliability filtering is OPT-IN ONLY. If no filtering parameters are specified
+    in the experiment, ALL dimensions will be included in the analysis (no filtering).
+    
+    To enable filtering, explicitly specify threshold values in your experiment specification.
+    """
+    salience_threshold: float = None
+    confidence_threshold: float = None
+    reliability_threshold: float = None
     reliability_calculation: str = "confidence_x_salience"
     framework_fit_required: bool = False
     framework_fit_threshold: float = 0.3
+    
+    def is_filtering_enabled(self) -> bool:
+        """Check if any filtering is enabled (opt-in)."""
+        return (self.salience_threshold is not None or 
+                self.confidence_threshold is not None or 
+                self.reliability_threshold is not None)
 
 
 @dataclass
