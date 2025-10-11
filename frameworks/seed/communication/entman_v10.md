@@ -107,6 +107,32 @@ This framework is specifically designed for strategic communication analysis and
 
 **Potential pitfalls** include over-interpreting framing patterns in texts where they are minimal or absent, and misattributing strategic intent to naturally occurring language patterns. The framework should be applied with awareness of the speaker's communicative context and intent.
 
+### Section 4.5: Framework Fit Assessment
+
+**Framework Fit Definition**: For the Entman Framing Functions Framework, good framework fit is indicated by the independence of the four framing functions and their ability to distinguish between strategic and non-strategic communication patterns. The framework is working properly when the four framing functions show minimal correlation (independence) and effectively distinguish between different types of strategic communication.
+
+**Fit Assessment Criteria**:
+- **Functional Independence**: Low correlations between the four framing functions (typically < 0.3 for well-fitted frameworks)
+- **Dimensional Distinctiveness**: Each framing function measures distinct aspects of strategic communication
+- **Strategic Communication Detection**: Framework can distinguish between strategic/persuasive texts and non-strategic/descriptive content
+- **Theoretical Coherence**: Observed functional relationships match Entman's independence hypothesis
+
+**Fit Score Calculation**:
+framework_fit_score = (functional_independence + dimensional_distinctiveness + strategic_detection + theoretical_coherence) / 4
+
+Where:
+- functional_independence = average of (1.0 - correlation between each pair of framing functions)
+- dimensional_distinctiveness = validation against theoretical predictions for independent framing functions
+- strategic_detection = effect size of strategic vs non-strategic content differentiation
+- theoretical_coherence = validation against Entman's independence hypothesis
+
+**Interpretation Guidelines**:
+- **0.8-1.0**: Excellent fit - framework working as intended for framing function analysis
+- **0.6-0.8**: Good fit - minor calibration may be needed for specific communication contexts
+- **0.4-0.6**: Moderate fit - some functions may need refinement for particular discourse types
+- **0.2-0.4**: Poor fit - significant issues with functional relationships or independence
+- **0.0-0.2**: Very poor fit - framework may be misapplied to non-strategic communication
+
 ---
 
 ## Machine-Readable Framework Specification
@@ -327,6 +353,31 @@ derived_metrics:
     description: "Measures the empirical independence of framing functions as predicted by Entman's theory"
     formula: "np.std([dimensions.problem_definition.raw_score, dimensions.causal_attribution.raw_score, dimensions.moral_evaluation.raw_score, dimensions.treatment_recommendation.raw_score])"
     interpretation: "Higher values indicate framing functions vary independently as predicted by theory. Lower values suggest functions are deployed in correlated patterns."
+
+# 5.5: Framework Fit Score
+framework_fit_score:
+  description: "Assessment of how well the Entman framework applies to framing function analysis"
+  calculation_method: "Statistical analysis of functional independence and strategic communication detection"
+  components:
+    - name: "functional_independence"
+      description: "Measures independence between the four framing functions"
+      formula: "(1.0 - abs(correlation(problem_definition.raw_score, causal_attribution.raw_score))) + (1.0 - abs(correlation(problem_definition.raw_score, moral_evaluation.raw_score))) + (1.0 - abs(correlation(problem_definition.raw_score, treatment_recommendation.raw_score))) + (1.0 - abs(correlation(causal_attribution.raw_score, moral_evaluation.raw_score))) + (1.0 - abs(correlation(causal_attribution.raw_score, treatment_recommendation.raw_score))) + (1.0 - abs(correlation(moral_evaluation.raw_score, treatment_recommendation.raw_score)))) / 6"
+    - name: "dimensional_distinctiveness"
+      description: "Measures whether functions capture distinct strategic communication aspects"
+      formula: "1.0 if functional_independence > 0.7 else 0.5"
+    - name: "strategic_detection"
+      description: "Measures framework's ability to distinguish strategic from non-strategic communication"
+      formula: "abs(mean(problem_definition.raw_score + causal_attribution.raw_score + moral_evaluation.raw_score + treatment_recommendation.raw_score) - 0.25) / std(problem_definition.raw_score + causal_attribution.raw_score + moral_evaluation.raw_score + treatment_recommendation.raw_score)"
+    - name: "theoretical_coherence"
+      description: "Measures alignment with Entman's independence hypothesis"
+      formula: "1.0 if functional_independence > 0.5 else 0.5"
+  final_formula: "(functional_independence + dimensional_distinctiveness + strategic_detection + theoretical_coherence) / 4"
+  interpretation:
+    excellent: "0.8-1.0: Framework working as intended for framing function analysis"
+    good: "0.6-0.8: Minor calibration may be needed for specific communication contexts"
+    moderate: "0.4-0.6: Some functions may need refinement for particular discourse types"
+    poor: "0.2-0.4: Significant issues with functional relationships or independence"
+    very_poor: "0.0-0.2: Framework may be misapplied to non-strategic communication"
 
 output_schema:
   type: object

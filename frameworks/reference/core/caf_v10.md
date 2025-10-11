@@ -121,6 +121,32 @@ These structured formats exceed the base specification requirements but signific
 -   **Model Requirements**: This framework requires a highly capable LLM model (e.g., Gemini 2.5 Pro) for reliable analysis due to the nuanced distinctions between dimensions and the dual-track intensity/salience scoring.
 -   **System Validation Note**: Be aware that the Discernus platform will perform a post-hoc statistical analysis of your framework's fit with your chosen corpus based on the variance in the results. A low framework-corpus fit score may indicate that the framework was misapplied and could impact the interpretation of the results.
 
+### Section 4.5: Framework Fit Assessment
+
+**Framework Fit Definition**: For the Civic Analysis Framework (CAF), good framework fit is indicated by the bipolar nature of the five opposing virtue/vice dimension pairs and their ability to distinguish between civic virtue and vice patterns in political discourse. The framework is working properly when opposing dimensions show strong negative correlations and the dimensional clusters (virtues vs. vices) demonstrate theoretical coherence with Aristotelian virtue ethics.
+
+**Fit Assessment Criteria**:
+- **Bipolar Validity**: Strong negative correlations between opposing virtue/vice dimensions within each axis (typically -0.6 to -0.9 for well-fitted frameworks)
+- **Dimensional Distinctiveness**: Dimensions within virtue and vice clusters show moderate positive correlations (0.3-0.7), indicating they measure related but distinct civic concepts
+- **Theoretical Coherence**: Observed dimensional relationships match CAF's Aristotelian predictions about civic character and democratic discourse patterns
+- **Discriminatory Power**: Framework can distinguish between different civic character profiles (e.g., virtue-dominant vs. vice-dominant discourse) with effect sizes > 0.5
+
+**Fit Score Calculation**:
+framework_fit_score = (bipolar_validity + dimensional_distinctiveness + theoretical_coherence + discriminatory_power) / 4
+
+Where:
+- bipolar_validity = average absolute correlation between all opposing dimension pairs
+- dimensional_distinctiveness = (average correlation within virtue cluster + average correlation within vice cluster) / 2
+- theoretical_coherence = validation against Aristotelian virtue ethics predictions for civic discourse
+- discriminatory_power = effect size of virtue-dominant vs vice-dominant discourse differentiation
+
+**Interpretation Guidelines**:
+- **0.8-1.0**: Excellent fit - framework working as intended for civic character analysis
+- **0.6-0.8**: Good fit - minor calibration may be needed for specific political contexts
+- **0.4-0.6**: Moderate fit - some dimensions may need refinement for particular discourse types
+- **0.2-0.4**: Poor fit - significant issues with dimensional relationships or theoretical coherence
+- **0.0-0.2**: Very poor fit - framework may be misapplied to non-civic discourse contexts
+
 ---
 
 ## Part 2: The Machine-Readable Appendix
@@ -625,7 +651,32 @@ derived_metrics:
     description: "Primary summary metric measuring overall character orientation, weighted by rhetorical prominence."
     formula: "(derived_metrics.weighted_virtue_score - derived_metrics.weighted_vice_score) / (derived_metrics.combined_salience_total + 0.001)"
 
-# 5.5: Output Schema
+# 5.5: Framework Fit Score
+framework_fit_score:
+  description: "Assessment of how well the CAF applies to civic character analysis"
+  calculation_method: "Statistical analysis of dimensional relationships and Aristotelian coherence"
+  components:
+    - name: "bipolar_validity"
+      description: "Measures strength of opposing relationships between virtue/vice pairs"
+      formula: "(abs(correlation(dignity.raw_score, tribalism.raw_score)) + abs(correlation(truth.raw_score, manipulation.raw_score)) + abs(correlation(justice.raw_score, resentment.raw_score)) + abs(correlation(hope.raw_score, fear.raw_score)) + abs(correlation(pragmatism.raw_score, fantasy.raw_score))) / 5"
+    - name: "dimensional_distinctiveness"
+      description: "Measures whether dimensions within virtue/vice clusters are appropriately correlated"
+      formula: "(average([correlation(dignity.raw_score, truth.raw_score), correlation(dignity.raw_score, justice.raw_score), correlation(dignity.raw_score, hope.raw_score), correlation(dignity.raw_score, pragmatism.raw_score), correlation(truth.raw_score, justice.raw_score), correlation(truth.raw_score, hope.raw_score), correlation(truth.raw_score, pragmatism.raw_score), correlation(justice.raw_score, hope.raw_score), correlation(justice.raw_score, pragmatism.raw_score), correlation(hope.raw_score, pragmatism.raw_score)]) + average([correlation(tribalism.raw_score, manipulation.raw_score), correlation(tribalism.raw_score, resentment.raw_score), correlation(tribalism.raw_score, fear.raw_score), correlation(tribalism.raw_score, fantasy.raw_score), correlation(manipulation.raw_score, resentment.raw_score), correlation(manipulation.raw_score, fear.raw_score), correlation(manipulation.raw_score, fantasy.raw_score), correlation(resentment.raw_score, fear.raw_score), correlation(resentment.raw_score, fantasy.raw_score), correlation(fear.raw_score, fantasy.raw_score)])) / 2"
+    - name: "theoretical_coherence"
+      description: "Measures alignment with Aristotelian virtue ethics predictions"
+      formula: "1.0 if bipolar_validity > 0.5 and dimensional_distinctiveness > 0.3 else 0.5"
+    - name: "discriminatory_power"
+      description: "Measures framework's ability to distinguish between virtue and vice dominant discourse"
+      formula: "abs(mean(dignity.raw_score + truth.raw_score + justice.raw_score + hope.raw_score + pragmatism.raw_score) - mean(tribalism.raw_score + manipulation.raw_score + resentment.raw_score + fear.raw_score + fantasy.raw_score)) / std(dignity.raw_score + truth.raw_score + justice.raw_score + hope.raw_score + pragmatism.raw_score + tribalism.raw_score + manipulation.raw_score + resentment.raw_score + fear.raw_score + fantasy.raw_score)"
+  final_formula: "(bipolar_validity + dimensional_distinctiveness + theoretical_coherence + discriminatory_power) / 4"
+  interpretation:
+    excellent: "0.8-1.0: Framework working as intended for civic character analysis"
+    good: "0.6-0.8: Minor calibration may be needed for specific political contexts"
+    moderate: "0.4-0.6: Some dimensions may need refinement for particular discourse types"
+    poor: "0.2-0.4: Significant issues with dimensional relationships or theoretical coherence"
+    very_poor: "0.0-0.2: Framework may be misapplied to non-civic discourse contexts"
+
+# 5.6: Output Schema
 output_schema:
   type: object
   properties:

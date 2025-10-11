@@ -124,6 +124,32 @@ This framework is designed for analysis of:
 
 This framework is designed to work with the Discernus v10.0 analysis pipeline. Post-hoc statistical analysis will validate dimensional independence and internal consistency. The framework's reliability metrics are calculated automatically during analysis execution.
 
+### Section 4.5: Framework Fit Assessment
+
+**Framework Fit Definition**: For the Constitutional Health Framework (CHF), good framework fit is indicated by the bipolar nature of the three opposing dimension pairs and their ability to distinguish between constitutional health and degradation patterns in political discourse. The framework is working properly when opposing dimensions show strong negative correlations and the dimensional clusters demonstrate theoretical coherence with constitutional theory.
+
+**Fit Assessment Criteria**:
+- **Bipolar Validity**: Strong negative correlations between opposing dimensions within each axis (typically -0.6 to -0.9 for well-fitted frameworks)
+- **Dimensional Distinctiveness**: Dimensions within health and degradation clusters show moderate positive correlations (0.3-0.7), indicating they measure related but distinct constitutional concepts
+- **Theoretical Coherence**: Observed dimensional relationships match CHF's theoretical predictions about constitutional discourse patterns
+- **Discriminatory Power**: Framework can distinguish between different constitutional discourse types (e.g., institution-affirming vs. institution-undermining) with effect sizes > 0.5
+
+**Fit Score Calculation**:
+framework_fit_score = (bipolar_validity + dimensional_distinctiveness + theoretical_coherence + discriminatory_power) / 4
+
+Where:
+- bipolar_validity = average absolute correlation between all opposing dimension pairs
+- dimensional_distinctiveness = (average correlation within health cluster + average correlation within degradation cluster) / 2
+- theoretical_coherence = validation against constitutional theory predictions for discourse patterns
+- discriminatory_power = effect size of health-affirming vs degradation discourse differentiation
+
+**Interpretation Guidelines**:
+- **0.8-1.0**: Excellent fit - framework working as intended for constitutional discourse analysis
+- **0.6-0.8**: Good fit - minor calibration may be needed for specific constitutional contexts
+- **0.4-0.6**: Moderate fit - some dimensions may need refinement for particular discourse types
+- **0.2-0.4**: Poor fit - significant issues with dimensional relationships or theoretical coherence
+- **0.0-0.2**: Very poor fit - framework may be misapplied to non-constitutional discourse contexts
+
 # --- Start of Machine-Readable Appendix ---
 ```yaml
 metadata:
@@ -467,7 +493,32 @@ derived_metrics:
     description: "Measures overall constitutional threat level, weighted by salience."
     formula: "((dimensions.procedural_rejection.raw_score * dimensions.procedural_rejection.salience) + (dimensions.institutional_subversion.raw_score * dimensions.institutional_subversion.salience) + (dimensions.systemic_replacement.raw_score * dimensions.systemic_replacement.salience)) / derived_metrics.total_constitutional_salience"
 
-# 5.5: Output Schema
+# 5.5: Framework Fit Score
+framework_fit_score:
+  description: "Assessment of how well CHF applies to constitutional discourse analysis"
+  calculation_method: "Statistical analysis of dimensional relationships and constitutional theory coherence"
+  components:
+    - name: "bipolar_validity"
+      description: "Measures strength of opposing relationships between health/degradation pairs"
+      formula: "(abs(correlation(procedural_legitimacy.raw_score, procedural_rejection.raw_score)) + abs(correlation(institutional_respect.raw_score, institutional_subversion.raw_score)) + abs(correlation(systemic_continuity.raw_score, systemic_replacement.raw_score))) / 3"
+    - name: "dimensional_distinctiveness"
+      description: "Measures whether dimensions within health/degradation clusters are appropriately correlated"
+      formula: "(average([correlation(procedural_legitimacy.raw_score, institutional_respect.raw_score), correlation(procedural_legitimacy.raw_score, systemic_continuity.raw_score), correlation(institutional_respect.raw_score, systemic_continuity.raw_score)]) + average([correlation(procedural_rejection.raw_score, institutional_subversion.raw_score), correlation(procedural_rejection.raw_score, systemic_replacement.raw_score), correlation(institutional_subversion.raw_score, systemic_replacement.raw_score)])) / 2"
+    - name: "theoretical_coherence"
+      description: "Measures alignment with constitutional theory predictions"
+      formula: "1.0 if bipolar_validity > 0.5 and dimensional_distinctiveness > 0.3 else 0.5"
+    - name: "discriminatory_power"
+      description: "Measures framework's ability to distinguish between health and degradation discourse"
+      formula: "abs(mean(procedural_legitimacy.raw_score + institutional_respect.raw_score + systemic_continuity.raw_score) - mean(procedural_rejection.raw_score + institutional_subversion.raw_score + systemic_replacement.raw_score)) / std(procedural_legitimacy.raw_score + institutional_respect.raw_score + systemic_continuity.raw_score + procedural_rejection.raw_score + institutional_subversion.raw_score + systemic_replacement.raw_score)"
+  final_formula: "(bipolar_validity + dimensional_distinctiveness + theoretical_coherence + discriminatory_power) / 4"
+  interpretation:
+    excellent: "0.8-1.0: Framework working as intended for constitutional discourse analysis"
+    good: "0.6-0.8: Minor calibration may be needed for specific constitutional contexts"
+    moderate: "0.4-0.6: Some dimensions may need refinement for particular discourse types"
+    poor: "0.2-0.4: Significant issues with dimensional relationships or theoretical coherence"
+    very_poor: "0.0-0.2: Framework may be misapplied to non-constitutional discourse contexts"
+
+# 5.6: Output Schema
 output_schema:
   type: object
   properties:

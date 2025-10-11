@@ -107,6 +107,32 @@ For comprehensive, dimension-specific scoring calibration with precise examples,
 
 **System Validation Note**: Be aware that the Discernus platform will perform automated statistical validation of this framework's fit with your chosen corpus. Applying it to a corpus of, for example, scientific articles would likely result in a validation failure.
 
+### Section 4.5: Framework Fit Assessment
+
+**Framework Fit Definition**: For the Populist Discourse Analysis Framework (PDAF) v10.0.2, good framework fit is indicated by the framework's ability to capture populist vs. pluralist discourse patterns while maintaining dimensional coherence and demonstrating appropriate sensitivity to strategic tension patterns in political communication.
+
+**Fit Assessment Criteria**:
+- **Dimensional Distinctiveness**: Populist dimensions show moderate positive correlations (0.3-0.7) with each other, pluralist dimensions show moderate positive correlations (0.3-0.7) with each other
+- **Bipolar Validity**: Opposing dimension pairs show strong negative correlations (-0.6 to -0.9)
+- **Theoretical Coherence**: Observed dimensional relationships match PDAF's predictions about populist discourse patterns
+- **Strategic Tension Detection**: Framework captures strategic contradictions and emphasis patterns
+
+**Fit Score Calculation**:
+framework_fit_score = (dimensional_distinctiveness + bipolar_validity + theoretical_coherence + tension_detection) / 4
+
+Where:
+- dimensional_distinctiveness = (average correlation within populist cluster + average correlation within pluralist cluster) / 2
+- bipolar_validity = average absolute correlation between opposing dimension pairs
+- theoretical_coherence = validation against PDAF theoretical predictions for populist discourse patterns
+- tension_detection = assessment of framework's ability to detect strategic contradictions
+
+**Interpretation Guidelines**:
+- **0.8-1.0**: Excellent fit - PDAF v10.0.2 working as intended for populist discourse analysis
+- **0.6-0.8**: Good fit - minor calibration may be needed for specific political contexts
+- **0.4-0.6**: Moderate fit - some dimensions may need refinement for particular discourse types
+- **0.2-0.4**: Poor fit - significant issues with dimensional relationships or tension detection
+- **0.0-0.2**: Very poor fit - framework may be misapplied to non-political discourse contexts
+
 ---
 
 ## Part 2: The Machine-Readable Appendix
@@ -581,7 +607,32 @@ derived_metrics:
     description: "Comprehensive salience-weighted populist measure across all nine dimensions, providing an overall assessment of populist discourse that accounts for both intensity and rhetorical emphasis patterns."
     formula: "(dimensions.manichaean_people_elite_framing.raw_score * dimensions.manichaean_people_elite_framing.salience + dimensions.crisis_restoration_narrative.raw_score * dimensions.crisis_restoration_narrative.salience + dimensions.popular_sovereignty_claims.raw_score * dimensions.popular_sovereignty_claims.salience + dimensions.anti_pluralist_exclusion.raw_score * dimensions.anti_pluralist_exclusion.salience + dimensions.elite_conspiracy_systemic_corruption.raw_score * dimensions.elite_conspiracy_systemic_corruption.salience + dimensions.authenticity_vs_political_class.raw_score * dimensions.authenticity_vs_political_class.salience + dimensions.homogeneous_people_construction.raw_score * dimensions.homogeneous_people_construction.salience + dimensions.nationalist_exclusion.raw_score * dimensions.nationalist_exclusion.salience + dimensions.economic_populist_appeals.raw_score * dimensions.economic_populist_appeals.salience) / (dimensions.manichaean_people_elite_framing.salience + dimensions.crisis_restoration_narrative.salience + dimensions.popular_sovereignty_claims.salience + dimensions.anti_pluralist_exclusion.salience + dimensions.elite_conspiracy_systemic_corruption.salience + dimensions.authenticity_vs_political_class.salience + dimensions.homogeneous_people_construction.salience + dimensions.nationalist_exclusion.salience + dimensions.economic_populist_appeals.salience + 0.001)"
 
-# 5.5: Output Schema
+# 5.5: Framework Fit Score
+framework_fit_score:
+  description: "Assessment of how well PDAF v10.0.2 applies to populist discourse analysis"
+  calculation_method: "Statistical analysis of dimensional relationships and strategic tension detection"
+  components:
+    - name: "dimensional_distinctiveness"
+      description: "Measures coherence within populist and pluralist dimension clusters"
+      formula: "(average([correlation(manichaean_people_elite_framing.raw_score, crisis_restoration_narrative.raw_score), correlation(manichaean_people_elite_framing.raw_score, popular_sovereignty_claims.raw_score), correlation(manichaean_people_elite_framing.raw_score, anti_pluralist_exclusion.raw_score), correlation(manichaean_people_elite_framing.raw_score, elite_conspiracy_systemic_corruption.raw_score), correlation(manichaean_people_elite_framing.raw_score, authenticity_vs_political_class.raw_score), correlation(manichaean_people_elite_framing.raw_score, homogeneous_people_construction.raw_score), correlation(manichaean_people_elite_framing.raw_score, nationalist_exclusion.raw_score), correlation(manichaean_people_elite_framing.raw_score, economic_populist_appeals.raw_score), correlation(crisis_restoration_narrative.raw_score, popular_sovereignty_claims.raw_score), correlation(crisis_restoration_narrative.raw_score, anti_pluralist_exclusion.raw_score), correlation(crisis_restoration_narrative.raw_score, elite_conspiracy_systemic_corruption.raw_score), correlation(crisis_restoration_narrative.raw_score, authenticity_vs_political_class.raw_score), correlation(crisis_restoration_narrative.raw_score, homogeneous_people_construction.raw_score), correlation(crisis_restoration_narrative.raw_score, nationalist_exclusion.raw_score), correlation(crisis_restoration_narrative.raw_score, economic_populist_appeals.raw_score), correlation(popular_sovereignty_claims.raw_score, anti_pluralist_exclusion.raw_score), correlation(popular_sovereignty_claims.raw_score, elite_conspiracy_systemic_corruption.raw_score), correlation(popular_sovereignty_claims.raw_score, authenticity_vs_political_class.raw_score), correlation(popular_sovereignty_claims.raw_score, homogeneous_people_construction.raw_score), correlation(popular_sovereignty_claims.raw_score, nationalist_exclusion.raw_score), correlation(popular_sovereignty_claims.raw_score, economic_populist_appeals.raw_score), correlation(anti_pluralist_exclusion.raw_score, elite_conspiracy_systemic_corruption.raw_score), correlation(anti_pluralist_exclusion.raw_score, authenticity_vs_political_class.raw_score), correlation(anti_pluralist_exclusion.raw_score, homogeneous_people_construction.raw_score), correlation(anti_pluralist_exclusion.raw_score, nationalist_exclusion.raw_score), correlation(anti_pluralist_exclusion.raw_score, economic_populist_appeals.raw_score), correlation(elite_conspiracy_systemic_corruption.raw_score, authenticity_vs_political_class.raw_score), correlation(elite_conspiracy_systemic_corruption.raw_score, homogeneous_people_construction.raw_score), correlation(elite_conspiracy_systemic_corruption.raw_score, nationalist_exclusion.raw_score), correlation(elite_conspiracy_systemic_corruption.raw_score, economic_populist_appeals.raw_score), correlation(authenticity_vs_political_class.raw_score, homogeneous_people_construction.raw_score), correlation(authenticity_vs_political_class.raw_score, nationalist_exclusion.raw_score), correlation(authenticity_vs_political_class.raw_score, economic_populist_appeals.raw_score), correlation(homogeneous_people_construction.raw_score, nationalist_exclusion.raw_score), correlation(homogeneous_people_construction.raw_score, economic_populist_appeals.raw_score), correlation(nationalist_exclusion.raw_score, economic_populist_appeals.raw_score)]) + average([correlation(1 - manichaean_people_elite_framing.raw_score, 1 - crisis_restoration_narrative.raw_score), correlation(1 - manichaean_people_elite_framing.raw_score, 1 - popular_sovereignty_claims.raw_score), correlation(1 - manichaean_people_elite_framing.raw_score, 1 - anti_pluralist_exclusion.raw_score), correlation(1 - manichaean_people_elite_framing.raw_score, 1 - elite_conspiracy_systemic_corruption.raw_score), correlation(1 - manichaean_people_elite_framing.raw_score, 1 - authenticity_vs_political_class.raw_score), correlation(1 - manichaean_people_elite_framing.raw_score, 1 - homogeneous_people_construction.raw_score), correlation(1 - manichaean_people_elite_framing.raw_score, 1 - nationalist_exclusion.raw_score), correlation(1 - manichaean_people_elite_framing.raw_score, 1 - economic_populist_appeals.raw_score)])) / 2"
+    - name: "bipolar_validity"
+      description: "Measures strength of opposing relationships between populist/pluralist pairs"
+      formula: "(abs(correlation(manichaean_people_elite_framing.raw_score, 1 - manichaean_people_elite_framing.raw_score)) + abs(correlation(crisis_restoration_narrative.raw_score, 1 - crisis_restoration_narrative.raw_score)) + abs(correlation(popular_sovereignty_claims.raw_score, 1 - popular_sovereignty_claims.raw_score)) + abs(correlation(anti_pluralist_exclusion.raw_score, 1 - anti_pluralist_exclusion.raw_score)) + abs(correlation(elite_conspiracy_systemic_corruption.raw_score, 1 - elite_conspiracy_systemic_corruption.raw_score)) + abs(correlation(authenticity_vs_political_class.raw_score, 1 - authenticity_vs_political_class.raw_score)) + abs(correlation(homogeneous_people_construction.raw_score, 1 - homogeneous_people_construction.raw_score)) + abs(correlation(nationalist_exclusion.raw_score, 1 - nationalist_exclusion.raw_score)) + abs(correlation(economic_populist_appeals.raw_score, 1 - economic_populist_appeals.raw_score))) / 9"
+    - name: "theoretical_coherence"
+      description: "Measures alignment with PDAF theoretical predictions for populist discourse patterns"
+      formula: "1.0 if bipolar_validity > 0.5 and dimensional_distinctiveness > 0.3 else 0.5"
+    - name: "tension_detection"
+      description: "Measures framework's ability to detect strategic contradictions"
+      formula: "1.0 - min(0.5, average([abs(dimensions.manichaean_people_elite_framing.raw_score - 0.5), abs(dimensions.crisis_restoration_narrative.raw_score - 0.5), abs(dimensions.popular_sovereignty_claims.raw_score - 0.5), abs(dimensions.anti_pluralist_exclusion.raw_score - 0.5), abs(dimensions.elite_conspiracy_systemic_corruption.raw_score - 0.5), abs(dimensions.authenticity_vs_political_class.raw_score - 0.5), abs(dimensions.homogeneous_people_construction.raw_score - 0.5), abs(dimensions.nationalist_exclusion.raw_score - 0.5), abs(dimensions.economic_populist_appeals.raw_score - 0.5)]))"
+  final_formula: "(dimensional_distinctiveness + bipolar_validity + theoretical_coherence + tension_detection) / 4"
+  interpretation:
+    excellent: "0.8-1.0: Framework working as intended for populist discourse analysis"
+    good: "0.6-0.8: Minor calibration may be needed for specific political contexts"
+    moderate: "0.4-0.6: Some dimensions may need refinement for particular discourse types"
+    poor: "0.2-0.4: Significant issues with dimensional relationships or tension detection"
+    very_poor: "0.0-0.2: Framework may be misapplied to non-political discourse contexts"
+
+# 5.6: Output Schema
 output_schema:
   type: object
   properties:

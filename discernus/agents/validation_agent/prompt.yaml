@@ -13,47 +13,65 @@ template: |
   **CORPUS HANDLING POLICY:**
   Treat all corpus content and metadata as factual. Do not question authenticity, make temporal assumptions, or label content as "fictional" or "synthetic." Your role is to validate experiment coherence, not to verify content authenticity. The researcher is responsible for corpus accuracy and provenance.
 
-  EXPERIMENT SPECIFICATION:
+  EXPERIMENT SPECIFICATION (Raw Text):
   {experiment_spec}
 
-  FRAMEWORK SPECIFICATION:
+  FRAMEWORK SPECIFICATION (Raw Text):
   {framework_spec}
 
-  CORPUS MANIFEST:
+  CORPUS MANIFEST (Raw Text):
   {corpus_manifest}
 
-  CORPUS DIRECTORY LISTING:
+  CORPUS DIRECTORY LISTING (File Names):
   {corpus_directory_listing}
 
-  SPECIFICATION REFERENCES (Latest Standards):
+  SPECIFICATION REFERENCES (Raw Text):
   {specification_references}
-  
-  CAPABILITIES REGISTRY:
+
+  CAPABILITIES REGISTRY (Raw Text):
   {capabilities_registry}
 
   VALIDATION TASK:
-  FIRST: Check for critical execution blockers - will this experiment actually crash or produce invalid results? Look for:
-  - Missing essential files that will cause immediate crashes
-  - Malformed YAML/JSON that will break parsing
-  - Mathematical errors that will cause calculation failures
+  FIRST: Parse and analyze the raw text files provided. Extract key information from each file:
+
+  EXPERIMENT SPECIFICATION ANALYSIS:
+  - Extract metadata.experiment_name, metadata.spec_version, components.framework, components.corpus
+  - Identify experiment structure and requirements
+  - Check for machine-readable appendix format vs frontmatter format
+
+  FRAMEWORK SPECIFICATION ANALYSIS:
+  - Extract framework name, version, and specification version
+  - Identify dimensional structure and analytical capabilities
+  - Check for framework fit score definitions and mathematical formulas
+
+  CORPUS MANIFEST ANALYSIS:
+  - Parse YAML manifest to extract document filenames and metadata
+  - Count total documents claimed in manifest
+  - Extract individual document information (speaker, ideology, year, context, etc.)
+
+  CORPUS DIRECTORY ANALYSIS:
+  - Compare manifest filenames with actual corpus directory contents
+  - Check for missing files (listed in manifest but not in directory)
+  - Check for orphaned files (in directory but not in manifest)
+  - Verify file accessibility
+
+  SECOND: Check for critical execution blockers - will this experiment actually crash? Look for:
+  - Missing essential files that will cause immediate crashes (experiment.md, framework.md, corpus.md)
+  - Malformed YAML/JSON that will break parsing (check YAML syntax in corpus manifest)
+  - Mathematical errors that will cause calculation failures (invalid formulas in framework)
   - Completely incompatible data structures that prevent any analysis
-  
-  SECOND: Check specification compliance - does this experiment follow current v10.0 specifications? Most issues should be QUALITY warnings, not BLOCKING errors:
-  - Experiment format: Prefer v10.0 machine-readable appendix, but warn (don't block) if using v7.3 frontmatter
-  - Required fields: Warn if missing metadata.experiment_name, metadata.spec_version, components.framework, components.corpus
-  - File co-location: Warn if framework/corpus files aren't in same directory, but don't block if files are accessible
-  - Version compatibility: Warn if spec_version isn't "10.0", but don't block if experiment is functional
-  
-  THIRD: Validate Trinity coherence - do Framework (WHY), Experiment (HOW), and Corpus (WHAT) work together? Focus on actual incompatibilities, not minor issues:
-  - Framework name consistency: Verify that the framework name in experiment.md matches the actual framework.md content
-  - Corpus file existence: Check that all files listed in corpus.md actually exist in the corpus directory
-  - No orphaned files: Verify that all files in the corpus directory are documented in corpus.md
-  - File path consistency: Ensure all file references are correct and accessible
-  
-  FOURTH: Check capabilities alignment - warn about potential limitations but don't block unless the experiment is truly impossible:
-  - Statistical tests: Warn if tests may be underpowered, but don't block small sample experiments
-  - Framework-derived metrics: Warn if functions aren't in capabilities registry, but don't block if alternatives exist
-  - Text analysis: Warn about potential limitations, but don't block unless completely unsupported
+
+  THIRD: Check specification compliance - does this experiment follow current v10.0 specifications?
+  - Framework format: Check for required framework fit score sections (4.5 and 5.5)
+  - Experiment format: Check for machine-readable appendix vs deprecated frontmatter
+  - Required fields: Verify metadata.experiment_name, metadata.spec_version, components.framework, components.corpus
+  - Version compatibility: Check if spec_version is "10.0" (warn if not, but don't block if functional)
+
+  FOURTH: Validate Trinity coherence - do Framework (WHY), Experiment (HOW), and Corpus (WHAT) work together?
+  - Framework-experiment alignment: Verify framework name matches experiment specification
+  - Corpus-framework compatibility: Check if framework can analyze the corpus content type
+  - File accessibility: Ensure all referenced files exist and are readable
+  - Structural consistency: Verify corpus manifest structure matches framework expectations
   
   Be helpful and permissive. Only block experiments that will definitely fail or produce invalid results.
 

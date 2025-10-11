@@ -294,6 +294,32 @@ Complements Civic Analysis Framework (CAF) for comprehensive moral-civic assessm
 
 This framework has been validated through the Discernus v10.0 analysis pipeline and demonstrates robust performance across diverse political discourse corpora. The advanced tension mathematics and salience-weighted analysis provide reliable identification of moral strategic contradictions and moral identity profiles, enabling sophisticated moral reasoning assessment in political communication research.
 
+### Section 4.5: Framework Fit Assessment
+
+**Framework Fit Definition**: For the Moral Foundations Theory Framework, good framework fit is indicated by the coherence of individualizing vs. binding foundation clusters and their ability to distinguish between different moral reasoning patterns in political discourse. The framework is working properly when the six moral foundations show appropriate clustering around individualizing vs. binding orientations and effectively distinguish between different moral worldview profiles.
+
+**Fit Assessment Criteria**:
+- **Foundation Clustering**: Individualizing foundations (Care/Harm, Fairness/Cheating) show moderate positive correlations (0.3-0.7) with each other
+- **Binding Foundation Coherence**: Binding foundations (Loyalty/Betrayal, Authority/Subversion, Sanctity/Degradation, Liberty/Oppression) show moderate positive correlations within their cluster
+- **Individualizing vs. Binding Discrimination**: Framework can distinguish between individualizing and binding moral orientations
+- **Moral Reasoning Pattern Detection**: Framework identifies coherent moral reasoning patterns across political contexts
+
+**Fit Score Calculation**:
+framework_fit_score = (foundation_clustering + binding_coherence + moral_discrimination + reasoning_detection) / 4
+
+Where:
+- foundation_clustering = (average correlation within individualizing cluster + average correlation within binding cluster) / 2
+- binding_coherence = average correlation within binding foundation cluster
+- moral_discrimination = effect size of individualizing vs binding moral orientation differentiation
+- reasoning_detection = validation against Moral Foundations Theory predictions for moral reasoning patterns
+
+**Interpretation Guidelines**:
+- **0.8-1.0**: Excellent fit - framework working as intended for moral foundations analysis
+- **0.6-0.8**: Good fit - minor calibration may be needed for specific political contexts
+- **0.4-0.6**: Moderate fit - some foundations may need refinement for particular discourse types
+- **0.2-0.4**: Poor fit - significant issues with foundation clustering or moral discrimination
+- **0.0-0.2**: Very poor fit - framework may be misapplied to non-moral discourse contexts
+
 ---
 
 ## Machine-Readable Implementation
@@ -911,6 +937,31 @@ derived_metrics:
   - name: "liberty_salience_mean"
     description: "Average salience across liberty foundations"
     formula: "(dimensions.liberty.salience + dimensions.oppression.salience) / 2"
+
+# 5.5: Framework Fit Score
+framework_fit_score:
+  description: "Assessment of how well MFT applies to moral foundations analysis"
+  calculation_method: "Statistical analysis of foundation clustering and moral reasoning discrimination"
+  components:
+    - name: "foundation_clustering"
+      description: "Measures coherence within individualizing and binding foundation clusters"
+      formula: "(average([correlation(care.raw_score, fairness.raw_score), correlation(care.raw_score, harm.raw_score), correlation(fairness.raw_score, harm.raw_score)]) + average([correlation(loyalty.raw_score, authority.raw_score), correlation(loyalty.raw_score, sanctity.raw_score), correlation(loyalty.raw_score, liberty.raw_score), correlation(authority.raw_score, sanctity.raw_score), correlation(authority.raw_score, liberty.raw_score), correlation(sanctity.raw_score, liberty.raw_score)])) / 2"
+    - name: "binding_coherence"
+      description: "Measures coherence within binding foundation cluster (loyalty, authority, sanctity, liberty)"
+      formula: "average([correlation(loyalty.raw_score, authority.raw_score), correlation(loyalty.raw_score, sanctity.raw_score), correlation(loyalty.raw_score, liberty.raw_score), correlation(authority.raw_score, sanctity.raw_score), correlation(authority.raw_score, liberty.raw_score), correlation(sanctity.raw_score, liberty.raw_score)])"
+    - name: "moral_discrimination"
+      description: "Measures framework's ability to distinguish individualizing vs binding moral orientations"
+      formula: "abs(mean(care.raw_score + fairness.raw_score + harm.raw_score + cheating.raw_score) - mean(loyalty.raw_score + authority.raw_score + sanctity.raw_score + liberty.raw_score + betrayal.raw_score + subversion.raw_score + degradation.raw_score + oppression.raw_score)) / std(care.raw_score + fairness.raw_score + harm.raw_score + cheating.raw_score + loyalty.raw_score + authority.raw_score + sanctity.raw_score + liberty.raw_score + betrayal.raw_score + subversion.raw_score + degradation.raw_score + oppression.raw_score)"
+    - name: "reasoning_detection"
+      description: "Measures alignment with Moral Foundations Theory predictions for moral reasoning patterns"
+      formula: "1.0 if moral_discrimination > 0.3 and foundation_clustering > 0.2 else 0.5"
+  final_formula: "(foundation_clustering + binding_coherence + moral_discrimination + reasoning_detection) / 4"
+  interpretation:
+    excellent: "0.8-1.0: Framework working as intended for moral foundations analysis"
+    good: "0.6-0.8: Minor calibration may be needed for specific political contexts"
+    moderate: "0.4-0.6: Some foundations may need refinement for particular discourse types"
+    poor: "0.2-0.4: Significant issues with foundation clustering or moral discrimination"
+    very_poor: "0.0-0.2: Framework may be misapplied to non-moral discourse contexts"
 
 output_schema:
   type: object

@@ -94,6 +94,32 @@ This framework is specifically designed for family model moral analysis and has 
 
 **Potential pitfalls** include over-interpreting family model patterns in texts where they are minimal or absent, and misattributing strategic intent to naturally occurring family-based language patterns. The framework should be applied with awareness of the speaker's cultural and communicative context.
 
+### Section 4.5: Framework Fit Assessment
+
+**Framework Fit Definition**: For the Lakoff Framing Framework, good framework fit is indicated by the coherence of family model dimensions and their ability to distinguish between Strict Father and Nurturant Parent moral systems in political discourse. The framework is working properly when the three bipolar dimensions show appropriate clustering around family model coherence and effectively distinguish between different moral worldview orientations.
+
+**Fit Assessment Criteria**:
+- **Family Model Coherence**: Dimensions within Strict Father and Nurturant Parent clusters show moderate positive correlations (0.3-0.7)
+- **Bipolar Validity**: Strong negative correlations between opposing dimensions within each axis (typically -0.6 to -0.9)
+- **Moral System Discrimination**: Framework can distinguish between Strict Father and Nurturant Parent moral orientations
+- **Theoretical Coherence**: Observed dimensional relationships match Lakoff's family model predictions
+
+**Fit Score Calculation**:
+framework_fit_score = (family_model_coherence + bipolar_validity + moral_discrimination + theoretical_coherence) / 4
+
+Where:
+- family_model_coherence = (average correlation within Strict Father cluster + average correlation within Nurturant Parent cluster) / 2
+- bipolar_validity = average absolute correlation between all opposing dimension pairs
+- moral_discrimination = effect size of Strict Father vs Nurturant Parent moral system differentiation
+- theoretical_coherence = validation against Lakoff's family model coherence predictions
+
+**Interpretation Guidelines**:
+- **0.8-1.0**: Excellent fit - framework working as intended for family model moral analysis
+- **0.6-0.8**: Good fit - minor calibration may be needed for specific moral contexts
+- **0.4-0.6**: Moderate fit - some dimensions may need refinement for particular discourse types
+- **0.2-0.4**: Poor fit - significant issues with family model coherence or moral discrimination
+- **0.0-0.2**: Very poor fit - framework may be misapplied to non-moral discourse contexts
+
 ---
 
 ## Machine-Readable Framework Specification
@@ -286,6 +312,31 @@ derived_metrics:
   - name: "family_model_strategic_contradiction_index"
     description: "Measures strategic contradictions in family model deployment using tension analysis"
     formula: "((min(dimensions.authority_vs_empathy.raw_score, 1 - dimensions.authority_vs_empathy.raw_score) * abs(dimensions.authority_vs_empathy.salience - 0.5)) + (min(dimensions.competition_vs_cooperation.raw_score, 1 - dimensions.competition_vs_cooperation.raw_score) * abs(dimensions.competition_vs_cooperation.salience - 0.5)) + (min(dimensions.self_reliance_vs_interdependence.raw_score, 1 - dimensions.self_reliance_vs_interdependence.raw_score) * abs(dimensions.self_reliance_vs_interdependence.salience - 0.5))) / 3"
+
+# 5.5: Framework Fit Score
+framework_fit_score:
+  description: "Assessment of how well the Lakoff framework applies to family model moral analysis"
+  calculation_method: "Statistical analysis of family model coherence and moral system discrimination"
+  components:
+    - name: "family_model_coherence"
+      description: "Measures coherence within Strict Father and Nurturant Parent moral systems"
+      formula: "(average([correlation(authority_vs_empathy.raw_score, competition_vs_cooperation.raw_score), correlation(authority_vs_empathy.raw_score, self_reliance_vs_interdependence.raw_score), correlation(competition_vs_cooperation.raw_score, self_reliance_vs_interdependence.raw_score)]) + average([correlation(1 - authority_vs_empathy.raw_score, 1 - competition_vs_cooperation.raw_score), correlation(1 - authority_vs_empathy.raw_score, 1 - self_reliance_vs_interdependence.raw_score), correlation(1 - competition_vs_cooperation.raw_score, 1 - self_reliance_vs_interdependence.raw_score)])) / 2"
+    - name: "bipolar_validity"
+      description: "Measures strength of opposing relationships between family model orientations"
+      formula: "(abs(correlation(authority_vs_empathy.raw_score, 1 - authority_vs_empathy.raw_score)) + abs(correlation(competition_vs_cooperation.raw_score, 1 - competition_vs_cooperation.raw_score)) + abs(correlation(self_reliance_vs_interdependence.raw_score, 1 - self_reliance_vs_interdependence.raw_score))) / 3"
+    - name: "moral_discrimination"
+      description: "Measures framework's ability to distinguish between Strict Father and Nurturant Parent moral systems"
+      formula: "abs(mean(authority_vs_empathy.raw_score + competition_vs_cooperation.raw_score + self_reliance_vs_interdependence.raw_score) - mean(1 - authority_vs_empathy.raw_score + 1 - competition_vs_cooperation.raw_score + 1 - self_reliance_vs_interdependence.raw_score)) / std(authority_vs_empathy.raw_score + competition_vs_cooperation.raw_score + self_reliance_vs_interdependence.raw_score + (1 - authority_vs_empathy.raw_score) + (1 - competition_vs_cooperation.raw_score) + (1 - self_reliance_vs_interdependence.raw_score))"
+    - name: "theoretical_coherence"
+      description: "Measures alignment with Lakoff's family model coherence predictions"
+      formula: "1.0 if bipolar_validity > 0.5 and family_model_coherence > 0.3 else 0.5"
+  final_formula: "(family_model_coherence + bipolar_validity + moral_discrimination + theoretical_coherence) / 4"
+  interpretation:
+    excellent: "0.8-1.0: Framework working as intended for family model moral analysis"
+    good: "0.6-0.8: Minor calibration may be needed for specific moral contexts"
+    moderate: "0.4-0.6: Some dimensions may need refinement for particular discourse types"
+    poor: "0.2-0.4: Significant issues with family model coherence or moral discrimination"
+    very_poor: "0.0-0.2: Framework may be misapplied to non-moral discourse contexts"
 
 output_schema:
   type: object

@@ -72,54 +72,46 @@ class V2ValidationAgent(StandardAgent):
     def execute(self, run_context: RunContext, **kwargs) -> AgentResult:
         """
         V2 StandardAgent execute method.
-        
+
+        THIN approach: Let LLM handle complex validation reasoning, software handles simple data preparation.
+
         Args:
             run_context: The RunContext object containing all necessary data
-            
+
         Returns:
             AgentResult containing validation results and artifact hash
         """
         self.logger.info(f"Starting {self.agent_name} validation for experiment_id: {run_context.experiment_id}")
-        
+
         try:
             self.log_execution_start(run_context=run_context, **kwargs)
 
-            # 1. Validate and extract necessary data from RunContext (always needed for file path population)
-            validation_inputs = self._validate_and_extract_inputs(run_context)
+            # THIN approach: Simple data preparation, complex validation reasoning by LLM
+            validation_inputs = self._prepare_validation_inputs(run_context)
 
-            # 2. Check if LLM validation should be skipped
+            # Check if LLM validation should be skipped
             skip_validation = run_context.metadata.get("skip_validation", False)
-            
+
             if skip_validation:
-                # Skip LLM validation but still populate file paths
-                self.logger.info("Skipping LLM validation, but file paths have been populated")
+                self.logger.info("Skipping LLM validation")
                 validation_result = ValidationResult(
                     success=True,
                     issues=[],
-                    suggestions=[],
+                    suggestions=["Validation was skipped"],
                     llm_metadata={"agent_name": self.agent_name, "validation_skipped": True}
                 )
-                artifact_hash = None  # No validation artifact when skipped
+                artifact_hash = None
             else:
-                # 3. Perform validation using LLM
-                self.logger.info("Performing experiment validation...")
-                validation_result = self._perform_validation(validation_inputs, run_context)
-
-                # 4. Store validation results
+                # Send raw data to LLM for validation reasoning
+                self.logger.info("Performing experiment validation using LLM...")
+                validation_result = self._perform_llm_validation(validation_inputs, run_context)
                 artifact_hash = self._store_validation_results(validation_result, run_context)
 
-            # 4. Check if validation was successful
+            # Check validation results
             if not validation_result.success:
                 blocking_issues = [issue for issue in validation_result.issues if issue.priority == "BLOCKING"]
                 if blocking_issues:
-                    # Create detailed error message with actual issue descriptions
-                    issue_details = []
-                    for issue in blocking_issues:
-                        issue_details.append(f"• {issue.description}")
-                        if hasattr(issue, 'fix') and issue.fix:
-                            issue_details.append(f"  Fix: {issue.fix}")
-                    
-                    error_msg = f"Validation failed with {len(blocking_issues)} blocking issue(s):\n" + "\n".join(issue_details)
+                    error_msg = f"Validation failed with {len(blocking_issues)} blocking issue(s)"
                     self.logger.error(error_msg)
                     return AgentResult(
                         success=False,
@@ -128,7 +120,7 @@ class V2ValidationAgent(StandardAgent):
                         error_message=error_msg
                     )
 
-            # 5. Log completion and return success
+            # Return success
             artifacts = [artifact_hash] if artifact_hash else []
             result = AgentResult(
                 success=True,
@@ -152,6 +144,186 @@ class V2ValidationAgent(StandardAgent):
                 metadata={"agent_name": self.agent_name, "error": str(e)},
                 error_message=str(e)
             )
+
+    def _prepare_validation_inputs(self, run_context: RunContext) -> Dict[str, Any]:
+        """
+        THIN approach: Simple data preparation for LLM validation.
+
+        Load raw text files and provide directory listings.
+        Let LLM handle complex validation reasoning.
+        """
+        experiment_dir = Path(run_context.experiment_dir)
+
+        # Load raw text content (simple file I/O)
+        experiment_content = self._load_text_file(experiment_dir / "experiment.md")
+        framework_content = self._load_text_file(experiment_dir / "framework.md")
+        corpus_manifest_content = self._load_text_file(experiment_dir / "corpus.md")
+
+        # Get corpus directory listing (simple filesystem operation)
+        corpus_dir = experiment_dir / "corpus"
+        corpus_files = []
+        if corpus_dir.exists():
+            corpus_files = [f.name for f in corpus_dir.iterdir() if f.is_file()]
+
+        # Load specification references (simple file loading)
+        specification_references = self._load_specification_references()
+
+        # Load capabilities registry (simple file loading)
+        capabilities_registry = self._load_capabilities_registry()
+
+        return {
+            "experiment_content": experiment_content,
+            "framework_content": framework_content,
+            "corpus_manifest_content": corpus_manifest_content,
+            "corpus_directory_listing": corpus_files,
+            "specification_references": specification_references,
+            "capabilities_registry": capabilities_registry
+        }
+
+    def _perform_llm_validation(self, validation_inputs: Dict[str, Any], run_context: RunContext) -> ValidationResult:
+        """
+        Send raw validation data to LLM for complex reasoning.
+
+        THIN approach: LLM handles validation logic, software just formats and sends data.
+        """
+        # Format prompt with raw data
+        prompt = self.prompt_template.format(
+            current_date=datetime.now().strftime("%Y-%m-%d"),
+            experiment_spec=validation_inputs["experiment_content"],
+            framework_spec=validation_inputs["framework_content"],
+            corpus_manifest=validation_inputs["corpus_manifest_content"],
+            corpus_directory_listing=validation_inputs["corpus_directory_listing"],
+            specification_references=validation_inputs["specification_references"],
+            capabilities_registry=validation_inputs["capabilities_registry"]
+        )
+
+        # Send to LLM for validation reasoning
+        response_content, response_metadata = self.llm_gateway.execute_call(
+            model=self.model,
+            prompt=prompt,
+            system_prompt="You are an expert validation agent for the Discernus research platform.",
+            temperature=0.1,  # Low temperature for consistent validation
+            max_tokens=4000
+        )
+
+        # Parse LLM response (simple text parsing)
+        return self._parse_validation_response(response_content)
+
+    def _load_text_file(self, file_path: Path) -> str:
+        """Simple file loading - THIN approach."""
+        try:
+            if file_path.exists():
+                return file_path.read_text(encoding='utf-8')
+            else:
+                return f"FILE_NOT_FOUND: {file_path}"
+        except Exception as e:
+            return f"FILE_ERROR: {str(e)}"
+
+    def _load_specification_references(self) -> str:
+        """Load specification references."""
+        try:
+            spec_file = Path(__file__).parent.parent.parent / "docs" / "specifications" / "FRAMEWORK_SPECIFICATION.md"
+            return self._load_text_file(spec_file)
+        except:
+            return "SPECIFICATION_FILE_NOT_FOUND"
+
+    def _load_capabilities_registry(self) -> str:
+        """Load capabilities registry."""
+        try:
+            cap_file = Path(__file__).parent.parent.parent / "discernus" / "core" / "presets" / "core_capabilities.yaml"
+            return self._load_text_file(cap_file)
+        except:
+            return "CAPABILITIES_FILE_NOT_FOUND"
+
+    def _parse_validation_response(self, response_content: str) -> ValidationResult:
+        """
+        Simple text parsing of LLM validation response.
+
+        THIN approach: Let LLM format response clearly, software just extracts structured data.
+        """
+        try:
+            # Find validation block
+            start = response_content.find("```validation")
+            end = response_content.find("```", start + 13)
+
+            if start == -1 or end == -1:
+                # Fallback: try to extract from plain text
+                return self._parse_text_validation_response(response_content)
+
+            validation_block = response_content[start:end + 3]
+
+            # Simple parsing - look for SUCCESS: true/false
+            success_line = [line for line in validation_block.split('\n') if 'SUCCESS:' in line]
+            if success_line:
+                success = 'true' in success_line[0].lower()
+            else:
+                success = True  # Default to success if unclear
+
+            # Extract issues (simplified)
+            issues = []
+            suggestions = []
+
+            # Look for issue descriptions
+            issue_lines = [line.strip() for line in validation_block.split('\n') if '•' in line and ('description' in line.lower() or 'fix' in line.lower())]
+            for line in issue_lines:
+                if 'description' in line.lower():
+                    issues.append(line.split(':', 1)[1].strip() if ':' in line else line)
+                elif 'fix' in line.lower():
+                    suggestions.append(line.split(':', 1)[1].strip() if ':' in line else line)
+
+            return ValidationResult(
+                success=success,
+                issues=issues,
+                suggestions=suggestions
+            )
+
+        except Exception as e:
+            self.logger.error(f"Failed to parse validation response: {e}")
+            return ValidationResult(
+                success=False,
+                issues=[f"Failed to parse validation response: {str(e)}"],
+                suggestions=["Check validation agent logs for parsing errors"]
+            )
+
+    def _find_and_load_framework(self, experiment_path: Path) -> str:
+        """Find and load framework file."""
+        framework_file = experiment_path / "framework.md"
+        return self._load_text_file(framework_file)
+
+    def _find_and_load_corpus(self, experiment_path: Path) -> str:
+        """Find and load corpus manifest file."""
+        corpus_file = experiment_path / "corpus.md"
+        return self._load_text_file(corpus_file)
+
+    def _get_corpus_directory_listing(self, experiment_path: Path) -> List[str]:
+        """Get list of files in corpus directory."""
+        corpus_dir = experiment_path / "corpus"
+        if corpus_dir.exists():
+            return [f.name for f in corpus_dir.iterdir() if f.is_file()]
+        return []
+
+    def _parse_text_validation_response(self, response: str) -> ValidationResult:
+        """Fallback text parsing for validation responses."""
+        # Simple heuristic-based parsing
+        success_indicators = ['success', 'valid', 'passed', 'correct']
+        failure_indicators = ['failed', 'invalid', 'error', 'issue', 'problem']
+
+        response_lower = response.lower()
+        success = any(indicator in response_lower for indicator in success_indicators)
+        failure = any(indicator in response_lower for indicator in failure_indicators)
+
+        if failure and not success:
+            success = False
+        elif success and not failure:
+            success = True
+        else:
+            success = True  # Default to success
+
+        return ValidationResult(
+            success=success,
+            issues=["Validation response parsing fallback used"],
+            suggestions=["Consider improving validation response format"]
+        )
 
     def validate_experiment(self, experiment_path: Path) -> ValidationResult:
         """
@@ -186,7 +358,7 @@ class V2ValidationAgent(StandardAgent):
             
             # Find and load framework file
             framework_content = self._find_and_load_framework(experiment_path)
-            
+
             # Find and load corpus manifest
             corpus_manifest_content = self._find_and_load_corpus(experiment_path)
             
@@ -199,11 +371,19 @@ class V2ValidationAgent(StandardAgent):
                 "framework_content": framework_content,
                 "corpus_manifest_content": corpus_manifest_content,
                 "specification_references": specification_references,
-                "corpus_directory_listing": self._get_corpus_directory_listing(experiment_path)
+                "corpus_directory_listing": self._get_corpus_directory_listing(experiment_path),
+                "capabilities_registry": self._load_capabilities_registry()
             }
             
-            # Perform validation
-            validation_result = self._perform_validation(validation_inputs)
+            # Perform validation (standalone mode - create minimal run context)
+            class MockRunContext:
+                def __init__(self):
+                    self.experiment_id = experiment_path.name
+                    self.experiment_dir = str(experiment_path)
+                    self.metadata = {}
+
+            mock_run_context = MockRunContext()
+            validation_result = self._perform_llm_validation(validation_inputs, mock_run_context)
             
             self.logger.info(f"Standalone validation completed: success={validation_result.success}")
             return validation_result

@@ -195,6 +195,32 @@ Each layer builds on the previous one, providing increasingly contextualized emp
 -   **Model Requirements**: This framework requires a highly capable LLM model (e.g., Gemini 2.5 Pro, Claude 3 Opus, GPT-4) for reliable analysis. The sophisticated dual-track analysis (intensity + salience), complex concept distinctions, and mathematical framework exceed the capabilities of basic or lightweight models.
 -   **System Validation Note**: Be aware that the Discernus platform will perform a post-hoc statistical analysis of your framework's fit with your chosen corpus based on the variance in the results. A low framework-corpus fit score may indicate that the framework was misapplied and could impact the interpretation of the results.
 
+### Section 4.5: Framework Fit Assessment
+
+**Framework Fit Definition**: For the Cohesive Flourishing Framework (CFF), good framework fit is indicated by the bipolar nature of the five opposing dimension pairs and their ability to distinguish between constructive and destructive discourse patterns. The framework is working properly when opposing dimensions show strong negative correlations and the dimensional clusters (constructive vs. destructive) demonstrate theoretical coherence.
+
+**Fit Assessment Criteria**:
+- **Bipolar Validity**: Strong negative correlations between opposing dimensions within each axis (typically -0.6 to -0.9 for well-fitted frameworks)
+- **Dimensional Distinctiveness**: Dimensions within constructive and destructive clusters show moderate positive correlations (0.3-0.7), indicating they measure related but distinct concepts
+- **Theoretical Coherence**: Observed dimensional relationships match CFF's theoretical predictions about democratic discourse patterns
+- **Discriminatory Power**: Framework can distinguish between different discourse types (e.g., deliberative vs. divisive, constructive vs. destructive) with effect sizes > 0.5
+
+**Fit Score Calculation**:
+framework_fit_score = (bipolar_validity + dimensional_distinctiveness + theoretical_coherence + discriminatory_power) / 4
+
+Where:
+- bipolar_validity = average absolute correlation between all opposing dimension pairs
+- dimensional_distinctiveness = (average correlation within constructive cluster + average correlation within destructive cluster) / 2
+- theoretical_coherence = validation against CFF theoretical predictions for discourse patterns
+- discriminatory_power = effect size of constructive vs destructive discourse differentiation
+
+**Interpretation Guidelines**:
+- **0.8-1.0**: Excellent fit - framework working as intended for democratic discourse analysis
+- **0.6-0.8**: Good fit - minor calibration may be needed for specific discourse contexts
+- **0.4-0.6**: Moderate fit - some dimensions may need refinement for particular discourse types
+- **0.2-0.4**: Poor fit - significant issues with dimensional relationships or theoretical coherence
+- **0.0-0.2**: Very poor fit - framework may be misapplied to non-democratic discourse contexts
+
 ---
 
 ## Part 2: The Machine-Readable Appendix
@@ -730,7 +756,32 @@ derived_metrics:
     description: "Comprehensive evaluation of democratic health and social cohesion"
     formula: "(identity_cohesion_component + emotional_cohesion_component + success_cohesion_component + relational_cohesion_component + goal_cohesion_component) / (full_salience_total + 0.001)"
 
-# 5.5: Enhanced Output Schema
+# 5.5: Framework Fit Score
+framework_fit_score:
+  description: "Assessment of how well the CFF applies to democratic discourse analysis"
+  calculation_method: "Statistical analysis of dimensional relationships and theoretical coherence"
+  components:
+    - name: "bipolar_validity"
+      description: "Measures strength of opposing relationships between dimension pairs"
+      formula: "(abs(correlation(tribal_dominance.raw_score, individual_dignity.raw_score)) + abs(correlation(fear.raw_score, hope.raw_score)) + abs(correlation(envy.raw_score, mudita.raw_score)) + abs(correlation(enmity.raw_score, amity.raw_score)) + abs(correlation(fragmentative_goals.raw_score, cohesive_goals.raw_score))) / 5"
+    - name: "dimensional_distinctiveness"
+      description: "Measures whether dimensions within clusters are appropriately correlated"
+      formula: "(average([correlation(tribal_dominance.raw_score, fear.raw_score), correlation(tribal_dominance.raw_score, envy.raw_score), correlation(tribal_dominance.raw_score, enmity.raw_score), correlation(tribal_dominance.raw_score, fragmentative_goals.raw_score), correlation(fear.raw_score, envy.raw_score), correlation(fear.raw_score, enmity.raw_score), correlation(fear.raw_score, fragmentative_goals.raw_score), correlation(envy.raw_score, enmity.raw_score), correlation(envy.raw_score, fragmentative_goals.raw_score), correlation(enmity.raw_score, fragmentative_goals.raw_score)]) + average([correlation(individual_dignity.raw_score, hope.raw_score), correlation(individual_dignity.raw_score, mudita.raw_score), correlation(individual_dignity.raw_score, amity.raw_score), correlation(individual_dignity.raw_score, cohesive_goals.raw_score), correlation(hope.raw_score, mudita.raw_score), correlation(hope.raw_score, amity.raw_score), correlation(hope.raw_score, cohesive_goals.raw_score), correlation(mudita.raw_score, amity.raw_score), correlation(mudita.raw_score, cohesive_goals.raw_score), correlation(amity.raw_score, cohesive_goals.raw_score)])) / 2"
+    - name: "theoretical_coherence"
+      description: "Measures alignment with CFF theoretical predictions for discourse patterns"
+      formula: "1.0 if bipolar_validity > 0.5 and dimensional_distinctiveness > 0.3 else 0.5"
+    - name: "discriminatory_power"
+      description: "Measures framework's ability to distinguish between discourse types"
+      formula: "abs(mean(individual_dignity.raw_score + hope.raw_score + mudita.raw_score + amity.raw_score + cohesive_goals.raw_score) - mean(tribal_dominance.raw_score + fear.raw_score + envy.raw_score + enmity.raw_score + fragmentative_goals.raw_score)) / std(individual_dignity.raw_score + hope.raw_score + mudita.raw_score + amity.raw_score + cohesive_goals.raw_score + tribal_dominance.raw_score + fear.raw_score + envy.raw_score + enmity.raw_score + fragmentative_goals.raw_score)"
+  final_formula: "(bipolar_validity + dimensional_distinctiveness + theoretical_coherence + discriminatory_power) / 4"
+  interpretation:
+    excellent: "0.8-1.0: Framework working as intended for democratic discourse analysis"
+    good: "0.6-0.8: Minor calibration may be needed for specific discourse contexts"
+    moderate: "0.4-0.6: Some dimensions may need refinement for particular discourse types"
+    poor: "0.2-0.4: Significant issues with dimensional relationships or theoretical coherence"
+    very_poor: "0.0-0.2: Framework may be misapplied to non-democratic discourse contexts"
+
+# 5.6: Enhanced Output Schema
 # Both dimensional_scores AND derived_metrics are REQUIRED
 output_schema:
   type: object

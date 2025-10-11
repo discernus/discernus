@@ -35,6 +35,32 @@ This framework is grounded in basic sentiment analysis theory, measuring the pre
 
 **Known Limitations**: Designed for testing purposes only, not for serious sentiment analysis.
 
+### Section 4.5: Framework Fit Assessment
+
+**Framework Fit Definition**: For the Sentiment Binary Framework, good framework fit is indicated by the bipolar nature of the positive and negative sentiment dimensions. The framework is working properly when these dimensions show strong negative correlation and effectively distinguish between positive and negative content types.
+
+**Fit Assessment Criteria**:
+- **Bipolar Validity**: Strong negative correlation between positive and negative sentiment dimensions (typically -0.6 to -0.9)
+- **Dimensional Distinctiveness**: Positive and negative dimensions measure distinct concepts with minimal conceptual overlap
+- **Discriminatory Power**: Framework can reliably distinguish between positive and negative content types with effect sizes > 0.5
+- **Theoretical Coherence**: Observed dimensional relationships match framework predictions for sentiment analysis
+
+**Fit Score Calculation**:
+framework_fit_score = (bipolar_validity + dimensional_distinctiveness + discriminatory_power + theoretical_coherence) / 4
+
+Where:
+- bipolar_validity = absolute value of correlation between positive_sentiment and negative_sentiment dimensions
+- dimensional_distinctiveness = 1.0 - average correlation with other sentiment measures (if available)
+- discriminatory_power = effect size of positive vs negative content type differentiation
+- theoretical_coherence = validation against known sentiment analysis benchmarks
+
+**Interpretation Guidelines**:
+- **0.8-1.0**: Excellent fit - framework working as intended for sentiment analysis
+- **0.6-0.8**: Good fit - minor calibration may be needed
+- **0.4-0.6**: Moderate fit - framework may need refinement for specific content types
+- **0.2-0.4**: Poor fit - significant issues with dimensional relationships
+- **0.0-0.2**: Very poor fit - framework may be misapplied to the corpus
+
 ---
 
 ```yaml
@@ -105,6 +131,31 @@ analysis_variants:
     analysis_notes: |
       This is a test framework for pipeline validation. Use only for testing purposes.
       The dimensions are intentionally simple to test the complete pipeline.
+
+# 5.5: Framework Fit Score
+framework_fit_score:
+  description: "Assessment of how well the framework applies to sentiment analysis tasks"
+  calculation_method: "Statistical analysis of dimensional relationships and content discrimination"
+  components:
+    - name: "bipolar_validity"
+      description: "Measures strength of opposing relationship between positive and negative sentiment"
+      formula: "abs(correlation(positive_sentiment.raw_score, negative_sentiment.raw_score))"
+    - name: "dimensional_distinctiveness"
+      description: "Measures whether dimensions measure distinct concepts"
+      formula: "1.0 - abs(correlation(positive_sentiment.raw_score, negative_sentiment.raw_score))"
+    - name: "discriminatory_power"
+      description: "Measures framework's ability to distinguish between positive and negative content"
+      formula: "abs(mean(positive_sentiment.raw_score) - mean(negative_sentiment.raw_score)) / std(positive_sentiment.raw_score + negative_sentiment.raw_score)"
+    - name: "theoretical_coherence"
+      description: "Measures alignment with established sentiment analysis principles"
+      formula: "1.0 if bipolar_validity > 0.5 and discriminatory_power > 0.3 else 0.5"
+  final_formula: "(bipolar_validity + dimensional_distinctiveness + discriminatory_power + theoretical_coherence) / 4"
+  interpretation:
+    excellent: "0.8-1.0: Framework working as intended for sentiment analysis"
+    good: "0.6-0.8: Minor calibration may be needed"
+    moderate: "0.4-0.6: Framework may need refinement for specific content types"
+    poor: "0.2-0.4: Significant issues with dimensional relationships"
+    very_poor: "0.0-0.2: Framework may be misapplied to the corpus"
 
 output_schema:
   type: object

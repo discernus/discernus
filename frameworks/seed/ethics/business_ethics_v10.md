@@ -243,6 +243,32 @@ The framework performs best with corpora that contain:
 
 **System Validation Note**: The Discernus platform will perform a post-hoc statistical analysis to measure the framework's fit with the chosen corpus. This framework-corpus fit score is a key indicator of the research design's validity and will be provided in the final analysis results.
 
+### Section 4.5: Framework Fit Assessment
+
+**Framework Fit Definition**: For the Business Ethics Framework, good framework fit is indicated by the coherence of stakeholder, operational, and strategic dimensions and their ability to distinguish between different business ethics orientations in corporate communications. The framework is working properly when the three domains show appropriate clustering and effectively distinguish between different corporate responsibility priorities.
+
+**Fit Assessment Criteria**:
+- **Domain Coherence**: Dimensions within stakeholder, operational, and strategic domains show moderate positive correlations (0.3-0.7)
+- **Stakeholder Orientation Clarity**: Framework can distinguish between different stakeholder priority patterns
+- **Operational Integrity Assessment**: Framework captures governance and transparency patterns effectively
+- **Strategic Vision Discrimination**: Framework identifies long-term purpose and value creation patterns
+
+**Fit Score Calculation**:
+framework_fit_score = (domain_coherence + stakeholder_clarity + operational_assessment + strategic_discrimination) / 4
+
+Where:
+- domain_coherence = average correlation within stakeholder, operational, and strategic domains
+- stakeholder_clarity = effect size of different stakeholder priority patterns
+- operational_assessment = validation of operational integrity pattern detection
+- strategic_discrimination = effect size of strategic vision vs operational focus differentiation
+
+**Interpretation Guidelines**:
+- **0.8-1.0**: Excellent fit - framework working as intended for business ethics analysis
+- **0.6-0.8**: Good fit - minor calibration may be needed for specific business contexts
+- **0.4-0.6**: Moderate fit - some domains may need refinement for particular industry types
+- **0.2-0.4**: Poor fit - significant issues with domain coherence or ethical discrimination
+- **0.0-0.2**: Very poor fit - framework may be misapplied to non-business contexts
+
 ---
 
 ## Derived Metrics
@@ -780,6 +806,31 @@ derived_metrics:
     formula: "1 - (abs(dimensions.customer_service.raw_score - dimensions.employee_development.raw_score) + abs(dimensions.customer_exploitation.raw_score - dimensions.employee_exploitation.raw_score)) / 2"
     minimum: 0.0
     maximum: 1.0
+
+# 5.5: Framework Fit Score
+framework_fit_score:
+  description: "Assessment of how well the Business Ethics framework applies to corporate ethics analysis"
+  calculation_method: "Statistical analysis of domain coherence and business ethics discrimination"
+  components:
+    - name: "domain_coherence"
+      description: "Measures coherence within stakeholder, operational, and strategic domains"
+      formula: "(average([correlation(customer_service.raw_score, employee_development.raw_score), correlation(customer_service.raw_score, accountability.raw_score), correlation(customer_service.raw_score, sustainable_purpose.raw_score), correlation(employee_development.raw_score, accountability.raw_score), correlation(employee_development.raw_score, sustainable_purpose.raw_score), correlation(accountability.raw_score, sustainable_purpose.raw_score)]) + average([correlation(customer_exploitation.raw_score, employee_exploitation.raw_score), correlation(customer_exploitation.raw_score, opacity.raw_score), correlation(customer_exploitation.raw_score, short_term_extraction.raw_score), correlation(employee_exploitation.raw_score, opacity.raw_score), correlation(employee_exploitation.raw_score, short_term_extraction.raw_score), correlation(opacity.raw_score, short_term_extraction.raw_score)]) + average([correlation(financial_responsibility.raw_score, financial_manipulation.raw_score)]) ) / 3"
+    - name: "stakeholder_clarity"
+      description: "Measures framework's ability to distinguish stakeholder vs exploitation orientations"
+      formula: "abs(mean(customer_service.raw_score + employee_development.raw_score + accountability.raw_score + sustainable_purpose.raw_score) - mean(customer_exploitation.raw_score + employee_exploitation.raw_score + opacity.raw_score + short_term_extraction.raw_score)) / std(customer_service.raw_score + employee_development.raw_score + accountability.raw_score + sustainable_purpose.raw_score + customer_exploitation.raw_score + employee_exploitation.raw_score + opacity.raw_score + short_term_extraction.raw_score)"
+    - name: "operational_assessment"
+      description: "Measures validation of operational integrity pattern detection"
+      formula: "1.0 if stakeholder_clarity > 0.3 else 0.5"
+    - name: "strategic_discrimination"
+      description: "Measures framework's ability to distinguish strategic vision vs operational focus"
+      formula: "abs(mean(sustainable_purpose.raw_score + accountability.raw_score) - mean(customer_service.raw_score + employee_development.raw_score + financial_responsibility.raw_score)) / std(sustainable_purpose.raw_score + accountability.raw_score + customer_service.raw_score + employee_development.raw_score + financial_responsibility.raw_score)"
+  final_formula: "(domain_coherence + stakeholder_clarity + operational_assessment + strategic_discrimination) / 4"
+  interpretation:
+    excellent: "0.8-1.0: Framework working as intended for business ethics analysis"
+    good: "0.6-0.8: Minor calibration may be needed for specific business contexts"
+    moderate: "0.4-0.6: Some domains may need refinement for particular industry types"
+    poor: "0.2-0.4: Significant issues with domain coherence or ethical discrimination"
+    very_poor: "0.0-0.2: Framework may be misapplied to non-business contexts"
 
 output_schema:
   type: object

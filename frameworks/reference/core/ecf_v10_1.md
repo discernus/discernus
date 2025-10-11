@@ -128,6 +128,32 @@ This framework is designed for analysis of:
 
 This framework is designed to work with the Discernus v10.1 analysis pipeline. Post-hoc statistical analysis will validate dimensional independence and internal consistency. The framework's reliability metrics are calculated automatically during analysis execution.
 
+### Section 4.5: Framework Fit Assessment
+
+**Framework Fit Definition**: For the Emotional Climate Framework (ECF), good framework fit is indicated by the bipolar nature of the three opposing emotional dimension pairs and their ability to distinguish between different emotional climate patterns in political discourse. The framework is working properly when opposing dimensions show strong negative correlations and the dimensional clusters demonstrate theoretical coherence with affective intelligence theory.
+
+**Fit Assessment Criteria**:
+- **Bipolar Validity**: Strong negative correlations between opposing emotional dimensions within each axis (typically -0.6 to -0.9 for well-fitted frameworks)
+- **Dimensional Distinctiveness**: Dimensions within positive and negative emotional clusters show moderate positive correlations (0.3-0.7), indicating they measure related but distinct emotional concepts
+- **Theoretical Coherence**: Observed dimensional relationships match ECF's theoretical predictions about emotional climate patterns
+- **Discriminatory Power**: Framework can distinguish between different emotional discourse types (e.g., positive vs. negative emotional climates) with effect sizes > 0.5
+
+**Fit Score Calculation**:
+framework_fit_score = (bipolar_validity + dimensional_distinctiveness + theoretical_coherence + discriminatory_power) / 4
+
+Where:
+- bipolar_validity = average absolute correlation between all opposing dimension pairs
+- dimensional_distinctiveness = (average correlation within positive emotional cluster + average correlation within negative emotional cluster) / 2
+- theoretical_coherence = validation against affective intelligence theory predictions for emotional patterns
+- discriminatory_power = effect size of positive vs negative emotional climate differentiation
+
+**Interpretation Guidelines**:
+- **0.8-1.0**: Excellent fit - framework working as intended for emotional climate analysis
+- **0.6-0.8**: Good fit - minor calibration may be needed for specific emotional contexts
+- **0.4-0.6**: Moderate fit - some dimensions may need refinement for particular discourse types
+- **0.2-0.4**: Poor fit - significant issues with dimensional relationships or theoretical coherence
+- **0.0-0.2**: Very poor fit - framework may be misapplied to non-emotional discourse contexts
+
 ## References
 
 Marcus, G. E., Neuman, W. R., & MacKuen, M. (2000). *Affective Intelligence and Political Judgment*. University of Chicago Press.
@@ -476,7 +502,32 @@ derived_metrics:
     description: "Measures negative emotional atmosphere (fear, enmity, envy)."
     formula: "(dimensions.fear.raw_score + dimensions.enmity.raw_score + dimensions.envy.raw_score) / 3"
 
-# 5.5: Output Schema
+# 5.5: Framework Fit Score
+framework_fit_score:
+  description: "Assessment of how well ECF applies to emotional climate analysis"
+  calculation_method: "Statistical analysis of dimensional relationships and affective intelligence coherence"
+  components:
+    - name: "bipolar_validity"
+      description: "Measures strength of opposing relationships between emotional pairs"
+      formula: "(abs(correlation(fear.raw_score, hope.raw_score)) + abs(correlation(enmity.raw_score, amity.raw_score)) + abs(correlation(envy.raw_score, mudita.raw_score))) / 3"
+    - name: "dimensional_distinctiveness"
+      description: "Measures whether dimensions within positive/negative clusters are appropriately correlated"
+      formula: "(average([correlation(fear.raw_score, enmity.raw_score), correlation(fear.raw_score, envy.raw_score), correlation(enmity.raw_score, envy.raw_score)]) + average([correlation(hope.raw_score, amity.raw_score), correlation(hope.raw_score, mudita.raw_score), correlation(amity.raw_score, mudita.raw_score)])) / 2"
+    - name: "theoretical_coherence"
+      description: "Measures alignment with affective intelligence theory predictions"
+      formula: "1.0 if bipolar_validity > 0.5 and dimensional_distinctiveness > 0.3 else 0.5"
+    - name: "discriminatory_power"
+      description: "Measures framework's ability to distinguish between positive and negative emotional climates"
+      formula: "abs(mean(hope.raw_score + amity.raw_score + mudita.raw_score) - mean(fear.raw_score + enmity.raw_score + envy.raw_score)) / std(hope.raw_score + amity.raw_score + mudita.raw_score + fear.raw_score + enmity.raw_score + envy.raw_score)"
+  final_formula: "(bipolar_validity + dimensional_distinctiveness + theoretical_coherence + discriminatory_power) / 4"
+  interpretation:
+    excellent: "0.8-1.0: Framework working as intended for emotional climate analysis"
+    good: "0.6-0.8: Minor calibration may be needed for specific emotional contexts"
+    moderate: "0.4-0.6: Some dimensions may need refinement for particular discourse types"
+    poor: "0.2-0.4: Significant issues with dimensional relationships or theoretical coherence"
+    very_poor: "0.0-0.2: Framework may be misapplied to non-emotional discourse contexts"
+
+# 5.6: Output Schema
 output_schema:
   type: object
   properties:

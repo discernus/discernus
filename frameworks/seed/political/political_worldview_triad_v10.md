@@ -152,6 +152,32 @@ The framework may be less suitable for purely descriptive or factual political r
 
 This framework has been designed to work with the Discernus platform's enhanced analysis and synthesis capabilities. The derived metrics formulas leverage the secure code execution environment with access to numpy, pandas, and scipy for statistical analysis. The framework's pattern classifications and worldview profiling are designed to integrate seamlessly with the platform's automated analysis pipeline.
 
+### Section 4.5: Framework Fit Assessment
+
+**Framework Fit Definition**: For the Political Worldview Triad Framework, good framework fit is indicated by the coherence of the three legitimacy paradigms and their ability to distinguish between different political worldview orientations in political discourse. The framework is working properly when the three legitimacy sources show appropriate clustering and effectively distinguish between competing political legitimacy paradigms.
+
+**Fit Assessment Criteria**:
+- **Legitimacy Paradigm Coherence**: Dimensions within each legitimacy paradigm show moderate positive correlations (0.3-0.7)
+- **Worldview Discrimination**: Framework can distinguish between identity-based, dominance-based, and universal dignity legitimacy orientations
+- **Theoretical Integration**: Framework captures the triadic competition between legitimacy sources as predicted by political theory
+- **Political Discourse Pattern Detection**: Framework identifies coherent worldview patterns across political contexts
+
+**Fit Score Calculation**:
+framework_fit_score = (paradigm_coherence + worldview_discrimination + theoretical_integration + discourse_detection) / 4
+
+Where:
+- paradigm_coherence = average correlation within identity-based, dominance-based, and universal dignity legitimacy clusters
+- worldview_discrimination = effect size of different legitimacy paradigm differentiation
+- theoretical_integration = validation against political theory predictions for legitimacy paradigm competition
+- discourse_detection = validation against political discourse patterns for worldview coherence
+
+**Interpretation Guidelines**:
+- **0.8-1.0**: Excellent fit - framework working as intended for political worldview analysis
+- **0.6-0.8**: Good fit - minor calibration may be needed for specific political contexts
+- **0.4-0.6**: Moderate fit - some paradigms may need refinement for particular discourse types
+- **0.2-0.4**: Poor fit - significant issues with paradigm coherence or worldview discrimination
+- **0.0-0.2**: Very poor fit - framework may be misapplied to non-political discourse contexts
+
 ---
 
 <details><summary>Machine-Readable Configuration</summary>
@@ -426,6 +452,31 @@ derived_metrics:
     description: "Assesses the coherence of political strategy across legitimacy sources"
     formula: "1 - ((abs(dimensions.immutable_identity_politics.raw_score - dimensions.tribal_domination.raw_score) + abs(dimensions.pluralist_individual_dignity.raw_score - dimensions.immutable_identity_politics.raw_score) + abs(dimensions.tribal_domination.raw_score - dimensions.pluralist_individual_dignity.raw_score)) / 3)"
     interpretation: "Higher values indicate more coherent political strategy, lower values suggest strategic contradictions"
+
+# 5.5: Framework Fit Score
+framework_fit_score:
+  description: "Assessment of how well the Political Worldview Triad applies to political legitimacy analysis"
+  calculation_method: "Statistical analysis of legitimacy paradigm coherence and worldview discrimination"
+  components:
+    - name: "paradigm_coherence"
+      description: "Measures coherence within identity-based, dominance-based, and universal dignity legitimacy clusters"
+      formula: "(average([correlation(immutable_identity_politics.raw_score, tribal_domination.raw_score), correlation(immutable_identity_politics.raw_score, pluralist_individual_dignity.raw_score), correlation(tribal_domination.raw_score, pluralist_individual_dignity.raw_score)]) + average([correlation(immutable_identity_politics.raw_score, immutable_identity_politics.raw_score)]) + average([correlation(tribal_domination.raw_score, tribal_domination.raw_score)]) + average([correlation(pluralist_individual_dignity.raw_score, pluralist_individual_dignity.raw_score)])) / 4"
+    - name: "worldview_discrimination"
+      description: "Measures framework's ability to distinguish between different legitimacy paradigms"
+      formula: "abs(mean(immutable_identity_politics.raw_score) - mean(tribal_domination.raw_score)) / std(immutable_identity_politics.raw_score + tribal_domination.raw_score + pluralist_individual_dignity.raw_score) + abs(mean(tribal_domination.raw_score) - mean(pluralist_individual_dignity.raw_score)) / std(tribal_domination.raw_score + pluralist_individual_dignity.raw_score + immutable_identity_politics.raw_score) + abs(mean(pluralist_individual_dignity.raw_score) - mean(immutable_identity_politics.raw_score)) / std(pluralist_individual_dignity.raw_score + immutable_identity_politics.raw_score + tribal_domination.raw_score)"
+    - name: "theoretical_integration"
+      description: "Measures alignment with political theory predictions for legitimacy paradigm competition"
+      formula: "1.0 if worldview_discrimination > 0.3 else 0.5"
+    - name: "discourse_detection"
+      description: "Measures validation against political discourse patterns for worldview coherence"
+      formula: "1.0 if paradigm_coherence > 0.2 else 0.5"
+  final_formula: "(paradigm_coherence + worldview_discrimination + theoretical_integration + discourse_detection) / 4"
+  interpretation:
+    excellent: "0.8-1.0: Framework working as intended for political worldview analysis"
+    good: "0.6-0.8: Minor calibration may be needed for specific political contexts"
+    moderate: "0.4-0.6: Some paradigms may need refinement for particular discourse types"
+    poor: "0.2-0.4: Significant issues with paradigm coherence or worldview discrimination"
+    very_poor: "0.0-0.2: Framework may be misapplied to non-political discourse contexts"
 
 output_schema:
   type: "object"

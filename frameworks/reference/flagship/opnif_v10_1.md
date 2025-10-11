@@ -123,6 +123,32 @@ This framework is designed for analysis of:
 ### System Validation Note
 This framework is designed to work with the Discernus v10.0 analysis pipeline. Post-hoc statistical analysis will validate dimensional independence and interaction patterns. The framework's reliability metrics are calculated automatically during analysis execution.
 
+### Section 4.5: Framework Fit Assessment
+
+**Framework Fit Definition**: For the Orthogonal Populism-Nationalism Interaction Framework (OPNIF), good framework fit is indicated by the orthogonal nature of the populism and nationalism dimensions and their ability to capture strategic interaction patterns in political discourse. The framework is working properly when the dimensions show minimal correlation (orthogonality) and effectively distinguish between different populist-nationalist appeal combinations.
+
+**Fit Assessment Criteria**:
+- **Orthogonality Validation**: Low correlation between populism and nationalism dimensions (typically < 0.3 for well-fitted frameworks)
+- **Dimensional Distinctiveness**: Populist and nationalist dimensions measure distinct concepts with clear theoretical separation
+- **Interaction Analysis**: Framework captures meaningful interaction patterns between populist and nationalist appeals
+- **Discriminatory Power**: Framework can distinguish between different strategic combinations of populist-nationalist appeals
+
+**Fit Score Calculation**:
+framework_fit_score = (orthogonality + dimensional_distinctiveness + interaction_analysis + discriminatory_power) / 4
+
+Where:
+- orthogonality = 1.0 - abs(correlation(populism.raw_score, nationalism.raw_score))
+- dimensional_distinctiveness = validation against theoretical predictions for orthogonal dimensions
+- interaction_analysis = assessment of strategic interaction pattern detection
+- discriminatory_power = effect size of different populist-nationalist appeal combinations
+
+**Interpretation Guidelines**:
+- **0.8-1.0**: Excellent fit - framework working as intended for orthogonal populism-nationalism analysis
+- **0.6-0.8**: Good fit - minor calibration may be needed for specific political contexts
+- **0.4-0.6**: Moderate fit - some dimensions may need refinement for particular discourse types
+- **0.2-0.4**: Poor fit - significant issues with dimensional relationships or orthogonality
+- **0.0-0.2**: Very poor fit - framework may be misapplied to non-political discourse contexts
+
 ## References
 
 Mudde, C. (2004). The populist zeitgeist. *Government and Opposition*, 39(4), 541-563.
@@ -369,7 +395,30 @@ derived_metrics:
     description: "Overall political positioning strength across both orthogonal axes."
     formula: "(dimensional_scores.populism.raw_score + dimensional_scores.nationalism.raw_score) / 2"
 
-
+# 5.5: Framework Fit Score
+framework_fit_score:
+  description: "Assessment of how well OPNIF applies to populism-nationalism interaction analysis"
+  calculation_method: "Statistical analysis of orthogonal relationships and strategic interaction patterns"
+  components:
+    - name: "orthogonality"
+      description: "Measures independence between populism and nationalism dimensions"
+      formula: "1.0 - abs(correlation(populism.raw_score, nationalism.raw_score))"
+    - name: "dimensional_distinctiveness"
+      description: "Measures whether dimensions capture distinct theoretical concepts"
+      formula: "1.0 if correlation(populism.raw_score, nationalism.raw_score) < 0.3 else 0.5"
+    - name: "interaction_analysis"
+      description: "Measures framework's ability to capture strategic interaction patterns"
+      formula: "1.0 if strategic_interaction_metrics_detected else 0.5"
+    - name: "discriminatory_power"
+      description: "Measures framework's ability to distinguish between different appeal combinations"
+      formula: "abs(mean(populism.raw_score + nationalism.raw_score) - mean(populism.raw_score - nationalism.raw_score)) / std(populism.raw_score + nationalism.raw_score + populism.raw_score - nationalism.raw_score)"
+  final_formula: "(orthogonality + dimensional_distinctiveness + interaction_analysis + discriminatory_power) / 4"
+  interpretation:
+    excellent: "0.8-1.0: Framework working as intended for orthogonal populism-nationalism analysis"
+    good: "0.6-0.8: Minor calibration may be needed for specific political contexts"
+    moderate: "0.4-0.6: Some dimensions may need refinement for particular discourse types"
+    poor: "0.2-0.4: Significant issues with dimensional relationships or orthogonality"
+    very_poor: "0.0-0.2: Framework may be misapplied to non-political discourse contexts"
 
 output_schema:
   type: object
