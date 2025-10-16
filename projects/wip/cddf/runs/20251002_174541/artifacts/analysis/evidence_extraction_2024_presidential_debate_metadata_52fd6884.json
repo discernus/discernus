@@ -1,0 +1,8 @@
+{
+  "analysis_id": "analysis_v2_analysis_20251002_114550_38",
+  "step": "evidence_extraction",
+  "model_used": "vertex_ai/gemini-2.5-flash-lite",
+  "evidence_extraction": "```json\n[\n  {\n    \"dimension\": \"dignified_expression\",\n    \"raw_score\": 0.8,\n    \"quote\": \"Vice President Kamala Harris and former President Donald Trump face off in their first presidential debate in Philadelphia.\"\n  },\n  {\n    \"dimension\": \"dignified_expression\",\n    \"raw_score\": 0.8,\n    \"quote\": \"Follow live debate coverage here:\"\n  },\n  {\n    \"dimension\": \"dignified_expression\",\n    \"raw_score\": 0.8,\n    \"quote\": \"Note: Debate starts at 3:47\"\n  },\n  {\n    \"dimension\": \"truth_with_care\",\n    \"raw_score\": 0.9,\n    \"quote\": \"Full Debate: Harris vs. Trump in 2024 ABC News Presidential Debate | WSJ\"\n  },\n  {\n    \"dimension\": \"truth_with_care\",\n    \"raw_score\": 0.9,\n    \"quote\": \"Vice President Kamala Harris and former President Donald Trump face off in their first presidential debate in Philadelphia.\"\n  },\n  {\n    \"dimension\": \"truth_with_care\",\n    \"raw_score\": 0.9,\n    \"quote\": \"Note: Debate starts at 3:47\"\n  }\n]\n```",
+  "document_index": 38,
+  "timestamp": "2025-10-02T19:49:01.369186+00:00"
+}

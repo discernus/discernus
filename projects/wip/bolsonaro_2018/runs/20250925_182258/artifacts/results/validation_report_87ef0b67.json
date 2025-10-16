@@ -1,0 +1,87 @@
+{
+  "validation_success": false,
+  "issues": [
+    {
+      "category": "trinity_coherence",
+      "description": "The experiment specifies a `campaign_stage` grouping variable with 8 distinct phases, but the corpus manifest does not define a corresponding metadata field named `campaign_stage` for all documents. While the `political_phase` field exists and appears to be mapped in the experiment specification, the direct `campaign_stage` mapping is not universally present in the corpus metadata.",
+      "impact": "Statistical analyses requiring grouping by `campaign_stage` will fail because the necessary metadata is not consistently available for all documents in the corpus.",
+      "fix": "Add a `campaign_stage` metadata field to each document in the `corpus.md` file, ensuring it accurately reflects the intended grouping as described in the experiment specification's 'Data Grouping and Custom Variable Mapping' section.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "trinity_coherence",
+      "description": "The experiment specification attempts to define and use custom grouping variables for `pre_post_stabbing` and `electoral_proximity` based on temporal logic derived from the `date` field. However, the corpus manifest metadata for several documents does not consistently include the `pre_post_stabbing` field (e.g., '2018-07-22_PSL_Conference_Candidacy_Launch.txt' is marked as 'pre_stabbing' but the experiment implies it should be 'pre_stabbing' based on date). More critically, the `electoral_proximity` grouping (distant, approaching, imminent, inter_round, final_push) is entirely missing as a metadata field from all documents in the corpus manifest, but it is referenced as a grouping variable for statistical analysis.",
+      "impact": "Statistical analyses dependent on `pre_post_stabbing` and `electoral_proximity` will fail due to missing or inconsistent metadata. The `electoral_proximity` grouping is completely undefined in the corpus manifest.",
+      "fix": "Ensure that the `pre_post_stabbing` field is consistently applied in the corpus manifest according to the experiment's logic. Crucially, add an `electoral_proximity` metadata field to every document in the `corpus.md` file, populating it with the correct category (e.g., 'distant', 'approaching', 'imminent', 'inter_round', 'final_push') based on the document's date, as outlined in the experiment's 'Data Grouping and Custom Variable Mapping' section.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "trinity_coherence",
+      "description": "The experiment specification references a `speech_type` metadata field for grouping (e.g., 'campaign_speech', 'policy_speech', 'personal_statement', 'election_result', 'election_eve'). While this field is present in the corpus manifest for most documents, it is missing for the document with `document_id: 'bolsonaro_2018_pre_election_live'`, which is listed as 'election_eve' in the experiment's `speech_type` grouping but lacks the `speech_type` metadata in the manifest.",
+      "impact": "Statistical analyses that group by `speech_type` might fail or produce incomplete results due to missing data for at least one document.",
+      "fix": "Add the `speech_type` metadata field to the document with `document_id: 'bolsonaro_2018_pre_election_live'` in the `corpus.md` file, setting its value to 'election_eve' as indicated in the experiment's grouping strategy.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The experiment specifies using 'PDAF v10.0.2 framework' in the abstract and refers to 'v10.0.2' in the research questions and significance sections. However, the machine-readable appendix in the experiment file references `spec_version: \"10.0\"` and the framework file itself is also labeled as `framework_version: \"10.0.2\"` and `spec_version: \"10.0\"`. While the framework version is explicit, the experiment's `spec_version` in the appendix should ideally match the framework's `spec_version` for strict compliance.",
+      "impact": "Minor inconsistency in versioning specification. The system might proceed if compatible, but it indicates a lack of strict adherence to versioning standards, potentially leading to confusion or issues if future versions have breaking changes.",
+      "fix": "Update the `spec_version` in the `metadata` section of the machine-readable appendix in `experiment.md` to `\"10.0.2\"` to precisely match the framework's specified version.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The experiment specification, under Section 5.3 'Statistical Executability Requirements', states that 'All ANOVA groups must have n>=2. Single-observation groups (n=1) must be designated as baselines and excluded from inferential testing.' Several planned statistical groups based on the corpus metadata and experiment's grouping logic have only one document. Specifically, the `campaign_stage` groups 'campaign_interruption' (n=1), 'final_campaign' (n=1), 'election_day' (n=1), and 'final_hours' (n=1) are too small for inferential statistical tests like ANOVA. Similarly, for `audience` type, 'business_leaders' has n=1.",
+      "impact": "Statistical tests like ANOVA cannot be performed on groups with only one observation. The experiment's planned analyses may be underpowered or impossible for these specific groups, potentially impacting hypothesis testing.",
+      "fix": "Clearly designate the single-observation groups ('campaign_interruption', 'final_campaign', 'election_day', 'final_hours' for `campaign_stage`; 'business_leaders' for `audience`) as baseline reference groups and ensure they are excluded from inferential statistical tests as per the specification. The analysis plan should focus on groups with n>=2 for comparisons. A suggestion would be to consider combining 'final_campaign' and 'final_hours' if semantically justifiable, or acknowledge the limitations for these specific groups in the analysis.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The experiment aims to analyze 'audience types' with groups: 'mass_public' (n=5), 'business_leaders' (n=1), 'online_supporters' (n=3), 'national_audience' (n=4). While 'mass_public', 'online_supporters', and 'national_audience' have sufficient samples for basic comparative analysis (n>=2), the 'business_leaders' group has only n=1. This violates the 'n>=2' requirement for ANOVA groups as stated in Section 5.3 of the experiment specification.",
+      "impact": "The 'business_leaders' group cannot be used for comparative statistical analysis (like t-tests or ANOVA) with other audience types due to its sample size being less than 2.",
+      "fix": "As per the specification, designate the 'business_leaders' group (n=1) as a baseline or reference group and ensure it is excluded from inferential statistical tests comparing audience types. The analysis should proceed with comparisons between 'mass_public', 'online_supporters', and 'national_audience'.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "capabilities_mismatch",
+      "description": "The experiment aims to perform 'Trend Analysis: Linear regression on temporal progression of Salience-Weighted Overall Populism Index'. While linear regression is a standard capability, the corpus size (N=13) is quite small for robust trend analysis. The experiment also mentions 'Variance in populist scores will increase in final campaign month (Levene's test, October vs. earlier months)', which requires a Levene's test. For comparing multiple groups like 'campaign_stage', ANOVA is mentioned. While these tests are available, the small sample sizes per group may limit the statistical power and reliability of the findings, particularly for ANOVA and variance tests across all defined campaign stages.",
+      "impact": "Statistical power for trend analysis and group comparisons (ANOVA, Levene's test) may be low due to small sample sizes per group, potentially leading to non-significant results even if real effects exist, or unreliable estimates.",
+      "fix": "Proceed with the planned analyses but acknowledge the limitations imposed by small sample sizes in the experiment's reporting. Consider using non-parametric alternatives or focusing on effect sizes rather than strict p-values where appropriate. The experiment specification already notes sample size adequacy for statistical power in Section 4, which is good, but reiterate this limitation for specific tests.",
+      "priority": "SUGGESTION",
+      "affected_files": [
+        "experiment.md"
+      ]
+    }
+  ],
+  "suggestions": [
+    "Consider consolidating or re-evaluating the definition of the `campaign_stage` groups to increase the sample size for some categories, allowing for more robust statistical analysis. For example, 'final_campaign' and 'final_hours' could potentially be merged if semantically justifiable to increase the N for those stages.",
+    "When reporting results, explicitly mention the limitations due to small sample sizes for certain groups, especially for inferential statistics like ANOVA and variance tests.",
+    "Ensure the mapping of `political_phase` to `campaign_stage` in the experiment specification is reviewed for semantic alignment, as some mappings might be less direct (e.g., 'final_campaign_push' to 'late_campaign', 'pre_second_round' to 'final_hours'). This is primarily a suggestion for clarity, not a functional blocker, given that the primary statistical grouping is `campaign_stage`.",
+    "The experiment's detailed research questions and hypotheses are comprehensive. Ensure the final analysis output directly addresses each of these to maximize the study's impact."
+  ],
+  "metadata": {
+    "agent": "V2ValidationAgent",
+    "timestamp": "2025-09-25T14:23:08.453601",
+    "experiment_id": "bolsonaro_2018",
+    "validation_type": "experiment_coherence"
+  }
+}

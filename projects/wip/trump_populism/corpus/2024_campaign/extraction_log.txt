@@ -1,0 +1,48 @@
+🎯 Starting transcript extraction for 74 speeches...
+❌ Failed: trump_2024_2024-06-06_AZ_NY6oOhea7Tg.txt - /opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python: can't open file '/Volumes/code/discernus/projects/2d_trump_populism/../../../../corpus/tools/enhanced_transcript_extractor.py': [Errno 2] No such file or directory
+
+❌ Failed: trump_2024_2024-06-09_NV_-nyZJZf7_1c.txt - /opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python: can't open file '/Volumes/code/discernus/projects/2d_trump_populism/../../../../corpus/tools/enhanced_transcript_extractor.py': [Errno 2] No such file or directory
+
+❌ Failed: trump_2024_2024-06-15_MI_-YNaRMLdZ6M.txt - /opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python: can't open file '/Volumes/code/discernus/projects/2d_trump_populism/../../../../corpus/tools/enhanced_transcript_extractor.py': [Errno 2] No such file or directory
+
+❌ Failed: trump_2024_2024-06-18_WI_FjCYUNEiQGA.txt - /opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python: can't open file '/Volumes/code/discernus/projects/2d_trump_populism/../../../../corpus/tools/enhanced_transcript_extractor.py': [Errno 2] No such file or directory
+
+❌ Failed: trump_2024_2024-06-22_PA_9vN1ysKxXP8.txt - /opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python: can't open file '/Volumes/code/discernus/projects/2d_trump_populism/../../../../corpus/tools/enhanced_transcript_extractor.py': [Errno 2] No such file or directory
+
+❌ Failed: trump_2024_2024-06-28_VA_7R8UVSvqJRQ.txt - /opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python: can't open file '/Volumes/code/discernus/projects/2d_trump_populism/../../../../corpus/tools/enhanced_transcript_extractor.py': [Errno 2] No such file or directory
+
+❌ Failed: trump_2024_2024-07-09_FL_eojBR3JiL6Y.txt - /opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python: can't open file '/Volumes/code/discernus/projects/2d_trump_populism/../../../../corpus/tools/enhanced_transcript_extractor.py': [Errno 2] No such file or directory
+
+❌ Failed: trump_2024_2024-07-13_PA_0XVJW5oC7FU.txt - /opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python: can't open file '/Volumes/code/discernus/projects/2d_trump_populism/../../../../corpus/tools/enhanced_transcript_extractor.py': [Errno 2] No such file or directory
+
+❌ Failed: trump_2024_2024-07-20_MI_4v46FwsLUOc.txt - /opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python: can't open file '/Volumes/code/discernus/projects/2d_trump_populism/../../../../corpus/tools/enhanced_transcript_extractor.py': [Errno 2] No such file or directory
+
+❌ Failed: trump_2024_2024-07-24_NC_37VqgNlQbQg.txt - /opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python: can't open file '/Volumes/code/discernus/projects/2d_trump_populism/../../../../corpus/tools/enhanced_transcript_extractor.py': [Errno 2] No such file or directory
+
+❌ Failed: trump_2024_2024-07-27_MN_-4Drs2TmEhc.txt - /opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python: can't open file '/Volumes/code/discernus/projects/2d_trump_populism/../../../../corpus/tools/enhanced_transcript_extractor.py': [Errno 2] No such file or directory
+
+❌ Failed: trump_2024_2024-07-31_PA_YA7Pi8F1I7s.txt - /opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python: can't open file '/Volumes/code/discernus/projects/2d_trump_populism/../../../../corpus/tools/enhanced_transcript_extractor.py': [Errno 2] No such file or directory
+
+❌ Failed: trump_2024_2024-08-03_GA_-1UAZqFLVYI.txt - /opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python: can't open file '/Volumes/code/discernus/projects/2d_trump_populism/../../../../corpus/tools/enhanced_transcript_extractor.py': [Errno 2] No such file or directory
+
+❌ Failed: trump_2024_2024-08-09_MT_D4IdhXexLko.txt - /opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python: can't open file '/Volumes/code/discernus/projects/2d_trump_populism/../../../../corpus/tools/enhanced_transcript_extractor.py': [Errno 2] No such file or directory
+
+❌ Failed: trump_2024_2024-08-14_NC_bAIPi1cPY4c.txt - /opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python: can't open file '/Volumes/code/discernus/projects/2d_trump_populism/../../../../corpus/tools/enhanced_transcript_extractor.py': [Errno 2] No such file or directory
+
+❌ Failed: trump_2024_2024-08-17_PA_Z2ACEVWKaCs.txt - /opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python: can't open file '/Volumes/code/discernus/projects/2d_trump_populism/../../../../corpus/tools/enhanced_transcript_extractor.py': [Errno 2] No such file or directory
+
+❌ Failed: trump_2024_2024-08-21_NC_IGV3T03fmLo.txt - /opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python: can't open file '/Volumes/code/discernus/projects/2d_trump_populism/../../../../corpus/tools/enhanced_transcript_extractor.py': [Errno 2] No such file or directory
+
+❌ Failed: trump_2024_2024-08-23_AZ_jtW6LFSeMq8.txt - /opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python: can't open file '/Volumes/code/discernus/projects/2d_trump_populism/../../../../corpus/tools/enhanced_transcript_extractor.py': [Errno 2] No such file or directory
+
+❌ Failed: trump_2024_2024-08-29_WI_GYnvNd77o3Y.txt - /opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python: can't open file '/Volumes/code/discernus/projects/2d_trump_populism/../../../../corpus/tools/enhanced_transcript_extractor.py': [Errno 2] No such file or directory
+
+❌ Failed: trump_2024_2024-08-30_PA_VFuQ3kxTDMI.txt - /opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python: can't open file '/Volumes/code/discernus/projects/2d_trump_populism/../../../../corpus/tools/enhanced_transcript_extractor.py': [Errno 2] No such file or directory
+
+❌ Failed: trump_2024_2024-09-07_WI_7kykpqbOSjI.txt - /opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python: can't open file '/Volumes/code/discernus/projects/2d_trump_populism/../../../../corpus/tools/enhanced_transcript_extractor.py': [Errno 2] No such file or directory
+
+❌ Failed: trump_2024_2024-09-12_AZ_a5lQkUWhkqA.txt - /opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python: can't open file '/Volumes/code/discernus/projects/2d_trump_populism/../../../../corpus/tools/enhanced_transcript_extractor.py': [Errno 2] No such file or directory
+
+❌ Failed: trump_2024_2024-09-13_NV_mk97gSfZiDg.txt - /opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python: can't open file '/Volumes/code/discernus/projects/2d_trump_populism/../../../../corpus/tools/enhanced_transcript_extractor.py': [Errno 2] No such file or directory
+
+❌ Failed: trump_2024_2024-09-17_MI_v74Ri4dVzlk.txt - /opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python: can't open file '/Volumes/code/discernus/projects/2d_trump_populism/../../../../corpus/tools/enhanced_transcript_extractor.py': [Errno 2] No such file or directory

@@ -1,0 +1,26 @@
+{
+  "video_info": {
+    "video_id": "4Xaw9rXXnvU",
+    "title": "A Public Address by Senator Rand Paul",
+    "channel": "Rand Paul",
+    "upload_date": "2020-05-21",
+    "description": "",
+    "duration": 770,
+    "view_count": 1158,
+    "like_count": null,
+    "url": "https://www.youtube.com/watch?v=4Xaw9rXXnvU"
+  },
+  "extraction_info": {
+    "method": "youtube_api",
+    "language": "en (auto-generated)",
+    "confidence": 80.0,
+    "success": true,
+    "transcript_length": 12594,
+    "whisper_model": null
+  },
+  "processing_metadata": {
+    "transcript_length": 12594,
+    "extraction_date": "2025-08-06T01:18:13.174277",
+    "source": "youtube_transcript_api"
+  }
+}

@@ -164,7 +164,7 @@ def _validate_corpus_documents(experiment_path: Path, corpus_manifest_path: Path
 
 # Main CLI group
 @click.group()
-@click.version_option(version='2.0.0', prog_name='Discernus')
+@click.version_option(version='2.1.0', prog_name='Discernus')
 @click.pass_context
 def cli(ctx):
     """Discernus - Computational Social Science Research Platform (THIN v2.0)

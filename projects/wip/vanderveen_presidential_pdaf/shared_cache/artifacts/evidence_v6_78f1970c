@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "32cba71f48f520083cfed9d6255dd290c17267cd67f836a413e8776de309f83c"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-03T14:30:40.427910+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "trump/convention_period/trump_2016_07_11.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "There are two Americas: the ruling class, and the groups it favors, and then everyone else.",
+      "confidence": 0.95,
+      "context_type": "binary_opposition_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:30:40.427894+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_07_11.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "The decades of decay, division and decline will come to an end. The years of American Greatness will return.",
+      "confidence": 0.95,
+      "context_type": "decline_from_past_greatness_narrative_structure",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:30:40.427896+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_07_11.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "I am the law and order candidate.",
+      "confidence": 0.9,
+      "context_type": "popular_will_primacy_assertions",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:30:40.427897+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_07_11.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "Crooked Hillary Clinton is the Secretary of the Status Quo \u2013 and wherever Hillary Clinton goes, corruption and scandal follow.",
+      "confidence": 0.9,
+      "context_type": "opponent_demonization_strategies",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:30:40.427898+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_07_11.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "Fixing this corruption will be one of my highest priorities \u2013 and it will happen. It will be fixed.",
+      "confidence": 0.95,
+      "context_type": "explicit_coordination_conspiracy_claims",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:30:40.427899+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_07_11.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "I am the law and order candidate.",
+      "confidence": 0.95,
+      "context_type": "anti_political_class_identity_claims",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:30:40.427904+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_07_11.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "Our whole nation is in mourning, and will be for a very long time.",
+      "confidence": 0.9,
+      "context_type": "unified_virtuous_people_construction",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:30:40.427906+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_07_11.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "Veterans should come first in the country they fought to protect, and under a Trump Administration they will -- America First, Veterans First.",
+      "confidence": 0.9,
+      "context_type": "cultural_identity_under_siege_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:30:40.427907+00:00"
+    },
+    {
+      "document_name": "trump/convention_period/trump_2016_07_11.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "Every year, large corporations bring in many thousands of low-wage workers from overseas, and across the border, to fill jobs that could Veterans should come first in the country they fought to protect, and under a Trump Administration they will -- America First, Veterans First.",
+      "confidence": 0.85,
+      "context_type": "economic_system_manipulation_claims",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:30:40.427908+00:00"
+    }
+  ]
+}

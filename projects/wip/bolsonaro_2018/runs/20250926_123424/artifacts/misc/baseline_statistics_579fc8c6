@@ -1,0 +1,2824 @@
+{
+  "analysis_id": "baseline_stats_20250926_045818",
+  "step": "baseline_statistics",
+  "processor_type": "composite_analysis_pandas",
+  "processor_version": "1.0.0",
+  "baseline_statistics": {
+    "document_level": {
+      "sample_size": 12,
+      "metric_count": 8,
+      "metric_names": [
+        "democratic_authoritarian_tension",
+        "internal_external_focus_tension",
+        "crisis_elite_attribution_tension",
+        "populist_strategic_contradiction_index",
+        "salience_weighted_core_populism_index",
+        "salience_weighted_populism_mechanisms_index",
+        "salience_weighted_boundary_distinctions_index",
+        "salience_weighted_overall_populism_index"
+      ],
+      "descriptives": {
+        "democratic_authoritarian_tension": {
+          "mean": 0.10333333333333335,
+          "median": 0.12,
+          "std": 0.05262791055796316,
+          "min": 0.0,
+          "max": 0.15,
+          "q25": 0.0875,
+          "q75": 0.14,
+          "skewness": -1.243610604687846,
+          "kurtosis": 0.1099885563253844
+        },
+        "internal_external_focus_tension": {
+          "mean": 0.06083333333333333,
+          "median": 0.08,
+          "std": 0.04273774855458757,
+          "min": 0.0,
+          "max": 0.14,
+          "q25": 0.03,
+          "q75": 0.08,
+          "skewness": -0.17666124555489368,
+          "kurtosis": -0.5811119745133295
+        },
+        "crisis_elite_attribution_tension": {
+          "mean": 0.09291666666666669,
+          "median": 0.08,
+          "std": 0.02472193848435519,
+          "min": 0.07,
+          "max": 0.14,
+          "q25": 0.0775,
+          "q75": 0.10875,
+          "skewness": 0.831104077176761,
+          "kurtosis": -0.7953689858644473
+        },
+        "populist_strategic_contradiction_index": {
+          "mean": 0.08555277777777777,
+          "median": 0.08683333333333333,
+          "std": 0.01755971317920731,
+          "min": 0.0533,
+          "max": 0.11,
+          "q25": 0.075,
+          "q75": 0.1,
+          "skewness": -0.31018108824869506,
+          "kurtosis": -1.0953325578523894
+        },
+        "salience_weighted_core_populism_index": {
+          "mean": 0.8481822285181072,
+          "median": 0.853193371108643,
+          "std": 0.02724717080578566,
+          "min": 0.81,
+          "max": 0.88,
+          "q25": 0.8282499999999999,
+          "q75": 0.8762,
+          "skewness": -0.25417510473627136,
+          "kurtosis": -1.4306131984682926
+        },
+        "salience_weighted_populism_mechanisms_index": {
+          "mean": 0.8173845623514834,
+          "median": 0.825,
+          "std": 0.055206099678790366,
+          "min": 0.73,
+          "max": 0.8996,
+          "q25": 0.7638380533079486,
+          "q75": 0.85025,
+          "skewness": -0.062392739656736175,
+          "kurtosis": -1.2391230177440549
+        },
+        "salience_weighted_boundary_distinctions_index": {
+          "mean": 0.7382575265459087,
+          "median": 0.752,
+          "std": 0.13531434594317598,
+          "min": 0.36,
+          "max": 0.8759900062460962,
+          "q25": 0.7197,
+          "q75": 0.803125234228607,
+          "skewness": -1.8687528558824724,
+          "kurtosis": 3.286643357789953
+        },
+        "salience_weighted_overall_populism_index": {
+          "mean": 0.8454828279724779,
+          "median": 0.8377590928848717,
+          "std": 0.06303885033030783,
+          "min": 0.74,
+          "max": 0.957,
+          "q25": 0.8135,
+          "q75": 0.8815,
+          "skewness": 0.16272283919297859,
+          "kurtosis": -0.6385298490970195
+        }
+      },
+      "correlations": {
+        "pearson_correlations": {
+          "democratic_authoritarian_tension": {
+            "democratic_authoritarian_tension": 1.0,
+            "internal_external_focus_tension": -0.42169905729578977,
+            "crisis_elite_attribution_tension": 0.02678460530946699,
+            "populist_strategic_contradiction_index": 0.6529858157540106,
+            "salience_weighted_core_populism_index": -0.6432994590778915,
+            "salience_weighted_populism_mechanisms_index": -0.5698387262332906,
+            "salience_weighted_boundary_distinctions_index": -0.20732273631144432,
+            "salience_weighted_overall_populism_index": -0.3983287852676525
+          },
+          "internal_external_focus_tension": {
+            "democratic_authoritarian_tension": -0.42169905729578977,
+            "internal_external_focus_tension": 1.0,
+            "crisis_elite_attribution_tension": -0.24342864764371255,
+            "populist_strategic_contradiction_index": 0.26777086353113944,
+            "salience_weighted_core_populism_index": 0.27589487422509396,
+            "salience_weighted_populism_mechanisms_index": 0.029451473150140996,
+            "salience_weighted_boundary_distinctions_index": -0.2782493486209589,
+            "salience_weighted_overall_populism_index": 0.2321647165959983
+          },
+          "crisis_elite_attribution_tension": {
+            "democratic_authoritarian_tension": 0.02678460530946699,
+            "internal_external_focus_tension": -0.24342864764371255,
+            "crisis_elite_attribution_tension": 1.0,
+            "populist_strategic_contradiction_index": 0.3090933392335752,
+            "salience_weighted_core_populism_index": 0.23614149521837438,
+            "salience_weighted_populism_mechanisms_index": -0.16576645064031653,
+            "salience_weighted_boundary_distinctions_index": 0.2904969760548368,
+            "salience_weighted_overall_populism_index": -0.23728155966113845
+          },
+          "populist_strategic_contradiction_index": {
+            "democratic_authoritarian_tension": 0.6529858157540106,
+            "internal_external_focus_tension": 0.26777086353113944,
+            "crisis_elite_attribution_tension": 0.3090933392335752,
+            "populist_strategic_contradiction_index": 1.0,
+            "salience_weighted_core_populism_index": -0.2815478826858454,
+            "salience_weighted_populism_mechanisms_index": -0.5945597221543625,
+            "salience_weighted_boundary_distinctions_index": -0.24658430775957896,
+            "salience_weighted_overall_populism_index": -0.2888954080789983
+          },
+          "salience_weighted_core_populism_index": {
+            "democratic_authoritarian_tension": -0.6432994590778915,
+            "internal_external_focus_tension": 0.27589487422509396,
+            "crisis_elite_attribution_tension": 0.23614149521837438,
+            "populist_strategic_contradiction_index": -0.2815478826858454,
+            "salience_weighted_core_populism_index": 1.0,
+            "salience_weighted_populism_mechanisms_index": 0.5805123280413457,
+            "salience_weighted_boundary_distinctions_index": 0.5767465363336018,
+            "salience_weighted_overall_populism_index": 0.48294752712181926
+          },
+          "salience_weighted_populism_mechanisms_index": {
+            "democratic_authoritarian_tension": -0.5698387262332906,
+            "internal_external_focus_tension": 0.029451473150140996,
+            "crisis_elite_attribution_tension": -0.16576645064031653,
+            "populist_strategic_contradiction_index": -0.5945597221543625,
+            "salience_weighted_core_populism_index": 0.5805123280413457,
+            "salience_weighted_populism_mechanisms_index": 1.0,
+            "salience_weighted_boundary_distinctions_index": 0.5210062238189563,
+            "salience_weighted_overall_populism_index": 0.7172040462522525
+          },
+          "salience_weighted_boundary_distinctions_index": {
+            "democratic_authoritarian_tension": -0.20732273631144432,
+            "internal_external_focus_tension": -0.2782493486209589,
+            "crisis_elite_attribution_tension": 0.2904969760548368,
+            "populist_strategic_contradiction_index": -0.24658430775957896,
+            "salience_weighted_core_populism_index": 0.5767465363336018,
+            "salience_weighted_populism_mechanisms_index": 0.5210062238189563,
+            "salience_weighted_boundary_distinctions_index": 1.0,
+            "salience_weighted_overall_populism_index": 0.5796905070709563
+          },
+          "salience_weighted_overall_populism_index": {
+            "democratic_authoritarian_tension": -0.3983287852676525,
+            "internal_external_focus_tension": 0.2321647165959983,
+            "crisis_elite_attribution_tension": -0.23728155966113845,
+            "populist_strategic_contradiction_index": -0.2888954080789983,
+            "salience_weighted_core_populism_index": 0.48294752712181926,
+            "salience_weighted_populism_mechanisms_index": 0.7172040462522525,
+            "salience_weighted_boundary_distinctions_index": 0.5796905070709563,
+            "salience_weighted_overall_populism_index": 1.0
+          }
+        },
+        "matrix_size": "8x8",
+        "variable_count": 8
+      },
+      "reliability": {
+        "cronbach_alpha": 0.3803550579929566,
+        "item_count": 8,
+        "interpretation": "Poor reliability"
+      }
+    },
+    "dimension_level": {
+      "sample_size": 108,
+      "dimension_count": 9,
+      "document_count": 12,
+      "dimension_names": [
+        "anti_pluralist_exclusion",
+        "authenticity_vs_political_class",
+        "crisis_restoration_narrative",
+        "economic_populist_appeals",
+        "elite_conspiracy_systemic_corruption",
+        "homogeneous_people_construction",
+        "manichaean_people_elite_framing",
+        "nationalist_exclusion",
+        "popular_sovereignty_claims"
+      ],
+      "score_types": [
+        "raw_score",
+        "salience",
+        "confidence"
+      ],
+      "overall_descriptives": {
+        "raw_score": {
+          "mean": 0.8,
+          "median": 0.8,
+          "std": 0.12934052714681823,
+          "min": 0.3,
+          "max": 1.0,
+          "skewness": -1.5036112630933616,
+          "kurtosis": 3.0815517618051853
+        },
+        "salience": {
+          "mean": 0.7601851851851852,
+          "median": 0.8,
+          "std": 0.15035149770648182,
+          "min": 0.2,
+          "max": 1.0,
+          "skewness": -1.512565994104332,
+          "kurtosis": 2.8111160684192207
+        },
+        "confidence": {
+          "mean": 0.9462962962962962,
+          "median": 0.95,
+          "std": 0.045191029475249646,
+          "min": 0.9,
+          "max": 1.0,
+          "skewness": 0.1458371835973444,
+          "kurtosis": -1.748721631715023
+        }
+      },
+      "by_dimension": {
+        "manichaean_people_elite_framing": {
+          "sample_size": 12,
+          "descriptives": {
+            "raw_score": {
+              "mean": 0.9,
+              "median": 0.9,
+              "std": 0.0,
+              "min": 0.9,
+              "max": 0.9
+            },
+            "salience": {
+              "mean": 0.8958333333333334,
+              "median": 0.9,
+              "std": 0.045016831868925994,
+              "min": 0.8,
+              "max": 1.0
+            },
+            "confidence": {
+              "mean": 0.9416666666666665,
+              "median": 0.925,
+              "std": 0.04687184332805459,
+              "min": 0.9,
+              "max": 1.0
+            }
+          }
+        },
+        "crisis_restoration_narrative": {
+          "sample_size": 12,
+          "descriptives": {
+            "raw_score": {
+              "mean": 0.8166666666666668,
+              "median": 0.8,
+              "std": 0.03892494720807614,
+              "min": 0.8,
+              "max": 0.9
+            },
+            "salience": {
+              "mean": 0.8000000000000002,
+              "median": 0.8,
+              "std": 0.06396021490668315,
+              "min": 0.7,
+              "max": 0.9
+            },
+            "confidence": {
+              "mean": 0.9458333333333333,
+              "median": 0.95,
+              "std": 0.045016831868925994,
+              "min": 0.9,
+              "max": 1.0
+            }
+          }
+        },
+        "popular_sovereignty_claims": {
+          "sample_size": 12,
+          "descriptives": {
+            "raw_score": {
+              "mean": 0.75,
+              "median": 0.75,
+              "std": 0.10000000000000003,
+              "min": 0.6,
+              "max": 0.9
+            },
+            "salience": {
+              "mean": 0.7124999999999999,
+              "median": 0.7,
+              "std": 0.10897247358851685,
+              "min": 0.55,
+              "max": 0.9
+            },
+            "confidence": {
+              "mean": 0.9416666666666665,
+              "median": 0.925,
+              "std": 0.04687184332805459,
+              "min": 0.9,
+              "max": 1.0
+            }
+          }
+        },
+        "anti_pluralist_exclusion": {
+          "sample_size": 12,
+          "descriptives": {
+            "raw_score": {
+              "mean": 0.8958333333333334,
+              "median": 0.9,
+              "std": 0.045016831868925994,
+              "min": 0.8,
+              "max": 1.0
+            },
+            "salience": {
+              "mean": 0.8583333333333334,
+              "median": 0.875,
+              "std": 0.05573204290227125,
+              "min": 0.8,
+              "max": 0.95
+            },
+            "confidence": {
+              "mean": 0.9708333333333333,
+              "median": 1.0,
+              "std": 0.045016831868925994,
+              "min": 0.9,
+              "max": 1.0
+            }
+          }
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "sample_size": 12,
+          "descriptives": {
+            "raw_score": {
+              "mean": 0.7625000000000001,
+              "median": 0.7,
+              "std": 0.11103848636641919,
+              "min": 0.6,
+              "max": 0.9
+            },
+            "salience": {
+              "mean": 0.7041666666666667,
+              "median": 0.7,
+              "std": 0.12873216263610932,
+              "min": 0.5,
+              "max": 0.9
+            },
+            "confidence": {
+              "mean": 0.9333333333333332,
+              "median": 0.9,
+              "std": 0.044381268229929716,
+              "min": 0.9,
+              "max": 1.0
+            }
+          }
+        },
+        "authenticity_vs_political_class": {
+          "sample_size": 12,
+          "descriptives": {
+            "raw_score": {
+              "mean": 0.7958333333333333,
+              "median": 0.8500000000000001,
+              "std": 0.13221596199423355,
+              "min": 0.5,
+              "max": 0.9
+            },
+            "salience": {
+              "mean": 0.775,
+              "median": 0.8,
+              "std": 0.1438117456323307,
+              "min": 0.4,
+              "max": 0.9
+            },
+            "confidence": {
+              "mean": 0.9416666666666668,
+              "median": 0.925,
+              "std": 0.046871843328054594,
+              "min": 0.9,
+              "max": 1.0
+            }
+          }
+        },
+        "homogeneous_people_construction": {
+          "sample_size": 12,
+          "descriptives": {
+            "raw_score": {
+              "mean": 0.8500000000000001,
+              "median": 0.9,
+              "std": 0.10871146130092181,
+              "min": 0.6,
+              "max": 1.0
+            },
+            "salience": {
+              "mean": 0.7916666666666666,
+              "median": 0.8,
+              "std": 0.13113721705515066,
+              "min": 0.5,
+              "max": 0.9
+            },
+            "confidence": {
+              "mean": 0.9583333333333334,
+              "median": 0.975,
+              "std": 0.046871843328054594,
+              "min": 0.9,
+              "max": 1.0
+            }
+          }
+        },
+        "nationalist_exclusion": {
+          "sample_size": 12,
+          "descriptives": {
+            "raw_score": {
+              "mean": 0.775,
+              "median": 0.8,
+              "std": 0.14847711791873708,
+              "min": 0.4,
+              "max": 1.0
+            },
+            "salience": {
+              "mean": 0.7291666666666666,
+              "median": 0.75,
+              "std": 0.1514450595450577,
+              "min": 0.3,
+              "max": 0.9
+            },
+            "confidence": {
+              "mean": 0.9458333333333333,
+              "median": 0.95,
+              "std": 0.045016831868925994,
+              "min": 0.9,
+              "max": 1.0
+            }
+          }
+        },
+        "economic_populist_appeals": {
+          "sample_size": 12,
+          "descriptives": {
+            "raw_score": {
+              "mean": 0.6541666666666667,
+              "median": 0.7,
+              "std": 0.18272972258270279,
+              "min": 0.3,
+              "max": 0.85
+            },
+            "salience": {
+              "mean": 0.575,
+              "median": 0.6499999999999999,
+              "std": 0.20834848429756073,
+              "min": 0.2,
+              "max": 0.8
+            },
+            "confidence": {
+              "mean": 0.9375,
+              "median": 0.925,
+              "std": 0.04330127018922192,
+              "min": 0.9,
+              "max": 1.0
+            }
+          }
+        }
+      },
+      "score_correlations": {
+        "pearson_correlations": {
+          "raw_score": {
+            "raw_score": 1.0,
+            "salience": 0.9263353206322343,
+            "confidence": 0.11592240089825612
+          },
+          "salience": {
+            "raw_score": 0.9263353206322343,
+            "salience": 1.0,
+            "confidence": 0.1741008886549379
+          },
+          "confidence": {
+            "raw_score": 0.11592240089825612,
+            "salience": 0.1741008886549379,
+            "confidence": 1.0
+          }
+        },
+        "matrix_size": "3x3",
+        "variable_count": 3
+      }
+    },
+    "evidence_level": {
+      "total_quotes": 325,
+      "unique_documents": 12,
+      "unique_dimensions": 9,
+      "quotes_per_document": 27.083333333333332,
+      "quotes_per_dimension": 36.111111111111114,
+      "quote_length_stats": {
+        "mean": 137.96307692307693,
+        "median": 124.0,
+        "std": 70.30984241996713,
+        "min": 17,
+        "max": 429
+      },
+      "evidence_by_dimension": {
+        "anti_pluralist_exclusion": 37,
+        "nationalist_exclusion": 37,
+        "manichaean_people_elite_framing": 36,
+        "crisis_restoration_narrative": 36,
+        "elite_conspiracy_systemic_corruption": 36,
+        "authenticity_vs_political_class": 36,
+        "homogeneous_people_construction": 36,
+        "economic_populist_appeals": 36,
+        "popular_sovereignty_claims": 35
+      },
+      "evidence_by_document": {
+        "bolsonaro_speech_2018_pre_election": 29,
+        "bolsonaro_candidacy_speech": 27,
+        "brazilian_political_speech_1": 27,
+        "bolsonaro_rally_transcript": 27,
+        "bolsonaro_rally_portovelho_transcript": 27,
+        "bolsonaro_speech_1": 27,
+        "bolsonaro_hospital_speech": 27,
+        "Bolsonaro_Live_Pre_Election_Speech": 27,
+        "0": 27,
+        "bolsonaro_speech_2018_post_election": 27,
+        "Speech_1_Portuguese": 27,
+        "speech_transcript_1": 26
+      }
+    },
+    "cross_level": {
+      "merged_sample_size": 12,
+      "cross_correlations": {
+        "pearson_correlations": {
+          "democratic_authoritarian_tension": {
+            "democratic_authoritarian_tension": 1.0,
+            "internal_external_focus_tension": -0.42169905729578977,
+            "crisis_elite_attribution_tension": 0.02678460530946699,
+            "populist_strategic_contradiction_index": 0.6529858157540106,
+            "salience_weighted_core_populism_index": -0.6432994590778915,
+            "salience_weighted_populism_mechanisms_index": -0.5698387262332906,
+            "salience_weighted_boundary_distinctions_index": -0.20732273631144432,
+            "salience_weighted_overall_populism_index": -0.3983287852676525,
+            "mean_raw_score": -0.48851511006119885,
+            "std_raw_score": 0.17161909292977903,
+            "min_raw_score": -0.11818261583577373,
+            "max_raw_score": 0.014792510968188245,
+            "mean_salience": -0.48284839764849785,
+            "std_salience": 0.07794503969929807,
+            "min_salience": -0.051525314935172345,
+            "max_salience": -0.07246820777317148,
+            "mean_confidence": -0.16124076082024752,
+            "std_confidence": 0.28156344703257785,
+            "min_confidence": -0.3846052851729059,
+            "max_confidence": 0.13962352404334338
+          },
+          "internal_external_focus_tension": {
+            "democratic_authoritarian_tension": -0.42169905729578977,
+            "internal_external_focus_tension": 1.0,
+            "crisis_elite_attribution_tension": -0.24342864764371255,
+            "populist_strategic_contradiction_index": 0.26777086353113944,
+            "salience_weighted_core_populism_index": 0.27589487422509396,
+            "salience_weighted_populism_mechanisms_index": 0.029451473150140996,
+            "salience_weighted_boundary_distinctions_index": -0.2782493486209589,
+            "salience_weighted_overall_populism_index": 0.2321647165959983,
+            "mean_raw_score": 0.029969924479502592,
+            "std_raw_score": -0.26095021407154445,
+            "min_raw_score": 0.29106372450888474,
+            "max_raw_score": -0.22769652429373144,
+            "mean_salience": 0.13367732057734746,
+            "std_salience": -0.2196095828321531,
+            "min_salience": 0.30534856674480887,
+            "max_salience": 0.08923844811597999,
+            "mean_confidence": 0.11475264922164798,
+            "std_confidence": -0.21400296094424268,
+            "min_confidence": 0.10018647068924204,
+            "max_confidence": -0.14123192813321683
+          },
+          "crisis_elite_attribution_tension": {
+            "democratic_authoritarian_tension": 0.02678460530946699,
+            "internal_external_focus_tension": -0.24342864764371255,
+            "crisis_elite_attribution_tension": 1.0,
+            "populist_strategic_contradiction_index": 0.3090933392335752,
+            "salience_weighted_core_populism_index": 0.23614149521837438,
+            "salience_weighted_populism_mechanisms_index": -0.16576645064031653,
+            "salience_weighted_boundary_distinctions_index": 0.2904969760548368,
+            "salience_weighted_overall_populism_index": -0.23728155966113845,
+            "mean_raw_score": 0.009252036752506439,
+            "std_raw_score": 0.35015558374270195,
+            "min_raw_score": -0.4088279415033242,
+            "max_raw_score": 0.5589511626530307,
+            "mean_salience": -0.12579358677800154,
+            "std_salience": 0.3086616801662795,
+            "min_salience": -0.4096115446175747,
+            "max_salience": -0.019283734361061133,
+            "mean_confidence": 0.04235177741440714,
+            "std_confidence": 0.16117563954079248,
+            "min_confidence": -0.14957848014658565,
+            "max_confidence": 0.2919220258329413
+          },
+          "populist_strategic_contradiction_index": {
+            "democratic_authoritarian_tension": 0.6529858157540106,
+            "internal_external_focus_tension": 0.26777086353113944,
+            "crisis_elite_attribution_tension": 0.3090933392335752,
+            "populist_strategic_contradiction_index": 1.0,
+            "salience_weighted_core_populism_index": -0.2815478826858454,
+            "salience_weighted_populism_mechanisms_index": -0.5945597221543625,
+            "salience_weighted_boundary_distinctions_index": -0.24658430775957896,
+            "salience_weighted_overall_populism_index": -0.2888954080789983,
+            "mean_raw_score": -0.41106615102995353,
+            "std_raw_score": 0.08905811161146392,
+            "min_raw_score": -0.03896233656813744,
+            "max_raw_score": 0.10499858287011993,
+            "mean_salience": -0.38571773383655467,
+            "std_salience": 0.006341554125913147,
+            "min_salience": 0.03809165393290962,
+            "max_salience": -0.003619886724097716,
+            "mean_confidence": -0.048457061300552,
+            "std_confidence": 0.18087697916337384,
+            "min_confidence": -0.36051237566735866,
+            "max_confidence": 0.15936474763226985
+          },
+          "salience_weighted_core_populism_index": {
+            "democratic_authoritarian_tension": -0.6432994590778915,
+            "internal_external_focus_tension": 0.27589487422509396,
+            "crisis_elite_attribution_tension": 0.23614149521837438,
+            "populist_strategic_contradiction_index": -0.2815478826858454,
+            "salience_weighted_core_populism_index": 1.0,
+            "salience_weighted_populism_mechanisms_index": 0.5805123280413457,
+            "salience_weighted_boundary_distinctions_index": 0.5767465363336018,
+            "salience_weighted_overall_populism_index": 0.48294752712181926,
+            "mean_raw_score": 0.7344819879516545,
+            "std_raw_score": -0.16884058074835814,
+            "min_raw_score": 0.15188638834940477,
+            "max_raw_score": 0.5111672793046257,
+            "mean_salience": 0.5969330880135171,
+            "std_salience": -0.23529924179009806,
+            "min_salience": 0.10020294989707099,
+            "max_salience": -0.0479308665822775,
+            "mean_confidence": -0.2561227886113395,
+            "std_confidence": -0.10405204775329581,
+            "min_confidence": -0.04598155348083931,
+            "max_confidence": -0.052094339783675
+          },
+          "salience_weighted_populism_mechanisms_index": {
+            "democratic_authoritarian_tension": -0.5698387262332906,
+            "internal_external_focus_tension": 0.029451473150140996,
+            "crisis_elite_attribution_tension": -0.16576645064031653,
+            "populist_strategic_contradiction_index": -0.5945597221543625,
+            "salience_weighted_core_populism_index": 0.5805123280413457,
+            "salience_weighted_populism_mechanisms_index": 1.0,
+            "salience_weighted_boundary_distinctions_index": 0.5210062238189563,
+            "salience_weighted_overall_populism_index": 0.7172040462522525,
+            "mean_raw_score": 0.730402204967483,
+            "std_raw_score": -0.17970125755547975,
+            "min_raw_score": 0.13332427809033964,
+            "max_raw_score": 0.07289530488715039,
+            "mean_salience": 0.5601503768087234,
+            "std_salience": -0.1372935496222058,
+            "min_salience": 0.039475970535780544,
+            "max_salience": -0.023060560108789933,
+            "mean_confidence": -0.3840950451237765,
+            "std_confidence": 0.11829967218614323,
+            "min_confidence": 0.026359749383669258,
+            "max_confidence": -0.14990037822802937
+          },
+          "salience_weighted_boundary_distinctions_index": {
+            "democratic_authoritarian_tension": -0.20732273631144432,
+            "internal_external_focus_tension": -0.2782493486209589,
+            "crisis_elite_attribution_tension": 0.2904969760548368,
+            "populist_strategic_contradiction_index": -0.24658430775957896,
+            "salience_weighted_core_populism_index": 0.5767465363336018,
+            "salience_weighted_populism_mechanisms_index": 0.5210062238189563,
+            "salience_weighted_boundary_distinctions_index": 1.0,
+            "salience_weighted_overall_populism_index": 0.5796905070709563,
+            "mean_raw_score": 0.8963601321087414,
+            "std_raw_score": -0.5149242491054677,
+            "min_raw_score": 0.47435513852291283,
+            "max_raw_score": 0.25282990293904123,
+            "mean_salience": 0.7010698313194081,
+            "std_salience": -0.5959741873719512,
+            "min_salience": 0.41477290745626705,
+            "max_salience": -0.25013585082386597,
+            "mean_confidence": -0.31339395809933696,
+            "std_confidence": 0.00565570779287793,
+            "min_confidence": -0.0492163751817094,
+            "max_confidence": -0.14253090164655588
+          },
+          "salience_weighted_overall_populism_index": {
+            "democratic_authoritarian_tension": -0.3983287852676525,
+            "internal_external_focus_tension": 0.2321647165959983,
+            "crisis_elite_attribution_tension": -0.23728155966113845,
+            "populist_strategic_contradiction_index": -0.2888954080789983,
+            "salience_weighted_core_populism_index": 0.48294752712181926,
+            "salience_weighted_populism_mechanisms_index": 0.7172040462522525,
+            "salience_weighted_boundary_distinctions_index": 0.5796905070709563,
+            "salience_weighted_overall_populism_index": 1.0,
+            "mean_raw_score": 0.7151700279030461,
+            "std_raw_score": -0.4009895720657281,
+            "min_raw_score": 0.4081112407448807,
+            "max_raw_score": 0.018651505432897363,
+            "mean_salience": 0.7667221661962851,
+            "std_salience": -0.49068078626229683,
+            "min_salience": 0.45745684291949723,
+            "max_salience": -0.06582125445796896,
+            "mean_confidence": -0.32628339900986075,
+            "std_confidence": -0.08449962432284491,
+            "min_confidence": 0.003832092831004698,
+            "max_confidence": -0.43158646513935295
+          },
+          "mean_raw_score": {
+            "democratic_authoritarian_tension": -0.48851511006119885,
+            "internal_external_focus_tension": 0.029969924479502592,
+            "crisis_elite_attribution_tension": 0.009252036752506439,
+            "populist_strategic_contradiction_index": -0.41106615102995353,
+            "salience_weighted_core_populism_index": 0.7344819879516545,
+            "salience_weighted_populism_mechanisms_index": 0.730402204967483,
+            "salience_weighted_boundary_distinctions_index": 0.8963601321087414,
+            "salience_weighted_overall_populism_index": 0.7151700279030461,
+            "mean_raw_score": 1.0,
+            "std_raw_score": -0.6397153956467365,
+            "min_raw_score": 0.5977983952839931,
+            "max_raw_score": 0.11752765599242679,
+            "mean_salience": 0.8391443231181547,
+            "std_salience": -0.6599733890849045,
+            "min_salience": 0.5040304101864522,
+            "max_salience": -0.14393621213685462,
+            "mean_confidence": -0.3011379966454832,
+            "std_confidence": -0.07227123494679778,
+            "min_confidence": 0.04701106239696993,
+            "max_confidence": -0.19016435668104328
+          },
+          "std_raw_score": {
+            "democratic_authoritarian_tension": 0.17161909292977903,
+            "internal_external_focus_tension": -0.26095021407154445,
+            "crisis_elite_attribution_tension": 0.35015558374270195,
+            "populist_strategic_contradiction_index": 0.08905811161146392,
+            "salience_weighted_core_populism_index": -0.16884058074835814,
+            "salience_weighted_populism_mechanisms_index": -0.17970125755547975,
+            "salience_weighted_boundary_distinctions_index": -0.5149242491054677,
+            "salience_weighted_overall_populism_index": -0.4009895720657281,
+            "mean_raw_score": -0.6397153956467365,
+            "std_raw_score": 1.0,
+            "min_raw_score": -0.9772773781130131,
+            "max_raw_score": 0.4582663302928993,
+            "mean_salience": -0.627952719508623,
+            "std_salience": 0.9387659336139136,
+            "min_salience": -0.8841058115934006,
+            "max_salience": 0.12321011202682126,
+            "mean_confidence": 0.03558208801127266,
+            "std_confidence": 0.21769250600148418,
+            "min_confidence": -0.14871230610959937,
+            "max_confidence": 0.26684851610431753
+          },
+          "min_raw_score": {
+            "democratic_authoritarian_tension": -0.11818261583577373,
+            "internal_external_focus_tension": 0.29106372450888474,
+            "crisis_elite_attribution_tension": -0.4088279415033242,
+            "populist_strategic_contradiction_index": -0.03896233656813744,
+            "salience_weighted_core_populism_index": 0.15188638834940477,
+            "salience_weighted_populism_mechanisms_index": 0.13332427809033964,
+            "salience_weighted_boundary_distinctions_index": 0.47435513852291283,
+            "salience_weighted_overall_populism_index": 0.4081112407448807,
+            "mean_raw_score": 0.5977983952839931,
+            "std_raw_score": -0.9772773781130131,
+            "min_raw_score": 1.0,
+            "max_raw_score": -0.39946773096848115,
+            "mean_salience": 0.6162082260294564,
+            "std_salience": -0.9605549461723981,
+            "min_salience": 0.9392132927922542,
+            "max_salience": -0.13046561461068903,
+            "mean_confidence": 0.011306772812312684,
+            "std_confidence": -0.18296796467238693,
+            "min_confidence": 0.15978709238739197,
+            "max_confidence": -0.2154568714219625
+          },
+          "max_raw_score": {
+            "democratic_authoritarian_tension": 0.014792510968188245,
+            "internal_external_focus_tension": -0.22769652429373144,
+            "crisis_elite_attribution_tension": 0.5589511626530307,
+            "populist_strategic_contradiction_index": 0.10499858287011993,
+            "salience_weighted_core_populism_index": 0.5111672793046257,
+            "salience_weighted_populism_mechanisms_index": 0.07289530488715039,
+            "salience_weighted_boundary_distinctions_index": 0.25282990293904123,
+            "salience_weighted_overall_populism_index": 0.018651505432897363,
+            "mean_raw_score": 0.11752765599242679,
+            "std_raw_score": 0.4582663302928993,
+            "min_raw_score": -0.39946773096848115,
+            "max_raw_score": 1.0,
+            "mean_salience": 0.16272007875601963,
+            "std_salience": 0.2540763007571823,
+            "min_salience": -0.2830102237196707,
+            "max_salience": 0.24494897427831766,
+            "mean_confidence": -0.1557198712190759,
+            "std_confidence": 0.09641948611926195,
+            "min_confidence": -0.20000000000000065,
+            "max_confidence": 0.13483997249264904
+          },
+          "mean_salience": {
+            "democratic_authoritarian_tension": -0.48284839764849785,
+            "internal_external_focus_tension": 0.13367732057734746,
+            "crisis_elite_attribution_tension": -0.12579358677800154,
+            "populist_strategic_contradiction_index": -0.38571773383655467,
+            "salience_weighted_core_populism_index": 0.5969330880135171,
+            "salience_weighted_populism_mechanisms_index": 0.5601503768087234,
+            "salience_weighted_boundary_distinctions_index": 0.7010698313194081,
+            "salience_weighted_overall_populism_index": 0.7667221661962851,
+            "mean_raw_score": 0.8391443231181547,
+            "std_raw_score": -0.627952719508623,
+            "min_raw_score": 0.6162082260294564,
+            "max_raw_score": 0.16272007875601963,
+            "mean_salience": 1.0,
+            "std_salience": -0.695533996480673,
+            "min_salience": 0.6595925867477282,
+            "max_salience": 0.26306242024154,
+            "mean_confidence": -0.06957133396666587,
+            "std_confidence": -0.3293119125839583,
+            "min_confidence": 0.2408243106686755,
+            "max_confidence": -0.3466662355772111
+          },
+          "std_salience": {
+            "democratic_authoritarian_tension": 0.07794503969929807,
+            "internal_external_focus_tension": -0.2196095828321531,
+            "crisis_elite_attribution_tension": 0.3086616801662795,
+            "populist_strategic_contradiction_index": 0.006341554125913147,
+            "salience_weighted_core_populism_index": -0.23529924179009806,
+            "salience_weighted_populism_mechanisms_index": -0.1372935496222058,
+            "salience_weighted_boundary_distinctions_index": -0.5959741873719512,
+            "salience_weighted_overall_populism_index": -0.49068078626229683,
+            "mean_raw_score": -0.6599733890849045,
+            "std_raw_score": 0.9387659336139136,
+            "min_raw_score": -0.9605549461723981,
+            "max_raw_score": 0.2540763007571823,
+            "mean_salience": -0.695533996480673,
+            "std_salience": 1.0,
+            "min_salience": -0.9614730461792053,
+            "max_salience": 0.097038670364958,
+            "mean_confidence": 0.02802151869717082,
+            "std_confidence": 0.3195373950014344,
+            "min_confidence": -0.18385436953056347,
+            "max_confidence": 0.30828564839115585
+          },
+          "min_salience": {
+            "democratic_authoritarian_tension": -0.051525314935172345,
+            "internal_external_focus_tension": 0.30534856674480887,
+            "crisis_elite_attribution_tension": -0.4096115446175747,
+            "populist_strategic_contradiction_index": 0.03809165393290962,
+            "salience_weighted_core_populism_index": 0.10020294989707099,
+            "salience_weighted_populism_mechanisms_index": 0.039475970535780544,
+            "salience_weighted_boundary_distinctions_index": 0.41477290745626705,
+            "salience_weighted_overall_populism_index": 0.45745684291949723,
+            "mean_raw_score": 0.5040304101864522,
+            "std_raw_score": -0.8841058115934006,
+            "min_raw_score": 0.9392132927922542,
+            "max_raw_score": -0.2830102237196707,
+            "mean_salience": 0.6595925867477282,
+            "std_salience": -0.9614730461792053,
+            "min_salience": 1.0,
+            "max_salience": 0.053325433854161275,
+            "mean_confidence": 0.13559764268388888,
+            "std_confidence": -0.37678607846924383,
+            "min_confidence": 0.3047802409288754,
+            "max_confidence": -0.29354685216537385
+          },
+          "max_salience": {
+            "democratic_authoritarian_tension": -0.07246820777317148,
+            "internal_external_focus_tension": 0.08923844811597999,
+            "crisis_elite_attribution_tension": -0.019283734361061133,
+            "populist_strategic_contradiction_index": -0.003619886724097716,
+            "salience_weighted_core_populism_index": -0.0479308665822775,
+            "salience_weighted_populism_mechanisms_index": -0.023060560108789933,
+            "salience_weighted_boundary_distinctions_index": -0.25013585082386597,
+            "salience_weighted_overall_populism_index": -0.06582125445796896,
+            "mean_raw_score": -0.14393621213685462,
+            "std_raw_score": 0.12321011202682126,
+            "min_raw_score": -0.13046561461068903,
+            "max_raw_score": 0.24494897427831766,
+            "mean_salience": 0.26306242024154,
+            "std_salience": 0.097038670364958,
+            "min_salience": 0.053325433854161275,
+            "max_salience": 1.0,
+            "mean_confidence": 0.41610949872476644,
+            "std_confidence": -0.45690457188592853,
+            "min_confidence": 0.489897948556635,
+            "max_confidence": 1.0541514712551332e-15
+          },
+          "mean_confidence": {
+            "democratic_authoritarian_tension": -0.16124076082024752,
+            "internal_external_focus_tension": 0.11475264922164798,
+            "crisis_elite_attribution_tension": 0.04235177741440714,
+            "populist_strategic_contradiction_index": -0.048457061300552,
+            "salience_weighted_core_populism_index": -0.2561227886113395,
+            "salience_weighted_populism_mechanisms_index": -0.3840950451237765,
+            "salience_weighted_boundary_distinctions_index": -0.31339395809933696,
+            "salience_weighted_overall_populism_index": -0.32628339900986075,
+            "mean_raw_score": -0.3011379966454832,
+            "std_raw_score": 0.03558208801127266,
+            "min_raw_score": 0.011306772812312684,
+            "max_raw_score": -0.1557198712190759,
+            "mean_salience": -0.06957133396666587,
+            "std_salience": 0.02802151869717082,
+            "min_salience": 0.13559764268388888,
+            "max_salience": 0.41610949872476644,
+            "mean_confidence": 1.0,
+            "std_confidence": -0.3817040597969652,
+            "min_confidence": 0.8210638947479352,
+            "max_confidence": 0.47720701219346207
+          },
+          "std_confidence": {
+            "democratic_authoritarian_tension": 0.28156344703257785,
+            "internal_external_focus_tension": -0.21400296094424268,
+            "crisis_elite_attribution_tension": 0.16117563954079248,
+            "populist_strategic_contradiction_index": 0.18087697916337384,
+            "salience_weighted_core_populism_index": -0.10405204775329581,
+            "salience_weighted_populism_mechanisms_index": 0.11829967218614323,
+            "salience_weighted_boundary_distinctions_index": 0.00565570779287793,
+            "salience_weighted_overall_populism_index": -0.08449962432284491,
+            "mean_raw_score": -0.07227123494679778,
+            "std_raw_score": 0.21769250600148418,
+            "min_raw_score": -0.18296796467238693,
+            "max_raw_score": 0.09641948611926195,
+            "mean_salience": -0.3293119125839583,
+            "std_salience": 0.3195373950014344,
+            "min_salience": -0.37678607846924383,
+            "max_salience": -0.45690457188592853,
+            "mean_confidence": -0.3817040597969652,
+            "std_confidence": 1.0,
+            "min_confidence": -0.6768912425835858,
+            "max_confidence": 0.45635998265242617
+          },
+          "min_confidence": {
+            "democratic_authoritarian_tension": -0.3846052851729059,
+            "internal_external_focus_tension": 0.10018647068924204,
+            "crisis_elite_attribution_tension": -0.14957848014658565,
+            "populist_strategic_contradiction_index": -0.36051237566735866,
+            "salience_weighted_core_populism_index": -0.04598155348083931,
+            "salience_weighted_populism_mechanisms_index": 0.026359749383669258,
+            "salience_weighted_boundary_distinctions_index": -0.0492163751817094,
+            "salience_weighted_overall_populism_index": 0.003832092831004698,
+            "mean_raw_score": 0.04701106239696993,
+            "std_raw_score": -0.14871230610959937,
+            "min_raw_score": 0.15978709238739197,
+            "max_raw_score": -0.20000000000000065,
+            "mean_salience": 0.2408243106686755,
+            "std_salience": -0.18385436953056347,
+            "min_salience": 0.3047802409288754,
+            "max_salience": 0.489897948556635,
+            "mean_confidence": 0.8210638947479352,
+            "std_confidence": -0.6768912425835858,
+            "min_confidence": 1.0,
+            "max_confidence": 0.13483997249264904
+          },
+          "max_confidence": {
+            "democratic_authoritarian_tension": 0.13962352404334338,
+            "internal_external_focus_tension": -0.14123192813321683,
+            "crisis_elite_attribution_tension": 0.2919220258329413,
+            "populist_strategic_contradiction_index": 0.15936474763226985,
+            "salience_weighted_core_populism_index": -0.052094339783675,
+            "salience_weighted_populism_mechanisms_index": -0.14990037822802937,
+            "salience_weighted_boundary_distinctions_index": -0.14253090164655588,
+            "salience_weighted_overall_populism_index": -0.43158646513935295,
+            "mean_raw_score": -0.19016435668104328,
+            "std_raw_score": 0.26684851610431753,
+            "min_raw_score": -0.2154568714219625,
+            "max_raw_score": 0.13483997249264904,
+            "mean_salience": -0.3466662355772111,
+            "std_salience": 0.30828564839115585,
+            "min_salience": -0.29354685216537385,
+            "max_salience": 1.0541514712551332e-15,
+            "mean_confidence": 0.47720701219346207,
+            "std_confidence": 0.45635998265242617,
+            "min_confidence": 0.13483997249264904,
+            "max_confidence": 1.0
+          }
+        },
+        "matrix_size": "20x20",
+        "variable_count": 20
+      },
+      "dimension_aggregates": {
+        "mean_raw_score": {
+          "mean": 0.7999998333333332,
+          "std": 0.05520080270798659
+        },
+        "std_raw_score": {
+          "mean": 0.11433925,
+          "std": 0.0514873973161041
+        },
+        "min_raw_score": {
+          "mean": 0.6,
+          "std": 0.14616304718921386
+        },
+        "max_raw_score": {
+          "mean": 0.9166666666666669,
+          "std": 0.03892494720807614
+        },
+        "mean_salience": {
+          "mean": 0.7601851666666667,
+          "std": 0.06644890979724517
+        },
+        "std_salience": {
+          "mean": 0.13101225000000002,
+          "std": 0.061598614676165626
+        },
+        "min_salience": {
+          "mean": 0.5333333333333333,
+          "std": 0.17880071859390545
+        },
+        "max_salience": {
+          "mean": 0.9,
+          "std": 0.047673129462279605
+        },
+        "mean_confidence": {
+          "mean": 0.94629625,
+          "std": 0.030551809382885684
+        },
+        "std_confidence": {
+          "mean": 0.030240416666666672,
+          "std": 0.020867871496887413
+        },
+        "min_confidence": {
+          "mean": 0.9166666666666666,
+          "std": 0.03892494720807614
+        },
+        "max_confidence": {
+          "mean": 0.9916666666666667,
+          "std": 0.028867513459481277
+        }
+      }
+    },
+    "semi_universal_tests": {
+      "multivariate_analysis": {
+        "pca": {
+          "explained_variance_ratio": [
+            0.43741649820032275,
+            0.20019946693817925,
+            0.16639643198095277,
+            0.1173851789551731,
+            0.03443576106152794,
+            0.030333845578328886,
+            0.013802774086096394,
+            3.0043199418966854e-05
+          ],
+          "cumulative_variance": [
+            0.43741649820032275,
+            0.637615965138502,
+            0.8040123971194548,
+            0.9213975760746279,
+            0.9558333371361558,
+            0.9861671827144847,
+            0.9999699568005811,
+            1.0
+          ],
+          "n_components_90_percent": 4,
+          "component_loadings": {
+            "PC1": {
+              "democratic_authoritarian_tension": -0.41788103990001424,
+              "internal_external_focus_tension": 0.09023590354355071,
+              "crisis_elite_attribution_tension": -0.04701291237981677,
+              "populist_strategic_contradiction_index": -0.3474450836018626,
+              "salience_weighted_core_populism_index": 0.42218318166105967,
+              "salience_weighted_populism_mechanisms_index": 0.47188582627071696,
+              "salience_weighted_boundary_distinctions_index": 0.3459013948978289,
+              "salience_weighted_overall_populism_index": 0.4168236692527283
+            },
+            "PC2": {
+              "democratic_authoritarian_tension": 0.23475042036632687,
+              "internal_external_focus_tension": -0.5710327354786998,
+              "crisis_elite_attribution_tension": 0.5879043628712717,
+              "populist_strategic_contradiction_index": 0.06730305702753668,
+              "salience_weighted_core_populism_index": 0.12096868862150308,
+              "salience_weighted_populism_mechanisms_index": 0.0017036084281176545,
+              "salience_weighted_boundary_distinctions_index": 0.5005941692693352,
+              "salience_weighted_overall_populism_index": -0.05849585939432637
+            },
+            "PC3": {
+              "democratic_authoritarian_tension": -0.12706758640115579,
+              "internal_external_focus_tension": 0.5694428618821915,
+              "crisis_elite_attribution_tension": 0.43977404910386075,
+              "populist_strategic_contradiction_index": 0.542905636416208,
+              "salience_weighted_core_populism_index": 0.3795533844311515,
+              "salience_weighted_populism_mechanisms_index": -0.160830560724711,
+              "salience_weighted_boundary_distinctions_index": 0.03122828500968218,
+              "salience_weighted_overall_populism_index": 0.02320483870012593
+            }
+          }
+        }
+      },
+      "distribution_tests": {
+        "document_level": {
+          "democratic_authoritarian_tension": {
+            "normality_test": {
+              "shapiro_wilk_statistic": 0.7637312758186364,
+              "shapiro_wilk_p_value": 0.003731782758464933,
+              "is_normal": "False"
+            }
+          },
+          "internal_external_focus_tension": {
+            "normality_test": {
+              "shapiro_wilk_statistic": 0.8319665886917418,
+              "shapiro_wilk_p_value": 0.022142845281940368,
+              "is_normal": "False"
+            }
+          },
+          "crisis_elite_attribution_tension": {
+            "normality_test": {
+              "shapiro_wilk_statistic": 0.8344105598553321,
+              "shapiro_wilk_p_value": 0.02369325257368889,
+              "is_normal": "False"
+            }
+          },
+          "populist_strategic_contradiction_index": {
+            "normality_test": {
+              "shapiro_wilk_statistic": 0.9202392701148159,
+              "shapiro_wilk_p_value": 0.2879003363508198,
+              "is_normal": "True"
+            }
+          },
+          "salience_weighted_core_populism_index": {
+            "normality_test": {
+              "shapiro_wilk_statistic": 0.8782506768282226,
+              "shapiro_wilk_p_value": 0.08324194617533581,
+              "is_normal": "True"
+            }
+          },
+          "salience_weighted_populism_mechanisms_index": {
+            "normality_test": {
+              "shapiro_wilk_statistic": 0.9463767887418577,
+              "shapiro_wilk_p_value": 0.5847652081180955,
+              "is_normal": "True"
+            }
+          },
+          "salience_weighted_boundary_distinctions_index": {
+            "normality_test": {
+              "shapiro_wilk_statistic": 0.7794236319151163,
+              "shapiro_wilk_p_value": 0.0055187136626350525,
+              "is_normal": "False"
+            }
+          },
+          "salience_weighted_overall_populism_index": {
+            "normality_test": {
+              "shapiro_wilk_statistic": 0.9828847595640043,
+              "shapiro_wilk_p_value": 0.9926410631168566,
+              "is_normal": "True"
+            }
+          }
+        }
+      },
+      "outlier_detection": {
+        "document_level": {
+          "democratic_authoritarian_tension": {
+            "iqr_method": {
+              "outlier_count": 2,
+              "outlier_percentage": 16.666666666666664,
+              "bounds": {
+                "lower": 0.008749999999999966,
+                "upper": 0.21875000000000006
+              }
+            },
+            "zscore_method": {
+              "outlier_count": 2,
+              "outlier_percentage": 16.666666666666664
+            }
+          },
+          "internal_external_focus_tension": {
+            "iqr_method": {
+              "outlier_count": 0,
+              "outlier_percentage": 0.0,
+              "bounds": {
+                "lower": -0.04500000000000001,
+                "upper": 0.15500000000000003
+              }
+            },
+            "zscore_method": {
+              "outlier_count": 0,
+              "outlier_percentage": 0.0
+            }
+          },
+          "crisis_elite_attribution_tension": {
+            "iqr_method": {
+              "outlier_count": 0,
+              "outlier_percentage": 0.0,
+              "bounds": {
+                "lower": 0.030625,
+                "upper": 0.155625
+              }
+            },
+            "zscore_method": {
+              "outlier_count": 0,
+              "outlier_percentage": 0.0
+            }
+          },
+          "populist_strategic_contradiction_index": {
+            "iqr_method": {
+              "outlier_count": 0,
+              "outlier_percentage": 0.0,
+              "bounds": {
+                "lower": 0.037499999999999985,
+                "upper": 0.1375
+              }
+            },
+            "zscore_method": {
+              "outlier_count": 0,
+              "outlier_percentage": 0.0
+            }
+          },
+          "salience_weighted_core_populism_index": {
+            "iqr_method": {
+              "outlier_count": 0,
+              "outlier_percentage": 0.0,
+              "bounds": {
+                "lower": 0.7563249999999999,
+                "upper": 0.9481250000000001
+              }
+            },
+            "zscore_method": {
+              "outlier_count": 0,
+              "outlier_percentage": 0.0
+            }
+          },
+          "salience_weighted_populism_mechanisms_index": {
+            "iqr_method": {
+              "outlier_count": 0,
+              "outlier_percentage": 0.0,
+              "bounds": {
+                "lower": 0.6342201332698716,
+                "upper": 0.9798679200380769
+              }
+            },
+            "zscore_method": {
+              "outlier_count": 0,
+              "outlier_percentage": 0.0
+            }
+          },
+          "salience_weighted_boundary_distinctions_index": {
+            "iqr_method": {
+              "outlier_count": 1,
+              "outlier_percentage": 8.333333333333332,
+              "bounds": {
+                "lower": 0.5945621486570895,
+                "upper": 0.9282630855715176
+              }
+            },
+            "zscore_method": {
+              "outlier_count": 1,
+              "outlier_percentage": 8.333333333333332
+            }
+          },
+          "salience_weighted_overall_populism_index": {
+            "iqr_method": {
+              "outlier_count": 0,
+              "outlier_percentage": 0.0,
+              "bounds": {
+                "lower": 0.7115,
+                "upper": 0.9834999999999998
+              }
+            },
+            "zscore_method": {
+              "outlier_count": 0,
+              "outlier_percentage": 0.0
+            }
+          }
+        }
+      },
+      "effect_sizes": {
+        "cohens_d_interpretations": {
+          "democratic_authoritarian_tension": {
+            "cohens_d": -7.5371920044172604,
+            "interpretation": "large",
+            "direction": "below_midpoint"
+          },
+          "internal_external_focus_tension": {
+            "cohens_d": -10.275849372498717,
+            "interpretation": "large",
+            "direction": "below_midpoint"
+          },
+          "crisis_elite_attribution_tension": {
+            "cohens_d": -16.466481121249785,
+            "interpretation": "large",
+            "direction": "below_midpoint"
+          },
+          "populist_strategic_contradiction_index": {
+            "cohens_d": -23.602163542908816,
+            "interpretation": "large",
+            "direction": "below_midpoint"
+          },
+          "salience_weighted_core_populism_index": {
+            "cohens_d": 12.778656213516825,
+            "interpretation": "large",
+            "direction": "above_midpoint"
+          },
+          "salience_weighted_populism_mechanisms_index": {
+            "cohens_d": 5.749085050350321,
+            "interpretation": "large",
+            "direction": "above_midpoint"
+          },
+          "salience_weighted_boundary_distinctions_index": {
+            "cohens_d": 1.7607706328932984,
+            "interpretation": "large",
+            "direction": "above_midpoint"
+          },
+          "salience_weighted_overall_populism_index": {
+            "cohens_d": 5.480474757427113,
+            "interpretation": "large",
+            "direction": "above_midpoint"
+          }
+        }
+      },
+      "clustering": {
+        "2_clusters": {
+          "cluster_centers": [
+            [
+              -0.5623100214072794,
+              0.3869501289865243,
+              -0.19363916554566124,
+              -0.3207006921294731,
+              0.5583593945545948,
+              0.8827636522365998,
+              0.34677423789074835,
+              0.8211920274816394
+            ],
+            [
+              0.5623100214072787,
+              -0.386950128986524,
+              0.19363916554565969,
+              0.3207006921294742,
+              -0.5583593945545984,
+              -0.8827636522366016,
+              -0.3467742378907469,
+              -0.8211920274816388
+            ]
+          ],
+          "inertia": 66.09703655850147,
+          "cluster_sizes": [
+            6,
+            6
+          ]
+        },
+        "3_clusters": {
+          "cluster_centers": [
+            [
+              -1.5215447638079318,
+              0.9571924243350862,
+              -0.5457103756286805,
+              -0.9852335018897737,
+              0.7914847788268349,
+              0.8331397694363183,
+              0.15521946647427826,
+              0.8109077547798801
+            ],
+            [
+              0.4498480171258232,
+              -0.7046565506807229,
+              -0.20772201394898193,
+              -0.19942593271523615,
+              -0.17565058886394525,
+              0.4619252777916294,
+              0.37932149147049393,
+              0.2769802531782627
+            ],
+            [
+              0.5788485514486694,
+              0.1629263700995893,
+              0.6689352991577354,
+              0.988207542311377,
+              -0.3740503480401999,
+              -1.2022614243167782,
+              -0.5905664641938239,
+              -0.9544061325577374
+            ]
+          ],
+          "inertia": 51.73804264335961,
+          "cluster_sizes": [
+            3,
+            5,
+            4
+          ]
+        },
+        "4_clusters": {
+          "cluster_centers": [
+            [
+              0.5292329613244977,
+              -1.4867031271587505,
+              -0.7569531016784918,
+              -1.0143130082343315,
+              -0.9269774875833954,
+              -0.2437681080762484,
+              0.14081021471540703,
+              -0.5547638173294417
+            ],
+            [
+              0.3704630729271484,
+              -0.11812161832220198,
+              0.510503254620377,
+              0.5341707046133896,
+              0.4813559509761666,
+              0.14541219540659234,
+              0.5552949667266541,
+              0.33503064019036033
+            ],
+            [
+              -1.5215447638079318,
+              0.9571924243350862,
+              -0.5457103756286805,
+              -0.9852335018897737,
+              0.7914847788268349,
+              0.8331397694363183,
+              0.15521946647427826,
+              0.8109077547798801
+            ],
+            [
+              0.8269265020695279,
+              0.34621853646162704,
+              0.29926052857056534,
+              1.156736499535521,
+              -1.463639558097284,
+              -1.3694720345947151,
+              -1.7618768312434552,
+              -1.4991744153162774
+            ]
+          ],
+          "inertia": 35.76256070482814,
+          "cluster_sizes": [
+            2,
+            5,
+            3,
+            2
+          ]
+        },
+        "5_clusters": {
+          "cluster_centers": [
+            [
+              0.3307706008278112,
+              0.46841331403631875,
+              -0.8273673436950957,
+              0.33722313891615496,
+              0.02738021176181567,
+              0.6590813471847239,
+              0.3517918671656334,
+              1.1235021398445277
+            ],
+            [
+              0.13230824033112415,
+              -0.5091449065612158,
+              1.3554741588196226,
+              0.37687701120418854,
+              0.8324721661197061,
+              -0.2510065846688263,
+              0.7312735846430148,
+              -0.08798094970624962
+            ],
+            [
+              -2.0507777251324297,
+              1.20158197948447,
+              -0.3344676495788691,
+              -1.2135737164817018,
+              1.1008384788583863,
+              1.001127998897112,
+              -0.003531561184919966,
+              0.5006564474383034
+            ],
+            [
+              0.5292329613244977,
+              -1.4867031271587505,
+              -0.7569531016784918,
+              -1.0143130082343315,
+              -0.9269774875833954,
+              -0.2437681080762484,
+              0.14081021471540703,
+              -0.5547638173294417
+            ],
+            [
+              0.8269265020695279,
+              0.34621853646162704,
+              0.29926052857056534,
+              1.156736499535521,
+              -1.463639558097284,
+              -1.3694720345947151,
+              -1.7618768312434552,
+              -1.4991744153162774
+            ]
+          ],
+          "inertia": 23.215378907816792,
+          "cluster_sizes": [
+            3,
+            3,
+            2,
+            2,
+            2
+          ]
+        }
+      }
+    },
+    "dimension_correlations": {
+      "raw_score": {
+        "anti_pluralist_exclusion": {
+          "anti_pluralist_exclusion": {
+            "correlation": 1.0,
+            "p_value": null,
+            "significant": false
+          },
+          "authenticity_vs_political_class": {
+            "correlation": -0.15592054375808329,
+            "p_value": 0.6284582439976438,
+            "significant": "False"
+          },
+          "crisis_restoration_narrative": {
+            "correlation": 0.043233770116711874,
+            "p_value": 0.8938691085752356,
+            "significant": "False"
+          },
+          "economic_populist_appeals": {
+            "correlation": 0.3062200308966973,
+            "p_value": 0.33302806297760096,
+            "significant": "False"
+          },
+          "elite_conspiracy_systemic_corruption": {
+            "correlation": 0.05683408545323186,
+            "p_value": 0.8607354929860357,
+            "significant": "False"
+          },
+          "homogeneous_people_construction": {
+            "correlation": 0.6037267439068865,
+            "p_value": 0.03764559157443395,
+            "significant": "True"
+          },
+          "manichaean_people_elite_framing": {
+            "correlation": null,
+            "p_value": null,
+            "significant": false
+          },
+          "nationalist_exclusion": {
+            "correlation": 0.3910305667506651,
+            "p_value": 0.20879487536681895,
+            "significant": "False"
+          },
+          "popular_sovereignty_claims": {
+            "correlation": 0.3534031660738116,
+            "p_value": 0.25978969185963535,
+            "significant": "False"
+          }
+        },
+        "authenticity_vs_political_class": {
+          "anti_pluralist_exclusion": {
+            "correlation": -0.15592054375808329,
+            "p_value": 0.6284582439976438,
+            "significant": "False"
+          },
+          "authenticity_vs_political_class": {
+            "correlation": 1.0,
+            "p_value": null,
+            "significant": false
+          },
+          "crisis_restoration_narrative": {
+            "correlation": 0.01472021479894165,
+            "p_value": 0.9637849353772729,
+            "significant": "False"
+          },
+          "economic_populist_appeals": {
+            "correlation": 0.2547747325237802,
+            "p_value": 0.4242055953559618,
+            "significant": "False"
+          },
+          "elite_conspiracy_systemic_corruption": {
+            "correlation": -0.4760307650814836,
+            "p_value": 0.11772963788425886,
+            "significant": "False"
+          },
+          "homogeneous_people_construction": {
+            "correlation": 0.5534216502453139,
+            "p_value": 0.06195455359023272,
+            "significant": "False"
+          },
+          "manichaean_people_elite_framing": {
+            "correlation": null,
+            "p_value": null,
+            "significant": false
+          },
+          "nationalist_exclusion": {
+            "correlation": 0.6888439859758609,
+            "p_value": 0.013231311629365998,
+            "significant": "True"
+          },
+          "popular_sovereignty_claims": {
+            "correlation": 0.4641167029916754,
+            "p_value": 0.12852897781102918,
+            "significant": "False"
+          }
+        },
+        "crisis_restoration_narrative": {
+          "anti_pluralist_exclusion": {
+            "correlation": 0.043233770116711874,
+            "p_value": 0.8938691085752356,
+            "significant": "False"
+          },
+          "authenticity_vs_political_class": {
+            "correlation": 0.01472021479894165,
+            "p_value": 0.9637849353772729,
+            "significant": "False"
+          },
+          "crisis_restoration_narrative": {
+            "correlation": 1.0,
+            "p_value": null,
+            "significant": false
+          },
+          "economic_populist_appeals": {
+            "correlation": 0.3727836755364361,
+            "p_value": 0.2326961592667613,
+            "significant": "False"
+          },
+          "elite_conspiracy_systemic_corruption": {
+            "correlation": 0.3680813374347332,
+            "p_value": 0.23910846256978935,
+            "significant": "False"
+          },
+          "homogeneous_people_construction": {
+            "correlation": 0.21483446221183014,
+            "p_value": 0.5025188231708988,
+            "significant": "False"
+          },
+          "manichaean_people_elite_framing": {
+            "correlation": null,
+            "p_value": null,
+            "significant": false
+          },
+          "nationalist_exclusion": {
+            "correlation": -0.07864837576396098,
+            "p_value": 0.8080386806599056,
+            "significant": "False"
+          },
+          "popular_sovereignty_claims": {
+            "correlation": 3.61977854093301e-16,
+            "p_value": 1.0,
+            "significant": "False"
+          }
+        },
+        "economic_populist_appeals": {
+          "anti_pluralist_exclusion": {
+            "correlation": 0.3062200308966973,
+            "p_value": 0.33302806297760096,
+            "significant": "False"
+          },
+          "authenticity_vs_political_class": {
+            "correlation": 0.2547747325237802,
+            "p_value": 0.4242055953559618,
+            "significant": "False"
+          },
+          "crisis_restoration_narrative": {
+            "correlation": 0.3727836755364361,
+            "p_value": 0.2326961592667613,
+            "significant": "False"
+          },
+          "economic_populist_appeals": {
+            "correlation": 1.0,
+            "p_value": null,
+            "significant": false
+          },
+          "elite_conspiracy_systemic_corruption": {
+            "correlation": -0.1484159149971472,
+            "p_value": 0.645274331848346,
+            "significant": "False"
+          },
+          "homogeneous_people_construction": {
+            "correlation": 0.26314227863857836,
+            "p_value": 0.40860618105724633,
+            "significant": "False"
+          },
+          "manichaean_people_elite_framing": {
+            "correlation": null,
+            "p_value": null,
+            "significant": false
+          },
+          "nationalist_exclusion": {
+            "correlation": 0.27224628407098866,
+            "p_value": 0.39196615580713545,
+            "significant": "False"
+          },
+          "popular_sovereignty_claims": {
+            "correlation": 0.012437644191675798,
+            "p_value": 0.969398047378601,
+            "significant": "False"
+          }
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "anti_pluralist_exclusion": {
+            "correlation": 0.05683408545323186,
+            "p_value": 0.8607354929860357,
+            "significant": "False"
+          },
+          "authenticity_vs_political_class": {
+            "correlation": -0.4760307650814836,
+            "p_value": 0.11772963788425886,
+            "significant": "False"
+          },
+          "crisis_restoration_narrative": {
+            "correlation": 0.3680813374347332,
+            "p_value": 0.23910846256978935,
+            "significant": "False"
+          },
+          "economic_populist_appeals": {
+            "correlation": -0.1484159149971472,
+            "p_value": 0.645274331848346,
+            "significant": "False"
+          },
+          "elite_conspiracy_systemic_corruption": {
+            "correlation": 1.0,
+            "p_value": null,
+            "significant": false
+          },
+          "homogeneous_people_construction": {
+            "correlation": -0.13179426029666982,
+            "p_value": 0.6830576415364007,
+            "significant": "False"
+          },
+          "manichaean_people_elite_framing": {
+            "correlation": null,
+            "p_value": null,
+            "significant": false
+          },
+          "nationalist_exclusion": {
+            "correlation": -0.5307316545349204,
+            "p_value": 0.07584409491430216,
+            "significant": "False"
+          },
+          "popular_sovereignty_claims": {
+            "correlation": -0.18421131378760777,
+            "p_value": 0.5665621741788911,
+            "significant": "False"
+          }
+        },
+        "homogeneous_people_construction": {
+          "anti_pluralist_exclusion": {
+            "correlation": 0.6037267439068865,
+            "p_value": 0.03764559157443395,
+            "significant": "True"
+          },
+          "authenticity_vs_political_class": {
+            "correlation": 0.5534216502453139,
+            "p_value": 0.06195455359023272,
+            "significant": "False"
+          },
+          "crisis_restoration_narrative": {
+            "correlation": 0.21483446221183014,
+            "p_value": 0.5025188231708988,
+            "significant": "False"
+          },
+          "economic_populist_appeals": {
+            "correlation": 0.26314227863857836,
+            "p_value": 0.40860618105724633,
+            "significant": "False"
+          },
+          "elite_conspiracy_systemic_corruption": {
+            "correlation": -0.13179426029666982,
+            "p_value": 0.6830576415364007,
+            "significant": "False"
+          },
+          "homogeneous_people_construction": {
+            "correlation": 1.0,
+            "p_value": null,
+            "significant": false
+          },
+          "manichaean_people_elite_framing": {
+            "correlation": null,
+            "p_value": null,
+            "significant": false
+          },
+          "nationalist_exclusion": {
+            "correlation": 0.816658439702421,
+            "p_value": 0.0011885570387789074,
+            "significant": "True"
+          },
+          "popular_sovereignty_claims": {
+            "correlation": 0.6689936080056724,
+            "p_value": 0.017360687589409757,
+            "significant": "True"
+          }
+        },
+        "manichaean_people_elite_framing": {
+          "anti_pluralist_exclusion": {
+            "correlation": null,
+            "p_value": null,
+            "significant": false
+          },
+          "authenticity_vs_political_class": {
+            "correlation": null,
+            "p_value": null,
+            "significant": false
+          },
+          "crisis_restoration_narrative": {
+            "correlation": null,
+            "p_value": null,
+            "significant": false
+          },
+          "economic_populist_appeals": {
+            "correlation": null,
+            "p_value": null,
+            "significant": false
+          },
+          "elite_conspiracy_systemic_corruption": {
+            "correlation": null,
+            "p_value": null,
+            "significant": false
+          },
+          "homogeneous_people_construction": {
+            "correlation": null,
+            "p_value": null,
+            "significant": false
+          },
+          "manichaean_people_elite_framing": {
+            "correlation": 1.0,
+            "p_value": null,
+            "significant": false
+          },
+          "nationalist_exclusion": {
+            "correlation": null,
+            "p_value": null,
+            "significant": false
+          },
+          "popular_sovereignty_claims": {
+            "correlation": null,
+            "p_value": null,
+            "significant": false
+          }
+        },
+        "nationalist_exclusion": {
+          "anti_pluralist_exclusion": {
+            "correlation": 0.3910305667506651,
+            "p_value": 0.20879487536681895,
+            "significant": "False"
+          },
+          "authenticity_vs_political_class": {
+            "correlation": 0.6888439859758609,
+            "p_value": 0.013231311629365998,
+            "significant": "True"
+          },
+          "crisis_restoration_narrative": {
+            "correlation": -0.07864837576396098,
+            "p_value": 0.8080386806599056,
+            "significant": "False"
+          },
+          "economic_populist_appeals": {
+            "correlation": 0.27224628407098866,
+            "p_value": 0.39196615580713545,
+            "significant": "False"
+          },
+          "elite_conspiracy_systemic_corruption": {
+            "correlation": -0.5307316545349204,
+            "p_value": 0.07584409491430216,
+            "significant": "False"
+          },
+          "homogeneous_people_construction": {
+            "correlation": 0.816658439702421,
+            "p_value": 0.0011885570387789074,
+            "significant": "True"
+          },
+          "manichaean_people_elite_framing": {
+            "correlation": null,
+            "p_value": null,
+            "significant": false
+          },
+          "nationalist_exclusion": {
+            "correlation": 1.0,
+            "p_value": null,
+            "significant": false
+          },
+          "popular_sovereignty_claims": {
+            "correlation": 0.642890613668758,
+            "p_value": 0.02413879332199897,
+            "significant": "True"
+          }
+        },
+        "popular_sovereignty_claims": {
+          "anti_pluralist_exclusion": {
+            "correlation": 0.3534031660738116,
+            "p_value": 0.25978969185963535,
+            "significant": "False"
+          },
+          "authenticity_vs_political_class": {
+            "correlation": 0.4641167029916754,
+            "p_value": 0.12852897781102918,
+            "significant": "False"
+          },
+          "crisis_restoration_narrative": {
+            "correlation": 3.61977854093301e-16,
+            "p_value": 1.0,
+            "significant": "False"
+          },
+          "economic_populist_appeals": {
+            "correlation": 0.012437644191675798,
+            "p_value": 0.969398047378601,
+            "significant": "False"
+          },
+          "elite_conspiracy_systemic_corruption": {
+            "correlation": -0.18421131378760777,
+            "p_value": 0.5665621741788911,
+            "significant": "False"
+          },
+          "homogeneous_people_construction": {
+            "correlation": 0.6689936080056724,
+            "p_value": 0.017360687589409757,
+            "significant": "True"
+          },
+          "manichaean_people_elite_framing": {
+            "correlation": null,
+            "p_value": null,
+            "significant": false
+          },
+          "nationalist_exclusion": {
+            "correlation": 0.642890613668758,
+            "p_value": 0.02413879332199897,
+            "significant": "True"
+          },
+          "popular_sovereignty_claims": {
+            "correlation": 1.0,
+            "p_value": null,
+            "significant": false
+          }
+        }
+      },
+      "salience": {
+        "anti_pluralist_exclusion": {
+          "anti_pluralist_exclusion": {
+            "correlation": 1.0,
+            "p_value": null,
+            "significant": false
+          },
+          "authenticity_vs_political_class": {
+            "correlation": 0.2552057835537045,
+            "p_value": 0.42339493584980414,
+            "significant": "False"
+          },
+          "crisis_restoration_narrative": {
+            "correlation": 0.38254602783800273,
+            "p_value": 0.21971460588701108,
+            "significant": "False"
+          },
+          "economic_populist_appeals": {
+            "correlation": 0.1370093025018167,
+            "p_value": 0.6711263389480777,
+            "significant": "False"
+          },
+          "elite_conspiracy_systemic_corruption": {
+            "correlation": 0.1214316457901446,
+            "p_value": 0.7069622491809602,
+            "significant": "False"
+          },
+          "homogeneous_people_construction": {
+            "correlation": 0.5079152154860825,
+            "p_value": 0.09182077752794687,
+            "significant": "False"
+          },
+          "manichaean_people_elite_framing": {
+            "correlation": 0.37744718562311086,
+            "p_value": 0.2264391144664163,
+            "significant": "False"
+          },
+          "nationalist_exclusion": {
+            "correlation": 0.45327041532008583,
+            "p_value": 0.13890482714747832,
+            "significant": "False"
+          },
+          "popular_sovereignty_claims": {
+            "correlation": 0.6923047000004153,
+            "p_value": 0.012593571870293125,
+            "significant": "True"
+          }
+        },
+        "authenticity_vs_political_class": {
+          "anti_pluralist_exclusion": {
+            "correlation": 0.2552057835537045,
+            "p_value": 0.42339493584980414,
+            "significant": "False"
+          },
+          "authenticity_vs_political_class": {
+            "correlation": 1.0,
+            "p_value": null,
+            "significant": false
+          },
+          "crisis_restoration_narrative": {
+            "correlation": -0.24708310555370025,
+            "p_value": 0.4387983068630775,
+            "significant": "False"
+          },
+          "economic_populist_appeals": {
+            "correlation": 0.3413305291342918,
+            "p_value": 0.27755277870138195,
+            "significant": "False"
+          },
+          "elite_conspiracy_systemic_corruption": {
+            "correlation": -0.39897828696482696,
+            "p_value": 0.1988715902803509,
+            "significant": "False"
+          },
+          "homogeneous_people_construction": {
+            "correlation": 0.44589102070240366,
+            "p_value": 0.14626470536466635,
+            "significant": "False"
+          },
+          "manichaean_people_elite_framing": {
+            "correlation": 0.017552866200180307,
+            "p_value": 0.9568212337197362,
+            "significant": "False"
+          },
+          "nationalist_exclusion": {
+            "correlation": 0.6939361313404312,
+            "p_value": 0.012300957175422452,
+            "significant": "True"
+          },
+          "popular_sovereignty_claims": {
+            "correlation": 0.34080347839165714,
+            "p_value": 0.2783436757127086,
+            "significant": "False"
+          }
+        },
+        "crisis_restoration_narrative": {
+          "anti_pluralist_exclusion": {
+            "correlation": 0.38254602783800273,
+            "p_value": 0.21971460588701108,
+            "significant": "False"
+          },
+          "authenticity_vs_political_class": {
+            "correlation": -0.24708310555370025,
+            "p_value": 0.4387983068630775,
+            "significant": "False"
+          },
+          "crisis_restoration_narrative": {
+            "correlation": 1.0,
+            "p_value": null,
+            "significant": false
+          },
+          "economic_populist_appeals": {
+            "correlation": 0.13643853602577347,
+            "p_value": 0.6724288392253079,
+            "significant": "False"
+          },
+          "elite_conspiracy_systemic_corruption": {
+            "correlation": 0.634860314594966,
+            "p_value": 0.02656369199406856,
+            "significant": "True"
+          },
+          "homogeneous_people_construction": {
+            "correlation": 0.2709639073017023,
+            "p_value": 0.39428885369998457,
+            "significant": "False"
+          },
+          "manichaean_people_elite_framing": {
+            "correlation": 0.7104033341674728,
+            "p_value": 0.009621903501652103,
+            "significant": "True"
+          },
+          "nationalist_exclusion": {
+            "correlation": -0.11731466458093072,
+            "p_value": 0.7165285586567152,
+            "significant": "False"
+          },
+          "popular_sovereignty_claims": {
+            "correlation": 0.45650825550821766,
+            "p_value": 0.13575261359442745,
+            "significant": "False"
+          }
+        },
+        "economic_populist_appeals": {
+          "anti_pluralist_exclusion": {
+            "correlation": 0.1370093025018167,
+            "p_value": 0.6711263389480777,
+            "significant": "False"
+          },
+          "authenticity_vs_political_class": {
+            "correlation": 0.3413305291342918,
+            "p_value": 0.27755277870138195,
+            "significant": "False"
+          },
+          "crisis_restoration_narrative": {
+            "correlation": 0.13643853602577347,
+            "p_value": 0.6724288392253079,
+            "significant": "False"
+          },
+          "economic_populist_appeals": {
+            "correlation": 1.0,
+            "p_value": null,
+            "significant": false
+          },
+          "elite_conspiracy_systemic_corruption": {
+            "correlation": -0.24149868645029446,
+            "p_value": 0.4495427008798021,
+            "significant": "False"
+          },
+          "homogeneous_people_construction": {
+            "correlation": 0.5074121359152292,
+            "p_value": 0.09219661728702756,
+            "significant": "False"
+          },
+          "manichaean_people_elite_framing": {
+            "correlation": -0.08481059203893392,
+            "p_value": 0.7932751768941574,
+            "significant": "False"
+          },
+          "nationalist_exclusion": {
+            "correlation": 0.45017553064997473,
+            "p_value": 0.1419617268242006,
+            "significant": "False"
+          },
+          "popular_sovereignty_claims": {
+            "correlation": 0.11511661463839931,
+            "p_value": 0.7216514500646869,
+            "significant": "False"
+          }
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "anti_pluralist_exclusion": {
+            "correlation": 0.1214316457901446,
+            "p_value": 0.7069622491809602,
+            "significant": "False"
+          },
+          "authenticity_vs_political_class": {
+            "correlation": -0.39897828696482696,
+            "p_value": 0.1988715902803509,
+            "significant": "False"
+          },
+          "crisis_restoration_narrative": {
+            "correlation": 0.634860314594966,
+            "p_value": 0.02656369199406856,
+            "significant": "True"
+          },
+          "economic_populist_appeals": {
+            "correlation": -0.24149868645029446,
+            "p_value": 0.4495427008798021,
+            "significant": "False"
+          },
+          "elite_conspiracy_systemic_corruption": {
+            "correlation": 1.0,
+            "p_value": null,
+            "significant": false
+          },
+          "homogeneous_people_construction": {
+            "correlation": -0.15930939693618598,
+            "p_value": 0.6209168610930573,
+            "significant": "False"
+          },
+          "manichaean_people_elite_framing": {
+            "correlation": 0.4346660550805093,
+            "p_value": 0.15793197989539556,
+            "significant": "False"
+          },
+          "nationalist_exclusion": {
+            "correlation": -0.6246473111290052,
+            "p_value": 0.029896253044780045,
+            "significant": "True"
+          },
+          "popular_sovereignty_claims": {
+            "correlation": 0.25516670599216146,
+            "p_value": 0.4234683959437348,
+            "significant": "False"
+          }
+        },
+        "homogeneous_people_construction": {
+          "anti_pluralist_exclusion": {
+            "correlation": 0.5079152154860825,
+            "p_value": 0.09182077752794687,
+            "significant": "False"
+          },
+          "authenticity_vs_political_class": {
+            "correlation": 0.44589102070240366,
+            "p_value": 0.14626470536466635,
+            "significant": "False"
+          },
+          "crisis_restoration_narrative": {
+            "correlation": 0.2709639073017023,
+            "p_value": 0.39428885369998457,
+            "significant": "False"
+          },
+          "economic_populist_appeals": {
+            "correlation": 0.5074121359152292,
+            "p_value": 0.09219661728702756,
+            "significant": "False"
+          },
+          "elite_conspiracy_systemic_corruption": {
+            "correlation": -0.15930939693618598,
+            "p_value": 0.6209168610930573,
+            "significant": "False"
+          },
+          "homogeneous_people_construction": {
+            "correlation": 1.0,
+            "p_value": null,
+            "significant": false
+          },
+          "manichaean_people_elite_framing": {
+            "correlation": -0.16041138598847943,
+            "p_value": 0.618471705929137,
+            "significant": "False"
+          },
+          "nationalist_exclusion": {
+            "correlation": 0.7915221934760779,
+            "p_value": 0.0021595840434963766,
+            "significant": "True"
+          },
+          "popular_sovereignty_claims": {
+            "correlation": 0.6759171741458048,
+            "p_value": 0.015826139534741577,
+            "significant": "True"
+          }
+        },
+        "manichaean_people_elite_framing": {
+          "anti_pluralist_exclusion": {
+            "correlation": 0.37744718562311086,
+            "p_value": 0.2264391144664163,
+            "significant": "False"
+          },
+          "authenticity_vs_political_class": {
+            "correlation": 0.017552866200180307,
+            "p_value": 0.9568212337197362,
+            "significant": "False"
+          },
+          "crisis_restoration_narrative": {
+            "correlation": 0.7104033341674728,
+            "p_value": 0.009621903501652103,
+            "significant": "True"
+          },
+          "economic_populist_appeals": {
+            "correlation": -0.08481059203893392,
+            "p_value": 0.7932751768941574,
+            "significant": "False"
+          },
+          "elite_conspiracy_systemic_corruption": {
+            "correlation": 0.4346660550805093,
+            "p_value": 0.15793197989539556,
+            "significant": "False"
+          },
+          "homogeneous_people_construction": {
+            "correlation": -0.16041138598847943,
+            "p_value": 0.618471705929137,
+            "significant": "False"
+          },
+          "manichaean_people_elite_framing": {
+            "correlation": 1.0,
+            "p_value": null,
+            "significant": false
+          },
+          "nationalist_exclusion": {
+            "correlation": -0.21390787075358167,
+            "p_value": 0.5044079635398482,
+            "significant": "False"
+          },
+          "popular_sovereignty_claims": {
+            "correlation": 0.196899456264152,
+            "p_value": 0.539632761457199,
+            "significant": "False"
+          }
+        },
+        "nationalist_exclusion": {
+          "anti_pluralist_exclusion": {
+            "correlation": 0.45327041532008583,
+            "p_value": 0.13890482714747832,
+            "significant": "False"
+          },
+          "authenticity_vs_political_class": {
+            "correlation": 0.6939361313404312,
+            "p_value": 0.012300957175422452,
+            "significant": "True"
+          },
+          "crisis_restoration_narrative": {
+            "correlation": -0.11731466458093072,
+            "p_value": 0.7165285586567152,
+            "significant": "False"
+          },
+          "economic_populist_appeals": {
+            "correlation": 0.45017553064997473,
+            "p_value": 0.1419617268242006,
+            "significant": "False"
+          },
+          "elite_conspiracy_systemic_corruption": {
+            "correlation": -0.6246473111290052,
+            "p_value": 0.029896253044780045,
+            "significant": "True"
+          },
+          "homogeneous_people_construction": {
+            "correlation": 0.7915221934760779,
+            "p_value": 0.0021595840434963766,
+            "significant": "True"
+          },
+          "manichaean_people_elite_framing": {
+            "correlation": -0.21390787075358167,
+            "p_value": 0.5044079635398482,
+            "significant": "False"
+          },
+          "nationalist_exclusion": {
+            "correlation": 1.0,
+            "p_value": null,
+            "significant": false
+          },
+          "popular_sovereignty_claims": {
+            "correlation": 0.4716675298062005,
+            "p_value": 0.12161261729845362,
+            "significant": "False"
+          }
+        },
+        "popular_sovereignty_claims": {
+          "anti_pluralist_exclusion": {
+            "correlation": 0.6923047000004153,
+            "p_value": 0.012593571870293125,
+            "significant": "True"
+          },
+          "authenticity_vs_political_class": {
+            "correlation": 0.34080347839165714,
+            "p_value": 0.2783436757127086,
+            "significant": "False"
+          },
+          "crisis_restoration_narrative": {
+            "correlation": 0.45650825550821766,
+            "p_value": 0.13575261359442745,
+            "significant": "False"
+          },
+          "economic_populist_appeals": {
+            "correlation": 0.11511661463839931,
+            "p_value": 0.7216514500646869,
+            "significant": "False"
+          },
+          "elite_conspiracy_systemic_corruption": {
+            "correlation": 0.25516670599216146,
+            "p_value": 0.4234683959437348,
+            "significant": "False"
+          },
+          "homogeneous_people_construction": {
+            "correlation": 0.6759171741458048,
+            "p_value": 0.015826139534741577,
+            "significant": "True"
+          },
+          "manichaean_people_elite_framing": {
+            "correlation": 0.196899456264152,
+            "p_value": 0.539632761457199,
+            "significant": "False"
+          },
+          "nationalist_exclusion": {
+            "correlation": 0.4716675298062005,
+            "p_value": 0.12161261729845362,
+            "significant": "False"
+          },
+          "popular_sovereignty_claims": {
+            "correlation": 1.0,
+            "p_value": null,
+            "significant": false
+          }
+        }
+      },
+      "confidence": {
+        "anti_pluralist_exclusion": {
+          "anti_pluralist_exclusion": {
+            "correlation": 1.0,
+            "p_value": null,
+            "significant": false
+          },
+          "authenticity_vs_political_class": {
+            "correlation": 0.30518138074443224,
+            "p_value": 0.3347544225533778,
+            "significant": "False"
+          },
+          "crisis_restoration_narrative": {
+            "correlation": -0.06542056074766321,
+            "p_value": 0.8399192749657285,
+            "significant": "False"
+          },
+          "economic_populist_appeals": {
+            "correlation": 0.2623338167980901,
+            "p_value": 0.4101006965010069,
+            "significant": "False"
+          },
+          "elite_conspiracy_systemic_corruption": {
+            "correlation": 0.30334819828590925,
+            "p_value": 0.3378131802967001,
+            "significant": "False"
+          },
+          "homogeneous_people_construction": {
+            "correlation": 0.3410850725967168,
+            "p_value": 0.27792095282415286,
+            "significant": "False"
+          },
+          "manichaean_people_elite_framing": {
+            "correlation": 0.08975922963071624,
+            "p_value": 0.7814638907249392,
+            "significant": "False"
+          },
+          "nationalist_exclusion": {
+            "correlation": 0.38317757009345815,
+            "p_value": 0.21889018717766942,
+            "significant": "False"
+          },
+          "popular_sovereignty_claims": {
+            "correlation": 0.1974703051875743,
+            "p_value": 0.5384340109641564,
+            "significant": "False"
+          }
+        },
+        "authenticity_vs_political_class": {
+          "anti_pluralist_exclusion": {
+            "correlation": 0.30518138074443224,
+            "p_value": 0.3347544225533778,
+            "significant": "False"
+          },
+          "authenticity_vs_political_class": {
+            "correlation": 1.0,
+            "p_value": null,
+            "significant": false
+          },
+          "crisis_restoration_narrative": {
+            "correlation": 0.520603531858148,
+            "p_value": 0.08268048603334459,
+            "significant": "False"
+          },
+          "economic_populist_appeals": {
+            "correlation": 0.7278602642426106,
+            "p_value": 0.007284084550700438,
+            "significant": "True"
+          },
+          "elite_conspiracy_systemic_corruption": {
+            "correlation": 0.254924964255231,
+            "p_value": 0.4239229743216461,
+            "significant": "False"
+          },
+          "homogeneous_people_construction": {
+            "correlation": 0.7586206896551725,
+            "p_value": 0.004232092570360449,
+            "significant": "True"
+          },
+          "manichaean_people_elite_framing": {
+            "correlation": 0.2758620689655177,
+            "p_value": 0.38545481318191227,
+            "significant": "False"
+          },
+          "nationalist_exclusion": {
+            "correlation": 0.5206035318581482,
+            "p_value": 0.08268048603334459,
+            "significant": "False"
+          },
+          "popular_sovereignty_claims": {
+            "correlation": 0.27586206896551746,
+            "p_value": 0.38545481318191227,
+            "significant": "False"
+          }
+        },
+        "crisis_restoration_narrative": {
+          "anti_pluralist_exclusion": {
+            "correlation": -0.06542056074766321,
+            "p_value": 0.8399192749657285,
+            "significant": "False"
+          },
+          "authenticity_vs_political_class": {
+            "correlation": 0.520603531858148,
+            "p_value": 0.08268048603334459,
+            "significant": "False"
+          },
+          "crisis_restoration_narrative": {
+            "correlation": 1.0,
+            "p_value": null,
+            "significant": false
+          },
+          "economic_populist_appeals": {
+            "correlation": 0.7870014503942702,
+            "p_value": 0.0023845147767363644,
+            "significant": "True"
+          },
+          "elite_conspiracy_systemic_corruption": {
+            "correlation": 0.3033481982859088,
+            "p_value": 0.3378131802967001,
+            "significant": "False"
+          },
+          "homogeneous_people_construction": {
+            "correlation": 0.3410850725967176,
+            "p_value": 0.27792095282415286,
+            "significant": "False"
+          },
+          "manichaean_people_elite_framing": {
+            "correlation": 0.3051813807444315,
+            "p_value": 0.33475442255337845,
+            "significant": "False"
+          },
+          "nationalist_exclusion": {
+            "correlation": 0.10280373831775703,
+            "p_value": 0.7505377390820756,
+            "significant": "False"
+          },
+          "popular_sovereignty_claims": {
+            "correlation": 0.3051813807444314,
+            "p_value": 0.33475442255337845,
+            "significant": "False"
+          }
+        },
+        "economic_populist_appeals": {
+          "anti_pluralist_exclusion": {
+            "correlation": 0.2623338167980901,
+            "p_value": 0.4101006965010069,
+            "significant": "False"
+          },
+          "authenticity_vs_political_class": {
+            "correlation": 0.7278602642426106,
+            "p_value": 0.007284084550700438,
+            "significant": "True"
+          },
+          "crisis_restoration_narrative": {
+            "correlation": 0.7870014503942702,
+            "p_value": 0.0023845147767363644,
+            "significant": "True"
+          },
+          "economic_populist_appeals": {
+            "correlation": 1.0,
+            "p_value": null,
+            "significant": false
+          },
+          "elite_conspiracy_systemic_corruption": {
+            "correlation": 0.4730499167912662,
+            "p_value": 0.12037342112673273,
+            "significant": "False"
+          },
+          "homogeneous_people_construction": {
+            "correlation": 0.6158817620514399,
+            "p_value": 0.032987956202661206,
+            "significant": "True"
+          },
+          "manichaean_people_elite_framing": {
+            "correlation": 0.5039032598602683,
+            "p_value": 0.09484686977820556,
+            "significant": "False"
+          },
+          "nationalist_exclusion": {
+            "correlation": 0.3206302205309991,
+            "p_value": 0.30957866821315877,
+            "significant": "False"
+          },
+          "popular_sovereignty_claims": {
+            "correlation": 0.5039032598602684,
+            "p_value": 0.09484686977820556,
+            "significant": "False"
+          }
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "anti_pluralist_exclusion": {
+            "correlation": 0.30334819828590925,
+            "p_value": 0.3378131802967001,
+            "significant": "False"
+          },
+          "authenticity_vs_political_class": {
+            "correlation": 0.254924964255231,
+            "p_value": 0.4239229743216461,
+            "significant": "False"
+          },
+          "crisis_restoration_narrative": {
+            "correlation": 0.3033481982859088,
+            "p_value": 0.3378131802967001,
+            "significant": "False"
+          },
+          "economic_populist_appeals": {
+            "correlation": 0.4730499167912662,
+            "p_value": 0.12037342112673273,
+            "significant": "False"
+          },
+          "elite_conspiracy_systemic_corruption": {
+            "correlation": 1.0,
+            "p_value": null,
+            "significant": false
+          },
+          "homogeneous_people_construction": {
+            "correlation": 0.18208926018230745,
+            "p_value": 0.5711181844801008,
+            "significant": "False"
+          },
+          "manichaean_people_elite_framing": {
+            "correlation": 0.47343207647399976,
+            "p_value": 0.12003231578246387,
+            "significant": "False"
+          },
+          "nationalist_exclusion": {
+            "correlation": 0.30334819828590914,
+            "p_value": 0.3378131802967001,
+            "significant": "False"
+          },
+          "popular_sovereignty_claims": {
+            "correlation": 0.8011927448021527,
+            "p_value": 0.0017330589224204313,
+            "significant": "True"
+          }
+        },
+        "homogeneous_people_construction": {
+          "anti_pluralist_exclusion": {
+            "correlation": 0.3410850725967168,
+            "p_value": 0.27792095282415286,
+            "significant": "False"
+          },
+          "authenticity_vs_political_class": {
+            "correlation": 0.7586206896551725,
+            "p_value": 0.004232092570360449,
+            "significant": "True"
+          },
+          "crisis_restoration_narrative": {
+            "correlation": 0.3410850725967176,
+            "p_value": 0.27792095282415286,
+            "significant": "False"
+          },
+          "economic_populist_appeals": {
+            "correlation": 0.6158817620514399,
+            "p_value": 0.032987956202661206,
+            "significant": "True"
+          },
+          "elite_conspiracy_systemic_corruption": {
+            "correlation": 0.18208926018230745,
+            "p_value": 0.5711181844801008,
+            "significant": "False"
+          },
+          "homogeneous_people_construction": {
+            "correlation": 1.0,
+            "p_value": null,
+            "significant": false
+          },
+          "manichaean_people_elite_framing": {
+            "correlation": 0.24137931034482707,
+            "p_value": 0.44977373789823916,
+            "significant": "False"
+          },
+          "nationalist_exclusion": {
+            "correlation": 0.7719293748241499,
+            "p_value": 0.003265630034172661,
+            "significant": "True"
+          },
+          "popular_sovereignty_claims": {
+            "correlation": 0.137931034482758,
+            "p_value": 0.6690246826670384,
+            "significant": "False"
+          }
+        },
+        "manichaean_people_elite_framing": {
+          "anti_pluralist_exclusion": {
+            "correlation": 0.08975922963071624,
+            "p_value": 0.7814638907249392,
+            "significant": "False"
+          },
+          "authenticity_vs_political_class": {
+            "correlation": 0.2758620689655177,
+            "p_value": 0.38545481318191227,
+            "significant": "False"
+          },
+          "crisis_restoration_narrative": {
+            "correlation": 0.3051813807444315,
+            "p_value": 0.33475442255337845,
+            "significant": "False"
+          },
+          "economic_populist_appeals": {
+            "correlation": 0.5039032598602683,
+            "p_value": 0.09484686977820556,
+            "significant": "False"
+          },
+          "elite_conspiracy_systemic_corruption": {
+            "correlation": 0.47343207647399976,
+            "p_value": 0.12003231578246387,
+            "significant": "False"
+          },
+          "homogeneous_people_construction": {
+            "correlation": 0.24137931034482707,
+            "p_value": 0.44977373789823916,
+            "significant": "False"
+          },
+          "manichaean_people_elite_framing": {
+            "correlation": 1.0,
+            "p_value": null,
+            "significant": false
+          },
+          "nationalist_exclusion": {
+            "correlation": 0.30518138074443185,
+            "p_value": 0.33475442255337845,
+            "significant": "False"
+          },
+          "popular_sovereignty_claims": {
+            "correlation": 0.4827586206896558,
+            "p_value": 0.11190385144360257,
+            "significant": "False"
+          }
+        },
+        "nationalist_exclusion": {
+          "anti_pluralist_exclusion": {
+            "correlation": 0.38317757009345815,
+            "p_value": 0.21889018717766942,
+            "significant": "False"
+          },
+          "authenticity_vs_political_class": {
+            "correlation": 0.5206035318581482,
+            "p_value": 0.08268048603334459,
+            "significant": "False"
+          },
+          "crisis_restoration_narrative": {
+            "correlation": 0.10280373831775703,
+            "p_value": 0.7505377390820756,
+            "significant": "False"
+          },
+          "economic_populist_appeals": {
+            "correlation": 0.3206302205309991,
+            "p_value": 0.30957866821315877,
+            "significant": "False"
+          },
+          "elite_conspiracy_systemic_corruption": {
+            "correlation": 0.30334819828590914,
+            "p_value": 0.3378131802967001,
+            "significant": "False"
+          },
+          "homogeneous_people_construction": {
+            "correlation": 0.7719293748241499,
+            "p_value": 0.003265630034172661,
+            "significant": "True"
+          },
+          "manichaean_people_elite_framing": {
+            "correlation": 0.30518138074443185,
+            "p_value": 0.33475442255337845,
+            "significant": "False"
+          },
+          "nationalist_exclusion": {
+            "correlation": 1.0,
+            "p_value": null,
+            "significant": false
+          },
+          "popular_sovereignty_claims": {
+            "correlation": 0.30518138074443146,
+            "p_value": 0.33475442255337845,
+            "significant": "False"
+          }
+        },
+        "popular_sovereignty_claims": {
+          "anti_pluralist_exclusion": {
+            "correlation": 0.1974703051875743,
+            "p_value": 0.5384340109641564,
+            "significant": "False"
+          },
+          "authenticity_vs_political_class": {
+            "correlation": 0.27586206896551746,
+            "p_value": 0.38545481318191227,
+            "significant": "False"
+          },
+          "crisis_restoration_narrative": {
+            "correlation": 0.3051813807444314,
+            "p_value": 0.33475442255337845,
+            "significant": "False"
+          },
+          "economic_populist_appeals": {
+            "correlation": 0.5039032598602684,
+            "p_value": 0.09484686977820556,
+            "significant": "False"
+          },
+          "elite_conspiracy_systemic_corruption": {
+            "correlation": 0.8011927448021527,
+            "p_value": 0.0017330589224204313,
+            "significant": "True"
+          },
+          "homogeneous_people_construction": {
+            "correlation": 0.137931034482758,
+            "p_value": 0.6690246826670384,
+            "significant": "False"
+          },
+          "manichaean_people_elite_framing": {
+            "correlation": 0.4827586206896558,
+            "p_value": 0.11190385144360257,
+            "significant": "False"
+          },
+          "nationalist_exclusion": {
+            "correlation": 0.30518138074443146,
+            "p_value": 0.33475442255337845,
+            "significant": "False"
+          },
+          "popular_sovereignty_claims": {
+            "correlation": 1.0,
+            "p_value": null,
+            "significant": false
+          }
+        }
+      }
+    },
+    "group_comparisons": {},
+    "temporal_analysis": {},
+    "cross_document_tests": {
+      "internal_consistency": {
+        "core_populist_dimensions": {
+          "cronbach_alpha": 0.2633744855967054,
+          "item_count": 4,
+          "interpretation": "Poor reliability"
+        },
+        "auxiliary_dimensions": {
+          "cronbach_alpha": 0.5067293189465136,
+          "item_count": 5,
+          "interpretation": "Poor reliability"
+        }
+      },
+      "variance_tests": {}
+    },
+    "processing_metadata": {
+      "processor_version": "1.0.0",
+      "processor_type": "composite_analysis",
+      "artifact_count": 12,
+      "document_count": 12,
+      "dimension_count": 108,
+      "evidence_count": 325,
+      "framework_metadata": {
+        "framework_name": "Populist Discourse Analysis Framework",
+        "framework_version": "10.0.2",
+        "analyst_confidence": 0.95,
+        "analysis_notes": "Applied three independent analytical approaches (Evidence-First, Context-Weighted, Pattern-Based) with median aggregation for raw_score. Confidence is calculated as 1 - (maximum_internal_raw_score - minimum_internal_raw_score) for each dimension. Calculated all framework-specified derived metrics using exact formulas.",
+        "internal_consistency_approach": "3-run median aggregation with calculated confidence",
+        "derived_metrics_calculated": true
+      },
+      "content_hash": "6babf02a79c4"
+    }
+  },
+  "artifacts_processed": 12,
+  "timestamp": "2025-09-26T05:17:51.375532+00:00"
+}

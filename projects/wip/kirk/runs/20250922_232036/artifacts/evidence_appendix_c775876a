@@ -1,0 +1,333 @@
+---
+agent_name: TwoStageSynthesisAgent
+stage: evidence_appendix
+timestamp: 2025-09-22 23:25:51 UTC
+evidence_content_length: 27184
+synthesis_method: two_stage_with_appendix
+---
+
+Here is a curated set of 100 compelling quotes illustrating the core statistical findings for the `kirk` corpus, focusing on Dominant Rhetorical Profile (Fear, Enmity, Tribal Dominance), Strategic Relational Tension, and rhetoric contributing to a negative Full Cohesion Index.
+
+**Observed Shifts Across Timeline (2015-2024):**
+Across the provided documents, there's a clear escalation in the intensity and scope of fragmentative rhetoric. Earlier documents (e.g., Doc 0, 1) show foundational "us vs. them" framing, concerns about free speech, and economic anxieties. Mid-timeline documents (e.g., Doc 4, 7, 6, 12) introduce more direct demonization of specific political figures and institutions (Big Tech, "socialist left," "rigged media"), and elevate the conflict to a "culture war" or a fight for "Western civilization." Later documents (e.g., Doc 9, 10, 13) feature even more extreme accusations ("Marxist totalitarian left," "demonic wokeism," "anti-civilization"), explicit calls for aggressive action (deportation), and frame the stakes as an "existential crisis" or the literal "dying" of the country. The strategic "Relational Tension" (mixing high-amity for the in-group with high-enmity for the out-group) becomes increasingly pronounced and sophisticated, often appearing within the same breath or paragraph, highlighting an irreconcilable divide.
+
+---
+
+**Curated Evidence:**
+
+**Document 0**
+*   **Quote:** "left-wing academics using their institutional titles and their power to try to block conservative organizations"
+    *   **Statistical Relevance:** Enmity, Fear, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "intolerance of the tolerance crowd"
+    *   **Statistical Relevance:** Enmity, Negative Full Cohesion Index
+    *   **Strength:** 4
+*   **Quote:** "financially cataclysmic situation that young people are finding themselves in"
+    *   **Statistical Relevance:** Fear
+    *   **Strength:** 5
+*   **Quote:** "the left has hated luxury rap for years because I think there’s an underlying message that says you don’t have to settle for government crumbs."
+    *   **Statistical Relevance:** Enmity, Tribal Dominance
+    *   **Strength:** 4
+*   **Quote:** "try to block conservative organizations and group on campus"
+    *   **Statistical Relevance:** Enmity, Fear, Negative Full Cohesion Index
+    *   **Strength:** 5
+
+**Document 1**
+*   **Quote:** "These are the young patriots that are doing the work that is necessary to fight back against the intolerant left on our campuses."
+    *   **Statistical Relevance:** Relational Tension, Tribal Dominance, Enmity
+    *   **Strength:** 5
+*   **Quote:** "What is going on right now is a fight for freedom versus slavery, capitalism versus socialism."
+    *   **Statistical Relevance:** Fear, Enmity, Tribal Dominance, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "We are banding together to fight for the core values that made Western civilization so great."
+    *   **Statistical Relevance:** Tribal Dominance, Relational Tension
+    *   **Strength:** 5
+*   **Quote:** "Free speech is being silenced, unlike any other time in human history."
+    *   **Statistical Relevance:** Fear
+    *   **Strength:** 5
+*   **Quote:** "And never before in human history has a cohort of a generation so shamelessly enjoyed the fruits of the free market while simultaneously using those devices to bash it."
+    *   **Statistical Relevance:** Enmity, Negative Full Cohesion Index
+    *   **Strength:** 4
+*   **Quote:** "They would rather silence conservatives. They'd rather put them in a box."
+    *   **Statistical Relevance:** Fear, Enmity
+    *   **Strength:** 5
+*   **Quote:** "resistance movement of liberty-minded, freedom-centric student organizations that are banding together to fight back against these very, very dangerous ideas."
+    *   **Statistical Relevance:** Tribal Dominance, Fear, Enmity
+    *   **Strength:** 5
+
+**Document 4**
+*   **Quote:** "As we conservatives believe, we believe the bigger the government, the smaller the citizen."
+    *   **Statistical Relevance:** Tribal Dominance
+    *   **Strength:** 4
+*   **Quote:** "Well, I'd say the biggest issue facing our generation is there's been a bipartisan agreement to continue to spend money we don't have, grow government at the expense of our generation, concentrate power around Washington, D.C. to benefit the wealthy few and the well-connected."
+    *   **Statistical Relevance:** Fear, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "Currently the economic system that we're living under is inherently exploitative, it's inherently oppressive, and we're now actually feeling the devastating impact of that more than ever." (Hasan)
+    *   **Statistical Relevance:** Fear, Enmity, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "if you lose your job, you might lose your healthcare, and you might literally die." (Hasan)
+    *   **Statistical Relevance:** Fear
+    *   **Strength:** 5
+*   **Quote:** "your wealthy benefactors can virtually, virtually enact feudalist policies upon the same people who are cheering right now for free market enterprise..." (Hasan)
+    *   **Statistical Relevance:** Negative Full Cohesion Index (Envy), Enmity
+    *   **Strength:** 4
+*   **Quote:** "Jux deposed that with the last eight years, which was mediocrity and apologizing for being American."
+    *   **Statistical Relevance:** Enmity
+    *   **Strength:** 5
+*   **Quote:** "The number one killer of citizens, from innocent civilians the last 100 years has been the very idea that you shamelessly wear on your sleeve every single day."
+    *   **Statistical Relevance:** Enmity, Fear, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "private corporations are essentially privatizing tyranny, okay? They are unelectable, they are unaccountable..." (Hasan)
+    *   **Statistical Relevance:** Enmity, Negative Full Cohesion Index
+    *   **Strength:** 5
+
+**Document 5**
+*   **Quote:** "It's that the left has done everything they possibly can to make sure our generation has never heard why America is the greatest country ever to exist..."
+    *   **Statistical Relevance:** Enmity, Tribal Dominance
+    *   **Strength:** 5
+*   **Quote:** "This is who they have always been. They have always hated this country. They have always had contempt for our history."
+    *   **Statistical Relevance:** Enmity, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "What is America? Is America a place for victims or for victors? Is America a socialist place or is America a place that embraces freedom and is a refuge for those that have fled totalitarian Marxist dictatorships?"
+    *   **Statistical Relevance:** Fear, Enmity, Tribal Dominance, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "I don't want to live in the country that the socialist left wants to create. We are not going in the same direction as the Democrat Party. I don't want to live in the country where it's okay to execute a newborn child. That's not the country I want to live in."
+    *   **Statistical Relevance:** Relational Tension, Fear, Enmity, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "If you want to fundamentally transform and destroy this country from within, you do not mean well. You do not have good intentions whatsoever."
+    *   **Statistical Relevance:** Enmity, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "the fight that I've decided to engage in is one that will either make or break Western civilization."
+    *   **Statistical Relevance:** Fear, Tribal Dominance
+    *   **Strength:** 5
+*   **Quote:** "If there is one thing we take away from what this president has taught us, is that when we as a movement fight, we win."
+    *   **Statistical Relevance:** Tribal Dominance
+    *   **Strength:** 4
+*   **Quote:** "That will be the question of the 2020 election. It will be the most important culture war in American history, and we will win."
+    *   **Statistical Relevance:** Tribal Dominance, Fear
+    *   **Strength:** 5
+*   **Quote:** "I'm so sick and tired of saying that the Democrat Party and liberals mean well. They do not mean well."
+    *   **Statistical Relevance:** Enmity, Negative Full Cohesion Index
+    *   **Strength:** 5
+
+**Document 6**
+*   **Quote:** "What I see every single day are students that are being taught that our country is racist and bigoted and homophobic and backwards, and they're being taught nothing but negatives about the greatest country ever to exist in the history of the world."
+    *   **Statistical Relevance:** Fear, Enmity, Tribal Dominance
+    *   **Strength:** 5
+*   **Quote:** "Alexandria Kasiukortez and Rashida Tlaib and Ayanna Presley and Ilan Omar, they are a harbinger for things to come. They have bitter resentment for the greatest country ever to exist in the history of the world."
+    *   **Statistical Relevance:** Enmity, Fear
+    *   **Strength:** 5
+*   **Quote:** "America is the greatest country in the history of the world. One of American sovereignty that believes in the working class. A conservative movement that believes in people that shower before work and after work."
+    *   **Statistical Relevance:** Tribal Dominance
+    *   **Strength:** 5
+*   **Quote:** "I come with a warning and some insight. What I see on college campuses every single day is no different than what's happening in the Democrat primary right now, which is we have volunteered and sent our next generation to installations of indoctrination to teach the next generation to hate our country."
+    *   **Statistical Relevance:** Fear, Enmity, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "Culture will get this president reelected. Culture will win back our country. College campuses are the battleground for the hearts and minds for the next generation. I'm going to keep fighting on them from now to November. I know every single one of you are going to do what you can. And we will get this president reelected and take back this country."
+    *   **Statistical Relevance:** Relational Tension, Tribal Dominance, Enmity
+    *   **Strength:** 5
+*   **Quote:** "I hear people all the time, they say, how on earth could a Bolshevik, could a breadline advocate, could a Marxist be leading the Democrat primary? I say, have you visited a college campus at all in the last 20 years?"
+    *   **Statistical Relevance:** Enmity, Fear
+    *   **Strength:** 5
+*   **Quote:** "These universities are indoctrinating the next generation around ideas of open borders and Marxism. And where Senator Sanders gets his base is a limitless supply of millions and millions of students that are entering our university system and they're being turned into activists."
+    *   **Statistical Relevance:** Fear, Enmity, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "They have bitter resentment for the greatest country ever to exist in the history of the world. The leading Democrat nominee has nicer things to say about literacy in Cuba than the heroic history of the United States of America. We have a dictator-apologist that is the front-runner of the Democrat Party"
+    *   **Statistical Relevance:** Enmity, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "They will make up narratives, manufacture stories, and they're already beginning it in ways we could never imagine. They've already tried to impeach him. They spied on his campaign. Pathological resistance started 14 minutes after his inauguration."
+    *   **Statistical Relevance:** Enmity, Fear
+    *   **Strength:** 5
+*   **Quote:** "For every single person in this room, please, unless you went to Liberty University or Hillsdale, Liberty's a great college, stop giving money to your alma mater. Stop it. Cut them off."
+    *   **Statistical Relevance:** Enmity, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "This election is going to be a referendum on what is America? Is America a mediocre socialist welfare Marxist country? Of course not. Are we a country of victims or are we a country of victors?"
+    *   **Statistical Relevance:** Fear, Enmity, Tribal Dominance, Negative Full Cohesion Index
+    *   **Strength:** 5
+
+**Document 7**
+*   **Quote:** "Any Republican that takes money from NetPak or from Google should leave the Republican party. Any Republican that is funded by Google has no place in the Republican party."
+    *   **Statistical Relevance:** Enmity, Tribal Dominance, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "If we do not have free speech or first freedoms, then we're all going to live in a country that is unrecognizable."
+    *   **Statistical Relevance:** Fear
+    *   **Strength:** 5
+*   **Quote:** "What happens if Google decides to digitally assassinate a certain person? Like what we saw happen last month? They can wipe away the existence of an idea of a human being, of a political movement instantaneously."
+    *   **Statistical Relevance:** Fear, Enmity
+    *   **Strength:** 5
+*   **Quote:** "But if we do not challenge these big tech companies, if we are not serious about the threat that they pose to our livelihood... then we will live in a country where every state is like California."
+    *   **Statistical Relevance:** Fear, Enmity, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "And when a group of people in a concentrated area controlling trillion-dollar companies decide to impose a viewpoint that is completely contrary to the American way of life..."
+    *   **Statistical Relevance:** Enmity, Fear, Tribal Dominance
+    *   **Strength:** 5
+*   **Quote:** "And we as conservatives must be very clear. If you do not support breaking up big tech or challenging big tech, you are not a conservative. You are a corporatist."
+    *   **Statistical Relevance:** Tribal Dominance, Enmity, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "So for every Republican attorney general out there, sue these tech companies now for platform access, for monopolistic practices."
+    *   **Statistical Relevance:** Enmity
+    *   **Strength:** 5
+*   **Quote:** "to liberate the marketplace, empower real entrepreneurs because the digital age is upon us. And if we do not have free speech or first freedoms, then we're all going to live in a country that is unrecognizable. And I believe if we do that and restore integrity in our elections, we're not just going to win a little. We're going to win big and we're going to win for the next couple decades."
+    *   **Statistical Relevance:** Relational Tension, Fear, Tribal Dominance
+    *   **Strength:** 5
+
+**Document 9**
+*   **Quote:** "Democrats have given hundreds of billions of dollars to illegals and foreign nations, while Gen Z has to pinch pennies just so that they can never own a home, never marry, and work until they die."
+    *   **Statistical Relevance:** Tribal Dominance, Enmity, Fear, Negative Full Cohesion Index (Envy)
+    *   **Strength:** 5
+*   **Quote:** "The American dream has become a luxury item for the wealthy elite."
+    *   **Statistical Relevance:** Fear, Negative Full Cohesion Index (Envy)
+    *   **Strength:** 5
+*   **Quote:** "Happy countries have children. Broken countries have addiction, depression, and suffering."
+    *   **Statistical Relevance:** Fear
+    *   **Strength:** 5
+*   **Quote:** "Under Biden, our young people own nothing and they are miserable."
+    *   **Statistical Relevance:** Fear, Enmity
+    *   **Strength:** 5
+*   **Quote:** "Donald Trump refuses to accept this fake, pathetic, mutilated version of the American dream. When he was president, young people were richer than ever before, and he will do it again."
+    *   **Statistical Relevance:** Relational Tension, Enmity, Tribal Dominance
+    *   **Strength:** 5
+*   **Quote:** "For the past four years, they've seen the vision of the Biden-Harris regime."
+    *   **Statistical Relevance:** Enmity
+    *   **Strength:** 5
+*   **Quote:** "You don't have to support leaders who lied to you and took advantage of you for your vote."
+    *   **Statistical Relevance:** Enmity
+    *   **Strength:** 5
+*   **Quote:** "All of us together working harder than ever, we will fire the Biden-Harris regime and put Donald Trump back in the White House where he belongs."
+    *   **Statistical Relevance:** Relational Tension, Enmity, Tribal Dominance
+    *   **Strength:** 5
+*   **Quote:** "We will fire the Biden-Harris regime and put Donald Trump back in the White House where he belongs."
+    *   **Statistical Relevance:** Enmity, Negative Full Cohesion Index
+    *   **Strength:** 5
+
+**Document 10**
+*   **Quote:** "Now, we know what the bad guys are fighting for, and a movement with no vision, we're nothing more than just a gang... but a vision, something that we are aiming for..."
+    *   **Statistical Relevance:** Relational Tension, Enmity, Tribal Dominance
+    *   **Strength:** 5
+*   **Quote:** "One of the reasons why I believe we are going to win is because our young people are tougher than the liberals. Our opposition is fragile."
+    *   **Statistical Relevance:** Tribal Dominance, Enmity
+    *   **Strength:** 5
+*   **Quote:** "So the vision of our opponents and the Marxist totalitarian left is filled with venom, hatred, darkness, resentment, arrogance, and despair."
+    *   **Statistical Relevance:** Enmity, Fear, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "They want power, they want control, they want uniformity, and they want submission."
+    *   **Statistical Relevance:** Enmity, Fear
+    *   **Strength:** 5
+*   **Quote:** "What gives me hope is that what we see on these campuses is a generation that understands the only way you beat the left is you never give up and you never give them an inch, period."
+    *   **Statistical Relevance:** Relational Tension, Enmity, Tribal Dominance
+    *   **Strength:** 5
+*   **Quote:** "The only way they can win. We are going to win in the end because the only way they've been able to have even a slight advantage against us is by suppressing us without our consent, censoring us, outright cheating."
+    *   **Statistical Relevance:** Enmity, Fear, Tribal Dominance
+    *   **Strength:** 5
+*   **Quote:** "One of the things that the totalitarian left wants to do for our society is to destroy the distinction between God and man, between man and woman, between good and evil."
+    *   **Statistical Relevance:** Fear, Enmity, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "And if you ask me, one of the most important things that needs to happen in American Christianity is we need to excommunicate the demonic, anti-biblical idea of wokeism out of the American church immediately."
+    *   **Statistical Relevance:** Enmity, Tribal Dominance, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "And then the next four days, we are going to commit to a plan of action to take back our country and to create something bold and beautiful for the next generation."
+    *   **Statistical Relevance:** Relational Tension, Tribal Dominance
+    *   **Strength:** 5
+
+**Document 12**
+*   **Quote:** "America is the greatest country ever to exist in the history of the world... Only in America is that possible."
+    *   **Statistical Relevance:** Tribal Dominance
+    *   **Strength:** 5
+*   **Quote:** "It's a decision, are we going to take a radical turn towards victimhood ideology and Marxism and blaming others for your problems and thinking that America is just a mistake and that everything before us is wrong?"
+    *   **Statistical Relevance:** Fear, Enmity, Tribal Dominance, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "Imagine a world without America. A world without America is a much less free world. It's a world where tyrants would run wild."
+    *   **Statistical Relevance:** Fear
+    *   **Strength:** 5
+*   **Quote:** "If the alternative would have won, oh my goodness... We would have had further division and chaos in all sorts of different portions of society."
+    *   **Statistical Relevance:** Fear, Enmity, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "Not only did he beat the rigged media, not only did he beat the Bush dynasty and the Clinton dynasty, not only did he win states they said he has no chance of winning..."
+    *   **Statistical Relevance:** Enmity, Tribal Dominance
+    *   **Strength:** 5
+*   **Quote:** "The ideas that are being put forth by these radical leftists."
+    *   **Statistical Relevance:** Enmity
+    *   **Strength:** 5
+*   **Quote:** "Not only did he beat 16 Republicans, qualified Republicans, not only did he beat the rigged media... Not only did he overcome an FBI that was trying to spy on him and was trying to destabilize him from within. But he also overcame the people within the Republican party that were trying to stop him all along. And he overcame the people in the pundit class that were trying to stop him."
+    *   **Statistical Relevance:** Enmity, Fear, Tribal Dominance, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "Instead of saying, hmm, why did you take out $100,000 in student loans? Personal responsibility would be a nice thing, wouldn't it?"
+    *   **Statistical Relevance:** Negative Full Cohesion Index
+    *   **Strength:** 4
+*   **Quote:** "And so what's so generationally important for everyone in this room, and you're playing a role in this, is that the winners of this culture war will decide the future of Western civilization."
+    *   **Statistical Relevance:** Fear, Tribal Dominance
+    *   **Strength:** 5
+
+**Document 13**
+*   **Quote:** "America was never great."
+    *   **Statistical Relevance:** Enmity (as a statement being rebutted or highlighted as an opposing view)
+    *   **Strength:** 5
+*   **Quote:** "Fascist, misogynistic, backwards."
+    *   **Statistical Relevance:** Enmity (as labels for an out-group)
+    *   **Strength:** 5
+*   **Quote:** "We are a product of white supremacist systems."
+    *   **Statistical Relevance:** Enmity (as a statement being rebutted or highlighted as an opposing view)
+    *   **Strength:** 5
+*   **Quote:** "And this is the time for the largest deportation effort this country has ever seen."
+    *   **Statistical Relevance:** Enmity, Tribal Dominance, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "If you are here illegally, you are deported from the United States of America. Period. No amnesty."
+    *   **Statistical Relevance:** Enmity, Tribal Dominance, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "But if you come from Somalia and you refuse to learn our language, adopt to our customs and assimilate, I'm sorry, America is closed to the third world until further notice."
+    *   **Statistical Relevance:** Enmity, Tribal Dominance, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "We are not a dumping ground for the rest of the planet."
+    *   **Statistical Relevance:** Enmity, Tribal Dominance
+    *   **Strength:** 5
+*   **Quote:** "We, the American people, are not each other's enemies. But we have people who are manipulating us on the basis of race, age, gender, trying to divide us and make us into enemies."
+    *   **Statistical Relevance:** Relational Tension, Enmity, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "But I'll tell you right now, you are going to see a massive breakdown of the political order."
+    *   **Statistical Relevance:** Fear
+    *   **Strength:** 5
+*   **Quote:** "Do you know what a threat to our country is? We're not having enough babies."
+    *   **Statistical Relevance:** Fear
+    *   **Strength:** 5
+*   **Quote:** "We face an existential crisis."
+    *   **Statistical Relevance:** Fear
+    *   **Strength:** 5
+*   **Quote:** "Our country is literally dying, and I don't mean that in the abstract way that hysterical politicians sometimes mean it."
+    *   **Statistical Relevance:** Fear
+    *   **Strength:** 5
+*   **Quote:** "You guys are the beginning of the greatest political comeback in American history."
+    *   **Statistical Relevance:** Tribal Dominance
+    *   **Strength:** 5
+*   **Quote:** "Why is it that our young, why you, the next generation, have to compete to buy a home against a Chinese oligarch?"
+    *   **Statistical Relevance:** Enmity, Negative Full Cohesion Index (Envy)
+    *   **Strength:** 5
+*   **Quote:** "We have record numbers of Americans dying, deaths of despair..."
+    *   **Statistical Relevance:** Fear
+    *   **Strength:** 5
+*   **Quote:** "It's the frustration of normal people watching a certain class of people get away with everything every single time."
+    *   **Statistical Relevance:** Negative Full Cohesion Index (Envy), Enmity
+    *   **Strength:** 5
+*   **Quote:** "You should delight and rejoice in the opposition because you are doing the work to save this beautiful republic."
+    *   **Statistical Relevance:** Relational Tension, Enmity, Tribal Dominance
+    *   **Strength:** 5
+*   **Quote:** "Now we should boo Zoran Mamdani. The guy is a bigot, anti-civilization to his core, anti-American, anti-Western, wants to nationalize or make all the grocery stores run by the government, defund the police, all that is garbage."
+    *   **Statistical Relevance:** Enmity, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "This is not about Republicans and Democrats. This is about good and evil, and we have to use those brains."
+    *   **Statistical Relevance:** Enmity, Tribal Dominance, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "We have to use that weapon that God gave us to fight Marxism."
+    *   **Statistical Relevance:** Enmity, Tribal Dominance
+    *   **Strength:** 5
+*   **Quote:** "The other side, and sadly there is another side, is interested in destruction. They're interested in tearing down our history. They're interested in making us fearful of standing up for what we believe. They're interested in attacking law enforcement and shaking the young people's faith in fundamental American institutions."
+    *   **Statistical Relevance:** Enmity, Fear, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "I want to get the family back together because Lord knows we have enough on the outside coming at us."
+    *   **Statistical Relevance:** Relational Tension, Fear, Enmity
+    *   **Strength:** 5
+*   **Quote:** "Starting with those of you that are looking for a job, you should not have to compete against a foreigner for your job. American college graduates should come first."
+    *   **Statistical Relevance:** Enmity, Tribal Dominance, Negative Full Cohesion Index
+    *   **Strength:** 5
+*   **Quote:** "We need to celebrate, embrace, platform, and sometimes if necessary, subsidize getting married and having children. We are not having enough children in this country. This is a national crisis."
+    *   **Statistical Relevance:** Fear, Tribal Dominance
+    *   **Strength:** 5

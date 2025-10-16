@@ -1,0 +1,14 @@
+{
+  "url": "https://politicalrhetoricarchive.com/speech/sarah-palin-at-the-inaugural-tea-party-convention/",
+  "title": "Sarah Palin at the Inaugural Tea Party Convention – Political Rhetoric Archive",
+  "method_used": "requests",
+  "word_count": 5556,
+  "confidence_score": 80.0,
+  "success": true,
+  "extraction_metadata": {
+    "extraction_date": "2025-08-06T12:40:21.006876",
+    "page_title": "Sarah Palin at the Inaugural Tea Party Convention – Political Rhetoric Archive",
+    "http_status": 200,
+    "content_type": "text/html; charset=UTF-8"
+  }
+}

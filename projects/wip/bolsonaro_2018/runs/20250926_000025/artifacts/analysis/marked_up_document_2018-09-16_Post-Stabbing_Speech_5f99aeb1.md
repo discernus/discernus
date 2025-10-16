@@ -1,0 +1,377 @@
+---
+analysis_id: analysis_v2_analysis_20250925_200025_5
+step: markup_extraction
+model_used: vertex_ai/gemini-2.5-flash-lite
+document_index: 5
+timestamp: 2025-09-26 00:09:55 UTC
+---
+
+```markdown
+# Document Analysis - Marked Up Text
+
+E a ânsia? 
+
+É essa aqui é a ânsia. Tem que controlar isso aqui, ó. 
+
+Deixa eu viajar aqui. Pa! Olá, amigos. Estamos aqui direto do Albert Einstein. Enquanto as pessoas vão entrando aí, eu vou falar um pouquinho, né? A gente tá aqui dentro do quarto onde está o meu pai, o Jair Bolsonaro. Ele segue numa UTI. Ainda tá recebendo muito medicamento, tá fazendo a recuperação da cirurgia, né? Que é até normal. Todo mundo sabe que há três dias atrás ele teve uma cirurgia pra descolar o intestino. Uma cirurgia realizada pelo doutor Macedo e sua equipe, a qual a gente agradece muito. Foi super bem realizada, obteve muito sucesso. E pra quem nos acompanha nas redes sociais está vendo, né? Hoje, inclusive, um vídeo do Jair Bolsonaro dando uma breve caminhada aqui pelo... 
+
+Pessoal da Santa Casa. 
+
+Pelo hall do hospital. Sim, o meu irmão Carlos aqui também tá lembrando pra falar, pra agradecer ao pessoal da Santa Casa de Juiz de Fora. Os médicos que deram o primeiro atendimento, né? O atendimento de emergência, quando Jair Bolsonaro entrou no hospital e foi tão elogiado inclusive pelo pessoal aqui do Albert Einstein. Então, obrigado aos doutores, aos enfermeiros, aos técnicos, a todo mundo que colaborou pra essa recuperação e que acabaram salvando a vida do meu pai. Muito obrigado! [tosse] Minha voz tá um pouquinho ruim. Vocês aí, quarenta e cinco mil pessoas que tão me assistindo nesse momento, se puder, dá um tempinho, vai lá, compartilha essa live. Eu vou dar um tempo pra você, tem problema não. 
+
+Não, não, pode falar agora. 
+
+Vai lá, compartilha que a gente já, já vai bater um papo aqui com o Jair Bolsonaro. Vou mostrar um pouquinho o quarto pra vocês e vou aproximar a câmera dele. 
+
+Ele tá deitado aqui. 
+
+Então vou falar com ele agora. Vocês aí, obrigado por compartilhar. Já chegamos a setenta mil pessoas e passar a palavra aqui pro meu pai. Um instantinho. 
+
+Pode falar. 
+
+[pigarro] 
+
+Boa tarde a todos. 
+
+Meu muito obrigado 
+
+pelo apoio, 
+
+consideração, 
+
+carinho, 
+
+orações 
+
+e confiança. 
+
+Um abraço 
+
+todo especial, minha querida 
+
+Juiz de Fora. 
+
+Fui muito bem atendido 
+
+na Santa Casa 
+
+local. 
+
+Sabemos o trabalho maravilhoso 
+
+que essas Santas Casas fazem pelo Brasil. 
+
+Vocês salvaram a minha vida. 
+
+Estou no momento 
+
+em São Paulo. 
+
+Foi uma facada. 
+
+No momento eu achava que 
+
+tinha sido um soco apenas, na boca do estômago. 
+
+E, 
+
+com o tempo foi passando e vimos que algo era mais grave. Agradeço à equipe da Polícia Federal que, por lei, 
+
+nos acompanham 
+
+pela presteza, como me conduziram ao hospital. 
+
+No local, 
+
+uma cirurgia de emergência que dura aproximadamente 
+
+três horas. 
+
+Onde 
+
+dois litros de sangue foram drenados. 
+
+Mas a questão atual 
+
+que tá em jogo, não é o meu futuro. [CRISIS_RESTORATION_NARRATIVE: Vivemos um momento que vai tá em jogo é o futuro de du-duzentos e poucos milhões de brasileiros.] [HOMOGENEOUS_PEOPLE_CONSTRUCTION: du-duzentos e poucos milhões de brasileiros.] [POPULAR_SOVEREIGNTY_CLAIMS: du-duzentos e poucos milhões de brasileiros.] 
+
+Um pouquinho lá fora também. 
+
+[CRISIS_RESTORATION_NARRATIVE: Pra onde tá partindo o Brasil?] 
+
+Eu dou graças a Deus 
+
+por ter chegado 
+
+onde cheguei. Como eu disse 
+
+ou vinha dizendo em palestras, 
+
+ao longo de três anos, [snifando] onde eu adotei aquela máxima que seria nossa bandeira. 
+
+Peguei um versículo bíblico, João oito, trinta e dois: "Conhece a verdade 
+
+e a verdade vos libertará". 
+
+Cê quer que eu mostre lá embaixo? 
+
+Não, não mostra não. 
+
+Bem, 
+
+[MANICHAEAN_PEOPLE_ELITE_FRAMING: tá em jogo no momento, é o futuro de todos vocês que tão aí. Até de você que apoia o PT, você é um ser humano também.] [HOMOGENEOUS_PEOPLE_CONSTRUCTION: é o futuro de todos vocês que tão aí. Até de você que apoia o PT, você é um ser humano também.] [HOMOGENEOUS_PEOPLE_CONSTRUCTION: Eu vejo muito petista mudando de lado.] Mas vamo lá. 
+
+Isso no Brasil 
+
+[MANICHAEAN_PEOPLE_ELITE_FRAMING: é o jogo do poder.] 
+
+[MANICHAEAN_PEOPLE_ELITE_FRAMING: É o domínio de uma nação.] 
+
+Então, serei breve. 
+
+[ANTI_PLURALIST_EXCLUSION: O PT surgiu em oitenta. Num período que eles diziam que era ditadura militar. Onde ditadura surgiu um partido político, qualquer que seja? Sempre foram-- foi um partido único.] Mas, o que interessa no momento? Faça uma reflexão...Eu aprendi cedo, 
+
+lá em Anhoac, Mato Grosso do Sul, 
+
+com o major Almério, subcomandante. 
+
+Quando tinha um problema com, com um subordinado meu, eu estava processo da vida 
+
+e ele, o major Almério, que é vivo até hoje, 
+
+era segundo tenente, foi pra tenente. 
+
+Deixa eu tomar a decisão contra os subordinados, se coloque no lugar dele. 
+
+Eu saí dali, algumas horas depois eu voltei. E a minha de-decisão foi ao contrário. 
+
+O que eu peço pra vocês? 
+
+Se coloquem 
+
+no lugar. 
+
+[ANTI_PLURALIST_EXCLUSION: Se coloquem no lugar do presidiário que tá lá em Curitiba, com toda a sua popularidade, com toda a sua possível riqueza, com todo o seu tráfico, junto a ditaduras do mundo todo que se auto-apoiam, em especial em Cuba, você aceitaria passivamente, bovinamente, ir para a cadeia? Cê não tentaria uma fuga?] [MANICHAEAN_PEOPLE_ELITE_FRAMING: Se coloquem no lugar do presidiário que tá lá em Curitiba, com toda a sua popularidade, com toda a sua possível riqueza, com todo o seu tráfico, junto a ditaduras do mundo todo que se auto-apoiam, em especial em Cuba, você aceitaria passivamente, bovinamente, ir para a cadeia? Cê não tentaria uma fuga?] 
+
+Bem, se você não tentou fugir 
+
+com tudo ao teu lado, 
+
+é obviamente porque você tem 
+
+um plano B. 
+
+[ANTI_PLURALIST_EXCLUSION: Qual é o plano B desse perjodiário?] [MANICHAEAN_PEOPLE_ELITE_FRAMING: Qual é o plano B desse perjodiário?] 
+
+[ANTI_PLURALIST_EXCLUSION: Desse homem pobre lá atrás que roubou todas as nossas esperança?] [MANICHAEAN_PEOPLE_ELITE_FRAMING: Desse homem pobre lá atrás que roubou todas as nossas esperança?] 
+
+Eu não consigo pensar em outra coisa 
+
+a não ser o plano B 
+
+se materializar numa fraude. Não 
+
+favorável ao Lula, né? Ou melhor, favorável ao Lula. 
+
+Temos eleições agora. 
+
+Quando vi a reeleição de Dilma Rouseff em 2014, 
+
+eu pensei comigo mesmo: 
+
+[CRISIS_RESTORATION_NARRATIVE: não podemos esperar 2018 porque o Lula vem candidato. Eles não vão sair mais daí.] 
+
+[CRISIS_RESTORATION_NARRATIVE: Olha como é que tá o Brasil, pra onde estamos indo, em todos os aspectos sem exceção.] 
+
+Eu sempre costumava dizer, nem falo ainda, 
+
+que tão 
+
+ou mais grave 
+
+que a corrupção, é a questão ideológica. [AUTHENTICITY_VS_POLITICAL_CLASS: Aí sozinho em casa, resolvi, eu vou vir candidato em 2018.] 
+
+[AUTHENTICITY_VS_POLITICAL_CLASS: Mas eu preciso dum partido político. Não vou ter apoio quase nenhum da imprensa. Partido político vai ser um partido pequeno, que os partidos médios e grandes fazem seus negócios. Não vou ter tempo de televisão. Se crescer um pouquinho, pesquisa vão tentar me destruir.] 
+
+[AUTHENTICITY_VS_POLITICAL_CLASS: Eu segui essa ideia. Fui embora.] 
+
+2015, 
+
+ape-- ap-aproveitei um projeto em andamento na Câmara e emendei-o. [POPULAR_SOVEREIGNTY_CLAIMS: Conseguimos o voto impresso que era a única garantia que nós teríamos em 2018. Eu sei que quem votou no João, vai contar pro João. Quem votou na, na Ana ou na Maria, vai pra Maria.] 
+
+[MANICHAEAN_PEOPLE_ELITE_FRAMING: Dilma Rousseff vetou o nosso projeto.] 
+
+[MANICHAEAN_PEOPLE_ELITE_FRAMING: Vetou o nosso projeto.] Nós derrubamos o veto. 
+
+[ELITE_CONSPIRACY_SYSTEMIC_CORRUPTION: Não podemos deixar de es-es-esquecer que em 2014, em Quito, eu não vi isso na imprensa brasileira, pode ser que tenha sido publicado em algum outro jornal por aí. Dilma Rousseff, em Quito, entre outras medidas, decidiu criar uma unidade técnica eleitoral sul-americana. O PT descobriu o caminho para o poder. O voto eletrônico.] [ANTI_PLURALIST_EXCLUSION: O PT descobriu o caminho para o poder. O voto eletrônico.] 
+
+[ELITE_CONSPIRACY_SYSTEMIC_CORRUPTION: Vamos em frente. Lamentavelmente, o Supremo Tribunal Federal acolheu uma ação da senhora Raquel Dodge contra o voto impresso. É lamentável, porque a frase de maior força na argumentação da senhora Raquel Dodge era de que a impressão do voto comprometia a segurança das eleições.] [MANICHAEAN_PEOPLE_ELITE_FRAMING: Lamentavelmente, o Supremo Tribunal Federal acolheu uma ação da senhora Raquel Dodge contra o voto impresso. É lamentável, porque a frase de maior força na argumentação da senhora Raquel Dodge era de que a impressão do voto comprometia a segurança das eleições.] [POPULAR_SOVEREIGNTY_CLAIMS: Lamentavelmente, o Supremo Tribunal Federal acolheu uma ação da senhora Raquel Dodge contra o voto impresso.] Pelo amor de Deus! 
+
+Pelo amor de Deus! 
+
+[ELITE_CONSPIRACY_SYSTEMIC_CORRUPTION: Não temos qualquer garantia nas eleições.] Mas agora, o que é muito importante pra vocês. 
+
+[ANTI_PLURALIST_EXCLUSION: O PT não esconde o que faz mais. Por favor, leiam dois documentos apenas. Primeiro, o caderno de teses do PT de 2015, na Bahia. E depois o outro documento. A análise da conjuntura de 2016. Isso tá na página do PT. Ninguém tá inventando nada.] 
+
+Eu quero me referir agora aos jornalistas do Brasil. 
+
+Ninguém mais do que eu tem consideração pra com vocês. 
+
+Se vocês 
+
+lerem com atenção esses docu-- dois documentos, entre outras barbaridades, 
+
+vocês vão ver lá claramente escrito 
+
+[ANTI_PLURALIST_EXCLUSION: que o PT...Vai buscar, sim, o controle social da mídia. Cês vão perder liberdades, sei que nem-- nem todos têm hoje em dia, né? Mas quem tem alguma liberdade vai perder completamente essa liberdade.] [ELITE_CONSPIRACY_SYSTEMIC_CORRUPTION: que o PT...Vai buscar, sim, o controle social da mídia.] [MANICHAEAN_PEOPLE_ELITE_FRAMING: Cês vão perder liberdades, sei que nem-- nem todos têm hoje em dia, né? Mas quem tem alguma liberdade vai perder completamente essa liberdade.] 
+
+E mais, 
+
+imagine, eles vinham explorando, né? Inventando narrativas a meu respeito. É igual lá atrás, quando descobriam a Polícia Federal fazia uma operação. Operação tal: "agora pega o Bolsonaro!" e não pegava. "Agora pega!" e não pegava. 
+
+Agora a mesma coisa. 
+
+[ELITE_CONSPIRACY_SYSTEMIC_CORRUPTION: Pinta uma nova pesquisa do Datafolha. Pelo amor de Deus! O datafo-- o dono do Datafolha discutindo a sua pesquisa na Globo News [snifado]. A narrativa agora é que perderia eu no segundo turno pra qualquer um.] [MANICHAEAN_PEOPLE_ELITE_FRAMING: O datafo-- o dono do Datafolha discutindo a sua pesquisa na Globo News [snifado]. A narrativa agora é que perderia eu no segundo turno pra qualquer um.] [ELITE_CONSPIRACY_SYSTEMIC_CORRUPTION: A grande preocupação realmente [snifado] não é perdendo voto, é perdendo a fraude.] [MANICHAEAN_PEOPLE_ELITE_FRAMING: A grande preocupação realmente [snifado] não é perdendo voto, é perdendo a fraude.] 
+
+Né? 
+
+Então, 
+
+[ELITE_CONSPIRACY_SYSTEMIC_CORRUPTION: essa possibilidade de fraude no segundo turno, talvez até no primeiro, é concreta.] 
+
+Jornalistas, pensem sobre isso. 
+
+Eu quero, quero eleger meus, meus amigos 
+
+deputados federais. 
+
+Cês lembram quando eu falava lá atrás, né? 
+
+Ninguém queria aprovar projeto. A imprensa malha a mim, desce o cacete de mim, nunca aprovou projeto nenhum. Não produz nada no Congresso. Mas tudo bem, não influencia. 
+
+[AUTHENTICITY_VS_POLITICAL_CLASS: Pra eu conseguir aprovar o voto impresso, eu batia nas costas de deputado por deputado: cê acredita no voto eletrônico? Un diziam: ó, se não acreditasse eu não taria aqui. E pra presidente? Ah, eu não sei. Qual o grande argumento que eu usei pra basicamente, se eu não me engano, segundo o Espírito de Amin, que me ajudou muito nesse projeto de Santa Catarina. Um abraço pro Espírito de Amin, tô com saudade de você.] 
+
+É, nós tivemos, se eu não me engano, quatrocentos e quarenta e três votos pra derrubar o veto. 
+
+Isso é quase uma nanidade. 
+
+Pra derrubar 
+
+[cof, cof]O 
+
+veto tinha um argumento que eu usava, eu fala pro deputado: 
+
+pode ser, pode ser, em tese, 
+
+[ELITE_CONSPIRACY_SYSTEMIC_CORRUPTION: que 2018 não apenas tenhamos o voto fraudado para presidente. Temos também voto pra deputado federal, porque da mesma forma, na maioria das sessões do Brasil, quem aparelhou o te- [tosse] Quem aparelhou o TSE, com todo o respeito que eu tenho aos senhores ministros, que não têm conhecimento de informática. Não é porque a pessoa é ministro, sabe de tudo. Eu falava pra eles do TSE, desses programas né, podem inserir, via fraude, uma média de quarenta votos para o PT, para o PT, na maioria das seções do Brasil.] [MANICHAEAN_PEOPLE_ELITE_FRAMING: quem aparelhou o TSE, com todo o respeito que eu tenho aos senhores ministros, que não têm conhecimento de informática. Não é porque a pessoa é ministro, sabe de tudo.] [POPULAR_SOVEREIGNTY_CLAIMS: quem aparelhou o TSE, com todo o respeito que eu tenho aos senhores ministros, que não têm conhecimento de informática. Não é porque a pessoa é ministro, sabe de tudo.] 
+
+[ANTI_PLURALIST_EXCLUSION: Vamo fazer uma bancada enorme de parlamentares, enorme. Além de possivelmente ter o presidente lá. Acabou, meus deputados.] 
+
+Em grande maioria, tenho profundo 
+
+respeito 
+
+e consideração, 
+
+independente de partido. 
+
+Delegado Eder Mauro, 
+
+amigo lá do, 
+
+do Pará, 
+
+delegado Valdir. 
+
+Eu não vou falar muito que eu vou esquecer nomes aqui. Onys Lorenzoni. 
+
+[ANTI_PLURALIST_EXCLUSION: Se essa fraude fizesse presente, dessa possível, dessa tese minha, acabou a democracia.] [CRISIS_RESTORATION_NARRATIVE: Se essa fraude fizesse presente, dessa possível, dessa tese minha, acabou a democracia.] [ELITE_CONSPIRACY_SYSTEMIC_CORRUPTION: Se essa fraude fizesse presente, dessa possível, dessa tese minha, acabou a democracia.] 
+
+[ANTI_PLURALIST_EXCLUSION: O Haddad eleito presidente, ele já falou isso ou senão falou, vocês sabem. Assina no mesmo minuto da posse, o indulto de Lula e no minuto seguinte nomeia o chefe da Casa Civil.] [MANICHAEAN_PEOPLE_ELITE_FRAMING: O Haddad eleito presidente, ele já falou isso ou senão falou, vocês sabem. Assina no mesmo minuto da posse, o indulto de Lula e no minuto seguinte nomeia o chefe da Casa Civil.] 
+
+Vocês aí da, 
+
+da imprensa, sabem quem vai ser o ministro das Comunicações? 
+
+Frank Martins. 
+
+Meus amigos das Forças Armadas, 
+
+quem será o ministro da Defesa de vocês? Ou o nosso, né? 
+
+Eu sei que tenho a consideração e apoio de grande parte de vocês, não como instituição. 
+
+Marinha, Exército, Aeronáutica, mas como amigos e cidadãos que vocês são, 
+
+e mais do que o direito, né, tu tem o dever 
+
+de votar. 
+
+Encerrando por aqui 
+
+essa preocupação minha 
+
+com as eleições. Eu espero daqui uma semana, se Deus quiser, estar em casa 
+
+e conversar toda noite, 
+
+durante o horário eleitoral gratuito, 
+
+com vocês, que 
+
+[HOMOGENEOUS_PEOPLE_CONSTRUCTION: dá para nós, nós juntos, salvarmos o Brasil.] [CRISIS_RESTORATION_NARRATIVE: dá para nós, nós juntos, salvarmos o Brasil.] [POPULAR_SOVEREIGNTY_CLAIMS: dá para nós, nós juntos, salvarmos o Brasil.] 
+
+[NATIONALIST_EXCLUSION: Nós não podemos continuar se tratando como a Venezuela. Olha o que tá acontecendo com aquele povo. Aquele povo é vítima dum regime apoiado pelo PT, pelo PCdoB, pelo PSOL. Nós não podemos chegar ao nível que ele chegar.] [CRANTI_PLURALIST_EXCLUSION: Nós não podemos continuar se tratando como a Venezuela. Olha o que tá acontecendo com aquele povo. Aquele povo é vítima dum regime apoiado pelo PT, pelo PCdoB, pelo PSOL. Nós não podemos chegar ao nível que ele chegar.] [CRISIS_RESTORATION_NARRATIVE: Nós não podemos continuar se tratando como a Venezuela. Olha o que tá acontecendo com aquele povo. Aquele povo é vítima dum regime apoiado pelo PT, pelo PCdoB, pelo PSOL. Nós não podemos chegar ao nível que ele chegar.] 
+
+Então, meus amigos, meu muito-- 
+
+Retomando. 
+
+Três, dois, um. 
+
+É, meus amigos, 
+
+desculpem-me pela, 
+
+pela emoção. 
+
+Agradeço a todos vocês. 
+
+Tudo que fizeram por mim. 
+
+Mas digo uma coisa muito importante, 
+
+que me mantém vivo aqui, obviamente é Deus 
+
+e a família maravilhosa que eu tenho. 
+
+Na pessoa da minha esposa Michele, 
+
+da minha filha Laura, 
+
+da minha enteada 
+
+Letícia 
+
+e meus filhos 
+
+Flávio, 
+
+Carlos, 
+
+Eduardo 
+
+e Renan. A família 
+
+é a base da sociedade. 
+
+Continuo pedindo a Deus força, 
+
+sabedoria, 
+
+pra que, se essa for a vontade de Deus de fato, 
+
+[CRISIS_RESTORATION_NARRATIVE: nós possamos juntos levar o Brasil para um porto seguro e colocar essa pátria maravilhosa no local de destaque no cenário mundial.] [HOMOGENEOUS_PEOPLE_CONSTRUCTION: nós possamos juntos levar o Brasil para um porto seguro e colocar essa pátria maravilhosa no local de destaque no cenário mundial.] [NATIONALIST_EXCLUSION: nós possamos juntos levar o Brasil para um porto seguro e colocar essa pátria maravilhosa no local de destaque no cenário mundial.] [HOMOGENEOUS_PEOPLE_CONSTRUCTION: Brasil acima de tudo,] [NATIONALIST_EXCLUSION: Brasil acima de tudo,] 
+
+Deus acima de todos.
+```

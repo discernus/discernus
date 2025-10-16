@@ -1,0 +1,26 @@
+{
+  "video_info": {
+    "video_id": "9vN1ysKxXP8",
+    "title": "Donald Trump's speech Philadelphia June 22, 2024 I Temple University I @DonaldJTrumpforPresident",
+    "channel": "Infinite-Lee Productions",
+    "upload_date": "2024-06-25",
+    "description": "For Donations $ILEE2023\nHere is the full video of Donald Trump at Temple University's Liacouras Center.  Here is the full video.",
+    "duration": 5066,
+    "view_count": 588,
+    "like_count": 26,
+    "url": "https://www.youtube.com/watch?v=9vN1ysKxXP8"
+  },
+  "extraction_info": {
+    "method": "youtube_api",
+    "language": "en (auto-generated)",
+    "confidence": 80.0,
+    "success": true,
+    "transcript_length": 61204,
+    "whisper_model": null
+  },
+  "processing_metadata": {
+    "transcript_length": 61204,
+    "extraction_date": "2025-08-21T08:43:21.987717",
+    "source": "youtube_transcript_api"
+  }
+}

@@ -1,0 +1,710 @@
+---
+agent_name: TwoStageSynthesisAgent
+stage: evidence_appendix
+timestamp: 2025-09-22 21:46:14 UTC
+evidence_content_length: 42216
+synthesis_method: two_stage_with_appendix
+---
+
+Here is a balanced set of 125 quotes, curated to provide strong evidence for the dual-pronged rhetorical strategy, strategic contradiction, and overall fragmenting tone identified in the statistical analysis.
+
+```json
+[
+  {
+    "document_index": 4,
+    "quote_text": "Charlie: [FEAR: \"Well, I'd say the biggest issue facing our generation is there's been a bipartisan agreement to continue to spend money we don't have, grow government at the expense of our generation, concentrate power around Washington, D.C. to benefit the wealthy few and the well-connected.\"]",
+    "statistical_relevance": "High-intensity fragmenting theme (Fear), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 4,
+    "quote_text": "Hasan: [FEAR: \"if you lose your job, you might lose your healthcare, and you might literally die.\"]",
+    "statistical_relevance": "High-intensity fragmenting theme (Fear), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 4,
+    "quote_text": "Charlie: [ENMITY: \"The number one killer of citizens, from innocent civilians the last 100 years has been the very idea that you shamelessly wear on your sleeve every single day.\"]",
+    "statistical_relevance": "High-intensity fragmenting theme (Enmity), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 4,
+    "quote_text": "Moderator: [AMITY: \"this is American democracy at work. This is about a competition of ideas. And since the founding of this country, this is really what it was all about.\"]",
+    "statistical_relevance": "Strategic contradiction (Relational Tension - presence of Amity)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 4,
+    "quote_text": "Hasan: [COHESIVE_GOALS: \"Medicare for all would be a good place to start.\"]",
+    "statistical_relevance": "High-intensity cohesive theme (Cohesive Goals)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 4,
+    "quote_text": "Charlie: [TRIBAL_DOMINANCE: \"As we conservatives believe, we believe the bigger the government, the smaller the citizen.\"]",
+    "statistical_relevance": "High-intensity fragmenting theme (Tribal Dominance)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 4,
+    "quote_text": "Hasan: [TRIBAL_DOMINANCE: \"easing the burden placed upon the proletariat and that is why I will vote Democrat and I'll tell people to do that as well.\"]",
+    "statistical_relevance": "High-intensity fragmenting theme (Tribal Dominance)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 4,
+    "quote_text": "Hasan: [ENMITY: \"inherently oppressive capitalist dogma\"]",
+    "statistical_relevance": "High-intensity fragmenting theme (Enmity), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 4,
+    "quote_text": "Charlie: [ENMITY: \"Jux deposed that with the last eight years, which was mediocrity and apologizing for being American.\"]",
+    "statistical_relevance": "High-intensity fragmenting theme (Enmity), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 4,
+    "quote_text": "Hasan: [FEAR: \"Currently the economic system that we're living under is inherently exploitative, it's inherently oppressive, and we're now actually feeling the devastating impact of that more than ever.\"]",
+    "statistical_relevance": "High-intensity fragmenting theme (Fear), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 4,
+    "quote_text": "Hasan: [COHESIVE_GOALS: \"We should take care of our vets.\"]",
+    "statistical_relevance": "High-intensity cohesive theme (Cohesive Goals)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 4,
+    "quote_text": "Hasan: [FRAGMENTATIVE_GOALS: \"private corporations are essentially privatizing tyranny, okay? They are unelectable, they are unaccountable...\"]",
+    "statistical_relevance": "Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 1,
+    "quote_text": "What is going on right now is a fight for freedom versus slavery, capitalism versus socialism.",
+    "statistical_relevance": "High-intensity fragmenting theme (Enmity, Tribal Dominance), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 1,
+    "quote_text": "These are the young patriots that are doing the work that is necessary to fight back against the intolerant left on our campuses.",
+    "statistical_relevance": "Dual-pronged rhetorical strategy (Fragmenting & Cohesive), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 1,
+    "quote_text": "We are banding together to fight for the core values that made Western civilization so great.",
+    "statistical_relevance": "Dual-pronged rhetorical strategy (Fragmenting & Cohesive), High-intensity cohesive theme (Cohesive Goals)",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 1,
+    "quote_text": "resistance movement of liberty-minded, freedom-centric student organizations that are banding together to fight back against these very, very dangerous ideas.",
+    "statistical_relevance": "Dual-pronged rhetorical strategy (Fragmenting & Cohesive), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 1,
+    "quote_text": "Free speech is being silenced, unlike any other time in human history.",
+    "statistical_relevance": "High-intensity fragmenting theme (Fear), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 1,
+    "quote_text": "They would rather silence conservatives. They'd rather put them in a box.",
+    "statistical_relevance": "High-intensity fragmenting theme (Fear, Enmity), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 1,
+    "quote_text": "we have so much to be proud of. And make this not just a moment, but get our young leaders and to support them and to reinforce them. Because we have the youngest, most diverse, most energetic party.",
+    "statistical_relevance": "High-intensity cohesive theme (Hope), High-intensity fragmenting theme (Tribal Dominance)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 1,
+    "quote_text": "And never before in human history has a cohort of a generation so shamelessly enjoyed the fruits of the free market while simultaneously using those devices to bash it.",
+    "statistical_relevance": "High-intensity fragmenting theme (Enmity), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 1,
+    "quote_text": "free markets and free people are a necessary precedent to people's lives getting better.",
+    "statistical_relevance": "High-intensity cohesive theme (Hope, Cohesive Goals)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 1,
+    "quote_text": "They're the old, rich white people.",
+    "statistical_relevance": "High-intensity fragmenting theme (Enmity), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 7,
+    "quote_text": "to liberate the marketplace, empower real entrepreneurs because the digital age is upon us. And if we do not have free speech or first freedoms, then we're all going to live in a country that is unrecognizable. And I believe if we do that and restore integrity in our elections, we're not just going to win a little. We're going to win big and we're going to win for the next couple decades.",
+    "statistical_relevance": "Dual-pronged rhetorical strategy (Fragmenting & Cohesive), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 7,
+    "quote_text": "What happens if Google decides to digitally assassinate a certain person? Like what we saw happen last month? They can wipe away the existence of an idea of a human being, of a political movement instantaneously.",
+    "statistical_relevance": "High-intensity fragmenting theme (Fear), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 7,
+    "quote_text": "And we as conservatives must be very clear. If you do not support breaking up big tech or challenging big tech, you are not a conservative. You are a corporatist.",
+    "statistical_relevance": "High-intensity fragmenting theme (Tribal Dominance, Enmity), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 7,
+    "quote_text": "But if we do not challenge these big tech companies, if we are not serious about the threat that they pose to our livelihood, so spreading information or in some ways not spreading information at all, then we will live in a country where every state is like California.",
+    "statistical_relevance": "Dual-pronged rhetorical strategy (Fragmenting & Cohesive), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 7,
+    "quote_text": "I believe if we do that and restore integrity in our elections, we're not just going to win a little. We're going to win big and we're going to win for the next couple decades.",
+    "statistical_relevance": "High-intensity cohesive theme (Hope, Cohesive Goals)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 7,
+    "quote_text": "Any Republican that takes money from NetPak or from Google should leave the Republican party. Any Republican that is funded by Google has no place in the Republican party.",
+    "statistical_relevance": "High-intensity fragmenting theme (Tribal Dominance, Enmity), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 7,
+    "quote_text": "We are here to conserve God-given liberties and freedoms. We are here to protect the family. Our country are the American way of life.",
+    "statistical_relevance": "High-intensity fragmenting theme (Tribal Dominance), High-intensity cohesive theme (Cohesive Goals)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 7,
+    "quote_text": "If we do not have free speech or first freedoms, then we're all going to live in a country that is unrecognizable.",
+    "statistical_relevance": "High-intensity fragmenting theme (Fear), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 7,
+    "quote_text": "And when a group of people in a concentrated area controlling trillion-dollar companies decide to impose a viewpoint that is completely contrary to the American way of life, and then we say, well, we can't do anything because they're a private company. Excuse me.",
+    "statistical_relevance": "High-intensity fragmenting theme (Enmity, Tribal Dominance), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 7,
+    "quote_text": "sue these tech companies now for platform access, for monopolistic practices.",
+    "statistical_relevance": "High-intensity cohesive theme (Cohesive Goals)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 7,
+    "quote_text": "Number one, restoring election integrity in our country for fair and free elections. And number two, it is challenging big tech. It is giving us the ability to speak freely on social media.",
+    "statistical_relevance": "High-intensity cohesive theme (Cohesive Goals)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 6,
+    "quote_text": "Culture will get this president reelected. Culture will win back our country. College campuses are the battleground for the hearts and minds for the next generation. I'm going to keep fighting on them from now to November. I know every single one of you are going to do what you can. And we will get this president reelected and take back this country.",
+    "statistical_relevance": "Dual-pronged rhetorical strategy (Fragmenting & Cohesive), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 6,
+    "quote_text": "They have bitter resentment for the greatest country ever to exist in the history of the world. The leading Democrat nominee has nicer things to say about literacy in Cuba than the heroic history of the United States of America. We have a dictator-apologist that is the front-runner of the Democrat Party",
+    "statistical_relevance": "High-intensity fragmenting theme (Enmity, Tribal Dominance), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 6,
+    "quote_text": "I come with a warning and some insight. What I see on college campuses every single day is no different than what's happening in the Democrat primary right now, which is we have volunteered and sent our next generation to installations of indoctrination to teach the next generation to hate our country.",
+    "statistical_relevance": "High-intensity fragmenting theme (Fear, Enmity), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 6,
+    "quote_text": "What I see every single day are students that are being taught that our country is racist and bigoted and homophobic and backwards, and they're being taught nothing but negatives about the greatest country ever to exist in the history of the world.",
+    "statistical_relevance": "High-intensity fragmenting theme (Enmity, Tribal Dominance), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 6,
+    "quote_text": "These universities are indoctrinating the next generation around ideas of open borders and Marxism. And where Senator Sanders gets his base is a limitless supply of millions and millions of students that are entering our university system and they're being turned into activists.",
+    "statistical_relevance": "High-intensity fragmenting theme (Fear, Enmity), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 6,
+    "quote_text": "This election is going to be a referendum on what is America? Is America a mediocre socialist welfare Marxist country? Of course not. Are we a country of victims or are we a country of victors?",
+    "statistical_relevance": "High-intensity fragmenting theme (Fear, Tribal Dominance), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 6,
+    "quote_text": "America is the greatest country in the history of the world. One of American sovereignty that believes in the working class. A conservative movement that believes in people that shower before work and after work.",
+    "statistical_relevance": "High-intensity fragmenting theme (Tribal Dominance)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 6,
+    "quote_text": "No, he could win. And I want every conservative activist in this room to get your laughs out of the way and get the mockery out of the way and then get deathly serious, because we should not do what the left did in 2016 and dismiss an outsider populist candidate from thinking that person can't win the White House.",
+    "statistical_relevance": "High-intensity cohesive theme (Cohesive Goals), High-intensity fragmenting theme (Enmity)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 6,
+    "quote_text": "I hear people all the time, they say, how on earth could a Bolshevik, could a breadline advocate, could a Marxist be leading the Democrat primary? I say, have you visited a college campus at all in the last 20 years?",
+    "statistical_relevance": "High-intensity fragmenting theme (Enmity), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 6,
+    "quote_text": "They will make up narratives, manufacture stories, and they're already beginning it in ways we could never imagine. They've already tried to impeach him. They spied on his campaign. Pathological resistance started 14 minutes after his inauguration.",
+    "statistical_relevance": "High-intensity fragmenting theme (Fear, Enmity), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 6,
+    "quote_text": "And if every single conservative in this room got as involved in school board races as we do with national elections, our country would be in a much better place with getting involved in what they're doing at our textbooks, getting involved with what they're doing at the very elementary local level.",
+    "statistical_relevance": "High-intensity cohesive theme (Cohesive Goals, Hope)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 6,
+    "quote_text": "Are we a country of victims or are we a country of victors?",
+    "statistical_relevance": "High-intensity fragmenting theme (Tribal Dominance)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 6,
+    "quote_text": "The MAGA doctrine, which is a doctrine of American renewal, revival. One that America is the greatest country in the history of the world. One of American sovereignty that believes in the working class.",
+    "statistical_relevance": "High-intensity cohesive theme (Hope), High-intensity fragmenting theme (Tribal Dominance)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 6,
+    "quote_text": "in solidarity with the grassroots activists of our country, that see that college conservatives are under attack.",
+    "statistical_relevance": "High-intensity fragmenting theme (Tribal Dominance, Fear), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 12,
+    "quote_text": "Not only did he beat 16 Republicans, qualified Republicans, not only did he beat the rigged media, not only did he beat the Bush dynasty and the Clinton dynasty, not only did he win states they said he has no chance of winning Pennsylvania, Wisconsin, Michigan, the blue wall. Remember the blue wall? Jesus. It worked out great. Not only did he overcome an FBI that was trying to spy on him and was trying to destabilize him from within. But he also overcame the people within the Republican party that were trying to stop him all along. And he overcame the people in the pundit class that were trying to stop him.",
+    "statistical_relevance": "Dual-pronged rhetorical strategy (Fragmenting & Cohesive), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 12,
+    "quote_text": "Imagine a world without America. A world without America is a much less free world. It's a world where tyrants would run wild. It's a world without the beacon of freedom that has existed for individuals that have been fleeing tyranny for decades, years and centuries.",
+    "statistical_relevance": "High-intensity fragmenting theme (Fear), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 12,
+    "quote_text": "If the alternative would have won, oh my goodness. I don't know. It would have been a complete embrace of the same type of policies that were furthering put our generation in jeopardy. We would have economic malaise if not economic depression. We would have had further division and chaos in all sorts of different portions of society.",
+    "statistical_relevance": "High-intensity fragmenting theme (Fear), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 12,
+    "quote_text": "Eploribus unum means out of many one. Means one people. Because if you actually look, most civilizations in human history were formed on divisions and formed on tribalism. It was really a first major experiment that said, no, we're going to focus on similarities, not differences.",
+    "statistical_relevance": "Strategic contradiction (Relational Tension - presence of Amity), High-intensity cohesive theme (Cohesive Goals)",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 12,
+    "quote_text": "And they came on a compromise, which is how we got the electoral college and how our system was put together. But there was a recognition and the founding fathers realized this, that it's what unites us, not what divides us, which is what is going to keep this together.",
+    "statistical_relevance": "Strategic contradiction (Relational Tension - presence of Amity), High-intensity cohesive theme (Cohesive Goals)",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 12,
+    "quote_text": "America is the greatest country ever to exist in the history of the world. In the history of the world. And only in America would an 18 year old with no qualifications, no money, no connections, no idea what I was doing be able to create an organization that will be part of a movement to help save that very same country. Only in America is that possible.",
+    "statistical_relevance": "Dual-pronged rhetorical strategy (Fragmenting & Cohesive), High-intensity cohesive theme (Hope)",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 12,
+    "quote_text": "It's a decision, are we going to take a radical turn towards victimhood ideology and Marxism and blaming others for your problems and thinking that America is just a mistake and that everything before us is wrong?",
+    "statistical_relevance": "High-intensity fragmenting theme (Fear, Enmity), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 12,
+    "quote_text": "And so what's so generationally important for everyone in this room, and you're playing a role in this, is that the winners of this culture war will decide the future of Western civilization.",
+    "statistical_relevance": "High-intensity fragmenting theme (Tribal Dominance, Fear), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 12,
+    "quote_text": "He wakes up every single day focused on a singular thing. How do I do what I said I'm going to do and deliver results for the people who put me here and revitalize the greatest country ever to exist in the history of the world?",
+    "statistical_relevance": "High-intensity cohesive theme (Hope, Cohesive Goals), High-intensity fragmenting theme (Tribal Dominance)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 12,
+    "quote_text": "It's not going to be the United Kingdom. It's not going to be Belgium that will determine the future of Western civilization. It's what happens here. As America goes, the world goes.",
+    "statistical_relevance": "High-intensity fragmenting theme (Tribal Dominance)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 12,
+    "quote_text": "Or are we going to say, America has made mistakes, but America is not a mistake.",
+    "statistical_relevance": "High-intensity fragmenting theme (Tribal Dominance)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 12,
+    "quote_text": "The ideas that are being put forth by these radical leftists.",
+    "statistical_relevance": "High-intensity fragmenting theme (Enmity), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 5,
+    "quote_text": "the fight that I've decided to engage in is one that will either make or break Western civilization. Because our generation, the next generation, generation Z, if we have a generation that has contempt for America, it doesn't matter if they want higher or low taxes. If we have a generation that hates this country, that believes that we're racist, misogynistic, and homophobic, it doesn't matter. All the rest is irrelevant.",
+    "statistical_relevance": "Dual-pronged rhetorical strategy (Fragmenting & Cohesive), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 5,
+    "quote_text": "I don't want to live in the country that the socialist left wants to create. We are not going in the same direction as the Democrat Party. I don't want to live in the country where it's okay to execute a newborn child. That's not the country I want to live in. We do not have different ways of getting to the same place. We have two different places that we want to get to.",
+    "statistical_relevance": "Dual-pronged rhetorical strategy (Fragmenting & Cohesive), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 5,
+    "quote_text": "This is who they have always been. They have always hated this country. They have always had contempt for our history.",
+    "statistical_relevance": "High-intensity fragmenting theme (Enmity), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 5,
+    "quote_text": "If you want to fundamentally transform and destroy this country from within, you do not mean well. You do not have good intentions whatsoever.",
+    "statistical_relevance": "High-intensity fragmenting theme (Enmity), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 5,
+    "quote_text": "What is America? Is America a place for victims or for victors? Is America a place where you can achieve your dreams or dwell in mediocrity? Is America a socialist place or is America a place that embraces freedom and is a refuge for those that have fled totalitarian Marxist dictatorships?",
+    "statistical_relevance": "High-intensity fragmenting theme (Tribal Dominance, Fear), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 5,
+    "quote_text": "I'm so sick and tired of saying that the Democrat Party and liberals mean well. They do not mean well.",
+    "statistical_relevance": "High-intensity fragmenting theme (Enmity), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 5,
+    "quote_text": "So I see a conservative movement that will stand for the dignity of all people, unborn, pre-born, newly born, all people. That's the conservative movement that I see.",
+    "statistical_relevance": "High-intensity cohesive theme (Hope, Cohesive Goals), High-intensity fragmenting theme (Tribal Dominance)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 5,
+    "quote_text": "If there is one thing we take away from what this president has taught us, is that when we as a movement fight, we win.",
+    "statistical_relevance": "High-intensity cohesive theme (Hope), High-intensity fragmenting theme (Tribal Dominance)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 5,
+    "quote_text": "That will be the question of the 2020 election. It will be the most important culture war in American history, and we will win. Thank you guys so much.",
+    "statistical_relevance": "High-intensity cohesive theme (Hope), High-intensity fragmenting theme (Tribal Dominance)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 5,
+    "quote_text": "It's that the left has done everything they possibly can to make sure our generation has never heard why America is the greatest country ever to exist, or why free markets are the most moral, proven and effective economic system ever discovered, or why the Constitution is the greatest political document ever written, or why abortion after birth is immoral and should be rejected in modern and decent society.",
+    "statistical_relevance": "High-intensity fragmenting theme (Enmity, Tribal Dominance), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 5,
+    "quote_text": "I see a conservative movement that is thankful to live in America, not angry to live in America. I see a conservative movement that stands with Israel.",
+    "statistical_relevance": "High-intensity fragmenting theme (Tribal Dominance)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 9,
+    "quote_text": "[TRIBAL_DOMINANCE: Democrats have given hundreds of billions of dollars to illegals and foreign nations, while Gen Z has to pinch pennies just so that they can never own a home, never marry, and work until they die.]",
+    "statistical_relevance": "Dual-pronged rhetorical strategy (Fragmenting & Cohesive), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 9,
+    "quote_text": "[FEAR: Happy countries have children. Broken countries have addiction, depression, and suffering.]",
+    "statistical_relevance": "High-intensity fragmenting theme (Fear), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 9,
+    "quote_text": "[HOPE: Donald Trump refuses to accept this fake, pathetic, mutilated version of the American dream. When he was president, young people were richer than ever before, and he will do it again.]",
+    "statistical_relevance": "Dual-pronged rhetorical strategy (Fragmenting & Cohesive)",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 9,
+    "quote_text": "[AMITY: All of us together working harder than ever, we will fire the Biden-Harris regime and put Donald Trump back in the White House where he belongs.]",
+    "statistical_relevance": "Strategic contradiction (Relational Tension - Amity for fragmenting goal)",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 9,
+    "quote_text": "[FEAR: Under Biden, our young people own nothing and they are miserable.]",
+    "statistical_relevance": "High-intensity fragmenting theme (Fear, Enmity), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 9,
+    "quote_text": "[ENMITY: We will fire the Biden-Harris regime and put Donald Trump back in the White House where he belongs.]",
+    "statistical_relevance": "High-intensity fragmenting theme (Enmity), High-intensity cohesive theme (Cohesive Goals)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 9,
+    "quote_text": "[HOPE: Donald Trump is on a rescue mission to revive your birthright.]",
+    "statistical_relevance": "High-intensity cohesive theme (Hope, Cohesive Goals)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 9,
+    "quote_text": "[COHESIVE_GOALS: We together are going to do the work to save America.]",
+    "statistical_relevance": "High-intensity cohesive theme (Cohesive Goals), Strategic contradiction (Amity)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 9,
+    "quote_text": "[ENMITY: You don't have to support leaders who lied to you and took advantage of you for your vote.]",
+    "statistical_relevance": "High-intensity fragmenting theme (Enmity), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 9,
+    "quote_text": "[COHESIVE_GOALS: We are going to choose to work harder than ever before, to chase ballots, to vote early, to register new voters.]",
+    "statistical_relevance": "High-intensity cohesive theme (Cohesive Goals)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 10,
+    "quote_text": "So the vision of our opponents and the Marxist totalitarian left is filled with venom, hatred, darkness, resentment, arrogance, and despair.",
+    "statistical_relevance": "High-intensity fragmenting theme (Enmity), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 10,
+    "quote_text": "What gives me hope is that what we see on these campuses is a generation that understands the only way you beat the left is you never give up and you never give them an inch, period.",
+    "statistical_relevance": "Dual-pronged rhetorical strategy (Fragmenting & Cohesive)",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 10,
+    "quote_text": "The only way they can win. We are going to win in the end because the only way they've been able to have even a slight advantage against us is by suppressing us without our consent, censoring us, outright cheating.",
+    "statistical_relevance": "Dual-pronged rhetorical strategy (Fragmenting & Cohesive), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 10,
+    "quote_text": "And if you ask me, one of the most important things that needs to happen in American Christianity is we need to excommunicate the demonic, anti-biblical idea of wokeism out of the American church immediately.",
+    "statistical_relevance": "High-intensity fragmenting theme (Enmity), High-intensity cohesive theme (Cohesive Goals), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 10,
+    "quote_text": "One of the things that the totalitarian left wants to do for our society is to destroy the distinction between God and man, between man and woman, between good and evil.",
+    "statistical_relevance": "High-intensity fragmenting theme (Fear, Enmity), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 10,
+    "quote_text": "But our vision needs to be clear and bold. How about this? We want a country where our kids love America again.",
+    "statistical_relevance": "High-intensity cohesive theme (Hope, Cohesive Goals)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 10,
+    "quote_text": "We want to live in a country and build a country and rebuild the country where it's easy to be a parent, where it's easy to get married and have children.",
+    "statistical_relevance": "High-intensity cohesive theme (Hope, Cohesive Goals)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 10,
+    "quote_text": "And then the next four days, we are going to commit to a plan of action to take back our country and to create something bold and beautiful for the next generation.",
+    "statistical_relevance": "High-intensity cohesive theme (Hope, Cohesive Goals)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 10,
+    "quote_text": "One of the reasons why I believe we are going to win is because our young people are tougher than the liberals. Our opposition is fragile.",
+    "statistical_relevance": "High-intensity fragmenting theme (Tribal Dominance, Enmity), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 10,
+    "quote_text": "They want power, they want control, they want uniformity, and they want submission.",
+    "statistical_relevance": "High-intensity fragmenting theme (Fear, Enmity), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 10,
+    "quote_text": "You see, we're in a very important time in our nation's history, and we as a movement, as a conservative movement, need a vision. Without a vision, the people perish, is what it says in the Scriptures.",
+    "statistical_relevance": "High-intensity fragmenting theme (Fear), High-intensity cohesive theme (Cohesive Goals)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 0,
+    "quote_text": "left-wing academics using their institutional titles and their power to try to block conservative organizations",
+    "statistical_relevance": "High-intensity fragmenting theme (Enmity, Fear), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 0,
+    "quote_text": "financially cataclysmic situation that young people are finding themselves in",
+    "statistical_relevance": "High-intensity fragmenting theme (Fear), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 0,
+    "quote_text": "perpetually financially under water",
+    "statistical_relevance": "High-intensity fragmenting theme (Fear), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 0,
+    "quote_text": "the left has hated luxury rap for years because I think there’s an underlying message that says you don’t have to settle for government crumbs.",
+    "statistical_relevance": "High-intensity fragmenting theme (Enmity, Tribal Dominance), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 0,
+    "quote_text": "I think a longer term solution would be getting government out of the student loan business completely. However, let’s start with allowing young people first and foremost to maybe select a three-year degree instead of a four-year degree. That would cut the cost of college by 25% right off the top.",
+    "statistical_relevance": "High-intensity cohesive theme (Cohesive Goals)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 0,
+    "quote_text": "getting government out of the student loan business completely",
+    "statistical_relevance": "High-intensity cohesive theme (Cohesive Goals)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 0,
+    "quote_text": "intolerance of the tolerance crowd",
+    "statistical_relevance": "High-intensity fragmenting theme (Enmity), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 13,
+    "quote_text": "We, the American people, are not each other's enemies. But we have people who are manipulating us on the basis of race, age, gender, trying to divide us and make us into enemies.",
+    "statistical_relevance": "Strategic contradiction (Relational Tension - Amity & Enmity), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 13,
+    "quote_text": "Do you know what a threat to our country is? We're not having enough babies. We face an existential crisis. Our country is literally dying, and I don't mean that in the abstract way that hysterical politicians sometimes mean it. I mean it in a really basic way. More of us are dying than are being born. We have not had an above-replacement birth rate in half a century.",
+    "statistical_relevance": "High-intensity fragmenting theme (Fear), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 13,
+    "quote_text": "The other side, and sadly there is another side, is interested in destruction. They're interested in tearing down our history. They're interested in making us fearful of standing up for what we believe. They're interested in attacking law enforcement and shaking the young people's faith in fundamental American institutions.",
+    "statistical_relevance": "High-intensity fragmenting theme (Enmity, Fear), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 13,
+    "quote_text": "This is not about Republicans and Democrats. This is about good and evil, and we have to use those brains. We have to use that weapon that God gave us to fight Marxism.",
+    "statistical_relevance": "High-intensity fragmenting theme (Enmity, Tribal Dominance), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 13,
+    "quote_text": "I want to get the family back together because Lord knows we have enough on the outside coming at us.",
+    "statistical_relevance": "Strategic contradiction (Relational Tension - Amity & Enmity), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 13,
+    "quote_text": "You guys are the beginning of the greatest political comeback in American history.",
+    "statistical_relevance": "High-intensity cohesive theme (Hope), High-intensity fragmenting theme (Tribal Dominance)",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 13,
+    "quote_text": "Thousands and thousands of charismatic, energetic young leaders like you start to chart the path forward in a way that is going to be at one of hope and freedom and of a better tomorrow.",
+    "statistical_relevance": "High-intensity cohesive theme (Hope), High-intensity fragmenting theme (Tribal Dominance)",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 13,
+    "quote_text": "Now we should boo Zoran Mamdani. The guy is a bigot, anti-civilization to his core, anti-American, anti-Western, wants to nationalize or make all the grocery stores run by the government, defund the police, all that is garbage.",
+    "statistical_relevance": "High-intensity fragmenting theme (Enmity), Overall fragmenting tone",
+    "strength_rating": 5
+  },
+  {
+    "document_index": 13,
+    "quote_text": "If you are here illegally, you are deported from the United States of America. Period. No amnesty.",
+    "statistical_relevance": "High-intensity cohesive theme (Cohesive Goals), High-intensity fragmenting theme (Tribal Dominance), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 13,
+    "quote_text": "But if you come from Somalia and you refuse to learn our language, adopt to our customs and assimilate, I'm sorry, America is closed to the third world until further notice.",
+    "statistical_relevance": "High-intensity fragmenting theme (Tribal Dominance), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 13,
+    "quote_text": "We are not a dumping ground for the rest of the planet.",
+    "statistical_relevance": "High-intensity fragmenting theme (Tribal Dominance), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 13,
+    "quote_text": "Citizenship has to be the thing that holds us together as a country. We're all Americans.",
+    "statistical_relevance": "Strategic contradiction (Amity), High-intensity cohesive theme (Cohesive Goals)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 13,
+    "quote_text": "But I'll tell you right now, you are going to see a massive breakdown of the political order.",
+    "statistical_relevance": "High-intensity fragmenting theme (Fear), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 13,
+    "quote_text": "Why is it that our young, why you, the next generation, have to compete to buy a home against a Chinese oligarch?",
+    "statistical_relevance": "High-intensity fragmenting theme (Fear, Enmity), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 13,
+    "quote_text": "Starting with those of you that are looking for a job, you should not have to compete against a foreigner for your job. American college graduates should come first.",
+    "statistical_relevance": "High-intensity fragmenting theme (Tribal Dominance), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 13,
+    "quote_text": "We are not having enough children in this country. This is a national crisis.",
+    "statistical_relevance": "High-intensity fragmenting theme (Fear), Overall fragmenting tone",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 13,
+    "quote_text": "It's time to build something real, something tangible, something that will last and leave this country better off for our children.",
+    "statistical_relevance": "High-intensity cohesive theme (Hope, Cohesive Goals)",
+    "strength_rating": 4
+  },
+  {
+    "document_index": 13,
+    "quote_text": "And this continuation of identity politics is the most destructive thing we can do.",
+    "statistical_relevance": "High-intensity fragmenting theme (Fear, Enmity), Overall fragmenting tone",
+    "strength_rating": 4
+  }
+]
+```

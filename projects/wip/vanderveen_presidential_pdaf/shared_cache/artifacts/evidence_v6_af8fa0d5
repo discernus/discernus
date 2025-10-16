@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "059fdde1773e80230caf35f32a5d955d38740db5cebd66050ded988838c706c4"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-03T14:21:50.903049+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "clinton_2016_09_09.txt",
+      "dimension": "manichean_people_elite_framing",
+      "quote_text": "I'm not like Donald Trump who says 'I alone can fix it.' I've never quite figure out what it is he alone can fix.",
+      "confidence": 0.8,
+      "context_type": "direct_contrast",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.903038+00:00"
+    },
+    {
+      "document_name": "clinton_2016_09_09.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "the idea of our country is so rooted in continuing progress that we make together",
+      "confidence": 0.9,
+      "context_type": "progress_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.903040+00:00"
+    },
+    {
+      "document_name": "clinton_2016_09_09.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "I think we have to do this together",
+      "confidence": 0.8,
+      "context_type": "collective_action",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.903041+00:00"
+    },
+    {
+      "document_name": "clinton_2016_09_09.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "We really do believe that we are stronger together. We really do believe that showing respect and appreciation for one another lifts us all up.",
+      "confidence": 0.95,
+      "context_type": "pluralist_affirmation",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.903042+00:00"
+    },
+    {
+      "document_name": "clinton_2016_09_09.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "",
+      "confidence": 0.95,
+      "context_type": "absence",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.903043+00:00"
+    },
+    {
+      "document_name": "clinton_2016_09_09.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "I'm not like Donald Trump who says 'I alone can fix it.'",
+      "confidence": 0.8,
+      "context_type": "implicit_contrast",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.903044+00:00"
+    },
+    {
+      "document_name": "clinton_2016_09_09.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "We really do believe that we are stronger together",
+      "confidence": 0.85,
+      "context_type": "unity_construction",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.903045+00:00"
+    },
+    {
+      "document_name": "clinton_2016_09_09.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "broken down barriers, stood up to discrimination and bigotry, fought for the rights of everyone",
+      "confidence": 0.95,
+      "context_type": "inclusive_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.903046+00:00"
+    },
+    {
+      "document_name": "clinton_2016_09_09.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "people who feel that the government has let them down, the economy has let them down",
+      "confidence": 0.8,
+      "context_type": "economic_grievance",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.903047+00:00"
+    }
+  ]
+}

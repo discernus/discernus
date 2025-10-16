@@ -1,0 +1,26 @@
+{
+  "video_info": {
+    "video_id": "akVL7QY0S8A",
+    "title": "The Coming Collapse of the Middle Class with Elizabeth Warren",
+    "channel": "University of California Television (UCTV)",
+    "upload_date": "2008-02-01",
+    "description": "(Visit: http://www.uctv.tv) Distinguished law scholar Elizabeth Warren teaches contract law, bankruptcy, and commercial law at Harvard Law School. She is an outspoken critic of America’s credit economy, which she has linked to the continuing rise in bankruptcy among the middle-class.  Series: \"UC Berkeley Graduate Lectures\" [6/2007] [Public Affairs] [Business] [Show ID: 12620]",
+    "duration": 3457,
+    "view_count": 1448506,
+    "like_count": 10002,
+    "url": "https://www.youtube.com/watch?v=akVL7QY0S8A"
+  },
+  "extraction_info": {
+    "method": "youtube_api",
+    "language": "en",
+    "confidence": 100.0,
+    "success": true,
+    "transcript_length": 50592,
+    "whisper_model": null
+  },
+  "processing_metadata": {
+    "transcript_length": 50592,
+    "extraction_date": "2025-08-06T01:12:41.416184",
+    "source": "youtube_transcript_api"
+  }
+}

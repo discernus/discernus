@@ -1,0 +1,17 @@
+---
+analysis_id: analysis_v2_analysis_20250925_150354_6
+step: markup_extraction
+model_used: vertex_ai/gemini-2.5-flash-lite
+document_index: 6
+timestamp: 2025-09-25 19:14:14 UTC
+---
+
+# Document Analysis - Marked Up Text
+
+[voz de Lula] [CRISIS_RESTORATION_NARRATIVE: A consideração, as orações, a confiança. Juntos, vamos mudar o destino do Brasil] [som de multidão] [gritos]. [HOMOGENEOUS_PEOPLE_CONSTRUCTION: O Brasil é de nós, pessoas de bem, trabalhadores, conservadores, cristãos, que preservam os valores familiares], [NATIONALIST_EXCLUSION: que não querem ideologia e higiene em sala de aula], que querem o Brasil fazendo negócio com o mundo todo [NATIONALIST_EXCLUSION: sem o viés ideológico], que queremos, sim, atacar de frente a questão da violência, valorizando nossos policiais civis e militares, valorizando as nossas forças armadas, que sempre estiveram ao lado do povo brasileiro. [CRISIS_RESTORATION_NARRATIVE: Nós queremos, sim, mudança], [NATIONALIST_EXCLUSION: nos afastarmos de vez do comunismo, dar um chega pra lá, na política que existe na Venezuela. Não queremos isso para o nosso Brasil.] [ELITE_CONSPIRACY_SYSTEMIC_CORRUPTION: Queremos um presidente com isenção], que tenha liberdade pra indicar um time de ministros, técnicos e competentes e comprometido com [POPULAR_SOVEREIGNTY_CLAIMS: os interesses do povo brasileiro] [AUTHENTICITY_VS_POLITICAL_CLASS: e não de partidos políticos] [música]. Falo agora porque acredito em vocês, e vocês também porque acreditam no Brasil. [CRISIS_RESTORATION_NARRATIVE: Vamos ganhar essas eleições no primeiro turno] [gritos]. [ELITE_CONSPIRACY_SYSTEMIC_CORRUPTION: A diferença será tão grande que seja impossível qualquer possibilidade de fraude.] [CRISIS_RESTORATION_NARRATIVE: Vamos lutar até o último segundo. É a última chance que nós temos de nos afastarmos de vez dessa política que há trinta anos espolia o povo brasileiro. Chega de PT e de PSDB!] [MANICHAEAN_PEOPLE_ELITE_FRAMING: O Brasil é nosso, é meu, é de vocês!] [AUTHENTICITY_VS_POLITICAL_CLASS: Esse movimento vem da raiz, vem da alma do povo sofrido que quer e terá a mudança.] [HOMOGENEOUS_PEOPLE_CONSTRUCTION: O Brasil é nosso]. [MANICHAEAN_PEOPLE_ELITE_FRAMING: Nós somos diferentes deles. Não somos de esquerda. Abominamos o comunismo, abominamos o socialismo.] [HOMOGENEOUS_PEOPLE_CONSTRUCTION: Povo da Paulista, muito obrigado a todos vocês] [aplausos], [HOMOGENEOUS_PEOPLE_CONSTRUCTION: gente em todo o Brasil e no exterior que faz esse movimento nesse dia também]. Meu muito obrigado a todos vocês. [NATIONALIST_EXCLUSION: Esta pátria é nossa. Brasil acima de tudo, Deus acima de todos.] [CRISIS_RESTORATION_NARRATIVE: Até a vitória] [gritos]. Valeu, brasileiros.
+
+[coros] O capitão voltou. O capitão voltou. O capitão voltou. O capitão voltou [gritos].
+
+[NATIONALIST_EXCLUSION: O Maduro não vai vir pra posse no Brasil dia primeiro] [gritos].
+
+E General Moro já falou, [NATIONALIST_EXCLUSION: a próxima operação de paz do Brasil será na Venezuela] [CRISIS_RESTORATION_NARRATIVE: [ELITE_CONSPIRACY_SYSTEMIC_CORRUPTION: [ECONOMIC_POPULIST_APPEALS: [NATIONALIST_EXCLUSION: [ANTI_PLURALIST_EXCLUSION: Vamos libertar os nossos irmãos da fome e do socialismo]]]]] [gritos]. [CRISIS_RESTORATION_NARRATIVE: A melhor solução pra crise migratória que nós tivemos, é a saída de Maduro do poder] [gritos]. [ECONOMIC_POPULIST_APPEALS: E quando o povo passa fome, ele come carne nos melhores restaurantes do mundo]. [ANTI_PLURALIST_EXCLUSION: A gente vai dar uma lição nesse narco ditador] [gritos].

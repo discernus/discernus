@@ -1,0 +1,25 @@
+{
+  "experiment_name": "bolsonaro_2018",
+  "framework_name": "framework.md",
+  "corpus_name": "corpus.md",
+  "document_count": 12,
+  "run_id": "bolsonaro_2018_20250925_202122",
+  "completion_date": "2025-09-26T00:21:22.391125+00:00",
+  "experiment_dir": "/Volumes/code/discernus/projects/wip/bolsonaro_2018",
+  "framework_hash": "4152f312d410e2de3bbc16f7d3e9a70c6347b3dd3db6f67aa44c6725f7b2d6d7",
+  "corpus_manifest_hash": "f3bb711337f65a83ce85120a0e5674c9bc5581fbd734e5e97202d4da2bace884",
+  "corpus_document_hashes": [
+    "9d307c5a736110425732409493a5f915219f61841a7ee198da07c2e256a8f1bd",
+    "5bb1eaaecfed307639402b6a074365b434d707dee26cfc7d57d81e2d87d32a9f",
+    "01a51ec72fb1e6a44163bd671d9e63c44110ad2cf40f806265433683a26ac25f",
+    "744f775c3c37f16a4c0b7d9852e2b79cc2f582f531a390a1335cffd0034d1e9e",
+    "08743cd7875e79bcf0f020fed55eef091e9707bc5d73acdccb4c906dac7dc0b4",
+    "1642c54ab5ed85de676dc673450121eaeba93c2f53a23c1d5d5a92bdab0e5994",
+    "8ad3587b8983fb5d65f6f3ed0bf60551a8ad2e9805b26d83ab16d7944fb184de",
+    "fd2a7eed17d74bbb25377020a609e9257949208fdec6072bb1175c6c2fc5289e",
+    "10d7264b750f5b0ba1f60289667a7d2afb75d0829d73d7cdffc9bf0710c5e8b0",
+    "8e4d203e986c1c26e573eb9a2a9a9073f76f7358e24731bf4ffeb0bfbb9d0a59",
+    "e311d4a2050fc501a79af45922df037383a9bda56dcb5496bbfb24dbe254e066",
+    "c61fcfb31f1704d6388613c7b7b145ad3a91c65113e57f5e4568cd202a38ea3e"
+  ]
+}

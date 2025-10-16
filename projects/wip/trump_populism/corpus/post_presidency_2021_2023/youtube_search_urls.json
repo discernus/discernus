@@ -1,0 +1,429 @@
+{
+  "metadata": {
+    "total_events": 30,
+    "description": "YouTube search URLs for post-presidency events",
+    "usage": "Copy URLs to browser to search for videos"
+  },
+  "search_urls": [
+    {
+      "event": "CPAC 2021",
+      "date": "2021-02-28",
+      "location": "Orlando, Florida",
+      "type": "Conservative Political Action Conference",
+      "notes": "First major post-presidency speech, already extracted",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+CPAC+2021+Orlando%2C+Florida+2021-02-28",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Orlando%2C+Florida+2021-02-28",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Orlando%2C+Florida+2021-02-28",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Orlando%2C+Florida+2021-02-28"
+      },
+      "priority": "high"
+    },
+    {
+      "event": "Ohio Rally",
+      "date": "2021-06-26",
+      "location": "Lorain, Ohio",
+      "type": "Campaign Rally",
+      "notes": "First post-presidency rally",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+Ohio+Rally+Lorain%2C+Ohio+2021-06-26",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Lorain%2C+Ohio+2021-06-26",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Lorain%2C+Ohio+2021-06-26",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Lorain%2C+Ohio+2021-06-26"
+      },
+      "priority": "medium"
+    },
+    {
+      "event": "Florida Rally",
+      "date": "2021-07-03",
+      "location": "Sarasota, Florida",
+      "type": "Campaign Rally",
+      "notes": "Fourth of July weekend rally",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+Florida+Rally+Sarasota%2C+Florida+2021-07-03",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Sarasota%2C+Florida+2021-07-03",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Sarasota%2C+Florida+2021-07-03",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Sarasota%2C+Florida+2021-07-03"
+      },
+      "priority": "medium"
+    },
+    {
+      "event": "Arizona Rally",
+      "date": "2021-07-24",
+      "location": "Phoenix, Arizona",
+      "type": "Campaign Rally",
+      "notes": "Election audit rally",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+Arizona+Rally+Phoenix%2C+Arizona+2021-07-24",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Phoenix%2C+Arizona+2021-07-24",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Phoenix%2C+Arizona+2021-07-24",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Phoenix%2C+Arizona+2021-07-24"
+      },
+      "priority": "medium"
+    },
+    {
+      "event": "Alabama Rally",
+      "date": "2021-08-21",
+      "location": "Cullman, Alabama",
+      "type": "Campaign Rally",
+      "notes": "Large outdoor rally",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+Alabama+Rally+Cullman%2C+Alabama+2021-08-21",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Cullman%2C+Alabama+2021-08-21",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Cullman%2C+Alabama+2021-08-21",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Cullman%2C+Alabama+2021-08-21"
+      },
+      "priority": "medium"
+    },
+    {
+      "event": "Georgia Rally",
+      "date": "2021-09-25",
+      "location": "Perry, Georgia",
+      "type": "Campaign Rally",
+      "notes": "Supporting GOP candidates",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+Georgia+Rally+Perry%2C+Georgia+2021-09-25",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Perry%2C+Georgia+2021-09-25",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Perry%2C+Georgia+2021-09-25",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Perry%2C+Georgia+2021-09-25"
+      },
+      "priority": "medium"
+    },
+    {
+      "event": "Iowa Rally",
+      "date": "2021-10-09",
+      "location": "Des Moines, Iowa",
+      "type": "Campaign Rally",
+      "notes": "Early primary state",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+Iowa+Rally+Des+Moines%2C+Iowa+2021-10-09",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Des+Moines%2C+Iowa+2021-10-09",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Des+Moines%2C+Iowa+2021-10-09",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Des+Moines%2C+Iowa+2021-10-09"
+      },
+      "priority": "medium"
+    },
+    {
+      "event": "Florida Rally",
+      "date": "2021-11-20",
+      "location": "Tampa, Florida",
+      "type": "Campaign Rally",
+      "notes": "Thanksgiving weekend",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+Florida+Rally+Tampa%2C+Florida+2021-11-20",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Tampa%2C+Florida+2021-11-20",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Tampa%2C+Florida+2021-11-20",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Tampa%2C+Florida+2021-11-20"
+      },
+      "priority": "medium"
+    },
+    {
+      "event": "Arizona Rally",
+      "date": "2022-01-15",
+      "location": "Florence, Arizona",
+      "type": "Campaign Rally",
+      "notes": "Election integrity focus",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+Arizona+Rally+Florence%2C+Arizona+2022-01-15",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Florence%2C+Arizona+2022-01-15",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Florence%2C+Arizona+2022-01-15",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Florence%2C+Arizona+2022-01-15"
+      },
+      "priority": "medium"
+    },
+    {
+      "event": "CPAC 2022",
+      "date": "2022-02-26",
+      "location": "Orlando, Florida",
+      "type": "Conservative Political Action Conference",
+      "notes": "Annual CPAC speech",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+CPAC+2022+Orlando%2C+Florida+2022-02-26",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Orlando%2C+Florida+2022-02-26",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Orlando%2C+Florida+2022-02-26",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Orlando%2C+Florida+2022-02-26"
+      },
+      "priority": "high"
+    },
+    {
+      "event": "Georgia Rally",
+      "date": "2022-03-26",
+      "location": "Commerce, Georgia",
+      "type": "Campaign Rally",
+      "notes": "Primary season",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+Georgia+Rally+Commerce%2C+Georgia+2022-03-26",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Commerce%2C+Georgia+2022-03-26",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Commerce%2C+Georgia+2022-03-26",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Commerce%2C+Georgia+2022-03-26"
+      },
+      "priority": "medium"
+    },
+    {
+      "event": "North Carolina Rally",
+      "date": "2022-04-09",
+      "location": "Selma, North Carolina",
+      "type": "Campaign Rally",
+      "notes": "Primary support",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+North+Carolina+Rally+Selma%2C+North+Carolina+2022-04-09",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Selma%2C+North+Carolina+2022-04-09",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Selma%2C+North+Carolina+2022-04-09",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Selma%2C+North+Carolina+2022-04-09"
+      },
+      "priority": "medium"
+    },
+    {
+      "event": "Texas Rally",
+      "date": "2022-05-28",
+      "location": "Houston, Texas",
+      "type": "Campaign Rally",
+      "notes": "NRA convention",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+Texas+Rally+Houston%2C+Texas+2022-05-28",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Houston%2C+Texas+2022-05-28",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Houston%2C+Texas+2022-05-28",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Houston%2C+Texas+2022-05-28"
+      },
+      "priority": "medium"
+    },
+    {
+      "event": "Nashville Rally",
+      "date": "2022-06-18",
+      "location": "Nashville, Tennessee",
+      "type": "Campaign Rally",
+      "notes": "Faith and Freedom Coalition",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+Nashville+Rally+Nashville%2C+Tennessee+2022-06-18",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Nashville%2C+Tennessee+2022-06-18",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Nashville%2C+Tennessee+2022-06-18",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Nashville%2C+Tennessee+2022-06-18"
+      },
+      "priority": "medium"
+    },
+    {
+      "event": "Arizona Rally",
+      "date": "2022-07-23",
+      "location": "Prescott Valley, Arizona",
+      "type": "Campaign Rally",
+      "notes": "Primary election support",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+Arizona+Rally+Prescott+Valley%2C+Arizona+2022-07-23",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Prescott+Valley%2C+Arizona+2022-07-23",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Prescott+Valley%2C+Arizona+2022-07-23",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Prescott+Valley%2C+Arizona+2022-07-23"
+      },
+      "priority": "medium"
+    },
+    {
+      "event": "Wisconsin Rally",
+      "date": "2022-08-06",
+      "location": "Waukesha, Wisconsin",
+      "type": "Campaign Rally",
+      "notes": "Midterm support",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+Wisconsin+Rally+Waukesha%2C+Wisconsin+2022-08-06",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Waukesha%2C+Wisconsin+2022-08-06",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Waukesha%2C+Wisconsin+2022-08-06",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Waukesha%2C+Wisconsin+2022-08-06"
+      },
+      "priority": "medium"
+    },
+    {
+      "event": "Pennsylvania Rally",
+      "date": "2022-09-03",
+      "location": "Wilkes-Barre, Pennsylvania",
+      "type": "Campaign Rally",
+      "notes": "Senate race support",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+Pennsylvania+Rally+Wilkes-Barre%2C+Pennsylvania+2022-09-03",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Wilkes-Barre%2C+Pennsylvania+2022-09-03",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Wilkes-Barre%2C+Pennsylvania+2022-09-03",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Wilkes-Barre%2C+Pennsylvania+2022-09-03"
+      },
+      "priority": "medium"
+    },
+    {
+      "event": "Texas Rally",
+      "date": "2022-10-22",
+      "location": "Robstown, Texas",
+      "type": "Campaign Rally",
+      "notes": "Midterm election support",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+Texas+Rally+Robstown%2C+Texas+2022-10-22",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Robstown%2C+Texas+2022-10-22",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Robstown%2C+Texas+2022-10-22",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Robstown%2C+Texas+2022-10-22"
+      },
+      "priority": "medium"
+    },
+    {
+      "event": "Florida Rally",
+      "date": "2022-11-05",
+      "location": "Miami, Florida",
+      "type": "Campaign Rally",
+      "notes": "Election eve rally",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+Florida+Rally+Miami%2C+Florida+2022-11-05",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Miami%2C+Florida+2022-11-05",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Miami%2C+Florida+2022-11-05",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Miami%2C+Florida+2022-11-05"
+      },
+      "priority": "medium"
+    },
+    {
+      "event": "New Hampshire Rally",
+      "date": "2023-01-28",
+      "location": "Salem, New Hampshire",
+      "type": "Campaign Rally",
+      "notes": "Early primary state",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+New+Hampshire+Rally+Salem%2C+New+Hampshire+2023-01-28",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Salem%2C+New+Hampshire+2023-01-28",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Salem%2C+New+Hampshire+2023-01-28",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Salem%2C+New+Hampshire+2023-01-28"
+      },
+      "priority": "medium"
+    },
+    {
+      "event": "CPAC 2023",
+      "date": "2023-02-25",
+      "location": "National Harbor, Maryland",
+      "type": "Conservative Political Action Conference",
+      "notes": "Annual CPAC speech",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+CPAC+2023+National+Harbor%2C+Maryland+2023-02-25",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+National+Harbor%2C+Maryland+2023-02-25",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+National+Harbor%2C+Maryland+2023-02-25",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+National+Harbor%2C+Maryland+2023-02-25"
+      },
+      "priority": "high"
+    },
+    {
+      "event": "South Carolina Rally",
+      "date": "2023-03-04",
+      "location": "Columbia, South Carolina",
+      "type": "Campaign Rally",
+      "notes": "Primary state",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+South+Carolina+Rally+Columbia%2C+South+Carolina+2023-03-04",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Columbia%2C+South+Carolina+2023-03-04",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Columbia%2C+South+Carolina+2023-03-04",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Columbia%2C+South+Carolina+2023-03-04"
+      },
+      "priority": "medium"
+    },
+    {
+      "event": "Iowa Rally",
+      "date": "2023-04-22",
+      "location": "Davenport, Iowa",
+      "type": "Campaign Rally",
+      "notes": "First in the nation caucus",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+Iowa+Rally+Davenport%2C+Iowa+2023-04-22",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Davenport%2C+Iowa+2023-04-22",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Davenport%2C+Iowa+2023-04-22",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Davenport%2C+Iowa+2023-04-22"
+      },
+      "priority": "medium"
+    },
+    {
+      "event": "Ohio Rally",
+      "date": "2023-05-13",
+      "location": "Vandalia, Ohio",
+      "type": "Campaign Rally",
+      "notes": "Primary support",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+Ohio+Rally+Vandalia%2C+Ohio+2023-05-13",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Vandalia%2C+Ohio+2023-05-13",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Vandalia%2C+Ohio+2023-05-13",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Vandalia%2C+Ohio+2023-05-13"
+      },
+      "priority": "medium"
+    },
+    {
+      "event": "Georgia Rally",
+      "date": "2023-06-10",
+      "location": "Columbus, Georgia",
+      "type": "Campaign Rally",
+      "notes": "Primary season",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+Georgia+Rally+Columbus%2C+Georgia+2023-06-10",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Columbus%2C+Georgia+2023-06-10",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Columbus%2C+Georgia+2023-06-10",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Columbus%2C+Georgia+2023-06-10"
+      },
+      "priority": "medium"
+    },
+    {
+      "event": "South Carolina Rally",
+      "date": "2023-07-01",
+      "location": "Pickens, South Carolina",
+      "type": "Campaign Rally",
+      "notes": "Fourth of July weekend",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+South+Carolina+Rally+Pickens%2C+South+Carolina+2023-07-01",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Pickens%2C+South+Carolina+2023-07-01",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Pickens%2C+South+Carolina+2023-07-01",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Pickens%2C+South+Carolina+2023-07-01"
+      },
+      "priority": "medium"
+    },
+    {
+      "event": "Iowa Rally",
+      "date": "2023-08-12",
+      "location": "Des Moines, Iowa",
+      "type": "Campaign Rally",
+      "notes": "State fair rally",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+Iowa+Rally+Des+Moines%2C+Iowa+2023-08-12",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Des+Moines%2C+Iowa+2023-08-12",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Des+Moines%2C+Iowa+2023-08-12",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Des+Moines%2C+Iowa+2023-08-12"
+      },
+      "priority": "medium"
+    },
+    {
+      "event": "South Dakota Rally",
+      "date": "2023-09-16",
+      "location": "Rapid City, South Dakota",
+      "type": "Campaign Rally",
+      "notes": "Primary support",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+South+Dakota+Rally+Rapid+City%2C+South+Dakota+2023-09-16",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Rapid+City%2C+South+Dakota+2023-09-16",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Rapid+City%2C+South+Dakota+2023-09-16",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Rapid+City%2C+South+Dakota+2023-09-16"
+      },
+      "priority": "medium"
+    },
+    {
+      "event": "New Hampshire Rally",
+      "date": "2023-10-07",
+      "location": "Laconia, New Hampshire",
+      "type": "Campaign Rally",
+      "notes": "Primary state focus",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+New+Hampshire+Rally+Laconia%2C+New+Hampshire+2023-10-07",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Laconia%2C+New+Hampshire+2023-10-07",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Laconia%2C+New+Hampshire+2023-10-07",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Laconia%2C+New+Hampshire+2023-10-07"
+      },
+      "priority": "medium"
+    },
+    {
+      "event": "Florida Rally",
+      "date": "2023-11-11",
+      "location": "Hialeah, Florida",
+      "type": "Campaign Rally",
+      "notes": "Veterans Day rally",
+      "search_urls": {
+        "base": "https://www.youtube.com/results?search_query=Donald+Trump+Florida+Rally+Hialeah%2C+Florida+2023-11-11",
+        "rally": "https://www.youtube.com/results?search_query=Donald+Trump+rally+Hialeah%2C+Florida+2023-11-11",
+        "speech": "https://www.youtube.com/results?search_query=Donald+Trump+speech+Hialeah%2C+Florida+2023-11-11",
+        "full_speech": "https://www.youtube.com/results?search_query=Donald+Trump+full+speech+Hialeah%2C+Florida+2023-11-11"
+      },
+      "priority": "medium"
+    }
+  ]
+}

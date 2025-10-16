@@ -1,0 +1,30 @@
+{
+  "analysis_id": "analysis_81a8db441f39",
+  "agent_name": "EnhancedAnalysisAgent",
+  "agent_version": "enhanced_v2.1_raw_output",
+  "experiment_name": "vanderveen_presidential_pdaf_replication",
+  "model_used": "vertex_ai/gemini-2.5-flash",
+  "raw_analysis_response": "<<<DISCERNUS_ANALYSIS_JSON_v6>>>\n{\n  \"analysis_metadata\": {\n    \"framework_name\": \"populist_discourse_analysis_framework\",\n    \"framework_version\": \"10.0.2\",\n    \"analyst_confidence\": 0.9,\n    \"analysis_notes\": \"Applied three independent analytical approaches (Evidence-First, Context-Weighted, Pattern-Based) with median aggregation for robust scoring.\",\n    \"internal_consistency_approach\": \"3-run median aggregation\"\n  },\n  \"document_analyses\": [\n    {\n      \"document_id\": \"analysis_81a8db441f39\",\n      \"document_name\": \"cruz/early_primary/cruz_2016_02_20.txt\",\n      \"dimensional_scores\": {\n        \"manichaean_people_elite_framing\": {\n          \"raw_score\": 0.9,\n          \"salience\": 0.9,\n          \"confidence\": 0.95\n        },\n        \"crisis_restoration_narrative\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"popular_sovereignty_claims\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.8,\n          \"confidence\": 0.9\n        },\n        \"anti_pluralist_exclusion\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"elite_conspiracy_systemic_corruption\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"authenticity_vs_political_class\": {\n          \"raw_score\": 0.8,\n          \"salience\": 0.7,\n          \"confidence\": 0.9\n        },\n        \"homogeneous_people_construction\": {\n          \"raw_score\": 0.7,\n          \"salience\": 0.6,\n          \"confidence\": 0.8\n        },\n        \"nationalist_exclusion\": {\n          \"raw_score\": 0.5,\n          \"salience\": 0.4,\n          \"confidence\": 0.75\n        },\n        \"economic_populist_appeals\": {\n          \"raw_score\": 0.6,\n          \"salience\": 0.5,\n          \"confidence\": 0.8\n        }\n      },\n      \"evidence\": [\n        {\n          \"dimension\": \"manichaean_people_elite_framing\",\n          \"quote_text\": \"the screaming you hear now from across the Potomac is the Washington cartel in full terror that the conservative grassroots are rising up.\",\n          \"confidence\": 0.95,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"crisis_restoration_narrative\",\n          \"quote_text\": \"Justice Antonin Scalia\u2019s passing one week ago today underscores the enormous stakes of this election.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"thematic_framing\"\n        },\n        {\n          \"dimension\": \"popular_sovereignty_claims\",\n          \"quote_text\": \"It will be decided by we the people.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"direct_statement\"\n        },\n        {\n          \"dimension\": \"anti_pluralist_exclusion\",\n          \"quote_text\": \"I cannot wait to stand on that debate stage with Hillary Clinton or Bernie Sanders or whatever other socialist they nominate and make the case against their radical vision of the Constitution that would strip away life and marriage and religious liberty and the Second Amendment and the basic rights of every American citizen.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"opponent_delegitimization\"\n        },\n        {\n          \"dimension\": \"elite_conspiracy_systemic_corruption\",\n          \"quote_text\": \"the screaming you hear now from across the Potomac is the Washington cartel in full terror\",\n          \"confidence\": 0.8,\n          \"context_type\": \"accusation\"\n        },\n        {\n          \"dimension\": \"authenticity_vs_political_class\",\n          \"quote_text\": \"Only one candidate remaining has a consistent conservative record. Other candidates engage in non-stop personal attacks. We have not and we will not respond in kind.\",\n          \"confidence\": 0.9,\n          \"context_type\": \"self_positioning\"\n        },\n        {\n          \"dimension\": \"homogeneous_people_construction\",\n          \"quote_text\": \"If you are a conservative this is where you belong because only one strong conservative is in a position to win this race.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"group_appeal\"\n        },\n        {\n          \"dimension\": \"nationalist_exclusion\",\n          \"quote_text\": \"Together, we will secure the borders and keep America safe.\",\n          \"confidence\": 0.7,\n          \"context_type\": \"policy_promise\"\n        },\n        {\n          \"dimension\": \"economic_populist_appeals\",\n          \"quote_text\": \"Only one candidate has stood up to the corrupt dealmaking in Washington, said no to the corporate welfare.\",\n          \"confidence\": 0.8,\n          \"context_type\": \"economic_critique\"\n        }\n      ]\n    }\n  ]\n}\n<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>",
+  "evidence_hash": "93b49d6fed18879e5ee589eedbc4383385e9bf03d256a769a0c3f5fa6ca583ae",
+  "execution_metadata": {
+    "start_time": "2025-09-03T03:38:59.440535+00:00",
+    "end_time": "2025-09-03T03:39:48.455776+00:00",
+    "duration_seconds": 49.015212
+  },
+  "input_artifacts": {
+    "framework_hash": "4152f312d410e2de3bbc16f7d3e9a70c6347b3dd3db6f67aa44c6725f7b2d6d7",
+    "document_hashes": [
+      "b649effab2d90eb198feb1dae534b9e4d64e97178cb3871d0145bff45976c607"
+    ],
+    "num_documents": 1
+  },
+  "provenance": {
+    "security_boundary": {
+      "experiment_name": "vanderveen_presidential_pdaf",
+      "experiment_root": "/Volumes/code/discernus/projects/vanderveen_presidential_pdaf",
+      "boundary_type": "filesystem",
+      "security_level": "experiment_scoped"
+    },
+    "audit_session_id": "20250903T024406Z_6e907314"
+  }
+}

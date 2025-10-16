@@ -11,7 +11,7 @@ Main Components:
 - Gateway: LLM provider abstraction layer
 """
 
-__version__ = "2.0.0"
+__version__ = "2.1.0"
 __author__ = "Discernus Team"
 
 # Import key components for easy access (only if they exist)

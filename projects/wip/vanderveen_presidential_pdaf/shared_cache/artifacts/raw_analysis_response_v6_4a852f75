@@ -1,0 +1,120 @@
+<<<DISCERNUS_ANALYSIS_JSON_v6>>>
+{
+  "analysis_metadata": {
+    "framework_name": "populist_discourse_analysis_framework",
+    "framework_version": "10.0.2",
+    "analyst_confidence": 0.92,
+    "analysis_notes": "Applied three independent analytical approaches with median aggregation",
+    "internal_consistency_approach": "3-run median aggregation"
+  },
+  "document_analyses": [
+    {
+      "document_id": "trump/general_election/trump_2016_08_08.txt",
+      "document_name": "trump_2016_08_08.txt",
+      "dimensional_scores": {
+        "manichean_people_elite_framing": {
+          "raw_score": 0.8,
+          "salience": 0.9,
+          "confidence": 0.95
+        },
+        "crisis_restoration_narrative": {
+          "raw_score": 0.9,
+          "salience": 0.85,
+          "confidence": 0.9
+        },
+        "popular_sovereignty_claims": {
+          "raw_score": 0.7,
+          "salience": 0.7,
+          "confidence": 0.85
+        },
+        "anti_pluralist_exclusion": {
+          "raw_score": 0.6,
+          "salience": 0.6,
+          "confidence": 0.8
+        },
+        "elite_conspiracy_systemic_corruption": {
+          "raw_score": 0.7,
+          "salience": 0.75,
+          "confidence": 0.85
+        },
+        "authenticity_vs_political_class": {
+          "raw_score": 0.85,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "homogeneous_people_construction": {
+          "raw_score": 0.8,
+          "salience": 0.75,
+          "confidence": 0.85
+        },
+        "nationalist_exclusion": {
+          "raw_score": 0.8,
+          "salience": 0.8,
+          "confidence": 0.9
+        },
+        "economic_populist_appeals": {
+          "raw_score": 0.9,
+          "salience": 0.95,
+          "confidence": 0.95
+        }
+      },
+      "evidence": [
+        {
+          "dimension": "manichean_people_elite_framing",
+          "quote_text": "We can't fix a rigged system by relying on the people who rigged it in the first place. We can't solve our problems by relying on the politicians who created them.",
+          "confidence": 0.95,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "crisis_restoration_narrative",
+          "quote_text": "Detroit was once the economic envy of the world... But for many living in this city, that dream has long ago vanished... We will Make America Great Again.",
+          "confidence": 0.9,
+          "context_type": "decline_narrative"
+        },
+        {
+          "dimension": "popular_sovereignty_claims",
+          "quote_text": "My campaign is about reaching out to everyone as Americans, and returning to a government that puts the American people first.",
+          "confidence": 0.85,
+          "context_type": "direct_statement"
+        },
+        {
+          "dimension": "anti_pluralist_exclusion",
+          "quote_text": "Hillary Clinton is bought, controlled and paid-for by her donors and special interests.",
+          "confidence": 0.8,
+          "context_type": "opposition_delegitimization"
+        },
+        {
+          "dimension": "elite_conspiracy_systemic_corruption",
+          "quote_text": "She is bought, controlled and paid-for by her donors and special interests... Her donors will make sure of it.",
+          "confidence": 0.85,
+          "context_type": "coordination_claims"
+        },
+        {
+          "dimension": "authenticity_vs_political_class",
+          "quote_text": "Our party has chosen to make new history by selecting a nominee from outside the rigged and corrupt system.",
+          "confidence": 0.9,
+          "context_type": "anti_establishment_positioning"
+        },
+        {
+          "dimension": "homogeneous_people_construction",
+          "quote_text": "My campaign is about reaching out to everyone as Americans... We are ready to dream great things for our country once again.",
+          "confidence": 0.85,
+          "context_type": "unity_construction"
+        },
+        {
+          "dimension": "nationalist_exclusion",
+          "quote_text": "We started rebuilding other countries instead of our own... Americanism, not globalism, will be our new credo.",
+          "confidence": 0.9,
+          "context_type": "external_threat_emphasis"
+        },
+        {
+          "dimension": "economic_populist_appeals",
+          "quote_text": "We will eliminate the Carried Interest Deduction and other special interest loopholes that have been so good for Wall Street investors, and people like me, but unfair to American workers.",
+          "confidence": 0.95,
+          "context_type": "economic_elite_opposition"
+        }
+      ]
+    }
+  ]
+}
+<<<END_DISCERNUS_ANALYSIS_JSON_v6>>>

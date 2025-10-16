@@ -1,0 +1,26 @@
+{
+  "video_info": {
+    "video_id": "f_Qot2yPaKs",
+    "title": "Maiden Floor Speech 7.24.2025",
+    "channel": "Senator Dave McCormick",
+    "upload_date": "2025-07-24",
+    "description": "",
+    "duration": 861,
+    "view_count": 340,
+    "like_count": 13,
+    "url": "https://www.youtube.com/watch?v=f_Qot2yPaKs"
+  },
+  "extraction_info": {
+    "method": "youtube_api",
+    "language": "en (auto-generated)",
+    "confidence": 80.0,
+    "success": true,
+    "transcript_length": 13151,
+    "whisper_model": null
+  },
+  "processing_metadata": {
+    "transcript_length": 13151,
+    "extraction_date": "2025-08-06T01:29:39.528794",
+    "source": "youtube_transcript_api"
+  }
+}

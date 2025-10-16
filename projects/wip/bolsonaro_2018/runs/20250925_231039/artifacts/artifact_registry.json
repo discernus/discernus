@@ -1,0 +1,928 @@
+{
+  "00405663b36e2fdd0852b5ec9fdc830f5a8a8cd9ff7a725ac345f1e7e7544deb": {
+    "artifact_path": "composite_analysis_00405663.json",
+    "created_at": "2025-09-25T23:10:39.627124+00:00",
+    "human_filename": "composite_analysis_00405663.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 3,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 35968,
+    "source_run": "20250925_231039"
+  },
+  "01031a2ddb0651419536978f2a8e85276868c33d0b5ec05717553a1c41f87cee": {
+    "artifact_path": "marked_up_document_01031a2d.md",
+    "created_at": "2025-09-25T23:10:39.649378+00:00",
+    "human_filename": "marked_up_document_01031a2d.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "marked_up_document",
+      "document_index": 1,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 10970,
+    "source_run": "20250925_231039"
+  },
+  "01a51ec72fb1e6a44163bd671d9e63c44110ad2cf40f806265433683a26ac25f": {
+    "artifact_path": "2018-08-23_Aracatuba_Speech_Part_2_01a51ec7.txt",
+    "created_at": "2025-09-25T23:10:39.696539+00:00",
+    "human_filename": "2018-08-23_Aracatuba_Speech_Part_2_01a51ec7.txt",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "document_id": "bolsonaro_2018_aracatuba_part2",
+      "filename": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+      "metadata": {},
+      "original_filename": "2018-08-23_Aracatuba_Speech_Part_2.txt"
+    },
+    "size_bytes": 15072,
+    "source_run": "20250925_231039"
+  },
+  "05964b51d7ec1c81047421458cc9a53737c186e15013029867ea3d19d10bb885": {
+    "artifact_path": "evidence_extraction_05964b51.json",
+    "created_at": "2025-09-25T23:10:39.635185+00:00",
+    "human_filename": "evidence_extraction_05964b51.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 8,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 11071,
+    "source_run": "20250925_231039"
+  },
+  "08743cd7875e79bcf0f020fed55eef091e9707bc5d73acdccb4c906dac7dc0b4": {
+    "artifact_path": "2018-09-06_Juiz_de_Fora_Business_Association_08743cd7.txt",
+    "created_at": "2025-09-25T23:10:39.697692+00:00",
+    "human_filename": "2018-09-06_Juiz_de_Fora_Business_Association_08743cd7.txt",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "document_id": "bolsonaro_2018_juiz_fora_business",
+      "filename": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+      "metadata": {},
+      "original_filename": "2018-09-06_Juiz_de_Fora_Business_Association.txt"
+    },
+    "size_bytes": 13587,
+    "source_run": "20250925_231039"
+  },
+  "08c85b9f906aff36bdb5fb123897ff39e4f1b03502cf0b9878e979bbe8366994": {
+    "artifact_path": "composite_analysis_08c85b9f.json",
+    "created_at": "2025-09-25T23:10:39.628024+00:00",
+    "human_filename": "composite_analysis_08c85b9f.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 8,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 40953,
+    "source_run": "20250925_231039"
+  },
+  "0e93eb48b21b5d90ee7c2dd90c545768a99965c414c02f0f69bac258beb0983c": {
+    "artifact_path": "score_extraction_0e93eb48.json",
+    "created_at": "2025-09-25T23:10:39.641731+00:00",
+    "human_filename": "score_extraction_0e93eb48.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 3,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 1923,
+    "source_run": "20250925_231039"
+  },
+  "10d7264b750f5b0ba1f60289667a7d2afb75d0829d73d7cdffc9bf0710c5e8b0": {
+    "artifact_path": "2018-10-07_Pre-Election_Live_10d7264b.txt",
+    "created_at": "2025-09-25T23:10:39.700033+00:00",
+    "human_filename": "2018-10-07_Pre-Election_Live_10d7264b.txt",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "document_id": "bolsonaro_2018_pre_election_live",
+      "filename": "2018-10-07_Pre-Election_Live.txt",
+      "metadata": {},
+      "original_filename": "2018-10-07_Pre-Election_Live.txt"
+    },
+    "size_bytes": 23476,
+    "source_run": "20250925_231039"
+  },
+  "162728e6707fcdb0a080a6a3790192a5de14c99bcd3b1715e54a2a259506d1d1": {
+    "artifact_path": "score_extraction_162728e6.json",
+    "created_at": "2025-09-25T23:10:39.642328+00:00",
+    "human_filename": "score_extraction_162728e6.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 10,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 1921,
+    "source_run": "20250925_231039"
+  },
+  "1642c54ab5ed85de676dc673450121eaeba93c2f53a23c1d5d5a92bdab0e5994": {
+    "artifact_path": "2018-09-16_Post-Stabbing_Speech_1642c54a.txt",
+    "created_at": "2025-09-25T23:10:39.698211+00:00",
+    "human_filename": "2018-09-16_Post-Stabbing_Speech_1642c54a.txt",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "document_id": "bolsonaro_2018_post_stabbing",
+      "filename": "2018-09-16_Post-Stabbing_Speech.txt",
+      "metadata": {},
+      "original_filename": "2018-09-16_Post-Stabbing_Speech.txt"
+    },
+    "size_bytes": 12365,
+    "source_run": "20250925_231039"
+  },
+  "18776f97dc2de93abc452d255fe03fb44d3e1ee8bc93c34adff68499123f043b": {
+    "artifact_path": "run_context_18776f97",
+    "created_at": "2025-09-25T23:10:39.703267+00:00",
+    "human_filename": "run_context_18776f97",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "run_context"
+    },
+    "size_bytes": 1389,
+    "source_run": "20250925_231039"
+  },
+  "1999a2c43b16e05144b1b4442b02599514ffbff9394aee1a2d5428f7f6a9ef01": {
+    "artifact_path": "composite_analysis_1999a2c4.json",
+    "created_at": "2025-09-25T23:10:39.628755+00:00",
+    "human_filename": "composite_analysis_1999a2c4.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 0,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 55687,
+    "source_run": "20250925_231039"
+  },
+  "1ca43364dd701f82098f0f4dbe2e3863ae2aab7e11ef6de2e6e612631485601d": {
+    "artifact_path": "marked_up_document_1ca43364.md",
+    "created_at": "2025-09-25T23:10:39.649974+00:00",
+    "human_filename": "marked_up_document_1ca43364.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "marked_up_document",
+      "document_index": 2,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 28101,
+    "source_run": "20250925_231039"
+  },
+  "1e33552a164dee8c929d6a757865a54e35f5c220f96cadd9df557e721e638891": {
+    "artifact_path": "score_extraction_1e33552a.json",
+    "created_at": "2025-09-25T23:10:39.643099+00:00",
+    "human_filename": "score_extraction_1e33552a.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 4,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 1989,
+    "source_run": "20250925_231039"
+  },
+  "2102ff77adaeaab54f5cf17fc6dc9871c2c11b17ee55ea4f6df1be0710502328": {
+    "artifact_path": "evidence_extraction_2102ff77.json",
+    "created_at": "2025-09-25T23:10:39.635752+00:00",
+    "human_filename": "evidence_extraction_2102ff77.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 9,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 7774,
+    "source_run": "20250925_231039"
+  },
+  "282162923d8d059a7064964a6e48259095d93b15355deda5809cb6abb3346323": {
+    "artifact_path": "marked_up_document_28216292.md",
+    "created_at": "2025-09-25T23:10:39.650561+00:00",
+    "human_filename": "marked_up_document_28216292.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "marked_up_document",
+      "document_index": 4,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 16490,
+    "source_run": "20250925_231039"
+  },
+  "28cefc61ffd3592b244beeab3ab35b5656f98531121b693e44bd084143487633": {
+    "artifact_path": "marked_up_document_28cefc61.md",
+    "created_at": "2025-09-25T23:10:39.651161+00:00",
+    "human_filename": "marked_up_document_28cefc61.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "marked_up_document",
+      "document_index": 8,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 26533,
+    "source_run": "20250925_231039"
+  },
+  "29139c8c0e2362884adaa446ac98624eab68d3f01a07d9fef16f12bce05edcb0": {
+    "artifact_path": "evidence_extraction_29139c8c.json",
+    "created_at": "2025-09-25T23:10:39.636261+00:00",
+    "human_filename": "evidence_extraction_29139c8c.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 5,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 7131,
+    "source_run": "20250925_231039"
+  },
+  "33d187dd7f83d002f0610b9e75dba37671824401d7d9ec9a80921bcc2d21b99f": {
+    "artifact_path": "score_extraction_33d187dd.json",
+    "created_at": "2025-09-25T23:10:39.643820+00:00",
+    "human_filename": "score_extraction_33d187dd.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 2,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 1923,
+    "source_run": "20250925_231039"
+  },
+  "3b3b76a1f0604e98c2fb96b080518f178319b14a4a222b5fcad1ea99165c8305": {
+    "artifact_path": "evidence_appendix_3b3b76a1.md",
+    "created_at": "2025-09-25T23:16:03.121398+00:00",
+    "human_filename": "evidence_appendix_3b3b76a1.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_appendix",
+      "experiment_id": "evidence_appendix"
+    },
+    "size_bytes": 27715,
+    "source_run": "20250925_231039"
+  },
+  "4152f312d410e2de3bbc16f7d3e9a70c6347b3dd3db6f67aa44c6725f7b2d6d7": {
+    "artifact_path": "framework_4152f312.md",
+    "created_at": "2025-09-25T23:10:39.687699+00:00",
+    "human_filename": "framework_4152f312.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "framework",
+      "original_filename": "framework.md"
+    },
+    "size_bytes": 53669,
+    "source_run": "20250925_231039"
+  },
+  "4289775cc19c69cdd20d1543fa8aaf1ed6242795e012d4604cc2a2c8d070cbfb": {
+    "artifact_path": "evidence_extraction_4289775c.json",
+    "created_at": "2025-09-25T23:10:39.636794+00:00",
+    "human_filename": "evidence_extraction_4289775c.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 7,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 10013,
+    "source_run": "20250925_231039"
+  },
+  "445b2e54b5b3c13697a31f48a0a0d2bcccf84e7ef2e6da6a3f26079b63f70154": {
+    "artifact_path": "evidence_extraction_445b2e54.json",
+    "created_at": "2025-09-25T23:10:39.637328+00:00",
+    "human_filename": "evidence_extraction_445b2e54.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 1,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 7364,
+    "source_run": "20250925_231039"
+  },
+  "488dd55003c698f74d7094b7819be9e5794a65ae6098e00bdb40ab6c9bcf7a0a": {
+    "artifact_path": "score_extraction_488dd550.json",
+    "created_at": "2025-09-25T23:10:39.644457+00:00",
+    "human_filename": "score_extraction_488dd550.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 0,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 1923,
+    "source_run": "20250925_231039"
+  },
+  "5569cb0b6cb1b1700d2adf7652b8676a4f99ab5dc35e945950d71c5389d0d7aa": {
+    "artifact_path": "score_extraction_5569cb0b.json",
+    "created_at": "2025-09-25T23:10:39.645084+00:00",
+    "human_filename": "score_extraction_5569cb0b.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 8,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 1941,
+    "source_run": "20250925_231039"
+  },
+  "57877faaae3d9d3ca26e15dd64766439d14a648a2cc5dbbd85f62a782d06d484": {
+    "artifact_path": "evidence_extraction_57877faa.json",
+    "created_at": "2025-09-25T23:10:39.637872+00:00",
+    "human_filename": "evidence_extraction_57877faa.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 2,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 6966,
+    "source_run": "20250925_231039"
+  },
+  "5bb1eaaecfed307639402b6a074365b434d707dee26cfc7d57d81e2d87d32a9f": {
+    "artifact_path": "2018-08-23_Aracatuba_Speech_Part_1_5bb1eaae.txt",
+    "created_at": "2025-09-25T23:10:39.696030+00:00",
+    "human_filename": "2018-08-23_Aracatuba_Speech_Part_1_5bb1eaae.txt",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "document_id": "bolsonaro_2018_aracatuba_part1",
+      "filename": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+      "metadata": {},
+      "original_filename": "2018-08-23_Aracatuba_Speech_Part_1.txt"
+    },
+    "size_bytes": 7246,
+    "source_run": "20250925_231039"
+  },
+  "5d1fcbbe24d5ab026eacfe67de4aa8610ddd16d244b4291bca08897d36fd37da": {
+    "artifact_path": "score_extraction_5d1fcbbe.json",
+    "created_at": "2025-09-25T23:10:39.645707+00:00",
+    "human_filename": "score_extraction_5d1fcbbe.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 5,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 1923,
+    "source_run": "20250925_231039"
+  },
+  "5d2df77289b55a4d6d09c7cb866463b6a8ed607f6b62762d2b2c87d01e6ac7c0": {
+    "artifact_path": "composite_analysis_5d2df772.json",
+    "created_at": "2025-09-25T23:10:39.629657+00:00",
+    "human_filename": "composite_analysis_5d2df772.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 7,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 45289,
+    "source_run": "20250925_231039"
+  },
+  "5da8048808336063b35d8ea9fa413b89ec83f811e04224190bda6216cd07ebe6": {
+    "artifact_path": "composite_analysis_5da80488.json",
+    "created_at": "2025-09-25T23:10:39.630474+00:00",
+    "human_filename": "composite_analysis_5da80488.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 2,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 39008,
+    "source_run": "20250925_231039"
+  },
+  "5da9b74038ec0d6f1e4982b3d05e53de0e56631ec148d5f7b6d0b6f9576c9f7a": {
+    "artifact_path": "marked_up_document_5da9b740.md",
+    "created_at": "2025-09-25T23:10:39.651775+00:00",
+    "human_filename": "marked_up_document_5da9b740.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "marked_up_document",
+      "document_index": 0,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 40698,
+    "source_run": "20250925_231039"
+  },
+  "63a777a01c730171cd46dc1fab6c94e3e827a25c3a79e8d2a40579c241d79efa": {
+    "artifact_path": "score_extraction_63a777a0.json",
+    "created_at": "2025-09-25T23:10:39.646327+00:00",
+    "human_filename": "score_extraction_63a777a0.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 11,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 1978,
+    "source_run": "20250925_231039"
+  },
+  "6f3b5a7aa6eb210e7914410c5aa4cb00189b936af6701145fbf077f6774860c5": {
+    "artifact_path": "curated_evidence_6f3b5a7a.json",
+    "created_at": "2025-09-25T23:12:42.391925+00:00",
+    "human_filename": "curated_evidence_6f3b5a7a.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "curated_evidence",
+      "experiment_id": "Core Populist Theme Expression"
+    },
+    "size_bytes": 31064,
+    "source_run": "20250925_231039"
+  },
+  "744f775c3c37f16a4c0b7d9852e2b79cc2f582f531a390a1335cffd0034d1e9e": {
+    "artifact_path": "2018-08-31_Porto_Velho_Speech_744f775c.txt",
+    "created_at": "2025-09-25T23:10:39.697167+00:00",
+    "human_filename": "2018-08-31_Porto_Velho_Speech_744f775c.txt",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "document_id": "bolsonaro_2018_porto_velho",
+      "filename": "2018-08-31_Porto_Velho_Speech.txt",
+      "metadata": {},
+      "original_filename": "2018-08-31_Porto_Velho_Speech.txt"
+    },
+    "size_bytes": 20263,
+    "source_run": "20250925_231039"
+  },
+  "7726472c8435c7f7e2185e3fbced9f246c17c791a091ee7b9d990bc67f521612": {
+    "artifact_path": "marked_up_document_7726472c.md",
+    "created_at": "2025-09-25T23:10:39.652365+00:00",
+    "human_filename": "marked_up_document_7726472c.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "marked_up_document",
+      "document_index": 11,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 28394,
+    "source_run": "20250925_231039"
+  },
+  "7b26213dd77a6360f1eee070e23680adfb08ec09785fe3ab0d475f2b793a2f3c": {
+    "artifact_path": "composite_analysis_7b26213d.json",
+    "created_at": "2025-09-25T23:10:39.631116+00:00",
+    "human_filename": "composite_analysis_7b26213d.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 10,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 16831,
+    "source_run": "20250925_231039"
+  },
+  "80fe68cb01a77b89730e89a207e5a753d6873e5e0d01cf7837de57c128402088": {
+    "artifact_path": "evidence_extraction_80fe68cb.json",
+    "created_at": "2025-09-25T23:10:39.638406+00:00",
+    "human_filename": "evidence_extraction_80fe68cb.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 4,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 7560,
+    "source_run": "20250925_231039"
+  },
+  "8106bbaa762809fc17437b7ba6b0ea41a9d0b5b1610bea9d118777012480e7f7": {
+    "artifact_path": "evidence_extraction_8106bbaa.json",
+    "created_at": "2025-09-25T23:10:39.638952+00:00",
+    "human_filename": "evidence_extraction_8106bbaa.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 3,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 7096,
+    "source_run": "20250925_231039"
+  },
+  "8341f34e18e6d464959bbb32d97f30f65d77c17eebffd05b9958635aa13f85b8": {
+    "artifact_path": "composite_analysis_8341f34e.json",
+    "created_at": "2025-09-25T23:10:39.631709+00:00",
+    "human_filename": "composite_analysis_8341f34e.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 6,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 11329,
+    "source_run": "20250925_231039"
+  },
+  "85fddd028f92052138b0bd4d300bd9a9ed22e988deefc109f940b6c4c17e1687": {
+    "artifact_path": "evidence_extraction_85fddd02.json",
+    "created_at": "2025-09-25T23:10:39.639501+00:00",
+    "human_filename": "evidence_extraction_85fddd02.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 0,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 8434,
+    "source_run": "20250925_231039"
+  },
+  "8667355f9acc2e81aba9c434ca9270a757cff53288c86df271839e6d505e49d0": {
+    "artifact_path": "stage1_synthesis_report_8667355f.md",
+    "created_at": "2025-09-25T23:14:18.814028+00:00",
+    "human_filename": "stage1_synthesis_report_8667355f.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "stage1_synthesis_report",
+      "experiment_id": "stage1_analysis"
+    },
+    "size_bytes": 30926,
+    "source_run": "20250925_231039"
+  },
+  "8ad3587b8983fb5d65f6f3ed0bf60551a8ad2e9805b26d83ab16d7944fb184de": {
+    "artifact_path": "2018-09-30_Avenida_Paulista_Speech_8ad3587b.txt",
+    "created_at": "2025-09-25T23:10:39.698828+00:00",
+    "human_filename": "2018-09-30_Avenida_Paulista_Speech_8ad3587b.txt",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "document_id": "bolsonaro_2018_avenida_paulista_sep30",
+      "filename": "2018-09-30_Avenida_Paulista_Speech.txt",
+      "metadata": {},
+      "original_filename": "2018-09-30_Avenida_Paulista_Speech.txt"
+    },
+    "size_bytes": 2454,
+    "source_run": "20250925_231039"
+  },
+  "8adc5ef84763a5b763efd954111b69425f5e48c856bac49f87f329c5f91c56dd": {
+    "artifact_path": "marked_up_document_8adc5ef8.md",
+    "created_at": "2025-09-25T23:10:39.652968+00:00",
+    "human_filename": "marked_up_document_8adc5ef8.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "marked_up_document",
+      "document_index": 5,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 13543,
+    "source_run": "20250925_231039"
+  },
+  "8e4d203e986c1c26e573eb9a2a9a9073f76f7358e24731bf4ffeb0bfbb9d0a59": {
+    "artifact_path": "2018-10-07_Post-First-Round_Speech_8e4d203e.txt",
+    "created_at": "2025-09-25T23:10:39.700557+00:00",
+    "human_filename": "2018-10-07_Post-First-Round_Speech_8e4d203e.txt",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "document_id": "bolsonaro_2018_post_first_round",
+      "filename": "2018-10-07_Post-First-Round_Speech.txt",
+      "metadata": {},
+      "original_filename": "2018-10-07_Post-First-Round_Speech.txt"
+    },
+    "size_bytes": 9958,
+    "source_run": "20250925_231039"
+  },
+  "9d307c5a736110425732409493a5f915219f61841a7ee198da07c2e256a8f1bd": {
+    "artifact_path": "2018-07-22_PSL_Conference_Candidacy_Launch_9d307c5a.txt",
+    "created_at": "2025-09-25T23:10:39.695477+00:00",
+    "human_filename": "2018-07-22_PSL_Conference_Candidacy_Launch_9d307c5a.txt",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "document_id": "bolsonaro_2018_candidacy_launch",
+      "filename": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+      "metadata": {},
+      "original_filename": "2018-07-22_PSL_Conference_Candidacy_Launch.txt"
+    },
+    "size_bytes": 32195,
+    "source_run": "20250925_231039"
+  },
+  "9db14e872545b9d70d4ab2d9ded5db375d1d4ce41f46dbc698ba71a855482d9d": {
+    "artifact_path": "final_synthesis_report_9db14e87.md",
+    "created_at": "2025-09-25T23:16:03.120261+00:00",
+    "human_filename": "final_synthesis_report_9db14e87.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "final_synthesis_report",
+      "experiment_id": "final_report"
+    },
+    "size_bytes": 63719,
+    "source_run": "20250925_231039"
+  },
+  "9f984582fe6ed9734d10c0d7ed79e697768808218a55fcf6e17c781b1a997870": {
+    "artifact_path": "composite_analysis_9f984582.json",
+    "created_at": "2025-09-25T23:10:39.632341+00:00",
+    "human_filename": "composite_analysis_9f984582.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 11,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 39630,
+    "source_run": "20250925_231039"
+  },
+  "a45b8b911f052cee97bb586f76af3292d94388325ae0a5a50b50b73f1ab15617": {
+    "artifact_path": "score_extraction_a45b8b91.json",
+    "created_at": "2025-09-25T23:10:39.646953+00:00",
+    "human_filename": "score_extraction_a45b8b91.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 6,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 1989,
+    "source_run": "20250925_231039"
+  },
+  "a6ec80393b113126f1fc9b154879bec25478546312633d28dafdcd5fe4d586e0": {
+    "artifact_path": "marked_up_document_a6ec8039.md",
+    "created_at": "2025-09-25T23:10:39.653573+00:00",
+    "human_filename": "marked_up_document_a6ec8039.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "marked_up_document",
+      "document_index": 6,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 3602,
+    "source_run": "20250925_231039"
+  },
+  "a9cd7998ad772245e7f63f594b1a1334d3d14feeb67c8aaaecead3138e6e53c3": {
+    "artifact_path": "experiment_spec_a9cd7998.md",
+    "created_at": "2025-09-25T23:10:39.686828+00:00",
+    "human_filename": "experiment_spec_a9cd7998.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "experiment_spec",
+      "original_filename": "experiment.md"
+    },
+    "size_bytes": 11114,
+    "source_run": "20250925_231039"
+  },
+  "b03ac076f580c6274efe5528c95e6999aa25ace3f2080b9bf7e4ff62bffae7d0": {
+    "artifact_path": "marked_up_document_b03ac076.md",
+    "created_at": "2025-09-25T23:10:39.654178+00:00",
+    "human_filename": "marked_up_document_b03ac076.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "marked_up_document",
+      "document_index": 9,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 12335,
+    "source_run": "20250925_231039"
+  },
+  "b930f054adbff71118123ded196402606907bf1406634e4f8b505324eff98984": {
+    "artifact_path": "marked_up_document_b930f054.md",
+    "created_at": "2025-09-25T23:10:39.654792+00:00",
+    "human_filename": "marked_up_document_b930f054.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "marked_up_document",
+      "document_index": 3,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 25525,
+    "source_run": "20250925_231039"
+  },
+  "bc76c8d9940a0919a88b8ff4d206d653ae372bcde2d6d54ceedcc182880422a1": {
+    "artifact_path": "score_extraction_bc76c8d9.json",
+    "created_at": "2025-09-25T23:10:39.647573+00:00",
+    "human_filename": "score_extraction_bc76c8d9.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 9,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 1923,
+    "source_run": "20250925_231039"
+  },
+  "c08ec26add391f58e4c54e9d611f872c67418d9687fbdea67f5efd2a541f140e": {
+    "artifact_path": "evidence_extraction_c08ec26a.json",
+    "created_at": "2025-09-25T23:10:39.640076+00:00",
+    "human_filename": "evidence_extraction_c08ec26a.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 6,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 6348,
+    "source_run": "20250925_231039"
+  },
+  "c18caabbc0c64d52583d2025d6781c63326723c1a7eeb4bb1e3097a3916f1b7a": {
+    "artifact_path": "evidence_extraction_c18caabb.json",
+    "created_at": "2025-09-25T23:10:39.640610+00:00",
+    "human_filename": "evidence_extraction_c18caabb.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 11,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 7161,
+    "source_run": "20250925_231039"
+  },
+  "c4def61c8613bcdc912519b92c4c2a40aa9ec9306ca26e006bdc735eec43e887": {
+    "artifact_path": "composite_analysis_c4def61c.json",
+    "created_at": "2025-09-25T23:10:39.632913+00:00",
+    "human_filename": "composite_analysis_c4def61c.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 4,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 27200,
+    "source_run": "20250925_231039"
+  },
+  "c61fcfb31f1704d6388613c7b7b145ad3a91c65113e57f5e4568cd202a38ea3e": {
+    "artifact_path": "2018-10-27_Pre-Second-Round_Live_c61fcfb3.txt",
+    "created_at": "2025-09-25T23:10:39.701635+00:00",
+    "human_filename": "2018-10-27_Pre-Second-Round_Live_c61fcfb3.txt",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "document_id": "bolsonaro_2018_pre_second_round",
+      "filename": "2018-10-27_Pre-Second-Round_Live.txt",
+      "metadata": {},
+      "original_filename": "2018-10-27_Pre-Second-Round_Live.txt"
+    },
+    "size_bytes": 24193,
+    "source_run": "20250925_231039"
+  },
+  "c791fcaebc56d79163bcf30bc3b61db6884b9c4eb20334b8976e94c97c859c44": {
+    "artifact_path": "score_extraction_c791fcae.json",
+    "created_at": "2025-09-25T23:10:39.648204+00:00",
+    "human_filename": "score_extraction_c791fcae.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 7,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 1923,
+    "source_run": "20250925_231039"
+  },
+  "cb530d05bedc26f3ffff7490d480324db02c8400bcb9c5bbd44df1630e3218c6": {
+    "artifact_path": "composite_analysis_cb530d05.json",
+    "created_at": "2025-09-25T23:10:39.633474+00:00",
+    "human_filename": "composite_analysis_cb530d05.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 1,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 20301,
+    "source_run": "20250925_231039"
+  },
+  "cea1700cccfbc918cf33a6a29cfdf63cc4860a39f970a894a5a41ee534c12ad8": {
+    "artifact_path": "composite_analysis_cea1700c.json",
+    "created_at": "2025-09-25T23:10:39.634022+00:00",
+    "human_filename": "composite_analysis_cea1700c.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 9,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 21962,
+    "source_run": "20250925_231039"
+  },
+  "cfc1492c3972015d086ab9a170429fa79ba3f0e87c6bc99e6a53d6eb7742effd": {
+    "artifact_path": "composite_analysis_cfc1492c.json",
+    "created_at": "2025-09-25T23:10:39.634621+00:00",
+    "human_filename": "composite_analysis_cfc1492c.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 5,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 26340,
+    "source_run": "20250925_231039"
+  },
+  "db9c83941bc871f8b1551e5ae381e977d6f1e5ceffbd0f1a7ac32e6ea25bdcc6": {
+    "artifact_path": "marked_up_document_db9c8394.md",
+    "created_at": "2025-09-25T23:10:39.655370+00:00",
+    "human_filename": "marked_up_document_db9c8394.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "marked_up_document",
+      "document_index": 10,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 8412,
+    "source_run": "20250925_231039"
+  },
+  "deddb8f316970cc3bb32fbca2616fe8ea0efb22bb362068ba5891abb7795b52c": {
+    "artifact_path": "statistical_analysis_deddb8f3.json",
+    "created_at": "2025-09-25T23:10:54.797067+00:00",
+    "human_filename": "statistical_analysis_deddb8f3.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "statistical_analysis",
+      "batch_id": "stats_20250925T231039Z"
+    },
+    "size_bytes": 19799,
+    "source_run": "20250925_231039"
+  },
+  "e311d4a2050fc501a79af45922df037383a9bda56dcb5496bbfb24dbe254e066": {
+    "artifact_path": "2018-10-22_Avenida_Paulista_Speech_e311d4a2.txt",
+    "created_at": "2025-09-25T23:10:39.701106+00:00",
+    "human_filename": "2018-10-22_Avenida_Paulista_Speech_e311d4a2.txt",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "document_id": "bolsonaro_2018_avenida_paulista_oct22",
+      "filename": "2018-10-22_Avenida_Paulista_Speech.txt",
+      "metadata": {},
+      "original_filename": "2018-10-22_Avenida_Paulista_Speech.txt"
+    },
+    "size_bytes": 5509,
+    "source_run": "20250925_231039"
+  },
+  "f3ba8c82e56e7a136c03405fb66a522aae42d393863a699cb7ddc939f7175cde": {
+    "artifact_path": "validation_report_f3ba8c82.json",
+    "created_at": "2025-09-25T23:10:39.626287+00:00",
+    "human_filename": "validation_report_f3ba8c82.json",
+    "is_directory": false,
+    "metadata": {
+      "agent": "V2ValidationAgent",
+      "artifact_type": "validation_report",
+      "experiment_id": "bolsonaro_2018",
+      "source_run": "20250925_190350",
+      "timestamp": "2025-09-25T15:03:54.236159"
+    },
+    "size_bytes": 2431,
+    "source_run": "20250925_231039"
+  },
+  "f3bb711337f65a83ce85120a0e5674c9bc5581fbd734e5e97202d4da2bace884": {
+    "artifact_path": "corpus_manifest_f3bb7113",
+    "created_at": "2025-09-25T23:10:39.688219+00:00",
+    "human_filename": "corpus_manifest_f3bb7113",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_manifest",
+      "original_filename": "corpus.md"
+    },
+    "size_bytes": 11094,
+    "source_run": "20250925_231039"
+  },
+  "f8efb354df5640779977c33260122a55bb159452eeb04ddd2b38a2f26ea660a4": {
+    "artifact_path": "score_extraction_f8efb354.json",
+    "created_at": "2025-09-25T23:10:39.648821+00:00",
+    "human_filename": "score_extraction_f8efb354.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 1,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 1933,
+    "source_run": "20250925_231039"
+  },
+  "fb88861d70b5f92641f7fc16377f087481f879a133b30a926a4e0fdc6b81bd37": {
+    "artifact_path": "evidence_extraction_fb88861d.json",
+    "created_at": "2025-09-25T23:10:39.641143+00:00",
+    "human_filename": "evidence_extraction_fb88861d.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 10,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 6634,
+    "source_run": "20250925_231039"
+  },
+  "fc7490756f132fc534df95d5b930fc18e4f31cc94ebbc5541a7aba7ae9ed801e": {
+    "artifact_path": "marked_up_document_fc749075.md",
+    "created_at": "2025-09-25T23:10:39.656009+00:00",
+    "human_filename": "marked_up_document_fc749075.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "marked_up_document",
+      "document_index": 7,
+      "source_run": "20250925_190350"
+    },
+    "size_bytes": 31210,
+    "source_run": "20250925_231039"
+  },
+  "fd2a7eed17d74bbb25377020a609e9257949208fdec6072bb1175c6c2fc5289e": {
+    "artifact_path": "2018-10-06_Pre-First-Round_Speech_fd2a7eed.txt",
+    "created_at": "2025-09-25T23:10:39.699405+00:00",
+    "human_filename": "2018-10-06_Pre-First-Round_Speech_fd2a7eed.txt",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "document_id": "bolsonaro_2018_pre_first_round",
+      "filename": "2018-10-06_Pre-First-Round_Speech.txt",
+      "metadata": {},
+      "original_filename": "2018-10-06_Pre-First-Round_Speech.txt"
+    },
+    "size_bytes": 25686,
+    "source_run": "20250925_231039"
+  }
+}

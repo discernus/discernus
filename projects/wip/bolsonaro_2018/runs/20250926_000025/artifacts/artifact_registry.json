@@ -1,0 +1,805 @@
+{
+  "01a51ec72fb1e6a44163bd671d9e63c44110ad2cf40f806265433683a26ac25f": {
+    "artifact_path": "2018-08-23_Aracatuba_Speech_Part_2_01a51ec7.txt",
+    "created_at": "2025-09-26T00:00:25.677886+00:00",
+    "human_filename": "2018-08-23_Aracatuba_Speech_Part_2_01a51ec7.txt",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "document_id": "bolsonaro_2018_aracatuba_part2",
+      "filename": "2018-08-23_Aracatuba_Speech_Part_2.txt",
+      "metadata": {},
+      "original_filename": "2018-08-23_Aracatuba_Speech_Part_2.txt"
+    },
+    "size_bytes": 15072,
+    "source_run": "20250926_000025"
+  },
+  "0293e5588e02f871f1052d18453cb9fd2507de3a3698e83b6cdafa6abafecb12": {
+    "artifact_path": "score_extraction_2018-09-06_Juiz_de_Fora_Business_Association_0293e558.json",
+    "created_at": "2025-09-26T00:08:26.010892+00:00",
+    "human_filename": "score_extraction_2018-09-06_Juiz_de_Fora_Business_Association_0293e558.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 4
+    },
+    "size_bytes": 1990,
+    "source_run": "20250926_000025"
+  },
+  "02ad894c21d2c76c2142b6e6c610d0dca10ea5142da5647c45f93793496b7f3f": {
+    "artifact_path": "evidence_extraction_2018-09-16_Post-Stabbing_Speech_02ad894c.json",
+    "created_at": "2025-09-26T00:09:42.495299+00:00",
+    "human_filename": "evidence_extraction_2018-09-16_Post-Stabbing_Speech_02ad894c.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 5
+    },
+    "size_bytes": 6635,
+    "source_run": "20250926_000025"
+  },
+  "0331391c8110d7b1fbb495f5fbde1378b09334d316e30f082533a57c7b86921d": {
+    "artifact_path": "marked_up_document_2018-09-06_Juiz_de_Fora_Business_Association_0331391c.md",
+    "created_at": "2025-09-26T00:08:39.491031+00:00",
+    "human_filename": "marked_up_document_2018-09-06_Juiz_de_Fora_Business_Association_0331391c.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "marked_up_document",
+      "document_index": 4
+    },
+    "size_bytes": 18492,
+    "source_run": "20250926_000025"
+  },
+  "08743cd7875e79bcf0f020fed55eef091e9707bc5d73acdccb4c906dac7dc0b4": {
+    "artifact_path": "2018-09-06_Juiz_de_Fora_Business_Association_08743cd7.txt",
+    "created_at": "2025-09-26T00:00:25.678595+00:00",
+    "human_filename": "2018-09-06_Juiz_de_Fora_Business_Association_08743cd7.txt",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "document_id": "bolsonaro_2018_juiz_fora_business",
+      "filename": "2018-09-06_Juiz_de_Fora_Business_Association.txt",
+      "metadata": {},
+      "original_filename": "2018-09-06_Juiz_de_Fora_Business_Association.txt"
+    },
+    "size_bytes": 13587,
+    "source_run": "20250926_000025"
+  },
+  "0a68a51382faac3780b968f273fb510c0ac75dd9812675bf5b5e08775795bc44": {
+    "artifact_path": "score_extraction_2018-10-22_Avenida_Paulista_Speech_0a68a513.json",
+    "created_at": "2025-09-26T00:16:34.008327+00:00",
+    "human_filename": "score_extraction_2018-10-22_Avenida_Paulista_Speech_0a68a513.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 10
+    },
+    "size_bytes": 1940,
+    "source_run": "20250926_000025"
+  },
+  "10d7264b750f5b0ba1f60289667a7d2afb75d0829d73d7cdffc9bf0710c5e8b0": {
+    "artifact_path": "2018-10-07_Pre-Election_Live_10d7264b.txt",
+    "created_at": "2025-09-26T00:00:25.679926+00:00",
+    "human_filename": "2018-10-07_Pre-Election_Live_10d7264b.txt",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "document_id": "bolsonaro_2018_pre_election_live",
+      "filename": "2018-10-07_Pre-Election_Live.txt",
+      "metadata": {},
+      "original_filename": "2018-10-07_Pre-Election_Live.txt"
+    },
+    "size_bytes": 23476,
+    "source_run": "20250926_000025"
+  },
+  "124bb4373568ee6bfcc0ed2c9d4975300b526c39189bff4985af603e716f37d6": {
+    "artifact_path": "composite_analysis_2018-09-30_Avenida_Paulista_Speech_124bb437.json",
+    "created_at": "2025-09-26T00:10:38.495965+00:00",
+    "human_filename": "composite_analysis_2018-09-30_Avenida_Paulista_Speech_124bb437.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 6
+    },
+    "size_bytes": 12487,
+    "source_run": "20250926_000025"
+  },
+  "1642c54ab5ed85de676dc673450121eaeba93c2f53a23c1d5d5a92bdab0e5994": {
+    "artifact_path": "2018-09-16_Post-Stabbing_Speech_1642c54a.txt",
+    "created_at": "2025-09-26T00:00:25.678908+00:00",
+    "human_filename": "2018-09-16_Post-Stabbing_Speech_1642c54a.txt",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "document_id": "bolsonaro_2018_post_stabbing",
+      "filename": "2018-09-16_Post-Stabbing_Speech.txt",
+      "metadata": {},
+      "original_filename": "2018-09-16_Post-Stabbing_Speech.txt"
+    },
+    "size_bytes": 12365,
+    "source_run": "20250926_000025"
+  },
+  "18562db2fd144ab66a70dfb7a7d7369a265c464bb8bcacbcdfb77c1543cd30d5": {
+    "artifact_path": "marked_up_document_2018-08-23_Aracatuba_Speech_Part_2_18562db2.md",
+    "created_at": "2025-09-26T00:06:04.652344+00:00",
+    "human_filename": "marked_up_document_2018-08-23_Aracatuba_Speech_Part_2_18562db2.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "marked_up_document",
+      "document_index": 2
+    },
+    "size_bytes": 21171,
+    "source_run": "20250926_000025"
+  },
+  "198bee27a0bb0c2021e9a4d0e9a7222bb55a9c449c35a5577c2f20a28ea1c073": {
+    "artifact_path": "evidence_extraction_2018-10-06_Pre-First-Round_Speech_198bee27.json",
+    "created_at": "2025-09-26T00:12:15.866640+00:00",
+    "human_filename": "evidence_extraction_2018-10-06_Pre-First-Round_Speech_198bee27.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 7
+    },
+    "size_bytes": 8849,
+    "source_run": "20250926_000025"
+  },
+  "1ab463e40e8fa047129904ad7f2775abbd3149e527463bef1932ddf8fd748090": {
+    "artifact_path": "marked_up_document_2018-08-23_Aracatuba_Speech_Part_1_1ab463e4.md",
+    "created_at": "2025-09-26T00:04:41.335118+00:00",
+    "human_filename": "marked_up_document_2018-08-23_Aracatuba_Speech_Part_1_1ab463e4.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "marked_up_document",
+      "document_index": 1
+    },
+    "size_bytes": 10195,
+    "source_run": "20250926_000025"
+  },
+  "203e42c92ed63a2c10f99e6027641f5273b8892ea6e8ec949abdc9e0b89deefe": {
+    "artifact_path": "composite_analysis_2018-09-16_Post-Stabbing_Speech_203e42c9.json",
+    "created_at": "2025-09-26T00:09:38.411668+00:00",
+    "human_filename": "composite_analysis_2018-09-16_Post-Stabbing_Speech_203e42c9.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 5
+    },
+    "size_bytes": 27494,
+    "source_run": "20250926_000025"
+  },
+  "2b2ce3daac5dcba0f1430cddcd549aa8855be09187dcd6f30e6bf346b541d9f3": {
+    "artifact_path": "evidence_extraction_2018-10-27_Pre-Second-Round_Live_2b2ce3da.json",
+    "created_at": "2025-09-26T00:18:01.160317+00:00",
+    "human_filename": "evidence_extraction_2018-10-27_Pre-Second-Round_Live_2b2ce3da.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 11
+    },
+    "size_bytes": 8799,
+    "source_run": "20250926_000025"
+  },
+  "3b20a98445ef20ff6a1b1d238695b0fb02dc7dcdf5d08c0ee4b549b960c58a4f": {
+    "artifact_path": "composite_analysis_2018-10-07_Post-First-Round_Speech_3b20a984.json",
+    "created_at": "2025-09-26T00:15:16.532617+00:00",
+    "human_filename": "composite_analysis_2018-10-07_Post-First-Round_Speech_3b20a984.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 9
+    },
+    "size_bytes": 22471,
+    "source_run": "20250926_000025"
+  },
+  "4087efdb038efa04b69b2964a9bff2993c10ccf782d0036843848e8d96f45188": {
+    "artifact_path": "run_context_4087efdb",
+    "created_at": "2025-09-26T00:00:25.681695+00:00",
+    "human_filename": "run_context_4087efdb",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "run_context"
+    },
+    "size_bytes": 1389,
+    "source_run": "20250926_000025"
+  },
+  "4152f312d410e2de3bbc16f7d3e9a70c6347b3dd3db6f67aa44c6725f7b2d6d7": {
+    "artifact_path": "framework_4152f312.md",
+    "created_at": "2025-09-26T00:00:25.669324+00:00",
+    "human_filename": "framework_4152f312.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "framework",
+      "original_filename": "framework.md"
+    },
+    "size_bytes": 53669,
+    "source_run": "20250926_000025"
+  },
+  "44e96d5add3fe31ed538ee8e0a9329eb4f658447c2d26c2d95f5fa2fdbb5503a": {
+    "artifact_path": "composite_analysis_2018-08-23_Aracatuba_Speech_Part_1_44e96d5a.json",
+    "created_at": "2025-09-26T00:04:27.704732+00:00",
+    "human_filename": "composite_analysis_2018-08-23_Aracatuba_Speech_Part_1_44e96d5a.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 1
+    },
+    "size_bytes": 18545,
+    "source_run": "20250926_000025"
+  },
+  "4539199404eb96f0ae45fcbd7830cf8b52131ae98a54b85df47aaf4adb20a4b0": {
+    "artifact_path": "score_extraction_2018-09-30_Avenida_Paulista_Speech_45391994.json",
+    "created_at": "2025-09-26T00:10:45.426918+00:00",
+    "human_filename": "score_extraction_2018-09-30_Avenida_Paulista_Speech_45391994.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 6
+    },
+    "size_bytes": 1924,
+    "source_run": "20250926_000025"
+  },
+  "583e40c07f16696e2e1883326cfd77133542911af3ad273df6eb548c5e07f746": {
+    "artifact_path": "score_extraction_2018-07-22_PSL_Conference_Candidacy_Launch_583e40c0.json",
+    "created_at": "2025-09-26T00:03:02.545575+00:00",
+    "human_filename": "score_extraction_2018-07-22_PSL_Conference_Candidacy_Launch_583e40c0.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 0
+    },
+    "size_bytes": 75266,
+    "source_run": "20250926_000025"
+  },
+  "5a82fb9005fc23201eea854c671cffb6f00265f04923c82fa3d3313bee71190d": {
+    "artifact_path": "score_extraction_2018-08-23_Aracatuba_Speech_Part_1_5a82fb90.json",
+    "created_at": "2025-09-26T00:04:33.855930+00:00",
+    "human_filename": "score_extraction_2018-08-23_Aracatuba_Speech_Part_1_5a82fb90.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 1
+    },
+    "size_bytes": 1927,
+    "source_run": "20250926_000025"
+  },
+  "5bb1eaaecfed307639402b6a074365b434d707dee26cfc7d57d81e2d87d32a9f": {
+    "artifact_path": "2018-08-23_Aracatuba_Speech_Part_1_5bb1eaae.txt",
+    "created_at": "2025-09-26T00:00:25.677513+00:00",
+    "human_filename": "2018-08-23_Aracatuba_Speech_Part_1_5bb1eaae.txt",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "document_id": "bolsonaro_2018_aracatuba_part1",
+      "filename": "2018-08-23_Aracatuba_Speech_Part_1.txt",
+      "metadata": {},
+      "original_filename": "2018-08-23_Aracatuba_Speech_Part_1.txt"
+    },
+    "size_bytes": 7246,
+    "source_run": "20250926_000025"
+  },
+  "5d0a40d9c54c90913bf0b50e96f734c1769224843657fbdb25bdd7814b377107": {
+    "artifact_path": "composite_analysis_2018-10-06_Pre-First-Round_Speech_5d0a40d9.json",
+    "created_at": "2025-09-26T00:12:10.131991+00:00",
+    "human_filename": "composite_analysis_2018-10-06_Pre-First-Round_Speech_5d0a40d9.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 7
+    },
+    "size_bytes": 44799,
+    "source_run": "20250926_000025"
+  },
+  "5d90fee3637b018fb545a9b61ad308f404f83fd3f63d6620e147b0df739cf6f1": {
+    "artifact_path": "composite_analysis_2018-10-27_Pre-Second-Round_Live_5d90fee3.json",
+    "created_at": "2025-09-26T00:17:55.827025+00:00",
+    "human_filename": "composite_analysis_2018-10-27_Pre-Second-Round_Live_5d90fee3.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 11
+    },
+    "size_bytes": 44010,
+    "source_run": "20250926_000025"
+  },
+  "5f2e2fe906e8690543e7e1dabf3bb5aac183af1e0b98d5f406b84961e6fab9ce": {
+    "artifact_path": "evidence_extraction_2018-08-31_Porto_Velho_Speech_5f2e2fe9.json",
+    "created_at": "2025-09-26T00:07:03.742201+00:00",
+    "human_filename": "evidence_extraction_2018-08-31_Porto_Velho_Speech_5f2e2fe9.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 3
+    },
+    "size_bytes": 5727,
+    "source_run": "20250926_000025"
+  },
+  "5f99aeb1291da2bc8d31c571f89b0a6559a300c3ccbd248798a69940f1d0bbd6": {
+    "artifact_path": "marked_up_document_2018-09-16_Post-Stabbing_Speech_5f99aeb1.md",
+    "created_at": "2025-09-26T00:09:55.345659+00:00",
+    "human_filename": "marked_up_document_2018-09-16_Post-Stabbing_Speech_5f99aeb1.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "marked_up_document",
+      "document_index": 5
+    },
+    "size_bytes": 17460,
+    "source_run": "20250926_000025"
+  },
+  "60399c3aa8aff69f9f092a0a9a923b96b631bcd2bff66afd66f8f24fa57615e8": {
+    "artifact_path": "evidence_extraction_2018-09-30_Avenida_Paulista_Speech_60399c3a.json",
+    "created_at": "2025-09-26T00:10:43.484178+00:00",
+    "human_filename": "evidence_extraction_2018-09-30_Avenida_Paulista_Speech_60399c3a.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 6
+    },
+    "size_bytes": 6453,
+    "source_run": "20250926_000025"
+  },
+  "63517f90bef32f827a8a9386303016d68a9c04f8b02340cb48f3758036462bb4": {
+    "artifact_path": "score_extraction_2018-09-16_Post-Stabbing_Speech_63517f90.json",
+    "created_at": "2025-09-26T00:09:44.128117+00:00",
+    "human_filename": "score_extraction_2018-09-16_Post-Stabbing_Speech_63517f90.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 5
+    },
+    "size_bytes": 1924,
+    "source_run": "20250926_000025"
+  },
+  "63f7aa842564c873f55fb8d519fe9c303f3c2f2bf33dc44f73f7414739bdf2f8": {
+    "artifact_path": "marked_up_document_2018-09-30_Avenida_Paulista_Speech_63f7aa84.md",
+    "created_at": "2025-09-26T00:10:48.811019+00:00",
+    "human_filename": "marked_up_document_2018-09-30_Avenida_Paulista_Speech_63f7aa84.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "marked_up_document",
+      "document_index": 6
+    },
+    "size_bytes": 4879,
+    "source_run": "20250926_000025"
+  },
+  "69236fd75a3433a5e7608f4ab8035b958e657c4ad2bf9d43341d4eda4c9586ef": {
+    "artifact_path": "score_extraction_2018-10-06_Pre-First-Round_Speech_69236fd7.json",
+    "created_at": "2025-09-26T00:12:17.882265+00:00",
+    "human_filename": "score_extraction_2018-10-06_Pre-First-Round_Speech_69236fd7.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 7
+    },
+    "size_bytes": 1924,
+    "source_run": "20250926_000025"
+  },
+  "6988a3ac9edbb05742f1c7509e834c581df16ad664aaa218f5dc3c9e5238d1f5": {
+    "artifact_path": "marked_up_document_2018-10-06_Pre-First-Round_Speech_6988a3ac.md",
+    "created_at": "2025-09-26T00:12:38.053093+00:00",
+    "human_filename": "marked_up_document_2018-10-06_Pre-First-Round_Speech_6988a3ac.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "marked_up_document",
+      "document_index": 7
+    },
+    "size_bytes": 28438,
+    "source_run": "20250926_000025"
+  },
+  "71c5e16dfa8d2f8bb06a70342f850af55dde087ecebc992995faad7a1213d0b8": {
+    "artifact_path": "marked_up_document_2018-10-22_Avenida_Paulista_Speech_71c5e16d.md",
+    "created_at": "2025-09-26T00:16:44.242440+00:00",
+    "human_filename": "marked_up_document_2018-10-22_Avenida_Paulista_Speech_71c5e16d.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "marked_up_document",
+      "document_index": 10
+    },
+    "size_bytes": 10852,
+    "source_run": "20250926_000025"
+  },
+  "7390d270777d75e20d29361742034b955c4dba71ff05314831f6fd2e97233d05": {
+    "artifact_path": "composite_analysis_2018-08-23_Aracatuba_Speech_Part_2_7390d270.json",
+    "created_at": "2025-09-26T00:05:42.741228+00:00",
+    "human_filename": "composite_analysis_2018-08-23_Aracatuba_Speech_Part_2_7390d270.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 2
+    },
+    "size_bytes": 33502,
+    "source_run": "20250926_000025"
+  },
+  "73ef9e68593286b83312f7415105347f4eede7880a711d069c9f8c7cee7a352b": {
+    "artifact_path": "evidence_extraction_2018-09-06_Juiz_de_Fora_Business_Association_73ef9e68.json",
+    "created_at": "2025-09-26T00:08:24.178650+00:00",
+    "human_filename": "evidence_extraction_2018-09-06_Juiz_de_Fora_Business_Association_73ef9e68.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 4
+    },
+    "size_bytes": 6864,
+    "source_run": "20250926_000025"
+  },
+  "744f775c3c37f16a4c0b7d9852e2b79cc2f582f531a390a1335cffd0034d1e9e": {
+    "artifact_path": "2018-08-31_Porto_Velho_Speech_744f775c.txt",
+    "created_at": "2025-09-26T00:00:25.678254+00:00",
+    "human_filename": "2018-08-31_Porto_Velho_Speech_744f775c.txt",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "document_id": "bolsonaro_2018_porto_velho",
+      "filename": "2018-08-31_Porto_Velho_Speech.txt",
+      "metadata": {},
+      "original_filename": "2018-08-31_Porto_Velho_Speech.txt"
+    },
+    "size_bytes": 20263,
+    "source_run": "20250926_000025"
+  },
+  "837f07b0733669d9ba9efd5887cf0576bdbdc30808b0bb49df6053d285a6ae80": {
+    "artifact_path": "evidence_extraction_2018-08-23_Aracatuba_Speech_Part_1_837f07b0.json",
+    "created_at": "2025-09-26T00:04:32.166041+00:00",
+    "human_filename": "evidence_extraction_2018-08-23_Aracatuba_Speech_Part_1_837f07b0.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 1
+    },
+    "size_bytes": 6312,
+    "source_run": "20250926_000025"
+  },
+  "887ca0720fdd57520c9982e8f1f00dd62d30c83e6901be31cfbbaab93964f54a": {
+    "artifact_path": "marked_up_document_2018-10-07_Post-First-Round_Speech_887ca072.md",
+    "created_at": "2025-09-26T00:15:30.872345+00:00",
+    "human_filename": "marked_up_document_2018-10-07_Post-First-Round_Speech_887ca072.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "marked_up_document",
+      "document_index": 9
+    },
+    "size_bytes": 13332,
+    "source_run": "20250926_000025"
+  },
+  "8ad3587b8983fb5d65f6f3ed0bf60551a8ad2e9805b26d83ab16d7944fb184de": {
+    "artifact_path": "2018-09-30_Avenida_Paulista_Speech_8ad3587b.txt",
+    "created_at": "2025-09-26T00:00:25.679257+00:00",
+    "human_filename": "2018-09-30_Avenida_Paulista_Speech_8ad3587b.txt",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "document_id": "bolsonaro_2018_avenida_paulista_sep30",
+      "filename": "2018-09-30_Avenida_Paulista_Speech.txt",
+      "metadata": {},
+      "original_filename": "2018-09-30_Avenida_Paulista_Speech.txt"
+    },
+    "size_bytes": 2454,
+    "source_run": "20250926_000025"
+  },
+  "8e4d203e986c1c26e573eb9a2a9a9073f76f7358e24731bf4ffeb0bfbb9d0a59": {
+    "artifact_path": "2018-10-07_Post-First-Round_Speech_8e4d203e.txt",
+    "created_at": "2025-09-26T00:00:25.680246+00:00",
+    "human_filename": "2018-10-07_Post-First-Round_Speech_8e4d203e.txt",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "document_id": "bolsonaro_2018_post_first_round",
+      "filename": "2018-10-07_Post-First-Round_Speech.txt",
+      "metadata": {},
+      "original_filename": "2018-10-07_Post-First-Round_Speech.txt"
+    },
+    "size_bytes": 9958,
+    "source_run": "20250926_000025"
+  },
+  "8f7eca77417c407af921b5a02f5b997e2616311dadb93fd43009374b3860b070": {
+    "artifact_path": "evidence_extraction_2018-10-07_Pre-Election_Live_8f7eca77.json",
+    "created_at": "2025-09-26T00:13:53.083250+00:00",
+    "human_filename": "evidence_extraction_2018-10-07_Pre-Election_Live_8f7eca77.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 8
+    },
+    "size_bytes": 5807,
+    "source_run": "20250926_000025"
+  },
+  "9324d0e800f5b5f8938f60953471a72efd230a2b1b35c42ed4b71cf7c14cbfd3": {
+    "artifact_path": "composite_analysis_2018-07-22_PSL_Conference_Candidacy_Launch_9324d0e8.json",
+    "created_at": "2025-09-26T00:01:58.495694+00:00",
+    "human_filename": "composite_analysis_2018-07-22_PSL_Conference_Candidacy_Launch_9324d0e8.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 0
+    },
+    "size_bytes": 67685,
+    "source_run": "20250926_000025"
+  },
+  "9d307c5a736110425732409493a5f915219f61841a7ee198da07c2e256a8f1bd": {
+    "artifact_path": "2018-07-22_PSL_Conference_Candidacy_Launch_9d307c5a.txt",
+    "created_at": "2025-09-26T00:00:25.677060+00:00",
+    "human_filename": "2018-07-22_PSL_Conference_Candidacy_Launch_9d307c5a.txt",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "document_id": "bolsonaro_2018_candidacy_launch",
+      "filename": "2018-07-22_PSL_Conference_Candidacy_Launch.txt",
+      "metadata": {},
+      "original_filename": "2018-07-22_PSL_Conference_Candidacy_Launch.txt"
+    },
+    "size_bytes": 32195,
+    "source_run": "20250926_000025"
+  },
+  "9ec04d09f76ac68859170929285fe4307e96512e742785ceb2fc4e778bd48629": {
+    "artifact_path": "score_extraction_2018-10-07_Pre-Election_Live_9ec04d09.json",
+    "created_at": "2025-09-26T00:13:54.862384+00:00",
+    "human_filename": "score_extraction_2018-10-07_Pre-Election_Live_9ec04d09.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 8
+    },
+    "size_bytes": 1924,
+    "source_run": "20250926_000025"
+  },
+  "a0dcf759353566e723fcc18865ef8d2e40e0daf1eeaa35faf00eebcd74db9fe1": {
+    "artifact_path": "marked_up_document_2018-08-31_Porto_Velho_Speech_a0dcf759.md",
+    "created_at": "2025-09-26T00:07:21.533341+00:00",
+    "human_filename": "marked_up_document_2018-08-31_Porto_Velho_Speech_a0dcf759.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "marked_up_document",
+      "document_index": 3
+    },
+    "size_bytes": 24573,
+    "source_run": "20250926_000025"
+  },
+  "a2a0aea3442e71c3dda0405715695586e5609efa10b032c0319d0624f35d4270": {
+    "artifact_path": "score_extraction_2018-10-27_Pre-Second-Round_Live_a2a0aea3.json",
+    "created_at": "2025-09-26T00:18:03.852932+00:00",
+    "human_filename": "score_extraction_2018-10-27_Pre-Second-Round_Live_a2a0aea3.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 11
+    },
+    "size_bytes": 4244,
+    "source_run": "20250926_000025"
+  },
+  "a92bbce3e20265c222161dbbf57aa4c980f5719729c676565f582746f44e6683": {
+    "artifact_path": "evidence_extraction_2018-10-22_Avenida_Paulista_Speech_a92bbce3.json",
+    "created_at": "2025-09-26T00:16:32.288732+00:00",
+    "human_filename": "evidence_extraction_2018-10-22_Avenida_Paulista_Speech_a92bbce3.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 10
+    },
+    "size_bytes": 5950,
+    "source_run": "20250926_000025"
+  },
+  "a9cd7998ad772245e7f63f594b1a1334d3d14feeb67c8aaaecead3138e6e53c3": {
+    "artifact_path": "experiment_spec_a9cd7998.md",
+    "created_at": "2025-09-26T00:00:25.668851+00:00",
+    "human_filename": "experiment_spec_a9cd7998.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "experiment_spec",
+      "original_filename": "experiment.md"
+    },
+    "size_bytes": 11114,
+    "source_run": "20250926_000025"
+  },
+  "aa147249b9037a1a29c2dd38a28ef22bf66b0f573b26ba55f7f80271e6686527": {
+    "artifact_path": "composite_analysis_2018-10-07_Pre-Election_Live_aa147249.json",
+    "created_at": "2025-09-26T00:13:48.826880+00:00",
+    "human_filename": "composite_analysis_2018-10-07_Pre-Election_Live_aa147249.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 8
+    },
+    "size_bytes": 35271,
+    "source_run": "20250926_000025"
+  },
+  "adaa790e859b872f0157affa0af25e741295a461f7917b7bef2007f419c70a5b": {
+    "artifact_path": "marked_up_document_2018-07-22_PSL_Conference_Candidacy_Launch_adaa790e.md",
+    "created_at": "2025-09-26T00:03:37.080808+00:00",
+    "human_filename": "marked_up_document_2018-07-22_PSL_Conference_Candidacy_Launch_adaa790e.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "marked_up_document",
+      "document_index": 0
+    },
+    "size_bytes": 52284,
+    "source_run": "20250926_000025"
+  },
+  "adf0fb1a2d48655841926ffec6776c0aa9b628495932a61749b86378267a71b0": {
+    "artifact_path": "score_extraction_2018-10-07_Post-First-Round_Speech_adf0fb1a.json",
+    "created_at": "2025-09-26T00:15:22.661799+00:00",
+    "human_filename": "score_extraction_2018-10-07_Post-First-Round_Speech_adf0fb1a.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 9
+    },
+    "size_bytes": 1928,
+    "source_run": "20250926_000025"
+  },
+  "b1344477d4e72705f3200d3a76ef09e9fa4780331dc01b4efa728cab87192f8f": {
+    "artifact_path": "evidence_extraction_2018-07-22_PSL_Conference_Candidacy_Launch_b1344477.json",
+    "created_at": "2025-09-26T00:02:04.376951+00:00",
+    "human_filename": "evidence_extraction_2018-07-22_PSL_Conference_Candidacy_Launch_b1344477.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 0
+    },
+    "size_bytes": 9468,
+    "source_run": "20250926_000025"
+  },
+  "b70d442d92e8b1c8d87720b2269c6fe6ac88460d4009b4e4509f6a35d54c9071": {
+    "artifact_path": "composite_analysis_2018-08-31_Porto_Velho_Speech_b70d442d.json",
+    "created_at": "2025-09-26T00:06:59.928118+00:00",
+    "human_filename": "composite_analysis_2018-08-31_Porto_Velho_Speech_b70d442d.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 3
+    },
+    "size_bytes": 33585,
+    "source_run": "20250926_000025"
+  },
+  "c61fcfb31f1704d6388613c7b7b145ad3a91c65113e57f5e4568cd202a38ea3e": {
+    "artifact_path": "2018-10-27_Pre-Second-Round_Live_c61fcfb3.txt",
+    "created_at": "2025-09-26T00:00:25.680891+00:00",
+    "human_filename": "2018-10-27_Pre-Second-Round_Live_c61fcfb3.txt",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "document_id": "bolsonaro_2018_pre_second_round",
+      "filename": "2018-10-27_Pre-Second-Round_Live.txt",
+      "metadata": {},
+      "original_filename": "2018-10-27_Pre-Second-Round_Live.txt"
+    },
+    "size_bytes": 24193,
+    "source_run": "20250926_000025"
+  },
+  "d9eda8cf6b9674d264b4b80119bab5dc7bccba771653447b6a46a37c2af21025": {
+    "artifact_path": "evidence_extraction_2018-08-23_Aracatuba_Speech_Part_2_d9eda8cf.json",
+    "created_at": "2025-09-26T00:05:47.814628+00:00",
+    "human_filename": "evidence_extraction_2018-08-23_Aracatuba_Speech_Part_2_d9eda8cf.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 2
+    },
+    "size_bytes": 7313,
+    "source_run": "20250926_000025"
+  },
+  "dcff59129ab218e59e58b4686ce4ac79a63860e3ddc3145c6982066f5d49004e": {
+    "artifact_path": "composite_analysis_2018-10-22_Avenida_Paulista_Speech_dcff5912.json",
+    "created_at": "2025-09-26T00:16:28.629929+00:00",
+    "human_filename": "composite_analysis_2018-10-22_Avenida_Paulista_Speech_dcff5912.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 10
+    },
+    "size_bytes": 20038,
+    "source_run": "20250926_000025"
+  },
+  "e311d4a2050fc501a79af45922df037383a9bda56dcb5496bbfb24dbe254e066": {
+    "artifact_path": "2018-10-22_Avenida_Paulista_Speech_e311d4a2.txt",
+    "created_at": "2025-09-26T00:00:25.680546+00:00",
+    "human_filename": "2018-10-22_Avenida_Paulista_Speech_e311d4a2.txt",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "document_id": "bolsonaro_2018_avenida_paulista_oct22",
+      "filename": "2018-10-22_Avenida_Paulista_Speech.txt",
+      "metadata": {},
+      "original_filename": "2018-10-22_Avenida_Paulista_Speech.txt"
+    },
+    "size_bytes": 5509,
+    "source_run": "20250926_000025"
+  },
+  "e3fcff61e7764b7f14e5a50f8f15c0a6eb96f096dd6a27f972325eaa50df2c25": {
+    "artifact_path": "score_extraction_2018-08-31_Porto_Velho_Speech_e3fcff61.json",
+    "created_at": "2025-09-26T00:07:05.324642+00:00",
+    "human_filename": "score_extraction_2018-08-31_Porto_Velho_Speech_e3fcff61.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 3
+    },
+    "size_bytes": 1927,
+    "source_run": "20250926_000025"
+  },
+  "e65491ad1914deaf43883babd6154461a42ba1c394e1e67110f720e9a0f3dcde": {
+    "artifact_path": "composite_analysis_2018-09-06_Juiz_de_Fora_Business_Association_e65491ad.json",
+    "created_at": "2025-09-26T00:08:19.810565+00:00",
+    "human_filename": "composite_analysis_2018-09-06_Juiz_de_Fora_Business_Association_e65491ad.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "composite_analysis",
+      "document_index": 4
+    },
+    "size_bytes": 28476,
+    "source_run": "20250926_000025"
+  },
+  "e87b22972d56a3894e1470c34978b6b271d4f34aa07406012d5285ecb9dc9d62": {
+    "artifact_path": "marked_up_document_2018-10-07_Pre-Election_Live_e87b2297.md",
+    "created_at": "2025-09-26T00:14:14.843472+00:00",
+    "human_filename": "marked_up_document_2018-10-07_Pre-Election_Live_e87b2297.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "marked_up_document",
+      "document_index": 8
+    },
+    "size_bytes": 24339,
+    "source_run": "20250926_000025"
+  },
+  "eb390b63803e6cb5ff66580a03387154ac7d39ffb5c86d9333805fc5ba16f53c": {
+    "artifact_path": "evidence_extraction_2018-10-07_Post-First-Round_Speech_eb390b63.json",
+    "created_at": "2025-09-26T00:15:20.899026+00:00",
+    "human_filename": "evidence_extraction_2018-10-07_Post-First-Round_Speech_eb390b63.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "evidence_extraction",
+      "document_index": 9
+    },
+    "size_bytes": 7006,
+    "source_run": "20250926_000025"
+  },
+  "f332680a88ceac0082fc16ebca2bec552844a84ea75d805a9b4f396d6a93d727": {
+    "artifact_path": "marked_up_document_2018-10-27_Pre-Second-Round_Live_f332680a.md",
+    "created_at": "2025-09-26T00:18:23.362765+00:00",
+    "human_filename": "marked_up_document_2018-10-27_Pre-Second-Round_Live_f332680a.md",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "marked_up_document",
+      "document_index": 11
+    },
+    "size_bytes": 28737,
+    "source_run": "20250926_000025"
+  },
+  "f3bb711337f65a83ce85120a0e5674c9bc5581fbd734e5e97202d4da2bace884": {
+    "artifact_path": "corpus_manifest_f3bb7113",
+    "created_at": "2025-09-26T00:00:25.669683+00:00",
+    "human_filename": "corpus_manifest_f3bb7113",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_manifest",
+      "original_filename": "corpus.md"
+    },
+    "size_bytes": 11094,
+    "source_run": "20250926_000025"
+  },
+  "f3d3d2045ab4aab7e9d996e0be1dc0963f26664559d3ab52c2d679141e648f5e": {
+    "artifact_path": "score_extraction_2018-08-23_Aracatuba_Speech_Part_2_f3d3d204.json",
+    "created_at": "2025-09-26T00:05:49.721728+00:00",
+    "human_filename": "score_extraction_2018-08-23_Aracatuba_Speech_Part_2_f3d3d204.json",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "score_extraction",
+      "document_index": 2
+    },
+    "size_bytes": 1923,
+    "source_run": "20250926_000025"
+  },
+  "fd2a7eed17d74bbb25377020a609e9257949208fdec6072bb1175c6c2fc5289e": {
+    "artifact_path": "2018-10-06_Pre-First-Round_Speech_fd2a7eed.txt",
+    "created_at": "2025-09-26T00:00:25.679585+00:00",
+    "human_filename": "2018-10-06_Pre-First-Round_Speech_fd2a7eed.txt",
+    "is_directory": false,
+    "metadata": {
+      "artifact_type": "corpus_document",
+      "document_id": "bolsonaro_2018_pre_first_round",
+      "filename": "2018-10-06_Pre-First-Round_Speech.txt",
+      "metadata": {},
+      "original_filename": "2018-10-06_Pre-First-Round_Speech.txt"
+    },
+    "size_bytes": 25686,
+    "source_run": "20250926_000025"
+  }
+}

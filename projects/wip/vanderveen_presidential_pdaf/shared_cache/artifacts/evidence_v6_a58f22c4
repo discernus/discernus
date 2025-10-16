@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "72dff2b5d341d0b3f1296405f5bce9a1c1207014902ad869304ff04629d51853"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-03T14:30:40.437136+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "trump_2016_08_19.txt",
+      "dimension": "manichean_people_elite_framing",
+      "quote_text": "It will be a win for the voters \u2013 not the pundits, not the journalists, not the lobbyists, not the global special interests funding my opponent's campaign.",
+      "confidence": 0.95,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:30:40.437122+00:00"
+    },
+    {
+      "document_name": "trump_2016_08_19.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "But to achieve this New American Future, we must break free from the bitter failures of the past \u2013 and reject the same insiders telling us the same old lies.",
+      "confidence": 0.93,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:30:40.437126+00:00"
+    },
+    {
+      "document_name": "trump_2016_08_19.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "This is going to be YOUR victory.",
+      "confidence": 0.88,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:30:40.437127+00:00"
+    },
+    {
+      "document_name": "trump_2016_08_19.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "It is time to hold Democratic Politicians accountable for what they have done to these communities. It is time to hold failed leaders accountable for their results, not just their empty words.",
+      "confidence": 0.85,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:30:40.437129+00:00"
+    },
+    {
+      "document_name": "trump_2016_08_19.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "It was pay-for-play.",
+      "confidence": 0.9,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:30:40.437130+00:00"
+    },
+    {
+      "document_name": "trump_2016_08_19.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "I am the change agent. Hillary Clinton is the defender of the status quo.",
+      "confidence": 0.92,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:30:40.437131+00:00"
+    },
+    {
+      "document_name": "trump_2016_08_19.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "We are going to do it by emphasizing what we all have in common as Americans.",
+      "confidence": 0.87,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:30:40.437132+00:00"
+    },
+    {
+      "document_name": "trump_2016_08_19.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "American values and culture will be cherished and celebrated once again.",
+      "confidence": 0.83,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:30:40.437133+00:00"
+    },
+    {
+      "document_name": "trump_2016_08_19.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "It's going to be a victory for the people. A victory for the wage-earner, the factory worker, a victory for the everyday citizen \u2013 and for all the people whose voice hasn't been heard.",
+      "confidence": 0.94,
+      "context_type": "direct_statement",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:30:40.437134+00:00"
+    }
+  ]
+}

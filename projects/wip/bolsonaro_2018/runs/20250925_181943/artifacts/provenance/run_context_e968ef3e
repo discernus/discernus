@@ -1,0 +1,12 @@
+{
+  "experiment_name": "bolsonaro_2018",
+  "framework_name": "unknown_framework",
+  "corpus_name": "unknown_corpus",
+  "document_count": 0,
+  "run_id": "bolsonaro_2018_20250925_141943",
+  "completion_date": "2025-09-25T18:19:43.161214+00:00",
+  "experiment_dir": "/Volumes/code/discernus/projects/wip/bolsonaro_2018",
+  "framework_hash": "",
+  "corpus_manifest_hash": "",
+  "corpus_document_hashes": []
+}

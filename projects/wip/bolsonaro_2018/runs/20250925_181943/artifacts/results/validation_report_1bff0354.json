@@ -1,0 +1,464 @@
+{
+  "validation_success": false,
+  "issues": [
+    {
+      "category": "specification",
+      "description": "The `spec_version` in the experiment configuration (10.0) does not match the version specified in the framework (10.0.2). While the functional components are likely compatible, this version mismatch should be corrected for strict adherence to the latest specification.",
+      "impact": "Minor inconsistencies in feature availability or behavioral interpretation between the experiment's declared intent and the framework's actual capabilities.",
+      "fix": "Update the `spec_version` in the experiment's machine-readable appendix to match the framework's `spec_version` (10.0.2).",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The framework's `spec_version` in the machine-readable appendix is declared as '10.0.2', but the framework's scholarly document states '10.0'. This inconsistency needs to be resolved.",
+      "impact": "Ambiguity regarding the exact version of the framework being used, which could lead to misinterpretation of its capabilities or subtle behavioral differences.",
+      "fix": "Ensure the `spec_version` declared in both the scholarly document (Section 1) and the machine-readable appendix (Section 5.1) of the framework file are consistent. If '10.0.2' is the intended version, update the scholarly document.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "framework.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The experiment requests the use of 'pdaf_v10_0_2.md' as the framework file, but the experiment's machine-readable appendix specifies 'framework.md'. For the experiment to load correctly, these names must match.",
+      "impact": "The experiment will fail to load the specified framework, preventing the analysis from proceeding.",
+      "fix": "Update the `components.framework` value in the machine-readable appendix of `experiment.md` to `pdaf_v10_0_2.md` to match the filename it references.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "trinity_coherence",
+      "description": "The experiment specification references a framework file named 'pdaf_v10_0_2.md' in its abstract, but the machine-readable appendix within the same experiment file specifies 'framework.md' for the framework component. The framework file itself is named 'framework.md' as per the capabilities registry and experiment instructions.",
+      "impact": "The experiment orchestration will attempt to load a framework file named 'framework.md' based on the machine-readable appendix, but the abstract suggests 'pdaf_v10_0_2.md'. This mismatch can lead to the experiment failing to find and load the correct framework, causing an execution failure.",
+      "fix": "Ensure consistency between the abstract's reference to the framework filename and the `components.framework` value in the machine-readable appendix. Update the `components.framework` value in `experiment.md` to `pdaf_v10_0_2.md` to match the abstract, assuming 'pdaf_v10_0_2.md' is the actual name of the framework file provided in the experiment's directory.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "trinity_coherence",
+      "description": "The corpus manifest file is referenced as 'corpus.md' in the experiment's machine-readable appendix, and the experiment's abstract also mentions 'corpus.md'. The provided context indicates the corpus file is indeed named 'corpus.md'. This alignment is correct.",
+      "impact": "No immediate impact, as the references are consistent.",
+      "fix": "None required.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "trinity_coherence",
+      "description": "The experiment's abstract refers to the framework 'PDAF v10.0.2', while the provided framework file is named 'framework.md' and declares its version as '10.0.2' in its machine-readable appendix, but '10.0' in its scholarly document. This creates a version and naming inconsistency.",
+      "impact": "Potential confusion and a failure in the strict version matching required for robust research reproducibility. The naming mismatch between the abstract and the actual framework file can lead to the experiment not finding the correct framework.",
+      "fix": "Standardize the framework filename to 'framework.md' across all references (abstract and machine-readable appendix) and align the version number to '10.0.2' in both parts of the experiment specification and the framework's scholarly document.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "experiment.md",
+        "framework.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The framework's scholarly document (Part 1) states its version as '10.0', while the machine-readable appendix (Part 2) states '10.0.2'. This version discrepancy needs to be resolved for consistent understanding of the framework's capabilities.",
+      "impact": "Ambiguity regarding the framework's version, which could lead to misinterpretation of its features, analytical dimensions, or compliance requirements.",
+      "fix": "Ensure the version number is consistent across the entire framework document. If '10.0.2' is the correct and intended version, update the scholarly document (Section 1) to reflect this.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "framework.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment specifies 'campaign_stage' with 8 distinct phases, and then defines 'election_day' as a stage which includes October 7th. However, the corpus manifest has two entries for October 7th: '2018-10-07_Pre-Election_Live.txt' (classified as 'election_day') and '2018-10-07_Post-First-Round_Speech.txt' (classified as 'between_rounds'). This creates an ambiguity for what constitutes the 'election_day' stage if there are multiple entries on that date and they are classified differently in terms of campaign stage.",
+      "impact": "Potential for misclassification and inaccurate temporal analysis if the 'election_day' stage is not clearly defined or if the corpus data has conflicting temporal classifications for the same date.",
+      "fix": "Clarify the definition of 'election_day' in the experiment's data grouping section. Ensure that all documents falling on October 7th are consistently classified within the experiment's stages, or adjust the corpus manifest's 'campaign_stage' for '2018-10-07_Post-First-Round_Speech.txt' to align with the 'election_day' definition if appropriate. Alternatively, refine the 'campaign_stage' definitions to better accommodate multiple events on a single key date.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment defines a 'pre_post_stabbing' grouping where 'pre_stabbing' includes speeches before September 6, 2018, and 'post_stabbing' includes speeches from September 16 onward. However, the corpus manifest lists '2018-09-06_Juiz_de_Fora_Business_Association.txt' with the metadata field `pre_post_stabbing: \"post_stabbing\"`. This classification is inconsistent with the stated grouping logic, as the speech occurred on the date of the stabbing incident, not after it.",
+      "impact": "Inaccurate grouping for temporal analysis related to the stabbing incident, potentially skewing results for hypotheses concerning the event's impact.",
+      "fix": "Correct the `pre_post_stabbing` metadata for '2018-09-06_Juiz_de_Fora_Business_Association.txt' in the corpus manifest to either 'pre_stabbing' if the intent was to include events up to the incident, or clarify the 'post_stabbing' definition to include the date of the incident itself if it was immediately affected.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment defines 'Electoral Proximity Groups' including 'imminent' for October 1-6 speeches. The corpus manifest lists '2018-10-06_Pre-First-Round_Speech.txt' with `electoral_proximity: \"imminent\"`. This classification aligns with the experiment's definition.",
+      "impact": "No issue identified.",
+      "fix": "None required.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment defines 'Electoral Proximity Groups' including 'inter_round' for October 7-21 speeches. The corpus manifest lists '2018-10-07_Post-First-Round_Speech.txt' with `electoral_proximity: \"imminent\"` and '2018-10-16_Post-First-Round_Speech.txt' with `electoral_proximity: \"inter_round\"`. The former classification is inconsistent with the experiment's definition.",
+      "impact": "Misclassification of a speech's electoral proximity, potentially affecting analyses that rely on this temporal grouping.",
+      "fix": "Correct the `electoral_proximity` metadata for '2018-10-07_Post-First-Round_Speech.txt' in the corpus manifest to 'inter_round' to align with the experiment's defined grouping.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment defines 'Electoral Proximity Groups' including 'final_push' for October 22-27 speeches. The corpus manifest lists '2018-10-22_Avenida_Paulista_Speech.txt' and '2018-10-27_Pre-Second-Round_Live.txt' with `electoral_proximity: \"final_push\"`. This classification aligns with the experiment's definition.",
+      "impact": "No issue identified.",
+      "fix": "None required.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment defines 'Audience Type Groups' and lists 'mass_public' for mass rallies and public events. The corpus manifest classifies '2018-09-30_Avenida_Paulista_Speech.txt' as 'mass_public', which aligns with this definition.",
+      "impact": "No issue identified.",
+      "fix": "None required.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment defines 'Audience Type Groups' and lists 'business_leaders' for a business association speech. The corpus manifest classifies '2018-09-06_Juiz_de_Fora_Business_Association.txt' as 'business_leaders', which aligns with this definition.",
+      "impact": "No issue identified.",
+      "fix": "None required.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment defines 'Audience Type Groups' and lists 'online_supporters' for Facebook live broadcasts. The corpus manifest classifies '2018-09-16_Post-Stabbing_Speech.txt', '2018-10-07_Pre-Election_Live.txt', and '2018-10-27_Pre-Second-Round_Live.txt' as 'online_supporters', which aligns with this definition.",
+      "impact": "No issue identified.",
+      "fix": "None required.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment defines 'Audience Type Groups' and lists 'national_audience' for broad national appeals. The corpus manifest classifies '2018-09-16_Post-Stabbing_Speech.txt' as 'national_audience'. This classification is redundant or potentially conflicting with 'online_supporters' for the same document, which is also listed as a Facebook live broadcast.",
+      "impact": "Ambiguity in audience classification for the '2018-09-16_Post-Stabbing_Speech.txt' document, potentially affecting analyses that rely on precise audience segmentation.",
+      "fix": "Remove the redundant 'national_audience' classification for '2018-09-16_Post-Stabbing_Speech.txt' in the corpus manifest if it is already accurately classified as 'online_supporters' and its primary delivery medium was online. If it also served as a broad national appeal distinct from its online nature, consider how to represent this dual classification appropriately or clarify the definitions.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment defines 'Speech Type Groups' including 'campaign_speech'. The corpus manifest lists several speeches as 'campaign_speech': '2018-07-22_PSL_Conference_Candidacy_Launch.txt', '2018-08-23_Aracatuba_Speech_Part_1.txt', '2018-08-23_Aracatuba_Speech_Part_2.txt', '2018-08-31_Porto_Velho_Speech.txt', '2018-09-30_Avenida_Paulista_Speech.txt', '2018-10-06_Pre-First-Round_Speech.txt', '2018-10-22_Avenida_Paulista_Speech.txt'. This classification appears consistent.",
+      "impact": "No issue identified.",
+      "fix": "None required.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment defines 'Speech Type Groups' including 'policy_speech'. The corpus manifest lists '2018-09-06_Juiz_de_Fora_Business_Association.txt' as 'policy_speech'. This classification appears consistent.",
+      "impact": "No issue identified.",
+      "fix": "None required.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment defines 'Speech Type Groups' including 'personal_statement'. The corpus manifest lists '2018-09-16_Post-Stabbing_Speech.txt' as 'personal_statement'. This classification appears consistent.",
+      "impact": "No issue identified.",
+      "fix": "None required.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment defines 'Speech Type Groups' including 'election_result'. The corpus manifest lists '2018-10-07_Post-First-Round_Speech.txt' as 'election_result'. This classification appears consistent.",
+      "impact": "No issue identified.",
+      "fix": "None required.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment defines 'Speech Type Groups' including 'campaign_closing'. The corpus manifest lists '2018-10-07_Pre-Election_Live.txt' as 'campaign_closing'. This classification appears consistent.",
+      "impact": "No issue identified.",
+      "fix": "None required.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment defines 'Speech Type Groups' including 'election_eve'. The corpus manifest lists '2018-10-27_Pre-Second-Round_Live.txt' as 'election_eve'. This classification appears consistent.",
+      "impact": "No issue identified.",
+      "fix": "None required.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment defines 'Political Phase Groups' including 'campaign_launch' for July 22. The corpus manifest lists '2018-07-22_PSL_Conference_Candidacy_Launch.txt' as 'campaign_launch'. This aligns.",
+      "impact": "No issue identified.",
+      "fix": "None required.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment defines 'Political Phase Groups' including 'campaign_rally' for August 23-31 and September 6. The corpus manifest lists '2018-08-23_Aracatuba_Speech_Part_1.txt', '2018-08-23_Aracatuba_Speech_Part_2.txt', '2018-08-31_Porto_Velho_Speech.txt' as 'campaign_rally'. However, it also lists '2018-09-06_Juiz_de_Fora_Business_Association.txt' as 'policy_outreach', which deviates from the 'campaign_rally' grouping for that date range.",
+      "impact": "Inconsistent classification for the 'campaign_rally' phase, as a speech occurring on September 6th is categorized differently than the specified range suggests.",
+      "fix": "Update the corpus manifest to classify '2018-09-06_Juiz_de_Fora_Business_Association.txt' as 'campaign_rally' if it is intended to be part of that phase, or adjust the experiment's 'campaign_rally' definition to exclude or reclassify September 6th.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment defines 'Political Phase Groups' including 'campaign_interruption' for September 16. The corpus manifest lists '2018-09-16_Post-Stabbing_Speech.txt' as 'post_assassination'. This is a semantic mismatch.",
+      "impact": "The 'campaign_interruption' grouping in the experiment cannot be directly mapped to the 'post_assassination' political phase in the corpus manifest, hindering temporal analysis related to the stabbing.",
+      "fix": "Update the corpus manifest to use 'campaign_interruption' as the `political_phase` for '2018-09-16_Post-Stabbing_Speech.txt' to align with the experiment's defined grouping.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment defines 'Political Phase Groups' including 'late_campaign' for September 30. The corpus manifest lists '2018-09-30_Avenida_Paulista_Speech.txt' as 'campaign_peak'. This is a semantic mismatch.",
+      "impact": "The 'late_campaign' grouping in the experiment cannot be directly mapped to the 'campaign_peak' political phase in the corpus manifest, hindering temporal analysis.",
+      "fix": "Update the corpus manifest to use 'late_campaign' as the `political_phase` for '2018-09-30_Avenida_Paulista_Speech.txt' to align with the experiment's defined grouping.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment defines 'Political Phase Groups' including 'final_campaign' for October 6. The corpus manifest lists '2018-10-06_Pre-First-Round_Speech.txt' as 'election_eve'. This is a semantic mismatch.",
+      "impact": "The 'final_campaign' grouping in the experiment cannot be directly mapped to the 'election_eve' political phase in the corpus manifest, hindering temporal analysis.",
+      "fix": "Update the corpus manifest to use 'final_campaign' as the `political_phase` for '2018-10-06_Pre-First-Round_Speech.txt' to align with the experiment's defined grouping.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment defines 'Political Phase Groups' including 'election_day' for October 7 (morning). The corpus manifest lists '2018-10-07_Pre-Election_Live.txt' as 'election_day_morning'. This aligns.",
+      "impact": "No issue identified.",
+      "fix": "None required.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment defines 'Political Phase Groups' including 'between_rounds' for October 7 (evening) and October 16. The corpus manifest lists '2018-10-07_Post-First-Round_Speech.txt' as 'post_first_round' and '2018-10-16_Post-First-Round_Speech.txt' as 'second_round_campaign'. These are semantic mismatches with 'between_rounds'.",
+      "impact": "The 'between_rounds' grouping in the experiment cannot be directly mapped to the 'post_first_round' and 'second_round_campaign' political phases in the corpus manifest, hindering temporal analysis.",
+      "fix": "Update the corpus manifest to use 'between_rounds' as the `political_phase` for both '2018-10-07_Post-First-Round_Speech.txt' and '2018-10-16_Post-First-Round_Speech.txt' to align with the experiment's defined grouping.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment defines 'Political Phase Groups' including 'pre_second_round' for October 22 and 27. The corpus manifest lists '2018-10-22_Avenida_Paulista_Speech.txt' as 'final_campaign_push' and '2018-10-27_Pre-Second-Round_Live.txt' as 'pre_second_round'. The former is a semantic mismatch.",
+      "impact": "The 'pre_second_round' grouping in the experiment cannot be directly mapped to the 'final_campaign_push' political phase in the corpus manifest, hindering temporal analysis.",
+      "fix": "Update the corpus manifest to use 'pre_second_round' as the `political_phase` for '2018-10-22_Avenida_Paulista_Speech.txt' to align with the experiment's defined grouping.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment's 'Statistical Grouping Structure' defines 'campaign_stage' groups. However, the corpus manifest uses 'political_phase' for most temporal categorizations, and there are semantic mismatches between the experiment's 'campaign_stage' labels and the corpus's 'political_phase' labels for several documents. For instance, 'late_campaign' vs 'campaign_peak', 'final_campaign' vs 'election_eve', 'between_rounds' vs 'post_first_round'/'second_round_campaign', and 'pre_second_round' vs 'final_campaign_push'.",
+      "impact": "The primary variable for temporal analysis (`campaign_stage`) cannot be reliably constructed from the corpus metadata, preventing hypothesis testing related to campaign evolution.",
+      "fix": "Standardize the metadata field used for temporal grouping. Either update the experiment to use 'political_phase' as the primary analysis variable and adjust its definitions to match the corpus, or systematically rename/reclassify the 'political_phase' values in the corpus manifest to precisely match the 'campaign_stage' labels defined in the experiment. Ensure all documents are mapped to one of the experiment's defined campaign stages.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment uses 'campaign_stage' with 8 distinct phases but the corpus manifest uses 'political_phase' with different labels and boundaries (e.g., 'campaign_launch', 'regional_campaign', 'policy_outreach', 'campaign_peak', 'election_eve', 'election_day_morning', 'post_first_round', 'second_round_campaign', 'final_campaign_push', 'pre_second_round'). This requires a mapping that is not fully provided or consistently applied.",
+      "impact": "The experiment's statistical analysis of 'campaign_stage' will fail due to missing or inconsistent mapping from the corpus's 'political_phase' field.",
+      "fix": "Explicitly define the mapping logic between the corpus's 'political_phase' field and the experiment's 'campaign_stage' variable in the 'Data Grouping and Custom Variable Mapping' section of the experiment. Ensure each 'political_phase' value from the corpus is mapped to one of the 8 'campaign_stage' groups, and that the counts per group align with the experiment's intended analysis.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment's 'Statistical Grouping Structure' defines 'pre_stabbing' and 'post_stabbing' groups based on dates. The corpus manifest uses a 'pre_post_stabbing' field. The classification for '2018-09-06_Juiz_de_Fora_Business_Association.txt' as 'post_stabbing' is inconsistent with the experiment's definition of 'post_stabbing' (from September 16 onward).",
+      "impact": "The 'pre_stabbing'/'post_stabbing' comparison may yield inaccurate results due to misclassified documents.",
+      "fix": "Correct the `pre_post_stabbing` metadata for '2018-09-06_Juiz_de_Fora_Business_Association.txt' in the corpus manifest to 'pre_stabbing' or clarify that 'post_stabbing' includes the date of the incident if it was immediately affected, and ensure this clarification is reflected in the experiment's grouping logic.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment's 'Statistical Grouping Structure' defines 'audience' groups. The corpus manifest uses an 'audience' field. The classification for '2018-09-16_Post-Stabbing_Speech.txt' has both 'national_audience' and 'online_supporters'. If 'online_supporters' is the intended primary classification for this Facebook Live event, the 'national_audience' classification might be redundant or create ambiguity.",
+      "impact": "Potential for inconsistent audience group assignment if a document belongs to multiple audience categories, which could affect analyses comparing audience types.",
+      "fix": "For '2018-09-16_Post-Stabbing_Speech.txt', review the primary audience type. If it was primarily delivered to online supporters, remove the 'national_audience' classification to avoid redundancy. If it genuinely served dual purposes, ensure the experiment's audience grouping logic can accommodate multi-category documents or prioritize one category.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment's 'Statistical Grouping Structure' defines 'electoral_proximity' groups. The corpus manifest uses 'electoral_proximity' field. The classification for '2018-10-07_Post-First-Round_Speech.txt' as 'imminent' conflicts with the experiment's definition of 'imminent' (October 1-6) and 'inter_round' (October 7-21).",
+      "impact": "Misclassification of a document's electoral proximity, affecting analyses that rely on this temporal grouping.",
+      "fix": "Correct the `electoral_proximity` metadata for '2018-10-07_Post-First-Round_Speech.txt' in the corpus manifest to 'inter_round' to align with the experiment's definition.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment's 'Statistical Grouping Structure' defines 'campaign_stage' groups. The corpus manifest uses 'campaign_stage' field. There are several mismatches: 'mid_campaign' in experiment vs. 'regional_campaign'/'policy_outreach'/'campaign_peak' in corpus; 'late_campaign' in experiment vs. 'campaign_peak' in corpus; 'final_campaign' in experiment vs. 'election_eve' in corpus; 'election_day' in experiment vs. 'election_day_morning' in corpus; 'between_rounds' in experiment vs. 'post_first_round'/'second_round_campaign' in corpus; 'pre_second_round' in experiment vs. 'final_campaign_push'/'pre_second_round' in corpus.",
+      "impact": "Crucial temporal analysis based on 'campaign_stage' will be impossible without explicit mapping from the corpus's 'campaign_stage' (or equivalent 'political_phase') labels to the experiment's defined stages.",
+      "fix": "In the 'Data Grouping and Custom Variable Mapping' section of the experiment, create a clear mapping from the corpus's 'campaign_stage' (or 'political_phase') values to the experiment's defined 'campaign_stage' groups. Ensure that the defined groups in the experiment accurately reflect the distribution and content of the corpus. For example, map corpus 'regional_campaign', 'policy_outreach', and 'campaign_peak' to 'mid_campaign' if they represent similar temporal phases in the experiment's conceptualization, and similarly for other mismatched labels.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment defines 'Statistical Grouping Structure' with 'pre_post_stabbing' groups. The corpus manifest uses 'pre_post_stabbing' field. The classification for '2018-09-06_Juiz_de_Fora_Business_Association.txt' as 'post_stabbing' conflicts with the experiment's definition of 'pre_stabbing' (before Sep 6) and 'post_stabbing' (from Sep 16 onwards).",
+      "impact": "Misclassification for a critical temporal marker affecting analyses related to the stabbing incident.",
+      "fix": "Adjust the corpus manifest for '2018-09-06_Juiz_de_Fora_Business_Association.txt'. If the speech is considered part of the 'pre_stabbing' period leading up to the event, change `pre_post_stabbing` to 'pre_stabbing'. If it was immediately impacted or intended to reflect the immediate aftermath, ensure the experiment's definition of 'post_stabbing' includes Sep 6th, or change the metadata to 'post_stabbing' and ensure the experiment's definition accommodates this.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment defines 'Statistical Grouping Structure' with 'audience' groups. The corpus manifest uses 'audience' field. The classification of '2018-09-16_Post-Stabbing_Speech.txt' includes both 'national_audience' and 'online_supporters'. While potentially valid, this overlap might lead to issues if the experiment expects mutually exclusive audience categories for its analyses.",
+      "impact": "Ambiguity in audience classification for a specific document, which could affect the accuracy of analyses comparing different audience types if not handled properly.",
+      "fix": "Review the audience classification for '2018-09-16_Post-Stabbing_Speech.txt'. If the document primarily targeted online supporters and the 'national_audience' classification is redundant or creates ambiguity, consider removing it. If both classifications are critical, ensure the experiment's analysis design can accommodate or prioritize one category.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment defines 'Statistical Grouping Structure' with 'electoral_proximity' groups. The corpus manifest uses 'electoral_proximity' field. The classification for '2018-10-07_Post-First-Round_Speech.txt' as 'imminent' contradicts the experiment's definition of 'imminent' (Oct 1-6) and 'inter_round' (Oct 7-21).",
+      "impact": "Misclassification of a document's electoral proximity, potentially impacting analyses that depend on this temporal variable.",
+      "fix": "Correct the `electoral_proximity` metadata for '2018-10-07_Post-First-Round_Speech.txt' in the corpus manifest to 'inter_round' to align with the experiment's defined grouping.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "corpus.md",
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "data_quality",
+      "description": "The experiment defines 'Statistical Grouping Structure' with 'campaign_stage' groups. The corpus manifest uses 'campaign_stage' field. There are several mismatches in labels and intended boundaries between the experiment's defined 'campaign_stage' and the corpus's actual 'campaign_stage' values. For example, experiment's 'mid_campaign' spans Aug 23-Sep 6, but corpus lists '2018-09-06_Juiz_de_Fora_Business_Association.txt' with `campaign_stage: \"mid_campaign\"` but `pre_post_stabbing: \"post_stabbing\"`, which contradicts the experiment's definition of 'post_stabbing' starting Sep 16. Also, 'election_day' in experiment covers Oct 7, but corpus has '2018-10-07_Pre-Election_Live.txt' as 'election_day' and '2018-10-07_Post-First-Round_Speech.txt' as 'between_rounds'.",
+      "impact": "The primary temporal variable 'campaign_stage' for hypothesis testing cannot be reliably constructed due to inconsistent mapping and definitions between the experiment and the corpus manifest. This will prevent core replication and extension questions from being answered accurately.",
+      "fix": "Thoroughly review and reconcile the 'campaign_stage' definitions and classifications between the experiment and the corpus manifest. For '2018-09-06_Juiz_de_Fora_Business_Association.txt', ensure its `campaign_stage` classification aligns with the experiment's intended grouping for 'mid_campaign' or adjust the experiment's 'mid_campaign' boundaries. For October 7th, clarify whether both events fall under 'election_day' or if one should be reclassified. Ensure all corpus documents are mapped to one of the 8 experiment-defined 'campaign_stage' groups.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "trinity_coherence",
+      "description": "The experiment specification in the abstract mentions 'PDAF v10.0.2 framework', while the machine-readable appendix references 'framework.md'. The framework file provided is named 'framework.md' and declares '10.0.2' in its appendix, but '10.0' in its scholarly document. For a successful trinity coherence, the referenced framework file name and version must be consistent and accurate.",
+      "impact": "The experiment might fail to load the correct framework file due to naming discrepancies or use an incorrectly versioned framework, leading to execution failures or invalid analytical results.",
+      "fix": "Standardize the framework filename to 'framework.md' across all references (experiment abstract, experiment appendix, and the actual framework file name). Ensure the framework version is consistently stated as '10.0.2' in both the experiment's abstract and machine-readable appendix, and in the framework's scholarly document and machine-readable appendix.",
+      "priority": "BLOCKING",
+      "affected_files": [
+        "experiment.md",
+        "framework.md"
+      ]
+    }
+  ],
+  "suggestions": [
+    "Consider providing more granular definitions for 'campaign_stage' in the experiment specification to better align with the nuances of the corpus data, particularly around critical dates like September 6th and October 7th.",
+    "When defining audience types, ensure that classifications are mutually exclusive or that the experiment's analysis plan explicitly addresses how overlapping categories will be handled.",
+    "For improved clarity and adherence to the v10.0 specification, all version numbers (framework, corpus, experiment) should be precisely aligned. Currently, there are minor discrepancies between the declared versions.",
+    "To enhance the robustness of the analysis, consider creating 'sequential analysis variants' within the framework's machine-readable appendix to break down the evaluation of dimensions, especially those that might be conceptually close or require careful disambiguation.",
+    "The framework document's scholarly section could benefit from a more detailed explanation of the 'salience' concept and its theoretical grounding in relation to the nine PDAF dimensions."
+  ],
+  "metadata": {
+    "agent": "V2ValidationAgent",
+    "timestamp": "2025-09-25T14:20:12.455726",
+    "experiment_id": "bolsonaro_2018",
+    "validation_type": "experiment_coherence"
+  }
+}

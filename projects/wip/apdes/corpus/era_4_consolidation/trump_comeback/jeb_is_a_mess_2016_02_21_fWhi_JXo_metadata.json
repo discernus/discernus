@@ -1,0 +1,27 @@
+{
+  "video_info": {
+    "video_id": "fWhi_JXos60",
+    "title": "jeb is a mess",
+    "channel": "ianeure",
+    "upload_date": "2016-02-21",
+    "description": "jeb is a waste\nand everybody knows it\n\nI didn't make this, it came from http://libertybill.tumblr.com/post/139576461509/go-to-wwwjebbushcom-to-help-jeb-today",
+    "duration": 137,
+    "view_count": 671344,
+    "like_count": 17172,
+    "url": "https://www.youtube.com/watch?v=fWhi_JXos60"
+  },
+  "extraction_info": {
+    "language": "en (auto-generated)",
+    "success": true,
+    "transcript_length": 1365
+  },
+  "processing_metadata": {
+    "extraction_date": "2025-08-05T20:35:56.471258",
+    "transcript_length": 1365,
+    "source": "youtube_transcript_api",
+    "video_url": "https://www.youtube.com/watch?v=fWhi_JXos60",
+    "processing_notes": [
+      "Enhanced metadata extracted with yt-dlp"
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "filename": "unknown_title_bAIPi1cP.txt",
+  "document_id": "unknown_title_bAIPi1cP",
+  "metadata": {
+    "title": null,
+    "speaker": "Donald Trump",
+    "date": null,
+    "channel": null,
+    "url": "https://www.youtube.com/watch?v=bAIPi1cPY4c",
+    "view_count": null,
+    "category": "Political Speech"
+  },
+  "extraction_info": {
+    "method": "whisper",
+    "language": "en (whisper)",
+    "confidence": 75.5029442644774,
+    "transcript_length_chars": 63756,
+    "whisper_model_used": "base",
+    "extracted_at": "2025-08-22T13:29:23.778993"
+  }
+}

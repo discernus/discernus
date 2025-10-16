@@ -1,0 +1,178 @@
+{
+  "schema_version": "1.0",
+  "experiment": "Trump Populism Evolution Study",
+  "framework": "PDAF v10.0",
+
+  "metadata_fields": {
+    "document_id": {
+      "type": "string",
+      "description": "Unique identifier for the document",
+      "format": "PHASE_YYYY_MM_DD_TITLE"
+    },
+
+    "phase": {
+      "type": "string",
+      "description": "Temporal phase of Trump's political career",
+      "enum": [
+        "baseline_1988_2000",
+        "campaign_2015_2016",
+        "presidential_2017_2020",
+        "post_presidency_2021_2023",
+        "campaign_2024_2025"
+      ]
+    },
+
+    "date": {
+      "type": "string",
+      "description": "Document date in ISO format",
+      "format": "YYYY-MM-DD"
+    },
+
+    "title": {
+      "type": "string",
+      "description": "Document title or speech topic"
+    },
+
+    "venue": {
+      "type": "string",
+      "description": "Location or event where speech was delivered"
+    },
+
+    "audience": {
+      "type": "string",
+      "description": "Target audience (e.g., rally, town hall, CPAC, press conference)"
+    },
+
+    "content_type": {
+      "type": "string",
+      "description": "Type of communication",
+      "enum": [
+        "campaign_rally",
+        "policy_speech",
+        "town_hall",
+        "press_conference",
+        "ceremonial_address",
+        "political_announcement",
+        "interview",
+        "debate"
+      ]
+    },
+
+    "geographic_focus": {
+      "type": "string",
+      "description": "Geographic region or state mentioned prominently"
+    },
+
+    "key_themes": {
+      "type": "array",
+      "description": "Primary themes addressed in the document",
+      "items": {
+        "type": "string",
+        "enum": [
+          "immigration",
+          "economy",
+          "foreign_policy",
+          "domestic_policy",
+          "campaign_strategy",
+          "political_rhetoric",
+          "personal_branding",
+          "opposition_criticism"
+        ]
+      }
+    },
+
+    "populist_indicators": {
+      "type": "object",
+      "description": "Preliminary populist dimension markers",
+      "properties": {
+        "people_vs_elite": {
+          "type": "boolean",
+          "description": "References to people vs. establishment/elites"
+        },
+        "anti_establishment": {
+          "type": "boolean",
+          "description": "Criticism of political establishment"
+        },
+        "nationalism": {
+          "type": "boolean",
+          "description": "Nationalistic or protectionist rhetoric"
+        },
+        "direct_communication": {
+          "type": "boolean",
+          "description": "Direct appeals bypassing traditional media"
+        }
+      }
+    },
+
+    "word_count": {
+      "type": "integer",
+      "description": "Approximate word count of document"
+    },
+
+    "source_quality": {
+      "type": "string",
+      "description": "Confidence level in document authenticity",
+      "enum": [
+        "verified_official",
+        "reliable_transcript",
+        "crowdsourced",
+        "uncertain"
+      ]
+    },
+
+    "provenance": {
+      "type": "object",
+      "description": "Source and processing information",
+      "properties": {
+        "original_source": {
+          "type": "string",
+          "description": "Original source of the document"
+        },
+        "processing_date": {
+          "type": "string",
+          "description": "Date document was processed/curated",
+          "format": "YYYY-MM-DD"
+        },
+        "curator_notes": {
+          "type": "string",
+          "description": "Notes from curation process"
+        }
+      }
+    },
+
+    "analysis_flags": {
+      "type": "object",
+      "description": "Technical flags for analysis processing",
+      "properties": {
+        "pdaf_ready": {
+          "type": "boolean",
+          "description": "Ready for PDAF v10.0 analysis"
+        },
+        "requires_preprocessing": {
+          "type": "boolean",
+          "description": "Needs text cleaning or formatting"
+        },
+        "duplicate_content": {
+          "type": "boolean",
+          "description": "Potential duplicate or very similar content"
+        }
+      }
+    }
+  },
+
+  "validation_rules": [
+    "document_id must be unique across corpus",
+    "date must be valid and within phase timeframe",
+    "at least one key_theme must be specified",
+    "word_count must be reasonable (>100 for substantive content)",
+    "source_quality should be verified_official or reliable_transcript when possible"
+  ],
+
+  "usage_guidelines": [
+    "Populate all required fields during curation",
+    "Use consistent terminology for venues and content_types",
+    "Flag uncertain source_quality for follow-up verification",
+    "Document any preprocessing steps in curator_notes",
+    "Review populist_indicators during initial content analysis"
+  ]
+}

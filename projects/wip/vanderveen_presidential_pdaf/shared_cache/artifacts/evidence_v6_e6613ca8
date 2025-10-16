@@ -1,0 +1,103 @@
+{
+  "evidence_metadata": {
+    "document_hashes": [
+      "384d1757d96bd7d419bff1aa87d437994501b9ede1c1be9c97ba33c60ce037c0"
+    ],
+    "total_evidence_pieces": 9,
+    "extraction_method": "analysis_time_extraction_v1.0",
+    "extraction_time": "2025-09-03T14:21:50.774379+00:00",
+    "framework_version": "v6.0"
+  },
+  "evidence_data": [
+    {
+      "document_name": "clinton_2016_02_20.txt",
+      "dimension": "manichaean_people_elite_framing",
+      "quote_text": "Wall Street can never be allowed to threaten Main street again. No bank can be too big to fail, no executive too powerful to jail.",
+      "confidence": 0.9,
+      "context_type": "binary_opposition_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.774352+00:00"
+    },
+    {
+      "document_name": "clinton_2016_02_20.txt",
+      "dimension": "crisis_restoration_narrative",
+      "quote_text": "We look at our country and see so much that isn't working the way it should... We're going to build ladders of opportunity in their place so every American can go as far as your hard work can take you.",
+      "confidence": 1.0,
+      "context_type": "problem_solution_narrative",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.774363+00:00"
+    },
+    {
+      "document_name": "clinton_2016_02_20.txt",
+      "dimension": "popular_sovereignty_claims",
+      "quote_text": "We hear you, we see you, we're incredibly grateful to you because we're in this together. This is your campaign...",
+      "confidence": 0.8,
+      "context_type": "direct_address_and_mandate",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.774365+00:00"
+    },
+    {
+      "document_name": "clinton_2016_02_20.txt",
+      "dimension": "anti_pluralist_exclusion",
+      "quote_text": "I have never believed in dividing America between us and them. We are all in this together, we all have to do our part.",
+      "confidence": 1.0,
+      "context_type": "explicit_rejection_of_division",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.774367+00:00"
+    },
+    {
+      "document_name": "clinton_2016_02_20.txt",
+      "dimension": "elite_conspiracy_systemic_corruption",
+      "quote_text": "We all want to get secret unaccountable money out of politics... No bank can be too big to fail, no executive too powerful to jail.",
+      "confidence": 0.9,
+      "context_type": "systemic_critique",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.774369+00:00"
+    },
+    {
+      "document_name": "clinton_2016_02_20.txt",
+      "dimension": "authenticity_vs_political_class",
+      "quote_text": "Hotel and casino workers who never wavered... Students with too much debt, and small business owners who never go off the clock... Tens of thousands of men and women with kids to raise, bills to pay, and dreams that won't die.",
+      "confidence": 0.9,
+      "context_type": "connection_to_ordinary_citizens",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.774371+00:00"
+    },
+    {
+      "document_name": "clinton_2016_02_20.txt",
+      "dimension": "homogeneous_people_construction",
+      "quote_text": "I have never believed in dividing America between us and them. We are all in this together, we all have to do our part.",
+      "confidence": 1.0,
+      "context_type": "unifying_rhetoric",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.774373+00:00"
+    },
+    {
+      "document_name": "clinton_2016_02_20.txt",
+      "dimension": "nationalist_exclusion",
+      "quote_text": "So, imagine a tomorrow where no child grows up in the shadow of discrimination or under the spectre of deportation.",
+      "confidence": 1.0,
+      "context_type": "inclusive_vision",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.774374+00:00"
+    },
+    {
+      "document_name": "clinton_2016_02_20.txt",
+      "dimension": "economic_populist_appeals",
+      "quote_text": "We need more than a plan for the big banks. The middle class needs a raise, and we need more jobs. We need jobs that pay well and can't be outsourced. Jobs that provide dignity and a future.",
+      "confidence": 1.0,
+      "context_type": "economic_policy_framing",
+      "extraction_method": "analysis_time_extraction_v1.0",
+      "source_type": "analysis_response",
+      "extraction_timestamp": "2025-09-03T14:21:50.774376+00:00"
+    }
+  ]
+}

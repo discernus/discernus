@@ -1,0 +1,26 @@
+{
+  "video_info": {
+    "video_id": "Z2ACEVWKaCs",
+    "title": "Donald Trump full speech at campaign rally in Wilkes-Barre, PA (Aug. 17, 2024)",
+    "channel": "WFAA",
+    "upload_date": "2024-08-18",
+    "description": "Former President Donald Trump was in Wilkes-Barre, Pennsylvania, and gave a full speech at a campaign rally.",
+    "duration": 6253,
+    "view_count": 88890,
+    "like_count": 1139,
+    "url": "https://www.youtube.com/watch?v=Z2ACEVWKaCs"
+  },
+  "extraction_info": {
+    "method": "youtube_api",
+    "language": "en",
+    "confidence": 100.0,
+    "success": true,
+    "transcript_length": 86478,
+    "whisper_model": null
+  },
+  "processing_metadata": {
+    "transcript_length": 86478,
+    "extraction_date": "2025-08-22T09:49:36.477894",
+    "source": "youtube_transcript_api"
+  }
+}

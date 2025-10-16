@@ -1,0 +1,80 @@
+{
+  "validation_success": true,
+  "issues": [
+    {
+      "category": "trinity_coherence",
+      "description": "The `campaign_stage` mapping in the experiment specification is not fully consistent with the `campaign_stage` values present in the corpus manifest. Specifically, the experiment lists 'election_day' (n=1) and 'between_rounds' (n=1) as distinct stages, but the corpus manifest has 'election_day' (n=1, for Oct 7 morning live) and 'between_rounds' (n=1, for Oct 7 evening victory speech). The experiment's mapping of 'election_day' to 'October 7 morning speech' and 'between_rounds' to 'October 7 evening speech' is a mapping of specific documents, not a direct mapping of the `campaign_stage` field itself. The 'pre_first_round' speech in the corpus is mapped to 'final_campaign' in the experiment, which aligns. However, the 'post_first_round' speech in the corpus is mapped to 'between_rounds' in the experiment. This implies a slight inconsistency in how the stages are defined and mapped between the experiment's intent and the corpus's factual data.",
+      "impact": "This could lead to minor discrepancies in how temporal phases are defined and analyzed, potentially affecting the granularity of temporal trend analysis if not carefully handled by the analysis pipeline. It might also lead to unexpected results when comparing distinct campaign stages that are conflated or ambiguously defined.",
+      "fix": "Review the 'Statistical Grouping Structure' in the experiment specification. Ensure each `campaign_stage` listed in the experiment's groupings directly and exclusively maps to unique `campaign_stage` values from the corpus manifest. Clarify or adjust the groupings to accurately reflect the temporal progression and the distinct events captured in the corpus, or adjust the corpus manifest if those distinctions are critical and correctly represented in the experiment design.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "trinity_coherence",
+      "description": "The experiment's 'Pre/Post Stabbing Groups' are defined as 'pre_stabbing' (n=4) and 'post_stabbing' (n=9). The corpus manifest's `pre_post_stabbing` field correctly categorizes documents into 'pre_stabbing' (July 22, Aug 23 part 1, Aug 23 part 2, Aug 31, Sep 6) and 'post_stabbing' (Sep 16, Sep 30, Oct 6, Oct 7 morning live, Oct 7 evening victory, Oct 22, Oct 27). The count of 'pre_stabbing' documents in the corpus manifest is 5, not 4 as stated in the experiment's grouping. The document '2018-09-06_Juiz_de_Fora_Business_Association.txt' is marked as 'pre_stabbing' in the corpus, which is correct as it predates Sep 6. The experiment's grouping of 'pre_stabbing' (n=4) seems to exclude this document. This is a count mismatch and potential miscategorization for analysis.",
+      "impact": "The 'pre_stabbing' group will be underspecified in the analysis, potentially leading to biased or incomplete results for comparisons involving the pre-stabbing period. The analysis might not accurately capture the discourse patterns leading up to the incident.",
+      "fix": "Update the 'Pre/Post Stabbing Groups' count in the experiment specification to reflect the correct number of 'pre_stabbing' documents (n=5) as per the corpus manifest. Ensure the 'post_stabbing' count (n=7) also aligns if there are any discrepancies (currently, corpus indicates 7 post-stabbing documents, which aligns with the experiment's stated n=9 if some are miscounted). Double-check the date logic used for defining these groups against the corpus dates.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "trinity_coherence",
+      "description": "The experiment defines 'Electoral Proximity Groups' with specific date ranges and sample counts. The 'distant' group includes July-August speeches (>30 days before election). The corpus manifest indicates July 22, August 23 (x2), and August 31 speeches fall into this category (n=4). The experiment states n=3 for 'distant'. This implies a document is missing from the 'distant' group or miscategorized. The 'approaching' group is defined as September speeches (7-30 days before election). The corpus has speeches on Sept 6 and Sept 16, totaling 2 speeches in September before Oct 6. The experiment states n=3 for 'approaching'. This count mismatch suggests a potential issue in either the date ranges or the assignment of speeches to groups.",
+      "impact": "The 'distant' and 'approaching' electoral proximity groups used for analysis will have incorrect sample sizes, potentially leading to inaccurate statistical comparisons and misinterpretations of discourse evolution relative to electoral timing.",
+      "fix": "Reconcile the 'Electoral Proximity Groups' in the experiment specification with the actual dates and counts of speeches in the corpus manifest. Ensure the date thresholds (>30 days, 7-30 days, etc.) accurately reflect the number of documents available in each group based on the corpus dates. Verify all speeches are assigned to exactly one group.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "trinity_coherence",
+      "description": "The experiment specifies 'Audience Type Groups' (mass_public, business_leaders, online_supporters, national_audience). However, the counts mentioned in the experiment (mass_public: n=5, business_leaders: n=1, online_supporters: n=3, national_audience: n=4) do not precisely sum to the total corpus size of 12 documents. Summing these counts (5+1+3+4 = 13) exceeds the corpus total by one. This indicates a potential overlap in categorizations or an error in counting within the experiment specification.",
+      "impact": "Analysis based on audience type may produce incorrect group sizes and potentially overlap analyses, leading to invalid statistical comparisons or misinterpretations of audience-specific rhetorical strategies.",
+      "fix": "Thoroughly review the `audience` metadata field for each document in the corpus manifest and compare it against the experiment's specified audience types and their counts. Ensure each document is assigned to only one audience category for the purpose of these statistical groups, and that the counts provided in the experiment sum correctly to the total number of documents in the corpus (12). Adjust the experiment specification to accurately reflect the audience distribution found in the corpus.",
+      "priority": "QUALITY",
+      "affected_files": [
+        "experiment.md",
+        "corpus.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The experiment specification's 'Statistical Grouping Structure' section refers to 'Corpus-to-Experiment Mapping' for `campaign_stage` with an arrow notation (e.g., `campaign_launch -> early_campaign`). This implies a mapping logic that is not explicitly detailed in the experiment's 'Data Grouping and Custom Variable Mapping' section as per v10.0 requirements for custom mappings. While the `campaign_stage` field exists in the corpus, the experiment might be intending to use it in a nuanced way that requires explicit mapping rules if the direct field value isn't sufficient.",
+      "impact": "Without a clear mapping specification, the system might default to direct field matching, potentially missing nuances intended by the researcher, or fail if the mapping logic is complex and not understood. This could lead to misclassification for temporal analysis.",
+      "fix": "If the `campaign_stage` field in the corpus manifest is not directly usable as the primary analysis variable due to intended groupings (e.g., combining 'campaign_launch' and 'early_campaign' into a single 'early_campaign' analysis group), then a formal mapping or a custom variable derivation strategy needs to be defined within the 'Data Grouping and Custom Variable Mapping' section of the experiment specification.",
+      "priority": "SUGGESTION",
+      "affected_files": [
+        "experiment.md"
+      ]
+    },
+    {
+      "category": "specification",
+      "description": "The experiment's 'Statistical Grouping Structure' section includes a mapping for 'Political Phase' using a different set of terms than those directly present in the corpus manifest's `political_phase` field (e.g., 'campaign_peak' in experiment vs. 'campaign_peak' in corpus - this seems consistent, but further review might be needed for less obvious cases). More critically, the experiment outlines 'Pre/Post Stabbing Groups' and 'Electoral Proximity Groups' which are derived from dates but not explicitly listed as `campaign_stage` or `political_phase` fields. While derivation is permitted, the experiment should explicitly state how these derived groupings are implemented if they are intended as primary analysis variables.",
+      "impact": "The analysis pipeline needs clear instructions on how custom or derived groupings are formed. Without explicit definition, the system might not correctly generate these groups for analysis, or may use default interpretations that differ from the researcher's intent.",
+      "fix": "Clearly define the logic or criteria used to derive the 'Pre/Post Stabbing Groups' and 'Electoral Proximity Groups' within the 'Data Grouping and Custom Variable Mapping' section of the experiment specification. For example, specify the exact date cutoff for 'pre_stabbing' and the date ranges for electoral proximity. This will ensure the analysis pipeline correctly implements these custom groupings.",
+      "priority": "SUGGESTION",
+      "affected_files": [
+        "experiment.md"
+      ]
+    }
+  ],
+  "suggestions": [
+    "Consider consolidating the 'election_day' and 'between_rounds' campaign stages if their analyses are very similar to avoid unnecessary group comparisons.",
+    "Ensure the PDAF framework's dimensions and derived metrics are well-aligned with the specific hypotheses and research questions outlined in the experiment. For instance, the hypotheses mention 'Salience-Weighted Overall Populism Index' and specific dimension salience, which should be directly calculable from the framework.",
+    "Double-check the counts for all specified groups (campaign_stage, audience, electoral_proximity) against the corpus manifest to ensure complete accuracy for statistical analysis. Precise group sizes are crucial for reliable hypothesis testing and effect size calculations."
+  ],
+  "metadata": {
+    "agent": "V2ValidationAgent",
+    "timestamp": "2025-09-25T15:03:41.550210",
+    "experiment_id": "bolsonaro_2018",
+    "validation_type": "experiment_coherence"
+  }
+}

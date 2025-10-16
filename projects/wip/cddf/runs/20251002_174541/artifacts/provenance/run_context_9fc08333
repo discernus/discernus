@@ -1,0 +1,12 @@
+{
+  "experiment_name": "cddf",
+  "framework_name": "unknown_framework",
+  "corpus_name": "unknown_corpus",
+  "document_count": 0,
+  "run_id": "cddf_20251002_114541",
+  "completion_date": "2025-10-02T17:45:41.980161+00:00",
+  "experiment_dir": "/Volumes/code/discernus/projects/wip/cddf",
+  "framework_hash": "",
+  "corpus_manifest_hash": "",
+  "corpus_document_hashes": []
+}

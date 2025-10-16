@@ -1,0 +1,26 @@
+{
+  "video_info": {
+    "video_id": "pUJkwiXf2EE",
+    "title": "JD Vance: 'What Happened Right Here In Butler Is A Metaphor For The United States Of America'",
+    "channel": "Forbes Breaking News",
+    "upload_date": "2024-10-06",
+    "description": "At the Trump-Vance 2024 campaign event in Butler, Pennsylvania, Sen. JD Vance (R-OH) spoke about former President Trump and the U.S.\n\nFuel your success with Forbes. Gain unlimited access to premium journalism, including breaking news, groundbreaking in-depth reported stories, daily digests and more. Plus, members get a front-row seat at members-only events with leading thinkers and doers, access to premium video that can help you get ahead, an ad-light experience, early access to select products including NFT drops and more:\n\nhttps://account.forbes.com/membership/?utm_source=youtube&utm_medium=display&utm_campaign=growth_non-sub_paid_subscribe_ytdescript\n\n\nStay Connected\nForbes on Facebook: http://fb.com/forbes\nForbes Video on Twitter: http://www.twitter.com/forbes\nForbes Video on Instagram: http://instagram.com/forbes\nMore From Forbes:  http://forbes.com",
+    "duration": 219,
+    "view_count": 15952,
+    "like_count": 1116,
+    "url": "https://www.youtube.com/watch?v=pUJkwiXf2EE"
+  },
+  "extraction_info": {
+    "method": "youtube_api",
+    "language": "en (auto-generated)",
+    "confidence": 80.0,
+    "success": true,
+    "transcript_length": 2711,
+    "whisper_model": null
+  },
+  "processing_metadata": {
+    "transcript_length": 2711,
+    "extraction_date": "2025-08-06T01:30:29.167787",
+    "source": "youtube_transcript_api"
+  }
+}
