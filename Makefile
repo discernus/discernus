@@ -25,7 +25,18 @@ test:  ## Run the test suite
 install:  ## Set up the development environment
 	@echo "🚀 Setting up development environment..."
 	@python3 -m pip install --user -r requirements.txt
+	@echo "📦 Installing discernus package..."
+	@python3 -m pip install --user .
+	@echo "🔗 Creating discernus command wrapper..."
+	@echo '#!/usr/bin/env python3' > discernus-cli
+	@echo 'import sys, os' >> discernus-cli
+	@echo 'current_dir = os.path.dirname(os.path.abspath(__file__))' >> discernus-cli
+	@echo 'sys.path.insert(0, current_dir)' >> discernus-cli
+	@echo 'from discernus.cli import main' >> discernus-cli
+	@echo 'if __name__ == "__main__": main()' >> discernus-cli
+	@chmod +x discernus-cli
 	@echo "✅ Environment ready! Run 'make check' to verify."
+	@echo "💡 Use './discernus-cli' or 'python3 -m discernus' to run commands"
 
 deps:  ## Install/update dependencies
 	@echo "📦 Installing dependencies..."
