@@ -250,7 +250,7 @@ class SimpleExperimentExecutor:
                 try:
                     from ..agents.validation_agent.v2_validation_agent import V2ValidationAgent
                     # Create a minimal validation agent just for CAS registration
-                    temp_agent = V2ValidationAgent(None, None, None)
+                    temp_agent = V2ValidationAgent(None, storage, audit)
                     # Run only the input extraction part (CAS registration)
                     temp_agent._validate_and_extract_inputs(run_context)
                     
