@@ -455,9 +455,9 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, ski
                 if source_state[phase].completed:
                     phases_to_copy.append(phase)
             
-            # If starting from a phase that's already completed, copy it too
-            if source_state[start_phase].completed:
-                phases_to_copy.append(start_phase)
+            # Always include the start_phase for artifact discovery, even if not completed
+            # This handles cases where phases were partially completed but not marked as complete
+            phases_to_copy.append(start_phase)
             
             # Special case: if starting from analysis but statistical phase is completed, copy it too
             # because the statistical phase creates baseline statistics that might be needed
@@ -467,39 +467,60 @@ def run(ctx, experiment_path: str, verbose_trace: bool, trace_filter: tuple, ski
             if phases_to_copy:
                 rich_console.print_info(f"📦 Copying completed phases: {', '.join(phases_to_copy)}")
                 
+                # Load source artifact registry once for efficiency
+                source_registry_file = source_run_dir / 'artifacts' / 'artifact_registry.json'
+                source_registry = {}
+                if source_registry_file.exists():
+                    with open(source_registry_file, 'r') as f:
+                        source_registry = json.load(f)
+                
                 # Copy artifacts and update phase state
                 for phase in phases_to_copy:
                     completion = source_state[phase]
                     
+                    # Get artifacts to copy - use artifact_hashes if phase is completed, otherwise discover from registry
+                    if completion.completed:
+                        artifacts_to_copy = completion.artifact_hashes
+                    else:
+                        # For partially completed phases, discover artifacts from registry
+                        artifacts_to_copy = []
+                        for artifact_hash, artifact_info in source_registry.items():
+                            metadata = artifact_info.get('metadata', {})
+                            # Look for artifacts created by agents that typically run in this phase
+                            if phase == 'statistical' and metadata.get('agent_name') == 'V2StatisticalAgent':
+                                artifacts_to_copy.append(artifact_hash)
+                            elif phase == 'analysis' and metadata.get('agent_name') == 'V2AnalysisAgent':
+                                artifacts_to_copy.append(artifact_hash)
+                            elif phase == 'validation' and metadata.get('agent_name') == 'V2ValidationAgent':
+                                artifacts_to_copy.append(artifact_hash)
+                            elif phase == 'evidence' and metadata.get('agent_name') == 'IntelligentEvidenceRetriever':
+                                artifacts_to_copy.append(artifact_hash)
+                            elif phase == 'synthesis' and metadata.get('agent_name') == 'TwoStageSynthesisAgent':
+                                artifacts_to_copy.append(artifact_hash)
+                    
                     # Copy artifacts by hash using artifact registry for correct paths
-                    for artifact_hash in completion.artifact_hashes:
-                        # Load source artifact registry to get correct file paths
-                        source_registry_file = source_run_dir / 'artifacts' / 'artifact_registry.json'
-                        if source_registry_file.exists():
-                            with open(source_registry_file, 'r') as f:
-                                source_registry = json.load(f)
+                    for artifact_hash in artifacts_to_copy:
+                        if artifact_hash in source_registry:
+                            artifact_info = source_registry[artifact_hash]
+                            artifact_path = artifact_info.get('artifact_path')
                             
-                            if artifact_hash in source_registry:
-                                artifact_info = source_registry[artifact_hash]
-                                artifact_path = artifact_info.get('artifact_path')
+                            if artifact_path:
+                                source_file = source_run_dir / 'artifacts' / artifact_path
+                                if not source_file.exists():
+                                    # If file doesn't exist at expected path, search for it in subdirectories
+                                    source_artifacts_dir = source_run_dir / 'artifacts'
+                                    for file_path in source_artifacts_dir.rglob(artifact_path):
+                                        if file_path.is_file():
+                                            source_file = file_path
+                                            break
                                 
-                                if artifact_path:
-                                    source_file = source_run_dir / 'artifacts' / artifact_path
-                                    if not source_file.exists():
-                                        # If file doesn't exist at expected path, search for it in subdirectories
-                                        source_artifacts_dir = source_run_dir / 'artifacts'
-                                        for file_path in source_artifacts_dir.rglob(artifact_path):
-                                            if file_path.is_file():
-                                                source_file = file_path
-                                                break
-                                    
-                                    if source_file.exists():
-                                        # Calculate relative path from artifacts directory
-                                        rel_path = source_file.relative_to(source_run_dir / 'artifacts')
-                                        target_file = run_folder / 'artifacts' / rel_path
-                                        target_file.parent.mkdir(parents=True, exist_ok=True)
-                                        shutil.copy2(source_file, target_file)
-                                        continue
+                                if source_file.exists():
+                                    # Calculate relative path from artifacts directory
+                                    rel_path = source_file.relative_to(source_run_dir / 'artifacts')
+                                    target_file = run_folder / 'artifacts' / rel_path
+                                    target_file.parent.mkdir(parents=True, exist_ok=True)
+                                    shutil.copy2(source_file, target_file)
+                                    continue
                         
                         # Fallback: search recursively for files with the hash (for backward compatibility)
                         source_artifacts_dir = source_run_dir / 'artifacts'
