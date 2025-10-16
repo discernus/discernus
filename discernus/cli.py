@@ -17,11 +17,18 @@ Phase Selection (V2 Architecture):
 - discernus run --from evidence --to synthesis        - Evidence retrieval and synthesis only
 - discernus run --from validation --to validation     - Validation phase only
 
-Resume Functionality:
+Resume Functionality (v2.1 Enhanced):
 - discernus run --resume                              - Auto-resume from most recent compatible run
 - discernus run --run-dir <run_id>                    - Resume from specific run directory
 - discernus resume --from statistical --to synthesis  - Resume from statistical phase
 - discernus resume --run-dir <run_id> --from analysis - Resume from specific run
+
+Resume Features:
+- ✅ Robust artifact discovery for partially completed phases
+- ✅ Automatic detection of resumable runs
+- ✅ Provenance tracking across resume operations
+- ✅ Enhanced error messages for resume failures
+- ✅ Support for cross-run resume operations
 
 Advanced Options:
 - discernus run --verbose-trace                       - Enable comprehensive function-level tracing

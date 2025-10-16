@@ -157,9 +157,16 @@ This allows you to:
 *   **Debug specific phases** by running them in isolation
 *   **Resume from cached results** when continuing from a specific phase
 
-### Resume Functionality
+### Resume Functionality (v2.1 Enhanced)
 
-Discernus supports resuming experiments from previously completed phases, which is particularly useful for development workflows and cost optimization.
+Discernus v2.1 significantly improves resume functionality with robust artifact discovery and enhanced reliability. Resume is now production-ready for long-running experiments.
+
+**Key Features:**
+- ✅ **Robust Artifact Discovery**: Automatically detects artifacts from partially completed phases
+- ✅ **Cross-Run Support**: Resume from any previous run, not just the most recent
+- ✅ **Provenance Tracking**: Full lineage tracking across all resume operations
+- ✅ **Smart Phase Detection**: Automatically identifies which phases can be resumed
+- ✅ **Production Ready**: Extensively tested and reliable
 
 **Automatic Resume:**
 ```bash
@@ -173,11 +180,22 @@ discernus run projects/your_experiment --resume --from statistical
 discernus run projects/your_experiment --run-dir 20250926_045818 --from evidence
 ```
 
+**How Resume Works:**
+
+When you resume an experiment, Discernus:
+1. **Identifies the source run** - Either automatically (most recent) or specified with `--run-dir`
+2. **Copies completed phases** - All artifacts from completed phases are copied to the new run
+3. **Discovers partial artifacts** - Artifacts from partially completed phases are automatically discovered and copied
+4. **Merges artifact registries** - Registry entries are merged to ensure all artifacts are discoverable
+5. **Tracks provenance** - Full lineage tracking in `provenance.json`
+6. **Continues execution** - Starts from the specified phase using the copied artifacts
+
 **Resume Use Cases:**
 *   **Development Iteration**: Modify statistical analysis without re-running expensive analysis phase
 *   **Debugging**: Test synthesis changes without re-running statistical phase
-*   **Cost Optimization**: Resume from analysis phase after CSV export
+*   **Cost Optimization**: Resume from analysis phase after interruption
 *   **Data Integrity**: All resume operations maintain complete audit trail
+*   **Interrupted Experiments**: Automatically resume from where the experiment was interrupted
 
 **Resume Provenance:**
 All resume operations are tracked for audit and reproducibility:

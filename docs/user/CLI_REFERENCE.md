@@ -33,9 +33,20 @@ discernus run [EXPERIMENT_PATH] [OPTIONS]
 --verbose-trace           # Enable comprehensive function-level tracing
 --trace-filter COMPONENT # Filter tracing to specific components
 --skip-validation         # Skip experiment coherence validation
---resume                  # Resume from existing run with completed phases
---run-dir RUN_ID         # Specify specific run directory to resume from
 ```
+
+**Resume Options (v2.1 Enhanced):**
+```bash
+--resume                  # Auto-resume from most recent compatible run
+--run-dir RUN_ID         # Resume from specific run directory
+```
+
+**Resume Features:**
+- ✅ **Robust Artifact Discovery**: Automatically detects and copies artifacts from partially completed phases
+- ✅ **Cross-Run Support**: Resume from any previous run with --run-dir option
+- ✅ **Provenance Tracking**: Full lineage tracking of resume operations
+- ✅ **Smart Phase Detection**: Automatically identifies which phases can be resumed
+- ✅ **Enhanced Error Messages**: Clear guidance when resume is not possible
 
 **Examples:**
 ```bash

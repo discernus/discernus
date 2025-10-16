@@ -6,6 +6,24 @@ Discernus a computational research platform that applies user-created analytical
 
 Discernus addresses the scalability and consistency challenges of traditional text analysis. Instead of manual coding, researchers can define their analytical frameworks in natural language. The system then uses Large Language Models (LLMs) to apply these frameworks at scale, producing statistical results, evidence-backed scores, and complete audit trails. This allows for reproducible, transparent, and computationally rigorous analysis of large text corpora.
 
+## What's New in v2.1
+
+**Enhanced Resume Functionality** - The v2.1 release significantly improves experiment resume capabilities:
+
+- ✅ **Robust Artifact Discovery**: Automatically detects and copies artifacts from partially completed phases
+- ✅ **Cross-Run Resume**: Resume from any previous run with `--run-dir` option
+- ✅ **Provenance Tracking**: Full lineage tracking across resume operations
+- ✅ **Smart Phase Detection**: Automatically identifies which phases can be resumed
+- ✅ **Production Ready**: Extensively tested and reliable for long-running experiments
+
+```bash
+# Resume from most recent run
+discernus run projects/experiment --resume --from statistical
+
+# Resume from specific run
+discernus run projects/experiment --run-dir 20250101_120000 --from evidence
+```
+
 ## Quick Start
 
 Get up and running with a simple test experiment.
