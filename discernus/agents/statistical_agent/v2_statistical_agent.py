@@ -529,7 +529,7 @@ class V2StatisticalAgent(StandardAgent):
             # Create reliability filtering context from experiment parameters
             rf_params = experiment_params.reliability_filtering
             
-            if rf_params.is_filtering_enabled():
+            if rf_params is not None and rf_params.is_filtering_enabled():
                 reliability_filtering_context = f"""
   **RELIABILITY FILTERING: ENABLED**
   

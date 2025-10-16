@@ -469,7 +469,7 @@ class ScoreExtractionProcessor:
         af_params = self.experiment_params.advanced_filtering
         
         # Check if filtering is enabled (opt-in)
-        if not rf_params.is_filtering_enabled():
+        if rf_params is None or not rf_params.is_filtering_enabled():
             logger.info("Reliability filtering is DISABLED (not specified in experiment) - including all dimensions")
             # No filtering - include all dimensions
             return self.dimension_data, pd.DataFrame()

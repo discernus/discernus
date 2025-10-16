@@ -33,9 +33,10 @@ class ReliabilityFilteringParams:
     
     def is_filtering_enabled(self) -> bool:
         """Check if any filtering is enabled (opt-in)."""
-        return (self.salience_threshold is not None or 
-                self.confidence_threshold is not None or 
-                self.reliability_threshold is not None)
+        # Filtering is enabled if any threshold is > 0.0
+        return (self.salience_threshold is not None and self.salience_threshold > 0.0) or \
+               (self.confidence_threshold is not None and self.confidence_threshold > 0.0) or \
+               (self.reliability_threshold is not None and self.reliability_threshold > 0.0)
 
 
 @dataclass
@@ -57,7 +58,7 @@ class AdvancedFilteringParams:
 @dataclass
 class ExperimentParameters:
     """Complete experiment parameters including reliability filtering."""
-    reliability_filtering: ReliabilityFilteringParams
+    reliability_filtering: ReliabilityFilteringParams = None
     advanced_filtering: AdvancedFilteringParams = None
     
     def __post_init__(self):
@@ -117,14 +118,20 @@ def _parse_yaml_parameters(config: Dict[str, Any]) -> ExperimentParameters:
     """Parse parameters from YAML configuration."""
     # Parse reliability filtering parameters
     reliability_config = config.get('reliability_filtering', {})
-    reliability_params = ReliabilityFilteringParams(
-        salience_threshold=reliability_config.get('salience_threshold', 0.0),
-        confidence_threshold=reliability_config.get('confidence_threshold', 0.0),
-        reliability_threshold=reliability_config.get('reliability_threshold', 0.0),
-        reliability_calculation=reliability_config.get('reliability_calculation', 'confidence_x_salience'),
-        framework_fit_required=reliability_config.get('framework_fit_required', False),
-        framework_fit_threshold=reliability_config.get('framework_fit_threshold', 0.3)
-    )
+    
+    # Only create reliability filtering params if the section exists in the experiment
+    if 'reliability_filtering' in config:
+        reliability_params = ReliabilityFilteringParams(
+            salience_threshold=reliability_config.get('salience_threshold', 0.0),
+            confidence_threshold=reliability_config.get('confidence_threshold', 0.0),
+            reliability_threshold=reliability_config.get('reliability_threshold', 0.0),
+            reliability_calculation=reliability_config.get('reliability_calculation', 'confidence_x_salience'),
+            framework_fit_required=reliability_config.get('framework_fit_required', False),
+            framework_fit_threshold=reliability_config.get('framework_fit_threshold', 0.3)
+        )
+    else:
+        # No reliability filtering section - set to None to disable filtering
+        reliability_params = None
     
     # Parse advanced filtering parameters
     advanced_config = config.get('advanced_filtering', {})
