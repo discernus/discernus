@@ -35,8 +35,11 @@ install:  ## Set up the development environment
 	@echo 'from discernus.cli import main' >> discernus-cli
 	@echo 'if __name__ == "__main__": main()' >> discernus-cli
 	@chmod +x discernus-cli
+	@echo "🔗 Creating discernus command symlink..."
+	@ln -sf discernus-cli discernus
+	@chmod +x discernus
 	@echo "✅ Environment ready! Run 'make check' to verify."
-	@echo "💡 Use './discernus-cli' or 'python3 -m discernus' to run commands"
+	@echo "💡 Use './discernus' or 'python3 -m discernus' to run commands"
 
 deps:  ## Install/update dependencies
 	@echo "📦 Installing dependencies..."
